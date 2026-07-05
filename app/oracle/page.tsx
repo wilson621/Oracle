@@ -4,6 +4,7 @@ import { useState } from "react";
 import AppLayout from "@/components/layout/AppLayout";
 import ClipUpload from "@/components/oracle/ClipUpload";
 import { saveOracleSession } from "@/lib/oracle/saveOracleSession";
+import { unlockAchievements } from "@/lib/achievements/unlockAchievements";
 import OracleHero from "@/components/oracle/OracleHero";
 import OracleInput from "@/components/oracle/OracleInput";
 import OracleLoading from "@/components/oracle/OracleLoading";
@@ -15,13 +16,8 @@ export default function OraclePage() {
   const [report, setReport] = useState<OracleReportType | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  async function handleAskOracle() {
-    const textarea = document.querySelector("textarea");
-    if (!textarea) return;
-
-    const prompt = textarea.value.trim();
-
-    if (!prompt) {
+  async function handleAskOracle(prompt: string) {
+    if (!prompt.trim()) {
       alert("Tell Oracle what happened first.");
       return;
     }
@@ -46,16 +42,18 @@ export default function OraclePage() {
       }
 
       setReport(data.report);
-      await saveOracleSession(prompt, data.report);
-    } catch (err: any) {
-  console.error("FULL ERROR:", err);
 
-  if (err?.message) {
-    alert(err.message);
-  } else {
-    alert(JSON.stringify(err, null, 2));
-  }
-}
+      await saveOracleSession(prompt, data.report);
+      await unlockAchievements();
+    } catch (err: any) {
+      console.error("FULL ERROR:", err);
+
+      if (err?.message) {
+        alert(err.message);
+      } else {
+        alert(JSON.stringify(err, null, 2));
+      }
+    }
 
     setIsAnalysing(false);
   }
@@ -64,9 +62,15 @@ export default function OraclePage() {
     <AppLayout>
       <OracleHero isAnalysing={isAnalysing} />
 
-      <OracleInput isAnalysing={isAnalysing} onAsk={handleAskOracle} />
+      <OracleInput
+        isAnalysing={isAnalysing}
+        onAskOracle={handleAskOracle}
+      />
 
-      <ClipUpload selectedFile={selectedFile} onFileSelect={setSelectedFile} />
+      <ClipUpload
+        selectedFile={selectedFile}
+        onFileSelect={setSelectedFile}
+      />
 
       {isAnalysing && <OracleLoading />}
 
