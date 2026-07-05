@@ -13,6 +13,7 @@ import {
   Dna,
   Trophy,
   Medal,
+  Target,
 } from "lucide-react";
 
 const navItems = [
@@ -21,6 +22,7 @@ const navItems = [
     items: [
       { label: "Oracle", href: "/oracle", icon: Brain },
       { label: "Session History", href: "/sessions", icon: ScrollText },
+      { label: "AI Coach", href: "/coach", icon: Target },
       { label: "AI Memory", href: "/memory", icon: DatabaseZap },
       { label: "Intelligence", href: "/intelligence", icon: Brain },
       { label: "Oracle DNA", href: "/dna", icon: Dna },
