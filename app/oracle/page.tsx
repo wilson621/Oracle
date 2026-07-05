@@ -3,6 +3,7 @@
 import { useState } from "react";
 import AppLayout from "@/components/layout/AppLayout";
 import ClipUpload from "@/components/oracle/ClipUpload";
+import { saveOracleSession } from "@/lib/saveOracleSession";
 import OracleHero from "@/components/oracle/OracleHero";
 import OracleInput from "@/components/oracle/OracleInput";
 import OracleLoading from "@/components/oracle/OracleLoading";
@@ -45,10 +46,16 @@ export default function OraclePage() {
       }
 
       setReport(data.report);
-    } catch (err) {
-      console.error(err);
-      alert("Oracle could not analyse the fight.");
-    }
+      await saveOracleSession(prompt, data.report);
+    } catch (err: any) {
+  console.error("FULL ERROR:", err);
+
+  if (err?.message) {
+    alert(err.message);
+  } else {
+    alert(JSON.stringify(err, null, 2));
+  }
+}
 
     setIsAnalysing(false);
   }
