@@ -1,8 +1,5 @@
 import { supabase } from "@/lib/supabase";
-
-function getLevelFromXp(xp: number) {
-  return Math.floor(Math.sqrt(xp / 100)) + 1;
-}
+import { getCurrentOperator } from "@/lib/operator/getCurrentOperator";
 
 function getXpForLevel(level: number) {
   return Math.pow(level - 1, 2) * 100;
@@ -20,47 +17,37 @@ function getRankFromScore(score: number) {
 }
 
 export async function getOperatorProgression() {
+  const operator = await getCurrentOperator();
+
   const { data, error } = await supabase
     .from("oracle_sessions")
     .select("*")
+    .eq("operator_id", operator.id)
     .order("created_at", { ascending: false });
 
   if (error) throw error;
 
-  if (!data || data.length === 0) {
-    return null;
-  }
+  const sessions = data ?? [];
+  const totalSessions = operator.total_sessions ?? sessions.length;
 
-  const totalSessions = data.length;
-
-  const totalXp = data.reduce((sum, session) => {
-    const gradeBonus =
-      session.grade === "S"
-        ? 300
-        : session.grade === "A"
-        ? 225
-        : session.grade === "B"
-        ? 175
-        : session.grade === "C"
-        ? 125
-        : 100;
-
-    const confidenceBonus = Math.round((session.confidence || 0) * 2);
-
-    return sum + gradeBonus + confidenceBonus;
-  }, 0);
-
-  const level = getLevelFromXp(totalXp);
-  const currentLevelXp = getXpForLevel(level);
-  const nextLevelXp = getXpForLevel(level + 1);
-  const xpIntoLevel = totalXp - currentLevelXp;
+  const currentLevelXp = getXpForLevel(operator.level);
+  const nextLevelXp = getXpForLevel(operator.level + 1);
+  const xpIntoLevel = operator.xp - currentLevelXp;
   const xpNeededForNextLevel = nextLevelXp - currentLevelXp;
-  const levelProgress = Math.round((xpIntoLevel / xpNeededForNextLevel) * 100);
 
-  const average = (field: string) =>
-    Math.round(
-      data.reduce((sum, row) => sum + (row[field] || 0), 0) / totalSessions
+  const levelProgress =
+    xpNeededForNextLevel > 0
+      ? Math.round((xpIntoLevel / xpNeededForNextLevel) * 100)
+      : 0;
+
+  const average = (field: string) => {
+    if (sessions.length === 0) return 0;
+
+    return Math.round(
+      sessions.reduce((sum, row) => sum + (row[field] || 0), 0) /
+        sessions.length
     );
+  };
 
   const combatScore = Math.round(
     (
@@ -72,16 +59,14 @@ export async function getOperatorProgression() {
     ) / 5
   );
 
-  const rank = getRankFromScore(combatScore);
-
   return {
     totalSessions,
-    totalXp,
-    level,
+    totalXp: operator.xp,
+    level: operator.level,
     xpIntoLevel,
     xpNeededForNextLevel,
     levelProgress,
     combatScore,
-    rank,
+    rank: getRankFromScore(combatScore),
   };
 }

@@ -6,11 +6,12 @@ import ClipUpload from "@/components/oracle/ClipUpload";
 import OracleHero from "@/components/oracle/OracleHero";
 import OracleInput from "@/components/oracle/OracleInput";
 import OracleLoading from "@/components/oracle/OracleLoading";
-import { awardXp } from "@/lib/xp/awardXp";
 import OracleReport from "@/components/oracle/OracleReport";
 import AchievementPopup from "@/components/achievements/AchievementPopup";
+import XPPopup from "@/components/progression/XPPopup";
 
 import { saveOracleSession } from "@/lib/oracle/saveOracleSession";
+import { awardXp } from "@/lib/xp/awardXp";
 import {
   unlockAchievements,
   type UnlockedAchievement,
@@ -18,12 +19,20 @@ import {
 
 import type { OracleReport as OracleReportType } from "@/types/oracle";
 
+type XPResult = {
+  earnedXp: number;
+  newXp: number;
+  newLevel: number;
+  levelUp: boolean;
+};
+
 export default function OraclePage() {
   const [isAnalysing, setIsAnalysing] = useState(false);
   const [report, setReport] = useState<OracleReportType | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [achievement, setAchievement] =
     useState<UnlockedAchievement | null>(null);
+  const [xpResult, setXpResult] = useState<XPResult | null>(null);
 
   async function handleAskOracle(prompt: string) {
     if (!prompt.trim()) {
@@ -34,6 +43,7 @@ export default function OraclePage() {
     setIsAnalysing(true);
     setReport(null);
     setAchievement(null);
+    setXpResult(null);
 
     try {
       const response = await fetch("/api/oracle/analyze", {
@@ -54,12 +64,17 @@ export default function OraclePage() {
       setReport(data.report);
 
       await saveOracleSession(prompt, data.report);
-      const xpResult = await awardXp(
-  data.report.grade,
-  data.report.confidence
-);
 
-console.log("XP Awarded", xpResult);
+      const xp = await awardXp(
+        data.report.grade,
+        data.report.confidence
+      );
+
+      setXpResult(xp);
+
+      setTimeout(() => {
+        setXpResult(null);
+      }, 4500);
 
       const unlocked = await unlockAchievements();
 
@@ -85,6 +100,15 @@ console.log("XP Awarded", xpResult);
           title={achievement.title}
           xp={achievement.xp}
           onClose={() => setAchievement(null)}
+        />
+      )}
+
+      {xpResult && (
+        <XPPopup
+          earnedXp={xpResult.earnedXp}
+          levelUp={xpResult.levelUp}
+          level={xpResult.newLevel}
+          onClose={() => setXpResult(null)}
         />
       )}
 
