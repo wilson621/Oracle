@@ -6,6 +6,7 @@ import ClipUpload from "@/components/oracle/ClipUpload";
 import OracleHero from "@/components/oracle/OracleHero";
 import OracleInput from "@/components/oracle/OracleInput";
 import OracleLoading from "@/components/oracle/OracleLoading";
+import { awardXp } from "@/lib/xp/awardXp";
 import OracleReport from "@/components/oracle/OracleReport";
 import AchievementPopup from "@/components/achievements/AchievementPopup";
 
@@ -53,6 +54,12 @@ export default function OraclePage() {
       setReport(data.report);
 
       await saveOracleSession(prompt, data.report);
+      const xpResult = await awardXp(
+  data.report.grade,
+  data.report.confidence
+);
+
+console.log("XP Awarded", xpResult);
 
       const unlocked = await unlockAchievements();
 

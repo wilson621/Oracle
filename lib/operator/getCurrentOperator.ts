@@ -6,6 +6,11 @@ export type Operator = {
   callsign: string | null;
   primary_game: string | null;
   combat_rating: string | null;
+
+  xp: number;
+  level: number;
+  total_sessions: number;
+
   created_at: string;
 };
 
