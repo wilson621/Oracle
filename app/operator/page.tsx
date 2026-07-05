@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import AppLayout from "@/components/layout/AppLayout";
 import CombatRatingBadge from "@/components/operator/CombatRatingBadge";
 import SkillBar from "@/components/operator/SkillBar";
-import { getOperatorStats } from "@/lib/getOperatorStats";
+import { getOperatorStats } from "@/lib/oracle/getOperatorStats";
 import {
   User,
   Shield,

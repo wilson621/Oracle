@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import AppLayout from "@/components/layout/AppLayout";
 import { Brain, AlertTriangle, CheckCircle, Target } from "lucide-react";
-import { getOracleMemory } from "@/lib/getOracleMemory";
+import { getOracleMemory } from "@/lib/oracle/getOracleMemory";
 
 type OracleMemory = {
   totalSessions: number;

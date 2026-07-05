@@ -10,7 +10,7 @@ import {
   TrendingUp,
   Crosshair,
 } from "lucide-react";
-import { getOracleIntelligence } from "@/lib/getOracleIntelligence";
+import { getOracleIntelligence } from "@/lib/oracle/getOracleIntelligence";
 
 type Intelligence = {
   totalSessions: number;

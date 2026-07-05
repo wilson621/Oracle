@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import AppLayout from "@/components/layout/AppLayout";
-import { getOracleDNA } from "@/lib/getOracleDNA";
+import { getOracleDNA } from "@/lib/oracle/getOracleDNA";
 import { Dna, Shield, AlertTriangle, Activity } from "lucide-react";
 
 type Trait = {

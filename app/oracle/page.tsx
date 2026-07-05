@@ -3,7 +3,7 @@
 import { useState } from "react";
 import AppLayout from "@/components/layout/AppLayout";
 import ClipUpload from "@/components/oracle/ClipUpload";
-import { saveOracleSession } from "@/lib/saveOracleSession";
+import { saveOracleSession } from "@/lib/oracle/saveOracleSession";
 import OracleHero from "@/components/oracle/OracleHero";
 import OracleInput from "@/components/oracle/OracleInput";
 import OracleLoading from "@/components/oracle/OracleLoading";
