@@ -1,33 +1,40 @@
 "use client";
 
 type AchievementPopupProps = {
-  open: boolean;
   title: string;
   xp: number;
+  onClose: () => void;
 };
 
 export default function AchievementPopup({
-  open,
   title,
   xp,
+  onClose,
 }: AchievementPopupProps) {
-  if (!open) return null;
-
   return (
-    <div className="fixed right-8 top-8 z-50 w-96 animate-[slideIn_.5s_ease] rounded-3xl border border-cyan-400/30 bg-slate-950 p-6 shadow-[0_0_35px_rgba(34,211,238,.25)]">
+    <div className="fixed right-8 top-8 z-50 w-96 rounded-3xl border border-cyan-400/40 bg-slate-950 p-6 shadow-[0_0_40px_rgba(34,211,238,0.3)]">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-xs font-bold tracking-[0.35em] text-cyan-300">
+            ACHIEVEMENT UNLOCKED
+          </p>
 
-      <p className="text-xs font-bold tracking-[0.35em] text-cyan-300">
-        ACHIEVEMENT UNLOCKED
-      </p>
+          <h2 className="mt-4 text-3xl font-black text-white">
+            🏆 {title}
+          </h2>
 
-      <h2 className="mt-4 text-3xl font-bold">
-        🏆 {title}
-      </h2>
+          <p className="mt-3 text-lg font-bold text-cyan-300">
+            +{xp} XP
+          </p>
+        </div>
 
-      <p className="mt-3 text-lg text-cyan-300">
-        +{xp} XP
-      </p>
-
+        <button
+          onClick={onClose}
+          className="rounded-full border border-slate-700 px-3 py-1 text-sm text-slate-400 hover:border-cyan-400 hover:text-cyan-300"
+        >
+          ×
+        </button>
+      </div>
     </div>
   );
 }

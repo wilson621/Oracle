@@ -1,8 +1,13 @@
 import { supabase } from "@/lib/supabase";
 import type { OracleReport } from "@/types/oracle";
+import { getCurrentOperator } from "@/lib/operator/getCurrentOperator";
 
 export async function saveOracleSession(prompt: string, report: OracleReport) {
+  const operator = await getCurrentOperator();
+
   const { error } = await supabase.from("oracle_sessions").insert({
+    operator_id: operator.id,
+
     game: "Call of Duty",
     session_type: "text",
     prompt,
