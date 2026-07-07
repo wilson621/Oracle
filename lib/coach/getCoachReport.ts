@@ -77,6 +77,20 @@ export async function getCoachReport() {
       skill: weakestSkill.label,
       sessions: 10,
     },
-    summary: `Oracle believes your fastest improvement will come from focusing on ${weakestSkill.label.toLowerCase()}. Your strongest area is currently ${strongestSkill.label.toLowerCase()}, but repeated corrections show that ${commonCorrection.toLowerCase()}`,
+    summary: `Operator...
+
+I have analysed your last ${sessions.length} combat sessions.
+
+Your strongest discipline is ${strongestSkill.label.toLowerCase()}.
+
+Your greatest opportunity for improvement is ${weakestSkill.label.toLowerCase()}.
+
+Repeated behavioural analysis indicates:
+
+"${commonCorrection}"
+
+My recommendation is to focus exclusively on ${weakestSkill.label.toLowerCase()} over your next ten sessions.
+
+Analysis confidence is increasing with every session completed.`,
   };
 }

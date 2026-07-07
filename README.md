@@ -1,36 +1,222 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project Meta
 
-## Getting Started
+> **Building the world's most advanced AI coaching platform for competitive gaming.**
 
-First, run the development server:
+Project Meta is a software platform focused on creating intelligent coaching systems that help competitive players improve through behavioural analysis, performance prediction and long-term AI guidance.
+
+The flagship product is **Oracle**.
+
+---
+
+# What is Oracle?
+
+Oracle is an AI-powered gaming intelligence platform.
+
+Unlike traditional stat trackers, Oracle is designed to understand **how** an Operator plays rather than simply recording what happened.
+
+Oracle analyses gameplay behaviour, identifies patterns, predicts future performance and delivers personalised coaching recommendations that evolve over time.
+
+Oracle is being built as a long-term AI coaching companion rather than a reporting dashboard.
+
+---
+
+# Current Status
+
+Version
+
+**Oracle v0.3 — Oracle Command Centre**
+
+Current Milestone
+
+**PM-006 — Premium Experience**
+
+Build Status
+
+✅ Passing
+
+---
+
+# Current Features
+
+- Operator Profiles
+- Oracle Sessions
+- Behaviour Intelligence
+- Trend Analysis
+- Prediction Engine
+- OracleBrain Intelligence Layer
+- Confidence Analysis
+- Intelligence Dashboard
+- Career Progression
+- XP System
+- Achievement System
+- Reusable Design System
+
+---
+
+# Technology Stack
+
+Frontend
+
+- Next.js (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+
+Backend
+
+- Supabase
+
+Artificial Intelligence
+
+- OpenAI
+
+Deployment
+
+- Vercel
+
+---
+
+# Architecture
+
+Oracle follows a layered architecture.
+
+```text
+Operator
+
+↓
+
+Oracle Session
+
+↓
+
+Supabase
+
+↓
+
+Repositories
+
+↓
+
+Behaviour Engine
+Trend Engine
+Prediction Engine
+
+↓
+
+Oracle Intelligence Layer
+
+↓
+
+OracleBrain
+
+↓
+
+Dashboard UI
+```
+
+Full architecture documentation is available in:
+
+```text
+docs/Architecture.md
+```
+
+---
+
+# Documentation
+
+Project Meta maintains comprehensive documentation inside the `/docs` directory.
+
+| Document | Purpose |
+|----------|---------|
+| Oracle_Codex.md | Engineering philosophy and development standards |
+| Architecture.md | Technical architecture |
+| Oracle-Principles.md | Oracle personality and behaviour |
+| Brand-Bible.md | Visual identity and design system |
+| Branding.md | Product naming and hierarchy |
+| PROJECT_BOARD.md | Current milestone and sprint |
+| Roadmap.md | Long-term product roadmap |
+| Decisions.md | Architectural decision log |
+| Ideas.md | Future ideas and backlog |
+| Manifesto.md | Project vision and philosophy |
+
+---
+
+# Development
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Production build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run production server
 
-## Learn More
+```bash
+npm run start
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```text
+app/
+components/
+docs/
+lib/
+public/
+```
 
-## Deploy on Vercel
+The project follows a modular architecture where business logic is separated from presentation.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+UI components display intelligence.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+OracleBrain produces intelligence.
+
+Repositories communicate with Supabase.
+
+---
+
+# Design Principles
+
+Project Meta is built around several core principles.
+
+- Premium user experience
+- Reusable architecture
+- AI-first design
+- Production-quality engineering
+- Behaviour over statistics
+- Intelligence over dashboards
+- Long-term maintainability
+
+---
+
+# Vision
+
+Project Meta exists to build AI systems that genuinely improve competitive players.
+
+Oracle is the first product in that journey.
+
+The long-term vision is to create the world's most advanced AI coaching companion capable of understanding player behaviour, predicting future performance and continuously adapting as the Operator evolves.
+
+---
+
+# License
+
+Private Project
+
+Copyright © Project Meta
+
+All rights reserved.

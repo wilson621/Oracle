@@ -1,16 +1,16 @@
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 
-type CardProps = {
+type PanelProps = {
   children: ReactNode;
   className?: string;
 };
 
-export default function Card({
+export default function Panel({
   children,
   className = "",
-}: CardProps) {
+}: PanelProps) {
   return (
-    <div
+    <section
       className={`
         rounded-3xl
         border
@@ -18,15 +18,11 @@ export default function Card({
         bg-white/[0.03]
         p-6
         shadow-lg
-        shadow-cyan-500/5
-        transition-all
-        duration-300
-        hover:border-cyan-500/25
-        hover:shadow-cyan-500/15
+        shadow-cyan-500/10
         ${className}
       `}
     >
       {children}
-    </div>
+    </section>
   );
 }

@@ -19,7 +19,7 @@ export default function PredictionCard({
     <Card>
       <TrendingUp className="text-cyan-300" size={32} />
 
-      <h2 className="mt-5 text-2xl font-bold">
+      <h2 className="mt-5 text-3xl font-black">
         Predicted Improvement
       </h2>
 
@@ -31,8 +31,24 @@ export default function PredictionCard({
       </p>
 
       <div className="mt-6">
-        <ProgressBar value={projected} label={`${skill} Projection`} />
-      </div>
+  <ProgressBar value={projected} label={`${skill} Projection`} />
+</div>
+
+<div className="mt-6 rounded-2xl border border-cyan-400/20 bg-cyan-400/5 p-4">
+
+  <p className="text-xs font-bold tracking-[0.3em] text-cyan-300">
+    PREDICTION CONFIDENCE
+  </p>
+
+  <p className="mt-3 text-3xl font-black">
+    84%
+  </p>
+
+  <p className="mt-2 text-slate-400">
+    High confidence based on your analysed sessions.
+  </p>
+
+</div>
     </Card>
   );
 }

@@ -6,6 +6,17 @@ import CombatRatingBadge from "@/components/operator/CombatRatingBadge";
 import SkillBar from "@/components/operator/SkillBar";
 import { getOperatorStats } from "@/lib/oracle/getOperatorStats";
 import {
+  getCurrentOperator,
+  type Operator,
+} from "@/lib/operator/getCurrentOperator";
+import IntelligenceGrid from "@/components/oracle/dashboard/IntelligenceGrid";
+import { generateOracleBrainReport } from "@/lib/oracle/oracle-brain";
+import {
+  getRecentOperatorSessions,
+  mapSessionRowsToTrendSessions,
+  type OracleSessionRow,
+} from "@/lib/oracle/repositories/session-repository";
+import {
   User,
   Shield,
   Trophy,
@@ -40,24 +51,68 @@ function getRank(score: number) {
 
 export default function OperatorPage() {
   const [stats, setStats] = useState<OperatorStats | null>(null);
+  const [operator, setOperator] = useState<Operator | null>(null);
+  const [sessions, setSessions] = useState<OracleSessionRow[]>([]);
 
   useEffect(() => {
-    async function loadStats() {
-      const data = await getOperatorStats();
-      setStats(data);
+    async function loadOperatorData() {
+      const operatorData = await getCurrentOperator();
+
+      const [statsData, recentSessions] = await Promise.all([
+        getOperatorStats(),
+        getRecentOperatorSessions(operatorData.id, 10),
+      ]);
+
+      setOperator(operatorData);
+      setStats(statsData);
+      setSessions(recentSessions);
     }
 
-    loadStats();
+    loadOperatorData();
   }, []);
 
   const combatRating = stats?.combatRating ?? 0;
   const rank = getRank(combatRating);
+  const trendSessions = mapSessionRowsToTrendSessions(sessions);
+
+  const oracleBrainReport = generateOracleBrainReport({
+    operatorId: operator?.id ?? "loading",
+    callsign: operator?.callsign ?? "Operator",
+    primaryGame: operator?.primary_game ?? "Call of Duty",
+    combatRating: stats?.combatRating ?? 0,
+    winChance: stats?.winRate ?? 0,
+    level: operator?.level ?? null,
+    xp: operator?.xp ?? null,
+    totalSessions: stats?.totalSessions ?? operator?.total_sessions ?? 0,
+    positioning: stats?.positioning ?? 0,
+    aim: stats?.aim ?? 0,
+    movement: stats?.movement ?? 0,
+    decisionMaking: stats?.decisionMaking ?? 0,
+    gameSense: stats?.gameSense ?? 0,
+    trendSessions,
+  });
 
   const statCards = [
-    { title: "Combat Rating", value: stats ? combatRating : "Unranked", icon: Shield },
-    { title: "Oracle Sessions", value: stats?.totalSessions ?? 0, icon: Trophy },
-    { title: "Win Rate", value: stats ? `${stats.winRate}%` : "--", icon: Target },
-    { title: "Most Improved", value: "--", icon: TrendingUp },
+    {
+      title: "Combat Rating",
+      value: stats ? combatRating : "Unranked",
+      icon: Shield,
+    },
+    {
+      title: "Oracle Sessions",
+      value: stats?.totalSessions ?? 0,
+      icon: Trophy,
+    },
+    {
+      title: "Win Rate",
+      value: stats ? `${stats.winRate}%` : "--",
+      icon: Target,
+    },
+    {
+      title: "Most Improved",
+      value: oracleBrainReport.trend.strongestImprovement?.skill ?? "--",
+      icon: TrendingUp,
+    },
   ];
 
   const skills = [
@@ -93,7 +148,7 @@ export default function OperatorPage() {
               </p>
 
               <h2 className="mt-2 text-4xl font-black text-white">
-                UNASSIGNED
+                {operator?.callsign ?? "Operator"}
               </h2>
 
               <p className="mt-3 text-slate-400">
@@ -109,21 +164,25 @@ export default function OperatorPage() {
           <div className="rounded-2xl border border-slate-800 bg-slate-950 p-5">
             <Activity className="text-cyan-300" />
             <p className="mt-4 text-sm text-slate-400">Operator ID</p>
-            <p className="mt-1 font-bold">PM-000001</p>
+            <p className="mt-1 font-bold">
+              {operator?.id?.slice(0, 8).toUpperCase() ?? "LOADING"}
+            </p>
           </div>
 
           <div className="rounded-2xl border border-slate-800 bg-slate-950 p-5">
             <Clock className="text-cyan-300" />
-            <p className="mt-4 text-sm text-slate-400">Last Oracle Session</p>
+            <p className="mt-4 text-sm text-slate-400">Trend Sample</p>
             <p className="mt-1 font-bold">
-              {stats ? "Recently" : "Never"}
+              {oracleBrainReport.trend.sampleSize} sessions
             </p>
           </div>
 
           <div className="rounded-2xl border border-slate-800 bg-slate-950 p-5">
             <Shield className="text-cyan-300" />
             <p className="mt-4 text-sm text-slate-400">Primary Game</p>
-            <p className="mt-1 font-bold">Call of Duty</p>
+            <p className="mt-1 font-bold">
+              {operator?.primary_game ?? "Call of Duty"}
+            </p>
           </div>
         </div>
       </div>
@@ -160,6 +219,10 @@ export default function OperatorPage() {
             />
           ))}
         </div>
+      </div>
+
+      <div className="mt-10">
+        <IntelligenceGrid report={oracleBrainReport} />
       </div>
     </AppLayout>
   );

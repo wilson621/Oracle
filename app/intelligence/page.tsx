@@ -2,36 +2,72 @@
 
 import { useEffect, useState } from "react";
 import AppLayout from "@/components/layout/AppLayout";
+import IntelligenceGrid from "@/components/oracle/dashboard/IntelligenceGrid";
+import { generateOracleBrainReport } from "@/lib/oracle/oracle-brain";
+import { getOperatorStats } from "@/lib/oracle/getOperatorStats";
 import {
-  Brain,
-  Target,
-  AlertTriangle,
-  Shield,
-  TrendingUp,
-  Crosshair,
-} from "lucide-react";
-import { getOracleIntelligence } from "@/lib/oracle/getOracleIntelligence";
+  getCurrentOperator,
+  type Operator,
+} from "@/lib/operator/getCurrentOperator";
+import {
+  getRecentOperatorSessions,
+  mapSessionRowsToTrendSessions,
+  type OracleSessionRow,
+} from "@/lib/oracle/repositories/session-repository";
+import type { OracleBrainReport } from "@/lib/oracle/oracle-brain-types";
+import { Brain } from "lucide-react";
 
-type Intelligence = {
+type OperatorStats = {
   totalSessions: number;
-  strongestSkill: { name: string; value: number };
-  weakestSkill: { name: string; value: number };
-  prediction: string;
-  recommendation: string;
-  intelligenceSummary: string;
+  winRate: number;
+  combatRating: number;
+  positioning: number;
+  aim: number;
+  movement: number;
+  decisionMaking: number;
+  gameSense: number;
 };
 
 export default function IntelligencePage() {
-  const [intel, setIntel] = useState<Intelligence | null>(null);
+  const [operator, setOperator] = useState<Operator | null>(null);
+  const [stats, setStats] = useState<OperatorStats | null>(null);
+  const [sessions, setSessions] = useState<OracleSessionRow[]>([]);
 
   useEffect(() => {
-    async function loadIntel() {
-      const data = await getOracleIntelligence();
-      setIntel(data);
+    async function loadIntelligence() {
+      const operatorData = await getCurrentOperator();
+
+      const [statsData, recentSessions] = await Promise.all([
+        getOperatorStats(),
+        getRecentOperatorSessions(operatorData.id, 10),
+      ]);
+
+      setOperator(operatorData);
+      setStats(statsData);
+      setSessions(recentSessions);
     }
 
-    loadIntel();
+    loadIntelligence();
   }, []);
+
+  const trendSessions = mapSessionRowsToTrendSessions(sessions);
+
+  const oracleBrainReport: OracleBrainReport = generateOracleBrainReport({
+    operatorId: operator?.id ?? "loading",
+    callsign: operator?.callsign ?? "Operator",
+    primaryGame: operator?.primary_game ?? "Call of Duty",
+    combatRating: stats?.combatRating ?? 0,
+    winChance: stats?.winRate ?? 0,
+    level: operator?.level ?? null,
+    xp: operator?.xp ?? null,
+    totalSessions: stats?.totalSessions ?? operator?.total_sessions ?? 0,
+    positioning: stats?.positioning ?? 0,
+    aim: stats?.aim ?? 0,
+    movement: stats?.movement ?? 0,
+    decisionMaking: stats?.decisionMaking ?? 0,
+    gameSense: stats?.gameSense ?? 0,
+    trendSessions,
+  });
 
   return (
     <AppLayout>
@@ -39,96 +75,39 @@ export default function IntelligencePage() {
         ORACLE INTELLIGENCE
       </p>
 
-      <h1 className="mt-3 text-4xl font-bold">Intelligence Report</h1>
+      <h1 className="mt-3 text-4xl font-bold">Intelligence Command Centre</h1>
 
       <p className="mt-4 max-w-3xl text-slate-400">
-        Oracle analyses your saved sessions to identify patterns, predict your
-        trajectory and recommend your next training focus.
+        Oracle analyses behaviour, trend momentum and future prediction signals
+        to build your live Operator intelligence profile.
       </p>
 
-      {!intel ? (
-        <div className="mt-10 rounded-3xl border border-slate-800 bg-slate-950 p-10 text-center">
-          <Brain className="mx-auto text-cyan-300" size={44} />
+      <div className="mt-10 rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-8">
+        <div className="flex items-center gap-4">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/10">
+            <Brain className="text-cyan-300" size={34} />
+          </div>
 
-          <h2 className="mt-6 text-3xl font-bold">No intelligence yet.</h2>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">
+              AI Status
+            </p>
 
-          <p className="mx-auto mt-3 max-w-xl text-slate-400">
-            Complete more Oracle Sessions and Oracle will begin building your
-            long-term intelligence profile.
-          </p>
-        </div>
-      ) : (
-        <div className="mt-10 grid gap-6">
-          <div className="rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-8">
-            <Brain className="text-cyan-300" size={40} />
-
-            <h2 className="mt-5 text-3xl font-bold">
-              Oracle has profiled your playstyle.
+            <h2 className="mt-2 text-3xl font-black text-white">
+              OracleBrain Online
             </h2>
 
-            <p className="mt-4 max-w-3xl text-slate-300">
-              {intel.intelligenceSummary}
-            </p>
-          </div>
-
-          <div className="grid gap-5 md:grid-cols-3">
-            <div className="rounded-3xl border border-slate-800 bg-slate-950 p-6">
-              <Shield className="text-cyan-300" />
-              <p className="mt-5 text-sm text-slate-400">Predicted Rank</p>
-              <h3 className="mt-2 text-3xl font-bold">{intel.prediction}</h3>
-            </div>
-
-            <div className="rounded-3xl border border-slate-800 bg-slate-950 p-6">
-              <Target className="text-cyan-300" />
-              <p className="mt-5 text-sm text-slate-400">Strongest Skill</p>
-              <h3 className="mt-2 text-3xl font-bold">
-                {intel.strongestSkill.name}
-              </h3>
-              <p className="mt-2 text-slate-400">
-                {intel.strongestSkill.value}/100
-              </p>
-            </div>
-
-            <div className="rounded-3xl border border-slate-800 bg-slate-950 p-6">
-              <AlertTriangle className="text-amber-300" />
-              <p className="mt-5 text-sm text-slate-400">Priority Weakness</p>
-              <h3 className="mt-2 text-3xl font-bold">
-                {intel.weakestSkill.name}
-              </h3>
-              <p className="mt-2 text-slate-400">
-                {intel.weakestSkill.value}/100
-              </p>
-            </div>
-          </div>
-
-          <div className="rounded-3xl border border-slate-800 bg-slate-950 p-8">
-            <div className="flex items-center gap-3">
-              <Crosshair className="text-cyan-300" />
-              <h2 className="text-2xl font-bold">Tactical Recommendation</h2>
-            </div>
-
-            <p className="mt-5 text-lg leading-8 text-slate-300">
-              {intel.recommendation}
-            </p>
-          </div>
-
-          <div className="rounded-3xl border border-slate-800 bg-slate-950 p-8">
-            <div className="flex items-center gap-3">
-              <TrendingUp className="text-cyan-300" />
-              <h2 className="text-2xl font-bold">Oracle Trajectory</h2>
-            </div>
-
-            <p className="mt-5 text-slate-400">
-              Based on your current profile, Oracle predicts your next meaningful
-              improvement will come from focusing on{" "}
-              <span className="font-bold text-cyan-300">
-                {intel.weakestSkill.name}
-              </span>
-              .
+            <p className="mt-2 text-sm text-slate-400">
+              Operator: {operator?.callsign ?? "Operator"} · Sample:{" "}
+              {oracleBrainReport.trend.sampleSize} sessions
             </p>
           </div>
         </div>
-      )}
+      </div>
+
+      <div className="mt-10">
+        <IntelligenceGrid report={oracleBrainReport} />
+      </div>
     </AppLayout>
   );
 }

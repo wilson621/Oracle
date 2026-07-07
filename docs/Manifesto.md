@@ -1,4 +1,4 @@
-# THE ORACLE CODEX
+# PROJECT META
 
 # Manifesto
 
@@ -198,7 +198,7 @@ It does not belong in Oracle.
 
 To become the operating system for mastering games.
 
-Beginning with Call of Duty.
+Beginning with Call of Duty and expanding into every competitive game where knowledge, decision making and improvement matter.
 
 Expanding into every game where knowledge, decision making and improvement matter.
 
