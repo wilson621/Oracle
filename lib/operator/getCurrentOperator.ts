@@ -4,6 +4,7 @@ export type Operator = {
   id: string;
   email: string | null;
   callsign: string | null;
+  designation: string | null;
   primary_game: string | null;
   combat_rating: string | null;
 
@@ -32,6 +33,7 @@ export async function getCurrentOperator(): Promise<Operator> {
     .insert({
       email: "local@oracle.dev",
       callsign: "Operator",
+      designation: null,
       primary_game: "Call of Duty",
       combat_rating: "0",
     })

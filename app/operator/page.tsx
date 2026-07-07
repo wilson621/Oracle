@@ -1,21 +1,29 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
 import AppLayout from "@/components/layout/AppLayout";
 import CombatRatingBadge from "@/components/operator/CombatRatingBadge";
+import DossierField from "@/components/operator/DossierField";
 import SkillBar from "@/components/operator/SkillBar";
+import IntelligenceGrid from "@/components/oracle/dashboard/IntelligenceGrid";
+
 import { getOperatorStats } from "@/lib/oracle/getOperatorStats";
+import { generateOracleBrainReport } from "@/lib/oracle/oracle-brain";
 import {
   getCurrentOperator,
   type Operator,
 } from "@/lib/operator/getCurrentOperator";
-import IntelligenceGrid from "@/components/oracle/dashboard/IntelligenceGrid";
-import { generateOracleBrainReport } from "@/lib/oracle/oracle-brain";
+import { getOperatorStatus } from "@/lib/operator/getOperatorStatus";
+import { isOperatorCommissioned } from "@/lib/operator/isOperatorCommissioned";
+
 import {
   getRecentOperatorSessions,
   mapSessionRowsToTrendSessions,
   type OracleSessionRow,
 } from "@/lib/oracle/repositories/session-repository";
+
 import {
   User,
   Shield,
@@ -25,6 +33,7 @@ import {
   Crosshair,
   Activity,
   Clock,
+  Gamepad2,
 } from "lucide-react";
 
 type OperatorStats = {
@@ -49,7 +58,20 @@ function getRank(score: number) {
   return "Recruit";
 }
 
+function getStatusTone(
+  status: string
+): "default" | "success" | "warning" | "danger" {
+  if (status === "HIGH MOMENTUM") return "success";
+  if (status === "ACTIVE") return "success";
+  if (status === "IN TRAINING") return "warning";
+  if (status === "RECRUITING") return "default";
+
+  return "default";
+}
+
 export default function OperatorPage() {
+  const router = useRouter();
+
   const [stats, setStats] = useState<OperatorStats | null>(null);
   const [operator, setOperator] = useState<Operator | null>(null);
   const [sessions, setSessions] = useState<OracleSessionRow[]>([]);
@@ -57,6 +79,11 @@ export default function OperatorPage() {
   useEffect(() => {
     async function loadOperatorData() {
       const operatorData = await getCurrentOperator();
+
+      if (!isOperatorCommissioned(operatorData)) {
+        router.replace("/onboarding");
+        return;
+      }
 
       const [statsData, recentSessions] = await Promise.all([
         getOperatorStats(),
@@ -69,7 +96,7 @@ export default function OperatorPage() {
     }
 
     loadOperatorData();
-  }, []);
+  }, [router]);
 
   const combatRating = stats?.combatRating ?? 0;
   const rank = getRank(combatRating);
@@ -91,6 +118,10 @@ export default function OperatorPage() {
     gameSense: stats?.gameSense ?? 0,
     trendSessions,
   });
+
+  const operatorStatus = getOperatorStatus(
+    stats?.totalSessions ?? operator?.total_sessions ?? 0
+  );
 
   const statCards = [
     {
@@ -132,7 +163,8 @@ export default function OperatorPage() {
       <h1 className="mt-3 text-4xl font-bold">Operator Profile</h1>
 
       <p className="mt-4 max-w-3xl text-slate-400">
-        Your Operator profile is built from every Oracle Session you complete.
+        Oracle continuously analyses your combat behaviour, decision making and
+        performance trends to produce actionable operational intelligence.
       </p>
 
       <div className="mt-10 rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-8">
@@ -144,15 +176,19 @@ export default function OperatorPage() {
 
             <div>
               <p className="text-xs font-bold tracking-[0.35em] text-slate-500">
-                CALLSIGN
+                OPERATOR CALLSIGN
               </p>
 
               <h2 className="mt-2 text-4xl font-black text-white">
-                {operator?.callsign ?? "Operator"}
+                <span className="text-2xl font-bold text-cyan-300/80">
+                  Operator:
+                </span>{" "}
+                {operator?.callsign ?? "Loading"}
               </h2>
 
               <p className="mt-3 text-slate-400">
-                Complete Oracle Sessions to begin building your combat profile.
+                Commissioned operators are tracked across every Oracle Session,
+                intelligence report and performance assessment.
               </p>
             </div>
           </div>
@@ -160,30 +196,33 @@ export default function OperatorPage() {
           <CombatRatingBadge rank={rank} />
         </div>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-slate-800 bg-slate-950 p-5">
-            <Activity className="text-cyan-300" />
-            <p className="mt-4 text-sm text-slate-400">Operator ID</p>
-            <p className="mt-1 font-bold">
-              {operator?.id?.slice(0, 8).toUpperCase() ?? "LOADING"}
-            </p>
-          </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-4">
+          <DossierField
+            icon={Activity}
+            label="Oracle Designation"
+            value={operator?.designation ?? "PENDING"}
+            emphasis="strong"
+          />
 
-          <div className="rounded-2xl border border-slate-800 bg-slate-950 p-5">
-            <Clock className="text-cyan-300" />
-            <p className="mt-4 text-sm text-slate-400">Trend Sample</p>
-            <p className="mt-1 font-bold">
-              {oracleBrainReport.trend.sampleSize} sessions
-            </p>
-          </div>
+          <DossierField
+            icon={Clock}
+            label="Intelligence Sample"
+            value={`${oracleBrainReport.trend.sampleSize} Oracle Sessions`}
+          />
 
-          <div className="rounded-2xl border border-slate-800 bg-slate-950 p-5">
-            <Shield className="text-cyan-300" />
-            <p className="mt-4 text-sm text-slate-400">Primary Game</p>
-            <p className="mt-1 font-bold">
-              {operator?.primary_game ?? "Call of Duty"}
-            </p>
-          </div>
+          <DossierField
+            icon={Shield}
+            label="Operator Status"
+            value={operatorStatus}
+            tone={getStatusTone(operatorStatus)}
+            display="pill"
+          />
+
+          <DossierField
+            icon={Gamepad2}
+            label="Primary Game"
+            value={operator?.primary_game ?? "Call of Duty"}
+          />
         </div>
       </div>
 
@@ -197,7 +236,9 @@ export default function OperatorPage() {
               className="rounded-3xl border border-slate-800 bg-slate-950 p-6"
             >
               <Icon className="text-cyan-300" />
+
               <p className="mt-6 text-sm text-slate-400">{stat.title}</p>
+
               <h3 className="mt-2 text-3xl font-bold">{stat.value}</h3>
             </div>
           );
@@ -207,6 +248,7 @@ export default function OperatorPage() {
       <div className="mt-10 rounded-3xl border border-slate-800 bg-slate-950 p-8">
         <div className="flex items-center gap-3">
           <Crosshair className="text-cyan-300" />
+
           <h2 className="text-2xl font-bold">Lifetime Skill Ratings</h2>
         </div>
 

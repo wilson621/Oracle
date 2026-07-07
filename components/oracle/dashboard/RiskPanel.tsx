@@ -1,56 +1,33 @@
+import StatusCard from "@/components/ui/StatusCard";
 import type { OracleBrainReport } from "@/lib/oracle/oracle-brain-types";
-import type { PredictionRisk } from "@/lib/oracle/prediction/prediction-types";
 import { AlertTriangle, ShieldAlert, Target, Activity } from "lucide-react";
 
 type RiskPanelProps = {
   report: OracleBrainReport;
 };
 
-function formatRisk(risk: PredictionRisk) {
-  return risk
-    .split("_")
-    .map((word) => word[0].toUpperCase() + word.slice(1))
-    .join(" ");
-}
+function confidenceLabel(confidence: number) {
+  const percentage = Math.round(confidence * 100);
 
-function riskColour(risk: PredictionRisk) {
-  switch (risk) {
-    case "very_low":
-      return "text-emerald-300";
-    case "low":
-      return "text-cyan-300";
-    case "moderate":
-      return "text-amber-300";
-    case "high":
-      return "text-rose-300";
-  }
-}
-
-function riskBorder(risk: PredictionRisk) {
-  switch (risk) {
-    case "very_low":
-      return "border-emerald-500/20 bg-emerald-500/5";
-    case "low":
-      return "border-cyan-500/20 bg-cyan-500/5";
-    case "moderate":
-      return "border-amber-500/20 bg-amber-500/5";
-    case "high":
-      return "border-rose-500/20 bg-rose-500/5";
-  }
+  if (percentage >= 75) return "Reliable Assessment";
+  if (percentage >= 50) return "Developing Assessment";
+  return "Low Sample Confidence";
 }
 
 function getPrimaryRisk(report: OracleBrainReport) {
   if (report.prediction.plateauRisk === "high") {
     return {
       title: "Performance Plateau Detected",
+      severity: "High",
       description:
-        "Prediction Engine indicates the operator is at elevated risk of stalling without a focused training adjustment.",
+        "Prediction Engine indicates elevated plateau risk. Oracle recommends immediate training adjustment before performance momentum stalls.",
     };
   }
 
   if (report.trend.sharpestDecline) {
     return {
       title: `${report.trend.sharpestDecline.skill} Decline Detected`,
+      severity: "Moderate",
       description:
         "Trend Engine has detected negative movement in this skill across recent Oracle Sessions.",
     };
@@ -59,6 +36,7 @@ function getPrimaryRisk(report: OracleBrainReport) {
   if (report.prediction.weakestFutureSkill) {
     return {
       title: `${report.prediction.weakestFutureSkill.skill} Exposure`,
+      severity: "Moderate",
       description:
         "Prediction Engine identifies this as the weakest projected future skill based on current intelligence.",
     };
@@ -67,6 +45,7 @@ function getPrimaryRisk(report: OracleBrainReport) {
   if (report.behaviour.weaknesses.length > 0) {
     return {
       title: `${report.behaviour.weaknesses[0]} Weakness`,
+      severity: "Moderate",
       description:
         "Behaviour Engine has detected this as the clearest current vulnerability in the operator profile.",
     };
@@ -74,6 +53,7 @@ function getPrimaryRisk(report: OracleBrainReport) {
 
   return {
     title: "Risk Profile Stable",
+    severity: "Low",
     description:
       "Oracle has not detected a dominant performance threat. Continue building session history to increase precision.",
   };
@@ -86,7 +66,7 @@ export default function RiskPanel({ report }: RiskPanelProps) {
   return (
     <div className="rounded-3xl border border-rose-500/20 bg-black/40 p-6 shadow-lg shadow-rose-500/10">
       <div className="flex items-start gap-4">
-        <div className="rounded-2xl border border-rose-500/20 bg-rose-500/10 p-3">
+        <div className="rounded-2xl border border-rose-500/20 bg-rose-500/10 p-3 shadow-lg shadow-rose-500/10">
           <ShieldAlert className="text-rose-300" size={24} />
         </div>
 
@@ -100,26 +80,35 @@ export default function RiskPanel({ report }: RiskPanelProps) {
           </h3>
 
           <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-400">
-            Oracle has analysed behavioural signals, trend movement and future
-            projections to identify the most important performance risks.
+            Oracle has identified the most significant threats to future
+            operator performance based on behavioural, trend and prediction
+            intelligence.
           </p>
         </div>
       </div>
 
-      <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+      <div className="mt-8 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
         <div className="flex items-start gap-4">
-          <AlertTriangle className="mt-1 text-amber-300" size={22} />
+          <div className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-3">
+            <AlertTriangle className="text-amber-300" size={24} />
+          </div>
 
-          <div>
-            <p className="text-xs uppercase tracking-wide text-slate-500">
-              Primary Threat
-            </p>
+          <div className="flex-1">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-xs uppercase tracking-wide text-slate-500">
+                Primary Threat
+              </p>
 
-            <h4 className="mt-2 text-xl font-black text-white">
+              <span className="w-fit rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-amber-300">
+                Severity: {primaryRisk.severity}
+              </span>
+            </div>
+
+            <h4 className="mt-3 text-2xl font-black text-white">
               {primaryRisk.title}
             </h4>
 
-            <p className="mt-2 text-sm leading-6 text-slate-400">
+            <p className="mt-3 text-sm leading-6 text-slate-400">
               {primaryRisk.description}
             </p>
           </div>
@@ -127,49 +116,27 @@ export default function RiskPanel({ report }: RiskPanelProps) {
       </div>
 
       <div className="mt-6 grid gap-4 md:grid-cols-3">
-        <div
-          className={`rounded-2xl border p-4 ${riskBorder(
-            report.prediction.plateauRisk
-          )}`}
-        >
-          <p className="text-xs uppercase tracking-wide text-slate-500">
-            Plateau Risk
-          </p>
+        <StatusCard
+  label="Plateau Risk"
+  risk={report.prediction.plateauRisk}
+/>
 
-          <p
-            className={`mt-2 text-2xl font-black ${riskColour(
-              report.prediction.plateauRisk
-            )}`}
-          >
-            {formatRisk(report.prediction.plateauRisk)}
-          </p>
-        </div>
-
-        <div
-          className={`rounded-2xl border p-4 ${riskBorder(
-            report.prediction.burnoutRisk
-          )}`}
-        >
-          <p className="text-xs uppercase tracking-wide text-slate-500">
-            Burnout Risk
-          </p>
-
-          <p
-            className={`mt-2 text-2xl font-black ${riskColour(
-              report.prediction.burnoutRisk
-            )}`}
-          >
-            {formatRisk(report.prediction.burnoutRisk)}
-          </p>
-        </div>
+        <StatusCard
+  label="Burnout Risk"
+  risk={report.prediction.burnoutRisk}
+/>
 
         <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4">
           <p className="text-xs uppercase tracking-wide text-slate-500">
             Assessment Confidence
           </p>
 
-          <p className="mt-2 text-2xl font-black text-cyan-300">
+          <p className="mt-3 text-2xl font-black text-cyan-300">
             {confidence}%
+          </p>
+
+          <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-cyan-200/80">
+            {confidenceLabel(report.confidence)}
           </p>
         </div>
       </div>
@@ -184,7 +151,7 @@ export default function RiskPanel({ report }: RiskPanelProps) {
             </p>
           </div>
 
-          <p className="mt-3 text-lg font-bold text-white">
+          <p className="mt-4 text-lg font-bold text-white">
             {report.prediction.weakestFutureSkill?.skill ??
               report.trend.sharpestDecline?.skill ??
               "No critical exposure"}
@@ -208,7 +175,7 @@ export default function RiskPanel({ report }: RiskPanelProps) {
             </p>
           </div>
 
-          <p className="mt-3 text-lg font-bold text-white">
+          <p className="mt-4 text-lg font-bold text-white">
             {report.nextFocus}
           </p>
 

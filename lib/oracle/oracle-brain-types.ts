@@ -31,6 +31,18 @@ export type OracleBrainRecommendation = {
   priority: "low" | "medium" | "high";
 };
 
+export type OracleAssessmentOutlook = "positive" | "stable" | "caution" | "critical";
+
+export type OracleBrainAssessment = {
+  operatorClassification: string;
+  outlook: OracleAssessmentOutlook;
+  confidence: number;
+  currentAssessment: string;
+  primaryLimitation: string;
+  trainingPriority: string;
+  strategicNote: string;
+};
+
 export type OracleBrainReport = {
   operatorId: string;
   summary: string;
@@ -39,6 +51,7 @@ export type OracleBrainReport = {
   behaviour: BehaviourProfile;
   trend: TrendProfile;
   prediction: PredictionProfile;
+  assessment: OracleBrainAssessment;
   recommendations: OracleBrainRecommendation[];
   nextFocus: string;
 };

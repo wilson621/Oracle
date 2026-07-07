@@ -1,5 +1,6 @@
 import { buildOracleIntelligence } from "./intelligence/oracle-intelligence";
 import type {
+  OracleBrainAssessment,
   OracleBrainInput,
   OracleBrainReport,
 } from "./oracle-brain-types";
@@ -30,6 +31,15 @@ export function generateOracleBrainReport(
     predictionSummary: prediction.summary,
   });
 
+  const assessment = buildAssessment({
+    totalSessions,
+    combatRating,
+    confidence,
+    behaviour,
+    trend,
+    prediction,
+  });
+
   return {
     operatorId: input.operatorId,
     summary,
@@ -37,6 +47,7 @@ export function generateOracleBrainReport(
     behaviour,
     trend,
     prediction,
+    assessment,
     signals: [
       {
         label: "Operator Level",
@@ -98,6 +109,126 @@ export function generateOracleBrainReport(
     ),
     nextFocus: buildNextFocus(totalSessions, behaviour, trend, prediction),
   };
+}
+
+function buildAssessment(input: {
+  totalSessions: number;
+  combatRating: number;
+  confidence: number;
+  behaviour: OracleBrainReport["behaviour"];
+  trend: OracleBrainReport["trend"];
+  prediction: OracleBrainReport["prediction"];
+}): OracleBrainAssessment {
+  if (input.totalSessions === 0) {
+    return {
+      operatorClassification: "Unclassified Operator",
+      outlook: "stable",
+      confidence: input.confidence,
+      currentAssessment:
+        "Oracle requires completed session history before issuing a full operator assessment.",
+      primaryLimitation:
+        "Insufficient intelligence data is currently limiting assessment precision.",
+      trainingPriority:
+        "Complete the first analysed Oracle Session to establish an operational baseline.",
+      strategicNote:
+        "Once session data is available, Oracle will begin classifying behaviour, trend movement and future performance risk.",
+    };
+  }
+
+  const primaryWeakness =
+    input.prediction.weakestFutureSkill?.skill ??
+    input.trend.sharpestDecline?.skill ??
+    input.behaviour.weaknesses[0] ??
+    "consistency";
+
+  const operatorClassification = classifyOperator(
+    input.combatRating,
+    input.trend.momentum,
+    input.prediction.plateauRisk
+  );
+
+  const outlook = assessOutlook(
+    input.prediction.plateauRisk,
+    input.trend.momentum,
+    input.trend.sharpestDecline
+  );
+
+  return {
+    operatorClassification,
+    outlook,
+    confidence: input.confidence,
+    currentAssessment: buildCurrentAssessment(
+      operatorClassification,
+      input.behaviour.playstyle,
+      input.trend.summary
+    ),
+    primaryLimitation: `${primaryWeakness} is currently the clearest limitation in the operator profile.`,
+    trainingPriority: input.prediction.weakestFutureSkill
+      ? `Protect ${input.prediction.weakestFutureSkill.skill} before it becomes a larger future performance drag.`
+      : input.trend.sharpestDecline
+        ? `Recover ${input.trend.sharpestDecline.skill} momentum during the next review cycle.`
+        : input.behaviour.weaknesses.length > 0
+          ? `Stabilise ${input.behaviour.weaknesses[0]} through focused session review.`
+          : "Maintain current strengths while increasing session sample size.",
+    strategicNote: buildStrategicNote(outlook),
+  };
+}
+
+function classifyOperator(
+  combatRating: number,
+  momentum: OracleBrainReport["trend"]["momentum"],
+  plateauRisk: OracleBrainReport["prediction"]["plateauRisk"]
+): string {
+  if (combatRating >= 85 && plateauRisk !== "high") return "Elite Operator";
+
+  if (
+    combatRating >= 70 &&
+    (momentum === "strong_positive" || momentum === "positive")
+  ) {
+    return "Advancing Operator";
+  }
+
+  if (combatRating >= 55) return "Developing Operator";
+  if (plateauRisk === "high") return "At-Risk Operator";
+
+  return "Emerging Operator";
+}
+
+function assessOutlook(
+  plateauRisk: OracleBrainReport["prediction"]["plateauRisk"],
+  momentum: OracleBrainReport["trend"]["momentum"],
+  sharpestDecline: OracleBrainReport["trend"]["sharpestDecline"]
+): OracleBrainAssessment["outlook"] {
+  if (plateauRisk === "high") return "critical";
+  if (sharpestDecline) return "caution";
+  if (momentum === "strong_positive" || momentum === "positive") {
+    return "positive";
+  }
+
+  return "stable";
+}
+
+function buildCurrentAssessment(
+  classification: string,
+  playstyle: string,
+  trendSummary: string
+): string {
+  return `Oracle classifies this profile as ${classification.toLowerCase()} with a ${playstyle.toLowerCase()} behavioural pattern. ${trendSummary}`;
+}
+
+function buildStrategicNote(
+  outlook: OracleBrainAssessment["outlook"]
+): string {
+  switch (outlook) {
+    case "positive":
+      return "Performance direction is favourable. Oracle recommends protecting current momentum while increasing difficulty and review frequency.";
+    case "stable":
+      return "Performance profile is stable. Oracle recommends building a larger intelligence sample to improve future precision.";
+    case "caution":
+      return "Oracle has detected a correctable performance threat. The next sessions should prioritise stabilisation before aggressive progression.";
+    case "critical":
+      return "Oracle has detected elevated risk. Immediate training adjustment is recommended before performance momentum stalls.";
+  }
 }
 
 function buildSummary(input: {
