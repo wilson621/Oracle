@@ -4,14 +4,13 @@ import ConfidencePanel from "./ConfidencePanel";
 import BehaviourPanel from "./BehaviourPanel";
 import TrendPanel from "./TrendPanel";
 import PredictionPanel from "./PredictionPanel";
+import RiskPanel from "./RiskPanel";
 
 type IntelligenceGridProps = {
   report: OracleBrainReport;
 };
 
-export default function IntelligenceGrid({
-  report,
-}: IntelligenceGridProps) {
+export default function IntelligenceGrid({ report }: IntelligenceGridProps) {
   return (
     <div className="space-y-6">
       <ConfidencePanel confidence={report.confidence} />
@@ -22,6 +21,8 @@ export default function IntelligenceGrid({
       </div>
 
       <PredictionPanel prediction={report.prediction} />
+
+      <RiskPanel report={report} />
     </div>
   );
 }

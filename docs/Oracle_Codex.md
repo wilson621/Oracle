@@ -246,6 +246,42 @@ No step should be skipped.
 
 ---
 
+# Session Completion Checklist
+
+Every development session should finish with the following checklist.
+
+1. Ensure the project compiles successfully.
+
+```bash
+npm run build
+```
+
+2. Review any major UI changes visually.
+
+3. Update documentation where required.
+
+- PROJECT_BOARD.md
+- Oracle_Codex.md (if principles changed)
+- Roadmap.md (if milestones changed)
+- Decisions.md (if an architectural decision was made)
+- Ideas.md (if new ideas were discussed)
+
+4. Commit changes to Git.
+
+Use a meaningful commit message describing the completed work.
+
+5. Push the latest commit to GitHub.
+
+GitHub is the authoritative backup of Project Meta.
+
+6. Verify the repository is up to date.
+
+7. End the session.
+
+Never finish a development session without completing this checklist unless there is a deliberate reason not to.
+
+---
+
 # Coding Standards
 
 - Prefer reusable services over page-level logic.
