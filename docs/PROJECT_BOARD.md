@@ -209,3 +209,12 @@ Oracle v0.3
 PM-006 Sprint 3
 
 Build Passing ✅
+
+PM-100 Infrastructure
+
+□ Supabase CLI
+□ Database Migrations
+□ Schema Versioning
+□ Backup Strategy
+□ Release Tagging
+□ CI / Build Improvements
