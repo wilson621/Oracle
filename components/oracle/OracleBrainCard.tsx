@@ -4,10 +4,27 @@ type OracleBrainCardProps = {
   report: OracleBrainReport;
 };
 
+type BehaviourTrait = {
+  label: string;
+  score: number;
+};
+
+type SkillTrend = {
+  skill: string;
+  change: number;
+  direction: string;
+};
+
+type BrainRecommendation = {
+  title: string;
+  reason: string;
+  priority: string;
+};
+
 function formatLabel(value: string) {
   return value
     .split("_")
-    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .map((word: string) => word[0].toUpperCase() + word.slice(1))
     .join(" ");
 }
 
@@ -18,6 +35,14 @@ function confidencePercent(value: number) {
 export function OracleBrainCard({ report }: OracleBrainCardProps) {
   const behaviour = report.behaviour;
   const trend = report.trend;
+
+  const behaviourTraits: BehaviourTrait[] = [
+    behaviour.discipline,
+    behaviour.mechanicalConfidence,
+    behaviour.decisionConfidence,
+    behaviour.adaptability,
+    behaviour.consistency,
+  ];
 
   return (
     <section className="rounded-3xl border border-cyan-500/20 bg-black/50 p-6 shadow-lg shadow-cyan-500/10">
@@ -77,13 +102,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
           </h3>
 
           <div className="mt-5 space-y-4">
-            {[
-              behaviour.discipline,
-              behaviour.mechanicalConfidence,
-              behaviour.decisionConfidence,
-              behaviour.adaptability,
-              behaviour.consistency,
-            ].map((trait) => (
+            {behaviourTraits.map((trait: BehaviourTrait) => (
               <div key={trait.label}>
                 <div className="flex items-center justify-between text-sm">
                   <p className="text-slate-300">{trait.label}</p>
@@ -146,7 +165,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
 
           <div className="mt-4 space-y-2">
             {behaviour.strengths.length > 0 ? (
-              behaviour.strengths.map((strength) => (
+              behaviour.strengths.map((strength: string) => (
                 <p key={strength} className="text-sm text-slate-300">
                   ✓ {strength}
                 </p>
@@ -166,7 +185,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
 
           <div className="mt-4 space-y-2">
             {behaviour.weaknesses.length > 0 ? (
-              behaviour.weaknesses.map((weakness) => (
+              behaviour.weaknesses.map((weakness: string) => (
                 <p key={weakness} className="text-sm text-slate-300">
                   ⚠ {weakness}
                 </p>
@@ -187,7 +206,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
 
         <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
           {trend.skillTrends.length > 0 ? (
-            trend.skillTrends.map((skillTrend) => (
+            trend.skillTrends.map((skillTrend: SkillTrend) => (
               <div
                 key={skillTrend.skill}
                 className="rounded-xl border border-white/10 bg-black/30 p-4"
@@ -215,7 +234,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
           Recommendations
         </h3>
 
-        {report.recommendations.map((recommendation) => (
+        {report.recommendations.map((recommendation: BrainRecommendation) => (
           <div
             key={recommendation.title}
             className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
