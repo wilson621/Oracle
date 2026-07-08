@@ -6,7 +6,8 @@ const registeredEngines: RegisteredOracleEngine[] = [];
 
 export function registerOracleEngine(engine: RegisteredOracleEngine): void {
   const alreadyRegistered = registeredEngines.some(
-    (registeredEngine) => registeredEngine.id === engine.id
+    (registeredEngine) =>
+      registeredEngine.metadata.id === engine.metadata.id
   );
 
   if (alreadyRegistered) {
@@ -17,7 +18,9 @@ export function registerOracleEngine(engine: RegisteredOracleEngine): void {
 }
 
 export function getRegisteredOracleEngines(): RegisteredOracleEngine[] {
-  return [...registeredEngines];
+  return [...registeredEngines].sort(
+    (a, b) => a.metadata.priority - b.metadata.priority
+  );
 }
 
 export function clearOracleEngineRegistry(): void {

@@ -14,16 +14,13 @@ export async function runIntelligencePipeline(
 
   const bus = await runIntelligenceBus(context);
 
-  const signals = context.intelligence.signals;
-  const decisions = context.intelligence.decisions;
-
   return {
     operatorId: context.operator.operatorId,
     callsign: context.operator.callsign,
     generatedAt: context.generatedAt,
-    signals,
-    decisions,
-    summary: summarizeSignals(signals),
+    signals: bus.signals,
+    decisions: bus.decisions,
+    summary: summarizeSignals(bus.signals),
     bus,
   };
 }
