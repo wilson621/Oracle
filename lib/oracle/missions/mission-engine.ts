@@ -1,4 +1,4 @@
-import type { MissionReport } from "./mission-types";
+import type { MissionReport, MissionSource } from "./mission-types";
 import { generateMission } from "./mission-generator";
 
 type MissionEngineInput = {
@@ -8,6 +8,7 @@ type MissionEngineInput = {
   currentCombatRating: number;
   projectedCombatRating: number;
   predictionConfidence: number;
+  source?: MissionSource;
 };
 
 export function generateMissionReport({
@@ -17,10 +18,13 @@ export function generateMissionReport({
   currentCombatRating,
   projectedCombatRating,
   predictionConfidence,
+  source = "static",
 }: MissionEngineInput): MissionReport {
   const mission = generateMission({
     weakestSkill,
     currentCombatRating,
+    source,
+    confidence: predictionConfidence,
   });
 
   return {

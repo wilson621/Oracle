@@ -84,6 +84,32 @@ export default function MissionReadiness({
         </div>
       </div>
 
+      <div className="mt-5 grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-5">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-300">
+            Mission Source
+          </p>
+
+          <p className="mt-3 text-xl font-black uppercase text-white">
+            {mission.source}
+          </p>
+
+          <p className="mt-2 text-sm text-slate-400">
+            Confidence: {Math.round(mission.confidence * 100)}%
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+            Difficulty
+          </p>
+
+          <p className="mt-3 text-xl font-black text-white">
+            {mission.difficulty}
+          </p>
+        </div>
+      </div>
+
       <div className="mt-7 grid gap-4 md:grid-cols-2">
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
           <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">

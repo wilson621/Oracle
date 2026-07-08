@@ -1,8 +1,10 @@
-import type { OracleMission } from "./mission-types";
+import type { MissionSource, OracleMission } from "./mission-types";
 
 type MissionGeneratorInput = {
   weakestSkill: string;
   currentCombatRating: number;
+  source?: MissionSource;
+  confidence?: number;
 };
 
 const missionLibrary: Record<
@@ -78,6 +80,8 @@ function createObjectives(objectives: string[]) {
 export function generateMission({
   weakestSkill,
   currentCombatRating,
+  source = "static",
+  confidence = 0.5,
 }: MissionGeneratorInput): OracleMission {
   const mission = missionLibrary[weakestSkill] ?? missionLibrary.Positioning;
 
@@ -100,5 +104,7 @@ export function generateMission({
     estimatedSessions: 3,
     rewardXp: estimatedCombatGain * 100,
     objectives: createObjectives(mission.objectives),
+    source,
+    confidence,
   };
 }
