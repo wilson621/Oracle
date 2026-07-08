@@ -11,8 +11,8 @@ type ConfidenceRingProps = {
 
 export default function ConfidenceRing({
   value,
-  size = 160,
-  strokeWidth = 12,
+  size = 180,
+  strokeWidth = 10,
 }: ConfidenceRingProps) {
   const [progress, setProgress] = useState(0);
 
@@ -26,30 +26,33 @@ export default function ConfidenceRing({
 
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
-
-  const offset =
-    circumference - (progress / 100) * circumference;
+  const offset = circumference - (progress / 100) * circumference;
 
   return (
     <div
       className="relative flex items-center justify-center"
-      style={{
-        width: size,
-        height: size,
-      }}
+      style={{ width: size, height: size }}
     >
-      <svg
-        width={size}
-        height={size}
-        className="-rotate-90"
-      >
+      <div className="absolute inset-0 rounded-full bg-cyan-400/5 blur-2xl" />
+
+      <svg width={size} height={size} className="relative -rotate-90">
         <circle
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="rgba(255,255,255,0.08)"
+          stroke="rgba(148,163,184,0.12)"
           strokeWidth={strokeWidth}
           fill="transparent"
+        />
+
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius - 18}
+          stroke="rgba(34,211,238,0.12)"
+          strokeWidth="1"
+          fill="transparent"
+          strokeDasharray="4 8"
         />
 
         <circle
@@ -63,20 +66,22 @@ export default function ConfidenceRing({
           strokeDasharray={circumference}
           strokeDashoffset={offset}
           style={{
-            transition: "stroke-dashoffset 1s ease",
-            filter: "drop-shadow(0 0 8px rgba(34,211,238,.55))",
+            transition: "stroke-dashoffset 1.1s cubic-bezier(0.22, 1, 0.36, 1)",
+            filter: "drop-shadow(0 0 10px rgba(34,211,238,.65))",
           }}
         />
       </svg>
 
       <div className="absolute text-center">
-        <div className="text-4xl font-black text-white">
+        <div className="text-5xl font-black leading-none text-white">
           <AnimatedNumber value={value} suffix="%" />
         </div>
 
-        <div className="mt-1 text-xs uppercase tracking-[0.25em] text-cyan-300">
+        <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.32em] text-cyan-300">
           Confidence
         </div>
+
+        <div className="mx-auto mt-3 h-px w-16 bg-cyan-400/30" />
       </div>
     </div>
   );

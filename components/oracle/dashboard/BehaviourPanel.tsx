@@ -8,7 +8,18 @@ function percent(value: number) {
   return `${Math.round(value)}%`;
 }
 
+function getBehaviourStatus(confidence: number) {
+  const percentage = Math.round(confidence * 100);
+
+  if (percentage >= 80) return "High reliability";
+  if (percentage >= 60) return "Stable reliability";
+  if (percentage >= 40) return "Developing profile";
+  return "Limited sample";
+}
+
 export default function BehaviourPanel({ behaviour }: BehaviourPanelProps) {
+  const confidence = Math.round(behaviour.overallBehaviourConfidence * 100);
+
   const traits = [
     behaviour.discipline,
     behaviour.mechanicalConfidence,
@@ -19,42 +30,56 @@ export default function BehaviourPanel({ behaviour }: BehaviourPanelProps) {
 
   return (
     <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-      <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
-        Behaviour
-      </p>
-
-      <div className="mt-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
         <div>
-          <h3 className="text-3xl font-black text-white">
+          <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+            Behaviour Assessment
+          </p>
+
+          <h3 className="mt-4 text-4xl font-black text-white">
             {behaviour.playstyle}
           </h3>
 
-          <p className="mt-2 text-sm text-slate-400">
-            Behaviour Confidence:{" "}
-            <span className="text-cyan-300">
-              {percent(behaviour.overallBehaviourConfidence * 100)}
-            </span>
+          <p className="mt-3 max-w-md text-sm leading-6 text-slate-400">
+            Oracle has classified the current operator behaviour profile from
+            discipline, confidence, adaptability and consistency signals.
           </p>
         </div>
 
-        <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 px-4 py-3 text-sm text-cyan-100">
-          Operator Profile
+        <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/5 px-5 py-4 text-right">
+          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-500">
+            Behaviour Confidence
+          </p>
+
+          <div className="mt-2 text-3xl font-black text-cyan-300">
+            {confidence}%
+          </div>
+
+          <p className="mt-1 text-xs font-semibold text-cyan-200">
+            {getBehaviourStatus(behaviour.overallBehaviourConfidence)}
+          </p>
         </div>
       </div>
 
-      <div className="mt-6 space-y-4">
+      <div className="mt-7 space-y-3">
         {traits.map((trait) => (
-          <div key={trait.label}>
-            <div className="flex items-center justify-between text-sm">
-              <p className="text-slate-300">{trait.label}</p>
-              <p className="font-semibold text-white">
+          <div
+            key={trait.label}
+            className="rounded-2xl border border-slate-800 bg-slate-950/60 p-4"
+          >
+            <div className="flex items-center justify-between gap-4">
+              <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
+                {trait.label}
+              </p>
+
+              <p className="text-lg font-black text-white">
                 {percent(trait.score)}
               </p>
             </div>
 
-            <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-800">
+            <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-800">
               <div
-                className="h-full rounded-full bg-cyan-400 transition-all duration-700"
+                className="h-full rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.45)] transition-all duration-700"
                 style={{ width: `${trait.score}%` }}
               />
             </div>
@@ -62,10 +87,10 @@ export default function BehaviourPanel({ behaviour }: BehaviourPanelProps) {
         ))}
       </div>
 
-      <div className="mt-6 grid gap-3 md:grid-cols-2">
+      <div className="mt-5 grid gap-3 md:grid-cols-2">
         <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-4">
-          <p className="text-xs uppercase tracking-wide text-emerald-300">
-            Strengths
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-emerald-300">
+            Strength Signals
           </p>
 
           <div className="mt-3 space-y-2">
@@ -77,15 +102,15 @@ export default function BehaviourPanel({ behaviour }: BehaviourPanelProps) {
               ))
             ) : (
               <p className="text-sm text-slate-500">
-                No dominant strengths detected yet.
+                No dominant strength signal detected yet.
               </p>
             )}
           </div>
         </div>
 
         <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4">
-          <p className="text-xs uppercase tracking-wide text-amber-300">
-            Watchlist
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-amber-300">
+            Watchlist Signals
           </p>
 
           <div className="mt-3 space-y-2">
@@ -97,7 +122,7 @@ export default function BehaviourPanel({ behaviour }: BehaviourPanelProps) {
               ))
             ) : (
               <p className="text-sm text-slate-500">
-                No major weaknesses detected yet.
+                No major watchlist signal detected yet.
               </p>
             )}
           </div>

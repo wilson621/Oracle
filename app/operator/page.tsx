@@ -1,16 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import MissionBrief from "@/components/oracle/coach/MissionBrief";
 import { useRouter } from "next/navigation";
+import type { LucideIcon } from "lucide-react";
 
 import AppLayout from "@/components/layout/AppLayout";
 import CombatRatingBadge from "@/components/operator/CombatRatingBadge";
 import DossierField from "@/components/operator/DossierField";
 import SkillBar from "@/components/operator/SkillBar";
+import OperatorIntelligence from "@/components/operator/OperatorIntelligence";
 import IntelligenceGrid from "@/components/oracle/dashboard/IntelligenceGrid";
 
 import { getOperatorStats } from "@/lib/oracle/getOperatorStats";
 import { generateOracleBrainReport } from "@/lib/oracle/oracle-brain";
+import { generateOperatorProfile } from "@/lib/oracle/operator/operator-profile";
 import {
   getCurrentOperator,
   type Operator,
@@ -46,6 +50,58 @@ type OperatorStats = {
   decisionMaking: number;
   gameSense: number;
 };
+
+type OperationalMetricCardProps = {
+  icon: LucideIcon;
+  label: string;
+  value: ReactNode;
+  signal: string;
+  context: string;
+  trend?: string;
+};
+
+function OperationalMetricCard({
+  icon: Icon,
+  label,
+  value,
+  signal,
+  context,
+  trend,
+}: OperationalMetricCardProps) {
+  return (
+    <div className="group relative overflow-hidden rounded-3xl border border-slate-800 bg-slate-950 p-6 transition duration-300 hover:border-cyan-400/30 hover:bg-cyan-400/[0.03]">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent opacity-0 transition group-hover:opacity-100" />
+
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/10 shadow-[0_0_30px_rgba(34,211,238,0.08)]">
+          <Icon size={22} className="text-cyan-300" />
+        </div>
+
+        {trend ? (
+          <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold tracking-[0.2em] text-emerald-300">
+            {trend}
+          </span>
+        ) : null}
+      </div>
+
+      <p className="mt-7 text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+        {label}
+      </p>
+
+      <h3 className="mt-3 text-4xl font-black tracking-tight text-white">
+        {value}
+      </h3>
+
+      <p className="mt-4 text-sm font-bold leading-5 text-cyan-300">
+        {signal}
+      </p>
+
+      <p className="mt-2 min-h-[44px] text-sm leading-6 text-slate-400">
+        {context}
+      </p>
+    </div>
+  );
+}
 
 function getRank(score: number) {
   if (score >= 90) return "Oracle";
@@ -119,30 +175,66 @@ export default function OperatorPage() {
     trendSessions,
   });
 
+  const operatorProfile = generateOperatorProfile({
+    callsign: operator?.callsign ?? "Operator",
+    positioning: stats?.positioning ?? 0,
+    aim: stats?.aim ?? 0,
+    movement: stats?.movement ?? 0,
+    decisionMaking: stats?.decisionMaking ?? 0,
+    gameSense: stats?.gameSense ?? 0,
+  });
+
   const operatorStatus = getOperatorStatus(
     stats?.totalSessions ?? operator?.total_sessions ?? 0
   );
 
-  const statCards = [
+  const strongestImprovement =
+    oracleBrainReport.trend.strongestImprovement?.skill ?? null;
+
+  const operationalMetrics = [
     {
-      title: "Combat Rating",
+      label: "Combat Rating",
       value: stats ? combatRating : "Unranked",
       icon: Shield,
+      signal:
+        combatRating >= 70
+          ? "Operational effectiveness is stable."
+          : "Combat effectiveness requires reinforcement.",
+      context: "Current combat profile based on Oracle Session intelligence.",
+      trend: rank.toUpperCase(),
     },
     {
-      title: "Oracle Sessions",
+      label: "Oracle Sessions",
       value: stats?.totalSessions ?? 0,
       icon: Trophy,
+      signal: "Intelligence sample expanding.",
+      context: "Each session improves Oracle's behavioural and trend analysis.",
+      trend:
+        (stats?.totalSessions ?? operator?.total_sessions ?? 0) > 0
+          ? "ACTIVE"
+          : undefined,
     },
     {
-      title: "Win Rate",
+      label: "Operational Success Rate",
       value: stats ? `${stats.winRate}%` : "--",
       icon: Target,
+      signal:
+        (stats?.winRate ?? 0) >= 50
+          ? "Win conversion is above baseline."
+          : "Win conversion remains a priority.",
+      context: "Outcome conversion across tracked operational sessions.",
+      trend: stats ? "TRACKED" : undefined,
     },
     {
-      title: "Most Improved",
-      value: oracleBrainReport.trend.strongestImprovement?.skill ?? "--",
+      label: "Most Improved Discipline",
+      value: strongestImprovement ?? "Pending",
       icon: TrendingUp,
+      signal:
+        strongestImprovement === null
+          ? "Additional sessions required."
+          : "Positive behavioural movement detected.",
+      context: "Oracle will identify the strongest improving skill trend.",
+      trend: strongestImprovement === null ? "PENDING" : "IMPROVING",
     },
   ];
 
@@ -226,33 +318,76 @@ export default function OperatorPage() {
         </div>
       </div>
 
-      <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-        {statCards.map((stat) => {
-          const Icon = stat.icon;
+      <section className="mt-10">
+        <div className="mb-5 flex flex-col gap-2">
+          <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+            OPERATIONAL METRICS
+          </p>
 
-          return (
-            <div
-              key={stat.title}
-              className="rounded-3xl border border-slate-800 bg-slate-950 p-6"
-            >
-              <Icon className="text-cyan-300" />
+          <h2 className="text-2xl font-bold text-white">
+            Current intelligence snapshot
+          </h2>
 
-              <p className="mt-6 text-sm text-slate-400">{stat.title}</p>
-
-              <h3 className="mt-2 text-3xl font-bold">{stat.value}</h3>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="mt-10 rounded-3xl border border-slate-800 bg-slate-950 p-8">
-        <div className="flex items-center gap-3">
-          <Crosshair className="text-cyan-300" />
-
-          <h2 className="text-2xl font-bold">Lifetime Skill Ratings</h2>
+          <p className="max-w-3xl text-sm leading-6 text-slate-400">
+            Oracle converts raw performance data into operational intelligence,
+            giving each Operator a clear read on current capability, trend
+            direction and improvement priority.
+          </p>
         </div>
 
-        <div className="mt-8 space-y-6">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {operationalMetrics.map((metric) => (
+            <OperationalMetricCard
+              key={metric.label}
+              icon={metric.icon}
+              label={metric.label}
+              value={metric.value}
+              signal={metric.signal}
+              context={metric.context}
+              trend={metric.trend}
+            />
+          ))}
+        </div>
+      </section>
+
+      <div className="mt-10">
+        <OperatorIntelligence profile={operatorProfile} />
+      </div>
+
+      <section className="mt-10 rounded-3xl border border-slate-800 bg-slate-950 p-8">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+              OPERATOR CAPABILITY MATRIX
+            </p>
+
+            <h2 className="mt-3 text-3xl font-bold text-white">
+              Core operational capability
+            </h2>
+
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-400">
+              Oracle continuously evaluates capability across the five primary
+              combat disciplines. These scores represent long-term operational
+              proficiency rather than individual match performance.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/5 px-5 py-4 text-right">
+            <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-slate-500">
+              Analysis Confidence
+            </p>
+
+            <div className="mt-2 text-4xl font-black text-cyan-300">
+              {Math.round(oracleBrainReport.confidence * 100)}%
+            </div>
+
+            <p className="mt-2 text-xs uppercase tracking-[0.25em] text-slate-500">
+              Based on {oracleBrainReport.trend.sampleSize} Oracle Sessions
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-10 space-y-4">
           {skills.map((skill) => (
             <SkillBar
               key={skill.label}
@@ -261,10 +396,14 @@ export default function OperatorPage() {
             />
           ))}
         </div>
-      </div>
+      </section>
 
       <div className="mt-10">
         <IntelligenceGrid report={oracleBrainReport} />
+      </div>
+
+      <div className="mt-10">
+        <MissionBrief />
       </div>
     </AppLayout>
   );

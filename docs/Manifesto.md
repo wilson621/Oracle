@@ -1,20 +1,20 @@
-# PROJECT META
+# ORACLE
 
 # Manifesto
 
-Version 1.0
+Version 2.0
 
-Last Updated: 4 July 2026
+Last Updated: 8 July 2026
 
 ---
 
 # We don't build AI.
 
-# We build better players.
+# We build Intelligence.
 
 Oracle exists for one reason:
 
-To help players improve.
+To help Operators improve.
 
 Not eventually.
 
@@ -22,9 +22,9 @@ Not after months of training.
 
 Not after watching endless videos.
 
-Every Oracle Session should leave a player more knowledgeable, more confident, and more dangerous than they were five minutes earlier.
+Every Oracle Session should leave an Operator more knowledgeable, more confident, and more capable than they were moments before.
 
-If a player wins their next engagement because of something Oracle taught them...
+If an Operator wins their next engagement because of something Oracle taught them...
 
 We've succeeded.
 
@@ -34,99 +34,151 @@ We've succeeded.
 
 Improvement is.
 
-Artificial Intelligence is simply the tool we use.
+Artificial Intelligence is simply one tool.
 
-Our real product is confidence.
+Intelligence is our craft.
+
+Our real product is understanding.
 
 Decision making.
 
-Understanding.
+Confidence.
+
+Adaptation.
 
 Growth.
 
-We don't want players to become dependent on Oracle.
+Oracle should never become a crutch.
 
-We want Oracle to teach them to think for themselves.
+Its purpose is to teach Operators how to think independently.
 
-The ultimate success of Oracle is when a player instinctively makes the correct decision because they learned it through previous Oracle Sessions.
+The ultimate success of Oracle is when an Operator instinctively makes the correct decision because Oracle helped build the habits that led there.
 
 ---
 
-# Every lost fight contains a lesson.
+# Every engagement contains intelligence.
 
 No engagement is meaningless.
 
-Every death.
+Every victory.
 
-Every mistake.
-
-Every failed rotation.
+Every defeat.
 
 Every missed opportunity.
 
-Every bad decision.
+Every failed rotation.
 
-Contains information.
+Every incorrect decision.
 
-Oracle exists to uncover that information.
+Every successful decision.
+
+Contains intelligence.
+
+Oracle exists to uncover that intelligence.
+
+---
+
+# Oracle learns the Operator.
+
+Games evolve.
+
+Weapons change.
+
+Maps rotate.
+
+Meta shifts.
+
+Operators endure.
+
+Oracle's purpose is not to memorise games.
+
+Oracle's purpose is to understand the person playing them.
+
+Every Oracle Session contributes to a deeper understanding of the Operator.
+
+Every recommendation becomes more personal.
+
+Every prediction becomes more accurate.
+
+Every decision becomes more informed.
 
 ---
 
 # Truth over ego.
 
-Oracle never tells players what they want to hear.
+Oracle never tells Operators what they want to hear.
 
-Oracle tells players what they need to hear.
+Oracle tells them what they need to hear.
 
-If the player made a mistake...
+If the Operator made a mistake...
 
-We explain why.
+Oracle explains why.
 
-If the player made the correct decision but still lost...
+If the Operator made the correct decision but still failed...
 
-We explain why.
+Oracle explains why.
+
+If confidence is uncertain...
+
+Oracle says so.
 
 Improvement always comes before comfort.
 
 ---
 
+# Intelligence must be explainable.
+
+Oracle never produces recommendations without evidence.
+
+Every recommendation should answer three questions.
+
+Why?
+
+How confident are we?
+
+What evidence supports this?
+
+Trust is earned through transparency.
+
+Never through false certainty.
+
+---
+
 # Clarity over complexity.
 
-The smartest analysis in the world is useless if the player cannot understand it.
+The most advanced intelligence is worthless if nobody understands it.
 
 Oracle communicates clearly.
 
 Every recommendation must be actionable.
 
-Every lesson must have purpose.
+Every insight must have purpose.
 
 Every Oracle Session should answer one simple question:
 
-"What should I do differently in my next engagement?"
+> What should I do differently next time?
 
 ---
 
-# One lesson is better than ten.
+# One improvement at a time.
 
-Players don't remember twenty mistakes.
+Operators do not improve by fixing twenty mistakes simultaneously.
 
-They remember one.
-
-Every Oracle Session should identify the single highest-impact improvement the player can make.
-
-Master one habit.
+They improve by mastering one behaviour.
 
 Then another.
 
 Then another.
 
-Great players are built one decision at a time.
+Oracle identifies the single highest-impact improvement first.
+
+Great Operators are built one decision at a time.
 
 ---
 
 # Show before you tell.
 
-A picture teaches faster than a paragraph.
+Visual understanding accelerates learning.
 
 Whenever possible...
 
@@ -134,45 +186,109 @@ Oracle should demonstrate.
 
 Not describe.
 
-Visual learning will always be preferred over unnecessary explanation.
+Animations.
+
+Heatmaps.
+
+Timelines.
+
+Comparisons.
+
+Evidence.
+
+Pictures teach faster than paragraphs.
 
 ---
 
 # Evidence over opinion.
 
-Oracle should never pretend certainty.
+Oracle does not guess.
 
-Every recommendation should be based on observable evidence.
+Oracle observes.
+
+Measures.
+
+Analyses.
+
+Reasons.
+
+Recommends.
 
 If confidence is low...
 
 Oracle says so.
 
-Trust is earned through honesty.
+If evidence is incomplete...
 
-Not confidence.
+Oracle waits.
+
+Accuracy is more valuable than certainty.
+
+---
+
+# The Operator comes before the meta.
+
+Global statistics matter.
+
+Patch notes matter.
+
+Public meta matters.
+
+But none of them matter more than the Operator.
+
+Oracle will always prioritise real Operator performance over theoretical perfection.
+
+The best weapon is the one that consistently produces better outcomes for that Operator.
+
+The best strategy is the one that repeatedly succeeds for that Operator.
+
+The Operator always comes first.
+
+---
+
+# Games are modules.
+
+Oracle is the platform.
+
+Games are simply intelligence modules.
+
+Warzone.
+
+Battlefield.
+
+Rainbow Six.
+
+Apex.
+
+GTA.
+
+Whatever comes next.
+
+Oracle should never be rebuilt for a new game.
+
+Only expanded.
 
 ---
 
 # Improvement over entertainment.
 
-We are not building another gaming website.
+Oracle is not another gaming website.
 
-We are not chasing trends.
+Oracle is not another statistics tracker.
 
-We are not building flashy AI for social media.
+Oracle is not another content platform.
 
-We are building the world's most trusted gaming coach.
+Oracle exists for one purpose.
 
-Everything we create must make players better.
+To make Operators better.
 
-If it doesn't...
+If a feature does not improve performance...
 
-We don't build it.
+It does not belong in Oracle.
 
 ---
 
-# The Oracle Standard
+# The Oracle Standard.
 
 Every feature.
 
@@ -180,13 +296,19 @@ Every screen.
 
 Every animation.
 
+Every engine.
+
+Every signal.
+
+Every recommendation.
+
 Every sentence.
 
 Every line of code.
 
-Must answer one question:
+Must answer one question.
 
-Will this increase the player's chance of winning their next engagement?
+Will this make the Operator better?
 
 If the answer is no...
 
@@ -196,33 +318,37 @@ It does not belong in Oracle.
 
 # Our Vision
 
-To become the operating system for mastering games.
+To become the world's most trusted competitive gaming intelligence platform.
 
-Beginning with Call of Duty and expanding into every competitive game where knowledge, decision making and improvement matter.
+A platform that continuously learns every Operator.
 
-Expanding into every game where knowledge, decision making and improvement matter.
+Explains every recommendation.
 
-Oracle will never play the game for the player.
+Builds long-term behavioural intelligence.
 
-Oracle will teach players to understand the game better than ever before.
+Adapts across every supported game.
+
+And helps every Operator become the best version of themselves.
 
 ---
 
 # Our Promise
 
-Oracle exists to create better players.
+Oracle will never replace skill.
 
-Not bigger egos.
+Oracle will develop it.
 
-Not prettier statistics.
+Oracle will never replace judgement.
 
-Not meaningless achievements.
+Oracle will strengthen it.
 
-Better players.
+Oracle will never play the game.
 
-Every Oracle Session is another step forward.
+Oracle will teach Operators how to understand it.
 
-Every engagement is another opportunity to learn.
+Every Oracle Session is another opportunity to learn.
+
+Every engagement is another source of intelligence.
 
 Every decision matters.
 
@@ -230,8 +356,16 @@ Every decision matters.
 
 # The Oracle Has Spoken.
 
-This manifesto is the foundation upon which every future decision will be made.
+This manifesto is the foundation upon which every future architectural, engineering and product decision will be made.
 
-If we ever lose our direction...
+Whenever uncertainty exists...
 
 We return here.
+
+Because technology changes.
+
+Games change.
+
+The industry changes.
+
+The Oracle Standard does not.

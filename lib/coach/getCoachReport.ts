@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase";
 import { getCurrentOperator } from "@/lib/operator/getCurrentOperator";
+import { generateCoachReport } from "@/lib/oracle/coach/coach-engine";
 
 type Skill = {
   label: string;
@@ -43,54 +44,36 @@ export async function getCoachReport() {
   const strongestSkill = [...skills].sort((a, b) => b.value - a.value)[0];
   const weakestSkill = [...skills].sort((a, b) => a.value - b.value)[0];
 
-  const commonCorrection =
-    sessions.find((session) => session.correction)?.correction ||
-    "Focus on cleaner engagements and smarter positioning.";
-
-  const mission =
-    weakestSkill.label === "Movement"
-      ? "Complete 5 fights where you rotate before taking damage."
-      : weakestSkill.label === "Positioning"
-      ? "Complete 5 fights where you move to stronger cover before engaging."
-      : weakestSkill.label === "Aim"
-      ? "Complete 5 fights where you centre your crosshair before shooting."
-      : weakestSkill.label === "Decision Making"
-      ? "Complete 5 fights where you disengage instead of forcing a bad challenge."
-      : "Complete 5 fights where you predict the enemy route before pushing.";
-
   const predictedGain = Math.max(4, Math.round((100 - weakestSkill.value) / 5));
+  const projectedCombatRating = Math.min(100, weakestSkill.value + predictedGain);
+
+  const coachReport = generateCoachReport({
+    sessionsAnalysed: sessions.length,
+    weakestSkill: weakestSkill.label,
+    strongestSkill: strongestSkill.label,
+    currentCombatRating: weakestSkill.value,
+    projectedCombatRating,
+    predictionConfidence: 0.77,
+  });
 
   return {
     operatorName: operator.callsign || "Operator",
-    sessionsAnalysed: sessions.length,
+    sessionsAnalysed: coachReport.sessionsAnalysed,
     strongestSkill,
     weakestSkill,
-    commonCorrection,
     dailyMission: {
-      title: `${weakestSkill.label} Focus`,
-      description: mission,
-      rewardXp: 450,
+      title: coachReport.mission.title,
+      description: coachReport.mission.summary,
+      rewardXp: coachReport.mission.rewardXp,
     },
     prediction: {
-      current: weakestSkill.value,
-      projected: Math.min(100, weakestSkill.value + predictedGain),
-      skill: weakestSkill.label,
-      sessions: 10,
+      current: coachReport.readiness.currentCombatRating,
+      projected: coachReport.readiness.projectedCombatRating,
+      skill: coachReport.readiness.focus,
+      sessions: coachReport.readiness.estimatedSessions,
     },
-    summary: `Operator...
-
-I have analysed your last ${sessions.length} combat sessions.
-
-Your strongest discipline is ${strongestSkill.label.toLowerCase()}.
-
-Your greatest opportunity for improvement is ${weakestSkill.label.toLowerCase()}.
-
-Repeated behavioural analysis indicates:
-
-"${commonCorrection}"
-
-My recommendation is to focus exclusively on ${weakestSkill.label.toLowerCase()} over your next ten sessions.
-
-Analysis confidence is increasing with every session completed.`,
+    readiness: coachReport.readiness,
+    mission: coachReport.mission,
+    summary: coachReport.summary,
   };
 }

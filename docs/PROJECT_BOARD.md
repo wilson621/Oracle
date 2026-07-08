@@ -1,28 +1,32 @@
-# PROJECT META BOARD
+# ORACLE PROJECT BOARD
+
+Mission Control
+
+Version 2.0
+
+Last Updated: 8 July 2026
 
 ---
 
 # Product
 
+Oracle
+
+Internal Repository
+
 Project Meta
 
 ---
 
-# Version
+# Current Release
 
-Oracle v0.3
+Operation Genesis
 
-Codename
+Foundation Architecture
 
-Oracle Command Centre
+Version
 
----
-
-# Milestone
-
-PM-006
-
-Premium Experience
+Oracle v0.4 (Development)
 
 Status
 
@@ -30,87 +34,209 @@ Status
 
 ---
 
-# Build Status
+# Platform Health
+
+Build
 
 ✅ Passing
+
+Architecture
+
+🟢 Stable
+
+Documentation
+
+🟢 Up To Date
+
+Technical Debt
+
+🟢 Low
+
+Design System
+
+🟢 Stable
+
+Operator Experience
+
+🟢 Premium
+
+---
+
+# Active Operation
+
+## Operation Genesis
+
+Purpose
+
+Transform Oracle from an AI coaching application into a reusable intelligence platform.
+
+Current Phase
+
+Final Foundation
+
+Progress
+
+██████████████████████████░░░░ 90%
+
+---
+
+# Completed During Genesis
+
+## Platform
+
+✅ Next.js Foundation
+
+✅ TypeScript
+
+✅ Tailwind
+
+✅ Supabase
+
+✅ Authentication
+
+---
+
+## Core Intelligence
+
+✅ Behaviour Engine
+
+✅ Trend Engine
+
+✅ Prediction Engine
+
+✅ Oracle Brain
+
+✅ Decision Intelligence
+
+✅ Confidence Engine
+
+✅ Evidence Engine
+
+---
+
+## Operator
+
+✅ Operator Profiles
+
+✅ Behavioural DNA
+
+✅ Learning Styles
+
+✅ Capability Matrix
+
+✅ Operator Intelligence
+
+---
+
+## Coaching
+
+✅ Coach Engine
+
+✅ Mission Control
+
+✅ Mission Classification
+
+✅ Oracle Assessment
+
+✅ Daily Missions
+
+---
+
+## Weapon Intelligence
+
+✅ Recommendation Engine
+
+✅ Decision Framework
+
+✅ Expected Outcome
+
+✅ Evidence Framework
+
+---
+
+## Intelligence Platform
+
+✅ Signal Types
+
+✅ Signal Engine
+
+✅ Signal Prioritisation
+
+✅ Signal Summary
+
+✅ Intelligence Pipeline
+
+---
+
+## User Experience
+
+✅ Premium Dashboard
+
+✅ Operator Page
+
+✅ Intelligence Dashboard
+
+✅ Oracle Design System
+
+---
+
+# Remaining Before Genesis Complete
+
+## Foundation
+
+⬜ Oracle Context
+
+⬜ Intelligence Bus
+
+⬜ Universal Engine Interface
+
+⬜ Engine Registration
+
+⬜ Architecture Validation
+
+⬜ Genesis Release Review
 
 ---
 
 # Current Sprint
 
-Sprint 3.0
+Sprint
 
-Progress
+Operation Genesis
 
-██████████████████████░░░░ 75%
+Phase 4
 
----
+Objective
 
-# Current Objective
+Complete Oracle's final architectural foundation before beginning Oracle Memory.
 
-Complete PM-006 without introducing feature creep.
+Current Focus
 
-Focus on refining the Oracle experience through reusable components, premium UI polish and production-quality architecture.
+Oracle Context
 
----
+↓
 
-# Completed
+Intelligence Bus
 
-## Architecture
+↓
 
-- OracleBrain
-- Behaviour Engine
-- Trend Engine
-- Prediction Engine
-- Oracle Intelligence Layer
-- Session Repository
+Universal Engine Interface
 
-## Pages
+↓
 
-- Operator
-- Intelligence
-- Operator / Intelligence separation
-
-## Design System
-
-- Card
-- MetricCard
-- AnimatedNumber
-- ConfidenceRing
-- StatusBadge
-
-## Dashboard
-
-- Intelligence Grid
-- Confidence Panel
-- Behaviour Panel
-- Trend Panel (Polished)
-- Prediction Panel
+Oracle Memory
 
 ---
 
-# Remaining
+# Engineering Workflow
 
-## PM-006
-
-- Risk Panel
-- Assessment Panel
-- Oracle Presence (Motion)
-- Dashboard Polish
-- Documentation Review
-- Release Review
-
----
-
-# Workflow
-
-Every task follows the same process.
+Every task follows the same lifecycle.
 
 Architecture Review
 
 ↓
 
-Inspect Existing Files
+Inspect Existing Code
 
 ↓
 
@@ -118,11 +244,15 @@ Planning
 
 ↓
 
-Complete Replacement Files
+Implementation
 
 ↓
 
-Build (`npm run build`)
+Build
+
+```bash
+npm run build
+```
 
 ↓
 
@@ -130,91 +260,250 @@ UI Review
 
 ↓
 
+Architecture Review
+
+↓
+
 Documentation
 
 ↓
 
-Next Task
+Git Commit
 
 ↓
 
 Release
 
----
-
-# Development Rules
-
-- Every feature must compile successfully.
-- Every major UI change receives a visual review.
-- Complete one milestone before starting another.
-- New ideas are added to the backlog.
-- Avoid feature creep.
-- Build reusable systems before building new features.
+No stage is skipped.
 
 ---
 
-# Active Backlog
+# Engineering Rules
 
-## PM-009
+Every build must compile.
 
-Oracle Personality
+Every UI change receives a visual review.
 
-- Oracle Voice
-- Dynamic Briefings
-- Greeting System
-- Oracle Boot Sequence
+Business logic belongs in engines.
 
-## Future
+Repositories expose truth.
 
-- Memory Engine Evolution
-- Timeline Replay
-- Weekly Reports
-- Video Upload
-- Computer Vision
-- Native Mobile App
-- Push Notifications
+Signals communicate observations.
 
----
+Decision Intelligence owns recommendations.
 
-# Next Task
+Pages compose.
 
-Risk Panel
+Components present.
 
-↓
-
-Assessment Panel
-
-↓
-
-Oracle Presence
-
-↓
-
-Dashboard Polish
-
-↓
-
-Documentation Review
-
-↓
-
-PM-006 Release
+Documentation evolves alongside architecture.
 
 ---
 
-# Last Updated
+# Current Backlog
 
-Oracle v0.3
+## Operation Sentinel
 
-PM-006 Sprint 3
+Oracle Memory
 
-Build Passing ✅
+Behaviour Evolution
 
-PM-100 Infrastructure
+Historical Intelligence
 
-□ Supabase CLI
-□ Database Migrations
-□ Schema Versioning
-□ Backup Strategy
-□ Release Tagging
-□ CI / Build Improvements
+Recommendation History
+
+Learning Timeline
+
+Adaptive Coaching
+
+---
+
+## Operation Vanguard
+
+Strategy Intelligence
+
+Map Intelligence
+
+Prediction Improvements
+
+Behaviour Relationships
+
+Advanced Reasoning
+
+---
+
+## Operation Dominion
+
+Gameplay Upload
+
+Video Analysis
+
+Computer Vision
+
+Automatic Timeline Analysis
+
+Visual Intelligence
+
+---
+
+## Operation Atlas
+
+Battlefield
+
+Rainbow Six
+
+Apex
+
+Delta Force
+
+GTA
+
+Universal Game Modules
+
+---
+
+## Operation Horizon
+
+Live Intelligence
+
+Real-Time Coaching
+
+Live Tactical Alerts
+
+Adaptive Guidance
+
+Performance Monitoring
+
+---
+
+## Operation Aegis
+
+Teams
+
+Organisations
+
+Tournament Intelligence
+
+Professional Analytics
+
+Shared Intelligence
+
+---
+
+# Technical Infrastructure
+
+Future Platform Improvements
+
+⬜ Supabase CLI
+
+⬜ Database Migrations
+
+⬜ Schema Versioning
+
+⬜ Automated Backups
+
+⬜ CI/CD Pipeline
+
+⬜ Automated Testing
+
+⬜ Deployment Automation
+
+⬜ Release Versioning
+
+---
+
+# Documentation Status
+
+✅ Manifesto
+
+✅ Oracle Codex
+
+✅ Architecture
+
+✅ Roadmap
+
+✅ Oracle Principles
+
+✅ Decision Records
+
+🟡 Project Board
+
+⬜ Design System
+
+⬜ Brand Bible
+
+⬜ Ideas
+
+---
+
+# Release Readiness
+
+Architecture
+
+🟢 Ready
+
+Build
+
+🟢 Passing
+
+Documentation
+
+🟢 Current
+
+UI Consistency
+
+🟢 Stable
+
+Testing
+
+🟡 Ongoing
+
+Operation Genesis
+
+🟢 On Track
+
+---
+
+# Next Objective
+
+Complete Operation Genesis.
+
+Once complete:
+
+↓
+
+Operation Sentinel
+
+↓
+
+Oracle Memory
+
+↓
+
+Behaviour Evolution
+
+↓
+
+Historical Intelligence
+
+↓
+
+Adaptive Coaching
+
+---
+
+# Mission Status
+
+Oracle is no longer being developed as a traditional gaming application.
+
+Oracle is now an intelligence platform.
+
+Every completed sprint strengthens the architecture.
+
+Every completed Operation expands Oracle's capabilities.
+
+Mission Status
+
+🟢 ON COURSE
+
+The Oracle Has Spoken.

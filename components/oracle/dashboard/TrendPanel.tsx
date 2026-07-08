@@ -30,116 +30,131 @@ function directionColour(value: string) {
   return "text-cyan-300";
 }
 
+function getMomentumStatus(score: number) {
+  if (score > 10) return "Positive momentum detected";
+  if (score > 0) return "Momentum improving";
+  if (score === 0) return "Momentum stable";
+  if (score > -10) return "Negative momentum detected";
+  return "Priority trend detected";
+}
+
 export default function TrendPanel({ trend }: TrendPanelProps) {
+  const signalItems = [
+    { label: "Performance", value: trend.performanceTrend },
+    { label: "Confidence", value: trend.confidenceTrend },
+    { label: "Consistency", value: trend.consistencyTrend },
+  ];
+
   return (
     <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+          <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
             Trend Engine
           </p>
 
-          <h3 className="mt-4 text-3xl font-black text-white">
+          <h3 className="mt-4 text-4xl font-black text-white">
             {formatLabel(trend.momentum)}
           </h3>
 
-          <p className="mt-2 text-sm text-slate-400">
-            Momentum Score:{" "}
-            <span className="text-cyan-300">{trend.momentumScore}</span>
+          <p className="mt-3 max-w-md text-sm leading-6 text-slate-400">
+            {trend.summary}
           </p>
         </div>
 
-        <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/5 px-4 py-2 text-sm font-semibold text-cyan-300">
-          {trend.sampleSize} sessions
+        <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/5 px-5 py-4 text-right">
+          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-500">
+            Momentum Score
+          </p>
+
+          <div className="mt-2 text-3xl font-black text-cyan-300">
+            {formatChange(trend.momentumScore)}
+          </div>
+
+          <p className="mt-1 text-xs font-semibold text-cyan-200">
+            {trend.sampleSize} sessions
+          </p>
         </div>
       </div>
 
-      <p className="mt-5 text-sm leading-6 text-slate-400">
-        {trend.summary}
+      <div className="mt-7 space-y-3">
+  {signalItems.map((item) => (
+    <div
+      key={item.label}
+      className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/30 px-4 py-3"
+    >
+      <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
+        {item.label}
       </p>
 
-      <div className="mt-6 space-y-3">
-        {[
-          { label: "Performance", value: trend.performanceTrend },
-          { label: "Confidence", value: trend.confidenceTrend },
-          { label: "Consistency", value: trend.consistencyTrend },
-        ].map((item) => (
-          <div
-            key={item.label}
-            className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/30 px-4 py-3"
-          >
-            <p className="text-xs uppercase tracking-wide text-slate-500">
-              {item.label}
-            </p>
+      <p
+        className={`text-sm font-black ${directionColour(item.value)}`}
+      >
+        {directionSymbol(item.value)} {formatLabel(item.value)}
+      </p>
+    </div>
+  ))}
+</div>
 
-            <p
-              className={`text-sm font-bold ${directionColour(
-                item.value
-              )}`}
-            >
-              {directionSymbol(item.value)} {formatLabel(item.value)}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-6 grid gap-3 md:grid-cols-2">
+      <div className="mt-5 grid gap-3 md:grid-cols-2">
         <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-4">
-          <p className="text-xs uppercase tracking-wide text-emerald-300">
-            Best Trend
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-emerald-300">
+            Improvement Signal
           </p>
 
           {trend.strongestImprovement ? (
             <>
-              <p className="mt-3 text-lg font-bold text-white">
+              <p className="mt-3 text-lg font-black text-white">
                 {trend.strongestImprovement.skill}
               </p>
-              <p className="mt-1 text-sm font-semibold text-emerald-300">
+
+              <p className="mt-1 text-sm font-bold text-emerald-300">
                 {formatChange(trend.strongestImprovement.change)} points
               </p>
             </>
           ) : (
-            <p className="mt-3 text-sm text-slate-500">
-              No improvement trend detected yet.
+            <p className="mt-3 text-sm leading-6 text-slate-500">
+              No improvement signal detected yet.
             </p>
           )}
         </div>
 
         <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4">
-          <p className="text-xs uppercase tracking-wide text-amber-300">
-            Largest Decline
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-amber-300">
+            Decline Signal
           </p>
 
           {trend.sharpestDecline ? (
             <>
-              <p className="mt-3 text-lg font-bold text-white">
+              <p className="mt-3 text-lg font-black text-white">
                 {trend.sharpestDecline.skill}
               </p>
-              <p className="mt-1 text-sm font-semibold text-amber-300">
+
+              <p className="mt-1 text-sm font-bold text-amber-300">
                 {formatChange(trend.sharpestDecline.change)} points
               </p>
             </>
           ) : (
-            <p className="mt-3 text-sm text-slate-500">
-              No decline trend detected yet.
+            <p className="mt-3 text-sm leading-6 text-slate-500">
+              No decline signal detected yet.
             </p>
           )}
         </div>
       </div>
 
-      <div className="mt-6">
-        <p className="text-xs uppercase tracking-wide text-slate-500">
+      <div className="mt-5">
+        <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
           Skill Movement
         </p>
 
-        <div className="mt-3 space-y-2">
+        <div className="mt-3 grid gap-2">
           {trend.skillTrends.length > 0 ? (
             trend.skillTrends.map((skillTrend) => (
               <div
                 key={skillTrend.skill}
                 className="flex items-center justify-between rounded-xl border border-white/10 bg-black/30 px-4 py-3"
               >
-                <p className="text-sm text-slate-400">
+                <p className="text-sm font-medium text-slate-300">
                   {skillTrend.skill}
                 </p>
 
@@ -156,7 +171,8 @@ export default function TrendPanel({ trend }: TrendPanelProps) {
           ) : (
             <div className="rounded-xl border border-white/10 bg-black/30 px-4 py-3">
               <p className="text-sm text-slate-500">
-                Complete at least two Oracle Sessions to unlock trend intelligence.
+                Complete at least two Oracle Sessions to unlock trend
+                intelligence.
               </p>
             </div>
           )}

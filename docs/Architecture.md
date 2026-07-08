@@ -1,133 +1,248 @@
-# PROJECT META
+# ORACLE ARCHITECTURE
 
-# Architecture
+Technical Architecture
 
-Version 2.0
+Version 3.0
 
-Last Updated: 7 July 2026
+Last Updated: 8 July 2026
 
 ---
 
 # Purpose
 
-This document defines the technical architecture for Project Meta and Oracle.
+This document defines the technical architecture of Oracle.
 
-Project Meta is the overall software platform.
+Its purpose is to describe how Oracle is structured, how intelligence flows through the platform and how future systems should integrate.
 
-Oracle is the flagship AI intelligence system built inside Project Meta.
+Unlike the Manifesto or the Codex, this document focuses exclusively on architecture.
 
-Oracle is designed as a modular, reusable AI coaching platform capable of analysing player behaviour, identifying trends, predicting future performance and continuously evolving as more data becomes available.
+It should answer one question.
 
-The architecture is intentionally layered to ensure scalability, maintainability and future expansion.
-
-# Vision
-
-Project Meta aims to become the operating system for competitive FPS players by combining intelligence, coaching, progression, loadouts and analytics into a single Oracle platform.
-
-Version 1 is focused on delivering the best possible intelligence platform for Call of Duty: Warzone.
-
-The architecture, however, is intentionally designed so that Oracle itself remains game-agnostic, allowing future game modules to integrate without requiring architectural redesign.
+**How does Oracle work?**
 
 ---
 
-# Core Principle
+# Architectural Vision
 
-Everything revolves around one object.
+Oracle is designed as a modular intelligence platform.
 
-# Platform Principles
+Every subsystem performs one responsibility.
 
-## Oracle is Game Agnostic
+Every subsystem produces reusable outputs.
 
-Oracle never belongs to a single game.
+Every subsystem should be capable of evolving independently without requiring architectural redesign.
 
-Oracle consumes intelligence.
+Oracle should become easier to extend over time.
 
-Game-specific behaviour belongs inside modular integrations.
+Never harder.
 
-Current module:
+---
 
-• Call of Duty: Warzone
+# Core Architectural Principles
 
-Planned modules:
+Oracle follows seven architectural principles.
 
-• Battlefield
-• GTA VI
-• Rainbow Six
-• Apex Legends
-• Delta Force
-• Future supported titles
+## 1. Separation of Responsibility
 
-The Oracle Brain, Intelligence Engines, Coach and Reports should never require modification when a new game module is introduced.
+Every subsystem owns one responsibility.
 
-## Oracle Session
+Pages compose.
 
-An Oracle Session is the atomic unit of intelligence.
+Components present.
 
-Every feature either:
+Repositories provide data.
 
-- Creates an Oracle Session
-- Reads Oracle Sessions
-- Analyses Oracle Sessions
-- Learns from Oracle Sessions
-- Improves future Oracle Sessions
+Engines reason.
 
-Examples include:
+Signals communicate.
 
-- Text analysis
-- Gameplay coaching
-- Behaviour analysis
-- Performance reviews
-- Video analysis (future)
-- Loadout recommendations
-- Route planning
-- Squad analysis
-- Weekly reports
+Oracle Brain analyses.
 
-Oracle Sessions become the long-term memory of the platform.
+Decision Intelligence recommends.
+
+Pipeline orchestrates.
+
+---
+
+## 2. Intelligence First
+
+Oracle always produces intelligence before presentation.
+
+Presentation never creates intelligence.
+
+Presentation consumes intelligence.
+
+The UI should know as little as possible about how intelligence is generated.
+
+---
+
+## 3. Evidence Driven
+
+Every recommendation originates from evidence.
+
+Evidence originates from Oracle Sessions.
+
+No recommendation should exist without supporting intelligence.
+
+---
+
+## 4. Game Agnostic
+
+Oracle is never built around one game.
+
+Games provide data.
+
+Oracle provides intelligence.
+
+Adding a new game should require a new module.
+
+It should never require redesigning Oracle.
+
+---
+
+## 5. Modular Expansion
+
+Future systems should plug into existing architecture.
+
+They should never replace it.
+
+---
+
+## 6. Reusable Systems
+
+Reusable architecture always takes priority over isolated implementations.
+
+Every engine should be reusable.
+
+Every component should be reusable.
+
+Every repository should be reusable.
+
+---
+
+## 7. Single Source of Truth
+
+Truth exists only once.
+
+Repositories expose truth.
+
+Engines generate intelligence.
+
+Presentation displays intelligence.
+
+---
+
+# Oracle Layer Model
+
+Oracle consists of multiple architectural layers.
+
+Each layer depends only on the layer immediately beneath it.
+
+Presentation Layer
+
+↓
+
+Pipeline Layer
+
+↓
+
+Decision Layer
+
+↓
+
+Oracle Brain
+
+↓
+
+Signal Layer
+
+↓
+
+Engine Layer
+
+↓
+
+Repository Layer
+
+↓
+
+Database Layer
+
+Each layer performs one responsibility.
 
 ---
 
 # High-Level Architecture
 
 ```text
-Operator
+                     Operator
 
-↓
+                        │
 
-Oracle Session
+                        ▼
 
-↓
+                 Oracle Session
 
-Supabase
+                        │
 
-↓
+                        ▼
 
-Repositories
+                   Supabase
 
-↓
+                        │
 
-Behaviour Engine
-Trend Engine
-Prediction Engine
+                        ▼
 
-↓
+                 Repository Layer
 
-Oracle Intelligence Layer
+                        │
 
-↓
+                        ▼
 
-OracleBrain
+              Operator Intelligence
 
-↓
+                        │
 
-Interface Layer
+                        ▼
+
+                Intelligence Engines
+
+                        │
+
+                        ▼
+
+                     Signals
+
+                        │
+
+                        ▼
+
+                  Oracle Brain
+
+                        │
+
+                        ▼
+
+             Decision Intelligence
+
+                        │
+
+                        ▼
+
+             Intelligence Pipeline
+
+                        │
+
+                        ▼
+
+                Presentation Layer
 ```
 
 ---
 
-# System Layers
+# Layer Responsibilities
 
-## 1. Interface Layer
+## Presentation Layer
 
 Location
 
@@ -138,15 +253,199 @@ components/
 
 Responsibilities
 
-- Display intelligence
-- Accept user input
-- Render Oracle dashboards
-- Present recommendations
-- Never contain business logic
+Render intelligence
+
+Display dashboards
+
+Present recommendations
+
+Handle navigation
+
+Collect user interaction
+
+Presentation should never:
+
+Generate recommendations
+
+Calculate intelligence
+
+Contain business logic
+
+Query Supabase directly
 
 ---
 
-## 2. Repository Layer
+## Pipeline Layer
+
+Location
+
+```text
+lib/oracle/pipeline/
+```
+
+Responsibilities
+
+Coordinate intelligence execution.
+
+Aggregate Decisions.
+
+Aggregate Signals.
+
+Prepare data for presentation.
+
+The Pipeline orchestrates.
+
+It does not reason.
+
+---
+
+## Decision Layer
+
+Location
+
+```text
+lib/oracle/intelligence/
+```
+
+Responsibilities
+
+Transform intelligence into recommendations.
+
+Every Oracle recommendation should eventually pass through this layer.
+
+Decision Intelligence produces:
+
+Recommendation
+
+Evidence
+
+Confidence
+
+Expected Outcome
+
+Reassessment Trigger
+
+---
+
+## Oracle Brain
+
+Location
+
+```text
+lib/oracle/brain/
+```
+
+Oracle Brain is the platform's intelligence analyst.
+
+Oracle Brain does not calculate statistics.
+
+Oracle Brain combines intelligence produced elsewhere.
+
+Responsibilities
+
+Consume Signals
+
+Identify behavioural patterns
+
+Resolve conflicting observations
+
+Generate operational assessments
+
+Prioritise intelligence
+
+Produce strategic understanding
+
+Oracle Brain becomes more valuable as additional engines are introduced.
+
+---
+
+## Signal Layer
+
+Location
+
+```text
+lib/oracle/signals/
+```
+
+Signals represent observations.
+
+Signals are intentionally small.
+
+Examples:
+
+Positioning improving
+
+Movement declining
+
+Weapon confidence increasing
+
+Decision quality stabilising
+
+Signals never contain recommendations.
+
+Signals communicate observations only.
+
+---
+
+## Engine Layer
+
+Location
+
+```text
+lib/oracle/
+```
+
+Current engines include:
+
+Behaviour Engine
+
+Trend Engine
+
+Prediction Engine
+
+Operator Intelligence
+
+Decision Intelligence
+
+Weapon Intelligence
+
+Coach Engine
+
+Future engines include:
+
+Memory
+
+Strategy
+
+Map
+
+Economy
+
+Team
+
+Tournament
+
+Voice
+
+Visual Intelligence
+
+Every engine should:
+
+Accept structured inputs
+
+Produce structured outputs
+
+Remain reusable
+
+Remain game agnostic
+
+Never render UI
+
+Never query React
+
+---
+
+## Repository Layer
 
 Location
 
@@ -156,74 +455,23 @@ lib/oracle/repositories/
 
 Responsibilities
 
-- Read Oracle Sessions
-- Save Oracle Sessions
-- Query Supabase
-- Convert database rows into reusable models
+Read Oracle Sessions
 
-Repositories are the only layer that communicates directly with the database.
+Write Oracle Sessions
 
----
+Read Operators
 
-## 3. Intelligence Engines
+Persist platform data
 
-Location
+Repositories expose truth.
 
-```text
-lib/oracle/
-```
+Repositories never generate intelligence.
 
-Current Engines
-
-- Behaviour Engine
-- Trend Engine
-- Prediction Engine
-
-Responsibilities
-
-- Analyse Oracle Sessions
-- Produce reusable intelligence
-- Remain independent from UI
-- Be reusable by every Oracle feature
-
-Engines never communicate directly with React components.
+Repositories never produce recommendations.
 
 ---
 
-## 4. Oracle Intelligence Layer
-
-Responsibilities
-
-Combine multiple intelligence engines into a unified intelligence model.
-
-Responsibilities include:
-
-- Behaviour analysis
-- Trend analysis
-- Prediction analysis
-- Future intelligence expansion
-
-This layer prevents the UI from depending on multiple engines.
-
----
-
-## 5. OracleBrain
-
-OracleBrain is the orchestration layer.
-
-Responsibilities
-
-- Combine intelligence
-- Generate summaries
-- Produce recommendations
-- Calculate confidence
-- Decide what Oracle communicates
-
-OracleBrain is the single intelligence entry point used by the interface.
-
----
-
-## 6. Database Layer
+## Database Layer
 
 Technology
 
@@ -231,135 +479,574 @@ Supabase
 
 Responsibilities
 
-- Store Operators
-- Store Oracle Sessions
-- Store XP
-- Store Achievements
-- Store Career Progress
-- Store future AI memory
+Persist Operators
+
+Persist Oracle Sessions
+
+Persist progression
+
+Persist achievements
+
+Persist future memory
+
+Persist future telemetry
 
 The database stores truth.
 
-It does not contain intelligence.
+It never stores intelligence.
 
----
+# Intelligence Flow
 
-# Current Intelligence Pipeline
+Every Oracle Session follows the same intelligence lifecycle.
 
 ```text
+Operator
+
+↓
+
 Oracle Session
 
 ↓
 
-Session Repository
+Repository Layer
 
 ↓
 
-Behaviour Engine
-
-Trend Engine
-
-Prediction Engine
+Operator Intelligence
 
 ↓
 
-Oracle Intelligence Layer
+Intelligence Engines
 
 ↓
 
-OracleBrain
+Signals
 
 ↓
 
-Dashboard UI
+Oracle Brain
+
+↓
+
+Decision Intelligence
+
+↓
+
+Intelligence Pipeline
+
+↓
+
+Presentation
 ```
 
----
+Every recommendation produced by Oracle should follow this lifecycle.
 
-# Design System
+No shortcuts.
 
-Reusable components should always be preferred over duplicated UI.
-
-Current Design System
-
-- OracleCard
-- MetricCard
-- DossierField
-- StatusPill
-- CombatRatingBadge
-- SkillBar
-- AnimatedNumber
-- ConfidenceRing
-
-Future reusable components should extend this system rather than creating duplicate implementations.
+No bypasses.
 
 ---
 
-# Coding Principles
+# Oracle Sessions
 
-- UI displays intelligence.
-- Engines produce intelligence.
-- Repositories communicate with Supabase.
-- OracleBrain orchestrates intelligence.
-- Components remain reusable.
-- Business logic never belongs inside UI.
-- Avoid duplicated logic.
-- Build foundations before features.
+Oracle Sessions are the atomic unit of intelligence.
+
+Everything Oracle learns originates from one or more Oracle Sessions.
+
+Oracle Sessions may be created from:
+
+Text Analysis
+
+Gameplay Review
+
+Video Analysis
+
+Voice Analysis (future)
+
+Computer Vision (future)
+
+Live Match Analysis (future)
+
+Every subsystem ultimately exists to improve future Oracle Sessions.
 
 ---
 
-# Future Architecture
+# Operator Intelligence
 
-The architecture is designed to support future systems without major rewrites.
+Operator Intelligence transforms raw session data into an Operator Profile.
 
-Planned additions include:
+It represents the Operator rather than the game.
 
-- Memory Engine
-- Oracle Voice
-- Timeline Replay
-- Weekly Reports
-- Video Analysis
-- Computer Vision
-- Multi-game Intelligence
-- Mobile Applications
+Current responsibilities include:
 
-These systems should integrate through OracleBrain rather than communicating directly with UI components.
+Learning Style
 
-## Game Module Framework
+Behavioural DNA
 
-Future titles should integrate through dedicated game modules.
+Behaviour Profile
 
-Example:
+Decision Profile
 
-Oracle
-├── Call of Duty Module
-├── Battlefield Module
-├── GTA VI Module
-├── Rainbow Six Module
+Weapon Profile
+
+Confidence Level
+
+Strengths
+
+Improvement Priorities
+
+Future responsibilities include:
+
+Risk Profile
+
+Leadership
+
+Learning Velocity
+
+Fatigue Detection
+
+Behaviour Evolution
+
+Preferred Playstyle
+
+Historical Behaviour
+
+Operator Intelligence is expected to become one of Oracle's most valuable systems.
+
+---
+
+# Signal Architecture
+
+Signals are Oracle's universal intelligence language.
+
+Every engine should communicate through Signals.
+
+Signals represent observations.
+
+Not recommendations.
+
+Examples include:
+
+Positioning improving
+
+Movement declining
+
+Weapon confidence increasing
+
+Behaviour stabilising
+
+Meta changing
+
+Confidence increasing
+
+Signals should be:
+
+Small
+
+Independent
+
+Timestamped
+
+Evidence based
+
+Reusable
+
+Signals intentionally avoid presentation concerns.
+
+---
+
+# Oracle Brain
+
+Oracle Brain consumes Signals.
+
+Oracle Brain does not produce raw observations.
+
+Instead it:
+
+Combines Signals
+
+Identifies relationships
+
+Resolves conflicts
+
+Prioritises intelligence
+
+Builds understanding
+
+Oracle Brain should eventually reason across every intelligence system simultaneously.
+
+---
+
+# Decision Intelligence
+
+Decision Intelligence converts intelligence into actionable recommendations.
+
+Every recommendation should include:
+
+Recommendation
+
+Reasoning
+
+Evidence
+
+Confidence
+
+Expected Outcome
+
+Reassessment Trigger
+
+Decision Intelligence becomes Oracle's universal recommendation framework.
+
+Future systems should not generate recommendations independently.
+
+---
+
+# Intelligence Pipeline
+
+The Pipeline coordinates Oracle.
+
+Responsibilities include:
+
+Execute intelligence flow
+
+Aggregate Signals
+
+Aggregate Decisions
+
+Prepare presentation models
+
+Generate pipeline summaries
+
+The Pipeline orchestrates.
+
+It never performs reasoning itself.
+
+---
+
+# Oracle Context (Planned)
+
+Oracle Context will become the shared intelligence model used by every engine.
+
+Every engine should receive the same structured context.
+
+Future Oracle Context includes:
+
+Operator
+
+Operator Profile
+
+Oracle Sessions
+
+Historical Sessions
+
+Signals
+
+Memory
+
+Current Game
+
+Patch Version
+
+Weapon Database
+
+Game Module
+
+Historical Decisions
+
+Future Predictions
+
+No engine should load this data independently.
+
+Consistency across engines is maintained through Oracle Context.
+
+---
+
+# Intelligence Bus (Planned)
+
+The Intelligence Bus becomes Oracle's orchestration backbone.
+
+Instead of manually invoking engines, Oracle will register them.
+
+```text
+Oracle Session Saved
+
+↓
+
+Intelligence Bus
+
+↓
+
+Registered Engines
+
+↓
+
+Signals
+
+↓
+
+Oracle Brain
+
+↓
+
+Decision Intelligence
+
+↓
+
+Pipeline
+
+↓
+
+Presentation
+```
+
+Benefits include:
+
+Automatic engine discovery
+
+Modular expansion
+
+Reduced coupling
+
+Simplified orchestration
+
+Future scalability
+
+New intelligence engines should register themselves rather than requiring architectural modification.
+
+---
+
+# Oracle Engine Contract
+
+Every intelligence engine should eventually implement a common interface.
+
+Conceptually every engine should:
+
+Accept Oracle Context
+
+Perform one responsibility
+
+Generate structured output
+
+Remain deterministic
+
+Remain reusable
+
+Remain game agnostic
+
+Produce Signals when appropriate
+
+This allows Oracle to expand without changing its core architecture.
+
+---
+
+# Game Module Architecture
+
+Oracle itself never contains game-specific business logic.
+
+Game-specific intelligence belongs inside dedicated modules.
+
+Future structure:
+
+```text
+games/
+
+call-of-duty/
+
+battlefield/
+
+rainbow-six/
+
+apex/
+
+delta-force/
+
+gta/
+
+shared/
+```
 
 Each module may expose:
 
-- Weapon data
-- Match data
-- Game-specific metrics
-- Telemetry
-- Metadata
+Weapon Database
 
-OracleBrain should consume standardised intelligence regardless of the originating game.
+Maps
+
+Telemetry
+
+Metadata
+
+Patch Information
+
+Movement Characteristics
+
+Game Rules
+
+Oracle consumes standardised intelligence regardless of the originating game.
+
+---
+
+# Extension Points
+
+Oracle is intentionally designed for expansion.
+
+Future systems should integrate through existing architecture rather than bypassing it.
+
+Current extension points include:
+
+Repositories
+
+Operator Intelligence
+
+Signal Engines
+
+Decision Intelligence
+
+Pipeline
+
+Future extension points include:
+
+Oracle Context
+
+Intelligence Bus
+
+Memory Engine
+
+Voice Engine
+
+Visual Intelligence
+
+Strategy Engine
+
+No future system should require redesigning the platform.
+
+---
+
+# Performance Principles
+
+Architecture should optimise for:
+
+Reusable computation
+
+Minimal duplication
+
+Predictable execution
+
+Incremental intelligence
+
+Scalable expansion
+
+As Oracle grows, intelligence quality should increase without significantly increasing architectural complexity.
+
+---
+
+# Security Principles
+
+Repositories remain the only layer communicating directly with persistent storage.
+
+Presentation never communicates directly with Supabase.
+
+Secrets remain server-side.
+
+Business logic remains outside UI.
+
+Future integrations should follow the same security model.
+
+---
+
+# Scalability
+
+Oracle is expected to support:
+
+Millions of Oracle Sessions
+
+Thousands of Operators
+
+Multiple Games
+
+Historical Intelligence
+
+Long-Term Memory
+
+Large AI Context Windows
+
+Distributed Intelligence Engines
+
+Architecture should evolve through additional modules rather than architectural replacement.
 
 ---
 
 # Architectural Goals
 
-Every architectural decision should support:
+Every architectural decision should improve one or more of the following:
 
-- Scalability
-- Maintainability
-- Reusability
-- Testability
-- Premium user experience
-- AI-first design
+Scalability
 
-Architecture should evolve without breaking existing systems.
+Maintainability
 
-Every new engine should strengthen Oracle rather than increase technical debt.
+Reusability
+
+Readability
+
+Predictability
+
+Testability
+
+Operator Understanding
+
+Decision Quality
+
+Platform Intelligence
+
+Architecture should become stronger after every Operation.
+
+Never weaker.
+
+---
+
+# Architecture Review Checklist
+
+Before introducing any new subsystem ask:
+
+Does it belong in an existing layer?
+
+Can an existing engine be reused?
+
+Should it produce Signals?
+
+Should it consume Oracle Context?
+
+Does it increase coupling?
+
+Does it duplicate intelligence?
+
+Does it strengthen Oracle Brain?
+
+Does it improve the Operator?
+
+If the answer to any question is uncertain, revisit the design before implementation.
+
+---
+
+# Closing Statement
+
+Oracle is designed as an intelligence platform rather than a traditional application.
+
+Its architecture prioritises reusable intelligence over isolated features.
+
+Every layer exists to support long-term evolution.
+
+Every subsystem contributes to a single intelligence pipeline.
+
+As Oracle expands, the architecture should remain stable while capabilities continue to grow.
+
+Future Operations should extend Oracle through modular systems rather than architectural redesign.
+
+The architecture is a living blueprint.
+
+Protect it.
+
+Strengthen it.
+
+Build upon it.
+
+Never compromise it.

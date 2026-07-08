@@ -1,321 +1,585 @@
-# PROJECT META
+# ORACLE
 
-# Architectural Decisions
+# Architectural Decision Records (ADR)
 
-Version 2.0
+Version 3.0
 
-Last Updated: 7 July 2026
+Last Updated: 8 July 2026
 
 ---
 
 # Purpose
 
-This document records significant architectural and product decisions made during the development of Project Meta.
+This document records the significant architectural, engineering and product decisions made during the development of Oracle.
 
-These decisions exist to preserve long-term consistency and explain *why* important choices were made.
+Architecture is not only defined by what was built.
 
-Every future architectural decision should be added to this document.
+It is defined by why it was built.
+
+These decisions preserve the reasoning behind Oracle's evolution and provide context for future development.
+
+Every significant architectural decision should be recorded here.
 
 ---
 
-# DEC-001
+# ADR-001
 
-Date
+## Decision
 
-4 July 2026
+Oracle is the product.
 
-Decision
+Project Meta remains the internal development codename and repository.
 
-Project Meta is the company.
+## Reason
 
-Oracle is the flagship product.
+Oracle has evolved into a standalone intelligence platform with its own identity.
 
-Reason
+Separating the product from the repository allows the platform to grow independently while preserving the original project structure.
 
-Separating the company from the product allows Oracle to expand beyond a single game while enabling Project Meta to build additional products in the future.
+## Consequence
 
-Status
+All product-facing experiences use the Oracle brand.
+
+Repository and internal references may continue using Project Meta.
+
+## Status
 
 ✅ Accepted
 
 ---
 
-# DEC-002
+# ADR-002
 
-Date
+## Decision
 
-4 July 2026
+Players are referred to as Operators.
 
-Decision
+## Reason
 
-Players are called Operators.
+Operator reinforces Oracle's tactical intelligence identity.
 
-Reason
+It creates consistency across coaching, reports, recommendations and future products.
 
-"Operator" creates identity and immersion.
+## Consequence
 
-It reflects the tactical nature of Oracle better than the generic term "user."
+All product interfaces, documentation and future systems use the term Operator.
 
-Status
-
-✅ Accepted
-
----
-
-# DEC-003
-
-Date
-
-4 July 2026
-
-Decision
-
-Every analysis is called an Oracle Session.
-
-Reason
-
-"Report" describes a document.
-
-"Oracle Session" describes an experience.
-
-Status
+## Status
 
 ✅ Accepted
 
 ---
 
-# DEC-004
+# ADR-003
 
-Date
+## Decision
 
-4 July 2026
+Every analysis is an Oracle Session.
 
-Decision
+## Reason
 
-Oracle exists to build better players rather than simply provide AI answers.
+A Session represents an experience rather than a report.
 
-Reason
+Oracle Sessions also become the atomic unit of intelligence.
 
-The long-term mission is player improvement.
+## Consequence
 
-Every feature must contribute towards that goal.
+Every subsystem ultimately consumes or produces Oracle Sessions.
 
-Status
-
-✅ Accepted
-
----
-
-# DEC-005
-
-Date
-
-4 July 2026
-
-Decision
-
-Oracle will be built as a platform rather than a single-game application.
-
-Reason
-
-Call of Duty is Version One.
-
-The long-term vision is to create the world's most trusted AI gaming coach across multiple games while maintaining one philosophy, one brand and one user experience.
-
-Status
+## Status
 
 ✅ Accepted
 
 ---
 
-# DEC-006
+# ADR-004
 
-Date
+## Decision
 
-4 July 2026
+Oracle is built as an intelligence platform rather than a gaming application.
 
-Decision
+## Reason
 
-Every major product decision must satisfy three questions.
+Games evolve.
 
-- Does this make the Operator better?
-- Does this strengthen the Oracle brand?
-- Would we still make this decision if Oracle had one million Operators?
+Operators remain.
 
-Reason
+The platform should outlive any individual title.
 
-These questions ensure short-term convenience never compromises the long-term vision.
+## Consequence
 
-Status
+Games become intelligence modules.
 
-✅ Accepted
+Oracle remains game agnostic.
 
----
-
-# DEC-007
-
-Date
-
-4 July 2026
-
-Decision
-
-Whenever possible, Oracle should show rather than tell.
-
-Reason
-
-Visual learning is faster, more memorable and more actionable than text alone.
-
-Maps, diagrams, timelines and annotated gameplay should always be preferred over unnecessary paragraphs.
-
-Status
+## Status
 
 ✅ Accepted
 
 ---
 
-# DEC-008
+# ADR-005
 
-Date
+## Decision
 
-4 July 2026
+Business logic belongs inside engines.
 
-Decision
+## Reason
 
-Every player becomes an Operator when creating an Oracle account.
+Separating reasoning from presentation improves reuse, testing and maintainability.
 
-Reason
+## Consequence
 
-An Operator is more than a user account.
+Pages compose.
 
-It represents the beginning of a player's journey and reinforces Oracle's identity from the first interaction.
+Components present.
 
-Status
+Engines reason.
 
-✅ Accepted
+Repositories expose data.
 
----
-
-# DEC-009
-
-Date
-
-7 July 2026
-
-Decision
-
-OracleBrain became the intelligence orchestration layer.
-
-Reason
-
-Rather than allowing UI components to communicate directly with multiple intelligence engines, OracleBrain became the single entry point for all Oracle intelligence.
-
-This keeps business logic out of the interface and allows every future application to reuse the same intelligence.
-
-Status
+## Status
 
 ✅ Accepted
 
 ---
 
-# DEC-010
+# ADR-006
 
-Date
+## Decision
 
-7 July 2026
+Repositories are the single source of persistent truth.
 
-Decision
+## Reason
 
-Project Meta adopted a reusable design system.
+Repositories isolate Oracle from storage implementation details.
 
-Reason
+## Consequence
 
-Reusable UI components improve consistency, reduce duplicated styling and accelerate future feature development.
+Repositories communicate with Supabase.
 
-The initial design system includes:
+No other layer accesses persistent storage directly.
 
-- Card
-- MetricCard
-- AnimatedNumber
-- ConfidenceRing
-- StatusBadge
-
-Future components should extend this design system rather than introducing duplicate implementations.
-
-Status
+## Status
 
 ✅ Accepted
 
 ---
 
-# DEC-011
+# ADR-007
 
-Date
+## Decision
 
-7 July 2026
+Oracle Brain consumes intelligence.
 
-Decision
+It does not calculate intelligence.
 
-Every significant UI improvement requires a visual review.
+## Reason
 
-Reason
+Reasoning belongs inside specialised engines.
 
-Successful compilation does not guarantee a premium experience.
+Oracle Brain should focus on combining observations rather than generating them.
 
-Project Meta now follows a development workflow where major interface changes are reviewed visually before being considered complete.
+## Consequence
 
-Status
+Oracle Brain becomes more valuable as additional engines are introduced.
 
-✅ Accepted
-
----
-
-# DEC-012
-
-Date
-
-7 July 2026
-
-Decision
-
-Documentation evolves alongside the software.
-
-Reason
-
-Documentation should accurately describe the current architecture, workflow and product vision.
-
-Technical documentation is treated as part of the product rather than an afterthought.
-
-Status
+## Status
 
 ✅ Accepted
 
 ---
 
-# DEC-013
+# ADR-008
 
-Date
+## Decision
 
-7 July 2026
+Signals are Oracle's universal intelligence language.
 
-Decision
+## Reason
 
-Oracle communicates intelligence before statistics.
+Individual engines should not communicate directly.
 
-Reason
+Signals provide a shared, reusable communication layer.
 
-Operators should first understand Oracle's conclusions before being presented with supporting metrics.
+## Consequence
 
-This principle will guide future development of Oracle Voice, Dynamic Briefings, AI Coach and dashboard experiences.
+Every intelligence engine should eventually produce Signals.
 
-Status
+Oracle Brain consumes Signals.
+
+## Status
 
 ✅ Accepted
 
 ---
 
-# Future Decisions
+# ADR-009
 
-Every significant architectural, product or workflow decision should be recorded here.
+## Decision
 
-This document serves as the long-term decision history for Project Meta.
+Decision Intelligence owns every recommendation.
+
+## Reason
+
+Without a universal recommendation layer, different systems would produce inconsistent advice.
+
+## Consequence
+
+Every recommendation across Oracle follows the same structure:
+
+Recommendation
+
+Reasoning
+
+Evidence
+
+Confidence
+
+Expected Outcome
+
+Reassessment Trigger
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-010
+
+## Decision
+
+Operator Intelligence exists independently of any game.
+
+## Reason
+
+Oracle's long-term value comes from understanding Operators rather than memorising games.
+
+## Consequence
+
+Operator Profiles continue evolving regardless of which game is analysed.
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-011
+
+## Decision
+
+The Intelligence Pipeline orchestrates systems.
+
+It does not perform reasoning.
+
+## Reason
+
+Separating orchestration from intelligence simplifies future expansion.
+
+## Consequence
+
+Future engines can be added without changing existing presentation logic.
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-012
+
+## Decision
+
+Oracle Context will become the shared input for every intelligence engine.
+
+## Reason
+
+Engines should receive consistent information without independently querying multiple systems.
+
+## Consequence
+
+Future engines become easier to test, maintain and reuse.
+
+## Status
+
+🟡 Planned
+
+---
+
+# ADR-013
+
+## Decision
+
+The Intelligence Bus will orchestrate engine execution.
+
+## Reason
+
+Manual orchestration does not scale as Oracle grows.
+
+## Consequence
+
+Future engines register themselves rather than requiring architectural changes.
+
+## Status
+
+🟡 Planned
+
+---
+
+# ADR-014
+
+## Decision
+
+Oracle communicates conclusions before statistics.
+
+## Reason
+
+Understanding improves decision making more effectively than isolated metrics.
+
+## Consequence
+
+Every Oracle report should present:
+
+Assessment
+
+↓
+
+Recommendation
+
+↓
+
+Evidence
+
+↓
+
+Supporting statistics
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-015
+
+## Decision
+
+Confidence must always be evidence based.
+
+## Reason
+
+Trust is created through transparency.
+
+Oracle should never imply certainty where evidence is weak.
+
+## Consequence
+
+Every recommendation includes calculated confidence rather than arbitrary percentages.
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-016
+
+## Decision
+
+Oracle follows layered architecture.
+
+## Reason
+
+Reducing coupling improves maintainability and long-term scalability.
+
+## Consequence
+
+The platform follows:
+
+Presentation
+
+↓
+
+Pipeline
+
+↓
+
+Decision Intelligence
+
+↓
+
+Oracle Brain
+
+↓
+
+Signals
+
+↓
+
+Engines
+
+↓
+
+Repositories
+
+↓
+
+Supabase
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-017
+
+## Decision
+
+Oracle is developed through Operations rather than feature lists.
+
+## Reason
+
+Operations describe platform evolution rather than isolated functionality.
+
+## Consequence
+
+Development is organised into:
+
+Operation Genesis
+
+Operation Sentinel
+
+Operation Vanguard
+
+Operation Dominion
+
+Operation Atlas
+
+Operation Horizon
+
+Operation Aegis
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-018
+
+## Decision
+
+Documentation is treated as a production asset.
+
+## Reason
+
+Good architecture requires accurate documentation.
+
+Future developers should understand Oracle without relying on tribal knowledge.
+
+## Consequence
+
+Every completed Operation updates:
+
+Manifesto
+
+Codex
+
+Architecture
+
+Roadmap
+
+Principles
+
+Project Board
+
+Decision Records
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-019
+
+## Decision
+
+Every new capability should strengthen the platform.
+
+## Reason
+
+Architecture should accumulate reusable capabilities rather than disconnected features.
+
+## Consequence
+
+Oracle prioritises:
+
+Operator Intelligence
+
+Signals
+
+Decision Intelligence
+
+Memory
+
+Pipeline
+
+Context
+
+Strategy
+
+Visual Intelligence
+
+rather than isolated implementations.
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-020
+
+## Decision
+
+Oracle should evolve without architectural redesign.
+
+## Reason
+
+The platform is intended to support many years of development.
+
+Major capabilities should integrate through existing architecture.
+
+## Consequence
+
+Future systems plug into Oracle rather than replacing Oracle.
+
+## Status
+
+✅ Accepted
+
+---
+
+# Future Decision Records
+
+Every significant architectural decision should be documented before implementation whenever practical.
+
+Decision Records should explain:
+
+What was decided.
+
+Why it was decided.
+
+The long-term consequences.
+
+Current status.
+
+The goal is to preserve Oracle's architectural reasoning for future developers.
+
+When uncertainty exists...
+
+Read the Decision Records before introducing architectural change.

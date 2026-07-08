@@ -1,287 +1,865 @@
-# PROJECT META ROADMAP
+# ORACLE ROADMAP
 
-Version 1.0
+Strategic Product Roadmap
 
-Last Updated: 7 July 2026
+Version 2.0
+
+Last Updated: 8 July 2026
 
 ---
 
 # Purpose
 
-This roadmap defines the planned evolution of Project Meta.
+This roadmap defines the long-term evolution of Oracle.
 
-Project Meta is being developed through structured milestones rather than isolated features.
+Oracle is developed through Operations rather than isolated feature milestones.
 
-Each milestone should deliver a meaningful improvement to Oracle while strengthening the overall platform architecture.
+Each Operation delivers a major platform capability.
 
-No milestone should begin until the current milestone is complete.
+Capabilities strengthen Oracle permanently.
+
+Features may evolve.
+
+Architecture should endure.
+
+The purpose of this roadmap is not simply to track progress.
+
+It exists to ensure Oracle evolves in a deliberate, disciplined and sustainable direction.
 
 ---
 
 # Product Vision
 
-Project Meta will become the world's leading AI-powered coaching platform for competitive gaming.
+Oracle exists to become the world's leading AI-powered competitive gaming intelligence platform.
 
-Oracle will evolve from an intelligent analysis tool into a genuine long-term AI coaching companion.
+Oracle continuously learns every Operator.
 
-Every milestone should move Oracle closer to that vision.
+Builds long-term behavioural understanding.
+
+Reasons from evidence.
+
+Explains every recommendation.
+
+Improves after every Oracle Session.
+
+Adapts across every supported game.
+
+Every Operation should move Oracle closer to that vision.
 
 ---
 
 # Development Philosophy
 
-Build foundations before features.
+Oracle is built through architecture.
 
-Complete one milestone before beginning the next.
+Not shortcuts.
 
-Prioritise reusable architecture over short-term functionality.
+Every completed Operation should improve one or more of the following:
 
-Avoid feature creep.
+• Intelligence
 
-Maintain production-quality standards throughout development.
+• Architecture
+
+• Scalability
+
+• Reusability
+
+• User Experience
+
+• Long-term Maintainability
+
+Features are temporary.
+
+Capabilities remain.
 
 ---
 
-# Roadmap
+# Development Workflow
 
-## PM-001
+Every Operation follows the same lifecycle.
 
-### Foundation
+Architecture
+
+↓
+
+Planning
+
+↓
+
+Implementation
+
+↓
+
+Compilation
+
+↓
+
+UI Review
+
+↓
+
+Architecture Review
+
+↓
+
+Documentation
+
+↓
+
+Release
+
+No stage should ever be skipped.
+
+---
+
+# OPERATION GENESIS
+
+Foundation Architecture
 
 Status
 
-✅ Complete
+🟢 Active
 
-Objectives
+Purpose
 
-- Next.js foundation
-- Supabase integration
-- Core project structure
-- Initial Oracle Sessions
+Transform Oracle from an AI coaching application into a reusable intelligence platform.
+
+Genesis establishes every core system that future Operations will build upon.
+
+Without Genesis there is no Oracle.
 
 ---
 
-## PM-002
+## Completed
 
-### Behaviour Intelligence
+### Platform Foundation
+
+✅ Next.js Platform
+
+✅ TypeScript Architecture
+
+✅ Tailwind Design System
+
+✅ Supabase Integration
+
+✅ Authentication
+
+✅ Session Repository
+
+✅ Oracle Sessions
+
+---
+
+### Intelligence
+
+✅ Behaviour Engine
+
+✅ Trend Engine
+
+✅ Prediction Engine
+
+✅ Oracle Brain
+
+✅ Decision Intelligence
+
+✅ Confidence Engine
+
+✅ Evidence Engine
+
+✅ Recommendation Framework
+
+---
+
+### Operator
+
+✅ Operator Profile
+
+✅ Behavioural DNA
+
+✅ Learning Style
+
+✅ Capability Matrix
+
+✅ Operational Metrics
+
+✅ Mission Brief
+
+✅ Operator Intelligence
+
+---
+
+### Coaching
+
+✅ Oracle Coach
+
+✅ Mission Control
+
+✅ Mission Classification
+
+✅ Mission Progress
+
+✅ Daily Missions
+
+✅ Oracle Assessment
+
+---
+
+### Weapon Intelligence
+
+✅ Weapon Recommendation Engine
+
+✅ Decision Framework
+
+✅ Evidence Framework
+
+✅ Recommendation Reasoning
+
+✅ Expected Outcome Prediction
+
+---
+
+### Intelligence Platform
+
+✅ Signal Types
+
+✅ Signal Engine
+
+✅ Signal Prioritisation
+
+✅ Signal Summary
+
+✅ Intelligence Pipeline
+
+---
+
+### User Experience
+
+✅ Premium Dashboard
+
+✅ Intelligence Dashboard
+
+✅ Operator Page
+
+✅ Intelligence Cards
+
+✅ Oracle Design Language
+
+✅ Premium Component System
+
+---
+
+## Remaining
+
+The following work completes Operation Genesis.
+
+⬜ Oracle Context
+
+⬜ Intelligence Bus
+
+⬜ Universal Engine Interface
+
+⬜ Shared Engine Registration
+
+⬜ Final Architecture Review
+
+⬜ Genesis Release Review
+
+---
+
+## Result
+
+When Operation Genesis completes Oracle becomes:
+
+A reusable intelligence platform.
+
+Not simply an AI coaching application.
+
+Future Operations should expand Oracle.
+
+Not redesign it.
+
+---
+
+# OPERATION SENTINEL
+
+Persistent Intelligence
 
 Status
 
-✅ Complete
+🔵 Planned
 
-Objectives
+Purpose
 
-- Behaviour Engine
-- Operator profiling
-- Behaviour analysis
-- Behaviour reporting
+Give Oracle long-term memory.
+
+Oracle should remember every Operator.
+
+Every recommendation.
+
+Every behavioural change.
+
+Every learning milestone.
+
+Oracle should become more intelligent through historical understanding.
 
 ---
 
-## PM-003
+## Objectives
 
-### OracleBrain
+Oracle Memory
+
+Historical Behaviour
+
+Learning Timeline
+
+Recommendation History
+
+Behaviour Evolution
+
+Operator Journey
+
+Historical Predictions
+
+Adaptive Coaching
+
+Behaviour Stability Analysis
+
+Memory Confidence
+
+---
+
+## Outcome
+
+Oracle evolves from analysing Operators
+
+to
+
+remembering Operators.
+
+Every Oracle Session contributes to a permanent intelligence profile.
+
+---
+
+# OPERATION VANGUARD
+
+Advanced Intelligence
 
 Status
 
-✅ Complete
+🔵 Planned
 
-Objectives
+Purpose
 
-- OracleBrain architecture
-- Intelligence orchestration
-- Behaviour integration
-- Summary generation
-- Recommendation generation
+Expand Oracle's reasoning capability.
+
+Oracle begins combining intelligence from multiple systems simultaneously.
+
+Instead of isolated observations,
+
+Oracle develops strategic understanding.
 
 ---
 
-## PM-004
+## Objectives
 
-### Intelligence Dashboard
+Strategy Intelligence
+
+Map Intelligence
+
+Rotation Intelligence
+
+Behaviour Relationships
+
+Prediction Improvements
+
+Meta Adaptation
+
+Pattern Detection
+
+Advanced Behaviour Modelling
+
+Cross-System Reasoning
+
+---
+
+## Outcome
+
+Oracle begins producing strategic intelligence rather than isolated recommendations.
+
+# OPERATION DOMINION
+
+Visual Intelligence
 
 Status
 
-✅ Complete
+🔵 Planned
 
-Objectives
+Purpose
 
-- Operator page
-- Intelligence page
-- Dashboard separation
-- Intelligence Grid
-- Session Repository integration
+Enable Oracle to understand gameplay directly.
+
+Instead of relying entirely on manually entered information, Oracle will analyse gameplay footage, identify events, recognise patterns and generate coaching automatically.
+
+Visual Intelligence dramatically increases Oracle's understanding of every Operator.
 
 ---
 
-## PM-005
+## Objectives
 
-### Prediction Intelligence
+Gameplay Upload
+
+Automatic Timeline Analysis
+
+Frame-by-Frame Intelligence
+
+Heatmaps
+
+Movement Recognition
+
+Combat Recognition
+
+Automatic Event Detection
+
+Kill Analysis
+
+Death Analysis
+
+Rotation Analysis
+
+Visual Evidence
+
+Computer Vision Integration
+
+---
+
+## Outcome
+
+Oracle no longer depends solely on Operator input.
+
+Oracle begins observing gameplay directly.
+
+Recommendations become faster.
+
+Evidence becomes stronger.
+
+Understanding becomes significantly deeper.
+
+---
+
+# OPERATION ATLAS
+
+Multi-Game Platform
 
 Status
 
-✅ Complete
+🔵 Planned
 
-Objectives
+Purpose
 
-- Prediction Engine
-- Trend Engine
-- Intelligence Layer
-- Future performance projection
+Expand Oracle beyond Call of Duty.
+
+Oracle's intelligence architecture should support multiple competitive games without redesigning the platform.
+
+Games become intelligence modules.
+
+Oracle remains the platform.
 
 ---
 
-## PM-006
+## Initial Game Modules
 
-### Premium Experience
+Call of Duty
+
+Battlefield
+
+Rainbow Six Siege
+
+Apex Legends
+
+Delta Force
+
+Counter-Strike
+
+Valorant
+
+GTA
+
+Future Competitive Titles
+
+---
+
+## Objectives
+
+Universal Game Framework
+
+Shared Operator Profiles
+
+Cross-Game Behaviour Intelligence
+
+Universal Recommendation Engine
+
+Game-Specific Intelligence Modules
+
+Shared Learning System
+
+Unified Statistics
+
+Cross-Game Progression
+
+---
+
+## Outcome
+
+Oracle becomes the Operator's intelligence platform regardless of which game they play.
+
+---
+
+# OPERATION HORIZON
+
+Live Intelligence
 
 Status
 
-🚧 Active
+🔵 Planned
 
-Objectives
+Purpose
 
-- Design System
-- Confidence Ring
-- Status Components
-- Dashboard polish
-- Oracle Presence
-- Premium UI
-- Production-ready experience
+Move Oracle from post-session analysis towards live competitive intelligence.
+
+Oracle should eventually provide guidance while the Operator is actively playing.
 
 ---
 
-## PM-007
+## Objectives
 
-### Memory Evolution
+Live Match Analysis
+
+Live Behaviour Detection
+
+Real-Time Recommendations
+
+Live Tactical Alerts
+
+Adaptive Session Coaching
+
+Performance Monitoring
+
+Behaviour Tracking
+
+Operator Fatigue Detection
+
+Confidence Tracking
+
+---
+
+## Outcome
+
+Oracle evolves from an after-action analyst into an active competitive intelligence companion.
+
+---
+
+# OPERATION AEGIS
+
+Competitive Ecosystem
 
 Status
 
-Planned
+🔵 Planned
 
-Objectives
+Purpose
 
-- Long-term AI memory
-- Coaching history
-- Recommendation tracking
-- Session recall
-- Behaviour evolution
+Expand Oracle beyond individual Operators.
 
----
+Support teams.
 
-## PM-008
+Organisations.
 
-### Advanced Intelligence
+Competitive communities.
 
-Status
-
-Planned
-
-Objectives
-
-- Improved prediction models
-- Behaviour relationships
-- Advanced trend analysis
-- Multi-session intelligence
-- Performance forecasting
+Professional environments.
 
 ---
 
-## PM-009
+## Objectives
 
-### Oracle Voice
+Teams
 
-Status
+Squads
 
-Planned
+Organisations
 
-Objectives
+Shared Intelligence
 
-- Dynamic briefings
-- Greeting system
-- Oracle personality
-- Adaptive communication
-- AI coaching conversations
+Tournament Intelligence
 
----
+Professional Analytics
 
-## PM-010
+Coaching Organisations
 
-### Video Analysis
+Organisation Dashboards
 
-Status
+Shared Operator Memory
 
-Planned
-
-Objectives
-
-- Gameplay upload
-- Timeline analysis
-- Event detection
-- Automatic coaching
-- Clip review
+Collaborative Intelligence
 
 ---
 
-## PM-011
+## Outcome
 
-### Computer Vision
-
-Status
-
-Planned
-
-Objectives
-
-- Screen understanding
-- Object detection
-- Live gameplay recognition
-- Tactical analysis
+Oracle becomes the intelligence platform used by competitive teams and organisations.
 
 ---
 
-## PM-012
+# Platform Capabilities
 
-### Mobile Platform
+Oracle is designed around capabilities rather than features.
 
-Status
+Capabilities strengthen the entire platform.
 
-Planned
+Current platform capabilities include:
 
-Objectives
+• Operator Intelligence
 
-- Progressive Web App
-- Push notifications
-- Mobile dashboards
-- Oracle companion
-- Cross-device experience
+• Oracle Brain
+
+• Decision Intelligence
+
+• Intelligence Signals
+
+• Intelligence Pipeline
+
+• Behaviour Analysis
+
+• Prediction
+
+• Weapon Intelligence
+
+• Coaching
+
+Future capabilities include:
+
+• Oracle Memory
+
+• Oracle Context
+
+• Intelligence Bus
+
+• Strategy Intelligence
+
+• Map Intelligence
+
+• Live Intelligence
+
+• Visual Intelligence
+
+• Voice Intelligence
+
+• Team Intelligence
+
+• Tournament Intelligence
+
+Every future feature should strengthen one or more platform capabilities.
 
 ---
 
-# Guiding Principles
+# Long-Term Architecture
 
-Every milestone should:
+Oracle is expected to evolve towards the following architecture.
 
-- Improve Oracle.
-- Improve the architecture.
-- Increase reusability.
-- Strengthen the AI.
-- Enhance the user experience.
+Oracle Sessions
 
-Features should never compromise long-term quality.
+↓
+
+Repositories
+
+↓
+
+Oracle Context
+
+↓
+
+Intelligence Bus
+
+↓
+
+Registered Engines
+
+↓
+
+Signals
+
+↓
+
+Oracle Brain
+
+↓
+
+Decision Intelligence
+
+↓
+
+Intelligence Pipeline
+
+↓
+
+Presentation Layer
+
+Each new intelligence engine should register itself with the Intelligence Bus.
+
+The surrounding architecture should remain unchanged.
+
+Oracle should become easier to extend over time.
+
+Never harder.
+
+---
+
+# Future Intelligence Engines
+
+Oracle's architecture is intentionally modular.
+
+Planned intelligence engines include:
+
+Behaviour Intelligence
+
+Decision Intelligence
+
+Operator Intelligence
+
+Prediction Intelligence
+
+Weapon Intelligence
+
+Map Intelligence
+
+Strategy Intelligence
+
+Economy Intelligence
+
+Team Intelligence
+
+Tournament Intelligence
+
+Memory Intelligence
+
+Voice Intelligence
+
+Visual Intelligence
+
+Every engine should be reusable.
+
+Every engine should produce Signals.
+
+Every recommendation should flow through Decision Intelligence.
+
+---
+
+# Release Philosophy
+
+Oracle is never "finished."
+
+Every release should strengthen at least one of the following:
+
+Architecture
+
+Reasoning
+
+Evidence
+
+Prediction
+
+Operator Understanding
+
+Performance
+
+User Experience
+
+Maintainability
+
+Scalability
+
+Every release should make Oracle more intelligent than the previous release.
 
 ---
 
 # Success Criteria
 
-Project Meta succeeds when Oracle becomes an AI coaching companion that:
+Oracle succeeds when it becomes the world's most trusted competitive gaming intelligence platform.
 
-- Understands player behaviour.
-- Predicts future performance.
-- Learns continuously.
-- Remembers previous coaching.
-- Delivers personalised recommendations.
-- Supports multiple competitive games.
-- Feels like a premium commercial product.
+Oracle should:
 
-Every completed milestone should move Oracle closer to that goal.
+Understand every Operator.
+
+Learn continuously.
+
+Explain every recommendation.
+
+Reason from evidence.
+
+Calculate confidence.
+
+Build long-term behavioural intelligence.
+
+Adapt across games.
+
+Scale through architecture.
+
+Deliver premium user experiences.
+
+Become more intelligent after every Oracle Session.
+
+Every completed Operation should move Oracle closer to that vision.
+
+---
+
+# Strategic Direction
+
+Oracle is no longer being developed as a traditional gaming application.
+
+Oracle is being developed as an intelligence platform.
+
+Games will evolve.
+
+Artificial Intelligence will evolve.
+
+Technology will evolve.
+
+Oracle's architecture should evolve alongside them without compromising its principles.
+
+Every Operation should leave Oracle:
+
+More intelligent.
+
+More reusable.
+
+More scalable.
+
+More valuable.
+
+Than before.
+
+---
+
+# Closing Statement
+
+The Oracle Roadmap defines the long-term direction of the platform.
+
+Operations provide purpose.
+
+Architecture provides stability.
+
+Intelligence provides value.
+
+Every completed Operation strengthens the foundation for the next.
+
+Oracle will not grow through isolated features.
+
+Oracle will grow through carefully designed capabilities that work together as a single intelligence platform.
+
+The roadmap is a living document.
+
+It should evolve as Oracle evolves.
+
+Whenever the future direction of Oracle is questioned...
+
+Return here.

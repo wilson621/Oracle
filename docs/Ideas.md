@@ -1,256 +1,595 @@
-# PROJECT META
+# ORACLE
 
-# Ideas
+# Innovation Lab
 
-Version 1.0
+Version 2.0
 
-Last Updated: 7 July 2026
+Last Updated: 8 July 2026
 
 ---
 
 # Purpose
 
-This document is the permanent home for ideas that are **not currently scheduled**.
+The Innovation Lab is Oracle's permanent research and innovation backlog.
 
-Ideas should be captured here immediately rather than interrupting the active milestone.
+This document captures ideas that are **not currently committed** to the Roadmap.
 
-Being listed here does **not** mean an idea is approved.
+Ideas belong here before they belong anywhere else.
 
-It simply means it has been preserved for future evaluation.
+Being recorded does **not** mean an idea has been approved.
+
+It simply means it is valuable enough to preserve.
+
+This document protects the current Operation from feature creep while ensuring promising ideas are never forgotten.
 
 ---
 
-# Rule
+# Innovation Philosophy
+
+Ideas are free.
+
+Architecture is disciplined.
+
+Every idea deserves consideration.
+
+Not every idea deserves implementation.
+
+The purpose of this document is exploration.
+
+Not commitment.
+
+---
+
+# Golden Rule
 
 Ideas are captured.
 
-Roadmaps are committed.
+Operations are committed.
 
-Do not move an idea into the Roadmap until it has been deliberately prioritised.
+Roadmaps are deliberate.
+
+Architecture remains protected.
+
+---
+
+# Intelligence Research
+
+Future intelligence capabilities.
+
+## Oracle Memory
+
+Long-term behavioural memory.
+
+Ideas:
+
+Behaviour Evolution
+
+Recommendation History
+
+Learning Timeline
+
+Behaviour Stability
+
+Habit Detection
+
+Behaviour Regression
+
+Memory Confidence
+
+Historical Intelligence
+
+Operator Journey
+
+Adaptive Coaching
+
+---
+
+## Behaviour Intelligence
+
+Future behavioural systems.
+
+Ideas:
+
+Confidence Decay
+
+Decision Consistency
+
+Learning Velocity
+
+Risk Profile
+
+Tilt Detection
+
+Aggression Balance
+
+Playstyle Evolution
+
+Leadership Analysis
+
+Communication Profile
+
+Pressure Response
+
+---
+
+## Prediction Intelligence
+
+Ideas:
+
+Performance Forecasting
+
+Rank Prediction
+
+Improvement Probability
+
+Confidence Projection
+
+Learning Curves
+
+Performance Plateaus
+
+Burnout Detection
+
+Future Behaviour Simulation
+
+---
+
+# Strategy Intelligence
+
+Future strategic reasoning.
+
+Ideas:
+
+Rotation Intelligence
+
+Economy Intelligence
+
+Map Control
+
+Spawn Prediction
+
+Circle Prediction
+
+Engagement Planning
+
+Risk Assessment
+
+Decision Trees
+
+Probability Maps
+
+Adaptive Strategy
+
+---
+
+# Weapon Intelligence
+
+Future capabilities.
+
+Ideas:
+
+Weapon Simulation
+
+Weapon Evolution
+
+Attachment Optimisation
+
+Meta Prediction
+
+Weapon Confidence
+
+Engagement Suitability
+
+Loadout Simulator
+
+Weapon Timeline
+
+Historical Weapon Performance
+
+---
+
+# Team Intelligence
+
+Future team capabilities.
+
+Ideas:
+
+Squad Profiles
+
+Role Analysis
+
+Communication Intelligence
+
+Leadership Analysis
+
+Shared Behaviour
+
+Squad Recommendations
+
+Role Optimisation
+
+Shared Memory
+
+Organisation Intelligence
+
+Tournament Preparation
+
+---
+
+# Visual Intelligence
+
+Future AI vision systems.
+
+Ideas:
+
+Gameplay Upload
+
+Automatic Timeline Analysis
+
+Frame Analysis
+
+Heatmaps
+
+Movement Recognition
+
+Position Recognition
+
+Kill Review
+
+Death Review
+
+Automatic Coaching
+
+Visual Evidence
+
+Computer Vision
+
+---
+
+# Live Intelligence
+
+Long-term research.
+
+Ideas:
+
+Live Coaching
+
+Real-Time Recommendations
+
+Behaviour Monitoring
+
+Performance Alerts
+
+Confidence Alerts
+
+Adaptive Coaching
+
+Live Mission Updates
+
+Real-Time Decision Support
 
 ---
 
 # Oracle Experience
 
+Future Operator experience.
+
 ## Oracle Voice
 
-Oracle communicates naturally with the Operator.
+Natural intelligence briefings.
 
-Instead of displaying statistics first, Oracle delivers an intelligence briefing.
+Examples:
 
-Example
+Morning Briefing
 
-> Good evening, Operator.
->
-> Analysis of your recent sessions is complete.
->
-> Decision making has improved.
->
-> Positioning remains your greatest opportunity.
->
-> Recommendation:
-> Continue positional discipline before increasing aggression.
+Post Match Review
 
----
+Mission Complete
 
-## Oracle Boot Sequence
+Recommendation Updates
 
-A premium boot experience when Oracle loads.
+Behaviour Changes
 
-Possible ideas:
-
-- System checks
-- AI initialisation
-- Intelligence synchronisation
-- Memory loading
-- Operator authentication
-
----
-
-## Dynamic Briefings
-
-Oracle generates different introductions depending on context.
-
-Examples
-
-- Welcome back.
-- New behavioural pattern detected.
-- Confidence has increased.
-- Performance decline detected.
-- Recommendation updated.
+Memory Recall
 
 ---
 
 ## Oracle Presence
 
-Ideas to make Oracle feel alive.
+Ideas:
 
-Examples
+AI Activity
 
-- Live AI status
-- Scanning effects
-- Intelligence activity
-- Adaptive interface
-- Background AI processing
+Intelligence Processing
 
----
+Signal Activity
 
-# Memory
+Mission Control
 
-Long-term coaching memory.
+Live Analysis
 
-Ideas
+Operational Status
 
-- Previous recommendations
-- Behaviour history
-- Coaching timeline
-- Weekly summaries
-- Seasonal summaries
-- Habit detection
+Adaptive Dashboard
 
 ---
 
-# AI Coach
+## Mission Control
 
-Future coaching improvements.
+Future interface concepts.
 
-Ideas
+Ideas:
 
-- Daily coaching
-- Weekly coaching
-- Training plans
-- Warm-up routines
-- Personal improvement plans
-- Goal tracking
+Global Intelligence Dashboard
 
----
+Operational Timeline
 
-# Timeline
+Mission Queue
 
-Interactive player history.
+Operator Alerts
 
-Ideas
+Mission Centre
 
-- Session timeline
-- Improvement milestones
-- Behaviour evolution
-- Rank progression
-- Achievement history
+Strategic Planning
 
 ---
 
-# Video Analysis
+## Boot Experience
 
-Ideas
+Ideas:
 
-- Gameplay upload
-- Clip analysis
-- Timeline annotations
-- AI commentary
-- Mistake detection
-- Tactical review
+System Initialisation
 
----
+Operator Authentication
 
-# Computer Vision
+Memory Synchronisation
 
-Ideas
+Signal Scan
 
-- Live gameplay understanding
-- Screen recognition
-- Tactical positioning analysis
-- Object detection
-- Event recognition
+Brain Online
+
+Intelligence Loading
 
 ---
 
-# Mobile
+# Maps
 
-Ideas
+Future map intelligence.
 
-- Progressive Web App
-- Native mobile application
-- Lock screen intelligence
-- Push notifications
-- Daily briefing widgets
+Ideas:
 
----
+Interactive Maps
 
-# Multi-game Expansion
+Heatmaps
 
-Future supported titles.
+Route Planning
 
-Possible candidates
+Loot Planning
 
-- Call of Duty
-- GTA VI
-- Rainbow Six Siege
-- Valorant
-- Counter-Strike
-- Apex Legends
-- Fortnite
-- Escape From Tarkov
+Objective Planning
+
+High-Risk Areas
+
+Operator Routes
+
+Historical Routes
 
 ---
 
-# Operator Profile
+# Mobile Platform
 
-Future ideas
+Ideas:
 
-- Seasonal progression
-- Personal records
-- Favourite weapons
-- Heatmaps
-- Tactical strengths
-- Behaviour evolution
-- Skill DNA
+Native Applications
+
+Progressive Web App
+
+Widgets
+
+Live Notifications
+
+Daily Briefings
+
+Mission Alerts
+
+Apple Watch
+
+Wearables
 
 ---
 
 # Community
 
-Ideas
+Ideas:
 
-- Squad intelligence
-- Team reports
-- Shared coaching
-- Community challenges
-- Leaderboards
-- Tournament mode
+Shared Intelligence
 
----
+Communities
 
-# Experimental
+Operator Groups
 
-Ideas requiring further research.
+Clans
 
-- Predictive burnout detection
-- AI-generated training sessions
-- Live coaching assistant
-- Voice conversations
-- Computer vision overlays
-- Multi-monitor intelligence
-- Real-time recommendations
+Squads
+
+Training Groups
+
+Mentorship
+
+Community Challenges
 
 ---
 
-# Evaluation Checklist
+# Professional Platform
 
-Before any idea moves into the Roadmap ask:
+Long-term commercial ideas.
 
-- Does it improve the Operator?
-- Does it strengthen Oracle?
-- Does it fit the long-term vision?
-- Is it reusable?
-- Is it technically achievable?
-- Is now the right time?
+Ideas:
 
-Only if the answer is yes should the idea become a planned milestone.
+Organisation Accounts
+
+Professional Teams
+
+Academy Platform
+
+Coach Portal
+
+Esports Organisations
+
+Tournament Dashboards
+
+Recruitment Intelligence
+
+Player Scouting
+
+Performance Reports
+
+Enterprise Platform
 
 ---
 
-# Final Principle
+# Artificial Intelligence
 
-The purpose of this document is not to increase scope.
+Long-term AI research.
 
-Its purpose is to ensure good ideas are never lost while protecting the current milestone from unnecessary interruption.
+Ideas:
+
+Multi-Agent Reasoning
+
+Voice Conversations
+
+Long-Term Planning
+
+Autonomous Coaching
+
+Adaptive Learning
+
+AI Debate
+
+Behaviour Simulation
+
+Strategic Simulation
+
+Continuous Learning
+
+---
+
+# Platform Expansion
+
+Future Oracle products.
+
+Ideas:
+
+Oracle Academy
+
+Oracle Live
+
+Oracle Vision
+
+Oracle Memory
+
+Oracle Teams
+
+Oracle Pro
+
+Oracle Enterprise
+
+Oracle Mobile
+
+Oracle API
+
+Oracle SDK
+
+---
+
+# Experimental Research
+
+Ideas that may not be technically practical today.
+
+Predictive Burnout Detection
+
+Confidence Decay Models
+
+AI Generated Training Plans
+
+Live Video Intelligence
+
+Emotion Detection
+
+Eye Tracking
+
+Reaction Analysis
+
+Multi-Monitor Intelligence
+
+Predictive Tactical Simulation
+
+Digital Twin Operators
+
+Adaptive AI Opponents
+
+Fully Autonomous Match Review
+
+---
+
+# Crazy Ideas
+
+Ideas that seem impossible today.
+
+Keep them anyway.
+
+Today's impossible ideas often become tomorrow's flagship features.
+
+Examples:
+
+Oracle predicts behavioural mistakes before they happen.
+
+Oracle automatically generates personalised training maps.
+
+Oracle builds a complete behavioural digital twin of every Operator.
+
+Oracle identifies professional-level talent before rankings reflect it.
+
+Oracle becomes the intelligence layer for every competitive game.
+
+Oracle becomes the operating system for competitive gaming.
+
+Never delete ambitious ideas.
+
+---
+
+# Idea Evaluation Framework
+
+Before promoting an idea into the Roadmap ask:
+
+Does it improve the Operator?
+
+Does it strengthen Oracle?
+
+Does it align with the Manifesto?
+
+Does it fit the Architecture?
+
+Can existing systems support it?
+
+Does it create reusable capability?
+
+Would we still build this in five years?
+
+Only then should an idea become an Operation.
+
+---
+
+# Closing Statement
+
+Innovation should never interrupt disciplined development.
+
+Ideas should inspire.
+
+Operations should deliver.
+
+Architecture should remain stable.
+
+This document exists to preserve Oracle's future without compromising its present.
+
+The Oracle Has Spoken.
