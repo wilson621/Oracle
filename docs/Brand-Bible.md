@@ -72,17 +72,63 @@ Improves after every Oracle Session.
 
 ---
 
+# Brand Philosophy
+
+Oracle is the intelligence layer between the Operator and the game.
+
+Oracle should anticipate needs rather than simply answer questions.
+
+Every Oracle experience should remove unnecessary friction.
+
+If an Operator would normally need to:
+
+Search Google
+
+Open YouTube
+
+Browse Reddit
+
+Read a guide
+
+Watch a tutorial
+
+Oracle should eventually provide that intelligence naturally.
+
+The right information.
+
+At the right moment.
+
+Oracle does not interrupt gameplay.
+
+Oracle improves gameplay.
+
+---
+
 # Brand Promise
 
-Oracle helps Operators improve through intelligence.
+# Stop Searching.
 
-Not opinion.
+# Start Playing.
 
-Not trends.
+Oracle exists to remove unnecessary friction from gaming.
 
-Not guesswork.
+Rather than requiring Operators to search websites, videos and forums, Oracle delivers the right intelligence at exactly the right moment.
 
-Every recommendation exists to improve future performance.
+Oracle improves gameplay without interrupting it.
+
+Every recommendation.
+
+Every notification.
+
+Every insight.
+
+Every Oracle Session.
+
+Should keep the Operator immersed in the game they love.
+
+Oracle does not replace discovery.
+
+Oracle makes discovery effortless.
 
 ---
 
@@ -217,6 +263,8 @@ Premium Quality
 Long-Term Thinking
 
 Professionalism
+
+Immersion
 
 ---
 
@@ -460,7 +508,21 @@ Every interaction should increase trust.
 
 Oracle is positioned as:
 
-The Intelligence Platform for Competitive Gaming.
+The AI Gaming Intelligence Companion.
+
+Oracle sits between the Operator and the game.
+
+Understanding context.
+
+Delivering intelligence.
+
+Removing unnecessary friction.
+
+Helping Operators remain immersed.
+
+Oracle is not simply another gaming website.
+
+Oracle is a gaming companion.
 
 Not:
 
@@ -482,7 +544,37 @@ They are not Oracle.
 
 Primary
 
-Understand Better. Play Smarter.
+# Taglines
+
+Primary
+
+Stop Searching.
+
+Start Playing.
+
+Alternative
+
+The Right Intelligence.
+At The Right Moment.
+
+Alternative
+
+Understand Better.
+Play Smarter.
+
+Alternative
+
+Gaming Intelligence,
+Exactly When You Need It.
+
+Alternative
+
+Never Leave The Game.
+
+Alternative
+
+Discover More.
+Search Less.
 
 Alternative
 
@@ -512,7 +604,27 @@ Oracle is an AI-powered competitive gaming intelligence platform that continuous
 
 Headline
 
-Become the Operator You Were Meant To Be.
+Stop Searching.
+
+Start Playing.
+
+Supporting Text
+
+Oracle is your AI gaming companion.
+
+Get the right gaming intelligence exactly when you need it.
+
+No endless YouTube videos.
+
+No browser tabs.
+
+No unnecessary searching.
+
+Just play.
+
+Call To Action
+
+Launch Oracle
 
 Supporting Text
 
@@ -623,5 +735,21 @@ Every recommendation should strengthen trust.
 Every visual decision should communicate confidence.
 
 Every Operator should feel they are working alongside an elite intelligence system.
+
+---
+
+Every unnecessary search removed.
+
+Every unnecessary interruption eliminated.
+
+Every unnecessary browser tab closed.
+
+Every moment returned to the Operator.
+
+This is Oracle.
+
+Stop Searching.
+
+Start Playing.
 
 The Oracle Has Spoken.

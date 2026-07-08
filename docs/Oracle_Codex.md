@@ -56,6 +56,10 @@ Every supported game contributes to a deeper understanding of the Operator.
 
 Oracle is designed to grow with the Operator throughout their competitive gaming journey.
 
+Oracle should anticipate needs rather than simply answer questions.
+
+This philosophy should guide every future architectural and product decision.
+
 ---
 
 # Mission
@@ -78,6 +82,28 @@ Oracle exists to develop better Operators.
 
 ---
 
+# Mission Extension
+
+Oracle exists to remove unnecessary friction from gaming.
+
+Every unnecessary search.
+
+Every unnecessary browser tab.
+
+Every unnecessary YouTube video.
+
+Every unnecessary interruption.
+
+Should eventually become an Oracle capability.
+
+Oracle should deliver the right intelligence at exactly the right moment.
+
+The goal is not to help Operators search faster.
+
+The goal is to make searching unnecessary.
+
+---
+
 # Product Philosophy
 
 Oracle is not:
@@ -95,6 +121,8 @@ Oracle is:
 - a behavioural analysis platform
 - a performance prediction platform
 - a long-term learning platform
+- an AI gaming companion
+- a contextual intelligence platform
 
 Games are simply intelligence modules.
 
@@ -353,6 +381,28 @@ Oracle Brain produces understanding.
 Decision Intelligence produces recommendations.
 
 The UI displays the result.
+
+---
+
+## Principle 9
+
+Remove Friction
+
+Every feature should reduce the number of actions required for the Operator to achieve their objective.
+
+Oracle should anticipate what the Operator needs rather than waiting to answer questions.
+
+The best Oracle experiences replace unnecessary searching with contextual intelligence.
+
+Whenever possible Oracle should reduce:
+
+- Searches
+- Browser tabs
+- Video tutorials
+- External guides
+- Interruptions
+
+Every capability should keep the Operator immersed in the game.
 
 ---
 
@@ -693,6 +743,14 @@ Game Modules
 Strategy Intelligence
 
 Map Intelligence
+
+Contextual Intelligence
+
+Public Knowledge Engine
+
+Objective Intelligence
+
+Exploration Intelligence
 
 Team Intelligence
 
@@ -2032,6 +2090,14 @@ Never harder.
 
 Artificial Intelligence is not Oracle's purpose.
 
+Artificial Intelligence enables Oracle.
+
+Context gives Oracle value.
+
+Oracle succeeds when intelligence reaches the Operator at exactly the moment it becomes useful.
+
+Context is as important as reasoning.
+
 Artificial Intelligence is one implementation detail.
 
 Oracle's purpose is intelligence.
@@ -2088,11 +2154,13 @@ Before merging any pull request...
 
 Before shipping any release...
 
-Ask one question.
+Ask two questions.
 
 Will this make Oracle more intelligent?
 
-If the answer is no...
+Will this reduce unnecessary friction for the Operator?
+
+If the answer to both is no...
 
 Do not build it.
 

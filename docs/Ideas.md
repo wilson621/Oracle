@@ -580,6 +580,53 @@ Only then should an idea become an Operation.
 
 ---
 
+# Contextual Intelligence
+
+Oracle should evolve into a contextual gaming companion capable of surfacing useful public information exactly when it becomes relevant.
+
+## Warzone
+
+- Secret bunker codes
+- Easter Egg guidance
+- Hidden loot
+- Secret rooms
+- Intel locations
+- Interactive map intelligence
+
+## GTA VI
+
+- Hidden packages
+- Rare vehicles
+- Property opportunities
+- Random encounters
+- Mission reminders
+- Hidden collectibles
+
+## Zombies
+
+- Easter Egg progression
+- Wonder Weapon steps
+- Hidden radios
+- Secret rooms
+- Ritual progression
+
+## General
+
+- Context-aware recommendations
+- Objective reminders
+- Exploration assistance
+- Progress awareness
+- Collectible tracking
+- Mission intelligence
+
+Mission:
+
+Stop Searching.
+
+Start Playing.
+
+---
+
 # Closing Statement
 
 Innovation should never interrupt disciplined development.

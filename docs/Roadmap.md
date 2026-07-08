@@ -30,6 +30,10 @@ It exists to ensure Oracle evolves in a deliberate, disciplined and sustainable 
 
 # Product Vision
 
+Oracle's long-term mission is to remove unnecessary friction from gaming.
+
+Every Operation should move Oracle closer to delivering the right intelligence at exactly the right moment.
+
 Oracle exists to become the world's leading AI-powered competitive gaming intelligence platform.
 
 Oracle continuously learns every Operator.
@@ -366,6 +370,14 @@ Strategy Intelligence
 
 Map Intelligence
 
+Contextual Intelligence
+
+Public Knowledge Engine
+
+Objective Intelligence
+
+Exploration Intelligence
+
 Rotation Intelligence
 
 Behaviour Relationships
@@ -379,6 +391,8 @@ Pattern Detection
 Advanced Behaviour Modelling
 
 Cross-System Reasoning
+
+Context-Aware Recommendations
 
 ---
 
@@ -540,7 +554,15 @@ Real-Time Recommendations
 
 Live Tactical Alerts
 
-Adaptive Session Coaching
+Contextual Intelligence Delivery
+
+Real-Time Map Intelligence
+
+Objective Notifications
+
+Public Knowledge Alerts
+
+Adaptive Session Guidance
 
 Performance Monitoring
 
@@ -646,11 +668,31 @@ Future capabilities include:
 
 • Strategy Intelligence
 
+• Oracle Memory
+
+• Oracle Context
+
+• Intelligence Bus
+
+• Strategy Intelligence
+
+• Contextual Intelligence
+
+• Public Knowledge Engine
+
 • Map Intelligence
+
+• Objective Intelligence
 
 • Live Intelligence
 
 • Visual Intelligence
+
+• Voice Intelligence
+
+• Team Intelligence
+
+• Tournament Intelligence
 
 • Voice Intelligence
 
@@ -805,6 +847,12 @@ Adapt across games.
 Scale through architecture.
 
 Deliver premium user experiences.
+
+Reduce unnecessary searching.
+
+Keep Operators immersed.
+
+Deliver the right intelligence at exactly the right moment.
 
 Become more intelligent after every Oracle Session.
 

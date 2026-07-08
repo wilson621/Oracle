@@ -288,6 +288,32 @@ It does not belong in Oracle.
 
 ---
 
+# Remove Friction
+
+Oracle exists to remove unnecessary friction from gaming.
+
+Every unnecessary search.
+
+Every unnecessary browser tab.
+
+Every unnecessary YouTube video.
+
+Every unnecessary interruption.
+
+Should eventually become an Oracle experience.
+
+The Operator should spend less time searching...
+
+And more time playing.
+
+If Oracle can provide the right information at exactly the right moment...
+
+The Operator remains immersed in the game they love.
+
+Removing friction is one of Oracle's highest priorities.
+
+---
+
 # The Oracle Standard.
 
 Every feature.
