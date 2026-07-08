@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { getCurrentOperator } from "@/lib/operator/getCurrentOperator";
 import { generateMissionReport } from "@/lib/oracle/missions";
+import { generatePlannerProfile } from "@/lib/oracle/planner";
 
 type Skill = {
   label: string;
@@ -15,12 +16,32 @@ type OracleSessionMetricRow = {
   game_sense: number | null;
 };
 
-function average(rows: OracleSessionMetricRow[], field: keyof OracleSessionMetricRow) {
+function average(
+  rows: OracleSessionMetricRow[],
+  field: keyof OracleSessionMetricRow
+) {
   if (rows.length === 0) return 0;
 
   return Math.round(
     rows.reduce((sum, row) => sum + (row[field] ?? 0), 0) / rows.length
   );
+}
+
+function plannerPriorityToSkillLabel(priority: string): string {
+  switch (priority) {
+    case "positioning":
+      return "Positioning";
+    case "aim":
+      return "Aim";
+    case "movement":
+      return "Movement";
+    case "decision":
+      return "Decision Making";
+    case "gamesense":
+      return "Game Sense";
+    default:
+      return "Positioning";
+  }
 }
 
 export async function getCoachReport() {
@@ -41,34 +62,61 @@ export async function getCoachReport() {
     return null;
   }
 
+  const positioning = average(sessions, "positioning");
+  const aim = average(sessions, "aim");
+  const movement = average(sessions, "movement");
+  const decisionMaking = average(sessions, "decision_making");
+  const gameSense = average(sessions, "game_sense");
+
   const skills: Skill[] = [
-    { label: "Positioning", value: average(sessions, "positioning") },
-    { label: "Aim", value: average(sessions, "aim") },
-    { label: "Movement", value: average(sessions, "movement") },
-    { label: "Decision Making", value: average(sessions, "decision_making") },
-    { label: "Game Sense", value: average(sessions, "game_sense") },
+    { label: "Positioning", value: positioning },
+    { label: "Aim", value: aim },
+    { label: "Movement", value: movement },
+    { label: "Decision Making", value: decisionMaking },
+    { label: "Game Sense", value: gameSense },
   ];
 
   const strongestSkill = [...skills].sort((a, b) => b.value - a.value)[0];
-  const weakestSkill = [...skills].sort((a, b) => a.value - b.value)[0];
 
-  const predictedGain = Math.max(4, Math.round((100 - weakestSkill.value) / 5));
-  const projectedCombatRating = Math.min(100, weakestSkill.value + predictedGain);
+  const planner = generatePlannerProfile({
+    positioning,
+    aim,
+    movement,
+    decisionMaking,
+    gameSense,
+  });
+
+  const plannedSkillLabel = plannerPriorityToSkillLabel(
+    planner.recommendation.priority
+  );
+
+  const plannedSkill =
+    skills.find((skill) => skill.label === plannedSkillLabel) ?? skills[0];
+
+  const predictedGain = Math.max(4, Math.round((100 - plannedSkill.value) / 5));
+  const projectedCombatRating = Math.min(100, plannedSkill.value + predictedGain);
 
   const missionReport = generateMissionReport({
     sessionsAnalysed: sessions.length,
-    weakestSkill: weakestSkill.label,
+    weakestSkill: plannedSkill.label,
     strongestSkill: strongestSkill.label,
-    currentCombatRating: weakestSkill.value,
+    currentCombatRating: plannedSkill.value,
     projectedCombatRating,
-    predictionConfidence: 0.77,
+    predictionConfidence:
+      planner.recommendation.confidence === "high"
+        ? 0.9
+        : planner.recommendation.confidence === "medium"
+          ? 0.7
+          : 0.5,
+    source: "brain",
   });
 
   return {
     operatorName: operator.callsign || "Operator",
     sessionsAnalysed: missionReport.sessionsAnalysed,
     strongestSkill,
-    weakestSkill,
+    weakestSkill: plannedSkill,
+    planner,
     dailyMission: {
       title: missionReport.mission.title,
       description: missionReport.mission.summary,
