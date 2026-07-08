@@ -7,6 +7,7 @@ import { registerCoreOracleEngines } from "@/lib/oracle/engines";
 import { runIntelligenceBus } from "@/lib/oracle/bus";
 import { summarizeSignals } from "@/lib/oracle/signals/signal-summary";
 import { generateOracleBrainGraphReport } from "@/lib/oracle/brain";
+import { buildOracleTimelineFromSignals } from "@/lib/oracle/timeline";
 
 export async function runIntelligencePipeline(
   context: IntelligencePipelineInput
@@ -15,6 +16,7 @@ export async function runIntelligencePipeline(
 
   const bus = await runIntelligenceBus(context);
   const brain = generateOracleBrainGraphReport(bus.graph);
+  const timeline = buildOracleTimelineFromSignals(bus.signals);
 
   return {
     operatorId: context.operator.operatorId,
@@ -25,5 +27,6 @@ export async function runIntelligencePipeline(
     summary: summarizeSignals(bus.signals),
     bus,
     brain,
+    timeline,
   };
 }
