@@ -14,6 +14,7 @@ export type OracleEngineCapability =
   | "strategy"
   | "map"
   | "coach"
+  | "planner"
   | "signal"
   | "decision";
 

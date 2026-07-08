@@ -1,3 +1,5 @@
+import type { OracleSignal } from "@/lib/oracle/signals/signal-types";
+
 export type PlannerPriority =
   | "positioning"
   | "aim"
@@ -5,10 +7,7 @@ export type PlannerPriority =
   | "decision"
   | "gamesense";
 
-export type PlannerConfidence =
-  | "low"
-  | "medium"
-  | "high";
+export type PlannerConfidence = "low" | "medium" | "high";
 
 export type PlannerRecommendation = {
   priority: PlannerPriority;
@@ -17,6 +16,12 @@ export type PlannerRecommendation = {
 };
 
 export type PlannerProfile = {
+  operatorId?: string;
   generatedAt: string;
   recommendation: PlannerRecommendation;
+};
+
+export type PlannerResult = {
+  profile: PlannerProfile;
+  signals: OracleSignal[];
 };

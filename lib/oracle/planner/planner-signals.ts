@@ -1,9 +1,13 @@
 import type { OracleSignal } from "@/lib/oracle/signals/signal-types";
 import type { PlannerProfile } from "./planner-types";
 
-export function plannerSignals(
-  profile: PlannerProfile
-): OracleSignal[] {
+function plannerConfidenceToNumber(confidence: PlannerProfile["recommendation"]["confidence"]) {
+  if (confidence === "high") return 0.9;
+  if (confidence === "medium") return 0.7;
+  return 0.5;
+}
+
+export function plannerSignals(profile: PlannerProfile): OracleSignal[] {
   return [
     {
       id: "planner-priority",
@@ -12,12 +16,7 @@ export function plannerSignals(
       summary: profile.recommendation.reason,
       severity: "medium",
       direction: "positive",
-      confidence:
-        profile.recommendation.confidence === "high"
-          ? 0.9
-          : profile.recommendation.confidence === "medium"
-            ? 0.7
-            : 0.5,
+      confidence: plannerConfidenceToNumber(profile.recommendation.confidence),
       createdAt: new Date().toISOString(),
     },
   ];

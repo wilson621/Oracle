@@ -2,6 +2,7 @@ export type OracleIntelligenceGraphKey =
   | "memory"
   | "evolution"
   | "coaching"
+  | "planner"
   | "prediction"
   | "weapon"
   | "strategy"

@@ -79,6 +79,7 @@ export async function getCoachReport() {
   const strongestSkill = [...skills].sort((a, b) => b.value - a.value)[0];
 
   const planner = generatePlannerProfile({
+    operatorId: operator.id,
     positioning,
     aim,
     movement,
