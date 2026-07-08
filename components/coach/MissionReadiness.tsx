@@ -1,22 +1,22 @@
 import type {
-  CoachMission,
-  CoachReadiness,
-} from "@/lib/oracle/coach/coach-types";
+  MissionReadiness as MissionReadinessType,
+  OracleMission,
+} from "@/lib/oracle/missions";
 import {
   getMissionStatusBorder,
   getMissionStatusColour,
   getMissionStatusLabel,
   type MissionStatus,
-} from "@/lib/oracle/coach/mission-status";
+} from "@/lib/oracle/missions";
 import {
   classifyMission,
   getMissionClassificationColour,
   getMissionClassificationLabel,
-} from "@/lib/oracle/coach/mission-classification";
+} from "@/lib/oracle/missions";
 
 type MissionReadinessProps = {
-  mission: CoachMission;
-  readiness: CoachReadiness;
+  mission: OracleMission;
+  readiness: MissionReadinessType;
   progress?: number;
   status?: MissionStatus;
 };
@@ -55,32 +55,32 @@ export default function MissionReadiness({
           )}`}
         >
           <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-500">
-  Mission Status
-</p>
+            Mission Status
+          </p>
 
-<p
-  className={`mt-2 text-3xl font-black uppercase ${getMissionStatusColour(
-    status
-  )}`}
->
-  {getMissionStatusLabel(status)}
-</p>
+          <p
+            className={`mt-2 text-3xl font-black uppercase ${getMissionStatusColour(
+              status
+            )}`}
+          >
+            {getMissionStatusLabel(status)}
+          </p>
 
-<div className="mx-auto mt-4 h-px w-20 bg-white/10" />
+          <div className="mx-auto mt-4 h-px w-20 bg-white/10" />
 
-<p className="mt-4 text-[10px] font-bold uppercase tracking-[0.28em] leading-5 text-slate-500">
-  Mission
-  <br />
-  Classification
-</p>
+          <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.28em] leading-5 text-slate-500">
+            Mission
+            <br />
+            Classification
+          </p>
 
-<p
-  className={`mt-2 text-lg font-black uppercase tracking-wide ${getMissionClassificationColour(
-    classification
-  )}`}
->
-  {getMissionClassificationLabel(classification)}
-</p>
+          <p
+            className={`mt-2 text-lg font-black uppercase tracking-wide ${getMissionClassificationColour(
+              classification
+            )}`}
+          >
+            {getMissionClassificationLabel(classification)}
+          </p>
         </div>
       </div>
 

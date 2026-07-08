@@ -1,17 +1,25 @@
 import { supabase } from "@/lib/supabase";
 import { getCurrentOperator } from "@/lib/operator/getCurrentOperator";
-import { generateCoachReport } from "@/lib/oracle/coach/coach-engine";
+import { generateMissionReport } from "@/lib/oracle/missions";
 
 type Skill = {
   label: string;
   value: number;
 };
 
-function average(rows: any[], field: string) {
+type OracleSessionMetricRow = {
+  positioning: number | null;
+  aim: number | null;
+  movement: number | null;
+  decision_making: number | null;
+  game_sense: number | null;
+};
+
+function average(rows: OracleSessionMetricRow[], field: keyof OracleSessionMetricRow) {
   if (rows.length === 0) return 0;
 
   return Math.round(
-    rows.reduce((sum, row) => sum + (row[field] || 0), 0) / rows.length
+    rows.reduce((sum, row) => sum + (row[field] ?? 0), 0) / rows.length
   );
 }
 
@@ -20,14 +28,14 @@ export async function getCoachReport() {
 
   const { data, error } = await supabase
     .from("oracle_sessions")
-    .select("*")
+    .select("positioning, aim, movement, decision_making, game_sense")
     .eq("operator_id", operator.id)
     .order("created_at", { ascending: false })
     .limit(20);
 
   if (error) throw error;
 
-  const sessions = data ?? [];
+  const sessions = (data ?? []) as OracleSessionMetricRow[];
 
   if (sessions.length === 0) {
     return null;
@@ -47,7 +55,7 @@ export async function getCoachReport() {
   const predictedGain = Math.max(4, Math.round((100 - weakestSkill.value) / 5));
   const projectedCombatRating = Math.min(100, weakestSkill.value + predictedGain);
 
-  const coachReport = generateCoachReport({
+  const missionReport = generateMissionReport({
     sessionsAnalysed: sessions.length,
     weakestSkill: weakestSkill.label,
     strongestSkill: strongestSkill.label,
@@ -58,22 +66,22 @@ export async function getCoachReport() {
 
   return {
     operatorName: operator.callsign || "Operator",
-    sessionsAnalysed: coachReport.sessionsAnalysed,
+    sessionsAnalysed: missionReport.sessionsAnalysed,
     strongestSkill,
     weakestSkill,
     dailyMission: {
-      title: coachReport.mission.title,
-      description: coachReport.mission.summary,
-      rewardXp: coachReport.mission.rewardXp,
+      title: missionReport.mission.title,
+      description: missionReport.mission.summary,
+      rewardXp: missionReport.mission.rewardXp,
     },
     prediction: {
-      current: coachReport.readiness.currentCombatRating,
-      projected: coachReport.readiness.projectedCombatRating,
-      skill: coachReport.readiness.focus,
-      sessions: coachReport.readiness.estimatedSessions,
+      current: missionReport.readiness.currentCombatRating,
+      projected: missionReport.readiness.projectedCombatRating,
+      skill: missionReport.readiness.focus,
+      sessions: missionReport.readiness.estimatedSessions,
     },
-    readiness: coachReport.readiness,
-    mission: coachReport.mission,
-    summary: coachReport.summary,
+    readiness: missionReport.readiness,
+    mission: missionReport.mission,
+    summary: missionReport.summary,
   };
 }

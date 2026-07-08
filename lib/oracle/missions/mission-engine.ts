@@ -1,7 +1,7 @@
-import type { CoachReport } from "./coach-types";
-import { generateCoachMission } from "./mission-generator";
+import type { MissionReport } from "./mission-types";
+import { generateMission } from "./mission-generator";
 
-type CoachEngineInput = {
+type MissionEngineInput = {
   sessionsAnalysed: number;
   weakestSkill: string;
   strongestSkill: string;
@@ -10,21 +10,21 @@ type CoachEngineInput = {
   predictionConfidence: number;
 };
 
-export function generateCoachReport({
+export function generateMissionReport({
   sessionsAnalysed,
   weakestSkill,
   strongestSkill,
   currentCombatRating,
   projectedCombatRating,
   predictionConfidence,
-}: CoachEngineInput): CoachReport {
-  const mission = generateCoachMission({
+}: MissionEngineInput): MissionReport {
+  const mission = generateMission({
     weakestSkill,
     currentCombatRating,
   });
 
   return {
-    summary: `Oracle has analysed ${sessionsAnalysed} Oracle Sessions. Current coaching priority is ${weakestSkill}.`,
+    summary: `Oracle has analysed ${sessionsAnalysed} Oracle Sessions. Current mission priority is ${weakestSkill}.`,
     sessionsAnalysed,
     mission,
     readiness: {

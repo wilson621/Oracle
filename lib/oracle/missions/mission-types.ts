@@ -1,21 +1,21 @@
-export type CoachMissionDifficulty = "Easy" | "Moderate" | "Hard";
+export type MissionDifficulty = "Easy" | "Moderate" | "Hard";
 
-export type CoachMissionObjective = {
+export type MissionObjective = {
   label: string;
 };
 
-export type CoachMission = {
+export type OracleMission = {
   title: string;
   focusArea: string;
   summary: string;
   estimatedCombatGain: number;
-  difficulty: CoachMissionDifficulty;
+  difficulty: MissionDifficulty;
   estimatedSessions: number;
   rewardXp: number;
-  objectives: CoachMissionObjective[];
+  objectives: MissionObjective[];
 };
 
-export type CoachReadiness = {
+export type MissionReadiness = {
   focus: string;
   strength: string;
   currentCombatRating: number;
@@ -24,9 +24,9 @@ export type CoachReadiness = {
   estimatedSessions: number;
 };
 
-export type CoachReport = {
+export type MissionReport = {
   summary: string;
   sessionsAnalysed: number;
-  mission: CoachMission;
-  readiness: CoachReadiness;
+  mission: OracleMission;
+  readiness: MissionReadiness;
 };

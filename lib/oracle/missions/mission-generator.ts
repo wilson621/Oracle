@@ -1,4 +1,4 @@
-import type { CoachMission } from "./coach-types";
+import type { OracleMission } from "./mission-types";
 
 type MissionGeneratorInput = {
   weakestSkill: string;
@@ -75,27 +75,21 @@ function createObjectives(objectives: string[]) {
   }));
 }
 
-export function generateCoachMission({
+export function generateMission({
   weakestSkill,
   currentCombatRating,
-}: MissionGeneratorInput): CoachMission {
-  const mission =
-    missionLibrary[weakestSkill] ??
-    missionLibrary["Positioning"];
+}: MissionGeneratorInput): OracleMission {
+  const mission = missionLibrary[weakestSkill] ?? missionLibrary.Positioning;
 
   const estimatedCombatGain =
-    currentCombatRating < 40
-      ? 4
-      : currentCombatRating < 70
-      ? 3
-      : 2;
+    currentCombatRating < 40 ? 4 : currentCombatRating < 70 ? 3 : 2;
 
   const difficulty =
     currentCombatRating < 40
       ? "Easy"
       : currentCombatRating < 70
-      ? "Moderate"
-      : "Hard";
+        ? "Moderate"
+        : "Hard";
 
   return {
     title: mission.codename,
