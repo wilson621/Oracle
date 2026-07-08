@@ -56,6 +56,14 @@ export const behaviourEvolutionEngine: OracleEngine<BehaviourEvolutionResult> = 
         profile,
         signals,
       },
+      graph: [
+        {
+          key: "evolution",
+          engineId: this.metadata.id,
+          profile,
+          generatedAt: new Date().toISOString(),
+        },
+      ],
       signals,
       decisions: [],
       diagnostics: {

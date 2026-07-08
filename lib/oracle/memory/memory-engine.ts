@@ -63,6 +63,14 @@ export const memoryEngine: OracleEngine<OracleMemoryResult> = {
         profile,
         signals,
       },
+      graph: [
+        {
+          key: "memory",
+          engineId: this.metadata.id,
+          profile,
+          generatedAt: new Date().toISOString(),
+        },
+      ],
       signals,
       decisions: [],
       diagnostics: {

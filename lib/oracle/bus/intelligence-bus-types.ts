@@ -4,6 +4,7 @@ import type {
 } from "@/lib/oracle/engines";
 import type { OracleSignal } from "@/lib/oracle/signals/signal-types";
 import type { OracleDecision } from "@/lib/oracle/intelligence/decision-types";
+import type { OracleIntelligenceGraph } from "@/lib/oracle/graph";
 
 export type IntelligenceBusStatus = "success" | "failed";
 
@@ -26,5 +27,6 @@ export type IntelligenceBusResult = {
   failedEngines: number;
   signals: OracleSignal[];
   decisions: OracleDecision[];
+  graph: OracleIntelligenceGraph;
   results: IntelligenceBusEngineResult[];
 };

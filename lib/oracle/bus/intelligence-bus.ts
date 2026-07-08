@@ -1,5 +1,10 @@
 import type { OracleContext } from "@/lib/oracle/context";
 import { getRegisteredOracleEngines } from "@/lib/oracle/engines";
+import {
+  addOracleIntelligenceGraphEntries,
+  createEmptyOracleIntelligenceGraph,
+} from "@/lib/oracle/graph";
+
 import type {
   IntelligenceBusEngineResult,
   IntelligenceBusResult,
@@ -38,6 +43,8 @@ export async function runIntelligenceBus(
   const signals = [...context.intelligence.signals];
   const decisions = [...context.intelligence.decisions];
 
+  let graph = createEmptyOracleIntelligenceGraph();
+
   for (const engine of compatibleEngines) {
     const startedAt = Date.now();
 
@@ -67,6 +74,8 @@ export async function runIntelligenceBus(
 
       signals.push(...result.signals);
       decisions.push(...result.decisions);
+
+      graph = addOracleIntelligenceGraphEntries(graph, result.graph);
 
       results.push({
         engineId: engine.metadata.id,
@@ -101,6 +110,7 @@ export async function runIntelligenceBus(
       .length,
     signals,
     decisions,
+    graph,
     results,
   };
 }

@@ -1,6 +1,7 @@
 import type { OracleContext } from "@/lib/oracle/context";
 import type { OracleSignal } from "@/lib/oracle/signals/signal-types";
 import type { OracleDecision } from "@/lib/oracle/intelligence/decision-types";
+import type { OracleIntelligenceGraphEntry } from "@/lib/oracle/graph";
 
 export type OracleEngineCapability =
   | "context"
@@ -33,6 +34,7 @@ export type OracleEngineResult<TOutput> = {
   engineId: string;
   generatedAt: string;
   output: TOutput;
+  graph: OracleIntelligenceGraphEntry[];
   signals: OracleSignal[];
   decisions: OracleDecision[];
   diagnostics?: Record<string, unknown>;

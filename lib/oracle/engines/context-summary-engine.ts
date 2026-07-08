@@ -41,6 +41,7 @@ export const contextSummaryEngine: OracleEngine<ContextSummaryOutput> = {
       engineId: this.metadata.id,
       generatedAt: new Date().toISOString(),
       output,
+      graph: [],
       signals: [
         {
           id: "context-summary-generated",
@@ -54,12 +55,7 @@ export const contextSummaryEngine: OracleEngine<ContextSummaryOutput> = {
         },
       ],
       decisions: [],
-      diagnostics: {
-        sessionsAnalysed: output.sessionsAnalysed,
-        recentSessionCount: output.recentSessionCount,
-        currentGame: output.currentGame,
-        patchVersion: output.patchVersion,
-      },
+      diagnostics: output,
     };
   },
 };
