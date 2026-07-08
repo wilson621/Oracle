@@ -3,11 +3,17 @@ import type {
   IntelligencePipelineResult,
 } from "./pipeline-types";
 
+import { registerCoreOracleEngines } from "@/lib/oracle/engines";
+import { runIntelligenceBus } from "@/lib/oracle/bus";
 import { summarizeSignals } from "@/lib/oracle/signals/signal-summary";
 
-export function runIntelligencePipeline(
+export async function runIntelligencePipeline(
   context: IntelligencePipelineInput
-): IntelligencePipelineResult {
+): Promise<IntelligencePipelineResult> {
+  registerCoreOracleEngines();
+
+  const bus = await runIntelligenceBus(context);
+
   const signals = context.intelligence.signals;
   const decisions = context.intelligence.decisions;
 
@@ -18,5 +24,6 @@ export function runIntelligencePipeline(
     signals,
     decisions,
     summary: summarizeSignals(signals),
+    bus,
   };
 }
