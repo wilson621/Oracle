@@ -3,24 +3,18 @@ import type {
   IntelligencePipelineResult,
 } from "./pipeline-types";
 
-import type { OracleSignal } from "@/lib/oracle/signals/signal-types";
-import type { OracleDecision } from "@/lib/oracle/intelligence/decision-types";
-
 import { summarizeSignals } from "@/lib/oracle/signals/signal-summary";
 
-export function runIntelligencePipeline({
-  operatorId,
-  callsign,
-  sessionsAnalysed,
-}: IntelligencePipelineInput): IntelligencePipelineResult {
-  const signals: OracleSignal[] = [];
-
-  const decisions: OracleDecision[] = [];
+export function runIntelligencePipeline(
+  context: IntelligencePipelineInput
+): IntelligencePipelineResult {
+  const signals = context.intelligence.signals;
+  const decisions = context.intelligence.decisions;
 
   return {
-    operatorId,
-    callsign,
-    generatedAt: new Date().toISOString(),
+    operatorId: context.operator.operatorId,
+    callsign: context.operator.callsign,
+    generatedAt: context.generatedAt,
     signals,
     decisions,
     summary: summarizeSignals(signals),
