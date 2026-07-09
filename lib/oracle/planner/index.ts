@@ -1,4 +1,5 @@
 export * from "./planner-engine";
+export * from "./planner-intelligence";
 export * from "./planner-priority";
 export * from "./planner-profile";
 export * from "./planner-signals";
