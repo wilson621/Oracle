@@ -3,6 +3,7 @@ export type OracleIntelligenceGraphKey =
   | "evolution"
   | "coaching"
   | "planner"
+  | "operatorProfile"
   | "prediction"
   | "weapon"
   | "strategy"
