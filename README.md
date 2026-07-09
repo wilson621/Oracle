@@ -1,8 +1,8 @@
 # Project Meta
 
-> **Building the world's most advanced AI coaching platform for competitive gaming.**
+> **Building the world's most advanced AI-powered Competitive Gaming Intelligence Platform.**
 
-Project Meta is a software platform focused on creating intelligent coaching systems that help competitive players improve through behavioural analysis, performance prediction and long-term AI guidance.
+Project Meta is a software platform focused on creating intelligent coaching systems that help competitive players improve through behavioural analysis, long-term learning, evidence-based reasoning and adaptive AI guidance.
 
 The flagship product is **Oracle**.
 
@@ -10,134 +10,220 @@ The flagship product is **Oracle**.
 
 # What is Oracle?
 
-Oracle is an AI-powered gaming intelligence platform.
+Oracle is an AI Gaming Intelligence Companion.
 
 Unlike traditional stat trackers, Oracle is designed to understand **how** an Operator plays rather than simply recording what happened.
 
-Oracle analyses gameplay behaviour, identifies patterns, predicts future performance and delivers personalised coaching recommendations that evolve over time.
+Oracle analyses gameplay behaviour, builds long-term intelligence, reasons from evidence, predicts future performance and continuously evolves its understanding of every Operator.
 
-Oracle is being built as a long-term AI coaching companion rather than a reporting dashboard.
+Oracle is being built as an intelligence platform rather than a statistics dashboard.
 
 ---
 
 # Current Status
 
-Version
+## Version
 
-**Oracle v0.3 — Oracle Command Centre**
+**Oracle v0.4 — Oracle Intelligence Platform**
 
-Current Milestone
+## Current Milestone
 
-**PM-006 — Premium Experience**
+**Operation Horizon**
 
-Build Status
+**Sprint 4 — COMPLETE**
 
-✅ Passing
+## Build Status
+
+✅ Production Build Passing
 
 ---
 
-# Current Features
+# Platform Capabilities
 
-- Operator Profiles
-- Oracle Sessions
-- Behaviour Intelligence
-- Trend Analysis
-- Prediction Engine
-- OracleBrain Intelligence Layer
-- Confidence Analysis
-- Intelligence Dashboard
+Oracle currently includes:
+
+## Core Runtime
+
+- Oracle Context
+- Intelligence Bus
+- Universal Engine Registry
+- Engine Dependency Resolution
+- Oracle Lifecycle
+- Oracle Intelligence State
+
+---
+
+## Intelligence Systems
+
+- Oracle Brain
+- Intelligence Graph
+- Behaviour Evolution
+- Adaptive Coaching
+- Operator Timeline
+- Planner Intelligence
+- Decision Intelligence
+- Explainability
+- Confidence Engine
+- Evidence Engine
+
+---
+
+## Operator Systems
+
+- Operator Profile
 - Career Progression
 - XP System
 - Achievement System
-- Reusable Design System
+- Behaviour Intelligence
+- Prediction Engine
+
+---
+
+## Dashboard
+
+The Intelligence Command Centre is built using reusable presentation components.
+
+- OracleDecisionCard
+- OracleBrainCard
+- OraclePlannerCard
+- OracleTimelineCard
+- OracleExplainabilityCard
+- OracleSignalFeed
+
+Pages compose.
+
+Components present.
+
+Oracle Runtime provides intelligence.
 
 ---
 
 # Technology Stack
 
-Frontend
+## Frontend
 
 - Next.js (App Router)
 - React
 - TypeScript
 - Tailwind CSS
 
-Backend
+## Backend
 
 - Supabase
 
-Artificial Intelligence
+## Artificial Intelligence
 
 - OpenAI
 
-Deployment
+## Deployment
 
 - Vercel
 
 ---
 
-# Architecture
+# Runtime Architecture
 
-Oracle follows a layered architecture.
+Oracle executes intelligence through a layered runtime.
 
 ```text
 Operator
-
-↓
-
-Oracle Session
-
-↓
-
-Supabase
-
-↓
-
-Repositories
-
-↓
-
-Behaviour Engine
-Trend Engine
-Prediction Engine
-
-↓
-
-Oracle Intelligence Layer
-
-↓
-
-OracleBrain
-
-↓
-
-Dashboard UI
+      │
+Oracle Context
+      │
+Intelligence Bus
+      │
+Registered Intelligence Engines
+      │
+Signals
+Profiles
+Graph Entries
+Decisions
+      │
+Oracle Brain
+      │
+Timeline
+      │
+Planner
+      │
+Explainability
+      │
+Decision Intelligence
+      │
+Oracle Intelligence State
+      │
+Dashboard Components
 ```
 
-Full architecture documentation is available in:
+The UI consumes the Oracle Intelligence State rather than individual intelligence engines.
+
+---
+
+# Project Structure
 
 ```text
-docs/Architecture.md
+app/
+components/
+database/
+docs/
+lib/
+public/
+types/
 ```
+
+Business logic is isolated from presentation.
+
+```
+Pages compose.
+
+Components present.
+
+Repositories expose truth.
+
+Engines reason.
+
+Signals communicate.
+
+Decision Intelligence recommends.
+
+Oracle State becomes the UI contract.
+```
+
+---
+
+# Engineering Principles
+
+Oracle follows several non-negotiable engineering principles.
+
+- Architecture before speed.
+- Pages compose.
+- Components present.
+- Business logic belongs inside engines.
+- Intelligence before presentation.
+- Evidence before opinion.
+- Confidence is calculated.
+- One responsibility per subsystem.
+- Green build before every commit.
+- Documentation evolves with the platform.
 
 ---
 
 # Documentation
 
-Project Meta maintains comprehensive documentation inside the `/docs` directory.
+Project Meta maintains comprehensive documentation inside `/docs`.
 
 | Document | Purpose |
 |----------|---------|
-| Oracle_Codex.md | Engineering philosophy and development standards |
-| Architecture.md | Technical architecture |
-| Oracle-Principles.md | Oracle personality and behaviour |
-| Brand-Bible.md | Visual identity and design system |
-| Branding.md | Product naming and hierarchy |
-| PROJECT_BOARD.md | Current milestone and sprint |
-| Roadmap.md | Long-term product roadmap |
+| MASTER_BUILD_PLAN.md | Canonical engineering build plan |
+| Architecture.md | Platform architecture |
+| Oracle_Codex.md | Engineering standards |
+| Oracle-Principles.md | Product and engineering principles |
+| PROJECT_BOARD.md | Active project board |
+| Roadmap.md | Strategic roadmap |
 | Decisions.md | Architectural decision log |
-| Ideas.md | Future ideas and backlog |
-| Manifesto.md | Project vision and philosophy |
+| Manifesto.md | Product vision |
+| Brand-Bible.md | Brand identity |
+| Branding.md | Product hierarchy |
+| Ideas.md | Innovation backlog |
 
 ---
 
@@ -149,7 +235,7 @@ Install dependencies
 npm install
 ```
 
-Start the development server
+Run development server
 
 ```bash
 npm run dev
@@ -169,47 +255,66 @@ npm run start
 
 ---
 
-# Project Structure
+# Current Platform Status
 
-```text
-app/
-components/
-docs/
-lib/
-public/
-```
+## Operation Genesis
 
-The project follows a modular architecture where business logic is separated from presentation.
+✅ Complete
 
-UI components display intelligence.
-
-OracleBrain produces intelligence.
-
-Repositories communicate with Supabase.
+Platform foundations.
 
 ---
 
-# Design Principles
+## Operation Sentinel
 
-Project Meta is built around several core principles.
+✅ Complete
 
-- Premium user experience
-- Reusable architecture
-- AI-first design
-- Production-quality engineering
-- Behaviour over statistics
-- Intelligence over dashboards
-- Long-term maintainability
+Persistent intelligence runtime.
+
+---
+
+## Operation Vanguard
+
+✅ Complete
+
+Operator-facing intelligence.
+
+---
+
+## Operation Horizon
+
+🟢 In Progress
+
+Platform consolidation and production architecture.
+
+Sprint 4 has completed:
+
+- Oracle Runtime
+- Oracle Lifecycle
+- Oracle Intelligence State
+- Decision Intelligence
+- Explainability
+- Dashboard Modularisation
 
 ---
 
 # Vision
 
-Project Meta exists to build AI systems that genuinely improve competitive players.
+Oracle exists to become the world's most trusted AI Gaming Intelligence Companion.
 
-Oracle is the first product in that journey.
+Oracle continuously learns every Operator.
 
-The long-term vision is to create the world's most advanced AI coaching companion capable of understanding player behaviour, predicting future performance and continuously adapting as the Operator evolves.
+Reasons from evidence.
+
+Explains every recommendation.
+
+Calculates confidence honestly.
+
+Adapts across games.
+
+Improves after every Oracle Session.
+
+The long-term goal is to build the world's most advanced competitive gaming intelligence platform.
 
 ---
 

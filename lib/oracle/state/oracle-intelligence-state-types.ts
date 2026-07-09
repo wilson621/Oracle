@@ -6,6 +6,7 @@ import type { PlannerResult } from "@/lib/oracle/planner";
 import type { OracleExplanation } from "@/lib/oracle/explainability";
 import type { OracleSignal } from "@/lib/oracle/signals/signal-types";
 import type { OracleDecision } from "@/lib/oracle/intelligence/decision-types";
+import type { OracleDecisionProfile } from "@/lib/oracle/intelligence/decision-profile";
 import type { OracleLifecycle } from "@/lib/oracle/lifecycle";
 
 export type OracleIntelligenceStateMetadata = {
@@ -35,4 +36,6 @@ export type OracleIntelligenceState = {
   signals: OracleSignal[];
 
   decisions: OracleDecision[];
+
+  decisionProfile: OracleDecisionProfile;
 };

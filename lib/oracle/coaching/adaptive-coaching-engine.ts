@@ -1,6 +1,7 @@
 import type { OracleContext } from "@/lib/oracle/context";
 import type { OracleEngine } from "@/lib/oracle/engines";
 import { buildEngineResult } from "@/lib/oracle/engines";
+import { generateOracleDecision } from "@/lib/oracle/intelligence/decision-engine";
 
 import {
   buildAdaptiveCoachingPlan,
@@ -25,11 +26,12 @@ export const adaptiveCoachingEngine: OracleEngine<AdaptiveCoachingResult> = {
     supportedGames: ["*"],
     dependencies: ["memory-engine", "behaviour-evolution-engine"],
     producesSignals: true,
-    producesDecisions: false,
+    producesDecisions: true,
   },
 
   async execute(context: OracleContext) {
-    const confidence = context.session.recentSessions.length >= 5 ? 0.8 : 0.45;
+    const sessionsAnalysed = context.session.recentSessions.length;
+    const confidence = sessionsAnalysed >= 5 ? 0.8 : 0.45;
 
     const priority = calculateCoachingPriority(confidence);
     const focusAreas = buildAdaptiveCoachingPlan(priority);
@@ -46,6 +48,21 @@ export const adaptiveCoachingEngine: OracleEngine<AdaptiveCoachingResult> = {
 
     const signals = buildAdaptiveCoachingSignals(profile);
 
+    const decision = generateOracleDecision({
+      category: "coach",
+      title: "Follow Adaptive Coaching Plan",
+      recommendation: summary,
+      summary,
+      expectedOutcome:
+        "Following this coaching plan should improve the operator's weakest recurring performance patterns.",
+      reassessmentTrigger:
+        "Reassess after the next analysed session or when Oracle detects a change in coaching priority.",
+      sessionsAnalysed,
+      sampleSize: sessionsAnalysed,
+      consistency: Math.round(confidence * 100),
+      trendStability: Math.round(confidence * 100),
+    });
+
     return buildEngineResult(adaptiveCoachingEngine, {
       profile: {
         profile,
@@ -60,10 +77,12 @@ export const adaptiveCoachingEngine: OracleEngine<AdaptiveCoachingResult> = {
         },
       ],
       signals,
+      decisions: [decision],
       diagnostics: {
         priority,
         confidence,
         focusAreas: focusAreas.length,
+        decisions: 1,
       },
     });
   },

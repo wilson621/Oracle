@@ -6,6 +6,7 @@ import type { PlannerResult } from "@/lib/oracle/planner";
 import type { OracleExplanation } from "@/lib/oracle/explainability";
 import type { OracleSignal } from "@/lib/oracle/signals/signal-types";
 import type { OracleDecision } from "@/lib/oracle/intelligence/decision-types";
+import type { OracleDecisionProfile } from "@/lib/oracle/intelligence/decision-profile";
 import { getOracleLifecycle } from "@/lib/oracle/lifecycle";
 import type { OracleIntelligenceState } from "./oracle-intelligence-state-types";
 
@@ -18,6 +19,7 @@ export function buildOracleIntelligenceState(input: {
   explanations: OracleExplanation[];
   signals: OracleSignal[];
   decisions: OracleDecision[];
+  decisionProfile: OracleDecisionProfile;
 }): OracleIntelligenceState {
   return {
     metadata: {
@@ -37,5 +39,6 @@ export function buildOracleIntelligenceState(input: {
     explanations: input.explanations,
     signals: input.signals,
     decisions: input.decisions,
+    decisionProfile: input.decisionProfile,
   };
 }

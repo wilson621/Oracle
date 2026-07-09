@@ -2,19 +2,20 @@
 
 import { useEffect, useState } from "react";
 import AppLayout from "@/components/layout/AppLayout";
-import IntelligenceGrid from "@/components/oracle/dashboard/IntelligenceGrid";
-import { generateOracleBrainReport } from "@/lib/oracle/oracle-brain";
+import OracleBrainCard from "@/components/oracle/dashboard/OracleBrainCard";
+import OracleDecisionCard from "@/components/oracle/dashboard/OracleDecisionCard";
+import OracleExplainabilityCard from "@/components/oracle/dashboard/OracleExplainabilityCard";
+import OraclePlannerCard from "@/components/oracle/dashboard/OraclePlannerCard";
+import OracleSignalFeed from "@/components/oracle/dashboard/OracleSignalFeed";
+import OracleTimelineCard from "@/components/oracle/dashboard/OracleTimelineCard";
+import { buildOracleContext } from "@/lib/oracle/context";
+import { runIntelligencePipeline } from "@/lib/oracle/pipeline/intelligence-pipeline";
 import { getOperatorStats } from "@/lib/oracle/getOperatorStats";
 import {
   getCurrentOperator,
   type Operator,
 } from "@/lib/operator/getCurrentOperator";
-import {
-  getRecentOperatorSessions,
-  mapSessionRowsToTrendSessions,
-  type OracleSessionRow,
-} from "@/lib/oracle/repositories/session-repository";
-import type { OracleBrainReport } from "@/lib/oracle/oracle-brain-types";
+import type { OracleIntelligenceState } from "@/lib/oracle/state";
 import { Brain } from "lucide-react";
 
 type OperatorStats = {
@@ -31,43 +32,49 @@ type OperatorStats = {
 export default function IntelligencePage() {
   const [operator, setOperator] = useState<Operator | null>(null);
   const [stats, setStats] = useState<OperatorStats | null>(null);
-  const [sessions, setSessions] = useState<OracleSessionRow[]>([]);
+  const [state, setState] = useState<OracleIntelligenceState | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadIntelligence() {
-      const operatorData = await getCurrentOperator();
+      try {
+        setIsLoading(true);
+        setLoadError(null);
 
-      const [statsData, recentSessions] = await Promise.all([
-        getOperatorStats(),
-        getRecentOperatorSessions(operatorData.id, 10),
-      ]);
+        const operatorData = await getCurrentOperator();
+        const statsData = await getOperatorStats();
 
-      setOperator(operatorData);
-      setStats(statsData);
-      setSessions(recentSessions);
+        const context = await buildOracleContext({
+          operatorId: operatorData.id,
+          callsign: operatorData.callsign ?? "Operator",
+          sessionsAnalysed:
+            statsData?.totalSessions ?? operatorData.total_sessions ?? 0,
+          currentGame: operatorData.primary_game ?? "Call of Duty",
+          patchVersion: null,
+        });
+
+        const result = await runIntelligencePipeline(context);
+
+        setOperator(operatorData);
+        setStats(statsData);
+        setState(result.state);
+      } catch (error) {
+        setLoadError(
+          error instanceof Error
+            ? error.message
+            : "Oracle failed to build intelligence state."
+        );
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     loadIntelligence();
   }, []);
 
-  const trendSessions = mapSessionRowsToTrendSessions(sessions);
-
-  const oracleBrainReport: OracleBrainReport = generateOracleBrainReport({
-    operatorId: operator?.id ?? "loading",
-    callsign: operator?.callsign ?? "Operator",
-    primaryGame: operator?.primary_game ?? "Call of Duty",
-    combatRating: stats?.combatRating ?? 0,
-    winChance: stats?.winRate ?? 0,
-    level: operator?.level ?? null,
-    xp: operator?.xp ?? null,
-    totalSessions: stats?.totalSessions ?? operator?.total_sessions ?? 0,
-    positioning: stats?.positioning ?? 0,
-    aim: stats?.aim ?? 0,
-    movement: stats?.movement ?? 0,
-    decisionMaking: stats?.decisionMaking ?? 0,
-    gameSense: stats?.gameSense ?? 0,
-    trendSessions,
-  });
+  const primaryDecision = state?.decisionProfile.primaryDecision ?? null;
+  const strongestExplanation = state?.explanations[0] ?? null;
 
   return (
     <AppLayout>
@@ -75,12 +82,31 @@ export default function IntelligencePage() {
         ORACLE INTELLIGENCE
       </p>
 
-      <h1 className="mt-3 text-4xl font-bold">Intelligence Command Centre</h1>
+      <h1 className="mt-3 text-4xl font-bold">
+        Intelligence Command Centre
+      </h1>
 
       <p className="mt-4 max-w-3xl text-slate-400">
-        Oracle analyses behaviour, trend momentum and future prediction signals
-        to build your live Operator intelligence profile.
+        Oracle now consumes the complete Intelligence State: runtime context,
+        intelligence bus output, brain findings, planner recommendations,
+        timeline events, explanations, signals and decisions.
       </p>
+
+      {loadError ? (
+        <div className="mt-10 rounded-3xl border border-red-400/30 bg-red-500/10 p-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-red-300">
+            Oracle Error
+          </p>
+
+          <h2 className="mt-3 text-2xl font-black text-white">
+            Intelligence state failed to load
+          </h2>
+
+          <p className="mt-3 text-sm text-red-100">
+            {loadError}
+          </p>
+        </div>
+      ) : null}
 
       <div className="mt-10 rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-8">
         <div className="flex items-center gap-4">
@@ -94,19 +120,54 @@ export default function IntelligencePage() {
             </p>
 
             <h2 className="mt-2 text-3xl font-black text-white">
-              OracleBrain Online
+              {isLoading
+                ? "Oracle Initialising"
+                : "Oracle Intelligence Online"}
             </h2>
 
             <p className="mt-2 text-sm text-slate-400">
-              Operator: {operator?.callsign ?? "Operator"} · Sample:{" "}
-              {oracleBrainReport.trend.sampleSize} sessions
+              Operator:{" "}
+              {state?.metadata.callsign ??
+                operator?.callsign ??
+                "Operator"}
+              {" · "}
+              Sample: {stats?.totalSessions ?? 0} sessions
+              {" · "}
+              Version: {state?.metadata.version ?? "1.0.0"}
             </p>
           </div>
         </div>
       </div>
 
-      <div className="mt-10">
-        <IntelligenceGrid report={oracleBrainReport} />
+      <OracleDecisionCard
+        decision={primaryDecision}
+        isLoading={isLoading}
+      />
+
+      <div className="mt-10 grid gap-6 xl:grid-cols-3">
+        <OracleBrainCard
+          brain={state?.brain ?? null}
+        />
+
+        <OraclePlannerCard
+          planner={state?.planner ?? null}
+        />
+
+        <OracleTimelineCard
+          timeline={state?.timeline ?? null}
+          signalCount={state?.signals.length ?? 0}
+        />
+      </div>
+
+      <div className="mt-6 grid gap-6 xl:grid-cols-2">
+        <OracleExplainabilityCard
+          explanation={strongestExplanation}
+        />
+
+        <OracleSignalFeed
+          signals={state?.signals ?? []}
+          isLoading={isLoading}
+        />
       </div>
     </AppLayout>
   );

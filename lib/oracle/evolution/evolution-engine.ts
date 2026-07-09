@@ -1,6 +1,7 @@
 import type { OracleContext } from "@/lib/oracle/context";
 import type { OracleEngine } from "@/lib/oracle/engines";
 import { buildEngineResult } from "@/lib/oracle/engines";
+import { generateOracleDecision } from "@/lib/oracle/intelligence/decision-engine";
 import { calculateEvolutionConfidence } from "./evolution-confidence";
 import {
   detectBehaviourEvolutionPatterns,
@@ -25,7 +26,7 @@ export const behaviourEvolutionEngine: OracleEngine<BehaviourEvolutionResult> = 
     supportedGames: ["*"],
     dependencies: ["memory-engine"],
     producesSignals: true,
-    producesDecisions: false,
+    producesDecisions: true,
   },
 
   async execute(context: OracleContext) {
@@ -48,6 +49,36 @@ export const behaviourEvolutionEngine: OracleEngine<BehaviourEvolutionResult> = 
 
     const signals = buildBehaviourEvolutionSignals({ profile });
 
+    const decision = generateOracleDecision({
+      category: "strategy",
+      title: sharpestDecline
+        ? `Recover ${sharpestDecline.label}`
+        : strongestImprovement
+          ? `Protect ${strongestImprovement.label} Momentum`
+          : "Stabilise Behaviour Trajectory",
+      recommendation: sharpestDecline
+        ? `Prioritise ${sharpestDecline.label} in the next training cycle because Oracle detected the sharpest negative movement there.`
+        : strongestImprovement
+          ? `Protect the current improvement in ${strongestImprovement.label} while continuing to build a larger session sample.`
+          : "Maintain consistent review cycles until Oracle detects a clearer improvement or decline pattern.",
+      summary: sharpestDecline
+        ? `${sharpestDecline.label} is currently the clearest behavioural risk.`
+        : strongestImprovement
+          ? `${strongestImprovement.label} is currently the strongest positive behavioural trend.`
+          : "Behaviour evolution is currently stable with no dominant improvement or decline.",
+      expectedOutcome: sharpestDecline
+        ? `Focused correction should reduce further decline in ${sharpestDecline.label}.`
+        : strongestImprovement
+          ? `Protecting this pattern should preserve current improvement momentum in ${strongestImprovement.label}.`
+          : "Consistent review should improve Oracle's ability to detect stronger behavioural trends.",
+      reassessmentTrigger:
+        "Reassess after the next analysed session or when Oracle detects a new strongest improvement or sharpest decline.",
+      sessionsAnalysed: sessionCount,
+      sampleSize: patterns.length,
+      consistency: Math.round(confidence * 100),
+      trendStability: sharpestDecline ? 45 : strongestImprovement ? 75 : 60,
+    });
+
     return buildEngineResult(behaviourEvolutionEngine, {
       profile: {
         profile,
@@ -62,11 +93,13 @@ export const behaviourEvolutionEngine: OracleEngine<BehaviourEvolutionResult> = 
         },
       ],
       signals,
+      decisions: [decision],
       diagnostics: {
         sessionCount,
         confidence,
         strongestImprovement,
         sharpestDecline,
+        decisions: 1,
       },
     });
   },

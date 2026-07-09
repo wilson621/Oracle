@@ -1,4 +1,5 @@
 import type { OracleBrainGraphReport } from "@/lib/oracle/brain";
+import type { OracleDecisionProfile } from "@/lib/oracle/intelligence/decision-profile";
 import type { PlannerProfile } from "@/lib/oracle/planner";
 import type { OracleSignal } from "@/lib/oracle/signals/signal-types";
 import type { OracleTimeline } from "@/lib/oracle/timeline";
@@ -8,6 +9,10 @@ import type {
   OracleExplanation,
   OracleExplanationEvidence,
 } from "./explainability-types";
+
+function normaliseDecisionConfidence(confidence: number): number {
+  return confidence > 1 ? confidence / 100 : confidence;
+}
 
 function brainEvidence(brain: OracleBrainGraphReport): OracleExplanationEvidence[] {
   return brain.findings.map((finding) => ({
@@ -51,6 +56,40 @@ function plannerEvidence(planner: PlannerProfile): OracleExplanationEvidence[] {
   }));
 }
 
+function decisionEvidence(
+  decisionProfile: OracleDecisionProfile
+): OracleExplanationEvidence[] {
+  const evidence: OracleExplanationEvidence[] = [];
+
+  if (decisionProfile.primaryDecision) {
+    const confidence = normaliseDecisionConfidence(
+      decisionProfile.primaryDecision.confidence
+    );
+
+    evidence.push({
+      source: "decision",
+      title: `Primary decision: ${decisionProfile.primaryDecision.title}`,
+      summary: decisionProfile.rationale,
+      strength: confidenceToExplanationStrength(confidence),
+      confidence,
+    });
+  }
+
+  decisionProfile.supportingDecisions.forEach((decision) => {
+    const confidence = normaliseDecisionConfidence(decision.confidence);
+
+    evidence.push({
+      source: "decision",
+      title: `Considered decision: ${decision.title}`,
+      summary: `${decision.title} was considered but ranked below the primary decision. ${decision.summary}`,
+      strength: confidenceToExplanationStrength(confidence),
+      confidence,
+    });
+  });
+
+  return evidence;
+}
+
 function calculateExplanationConfidence(
   evidence: OracleExplanationEvidence[]
 ): number {
@@ -68,15 +107,19 @@ export function buildPlannerExplanation(input: {
   brain: OracleBrainGraphReport;
   timeline: OracleTimeline;
   signals: OracleSignal[];
+  decisionProfile: OracleDecisionProfile;
 }): OracleExplanation {
   const evidence = [
+    ...decisionEvidence(input.decisionProfile),
     ...plannerEvidence(input.planner),
     ...brainEvidence(input.brain),
     ...timelineEvidence(input.timeline),
     ...signalEvidence(input.signals),
   ];
 
-  const title = `Why Oracle selected ${input.planner.recommendation.priority}`;
+  const title = input.decisionProfile.primaryDecision
+    ? `Why Oracle selected ${input.decisionProfile.primaryDecision.title}`
+    : `Why Oracle selected ${input.planner.recommendation.priority}`;
 
   const confidence = calculateExplanationConfidence(evidence);
 

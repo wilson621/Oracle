@@ -348,11 +348,13 @@ Delivered:
 
 # Operation Horizon
 
-Status: In Progress
+Status: Active
 
 Purpose:
 
-Consolidate Oracle into a scalable platform architecture.
+Consolidate Oracle into a production-ready Intelligence Platform through runtime stabilisation, state-first architecture and reusable presentation systems.
+
+---
 
 ## Phase 1 — Oracle Intelligence State
 
@@ -363,6 +365,9 @@ Delivered:
 - OracleIntelligenceState
 - State builder
 - Pipeline state output
+- State-first UI contract
+
+---
 
 ## Phase 2 — Oracle Lifecycle
 
@@ -375,16 +380,98 @@ Delivered:
 - Lifecycle engine
 - Lifecycle embedded into Intelligence State
 
-## Phase 3 — Master Build Plan
+---
 
-Status: In Progress
+## Phase 3 — Decision Intelligence
+
+Status: Complete
 
 Delivered:
 
-- Canonical build plan
-- Operation tracking
-- Completion status tracking
-- Foundation dependency tracking
+- Oracle Decision subsystem
+- Decision Profile
+- Primary Decision selection
+- Confidence calculation
+- Evidence integration
+- Expected outcome modelling
+- Reassessment triggers
+
+Decision Intelligence now provides Oracle's single authoritative recommendation for the Operator.
+
+---
+
+## Phase 4 — Explainability
+
+Status: Complete
+
+Delivered:
+
+- Explainability subsystem
+- Explanation builder
+- Evidence aggregation
+- Confidence reasoning
+- Planner explanation integration
+
+Oracle now explains every recommendation using evidence collected throughout the runtime.
+
+---
+
+## Phase 5 — Dashboard Modularisation
+
+Status: Complete
+
+Delivered:
+
+- OracleDecisionCard
+- OracleBrainCard
+- OraclePlannerCard
+- OracleTimelineCard
+- OracleExplainabilityCard
+- OracleSignalFeed
+
+Architecture Improvements:
+
+- Pages compose presentation components.
+- Components present intelligence.
+- Business logic removed from UI.
+- OracleIntelligenceState becomes the UI contract.
+
+---
+
+## Phase 6 — Sprint 4 Production Closure
+
+Status: Complete
+
+Delivered:
+
+- Production runtime audit
+- Architecture review
+- Dashboard review
+- Documentation refresh
+- Sprint Closure Report
+- Build verification
+- Repository ready for Sprint 5
+
+---
+
+## Operation Horizon Outcome
+
+Oracle now provides a complete production intelligence runtime built around:
+
+- Oracle Context
+- Intelligence Bus
+- Registered Engines
+- Intelligence Graph
+- Oracle Brain
+- Planner
+- Timeline
+- Explainability
+- Decision Intelligence
+- Oracle Intelligence State
+
+The Intelligence Dashboard is fully modular and consumes OracleIntelligenceState through reusable presentation components.
+
+Operation Horizon established the production architecture that future Operations will extend rather than redesign.
 
 ---
 

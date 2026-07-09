@@ -360,6 +360,33 @@ Never weaken it.
 
 # Principle 17
 
+## Every Sprint Ends With Verification
+
+Oracle is built through disciplined engineering.
+
+No sprint is considered complete until it has passed:
+
+- Production build verification
+- Architecture review
+- Documentation review
+- Repository review
+- Sprint Closure Audit
+
+Every completed sprint should leave Oracle:
+
+- More reusable.
+- More maintainable.
+- Better documented.
+- Easier to extend.
+
+The platform should never accumulate undocumented architectural changes.
+
+Release quality is part of the architecture.
+
+---
+
+# Principle 18
+
 ## Remove Friction Through Context
 
 Oracle exists to remove unnecessary friction from gaming.

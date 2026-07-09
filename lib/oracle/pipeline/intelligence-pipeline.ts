@@ -10,6 +10,7 @@ import { generateOracleBrainGraphReport } from "@/lib/oracle/brain";
 import { buildOracleTimelineFromSignals } from "@/lib/oracle/timeline";
 import { runPlannerIntelligenceRuntime } from "@/lib/oracle/planner";
 import { buildPlannerExplanation } from "@/lib/oracle/explainability";
+import { buildOracleDecisionProfile } from "@/lib/oracle/intelligence/decision-profile";
 import { buildOracleIntelligenceState } from "@/lib/oracle/state";
 
 export async function runIntelligencePipeline(
@@ -19,17 +20,21 @@ export async function runIntelligencePipeline(
 
   const bus = await runIntelligenceBus(context);
   const brain = generateOracleBrainGraphReport(bus.graph);
-  const timeline = buildOracleTimelineFromSignals(bus.signals);
+
+  const initialTimeline = buildOracleTimelineFromSignals(bus.signals);
 
   const planner = runPlannerIntelligenceRuntime({
     operatorId: context.operator.operatorId,
     brain,
-    timeline,
+    timeline: initialTimeline,
     graphEntries: bus.graph.entries,
     signals: bus.signals,
   });
 
   const signals = [...bus.signals, ...planner.signals];
+  const decisions = bus.decisions;
+  const decisionProfile = buildOracleDecisionProfile(decisions);
+  const timeline = buildOracleTimelineFromSignals(signals);
 
   const explanations = [
     buildPlannerExplanation({
@@ -37,6 +42,7 @@ export async function runIntelligencePipeline(
       brain,
       timeline,
       signals,
+      decisionProfile,
     }),
   ];
 
@@ -48,7 +54,8 @@ export async function runIntelligencePipeline(
     planner,
     explanations,
     signals,
-    decisions: bus.decisions,
+    decisions,
+    decisionProfile,
   });
 
   return {
@@ -56,7 +63,7 @@ export async function runIntelligencePipeline(
     callsign: context.operator.callsign,
     generatedAt: context.generatedAt,
     signals,
-    decisions: bus.decisions,
+    decisions,
     summary: summarizeSignals(signals),
     bus,
     brain,

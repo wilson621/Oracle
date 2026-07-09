@@ -4,6 +4,7 @@ export type OracleExplanationSource =
   | "graph"
   | "signals"
   | "planner"
+  | "decision"
   | "memory"
   | "evolution"
   | "coaching"
