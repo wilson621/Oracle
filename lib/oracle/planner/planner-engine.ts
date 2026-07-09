@@ -32,7 +32,7 @@ export const plannerEngine: OracleEngine<PlannerResult> = {
   metadata: {
     id: "planner-engine",
     name: "Planner Engine",
-    version: "1.0.0",
+    version: "1.1.0",
     description:
       "Determines the next highest-value operator training priority.",
     priority: 45,
@@ -77,6 +77,7 @@ export const plannerEngine: OracleEngine<PlannerResult> = {
       diagnostics: {
         priority: profile.recommendation.priority,
         confidence: profile.recommendation.confidence,
+        source: profile.recommendation.source,
       },
     };
   },

@@ -4,6 +4,7 @@ import type { OracleDecision } from "@/lib/oracle/intelligence/decision-types";
 import type { IntelligenceBusResult } from "@/lib/oracle/bus";
 import type { OracleBrainGraphReport } from "@/lib/oracle/brain";
 import type { OracleTimeline } from "@/lib/oracle/timeline";
+import type { PlannerResult } from "@/lib/oracle/planner";
 
 export type IntelligencePipelineInput = OracleContext;
 
@@ -17,4 +18,5 @@ export type IntelligencePipelineResult = {
   bus: IntelligenceBusResult;
   brain: OracleBrainGraphReport;
   timeline: OracleTimeline;
+  planner: PlannerResult;
 };
