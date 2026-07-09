@@ -2,21 +2,21 @@
 
 Technical Architecture
 
-Version 3.0
+Version 4.0
 
-Last Updated: 8 July 2026
+Last Updated: Sprint 5 Closure
 
 ---
 
 # Purpose
 
-This document defines the technical architecture of Oracle.
+This document defines Oracle's technical architecture.
 
-Its purpose is to describe how Oracle is structured, how intelligence flows through the platform and how future systems should integrate.
+Its purpose is to describe how Oracle is structured, how intelligence flows through the platform, and how future systems should integrate without requiring architectural redesign.
 
-Unlike the Manifesto or the Codex, this document focuses exclusively on architecture.
+Unlike the Manifesto or the Codex, this document focuses exclusively on production architecture.
 
-It should answer one question.
+It answers one question.
 
 **How does Oracle work?**
 
@@ -24,23 +24,27 @@ It should answer one question.
 
 # Architectural Vision
 
-Oracle is designed as a modular intelligence platform.
+Oracle is a modular AI Gaming Intelligence Platform.
 
-Every subsystem performs one responsibility.
+Every subsystem owns one responsibility.
 
-Every subsystem produces reusable outputs.
+Every subsystem produces reusable intelligence.
 
-Every subsystem should be capable of evolving independently without requiring architectural redesign.
+Every subsystem communicates through shared runtime contracts.
 
-Oracle should become easier to extend over time.
+Every subsystem should be capable of evolving independently.
 
-Never harder.
+Oracle is designed so that new capabilities extend existing architecture rather than replacing it.
+
+Every completed sprint should strengthen the platform.
+
+Never weaken it.
 
 ---
 
-# Core Architectural Principles
+# Architectural Principles
 
-Oracle follows seven architectural principles.
+Oracle follows seven core architectural principles.
 
 ## 1. Separation of Responsibility
 
@@ -50,17 +54,17 @@ Pages compose.
 
 Components present.
 
-Repositories provide data.
+Repositories expose truth.
 
 Engines reason.
 
 Signals communicate.
 
-Oracle Brain analyses.
-
 Decision Intelligence recommends.
 
-Pipeline orchestrates.
+The Pipeline orchestrates.
+
+Oracle Brain understands.
 
 ---
 
@@ -68,11 +72,11 @@ Pipeline orchestrates.
 
 Oracle always produces intelligence before presentation.
 
-Presentation never creates intelligence.
+Presentation never generates intelligence.
 
-Presentation consumes intelligence.
+Presentation consumes Oracle Intelligence State.
 
-The UI should know as little as possible about how intelligence is generated.
+The UI should know as little as possible about how intelligence is produced.
 
 ---
 
@@ -80,65 +84,76 @@ The UI should know as little as possible about how intelligence is generated.
 
 Every recommendation originates from evidence.
 
-Evidence originates from Oracle Sessions.
+Evidence originates from Oracle Sessions and Oracle Context.
 
-No recommendation should exist without supporting intelligence.
+Recommendations should always remain explainable.
 
 ---
 
 ## 4. Game Agnostic
 
-Oracle is never built around one game.
-
 Games provide data.
 
 Oracle provides intelligence.
 
-Adding a new game should require a new module.
+Oracle core should never contain game-specific business logic.
 
-It should never require redesigning Oracle.
+Game-specific reasoning belongs inside dedicated modules or providers.
 
 ---
 
 ## 5. Modular Expansion
 
-Future systems should plug into existing architecture.
+New capabilities should plug into existing architecture.
 
-They should never replace it.
+Future systems should extend Oracle.
+
+Never redesign Oracle.
 
 ---
 
 ## 6. Reusable Systems
 
-Reusable architecture always takes priority over isolated implementations.
+Reusable architecture takes priority over isolated implementations.
 
 Every engine should be reusable.
 
-Every component should be reusable.
+Every provider should be reusable.
 
 Every repository should be reusable.
+
+Every component should be reusable.
 
 ---
 
 ## 7. Single Source of Truth
 
-Truth exists only once.
+Truth exists once.
 
 Repositories expose truth.
 
-Engines generate intelligence.
+Oracle Context shares truth.
 
-Presentation displays intelligence.
+Signals communicate observations.
+
+Decision Intelligence owns recommendations.
+
+OracleIntelligenceState owns presentation.
 
 ---
 
 # Oracle Layer Model
 
-Oracle consists of multiple architectural layers.
+Oracle consists of layered systems.
 
 Each layer depends only on the layer immediately beneath it.
 
+```text
 Presentation Layer
+
+↓
+
+Oracle Intelligence State
 
 ↓
 
@@ -162,13 +177,20 @@ Engine Layer
 
 ↓
 
+Oracle Context
+
+↓
+
 Repository Layer
 
 ↓
 
 Database Layer
+```
 
 Each layer performs one responsibility.
+
+No layer should bypass another.
 
 ---
 
@@ -177,346 +199,326 @@ Each layer performs one responsibility.
 ```text
                      Operator
 
-                        │
+                         │
 
-                        ▼
+                         ▼
 
-                 Oracle Session
+                   Oracle Session
 
-                        │
+                         │
 
-                        ▼
+                         ▼
 
-                   Supabase
+                     Supabase
 
-                        │
+                         │
 
-                        ▼
+                         ▼
 
                  Repository Layer
 
-                        │
+                         │
 
-                        ▼
+                         ▼
 
-              Operator Intelligence
+                   Oracle Context
 
-                        │
+                         │
 
-                        ▼
+                         ▼
 
-                Intelligence Engines
+                 Intelligence Bus
 
-                        │
+                         │
 
-                        ▼
+         ┌───────────────┼────────────────┐
+         │               │                │
+         ▼               ▼                ▼
 
-                     Signals
+ Behaviour       Contextual Engine   Planner Engine
 
-                        │
+ Evolution
 
-                        ▼
+         │               │                │
 
-                  Oracle Brain
+         └───────────────┼────────────────┘
+                         ▼
 
-                        │
+                      Signals
 
-                        ▼
+                         ▼
 
-             Decision Intelligence
+                   Oracle Brain
 
-                        │
+                         ▼
 
-                        ▼
+              Decision Intelligence
 
-             Intelligence Pipeline
+                         ▼
 
-                        │
+           Oracle Intelligence State
 
-                        ▼
+                         ▼
 
-                Presentation Layer
+               Presentation Components
 ```
 
----
+Oracle's production architecture was completed during Sprint 4.
 
-# Layer Responsibilities
+Sprint 5 demonstrated that new capabilities can be added through this architecture without requiring redesign.
 
-## Presentation Layer
+# Pipeline Layer
 
-Location
-
-```text
-app/
-components/
-```
-
-Responsibilities
-
-Render intelligence
-
-Display dashboards
-
-Present recommendations
-
-Handle navigation
-
-Collect user interaction
-
-Presentation should never:
-
-Generate recommendations
-
-Calculate intelligence
-
-Contain business logic
-
-Query Supabase directly
-
----
-
-## Pipeline Layer
-
-Location
+## Location
 
 ```text
 lib/oracle/pipeline/
 ```
 
-Responsibilities
+## Responsibilities
 
-Coordinate intelligence execution.
+The Pipeline is Oracle's orchestration layer.
 
-Aggregate Decisions.
+Responsibilities include:
 
-Aggregate Signals.
+- Build Oracle Context
+- Execute the Intelligence Bus
+- Aggregate Signals
+- Aggregate Decisions
+- Aggregate Explainability
+- Build Oracle Brain
+- Build Timeline
+- Build Planner
+- Construct OracleIntelligenceState
 
-Prepare data for presentation.
+The Pipeline coordinates execution.
 
-The Pipeline orchestrates.
+It never performs intelligence reasoning.
 
-It does not reason.
+Business logic belongs inside Oracle engines.
 
 ---
 
-## Decision Layer
+# Oracle Context
 
-Location
+## Location
 
 ```text
-lib/oracle/intelligence/
+lib/oracle/context/
 ```
 
-Responsibilities
+Oracle Context is Oracle's shared runtime contract.
 
-Transform intelligence into recommendations.
+Every intelligence engine receives the same contextual model.
 
-Every Oracle recommendation should eventually pass through this layer.
+No engine should independently retrieve runtime information that already exists inside Oracle Context.
 
-Decision Intelligence produces:
+Oracle Context currently contains:
 
-Recommendation
+- Operator
+- Operator Profile
+- Current Session
+- Recent Sessions
+- Signals
+- Decisions
+- Current Game
+- Patch Version
+- Contextual State
 
-Evidence
+Oracle Context is now production architecture.
 
-Confidence
-
-Expected Outcome
-
-Reassessment Trigger
+It is no longer a planned capability.
 
 ---
 
-## Oracle Brain
+# Contextual State
 
-Location
+Sprint 5 introduced Contextual State as part of Oracle Context.
+
+Contextual State provides Oracle with a shared understanding of the Operator's current situation.
+
+Current contextual information includes:
 
 ```text
-lib/oracle/brain/
+Intent
+
+Priorities
+
+Opportunities
 ```
 
-Oracle Brain is the platform's intelligence analyst.
+Future contextual systems should extend this model rather than introducing parallel context systems.
 
-Oracle Brain does not calculate statistics.
-
-Oracle Brain combines intelligence produced elsewhere.
-
-Responsibilities
-
-Consume Signals
-
-Identify behavioural patterns
-
-Resolve conflicting observations
-
-Generate operational assessments
-
-Prioritise intelligence
-
-Produce strategic understanding
-
-Oracle Brain becomes more valuable as additional engines are introduced.
+Oracle Context remains the single runtime contract.
 
 ---
 
-## Signal Layer
+# Intelligence Bus
 
-Location
+## Location
 
 ```text
-lib/oracle/signals/
+lib/oracle/bus/
 ```
 
-Signals represent observations.
+The Intelligence Bus is Oracle's orchestration backbone.
 
-Signals are intentionally small.
+Rather than manually invoking intelligence engines, Oracle registers engines and executes them through a shared runtime.
 
-Examples:
+Current Intelligence Bus responsibilities include:
 
-Positioning improving
+- Execute registered engines
+- Validate dependencies
+- Aggregate Signals
+- Aggregate Decisions
+- Aggregate Graph entries
+- Record engine execution
+- Report diagnostics
 
-Movement declining
+The Intelligence Bus is production architecture.
 
-Weapon confidence increasing
+Future engines should register themselves.
 
-Decision quality stabilising
-
-Signals never contain recommendations.
-
-Signals communicate observations only.
+The Bus should never require redesign when new engines are added.
 
 ---
 
-## Engine Layer
+# Engine Layer
 
-Location
+## Location
 
 ```text
 lib/oracle/
 ```
 
-Current engines include:
+Oracle's intelligence engines perform domain-specific reasoning.
 
-Behaviour Engine
+Every engine performs one responsibility.
 
-Trend Engine
+Every engine receives Oracle Context.
 
-Prediction Engine
+Every engine produces structured outputs.
 
-Operator Intelligence
+Current production engines include:
 
-Decision Intelligence
-
-Weapon Intelligence
-
-Coach Engine
+- Context Summary Engine
+- Behaviour Evolution Engine
+- Adaptive Coaching Engine
+- Planner Engine
+- Operator Profile Engine
+- Contextual Intelligence Engine
 
 Future engines include:
 
-Memory
-
-Strategy
-
-Map
-
-Economy
-
-Team
-
-Tournament
-
-Voice
-
-Visual Intelligence
+- Memory
+- Strategy
+- Map
+- Economy
+- Team
+- Tournament
+- Voice
+- Visual Intelligence
 
 Every engine should:
 
-Accept structured inputs
-
-Produce structured outputs
-
-Remain reusable
-
-Remain game agnostic
-
-Never render UI
-
-Never query React
+- Accept Oracle Context
+- Produce structured output
+- Remain reusable
+- Remain deterministic
+- Remain game agnostic
+- Never render UI
+- Never access React
+- Never query presentation state
 
 ---
 
-## Repository Layer
+# Contextual Intelligence
 
-Location
+Sprint 5 introduced Oracle's first major capability expansion after completion of the production runtime.
 
-```text
-lib/oracle/repositories/
-```
+The Contextual Intelligence Engine allows Oracle to reason about what the Operator is currently trying to accomplish.
 
-Responsibilities
+Rather than creating a separate recommendation framework, Contextual Intelligence integrates directly into Oracle's existing architecture.
 
-Read Oracle Sessions
+It produces:
 
-Write Oracle Sessions
+- Contextual Profile
+- Contextual Signals
+- Contextual Decisions
+- Diagnostics
 
-Read Operators
+The engine executes through the Intelligence Bus using the standard OracleEngine contract.
 
-Persist platform data
-
-Repositories expose truth.
-
-Repositories never generate intelligence.
-
-Repositories never produce recommendations.
+No special execution path exists.
 
 ---
 
-## Database Layer
+# Intent Resolver
 
-Technology
+The Intent Resolver is responsible for selecting the strongest Operator intent.
 
-Supabase
+It does not contain game-specific logic.
 
-Responsibilities
+It does not own contextual reasoning.
 
-Persist Operators
+Instead, it coordinates Intent Providers.
 
-Persist Oracle Sessions
+Responsibilities include:
 
-Persist progression
+- Execute providers
+- Collect intent candidates
+- Rank candidates
+- Resolve the strongest intent
+- Provide fallback behaviour
 
-Persist achievements
+The resolver orchestrates.
 
-Persist future memory
+Providers reason.
 
-Persist future telemetry
+---
 
-The database stores truth.
+# Intent Provider Architecture
 
-It never stores intelligence.
+Sprint 5 introduced Oracle's first provider-based subsystem.
 
-# Intelligence Flow
+Intent Providers allow Oracle to expand contextual intelligence without modifying the resolver itself.
 
-Every Oracle Session follows the same intelligence lifecycle.
+Each provider performs one responsibility.
+
+Current providers include:
+
+- Explicit Context Provider
+- Opportunity Provider
+- Recent Session Provider
+- Active Game Provider
+
+Future providers may include:
+
+- Mission Provider
+- Planner Provider
+- Timeline Provider
+- Memory Provider
+- Map Provider
+- Loot Provider
+- Vehicle Provider
+- Quest Provider
+
+The preferred Oracle extension model is now:
 
 ```text
-Operator
+Oracle Context
 
 ↓
 
-Oracle Session
+Intent Resolver
 
 ↓
 
-Repository Layer
+Intent Providers
 
 ↓
 
-Operator Intelligence
-
-↓
-
-Intelligence Engines
+Contextual Intelligence Engine
 
 ↓
 
@@ -524,263 +526,253 @@ Signals
 
 ↓
 
-Oracle Brain
-
-↓
-
 Decision Intelligence
-
-↓
-
-Intelligence Pipeline
-
-↓
-
-Presentation
 ```
 
-Every recommendation produced by Oracle should follow this lifecycle.
-
-No shortcuts.
-
-No bypasses.
-
----
-
-# Oracle Sessions
-
-Oracle Sessions are the atomic unit of intelligence.
-
-Everything Oracle learns originates from one or more Oracle Sessions.
-
-Oracle Sessions may be created from:
-
-Text Analysis
-
-Gameplay Review
-
-Video Analysis
-
-Voice Analysis (future)
-
-Computer Vision (future)
-
-Live Match Analysis (future)
-
-Every subsystem ultimately exists to improve future Oracle Sessions.
-
----
-
-# Operator Intelligence
-
-Operator Intelligence transforms raw session data into an Operator Profile.
-
-It represents the Operator rather than the game.
-
-Current responsibilities include:
-
-Learning Style
-
-Behavioural DNA
-
-Behaviour Profile
-
-Decision Profile
-
-Weapon Profile
-
-Confidence Level
-
-Strengths
-
-Improvement Priorities
-
-Future responsibilities include:
-
-Risk Profile
-
-Leadership
-
-Learning Velocity
-
-Fatigue Detection
-
-Behaviour Evolution
-
-Preferred Playstyle
-
-Historical Behaviour
-
-Operator Intelligence is expected to become one of Oracle's most valuable systems.
-
----
+Future contextual capability should primarily be added by introducing new providers rather than modifying existing orchestration.
 
 # Signal Architecture
 
-Signals are Oracle's universal intelligence language.
+## Location
 
-Every engine should communicate through Signals.
+```text
+lib/oracle/signals/
+```
 
-Signals represent observations.
+Signals are Oracle's observational language.
 
-Not recommendations.
+Signals describe what Oracle has detected.
 
-Examples include:
+Signals never contain recommendations.
 
-Positioning improving
+Recommendations belong exclusively to Decision Intelligence.
 
-Movement declining
+Signals are intentionally lightweight so that every Oracle subsystem can communicate using a common vocabulary.
 
-Weapon confidence increasing
+Current signal domains include:
 
-Behaviour stabilising
+- Behaviour
+- Coaching
+- Weapon
+- Operator
+- Prediction
+- Memory
+- Report
+- Context
+- Opportunity
 
-Meta changing
+Signals may be consumed by:
 
-Confidence increasing
+- Oracle Brain
+- Timeline
+- Decision Intelligence
+- Explainability
+- Future Intelligence Engines
 
-Signals should be:
+Signals should always describe observations.
 
-Small
-
-Independent
-
-Timestamped
-
-Evidence based
-
-Reusable
-
-Signals intentionally avoid presentation concerns.
+They should never prescribe actions.
 
 ---
 
 # Oracle Brain
 
-Oracle Brain consumes Signals.
+## Location
 
-Oracle Brain does not produce raw observations.
+```text
+lib/oracle/brain/
+```
 
-Instead it:
+Oracle Brain is responsible for synthesising intelligence.
 
-Combines Signals
+It receives observations from the Intelligence Bus and produces higher-order understanding.
 
-Identifies relationships
+Oracle Brain does not replace individual engines.
 
-Resolves conflicts
+It combines their outputs.
 
-Prioritises intelligence
+Responsibilities include:
 
-Builds understanding
+- Aggregate intelligence
+- Connect related observations
+- Produce graph relationships
+- Identify emerging patterns
+- Support Explainability
+- Support Decision Intelligence
 
-Oracle Brain should eventually reason across every intelligence system simultaneously.
+Oracle Brain remains engine-agnostic.
+
+New engines automatically enrich Oracle Brain through standard outputs.
 
 ---
 
 # Decision Intelligence
 
-Decision Intelligence converts intelligence into actionable recommendations.
-
-Every recommendation should include:
-
-Recommendation
-
-Reasoning
-
-Evidence
-
-Confidence
-
-Expected Outcome
-
-Reassessment Trigger
-
-Decision Intelligence becomes Oracle's universal recommendation framework.
-
-Future systems should not generate recommendations independently.
-
----
-
-# Intelligence Pipeline
-
-The Pipeline coordinates Oracle.
-
-Responsibilities include:
-
-Execute intelligence flow
-
-Aggregate Signals
-
-Aggregate Decisions
-
-Prepare presentation models
-
-Generate pipeline summaries
-
-The Pipeline orchestrates.
-
-It never performs reasoning itself.
-
----
-
-# Oracle Context (Planned)
-
-Oracle Context will become the shared intelligence model used by every engine.
-
-Every engine should receive the same structured context.
-
-Future Oracle Context includes:
-
-Operator
-
-Operator Profile
-
-Oracle Sessions
-
-Historical Sessions
-
-Signals
-
-Memory
-
-Current Game
-
-Patch Version
-
-Weapon Database
-
-Game Module
-
-Historical Decisions
-
-Future Predictions
-
-No engine should load this data independently.
-
-Consistency across engines is maintained through Oracle Context.
-
----
-
-# Intelligence Bus (Planned)
-
-The Intelligence Bus becomes Oracle's orchestration backbone.
-
-Instead of manually invoking engines, Oracle will register them.
+## Location
 
 ```text
-Oracle Session Saved
+lib/oracle/intelligence/
+```
+
+Decision Intelligence converts observations into recommendations.
+
+Every recommendation produced by Oracle uses the shared OracleDecision contract.
+
+Decision Intelligence remains the only subsystem that owns recommendations.
+
+Sprint 5 extended the decision taxonomy by introducing:
+
+- Context
+- Opportunity
+
+No additional recommendation framework was introduced.
+
+Contextual Intelligence integrates directly into the existing OracleDecision architecture.
+
+Every decision continues to include:
+
+- Recommendation
+- Summary
+- Confidence
+- Priority
+- Evidence
+- Expected Outcome
+- Reassessment Trigger
+
+This preserves one recommendation language across Oracle.
+
+---
+
+# Timeline
+
+## Location
+
+```text
+lib/oracle/timeline/
+```
+
+The Oracle Timeline provides a chronological view of intelligence.
+
+Timeline events are derived from Signals.
+
+Sprint 5 extended the Timeline by introducing:
+
+- Context
+- Opportunity
+
+These new event categories allow contextual intelligence to appear naturally alongside Behaviour, Coaching, Memory and Prediction events.
+
+The Timeline remains presentation-independent.
+
+Its responsibility is to organise intelligence chronologically.
+
+---
+
+# Explainability
+
+## Location
+
+```text
+lib/oracle/explainability/
+```
+
+Explainability exists to answer one question:
+
+**Why did Oracle reach this conclusion?**
+
+Every recommendation should be traceable.
+
+Every recommendation should be explainable.
+
+Explainability consumes evidence from:
+
+- Signals
+- Decisions
+- Oracle Brain
+- Intelligence Graph
+- Engine diagnostics
+
+Future contextual providers should contribute additional explainability rather than introducing alternative explanation systems.
+
+---
+
+# Oracle Intelligence State
+
+## Location
+
+```text
+lib/oracle/state/
+```
+
+OracleIntelligenceState is Oracle's presentation contract.
+
+Presentation components should consume OracleIntelligenceState rather than individual engine outputs.
+
+Sprint 5 preserved this architecture.
+
+The Contextual Intelligence subsystem integrates through OracleIntelligenceState rather than introducing its own UI contract.
+
+OracleIntelligenceState currently contains:
+
+- Metadata
+- Lifecycle
+- Oracle Context
+- Intelligence Bus
+- Oracle Brain
+- Timeline
+- Planner
+- Explainability
+- Signals
+- Decisions
+- Decision Profile
+
+Presentation should consume this state directly.
+
+Business logic should never move into React components.
+
+---
+
+# Runtime Intelligence Flow
+
+Oracle's production runtime now follows this execution model.
+
+```text
+Operator
+
+↓
+
+Repositories
+
+↓
+
+Oracle Context
+
+↓
+
+Intent Resolver
+
+↓
+
+Intent Providers
+
+↓
+
+Contextual Intelligence Engine
+
+↓
+
+Registered Intelligence Engines
+
+↓
+
+Signals
+Graph
+Profiles
+Diagnostics
 
 ↓
 
 Intelligence Bus
-
-↓
-
-Registered Engines
-
-↓
-
-Signals
 
 ↓
 
@@ -792,261 +784,509 @@ Decision Intelligence
 
 ↓
 
-Pipeline
+Timeline
 
 ↓
 
-Presentation
+Explainability
+
+↓
+
+Planner
+
+↓
+
+OracleIntelligenceState
+
+↓
+
+Presentation Components
 ```
 
-Benefits include:
+Every capability added after Sprint 5 should integrate into this runtime.
 
-Automatic engine discovery
+Future systems should plug into the existing flow rather than creating parallel execution paths.
 
-Modular expansion
+# Extension Model
 
-Reduced coupling
+Oracle is designed to grow through extension rather than redesign.
 
-Simplified orchestration
+Every major subsystem exposes stable extension points.
 
-Future scalability
+Future capabilities should integrate with these extension points before introducing new architectural layers.
 
-New intelligence engines should register themselves rather than requiring architectural modification.
+Oracle's preferred extension mechanisms are:
 
----
+- Repository extensions
+- Engine registration
+- Signal categories
+- Decision categories
+- Timeline categories
+- Explainability providers
+- Intent Providers
+- Oracle Brain graph enrichment
 
-# Oracle Engine Contract
+New intelligence should attach to existing architecture.
 
-Every intelligence engine should eventually implement a common interface.
-
-Conceptually every engine should:
-
-Accept Oracle Context
-
-Perform one responsibility
-
-Generate structured output
-
-Remain deterministic
-
-Remain reusable
-
-Remain game agnostic
-
-Produce Signals when appropriate
-
-This allows Oracle to expand without changing its core architecture.
+It should not bypass it.
 
 ---
 
-# Game Module Architecture
+# Provider Architecture
 
-Oracle itself never contains game-specific business logic.
+Sprint 5 introduced Oracle's first provider-based subsystem.
 
-Game-specific intelligence belongs inside dedicated modules.
+Providers are intentionally small.
 
-Future structure:
+Each provider performs one responsibility.
+
+Each provider contributes evidence.
+
+Providers do not coordinate one another.
+
+Providers do not make recommendations.
+
+Providers simply contribute intelligence.
+
+This keeps Oracle compliant with the Open/Closed Principle.
+
+Future expansion should occur primarily by introducing new providers rather than modifying existing orchestration.
+
+---
+
+# Engine Registration
+
+Oracle engines register themselves with the Engine Registry.
+
+The Intelligence Bus discovers registered engines and executes them.
+
+Future engines should never require Intelligence Bus modification.
+
+Instead:
 
 ```text
-games/
+Create Engine
 
-call-of-duty/
+↓
 
-battlefield/
+Register Engine
 
-rainbow-six/
+↓
 
-apex/
+Engine executes automatically
 
-delta-force/
+↓
 
-gta/
+Signals
 
-shared/
-```
+↓
 
-Each module may expose:
+Brain
 
-Weapon Database
-
-Maps
-
-Telemetry
-
-Metadata
-
-Patch Information
-
-Movement Characteristics
-
-Game Rules
-
-Oracle consumes standardised intelligence regardless of the originating game.
-
----
-
-# Extension Points
-
-Oracle is intentionally designed for expansion.
-
-Future systems should integrate through existing architecture rather than bypassing it.
-
-Current extension points include:
-
-Repositories
-
-Operator Intelligence
-
-Signal Engines
+↓
 
 Decision Intelligence
+```
 
-Pipeline
-
-Future extension points include:
-
-Oracle Context
-
-Intelligence Bus
-
-Memory Engine
-
-Voice Engine
-
-Visual Intelligence
-
-Strategy Engine
-
-No future system should require redesigning the platform.
+This architecture allows Oracle to scale horizontally.
 
 ---
 
-# Performance Principles
+# Future Provider Packs
 
-Architecture should optimise for:
+Intent Providers were deliberately designed to support provider packs.
 
-Reusable computation
+Examples include:
 
-Minimal duplication
+## Mission Providers
 
-Predictable execution
-
-Incremental intelligence
-
-Scalable expansion
-
-As Oracle grows, intelligence quality should increase without significantly increasing architectural complexity.
+- Mission Intent Provider
+- Objective Provider
+- Challenge Provider
 
 ---
 
-# Security Principles
+## Planner Providers
 
-Repositories remain the only layer communicating directly with persistent storage.
+- Planner Intent Provider
+- Goal Alignment Provider
+- Task Priority Provider
 
-Presentation never communicates directly with Supabase.
+---
 
-Secrets remain server-side.
+## Timeline Providers
 
-Business logic remains outside UI.
+- Timeline Intent Provider
+- Behaviour Sequence Provider
+- Session Progress Provider
 
-Future integrations should follow the same security model.
+---
+
+## Memory Providers
+
+- Memory Intent Provider
+- Historical Pattern Provider
+- Behaviour Recall Provider
+
+---
+
+## Map Providers
+
+- Exploration Provider
+- Location Provider
+- Public Secret Provider
+- Collectible Provider
+
+---
+
+## Game Provider Packs
+
+Oracle core should remain game agnostic.
+
+Game-specific intelligence belongs inside provider packs.
+
+Examples:
+
+- Call of Duty Provider Pack
+- Warzone Provider Pack
+- Zombies Provider Pack
+- Delta Force Provider Pack
+- Battlefield Provider Pack
+- Tarkov Provider Pack
+- GTA Provider Pack
+
+Oracle consumes provider output.
+
+Oracle should never hard-code game rules into its core runtime.
 
 ---
 
 # Scalability
 
-Oracle is expected to support:
+Oracle has been designed around independent modules.
 
-Millions of Oracle Sessions
+Growth should occur by increasing the number of reusable engines and providers rather than increasing the complexity of existing engines.
 
-Thousands of Operators
+Preferred growth:
 
-Multiple Games
+```text
+More Engines
 
-Historical Intelligence
+More Providers
 
-Long-Term Memory
+More Signals
 
-Large AI Context Windows
+More Decisions
 
-Distributed Intelligence Engines
+Same Architecture
+```
 
-Architecture should evolve through additional modules rather than architectural replacement.
+Architecture stability is considered more valuable than feature velocity.
+
+---
+
+# Performance
+
+Oracle prefers predictable execution over aggressive optimisation.
+
+Current design principles include:
+
+- Shared Oracle Context
+- Single Intelligence Bus execution
+- Shared OracleIntelligenceState
+- Shared Decision framework
+- Shared Signal framework
+
+Future optimisation should focus on:
+
+- parallel engine execution
+- provider batching
+- engine dependency scheduling
+- intelligence caching
+- incremental graph construction
+
+Performance improvements should preserve architectural clarity.
 
 ---
 
-# Architectural Goals
+# Security
 
-Every architectural decision should improve one or more of the following:
+Oracle is designed as an intelligence platform.
 
-Scalability
+It is not designed to manipulate games.
 
-Maintainability
+Oracle must never:
 
-Reusability
+- inject code
+- modify game processes
+- bypass anti-cheat systems
+- automate gameplay
+- reveal hidden competitive information
 
-Readability
+Oracle only reasons over:
 
-Predictability
+- Operator data
+- Oracle Sessions
+- Public game knowledge
+- User supplied information
 
-Testability
-
-Operator Understanding
-
-Decision Quality
-
-Platform Intelligence
-
-Architecture should become stronger after every Operation.
-
-Never weaker.
+This boundary is fundamental to Oracle's design philosophy.
 
 ---
+
+# Fair Play
+
+Oracle should always improve player understanding.
+
+It should never replace player skill.
+
+Recommendations should assist learning.
+
+Recommendations should never automate decision making.
+
+Oracle remains an intelligence companion.
+
+Not an exploit.
+
+Not a cheat.
+
+Not an automation framework.
+
+---
+
+# Long-Term Evolution
+
+Oracle's production architecture was completed during Sprint 4.
+
+Sprint 5 validated that the architecture can expand without redesign.
+
+Future sprints should primarily strengthen:
+
+- Intelligence
+- Explainability
+- Reusability
+- Scalability
+- Maintainability
+- Operator Understanding
+
+Architecture should remain stable.
+
+Capabilities should evolve.
 
 # Architecture Review Checklist
 
-Before introducing any new subsystem ask:
+Every architectural change should be reviewed against the following questions.
 
-Does it belong in an existing layer?
+## Architecture
 
-Can an existing engine be reused?
+- Does this extend Oracle rather than redesign it?
+- Does this preserve subsystem boundaries?
+- Does this introduce reusable architecture?
+- Does this avoid duplicate systems?
+- Does this improve long-term maintainability?
 
-Should it produce Signals?
+## Intelligence
 
-Should it consume Oracle Context?
+- Does business logic remain inside Oracle?
+- Does the Intelligence Bus remain the orchestration layer?
+- Does Oracle Brain remain the intelligence synthesis layer?
+- Does Decision Intelligence remain the recommendation owner?
+- Does Explainability remain evidence driven?
 
-Does it increase coupling?
+## Runtime
 
-Does it duplicate intelligence?
+- Does Oracle Context remain the runtime contract?
+- Does OracleIntelligenceState remain the presentation contract?
+- Are Signals still observations?
+- Are Decisions still recommendations?
+- Is the Timeline still event driven?
 
-Does it strengthen Oracle Brain?
+## Presentation
 
-Does it improve the Operator?
+- Pages compose.
+- Components present.
+- Presentation contains no business logic.
+- Components consume OracleIntelligenceState.
 
-If the answer to any question is uncertain, revisit the design before implementation.
+Every answer should be **Yes** before architecture changes are accepted.
+
+---
+
+# Engineering Principles
+
+Oracle should always favour:
+
+- Stable architecture over rapid redesign.
+- Reusable systems over isolated implementations.
+- Extension over replacement.
+- Explainability over opaque intelligence.
+- Maintainability over short-term optimisation.
+- Consistency over convenience.
+
+These principles guide every future Operation.
+
+---
+
+# Production Readiness
+
+As of Sprint 5 Closure, Oracle provides:
+
+## Runtime
+
+- Production Oracle Context
+- Production Intelligence Bus
+- Production Engine Registry
+- Production Engine Contract
+- Production OracleIntelligenceState
+
+## Intelligence
+
+- Behaviour Intelligence
+- Trend Intelligence
+- Prediction Intelligence
+- Coaching Intelligence
+- Planner Intelligence
+- Contextual Intelligence
+- Decision Intelligence
+- Explainability
+- Timeline Intelligence
+
+## Extensibility
+
+- Engine Registration
+- Intent Resolver
+- Intent Provider Architecture
+- Signal Taxonomy
+- Decision Taxonomy
+- Timeline Categories
+- Intelligence Graph
+
+Oracle has successfully transitioned from a foundation project into an extensible intelligence platform.
+
+---
+
+# Sprint 5 Summary
+
+Sprint 5 focused on capability expansion rather than architectural redesign.
+
+Major outcomes included:
+
+- Contextual Runtime Model
+- Contextual Intelligence Engine
+- Intent Resolver
+- Intent Provider Architecture
+- Independent Intent Providers
+- Contextual Signal Categories
+- Contextual Decision Categories
+- Contextual Timeline Integration
+- Contextual Intelligence Dashboard
+- Provider-based extension model
+
+Most importantly, Sprint 5 demonstrated that Oracle's architecture can grow without structural redesign.
+
+This validates the engineering principles established during Operation Genesis.
+
+---
+
+# Looking Forward
+
+Future Operations should primarily expand Oracle by introducing new intelligence rather than changing existing foundations.
+
+Recommended areas of growth include:
+
+- Mission Intelligence
+- Memory Intelligence
+- Planner Intelligence
+- Map Intelligence
+- Strategy Intelligence
+- Public Knowledge Intelligence
+- Visual Intelligence
+- Team Intelligence
+- Tournament Intelligence
+
+Each capability should integrate using the existing production architecture.
+
+Oracle should continue to evolve through modular engines, providers and shared runtime contracts.
+
+---
+
+# Version History
+
+## Version 1
+
+Initial architectural vision.
+
+---
+
+## Version 2
+
+Foundation architecture introduced.
+
+---
+
+## Version 3
+
+Production runtime architecture completed.
+
+Operation Genesis concluded.
+
+---
+
+## Version 4
+
+Sprint 5 capability expansion.
+
+Introduced:
+
+- Contextual Intelligence
+- Intent Resolver
+- Intent Provider Architecture
+- Provider-based extensibility
+- Contextual runtime model
+- Updated production runtime documentation
+
+Oracle is now operating on a stable production architecture with proven extensibility.
 
 ---
 
 # Closing Statement
 
-Oracle is designed as an intelligence platform rather than a traditional application.
+Oracle is no longer being built as a traditional gaming application.
 
-Its architecture prioritises reusable intelligence over isolated features.
+Oracle is an AI Gaming Intelligence Platform.
 
-Every layer exists to support long-term evolution.
+The production architecture has been established.
 
-Every subsystem contributes to a single intelligence pipeline.
+The first major capability expansion has been successfully completed.
 
-As Oracle expands, the architecture should remain stable while capabilities continue to grow.
+Future development should strengthen Oracle through additional intelligence, richer reasoning and reusable capabilities while preserving the architectural principles defined in this document.
 
-Future Operations should extend Oracle through modular systems rather than architectural redesign.
+**Extend the architecture.**
 
-The architecture is a living blueprint.
+**Protect the architecture.**
 
-Protect it.
+**Improve the Operator.**
 
-Strengthen it.
+---
 
-Build upon it.
+**Architecture Status**
 
-Never compromise it.
+🟢 Production Ready
+
+**Build Status**
+
+🟢 Passing
+
+**Documentation Status**
+
+🟢 Version 4.0 Complete
+
+**Ready for Sprint 6**
+
+✅ Yes
+
+---
+
+*"The architecture should become more capable, not more complicated."*
+
+**The Oracle Has Spoken.**

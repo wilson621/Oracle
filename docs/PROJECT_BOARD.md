@@ -2,9 +2,9 @@
 
 Mission Control
 
-Version 2.0
+Version 3.0
 
-Last Updated: 8 July 2026
+Last Updated: Sprint 5 Closure
 
 ---
 
@@ -20,17 +20,17 @@ Project Meta
 
 # Current Release
 
-Operation Genesis
+Operation Horizon
 
-Foundation Architecture
+Contextual Intelligence Expansion
 
 Version
 
-Oracle v0.4 (Development)
+Oracle v0.5
 
 Status
 
-🟢 ACTIVE
+🟢 SPRINT 5 COMPLETE
 
 ---
 
@@ -42,11 +42,11 @@ Build
 
 Architecture
 
-🟢 Stable
+🟢 Production Ready
 
 Documentation
 
-🟢 Up To Date
+🟢 Sprint 5 Closure In Progress
 
 Technical Debt
 
@@ -58,143 +58,149 @@ Design System
 
 Operator Experience
 
-🟢 Premium
+🟢 Improved
 
 ---
 
 # Active Operation
 
-## Operation Genesis
+## Operation Horizon
 
 Purpose
 
-Transform Oracle from an AI coaching application into a reusable intelligence platform.
+Expand Oracle from a production-ready intelligence architecture into a contextual gaming intelligence platform.
 
 Current Phase
 
-Final Foundation
+Capability Expansion
 
 Progress
 
-██████████████████████████░░░░ 90%
+██████████████████████████████ 100%
 
 ---
 
-# Completed During Genesis
+# Completed During Sprint 5
 
-## Platform
+## Contextual Intelligence
 
-✅ Next.js Foundation
+✅ Oracle Context extended with contextual state
 
-✅ TypeScript
+✅ Operator Intent model
 
-✅ Tailwind
+✅ Contextual priorities
 
-✅ Supabase
+✅ Contextual opportunities
 
-✅ Authentication
+✅ Contextual Intelligence Engine
 
----
+✅ Intent Resolver
 
-## Core Intelligence
+✅ Intent Provider architecture
 
-✅ Behaviour Engine
+✅ Independent provider modules
 
-✅ Trend Engine
-
-✅ Prediction Engine
-
-✅ Oracle Brain
-
-✅ Decision Intelligence
-
-✅ Confidence Engine
-
-✅ Evidence Engine
+✅ Contextual Intelligence dashboard card
 
 ---
 
-## Operator
+## Intent Providers
 
-✅ Operator Profiles
+✅ Explicit Context Provider
 
-✅ Behavioural DNA
+✅ Opportunity Provider
 
-✅ Learning Styles
+✅ Recent Session Provider
 
-✅ Capability Matrix
-
-✅ Operator Intelligence
+✅ Active Game Provider
 
 ---
 
-## Coaching
+## Intelligence Architecture
 
-✅ Coach Engine
+✅ Contextual signal categories
 
-✅ Mission Control
+✅ Contextual decision categories
 
-✅ Mission Classification
+✅ Contextual timeline categories
 
-✅ Oracle Assessment
+✅ Contextual decisions integrated through existing OracleDecision contract
 
-✅ Daily Missions
+✅ Contextual signals integrated through existing OracleSignal contract
 
----
+✅ Contextual engine registered with core Oracle engines
 
-## Weapon Intelligence
+✅ Intelligence Bus preserved
 
-✅ Recommendation Engine
+✅ Decision Selection preserved
 
-✅ Decision Framework
-
-✅ Expected Outcome
-
-✅ Evidence Framework
-
----
-
-## Intelligence Platform
-
-✅ Signal Types
-
-✅ Signal Engine
-
-✅ Signal Prioritisation
-
-✅ Signal Summary
-
-✅ Intelligence Pipeline
+✅ OracleIntelligenceState preserved as UI contract
 
 ---
 
 ## User Experience
 
-✅ Premium Dashboard
+✅ Contextual Intelligence Card
 
-✅ Operator Page
+✅ Current inferred intent display
 
-✅ Intelligence Dashboard
+✅ Confidence display
 
-✅ Oracle Design System
+✅ Opportunity count
+
+✅ Priority count
+
+✅ Contextual recommendation display
+
+✅ Presentation-only component architecture preserved
 
 ---
 
-# Remaining Before Genesis Complete
+# Sprint 5 Closure Status
 
-## Foundation
+Architecture Review
 
-⬜ Oracle Context
+✅ Complete
 
-⬜ Intelligence Bus
+Planning
 
-⬜ Universal Engine Interface
+✅ Complete
 
-⬜ Engine Registration
+Implementation
 
-⬜ Architecture Validation
+✅ Complete
 
-⬜ Genesis Release Review
+Production Build Verification
+
+✅ Passing
+
+UI Review
+
+✅ Complete
+
+Documentation Review
+
+🟡 In Progress
+
+Architecture Audit
+
+✅ Complete
+
+Sprint Closure Report
+
+🟡 In Progress
+
+Git Commit
+
+⬜ Pending
+
+Git Push
+
+⬜ Pending
+
+Engineering Handover
+
+⬜ Pending
 
 ---
 
@@ -202,29 +208,35 @@ Progress
 
 Sprint
 
-Operation Genesis
-
-Phase 4
+Sprint 5
 
 Objective
 
-Complete Oracle's final architectural foundation before beginning Oracle Memory.
+Build Oracle's Contextual Intelligence foundation without redesigning the production architecture.
+
+Status
+
+✅ Implementation Complete
 
 Current Focus
 
-Oracle Context
+Documentation Closure
 
 ↓
 
-Intelligence Bus
+Sprint Closure Report
 
 ↓
 
-Universal Engine Interface
+Git Commit
 
 ↓
 
-Oracle Memory
+Git Push
+
+↓
+
+Sprint 6 Handover
 
 ---
 
@@ -252,258 +264,3 @@ Build
 
 ```bash
 npm run build
-```
-
-↓
-
-UI Review
-
-↓
-
-Architecture Review
-
-↓
-
-Documentation
-
-↓
-
-Git Commit
-
-↓
-
-Release
-
-No stage is skipped.
-
----
-
-# Engineering Rules
-
-Every build must compile.
-
-Every UI change receives a visual review.
-
-Business logic belongs in engines.
-
-Repositories expose truth.
-
-Signals communicate observations.
-
-Decision Intelligence owns recommendations.
-
-Pages compose.
-
-Components present.
-
-Documentation evolves alongside architecture.
-
----
-
-# Current Backlog
-
-## Operation Sentinel
-
-Oracle Memory
-
-Behaviour Evolution
-
-Historical Intelligence
-
-Recommendation History
-
-Learning Timeline
-
-Adaptive Coaching
-
----
-
-## Operation Vanguard
-
-Strategy Intelligence
-
-Map Intelligence
-
-Prediction Improvements
-
-Behaviour Relationships
-
-Advanced Reasoning
-
----
-
-## Operation Dominion
-
-Gameplay Upload
-
-Video Analysis
-
-Computer Vision
-
-Automatic Timeline Analysis
-
-Visual Intelligence
-
----
-
-## Operation Atlas
-
-Battlefield
-
-Rainbow Six
-
-Apex
-
-Delta Force
-
-GTA
-
-Universal Game Modules
-
----
-
-## Operation Horizon
-
-Live Intelligence
-
-Real-Time Coaching
-
-Live Tactical Alerts
-
-Adaptive Guidance
-
-Performance Monitoring
-
----
-
-## Operation Aegis
-
-Teams
-
-Organisations
-
-Tournament Intelligence
-
-Professional Analytics
-
-Shared Intelligence
-
----
-
-# Technical Infrastructure
-
-Future Platform Improvements
-
-⬜ Supabase CLI
-
-⬜ Database Migrations
-
-⬜ Schema Versioning
-
-⬜ Automated Backups
-
-⬜ CI/CD Pipeline
-
-⬜ Automated Testing
-
-⬜ Deployment Automation
-
-⬜ Release Versioning
-
----
-
-# Documentation Status
-
-✅ Manifesto
-
-✅ Oracle Codex
-
-✅ Architecture
-
-✅ Roadmap
-
-✅ Oracle Principles
-
-✅ Decision Records
-
-🟡 Project Board
-
-⬜ Design System
-
-⬜ Brand Bible
-
-⬜ Ideas
-
----
-
-# Release Readiness
-
-Architecture
-
-🟢 Ready
-
-Build
-
-🟢 Passing
-
-Documentation
-
-🟢 Current
-
-UI Consistency
-
-🟢 Stable
-
-Testing
-
-🟡 Ongoing
-
-Operation Genesis
-
-🟢 On Track
-
----
-
-# Next Objective
-
-Complete Operation Genesis.
-
-Once complete:
-
-↓
-
-Operation Sentinel
-
-↓
-
-Oracle Memory
-
-↓
-
-Behaviour Evolution
-
-↓
-
-Historical Intelligence
-
-↓
-
-Adaptive Coaching
-
----
-
-# Mission Status
-
-Oracle is no longer being developed as a traditional gaming application.
-
-Oracle is now an intelligence platform.
-
-Every completed sprint strengthens the architecture.
-
-Every completed Operation expands Oracle's capabilities.
-
-Mission Status
-
-🟢 ON COURSE
-
-The Oracle Has Spoken.

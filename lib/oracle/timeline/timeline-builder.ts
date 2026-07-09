@@ -24,6 +24,10 @@ function mapSignalCategoryToTimelineCategory(
       return "memory";
     case "report":
       return "brain";
+    case "context":
+      return "context";
+    case "opportunity":
+      return "opportunity";
   }
 }
 

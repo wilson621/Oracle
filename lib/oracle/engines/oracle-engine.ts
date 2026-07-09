@@ -6,6 +6,7 @@ import type { OracleIntelligenceGraphEntry } from "@/lib/oracle/graph";
 
 export type OracleEngineCapability =
   | "context"
+  | "contextual"
   | "operator"
   | "behaviour"
   | "trend"

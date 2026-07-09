@@ -6,9 +6,12 @@ import { behaviourEvolutionEngine } from "@/lib/oracle/evolution";
 import { adaptiveCoachingEngine } from "@/lib/oracle/coaching";
 import { plannerEngine } from "@/lib/oracle/planner";
 import { operatorProfileEngine } from "@/lib/oracle/operator-profile";
+import { contextualIntelligenceEngine } from "@/lib/oracle/contextual/contextual-intelligence-engine";
 
 export function registerCoreOracleEngines(): void {
   registerOracleEngine(contextSummaryEngine);
+  registerOracleEngine(contextualIntelligenceEngine);
+
   registerOracleEngine(memoryEngine);
   registerOracleEngine(behaviourEvolutionEngine);
   registerOracleEngine(adaptiveCoachingEngine);

@@ -45,6 +45,11 @@ export async function buildOracleContext({
       currentGame,
       patchVersion,
     },
+    contextual: {
+      intent: "unknown",
+      priorities: [],
+      opportunities: [],
+    },
     generatedAt: new Date().toISOString(),
   };
 }

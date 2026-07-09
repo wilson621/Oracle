@@ -6,7 +6,9 @@ export type OracleTimelineEventCategory =
   | "brain"
   | "prediction"
   | "weapon"
-  | "operator";
+  | "operator"
+  | "context"
+  | "opportunity";
 
 export type OracleTimelineEventSeverity =
   | "low"

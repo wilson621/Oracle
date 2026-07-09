@@ -5,7 +5,9 @@ export type OracleSignalCategory =
   | "operator"
   | "prediction"
   | "memory"
-  | "report";
+  | "report"
+  | "context"
+  | "opportunity";
 
 export type OracleSignalSeverity =
   | "low"

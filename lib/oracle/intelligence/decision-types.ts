@@ -4,7 +4,9 @@ export type OracleDecisionCategory =
   | "loadout"
   | "strategy"
   | "memory"
-  | "report";
+  | "report"
+  | "context"
+  | "opportunity";
 
 export type OracleDecisionPriority =
   | "low"

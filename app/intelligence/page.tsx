@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import AppLayout from "@/components/layout/AppLayout";
 import OracleBrainCard from "@/components/oracle/dashboard/OracleBrainCard";
+import OracleContextualIntelligenceCard from "@/components/oracle/dashboard/OracleContextualIntelligenceCard";
 import OracleDecisionCard from "@/components/oracle/dashboard/OracleDecisionCard";
 import OracleExplainabilityCard from "@/components/oracle/dashboard/OracleExplainabilityCard";
 import OraclePlannerCard from "@/components/oracle/dashboard/OraclePlannerCard";
@@ -143,6 +144,13 @@ export default function IntelligencePage() {
         decision={primaryDecision}
         isLoading={isLoading}
       />
+
+      <div className="mt-10">
+        <OracleContextualIntelligenceCard
+          state={state}
+          isLoading={isLoading}
+        />
+      </div>
 
       <div className="mt-10 grid gap-6 xl:grid-cols-3">
         <OracleBrainCard
