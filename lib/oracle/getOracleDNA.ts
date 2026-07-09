@@ -1,5 +1,14 @@
 import { supabase } from "@/lib/supabase";
 
+type OracleSessionRow = {
+  positioning: number | null;
+  aim: number | null;
+  movement: number | null;
+  decision_making: number | null;
+  game_sense: number | null;
+  win_chance: number | null;
+};
+
 export async function getOracleDNA() {
   const { data, error } = await supabase
     .from("oracle_sessions")
@@ -13,10 +22,12 @@ export async function getOracleDNA() {
     return null;
   }
 
-  const average = (field: string) =>
+  const sessions = data as OracleSessionRow[];
+
+  const average = (field: keyof OracleSessionRow) =>
     Math.round(
-      data.reduce((sum: number, row: any) => sum + (row[field] || 0), 0) /
-        data.length
+      sessions.reduce((sum, row) => sum + (row[field] ?? 0), 0) /
+        sessions.length
     );
 
   const positioning = average("positioning");
@@ -30,7 +41,9 @@ export async function getOracleDNA() {
   const confidence = Math.round((winChance + aim) / 2);
   const discipline = Math.round((positioning + decisionMaking) / 2);
   const awareness = Math.round((positioning + gameSense) / 2);
-  const adaptability = Math.round((movement + decisionMaking + gameSense) / 3);
+  const adaptability = Math.round(
+    (movement + decisionMaking + gameSense) / 3
+  );
   const mechanicalSkill = Math.round((aim + movement) / 2);
   const decisionSpeed = Math.round((movement + decisionMaking) / 2);
   const pressureHandling = Math.round((decisionMaking + winChance) / 2);
@@ -64,7 +77,7 @@ export async function getOracleDNA() {
   const assessment = `Oracle identifies you as a ${playstyle}. Your strongest trait is ${strongestTrait.label.toLowerCase()}, while your biggest development area is ${weakestTrait.label.toLowerCase()}.`;
 
   return {
-    sessionsAnalysed: data.length,
+    sessionsAnalysed: sessions.length,
     playstyle,
     strongestTrait,
     weakestTrait,

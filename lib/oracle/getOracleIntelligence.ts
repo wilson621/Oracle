@@ -1,5 +1,21 @@
 import { supabase } from "@/lib/supabase";
 
+type OracleSessionRow = {
+  positioning: number | null;
+  aim: number | null;
+  movement: number | null;
+  decision_making: number | null;
+  game_sense: number | null;
+  correction: string | null;
+};
+
+type NumericOracleSessionField =
+  | "positioning"
+  | "aim"
+  | "movement"
+  | "decision_making"
+  | "game_sense";
+
 export async function getOracleIntelligence() {
   const { data, error } = await supabase
     .from("oracle_sessions")
@@ -10,10 +26,12 @@ export async function getOracleIntelligence() {
 
   if (!data || data.length === 0) return null;
 
-  const average = (field: string) =>
+  const sessions = data as OracleSessionRow[];
+
+  const average = (field: NumericOracleSessionField) =>
     Math.round(
-      data.reduce((sum: number, row: any) => sum + (row[field] || 0), 0) /
-        data.length
+      sessions.reduce((sum, row) => sum + (row[field] ?? 0), 0) /
+        sessions.length
     );
 
   const averages = {
@@ -37,7 +55,7 @@ export async function getOracleIntelligence() {
 
   const corrections: Record<string, number> = {};
 
-  data.forEach((session: any) => {
+  sessions.forEach((session) => {
     if (!session.correction) return;
 
     corrections[session.correction] =
@@ -65,18 +83,12 @@ export async function getOracleIntelligence() {
   else if (rating > 250) prediction = "Silver";
 
   return {
-    totalSessions: data.length,
-
+    totalSessions: sessions.length,
     strongestSkill,
-
     weakestSkill,
-
     averages,
-
     prediction,
-
     recommendation: mostCommonCorrection,
-
-    intelligenceSummary: `Oracle has analysed ${data.length} engagements and believes your biggest opportunity is improving ${weakestSkill.name.toLowerCase()} while continuing to develop ${strongestSkill.name.toLowerCase()}.`,
+    intelligenceSummary: `Oracle has analysed ${sessions.length} engagements and believes your biggest opportunity is improving ${weakestSkill.name.toLowerCase()} while continuing to develop ${strongestSkill.name.toLowerCase()}.`,
   };
 }

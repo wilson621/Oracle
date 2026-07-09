@@ -52,14 +52,14 @@ export default function CoachPage() {
                 </h2>
 
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300">
-  Oracle has analysed your latest {report.sessionsAnalysed} combat sessions.
-  Your current improvement priority is{" "}
-  <span className="font-bold text-cyan-300">
-    {report.weakestSkill.label}
-  </span>
-  . Complete today's mission to give Oracle a clearer signal for your next
-  performance assessment.
-</p>
+                  Oracle has analysed your latest {report.sessionsAnalysed}{" "}
+                  combat sessions. Your current improvement priority is{" "}
+                  <span className="font-bold text-cyan-300">
+                    {report.weakestSkill.label}
+                  </span>
+                  . Complete today&apos;s mission to give Oracle a clearer
+                  signal for your next performance assessment.
+                </p>
 
                 <div className="mt-6 rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-5">
                   <p className="text-xs font-bold uppercase tracking-[0.3em] text-cyan-300">
@@ -119,40 +119,43 @@ export default function CoachPage() {
               </div>
 
               <div className="mt-4 grid gap-3 md:grid-cols-3">
-  <div className="rounded-xl border border-white/10 bg-black/30 px-4 py-3">
-    <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">
-      Focus
-    </p>
-    <p className="mt-2 text-sm font-bold text-white">
-      {report.weakestSkill.label}
-    </p>
-  </div>
+                <div className="rounded-xl border border-white/10 bg-black/30 px-4 py-3">
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">
+                    Focus
+                  </p>
 
-  <div className="rounded-xl border border-white/10 bg-black/30 px-4 py-3">
-    <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">
-      Target
-    </p>
-    <p className="mt-2 text-sm font-bold text-white">
-      Complete mission before next Oracle Session
-    </p>
-  </div>
+                  <p className="mt-2 text-sm font-bold text-white">
+                    {report.weakestSkill.label}
+                  </p>
+                </div>
 
-  <div className="rounded-xl border border-white/10 bg-black/30 px-4 py-3">
-    <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">
-      Reward
-    </p>
-    <p className="mt-2 text-sm font-bold text-cyan-300">
-      +{report.dailyMission.rewardXp} XP
-    </p>
-  </div>
-</div>
+                <div className="rounded-xl border border-white/10 bg-black/30 px-4 py-3">
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">
+                    Target
+                  </p>
+
+                  <p className="mt-2 text-sm font-bold text-white">
+                    Complete mission before next Oracle Session
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-white/10 bg-black/30 px-4 py-3">
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">
+                    Reward
+                  </p>
+
+                  <p className="mt-2 text-sm font-bold text-cyan-300">
+                    +{report.dailyMission.rewardXp} XP
+                  </p>
+                </div>
+              </div>
             </div>
           </section>
 
           <MissionReadiness
-  mission={report.mission}
-  readiness={report.readiness}
-/>
+            mission={report.mission}
+            readiness={report.readiness}
+          />
 
           <PredictionCard
             skill={report.prediction.skill}

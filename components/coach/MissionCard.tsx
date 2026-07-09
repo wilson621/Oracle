@@ -20,16 +20,12 @@ export default function MissionCard({
           <Target className="text-cyan-300" size={32} />
 
           <p className="mt-5 text-sm font-bold tracking-[0.3em] text-cyan-300">
-            TODAY'S MISSION
+            TODAY&apos;S MISSION
           </p>
 
-          <h2 className="mt-3 text-3xl font-black">
-            {title}
-          </h2>
+          <h2 className="mt-3 text-3xl font-black">{title}</h2>
 
-          <p className="mt-4 text-slate-300">
-            {description}
-          </p>
+          <p className="mt-4 text-slate-300">{description}</p>
         </div>
 
         <Badge>+{rewardXp} XP</Badge>

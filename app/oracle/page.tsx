@@ -26,6 +26,11 @@ type XPResult = {
   levelUp: boolean;
 };
 
+type OracleAnalyzeResponse = {
+  report?: OracleReportType;
+  error?: string;
+};
+
 export default function OraclePage() {
   const [isAnalysing, setIsAnalysing] = useState(false);
   const [report, setReport] = useState<OracleReportType | null>(null);
@@ -54,9 +59,9 @@ export default function OraclePage() {
         body: JSON.stringify({ prompt }),
       });
 
-      const data = await response.json();
+      const data = (await response.json()) as OracleAnalyzeResponse;
 
-      if (!response.ok) {
+      if (!response.ok || !data.report) {
         alert(data.error || "Oracle returned an error.");
         return;
       }
@@ -65,10 +70,7 @@ export default function OraclePage() {
 
       await saveOracleSession(prompt, data.report);
 
-      const xp = await awardXp(
-        data.report.grade,
-        data.report.confidence
-      );
+      const xp = await awardXp(data.report.grade, data.report.confidence);
 
       setXpResult(xp);
 
@@ -85,9 +87,13 @@ export default function OraclePage() {
           setAchievement(null);
         }, 4500);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("FULL ERROR:", err);
-      alert(err?.message || "Oracle could not analyse the fight.");
+
+      const message =
+        err instanceof Error ? err.message : "Oracle could not analyse the fight.";
+
+      alert(message);
     } finally {
       setIsAnalysing(false);
     }
@@ -114,15 +120,9 @@ export default function OraclePage() {
 
       <OracleHero isAnalysing={isAnalysing} />
 
-      <OracleInput
-        isAnalysing={isAnalysing}
-        onAskOracle={handleAskOracle}
-      />
+      <OracleInput isAnalysing={isAnalysing} onAskOracle={handleAskOracle} />
 
-      <ClipUpload
-        selectedFile={selectedFile}
-        onFileSelect={setSelectedFile}
-      />
+      <ClipUpload selectedFile={selectedFile} onFileSelect={setSelectedFile} />
 
       {isAnalysing && <OracleLoading />}
 
