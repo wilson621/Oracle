@@ -9,6 +9,8 @@ import { summarizeSignals } from "@/lib/oracle/signals/signal-summary";
 import { generateOracleBrainGraphReport } from "@/lib/oracle/brain";
 import { buildOracleTimelineFromSignals } from "@/lib/oracle/timeline";
 import { runPlannerIntelligenceRuntime } from "@/lib/oracle/planner";
+import { buildPlannerExplanation } from "@/lib/oracle/explainability";
+import { buildOracleIntelligenceState } from "@/lib/oracle/state";
 
 export async function runIntelligencePipeline(
   context: IntelligencePipelineInput
@@ -29,6 +31,26 @@ export async function runIntelligencePipeline(
 
   const signals = [...bus.signals, ...planner.signals];
 
+  const explanations = [
+    buildPlannerExplanation({
+      planner: planner.profile,
+      brain,
+      timeline,
+      signals,
+    }),
+  ];
+
+  const state = buildOracleIntelligenceState({
+    context,
+    bus,
+    brain,
+    timeline,
+    planner,
+    explanations,
+    signals,
+    decisions: bus.decisions,
+  });
+
   return {
     operatorId: context.operator.operatorId,
     callsign: context.operator.callsign,
@@ -40,5 +62,7 @@ export async function runIntelligencePipeline(
     brain,
     timeline,
     planner,
+    explanations,
+    state,
   };
 }
