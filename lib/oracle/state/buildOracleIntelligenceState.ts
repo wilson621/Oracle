@@ -6,6 +6,7 @@ import type { PlannerResult } from "@/lib/oracle/planner";
 import type { OracleExplanation } from "@/lib/oracle/explainability";
 import type { OracleSignal } from "@/lib/oracle/signals/signal-types";
 import type { OracleDecision } from "@/lib/oracle/intelligence/decision-types";
+import { getOracleLifecycle } from "@/lib/oracle/lifecycle";
 import type { OracleIntelligenceState } from "./oracle-intelligence-state-types";
 
 export function buildOracleIntelligenceState(input: {
@@ -25,6 +26,9 @@ export function buildOracleIntelligenceState(input: {
       callsign: input.context.operator.callsign,
       version: "1.0.0",
     },
+
+    lifecycle: getOracleLifecycle(),
+
     context: input.context,
     bus: input.bus,
     brain: input.brain,

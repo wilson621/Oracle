@@ -6,6 +6,7 @@ import type { PlannerResult } from "@/lib/oracle/planner";
 import type { OracleExplanation } from "@/lib/oracle/explainability";
 import type { OracleSignal } from "@/lib/oracle/signals/signal-types";
 import type { OracleDecision } from "@/lib/oracle/intelligence/decision-types";
+import type { OracleLifecycle } from "@/lib/oracle/lifecycle";
 
 export type OracleIntelligenceStateMetadata = {
   generatedAt: string;
@@ -16,12 +17,22 @@ export type OracleIntelligenceStateMetadata = {
 
 export type OracleIntelligenceState = {
   metadata: OracleIntelligenceStateMetadata;
+
+  lifecycle: OracleLifecycle;
+
   context: OracleContext;
+
   bus: IntelligenceBusResult;
+
   brain: OracleBrainGraphReport;
+
   timeline: OracleTimeline;
+
   planner: PlannerResult;
+
   explanations: OracleExplanation[];
+
   signals: OracleSignal[];
+
   decisions: OracleDecision[];
 };
