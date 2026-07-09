@@ -1,8 +1,6 @@
 import type { OracleContext } from "@/lib/oracle/context";
-import type {
-  OracleEngine,
-  OracleEngineResult,
-} from "@/lib/oracle/engines";
+import type { OracleEngine } from "@/lib/oracle/engines";
+import { buildEngineResult } from "@/lib/oracle/engines";
 
 import {
   buildAdaptiveCoachingPlan,
@@ -21,8 +19,7 @@ export const adaptiveCoachingEngine: OracleEngine<AdaptiveCoachingResult> = {
     id: "adaptive-coaching-engine",
     name: "Adaptive Coaching Engine",
     version: "1.0.0",
-    description:
-      "Builds personalised coaching plans from Oracle intelligence.",
+    description: "Builds personalised coaching plans from Oracle intelligence.",
     priority: 40,
     capabilities: ["coach", "signal"],
     supportedGames: ["*"],
@@ -31,9 +28,7 @@ export const adaptiveCoachingEngine: OracleEngine<AdaptiveCoachingResult> = {
     producesDecisions: false,
   },
 
-  async execute(
-    context: OracleContext
-  ): Promise<OracleEngineResult<AdaptiveCoachingResult>> {
+  async execute(context: OracleContext) {
     const confidence = context.session.recentSessions.length >= 5 ? 0.8 : 0.45;
 
     const priority = calculateCoachingPriority(confidence);
@@ -51,28 +46,25 @@ export const adaptiveCoachingEngine: OracleEngine<AdaptiveCoachingResult> = {
 
     const signals = buildAdaptiveCoachingSignals(profile);
 
-    return {
-      engineId: this.metadata.id,
-      generatedAt: new Date().toISOString(),
-      output: {
+    return buildEngineResult(adaptiveCoachingEngine, {
+      profile: {
         profile,
         signals,
       },
       graph: [
         {
           key: "coaching",
-          engineId: this.metadata.id,
+          engineId: adaptiveCoachingEngine.metadata.id,
           profile,
           generatedAt: new Date().toISOString(),
         },
       ],
       signals,
-      decisions: [],
       diagnostics: {
         priority,
         confidence,
         focusAreas: focusAreas.length,
       },
-    };
+    });
   },
 };

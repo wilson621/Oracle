@@ -1,5 +1,6 @@
 import type { OracleContext } from "@/lib/oracle/context";
-import type { OracleEngine, OracleEngineResult } from "@/lib/oracle/engines";
+import type { OracleEngine } from "@/lib/oracle/engines";
+import { buildEngineResult } from "@/lib/oracle/engines";
 import type { OracleMemoryProfile, OracleMemoryResult } from "./memory-types";
 import { calculateMemoryStatus } from "./memory-status";
 import { calculateMemoryConfidence } from "./memory-confidence";
@@ -13,8 +14,7 @@ export const memoryEngine: OracleEngine<OracleMemoryResult> = {
     id: "memory-engine",
     name: "Memory Engine",
     version: "1.2.0",
-    description:
-      "Builds evolving operator memory from historical Oracle Sessions.",
+    description: "Builds evolving operator memory from historical Oracle Sessions.",
     priority: 20,
     capabilities: ["memory", "operator", "signal"],
     supportedGames: ["*"],
@@ -23,9 +23,7 @@ export const memoryEngine: OracleEngine<OracleMemoryResult> = {
     producesDecisions: false,
   },
 
-  async execute(
-    context: OracleContext
-  ): Promise<OracleEngineResult<OracleMemoryResult>> {
+  async execute(context: OracleContext) {
     const sessionCount = context.session.recentSessions.length;
     const status = calculateMemoryStatus(sessionCount);
     const confidence = calculateMemoryConfidence(sessionCount);
@@ -56,23 +54,20 @@ export const memoryEngine: OracleEngine<OracleMemoryResult> = {
       recurringStrengths,
     });
 
-    return {
-      engineId: this.metadata.id,
-      generatedAt: new Date().toISOString(),
-      output: {
+    return buildEngineResult(memoryEngine, {
+      profile: {
         profile,
         signals,
       },
       graph: [
         {
           key: "memory",
-          engineId: this.metadata.id,
+          engineId: memoryEngine.metadata.id,
           profile,
           generatedAt: new Date().toISOString(),
         },
       ],
       signals,
-      decisions: [],
       diagnostics: {
         status,
         sessionCount,
@@ -80,6 +75,6 @@ export const memoryEngine: OracleEngine<OracleMemoryResult> = {
         recurringWeaknesses,
         recurringStrengths,
       },
-    };
+    });
   },
 };

@@ -1,5 +1,6 @@
 import type { OracleContext } from "@/lib/oracle/context";
-import type { OracleEngine, OracleEngineResult } from "@/lib/oracle/engines";
+import type { OracleEngine } from "@/lib/oracle/engines";
+import { buildEngineResult } from "@/lib/oracle/engines";
 import { generatePlannerProfile } from "./planner-profile";
 import { plannerSignals } from "./planner-signals";
 import type { PlannerResult } from "./planner-types";
@@ -43,9 +44,7 @@ export const plannerEngine: OracleEngine<PlannerResult> = {
     producesDecisions: false,
   },
 
-  async execute(
-    context: OracleContext
-  ): Promise<OracleEngineResult<PlannerResult>> {
+  async execute(context: OracleContext) {
     const profile = generatePlannerProfile({
       operatorId: context.operator.operatorId,
       positioning: getAverageScore(context, "positioning"),
@@ -57,28 +56,25 @@ export const plannerEngine: OracleEngine<PlannerResult> = {
 
     const signals = plannerSignals(profile);
 
-    return {
-      engineId: this.metadata.id,
-      generatedAt: new Date().toISOString(),
-      output: {
+    return buildEngineResult(plannerEngine, {
+      profile: {
         profile,
         signals,
       },
       graph: [
         {
           key: "planner",
-          engineId: this.metadata.id,
+          engineId: plannerEngine.metadata.id,
           profile,
           generatedAt: new Date().toISOString(),
         },
       ],
       signals,
-      decisions: [],
       diagnostics: {
         priority: profile.recommendation.priority,
         confidence: profile.recommendation.confidence,
         source: profile.recommendation.source,
       },
-    };
+    });
   },
 };

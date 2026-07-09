@@ -1,5 +1,6 @@
 import type { OracleContext } from "@/lib/oracle/context";
-import type { OracleEngine, OracleEngineResult } from "@/lib/oracle/engines";
+import type { OracleEngine } from "@/lib/oracle/engines";
+import { buildEngineResult } from "@/lib/oracle/engines";
 import { calculateOperatorProfileConfidence } from "./operator-profile-confidence";
 import { classifyOperatorCombatIdentity } from "./operator-profile-identity";
 import { determineOperatorLearningStyle } from "./operator-profile-learning-style";
@@ -26,9 +27,7 @@ export const operatorProfileEngine: OracleEngine<OperatorProfileResult> = {
     producesDecisions: false,
   },
 
-  async execute(
-    context: OracleContext
-  ): Promise<OracleEngineResult<OperatorProfileResult>> {
+  async execute(context: OracleContext) {
     const sessions = context.session.recentSessions;
     const sessionCount = sessions.length;
 
@@ -86,23 +85,20 @@ export const operatorProfileEngine: OracleEngine<OperatorProfileResult> = {
 
     const signals = buildOperatorProfileSignals(profile);
 
-    return {
-      engineId: this.metadata.id,
-      generatedAt: new Date().toISOString(),
-      output: {
+    return buildEngineResult(operatorProfileEngine, {
+      profile: {
         profile,
         signals,
       },
       graph: [
         {
           key: "operatorProfile",
-          engineId: this.metadata.id,
+          engineId: operatorProfileEngine.metadata.id,
           profile,
           generatedAt: new Date().toISOString(),
         },
       ],
       signals,
-      decisions: [],
       diagnostics: {
         combatIdentity,
         learningStyle,
@@ -113,6 +109,6 @@ export const operatorProfileEngine: OracleEngine<OperatorProfileResult> = {
         pressureRating,
         confidence,
       },
-    };
+    });
   },
 };

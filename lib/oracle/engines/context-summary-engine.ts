@@ -1,5 +1,6 @@
 import type { OracleContext } from "@/lib/oracle/context";
-import type { OracleEngine, OracleEngineResult } from "@/lib/oracle/engines";
+import type { OracleEngine } from "@/lib/oracle/engines";
+import { buildEngineResult } from "@/lib/oracle/engines";
 
 export type ContextSummaryOutput = {
   operatorId: string;
@@ -15,8 +16,7 @@ export const contextSummaryEngine: OracleEngine<ContextSummaryOutput> = {
     id: "context-summary-engine",
     name: "Context Summary Engine",
     version: "1.0.0",
-    description:
-      "Produces a diagnostic summary of the current Oracle Context.",
+    description: "Produces a diagnostic summary of the current Oracle Context.",
     priority: 10,
     capabilities: ["context", "operator", "signal"],
     supportedGames: ["*"],
@@ -25,10 +25,8 @@ export const contextSummaryEngine: OracleEngine<ContextSummaryOutput> = {
     producesDecisions: false,
   },
 
-  async execute(
-    context: OracleContext
-  ): Promise<OracleEngineResult<ContextSummaryOutput>> {
-    const output: ContextSummaryOutput = {
+  async execute(context: OracleContext) {
+    const profile: ContextSummaryOutput = {
       operatorId: context.operator.operatorId,
       callsign: context.operator.callsign,
       sessionsAnalysed: context.profile.sessionsAnalysed,
@@ -37,25 +35,23 @@ export const contextSummaryEngine: OracleEngine<ContextSummaryOutput> = {
       patchVersion: context.game.patchVersion,
     };
 
-    return {
-      engineId: this.metadata.id,
-      generatedAt: new Date().toISOString(),
-      output,
-      graph: [],
-      signals: [
-        {
-          id: "context-summary-generated",
-          category: "operator",
-          title: "Oracle Context Generated",
-          summary: `Oracle Context prepared for ${context.operator.callsign} with ${context.session.recentSessions.length} recent sessions available.`,
-          severity: "low",
-          direction: "neutral",
-          confidence: 0.95,
-          createdAt: new Date().toISOString(),
-        },
-      ],
-      decisions: [],
-      diagnostics: output,
-    };
+    const signals = [
+      {
+        id: "context-summary-generated",
+        category: "operator" as const,
+        title: "Oracle Context Generated",
+        summary: `Oracle Context prepared for ${context.operator.callsign} with ${context.session.recentSessions.length} recent sessions available.`,
+        severity: "low" as const,
+        direction: "neutral" as const,
+        confidence: 0.95,
+        createdAt: new Date().toISOString(),
+      },
+    ];
+
+    return buildEngineResult(contextSummaryEngine, {
+      profile,
+      signals,
+      diagnostics: profile,
+    });
   },
 };

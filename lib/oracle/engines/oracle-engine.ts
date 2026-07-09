@@ -1,6 +1,7 @@
 import type { OracleContext } from "@/lib/oracle/context";
 import type { OracleSignal } from "@/lib/oracle/signals/signal-types";
 import type { OracleDecision } from "@/lib/oracle/intelligence/decision-types";
+import type { OracleExplanation } from "@/lib/oracle/explainability";
 import type { OracleIntelligenceGraphEntry } from "@/lib/oracle/graph";
 
 export type OracleEngineCapability =
@@ -31,17 +32,32 @@ export type OracleEngineMetadata = {
   producesDecisions: boolean;
 };
 
-export type OracleEngineResult<TOutput> = {
+export type OracleEngineDiagnostics = Record<string, unknown>;
+
+export type OracleEngineResult<TProfile> = {
   engineId: string;
+
   generatedAt: string;
-  output: TOutput;
+
+  profile: TProfile;
+
   graph: OracleIntelligenceGraphEntry[];
+
   signals: OracleSignal[];
+
   decisions: OracleDecision[];
-  diagnostics?: Record<string, unknown>;
+
+  explanations: OracleExplanation[];
+
+  diagnostics: OracleEngineDiagnostics;
+
+  metadata: OracleEngineMetadata;
 };
 
-export interface OracleEngine<TOutput> {
+export interface OracleEngine<TProfile> {
   metadata: OracleEngineMetadata;
-  execute(context: OracleContext): Promise<OracleEngineResult<TOutput>>;
+
+  execute(
+    context: OracleContext
+  ): Promise<OracleEngineResult<TProfile>>;
 }

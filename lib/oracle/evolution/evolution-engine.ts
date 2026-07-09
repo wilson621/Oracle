@@ -1,5 +1,6 @@
 import type { OracleContext } from "@/lib/oracle/context";
-import type { OracleEngine, OracleEngineResult } from "@/lib/oracle/engines";
+import type { OracleEngine } from "@/lib/oracle/engines";
+import { buildEngineResult } from "@/lib/oracle/engines";
 import { calculateEvolutionConfidence } from "./evolution-confidence";
 import {
   detectBehaviourEvolutionPatterns,
@@ -27,9 +28,7 @@ export const behaviourEvolutionEngine: OracleEngine<BehaviourEvolutionResult> = 
     producesDecisions: false,
   },
 
-  async execute(
-    context: OracleContext
-  ): Promise<OracleEngineResult<BehaviourEvolutionResult>> {
+  async execute(context: OracleContext) {
     const sessionCount = context.session.recentSessions.length;
     const confidence = calculateEvolutionConfidence(sessionCount);
 
@@ -49,29 +48,26 @@ export const behaviourEvolutionEngine: OracleEngine<BehaviourEvolutionResult> = 
 
     const signals = buildBehaviourEvolutionSignals({ profile });
 
-    return {
-      engineId: this.metadata.id,
-      generatedAt: new Date().toISOString(),
-      output: {
+    return buildEngineResult(behaviourEvolutionEngine, {
+      profile: {
         profile,
         signals,
       },
       graph: [
         {
           key: "evolution",
-          engineId: this.metadata.id,
+          engineId: behaviourEvolutionEngine.metadata.id,
           profile,
           generatedAt: new Date().toISOString(),
         },
       ],
       signals,
-      decisions: [],
       diagnostics: {
         sessionCount,
         confidence,
         strongestImprovement,
         sharpestDecline,
       },
-    };
+    });
   },
 };
