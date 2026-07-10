@@ -1,5 +1,6 @@
 import { registerOracleEngine } from "@/lib/oracle/engines";
 
+import { behaviourEngine } from "@/lib/oracle/behaviour/behaviour-engine";
 import { contextSummaryEngine } from "@/lib/oracle/engines/context-summary-engine";
 import { memoryEngine } from "@/lib/oracle/memory";
 import { behaviourEvolutionEngine } from "@/lib/oracle/evolution";
@@ -11,6 +12,7 @@ import { contextualIntelligenceEngine } from "@/lib/oracle/contextual/contextual
 export function registerCoreOracleEngines(): void {
   registerOracleEngine(contextSummaryEngine);
   registerOracleEngine(contextualIntelligenceEngine);
+  registerOracleEngine(behaviourEngine);
 
   registerOracleEngine(memoryEngine);
   registerOracleEngine(behaviourEvolutionEngine);

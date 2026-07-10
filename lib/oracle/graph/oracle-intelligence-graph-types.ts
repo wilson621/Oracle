@@ -1,4 +1,5 @@
 export type OracleIntelligenceGraphKey =
+  | "behaviour"
   | "memory"
   | "evolution"
   | "coaching"
