@@ -8,6 +8,21 @@ import type { OracleIntelligenceGraph } from "@/lib/oracle/graph";
 
 export type IntelligenceBusStatus = "success" | "failed";
 
+export type IntelligenceBusEngineDiagnostics = {
+  startedAt: string;
+  completedAt: string;
+  durationMs: number;
+  dependencyResolutionDurationMs: number;
+  declaredDependencies: string[];
+  satisfiedDependencies: string[];
+  missingDependencies: string[];
+  signalsProduced: number;
+  decisionsProduced: number;
+  graphEntriesProduced: number;
+  explanationsProduced: number;
+  hasEngineDiagnostics: boolean;
+};
+
 export type IntelligenceBusEngineResult = {
   engineId: string;
   engineName: string;
@@ -16,6 +31,7 @@ export type IntelligenceBusEngineResult = {
   generatedAt: string;
   durationMs: number;
   metadata: OracleEngineMetadata;
+  diagnostics: IntelligenceBusEngineDiagnostics;
   result?: OracleEngineResult<unknown>;
   error?: string;
 };
