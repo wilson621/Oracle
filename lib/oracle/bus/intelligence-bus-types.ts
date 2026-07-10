@@ -2,6 +2,7 @@ import type {
   OracleEngineMetadata,
   OracleEngineResult,
 } from "@/lib/oracle/engines";
+import type { EngineValidationResult } from "@/lib/oracle/engines/validation/engine-runtime-validation";
 import type { OracleSignal } from "@/lib/oracle/signals/signal-types";
 import type { OracleDecision } from "@/lib/oracle/intelligence/decision-types";
 import type { OracleIntelligenceGraph } from "@/lib/oracle/graph";
@@ -41,6 +42,7 @@ export type IntelligenceBusResult = {
   engineCount: number;
   successfulEngines: number;
   failedEngines: number;
+  validation: EngineValidationResult;
   signals: OracleSignal[];
   decisions: OracleDecision[];
   graph: OracleIntelligenceGraph;

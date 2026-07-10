@@ -2,6 +2,7 @@ import type { OracleContext } from "@/lib/oracle/context";
 import {
   createOracleEngineRuntime,
   getRegisteredOracleEngines,
+  validateOracleEngineRuntime,
 } from "@/lib/oracle/engines";
 
 import type {
@@ -56,12 +57,40 @@ function buildEngineDiagnostics(input: {
   };
 }
 
+function buildValidationErrorMessage(
+  errors: {
+    engineId: string;
+    message: string;
+  }[]
+): string {
+  const details = errors
+    .map((issue) => {
+      const owner = issue.engineId || "unknown-engine";
+
+      return `${owner}: ${issue.message}`;
+    })
+    .join("; ");
+
+  return `Oracle Engine Runtime validation failed: ${details}`;
+}
+
 export async function runIntelligenceBus(
   context: OracleContext
 ): Promise<IntelligenceBusResult> {
-  const engines = getRegisteredOracleEngines();
+  const registeredEngines = getRegisteredOracleEngines();
 
-  const compatibleEngines = engines.filter((engine) =>
+  const validation =
+    validateOracleEngineRuntime(registeredEngines);
+
+  if (!validation.valid) {
+    const errors = validation.issues.filter(
+      (issue) => issue.severity === "error"
+    );
+
+    throw new Error(buildValidationErrorMessage(errors));
+  }
+
+  const compatibleEngines = registeredEngines.filter((engine) =>
     engineSupportsCurrentGame(
       engine.metadata.supportedGames,
       context.game.currentGame
@@ -196,6 +225,7 @@ export async function runIntelligenceBus(
     failedEngines: results.filter(
       (result) => result.status === "failed"
     ).length,
+    validation,
     signals: runtime.signals,
     decisions: runtime.decisions,
     graph: runtime.graph,
