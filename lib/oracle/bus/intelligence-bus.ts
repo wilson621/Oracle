@@ -1,9 +1,8 @@
 import type { OracleContext } from "@/lib/oracle/context";
-import { getRegisteredOracleEngines } from "@/lib/oracle/engines";
 import {
-  addOracleIntelligenceGraphEntries,
-  createEmptyOracleIntelligenceGraph,
-} from "@/lib/oracle/graph";
+  createOracleEngineRuntime,
+  getRegisteredOracleEngines,
+} from "@/lib/oracle/engines";
 
 import type {
   IntelligenceBusEngineResult,
@@ -37,13 +36,10 @@ export async function runIntelligenceBus(
     )
   );
 
+  const runtime = createOracleEngineRuntime(context);
   const completedEngineIds = new Set<string>();
 
   const results: IntelligenceBusEngineResult[] = [];
-  const signals = [...context.intelligence.signals];
-  const decisions = [...context.intelligence.decisions];
-
-  let graph = createEmptyOracleIntelligenceGraph();
 
   for (const engine of compatibleEngines) {
     const startedAt = Date.now();
@@ -68,14 +64,10 @@ export async function runIntelligenceBus(
     }
 
     try {
-      const result = await engine.execute(context);
+      const result = await engine.execute(runtime);
 
       completedEngineIds.add(engine.metadata.id);
-
-      signals.push(...result.signals);
-      decisions.push(...result.decisions);
-
-      graph = addOracleIntelligenceGraphEntries(graph, result.graph);
+      runtime.completeEngineResult(result);
 
       results.push({
         engineId: engine.metadata.id,
@@ -108,9 +100,9 @@ export async function runIntelligenceBus(
       .length,
     failedEngines: results.filter((result) => result.status === "failed")
       .length,
-    signals,
-    decisions,
-    graph,
+    signals: runtime.signals,
+    decisions: runtime.decisions,
+    graph: runtime.graph,
     results,
   };
 }

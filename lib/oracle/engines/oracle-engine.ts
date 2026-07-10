@@ -1,8 +1,8 @@
-import type { OracleContext } from "@/lib/oracle/context";
 import type { OracleSignal } from "@/lib/oracle/signals/signal-types";
 import type { OracleDecision } from "@/lib/oracle/intelligence/decision-types";
 import type { OracleExplanation } from "@/lib/oracle/explainability";
 import type { OracleIntelligenceGraphEntry } from "@/lib/oracle/graph";
+import type { OracleEngineRuntime } from "./oracle-engine-runtime";
 
 export type OracleEngineCapability =
   | "context"
@@ -59,6 +59,6 @@ export interface OracleEngine<TProfile> {
   metadata: OracleEngineMetadata;
 
   execute(
-    context: OracleContext
+    runtime: OracleEngineRuntime
   ): Promise<OracleEngineResult<TProfile>>;
 }

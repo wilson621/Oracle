@@ -1152,6 +1152,166 @@ Short-term convenience should never compromise long-term architecture.
 
 ---
 
+## Language & Naming Standard
+
+Oracle adopts British English for all internal engineering and domain terminology while following established industry conventions for public interfaces.
+
+### Internal Source Code
+
+All internal business logic, engines, domain models and architecture use British English.
+
+Examples:
+
+- analyseBehaviour()
+- analyseTrends()
+- BehaviourProfile
+- BehaviourEngine
+- sessionsAnalysed
+- prioritiseSignals()
+- optimiseRecommendations()
+
+This applies to:
+
+- Engines
+- Domain services
+- Repositories
+- Runtime contracts
+- TypeScript types
+- Documentation
+- Comments
+- Internal utility functions
+
+Consistency across the internal codebase takes precedence over personal preference.
+
+---
+
+### External Interfaces
+
+Public APIs, HTTP endpoints and external integrations may use American English where it aligns with established industry conventions.
+
+Examples:
+
+- /api/oracle/analyze
+- /api/operator/authorize
+
+This improves familiarity for external developers and aligns Oracle with common web API conventions.
+
+---
+
+### Database Schema
+
+Database naming follows the existing production schema.
+
+Schema names are never renamed purely for spelling consistency.
+
+Database stability always takes precedence over language preference.
+
+---
+
+### File Naming
+
+New internal files must follow British English.
+
+Examples:
+
+✅ behaviour-analysis.ts
+
+✅ behaviour-engine.ts
+
+✅ trend-analysis.ts
+
+✅ trend-engine.ts
+
+✅ prediction-analysis.ts
+
+✅ prediction-engine.ts
+
+Avoid introducing mixed naming such as:
+
+❌ behavior-engine.ts
+
+❌ analyze-trends.ts
+
+---
+
+### Engineering Principle
+
+Internal architecture should read naturally for Oracle engineers.
+
+External interfaces should follow established industry conventions.
+
+Persistent contracts should remain stable.
+
+Consistency is more important than preference.
+
+---
+
+## Incremental Architecture Standard
+
+Oracle evolves through incremental architectural refinement rather than large-scale rewrites.
+
+Architecture should evolve by introducing new capabilities alongside existing production code until migration is complete.
+
+Business logic should remain stable.
+
+Orchestration should evolve.
+
+Every architectural migration follows the same pattern.
+
+Existing Domain Logic
+
+↓
+
+Move to:
+
+<capability>-analysis.ts
+
+↓
+
+Create:
+
+<capability>-engine.ts
+
+↓
+
+Register the Engine
+
+↓
+
+Expose Graph output
+
+↓
+
+Preserve legacy exports during migration
+
+↓
+
+Run production build
+
+↓
+
+Commit
+
+↓
+
+Proceed to the next capability
+
+Business logic remains pure.
+
+Engine wrappers own orchestration.
+
+The Intelligence Bus owns execution.
+
+The Intelligence Pipeline owns runtime coordination.
+
+Every completed milestone must leave Oracle in a production-ready, buildable state before the next begins.
+
+Architecture evolves incrementally.
+
+Production stability is never sacrificed for migration speed.
+
+---
+
 # Layer Responsibilities
 
 Every layer has exactly one responsibility.
@@ -2031,6 +2191,8 @@ Pipeline
 Bus
 
 Capabilities strengthen the entire platform.
+
+Architecture evolves through incremental capability expansion, not large-scale rewrites.
 
 ---
 
