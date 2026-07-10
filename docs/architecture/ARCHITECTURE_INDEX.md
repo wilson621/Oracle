@@ -1,6 +1,6 @@
 # ORACLE ARCHITECTURE INDEX
 
-Version: 1.0
+Version: 4.1
 
 Status: Active
 
@@ -25,6 +25,35 @@ This document complements:
 - ADRs
 
 It does not replace them.
+
+# Current Production Architecture
+
+Oracle Architecture v4.1 is the current production architecture.
+
+The platform now executes intelligence through a validated Engine Runtime rather than a monolithic orchestration model.
+
+Runtime execution follows:
+
+```text
+Oracle Context
+        │
+        ▼
+Runtime Validation
+        │
+        ▼
+Oracle Engine Runtime
+        │
+        ▼
+Registered Oracle Engines
+        │
+        ▼
+Signals • Decisions • Graph
+        │
+        ▼
+Oracle Intelligence State
+```
+
+The detailed architecture is documented in **ARCHITECTURE_v4.1.md**.
 
 ---
 
@@ -220,6 +249,36 @@ Must Never
 
 - Execute business logic
 - Replace the Bus
+
+---
+
+## Runtime Services
+
+### Location
+
+```
+lib/oracle/engines
+```
+
+### Purpose
+
+Provide shared platform capabilities for every registered engine.
+
+### Owns
+
+- Runtime Validation
+- Engine Diagnostics
+- Engine Health
+
+### Produces
+
+- Runtime execution metadata
+
+### Must Never
+
+- Generate intelligence
+- Replace engine logic
+- Render UI
 
 ---
 
@@ -480,7 +539,18 @@ Current Development Phase
 
 Operation Sentinel
 
-Sprint 3
+Sprint 6.7 Complete
+
+Current Runtime
+
+✓ Engine Runtime
+✓ Runtime Validation
+✓ Runtime Diagnostics
+✓ Runtime Health
+✓ Behaviour Engine
+✓ Trend Engine
+✓ Prediction Engine
+✓ Mission Engine
 
 ---
 

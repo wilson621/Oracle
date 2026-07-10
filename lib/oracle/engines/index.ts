@@ -5,3 +5,5 @@ export * from "./oracle-engine-runtime";
 export * from "./register-core-engines";
 export * from "./registry/engine-registry";
 export * from "./validation/engine-runtime-validation";
+export * from "./health/health-evaluator";
+export * from "./health/health-types";

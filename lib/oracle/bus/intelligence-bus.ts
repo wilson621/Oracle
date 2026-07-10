@@ -1,6 +1,7 @@
 import type { OracleContext } from "@/lib/oracle/context";
 import {
   createOracleEngineRuntime,
+  evaluateEngineHealth,
   getRegisteredOracleEngines,
   validateOracleEngineRuntime,
 } from "@/lib/oracle/engines";
@@ -128,6 +129,16 @@ export async function runIntelligenceBus(
       const completedAt = new Date(completedAtMs).toISOString();
       const durationMs = completedAtMs - startedAtMs;
 
+      const diagnostics = buildEngineDiagnostics({
+        startedAt,
+        completedAt,
+        durationMs,
+        dependencyResolutionDurationMs,
+        declaredDependencies,
+        satisfiedDependencies,
+        missingDependencies,
+      });
+
       results.push({
         engineId: engine.metadata.id,
         engineName: engine.metadata.name,
@@ -136,14 +147,13 @@ export async function runIntelligenceBus(
         generatedAt: completedAt,
         durationMs,
         metadata: engine.metadata,
-        diagnostics: buildEngineDiagnostics({
-          startedAt,
-          completedAt,
+        diagnostics,
+        health: evaluateEngineHealth({
+          executed: false,
+          executionSucceeded: false,
+          validationPassed: validation.valid,
           durationMs,
-          dependencyResolutionDurationMs,
-          declaredDependencies,
-          satisfiedDependencies,
-          missingDependencies,
+          hasDiagnostics: false,
         }),
         error: `Missing engine dependencies: ${missingDependencies.join(", ")}`,
       });
@@ -161,6 +171,24 @@ export async function runIntelligenceBus(
       const completedAt = new Date(completedAtMs).toISOString();
       const durationMs = completedAtMs - startedAtMs;
 
+      const hasEngineDiagnostics =
+        Object.keys(result.diagnostics).length > 0;
+
+      const diagnostics = buildEngineDiagnostics({
+        startedAt,
+        completedAt,
+        durationMs,
+        dependencyResolutionDurationMs,
+        declaredDependencies,
+        satisfiedDependencies,
+        missingDependencies,
+        signalsProduced: result.signals.length,
+        decisionsProduced: result.decisions.length,
+        graphEntriesProduced: result.graph.length,
+        explanationsProduced: result.explanations.length,
+        hasEngineDiagnostics,
+      });
+
       results.push({
         engineId: engine.metadata.id,
         engineName: engine.metadata.name,
@@ -169,20 +197,13 @@ export async function runIntelligenceBus(
         generatedAt: completedAt,
         durationMs,
         metadata: engine.metadata,
-        diagnostics: buildEngineDiagnostics({
-          startedAt,
-          completedAt,
+        diagnostics,
+        health: evaluateEngineHealth({
+          executed: true,
+          executionSucceeded: true,
+          validationPassed: validation.valid,
           durationMs,
-          dependencyResolutionDurationMs,
-          declaredDependencies,
-          satisfiedDependencies,
-          missingDependencies,
-          signalsProduced: result.signals.length,
-          decisionsProduced: result.decisions.length,
-          graphEntriesProduced: result.graph.length,
-          explanationsProduced: result.explanations.length,
-          hasEngineDiagnostics:
-            Object.keys(result.diagnostics).length > 0,
+          hasDiagnostics: hasEngineDiagnostics,
         }),
         result,
       });
@@ -190,6 +211,16 @@ export async function runIntelligenceBus(
       const completedAtMs = Date.now();
       const completedAt = new Date(completedAtMs).toISOString();
       const durationMs = completedAtMs - startedAtMs;
+
+      const diagnostics = buildEngineDiagnostics({
+        startedAt,
+        completedAt,
+        durationMs,
+        dependencyResolutionDurationMs,
+        declaredDependencies,
+        satisfiedDependencies,
+        missingDependencies,
+      });
 
       results.push({
         engineId: engine.metadata.id,
@@ -199,14 +230,13 @@ export async function runIntelligenceBus(
         generatedAt: completedAt,
         durationMs,
         metadata: engine.metadata,
-        diagnostics: buildEngineDiagnostics({
-          startedAt,
-          completedAt,
+        diagnostics,
+        health: evaluateEngineHealth({
+          executed: true,
+          executionSucceeded: false,
+          validationPassed: validation.valid,
           durationMs,
-          dependencyResolutionDurationMs,
-          declaredDependencies,
-          satisfiedDependencies,
-          missingDependencies,
+          hasDiagnostics: false,
         }),
         error:
           error instanceof Error
