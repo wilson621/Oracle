@@ -8,8 +8,14 @@
     "build": "next build && npm run desktop:build",
     "start": "next start",
     "lint": "eslint",
-    "desktop:build": "tsc -p tsconfig.desktop.json",
+
+    "native:build": "dotnet publish desktop-native/Oracle.WindowDiscovery/Oracle.WindowDiscovery.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false --output dist-native",
+
+    "desktop:compile": "tsc -p tsconfig.desktop.json",
+    "desktop:build": "npm run native:build && npm run desktop:compile",
+
     "desktop:dev": "npm run desktop:build && concurrently -k \"next dev\" \"wait-on http://localhost:3000/oracle && electron .\"",
+
     "desktop:start": "concurrently -k \"next start\" \"wait-on http://localhost:3000/oracle && electron .\""
   },
   "dependencies": {
