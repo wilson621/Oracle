@@ -1,6 +1,7 @@
 import {
   app,
   ipcMain,
+  type IpcMainInvokeEvent,
 } from "electron";
 import { DESKTOP_CHANNELS } from "./contracts.js";
 import { CompanionHostWindowController } from "./overlay-window.js";
@@ -28,11 +29,7 @@ if (!hasSingleInstanceLock) {
       registerIpcHandlers();
 
       hostWindowController =
-        new CompanionHostWindowController({
-          companionUrl:
-            process.env.ORACLE_COMPANION_URL ??
-            DEFAULT_COMPANION_URL,
-        });
+        createHostWindowController();
 
       await hostWindowController.create();
     })
@@ -53,11 +50,7 @@ app.on("activate", () => {
   }
 
   hostWindowController =
-    new CompanionHostWindowController({
-      companionUrl:
-        process.env.ORACLE_COMPANION_URL ??
-        DEFAULT_COMPANION_URL,
-    });
+    createHostWindowController();
 
   void hostWindowController
     .create()
@@ -80,24 +73,50 @@ app.on("before-quit", () => {
   hostWindowController = null;
 });
 
+function createHostWindowController(): CompanionHostWindowController {
+  return new CompanionHostWindowController({
+    companionUrl:
+      process.env.ORACLE_COMPANION_URL ??
+      DEFAULT_COMPANION_URL,
+  });
+}
+
 function registerIpcHandlers(): void {
   removeIpcHandlers();
 
   ipcMain.handle(
     DESKTOP_CHANNELS.getHostState,
-    () => {
-      const window =
-        hostWindowController?.getWindow();
+    (event) => {
+      return requireAuthorizedController(
+        event
+      ).getState();
+    }
+  );
 
-      return {
-        ready: app.isReady(),
-        windowVisible:
-          window?.isVisible() ?? false,
-        windowFocused:
-          window?.isFocused() ?? false,
-        developmentMode:
-          process.env.NODE_ENV !== "production",
-      };
+  ipcMain.handle(
+    DESKTOP_CHANNELS.minimizeWindow,
+    (event) => {
+      return requireAuthorizedController(
+        event
+      ).minimize();
+    }
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.toggleMaximizeWindow,
+    (event) => {
+      return requireAuthorizedController(
+        event
+      ).toggleMaximize();
+    }
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.closeWindow,
+    (event) => {
+      requireAuthorizedController(
+        event
+      ).close();
     }
   );
 }
@@ -106,4 +125,38 @@ function removeIpcHandlers(): void {
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.getHostState
   );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.minimizeWindow
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.toggleMaximizeWindow
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.closeWindow
+  );
+}
+
+function requireAuthorizedController(
+  event: IpcMainInvokeEvent
+): CompanionHostWindowController {
+  if (!hostWindowController) {
+    throw new Error(
+      "Oracle Companion host controller is unavailable."
+    );
+  }
+
+  if (
+    !hostWindowController.ownsWebContentsId(
+      event.sender.id
+    )
+  ) {
+    throw new Error(
+      "Unauthorized Oracle desktop IPC sender."
+    );
+  }
+
+  return hostWindowController;
 }

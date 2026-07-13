@@ -1,5 +1,9 @@
 import { BrowserWindow } from "electron";
 import { join } from "node:path";
+import {
+  DESKTOP_CHANNELS,
+  type OracleDesktopHostState,
+} from "./contracts.js";
 
 export type CompanionHostWindowOptions = {
   companionUrl: string;
@@ -16,12 +20,10 @@ export class CompanionHostWindowController {
   ) {}
 
   async create(): Promise<BrowserWindow> {
-    const existingWindow = this.getExistingWindow();
+    const existingWindow = this.getWindow();
 
     if (existingWindow) {
-      existingWindow.show();
-      existingWindow.focus();
-
+      this.showAndFocus();
       return existingWindow;
     }
 
@@ -37,7 +39,7 @@ export class CompanionHostWindowController {
 
       title: "Oracle Companion",
 
-      frame: true,
+      frame: false,
       transparent: false,
       backgroundColor: "#090b10",
 
@@ -52,18 +54,18 @@ export class CompanionHostWindowController {
       focusable: true,
 
       webPreferences: {
-        preload: join(__dirname, "preload.js"),
+  preload: join(__dirname, "preload.js"),
 
-        nodeIntegration: false,
-        contextIsolation: true,
-        sandbox: true,
+  nodeIntegration: false,
+  contextIsolation: true,
+  sandbox: false,
 
-        webSecurity: true,
-        allowRunningInsecureContent: false,
+  webSecurity: true,
+  allowRunningInsecureContent: false,
 
-        devTools:
-          process.env.NODE_ENV !== "production",
-      },
+  devTools:
+    process.env.NODE_ENV !== "production",
+},
     });
 
     this.window = window;
@@ -76,17 +78,40 @@ export class CompanionHostWindowController {
     if (!window.isDestroyed()) {
       window.show();
       window.focus();
+      this.publishState();
     }
 
     return window;
   }
 
   getWindow(): BrowserWindow | null {
-    return this.getExistingWindow();
+    if (!this.window || this.window.isDestroyed()) {
+      this.window = null;
+      return null;
+    }
+
+    return this.window;
+  }
+
+  ownsWebContentsId(webContentsId: number): boolean {
+    return this.getWindow()?.webContents.id === webContentsId;
+  }
+
+  getState(): OracleDesktopHostState {
+    const window = this.getRequiredWindow();
+
+    return {
+      ready: true,
+      windowVisible: window.isVisible(),
+      windowFocused: window.isFocused(),
+      windowMaximized: window.isMaximized(),
+      developmentMode:
+        process.env.NODE_ENV !== "production",
+    };
   }
 
   showAndFocus(): void {
-    const window = this.getExistingWindow();
+    const window = this.getWindow();
 
     if (!window) {
       return;
@@ -98,10 +123,33 @@ export class CompanionHostWindowController {
 
     window.show();
     window.focus();
+    this.publishState();
+  }
+
+  minimize(): OracleDesktopHostState {
+    const window = this.getRequiredWindow();
+
+    window.minimize();
+
+    return this.getState();
+  }
+
+  toggleMaximize(): OracleDesktopHostState {
+    const window = this.getRequiredWindow();
+
+    if (window.isMaximized()) {
+      window.unmaximize();
+    } else {
+      window.maximize();
+    }
+
+    this.publishState();
+
+    return this.getState();
   }
 
   close(): void {
-    const window = this.getExistingWindow();
+    const window = this.getWindow();
 
     if (!window) {
       this.window = null;
@@ -109,16 +157,6 @@ export class CompanionHostWindowController {
     }
 
     window.close();
-    this.window = null;
-  }
-
-  private getExistingWindow(): BrowserWindow | null {
-    if (!this.window || this.window.isDestroyed()) {
-      this.window = null;
-      return null;
-    }
-
-    return this.window;
   }
 
   private registerNavigationSecurity(
@@ -156,6 +194,18 @@ export class CompanionHostWindowController {
   private registerWindowEvents(
     window: BrowserWindow
   ): void {
+    const publishState = () => {
+      this.publishState();
+    };
+
+    window.on("show", publishState);
+    window.on("hide", publishState);
+    window.on("focus", publishState);
+    window.on("blur", publishState);
+    window.on("maximize", publishState);
+    window.on("unmaximize", publishState);
+    window.on("restore", publishState);
+
     window.on("closed", () => {
       this.window = null;
     });
@@ -197,5 +247,33 @@ export class CompanionHostWindowController {
         );
       }
     );
+  }
+
+  private publishState(): void {
+    const window = this.getWindow();
+
+    if (
+      !window ||
+      window.webContents.isDestroyed()
+    ) {
+      return;
+    }
+
+    window.webContents.send(
+      DESKTOP_CHANNELS.hostStateChanged,
+      this.getState()
+    );
+  }
+
+  private getRequiredWindow(): BrowserWindow {
+    const window = this.getWindow();
+
+    if (!window) {
+      throw new Error(
+        "Oracle Companion desktop window is unavailable."
+      );
+    }
+
+    return window;
   }
 }

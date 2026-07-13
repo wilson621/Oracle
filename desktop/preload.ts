@@ -1,6 +1,7 @@
 import {
   contextBridge,
   ipcRenderer,
+  type IpcRendererEvent,
 } from "electron";
 import {
   DESKTOP_CHANNELS,
@@ -13,6 +14,42 @@ const oracleDesktopBridge: OracleDesktopBridge = {
     ipcRenderer.invoke(
       DESKTOP_CHANNELS.getHostState
     ) as Promise<OracleDesktopHostState>,
+
+  minimizeWindow: () =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.minimizeWindow
+    ) as Promise<OracleDesktopHostState>,
+
+  toggleMaximizeWindow: () =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.toggleMaximizeWindow
+    ) as Promise<OracleDesktopHostState>,
+
+  closeWindow: () =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.closeWindow
+    ) as Promise<void>,
+
+  onHostStateChanged: (listener) => {
+    const handler = (
+      _event: IpcRendererEvent,
+      state: OracleDesktopHostState
+    ) => {
+      listener(state);
+    };
+
+    ipcRenderer.on(
+      DESKTOP_CHANNELS.hostStateChanged,
+      handler
+    );
+
+    return () => {
+      ipcRenderer.removeListener(
+        DESKTOP_CHANNELS.hostStateChanged,
+        handler
+      );
+    };
+  },
 };
 
 contextBridge.exposeInMainWorld(
