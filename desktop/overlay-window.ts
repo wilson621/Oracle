@@ -153,6 +153,15 @@ export class CompanionHostWindowController {
     return this.getState();
   }
 
+  toggleAlwaysOnTop(): OracleDesktopHostState {
+    this.hostState.toggleAlwaysOnTop();
+
+    this.applyHostState();
+    this.publishState();
+
+    return this.getState();
+  }
+
   minimize(): OracleDesktopHostState {
     const window = this.getRequiredWindow();
 
@@ -196,7 +205,8 @@ export class CompanionHostWindowController {
     );
 
     window.setAlwaysOnTop(
-      this.hostState.isAlwaysOnTop()
+      this.hostState.isAlwaysOnTop(),
+      "floating"
     );
 
     window.setIgnoreMouseEvents(
@@ -260,6 +270,7 @@ export class CompanionHostWindowController {
     window.on("maximize", publishState);
     window.on("unmaximize", publishState);
     window.on("restore", publishState);
+    window.on("always-on-top-changed", publishState);
 
     window.on("closed", () => {
       this.window = null;

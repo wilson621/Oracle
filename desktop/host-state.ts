@@ -69,6 +69,15 @@ export class OracleDesktopHostStateModel {
     return this.configuration.windowMode;
   }
 
+  toggleAlwaysOnTop(): boolean {
+    this.configuration = {
+      ...this.configuration,
+      alwaysOnTop: !this.configuration.alwaysOnTop,
+    };
+
+    return this.configuration.alwaysOnTop;
+  }
+
   setAlwaysOnTop(enabled: boolean): void {
     this.configuration = {
       ...this.configuration,

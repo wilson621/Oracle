@@ -5,6 +5,8 @@ import {
   Eye,
   EyeOff,
   Minus,
+  Pin,
+  PinOff,
   Square,
   X,
 } from "lucide-react";
@@ -88,10 +90,23 @@ export default function CompanionTitleBar() {
     hostState?.windowMode ===
     "overlay-preview";
 
+  const alwaysOnTopEnabled =
+    hostState?.alwaysOnTop ?? false;
+
   async function toggleOverlayPreview() {
     const state =
       await window.oracleDesktop
         ?.toggleOverlayPreview();
+
+    if (state) {
+      setHostState(state);
+    }
+  }
+
+  async function toggleAlwaysOnTop() {
+    const state =
+      await window.oracleDesktop
+        ?.toggleAlwaysOnTop();
 
     if (state) {
       setHostState(state);
@@ -137,6 +152,12 @@ export default function CompanionTitleBar() {
             OVERLAY PREVIEW
           </span>
         )}
+
+        {alwaysOnTopEnabled && (
+          <span className="oracle-desktop-titlebar__mode">
+            PINNED
+          </span>
+        )}
       </div>
 
       <div className="oracle-desktop-titlebar__controls">
@@ -162,15 +183,37 @@ export default function CompanionTitleBar() {
           }}
         >
           {overlayPreviewEnabled ? (
-            <EyeOff
-              size={15}
-              strokeWidth={1.8}
-            />
+            <EyeOff size={15} strokeWidth={1.8} />
           ) : (
-            <Eye
-              size={15}
-              strokeWidth={1.8}
-            />
+            <Eye size={15} strokeWidth={1.8} />
+          )}
+        </button>
+
+        <button
+          type="button"
+          className={
+            alwaysOnTopEnabled
+              ? "oracle-desktop-titlebar__button oracle-desktop-titlebar__button--active"
+              : "oracle-desktop-titlebar__button"
+          }
+          aria-label={
+            alwaysOnTopEnabled
+              ? "Disable always on top"
+              : "Enable always on top"
+          }
+          title={
+            alwaysOnTopEnabled
+              ? "Unpin window"
+              : "Pin window"
+          }
+          onClick={() => {
+            void toggleAlwaysOnTop();
+          }}
+        >
+          {alwaysOnTopEnabled ? (
+            <PinOff size={15} strokeWidth={1.8} />
+          ) : (
+            <Pin size={15} strokeWidth={1.8} />
           )}
         </button>
 
@@ -206,10 +249,7 @@ export default function CompanionTitleBar() {
           {hostState?.windowMaximized ? (
             <Copy size={13} strokeWidth={1.8} />
           ) : (
-            <Square
-              size={12}
-              strokeWidth={1.8}
-            />
+            <Square size={12} strokeWidth={1.8} />
           )}
         </button>
 

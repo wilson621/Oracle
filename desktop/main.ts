@@ -103,6 +103,15 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
+    DESKTOP_CHANNELS.toggleAlwaysOnTop,
+    (event) => {
+      return requireAuthorizedController(
+        event
+      ).toggleAlwaysOnTop();
+    }
+  );
+
+  ipcMain.handle(
     DESKTOP_CHANNELS.minimizeWindow,
     (event) => {
       return requireAuthorizedController(
@@ -137,6 +146,10 @@ function removeIpcHandlers(): void {
 
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.toggleOverlayPreview
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.toggleAlwaysOnTop
   );
 
   ipcMain.removeHandler(
