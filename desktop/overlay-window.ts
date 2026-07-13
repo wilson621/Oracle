@@ -17,7 +17,8 @@ const DEVELOPMENT_BACKGROUND = "#090b10";
 const TRANSPARENT_BACKGROUND = "#00000000";
 
 export class CompanionHostWindowController {
-  private window: BrowserWindow | null = null;
+  private window: BrowserWindow | null =
+    null;
 
   private readonly hostState =
     new OracleDesktopHostStateModel();
@@ -27,7 +28,8 @@ export class CompanionHostWindowController {
   ) {}
 
   async create(): Promise<BrowserWindow> {
-    const existingWindow = this.getWindow();
+    const existingWindow =
+      this.getWindow();
 
     if (existingWindow) {
       this.showAndFocus();
@@ -48,7 +50,8 @@ export class CompanionHostWindowController {
 
       frame: false,
       transparent: true,
-      backgroundColor: DEVELOPMENT_BACKGROUND,
+      backgroundColor:
+        DEVELOPMENT_BACKGROUND,
 
       alwaysOnTop: false,
       skipTaskbar: false,
@@ -61,7 +64,10 @@ export class CompanionHostWindowController {
       focusable: true,
 
       webPreferences: {
-        preload: join(__dirname, "preload.js"),
+        preload: join(
+          __dirname,
+          "preload.js"
+        ),
 
         nodeIntegration: false,
         contextIsolation: true,
@@ -71,17 +77,23 @@ export class CompanionHostWindowController {
         allowRunningInsecureContent: false,
 
         devTools:
-          process.env.NODE_ENV !== "production",
+          process.env.NODE_ENV !==
+          "production",
       },
     });
 
     this.window = window;
     this.hostState.reset();
 
-    this.registerNavigationSecurity(window);
+    this.registerNavigationSecurity(
+      window
+    );
+
     this.registerWindowEvents(window);
 
-    await window.loadURL(this.options.companionUrl);
+    await window.loadURL(
+      this.options.companionUrl
+    );
 
     if (!window.isDestroyed()) {
       this.applyHostState();
@@ -96,7 +108,10 @@ export class CompanionHostWindowController {
   }
 
   getWindow(): BrowserWindow | null {
-    if (!this.window || this.window.isDestroyed()) {
+    if (
+      !this.window ||
+      this.window.isDestroyed()
+    ) {
       this.window = null;
       return null;
     }
@@ -104,7 +119,9 @@ export class CompanionHostWindowController {
     return this.window;
   }
 
-  ownsWebContentsId(webContentsId: number): boolean {
+  ownsWebContentsId(
+    webContentsId: number
+  ): boolean {
     return (
       this.getWindow()?.webContents.id ===
       webContentsId
@@ -112,7 +129,8 @@ export class CompanionHostWindowController {
   }
 
   getState(): OracleDesktopHostState {
-    const window = this.getRequiredWindow();
+    const window =
+      this.getRequiredWindow();
 
     return this.hostState.createSnapshot(
       {
@@ -120,7 +138,8 @@ export class CompanionHostWindowController {
         focused: window.isFocused(),
         maximized: window.isMaximized(),
       },
-      process.env.NODE_ENV !== "production"
+      process.env.NODE_ENV !==
+        "production"
     );
   }
 
@@ -137,7 +156,9 @@ export class CompanionHostWindowController {
 
     window.show();
 
-    if (!this.hostState.isClickThrough()) {
+    if (
+      !this.hostState.isClickThrough()
+    ) {
       window.focus();
     }
 
@@ -148,6 +169,13 @@ export class CompanionHostWindowController {
     this.hostState.toggleOverlayPreview();
 
     this.applyHostState();
+
+    if (
+      !this.hostState.isClickThrough()
+    ) {
+      this.focusInteractiveWindow();
+    }
+
     this.publishState();
 
     return this.getState();
@@ -162,8 +190,39 @@ export class CompanionHostWindowController {
     return this.getState();
   }
 
+  toggleClickThrough(): OracleDesktopHostState {
+    const clickThroughEnabled =
+      this.hostState.toggleClickThrough();
+
+    this.applyHostState();
+
+    const window =
+      this.getRequiredWindow();
+
+    if (clickThroughEnabled) {
+      window.blur();
+    } else {
+      this.focusInteractiveWindow();
+    }
+
+    this.publishState();
+
+    return this.getState();
+  }
+
+  restoreInteraction(): OracleDesktopHostState {
+    this.hostState.restoreInteraction();
+
+    this.applyHostState();
+    this.focusInteractiveWindow();
+    this.publishState();
+
+    return this.getState();
+  }
+
   minimize(): OracleDesktopHostState {
-    const window = this.getRequiredWindow();
+    const window =
+      this.getRequiredWindow();
 
     window.minimize();
 
@@ -171,7 +230,8 @@ export class CompanionHostWindowController {
   }
 
   toggleMaximize(): OracleDesktopHostState {
-    const window = this.getRequiredWindow();
+    const window =
+      this.getRequiredWindow();
 
     if (window.isMaximized()) {
       window.unmaximize();
@@ -196,7 +256,8 @@ export class CompanionHostWindowController {
   }
 
   private applyHostState(): void {
-    const window = this.getRequiredWindow();
+    const window =
+      this.getRequiredWindow();
 
     window.setBackgroundColor(
       this.hostState.isTransparent()
@@ -215,13 +276,21 @@ export class CompanionHostWindowController {
         forward: true,
       }
     );
+  }
 
-    if (
-      !this.hostState.isClickThrough() &&
-      !window.isFocused()
-    ) {
-      window.focus();
+  private focusInteractiveWindow(): void {
+    const window =
+      this.getRequiredWindow();
+
+    if (window.isMinimized()) {
+      window.restore();
     }
+
+    if (!window.isVisible()) {
+      window.show();
+    }
+
+    window.focus();
   }
 
   private registerNavigationSecurity(
@@ -231,9 +300,11 @@ export class CompanionHostWindowController {
       this.options.companionUrl
     ).origin;
 
-    window.webContents.setWindowOpenHandler(() => ({
-      action: "deny",
-    }));
+    window.webContents.setWindowOpenHandler(
+      () => ({
+        action: "deny",
+      })
+    );
 
     window.webContents.on(
       "will-navigate",
@@ -249,7 +320,10 @@ export class CompanionHostWindowController {
           return;
         }
 
-        if (navigationOrigin !== allowedOrigin) {
+        if (
+          navigationOrigin !==
+          allowedOrigin
+        ) {
           event.preventDefault();
         }
       }
@@ -268,9 +342,16 @@ export class CompanionHostWindowController {
     window.on("focus", publishState);
     window.on("blur", publishState);
     window.on("maximize", publishState);
-    window.on("unmaximize", publishState);
+    window.on(
+      "unmaximize",
+      publishState
+    );
     window.on("restore", publishState);
-    window.on("always-on-top-changed", publishState);
+
+    window.on(
+      "always-on-top-changed",
+      publishState
+    );
 
     window.on("closed", () => {
       this.window = null;

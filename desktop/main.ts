@@ -1,9 +1,13 @@
 import {
   app,
+  globalShortcut,
   ipcMain,
   type IpcMainInvokeEvent,
 } from "electron";
-import { DESKTOP_CHANNELS } from "./contracts.js";
+import {
+  DESKTOP_CHANNELS,
+  ORACLE_DESKTOP_RECOVERY_SHORTCUT,
+} from "./contracts.js";
 import { CompanionHostWindowController } from "./overlay-window.js";
 
 const DEFAULT_COMPANION_URL =
@@ -20,13 +24,14 @@ if (!hasSingleInstanceLock) {
   app.quit();
 } else {
   app.on("second-instance", () => {
-    hostWindowController?.showAndFocus();
+    restoreInteraction();
   });
 
   app
     .whenReady()
     .then(async () => {
       registerIpcHandlers();
+      registerRecoveryShortcut();
 
       hostWindowController =
         createHostWindowController();
@@ -44,8 +49,10 @@ if (!hasSingleInstanceLock) {
 }
 
 app.on("activate", () => {
-  if (hostWindowController?.getWindow()) {
-    hostWindowController.showAndFocus();
+  if (
+    hostWindowController?.getWindow()
+  ) {
+    restoreInteraction();
     return;
   }
 
@@ -73,12 +80,50 @@ app.on("before-quit", () => {
   hostWindowController = null;
 });
 
+app.on("will-quit", () => {
+  globalShortcut.unregister(
+    ORACLE_DESKTOP_RECOVERY_SHORTCUT
+  );
+});
+
 function createHostWindowController(): CompanionHostWindowController {
   return new CompanionHostWindowController({
     companionUrl:
       process.env.ORACLE_COMPANION_URL ??
       DEFAULT_COMPANION_URL,
   });
+}
+
+function registerRecoveryShortcut(): void {
+  const registered =
+    globalShortcut.register(
+      ORACLE_DESKTOP_RECOVERY_SHORTCUT,
+      () => {
+        restoreInteraction();
+      }
+    );
+
+  if (!registered) {
+    console.warn(
+      `Oracle Companion could not register the recovery shortcut '${ORACLE_DESKTOP_RECOVERY_SHORTCUT}'.`
+    );
+  }
+}
+
+function restoreInteraction(): void {
+  if (!hostWindowController) {
+    return;
+  }
+
+  try {
+    hostWindowController
+      .restoreInteraction();
+  } catch (error) {
+    console.error(
+      "Oracle Companion could not restore interactive mode.",
+      error
+    );
+  }
 }
 
 function registerIpcHandlers(): void {
@@ -108,6 +153,24 @@ function registerIpcHandlers(): void {
       return requireAuthorizedController(
         event
       ).toggleAlwaysOnTop();
+    }
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.toggleClickThrough,
+    (event) => {
+      return requireAuthorizedController(
+        event
+      ).toggleClickThrough();
+    }
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.restoreInteraction,
+    (event) => {
+      return requireAuthorizedController(
+        event
+      ).restoreInteraction();
     }
   );
 
@@ -150,6 +213,14 @@ function removeIpcHandlers(): void {
 
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.toggleAlwaysOnTop
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.toggleClickThrough
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.restoreInteraction
   );
 
   ipcMain.removeHandler(

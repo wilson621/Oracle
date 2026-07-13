@@ -5,6 +5,7 @@ import {
   Eye,
   EyeOff,
   Minus,
+  MousePointer2,
   Pin,
   PinOff,
   Square,
@@ -53,11 +54,13 @@ export default function CompanionTitleBar() {
       });
 
     const unsubscribe =
-      bridge.onHostStateChanged((state) => {
-        if (!cancelled) {
-          setHostState(state);
+      bridge.onHostStateChanged(
+        (state) => {
+          if (!cancelled) {
+            setHostState(state);
+          }
         }
-      });
+      );
 
     return () => {
       cancelled = true;
@@ -93,6 +96,9 @@ export default function CompanionTitleBar() {
   const alwaysOnTopEnabled =
     hostState?.alwaysOnTop ?? false;
 
+  const clickThroughEnabled =
+    hostState?.clickThrough ?? false;
+
   async function toggleOverlayPreview() {
     const state =
       await window.oracleDesktop
@@ -113,8 +119,26 @@ export default function CompanionTitleBar() {
     }
   }
 
+  async function toggleClickThrough() {
+    try {
+      const state =
+        await window.oracleDesktop
+          ?.toggleClickThrough();
+
+      if (state) {
+        setHostState(state);
+      }
+    } catch (error) {
+      console.error(
+        "Unable to toggle Oracle click-through mode.",
+        error
+      );
+    }
+  }
+
   async function minimizeWindow() {
-    await window.oracleDesktop?.minimizeWindow();
+    await window.oracleDesktop
+      ?.minimizeWindow();
   }
 
   async function toggleMaximizeWindow() {
@@ -128,7 +152,8 @@ export default function CompanionTitleBar() {
   }
 
   async function closeWindow() {
-    await window.oracleDesktop?.closeWindow();
+    await window.oracleDesktop
+      ?.closeWindow();
   }
 
   return (
@@ -158,6 +183,12 @@ export default function CompanionTitleBar() {
             PINNED
           </span>
         )}
+
+        {clickThroughEnabled && (
+          <span className="oracle-desktop-titlebar__mode">
+            CLICK-THROUGH · CTRL+SHIFT+O
+          </span>
+        )}
       </div>
 
       <div className="oracle-desktop-titlebar__controls">
@@ -183,9 +214,15 @@ export default function CompanionTitleBar() {
           }}
         >
           {overlayPreviewEnabled ? (
-            <EyeOff size={15} strokeWidth={1.8} />
+            <EyeOff
+              size={15}
+              strokeWidth={1.8}
+            />
           ) : (
-            <Eye size={15} strokeWidth={1.8} />
+            <Eye
+              size={15}
+              strokeWidth={1.8}
+            />
           )}
         </button>
 
@@ -211,10 +248,49 @@ export default function CompanionTitleBar() {
           }}
         >
           {alwaysOnTopEnabled ? (
-            <PinOff size={15} strokeWidth={1.8} />
+            <PinOff
+              size={15}
+              strokeWidth={1.8}
+            />
           ) : (
-            <Pin size={15} strokeWidth={1.8} />
+            <Pin
+              size={15}
+              strokeWidth={1.8}
+            />
           )}
+        </button>
+
+        <button
+          type="button"
+          className={
+            clickThroughEnabled
+              ? "oracle-desktop-titlebar__button oracle-desktop-titlebar__button--active"
+              : "oracle-desktop-titlebar__button"
+          }
+          disabled={
+            !overlayPreviewEnabled &&
+            !clickThroughEnabled
+          }
+          aria-label={
+            clickThroughEnabled
+              ? "Click-through enabled. Press Control Shift O to restore interaction."
+              : "Enable click-through"
+          }
+          title={
+            clickThroughEnabled
+              ? "Click-through enabled — press Ctrl+Shift+O to restore interaction"
+              : overlayPreviewEnabled
+                ? "Enable click-through"
+                : "Enable overlay preview first"
+          }
+          onClick={() => {
+            void toggleClickThrough();
+          }}
+        >
+          <MousePointer2
+            size={15}
+            strokeWidth={1.8}
+          />
         </button>
 
         <button
@@ -226,7 +302,10 @@ export default function CompanionTitleBar() {
             void minimizeWindow();
           }}
         >
-          <Minus size={15} strokeWidth={1.8} />
+          <Minus
+            size={15}
+            strokeWidth={1.8}
+          />
         </button>
 
         <button
@@ -247,9 +326,15 @@ export default function CompanionTitleBar() {
           }}
         >
           {hostState?.windowMaximized ? (
-            <Copy size={13} strokeWidth={1.8} />
+            <Copy
+              size={13}
+              strokeWidth={1.8}
+            />
           ) : (
-            <Square size={12} strokeWidth={1.8} />
+            <Square
+              size={12}
+              strokeWidth={1.8}
+            />
           )}
         </button>
 
@@ -262,7 +347,10 @@ export default function CompanionTitleBar() {
             void closeWindow();
           }}
         >
-          <X size={16} strokeWidth={1.8} />
+          <X
+            size={16}
+            strokeWidth={1.8}
+          />
         </button>
       </div>
     </header>

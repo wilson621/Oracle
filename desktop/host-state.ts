@@ -46,7 +46,10 @@ export class OracleDesktopHostStateModel {
   }
 
   isTransparent(): boolean {
-    return this.configuration.windowMode === "overlay-preview";
+    return (
+      this.configuration.windowMode ===
+      "overlay-preview"
+    );
   }
 
   isAlwaysOnTop(): boolean {
@@ -57,13 +60,28 @@ export class OracleDesktopHostStateModel {
     return this.configuration.clickThrough;
   }
 
+  canEnableClickThrough(): boolean {
+    return this.isTransparent();
+  }
+
   toggleOverlayPreview(): OracleDesktopWindowMode {
+    const nextWindowMode: OracleDesktopWindowMode =
+      this.configuration.windowMode ===
+      "development"
+        ? "overlay-preview"
+        : "development";
+
     this.configuration = {
       ...this.configuration,
-      windowMode:
-        this.configuration.windowMode === "development"
-          ? "overlay-preview"
-          : "development",
+      windowMode: nextWindowMode,
+
+      /*
+       * Development mode must always remain interactive.
+       */
+      clickThrough:
+        nextWindowMode === "development"
+          ? false
+          : this.configuration.clickThrough,
     };
 
     return this.configuration.windowMode;
@@ -72,10 +90,30 @@ export class OracleDesktopHostStateModel {
   toggleAlwaysOnTop(): boolean {
     this.configuration = {
       ...this.configuration,
-      alwaysOnTop: !this.configuration.alwaysOnTop,
+      alwaysOnTop:
+        !this.configuration.alwaysOnTop,
     };
 
     return this.configuration.alwaysOnTop;
+  }
+
+  toggleClickThrough(): boolean {
+    if (
+      !this.configuration.clickThrough &&
+      !this.canEnableClickThrough()
+    ) {
+      throw new Error(
+        "Click-through can only be enabled while transparent overlay preview is active."
+      );
+    }
+
+    this.configuration = {
+      ...this.configuration,
+      clickThrough:
+        !this.configuration.clickThrough,
+    };
+
+    return this.configuration.clickThrough;
   }
 
   setAlwaysOnTop(enabled: boolean): void {
@@ -86,9 +124,25 @@ export class OracleDesktopHostStateModel {
   }
 
   setClickThrough(enabled: boolean): void {
+    if (
+      enabled &&
+      !this.canEnableClickThrough()
+    ) {
+      throw new Error(
+        "Click-through can only be enabled while transparent overlay preview is active."
+      );
+    }
+
     this.configuration = {
       ...this.configuration,
       clickThrough: enabled,
+    };
+  }
+
+  restoreInteraction(): void {
+    this.configuration = {
+      ...this.configuration,
+      clickThrough: false,
     };
   }
 
@@ -109,11 +163,14 @@ export class OracleDesktopHostStateModel {
       windowFocused: observation.focused,
       windowMaximized: observation.maximized,
 
-      windowMode: this.configuration.windowMode,
+      windowMode:
+        this.configuration.windowMode,
 
       transparent: this.isTransparent(),
-      alwaysOnTop: this.configuration.alwaysOnTop,
-      clickThrough: this.configuration.clickThrough,
+      alwaysOnTop:
+        this.configuration.alwaysOnTop,
+      clickThrough:
+        this.configuration.clickThrough,
 
       developmentMode,
     };

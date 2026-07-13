@@ -25,6 +25,16 @@ const oracleDesktopBridge: OracleDesktopBridge = {
       DESKTOP_CHANNELS.toggleAlwaysOnTop
     ) as Promise<OracleDesktopHostState>,
 
+  toggleClickThrough: () =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.toggleClickThrough
+    ) as Promise<OracleDesktopHostState>,
+
+  restoreInteraction: () =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.restoreInteraction
+    ) as Promise<OracleDesktopHostState>,
+
   minimizeWindow: () =>
     ipcRenderer.invoke(
       DESKTOP_CHANNELS.minimizeWindow
