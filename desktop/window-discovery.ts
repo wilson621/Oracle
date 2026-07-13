@@ -2,6 +2,8 @@ import {
   execFile,
   type ExecFileOptions,
 } from "node:child_process";
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
@@ -9,6 +11,9 @@ const execFileAsync = promisify(execFile);
 const DISCOVERY_TIMEOUT_MS = 5_000;
 const DISCOVERY_MAX_BUFFER_BYTES =
   2 * 1024 * 1024;
+
+const WINDOWS_DISCOVERY_EXECUTABLE =
+  "Oracle.WindowDiscovery.exe";
 
 export type OracleDesktopDiscoveredWindow = {
   id: string;
@@ -67,7 +72,8 @@ type WindowsWindowRecord = {
 export class OracleDesktopWindowDiscoveryService {
   async discover(): Promise<OracleDesktopWindowDiscoveryResult> {
     const startedAt = Date.now();
-    const discoveredAt = new Date().toISOString();
+    const discoveredAt =
+      new Date().toISOString();
 
     if (process.platform !== "win32") {
       return {
@@ -75,7 +81,8 @@ export class OracleDesktopWindowDiscoveryService {
         platform: process.platform,
         windows: [],
         discoveredAt,
-        durationMs: Date.now() - startedAt,
+        durationMs:
+          Date.now() - startedAt,
         error:
           "Desktop window discovery is currently implemented for Windows only.",
       };
@@ -83,7 +90,7 @@ export class OracleDesktopWindowDiscoveryService {
 
     try {
       const records =
-        await discoverWindowsWithPowerShell();
+        await discoverWindowsWithNativeHelper();
 
       const windows = records
         .map((record) =>
@@ -105,7 +112,8 @@ export class OracleDesktopWindowDiscoveryService {
         platform: process.platform,
         windows,
         discoveredAt,
-        durationMs: Date.now() - startedAt,
+        durationMs:
+          Date.now() - startedAt,
         error: null,
       };
     } catch (error) {
@@ -114,34 +122,37 @@ export class OracleDesktopWindowDiscoveryService {
         platform: process.platform,
         windows: [],
         discoveredAt,
-        durationMs: Date.now() - startedAt,
+        durationMs:
+          Date.now() - startedAt,
         error: getErrorMessage(error),
       };
     }
   }
 }
 
-async function discoverWindowsWithPowerShell(): Promise<
+async function discoverWindowsWithNativeHelper(): Promise<
   WindowsWindowRecord[]
 > {
+  const executablePath =
+    resolveDiscoveryExecutablePath();
+
+  if (!existsSync(executablePath)) {
+    throw new Error(
+      `Oracle native window discovery helper was not found at '${executablePath}'. Run the native helper build before starting Oracle Companion.`
+    );
+  }
+
   const options: ExecFileOptions = {
     windowsHide: true,
     timeout: DISCOVERY_TIMEOUT_MS,
-    maxBuffer: DISCOVERY_MAX_BUFFER_BYTES,
+    maxBuffer:
+      DISCOVERY_MAX_BUFFER_BYTES,
     encoding: "utf8",
   };
 
   const { stdout } = await execFileAsync(
-    "powershell.exe",
-    [
-      "-NoLogo",
-      "-NoProfile",
-      "-NonInteractive",
-      "-ExecutionPolicy",
-      "Bypass",
-      "-Command",
-      WINDOWS_WINDOW_DISCOVERY_SCRIPT,
-    ],
+    executablePath,
+    [],
     options
   );
 
@@ -151,21 +162,54 @@ async function discoverWindowsWithPowerShell(): Promise<
       : stdout.toString("utf8").trim();
 
   if (!output) {
-    return [];
+    throw new Error(
+      "Oracle native window discovery helper returned no output."
+    );
   }
 
-  const parsed: unknown = JSON.parse(output);
+  let parsed: unknown;
 
-  if (Array.isArray(parsed)) {
-    return parsed.filter(isObjectRecord);
+  try {
+    parsed = JSON.parse(output);
+  } catch {
+    throw new Error(
+      "Oracle native window discovery helper returned invalid JSON."
+    );
   }
 
-  if (isObjectRecord(parsed)) {
-    return [parsed];
+  if (!Array.isArray(parsed)) {
+    throw new Error(
+      "Oracle native window discovery helper returned an unexpected payload."
+    );
   }
 
-  throw new Error(
-    "Windows window discovery returned an unexpected payload."
+  return parsed.filter(isObjectRecord);
+}
+
+function resolveDiscoveryExecutablePath(): string {
+  const configuredPath =
+    process.env
+      .ORACLE_WINDOW_DISCOVERY_EXECUTABLE;
+
+  if (
+    typeof configuredPath === "string" &&
+    configuredPath.trim().length > 0
+  ) {
+    return resolve(
+      configuredPath.trim()
+    );
+  }
+
+  /*
+   * Compiled Electron files live in dist-electron.
+   * The native helper is built into the sibling
+   * dist-native directory.
+   */
+  return resolve(
+    __dirname,
+    "..",
+    "dist-native",
+    WINDOWS_DISCOVERY_EXECUTABLE
   );
 }
 
@@ -173,28 +217,36 @@ function normaliseWindowRecord(
   record: WindowsWindowRecord,
   discoveredAt: string
 ): OracleDesktopDiscoveredWindow | null {
-  const handle = normaliseRequiredString(
-    record.handle
-  );
+  const handle =
+    normaliseRequiredString(
+      record.handle
+    );
 
-  const title = normaliseRequiredString(
-    record.title
-  );
+  const title =
+    normaliseRequiredString(
+      record.title
+    );
 
-  const processId = normaliseNonNegativeInteger(
-    record.processId
-  );
+  const processId =
+    normaliseNonNegativeInteger(
+      record.processId
+    );
 
-  const x = normaliseInteger(record.x);
-  const y = normaliseInteger(record.y);
+  const x =
+    normaliseInteger(record.x);
 
-  const width = normalisePositiveInteger(
-    record.width
-  );
+  const y =
+    normaliseInteger(record.y);
 
-  const height = normalisePositiveInteger(
-    record.height
-  );
+  const width =
+    normalisePositiveInteger(
+      record.width
+    );
+
+  const height =
+    normalisePositiveInteger(
+      record.height
+    );
 
   if (
     !handle ||
@@ -215,17 +267,20 @@ function normaliseWindowRecord(
     title,
 
     processId,
-    processName: normaliseOptionalString(
-      record.processName
-    ),
+    processName:
+      normaliseOptionalString(
+        record.processName
+      ),
 
-    visible: normaliseBoolean(
-      record.visible
-    ),
+    visible:
+      normaliseBoolean(
+        record.visible
+      ),
 
-    minimized: normaliseBoolean(
-      record.minimized
-    ),
+    minimized:
+      normaliseBoolean(
+        record.minimized
+      ),
 
     bounds: {
       x,
@@ -243,7 +298,8 @@ function compareDiscoveredWindows(
   right: OracleDesktopDiscoveredWindow
 ): number {
   if (
-    left.minimized !== right.minimized
+    left.minimized !==
+    right.minimized
   ) {
     return left.minimized ? 1 : -1;
   }
@@ -262,7 +318,8 @@ function compareDiscoveredWindows(
   }
 
   return (
-    left.processId - right.processId
+    left.processId -
+    right.processId
   );
 }
 
@@ -354,6 +411,51 @@ function isObjectRecord(
 function getErrorMessage(
   error: unknown
 ): string {
+  if (
+    typeof error === "object" &&
+    error !== null
+  ) {
+    const commandError = error as {
+      message?: unknown;
+      stderr?: unknown;
+      code?: unknown;
+      killed?: unknown;
+      signal?: unknown;
+    };
+
+    const stderr =
+      normaliseErrorOutput(
+        commandError.stderr
+      );
+
+    if (stderr) {
+      return stderr;
+    }
+
+    if (
+      commandError.killed === true
+    ) {
+      return `Oracle native window discovery exceeded the ${DISCOVERY_TIMEOUT_MS}ms timeout.`;
+    }
+
+    if (
+      commandError.code === "ENOENT"
+    ) {
+      return (
+        "Oracle native window discovery helper could not be found or started."
+      );
+    }
+
+    if (
+      typeof commandError.message ===
+      "string"
+    ) {
+      return sanitiseCommandError(
+        commandError.message
+      );
+    }
+  }
+
   if (error instanceof Error) {
     return error.message;
   }
@@ -361,186 +463,48 @@ function getErrorMessage(
   return String(error);
 }
 
-const WINDOWS_WINDOW_DISCOVERY_SCRIPT = String.raw`
-$ErrorActionPreference = "Stop"
+function normaliseErrorOutput(
+  output: unknown
+): string | null {
+  let text: string | null = null;
 
-Add-Type @"
-using System;
-using System.Text;
-using System.Runtime.InteropServices;
+  if (typeof output === "string") {
+    text = output;
+  } else if (Buffer.isBuffer(output)) {
+    text =
+      output.toString("utf8");
+  }
 
-public static class OracleWindowDiscovery
-{
-    public delegate bool EnumWindowsProc(
-        IntPtr hWnd,
-        IntPtr lParam
-    );
+  if (!text) {
+    return null;
+  }
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct RECT
-    {
-        public int Left;
-        public int Top;
-        public int Right;
-        public int Bottom;
-    }
+  const normalised = text.trim();
 
-    [DllImport("user32.dll")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool EnumWindows(
-        EnumWindowsProc callback,
-        IntPtr lParam
-    );
-
-    [DllImport("user32.dll")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool IsWindowVisible(
-        IntPtr hWnd
-    );
-
-    [DllImport("user32.dll")]
-    public static extern int GetWindowTextLength(
-        IntPtr hWnd
-    );
-
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    public static extern int GetWindowText(
-        IntPtr hWnd,
-        StringBuilder text,
-        int maxLength
-    );
-
-    [DllImport("user32.dll")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool GetWindowRect(
-        IntPtr hWnd,
-        out RECT rectangle
-    );
-
-    [DllImport("user32.dll")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool IsIconic(
-        IntPtr hWnd
-    );
-
-    [DllImport("user32.dll")]
-    public static extern uint GetWindowThreadProcessId(
-        IntPtr hWnd,
-        out uint processId
-    );
-
-    [DllImport("dwmapi.dll")]
-    public static extern int DwmGetWindowAttribute(
-        IntPtr hWnd,
-        int attribute,
-        out int value,
-        int valueSize
-    );
-}
-"@
-
-$windows = New-Object System.Collections.Generic.List[object]
-
-$callback = [OracleWindowDiscovery+EnumWindowsProc]{
-    param(
-        [IntPtr] $windowHandle,
-        [IntPtr] $parameter
-    )
-
-    if (-not [OracleWindowDiscovery]::IsWindowVisible($windowHandle)) {
-        return $true
-    }
-
-    $titleLength = [OracleWindowDiscovery]::GetWindowTextLength($windowHandle)
-
-    if ($titleLength -le 0) {
-        return $true
-    }
-
-    $titleBuilder = New-Object System.Text.StringBuilder ($titleLength + 1)
-
-    [void][OracleWindowDiscovery]::GetWindowText(
-        $windowHandle,
-        $titleBuilder,
-        $titleBuilder.Capacity
-    )
-
-    $title = $titleBuilder.ToString().Trim()
-
-    if ([string]::IsNullOrWhiteSpace($title)) {
-        return $true
-    }
-
-    $cloaked = 0
-    $dwmResult = [OracleWindowDiscovery]::DwmGetWindowAttribute(
-        $windowHandle,
-        14,
-        [ref] $cloaked,
-        4
-    )
-
-    if ($dwmResult -eq 0 -and $cloaked -ne 0) {
-        return $true
-    }
-
-    $rectangle = New-Object OracleWindowDiscovery+RECT
-
-    if (-not [OracleWindowDiscovery]::GetWindowRect(
-        $windowHandle,
-        [ref] $rectangle
-    )) {
-        return $true
-    }
-
-    $width = $rectangle.Right - $rectangle.Left
-    $height = $rectangle.Bottom - $rectangle.Top
-
-    if ($width -le 0 -or $height -le 0) {
-        return $true
-    }
-
-    [uint32] $processId = 0
-
-    [void][OracleWindowDiscovery]::GetWindowThreadProcessId(
-        $windowHandle,
-        [ref] $processId
-    )
-
-    $processName = $null
-
-    if ($processId -gt 0) {
-        try {
-            $processName = (
-                Get-Process -Id $processId -ErrorAction Stop
-            ).ProcessName
-        }
-        catch {
-            $processName = $null
-        }
-    }
-
-    $windows.Add(
-        [PSCustomObject]@{
-            handle = $windowHandle.ToInt64().ToString()
-            title = $title
-            processId = [int] $processId
-            processName = $processName
-            visible = $true
-            minimized = [OracleWindowDiscovery]::IsIconic($windowHandle)
-            x = $rectangle.Left
-            y = $rectangle.Top
-            width = $width
-            height = $height
-        }
-    )
-
-    return $true
+  return normalised.length > 0
+    ? normalised
+    : null;
 }
 
-[void][OracleWindowDiscovery]::EnumWindows(
-    $callback,
-    [IntPtr]::Zero
-)
+function sanitiseCommandError(
+  message: string
+): string {
+  const normalised =
+    message.trim();
 
-ConvertTo-Json -InputObject @($windows) -Compress
-`;
+  const lineBreakIndex =
+    normalised.indexOf("\n");
+
+  if (lineBreakIndex === -1) {
+    return normalised;
+  }
+
+  const firstLine = normalised
+    .slice(0, lineBreakIndex)
+    .trim();
+
+  return (
+    firstLine ||
+    "Oracle native window discovery failed."
+  );
+}
