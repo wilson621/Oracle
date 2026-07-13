@@ -42,3 +42,8 @@ next-env.d.ts
 
 # Electron build output
 dist-electron/
+
+# Native desktop build output
+dist-native/
+desktop-native/**/bin/
+desktop-native/**/obj/
