@@ -3,6 +3,7 @@ import { join } from "node:path";
 import {
   DESKTOP_CHANNELS,
   type OracleDesktopHostState,
+  type OracleDesktopWindowMode,
 } from "./contracts.js";
 
 export type CompanionHostWindowOptions = {
@@ -12,8 +13,14 @@ export type CompanionHostWindowOptions = {
 const DEVELOPMENT_WINDOW_WIDTH = 1200;
 const DEVELOPMENT_WINDOW_HEIGHT = 800;
 
+const DEVELOPMENT_BACKGROUND = "#090b10";
+const TRANSPARENT_BACKGROUND = "#00000000";
+
 export class CompanionHostWindowController {
   private window: BrowserWindow | null = null;
+
+  private windowMode: OracleDesktopWindowMode =
+    "development";
 
   constructor(
     private readonly options: CompanionHostWindowOptions
@@ -27,6 +34,11 @@ export class CompanionHostWindowController {
       return existingWindow;
     }
 
+    /*
+     * The native window is transparency-capable from creation,
+     * but launches with an opaque background in safe development
+     * mode. Overlay preview must be enabled explicitly.
+     */
     const window = new BrowserWindow({
       width: DEVELOPMENT_WINDOW_WIDTH,
       height: DEVELOPMENT_WINDOW_HEIGHT,
@@ -40,8 +52,8 @@ export class CompanionHostWindowController {
       title: "Oracle Companion",
 
       frame: false,
-      transparent: false,
-      backgroundColor: "#090b10",
+      transparent: true,
+      backgroundColor: DEVELOPMENT_BACKGROUND,
 
       alwaysOnTop: false,
       skipTaskbar: false,
@@ -54,21 +66,28 @@ export class CompanionHostWindowController {
       focusable: true,
 
       webPreferences: {
-  preload: join(__dirname, "preload.js"),
+        preload: join(__dirname, "preload.js"),
 
-  nodeIntegration: false,
-  contextIsolation: true,
-  sandbox: false,
+        nodeIntegration: false,
+        contextIsolation: true,
 
-  webSecurity: true,
-  allowRunningInsecureContent: false,
+        /*
+         * Required by the current compiled preload arrangement.
+         * Node integration remains disabled and the renderer only
+         * receives the narrow contextBridge API.
+         */
+        sandbox: false,
 
-  devTools:
-    process.env.NODE_ENV !== "production",
-},
+        webSecurity: true,
+        allowRunningInsecureContent: false,
+
+        devTools:
+          process.env.NODE_ENV !== "production",
+      },
     });
 
     this.window = window;
+    this.windowMode = "development";
 
     this.registerNavigationSecurity(window);
     this.registerWindowEvents(window);
@@ -76,6 +95,7 @@ export class CompanionHostWindowController {
     await window.loadURL(this.options.companionUrl);
 
     if (!window.isDestroyed()) {
+      this.applyWindowMode();
       window.show();
       window.focus();
       this.publishState();
@@ -94,7 +114,10 @@ export class CompanionHostWindowController {
   }
 
   ownsWebContentsId(webContentsId: number): boolean {
-    return this.getWindow()?.webContents.id === webContentsId;
+    return (
+      this.getWindow()?.webContents.id ===
+      webContentsId
+    );
   }
 
   getState(): OracleDesktopHostState {
@@ -105,6 +128,9 @@ export class CompanionHostWindowController {
       windowVisible: window.isVisible(),
       windowFocused: window.isFocused(),
       windowMaximized: window.isMaximized(),
+      windowMode: this.windowMode,
+      transparent:
+        this.windowMode === "overlay-preview",
       developmentMode:
         process.env.NODE_ENV !== "production",
     };
@@ -124,6 +150,18 @@ export class CompanionHostWindowController {
     window.show();
     window.focus();
     this.publishState();
+  }
+
+  toggleOverlayPreview(): OracleDesktopHostState {
+    this.windowMode =
+      this.windowMode === "development"
+        ? "overlay-preview"
+        : "development";
+
+    this.applyWindowMode();
+    this.publishState();
+
+    return this.getState();
   }
 
   minimize(): OracleDesktopHostState {
@@ -157,6 +195,30 @@ export class CompanionHostWindowController {
     }
 
     window.close();
+  }
+
+  private applyWindowMode(): void {
+    const window = this.getRequiredWindow();
+
+    const overlayPreviewEnabled =
+      this.windowMode === "overlay-preview";
+
+    window.setBackgroundColor(
+      overlayPreviewEnabled
+        ? TRANSPARENT_BACKGROUND
+        : DEVELOPMENT_BACKGROUND
+    );
+
+    /*
+     * Preview remains safe and fully interactive.
+     * Always-on-top and click-through are deliberately disabled.
+     */
+    window.setAlwaysOnTop(false);
+    window.setIgnoreMouseEvents(false);
+
+    if (!window.isFocused()) {
+      window.focus();
+    }
   }
 
   private registerNavigationSecurity(
@@ -208,6 +270,7 @@ export class CompanionHostWindowController {
 
     window.on("closed", () => {
       this.window = null;
+      this.windowMode = "development";
     });
 
     window.on("unresponsive", () => {

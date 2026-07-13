@@ -94,6 +94,15 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
+    DESKTOP_CHANNELS.toggleOverlayPreview,
+    (event) => {
+      return requireAuthorizedController(
+        event
+      ).toggleOverlayPreview();
+    }
+  );
+
+  ipcMain.handle(
     DESKTOP_CHANNELS.minimizeWindow,
     (event) => {
       return requireAuthorizedController(
@@ -124,6 +133,10 @@ function registerIpcHandlers(): void {
 function removeIpcHandlers(): void {
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.getHostState
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.toggleOverlayPreview
   );
 
   ipcMain.removeHandler(

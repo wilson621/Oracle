@@ -20,7 +20,13 @@
   }
 }
 
+html,
 body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
@@ -50,7 +56,6 @@ body {
   color: rgba(255, 255, 255, 0.78);
 
   user-select: none;
-  app-region: drag;
   -webkit-app-region: drag;
 }
 
@@ -94,11 +99,26 @@ body {
   white-space: nowrap;
 }
 
+.oracle-desktop-titlebar__mode {
+  padding: 3px 7px;
+
+  border: 1px solid
+    rgba(96, 165, 250, 0.28);
+  border-radius: 999px;
+
+  background: rgba(96, 165, 250, 0.1);
+  color: rgba(147, 197, 253, 0.9);
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+
 .oracle-desktop-titlebar__controls {
   display: flex;
   align-self: stretch;
 
-  app-region: no-drag;
   -webkit-app-region: no-drag;
 }
 
@@ -118,7 +138,6 @@ body {
     background-color 120ms ease,
     color 120ms ease;
 
-  app-region: no-drag;
   -webkit-app-region: no-drag;
 }
 
@@ -130,6 +149,16 @@ body {
 .oracle-desktop-titlebar__button:focus-visible {
   outline: 1px solid rgba(96, 165, 250, 0.9);
   outline-offset: -2px;
+}
+
+.oracle-desktop-titlebar__button--active {
+  background: rgba(96, 165, 250, 0.14);
+  color: #93c5fd;
+}
+
+.oracle-desktop-titlebar__button--active:hover {
+  background: rgba(96, 165, 250, 0.22);
+  color: #bfdbfe;
 }
 
 .oracle-desktop-titlebar__button--close:hover {
@@ -145,4 +174,41 @@ body {
   + .oracle-desktop-content {
   padding-top:
     var(--oracle-desktop-titlebar-height);
+}
+
+/*
+ * Safe transparent-preview presentation.
+ *
+ * This removes only full-window backgrounds. Oracle panels,
+ * navigation and controls remain visible and interactive.
+ */
+html.oracle-overlay-preview,
+html.oracle-overlay-preview body {
+  background: transparent;
+}
+
+html.oracle-overlay-preview
+  .oracle-desktop-content {
+  background: transparent;
+}
+
+html.oracle-overlay-preview
+  .oracle-desktop-content
+  > main {
+  background: transparent !important;
+}
+
+html.oracle-overlay-preview
+  .oracle-desktop-titlebar {
+  border-bottom-color:
+    rgba(147, 197, 253, 0.14);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 11, 18, 0.88),
+      rgba(13, 17, 26, 0.82)
+    );
+
+  backdrop-filter: blur(18px);
 }

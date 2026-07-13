@@ -2,6 +2,8 @@
 
 import {
   Copy,
+  Eye,
+  EyeOff,
   Minus,
   Square,
   X,
@@ -11,6 +13,9 @@ import {
   useState,
 } from "react";
 import type { OracleDesktopHostState } from "@/desktop/contracts";
+
+const OVERLAY_PREVIEW_CLASS =
+  "oracle-overlay-preview";
 
 export default function CompanionTitleBar() {
   const [hostState, setHostState] =
@@ -58,8 +63,39 @@ export default function CompanionTitleBar() {
     };
   }, []);
 
+  useEffect(() => {
+    const overlayPreviewEnabled =
+      hostState?.windowMode ===
+      "overlay-preview";
+
+    document.documentElement.classList.toggle(
+      OVERLAY_PREVIEW_CLASS,
+      overlayPreviewEnabled
+    );
+
+    return () => {
+      document.documentElement.classList.remove(
+        OVERLAY_PREVIEW_CLASS
+      );
+    };
+  }, [hostState?.windowMode]);
+
   if (!desktopAvailable) {
     return null;
+  }
+
+  const overlayPreviewEnabled =
+    hostState?.windowMode ===
+    "overlay-preview";
+
+  async function toggleOverlayPreview() {
+    const state =
+      await window.oracleDesktop
+        ?.toggleOverlayPreview();
+
+    if (state) {
+      setHostState(state);
+    }
   }
 
   async function minimizeWindow() {
@@ -68,7 +104,8 @@ export default function CompanionTitleBar() {
 
   async function toggleMaximizeWindow() {
     const state =
-      await window.oracleDesktop?.toggleMaximizeWindow();
+      await window.oracleDesktop
+        ?.toggleMaximizeWindow();
 
     if (state) {
       setHostState(state);
@@ -94,9 +131,49 @@ export default function CompanionTitleBar() {
         <span className="oracle-desktop-titlebar__division">
           COMPANION
         </span>
+
+        {overlayPreviewEnabled && (
+          <span className="oracle-desktop-titlebar__mode">
+            OVERLAY PREVIEW
+          </span>
+        )}
       </div>
 
       <div className="oracle-desktop-titlebar__controls">
+        <button
+          type="button"
+          className={
+            overlayPreviewEnabled
+              ? "oracle-desktop-titlebar__button oracle-desktop-titlebar__button--active"
+              : "oracle-desktop-titlebar__button"
+          }
+          aria-label={
+            overlayPreviewEnabled
+              ? "Exit transparent overlay preview"
+              : "Enter transparent overlay preview"
+          }
+          title={
+            overlayPreviewEnabled
+              ? "Exit overlay preview"
+              : "Preview transparency"
+          }
+          onClick={() => {
+            void toggleOverlayPreview();
+          }}
+        >
+          {overlayPreviewEnabled ? (
+            <EyeOff
+              size={15}
+              strokeWidth={1.8}
+            />
+          ) : (
+            <Eye
+              size={15}
+              strokeWidth={1.8}
+            />
+          )}
+        </button>
+
         <button
           type="button"
           className="oracle-desktop-titlebar__button"
@@ -129,7 +206,10 @@ export default function CompanionTitleBar() {
           {hostState?.windowMaximized ? (
             <Copy size={13} strokeWidth={1.8} />
           ) : (
-            <Square size={12} strokeWidth={1.8} />
+            <Square
+              size={12}
+              strokeWidth={1.8}
+            />
           )}
         </button>
 

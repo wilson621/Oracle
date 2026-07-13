@@ -15,6 +15,11 @@ const oracleDesktopBridge: OracleDesktopBridge = {
       DESKTOP_CHANNELS.getHostState
     ) as Promise<OracleDesktopHostState>,
 
+  toggleOverlayPreview: () =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.toggleOverlayPreview
+    ) as Promise<OracleDesktopHostState>,
+
   minimizeWindow: () =>
     ipcRenderer.invoke(
       DESKTOP_CHANNELS.minimizeWindow
