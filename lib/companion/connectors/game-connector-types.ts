@@ -4,6 +4,7 @@ import type {
   CompanionGame,
   CompanionWindowBounds,
 } from "../companion-types";
+import type { CompanionGameConnectorManifest } from "./game-connector-manifest";
 
 export type CompanionGameCompatibilityStatus =
   | "supported"
@@ -57,6 +58,8 @@ export type CompanionConnectorObservation = {
 };
 
 export type CompanionGameConnector = {
+  manifest: CompanionGameConnectorManifest;
+
   id: string;
   gameId: string;
   name: string;

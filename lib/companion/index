@@ -2,4 +2,7 @@ export * from "./companion-events";
 export * from "./companion-runtime";
 export * from "./companion-state";
 export * from "./companion-types";
+
+export * from "./capabilities";
 export * from "./connectors";
+export * from "./extensions";
