@@ -1,42 +1,56 @@
 # ORACLE ROADMAP
 
-Strategic Product Roadmap
+## Strategic Product Roadmap
 
-Version 3.0
-
-Last Updated: 9 July 2026
+**Version:** 4.1  
+**Last Updated:** Sprint 8 – Oracle Platform Foundation
 
 ---
 
 # Purpose
 
-This roadmap defines the long-term evolution of Oracle.
+The Oracle Roadmap defines the long-term evolution of the Oracle Platform.
 
-Oracle is developed through Operations rather than isolated feature milestones.
+Unlike traditional software roadmaps that focus on isolated features, Oracle evolves through deliberate architectural milestones that permanently strengthen the platform.
 
-Each Operation delivers a permanent platform capability.
-
-Capabilities strengthen Oracle permanently.
-
-Features evolve.
-
-Architecture endures.
-
-The roadmap exists to ensure Oracle grows through deliberate engineering rather than short-term feature development.
-
-Every completed Operation should leave Oracle:
+Every completed milestone should leave Oracle:
 
 - More intelligent
 - More reusable
 - More scalable
 - Easier to extend
 - Easier to maintain
+- Better prepared for future growth
+
+Features may evolve.
+
+User interfaces may change.
+
+Technologies may be replaced.
+
+The Oracle Platform endures.
+
+This roadmap exists to ensure every development decision contributes towards Oracle's long-term vision of becoming the world's leading operating platform for gaming intelligence.
 
 ---
 
 # Product Vision
 
-Oracle is being built as the world's leading AI-powered Competitive Gaming Intelligence Platform.
+> **Oracle is the operating platform for gaming intelligence.**
+
+Oracle exists to understand games, understand players and deliver intelligent, context-aware assistance through a unified platform architecture.
+
+Oracle is designed as a platform rather than a single-game application.
+
+The Platform owns the foundation.
+
+Oracle Services provide reusable capabilities.
+
+Oracle Applications deliver the Oracle experience.
+
+Game Integrations provide game-specific knowledge and context.
+
+Every supported game should feel like a natural extension of Oracle rather than a separate product.
 
 Oracle should:
 
@@ -48,350 +62,444 @@ Oracle should:
 - Improve after every Oracle Session.
 - Adapt across multiple games.
 - Deliver intelligence rather than statistics.
+- Assist without interfering with gameplay.
 
-Oracle exists to remove unnecessary friction from competitive gaming by delivering the right intelligence at exactly the right moment.
+The long-term objective is not simply to support more games.
+
+It is to build one intelligence platform capable of understanding any supported game through a consistent Oracle experience.
 
 ---
 
 # Development Philosophy
 
-Oracle is built around architecture.
+Oracle is architecture-driven.
 
-Not shortcuts.
+Every completed sprint should improve one or more of the following:
 
-Every completed Operation should improve one or more of:
-
+- Platform
 - Intelligence
-- Architecture
-- Scalability
 - Reusability
-- User Experience
+- Scalability
 - Maintainability
 - Explainability
+- User Experience
 
 Features are temporary.
 
 Capabilities remain.
 
+Platform architecture is permanent.
+
+Applications evolve.
+
+Game Integrations expand.
+
+Oracle grows by strengthening reusable platform capabilities rather than producing isolated game-specific functionality.
+
+Whenever architectural decisions are required, preference should always be given to solutions that improve the Platform for every future game rather than solving only the current problem.
+
 ---
 
 # Development Workflow
 
-Every Operation follows the same lifecycle.
+Every Oracle sprint follows the same engineering lifecycle.
 
 ```text
 Architecture
-
-↓
-
+      │
+      ▼
 Planning
-
-↓
-
+      │
+      ▼
 Implementation
-
-↓
-
+      │
+      ▼
 Compilation
-
-↓
-
-UI Review
-
-↓
-
+      │
+      ▼
+User Experience Review
+      │
+      ▼
 Architecture Review
-
-↓
-
+      │
+      ▼
 Documentation
-
-↓
-
+      │
+      ▼
 Sprint Closure Audit
-
-↓
-
+      │
+      ▼
 Release
 ```
 
-No stage should ever be skipped.
+No stage should be skipped.
+
+Green production builds are mandatory before sprint completion.
+
+Documentation is considered part of implementation rather than an optional activity.
+
+Every sprint should conclude with:
+
+- Passing production build
+- Updated documentation
+- Reviewed architecture
+- Git commit
+- Git tag
+- Sprint summary
+- Handover readiness
 
 ---
 
+# Roadmap Philosophy
+
+The Oracle Roadmap exists at the strategic level.
+
+Daily development is organised through Sprints.
+
+Version history is represented by Git tags.
+
+Source control is organised through Sprint branches.
+
+Together they provide four complementary views of Oracle's evolution:
+
+- Roadmap — Strategic direction
+- Sprints — Delivery milestones
+- Git — Implementation history
+- Documentation — Architectural knowledge
+
+Each should remain consistent with the others.
+
+The roadmap describes *where Oracle is going*.
+
+The Architecture explains *how Oracle is designed*.
+
+The Constitution defines *what Oracle is*.
+
+The Codex explains *how Oracle is built*.
+
+Implementation fulfils those documents.
+
+---
+
+# Engineering Principles
+
+Every future capability should satisfy the following principles:
+
+- Strengthen the Oracle Platform.
+- Reuse existing Platform contracts where possible.
+- Preserve Platform → Services → Applications → Game Integrations.
+- Keep game-specific knowledge inside Game Integrations.
+- Avoid duplicate intelligence.
+- Prefer capability resolution over hard-coded implementations.
+- Preserve explicit ownership.
+- Remain extensible.
+- Maintain player safety.
+- Deliver visible customer value.
+
+Every completed sprint should leave Oracle in a stronger architectural position than before.
+
 # OPERATION GENESIS
 
-Foundation Architecture
+## Foundation Era
 
-Status
-
-✅ COMPLETE
+**Status:** ✅ COMPLETE
 
 ---
 
 ## Purpose
 
-Transform Oracle from an AI coaching application into a reusable intelligence platform.
+Operation Genesis established Oracle's permanent engineering foundation.
 
-Genesis established every foundational system that future Operations build upon.
+The objective was not simply to build an AI coaching application.
 
-Without Genesis there is no Oracle.
+The objective was to create a reusable intelligence platform capable of growing for many years without requiring architectural redesign.
 
----
+Every future capability within Oracle depends upon the work completed during Genesis.
 
-# Platform Foundation
-
-Completed
-
-✅ Next.js Platform
-
-✅ TypeScript Architecture
-
-✅ Tailwind Design System
-
-✅ Supabase Integration
-
-✅ Authentication
-
-✅ Repository Layer
-
-✅ Session Repository
-
-✅ Operator Profiles
-
-✅ Oracle Sessions
+Without Genesis there is no Oracle Platform.
 
 ---
 
-# Runtime
+## Platform Foundation
 
-Completed
+Genesis established Oracle's core technology stack.
 
-✅ Oracle Context
+Completed:
 
-✅ Intelligence Bus
+- Next.js Application Platform
+- TypeScript Architecture
+- Tailwind Design System
+- Supabase Integration
+- Authentication
+- Repository Layer
+- Session Repository
+- Operator Profiles
+- Oracle Sessions
 
-✅ Universal Engine Registry
-
-✅ Engine Dependency Resolution
-
-✅ Oracle Lifecycle
-
-✅ Oracle Intelligence State
-
-✅ Runtime Orchestration
-
----
-
-# Intelligence
-
-Completed
-
-✅ Behaviour Engine
-
-✅ Trend Engine
-
-✅ Prediction Engine
-
-✅ Behaviour Evolution Engine
-
-✅ Adaptive Coaching Engine
-
-✅ Oracle Brain
-
-✅ Planner Intelligence
-
-✅ Timeline Intelligence
-
-✅ Decision Intelligence
-
-✅ Explainability
-
-✅ Confidence Engine
-
-✅ Evidence Engine
+These systems provide the permanent application foundation upon which Oracle continues to evolve.
 
 ---
 
-# Intelligence Platform
+## Runtime Foundation
 
-Completed
+Genesis established Oracle's shared runtime.
 
-✅ Intelligence Signals
+Completed:
 
-✅ Intelligence Graph
+- Oracle Context
+- Intelligence Bus
+- Universal Engine Registry
+- Engine Dependency Resolution
+- Runtime Orchestration
+- Oracle Lifecycle
+- Oracle Intelligence State
 
-✅ Engine Registration
-
-✅ Shared Runtime Contracts
-
-✅ Intelligence Pipeline
-
-✅ Decision Profile
-
----
-
-# Operator Systems
-
-Completed
-
-✅ Operator Profile
-
-✅ Behavioural DNA
-
-✅ Learning Style
-
-✅ Capability Matrix
-
-✅ Career Progression
-
-✅ XP System
-
-✅ Achievement System
+This runtime became the execution engine responsible for coordinating Oracle Intelligence.
 
 ---
 
-# User Experience
+## Intelligence Foundation
 
-Completed
+Genesis established Oracle's first generation of intelligence engines.
 
-✅ Premium Dashboard
+Completed:
 
-✅ Intelligence Dashboard
+- Behaviour Engine
+- Trend Engine
+- Prediction Engine
+- Behaviour Evolution Engine
+- Adaptive Coaching Engine
+- Oracle Brain
+- Planner Intelligence
+- Timeline Intelligence
+- Decision Intelligence
+- Explainability Engine
+- Confidence Engine
+- Evidence Engine
 
-✅ Oracle Command Centre
+Together these systems transformed Oracle from a statistics dashboard into an explainable intelligence platform.
 
-✅ Dashboard Component System
+---
 
-Completed Dashboard Components
+## Intelligence Platform
 
-- OracleDecisionCard
-- OracleBrainCard
-- OraclePlannerCard
-- OracleTimelineCard
-- OracleExplainabilityCard
-- OracleSignalFeed
+Genesis introduced the architecture required for modular intelligence.
 
-Pages now compose presentation components.
+Completed:
 
-Presentation consumes Oracle Intelligence State.
+- Intelligence Signals
+- Intelligence Graph
+- Shared Runtime Contracts
+- Engine Registration
+- Intelligence Pipeline
+- Decision Profiles
+
+This architecture allows Oracle Intelligence to grow without replacing existing foundations.
+
+---
+
+## Operator Systems
+
+Genesis introduced persistent Operator understanding.
+
+Completed:
+
+- Operator Profile
+- Behavioural DNA
+- Learning Style
+- Capability Matrix
+- Career Progression
+- XP System
+- Achievement System
+
+Oracle now understands the Operator rather than merely individual sessions.
+
+---
+
+## User Experience
+
+Genesis established Oracle's presentation architecture.
+
+Completed:
+
+- Premium Dashboard
+- Intelligence Dashboard
+- Oracle Command Centre
+- Modular Dashboard Components
+
+Presentation components now consume Oracle Intelligence rather than owning business logic.
 
 Business logic remains inside Oracle.
 
 ---
 
-# Sprint 4 Achievements
-
-Sprint 4 completed Oracle's production runtime.
-
-Major deliverables included:
-
-- Oracle Context
-- Intelligence Bus
-- Runtime Orchestration
-- Oracle Intelligence State
-- Behaviour Evolution
-- Adaptive Coaching
-- Decision Profile
-- Explainability
-- Dashboard Modularisation
-
-Sprint 4 established Oracle's long-term runtime architecture.
-
-Future Operations should extend this architecture rather than redesign it.
-
----
-
-# Sprint 5 Achievements
-
-Sprint 5 marked Oracle's transition from production architecture into capability expansion.
-
-Rather than redesigning the platform, Sprint 5 demonstrated that new intelligence systems could be added through the existing architecture.
-
-Major deliverables included:
-
-- Contextual Intelligence Engine
-- Contextual Runtime Model
-- Contextual Signal Categories
-- Contextual Decision Categories
-- Contextual Timeline Integration
-- Intent Resolver
-- Intent Provider Architecture
-- Independent Intent Providers
-- Contextual Intelligence Dashboard
-- Provider-Based Extensibility
-
-Sprint 5 validated Oracle's architectural principles.
-
-Business logic remained inside Oracle.
-
-The Intelligence Bus remained the orchestration layer.
-
-OracleIntelligenceState remained the UI contract.
-
-Pages continued to compose.
-
-Components continued to present.
-
-Sprint 5 confirmed that Oracle's production architecture can now expand through modular capability additions rather than architectural redesign.
-
-# Operation Genesis Outcome
+## Genesis Outcome
 
 Operation Genesis successfully transformed Oracle from an AI coaching application into a reusable intelligence platform.
 
-Oracle now provides:
+Genesis proved that intelligence could be:
 
-- Shared runtime context
-- Modular intelligence engines
-- Intelligence Bus orchestration
-- Unified Intelligence State
-- Explainable recommendations
-- Reusable dashboard architecture
+- Modular
+- Explainable
+- Reusable
+- Extensible
+- Testable
 
-Genesis is considered production complete.
+The architecture established during Genesis became the permanent engineering foundation of Oracle.
 
-Future Operations should expand Oracle's capabilities without replacing these foundations.
+Future development would build upon these foundations rather than replacing them.
 
 ---
 
-# OPERATION SENTINEL
+# SPRINT 8 — ORACLE PLATFORM FOUNDATION
 
-Persistent Intelligence
-
-Status
-
-🟢 NEXT
+**Status:** ✅ COMPLETE
 
 ---
 
 ## Purpose
 
-Give Oracle long-term memory.
+Sprint 8 transformed Oracle from an intelligence platform into **the Oracle Platform**—an operating platform for gaming intelligence.
 
-Oracle should remember every Operator.
+Rather than adding new user-facing functionality, Sprint 8 reorganised Oracle around a clear architectural model that will support every future application, service and game integration.
 
-Every behavioural change.
+The Platform became the permanent owner of shared infrastructure.
 
-Every recommendation.
+Applications became consumers of reusable Services.
 
-Every improvement.
+Game Integrations became providers of knowledge and capabilities.
 
-Every regression.
+---
 
-Oracle should become more intelligent through historical understanding rather than isolated sessions.
+## Major Deliverables
+
+### Oracle Platform
+
+- Platform Bootstrap
+- Platform Lifecycle
+- Platform Runtime
+
+### Oracle Services
+
+- Service Registry
+- Core Service Registration
+- Service Runtime
+
+### Oracle Applications
+
+- Application Registry
+- Core Application Registration
+- Application Runtime
+
+### Extension Platform
+
+- Extension Runtime
+- Extension Resolver
+- Extension Lifecycle
+- Extension SDK
+
+### Companion Platform
+
+- Companion Runtime
+- Companion SDK
+- Companion Lifecycle
+
+### Capability System
+
+- Capability Graph
+- Capability Resolution
+- Capability Contracts
+
+### Game Integration Platform
+
+- Game Integration SDK
+- Connector Registry
+- Connector Manifests
+- Compatibility Contracts
+
+### Documentation
+
+- Oracle Platform Constitution
+- Updated Architecture
+- Updated Codex
+- Updated Roadmap
+- Updated Project Board
+
+---
+
+## Architectural Discovery
+
+Sprint 8 produced Oracle's most important architectural discovery.
+
+Oracle is not organised around games.
+
+Oracle is organised around responsibilities.
+
+```text
+Oracle Platform
+        │
+        ▼
+Oracle Services
+        │
+        ▼
+Oracle Applications
+        │
+        ▼
+Game Integrations
+```
+
+This model became the permanent architecture for Oracle.
+
+---
+
+## Sprint 8 Outcome
+
+Oracle is no longer simply an intelligence platform.
+
+Oracle is now the operating platform for gaming intelligence.
+
+The Platform owns shared infrastructure.
+
+Services own reusable capabilities.
+
+Applications own the Oracle experience.
+
+Game Integrations provide game-specific knowledge.
+
+This foundation enables Oracle to support unlimited future games without architectural redesign.
+
+Sprint 8 is considered one of the defining milestones in Oracle's history.
+
+# OPERATION SENTINEL
+
+## Persistent Intelligence
+
+**Status:** 🟢 NEXT
+
+---
+
+## Purpose
+
+Operation Sentinel establishes Oracle's long-term memory.
+
+Oracle should no longer analyse isolated gaming sessions.
+
+Instead, Oracle should continuously learn from the complete history of every Operator.
+
+Persistent understanding becomes the foundation for every future recommendation.
 
 ---
 
 ## Objectives
 
-- Oracle Memory
+- Persistent Oracle Memory
 - Historical Behaviour Profiles
 - Behaviour Evolution History
 - Recommendation History
-- Cross-session Learning
+- Cross-Session Learning
 - Operator Journey
 - Historical Predictions
-- Adaptive Coaching Expansion
+- Long-Term Progression Intelligence
 - Behaviour Stability Analysis
 - Memory Confidence
 
@@ -399,11 +507,7 @@ Oracle should become more intelligent through historical understanding rather th
 
 ## Expected Outcome
 
-Oracle evolves from analysing Operators
-
-to
-
-remembering Operators.
+Oracle evolves from analysing Operators to understanding Operators over time.
 
 Every Oracle Session permanently strengthens future intelligence.
 
@@ -411,11 +515,9 @@ Every Oracle Session permanently strengthens future intelligence.
 
 # OPERATION VANGUARD
 
-Advanced Intelligence
+## Advanced Intelligence
 
-Status
-
-🔵 Planned
+**Status:** 🔵 PLANNED
 
 ---
 
@@ -423,9 +525,7 @@ Status
 
 Expand Oracle's reasoning capability.
 
-Instead of isolated observations,
-
-Oracle combines intelligence from multiple systems simultaneously to produce strategic recommendations.
+Rather than producing isolated observations, Oracle combines intelligence from multiple systems to generate strategic, explainable recommendations.
 
 ---
 
@@ -435,12 +535,12 @@ Oracle combines intelligence from multiple systems simultaneously to produce str
 - Context Intelligence
 - Objective Intelligence
 - Public Knowledge Engine
-- Map Intelligence
 - Behaviour Relationships
 - Pattern Detection
 - Advanced Behaviour Modelling
 - Multi-System Reasoning
 - Context-Aware Recommendations
+- Strategic Planning
 
 ---
 
@@ -448,334 +548,333 @@ Oracle combines intelligence from multiple systems simultaneously to produce str
 
 Oracle develops strategic understanding rather than isolated recommendations.
 
+Intelligence becomes increasingly predictive rather than reactive.
+
 ---
 
 # OPERATION DOMINION
 
-Visual Intelligence
+## Visual Intelligence
 
-Status
-
-🔵 Planned
+**Status:** 🔵 PLANNED
 
 ---
 
 ## Purpose
 
-Allow Oracle to understand gameplay directly.
+Allow Oracle to understand gameplay directly through observation.
 
-Rather than relying entirely on manually entered information,
-
-Oracle should analyse gameplay footage,
-
-identify important events,
-
-and automatically generate intelligence.
+Gameplay should become another source of intelligence alongside historical behaviour and structured game knowledge.
 
 ---
 
 ## Objectives
 
-- Gameplay Upload
-- Automatic Timeline Analysis
+- Desktop Observation
+- OCR Pipeline
+- Gameplay Analysis
 - Event Detection
-- Heatmaps
-- Combat Recognition
-- Movement Recognition
-- Rotation Recognition
-- Visual Evidence
+- Discovery Pipeline
 - Computer Vision Integration
+- Evidence Extraction
+- Timeline Enrichment
+- Context Recognition
+- Vision Confidence
 
 ---
 
 ## Expected Outcome
 
-Oracle begins observing gameplay directly.
+Oracle understands gameplay through safe external observation.
 
-Recommendations become significantly stronger.
-
-Evidence becomes richer.
-
-Understanding becomes deeper.
+Observation enriches intelligence without interfering with gameplay.
 
 ---
 
 # OPERATION ATLAS
 
-Multi-Game Platform
+## Universal Game Platform
 
-Status
-
-🔵 Planned
+**Status:** 🔵 PLANNED
 
 ---
 
 ## Purpose
 
-Expand Oracle beyond Call of Duty.
+Expand Oracle into a true multi-game platform.
 
-Games become intelligence modules.
+Games become integrations rather than separate products.
 
-Oracle remains the platform.
-
----
-
-## Initial Game Modules
-
-- Call of Duty
-- Battlefield
-- Rainbow Six Siege
-- Apex Legends
-- Counter-Strike
-- Valorant
-- Delta Force
-- GTA
-- Future Competitive Titles
+Oracle remains one consistent platform regardless of the game being played.
 
 ---
 
 ## Objectives
 
-- Universal Game Framework
-- Shared Operator Profiles
+- Universal Game Integration SDK
+- Shared Operator Profile
 - Cross-Game Behaviour Intelligence
-- Shared Learning System
+- Shared Learning
 - Universal Recommendation Engine
-- Game Modules
+- Game Integration Marketplace
+- Integration Trust Model
+- Community Connector Support
+
+---
+
+## Initial Game Integrations
+
+- Call of Duty
+- Battlefield
+- RuneScape
+- Minecraft
+- Elden Ring
+- Monster Hunter
+- Football Manager
+- Factorio
+
+Additional supported games should continue to grow through the Extension Marketplace.
 
 ---
 
 ## Expected Outcome
 
-Oracle becomes the Operator's intelligence platform regardless of the game being played.
+Oracle becomes the Operator's gaming platform rather than a single-game assistant.
 
 ---
 
 # OPERATION HORIZON
 
-Live Intelligence
+## Live Companion Intelligence
 
-Status
-
-🔵 Planned
+**Status:** 🔵 PLANNED
 
 ---
 
 ## Purpose
 
-Move Oracle from post-session intelligence towards live competitive intelligence.
+Deliver intelligent assistance while the Operator is actively playing.
 
-Oracle should eventually deliver relevant intelligence while the Operator is actively playing.
+The Oracle Companion becomes a context-aware desktop companion capable of presenting relevant information at the correct moment.
 
 ---
 
 ## Objectives
 
-- Live Match Analysis
-- Live Behaviour Detection
-- Live Tactical Alerts
-- Contextual Intelligence Delivery
-- Public Knowledge Alerts
-- Adaptive Session Guidance
-- Fatigue Detection
-- Confidence Tracking
+- Companion Overlay
+- Live Context
+- Live Session Understanding
+- Dynamic Guidance
+- Contextual Knowledge
+- Discovery Assistance
+- Navigation Assistance
+- Quest Assistance
+- Collectible Assistance
+- Multi-Monitor Support
 
 ---
 
 ## Expected Outcome
 
-Oracle evolves into a real-time competitive intelligence companion.
+Oracle Companion becomes the Operator's real-time gaming companion while remaining external to the game process.
 
 ---
 
 # OPERATION AEGIS
 
-Competitive Ecosystem
+## Oracle Ecosystem
 
-Status
-
-🔵 Planned
+**Status:** 🔵 PLANNED
 
 ---
 
 ## Purpose
 
-Expand Oracle beyond individual Operators.
+Expand Oracle into a complete gaming ecosystem.
 
-Support:
-
-- Teams
-- Squads
-- Organisations
-- Coaches
-- Competitive Communities
+The Platform should support community-created extensions, official integrations and third-party innovation while maintaining trust, safety and architectural consistency.
 
 ---
 
 ## Objectives
 
-- Team Intelligence
-- Shared Intelligence
-- Organisation Dashboards
-- Tournament Intelligence
-- Shared Memory
-- Collaborative Coaching
+- Oracle Marketplace
+- Extension Installation
+- Connector Installation
+- Knowledge Packs
+- Vision Packs
+- AI Modules
+- Overlay Widgets
+- Theme Marketplace
+- Language Packs
+- Extension Trust Levels
+- Community Verification
+- Oracle Verified Programme
 
 ---
 
 ## Expected Outcome
 
-Oracle becomes the intelligence platform used across competitive organisations.
+Oracle becomes an extensible ecosystem where new capabilities can be added without modifying the core Platform.
+
+The Oracle Platform grows through extensions rather than increasing complexity inside the Platform itself.
+
+# Current Oracle Platform
+
+Sprint 8 establishes Oracle as a complete operating platform for gaming intelligence.
+
+The Platform now provides the permanent foundation upon which every future capability will be built.
 
 ---
 
-# Current Platform Capabilities
+## Oracle Platform
 
-Oracle currently provides:
+Implemented:
 
-## Runtime
+- Platform Bootstrap
+- Platform Lifecycle
+- Intelligence Runtime
+- Companion Runtime
+- Extension Runtime
+- Capability Graph
+- Service Registry
+- Application Registry
+- Platform Contracts
+- Shared Diagnostics
+
+The Platform coordinates every major Oracle subsystem.
+
+---
+
+## Oracle Services
+
+Current Services include:
+
+- Sessions
+- Missions
+- Memory
+- Reports
+- Progression
+- Intelligence
+- Operator
+- AI Coach
+- Oracle Brain
+- Loadouts
+- Companion
+
+Oracle Services provide reusable capabilities that may be consumed by multiple Oracle Applications.
+
+---
+
+## Oracle Applications
+
+Current Oracle Applications include:
+
+- AI Coach
+- Oracle Brain
+- Loadouts
+- Reports
+- Career
+- Companion
+- Operator
+
+Applications present intelligence to the user.
+
+Applications orchestrate Services.
+
+Applications do not own business logic.
+
+---
+
+## Game Integrations
+
+Current architecture supports game integrations through the Oracle Game Integration SDK.
+
+Supported integrations will continue to grow without requiring Platform redesign.
+
+Initial priorities include:
+
+- Call of Duty
+- Battlefield
+- RuneScape
+- Minecraft
+- Elden Ring
+- Monster Hunter
+- Football Manager
+- Factorio
+
+Every supported game should integrate into the same Oracle experience.
+
+---
+
+## Platform Internals
+
+Internally the Platform currently includes:
 
 - Oracle Context
 - Intelligence Bus
+- Engine Runtime
 - Engine Registry
-- Runtime Lifecycle
-- Oracle Intelligence State
-
----
-
-## Intelligence
-
-- Behaviour Intelligence
-- Prediction
-- Behaviour Evolution
-- Adaptive Coaching
-- Planner
-- Timeline
-- Oracle Brain
-- Explainability
+- Oracle Brain Runtime
 - Decision Intelligence
-- Confidence Analysis
-- Evidence Analysis
-- Contextual Intelligence
-- Intent Resolution
-- Intent Provider Architecture
+- Behaviour Intelligence
+- Prediction Intelligence
+- Explainability
+- Evidence Engine
 
----
-
-## Platform
-
-- Signals
-- Intelligence Graph
-- Intelligence Pipeline
-- Decision Profiles
-- Dashboard Component Architecture
-- Contextual Runtime Model
-- Contextual Dashboard Components
+These systems remain implementation details of the Oracle Platform.
 
 ---
 
 # Long-Term Architecture
 
-Oracle continues to evolve around a stable runtime.
+Oracle grows through stable architectural layers.
 
 ```text
-Operator
-
-↓
-
-Oracle Context
-
-↓
-
-Intent Resolver
-
-↓
-
-Intent Providers
-
-↓
-
-Contextual Intelligence Engine
-
-↓
-
-Intelligence Bus
-
-↓
-
-Registered Intelligence Engines
-
-↓
-
-Signals
-Profiles
-Graph Entries
-
-↓
-
-Oracle Brain
-
-↓
-
-Planner
-
-↓
-
-Timeline
-
-↓
-
-Explainability
-
-↓
-
-Decision Intelligence
-
-↓
-
-Oracle Intelligence State
-
-↓
-
-Presentation Components
+Oracle Platform
+        │
+        ▼
+Oracle Services
+        │
+        ▼
+Oracle Applications
+        │
+        ▼
+Game Integrations
+        │
+        ▼
+Platform Runtime
+        │
+        ▼
+Registered Engines
+        │
+        ▼
+Oracle Intelligence
+        │
+        ▼
+Presentation
 ```
 
-Every new intelligence capability should integrate into this architecture.
+Every future capability should strengthen one or more of these layers rather than introducing parallel architecture.
 
-The architecture should become easier to extend over time.
-
-Never harder.
+The Platform should remain stable while the ecosystem around it continues to grow.
 
 ---
 
-# Future Intelligence Engines
+# Engineering Direction
 
-Planned engines include:
+Future development should primarily focus on:
 
-- Memory Intelligence
-- Strategy Intelligence
-- Weapon Intelligence
-- Map Intelligence
-- Objective Intelligence
-- Economy Intelligence
-- Team Intelligence
-- Tournament Intelligence
-- Visual Intelligence
-- Voice Intelligence
-- Public Knowledge Intelligence
-- Mission Intent Providers
-- Planner Intent Providers
-- Timeline Intent Providers
-- Memory Intent Providers
-- Map Intent Providers
-- Game-Specific Provider Packs
+- Customer-visible improvements
+- Companion experience
+- Observation
+- Knowledge
+- Marketplace
+- Platform maturity
 
-Every engine should:
+Large architectural redesigns should become increasingly rare.
 
-- Have one responsibility.
-- Register with the Intelligence Bus.
-- Produce Signals.
-- Integrate with Decision Intelligence.
+The Platform should now evolve through incremental improvement rather than repeated reconstruction.
 
 ---
 
@@ -783,27 +882,27 @@ Every engine should:
 
 Oracle is never "finished."
 
-Every release should improve one or more of:
+Every sprint should improve one or more of:
 
-- Architecture
+- Platform
 - Intelligence
-- Evidence
+- Architecture
+- User Experience
+- Safety
 - Explainability
-- Operator Understanding
 - Performance
 - Maintainability
-- Scalability
-- User Experience
+- Extensibility
 
-Every sprint should leave Oracle more intelligent than before.
+Every completed sprint should leave Oracle in a stronger architectural position than before.
 
 ---
 
 # Success Criteria
 
-Oracle succeeds when it becomes the world's most trusted AI Competitive Gaming Intelligence Platform.
+Oracle succeeds when it becomes the world's most trusted operating platform for gaming intelligence.
 
-Oracle should:
+Success will be measured by Oracle's ability to:
 
 - Understand every Operator.
 - Learn continuously.
@@ -811,10 +910,10 @@ Oracle should:
 - Reason from evidence.
 - Calculate confidence honestly.
 - Improve after every Oracle Session.
-- Adapt across games.
-- Scale through architecture.
-- Deliver premium experiences.
-- Surface relevant intelligence proactively.
+- Adapt across multiple supported games.
+- Provide intelligent assistance safely.
+- Deliver a premium Oracle experience.
+- Grow through reusable Platform capabilities.
 
 ---
 
@@ -822,52 +921,52 @@ Oracle should:
 
 Oracle is no longer being developed as a traditional gaming application.
 
-Oracle is an Intelligence Platform.
+Oracle is the operating platform for gaming intelligence.
 
-Games evolve.
+Future development should strengthen:
 
-Technology evolves.
+- The Oracle Platform
+- Oracle Services
+- Oracle Applications
+- Game Integrations
+- The Oracle Extension Ecosystem
 
-Artificial Intelligence evolves.
+Platform stability should always take priority over short-term convenience.
 
-Oracle's architecture should evolve with them while remaining faithful to its engineering principles.
-
-Oracle has now completed its production architecture phase.
-
-Future Operations should primarily expand Oracle through new intelligence capabilities rather than redesigning existing foundations.
-
-The Intent Provider architecture introduced during Sprint 5 establishes the preferred extension model for future contextual intelligence.
-
-Every completed Operation should leave Oracle:
-
-- More intelligent.
-- More reusable.
-- More scalable.
-- More maintainable.
-- More valuable.
-
-Than before.
+Every major architectural decision should remain consistent with the Oracle Platform Constitution.
 
 ---
 
 # Closing Statement
 
-The Oracle Roadmap defines the strategic direction of the platform.
+Oracle began as an AI coaching application.
 
-Operations provide purpose.
+It evolved into an intelligence platform.
 
-Architecture provides stability.
+Sprint 8 established Oracle's true identity as the operating platform for gaming intelligence.
 
-Intelligence provides value.
+From this point forward, Oracle grows by strengthening its Platform, expanding its Services, enriching its Applications and supporting more games through trusted Game Integrations.
 
-Every completed Operation should strengthen the foundation for the next.
+The Platform is the foundation.
 
-Oracle grows through capabilities.
+Services provide reusable capability.
 
-Not isolated features.
+Applications deliver the Oracle experience.
 
-The roadmap is a living document.
+Game Integrations provide knowledge.
 
-Whenever Oracle's future direction is questioned...
+Extensions expand the ecosystem.
 
-Return here.
+Everything else builds upon those principles.
+
+---
+
+> **Oracle understands games.**
+
+> **Oracle understands players.**
+
+> **Oracle delivers intelligence.**
+
+---
+
+**The Oracle has spoken.**

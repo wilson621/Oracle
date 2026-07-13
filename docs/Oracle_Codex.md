@@ -1,1050 +1,640 @@
 # ORACLE CODEX
 
-Engineering Handbook
+## Oracle Engineering Standards
 
-Version 2.0
-
-Last Updated: 8 July 2026
+**Version:** 3.0  
+**Status:** Active  
+**Authority:** Secondary only to the Oracle Platform Constitution  
+**Last Updated:** Sprint 8 – Oracle Platform Foundation
 
 ---
 
 # Purpose
 
-The Oracle Codex is the definitive engineering handbook for Oracle.
+The Oracle Codex defines how Oracle is engineered.
 
-It exists to ensure that every architectural decision, engineering choice, design decision and product feature follows a consistent philosophy.
+The Constitution defines **what Oracle is**.
 
-This document is the single source of truth for how Oracle is designed, built and evolved.
+The Codex defines **how Oracle is built**.
 
-Whenever uncertainty exists, the Codex takes precedence.
+Every implementation decision, architectural proposal, pull request and sprint should follow the standards contained within this document.
+
+The Codex exists to ensure Oracle remains:
+
+- Consistent
+- Scalable
+- Extensible
+- Explainable
+- Maintainable
+- Safe
+- Premium
+
+The Codex evolves as Oracle evolves.
+
+---
+
+# Relationship to the Constitution
+
+The Oracle Platform Constitution is the highest engineering authority.
+
+When conflicts occur:
+
+```text
+Oracle Platform Constitution
+        │
+        ▼
+Oracle Codex
+        │
+        ▼
+Architecture
+        │
+        ▼
+Roadmap
+        │
+        ▼
+Project Board
+        │
+        ▼
+Implementation
+```
+
+Implementation must never contradict higher-level documentation.
 
 ---
 
 # Oracle Identity
 
-## Product
+> **Oracle is the operating platform for gaming intelligence.**
 
-Oracle
-
-## Repository
-
-project-meta
-
-## Internal Codename
-
-Project Meta
-
-## Platform Type
-
-AI-Powered Competitive Gaming Intelligence Platform
-
----
-
-# Vision
-
-Oracle exists to become the world's most advanced competitive gaming intelligence platform.
-
-Oracle does not simply analyse gameplay.
-
-Oracle continuously learns the Operator.
-
-Every Oracle Session improves Oracle's understanding of behaviour, decision making, performance trends and learning patterns.
-
-Every recommendation should become more personalised over time.
-
-Every supported game contributes to a deeper understanding of the Operator.
-
-Oracle is designed to grow with the Operator throughout their competitive gaming journey.
-
-Oracle should anticipate needs rather than simply answer questions.
-
-This philosophy should guide every future architectural and product decision.
-
----
-
-# Mission
-
-Help every Operator become better through intelligence.
-
-Not opinions.
-
-Not trends.
-
-Not generic advice.
-
-Every recommendation should improve decision making.
-
-Every recommendation should increase confidence.
-
-Every recommendation should be supported by evidence.
-
-Oracle exists to develop better Operators.
-
----
-
-# Mission Extension
-
-Oracle exists to remove unnecessary friction from gaming.
-
-Every unnecessary search.
-
-Every unnecessary browser tab.
-
-Every unnecessary YouTube video.
-
-Every unnecessary interruption.
-
-Should eventually become an Oracle capability.
-
-Oracle should deliver the right intelligence at exactly the right moment.
-
-The goal is not to help Operators search faster.
-
-The goal is to make searching unnecessary.
-
----
-
-# Product Philosophy
+Oracle exists to understand games, understand players and deliver intelligent, context-aware assistance through a reusable platform architecture.
 
 Oracle is not:
 
-- a statistics website
-- a loadout website
-- a clip repository
-- an aim trainer
-- a content platform
+- A Call of Duty application
+- A statistics dashboard
+- A coaching overlay
+- A collection of disconnected tools
+- A single-game companion
 
 Oracle is:
 
-- an intelligence platform
-- an AI reasoning platform
-- a behavioural analysis platform
-- a performance prediction platform
-- a long-term learning platform
-- an AI gaming companion
-- a contextual intelligence platform
+- The operating platform for gaming intelligence
+- A reusable software platform
+- An intelligence platform
+- A behavioural intelligence platform
+- An AI reasoning platform
+- A companion platform
+- An extensible ecosystem
 
-Games are simply intelligence modules.
+Games become Game Integrations.
 
-The Operator is the product.
+Applications become Oracle experiences.
 
----
+Services become reusable capability.
 
-# Core Philosophy
+The Platform coordinates everything.
 
-Everything Oracle builds should reinforce one belief.
-
-The Operator always comes before the game.
-
-Games evolve.
-
-Weapons change.
-
-Maps rotate.
-
-Meta shifts.
-
-Operators remain.
-
-Oracle therefore learns the Operator rather than memorising individual games.
-
-The better Oracle understands the Operator, the more valuable every future recommendation becomes.
+The Operator remains the product.
 
 ---
 
-# Oracle Standard
+# Long-Term Vision
 
-Every feature.
+Oracle should become the platform every player launches before they launch a game.
 
-Every engine.
+Regardless of whether the Operator is playing:
 
-Every recommendation.
+- Call of Duty
+- Battlefield
+- RuneScape
+- Minecraft
+- Elden Ring
+- Factorio
+- Football Manager
+- Monster Hunter
+- or any future supported title,
 
-Every animation.
+Oracle should provide one consistent experience.
 
-Every API.
+Every supported game extends Oracle.
 
-Every component.
-
-Every document.
-
-Every line of code.
-
-Must answer one question.
-
-Will this improve the Operator?
-
-If the answer is no...
-
-It does not belong in Oracle.
+Oracle itself remains consistent.
 
 ---
 
 # Engineering Philosophy
 
-Oracle is built as a long-term commercial software platform.
+Oracle is architecture-driven.
 
-Architecture always takes priority over speed.
+Every sprint should permanently improve one or more of:
 
-Reusable systems always take priority over shortcuts.
+- Platform
+- Intelligence
+- User Experience
+- Extensibility
+- Maintainability
+- Explainability
+- Performance
+- Reliability
 
-Foundations always take priority over features.
+Features are temporary.
 
-Every subsystem should be capable of supporting future intelligence without requiring architectural redesign.
+Capabilities remain.
 
----
+Architecture is permanent.
 
-# Intelligence Philosophy
-
-Oracle does not produce answers.
-
-Oracle produces intelligence.
-
-Intelligence is created through reasoning.
-
-Reasoning is created through evidence.
-
-Evidence is created through observation.
-
-Observation is created through Oracle Sessions.
-
-Every recommendation should therefore be explainable.
-
-Oracle never guesses.
-
-Oracle reasons.
+Every engineering decision should improve Oracle for future games rather than solving only today's problem.
 
 ---
 
-# Intelligence Hierarchy
+# Product Philosophy
 
-Every recommendation follows the same hierarchy.
+Oracle owns the experience.
 
-Raw Data
+Applications belong to Oracle.
 
-↓
+Games provide knowledge.
 
-Repositories
+Applications must never become permanently owned by an individual game.
 
-↓
+For example:
 
-Operator Intelligence
+AI Coach remains Oracle AI Coach.
 
-↓
+Loadouts remains Oracle Loadouts.
 
-Signal Engines
+Oracle Brain remains Oracle Brain.
 
-↓
+Companion remains Oracle Companion.
 
-Signals
+Game Integrations provide context.
 
-↓
-
-Oracle Brain
-
-↓
-
-Decision Intelligence
-
-↓
-
-Pipeline
-
-↓
-
-Presentation
-
-Presentation never creates intelligence.
-
-Presentation displays intelligence.
+Oracle delivers intelligence.
 
 ---
 
-# Product Principles
+# Engineering Principles
 
-## Principle 1
+Every implementation should satisfy the following principles.
 
-Operator data outweighs public meta.
+## Platform First
 
-The best weapon is not necessarily the strongest weapon.
-
-The best weapon is the one that consistently produces better outcomes for that Operator.
+Strengthen the Platform before introducing new architecture.
 
 ---
 
-## Principle 2
+## Reuse Before Rebuild
 
-Confidence must be calculated.
-
-Confidence is never invented.
-
-Confidence is derived from:
-
-- evidence
-- consistency
-- sample size
-- behavioural stability
+Reuse existing Services, Engines and Platform contracts whenever possible.
 
 ---
 
-## Principle 3
+## Explicit Ownership
 
-Recommendations require evidence.
+Every capability has one owner.
 
-Every recommendation should answer:
-
-Why?
-
-How confident is Oracle?
-
-What evidence supports the recommendation?
-
-When should the recommendation change?
+Duplicate intelligence is prohibited.
 
 ---
 
-## Principle 4
+## Explainability
 
-Oracle learns continuously.
-
-Oracle should become more intelligent after every Oracle Session.
-
-Learning never resets.
-
-Knowledge accumulates.
+Oracle should always be capable of explaining how intelligence was produced.
 
 ---
 
-## Principle 5
+## Confidence
 
-Games are intelligence modules.
+Confidence should always be calculated honestly.
 
-Warzone is Version One.
-
-Future games include:
-
-- Battlefield
-- Rainbow Six
-- Apex Legends
-- GTA
-- Delta Force
-- Future competitive titles
-
-No game should require Oracle to be redesigned.
-
-Only expanded.
+Oracle should never fabricate certainty.
 
 ---
 
-## Principle 6
+## Capability Resolution
 
-Business logic belongs inside engines.
+Applications request capabilities.
 
-Pages should never contain business logic.
+The Platform resolves providers.
 
-Components should never calculate intelligence.
-
-Repositories should never contain UI knowledge.
-
-Every layer has one responsibility.
+Applications should not hard-code implementations.
 
 ---
 
-## Principle 7
+## Platform Stability
 
-Explain before recommending.
+The Platform should evolve slowly.
 
-Oracle should never simply tell an Operator what to do.
-
-Oracle should explain:
-
-- why
-- how
-- what evidence exists
-- expected outcome
-- reassessment criteria
-
-Understanding creates trust.
+Applications and Integrations should evolve rapidly.
 
 ---
 
-## Principle 8
+## Safety
 
-Signals are Oracle's universal language.
+Oracle assists.
 
-Every intelligence engine should produce Signals.
+Oracle does not automate gameplay.
 
-Signals become Oracle Brain's input.
-
-Oracle Brain produces understanding.
-
-Decision Intelligence produces recommendations.
-
-The UI displays the result.
+Oracle must remain external to the game process.
 
 ---
 
-## Principle 9
+## Extensibility
 
-Remove Friction
+Future growth should occur through:
 
-Every feature should reduce the number of actions required for the Operator to achieve their objective.
+- Services
+- Applications
+- Game Integrations
+- Extensions
 
-Oracle should anticipate what the Operator needs rather than waiting to answer questions.
-
-The best Oracle experiences replace unnecessary searching with contextual intelligence.
-
-Whenever possible Oracle should reduce:
-
-- Searches
-- Browser tabs
-- Video tutorials
-- External guides
-- Interruptions
-
-Every capability should keep the Operator immersed in the game.
+rather than repeated Platform redesign.
 
 ---
 
-# Oracle Personality
+# Oracle Platform Model
 
-Oracle should feel like an elite intelligence analyst.
+Oracle is organised into four architectural layers.
 
-Never casual.
-
-Never exaggerated.
-
-Never overly emotional.
-
-Oracle is:
-
-- Calm
-- Analytical
-- Precise
-- Confident
-- Professional
-- Direct
-- Evidence-driven
-
-Oracle avoids unnecessary praise.
-
-Oracle communicates facts.
-
-Recommendations.
-
-Predictions.
-
-Evidence.
-
-Confidence.
-
-Oracle should feel closer to Mission Control than a chatbot.
+```text
+Oracle Platform
+        │
+        ▼
+Oracle Services
+        │
+        ▼
+Oracle Applications
+        │
+        ▼
+Game Integrations
+```
 
 ---
 
-# Communication Style
+## Oracle Platform
 
-Preferred language:
+Owns:
 
-Analysis indicates…
+- Platform Bootstrap
+- Platform Lifecycle
+- Companion Runtime
+- Extension Runtime
+- Capability Graph
+- Service Registry
+- Application Registry
+- Shared Contracts
+- Diagnostics
 
-Oracle has detected…
-
-Behaviour suggests…
-
-Prediction indicates…
-
-Recommendation…
-
-Confidence…
-
-Operational assessment…
-
-Behavioural trend…
-
-Avoid language such as:
-
-"Maybe"
-
-"I think"
-
-"Nice job"
-
-"Awesome"
-
-"Cool"
-
-Oracle speaks with measured confidence backed by evidence.
+The Platform coordinates Oracle.
 
 ---
 
-# Development Philosophy
+## Oracle Services
 
-Oracle is developed using disciplined engineering.
+Provide reusable business capability.
 
-Every feature follows the same lifecycle.
+Examples include:
 
-Architecture
+- Sessions
+- Memory
+- Progression
+- Reports
+- Intelligence
+- Missions
 
-↓
-
-Planning
-
-↓
-
-Implementation
-
-↓
-
-Compilation
-
-↓
-
-UI Review
-
-↓
-
-Architecture Review
-
-↓
-
-Documentation
-
-↓
-
-Release
-
-No stage should be skipped.
-
-# Oracle Architecture
-
-Oracle follows a layered intelligence architecture.
-
-Every subsystem has one responsibility.
-
-Every layer depends only on the layer immediately beneath it.
-
-Intelligence always flows upwards.
-
-Presentation always flows downwards.
+Services are presentation-independent.
 
 ---
 
-# Oracle Layer Model
+## Oracle Applications
 
-Pages
+Applications deliver Oracle experiences.
 
-↓
+Examples:
 
-Components
+- AI Coach
+- Oracle Brain
+- Loadouts
+- Reports
+- Companion
+- Career
 
-↓
+Applications orchestrate Services.
 
-Pipeline
-
-↓
-
-Decision Intelligence
-
-↓
-
-Oracle Brain
-
-↓
-
-Signals
-
-↓
-
-Signal Engines
-
-↓
-
-Operator Intelligence
-
-↓
-
-Repositories
-
-↓
-
-Supabase
-
-Pages should know nothing about intelligence.
-
-Components should never calculate intelligence.
-
-Only engines reason.
-
-Only repositories communicate with the database.
+Applications never own intelligence.
 
 ---
 
-# Oracle Intelligence Flow
+## Game Integrations
 
-Every Oracle Session contributes to a single intelligence pipeline.
+Game Integrations provide:
 
-Oracle Session
+- Game knowledge
+- Rules
+- Maps
+- Weapons
+- Quests
+- Collectibles
+- Objectives
+- Compatibility
+- Context
 
-↓
-
-Supabase
-
-↓
-
-Repositories
-
-↓
-
-Operator Intelligence
-
-↓
-
-Signal Engines
-
-↓
-
-Signals
-
-↓
-
-Oracle Brain
-
-↓
-
-Decision Intelligence
-
-↓
-
-Pipeline
-
-↓
-
-UI
-
-This flow should remain consistent regardless of future features.
+Game Integrations never own Oracle Applications.
 
 ---
 
-# Core Systems
+# Internal Platform Runtime
 
-Oracle currently consists of the following production systems.
+The runtime exists beneath the Platform.
 
-## Intelligence Core
+Its purpose is to execute Oracle Intelligence consistently.
 
-Oracle Brain
+Current runtime systems include:
 
-Decision Intelligence
+- Oracle Context
+- Intelligence Bus
+- Engine Runtime
+- Engine Registry
+- Decision Intelligence
+- Oracle Brain Runtime
+- Explainability
+- Evidence Engine
 
-Operator Intelligence
-
-Signal Engine
-
-Intelligence Pipeline
-
-Confidence Engine
-
-Evidence Engine
+These systems are implementation details of the Platform rather than the Platform itself.
 
 ---
 
-## Coaching
+# Guiding Statement
 
-Oracle Coach
+Oracle understands games.
 
-Mission Engine
+Oracle understands players.
 
-Mission Readiness
+Oracle delivers intelligence.
 
-Mission Classification
+---
 
-Mission Progress
+> **The Oracle has spoken.**
+
+# Platform Architecture
+
+Oracle is engineered around explicit ownership.
+
+Every system has a single responsibility.
+
+Every capability has a single authoritative owner.
+
+Oracle is organised into four architectural layers.
+
+```text
+Oracle Platform
+        │
+        ▼
+Oracle Services
+        │
+        ▼
+Oracle Applications
+        │
+        ▼
+Game Integrations
+```
+
+Each layer exists for a different reason.
+
+No layer should duplicate another.
+
+---
+
+# Oracle Platform
+
+The Platform owns shared infrastructure.
+
+Responsibilities include:
+
+- Platform Bootstrap
+- Platform Lifecycle
+- Runtime Coordination
+- Companion Runtime
+- Extension Runtime
+- Capability Graph
+- Capability Resolution
+- Service Registry
+- Application Registry
+- Shared Contracts
+- Diagnostics
+- Health Monitoring
+
+The Platform never contains game-specific logic.
+
+The Platform should change slowly.
+
+Platform changes affect every Oracle Application.
+
+---
+
+# Oracle Services
+
+Services provide reusable capability.
+
+Services represent Oracle's business logic.
+
+Examples:
+
+- Sessions
+- Operator
+- Memory
+- Progression
+- Reports
+- Intelligence
+- Missions
+- Planner
+
+Services should:
+
+- remain presentation independent
+- expose typed contracts
+- remain reusable
+- avoid UI dependencies
+
+Services must never depend on Applications.
+
+---
+
+# Oracle Applications
+
+Applications own user experience.
+
+Examples:
+
+- AI Coach
+- Oracle Brain
+- Companion
+- Loadouts
+- Reports
+- Career
+- Operator
+
+Applications:
+
+- orchestrate Services
+- present intelligence
+- coordinate workflows
+
+Applications must never duplicate Service logic.
+
+---
+
+# Game Integrations
+
+Games integrate into Oracle.
+
+Oracle does not become part of games.
+
+A Game Integration may provide:
+
+- maps
+- weapons
+- quests
+- collectibles
+- game rules
+- APIs
+- OCR regions
+- observation rules
+- telemetry
+- compatibility
+
+Game Integrations never own Oracle Applications.
+
+---
+
+# Capability Architecture
+
+Oracle resolves capability rather than implementation.
+
+Applications request capabilities.
+
+The Platform determines which implementation provides those capabilities.
+
+Example:
+
+```text
+AI Coach
+
+↓
+
+Requests
+
+ai.coaching
+
+↓
+
+Capability Graph
+
+↓
+
+Call of Duty Integration
+
+or
+
+Battlefield Integration
+
+or
+
+RuneScape Integration
+```
+
+Applications never hard-code providers.
+
+---
+
+# Capability Ownership
+
+Every capability has one owner.
+
+Examples:
+
+Behaviour Intelligence
+
+Owner
+
+Behaviour Engine
+
+---
+
+Prediction
+
+Owner
 
 Prediction Engine
 
 ---
 
-## Operator
+Mission Generation
 
-Operator Profile
+Owner
 
-Behavioural DNA
-
-Learning Style
-
-Capability Matrix
-
-Operational Metrics
-
-Career Progression
-
-Mission Brief
+Mission Engine
 
 ---
 
-## Weapon Intelligence
+Capability Resolution
 
-Weapon Performance
+Owner
 
-Recommendation Engine
-
-Decision Engine
-
-Reasoning Engine
-
-Simulation Engine
-
-Expected Outcome Engine
+Capability Graph
 
 ---
 
-## Intelligence Dashboard
+Extension Activation
 
-Oracle Assessment
+Owner
 
-Risk Assessment
-
-Behaviour Analysis
-
-Trend Analysis
-
-Prediction Analysis
-
-Operational Intelligence
+Extension Runtime
 
 ---
 
-## Data Layer
+Application Discovery
 
-Supabase
+Owner
 
-Repositories
-
-Oracle Sessions
-
-Operator Records
-
-Historical Session Data
+Application Registry
 
 ---
 
-## Future Systems
+Game Knowledge
 
-Oracle Memory
+Owner
+
+Game Integrations
+
+Ownership should always be obvious.
+
+---
+
+# Runtime Architecture
+
+Oracle executes through a shared runtime.
+
+Current runtime:
+
+```text
+Platform Bootstrap
+
+↓
 
 Oracle Context
 
-Intelligence Bus
+↓
 
-Engine Framework
+Runtime Scheduler
 
-Game Modules
+↓
 
-Strategy Intelligence
-
-Map Intelligence
-
-Contextual Intelligence
-
-Public Knowledge Engine
-
-Objective Intelligence
-
-Exploration Intelligence
-
-Team Intelligence
-
-Tournament Intelligence
-
-Computer Vision
-
-Voice Intelligence
-
-Live Match Intelligence
-
----
-
-# Folder Architecture
-
-The Oracle platform follows a feature-based architecture.
-
-lib/
-
-oracle/
-
-brain/
-
-coach/
-
-dashboard/
-
-intelligence/
-
-loadouts/
-
-operator/
-
-pipeline/
-
-repositories/
-
-signals/
-
-games/
-
-memory/ (planned)
-
-context/ (planned)
-
-engines/ (planned)
-
-bus/ (planned)
-
-Each folder represents a subsystem.
-
-Subsystems should communicate through defined interfaces rather than direct coupling.
-
----
-
-# Engine Philosophy
-
-Every engine exists for one reason.
-
-An engine should perform a single responsibility exceptionally well.
-
-Good engines are:
-
-Reusable
-
-Predictable
-
-Independent
-
-Composable
-
-Game agnostic
-
-Engines should never:
-
-Render UI
-
-Know about pages
-
-Know about React
-
-Know about styling
-
-Duplicate business logic
-
----
-
-# Repository Philosophy
-
-Repositories provide Oracle's access to stored truth.
-
-Repositories:
-
-Read data
-
-Write data
-
-Map database rows
-
-Never calculate intelligence
-
-Never contain UI logic
-
-Never generate recommendations
-
-Oracle Sessions remain the source of truth.
-
----
-
-# Oracle Brain
-
-Oracle Brain is the central intelligence orchestrator.
-
-Oracle Brain does not own calculations.
-
-Oracle Brain consumes intelligence produced elsewhere.
-
-Its responsibilities are:
-
-Combine signals
-
-Identify patterns
-
-Resolve conflicts
-
-Generate assessments
-
-Prioritise intelligence
-
-Produce behavioural understanding
-
-Oracle Brain should become more valuable as additional intelligence engines are introduced.
-
----
-
-# Decision Intelligence
-
-Decision Intelligence is Oracle's universal recommendation framework.
-
-Every recommendation in Oracle should eventually pass through Decision Intelligence.
-
-Decision Intelligence answers five questions.
-
-What is Oracle recommending?
-
-Why?
-
-How confident is Oracle?
-
-What evidence supports this?
-
-When should this recommendation be reassessed?
-
-Every future module should use the same decision format.
-
----
-
-# Operator Intelligence
-
-Operator Intelligence transforms session data into an Operator Profile.
-
-Operator Intelligence describes the person.
-
-Not the game.
-
-Current capabilities include:
-
-Learning Style
-
-Behavioural DNA
-
-Confidence Level
-
-Strengths
-
-Improvement Priorities
-
-Future versions will include:
-
-Risk Profile
-
-Communication Style
-
-Leadership
-
-Fatigue Detection
-
-Learning Velocity
-
-Confidence Trends
-
-Weapon Preferences
-
-Map Preferences
-
-Behaviour Evolution
-
-Operator Intelligence becomes the foundation of Oracle Memory.
-
----
-
-# Signal Engine
-
-Signals are Oracle's universal intelligence format.
-
-Every engine produces Signals.
-
-Signals represent observations.
-
-Not recommendations.
-
-Examples:
-
-Weapon performance improving
-
-Positioning declining
-
-Decision making stabilising
-
-Confidence increasing
-
-Meta shift detected
-
-Signals are intentionally small.
-
-Oracle Brain combines them into larger intelligence.
-
----
-
-# Signal Principles
-
-Signals should be:
-
-Objective
-
-Independent
-
-Evidence based
-
-Timestamped
-
-Reusable
-
-Signals should never contain presentation logic.
-
-Signals should never make recommendations.
-
-Signals simply communicate observations.
-
----
-
-# Intelligence Pipeline
-
-The Intelligence Pipeline coordinates Oracle.
-
-Its responsibility is orchestration.
-
-Not reasoning.
-
-The pipeline decides:
-
-Which engines run
-
-Execution order
-
-Signal aggregation
-
-Decision generation
-
-Pipeline output
-
-Every intelligence module should eventually register with the Pipeline.
-
----
-
-# Intelligence Bus (Planned)
-
-The Intelligence Bus will eventually replace manual orchestration.
-
-Instead of calling engines directly:
-
-Oracle Session Saved
+Engine Runtime
 
 ↓
 
 Intelligence Bus
-
-↓
-
-Registered Engines
-
-↓
-
-Signals
 
 ↓
 
@@ -1056,237 +646,1825 @@ Decision Intelligence
 
 ↓
 
-Pipeline
+Presentation
+```
 
-↓
+Runtime systems execute intelligence.
 
-UI
-
-New engines should simply register themselves with the Bus.
-
-Oracle automatically becomes more intelligent without changing existing code.
+Applications consume intelligence.
 
 ---
 
-# Oracle Context (Planned)
+# Oracle Context
 
-Future engines should receive one shared context.
+Oracle Context represents the current understanding of the Operator.
 
-OracleContext
+Context is constructed.
 
-contains:
+Context is consumed.
+
+Context should never be unpredictably mutated.
+
+New systems derive intelligence.
+
+They do not overwrite upstream truth.
+
+---
+
+# Service Contracts
+
+Services communicate through explicit contracts.
+
+Avoid:
+
+- hidden dependencies
+- mutable global state
+- circular references
+
+Prefer:
+
+- typed interfaces
+- immutable contracts
+- dependency injection
+- explicit ownership
+
+---
+
+# Extension Platform
+
+Oracle grows through extensions.
+
+Supported extension types include:
+
+- Game Integrations
+- Knowledge Packs
+- Vision Packs
+- AI Modules
+- Overlay Widgets
+- Companion Plugins
+- Themes
+- Language Packs
+
+Extensions declare:
+
+- identity
+- version
+- permissions
+- capabilities
+- dependencies
+- conflicts
+- compatibility
+- trust level
+
+Extensions never grant themselves permission.
+
+---
+
+# Companion Platform
+
+Oracle Companion is a Platform subsystem.
+
+Responsibilities:
+
+- overlay lifecycle
+- attachment lifecycle
+- diagnostics
+- positioning
+- observation
+- presentation
+- interaction
+
+Companion does not own intelligence.
+
+Companion presents intelligence.
+
+---
+
+# Marketplace Philosophy
+
+The Marketplace exists to expand Oracle without expanding Platform complexity.
+
+Future developers should build:
+
+- integrations
+- extensions
+- knowledge packs
+- widgets
+
+rather than modifying Platform internals.
+
+---
+
+# Dependency Rules
+
+Allowed:
+
+Platform
+
+↓
+
+Services
+
+↓
+
+Applications
+
+↓
+
+Game Integrations
+
+Forbidden:
+
+Applications
+
+↓
+
+Platform internals
+
+---
+
+Services
+
+↓
+
+Applications
+
+---
+
+Game Integrations
+
+↓
+
+Applications
+
+---
+
+Circular dependencies
+
+---
+
+Hidden ownership
+
+---
+
+# Architecture Review Checklist
+
+Before introducing new architecture ask:
+
+- Does this strengthen the Platform?
+- Can this be reused?
+- Does ownership remain explicit?
+- Is another Service already responsible?
+- Can this become an Extension?
+- Does this violate the Constitution?
+- Does this duplicate intelligence?
+- Is the dependency direction correct?
+
+If the answer raises doubt, redesign first.
+
+---
+
+> Good architecture removes future work.
+
+Not because less is built.
+
+Because the right thing is built once.
+
+# Repository Structure
+
+The Oracle repository should remain organised by responsibility rather than technology.
+
+Top-level structure:
+
+```text
+app/
+components/
+lib/
+docs/
+public/
+styles/
+types/
+```
+
+Within `lib`, responsibilities should be clearly separated.
+
+```text
+lib/
+
+oracle/
+    platform/
+    services/
+    applications/
+    intelligence/
+    graph/
+    engines/
+    runtime/
+
+companion/
+    runtime/
+    overlay/
+    observation/
+    extensions/
+    connectors/
+
+games/
+    call-of-duty/
+    battlefield/
+    runescape/
+    minecraft/
+    ...
+
+shared/
+```
+
+Avoid deeply nested feature folders unless they provide clear architectural value.
+
+---
+
+# Folder Ownership
+
+Every folder has one owner.
+
+Examples:
+
+```
+platform/
+```
+
+Owns platform infrastructure.
+
+---
+
+```
+services/
+```
+
+Owns reusable business capability.
+
+---
+
+```
+applications/
+```
+
+Owns Oracle user experiences.
+
+---
+
+```
+engines/
+```
+
+Owns specialised intelligence.
+
+---
+
+```
+games/
+```
+
+Owns game-specific implementations.
+
+---
+
+No folder should become a "miscellaneous" dumping ground.
+
+---
+
+# File Naming
+
+Use consistent naming.
+
+Functions
+
+```
+getOperator.ts
+```
+
+---
+
+Services
+
+```
+operator-service.ts
+```
+
+---
+
+Runtime
+
+```
+platform-runtime.ts
+```
+
+---
+
+Contracts
+
+```
+operator-contract.ts
+```
+
+---
+
+Types
+
+```
+operator-types.ts
+```
+
+---
+
+Registry
+
+```
+application-registry.ts
+```
+
+---
+
+Bootstrap
+
+```
+platform-bootstrap.ts
+```
+
+Avoid:
+
+```
+helpers.ts
+
+utils2.ts
+
+newService.ts
+
+temp.ts
+```
+
+Names should describe responsibility.
+
+---
+
+# Naming Standards
+
+Prefer:
 
 Operator
 
-Sessions
+Mission
 
-Memory
+Session
 
-Signals
+Capability
 
-Current Game
+Context
 
-Patch Version
+Intelligence
 
-Weapon Database
+Prediction
 
-Operator Profile
+Behaviour
 
-Historical Intelligence
+Progression
 
-Every engine receives the same context.
+Application
 
-No engine should query the database directly.
+Integration
 
-This ensures consistency throughout the platform.
+Extension
 
----
+Avoid vague names such as:
 
-# Game Modules
+Manager
 
-Oracle is game agnostic.
+Processor
 
-Games are plug-in intelligence modules.
+Thing
 
-Current:
+Data
 
-Call of Duty
+Helper
 
-Future:
+General
 
-Battlefield
+Common
 
-Rainbow Six
+Utility
 
-Apex Legends
-
-GTA
-
-Delta Force
-
-Future competitive titles
-
-Games should provide data.
-
-Oracle provides intelligence.
-
-# Engineering Standards
-
-Oracle is engineered as a long-term commercial software platform.
-
-Every engineering decision should optimise for:
-
-Maintainability
-
-Scalability
-
-Readability
-
-Reusability
-
-Predictability
-
-Long-term evolution
-
-Short-term convenience should never compromise long-term architecture.
+Every name should describe purpose.
 
 ---
 
-## Language & Naming Standard
+# Single Responsibility
 
-Oracle adopts British English for all internal engineering and domain terminology while following established industry conventions for public interfaces.
+Every file should answer one question:
 
-### Internal Source Code
+"What is my responsibility?"
 
-All internal business logic, engines, domain models and architecture use British English.
+If multiple answers exist,
 
-Examples:
+split the file.
 
-- analyseBehaviour()
-- analyseTrends()
-- BehaviourProfile
-- BehaviourEngine
-- sessionsAnalysed
-- prioritiseSignals()
-- optimiseRecommendations()
+---
 
-This applies to:
+# File Size
 
+Guidelines:
+
+Functions
+
+<100 lines
+
+---
+
+Components
+
+150–300 lines
+
+---
+
+Services
+
+200–400 lines
+
+---
+
+Runtime
+
+As required.
+
+Readable over short.
+
+Do not split runtime code purely to satisfy arbitrary limits.
+
+---
+
+# Imports
+
+Order imports consistently.
+
+```typescript
+// External
+
+import React from "react";
+
+
+// Internal aliases
+
+import { ... } from "@/lib/...";
+
+
+// Relative imports
+
+import { ... } from "./types";
+```
+
+Avoid circular imports.
+
+---
+
+# TypeScript
+
+Prefer explicit types.
+
+Prefer interfaces for public contracts.
+
+Prefer type aliases for unions.
+
+Avoid:
+
+```
+any
+```
+
+Use:
+
+```
+unknown
+```
+
+until properly narrowed.
+
+Strict typing is preferred.
+
+---
+
+# Functions
+
+Functions should:
+
+- perform one responsibility
+- return predictable results
+- avoid hidden side effects
+- remain testable
+
+Prefer:
+
+```
+calculateMissionScore()
+```
+
+over
+
+```
+processMission()
+```
+
+---
+
+# Components
+
+Components render.
+
+Components should not own business logic.
+
+Business logic belongs inside:
+
+- Services
 - Engines
-- Domain services
-- Repositories
-- Runtime contracts
-- TypeScript types
-- Documentation
-- Comments
-- Internal utility functions
+- Platform
 
-Consistency across the internal codebase takes precedence over personal preference.
+Components consume results.
 
 ---
 
-### External Interfaces
+# React Principles
 
-Public APIs, HTTP endpoints and external integrations may use American English where it aligns with established industry conventions.
+Prefer:
+
+Small composable components.
+
+Clear props.
+
+Derived state.
+
+Avoid:
+
+Large monolithic pages.
+
+Nested conditional rendering.
+
+Duplicated UI logic.
+
+---
+
+# Styling
+
+Use Tailwind.
+
+Prefer design tokens.
+
+Avoid inline styling unless justified.
+
+Use consistent spacing.
+
+Use consistent typography.
+
+Use premium visual hierarchy.
+
+Oracle should always feel deliberate.
+
+---
+
+# Comments
+
+Comment:
+
+Why.
+
+Not:
+
+What.
+
+Good:
+
+```typescript
+// Delay registration until the Platform has completed bootstrap.
+```
+
+Bad:
+
+```typescript
+// Increment i.
+```
+
+The code already explains that.
+
+---
+
+# Error Handling
+
+Errors should be:
+
+Typed.
+
+Actionable.
+
+Observable.
+
+Avoid silent failures.
+
+Platform diagnostics should always explain why something failed.
+
+---
+
+# Logging
+
+Logs should help diagnose behaviour.
+
+Avoid console spam.
+
+Prefer structured logging.
+
+Include:
+
+- subsystem
+- severity
+- timestamp
+- message
+- context
+
+---
+
+# Configuration
+
+Configuration belongs in configuration.
+
+Never hard-code:
+
+API keys.
+
+URLs.
+
+Secrets.
+
+Environment-specific behaviour.
+
+---
+
+# Performance
+
+Optimise after measuring.
+
+Prefer clarity over premature optimisation.
+
+Platform correctness is more valuable than micro-optimisations.
+
+---
+
+# Refactoring
+
+Refactor when:
+
+- duplication appears
+- ownership becomes unclear
+- coupling increases
+- readability decreases
+
+Do not refactor purely for novelty.
+
+Every refactor should improve the Platform.
+
+---
+
+# Code Review Checklist
+
+Before committing ask:
+
+- Is ownership obvious?
+- Is naming clear?
+- Is another Service already responsible?
+- Is typing explicit?
+- Is the dependency direction correct?
+- Is duplication avoided?
+- Does this strengthen Oracle?
+- Does this follow the Constitution?
+
+If not,
+
+improve before committing.
+
+---
+
+> Great software is not written by adding more code.
+
+> Great software is written by making every line belong exactly where it should.
+
+# Oracle User Experience Standards
+
+Oracle is premium software.
+
+Every interaction should feel deliberate, polished and intelligent.
+
+The user should immediately feel that Oracle understands what they are doing.
+
+Oracle should never feel cluttered.
+
+Oracle should never overwhelm the Operator with unnecessary information.
+
+Intelligence should always feel calm.
+
+---
+
+# Design Philosophy
+
+Oracle is built around five principles.
+
+## Clarity
+
+The Operator should immediately understand:
+
+- where they are
+- what Oracle knows
+- what Oracle recommends
+- what action should be taken
+
+---
+
+## Confidence
+
+Oracle should communicate confidence honestly.
+
+Avoid:
+
+"Always"
+
+"Guaranteed"
+
+"Perfect"
+
+Prefer:
+
+High Confidence
+
+Medium Confidence
+
+Low Confidence
+
+Evidence Available
+
+Confidence should always be visible.
+
+---
+
+## Context
+
+Oracle should display information because it is useful now.
+
+Not because it exists.
+
+Context determines relevance.
+
+Relevance determines visibility.
+
+---
+
+## Progression
+
+Oracle should encourage continuous improvement.
+
+Every screen should answer one of:
+
+- What happened?
+- Why?
+- What should I improve?
+- What happens next?
+
+---
+
+## Simplicity
+
+If information does not help the Operator make a better decision,
+
+it should probably not be shown.
+
+---
+
+# Oracle Visual Identity
+
+Oracle should always appear:
+
+Premium
+
+Modern
+
+Technical
+
+Professional
+
+Minimal
+
+Readable
+
+Confident
+
+Never:
+
+Cheap
+
+Playful
+
+Noisy
+
+Distracting
+
+Overdesigned
+
+---
+
+# Layout Principles
+
+Every screen should have a clear hierarchy.
+
+Recommended structure:
+
+```text
+Page Header
+
+↓
+
+Primary Intelligence
+
+↓
+
+Supporting Information
+
+↓
+
+Secondary Detail
+
+↓
+
+Diagnostics (if required)
+```
+
+The most important information should always appear first.
+
+---
+
+# Typography
+
+Hierarchy should remain consistent.
+
+Primary Heading
+
+Large
+
+Bold
+
+High contrast
+
+---
+
+Section Heading
+
+Clear
+
+Compact
+
+Consistent
+
+---
+
+Body Text
+
+Comfortable reading width
+
+High readability
+
+Minimal visual noise
+
+---
+
+Labels
+
+Uppercase only when appropriate.
+
+Avoid excessive decorative text.
+
+---
+
+# Colour Philosophy
+
+Colour communicates meaning.
+
+Never decoration.
+
+Recommended meanings:
+
+Blue
+
+Information
+
+---
+
+Green
+
+Healthy
+
+Complete
+
+Successful
+
+---
+
+Amber
+
+Attention
+
+Review
+
+Medium confidence
+
+---
+
+Red
+
+Problem
+
+Critical warning
+
+Failure
+
+---
+
+Purple
+
+Oracle Intelligence
+
+AI
+
+Prediction
+
+Reasoning
+
+---
+
+Avoid using colour as the only communication mechanism.
+
+---
+
+# Cards
+
+Oracle uses cards extensively.
+
+Every card should answer one question.
+
+Good:
+
+Mission Progress
+
+Prediction
+
+Operator Rank
+
+Performance Trend
+
+Recommendation
+
+Avoid:
+
+Cards containing unrelated information.
+
+---
+
+# Dashboards
+
+Dashboards should guide attention.
+
+Not display everything.
+
+Every dashboard should answer:
+
+What matters now?
+
+---
+
+# AI Presentation
+
+Oracle Intelligence should feel conversational.
+
+Avoid robotic wording.
+
+Avoid exaggerated confidence.
+
+Prefer:
+
+"Oracle believes..."
+
+"Evidence suggests..."
+
+"Historical behaviour indicates..."
+
+"Confidence is currently high."
+
+Oracle should sound intelligent.
+
+Not theatrical.
+
+---
+
+# Recommendations
+
+Every recommendation should include:
+
+Recommendation
+
+↓
+
+Reason
+
+↓
+
+Evidence
+
+↓
+
+Confidence
+
+↓
+
+Expected Outcome
+
+Recommendations without explanation reduce trust.
+
+---
+
+# Empty States
+
+Empty states should encourage action.
+
+Example:
+
+"No sessions analysed yet.
+
+Complete your first Oracle Session to begin building your Operator profile."
+
+Avoid:
+
+"No data."
+
+---
+
+# Loading States
+
+Loading should reassure.
+
+Prefer meaningful progress.
+
+Example:
+
+Analysing Behaviour...
+
+Building Prediction...
+
+Resolving Platform...
+
+Avoid:
+
+Generic spinning indicators without context.
+
+---
+
+# Notifications
+
+Notifications should be:
+
+Relevant
+
+Actionable
+
+Rare
+
+Avoid notification fatigue.
+
+Every notification should help the Operator.
+
+---
+
+# Oracle Companion
+
+The Companion should feel like part of Oracle.
+
+Not a separate application.
+
+Companion should be:
+
+Minimal
+
+Context aware
+
+Non-intrusive
+
+Fast
+
+Transparent
+
+Companion should never compete with gameplay.
+
+It should complement gameplay.
+
+---
+
+# Overlay Philosophy
+
+The Overlay exists to deliver intelligence,
+
+not occupy screen space.
+
+Default behaviour:
+
+Transparent
+
+Borderless
+
+Click-through
+
+Always-on-top
+
+Operator controlled
+
+The Operator always remains in control.
+
+---
+
+# Information Priority
+
+When space is limited,
+
+display information in this order:
+
+Critical warnings
+
+↓
+
+Current objective
+
+↓
+
+Recommendations
+
+↓
+
+Predictions
+
+↓
+
+Supporting detail
+
+↓
+
+Diagnostics
+
+---
+
+# Animation
+
+Animation should communicate state.
+
+Avoid decorative animation.
+
+Good:
+
+Fade
+
+Slide
+
+Progress
+
+Expansion
+
+Avoid:
+
+Excessive movement
+
+Unnecessary transitions
+
+Distracting effects
+
+---
+
+# Accessibility
+
+Oracle should remain usable by everyone.
+
+Use:
+
+Readable font sizes
+
+High contrast
+
+Keyboard navigation
+
+Clear focus states
+
+Colour-independent meaning
+
+---
+
+# Consistency
+
+Every Oracle Application should feel like Oracle.
+
+The Operator should never wonder:
+
+"Am I still inside Oracle?"
+
+Consistency builds trust.
+
+---
+
+# User Experience Review
+
+Before releasing a feature ask:
+
+Is it obvious?
+
+Is it useful?
+
+Is it explainable?
+
+Is it visually consistent?
+
+Does it reduce effort?
+
+Does it strengthen Oracle?
+
+If not,
+
+improve it.
+
+---
+
+> Intelligence creates value.
+
+> Great user experience makes that value usable.
+
+# Oracle Intelligence Standards
+
+Oracle Intelligence is the heart of the Oracle Platform.
+
+Intelligence is never generated by a single system.
+
+It emerges from multiple specialised systems working together through explicit contracts.
+
+Oracle should always reason.
+
+Never guess.
+
+---
+
+# Intelligence Philosophy
+
+Oracle exists to answer four questions.
+
+## What happened?
+
+Historical understanding.
+
+---
+
+## Why did it happen?
+
+Behavioural reasoning.
+
+---
+
+## What will happen?
+
+Prediction.
+
+---
+
+## What should the Operator do?
+
+Recommendation.
+
+Every Oracle Application ultimately exists to answer one or more of these questions.
+
+---
+
+# Intelligence Flow
+
+Oracle Intelligence follows a predictable lifecycle.
+
+```text
+Evidence
+        │
+        ▼
+Context
+        │
+        ▼
+Engines
+        │
+        ▼
+Oracle Brain
+        │
+        ▼
+Decision Intelligence
+        │
+        ▼
+Services
+        │
+        ▼
+Applications
+```
+
+Each stage has one responsibility.
+
+---
+
+# Evidence
+
+Evidence is the foundation of trust.
+
+Evidence may originate from:
+
+- Oracle Sessions
+- Historical behaviour
+- Game Integrations
+- Desktop Observation
+- OCR
+- Platform state
+- Operator Profile
+- User configuration
+
+Evidence should never be fabricated.
+
+---
+
+# Oracle Context
+
+Context represents Oracle's current understanding.
+
+Context is immutable.
+
+Systems derive information from Context.
+
+They do not silently overwrite it.
+
+---
+
+# Engines
+
+Every Engine performs one specialised task.
 
 Examples:
 
-- /api/oracle/analyze
-- /api/operator/authorize
+Behaviour Engine
 
-This improves familiarity for external developers and aligns Oracle with common web API conventions.
+Prediction Engine
+
+Trend Engine
+
+Mission Engine
+
+Evidence Engine
+
+Explainability Engine
+
+Confidence Engine
+
+Avoid creating "general purpose" engines.
+
+Specialisation improves quality.
 
 ---
 
-### Database Schema
+# Oracle Brain
 
-Database naming follows the existing production schema.
+Oracle Brain coordinates intelligence.
 
-Schema names are never renamed purely for spelling consistency.
+Oracle Brain does not replace Engines.
 
-Database stability always takes precedence over language preference.
+Oracle Brain combines Engine outputs into coherent reasoning.
+
+Think of Oracle Brain as an orchestrator rather than a calculator.
 
 ---
 
-### File Naming
+# Decision Intelligence
 
-New internal files must follow British English.
+Decision Intelligence transforms reasoning into action.
+
+Every recommendation should include:
+
+Recommendation
+
+↓
+
+Evidence
+
+↓
+
+Confidence
+
+↓
+
+Reasoning
+
+↓
+
+Expected Outcome
+
+Recommendations without explanation reduce trust.
+
+---
+
+# Explainability
+
+Every important recommendation should answer:
+
+Why?
+
+Evidence should always be available.
+
+Oracle should never behave like a black box.
+
+---
+
+# Confidence
+
+Confidence should always be calculated.
+
+Never invented.
+
+Confidence should increase when:
+
+Evidence increases.
+
+Agreement between Engines increases.
+
+Historical accuracy increases.
+
+Confidence should decrease when:
+
+Evidence conflicts.
+
+Evidence is incomplete.
+
+Historical certainty is low.
+
+---
+
+# Behaviour
+
+Behaviour describes patterns.
+
+Not isolated events.
+
+Oracle should identify:
+
+Habits
+
+Strengths
+
+Weaknesses
+
+Consistency
+
+Improvement
+
+Regression
+
+Behaviour evolves over time.
+
+---
+
+# Prediction
+
+Prediction estimates future outcomes.
+
+Prediction should never be presented as certainty.
+
+Every prediction should include:
+
+Probability
+
+Confidence
+
+Reasoning
+
+Evidence
+
+Expected variance
+
+---
+
+# Memory
+
+Oracle remembers.
+
+Memory should improve future reasoning.
+
+Memory should not become uncontrolled historical storage.
+
+Useful memory is preferable to complete memory.
+
+---
+
+# Services and Intelligence
+
+Applications should never communicate directly with Engines.
+
+Applications consume Services.
+
+Services consume Platform Intelligence.
+
+This separation keeps intelligence reusable.
+
+---
+
+# Platform Intelligence
+
+The Platform owns intelligence.
+
+Applications present intelligence.
+
+Games provide context.
+
+This ownership must remain stable.
+
+---
+
+# AI Integration
+
+External AI services enhance Oracle.
+
+They do not define Oracle.
+
+Oracle should remain valuable even when external AI providers change.
+
+AI providers are dependencies.
+
+Oracle Intelligence is the product.
+
+---
+
+# Prompt Engineering
+
+AI prompts should:
+
+Be deterministic.
+
+Be explainable.
+
+Be versioned.
+
+Be testable.
+
+Avoid hidden prompt changes.
+
+Prompt evolution should be documented.
+
+---
+
+# Hallucination Prevention
+
+Oracle should minimise hallucination.
+
+Prefer:
+
+Evidence
+
+Structured data
+
+Historical behaviour
+
+Known game knowledge
+
+Avoid unsupported conclusions.
+
+When uncertainty exists,
+
+Oracle should say so.
+
+---
+
+# Intelligence Review
+
+Before releasing intelligence ask:
+
+Is it explainable?
+
+Is confidence justified?
+
+Is evidence available?
+
+Is ownership correct?
+
+Can another Engine own this?
+
+Does this strengthen Oracle?
+
+If not,
+
+redesign.
+
+---
+
+# Intelligence Goal
+
+Oracle should become more accurate after every Operator session.
+
+Every completed session should permanently strengthen Oracle's understanding of that Operator.
+
+Learning is continuous.
+
+Improvement is expected.
+
+---
+
+> Oracle does not generate intelligence because AI exists.
+
+> Oracle generates intelligence because evidence becomes understanding.
+
+# Oracle Development Workflow
+
+Oracle is developed through disciplined engineering.
+
+Every sprint should leave the Platform in a stronger state than before.
+
+Architecture always precedes implementation.
+
+Documentation is implementation.
+
+Green builds are mandatory.
+
+---
+
+# Sprint Lifecycle
+
+Every sprint follows the same lifecycle.
+
+```text
+Architecture Review
+        │
+        ▼
+Sprint Planning
+        │
+        ▼
+Implementation
+        │
+        ▼
+Continuous Compilation
+        │
+        ▼
+Green Production Build
+        │
+        ▼
+Architecture Review
+        │
+        ▼
+Documentation Update
+        │
+        ▼
+Sprint Closure
+        │
+        ▼
+Git Commit
+        │
+        ▼
+Git Push
+        │
+        ▼
+Version Tag
+        │
+        ▼
+Next Sprint
+```
+
+No stage should be skipped.
+
+---
+
+# Sprint Planning
+
+Before writing code:
+
+- Review the Constitution.
+- Review the Codex.
+- Review Architecture.
+- Review Roadmap.
+- Review current implementation.
+- Understand existing ownership.
+- Confirm sprint objective.
+- Identify success criteria.
+
+Planning should reduce implementation complexity.
+
+---
+
+# Definition of Done
+
+A sprint is **not complete** until all of the following are true.
+
+## Engineering
+
+- Production build passes.
+- TypeScript passes.
+- No unresolved build warnings.
+- Architecture remains consistent.
+
+---
+
+## Documentation
+
+- Constitution updated if required.
+- Codex updated if required.
+- Architecture updated.
+- Roadmap updated.
+- Project Board updated.
+- Decisions recorded.
+
+---
+
+## Repository
+
+- Commit created.
+- Changes pushed.
+- Version tag created.
+- Repository clean.
+
+---
+
+## Product
+
+- Feature works.
+- Existing behaviour preserved.
+- Platform strengthened.
+- No architectural regression.
+
+Only then is a sprint complete.
+
+---
+
+# Branch Strategy
+
+Each sprint receives its own branch.
 
 Examples:
 
-✅ behaviour-analysis.ts
+```text
+main
 
-✅ behaviour-engine.ts
+sprint-8-platform
 
-✅ trend-analysis.ts
+sprint-9-overlay
 
-✅ trend-engine.ts
+sprint-10-observation
 
-✅ prediction-analysis.ts
+sprint-11-game-intelligence
 
-✅ prediction-engine.ts
+sprint-12-marketplace
+```
 
-Avoid introducing mixed naming such as:
+Branch names should describe the sprint objective.
 
-❌ behavior-engine.ts
-
-❌ analyze-trends.ts
-
----
-
-### Engineering Principle
-
-Internal architecture should read naturally for Oracle engineers.
-
-External interfaces should follow established industry conventions.
-
-Persistent contracts should remain stable.
-
-Consistency is more important than preference.
+Avoid long-lived feature branches covering multiple milestones.
 
 ---
 
-## Incremental Architecture Standard
+# Versioning
 
-Oracle evolves through incremental architectural refinement rather than large-scale rewrites.
+Oracle follows milestone versioning.
 
-Architecture should evolve by introducing new capabilities alongside existing production code until migration is complete.
+Examples:
 
-Business logic should remain stable.
+```text
+v0.8.0-platform-foundation
 
-Orchestration should evolve.
+v0.9.0-overlay-alpha
 
-Every architectural migration follows the same pattern.
+v0.10.0-observation-alpha
 
-Existing Domain Logic
+v0.11.0-game-intelligence
 
-↓
+v0.12.0-marketplace
+```
 
-Move to:
+Every tagged version should represent a meaningful milestone.
 
-<capability>-analysis.ts
+---
 
-↓
+# Git Workflow
 
-Create:
+Standard workflow:
 
-<capability>-engine.ts
-
-↓
-
-Register the Engine
-
-↓
-
-Expose Graph output
+```text
+Create Sprint Branch
 
 ↓
 
-Preserve legacy exports during migration
+Implement
 
 ↓
 
-Run production build
+Build
+
+↓
+
+Review
 
 ↓
 
@@ -1294,1082 +2472,1082 @@ Commit
 
 ↓
 
-Proceed to the next capability
+Push
 
-Business logic remains pure.
+↓
 
-Engine wrappers own orchestration.
+Tag
 
-The Intelligence Bus owns execution.
+↓
 
-The Intelligence Pipeline owns runtime coordination.
+Merge
 
-Every completed milestone must leave Oracle in a production-ready, buildable state before the next begins.
+↓
 
-Architecture evolves incrementally.
+Create Next Sprint Branch
+```
 
-Production stability is never sacrificed for migration speed.
+Never tag a failing build.
 
 ---
 
-# Layer Responsibilities
+# Commit Messages
 
-Every layer has exactly one responsibility.
+Commit messages should describe intent.
 
-## Pages
+Good:
 
-Pages compose the application.
+```
+Introduce Platform Bootstrap
 
-Pages may:
+Implement Extension Runtime
 
-Load data
+Refactor Service Registry
 
-Call engines
-
-Compose components
-
-Handle routing
-
-Pages should never:
-
-Contain business logic
-
-Perform calculations
-
-Generate recommendations
-
-Contain duplicated intelligence
-
----
-
-## Components
-
-Components present intelligence.
-
-Components may:
-
-Render UI
-
-Display data
-
-Format values
-
-Handle local UI state
-
-Components should never:
-
-Query databases
-
-Generate intelligence
-
-Calculate recommendations
-
-Duplicate business logic
-
----
-
-## Engines
-
-Engines are Oracle's reasoning layer.
-
-Engines may:
-
-Analyse data
-
-Generate intelligence
-
-Produce Signals
-
-Generate Decisions
-
-Build Profiles
-
-Produce Predictions
-
-Engines should never:
-
-Render UI
-
-Know about React
-
-Know about Pages
-
-Know about styling
-
-Perform direct database queries
-
-Every engine should have one responsibility.
-
----
-
-## Repositories
-
-Repositories communicate with persistent storage.
-
-Repositories may:
-
-Read data
-
-Write data
-
-Map database records
-
-Repositories should never:
-
-Calculate intelligence
-
-Generate recommendations
-
-Contain presentation logic
-
-Know about UI
-
-Repositories expose truth.
-
-Engines create intelligence.
-
----
-
-# Oracle Engine Standard
-
-Every Oracle Engine should satisfy the following principles.
-
-Single Responsibility
-
-Reusable
-
-Independent
-
-Composable
-
-Deterministic
-
-Game Agnostic
-
-Evidence Driven
-
-Every engine should be capable of being reused by multiple systems.
-
----
-
-# Intelligence First
-
-Oracle should always produce intelligence before presentation.
-
-Never:
-
-Database
-
-↓
-
-UI
-
-Instead:
-
-Database
-
-↓
-
-Repository
-
-↓
-
-Engine
-
-↓
-
-Signals
-
-↓
-
-Brain
-
-↓
-
-Decision
-
-↓
-
-Pipeline
-
-↓
-
-UI
-
-Presentation is always the final step.
-
----
-
-# Code Quality Standards
-
-Prefer:
-
-Small functions
-
-Pure functions
-
-Descriptive naming
-
-Reusable abstractions
-
-Composition over duplication
+Add Capability Graph
+```
 
 Avoid:
 
-Massive files
+```
+Updates
 
-Temporary hacks
+Changes
 
-Hidden behaviour
+Fix
 
-Magic numbers
+More work
 
-Deep nesting
+Stuff
+```
 
-Duplicated logic
-
-Every function should be understandable without reading unrelated files.
-
----
-
-# Naming Standards
-
-Oracle uses descriptive names.
-
-Examples:
-
-generateOperatorProfile()
-
-generateOracleDecision()
-
-calculateOracleConfidence()
-
-generateDecisionEvidence()
-
-runIntelligencePipeline()
-
-createOracleSignal()
-
-Avoid names such as:
-
-process()
-
-handle()
-
-run()
-
-execute()
-
-data()
-
-info()
-
-Name functions according to what they actually produce.
+History should explain Oracle's evolution.
 
 ---
 
-# Folder Standards
+# Pull Requests
 
-Folders represent subsystems.
+Every pull request should answer:
 
-Files represent responsibilities.
-
-Bad
-
-coach/
-
-coach.ts
-
-coach2.ts
-
-coachHelper.ts
-
-Good
-
-coach/
-
-coach-engine.ts
-
-coach-types.ts
-
-coach-mission.ts
-
-coach-prediction.ts
-
-coach-summary.ts
-
-Folder structure should communicate architecture.
-
----
-
-# Component Standards
-
-Components should remain presentation focused.
-
-Bad
-
-MissionCard
-
-↓
-
-queries Supabase
-
-↓
-
-calculates XP
-
-↓
-
-generates recommendations
-
-↓
-
-renders UI
-
-Good
-
-MissionCard
-
-↓
-
-receives completed Mission object
-
-↓
-
-renders beautifully
-
-Business logic belongs elsewhere.
-
----
-
-# Engine Standards
-
-Engines should receive structured inputs.
-
-Example:
-
-generateOperatorProfile(input)
-
-↓
-
-returns
-
-OperatorProfile
-
-Not:
-
-generateOperatorProfile()
-
-↓
-
-internally queries Supabase
-
-↓
-
-internally loads UI
-
-↓
-
-internally loads React
-
-Inputs should be explicit.
-
-Outputs should be predictable.
-
----
-
-# Signal Standards
-
-Signals describe observations.
-
-Signals never recommend.
-
-Signals should answer:
-
-What happened?
-
-How important is it?
-
-How confident are we?
-
-Signals should remain small.
-
-Oracle Brain combines Signals into intelligence.
-
----
-
-# Decision Standards
-
-Every recommendation should answer:
-
-Recommendation
-
-Reasoning
-
-Evidence
-
-Confidence
-
-Expected Outcome
-
-Reassessment Trigger
-
-Decision Intelligence is the only subsystem responsible for recommendations.
-
----
-
-# Confidence Standards
-
-Confidence should always be derived.
-
-Never invented.
-
-Confidence should consider:
-
-Evidence quality
-
-Sample size
-
-Consistency
-
-Trend stability
-
-Historical behaviour
-
-Confidence is a calculation.
-
-Not a feeling.
-
----
-
-# Documentation Standards
-
-Documentation evolves with Oracle.
-
-Documentation is not optional.
-
-Every completed sprint should update:
-
-Architecture
-
-Roadmap
-
-Project Board
-
-Codex
-
-Decisions
-
-Manifesto (if philosophy changes)
-
-Documentation should explain why decisions exist.
-
-Not simply what changed.
-
----
-
-# Sprint Workflow
-
-Every sprint follows the same lifecycle.
-
-Architecture Review
-
-↓
-
-Inspect Existing Files
-
-↓
-
-Planning
-
-↓
-
-Implementation
-
-↓
-
-Compilation
-
-↓
-
-UI Review
-
-↓
-
-Architecture Review
-
-↓
-
-Documentation
-
-↓
-
-Git Commit
-
-↓
-
-Release
-
-Skipping steps creates technical debt.
-
----
-
-# Build Standard
-
-Every significant change ends with:
-
-npm run build
-
-Compilation success is required.
-
-Compilation success alone is not considered completion.
-
----
-
-# UI Review Standard
-
-Passing compilation is only the beginning.
-
-Every UI change should be reviewed visually.
-
-Questions to ask:
-
-Does it feel premium?
-
-Does it match Oracle?
-
-Does it communicate intelligence?
-
-Does it improve understanding?
-
-Is there unnecessary visual noise?
-
-If the answer is uncertain...
-
-Improve it.
-
----
-
-# Design Philosophy
-
-Oracle should feel like Mission Control.
-
-Every screen should communicate confidence.
-
-Every interaction should feel intentional.
-
-Premium is achieved through restraint.
-
-Not decoration.
-
-UI should emphasise:
-
-Hierarchy
-
-Spacing
-
-Motion
-
-Typography
-
-Contrast
-
-Evidence
-
-Clarity
-
-Avoid unnecessary effects.
-
-Animation should support understanding.
-
-Never distract from it.
-
----
-
-# Design System
-
-Oracle builds reusable UI systems.
-
-Before creating a new component ask:
-
-Can an existing component solve this?
-
-Can this become reusable?
-
-Can another subsystem benefit?
-
-Reusable systems always outperform duplicated UI.
-
----
-
-# Documentation Philosophy
-
-Oracle documentation is part of the product.
-
-Documentation should always answer:
+What changed?
 
 Why?
 
-How?
+What architecture was affected?
 
-Where?
+What documentation was updated?
 
-When?
-
-Future developers should understand Oracle without requiring verbal explanation.
+Does the build pass?
 
 ---
 
-# Development Workflow
+# Architecture Reviews
 
-The AI assisting Oracle acts as:
+Every significant change should answer:
 
-Lead Software Architect
+Does this strengthen the Platform?
 
-Technical Project Manager
+Does ownership remain clear?
 
-Product Designer
+Can this become reusable?
 
-Engineering Reviewer
+Does it introduce duplication?
 
-Documentation Custodian
+Is another subsystem already responsible?
 
-Long-term Platform Planner
+If uncertain,
 
-The objective is never simply to generate code.
-
-The objective is to build Oracle correctly.
-
----
-
-# Architecture Before Features
-
-When choosing between:
-
-A quick solution
-
-A reusable solution
-
-Always choose the reusable solution.
-
-Today's architecture determines tomorrow's development speed.
-
-Every sprint should strengthen Oracle.
-
-Never weaken it.
-
-# Operations
-
-Oracle is developed through Operations.
-
-An Operation represents a major architectural objective rather than a software version.
-
-Operations consist of multiple phases.
-
-Each phase delivers reusable platform capabilities.
-
-Future examples include:
-
-Operation Genesis
-
-Foundation Architecture
-
-Operation Sentinel
-
-Oracle Memory
-
-Operation Vanguard
-
-Multi-Game Intelligence
-
-Operation Dominion
-
-Live Intelligence
-
-Operation Atlas
-
-Competitive Ecosystem
-
-Operations communicate purpose.
-
-Versions communicate chronology.
-
-Oracle should always be driven by purpose.
-
----
-
-# Sprint Discipline
-
-Every sprint should have one objective.
-
-Complete that objective before beginning another.
-
-Ideas are encouraged.
-
-Feature creep is not.
-
-When new ideas emerge:
-
-Capture them.
-
-Document them.
-
-Schedule them.
-
-Continue the active sprint.
-
-Discipline produces momentum.
-
----
-
-# Release Philosophy
-
-Oracle is never "finished."
-
-Every release should strengthen one or more of the following.
-
-Architecture
-
-Operator Intelligence
-
-Decision Quality
-
-Evidence
-
-Prediction Accuracy
-
-Performance
-
-User Experience
-
-Every release should leave Oracle more intelligent than before.
-
----
-
-# Commercial Philosophy
-
-Oracle is being built as a commercial software platform.
-
-Every engineering decision should consider long-term maintainability.
-
-Every product decision should consider long-term value.
-
-Every architectural decision should consider future expansion.
-
-The platform should scale through architecture rather than constant rewrites.
-
----
-
-# Quality Standard
-
-Oracle values quality over quantity.
-
-One exceptional feature is more valuable than ten average ones.
-
-Every feature should demonstrate:
-
-Clear purpose
-
-Elegant architecture
-
-Production-quality implementation
-
-Premium user experience
-
-If a feature does not reach Oracle's standard...
-
-Continue improving it.
-
----
-
-# Review Standard
-
-Every completed feature should be reviewed.
-
-Questions to ask:
-
-Does this improve the Operator?
-
-Does this strengthen Oracle?
-
-Can this be reused?
-
-Will this still belong in five years?
-
-Does it align with the Manifesto?
-
-Does it align with the Codex?
-
-If the answer is uncertain...
-
-Review the implementation again.
+review before implementing.
 
 ---
 
 # Documentation Workflow
 
-Documentation evolves alongside Oracle.
+Documentation is maintained continuously.
 
-Every completed sprint should review:
+Preferred order:
 
-Manifesto
+Constitution
+
+↓
 
 Codex
 
+↓
+
 Architecture
+
+↓
 
 Roadmap
 
+↓
+
 Project Board
 
-Decisions
+↓
 
-Ideas
+Implementation
 
-Documentation should never lag behind development.
-
-Future developers should understand Oracle by reading the documentation alone.
+Documentation should never drift from reality.
 
 ---
 
-# Git Workflow
+# Build Policy
 
-Every completed sprint should end with:
+Production build must pass before:
 
-Review changes
+- Commit
+- Push
+- Tag
+- Sprint closure
 
-Compile
+A green build is non-negotiable.
 
-Run:
+---
 
-```bash
-npm run build
+# Refactoring Policy
+
+Refactor when:
+
+- duplication increases
+- ownership becomes unclear
+- complexity grows
+- architecture improves
+
+Do not refactor purely because code looks different.
+
+Every refactor should strengthen Oracle.
+
+---
+
+# Breaking Changes
+
+Breaking architectural changes require:
+
+- Architecture review
+- Documentation update
+- Decision record
+- Migration plan
+
+Avoid unnecessary breaking changes.
+
+---
+
+# Engineering Quality
+
+Oracle values:
+
+Correctness
+
+Clarity
+
+Consistency
+
+Maintainability
+
+Extensibility
+
+Explainability
+
+Premium quality
+
+Speed is important.
+
+Quality is permanent.
+
+---
+
+# Release Philosophy
+
+Oracle releases should represent genuine progress.
+
+Every release should:
+
+Improve the Platform.
+
+Improve the Operator experience.
+
+Reduce technical debt.
+
+Increase architectural maturity.
+
+Improve documentation.
+
+Every release should make Oracle easier to extend.
+
+---
+
+# Engineering Mindset
+
+Ask before every implementation:
+
+Will this still make sense in two years?
+
+Will another developer understand it?
+
+Does it strengthen Oracle?
+
+If the answer is no,
+
+stop and redesign.
+
+---
+
+> Great engineering is not measured by how quickly features are added.
+
+> Great engineering is measured by how confidently the Platform can continue to evolve.
+
+# Quality Standards
+
+Oracle is expected to behave like a premium software platform.
+
+Quality is not optional.
+
+Every subsystem should be:
+
+- Reliable
+- Predictable
+- Testable
+- Observable
+- Explainable
+- Maintainable
+
+Every sprint should improve one or more quality attributes.
+
+---
+
+# Testing Philosophy
+
+Oracle is tested in layers.
+
+```text
+Platform
+
+↓
+
+Services
+
+↓
+
+Applications
+
+↓
+
+Game Integrations
+
+↓
+
+User Experience
 ```
 
-Verify the build succeeds.
-
-Review the UI where applicable.
-
-Update documentation.
-
-Create a meaningful commit.
-
-Push to GitHub.
-
-GitHub remains the authoritative source for Oracle.
+Testing should verify behaviour rather than implementation.
 
 ---
 
-# Oracle Roadmap Philosophy
+# Unit Testing
 
-Oracle grows through capabilities.
+Unit tests validate isolated behaviour.
 
-Not features.
+Suitable targets include:
 
-Capabilities remain useful forever.
+- Services
+- Engines
+- Utility functions
+- Capability resolution
+- Platform contracts
 
-Features eventually become obsolete.
+Unit tests should be:
 
-Prioritise capabilities such as:
+Fast
 
-Operator Intelligence
+Deterministic
 
-Decision Intelligence
+Independent
 
-Signal Intelligence
+---
 
-Memory
+# Integration Testing
 
-Prediction
+Integration tests validate communication between subsystems.
 
-Reasoning
+Examples:
+
+Platform ↔ Services
+
+Services ↔ Applications
+
+Applications ↔ Game Integrations
+
+Companion ↔ Platform
+
+Extension Runtime ↔ Capability Graph
+
+Integration tests should validate contracts.
+
+---
+
+# End-to-End Testing
+
+End-to-end tests validate complete Operator journeys.
+
+Examples:
+
+Launch Oracle
+
+↓
+
+Platform Boots
+
+↓
+
+Game Detected
+
+↓
+
+Integration Loaded
+
+↓
+
+Companion Starts
+
+↓
+
+Session Begins
+
+↓
+
+Intelligence Generated
+
+↓
+
+Recommendation Displayed
+
+The entire journey should succeed.
+
+---
+
+# Build Validation
+
+Every release requires:
+
+- Successful production build
+- Successful TypeScript compilation
+- Zero unresolved build failures
+- Passing automated validation
+
+Broken builds are never committed intentionally.
+
+---
+
+# Diagnostics
+
+Every major subsystem should expose diagnostics.
+
+Examples:
+
+Platform
+
+Extension Runtime
+
+Companion Runtime
+
+Capability Graph
+
+Game Integrations
+
+Applications
+
+Diagnostics should answer:
+
+Is the subsystem healthy?
+
+What is running?
+
+What failed?
+
+Why?
+
+---
+
+# Logging Standards
+
+Logs exist for diagnosis.
+
+Every log should include:
+
+Timestamp
+
+Subsystem
+
+Severity
+
+Message
 
 Context
 
-Pipeline
+Avoid unnecessary verbosity.
 
-Bus
-
-Capabilities strengthen the entire platform.
-
-Architecture evolves through incremental capability expansion, not large-scale rewrites.
+Logs should help engineers solve problems.
 
 ---
 
-# Future Architecture
+# Error Handling
 
-Oracle's long-term architecture is expected to evolve towards:
+Errors should be:
 
-Oracle Sessions
+Recoverable where possible.
 
-↓
+Actionable.
 
-Repositories
+Typed.
 
-↓
+Observable.
 
-Oracle Context
+Never silently ignored.
 
-↓
-
-Intelligence Bus
-
-↓
-
-Registered Engines
-
-↓
-
-Signals
-
-↓
-
-Oracle Brain
-
-↓
-
-Decision Intelligence
-
-↓
-
-Pipeline
-
-↓
-
-Presentation
-
-New intelligence engines should register themselves.
-
-The surrounding architecture should not require modification.
-
-Oracle should become easier to extend over time.
-
-Never harder.
+Every unexpected failure should leave enough information to diagnose the issue.
 
 ---
 
-# Artificial Intelligence Philosophy
+# Performance
 
-Artificial Intelligence is not Oracle's purpose.
+Optimisation follows measurement.
 
-Artificial Intelligence enables Oracle.
+Priority order:
 
-Context gives Oracle value.
+Correctness
 
-Oracle succeeds when intelligence reaches the Operator at exactly the moment it becomes useful.
+↓
 
-Context is as important as reasoning.
+Reliability
 
-Artificial Intelligence is one implementation detail.
+↓
 
-Oracle's purpose is intelligence.
+Readability
 
-AI assists.
+↓
 
-Architecture enables.
+Performance
 
-Evidence validates.
+Avoid premature optimisation.
 
-Reasoning explains.
-
-The Operator benefits.
-
-Technology should never overshadow the product.
+Optimise only after identifying genuine bottlenecks.
 
 ---
 
-# The Oracle Standard
+# Memory Management
 
-Everything Oracle produces should satisfy the following principles.
+Platform resources should be released correctly.
 
-Evidence before opinion.
+Examples:
 
-Reasoning before recommendation.
+Observers
 
-Architecture before speed.
+Subscriptions
 
-Quality before quantity.
+Intervals
 
-Operator before meta.
+Timers
 
-Understanding before statistics.
+Runtime registrations
 
-Capabilities before features.
+Companion windows
 
-Signals before decisions.
+Extensions
 
-Decisions before presentation.
-
-Premium before ordinary.
-
-These principles are non-negotiable.
+Memory leaks should be treated as defects.
 
 ---
 
-# The Final Question
+# Lifecycle Management
 
-Before implementing any feature...
+Every long-lived subsystem should expose an explicit lifecycle.
 
-Before approving any architecture...
+Typical lifecycle:
 
-Before merging any pull request...
+```text
+Discovered
 
-Before shipping any release...
+↓
 
-Ask two questions.
+Registered
 
-Will this make Oracle more intelligent?
+↓
 
-Will this reduce unnecessary friction for the Operator?
+Validated
 
-If the answer to both is no...
+↓
 
-Do not build it.
+Loaded
 
----
+↓
 
-# Closing Statement
+Initialised
 
-Oracle is not simply software.
+↓
 
-Oracle is an intelligence platform.
+Running
 
-Every Oracle Session contributes to a deeper understanding of the Operator.
+↓
 
-Every intelligence engine contributes to a smarter platform.
+Paused
 
-Every recommendation should become more accurate.
+↓
 
-Every release should strengthen the foundations that future releases depend upon.
+Stopped
 
-Oracle is designed to improve continuously.
+↓
 
-Its architecture should reflect that philosophy.
+Unloaded
+```
 
-Technology will evolve.
-
-Games will evolve.
-
-Artificial Intelligence will evolve.
-
-Oracle should evolve with them.
-
-Without compromising its principles.
+Lifecycle transitions should be visible through diagnostics.
 
 ---
 
-# The Oracle Has Spoken.
+# Security
 
-This Codex defines the engineering, architectural and product standards that govern Oracle.
+Oracle prioritises Operator safety.
 
-When uncertainty exists...
+Never:
 
-Return here.
+Inject into game processes.
 
-The Codex is the single source of truth.
+Modify game memory.
 
-Protect it.
+Simulate gameplay input.
 
-Evolve it.
+Bypass anti-cheat.
 
-Build with it.
+Manipulate protected processes.
+
+Read protected memory.
+
+Oracle remains external.
+
+---
+
+# Privacy
+
+Oracle processes only the information required for enabled functionality.
+
+Operators should understand:
+
+What Oracle collects.
+
+Why it is collected.
+
+How it is used.
+
+Privacy should be designed into the Platform rather than added later.
+
+---
+
+# Companion Safety
+
+Oracle Companion should:
+
+Remain external.
+
+Respect game rules.
+
+Avoid interfering with gameplay.
+
+Allow the Operator to disable it instantly.
+
+Platform safety takes priority over additional functionality.
+
+---
+
+# Extension Safety
+
+Extensions operate within declared permissions.
+
+Extensions must declare:
+
+Identity
+
+Version
+
+Capabilities
+
+Permissions
+
+Compatibility
+
+Trust level
+
+Extensions should never receive unrestricted Platform access.
+
+---
+
+# Marketplace Standards
+
+Marketplace submissions should satisfy:
+
+Build validation.
+
+Manifest validation.
+
+Permission validation.
+
+Capability validation.
+
+Compatibility review.
+
+Security review.
+
+Community extensions should remain isolated from Platform internals.
+
+---
+
+# Observability
+
+Every important Platform event should be observable.
+
+Examples:
+
+Platform bootstrap
+
+Service registration
+
+Application registration
+
+Extension loading
+
+Companion attachment
+
+Game detection
+
+Capability resolution
+
+Failures should be diagnosable.
+
+---
+
+# Quality Gates
+
+Before every release verify:
+
+✓ Platform boots
+
+✓ Services register
+
+✓ Applications register
+
+✓ Companion starts
+
+✓ Extensions load
+
+✓ Capability Graph resolves
+
+✓ Documentation updated
+
+✓ Production build passes
+
+Every quality gate should pass before release.
+
+---
+
+# Platform Health
+
+Oracle should always be capable of reporting its own health.
+
+Health reporting should include:
+
+Platform
+
+Services
+
+Applications
+
+Extensions
+
+Companion
+
+Integrations
+
+Health should be understandable by both engineers and Operators.
+
+---
+
+# Continuous Improvement
+
+Every sprint should improve one or more of:
+
+Reliability
+
+Maintainability
+
+Performance
+
+Architecture
+
+Documentation
+
+Operator Experience
+
+Quality should trend upwards over time.
+
+---
+
+> Oracle should never become more complex than necessary.
+
+> Every improvement should make the Platform stronger, clearer and easier to extend.
+
+# Oracle Engineering Commandments
+
+The following principles should guide every architectural decision made within Oracle.
+
+These are not suggestions.
+
+They represent the engineering culture of the Oracle Platform.
+
+---
+
+## I. Strengthen the Platform
+
+Every sprint should strengthen the Platform.
+
+Avoid solutions that only solve today's problem.
+
+Prefer solutions that improve Oracle for every future Application, Service and Game Integration.
+
+---
+
+## II. Respect Ownership
+
+Every capability has one owner.
+
+Ownership should always be obvious.
+
+If ownership becomes unclear,
+
+the architecture requires improvement.
+
+---
+
+## III. Reuse Before Building
+
+Before creating something new ask:
+
+Can an existing Platform capability solve this?
+
+Can an existing Service own this?
+
+Can an existing Application orchestrate this?
+
+Can an Extension provide this?
+
+Reuse creates consistency.
+
+Duplication creates debt.
+
+---
+
+## IV. Prefer Architecture Over Features
+
+Features create excitement.
+
+Architecture creates longevity.
+
+Oracle should always favour architectural quality over short-term feature velocity.
+
+---
+
+## V. Intelligence Must Be Explainable
+
+Every recommendation should answer:
+
+Why?
+
+Every prediction should answer:
+
+How confident?
+
+Every decision should be supported by evidence.
+
+Explainability builds trust.
+
+---
+
+## VI. Applications Present
+
+Applications should present intelligence.
+
+Applications should not own intelligence.
+
+Business logic belongs inside Services.
+
+Intelligence belongs to the Platform.
+
+---
+
+## VII. Games Extend Oracle
+
+Games are integrations.
+
+Games are not Oracle.
+
+Oracle owns the experience.
+
+Game Integrations provide knowledge.
+
+This distinction must never be blurred.
+
+---
+
+## VIII. Platform Before Product
+
+Whenever uncertainty exists,
+
+choose the option that strengthens the Platform.
+
+The Platform should outlive every individual feature.
+
+---
+
+## IX. Keep Oracle Calm
+
+Oracle should feel:
+
+Professional
+
+Predictable
+
+Confident
+
+Minimal
+
+Helpful
+
+Never:
+
+Noisy
+
+Chaotic
+
+Overwhelming
+
+Distracting
+
+Calm software builds confidence.
+
+---
+
+## X. Leave Oracle Better
+
+Every engineer should leave Oracle in a stronger state than they found it.
+
+Examples include:
+
+Reducing duplication
+
+Improving documentation
+
+Clarifying ownership
+
+Simplifying architecture
+
+Strengthening typing
+
+Improving diagnostics
+
+Removing technical debt
+
+Small improvements accumulate.
+
+---
+
+# Architectural Review Checklist
+
+Before implementing any significant change ask:
+
+## Identity
+
+Does this align with the Oracle Platform Constitution?
+
+---
+
+## Platform
+
+Does this strengthen the Platform?
+
+---
+
+## Ownership
+
+Who owns this capability?
+
+Is ownership obvious?
+
+---
+
+## Services
+
+Can an existing Service already perform this responsibility?
+
+---
+
+## Applications
+
+Should this live inside an Application?
+
+Or should the Application consume an existing Service?
+
+---
+
+## Game Integrations
+
+Is game-specific knowledge staying inside the Integration?
+
+---
+
+## Extensions
+
+Should this be an Extension instead?
+
+---
+
+## Intelligence
+
+Can Oracle explain this recommendation?
+
+Can Oracle justify its confidence?
+
+---
+
+## Future Growth
+
+Will this architecture still make sense after supporting 100 games?
+
+---
+
+## Simplicity
+
+Does this reduce complexity?
+
+Or increase it?
+
+Good architecture usually removes complexity.
+
+---
+
+# Engineering Standards
+
+Oracle engineering values:
+
+Correctness over speed.
+
+Quality over quantity.
+
+Architecture over shortcuts.
+
+Evidence over assumptions.
+
+Consistency over novelty.
+
+Long-term thinking over short-term convenience.
+
+These principles should influence every engineering decision.
+
+---
+
+# Oracle Release Standard
+
+No Oracle release should be considered complete until:
+
+✓ Production build passes.
+
+✓ TypeScript passes.
+
+✓ Documentation reflects implementation.
+
+✓ Architecture reflects implementation.
+
+✓ Roadmap reflects reality.
+
+✓ Project Board updated.
+
+✓ Decisions recorded.
+
+✓ Git committed.
+
+✓ Git pushed.
+
+✓ Version tagged.
+
+✓ Ready for next sprint.
+
+Release quality is measured by confidence rather than speed.
+
+---
+
+# The Oracle Platform
+
+Oracle is no longer a collection of features.
+
+Oracle is no longer an AI coaching application.
+
+Oracle is no longer a single-game product.
+
+Oracle is the operating platform for gaming intelligence.
+
+The Platform provides stability.
+
+Services provide capability.
+
+Applications provide experience.
+
+Game Integrations provide knowledge.
+
+Extensions expand the ecosystem.
+
+Everything else builds upon these foundations.
+
+---
+
+# Final Declaration
+
+Oracle exists to help Operators understand their games, understand themselves and continually improve.
+
+Every sprint should move Oracle closer to that vision.
+
+Every architectural decision should strengthen the Platform.
+
+Every line of code should have a clear purpose.
+
+Every recommendation should be explainable.
+
+Every prediction should be evidence-based.
+
+Every Application should feel unmistakably like Oracle.
+
+The Platform should remain stable.
+
+The ecosystem should continue to grow.
+
+The Operator should always remain at the centre of every decision.
+
+---
+
+# Closing Principle
+
+When faced with multiple valid solutions, choose the one that future engineers will thank you for.
+
+Build for the next ten years.
+
+Not the next ten days.
+
+---
+
+> **Oracle understands games.**
+
+> **Oracle understands players.**
+
+> **Oracle delivers intelligence.**
+
+---
+
+**The Oracle has spoken.**

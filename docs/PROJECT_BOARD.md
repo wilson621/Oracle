@@ -20,17 +20,17 @@ Project Meta
 
 # Current Release
 
-Operation Horizon
+Operation
 
-Contextual Intelligence Expansion
+Oracle Platform Foundation
 
 Version
 
-Oracle v0.5
+Oracle v0.8.0
 
 Status
 
-🟢 SPRINT 5 COMPLETE
+🟢 SPRINT 8 COMPLETE
 
 ---
 
@@ -42,23 +42,43 @@ Build
 
 Architecture
 
-🟢 Production Ready
+🟢 Oracle Platform Established
 
 Documentation
 
-🟢 Sprint 5 Closure In Progress
+🟡 Sprint 8 Closure In Progress
 
 Technical Debt
 
 🟢 Low
 
-Design System
+Platform Bootstrap
 
-🟢 Stable
+✅ Complete
 
-Operator Experience
+Oracle Services
 
-🟢 Improved
+✅ Registered
+
+Oracle Applications
+
+✅ Registered
+
+Extension Runtime
+
+✅ Operational
+
+Companion Runtime
+
+✅ Operational
+
+Capability Graph
+
+✅ Operational
+
+Game Integration SDK
+
+✅ Operational
 
 ---
 
@@ -80,27 +100,51 @@ Progress
 
 ---
 
-# Completed During Sprint 5
+# Completed During Sprint 8
 
-## Contextual Intelligence
+## Oracle Platform
 
-✅ Oracle Context extended with contextual state
+✅ Oracle Platform Bootstrap
 
-✅ Operator Intent model
+✅ Oracle Service Registry
 
-✅ Contextual priorities
+✅ Oracle Application Registry
 
-✅ Contextual opportunities
+✅ Oracle Platform Runtime
 
-✅ Contextual Intelligence Engine
+✅ Companion Runtime
 
-✅ Intent Resolver
+✅ Extension Runtime
 
-✅ Intent Provider architecture
+✅ Capability Graph
 
-✅ Independent provider modules
+✅ Extension Resolver
 
-✅ Contextual Intelligence dashboard card
+✅ Game Integration SDK
+
+✅ Extension SDK
+
+✅ Companion SDK
+
+## Product Architecture
+
+✅ Platform → Services → Applications → Game Integrations
+
+✅ Oracle Platform Constitution
+
+✅ Service ownership model
+
+✅ Application ownership model
+
+✅ Capability-based architecture
+
+## Engineering
+
+✅ Green production build
+
+✅ Sprint closure audit
+
+✅ Documentation refresh
 
 ---
 
@@ -156,87 +200,69 @@ Progress
 
 ---
 
-# Sprint 5 Closure Status
-
-Architecture Review
-
-✅ Complete
-
-Planning
-
-✅ Complete
-
-Implementation
-
-✅ Complete
-
-Production Build Verification
-
-✅ Passing
-
-UI Review
-
-✅ Complete
-
-Documentation Review
-
-🟡 In Progress
-
-Architecture Audit
-
-✅ Complete
-
-Sprint Closure Report
-
-🟡 In Progress
-
-Git Commit
-
-⬜ Pending
-
-Git Push
-
-⬜ Pending
-
-Engineering Handover
-
-⬜ Pending
-
----
-
-# Current Sprint
+# Sprint Status
 
 Sprint
 
-Sprint 5
-
-Objective
-
-Build Oracle's Contextual Intelligence foundation without redesigning the production architecture.
+Sprint 8 — Oracle Platform Foundation
 
 Status
 
-✅ Implementation Complete
+✅ Complete
 
-Current Focus
+Outcome
 
-Documentation Closure
+Oracle is now organised as:
 
-↓
-
-Sprint Closure Report
+Platform
 
 ↓
 
-Git Commit
+Services
 
 ↓
 
-Git Push
+Applications
 
 ↓
 
-Sprint 6 Handover
+Game Integrations
+
+---
+
+# Next Sprint
+
+Sprint 9
+
+Oracle Companion Overlay
+
+Objectives
+
+- Platform boot sequence
+- Oracle Ready state
+- Transparent overlay window
+- Borderless support
+- Click-through behaviour
+- Runtime diagnostics
+- Companion attachment lifecycle
+
+---
+
+# Current Focus
+
+Sprint 8 Documentation Closure
+
+↓
+
+Git Tag
+
+↓
+
+Sprint 9 Branch
+
+↓
+
+Sprint 9 Kickoff
 
 ---
 

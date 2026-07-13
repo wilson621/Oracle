@@ -1,626 +1,443 @@
 # ORACLE MASTER BUILD PLAN
 
-Version: 1.0  
-Status: Active  
-Owner: Oracle Platform Engineering
+**Version:** 2.0  
+**Status:** Active  
+**Owner:** Oracle Platform Engineering  
+**Last Updated:** Sprint 8 – Oracle Platform Foundation
 
 ---
 
-## Purpose
+# Purpose
 
-This document is the canonical engineering build plan for Oracle.
+The Master Build Plan is Oracle's execution document.
 
-Oracle is not a side project.  
-Oracle is being built as a scalable AI Gaming Intelligence Companion business.
+The Constitution defines what Oracle is.
 
-Every architectural decision must be measured against this question:
+The Codex defines how Oracle is built.
 
-> Would we still be happy with this architecture if Oracle had 1 million users and 100 engineers working on it?
+The Architecture defines how Oracle is organised.
 
-If the answer is no, redesign it.
+The Roadmap defines where Oracle is going.
 
----
+The Project Board defines current progress.
 
-## Product Identity
+The Master Build Plan defines what the engineering team is building next.
 
-Oracle is an AI Gaming Intelligence Companion.
-
-Oracle learns the Operator before it learns the game.
-
-Warzone is the proving ground, not the destination.
-
-The Oracle core must remain game-agnostic.
-
-Game-specific intelligence belongs in plugins and specialist engines.
+This document should always reflect the current implementation plan.
 
 ---
 
-## Core Engineering Principles
+# Oracle Mission
 
-- Architecture before speed.
-- Full files only.
-- Green build before commit.
-- Commit after every successful milestone.
-- One responsibility per subsystem.
-- Business logic belongs inside engines.
-- Pages compose.
-- Components present.
-- Repositories expose truth.
-- Signals communicate observations.
-- Profiles represent learned knowledge.
-- The Intelligence Graph stores structured knowledge.
-- Oracle Brain synthesises intelligence.
-- Planner decides the next best action.
-- Explainability builds trust.
-- Lifecycle defines execution order.
-- Intelligence State represents Oracle's current understanding.
-- No subsystem should duplicate another subsystem's responsibility.
-- No feature should weaken the platform architecture.
+Oracle is the operating platform for gaming intelligence.
 
----
+The mission of the engineering team is to strengthen the Platform while continuously improving the Operator experience.
 
-# Current Platform Status
+Every completed sprint should permanently improve one or more of the following:
 
-## Completed Core Foundations
-
-- Oracle Manifesto
-- Oracle Codex
-- Oracle Architecture
-- Oracle Roadmap
-- Oracle Principles
-- Architectural Decision Records
-- Project Board
-- Design System
-- Brand Bible
-- Innovation Lab
-
----
-
-# Operation Genesis
-
-Status: Complete
-
-Purpose:
-
-Establish the original Oracle platform foundations.
-
-Completed:
-
-- Initial Oracle UI
-- Mission Control aesthetic
-- Oracle Brain foundation
-- Operator views
-- Session analysis
-- Supabase foundation
-- Production deployment
-- GitHub workflow
-- Vercel deployment
-
----
-
-# Operation Sentinel
-
-Status: Complete
-
-Purpose:
-
-Build Oracle's intelligence runtime foundations.
-
-Completed:
-
-## Sprint 1 — Oracle Context
-
-Status: Complete
-
-Delivered:
-
-- Oracle Context
-- Context Builder
-- Shared intelligence object
-- Pipeline context input
-
-## Sprint 2 — Intelligence Bus
-
-Status: Complete
-
-Delivered:
-
-- Intelligence Bus
-- Engine Registry
-- Universal Engine Interface
-- Core engine registration
-
-## Sprint 2.5 — Engine Framework
-
-Status: Complete
-
-Delivered:
-
-- Engine metadata
-- Engine capabilities
-- Engine priority
-- Engine dependency support
-- Game compatibility support
-
-## Sprint 2.6 — Signal-First Runtime
-
-Status: Complete
-
-Delivered:
-
-- Signal-producing engine contract
-- Signal aggregation
-- Decision aggregation
-- Signal-first pipeline
-
-## Sprint 2.7 — Oracle Brain Subsystem
-
-Status: Complete
-
-Delivered:
-
-- Oracle Brain subsystem folder
-- Compatibility wrappers
-- Brain exports
-- Type-safe UI fixes
-
-## Sprint 3 — Oracle Memory Foundation
-
-Status: Complete
-
-Delivered:
-
-- Memory Engine
-- Memory Profile
-- Memory confidence
-- Memory signals
-
-## Sprint 3.1 — Behaviour Evolution
-
-Status: Complete
-
-Delivered:
-
-- Behaviour Evolution Engine
-- Improvement detection
-- Decline detection
-- Evolution signals
-
-## Sprint 3.2 — Memory Modularisation
-
-Status: Complete
-
-Delivered:
-
-- Memory confidence module
-- Memory status module
-- Memory strengths module
-- Memory weaknesses module
-- Memory patterns module
-- Memory signals module
-- Memory utilities
-
-## Sprint 3.3 — Architecture Index
-
-Status: Complete
-
-Delivered:
-
-- Architecture Index
-- Subsystem boundaries
-- Runtime flow map
-
-## Sprint 3.4 — Adaptive Coaching
-
-Status: Complete
-
-Delivered:
-
-- Adaptive Coaching subsystem
-- Coaching profile
-- Coaching signals
-- Coaching runtime engine
-
-## Sprint 3.4C — Oracle Intelligence Graph
-
-Status: Complete
-
-Delivered:
-
-- Intelligence Graph
-- Graph entries
-- Graph-aware engine results
-- Generic graph aggregation
-
-## Sprint 3.5 — Oracle Brain v2
-
-Status: Complete
-
-Delivered:
-
-- Brain graph reasoning
-- Brain graph report
-- Findings-based reasoning
-
-## Sprint 3.6 — Operator Timeline
-
-Status: Complete
-
-Delivered:
-
-- Timeline events
-- Timeline builder
-- Timeline summary
-- Signal-to-timeline conversion
-
-## Sprint 3.7 — Mission Intelligence Foundation
-
-Status: Complete
-
-Delivered:
-
-- Mission source
-- Mission confidence
-- Mission UI source display
-- Mission subsystem refactor
-
----
-
-# Operation Vanguard
-
-Status: In Progress
-
-Purpose:
-
-Turn Oracle intelligence into operator-facing guidance.
-
-## Phase 1 — Mission Planner
-
-Status: Complete
-
-Delivered:
-
-- Planner subsystem
-- Planner priority
-- Planner summary
-- Planner profile
-- Planner signals
-
-## Phase 1B — Planner Mission Integration
-
-Status: Complete
-
-Delivered:
-
-- Planner connected to mission reports
-- Mission reports use Planner priority
-
-## Phase 1C — Planner Runtime Integration
-
-Status: Complete
-
-Delivered:
-
-- Planner registered as runtime engine
-- Planner added to Intelligence Graph
-
-## Phase 2 — Planner Intelligence
-
-Status: Complete
-
-Delivered:
-
-- Planner Intelligence input
-- Brain-aware planning
-- Timeline-aware evidence
-- Signal-aware evidence
-- Evidence scoring
-- Runtime Planner Intelligence
-
-## Phase 3 — Explainability
-
-Status: Complete
-
-Delivered:
-
-- Explainability subsystem
-- Explanation evidence
-- Explanation strength
-- Planner explanation builder
-
-## Phase 4 — Operator Profile
-
-Status: Complete
-
-Delivered:
-
-- Operator Profile subsystem
-- Combat identity
-- Learning style
-- Mechanical confidence
-- Tactical confidence
-- Adaptability
-- Consistency
-- Pressure rating
-- Operator Profile graph entry
-
----
-
-# Operation Horizon
-
-Status: Active
-
-Purpose:
-
-Consolidate Oracle into a production-ready Intelligence Platform through runtime stabilisation, state-first architecture and reusable presentation systems.
-
----
-
-## Phase 1 — Oracle Intelligence State
-
-Status: Complete
-
-Delivered:
-
-- OracleIntelligenceState
-- State builder
-- Pipeline state output
-- State-first UI contract
-
----
-
-## Phase 2 — Oracle Lifecycle
-
-Status: Complete
-
-Delivered:
-
-- Oracle lifecycle types
-- Default lifecycle
-- Lifecycle engine
-- Lifecycle embedded into Intelligence State
-
----
-
-## Phase 3 — Decision Intelligence
-
-Status: Complete
-
-Delivered:
-
-- Oracle Decision subsystem
-- Decision Profile
-- Primary Decision selection
-- Confidence calculation
-- Evidence integration
-- Expected outcome modelling
-- Reassessment triggers
-
-Decision Intelligence now provides Oracle's single authoritative recommendation for the Operator.
-
----
-
-## Phase 4 — Explainability
-
-Status: Complete
-
-Delivered:
-
-- Explainability subsystem
-- Explanation builder
-- Evidence aggregation
-- Confidence reasoning
-- Planner explanation integration
-
-Oracle now explains every recommendation using evidence collected throughout the runtime.
-
----
-
-## Phase 5 — Dashboard Modularisation
-
-Status: Complete
-
-Delivered:
-
-- OracleDecisionCard
-- OracleBrainCard
-- OraclePlannerCard
-- OracleTimelineCard
-- OracleExplainabilityCard
-- OracleSignalFeed
-
-Architecture Improvements:
-
-- Pages compose presentation components.
-- Components present intelligence.
-- Business logic removed from UI.
-- OracleIntelligenceState becomes the UI contract.
-
----
-
-## Phase 6 — Sprint 4 Production Closure
-
-Status: Complete
-
-Delivered:
-
-- Production runtime audit
-- Architecture review
-- Dashboard review
-- Documentation refresh
-- Sprint Closure Report
-- Build verification
-- Repository ready for Sprint 5
-
----
-
-## Operation Horizon Outcome
-
-Oracle now provides a complete production intelligence runtime built around:
-
-- Oracle Context
-- Intelligence Bus
-- Registered Engines
-- Intelligence Graph
-- Oracle Brain
-- Planner
-- Timeline
+- Platform
+- Intelligence
+- User Experience
+- Reliability
+- Extensibility
 - Explainability
-- Decision Intelligence
-- Oracle Intelligence State
-
-The Intelligence Dashboard is fully modular and consumes OracleIntelligenceState through reusable presentation components.
-
-Operation Horizon established the production architecture that future Operations will extend rather than redesign.
+- Maintainability
+- Performance
 
 ---
 
-# Planned Operations
+# Engineering Principles
 
-## Operation Horizon — Remaining Work
+Every implementation should follow these principles.
 
-Planned:
-
-- Engine v2 standardisation
-- State-first pipeline refinement
-- Graph profile access helpers
-- Explainability integration refinement
-- Lifecycle-aware diagnostics
-- Runtime health checks
-
----
-
-## Operation Atlas
-
-Status: Planned
-
-Purpose:
-
-Introduce game-specific intelligence plugins while protecting the game-agnostic Oracle core.
-
-Planned:
-
-- Game Plugin Interface
-- Game Registry
-- Warzone Engine
-- Apex Engine
-- Battlefield Engine
-- GTA VI Engine
-- Game Context expansion
-- Public knowledge ingestion
-- Rule-compliant contextual intelligence
-
-Non-negotiable:
-
-Oracle must never depend on:
-
-- Reading protected game memory
-- Injecting into game processes
-- Modifying games
-- Automating gameplay
-- Revealing hidden enemy information
-- Providing unfair competitive advantage
-
-Oracle must remain:
-
-- Public-information based
-- Rule-compliant
-- Companion-first
-- Discovery-focused
+- Platform before features.
+- Architecture before speed.
+- Green production build before commit.
+- Documentation is implementation.
+- One owner for every capability.
+- Services provide reusable capability.
+- Applications own user experience.
+- Game Integrations provide knowledge.
+- Extensions expand Oracle.
+- Avoid duplicate architecture.
+- Prefer capability resolution over direct coupling.
+- Every recommendation must be explainable.
+- Every confidence value must be evidence based.
 
 ---
 
-## Operation Command
+# Current Platform
 
-Status: Planned
-
-Purpose:
-
-Build Oracle's signature command centre experience.
-
-Planned:
-
-- Oracle Command Centre homepage
-- Operator status panel
-- Mission briefing panel
-- Brain findings panel
-- Timeline highlights panel
-- Planner recommendation panel
-- Explainability drawer
-- Intelligence confidence display
-
-Goal:
-
-Oracle should feel like a living command centre, not a generic dashboard.
-
----
-
-## Operation Companion
-
-Status: Planned
-
-Purpose:
-
-Evolve Oracle from an intelligence system into an interactive AI Gaming Companion.
-
-Planned:
-
-- Companion conversation layer
-- Personality memory
-- Operator-specific coaching tone
-- Long-term learning model
-- Companion briefing
-- Companion debriefing
-- Cross-session recall
-- Cross-game operator profile
-
----
-
-## Operation Dominion
-
-Status: Planned
-
-Purpose:
-
-Build the business-scale platform layer.
-
-Planned:
-
-- Subscription architecture
-- Premium feature gates
-- Team accounts
-- Organisations
-- Admin console
-- Usage analytics
-- Billing-ready architecture
-- Support workflows
-- Security hardening
-- Data retention model
-- Privacy controls
-
----
-
-# Current Runtime Flow
+Oracle is now organised into four permanent architectural layers.
 
 ```text
-Initialise
-    ↓
-Collect Context
-    ↓
-Execute Engines
-    ↓
-Build Intelligence Graph
-    ↓
-Oracle Brain
-    ↓
-Operator Timeline
-    ↓
-Planner Intelligence
-    ↓
-Explainability
-    ↓
-Oracle Intelligence State
-    ↓
-Mission Intelligence
-    ↓
-Operator Experience
+Oracle Platform
+        │
+        ▼
+Oracle Services
+        │
+        ▼
+Oracle Applications
+        │
+        ▼
+Game Integrations
+```
+
+This architecture was established during Sprint 8 and forms the permanent foundation for all future development.
+
+---
+
+# Current Release
+
+## Version
+
+v0.8.0 — Platform Foundation
+
+## Status
+
+✅ Complete
+
+## Outcome
+
+Sprint 8 established Oracle as the operating platform for gaming intelligence.
+
+Major deliverables:
+
+- Oracle Platform Bootstrap
+- Service Registry
+- Application Registry
+- Companion Runtime
+- Extension Runtime
+- Capability Graph
+- Extension Resolver
+- Game Integration SDK
+- Oracle Platform Constitution
+- Updated Architecture
+- Updated Codex
+- Updated Roadmap
+- Updated Project Board
+
+---
+
+# Completed Milestones
+
+## Operation Genesis
+
+✅ Complete
+
+Established Oracle's original engineering foundation.
+
+---
+
+## Operation Sentinel
+
+✅ Complete
+
+Established Oracle's shared intelligence runtime.
+
+---
+
+## Operation Vanguard
+
+✅ Complete
+
+Established operator-facing intelligence and decision systems.
+
+---
+
+## Sprint 8
+
+✅ Complete
+
+Established the Oracle Platform.
+
+Oracle now consists of:
+
+Platform
+
+↓
+
+Services
+
+↓
+
+Applications
+
+↓
+
+Game Integrations
+
+---
+
+# Active Sprint
+
+## Sprint 9
+
+### Oracle Companion Overlay
+
+Status
+
+🟢 Ready
+
+Branch
+
+```
+sprint-9-overlay
+```
+
+---
+
+# Sprint 9 Objectives
+
+## Platform Boot
+
+- Oracle bootstrap sequence
+- Platform ready state
+- Runtime diagnostics
+
+---
+
+## Companion Runtime
+
+- Companion lifecycle
+- Overlay lifecycle
+- Runtime attachment
+- Runtime health
+
+---
+
+## Overlay
+
+- Transparent overlay
+- Borderless window
+- Click-through support
+- Multi-monitor support
+- Window attachment
+
+---
+
+## Observation
+
+- Desktop observation foundation
+- OCR preparation
+- Context pipeline integration
+
+---
+
+## Diagnostics
+
+- Platform diagnostics
+- Companion diagnostics
+- Overlay diagnostics
+- Runtime diagnostics
+
+---
+
+# Sprint Success Criteria
+
+Sprint 9 is complete when:
+
+- Platform boots correctly.
+- Oracle reaches Ready state.
+- Companion launches automatically.
+- Overlay attaches correctly.
+- Overlay remains click-through.
+- Diagnostics report healthy Platform state.
+- Production build passes.
+- Documentation updated.
+
+---
+
+# Sprint Workflow
+
+Every sprint follows the same lifecycle.
+
+```text
+Architecture Review
+        │
+        ▼
+Sprint Planning
+        │
+        ▼
+Implementation
+        │
+        ▼
+Continuous Build
+        │
+        ▼
+Green Production Build
+        │
+        ▼
+Documentation
+        │
+        ▼
+Sprint Review
+        │
+        ▼
+Git Commit
+        │
+        ▼
+Git Push
+        │
+        ▼
+Release Tag
+        │
+        ▼
+Next Sprint
+```
+
+No stage should be skipped.
+
+---
+
+# Definition of Done
+
+A sprint is only considered complete when:
+
+## Engineering
+
+- Production build passes.
+- TypeScript passes.
+- Runtime verified.
+- No unresolved architectural issues.
+
+---
+
+## Documentation
+
+- Constitution updated if required.
+- Codex updated if required.
+- Architecture updated.
+- Roadmap updated.
+- Project Board updated.
+- ADRs updated.
+
+---
+
+## Repository
+
+- Commit created.
+- Changes pushed.
+- Release tag created.
+- Repository clean.
+
+---
+
+## Product
+
+- Platform strengthened.
+- User experience improved.
+- Existing functionality preserved.
+- Technical debt reduced where practical.
+
+---
+
+# Release Checklist
+
+Before every release confirm:
+
+✅ Production build passes
+
+✅ Documentation complete
+
+✅ Architecture reflects implementation
+
+✅ Platform diagnostics healthy
+
+✅ Companion diagnostics healthy
+
+✅ Capability Graph operational
+
+✅ Services registered
+
+✅ Applications registered
+
+✅ Repository clean
+
+✅ Release tag created
+
+---
+
+# Long-Term Build Sequence
+
+The current engineering direction is:
+
+```text
+Sprint 8
+Platform Foundation
+        │
+        ▼
+Sprint 9
+Companion Overlay
+        │
+        ▼
+Sprint 10
+Observation Engine
+        │
+        ▼
+Sprint 11
+Game Intelligence
+        │
+        ▼
+Sprint 12
+Marketplace
+        │
+        ▼
+Sprint 13
+Beta
+        │
+        ▼
+Public Release
+```
+
+Future sprints may evolve, but every sprint should strengthen the Platform rather than introducing isolated functionality.
+
+---
+
+# Engineering Philosophy
+
+The Oracle Platform should become increasingly stable over time.
+
+Future development should focus on:
+
+- Better Services
+- Better Applications
+- Better Companion experiences
+- Better Game Integrations
+- Better Extensions
+
+Large architectural redesigns should become increasingly rare.
+
+The Platform should mature while the ecosystem continues to grow.
+
+---
+
+# Final Statement
+
+The Oracle Platform now has a permanent architectural foundation.
+
+Future development should strengthen that foundation rather than replacing it.
+
+Every sprint should leave Oracle in a better state than before.
+
+Platform.
+
+Services.
+
+Applications.
+
+Game Integrations.
+
+Everything Oracle becomes will be built upon those four layers.
+
+---
+
+> **Oracle understands games.**
+
+> **Oracle understands players.**
+
+> **Oracle delivers intelligence.**
+
+---
+
+**The Oracle has spoken.**

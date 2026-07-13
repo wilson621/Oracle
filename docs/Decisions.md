@@ -2,9 +2,8 @@
 
 # Architectural Decision Records (ADR)
 
-Version 3.0
-
-Last Updated: 8 July 2026
+Version 4.0
+Last Updated: Sprint 8 – Oracle Platform Foundation
 
 ---
 
@@ -557,6 +556,198 @@ Major capabilities should integrate through existing architecture.
 ## Consequence
 
 Future systems plug into Oracle rather than replacing Oracle.
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-021
+
+## Decision
+
+Oracle is the operating platform for gaming intelligence.
+
+## Reason
+
+Oracle has evolved beyond an intelligence platform into a reusable software platform capable of supporting multiple Oracle Applications, Services, Game Integrations and future extensions.
+
+The Platform becomes Oracle's permanent architectural foundation.
+
+## Consequence
+
+Oracle owns the Platform.
+
+Future development strengthens the Platform rather than creating parallel architectures.
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-022
+
+## Decision
+
+Oracle adopts a four-layer architecture.
+
+## Reason
+
+Explicit architectural layering improves ownership, scalability and long-term maintainability.
+
+## Consequence
+
+Oracle is permanently organised as:
+
+Oracle Platform
+
+↓
+
+Oracle Services
+
+↓
+
+Oracle Applications
+
+↓
+
+Game Integrations
+
+Every future subsystem must belong to one of these layers.
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-023
+
+## Decision
+
+Applications own experience.
+
+Services own capability.
+
+## Reason
+
+Separating user experience from business capability prevents duplication and improves reuse.
+
+Applications should orchestrate Services rather than implementing business logic.
+
+## Consequence
+
+Applications become lightweight presentation layers.
+
+Reusable capability lives inside Services.
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-024
+
+## Decision
+
+Game Integrations provide knowledge rather than owning Oracle features.
+
+## Reason
+
+Oracle must remain consistent regardless of which game is currently active.
+
+Applications such as AI Coach, Oracle Brain and Loadouts remain Oracle products.
+
+Games contribute knowledge and capabilities through Game Integrations.
+
+## Consequence
+
+New Game Integrations can be introduced without redesigning Oracle Applications.
+
+The Oracle experience remains consistent across every supported title.
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-025
+
+## Decision
+
+Capability resolution replaces direct implementation coupling.
+
+## Reason
+
+Applications should request capabilities rather than knowing which implementation provides them.
+
+The Platform resolves providers through the Capability Graph.
+
+## Consequence
+
+Applications become independent of individual Game Integrations.
+
+Multiple providers may satisfy the same capability.
+
+Oracle becomes significantly easier to extend.
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-026
+
+## Decision
+
+The Companion becomes a Platform subsystem.
+
+## Reason
+
+The Companion is not a standalone application.
+
+It is an Oracle Application powered by the Oracle Platform.
+
+Keeping Companion infrastructure inside the Platform enables shared lifecycle management, diagnostics and capability resolution.
+
+## Consequence
+
+Companion Runtime becomes part of the Oracle Platform.
+
+Future Companion functionality consumes Platform Services rather than implementing separate infrastructure.
+
+## Status
+
+✅ Accepted
+
+---
+
+# ADR-027
+
+## Decision
+
+Oracle grows through reusable Platform capabilities.
+
+## Reason
+
+Long-term maintainability is achieved by strengthening shared Platform systems rather than repeatedly introducing isolated feature implementations.
+
+## Consequence
+
+Future development prioritises:
+
+- Platform
+- Services
+- Applications
+- Extensions
+- Game Integrations
+
+over feature-specific architecture.
 
 ## Status
 

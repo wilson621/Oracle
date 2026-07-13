@@ -2,9 +2,9 @@
 
 Technical Architecture
 
-Version 4.0
+Version 5.0
 
-Last Updated: Sprint 5 Closure
+Last Updated: Sprint 8 Platform Foundation
 
 ---
 
@@ -24,21 +24,25 @@ It answers one question.
 
 # Architectural Vision
 
-Oracle is a modular AI Gaming Intelligence Platform.
+Oracle is the operating platform for gaming intelligence.
 
-Every subsystem owns one responsibility.
+Oracle is designed as a platform rather than a single application.
 
-Every subsystem produces reusable intelligence.
+The Platform provides shared infrastructure that powers every Oracle experience across desktop, web, mobile and future clients.
 
-Every subsystem communicates through shared runtime contracts.
+Games do not define Oracle.
 
-Every subsystem should be capable of evolving independently.
+Games extend Oracle.
 
-Oracle is designed so that new capabilities extend existing architecture rather than replacing it.
+Applications do not own intelligence.
 
-Every completed sprint should strengthen the platform.
+Applications consume Oracle Services.
 
-Never weaken it.
+Services consume Platform capabilities.
+
+Every new capability should strengthen the Platform rather than introducing parallel architectures.
+
+The Platform is designed to support unlimited future games, applications, services and extensions without architectural redesign.
 
 ---
 
@@ -142,55 +146,50 @@ OracleIntelligenceState owns presentation.
 
 ---
 
-# Oracle Layer Model
+# Oracle Platform Layer Model
 
-Oracle consists of layered systems.
-
-Each layer depends only on the layer immediately beneath it.
-
-```text
-Presentation Layer
-
-↓
-
-Oracle Intelligence State
-
-↓
-
-Pipeline Layer
+Oracle Platform
+│
+├── Intelligence Runtime
+├── Companion Runtime
+├── Extension Runtime
+├── Capability Graph
+├── Platform Bootstrap
+├── Application Registry
+├── Service Registry
+└── Shared Contracts
 
 ↓
 
-Decision Layer
+Oracle Services
 
 ↓
 
-Oracle Brain
+Oracle Applications
 
 ↓
 
-Signal Layer
+Game Integrations
 
-↓
+---
 
-Engine Layer
+# Internal Platform Runtime
 
-↓
+The Oracle Platform internally executes intelligence through a shared runtime.
 
-Oracle Context
+This runtime remains implementation detail rather than product architecture.
 
-↓
+Its responsibility is to execute intelligence safely, deterministically and consistently regardless of which Oracle Application requested the capability.
 
-Repository Layer
+The runtime currently consists of:
 
-↓
-
-Database Layer
-```
-
-Each layer performs one responsibility.
-
-No layer should bypass another.
+• Oracle Context
+• Engine Runtime
+• Intelligence Bus
+• Oracle Brain
+• Decision Intelligence
+• Capability Graph
+• Companion Runtime
 
 ---
 
@@ -1207,6 +1206,23 @@ Recommended areas of growth include:
 Each capability should integrate using the existing production architecture.
 
 Oracle should continue to evolve through modular engines, providers and shared runtime contracts.
+
+---
+
+# Platform Growth
+
+Oracle grows by adding:
+
+• Services
+• Applications
+• Game Integrations
+• Extensions
+
+The Platform itself should rarely require modification.
+
+New capabilities should register with existing Platform systems rather than introducing parallel implementations.
+
+This allows Oracle to evolve from supporting one game into supporting an unlimited ecosystem of games without changing its architecture.
 
 ---
 
