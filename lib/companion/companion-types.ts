@@ -1,8 +1,42 @@
+export type CompanionPresentationMode =
+  | "hidden"
+  | "compact"
+  | "expanded"
+  | "interactive";
+
+/**
+ * Backward-compatible presentation mode used by earlier Companion code.
+ *
+ * New code should use CompanionPresentationMode.
+ */
 export type CompanionOverlayMode =
   | "hidden"
   | "passive"
   | "interactive"
   | "suspended";
+
+export type CompanionOverlayWindowLifecycle =
+  | "idle"
+  | "searching"
+  | "attaching"
+  | "attached"
+  | "detached";
+
+export type CompanionOverlayWindowState = {
+  lifecycle: CompanionOverlayWindowLifecycle;
+
+  transparent: boolean;
+  borderless: boolean;
+  alwaysOnTop: boolean;
+  clickThrough: boolean;
+  focused: boolean;
+
+  targetWindowId: string | null;
+  monitorId: string | null;
+  bounds: CompanionWindowBounds | null;
+
+  updatedAt: string;
+};
 
 export type CompanionGameState =
   | "unknown"
@@ -54,7 +88,15 @@ export type CompanionWindowBounds = {
 export type CompanionContext = {
   operatorId: string;
   game: CompanionGame | null;
+
+  /**
+   * Legacy compatibility field.
+   *
+   * The authoritative presentation value is stored by CompanionRuntime as
+   * presentationMode.
+   */
   overlayMode: CompanionOverlayMode;
+
   gameState: CompanionGameState;
   activeWindow: CompanionWindowBounds | null;
   currentQuest: string | null;
@@ -63,3 +105,23 @@ export type CompanionContext = {
   spoilerPreference: CompanionSpoilerPreference;
   capturedAt: string;
 };
+
+export function createInitialCompanionOverlayWindowState(
+  now = new Date().toISOString()
+): CompanionOverlayWindowState {
+  return {
+    lifecycle: "idle",
+
+    transparent: true,
+    borderless: true,
+    alwaysOnTop: true,
+    clickThrough: true,
+    focused: false,
+
+    targetWindowId: null,
+    monitorId: null,
+    bounds: null,
+
+    updatedAt: now,
+  };
+}
