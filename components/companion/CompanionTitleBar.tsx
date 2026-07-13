@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Activity,
   Copy,
   Eye,
   EyeOff,
@@ -16,6 +17,7 @@ import {
   useState,
 } from "react";
 import type { OracleDesktopHostState } from "@/desktop/contracts";
+import DesktopDiagnosticsPanel from "./DesktopDiagnosticsPanel";
 
 const OVERLAY_PREVIEW_CLASS =
   "oracle-overlay-preview";
@@ -25,6 +27,11 @@ export default function CompanionTitleBar() {
     useState<OracleDesktopHostState | null>(
       null
     );
+
+  const [
+    diagnosticsOpen,
+    setDiagnosticsOpen,
+  ] = useState(false);
 
   const desktopAvailable =
     typeof window !== "undefined" &&
@@ -157,202 +164,238 @@ export default function CompanionTitleBar() {
   }
 
   return (
-    <header className="oracle-desktop-titlebar">
-      <div className="oracle-desktop-titlebar__brand">
-        <span
-          className="oracle-desktop-titlebar__signal"
-          aria-hidden="true"
-        />
-
-        <span className="oracle-desktop-titlebar__name">
-          ORACLE
-        </span>
-
-        <span className="oracle-desktop-titlebar__division">
-          COMPANION
-        </span>
-
-        {overlayPreviewEnabled && (
-          <span className="oracle-desktop-titlebar__mode">
-            OVERLAY PREVIEW
-          </span>
-        )}
-
-        {alwaysOnTopEnabled && (
-          <span className="oracle-desktop-titlebar__mode">
-            PINNED
-          </span>
-        )}
-
-        {clickThroughEnabled && (
-          <span className="oracle-desktop-titlebar__mode">
-            CLICK-THROUGH · CTRL+SHIFT+O
-          </span>
-        )}
-      </div>
-
-      <div className="oracle-desktop-titlebar__controls">
-        <button
-          type="button"
-          className={
-            overlayPreviewEnabled
-              ? "oracle-desktop-titlebar__button oracle-desktop-titlebar__button--active"
-              : "oracle-desktop-titlebar__button"
-          }
-          aria-label={
-            overlayPreviewEnabled
-              ? "Exit transparent overlay preview"
-              : "Enter transparent overlay preview"
-          }
-          title={
-            overlayPreviewEnabled
-              ? "Exit overlay preview"
-              : "Preview transparency"
-          }
-          onClick={() => {
-            void toggleOverlayPreview();
-          }}
-        >
-          {overlayPreviewEnabled ? (
-            <EyeOff
-              size={15}
-              strokeWidth={1.8}
-            />
-          ) : (
-            <Eye
-              size={15}
-              strokeWidth={1.8}
-            />
-          )}
-        </button>
-
-        <button
-          type="button"
-          className={
-            alwaysOnTopEnabled
-              ? "oracle-desktop-titlebar__button oracle-desktop-titlebar__button--active"
-              : "oracle-desktop-titlebar__button"
-          }
-          aria-label={
-            alwaysOnTopEnabled
-              ? "Disable always on top"
-              : "Enable always on top"
-          }
-          title={
-            alwaysOnTopEnabled
-              ? "Unpin window"
-              : "Pin window"
-          }
-          onClick={() => {
-            void toggleAlwaysOnTop();
-          }}
-        >
-          {alwaysOnTopEnabled ? (
-            <PinOff
-              size={15}
-              strokeWidth={1.8}
-            />
-          ) : (
-            <Pin
-              size={15}
-              strokeWidth={1.8}
-            />
-          )}
-        </button>
-
-        <button
-          type="button"
-          className={
-            clickThroughEnabled
-              ? "oracle-desktop-titlebar__button oracle-desktop-titlebar__button--active"
-              : "oracle-desktop-titlebar__button"
-          }
-          disabled={
-            !overlayPreviewEnabled &&
-            !clickThroughEnabled
-          }
-          aria-label={
-            clickThroughEnabled
-              ? "Click-through enabled. Press Control Shift O to restore interaction."
-              : "Enable click-through"
-          }
-          title={
-            clickThroughEnabled
-              ? "Click-through enabled — press Ctrl+Shift+O to restore interaction"
-              : overlayPreviewEnabled
-                ? "Enable click-through"
-                : "Enable overlay preview first"
-          }
-          onClick={() => {
-            void toggleClickThrough();
-          }}
-        >
-          <MousePointer2
-            size={15}
-            strokeWidth={1.8}
+    <>
+      <header className="oracle-desktop-titlebar">
+        <div className="oracle-desktop-titlebar__brand">
+          <span
+            className="oracle-desktop-titlebar__signal"
+            aria-hidden="true"
           />
-        </button>
 
-        <button
-          type="button"
-          className="oracle-desktop-titlebar__button"
-          aria-label="Minimise Oracle Companion"
-          title="Minimise"
-          onClick={() => {
-            void minimizeWindow();
-          }}
-        >
-          <Minus
-            size={15}
-            strokeWidth={1.8}
-          />
-        </button>
+          <span className="oracle-desktop-titlebar__name">
+            ORACLE
+          </span>
 
-        <button
-          type="button"
-          className="oracle-desktop-titlebar__button"
-          aria-label={
-            hostState?.windowMaximized
-              ? "Restore Oracle Companion"
-              : "Maximise Oracle Companion"
-          }
-          title={
-            hostState?.windowMaximized
-              ? "Restore"
-              : "Maximise"
-          }
-          onClick={() => {
-            void toggleMaximizeWindow();
-          }}
-        >
-          {hostState?.windowMaximized ? (
-            <Copy
-              size={13}
-              strokeWidth={1.8}
-            />
-          ) : (
-            <Square
-              size={12}
-              strokeWidth={1.8}
-            />
+          <span className="oracle-desktop-titlebar__division">
+            COMPANION
+          </span>
+
+          {overlayPreviewEnabled && (
+            <span className="oracle-desktop-titlebar__mode">
+              OVERLAY PREVIEW
+            </span>
           )}
-        </button>
 
-        <button
-          type="button"
-          className="oracle-desktop-titlebar__button oracle-desktop-titlebar__button--close"
-          aria-label="Close Oracle Companion"
-          title="Close"
-          onClick={() => {
-            void closeWindow();
-          }}
-        >
-          <X
-            size={16}
-            strokeWidth={1.8}
-          />
-        </button>
-      </div>
-    </header>
+          {alwaysOnTopEnabled && (
+            <span className="oracle-desktop-titlebar__mode">
+              PINNED
+            </span>
+          )}
+
+          {clickThroughEnabled && (
+            <span className="oracle-desktop-titlebar__mode">
+              CLICK-THROUGH · CTRL+SHIFT+O
+            </span>
+          )}
+        </div>
+
+        <div className="oracle-desktop-titlebar__controls">
+          <button
+            type="button"
+            className={
+              diagnosticsOpen
+                ? "oracle-desktop-titlebar__button oracle-desktop-titlebar__button--active"
+                : "oracle-desktop-titlebar__button"
+            }
+            aria-label={
+              diagnosticsOpen
+                ? "Close desktop diagnostics"
+                : "Open desktop diagnostics"
+            }
+            aria-expanded={diagnosticsOpen}
+            title="Desktop diagnostics"
+            onClick={() => {
+              setDiagnosticsOpen(
+                (current) => !current
+              );
+            }}
+          >
+            <Activity
+              size={15}
+              strokeWidth={1.8}
+            />
+          </button>
+
+          <button
+            type="button"
+            className={
+              overlayPreviewEnabled
+                ? "oracle-desktop-titlebar__button oracle-desktop-titlebar__button--active"
+                : "oracle-desktop-titlebar__button"
+            }
+            aria-label={
+              overlayPreviewEnabled
+                ? "Exit transparent overlay preview"
+                : "Enter transparent overlay preview"
+            }
+            title={
+              overlayPreviewEnabled
+                ? "Exit overlay preview"
+                : "Preview transparency"
+            }
+            onClick={() => {
+              void toggleOverlayPreview();
+            }}
+          >
+            {overlayPreviewEnabled ? (
+              <EyeOff
+                size={15}
+                strokeWidth={1.8}
+              />
+            ) : (
+              <Eye
+                size={15}
+                strokeWidth={1.8}
+              />
+            )}
+          </button>
+
+          <button
+            type="button"
+            className={
+              alwaysOnTopEnabled
+                ? "oracle-desktop-titlebar__button oracle-desktop-titlebar__button--active"
+                : "oracle-desktop-titlebar__button"
+            }
+            aria-label={
+              alwaysOnTopEnabled
+                ? "Disable always on top"
+                : "Enable always on top"
+            }
+            title={
+              alwaysOnTopEnabled
+                ? "Unpin window"
+                : "Pin window"
+            }
+            onClick={() => {
+              void toggleAlwaysOnTop();
+            }}
+          >
+            {alwaysOnTopEnabled ? (
+              <PinOff
+                size={15}
+                strokeWidth={1.8}
+              />
+            ) : (
+              <Pin
+                size={15}
+                strokeWidth={1.8}
+              />
+            )}
+          </button>
+
+          <button
+            type="button"
+            className={
+              clickThroughEnabled
+                ? "oracle-desktop-titlebar__button oracle-desktop-titlebar__button--active"
+                : "oracle-desktop-titlebar__button"
+            }
+            disabled={
+              !overlayPreviewEnabled &&
+              !clickThroughEnabled
+            }
+            aria-label={
+              clickThroughEnabled
+                ? "Click-through enabled. Press Control Shift O to restore interaction."
+                : "Enable click-through"
+            }
+            title={
+              clickThroughEnabled
+                ? "Click-through enabled — press Ctrl+Shift+O to restore interaction"
+                : overlayPreviewEnabled
+                  ? "Enable click-through"
+                  : "Enable overlay preview first"
+            }
+            onClick={() => {
+              void toggleClickThrough();
+            }}
+          >
+            <MousePointer2
+              size={15}
+              strokeWidth={1.8}
+            />
+          </button>
+
+          <button
+            type="button"
+            className="oracle-desktop-titlebar__button"
+            aria-label="Minimise Oracle Companion"
+            title="Minimise"
+            onClick={() => {
+              void minimizeWindow();
+            }}
+          >
+            <Minus
+              size={15}
+              strokeWidth={1.8}
+            />
+          </button>
+
+          <button
+            type="button"
+            className="oracle-desktop-titlebar__button"
+            aria-label={
+              hostState?.windowMaximized
+                ? "Restore Oracle Companion"
+                : "Maximise Oracle Companion"
+            }
+            title={
+              hostState?.windowMaximized
+                ? "Restore"
+                : "Maximise"
+            }
+            onClick={() => {
+              void toggleMaximizeWindow();
+            }}
+          >
+            {hostState?.windowMaximized ? (
+              <Copy
+                size={13}
+                strokeWidth={1.8}
+              />
+            ) : (
+              <Square
+                size={12}
+                strokeWidth={1.8}
+              />
+            )}
+          </button>
+
+          <button
+            type="button"
+            className="oracle-desktop-titlebar__button oracle-desktop-titlebar__button--close"
+            aria-label="Close Oracle Companion"
+            title="Close"
+            onClick={() => {
+              void closeWindow();
+            }}
+          >
+            <X
+              size={16}
+              strokeWidth={1.8}
+            />
+          </button>
+        </div>
+      </header>
+
+      <DesktopDiagnosticsPanel
+        hostState={hostState}
+        open={diagnosticsOpen}
+        onClose={() =>
+          setDiagnosticsOpen(false)
+        }
+      />
+    </>
   );
 }
