@@ -40,6 +40,32 @@ export class OraclePlatformRuntime {
       applications: [...this.state.applications],
       companion: {
         ...this.state.companion,
+        context: this.state.companion.context
+          ? {
+              ...this.state.companion.context,
+              game: this.state.companion.context.game
+                ? {
+                    ...this.state.companion.context.game,
+                  }
+                : null,
+              activeWindow: this.state.companion.context.activeWindow
+                ? {
+                    ...this.state.companion.context.activeWindow,
+                  }
+                : null,
+              discoveries:
+                this.state.companion.context.discoveries.map(
+                  (discovery) => ({
+                    ...discovery,
+                  })
+                ),
+            }
+          : null,
+        failure: this.state.companion.failure
+          ? {
+              ...this.state.companion.failure,
+            }
+          : null,
       },
       subsystems: this.state.subsystems.map((subsystem) => ({
         ...subsystem,
@@ -133,21 +159,21 @@ export class OraclePlatformRuntime {
 
     const stoppedWithErrors = this.state.errors.length > 0;
 
-this.updateState({
-  status: stoppedWithErrors ? "failed" : "stopped",
-  phase: stoppedWithErrors ? "failed" : "stopped",
-  stoppedAt: new Date().toISOString(),
-  companion: this.companionRuntime.getState(),
-});
+    this.updateState({
+      status: stoppedWithErrors ? "failed" : "stopped",
+      phase: stoppedWithErrors ? "failed" : "stopped",
+      stoppedAt: new Date().toISOString(),
+      companion: this.companionRuntime.getState(),
+    });
 
-this.addDiagnostic(
-  "platform.stop.completed",
-  stoppedWithErrors ? "error" : "info",
-  stoppedWithErrors
-    ? "Oracle Platform stopped with errors."
-    : "Oracle Platform stopped successfully.",
-  stoppedWithErrors ? "failed" : "stopped"
-);
+    this.addDiagnostic(
+      "platform.stop.completed",
+      stoppedWithErrors ? "error" : "info",
+      stoppedWithErrors
+        ? "Oracle Platform stopped with errors."
+        : "Oracle Platform stopped successfully.",
+      stoppedWithErrors ? "failed" : "stopped"
+    );
 
     return this.getState();
   }
@@ -296,10 +322,30 @@ this.addDiagnostic(
     this.setPhase("starting-companion");
 
     try {
-      this.companionRuntime.start();
+      const prerequisitesReady = [
+        "services",
+        "applications",
+        "extensions",
+      ].every((subsystemId) =>
+        this.state.subsystems.some(
+          (subsystem) =>
+            subsystem.id === subsystemId &&
+            subsystem.status === "ready"
+        )
+      );
+
+      this.companionRuntime.start({
+        platformAuthorized: this.state.status === "booting",
+        prerequisitesReady,
+        waitingReason: prerequisitesReady
+          ? undefined
+          : "Required Oracle Platform subsystems are not ready.",
+      });
 
       const companion = this.companionRuntime.getState();
       const isReady = companion.status === "ready";
+      const isWaiting =
+        companion.status === "waiting-for-platform";
 
       this.updateState({
         companion,
@@ -307,10 +353,16 @@ this.addDiagnostic(
 
       this.updateSubsystem(
         "companion",
-        isReady ? "ready" : "failed",
+        isReady
+          ? "ready"
+          : isWaiting
+            ? "unavailable"
+            : "failed",
         isReady
           ? "Companion Runtime ready."
-          : `Companion Runtime entered status '${companion.status}'.`
+          : isWaiting
+            ? "Companion Runtime is waiting for Platform prerequisites."
+            : `Companion Runtime entered status '${companion.status}'.`
       );
 
       if (isReady) {
@@ -321,10 +373,19 @@ this.addDiagnostic(
           "starting-companion",
           "companion"
         );
+      } else if (isWaiting) {
+        this.addDiagnostic(
+          "platform.companion.waiting",
+          "warning",
+          "Companion Runtime is waiting for Platform prerequisites.",
+          "starting-companion",
+          "companion"
+        );
       } else {
         this.addError(
           "platform.companion.start.failed",
-          `Companion Runtime entered status '${companion.status}' during startup.`,
+          companion.failure?.message ??
+            `Companion Runtime entered status '${companion.status}' during startup.`,
           "starting-companion",
           "companion"
         );
@@ -448,7 +509,13 @@ this.addDiagnostic(
     this.updateState({
       diagnostics: [
         ...this.state.diagnostics,
-        createDiagnostic(code, level, message, phase, subsystemId),
+        createDiagnostic(
+          code,
+          level,
+          message,
+          phase,
+          subsystemId
+        ),
       ],
     });
   }
@@ -463,12 +530,20 @@ this.addDiagnostic(
       errors: [...this.state.errors, message],
       diagnostics: [
         ...this.state.diagnostics,
-        createDiagnostic(code, "error", message, phase, subsystemId),
+        createDiagnostic(
+          code,
+          "error",
+          message,
+          phase,
+          subsystemId
+        ),
       ],
     });
   }
 
-  private updateState(update: Partial<MutablePlatformState>): void {
+  private updateState(
+    update: Partial<MutablePlatformState>
+  ): void {
     this.state = {
       ...this.state,
       ...update,
@@ -527,7 +602,9 @@ function createDiagnostic(
   };
 }
 
-function getSubsystemName(id: OraclePlatformSubsystemId): string {
+function getSubsystemName(
+  id: OraclePlatformSubsystemId
+): string {
   switch (id) {
     case "services":
       return "Oracle Services";
@@ -541,5 +618,7 @@ function getSubsystemName(id: OraclePlatformSubsystemId): string {
 }
 
 function getErrorMessage(error: unknown): string {
-  return error instanceof Error ? error.message : String(error);
+  return error instanceof Error
+    ? error.message
+    : String(error);
 }
