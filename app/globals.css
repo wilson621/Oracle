@@ -434,3 +434,47 @@ html.oracle-overlay-preview
   .oracle-desktop-diagnostics {
   background: rgba(7, 10, 16, 0.9);
 }
+.oracle-desktop-diagnostics__window-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.oracle-desktop-diagnostics__window {
+  display: grid;
+  gap: 3px;
+
+  padding: 9px 10px;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.07);
+  border-radius: 9px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: rgba(255, 255, 255, 0.46);
+
+  font-family:
+    var(--font-geist-mono),
+    Consolas,
+    monospace;
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.oracle-desktop-diagnostics__window-title {
+  overflow: hidden;
+
+  color: rgba(255, 255, 255, 0.84);
+
+  font-family:
+    var(--font-geist-sans),
+    Arial,
+    sans-serif;
+  font-size: 10px;
+  font-weight: 650;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

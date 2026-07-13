@@ -1,3 +1,8 @@
+import type {
+  OracleDesktopDiscoveredWindow,
+  OracleDesktopWindowDiscoveryStatus,
+} from "./window-discovery.js";
+
 export type OracleDesktopWindowMode =
   | "development"
   | "overlay-preview";
@@ -37,6 +42,23 @@ export type OracleDesktopRuntimeState = {
   platform: NodeJS.Platform;
 };
 
+export type OracleDesktopHostWindowDiscoveryStatus =
+  | "idle"
+  | "discovering"
+  | OracleDesktopWindowDiscoveryStatus;
+
+export type OracleDesktopHostWindowDiscoveryState = {
+  status: OracleDesktopHostWindowDiscoveryStatus;
+  platform: NodeJS.Platform;
+
+  windows: OracleDesktopDiscoveredWindow[];
+
+  discoveredAt: string | null;
+  durationMs: number | null;
+
+  error: string | null;
+};
+
 export type OracleDesktopHostState = {
   ready: boolean;
 
@@ -53,6 +75,8 @@ export type OracleDesktopHostState = {
   bounds: OracleDesktopRectangle;
   display: OracleDesktopDisplayState;
   runtime: OracleDesktopRuntimeState;
+
+  windowDiscovery: OracleDesktopHostWindowDiscoveryState;
 
   developmentMode: boolean;
 };
@@ -79,10 +103,27 @@ const INITIAL_HOST_CONFIGURATION: OracleDesktopHostConfiguration = {
   clickThrough: false,
 };
 
+function createInitialWindowDiscoveryState(): OracleDesktopHostWindowDiscoveryState {
+  return {
+    status: "idle",
+    platform: process.platform,
+
+    windows: [],
+
+    discoveredAt: null,
+    durationMs: null,
+
+    error: null,
+  };
+}
+
 export class OracleDesktopHostStateModel {
   private configuration: OracleDesktopHostConfiguration = {
     ...INITIAL_HOST_CONFIGURATION,
   };
+
+  private windowDiscovery =
+    createInitialWindowDiscoveryState();
 
   getWindowMode(): OracleDesktopWindowMode {
     return this.configuration.windowMode;
@@ -189,10 +230,31 @@ export class OracleDesktopHostStateModel {
     };
   }
 
+  markWindowDiscoveryStarted(): void {
+    this.windowDiscovery = {
+      ...this.windowDiscovery,
+      status: "discovering",
+      windows: [],
+      discoveredAt: null,
+      durationMs: null,
+      error: null,
+    };
+  }
+
+  setWindowDiscovery(
+    discovery: OracleDesktopHostWindowDiscoveryState
+  ): void {
+    this.windowDiscovery =
+      cloneWindowDiscoveryState(discovery);
+  }
+
   reset(): void {
     this.configuration = {
       ...INITIAL_HOST_CONFIGURATION,
     };
+
+    this.windowDiscovery =
+      createInitialWindowDiscoveryState();
   }
 
   createSnapshot(
@@ -233,9 +295,31 @@ export class OracleDesktopHostStateModel {
         ...observation.runtime,
       },
 
+      windowDiscovery:
+        cloneWindowDiscoveryState(
+          this.windowDiscovery
+        ),
+
       developmentMode,
     };
   }
+}
+
+function cloneWindowDiscoveryState(
+  discovery: OracleDesktopHostWindowDiscoveryState
+): OracleDesktopHostWindowDiscoveryState {
+  return {
+    ...discovery,
+
+    windows: discovery.windows.map(
+      (window) => ({
+        ...window,
+        bounds: {
+          ...window.bounds,
+        },
+      })
+    ),
+  };
 }
 
 function cloneRectangle(

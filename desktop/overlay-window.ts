@@ -11,10 +11,13 @@ import {
   ORACLE_DESKTOP_RECOVERY_SHORTCUT,
   type OracleDesktopDisplayState,
   type OracleDesktopHostState,
+  type OracleDesktopHostWindowDiscoveryState,
   type OracleDesktopRectangle,
   type OracleDesktopRuntimeState,
+  type OracleDesktopWindowDiscoveryResult,
 } from "./contracts.js";
 import { OracleDesktopHostStateModel } from "./host-state.js";
+import { OracleDesktopWindowDiscoveryService } from "./window-discovery.js";
 
 export type CompanionHostWindowOptions = {
   companionUrl: string;
@@ -35,7 +38,12 @@ export class CompanionHostWindowController {
   private readonly hostState =
     new OracleDesktopHostStateModel();
 
+  private readonly windowDiscovery =
+    new OracleDesktopWindowDiscoveryService();
+
   private screenEventsRegistered = false;
+
+  private discoveryRunId = 0;
 
   private readonly handleDisplayChange = () => {
     this.publishState();
@@ -121,6 +129,8 @@ export class CompanionHostWindowController {
       window.focus();
 
       this.publishState();
+
+      void this.refreshWindowDiscovery();
     }
 
     return window;
@@ -282,6 +292,7 @@ export class CompanionHostWindowController {
   close(): void {
     const window = this.getWindow();
 
+    this.discoveryRunId += 1;
     this.unregisterScreenEvents();
 
     if (!window) {
@@ -290,6 +301,69 @@ export class CompanionHostWindowController {
     }
 
     window.close();
+  }
+
+  private async refreshWindowDiscovery(): Promise<void> {
+    const runId =
+      ++this.discoveryRunId;
+
+    this.hostState.markWindowDiscoveryStarted();
+    this.publishState();
+
+    const result =
+      await this.windowDiscovery.discover();
+
+    if (
+      runId !== this.discoveryRunId ||
+      !this.getWindow()
+    ) {
+      return;
+    }
+
+    this.hostState.setWindowDiscovery(
+      this.createHostWindowDiscoveryState(
+        result
+      )
+    );
+
+    this.publishState();
+  }
+
+  private createHostWindowDiscoveryState(
+    result: OracleDesktopWindowDiscoveryResult
+  ): OracleDesktopHostWindowDiscoveryState {
+    const ownWindow =
+      this.getRequiredWindow();
+
+    const ownHandle =
+      getNativeWindowHandleString(
+        ownWindow
+      );
+
+    const windows =
+      result.windows.filter(
+        (window) =>
+          !isOracleCompanionWindow(
+            window.handle,
+            window.processId,
+            ownHandle
+          )
+      );
+
+    return {
+      status: result.status,
+      platform: result.platform,
+
+      windows,
+
+      discoveredAt:
+        result.discoveredAt,
+
+      durationMs:
+        result.durationMs,
+
+      error: result.error,
+    };
   }
 
   private applyHostState(): void {
@@ -395,6 +469,8 @@ export class CompanionHostWindowController {
     );
 
     window.on("closed", () => {
+      this.discoveryRunId += 1;
+
       this.unregisterScreenEvents();
 
       this.window = null;
@@ -573,6 +649,44 @@ function createRuntimeState(): OracleDesktopRuntimeState {
     platform:
       process.platform,
   };
+}
+
+function getNativeWindowHandleString(
+  window: BrowserWindow
+): string | null {
+  const handle =
+    window.getNativeWindowHandle();
+
+  if (handle.length >= 8) {
+    return handle
+      .readBigUInt64LE(0)
+      .toString();
+  }
+
+  if (handle.length >= 4) {
+    return String(
+      handle.readUInt32LE(0)
+    );
+  }
+
+  return null;
+}
+
+function isOracleCompanionWindow(
+  discoveredHandle: string,
+  discoveredProcessId: number,
+  ownHandle: string | null
+): boolean {
+  if (
+    ownHandle &&
+    discoveredHandle === ownHandle
+  ) {
+    return true;
+  }
+
+  return (
+    discoveredProcessId === process.pid
+  );
 }
 
 function normaliseRectangle(

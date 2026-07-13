@@ -1,10 +1,19 @@
 import type {
   OracleDesktopDisplayState,
   OracleDesktopHostState,
+  OracleDesktopHostWindowDiscoveryState,
+  OracleDesktopHostWindowDiscoveryStatus,
   OracleDesktopRectangle,
   OracleDesktopRuntimeState,
   OracleDesktopWindowMode,
 } from "./host-state.js";
+
+import type {
+  OracleDesktopDiscoveredWindow,
+  OracleDesktopWindowBounds,
+  OracleDesktopWindowDiscoveryResult,
+  OracleDesktopWindowDiscoveryStatus,
+} from "./window-discovery.js";
 
 export const DESKTOP_CHANNELS = {
   getHostState:
@@ -39,10 +48,16 @@ export const ORACLE_DESKTOP_RECOVERY_SHORTCUT =
   "CommandOrControl+Shift+O";
 
 export type {
+  OracleDesktopDiscoveredWindow,
   OracleDesktopDisplayState,
   OracleDesktopHostState,
+  OracleDesktopHostWindowDiscoveryState,
+  OracleDesktopHostWindowDiscoveryStatus,
   OracleDesktopRectangle,
   OracleDesktopRuntimeState,
+  OracleDesktopWindowBounds,
+  OracleDesktopWindowDiscoveryResult,
+  OracleDesktopWindowDiscoveryStatus,
   OracleDesktopWindowMode,
 };
 

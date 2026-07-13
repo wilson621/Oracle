@@ -33,9 +33,6 @@ export default function CompanionTitleBar() {
     setDiagnosticsOpen,
   ] = useState(false);
 
-  const desktopAvailable =
-    typeof window !== "undefined" &&
-    Boolean(window.oracleDesktop);
 
   useEffect(() => {
     const bridge = window.oracleDesktop;
@@ -92,9 +89,9 @@ export default function CompanionTitleBar() {
     };
   }, [hostState?.windowMode]);
 
-  if (!desktopAvailable) {
-    return null;
-  }
+  if (!hostState) {
+  return null;
+}
 
   const overlayPreviewEnabled =
     hostState?.windowMode ===

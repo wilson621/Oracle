@@ -1,6 +1,9 @@
 "use client";
 
-import type { OracleDesktopHostState } from "@/desktop/contracts";
+import type {
+  OracleDesktopDiscoveredWindow,
+  OracleDesktopHostState,
+} from "@/desktop/contracts";
 
 type DesktopDiagnosticsPanelProps = {
   hostState: OracleDesktopHostState | null;
@@ -203,6 +206,60 @@ export default function DesktopDiagnosticsPanel({
             />
           </DiagnosticSection>
 
+          <DiagnosticSection title="Window Discovery">
+            <DiagnosticValue
+              label="Status"
+              value={formatDiscoveryStatus(
+                hostState.windowDiscovery.status
+              )}
+              healthy={getDiscoveryHealth(
+                hostState.windowDiscovery.status
+              )}
+            />
+
+            <DiagnosticValue
+              label="Windows found"
+              value={
+                hostState.windowDiscovery
+                  .windows.length
+              }
+            />
+
+            <DiagnosticValue
+              label="Duration"
+              value={
+                hostState.windowDiscovery
+                  .durationMs === null
+                  ? "—"
+                  : `${hostState.windowDiscovery.durationMs}ms`
+              }
+            />
+
+            <DiagnosticValue
+              label="Last discovery"
+              value={formatTimestamp(
+                hostState.windowDiscovery
+                  .discoveredAt
+              )}
+            />
+
+            {hostState.windowDiscovery.error && (
+              <DiagnosticValue
+                label="Error"
+                value={
+                  hostState.windowDiscovery.error
+                }
+                healthy={false}
+              />
+            )}
+
+            <DiscoveredWindowList
+              windows={
+                hostState.windowDiscovery.windows
+              }
+            />
+          </DiagnosticSection>
+
           <DiagnosticSection title="Runtime">
             <DiagnosticValue
               label="Host version"
@@ -252,6 +309,51 @@ export default function DesktopDiagnosticsPanel({
         </div>
       )}
     </aside>
+  );
+}
+
+function DiscoveredWindowList({
+  windows,
+}: {
+  windows: OracleDesktopDiscoveredWindow[];
+}) {
+  if (windows.length === 0) {
+    return (
+      <div className="oracle-desktop-diagnostics__empty">
+        No external top-level windows discovered.
+      </div>
+    );
+  }
+
+  return (
+    <div className="oracle-desktop-diagnostics__window-list">
+      {windows.map((window) => (
+        <article
+          key={window.id}
+          className="oracle-desktop-diagnostics__window"
+        >
+          <strong className="oracle-desktop-diagnostics__window-title">
+            {window.title}
+          </strong>
+
+          <span>
+            {window.processName ??
+              "Unknown process"}{" "}
+            · PID {window.processId}
+          </span>
+
+          <span>
+            {formatRectangle(window.bounds)}
+          </span>
+
+          <span>
+            {window.minimized
+              ? "Minimised"
+              : "Visible"}
+          </span>
+        </article>
+      ))}
+    </div>
   );
 }
 
@@ -317,10 +419,64 @@ function formatWindowMode(
     : "Development";
 }
 
+function formatDiscoveryStatus(
+  status: OracleDesktopHostState["windowDiscovery"]["status"]
+): string {
+  switch (status) {
+    case "idle":
+      return "Idle";
+
+    case "discovering":
+      return "Discovering";
+
+    case "ready":
+      return "Ready";
+
+    case "unsupported":
+      return "Unsupported";
+
+    case "failed":
+      return "Failed";
+  }
+}
+
+function getDiscoveryHealth(
+  status: OracleDesktopHostState["windowDiscovery"]["status"]
+): boolean | null {
+  switch (status) {
+    case "ready":
+      return true;
+
+    case "failed":
+      return false;
+
+    case "idle":
+    case "discovering":
+    case "unsupported":
+      return null;
+  }
+}
+
 function formatRectangle(
   rectangle: OracleDesktopHostState["bounds"]
 ): string {
   return `${rectangle.x}, ${rectangle.y} · ${rectangle.width} × ${rectangle.height}`;
+}
+
+function formatTimestamp(
+  timestamp: string | null
+): string {
+  if (!timestamp) {
+    return "—";
+  }
+
+  const date = new Date(timestamp);
+
+  if (Number.isNaN(date.getTime())) {
+    return timestamp;
+  }
+
+  return date.toLocaleTimeString();
 }
 
 function formatShortcut(shortcut: string): string {
