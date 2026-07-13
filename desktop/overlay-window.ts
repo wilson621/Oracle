@@ -1,8 +1,18 @@
-import { BrowserWindow } from "electron";
+import {
+  BrowserWindow,
+  app,
+  screen,
+  type Display,
+  type Rectangle,
+} from "electron";
 import { join } from "node:path";
 import {
   DESKTOP_CHANNELS,
+  ORACLE_DESKTOP_RECOVERY_SHORTCUT,
+  type OracleDesktopDisplayState,
   type OracleDesktopHostState,
+  type OracleDesktopRectangle,
+  type OracleDesktopRuntimeState,
 } from "./contracts.js";
 import { OracleDesktopHostStateModel } from "./host-state.js";
 
@@ -16,12 +26,20 @@ const DEVELOPMENT_WINDOW_HEIGHT = 800;
 const DEVELOPMENT_BACKGROUND = "#090b10";
 const TRANSPARENT_BACKGROUND = "#00000000";
 
+const STANDARD_WINDOWS_DPI = 96;
+
 export class CompanionHostWindowController {
   private window: BrowserWindow | null =
     null;
 
   private readonly hostState =
     new OracleDesktopHostStateModel();
+
+  private screenEventsRegistered = false;
+
+  private readonly handleDisplayChange = () => {
+    this.publishState();
+  };
 
   constructor(
     private readonly options: CompanionHostWindowOptions
@@ -90,6 +108,7 @@ export class CompanionHostWindowController {
     );
 
     this.registerWindowEvents(window);
+    this.registerScreenEvents();
 
     await window.loadURL(
       this.options.companionUrl
@@ -132,11 +151,27 @@ export class CompanionHostWindowController {
     const window =
       this.getRequiredWindow();
 
+    const bounds =
+      normaliseRectangle(
+        window.getBounds()
+      );
+
+    const display =
+      screen.getDisplayMatching(bounds);
+
     return this.hostState.createSnapshot(
       {
         visible: window.isVisible(),
         focused: window.isFocused(),
         maximized: window.isMaximized(),
+
+        bounds,
+
+        display:
+          createDisplayState(display),
+
+        runtime:
+          createRuntimeState(),
       },
       process.env.NODE_ENV !==
         "production"
@@ -247,6 +282,8 @@ export class CompanionHostWindowController {
   close(): void {
     const window = this.getWindow();
 
+    this.unregisterScreenEvents();
+
     if (!window) {
       this.window = null;
       return;
@@ -341,11 +378,15 @@ export class CompanionHostWindowController {
     window.on("hide", publishState);
     window.on("focus", publishState);
     window.on("blur", publishState);
+    window.on("move", publishState);
+    window.on("resize", publishState);
     window.on("maximize", publishState);
+
     window.on(
       "unmaximize",
       publishState
     );
+
     window.on("restore", publishState);
 
     window.on(
@@ -354,6 +395,8 @@ export class CompanionHostWindowController {
     );
 
     window.on("closed", () => {
+      this.unregisterScreenEvents();
+
       this.window = null;
       this.hostState.reset();
     });
@@ -397,6 +440,52 @@ export class CompanionHostWindowController {
     );
   }
 
+  private registerScreenEvents(): void {
+    if (this.screenEventsRegistered) {
+      return;
+    }
+
+    screen.on(
+      "display-added",
+      this.handleDisplayChange
+    );
+
+    screen.on(
+      "display-removed",
+      this.handleDisplayChange
+    );
+
+    screen.on(
+      "display-metrics-changed",
+      this.handleDisplayChange
+    );
+
+    this.screenEventsRegistered = true;
+  }
+
+  private unregisterScreenEvents(): void {
+    if (!this.screenEventsRegistered) {
+      return;
+    }
+
+    screen.removeListener(
+      "display-added",
+      this.handleDisplayChange
+    );
+
+    screen.removeListener(
+      "display-removed",
+      this.handleDisplayChange
+    );
+
+    screen.removeListener(
+      "display-metrics-changed",
+      this.handleDisplayChange
+    );
+
+    this.screenEventsRegistered = false;
+  }
+
   private publishState(): void {
     const window = this.getWindow();
 
@@ -424,4 +513,98 @@ export class CompanionHostWindowController {
 
     return window;
   }
+}
+
+function createDisplayState(
+  display: Display
+): OracleDesktopDisplayState {
+  return {
+    id: String(display.id),
+
+    primary:
+      display.id ===
+      screen.getPrimaryDisplay().id,
+
+    scaleFactor:
+      normaliseScaleFactor(
+        display.scaleFactor
+      ),
+
+    estimatedDpi: Math.round(
+      STANDARD_WINDOWS_DPI *
+        normaliseScaleFactor(
+          display.scaleFactor
+        )
+    ),
+
+    bounds:
+      normaliseRectangle(
+        display.bounds
+      ),
+
+    workArea:
+      normaliseRectangle(
+        display.workArea
+      ),
+  };
+}
+
+function createRuntimeState(): OracleDesktopRuntimeState {
+  return {
+    ipcConnected: true,
+
+    recoveryShortcut:
+      ORACLE_DESKTOP_RECOVERY_SHORTCUT,
+
+    desktopHostVersion:
+      app.getVersion(),
+
+    electronVersion:
+      process.versions.electron ??
+      "unknown",
+
+    chromiumVersion:
+      process.versions.chrome ??
+      "unknown",
+
+    nodeVersion:
+      process.versions.node,
+
+    platform:
+      process.platform,
+  };
+}
+
+function normaliseRectangle(
+  rectangle: Rectangle
+): OracleDesktopRectangle {
+  return {
+    x: Math.round(rectangle.x),
+    y: Math.round(rectangle.y),
+
+    width: Math.max(
+      1,
+      Math.round(rectangle.width)
+    ),
+
+    height: Math.max(
+      1,
+      Math.round(rectangle.height)
+    ),
+  };
+}
+
+function normaliseScaleFactor(
+  scaleFactor: number
+): number {
+  if (
+    !Number.isFinite(scaleFactor) ||
+    scaleFactor <= 0
+  ) {
+    return 1;
+  }
+
+  return Number(
+    scaleFactor.toFixed(3)
+  );
 }

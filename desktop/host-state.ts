@@ -2,6 +2,41 @@ export type OracleDesktopWindowMode =
   | "development"
   | "overlay-preview";
 
+export type OracleDesktopRectangle = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
+export type OracleDesktopDisplayState = {
+  id: string;
+  primary: boolean;
+
+  scaleFactor: number;
+
+  /**
+   * Indicative desktop DPI derived from the platform scale factor.
+   * A scale factor of 1 maps to the standard 96 DPI baseline.
+   */
+  estimatedDpi: number;
+
+  bounds: OracleDesktopRectangle;
+  workArea: OracleDesktopRectangle;
+};
+
+export type OracleDesktopRuntimeState = {
+  ipcConnected: boolean;
+  recoveryShortcut: string;
+
+  desktopHostVersion: string;
+  electronVersion: string;
+  chromiumVersion: string;
+  nodeVersion: string;
+
+  platform: NodeJS.Platform;
+};
+
 export type OracleDesktopHostState = {
   ready: boolean;
 
@@ -15,6 +50,10 @@ export type OracleDesktopHostState = {
   alwaysOnTop: boolean;
   clickThrough: boolean;
 
+  bounds: OracleDesktopRectangle;
+  display: OracleDesktopDisplayState;
+  runtime: OracleDesktopRuntimeState;
+
   developmentMode: boolean;
 };
 
@@ -22,6 +61,10 @@ export type OracleDesktopNativeWindowObservation = {
   visible: boolean;
   focused: boolean;
   maximized: boolean;
+
+  bounds: OracleDesktopRectangle;
+  display: OracleDesktopDisplayState;
+  runtime: OracleDesktopRuntimeState;
 };
 
 type OracleDesktopHostConfiguration = {
@@ -172,7 +215,36 @@ export class OracleDesktopHostStateModel {
       clickThrough:
         this.configuration.clickThrough,
 
+      bounds: cloneRectangle(
+        observation.bounds
+      ),
+
+      display: {
+        ...observation.display,
+        bounds: cloneRectangle(
+          observation.display.bounds
+        ),
+        workArea: cloneRectangle(
+          observation.display.workArea
+        ),
+      },
+
+      runtime: {
+        ...observation.runtime,
+      },
+
       developmentMode,
     };
   }
+}
+
+function cloneRectangle(
+  rectangle: OracleDesktopRectangle
+): OracleDesktopRectangle {
+  return {
+    x: rectangle.x,
+    y: rectangle.y,
+    width: rectangle.width,
+    height: rectangle.height,
+  };
 }

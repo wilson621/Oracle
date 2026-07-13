@@ -1,5 +1,8 @@
 import type {
+  OracleDesktopDisplayState,
   OracleDesktopHostState,
+  OracleDesktopRectangle,
+  OracleDesktopRuntimeState,
   OracleDesktopWindowMode,
 } from "./host-state.js";
 
@@ -36,7 +39,10 @@ export const ORACLE_DESKTOP_RECOVERY_SHORTCUT =
   "CommandOrControl+Shift+O";
 
 export type {
+  OracleDesktopDisplayState,
   OracleDesktopHostState,
+  OracleDesktopRectangle,
+  OracleDesktopRuntimeState,
   OracleDesktopWindowMode,
 };
 
