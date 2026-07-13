@@ -3,8 +3,8 @@ import { join } from "node:path";
 import {
   DESKTOP_CHANNELS,
   type OracleDesktopHostState,
-  type OracleDesktopWindowMode,
 } from "./contracts.js";
+import { OracleDesktopHostStateModel } from "./host-state.js";
 
 export type CompanionHostWindowOptions = {
   companionUrl: string;
@@ -19,8 +19,8 @@ const TRANSPARENT_BACKGROUND = "#00000000";
 export class CompanionHostWindowController {
   private window: BrowserWindow | null = null;
 
-  private windowMode: OracleDesktopWindowMode =
-    "development";
+  private readonly hostState =
+    new OracleDesktopHostStateModel();
 
   constructor(
     private readonly options: CompanionHostWindowOptions
@@ -34,11 +34,6 @@ export class CompanionHostWindowController {
       return existingWindow;
     }
 
-    /*
-     * The native window is transparency-capable from creation,
-     * but launches with an opaque background in safe development
-     * mode. Overlay preview must be enabled explicitly.
-     */
     const window = new BrowserWindow({
       width: DEVELOPMENT_WINDOW_WIDTH,
       height: DEVELOPMENT_WINDOW_HEIGHT,
@@ -70,12 +65,6 @@ export class CompanionHostWindowController {
 
         nodeIntegration: false,
         contextIsolation: true,
-
-        /*
-         * Required by the current compiled preload arrangement.
-         * Node integration remains disabled and the renderer only
-         * receives the narrow contextBridge API.
-         */
         sandbox: false,
 
         webSecurity: true,
@@ -87,7 +76,7 @@ export class CompanionHostWindowController {
     });
 
     this.window = window;
-    this.windowMode = "development";
+    this.hostState.reset();
 
     this.registerNavigationSecurity(window);
     this.registerWindowEvents(window);
@@ -95,9 +84,11 @@ export class CompanionHostWindowController {
     await window.loadURL(this.options.companionUrl);
 
     if (!window.isDestroyed()) {
-      this.applyWindowMode();
+      this.applyHostState();
+
       window.show();
       window.focus();
+
       this.publishState();
     }
 
@@ -123,17 +114,14 @@ export class CompanionHostWindowController {
   getState(): OracleDesktopHostState {
     const window = this.getRequiredWindow();
 
-    return {
-      ready: true,
-      windowVisible: window.isVisible(),
-      windowFocused: window.isFocused(),
-      windowMaximized: window.isMaximized(),
-      windowMode: this.windowMode,
-      transparent:
-        this.windowMode === "overlay-preview",
-      developmentMode:
-        process.env.NODE_ENV !== "production",
-    };
+    return this.hostState.createSnapshot(
+      {
+        visible: window.isVisible(),
+        focused: window.isFocused(),
+        maximized: window.isMaximized(),
+      },
+      process.env.NODE_ENV !== "production"
+    );
   }
 
   showAndFocus(): void {
@@ -148,17 +136,18 @@ export class CompanionHostWindowController {
     }
 
     window.show();
-    window.focus();
+
+    if (!this.hostState.isClickThrough()) {
+      window.focus();
+    }
+
     this.publishState();
   }
 
   toggleOverlayPreview(): OracleDesktopHostState {
-    this.windowMode =
-      this.windowMode === "development"
-        ? "overlay-preview"
-        : "development";
+    this.hostState.toggleOverlayPreview();
 
-    this.applyWindowMode();
+    this.applyHostState();
     this.publishState();
 
     return this.getState();
@@ -197,26 +186,30 @@ export class CompanionHostWindowController {
     window.close();
   }
 
-  private applyWindowMode(): void {
+  private applyHostState(): void {
     const window = this.getRequiredWindow();
 
-    const overlayPreviewEnabled =
-      this.windowMode === "overlay-preview";
-
     window.setBackgroundColor(
-      overlayPreviewEnabled
+      this.hostState.isTransparent()
         ? TRANSPARENT_BACKGROUND
         : DEVELOPMENT_BACKGROUND
     );
 
-    /*
-     * Preview remains safe and fully interactive.
-     * Always-on-top and click-through are deliberately disabled.
-     */
-    window.setAlwaysOnTop(false);
-    window.setIgnoreMouseEvents(false);
+    window.setAlwaysOnTop(
+      this.hostState.isAlwaysOnTop()
+    );
 
-    if (!window.isFocused()) {
+    window.setIgnoreMouseEvents(
+      this.hostState.isClickThrough(),
+      {
+        forward: true,
+      }
+    );
+
+    if (
+      !this.hostState.isClickThrough() &&
+      !window.isFocused()
+    ) {
       window.focus();
     }
   }
@@ -270,7 +263,7 @@ export class CompanionHostWindowController {
 
     window.on("closed", () => {
       this.window = null;
-      this.windowMode = "development";
+      this.hostState.reset();
     });
 
     window.on("unresponsive", () => {

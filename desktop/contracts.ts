@@ -1,3 +1,8 @@
+import type {
+  OracleDesktopHostState,
+  OracleDesktopWindowMode,
+} from "./host-state.js";
+
 export const DESKTOP_CHANNELS = {
   getHostState: "oracle-desktop:get-host-state",
   toggleOverlayPreview: "oracle-desktop:toggle-overlay-preview",
@@ -7,18 +12,9 @@ export const DESKTOP_CHANNELS = {
   hostStateChanged: "oracle-desktop:host-state-changed",
 } as const;
 
-export type OracleDesktopWindowMode =
-  | "development"
-  | "overlay-preview";
-
-export type OracleDesktopHostState = {
-  ready: boolean;
-  windowVisible: boolean;
-  windowFocused: boolean;
-  windowMaximized: boolean;
-  windowMode: OracleDesktopWindowMode;
-  transparent: boolean;
-  developmentMode: boolean;
+export type {
+  OracleDesktopHostState,
+  OracleDesktopWindowMode,
 };
 
 export type OracleDesktopBridge = {
