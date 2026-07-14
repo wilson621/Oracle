@@ -1,6 +1,9 @@
 import type {
   OracleDesktopDiscoveredWindow,
 } from "../window-discovery.js";
+import type {
+  OracleDesktopWindowObservation,
+} from "./window-observer.js";
 
 export type OracleDesktopAttachmentStatus =
   | "detached"
@@ -18,7 +21,13 @@ export type OracleDesktopAttachmentTarget =
 export type OracleDesktopAttachmentState = {
   status: OracleDesktopAttachmentStatus;
 
-  target: OracleDesktopAttachmentTarget | null;
+  target:
+    OracleDesktopAttachmentTarget | null;
+
+  observation:
+    OracleDesktopWindowObservation | null;
+
+  observationError: string | null;
 
   attachedAt: string | null;
   detachedAt: string | null;
@@ -37,7 +46,11 @@ export function createDetachedAttachmentState(
 
     target: null,
 
+    observation: null,
+    observationError: null,
+
     attachedAt: null,
+
     detachedAt:
       options.detachedAt ?? null,
 
@@ -58,6 +71,13 @@ export function cloneAttachmentState(
           state.target
         )
       : null,
+
+    observation:
+      state.observation
+        ? cloneWindowObservation(
+            state.observation
+          )
+        : null,
   };
 }
 
@@ -70,5 +90,20 @@ export function cloneAttachmentTarget(
     bounds: {
       ...target.bounds,
     },
+  };
+}
+
+function cloneWindowObservation(
+  observation:
+    OracleDesktopWindowObservation
+): OracleDesktopWindowObservation {
+  return {
+    ...observation,
+
+    bounds: observation.bounds
+      ? {
+          ...observation.bounds,
+        }
+      : null,
   };
 }
