@@ -2,41 +2,24 @@ import type {
   OracleDesktopDiscoveredWindow,
 } from "../window-discovery.js";
 import {
-  cloneTargetCandidate,
   createTargetCandidates,
   type OracleDesktopTargetCandidate,
   type OracleDesktopTargetCandidateInput,
 } from "./target-candidate.js";
 import {
-  cloneDesktopTargetScore,
+  createDesktopTargetDecision,
+  type OracleDesktopTargetDecision,
+} from "./target-decision.js";
+import {
   scoreDesktopTargetCandidate,
   type OracleDesktopTargetScore,
 } from "./target-score.js";
 
 export type OracleDesktopTargetSelectionStatus =
-  | "selected"
-  | "no-candidate";
+  OracleDesktopTargetDecision["status"];
 
 export type OracleDesktopTargetSelectionResult =
-  | {
-      status: "selected";
-
-      target:
-        OracleDesktopDiscoveredWindow;
-
-      candidate:
-        OracleDesktopTargetCandidate;
-
-      score:
-        OracleDesktopTargetScore;
-    }
-  | {
-      status: "no-candidate";
-
-      target: null;
-      candidate: null;
-      score: null;
-    };
+  OracleDesktopTargetDecision;
 
 type ScoredTargetCandidate = {
   candidate:
@@ -49,8 +32,15 @@ type ScoredTargetCandidate = {
 };
 
 /**
- * Eligibility, score ordering and stable tie-breaking remain
- * unchanged in Commit 10C.
+ * Owns the complete deterministic desktop-target decision:
+ *
+ * 1. Construct candidates.
+ * 2. Apply existing eligibility rules.
+ * 3. Apply existing scoring rules.
+ * 4. Preserve discovery order for tied scores.
+ * 5. Describe the winner and strongest alternative.
+ *
+ * Decision explanation does not influence selection.
  */
 export function selectDesktopTarget(
   inputs:
@@ -95,47 +85,56 @@ export function selectDesktopTarget(
           candidate !== null
       );
 
-  const selected =
-    selectHighestScoringCandidate(
+  const rankedCandidates =
+    rankScoredCandidates(
       scoredCandidates
     );
 
-  if (!selected) {
-    return {
-      status:
-        "no-candidate",
+  const selected =
+    rankedCandidates[0] ??
+    null;
 
-      target: null,
-      candidate: null,
-      score: null,
-    };
+  const runnerUp =
+    rankedCandidates[1] ??
+    null;
+
+  return createDesktopTargetDecision({
+    selectedCandidate:
+      selected?.candidate ??
+      null,
+
+    selectedScore:
+      selected?.score ??
+      null,
+
+    runnerUpScore:
+      runnerUp?.score ??
+      null,
+  });
+}
+
+export function getSelectedDiscoveredWindow(
+  decision:
+    OracleDesktopTargetDecision
+): OracleDesktopDiscoveredWindow | null {
+  if (
+    decision.status !==
+    "selected"
+  ) {
+    return null;
   }
 
-  const candidate =
-    cloneTargetCandidate(
-      selected.candidate
-    );
+  const window =
+    decision
+      .selectedCandidate
+      .discoveredWindow;
 
   return {
-    status: "selected",
+    ...window,
 
-    target: {
-      ...candidate
-        .discoveredWindow,
-
-      bounds: {
-        ...candidate
-          .discoveredWindow
-          .bounds,
-      },
+    bounds: {
+      ...window.bounds,
     },
-
-    candidate,
-
-    score:
-      cloneDesktopTargetScore(
-        selected.score
-      ),
   };
 }
 
@@ -176,40 +175,29 @@ function hasValidBounds(
   );
 }
 
-function selectHighestScoringCandidate(
+function rankScoredCandidates(
   candidates:
     readonly ScoredTargetCandidate[]
-): ScoredTargetCandidate | null {
-  let selected:
-    ScoredTargetCandidate | null =
-      null;
+): ScoredTargetCandidate[] {
+  return [...candidates].sort(
+    (left, right) => {
+      const scoreDifference =
+        right.score.total -
+        left.score.total;
 
-  for (const candidate of candidates) {
-    if (!selected) {
-      selected = candidate;
-      continue;
+      if (
+        scoreDifference !== 0
+      ) {
+        return scoreDifference;
+      }
+
+      /*
+       * Equal scores preserve the original discovery order.
+       */
+      return (
+        left.discoveryIndex -
+        right.discoveryIndex
+      );
     }
-
-    if (
-      candidate.score.total >
-      selected.score.total
-    ) {
-      selected = candidate;
-      continue;
-    }
-
-    /*
-     * Equal scores deliberately preserve original discovery order.
-     */
-    if (
-      candidate.score.total ===
-        selected.score.total &&
-      candidate.discoveryIndex <
-        selected.discoveryIndex
-    ) {
-      selected = candidate;
-    }
-  }
-
-  return selected;
+  );
 }

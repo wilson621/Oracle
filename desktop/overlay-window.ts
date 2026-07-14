@@ -23,6 +23,7 @@ import { OracleDesktopWindowDiscoveryService } from "./window-discovery.js";
 import { OracleDesktopAttachmentController } from "./overlay/attachment-controller.js";
 import { OracleDesktopWindowObserver } from "./overlay/window-observer.js";
 import {
+  getSelectedDiscoveredWindow,
   selectDesktopTarget,
   type OracleDesktopTargetCandidateInput,
 } from "./targeting/index.js";
@@ -478,21 +479,23 @@ this.unregisterScreenEvents();
       foregroundHandle
     );
 
-  const selection =
-    selectDesktopTarget(
-      candidateInputs
-    );
-
-  if (
-    selection.status !==
-    "selected"
-  ) {
-    return;
-  }
-
-  this.attachment.attach(
-    selection.target
+  const decision =
+  selectDesktopTarget(
+    candidateInputs
   );
+
+const selectedWindow =
+  getSelectedDiscoveredWindow(
+    decision
+  );
+
+if (!selectedWindow) {
+  return;
+}
+
+this.attachment.attach(
+  selectedWindow
+);
 }
 private createTargetCandidateInputs(
   discoveredWindows:

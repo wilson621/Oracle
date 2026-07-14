@@ -22,6 +22,16 @@ export {
 } from "./target-score.js";
 
 export {
+  cloneDesktopTargetDecision,
+  createDesktopTargetDecision,
+  type OracleDesktopTargetConfidence,
+  type OracleDesktopTargetDecision,
+  type OracleDesktopTargetDecisionInput,
+  type OracleDesktopTargetEvidenceBreadth,
+} from "./target-decision.js";
+
+export {
+  getSelectedDiscoveredWindow,
   selectDesktopTarget,
   type OracleDesktopTargetSelectionResult,
   type OracleDesktopTargetSelectionStatus,
