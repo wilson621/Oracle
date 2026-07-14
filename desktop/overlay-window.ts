@@ -21,6 +21,9 @@ type OracleDesktopDisplayState,
 import { OracleDesktopHostStateModel } from "./host-state.js";
 import { OracleDesktopWindowDiscoveryService } from "./window-discovery.js";
 import { OracleDesktopAttachmentController } from "./overlay/attachment-controller.js";
+import {
+  selectDesktopTarget,
+} from "./targeting/index.js";
 
 export type CompanionHostWindowOptions = {
   companionUrl: string;
@@ -437,32 +440,35 @@ this.unregisterScreenEvents();
   }
 
   private coordinateAttachment(
-    discoveredWindows:
-      OracleDesktopDiscoveredWindow[]
-  ): void {
-    const attachmentState =
-      this.attachment.getState();
+  discoveredWindows:
+    OracleDesktopDiscoveredWindow[]
+): void {
+  const attachmentState =
+    this.attachment.getState();
 
-    if (
-      attachmentState.status ===
-        "attached"
-    ) {
-      return;
-    }
-
-    const target =
-      selectBestAttachmentCandidate(
-        discoveredWindows
-      );
-
-    if (!target) {
-      return;
-    }
-
-    this.attachment.attach(
-      target
-    );
+  if (
+    attachmentState.status ===
+      "attached"
+  ) {
+    return;
   }
+
+  const selection =
+    selectDesktopTarget(
+      discoveredWindows
+    );
+
+  if (
+    selection.status !==
+    "selected"
+  ) {
+    return;
+  }
+
+  this.attachment.attach(
+    selection.target
+  );
+}
 
   private createHostWindowDiscoveryState(
     result:
@@ -908,24 +914,6 @@ this.hostState.reset();
   }
 }
 
-function selectBestAttachmentCandidate(
-  windows:
-    OracleDesktopDiscoveredWindow[]
-): OracleDesktopDiscoveredWindow | null {
-  return (
-    windows.find(
-      (window) =>
-        window.visible &&
-        !window.minimized
-    ) ??
-    windows.find(
-      (window) =>
-        !window.minimized
-    ) ??
-    windows[0] ??
-    null
-  );
-}
 
 function createDisplayState(
   display: Display
