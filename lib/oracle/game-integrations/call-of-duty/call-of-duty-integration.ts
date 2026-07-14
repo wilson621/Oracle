@@ -32,11 +32,11 @@ const CALL_OF_DUTY_INTEGRATION_VERSION =
 const WARZONE_TITLE_PATTERN_ID =
   "warzone-title";
 
-export type OracleCallOfDutyDetectedExperience =
+type CallOfDutyDetectedExperience =
   | "warzone"
   | null;
 
-export type OracleCallOfDutyContextState = {
+type CallOfDutyGameContextState = {
   /**
    * Warzone is the initial experience supported by Oracle.
    *
@@ -50,7 +50,7 @@ export type OracleCallOfDutyContextState = {
     "Warzone";
 
   detectedExperience:
-    OracleCallOfDutyDetectedExperience;
+    CallOfDutyDetectedExperience
 
   detectionScope:
     | "integration-family"
@@ -135,7 +135,7 @@ export class CallOfDutyIntegration
       );
 
     const state:
-      OracleCallOfDutyContextState = {
+      CallOfDutyGameContextState = {
         supportedExperience:
           "warzone",
 
@@ -219,7 +219,7 @@ export class CallOfDutyIntegration
 function resolveDetectedExperience(
   match:
     ExecutableGameMatchResult
-): OracleCallOfDutyDetectedExperience {
+): CallOfDutyDetectedExperience {
   return (
     match.matchedTitlePatternId ===
     WARZONE_TITLE_PATTERN_ID

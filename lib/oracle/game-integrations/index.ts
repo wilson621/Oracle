@@ -42,6 +42,4 @@ export {
 
 export {
   CallOfDutyIntegration,
-  type OracleCallOfDutyContextState,
-  type OracleCallOfDutyDetectedExperience,
 } from "./call-of-duty/call-of-duty-integration";
