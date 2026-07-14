@@ -9,6 +9,7 @@ import { join } from "node:path";
 import {
   DESKTOP_CHANNELS,
   ORACLE_DESKTOP_RECOVERY_SHORTCUT,
+  type OracleDesktopDiscoveredWindow,
   type OracleDesktopDisplayState,
   type OracleDesktopHostState,
   type OracleDesktopHostWindowDiscoveryState,
@@ -35,9 +36,12 @@ const TRANSPARENT_BACKGROUND =
 
 const STANDARD_WINDOWS_DPI = 96;
 
+const ATTACHMENT_TRACKING_INTERVAL_MS =
+  250;
+
 export class CompanionHostWindowController {
-  private window: BrowserWindow | null =
-    null;
+  private window:
+    BrowserWindow | null = null;
 
   private readonly hostState =
     new OracleDesktopHostStateModel();
@@ -45,13 +49,8 @@ export class CompanionHostWindowController {
   private readonly windowDiscovery =
     new OracleDesktopWindowDiscoveryService();
 
-  /**
-   * Owns only the selected external target lifecycle.
-   * Electron window movement remains the responsibility
-   * of this host controller in later commits.
-   */
-  private readonly attachment =
-    new OracleDesktopAttachmentController();
+  private readonly attachment:
+    OracleDesktopAttachmentController;
 
   private screenEventsRegistered = false;
 
@@ -65,7 +64,17 @@ export class CompanionHostWindowController {
   constructor(
     private readonly options:
       CompanionHostWindowOptions
-  ) {}
+  ) {
+    this.attachment =
+      new OracleDesktopAttachmentController({
+        trackingIntervalMs:
+          ATTACHMENT_TRACKING_INTERVAL_MS,
+
+        onStateChanged: () => {
+          this.publishState();
+        },
+      });
+  }
 
   async create(): Promise<BrowserWindow> {
     const existingWindow =
@@ -373,14 +382,49 @@ export class CompanionHostWindowController {
       return;
     }
 
-    this.hostState
-      .setWindowDiscovery(
-        this.createHostWindowDiscoveryState(
-          result
-        )
+    const discoveryState =
+      this.createHostWindowDiscoveryState(
+        result
       );
 
+    this.hostState
+      .setWindowDiscovery(
+        discoveryState
+      );
+
+    this.coordinateAttachment(
+      discoveryState.windows
+    );
+
     this.publishState();
+  }
+
+  private coordinateAttachment(
+    discoveredWindows:
+      OracleDesktopDiscoveredWindow[]
+  ): void {
+    const attachmentState =
+      this.attachment.getState();
+
+    if (
+      attachmentState.status ===
+        "attached"
+    ) {
+      return;
+    }
+
+    const target =
+      selectBestAttachmentCandidate(
+        discoveredWindows
+      );
+
+    if (!target) {
+      return;
+    }
+
+    this.attachment.attach(
+      target
+    );
   }
 
   private createHostWindowDiscoveryState(
@@ -711,6 +755,25 @@ export class CompanionHostWindowController {
 
     return window;
   }
+}
+
+function selectBestAttachmentCandidate(
+  windows:
+    OracleDesktopDiscoveredWindow[]
+): OracleDesktopDiscoveredWindow | null {
+  return (
+    windows.find(
+      (window) =>
+        window.visible &&
+        !window.minimized
+    ) ??
+    windows.find(
+      (window) =>
+        !window.minimized
+    ) ??
+    windows[0] ??
+    null
+  );
 }
 
 function createDisplayState(
