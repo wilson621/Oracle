@@ -9,3 +9,7 @@ export type {
 export type {
   OracleGameIntegration,
 } from "./game-integration";
+
+export {
+  OracleGameIntegrationRegistry,
+} from "./game-integration-registry";
