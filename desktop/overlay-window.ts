@@ -18,6 +18,7 @@ import {
 } from "./contracts.js";
 import { OracleDesktopHostStateModel } from "./host-state.js";
 import { OracleDesktopWindowDiscoveryService } from "./window-discovery.js";
+import { OracleDesktopAttachmentController } from "./overlay/attachment-controller.js";
 
 export type CompanionHostWindowOptions = {
   companionUrl: string;
@@ -26,8 +27,11 @@ export type CompanionHostWindowOptions = {
 const DEVELOPMENT_WINDOW_WIDTH = 1200;
 const DEVELOPMENT_WINDOW_HEIGHT = 800;
 
-const DEVELOPMENT_BACKGROUND = "#090b10";
-const TRANSPARENT_BACKGROUND = "#00000000";
+const DEVELOPMENT_BACKGROUND =
+  "#090b10";
+
+const TRANSPARENT_BACKGROUND =
+  "#00000000";
 
 const STANDARD_WINDOWS_DPI = 96;
 
@@ -41,16 +45,26 @@ export class CompanionHostWindowController {
   private readonly windowDiscovery =
     new OracleDesktopWindowDiscoveryService();
 
+  /**
+   * Owns only the selected external target lifecycle.
+   * Electron window movement remains the responsibility
+   * of this host controller in later commits.
+   */
+  private readonly attachment =
+    new OracleDesktopAttachmentController();
+
   private screenEventsRegistered = false;
 
   private discoveryRunId = 0;
 
-  private readonly handleDisplayChange = () => {
-    this.publishState();
-  };
+  private readonly handleDisplayChange =
+    () => {
+      this.publishState();
+    };
 
   constructor(
-    private readonly options: CompanionHostWindowOptions
+    private readonly options:
+      CompanionHostWindowOptions
   ) {}
 
   async create(): Promise<BrowserWindow> {
@@ -63,8 +77,11 @@ export class CompanionHostWindowController {
     }
 
     const window = new BrowserWindow({
-      width: DEVELOPMENT_WINDOW_WIDTH,
-      height: DEVELOPMENT_WINDOW_HEIGHT,
+      width:
+        DEVELOPMENT_WINDOW_WIDTH,
+
+      height:
+        DEVELOPMENT_WINDOW_HEIGHT,
 
       minWidth: 900,
       minHeight: 650,
@@ -76,6 +93,7 @@ export class CompanionHostWindowController {
 
       frame: false,
       transparent: true,
+
       backgroundColor:
         DEVELOPMENT_BACKGROUND,
 
@@ -100,7 +118,9 @@ export class CompanionHostWindowController {
         sandbox: false,
 
         webSecurity: true,
-        allowRunningInsecureContent: false,
+
+        allowRunningInsecureContent:
+          false,
 
         devTools:
           process.env.NODE_ENV !==
@@ -109,13 +129,18 @@ export class CompanionHostWindowController {
     });
 
     this.window = window;
+
     this.hostState.reset();
+    this.attachment.reset();
 
     this.registerNavigationSecurity(
       window
     );
 
-    this.registerWindowEvents(window);
+    this.registerWindowEvents(
+      window
+    );
+
     this.registerScreenEvents();
 
     await window.loadURL(
@@ -152,7 +177,8 @@ export class CompanionHostWindowController {
     webContentsId: number
   ): boolean {
     return (
-      this.getWindow()?.webContents.id ===
+      this.getWindow()
+        ?.webContents.id ===
       webContentsId
     );
   }
@@ -167,21 +193,33 @@ export class CompanionHostWindowController {
       );
 
     const display =
-      screen.getDisplayMatching(bounds);
+      screen.getDisplayMatching(
+        bounds
+      );
 
     return this.hostState.createSnapshot(
       {
-        visible: window.isVisible(),
-        focused: window.isFocused(),
-        maximized: window.isMaximized(),
+        visible:
+          window.isVisible(),
+
+        focused:
+          window.isFocused(),
+
+        maximized:
+          window.isMaximized(),
 
         bounds,
 
         display:
-          createDisplayState(display),
+          createDisplayState(
+            display
+          ),
 
         runtime:
           createRuntimeState(),
+
+        attachment:
+          this.attachment.getState(),
       },
       process.env.NODE_ENV !==
         "production"
@@ -189,7 +227,8 @@ export class CompanionHostWindowController {
   }
 
   showAndFocus(): void {
-    const window = this.getWindow();
+    const window =
+      this.getWindow();
 
     if (!window) {
       return;
@@ -202,7 +241,8 @@ export class CompanionHostWindowController {
     window.show();
 
     if (
-      !this.hostState.isClickThrough()
+      !this.hostState
+        .isClickThrough()
     ) {
       window.focus();
     }
@@ -211,12 +251,14 @@ export class CompanionHostWindowController {
   }
 
   toggleOverlayPreview(): OracleDesktopHostState {
-    this.hostState.toggleOverlayPreview();
+    this.hostState
+      .toggleOverlayPreview();
 
     this.applyHostState();
 
     if (
-      !this.hostState.isClickThrough()
+      !this.hostState
+        .isClickThrough()
     ) {
       this.focusInteractiveWindow();
     }
@@ -227,7 +269,8 @@ export class CompanionHostWindowController {
   }
 
   toggleAlwaysOnTop(): OracleDesktopHostState {
-    this.hostState.toggleAlwaysOnTop();
+    this.hostState
+      .toggleAlwaysOnTop();
 
     this.applyHostState();
     this.publishState();
@@ -237,7 +280,8 @@ export class CompanionHostWindowController {
 
   toggleClickThrough(): OracleDesktopHostState {
     const clickThroughEnabled =
-      this.hostState.toggleClickThrough();
+      this.hostState
+        .toggleClickThrough();
 
     this.applyHostState();
 
@@ -256,7 +300,8 @@ export class CompanionHostWindowController {
   }
 
   restoreInteraction(): OracleDesktopHostState {
-    this.hostState.restoreInteraction();
+    this.hostState
+      .restoreInteraction();
 
     this.applyHostState();
     this.focusInteractiveWindow();
@@ -290,9 +335,13 @@ export class CompanionHostWindowController {
   }
 
   close(): void {
-    const window = this.getWindow();
+    const window =
+      this.getWindow();
 
     this.discoveryRunId += 1;
+
+    this.attachment.reset();
+
     this.unregisterScreenEvents();
 
     if (!window) {
@@ -307,30 +356,36 @@ export class CompanionHostWindowController {
     const runId =
       ++this.discoveryRunId;
 
-    this.hostState.markWindowDiscoveryStarted();
+    this.hostState
+      .markWindowDiscoveryStarted();
+
     this.publishState();
 
     const result =
-      await this.windowDiscovery.discover();
+      await this.windowDiscovery
+        .discover();
 
     if (
-      runId !== this.discoveryRunId ||
+      runId !==
+        this.discoveryRunId ||
       !this.getWindow()
     ) {
       return;
     }
 
-    this.hostState.setWindowDiscovery(
-      this.createHostWindowDiscoveryState(
-        result
-      )
-    );
+    this.hostState
+      .setWindowDiscovery(
+        this.createHostWindowDiscoveryState(
+          result
+        )
+      );
 
     this.publishState();
   }
 
   private createHostWindowDiscoveryState(
-    result: OracleDesktopWindowDiscoveryResult
+    result:
+      OracleDesktopWindowDiscoveryResult
   ): OracleDesktopHostWindowDiscoveryState {
     const ownWindow =
       this.getRequiredWindow();
@@ -371,18 +426,21 @@ export class CompanionHostWindowController {
       this.getRequiredWindow();
 
     window.setBackgroundColor(
-      this.hostState.isTransparent()
+      this.hostState
+        .isTransparent()
         ? TRANSPARENT_BACKGROUND
         : DEVELOPMENT_BACKGROUND
     );
 
     window.setAlwaysOnTop(
-      this.hostState.isAlwaysOnTop(),
+      this.hostState
+        .isAlwaysOnTop(),
       "floating"
     );
 
     window.setIgnoreMouseEvents(
-      this.hostState.isClickThrough(),
+      this.hostState
+        .isClickThrough(),
       {
         forward: true,
       }
@@ -407,25 +465,33 @@ export class CompanionHostWindowController {
   private registerNavigationSecurity(
     window: BrowserWindow
   ): void {
-    const allowedOrigin = new URL(
-      this.options.companionUrl
-    ).origin;
+    const allowedOrigin =
+      new URL(
+        this.options
+          .companionUrl
+      ).origin;
 
-    window.webContents.setWindowOpenHandler(
-      () => ({
-        action: "deny",
-      })
-    );
+    window.webContents
+      .setWindowOpenHandler(
+        () => ({
+          action: "deny",
+        })
+      );
 
     window.webContents.on(
       "will-navigate",
-      (event, navigationUrl) => {
-        let navigationOrigin: string;
+      (
+        event,
+        navigationUrl
+      ) => {
+        let navigationOrigin:
+          string;
 
         try {
-          navigationOrigin = new URL(
-            navigationUrl
-          ).origin;
+          navigationOrigin =
+            new URL(
+              navigationUrl
+            ).origin;
         } catch {
           event.preventDefault();
           return;
@@ -444,53 +510,98 @@ export class CompanionHostWindowController {
   private registerWindowEvents(
     window: BrowserWindow
   ): void {
-    const publishState = () => {
-      this.publishState();
-    };
+    const publishState =
+      () => {
+        this.publishState();
+      };
 
-    window.on("show", publishState);
-    window.on("hide", publishState);
-    window.on("focus", publishState);
-    window.on("blur", publishState);
-    window.on("move", publishState);
-    window.on("resize", publishState);
-    window.on("maximize", publishState);
+    window.on(
+      "show",
+      publishState
+    );
+
+    window.on(
+      "hide",
+      publishState
+    );
+
+    window.on(
+      "focus",
+      publishState
+    );
+
+    window.on(
+      "blur",
+      publishState
+    );
+
+    window.on(
+      "move",
+      publishState
+    );
+
+    window.on(
+      "resize",
+      publishState
+    );
+
+    window.on(
+      "maximize",
+      publishState
+    );
 
     window.on(
       "unmaximize",
       publishState
     );
 
-    window.on("restore", publishState);
+    window.on(
+      "restore",
+      publishState
+    );
 
     window.on(
       "always-on-top-changed",
       publishState
     );
 
-    window.on("closed", () => {
-      this.discoveryRunId += 1;
+    window.on(
+      "closed",
+      () => {
+        this.discoveryRunId += 1;
 
-      this.unregisterScreenEvents();
+        this.unregisterScreenEvents();
 
-      this.window = null;
-      this.hostState.reset();
-    });
+        this.attachment.reset();
 
-    window.on("unresponsive", () => {
-      console.error(
-        "Oracle Companion desktop window became unresponsive."
-      );
-    });
+        this.window = null;
+        this.hostState.reset();
+      }
+    );
+
+    window.on(
+      "unresponsive",
+      () => {
+        console.error(
+          "Oracle Companion desktop window became unresponsive."
+        );
+      }
+    );
 
     window.webContents.on(
       "render-process-gone",
-      (_event, details) => {
+      (
+        _event,
+        details
+      ) => {
         console.error(
           "Oracle Companion renderer exited.",
           {
-            reason: details.reason,
-            exitCode: details.exitCode,
+            reason:
+              details.reason,
+
+            exitCode:
+              details.exitCode,
           }
         );
       }
@@ -517,7 +628,9 @@ export class CompanionHostWindowController {
   }
 
   private registerScreenEvents(): void {
-    if (this.screenEventsRegistered) {
+    if (
+      this.screenEventsRegistered
+    ) {
       return;
     }
 
@@ -536,11 +649,14 @@ export class CompanionHostWindowController {
       this.handleDisplayChange
     );
 
-    this.screenEventsRegistered = true;
+    this.screenEventsRegistered =
+      true;
   }
 
   private unregisterScreenEvents(): void {
-    if (!this.screenEventsRegistered) {
+    if (
+      !this.screenEventsRegistered
+    ) {
       return;
     }
 
@@ -559,27 +675,33 @@ export class CompanionHostWindowController {
       this.handleDisplayChange
     );
 
-    this.screenEventsRegistered = false;
+    this.screenEventsRegistered =
+      false;
   }
 
   private publishState(): void {
-    const window = this.getWindow();
+    const window =
+      this.getWindow();
 
     if (
       !window ||
-      window.webContents.isDestroyed()
+      window.webContents
+        .isDestroyed()
     ) {
       return;
     }
 
     window.webContents.send(
-      DESKTOP_CHANNELS.hostStateChanged,
+      DESKTOP_CHANNELS
+        .hostStateChanged,
+
       this.getState()
     );
   }
 
   private getRequiredWindow(): BrowserWindow {
-    const window = this.getWindow();
+    const window =
+      this.getWindow();
 
     if (!window) {
       throw new Error(
@@ -599,7 +721,9 @@ function createDisplayState(
 
     primary:
       display.id ===
-      screen.getPrimaryDisplay().id,
+      screen
+        .getPrimaryDisplay()
+        .id,
 
     scaleFactor:
       normaliseScaleFactor(
@@ -679,13 +803,15 @@ function isOracleCompanionWindow(
 ): boolean {
   if (
     ownHandle &&
-    discoveredHandle === ownHandle
+    discoveredHandle ===
+      ownHandle
   ) {
     return true;
   }
 
   return (
-    discoveredProcessId === process.pid
+    discoveredProcessId ===
+    process.pid
   );
 }
 
@@ -693,17 +819,26 @@ function normaliseRectangle(
   rectangle: Rectangle
 ): OracleDesktopRectangle {
   return {
-    x: Math.round(rectangle.x),
-    y: Math.round(rectangle.y),
+    x: Math.round(
+      rectangle.x
+    ),
+
+    y: Math.round(
+      rectangle.y
+    ),
 
     width: Math.max(
       1,
-      Math.round(rectangle.width)
+      Math.round(
+        rectangle.width
+      )
     ),
 
     height: Math.max(
       1,
-      Math.round(rectangle.height)
+      Math.round(
+        rectangle.height
+      )
     ),
   };
 }
@@ -712,7 +847,9 @@ function normaliseScaleFactor(
   scaleFactor: number
 ): number {
   if (
-    !Number.isFinite(scaleFactor) ||
+    !Number.isFinite(
+      scaleFactor
+    ) ||
     scaleFactor <= 0
   ) {
     return 1;

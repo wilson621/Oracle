@@ -15,6 +15,12 @@ import type {
   OracleDesktopWindowDiscoveryStatus,
 } from "./window-discovery.js";
 
+import type {
+  OracleDesktopAttachmentState,
+  OracleDesktopAttachmentStatus,
+  OracleDesktopAttachmentTarget,
+} from "./overlay/attachment-state.js";
+
 export const DESKTOP_CHANNELS = {
   getHostState:
     "oracle-desktop:get-host-state",
@@ -48,6 +54,9 @@ export const ORACLE_DESKTOP_RECOVERY_SHORTCUT =
   "CommandOrControl+Shift+O";
 
 export type {
+  OracleDesktopAttachmentState,
+  OracleDesktopAttachmentStatus,
+  OracleDesktopAttachmentTarget,
   OracleDesktopDiscoveredWindow,
   OracleDesktopDisplayState,
   OracleDesktopHostState,
@@ -83,7 +92,8 @@ export type OracleDesktopBridge = {
   toggleMaximizeWindow: () =>
     Promise<OracleDesktopHostState>;
 
-  closeWindow: () => Promise<void>;
+  closeWindow: () =>
+    Promise<void>;
 
   onHostStateChanged: (
     listener: (

@@ -2,6 +2,10 @@ import type {
   OracleDesktopDiscoveredWindow,
   OracleDesktopWindowDiscoveryStatus,
 } from "./window-discovery.js";
+import {
+  cloneAttachmentState,
+  type OracleDesktopAttachmentState,
+} from "./overlay/attachment-state.js";
 
 export type OracleDesktopWindowMode =
   | "development"
@@ -76,7 +80,11 @@ export type OracleDesktopHostState = {
   display: OracleDesktopDisplayState;
   runtime: OracleDesktopRuntimeState;
 
-  windowDiscovery: OracleDesktopHostWindowDiscoveryState;
+  windowDiscovery:
+    OracleDesktopHostWindowDiscoveryState;
+
+  attachment:
+    OracleDesktopAttachmentState;
 
   developmentMode: boolean;
 };
@@ -89,6 +97,9 @@ export type OracleDesktopNativeWindowObservation = {
   bounds: OracleDesktopRectangle;
   display: OracleDesktopDisplayState;
   runtime: OracleDesktopRuntimeState;
+
+  attachment:
+    OracleDesktopAttachmentState;
 };
 
 type OracleDesktopHostConfiguration = {
@@ -200,14 +211,18 @@ export class OracleDesktopHostStateModel {
     return this.configuration.clickThrough;
   }
 
-  setAlwaysOnTop(enabled: boolean): void {
+  setAlwaysOnTop(
+    enabled: boolean
+  ): void {
     this.configuration = {
       ...this.configuration,
       alwaysOnTop: enabled,
     };
   }
 
-  setClickThrough(enabled: boolean): void {
+  setClickThrough(
+    enabled: boolean
+  ): void {
     if (
       enabled &&
       !this.canEnableClickThrough()
@@ -245,7 +260,9 @@ export class OracleDesktopHostStateModel {
     discovery: OracleDesktopHostWindowDiscoveryState
   ): void {
     this.windowDiscovery =
-      cloneWindowDiscoveryState(discovery);
+      cloneWindowDiscoveryState(
+        discovery
+      );
   }
 
   reset(): void {
@@ -264,16 +281,24 @@ export class OracleDesktopHostStateModel {
     return {
       ready: true,
 
-      windowVisible: observation.visible,
-      windowFocused: observation.focused,
-      windowMaximized: observation.maximized,
+      windowVisible:
+        observation.visible,
+
+      windowFocused:
+        observation.focused,
+
+      windowMaximized:
+        observation.maximized,
 
       windowMode:
         this.configuration.windowMode,
 
-      transparent: this.isTransparent(),
+      transparent:
+        this.isTransparent(),
+
       alwaysOnTop:
         this.configuration.alwaysOnTop,
+
       clickThrough:
         this.configuration.clickThrough,
 
@@ -283,9 +308,11 @@ export class OracleDesktopHostStateModel {
 
       display: {
         ...observation.display,
+
         bounds: cloneRectangle(
           observation.display.bounds
         ),
+
         workArea: cloneRectangle(
           observation.display.workArea
         ),
@@ -300,6 +327,11 @@ export class OracleDesktopHostStateModel {
           this.windowDiscovery
         ),
 
+      attachment:
+        cloneAttachmentState(
+          observation.attachment
+        ),
+
       developmentMode,
     };
   }
@@ -311,14 +343,16 @@ function cloneWindowDiscoveryState(
   return {
     ...discovery,
 
-    windows: discovery.windows.map(
-      (window) => ({
-        ...window,
-        bounds: {
-          ...window.bounds,
-        },
-      })
-    ),
+    windows:
+      discovery.windows.map(
+        (window) => ({
+          ...window,
+
+          bounds: {
+            ...window.bounds,
+          },
+        })
+      ),
   };
 }
 
