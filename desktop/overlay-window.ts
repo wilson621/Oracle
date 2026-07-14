@@ -9,8 +9,9 @@ import { join } from "node:path";
 import {
   DESKTOP_CHANNELS,
   ORACLE_DESKTOP_RECOVERY_SHORTCUT,
-  type OracleDesktopDiscoveredWindow,
-  type OracleDesktopDisplayState,
+  type OracleDesktopAttachmentState,
+type OracleDesktopDiscoveredWindow,
+type OracleDesktopDisplayState,
   type OracleDesktopHostState,
   type OracleDesktopHostWindowDiscoveryState,
   type OracleDesktopRectangle,
@@ -55,6 +56,8 @@ export class CompanionHostWindowController {
   private screenEventsRegistered = false;
 
   private discoveryRunId = 0;
+  private developmentBounds:
+  OracleDesktopRectangle | null = null;
 
   private readonly handleDisplayChange =
     () => {
@@ -62,19 +65,25 @@ export class CompanionHostWindowController {
     };
 
   constructor(
-    private readonly options:
-      CompanionHostWindowOptions
-  ) {
-    this.attachment =
-      new OracleDesktopAttachmentController({
-        trackingIntervalMs:
-          ATTACHMENT_TRACKING_INTERVAL_MS,
+  private readonly options:
+    CompanionHostWindowOptions
+) {
+  this.attachment =
+    new OracleDesktopAttachmentController({
+      trackingIntervalMs:
+        ATTACHMENT_TRACKING_INTERVAL_MS,
 
-        onStateChanged: () => {
-          this.publishState();
-        },
-      });
-  }
+      onStateChanged: (
+        attachmentState
+      ) => {
+        this.applyAttachmentBounds(
+          attachmentState
+        );
+
+        this.publishState();
+      },
+    });
+}
 
   async create(): Promise<BrowserWindow> {
     const existingWindow =
@@ -157,9 +166,14 @@ export class CompanionHostWindowController {
     );
 
     if (!window.isDestroyed()) {
-      this.applyHostState();
+  this.developmentBounds =
+    normaliseRectangle(
+      window.getBounds()
+    );
 
-      window.show();
+  this.applyHostState();
+
+  window.show();
       window.focus();
 
       this.publishState();
@@ -260,22 +274,44 @@ export class CompanionHostWindowController {
   }
 
   toggleOverlayPreview(): OracleDesktopHostState {
+  const previousMode =
+    this.hostState.getWindowMode();
+
+  if (
+    previousMode ===
+    "development"
+  ) {
+    this.captureDevelopmentBounds();
+  }
+
+  const nextMode =
     this.hostState
       .toggleOverlayPreview();
 
-    this.applyHostState();
+  this.applyHostState();
 
-    if (
-      !this.hostState
-        .isClickThrough()
-    ) {
-      this.focusInteractiveWindow();
-    }
-
-    this.publishState();
-
-    return this.getState();
+  if (
+    nextMode ===
+    "overlay-preview"
+  ) {
+    this.applyAttachmentBounds(
+      this.attachment.getState()
+    );
+  } else {
+    this.restoreDevelopmentBounds();
   }
+
+  if (
+    !this.hostState
+      .isClickThrough()
+  ) {
+    this.focusInteractiveWindow();
+  }
+
+  this.publishState();
+
+  return this.getState();
+}
 
   toggleAlwaysOnTop(): OracleDesktopHostState {
     this.hostState
@@ -350,8 +386,9 @@ export class CompanionHostWindowController {
     this.discoveryRunId += 1;
 
     this.attachment.reset();
+this.developmentBounds = null;
 
-    this.unregisterScreenEvents();
+this.unregisterScreenEvents();
 
     if (!window) {
       this.window = null;
@@ -464,7 +501,112 @@ export class CompanionHostWindowController {
       error: result.error,
     };
   }
+private applyAttachmentBounds(
+  attachmentState:
+    OracleDesktopAttachmentState
+): void {
+  if (
+    this.hostState.getWindowMode() !==
+      "overlay-preview" ||
+    attachmentState.status !==
+      "attached"
+  ) {
+    return;
+  }
 
+  const observation =
+    attachmentState.observation;
+
+  if (
+    !observation ||
+    !observation.exists ||
+    !observation.visible ||
+    observation.minimized ||
+    !observation.bounds
+  ) {
+    return;
+  }
+
+  const window =
+    this.getWindow();
+
+  if (!window) {
+    return;
+  }
+
+  const currentBounds =
+    normaliseRectangle(
+      window.getBounds()
+    );
+
+  const targetBounds =
+    normaliseRectangle(
+      observation.bounds
+    );
+
+  if (
+    areRectanglesEqual(
+      currentBounds,
+      targetBounds
+    )
+  ) {
+    return;
+  }
+
+  window.setBounds(
+    targetBounds,
+    false
+  );
+}
+
+private captureDevelopmentBounds(): void {
+  const window =
+    this.getWindow();
+
+  if (!window) {
+    return;
+  }
+
+  this.developmentBounds =
+    normaliseRectangle(
+      window.getBounds()
+    );
+}
+
+private restoreDevelopmentBounds(): void {
+  const window =
+    this.getWindow();
+
+  if (
+    !window ||
+    !this.developmentBounds
+  ) {
+    return;
+  }
+
+  const restoredBounds = {
+    ...this.developmentBounds,
+  };
+
+  const currentBounds =
+    normaliseRectangle(
+      window.getBounds()
+    );
+
+  if (
+    areRectanglesEqual(
+      currentBounds,
+      restoredBounds
+    )
+  ) {
+    return;
+  }
+
+  window.setBounds(
+    restoredBounds,
+    false
+  );
+}
   private applyHostState(): void {
     const window =
       this.getRequiredWindow();
@@ -555,9 +697,16 @@ export class CompanionHostWindowController {
     window: BrowserWindow
   ): void {
     const publishState =
-      () => {
-        this.publishState();
-      };
+  () => {
+    if (
+      this.hostState.getWindowMode() ===
+      "development"
+    ) {
+      this.captureDevelopmentBounds();
+    }
+
+    this.publishState();
+  };
 
     window.on(
       "show",
@@ -618,8 +767,10 @@ export class CompanionHostWindowController {
 
         this.attachment.reset();
 
-        this.window = null;
-        this.hostState.reset();
+this.developmentBounds = null;
+
+this.window = null;
+this.hostState.reset();
       }
     );
 
@@ -878,6 +1029,17 @@ function isOracleCompanionWindow(
   );
 }
 
+function areRectanglesEqual(
+  left: OracleDesktopRectangle,
+  right: OracleDesktopRectangle
+): boolean {
+  return (
+    left.x === right.x &&
+    left.y === right.y &&
+    left.width === right.width &&
+    left.height === right.height
+  );
+}
 function normaliseRectangle(
   rectangle: Rectangle
 ): OracleDesktopRectangle {
