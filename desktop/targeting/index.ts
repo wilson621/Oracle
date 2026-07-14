@@ -1,7 +1,16 @@
 export {
+  cloneDesktopTargetEvidence,
+  createDesktopTargetEvidence,
+  type OracleDesktopTargetEvidence,
+  type OracleDesktopTargetEvidenceInput,
+} from "./target-evidence.js";
+
+export {
   cloneTargetCandidate,
+  createTargetCandidate,
   createTargetCandidates,
   type OracleDesktopTargetCandidate,
+  type OracleDesktopTargetCandidateInput,
 } from "./target-candidate.js";
 
 export {

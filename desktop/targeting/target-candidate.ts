@@ -1,21 +1,67 @@
 import type {
+  OracleDesktopDisplayState,
+} from "../host-state.js";
+import type {
   OracleDesktopDiscoveredWindow,
 } from "../window-discovery.js";
+import {
+  cloneDesktopTargetEvidence,
+  createDesktopTargetEvidence,
+  type OracleDesktopTargetEvidence,
+} from "./target-evidence.js";
 
-/**
- * A desktop target candidate is an existing discovered-window
- * snapshot. Targeting deliberately reuses the discovery contract
- * rather than creating a second window identity model.
- */
-export type OracleDesktopTargetCandidate =
-  OracleDesktopDiscoveredWindow;
+export type OracleDesktopTargetCandidate = {
+  discoveredWindow:
+    OracleDesktopDiscoveredWindow;
+
+  evidence:
+    OracleDesktopTargetEvidence;
+};
+
+export type OracleDesktopTargetCandidateInput = {
+  discoveredWindow:
+    OracleDesktopDiscoveredWindow;
+
+  display:
+    OracleDesktopDisplayState | null;
+
+  isForeground?:
+    boolean | null;
+};
+
+export function createTargetCandidate(
+  input:
+    OracleDesktopTargetCandidateInput
+): OracleDesktopTargetCandidate {
+  const discoveredWindow =
+    cloneDiscoveredWindow(
+      input.discoveredWindow
+    );
+
+  return {
+    discoveredWindow,
+
+    evidence:
+      createDesktopTargetEvidence({
+        bounds:
+          discoveredWindow.bounds,
+
+        display:
+          input.display,
+
+        isForeground:
+          input.isForeground ??
+          null,
+      }),
+  };
+}
 
 export function createTargetCandidates(
-  windows:
-    readonly OracleDesktopDiscoveredWindow[]
+  inputs:
+    readonly OracleDesktopTargetCandidateInput[]
 ): OracleDesktopTargetCandidate[] {
-  return windows.map(
-    cloneTargetCandidate
+  return inputs.map(
+    createTargetCandidate
   );
 }
 
@@ -24,10 +70,27 @@ export function cloneTargetCandidate(
     OracleDesktopTargetCandidate
 ): OracleDesktopTargetCandidate {
   return {
-    ...candidate,
+    discoveredWindow:
+      cloneDiscoveredWindow(
+        candidate.discoveredWindow
+      ),
+
+    evidence:
+      cloneDesktopTargetEvidence(
+        candidate.evidence
+      ),
+  };
+}
+
+function cloneDiscoveredWindow(
+  window:
+    OracleDesktopDiscoveredWindow
+): OracleDesktopDiscoveredWindow {
+  return {
+    ...window,
 
     bounds: {
-      ...candidate.bounds,
+      ...window.bounds,
     },
   };
 }

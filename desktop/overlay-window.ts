@@ -23,6 +23,7 @@ import { OracleDesktopWindowDiscoveryService } from "./window-discovery.js";
 import { OracleDesktopAttachmentController } from "./overlay/attachment-controller.js";
 import {
   selectDesktopTarget,
+  type OracleDesktopTargetCandidateInput,
 } from "./targeting/index.js";
 
 export type CompanionHostWindowOptions = {
@@ -453,9 +454,14 @@ this.unregisterScreenEvents();
     return;
   }
 
+  const candidateInputs =
+    this.createTargetCandidateInputs(
+      discoveredWindows
+    );
+
   const selection =
     selectDesktopTarget(
-      discoveredWindows
+      candidateInputs
     );
 
   if (
@@ -467,6 +473,36 @@ this.unregisterScreenEvents();
 
   this.attachment.attach(
     selection.target
+  );
+}
+private createTargetCandidateInputs(
+  discoveredWindows:
+    OracleDesktopDiscoveredWindow[]
+): OracleDesktopTargetCandidateInput[] {
+  return discoveredWindows.map(
+    (discoveredWindow) => {
+      const display =
+        screen.getDisplayMatching(
+          normaliseRectangle(
+            discoveredWindow.bounds
+          )
+        );
+
+      return {
+        discoveredWindow,
+
+        display:
+          createDisplayState(
+            display
+          ),
+
+        /*
+         * Arbitrary external foreground state is not yet
+         * exposed by the native desktop boundary.
+         */
+        isForeground: null,
+      };
+    }
   );
 }
 

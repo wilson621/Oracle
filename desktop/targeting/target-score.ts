@@ -14,7 +14,8 @@ export type OracleDesktopTargetScoreRule =
   | "substantial-window";
 
 export type OracleDesktopTargetScoreContribution = {
-  rule: OracleDesktopTargetScoreRule;
+  rule:
+    OracleDesktopTargetScoreRule;
 
   value: number;
 
@@ -32,19 +33,22 @@ export type OracleDesktopTargetScore = {
  * Scores one candidate that has already passed the selector's
  * eligibility rules.
  *
- * These initial contributions intentionally carry little weight.
- * They represent weak desktop evidence only and must not be treated
- * as proof that a candidate is a game or the Operator's intended app.
+ * Commit 10C deliberately preserves the existing score rules
+ * and values. The newly available evidence is not scored yet.
  */
 export function scoreDesktopTargetCandidate(
   candidate:
     OracleDesktopTargetCandidate
 ): OracleDesktopTargetScore {
-  const contributions: OracleDesktopTargetScoreContribution[] =
-    [];
+  const contributions:
+    OracleDesktopTargetScoreContribution[] =
+      [];
+
+  const window =
+    candidate.discoveredWindow;
 
   const title =
-    candidate.title.trim();
+    window.title.trim();
 
   if (title.length >= 3) {
     contributions.push({
@@ -58,7 +62,7 @@ export function scoreDesktopTargetCandidate(
   }
 
   const processName =
-    candidate.processName?.trim() ??
+    window.processName?.trim() ??
     "";
 
   if (processName.length > 0) {
@@ -73,9 +77,9 @@ export function scoreDesktopTargetCandidate(
   }
 
   if (
-    candidate.bounds.width >=
+    window.bounds.width >=
       SUBSTANTIAL_WINDOW_MINIMUM_WIDTH &&
-    candidate.bounds.height >=
+    window.bounds.height >=
       SUBSTANTIAL_WINDOW_MINIMUM_HEIGHT
   ) {
     contributions.push({
@@ -92,7 +96,8 @@ export function scoreDesktopTargetCandidate(
     total:
       contributions.reduce(
         (sum, contribution) =>
-          sum + contribution.value,
+          sum +
+          contribution.value,
         0
       ),
 
@@ -104,7 +109,8 @@ export function scoreDesktopTargetCandidate(
 }
 
 export function cloneDesktopTargetScore(
-  score: OracleDesktopTargetScore
+  score:
+    OracleDesktopTargetScore
 ): OracleDesktopTargetScore {
   return {
     total: score.total,
@@ -121,8 +127,12 @@ function cloneScoreContribution(
     OracleDesktopTargetScoreContribution
 ): OracleDesktopTargetScoreContribution {
   return {
-    rule: contribution.rule,
-    value: contribution.value,
+    rule:
+      contribution.rule,
+
+    value:
+      contribution.value,
+
     explanation:
       contribution.explanation,
   };

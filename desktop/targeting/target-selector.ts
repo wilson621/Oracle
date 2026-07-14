@@ -5,6 +5,7 @@ import {
   cloneTargetCandidate,
   createTargetCandidates,
   type OracleDesktopTargetCandidate,
+  type OracleDesktopTargetCandidateInput,
 } from "./target-candidate.js";
 import {
   cloneDesktopTargetScore,
@@ -21,6 +22,9 @@ export type OracleDesktopTargetSelectionResult =
       status: "selected";
 
       target:
+        OracleDesktopDiscoveredWindow;
+
+      candidate:
         OracleDesktopTargetCandidate;
 
       score:
@@ -30,6 +34,7 @@ export type OracleDesktopTargetSelectionResult =
       status: "no-candidate";
 
       target: null;
+      candidate: null;
       score: null;
     };
 
@@ -44,23 +49,16 @@ type ScoredTargetCandidate = {
 };
 
 /**
- * Selects a desktop attachment candidate through two distinct stages:
- *
- * 1. Remove candidates that are not currently eligible.
- * 2. Score eligible candidates and select the highest score.
- *
- * Equal scores preserve the original discovery order.
- *
- * Oracle's own Electron window is excluded by the host controller
- * before candidates reach this pure targeting function.
+ * Eligibility, score ordering and stable tie-breaking remain
+ * unchanged in Commit 10C.
  */
 export function selectDesktopTarget(
-  windows:
-    readonly OracleDesktopDiscoveredWindow[]
+  inputs:
+    readonly OracleDesktopTargetCandidateInput[]
 ): OracleDesktopTargetSelectionResult {
   const candidates =
     createTargetCandidates(
-      windows
+      inputs
     );
 
   const scoredCandidates =
@@ -104,20 +102,35 @@ export function selectDesktopTarget(
 
   if (!selected) {
     return {
-      status: "no-candidate",
+      status:
+        "no-candidate",
 
       target: null,
+      candidate: null,
       score: null,
     };
   }
 
+  const candidate =
+    cloneTargetCandidate(
+      selected.candidate
+    );
+
   return {
     status: "selected",
 
-    target:
-      cloneTargetCandidate(
-        selected.candidate
-      ),
+    target: {
+      ...candidate
+        .discoveredWindow,
+
+      bounds: {
+        ...candidate
+          .discoveredWindow
+          .bounds,
+      },
+    },
+
+    candidate,
 
     score:
       cloneDesktopTargetScore(
@@ -130,21 +143,24 @@ function isEligibleTargetCandidate(
   candidate:
     OracleDesktopTargetCandidate
 ): boolean {
+  const window =
+    candidate.discoveredWindow;
+
   return (
-    candidate.visible &&
-    !candidate.minimized &&
+    window.visible &&
+    !window.minimized &&
     hasValidBounds(
-      candidate
+      window
     )
   );
 }
 
 function hasValidBounds(
-  candidate:
-    OracleDesktopTargetCandidate
+  window:
+    OracleDesktopDiscoveredWindow
 ): boolean {
   const { bounds } =
-    candidate;
+    window;
 
   return (
     Number.isFinite(bounds.x) &&
@@ -183,8 +199,7 @@ function selectHighestScoringCandidate(
     }
 
     /*
-     * Equal scores deliberately retain the candidate encountered
-     * first in the original discovery order.
+     * Equal scores deliberately preserve original discovery order.
      */
     if (
       candidate.score.total ===
