@@ -1,4 +1,6 @@
-import type { OracleDesktopTargetCandidate } from "@/desktop/targeting";
+import type {
+  OracleGameDetectionInput,
+} from "./game-detection-input";
 import type {
   OracleGameContext,
 } from "./game-context";
@@ -29,8 +31,8 @@ export interface OracleGameIntegration {
    * Must be deterministic.
    */
   detect(
-    candidate: OracleDesktopTargetCandidate
-  ): OracleGameDetectionResult;
+  input: OracleGameDetectionInput
+): OracleGameDetectionResult;
 
   /**
    * Construct serialisable game context.
@@ -38,6 +40,6 @@ export interface OracleGameIntegration {
    * Only called after detection succeeds.
    */
   createContext(
-    candidate: OracleDesktopTargetCandidate
-  ): OracleGameContext;
+  input: OracleGameDetectionInput
+): OracleGameContext;
 }
