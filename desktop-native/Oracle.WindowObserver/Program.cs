@@ -25,29 +25,51 @@ internal static class Program
     {
         try
         {
-            IntPtr windowHandle =
-                ParseWindowHandle(
-                    arguments
+            if (arguments.Length == 0)
+            {
+                throw new CommandException(
+                    "missing-command",
+                    "Oracle.WindowObserver requires a command."
                 );
+            }
 
-            WindowObservation observation =
-                ObserveWindow(
-                    windowHandle
-                );
+            string command =
+                arguments[0].Trim().ToLowerInvariant();
 
-            string json =
-                JsonSerializer.Serialize(
-                    observation,
-                    JsonOptions
-                );
+            object result = command switch
+            {
+                "observe" =>
+                    ExecuteObserveCommand(arguments),
 
-            Console.Out.Write(json);
+                "foreground" =>
+                    ExecuteForegroundCommand(arguments),
+
+                _ => throw new CommandException(
+                    "unknown-command",
+                    $"Unknown Oracle.WindowObserver command '{arguments[0]}'."
+                ),
+            };
+
+            WriteJson(
+                Console.Out,
+                result
+            );
 
             return 0;
         }
+        catch (CommandException exception)
+        {
+            WriteStructuredError(
+                exception.Code,
+                exception.Message
+            );
+
+            return 1;
+        }
         catch (Exception exception)
         {
-            Console.Error.Write(
+            WriteStructuredError(
+                "native-observation-failed",
                 CreateSafeErrorMessage(
                     exception
                 )
@@ -57,19 +79,63 @@ internal static class Program
         }
     }
 
-    private static IntPtr ParseWindowHandle(
+    private static WindowObservation ExecuteObserveCommand(
+        IReadOnlyList<string> arguments
+    )
+    {
+        if (arguments.Count != 2)
+        {
+            throw new CommandException(
+                "invalid-handle",
+                "The observe command requires exactly one native window handle."
+            );
+        }
+
+        IntPtr windowHandle =
+            ParseWindowHandle(
+                arguments[1]
+            );
+
+        return ObserveWindow(
+            windowHandle
+        );
+    }
+
+    private static ForegroundWindowResult ExecuteForegroundCommand(
         IReadOnlyList<string> arguments
     )
     {
         if (arguments.Count != 1)
         {
-            throw new ArgumentException(
-                "Oracle.WindowObserver requires exactly one native window handle."
+            throw new CommandException(
+                "unknown-command",
+                "The foreground command does not accept additional arguments."
             );
         }
 
+        IntPtr foregroundHandle =
+            NativeMethods.GetForegroundWindow();
+
+        string? serialisedHandle =
+            foregroundHandle == IntPtr.Zero
+                ? null
+                : SerialiseWindowHandle(
+                    foregroundHandle
+                );
+
+        return new ForegroundWindowResult(
+            Success: true,
+            ForegroundHandle:
+                serialisedHandle
+        );
+    }
+
+    private static IntPtr ParseWindowHandle(
+        string suppliedValue
+    )
+    {
         string suppliedHandle =
-            arguments[0].Trim();
+            suppliedValue.Trim();
 
         if (
             suppliedHandle.Length == 0 ||
@@ -82,7 +148,8 @@ internal static class Program
             numericHandle == 0
         )
         {
-            throw new ArgumentException(
+            throw new CommandException(
+                "invalid-handle",
                 "The supplied native window handle is invalid."
             );
         }
@@ -97,11 +164,9 @@ internal static class Program
     )
     {
         string serialisedHandle =
-            windowHandle
-                .ToInt64()
-                .ToString(
-                    CultureInfo.InvariantCulture
-                );
+            SerialiseWindowHandle(
+                windowHandle
+            );
 
         bool exists =
             NativeMethods.IsWindow(
@@ -187,6 +252,48 @@ internal static class Program
         );
     }
 
+    private static string SerialiseWindowHandle(
+        IntPtr windowHandle
+    )
+    {
+        return windowHandle
+            .ToInt64()
+            .ToString(
+                CultureInfo.InvariantCulture
+            );
+    }
+
+    private static void WriteStructuredError(
+        string code,
+        string message
+    )
+    {
+        WriteJson(
+            Console.Error,
+            new NativeErrorResult(
+                Success: false,
+                Error: new NativeError(
+                    Code: code,
+                    Message: message
+                )
+            )
+        );
+    }
+
+    private static void WriteJson<T>(
+        TextWriter writer,
+        T value
+    )
+    {
+        string json =
+            JsonSerializer.Serialize(
+                value,
+                JsonOptions
+            );
+
+        writer.Write(json);
+    }
+
     private static string CreateSafeErrorMessage(
         Exception exception
     )
@@ -207,12 +314,40 @@ internal static class Program
         WindowBounds? Bounds
     );
 
+    private sealed record ForegroundWindowResult(
+        bool Success,
+        string? ForegroundHandle
+    );
+
+    private sealed record NativeErrorResult(
+        bool Success,
+        NativeError Error
+    );
+
+    private sealed record NativeError(
+        string Code,
+        string Message
+    );
+
     private sealed record WindowBounds(
         int X,
         int Y,
         int Width,
         int Height
     );
+
+    private sealed class CommandException : Exception
+    {
+        internal CommandException(
+            string code,
+            string message
+        ) : base(message)
+        {
+            Code = code;
+        }
+
+        internal string Code { get; }
+    }
 
     private static class NativeMethods
     {
@@ -271,5 +406,10 @@ internal static class Program
             IntPtr windowHandle,
             out Rect rectangle
         );
+
+        [DllImport(
+            "user32.dll"
+        )]
+        internal static extern IntPtr GetForegroundWindow();
     }
 }

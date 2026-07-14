@@ -45,6 +45,11 @@ type NativeWindowObservationPayload = {
   bounds?: unknown;
 };
 
+type NativeForegroundWindowPayload = {
+  success?: unknown;
+  foregroundHandle?: unknown;
+};
+
 type NativeWindowBoundsPayload = {
   x?: unknown;
   y?: unknown;
@@ -65,15 +70,12 @@ export class OracleDesktopWindowObserver {
       );
     }
 
-    if (process.platform !== "win32") {
-      throw new Error(
-        "Native desktop window observation is currently implemented for Windows only."
-      );
-    }
+    assertWindowsPlatform();
 
     const payload =
       await WINDOW_OBSERVER_HELPER.runJson({
         arguments: [
+          "observe",
           normalisedHandle,
         ],
       });
@@ -81,6 +83,23 @@ export class OracleDesktopWindowObserver {
     return normaliseObservation(
       payload,
       normalisedHandle
+    );
+  }
+
+  async getForegroundHandle(): Promise<
+    string | null
+  > {
+    assertWindowsPlatform();
+
+    const payload =
+      await WINDOW_OBSERVER_HELPER.runJson({
+        arguments: [
+          "foreground",
+        ],
+      });
+
+    return normaliseForegroundHandle(
+      payload
     );
   }
 }
@@ -154,6 +173,45 @@ function normaliseObservation(
     observedAt:
       new Date().toISOString(),
   };
+}
+
+function normaliseForegroundHandle(
+  payload: unknown
+): string | null {
+  if (!isObjectRecord(payload)) {
+    throw new Error(
+      "Oracle native window observer returned an unexpected foreground payload."
+    );
+  }
+
+  const nativePayload =
+    payload as NativeForegroundWindowPayload;
+
+  if (nativePayload.success !== true) {
+    throw new Error(
+      "Oracle native window observer did not report a successful foreground observation."
+    );
+  }
+
+  if (
+    nativePayload.foregroundHandle ===
+      null
+  ) {
+    return null;
+  }
+
+  const foregroundHandle =
+    normaliseHandle(
+      nativePayload.foregroundHandle
+    );
+
+  if (!foregroundHandle) {
+    throw new Error(
+      "Oracle native window observer returned an invalid foreground window handle."
+    );
+  }
+
+  return foregroundHandle;
 }
 
 function normaliseBounds(
@@ -267,6 +325,14 @@ function normalisePositiveInteger(
   }
 
   return numericValue;
+}
+
+function assertWindowsPlatform(): void {
+  if (process.platform !== "win32") {
+    throw new Error(
+      "Native desktop window observation is currently implemented for Windows only."
+    );
+  }
 }
 
 function isObjectRecord(

@@ -21,6 +21,7 @@ type OracleDesktopDisplayState,
 import { OracleDesktopHostStateModel } from "./host-state.js";
 import { OracleDesktopWindowDiscoveryService } from "./window-discovery.js";
 import { OracleDesktopAttachmentController } from "./overlay/attachment-controller.js";
+import { OracleDesktopWindowObserver } from "./overlay/window-observer.js";
 import {
   selectDesktopTarget,
   type OracleDesktopTargetCandidateInput,
@@ -56,6 +57,9 @@ export class CompanionHostWindowController {
 
   private readonly attachment:
     OracleDesktopAttachmentController;
+
+  private readonly windowObserver =
+    new OracleDesktopWindowObserver();
 
   private screenEventsRegistered = false;
 
@@ -428,13 +432,25 @@ this.unregisterScreenEvents();
         result
       );
 
+    const foregroundHandle =
+      await this.readForegroundHandle();
+
+    if (
+      runId !==
+        this.discoveryRunId ||
+      !this.getWindow()
+    ) {
+      return;
+    }
+
     this.hostState
       .setWindowDiscovery(
         discoveryState
       );
 
     this.coordinateAttachment(
-      discoveryState.windows
+      discoveryState.windows,
+      foregroundHandle
     );
 
     this.publishState();
@@ -442,7 +458,9 @@ this.unregisterScreenEvents();
 
   private coordinateAttachment(
   discoveredWindows:
-    OracleDesktopDiscoveredWindow[]
+    OracleDesktopDiscoveredWindow[],
+  foregroundHandle:
+    string | null
 ): void {
   const attachmentState =
     this.attachment.getState();
@@ -456,7 +474,8 @@ this.unregisterScreenEvents();
 
   const candidateInputs =
     this.createTargetCandidateInputs(
-      discoveredWindows
+      discoveredWindows,
+      foregroundHandle
     );
 
   const selection =
@@ -477,7 +496,9 @@ this.unregisterScreenEvents();
 }
 private createTargetCandidateInputs(
   discoveredWindows:
-    OracleDesktopDiscoveredWindow[]
+    OracleDesktopDiscoveredWindow[],
+  foregroundHandle:
+    string | null
 ): OracleDesktopTargetCandidateInput[] {
   return discoveredWindows.map(
     (discoveredWindow) => {
@@ -496,15 +517,31 @@ private createTargetCandidateInputs(
             display
           ),
 
-        /*
-         * Arbitrary external foreground state is not yet
-         * exposed by the native desktop boundary.
-         */
-        isForeground: null,
+        isForeground:
+          foregroundHandle === null
+            ? null
+            : discoveredWindow.handle ===
+              foregroundHandle,
       };
     }
   );
 }
+
+  private async readForegroundHandle(): Promise<
+    string | null
+  > {
+    try {
+      return await this.windowObserver
+        .getForegroundHandle();
+    } catch (error) {
+      console.warn(
+        "Oracle Companion could not capture the foreground window snapshot.",
+        error
+      );
+
+      return null;
+    }
+  }
 
   private createHostWindowDiscoveryState(
     result:
