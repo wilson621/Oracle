@@ -6,6 +6,11 @@ import {
   createTargetCandidates,
   type OracleDesktopTargetCandidate,
 } from "./target-candidate.js";
+import {
+  cloneDesktopTargetScore,
+  scoreDesktopTargetCandidate,
+  type OracleDesktopTargetScore,
+} from "./target-score.js";
 
 export type OracleDesktopTargetSelectionStatus =
   | "selected"
@@ -17,22 +22,37 @@ export type OracleDesktopTargetSelectionResult =
 
       target:
         OracleDesktopTargetCandidate;
+
+      score:
+        OracleDesktopTargetScore;
     }
   | {
       status: "no-candidate";
 
       target: null;
+      score: null;
     };
 
+type ScoredTargetCandidate = {
+  candidate:
+    OracleDesktopTargetCandidate;
+
+  score:
+    OracleDesktopTargetScore;
+
+  discoveryIndex: number;
+};
+
 /**
- * Selects the most suitable attachment candidate using the
- * existing deterministic policy.
+ * Selects a desktop attachment candidate through two distinct stages:
  *
- * Selection order:
- * 1. First visible, non-minimised candidate.
- * 2. First non-minimised candidate.
- * 3. First available candidate.
- * 4. No candidate.
+ * 1. Remove candidates that are not currently eligible.
+ * 2. Score eligible candidates and select the highest score.
+ *
+ * Equal scores preserve the original discovery order.
+ *
+ * Oracle's own Electron window is excluded by the host controller
+ * before candidates reach this pure targeting function.
  */
 export function selectDesktopTarget(
   windows:
@@ -43,15 +63,51 @@ export function selectDesktopTarget(
       windows
     );
 
-  const target =
-    findFirstSuitableCandidate(
-      candidates
+  const scoredCandidates =
+    candidates
+      .map(
+        (
+          candidate,
+          discoveryIndex
+        ): ScoredTargetCandidate | null => {
+          if (
+            !isEligibleTargetCandidate(
+              candidate
+            )
+          ) {
+            return null;
+          }
+
+          return {
+            candidate,
+
+            score:
+              scoreDesktopTargetCandidate(
+                candidate
+              ),
+
+            discoveryIndex,
+          };
+        }
+      )
+      .filter(
+        (
+          candidate
+        ): candidate is ScoredTargetCandidate =>
+          candidate !== null
+      );
+
+  const selected =
+    selectHighestScoringCandidate(
+      scoredCandidates
     );
 
-  if (!target) {
+  if (!selected) {
     return {
       status: "no-candidate",
+
       target: null,
+      score: null,
     };
   }
 
@@ -60,26 +116,85 @@ export function selectDesktopTarget(
 
     target:
       cloneTargetCandidate(
-        target
+        selected.candidate
+      ),
+
+    score:
+      cloneDesktopTargetScore(
+        selected.score
       ),
   };
 }
 
-function findFirstSuitableCandidate(
-  candidates:
-    readonly OracleDesktopTargetCandidate[]
-): OracleDesktopTargetCandidate | null {
+function isEligibleTargetCandidate(
+  candidate:
+    OracleDesktopTargetCandidate
+): boolean {
   return (
-    candidates.find(
-      (candidate) =>
-        candidate.visible &&
-        !candidate.minimized
-    ) ??
-    candidates.find(
-      (candidate) =>
-        !candidate.minimized
-    ) ??
-    candidates[0] ??
-    null
+    candidate.visible &&
+    !candidate.minimized &&
+    hasValidBounds(
+      candidate
+    )
   );
+}
+
+function hasValidBounds(
+  candidate:
+    OracleDesktopTargetCandidate
+): boolean {
+  const { bounds } =
+    candidate;
+
+  return (
+    Number.isFinite(bounds.x) &&
+    Number.isFinite(bounds.y) &&
+    Number.isFinite(
+      bounds.width
+    ) &&
+    Number.isFinite(
+      bounds.height
+    ) &&
+    bounds.width > 0 &&
+    bounds.height > 0
+  );
+}
+
+function selectHighestScoringCandidate(
+  candidates:
+    readonly ScoredTargetCandidate[]
+): ScoredTargetCandidate | null {
+  let selected:
+    ScoredTargetCandidate | null =
+      null;
+
+  for (const candidate of candidates) {
+    if (!selected) {
+      selected = candidate;
+      continue;
+    }
+
+    if (
+      candidate.score.total >
+      selected.score.total
+    ) {
+      selected = candidate;
+      continue;
+    }
+
+    /*
+     * Equal scores deliberately retain the candidate encountered
+     * first in the original discovery order.
+     */
+    if (
+      candidate.score.total ===
+        selected.score.total &&
+      candidate.discoveryIndex <
+        selected.discoveryIndex
+    ) {
+      selected = candidate;
+    }
+  }
+
+  return selected;
 }

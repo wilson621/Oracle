@@ -5,6 +5,14 @@ export {
 } from "./target-candidate.js";
 
 export {
+  cloneDesktopTargetScore,
+  scoreDesktopTargetCandidate,
+  type OracleDesktopTargetScore,
+  type OracleDesktopTargetScoreContribution,
+  type OracleDesktopTargetScoreRule,
+} from "./target-score.js";
+
+export {
   selectDesktopTarget,
   type OracleDesktopTargetSelectionResult,
   type OracleDesktopTargetSelectionStatus,
