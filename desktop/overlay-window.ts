@@ -419,12 +419,6 @@ if (this.companionSession) {
   );
   this.companionSession = null;
 }
-if (this.companionSession) {
-  this.companionSession = endOracleCompanionSession(
-    this.companionSession
-  );
-  this.companionSession = null;
-}
     if (!window) {
       this.window = null;
       return;
@@ -880,6 +874,13 @@ private restoreDevelopmentBounds(): void {
         this.attachment.reset();
 
 this.developmentBounds = null;
+
+if (this.companionSession) {
+  this.companionSession = endOracleCompanionSession(
+    this.companionSession
+  );
+  this.companionSession = null;
+}
 
 this.window = null;
 this.hostState.reset();
