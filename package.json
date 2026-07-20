@@ -4,24 +4,28 @@
   "private": true,
   "main": "dist-electron/main.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && npm run desktop:build",
-    "start": "next start",
-    "lint": "eslint",
+  "dev": "next dev",
 
-    "native:build:discovery": "dotnet publish desktop-native/Oracle.WindowDiscovery/Oracle.WindowDiscovery.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false --output dist-native",
+  "build": "next build",
+  "build:web": "next build",
+  "build:desktop": "npm run build:web && npm run desktop:build",
 
-    "native:build:observer": "dotnet publish desktop-native/Oracle.WindowObserver/Oracle.WindowObserver.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false --output dist-native",
+  "start": "next start",
+  "lint": "eslint",
 
-    "native:build": "npm run native:build:discovery && npm run native:build:observer",
+  "native:build:discovery": "dotnet publish desktop-native/Oracle.WindowDiscovery/Oracle.WindowDiscovery.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false --output dist-native",
 
-    "desktop:compile": "tsc -p tsconfig.desktop.json",
-    "desktop:build": "npm run native:build && npm run desktop:compile",
+  "native:build:observer": "dotnet publish desktop-native/Oracle.WindowObserver/Oracle.WindowObserver.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false --output dist-native",
 
-    "desktop:dev": "npm run desktop:build && concurrently -k \"next dev\" \"wait-on http://localhost:3000/oracle && electron .\"",
+  "native:build": "npm run native:build:discovery && npm run native:build:observer",
 
-    "desktop:start": "concurrently -k \"next start\" \"wait-on http://localhost:3000/oracle && electron .\""
-  },
+  "desktop:compile": "tsc -p tsconfig.desktop.json",
+  "desktop:build": "npm run native:build && npm run desktop:compile",
+
+  "desktop:dev": "npm run desktop:build && concurrently -k \"next dev\" \"wait-on http://localhost:3000/oracle && electron .\"",
+
+  "desktop:start": "concurrently -k \"next start\" \"wait-on http://localhost:3000/oracle && electron .\""
+},
   "dependencies": {
     "@supabase/ssr": "^0.12.0",
     "@supabase/supabase-js": "^2.110.0",
