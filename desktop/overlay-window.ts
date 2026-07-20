@@ -33,6 +33,12 @@ import {
 import {
   OracleDesktopHostSnapshotCoordinator,
 } from "./platform/desktop-host-snapshot-coordinator.js";
+import {
+  OracleDesktopDiagnostics,
+} from "./platform/desktop-diagnostics.js";
+import type {
+  OracleDesktopDiagnostic,
+} from "./platform/desktop-diagnostic.js";
 
 export type CompanionHostWindowOptions = {
   companionUrl: string;
@@ -74,6 +80,9 @@ export class CompanionHostWindowController {
   private readonly companionSession =
     new OracleCompanionSessionManager();
 
+  private readonly diagnostics =
+    new OracleDesktopDiagnostics();
+
   private screenEventsRegistered = false;
 
   private discoveryRunId = 0;
@@ -91,6 +100,9 @@ export class CompanionHostWindowController {
 ) {
   this.desktopHostSnapshots
     .subscribeEvents((event) => {
+      this.diagnostics
+        .consumeHostEvent(event);
+
       if (
         event.type ===
         "desktop-host.snapshot-captured"
@@ -246,6 +258,11 @@ export class CompanionHostWindowController {
         ?.webContents.id ===
       webContentsId
     );
+  }
+
+  getRecentDiagnostics(): readonly OracleDesktopDiagnostic[] {
+    return this.diagnostics
+      .getRecentDiagnostics();
   }
 
   getState(): OracleDesktopHostState {
@@ -904,6 +921,14 @@ this.hostState.reset();
     window.on(
       "unresponsive",
       () => {
+        this.diagnostics.report({
+          severity: "error",
+          category: "runtime",
+          code: "desktop-window.unresponsive",
+          message:
+            "Oracle Companion desktop window became unresponsive.",
+        });
+
         console.error(
           "Oracle Companion desktop window became unresponsive."
         );
@@ -916,6 +941,18 @@ this.hostState.reset();
         _event,
         details
       ) => {
+        this.diagnostics.report({
+          severity: "critical",
+          category: "runtime",
+          code: "desktop-renderer.process-gone",
+          message:
+            "Oracle Companion renderer exited unexpectedly.",
+          data: {
+            reason: details.reason,
+            exitCode: details.exitCode,
+          },
+        });
+
         console.error(
           "Oracle Companion renderer exited.",
           {
@@ -937,6 +974,19 @@ this.hostState.reset();
         errorDescription,
         validatedUrl
       ) => {
+        this.diagnostics.report({
+          severity: "error",
+          category: "runtime",
+          code: "desktop-renderer.load-failed",
+          message:
+            "Oracle Companion failed to load its application surface.",
+          data: {
+            errorCode,
+            errorDescription,
+            validatedUrl,
+          },
+        });
+
         console.error(
           "Oracle Companion failed to load.",
           {
