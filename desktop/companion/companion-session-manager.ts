@@ -2,6 +2,9 @@ import type {
   OracleDesktopHostState,
 } from "../host-state.js";
 import {
+  createOracleDesktopHostSnapshot,
+} from "../platform/desktop-host-snapshot-builder.js";
+import {
   createOracleCompanionContext,
   type OracleCompanionContext,
 } from "./companion-context.js";
@@ -191,7 +194,12 @@ function createContext(
     OracleDesktopHostState | null
 ) {
   return createOracleCompanionContext({
-    desktop: desktopState,
+    desktop:
+      desktopState == null
+        ? null
+        : createOracleDesktopHostSnapshot({
+            hostState: desktopState,
+          }),
   });
 }
 

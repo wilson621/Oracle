@@ -1,6 +1,6 @@
 import type {
-  OracleDesktopHostState,
-} from "../host-state.js";
+  OracleDesktopHostSnapshot,
+} from "../platform/desktop-host-snapshot.js";
 
 export type OracleCompanionGameContext = {
   integrationId: string;
@@ -11,7 +11,7 @@ export type OracleCompanionGameContext = {
 
 export type OracleCompanionContext = {
   desktop:
-    OracleDesktopHostState | null;
+    OracleDesktopHostSnapshot | null;
 
   game:
     OracleCompanionGameContext | null;
@@ -21,7 +21,7 @@ export type OracleCompanionContext = {
 
 export type CreateOracleCompanionContextInput = {
   desktop?:
-    OracleDesktopHostState | null;
+    OracleDesktopHostSnapshot | null;
 
   game?:
     OracleCompanionGameContext | null;
