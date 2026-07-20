@@ -1,6 +1,6 @@
 # ORACLE ARCHITECTURE INDEX
 
-Version: 4.1
+Version: 5.1
 
 Status: Active
 
@@ -28,7 +28,10 @@ It does not replace them.
 
 # Current Production Architecture
 
-Oracle Architecture v4.1 is the current production architecture.
+Architecture v4.1 remains the historical engine-runtime baseline. The current
+repository also contains the Sprint 8 Platform coordination foundations and
+the Sprint 12.1 Desktop Platform. Current delivery truth is recorded in
+`IMPLEMENTATION_STATUS.md`.
 
 The platform now executes intelligence through a validated Engine Runtime rather than a monolithic orchestration model.
 
@@ -537,9 +540,7 @@ Completed
 
 Current Development Phase
 
-Operation Sentinel
-
-Sprint 6.7 Complete
+Sprint 12.1 — Desktop Platform Foundation and Hardening
 
 Current Runtime
 
@@ -551,6 +552,20 @@ Current Runtime
 ✓ Trend Engine
 ✓ Prediction Engine
 ✓ Mission Engine
+✓ Platform, Service and Application registry foundations
+✓ Electron Companion host
+✓ Companion Session Manager and Context ownership
+✓ Desktop Host Snapshot and Event Stream
+✓ Desktop Diagnostics and Recovery
+✓ Desktop Timeline and Telemetry
+
+Not yet closed
+
+- Desktop Platform API Freeze
+- dependency-boundary audit acceptance
+- full Sprint 12.1 verification
+- Game Integration to desktop-context wiring
+- Platform bootstrap production wiring
 
 ---
 
@@ -558,16 +573,12 @@ Current Runtime
 
 Planned Subsystems
 
-- Adaptive Coaching
-- Operator Timeline
-- Contextual Intelligence
 - Map Intelligence
 - Public Knowledge Engine
 - Strategy Engine
-- Mission Engine
 - Voice Intelligence
 - Visual Intelligence
-- Companion Engine
+- Companion assistance capabilities beyond the current desktop foundation
 
 Each new subsystem must be added to this Architecture Index when introduced.
 

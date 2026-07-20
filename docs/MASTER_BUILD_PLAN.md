@@ -1,9 +1,9 @@
 # ORACLE MASTER BUILD PLAN
 
-**Version:** 2.0  
+**Version:** 2.1
 **Status:** Active  
 **Owner:** Oracle Platform Engineering  
-**Last Updated:** Sprint 8 – Oracle Platform Foundation
+**Last Updated:** Sprint 12.1 implementation audit — 20 July 2026
 
 ---
 
@@ -87,7 +87,50 @@ This architecture was established during Sprint 8 and forms the permanent founda
 
 ---
 
-# Current Release
+# Current Execution Status
+
+## Sprint 12.1 — Desktop Platform Foundation and Hardening
+
+**Branch:** `sprint-9-overlay`
+**Status:** Active; implementation milestones delivered, closure pending
+
+Verified completed work:
+
+- Companion Session Manager
+- Companion Context Ownership
+- Desktop Host Snapshot
+- Snapshot Coordinator
+- Desktop Host Event Stream
+- Desktop Diagnostics
+- Desktop Recovery
+- Desktop Timeline
+- Desktop Telemetry
+
+Remaining work, in order:
+
+1. Desktop Platform API Freeze
+2. dependency-boundary audit acceptance
+3. full compile, lint, production build and runtime verification
+4. correction of issues found by verification
+5. formal Sprint 12.1 closure and release decision
+
+Documentation synchronisation records current implementation but does not
+complete those engineering gates. Sprint 13 must not begin.
+
+Known integration boundaries requiring deliberate review:
+
+- Platform bootstrap is not wired into production startup.
+- web pages do not consistently consume Services through Applications.
+- desktop Companion Session Context does not yet consume Game Integrations.
+- the Platform-level and desktop-level Companion runtimes are not integrated.
+- Desktop Platform versioned contracts have no frozen public import surface.
+
+See `docs/architecture/IMPLEMENTATION_STATUS.md` for the canonical verified
+status.
+
+---
+
+# Historical Release Baseline
 
 ## Version
 
@@ -169,7 +212,7 @@ Game Integrations
 
 ---
 
-# Active Sprint
+# Historical Sprint 9 Plan
 
 ## Sprint 9
 
@@ -187,7 +230,7 @@ sprint-9-overlay
 
 ---
 
-# Sprint 9 Objectives
+# Historical Sprint 9 Objectives
 
 ## Platform Boot
 
@@ -233,7 +276,7 @@ sprint-9-overlay
 
 ---
 
-# Sprint Success Criteria
+# Historical Sprint 9 Success Criteria
 
 Sprint 9 is complete when:
 
@@ -360,7 +403,8 @@ Before every release confirm:
 
 # Long-Term Build Sequence
 
-The current engineering direction is:
+The following sequence was the Sprint 8 strategic projection. It is retained
+for historical context and is not the current execution board:
 
 ```text
 Sprint 8
@@ -390,7 +434,11 @@ Beta
 Public Release
 ```
 
-Future sprints may evolve, but every sprint should strengthen the Platform rather than introducing isolated functionality.
+Delivery evolved into Sprint 12.1 desktop-platform hardening on
+`sprint-9-overlay`; the projected Sprint 12 Marketplace milestone was not the
+work represented by the current repository history. Future sprints may evolve,
+but every sprint should strengthen the Platform rather than introducing
+isolated functionality.
 
 ---
 

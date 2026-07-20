@@ -1,14 +1,15 @@
 # ORACLE COMPANION ARCHITECTURE
 
-Version 1.0
+Version 1.1
 
-Status: Beta 1 Foundation
+Status: Sprint 12.1 implementation-aligned foundation
 
 ---
 
 # Purpose
 
-Oracle Companion is Oracle's independent desktop application for in-game assistance.
+Oracle Companion is an Oracle Application and Platform subsystem delivered
+through an external desktop host for in-game assistance.
 
 Its purpose is to help the Operator:
 
@@ -407,9 +408,11 @@ Companion should default to the least revealing useful response.
 
 # Companion Runtime
 
-Oracle Companion requires its own runtime.
+Oracle Companion requires an explicit runtime boundary within the Oracle
+Platform.
 
-The Companion Runtime is separate from the Oracle Intelligence Runtime.
+The Companion Runtime remains separate from the Oracle Intelligence Runtime,
+while both remain owned by the Oracle Platform.
 
 It owns:
 
@@ -1111,7 +1114,11 @@ Oracle Companion Beta 1 is successful when an Operator can:
 
 # Repository Strategy
 
-Oracle Companion should be developed as a separate application repository.
+The separate-repository layout below was the original planning direction. The
+accepted Platform decision and current implementation keep Companion in the
+Oracle repository so it can share controlled lifecycle, contracts and
+diagnostics. A future repository split would require a new ADR and migration
+plan; it is not current architecture.
 
 Recommended structure:
 
@@ -1174,6 +1181,30 @@ Potential shared contracts include:
 - Compatibility status
 
 Shared contracts should not require either application to import the other application's internal code.
+
+---
+
+# Current Verified Implementation
+
+As of Sprint 12.1, Oracle contains two distinct Companion foundations:
+
+- `lib/companion` defines the Platform-level Companion Runtime, presentation
+  state, extensions, capabilities and connector contracts.
+- `desktop/companion` defines the active desktop Session lifecycle and immutable
+  Context snapshots used by the Electron host.
+
+The Electron host additionally implements window discovery, deterministic
+target selection, attachment, native observation, Desktop Host Snapshots,
+events, diagnostics, recovery, Timeline and Telemetry.
+
+The two Companion foundations are not yet connected through an explicit
+integration boundary. The implemented Call of Duty Game Integration is also
+not yet wired into desktop Companion Context. These are recorded remaining
+integration tasks, not completed capabilities.
+
+The current public renderer boundary is the restricted preload
+`OracleDesktopBridge`. The newer versioned Desktop Platform contracts remain
+internal until the Desktop Platform API Freeze is completed.
 
 ---
 

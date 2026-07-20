@@ -2,8 +2,8 @@
 
 # Architectural Decision Records (ADR)
 
-Version 4.0
-Last Updated: Sprint 8 – Oracle Platform Foundation
+Version 4.1
+Last Updated: Sprint 12.1 implementation audit — 20 July 2026
 
 ---
 
@@ -291,7 +291,7 @@ Future engines can be added without changing existing presentation logic.
 
 ## Decision
 
-Oracle Context will become the shared input for every intelligence engine.
+Oracle Context is the shared input for registered intelligence engines.
 
 ## Reason
 
@@ -303,7 +303,7 @@ Future engines become easier to test, maintain and reuse.
 
 ## Status
 
-🟡 Planned
+✅ Accepted and implemented
 
 ---
 
@@ -311,7 +311,7 @@ Future engines become easier to test, maintain and reuse.
 
 ## Decision
 
-The Intelligence Bus will orchestrate engine execution.
+The Intelligence Bus orchestrates registered engine execution.
 
 ## Reason
 
@@ -323,7 +323,7 @@ Future engines register themselves rather than requiring architectural changes.
 
 ## Status
 
-🟡 Planned
+✅ Accepted and implemented
 
 ---
 
@@ -752,6 +752,56 @@ over feature-specific architecture.
 ## Status
 
 ✅ Accepted
+
+---
+
+# ADR-028
+
+## Decision
+
+Desktop host truth crosses Platform boundaries as immutable, serializable,
+versioned snapshots and events.
+
+## Reason
+
+Electron controllers and native Windows objects are implementation details.
+Companion context, diagnostics, recovery and future consumers require stable
+data without mutable controller coupling.
+
+## Consequence
+
+The Desktop Host Snapshot Coordinator owns the latest snapshot. Host events
+describe snapshot capture and clearing. Consumers receive data contracts rather
+than Electron objects. Contract versions change only when serialized schemas
+require consumer changes.
+
+## Status
+
+✅ Accepted and implemented in Sprint 12.1
+
+---
+
+# ADR-029
+
+## Decision
+
+The Desktop Timeline is the authoritative in-process chronological record;
+Desktop Telemetry is a derived view over that Timeline.
+
+## Reason
+
+Independent metric counters would duplicate diagnostic and recovery truth and
+could drift from the events they claim to summarize.
+
+## Consequence
+
+Host events, diagnostics and recovery lifecycle updates enter one ordered,
+bounded Timeline. Telemetry stores no duplicate source history and can be
+reproduced from the same Timeline input.
+
+## Status
+
+✅ Accepted and implemented in Sprint 12.1
 
 ---
 

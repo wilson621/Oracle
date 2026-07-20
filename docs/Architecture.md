@@ -2,9 +2,9 @@
 
 Technical Architecture
 
-Version 5.0
+Version 5.1
 
-Last Updated: Sprint 8 Platform Foundation
+Last Updated: Sprint 12.1 implementation audit — 20 July 2026
 
 ---
 
@@ -19,6 +19,11 @@ Unlike the Manifesto or the Codex, this document focuses exclusively on producti
 It answers one question.
 
 **How does Oracle work?**
+
+For the current verified delivery state, read
+`docs/architecture/IMPLEMENTATION_STATUS.md`. Historical readiness statements
+later in this document describe the milestones at which they were written and
+must not be treated as the current sprint board.
 
 ---
 
@@ -401,15 +406,19 @@ Every engine produces structured outputs.
 Current production engines include:
 
 - Context Summary Engine
+- Behaviour Engine
+- Trend Engine
+- Prediction Engine
+- Mission Engine
+- Memory Engine
 - Behaviour Evolution Engine
 - Adaptive Coaching Engine
 - Planner Engine
 - Operator Profile Engine
 - Contextual Intelligence Engine
 
-Future engines include:
+Additional future engines may include:
 
-- Memory
 - Strategy
 - Map
 - Economy
@@ -1126,7 +1135,54 @@ These principles guide every future Operation.
 
 ---
 
-# Production Readiness
+# Desktop Platform Architecture
+
+Sprint 12.1 added a desktop-specific Platform flow under `desktop/`:
+
+```text
+Electron Host State
+        ↓
+Immutable Desktop Host Snapshot
+        ↓
+Versioned Host Event Stream
+        ├──→ Desktop Diagnostics
+        │         ↓
+        │     Desktop Recovery
+        ↓         ↓
+Unified Desktop Timeline
+        ↓
+Derived Desktop Telemetry
+```
+
+`CompanionHostWindowController` coordinates this flow. The Snapshot
+Coordinator owns the latest desktop snapshot; the Companion Session Manager
+owns Session lifecycle and the current desktop Companion Context. Timeline is
+the chronological source for Telemetry. These services exchange serializable
+data and do not expose Electron objects through their contracts.
+
+The renderer-accessible boundary remains `OracleDesktopBridge` from
+`desktop/contracts.ts`. The newer Desktop Platform contracts are versioned but
+do not yet have a frozen public import surface. API Freeze remains Sprint 12.1
+work.
+
+# Verified Integration Limits
+
+- `bootstrapOraclePlatform()` is implemented but is not invoked by the current
+  web or Electron startup paths.
+- Service and Application registries are implemented metadata foundations;
+  web pages do not consistently consume them as runtime boundaries.
+- several web pages call repositories, pipelines or engines directly.
+- the registered Companion route `/companion` has no App Router page; Electron
+  currently loads `/oracle`.
+- the Call of Duty Game Integration is implemented but not registered into the
+  desktop host, so desktop Companion game context remains unset.
+- `lib/companion` and `desktop/companion` are not yet joined by an explicit
+  integration contract.
+
+These are audit findings. They do not invalidate verified systems or authorise
+architectural redesign.
+
+# Historical Production Readiness
 
 As of Sprint 5 Closure, Oracle provides:
 
@@ -1285,21 +1341,10 @@ Future development should strengthen Oracle through additional intelligence, ric
 
 ---
 
-**Architecture Status**
+**Current status:** See `docs/architecture/IMPLEMENTATION_STATUS.md`.
 
-🟢 Production Ready
-
-**Build Status**
-
-🟢 Passing
-
-**Documentation Status**
-
-🟢 Version 4.0 Complete
-
-**Ready for Sprint 6**
-
-✅ Yes
+The original Version 4 milestone was production-ready for its documented
+scope. It is not a statement that Sprint 12.1 closure gates have passed.
 
 ---
 

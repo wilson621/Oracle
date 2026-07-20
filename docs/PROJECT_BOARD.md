@@ -1,292 +1,138 @@
 # ORACLE PROJECT BOARD
 
-Mission Control
-
-Version 3.0
-
-Last Updated: Sprint 5 Closure
-
----
-
-# Product
-
-Oracle
-
-Internal Repository
-
-Project Meta
+**Version:** 4.0
+**Last updated:** 20 July 2026
+**Branch:** `sprint-9-overlay`
+**Implementation baseline:** `e02b254`
 
 ---
 
-# Current Release
+# Current Sprint
 
-Operation
+## Sprint 12.1 — Desktop Platform Foundation and Hardening
 
-Oracle Platform Foundation
+**Status:** Active — documentation synchronised; engineering closure pending
 
-Version
-
-Oracle v0.8.0
-
-Status
-
-🟢 SPRINT 8 COMPLETE
+Sprint 13 has not started.
 
 ---
 
-# Platform Health
+# Completed Sprint 12.1 Milestones
 
-Build
+- [x] Companion Session Manager
+- [x] Companion Context Ownership
+- [x] Desktop Host Snapshot
+- [x] Snapshot Coordinator
+- [x] Desktop Host Event Stream
+- [x] Desktop Diagnostics
+- [x] Desktop Recovery
+- [x] Desktop Timeline
+- [x] Desktop Telemetry
+- [x] Documentation implementation audit
+- [x] Canonical `IMPLEMENTATION_STATUS.md`
 
-✅ Passing
+---
 
-Architecture
+# Remaining Sprint 12.1 Work
 
-🟢 Oracle Platform Established
+- [ ] Desktop Platform API Freeze
+- [ ] Dependency-boundary audit acceptance
+- [ ] Full desktop TypeScript compilation
+- [ ] Full lint verification
+- [ ] Full Next.js production build
+- [ ] Runtime verification proportional to desktop risk
+- [ ] Fix issues found during verification
+- [ ] Sprint closure and release decision
 
-Documentation
+---
 
-🟡 Sprint 8 Closure In Progress
+# Verified Platform State
 
-Technical Debt
+## Intelligence Runtime
 
-🟢 Low
+- Oracle Context, Pipeline and Intelligence Bus implemented
+- Engine Registry and Engine Runtime implemented
+- Signals, Decisions, Explainability, Timeline and Intelligence State
+  implemented
+- production Intelligence page calls the Pipeline directly
 
-Platform Bootstrap
+## Platform Coordination
 
-✅ Complete
+- Platform Runtime and bootstrap function implemented
+- ten Service definitions registered by Platform Runtime
+- six Application definitions registered by Platform Runtime
+- Extension Runtime and Capability Graph implemented
+- production startup does not currently invoke Platform bootstrap
 
+## Desktop Platform
+
+- Electron host and restricted preload bridge implemented
+- deterministic discovery, target scoring and attachment implemented
+- native Windows discovery and observation implemented
+- versioned immutable desktop contracts implemented
+- Diagnostics, Recovery, Timeline and Telemetry implemented
+- Desktop Platform public API is not frozen
+
+## Companion
+
+- Platform-level Companion Runtime foundation implemented
+- desktop Companion Session and Context ownership implemented
+- the two lifecycle layers are not yet connected by an explicit contract
+- Electron currently loads `/oracle`; registered `/companion` route is absent
+
+## Game Integrations
+
+- Game Integration contract, registry and evaluator implemented
+- Call of Duty integration and executable profile implemented
+- integration is not registered into the desktop host
+- desktop Companion game context remains unset
+
+---
+
+# Architecture Audit
+
+Target ownership remains:
+
+```text
+Oracle Platform
+        ↓
 Oracle Services
-
-✅ Registered
-
+        ↓
 Oracle Applications
-
-✅ Registered
-
-Extension Runtime
-
-✅ Operational
-
-Companion Runtime
-
-✅ Operational
-
-Capability Graph
-
-✅ Operational
-
-Game Integration SDK
-
-✅ Operational
-
----
-
-# Active Operation
-
-## Operation Horizon
-
-Purpose
-
-Expand Oracle from a production-ready intelligence architecture into a contextual gaming intelligence platform.
-
-Current Phase
-
-Capability Expansion
-
-Progress
-
-██████████████████████████████ 100%
-
----
-
-# Completed During Sprint 8
-
-## Oracle Platform
-
-✅ Oracle Platform Bootstrap
-
-✅ Oracle Service Registry
-
-✅ Oracle Application Registry
-
-✅ Oracle Platform Runtime
-
-✅ Companion Runtime
-
-✅ Extension Runtime
-
-✅ Capability Graph
-
-✅ Extension Resolver
-
-✅ Game Integration SDK
-
-✅ Extension SDK
-
-✅ Companion SDK
-
-## Product Architecture
-
-✅ Platform → Services → Applications → Game Integrations
-
-✅ Oracle Platform Constitution
-
-✅ Service ownership model
-
-✅ Application ownership model
-
-✅ Capability-based architecture
-
-## Engineering
-
-✅ Green production build
-
-✅ Sprint closure audit
-
-✅ Documentation refresh
-
----
-
-## Intent Providers
-
-✅ Explicit Context Provider
-
-✅ Opportunity Provider
-
-✅ Recent Session Provider
-
-✅ Active Game Provider
-
----
-
-## Intelligence Architecture
-
-✅ Contextual signal categories
-
-✅ Contextual decision categories
-
-✅ Contextual timeline categories
-
-✅ Contextual decisions integrated through existing OracleDecision contract
-
-✅ Contextual signals integrated through existing OracleSignal contract
-
-✅ Contextual engine registered with core Oracle engines
-
-✅ Intelligence Bus preserved
-
-✅ Decision Selection preserved
-
-✅ OracleIntelligenceState preserved as UI contract
-
----
-
-## User Experience
-
-✅ Contextual Intelligence Card
-
-✅ Current inferred intent display
-
-✅ Confidence display
-
-✅ Opportunity count
-
-✅ Priority count
-
-✅ Contextual recommendation display
-
-✅ Presentation-only component architecture preserved
-
----
-
-# Sprint Status
-
-Sprint
-
-Sprint 8 — Oracle Platform Foundation
-
-Status
-
-✅ Complete
-
-Outcome
-
-Oracle is now organised as:
-
-Platform
-
-↓
-
-Services
-
-↓
-
-Applications
-
-↓
-
+        ↓
 Game Integrations
+```
+
+Open findings:
+
+1. some web Applications directly import repositories, pipelines and engines
+2. Platform bootstrap is not a production entry-point dependency
+3. registered Services and Applications are metadata foundations, not the
+   exclusive runtime boundary
+4. Game Integration output is not connected to desktop Companion Context
+5. Desktop Platform contracts are versioned but have no frozen public surface
+
+These findings are recorded for dependency-boundary review. This board does
+not authorise redesign or begin Sprint 13.
 
 ---
 
-# Next Sprint
+# Documentation Health
 
-Sprint 9
-
-Oracle Companion Overlay
-
-Objectives
-
-- Platform boot sequence
-- Oracle Ready state
-- Transparent overlay window
-- Borderless support
-- Click-through behaviour
-- Runtime diagnostics
-- Companion attachment lifecycle
+- [x] Constitution reviewed; no change required
+- [x] Codex reviewed; normative standards remain authoritative
+- [x] Oracle Principles reviewed; no change required
+- [x] Architecture aligned to verified implementation
+- [x] Companion Architecture aligned to verified implementation
+- [x] Roadmap distinguishes projection from delivered work
+- [x] Master Build Plan reflects Sprint 12.1
+- [x] ADRs record desktop snapshot/event and Timeline/Telemetry ownership
+- [x] Sprint 12.1 implementation audit added
 
 ---
 
-# Current Focus
+# Closure Rule
 
-Sprint 8 Documentation Closure
-
-↓
-
-Git Tag
-
-↓
-
-Sprint 9 Branch
-
-↓
-
-Sprint 9 Kickoff
-
----
-
-# Engineering Workflow
-
-Every task follows the same lifecycle.
-
-Architecture Review
-
-↓
-
-Inspect Existing Code
-
-↓
-
-Planning
-
-↓
-
-Implementation
-
-↓
-
-Build
-
-```bash
-npm run build
+Sprint 12.1 is complete only after the remaining engineering gates pass and
+the repository is formally closed. Documentation synchronisation alone does
+not satisfy sprint closure.

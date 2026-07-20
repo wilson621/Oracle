@@ -1,8 +1,13 @@
 # Oracle Architecture v4.1
 
-**Status:** Current Production Architecture  
+**Status:** Historical engine-runtime baseline
 **Version:** 4.1  
 **Last Updated:** Sprint 6.7
+
+> This document is preserved as the Sprint 6.7 engine-runtime record. The
+> current architecture extends it with the Sprint 8 Platform layers and Sprint
+> 12.1 Desktop Platform. See `../Architecture.md` and
+> `IMPLEMENTATION_STATUS.md` for current status.
 
 ---
 

@@ -2,8 +2,8 @@
 
 ## Strategic Product Roadmap
 
-**Version:** 4.1  
-**Last Updated:** Sprint 8 – Oracle Platform Foundation
+**Version:** 4.2
+**Last Updated:** Sprint 12.1 implementation audit — 20 July 2026
 
 ---
 
@@ -474,7 +474,7 @@ Sprint 8 is considered one of the defining milestones in Oracle's history.
 
 ## Persistent Intelligence
 
-**Status:** 🟢 NEXT
+**Status:** FOUNDATION IMPLEMENTED; full operation outcome not re-verified
 
 ---
 
@@ -517,7 +517,7 @@ Every Oracle Session permanently strengthens future intelligence.
 
 ## Advanced Intelligence
 
-**Status:** 🔵 PLANNED
+**Status:** PARTIALLY IMPLEMENTED through current intelligence engines
 
 ---
 
@@ -556,7 +556,7 @@ Intelligence becomes increasingly predictive rather than reactive.
 
 ## Visual Intelligence
 
-**Status:** 🔵 PLANNED
+**Status:** DESKTOP OBSERVATION FOUNDATION IMPLEMENTED; vision pipeline planned
 
 ---
 
@@ -595,7 +595,7 @@ Observation enriches intelligence without interfering with gameplay.
 
 ## Universal Game Platform
 
-**Status:** 🔵 PLANNED
+**Status:** GAME INTEGRATION FOUNDATION IMPLEMENTED; universal platform planned
 
 ---
 
@@ -647,7 +647,7 @@ Oracle becomes the Operator's gaming platform rather than a single-game assistan
 
 ## Live Companion Intelligence
 
-**Status:** 🔵 PLANNED
+**Status:** ACTIVE FOUNDATION through Sprint 12.1
 
 ---
 
@@ -684,7 +684,7 @@ Oracle Companion becomes the Operator's real-time gaming companion while remaini
 
 ## Oracle Ecosystem
 
-**Status:** 🔵 PLANNED
+**Status:** EXTENSION FOUNDATION IMPLEMENTED; Marketplace planned
 
 ---
 
@@ -719,9 +719,41 @@ Oracle becomes an extensible ecosystem where new capabilities can be added witho
 
 The Oracle Platform grows through extensions rather than increasing complexity inside the Platform itself.
 
+# Current Delivery — Sprint 12.1
+
+The earlier Sprint 9–12 sequence in this roadmap was a strategic projection.
+Repository delivery continued on `sprint-9-overlay`, and the verified current
+work is Sprint 12.1 Desktop Platform Foundation and Hardening. It is not the
+projected Marketplace milestone.
+
+Completed in the current delivery line:
+
+- external Electron Companion host
+- deterministic desktop discovery, target selection and attachment
+- native desktop-window observation
+- Companion Session and immutable Context ownership
+- Desktop Host Snapshot and Coordinator
+- Desktop Host Event Stream
+- Desktop Diagnostics and Recovery
+- unified Desktop Timeline
+- derived Desktop Telemetry
+- first Call of Duty Game Integration foundation
+
+Remaining before Sprint 12.1 closure:
+
+- Desktop Platform API Freeze
+- dependency-boundary audit acceptance
+- full verification and issue correction
+- formal sprint closure and release decision
+
+Sprint 13 has not started. Marketplace remains a future strategic objective;
+it must not be inferred from the Sprint number alone.
+
 # Current Oracle Platform
 
-Sprint 8 establishes Oracle as a complete operating platform for gaming intelligence.
+Sprint 8 established Oracle's operating-platform model. Later implementation
+added desktop foundations, while some Platform coordination remains unwired in
+production entry points.
 
 The Platform now provides the permanent foundation upon which every future capability will be built.
 
@@ -729,7 +761,7 @@ The Platform now provides the permanent foundation upon which every future capab
 
 ## Oracle Platform
 
-Implemented:
+Implemented as architectural foundations:
 
 - Platform Bootstrap
 - Platform Lifecycle
@@ -742,7 +774,9 @@ Implemented:
 - Platform Contracts
 - Shared Diagnostics
 
-The Platform coordinates every major Oracle subsystem.
+The Platform is designed to coordinate every major Oracle subsystem. The
+Platform bootstrap is not yet wired into production startup, so this list must
+not be interpreted as end-to-end activation of every subsystem.
 
 ---
 
@@ -755,7 +789,6 @@ Current Services include:
 - Memory
 - Reports
 - Progression
-- Intelligence
 - Operator
 - AI Coach
 - Oracle Brain
@@ -776,7 +809,6 @@ Current Oracle Applications include:
 - Reports
 - Career
 - Companion
-- Operator
 
 Applications present intelligence to the user.
 
@@ -788,7 +820,9 @@ Applications do not own business logic.
 
 ## Game Integrations
 
-Current architecture supports game integrations through the Oracle Game Integration SDK.
+Current architecture provides Game Integration contracts, a registry, an
+evaluator and one Call of Duty implementation. No integration is currently
+wired into the desktop host.
 
 Supported integrations will continue to grow without requiring Platform redesign.
 

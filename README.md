@@ -1,6 +1,6 @@
-# Project Meta
+# Project Meta — Oracle
 
-> **Building the world's most advanced AI-powered Competitive Gaming Intelligence Platform.**
+> **Oracle is the operating platform for gaming intelligence.**
 
 Project Meta is a software platform focused on creating intelligent coaching systems that help competitive players improve through behavioural analysis, long-term learning, evidence-based reasoning and adaptive AI guidance.
 
@@ -10,7 +10,8 @@ The flagship product is **Oracle**.
 
 # What is Oracle?
 
-Oracle is an AI Gaming Intelligence Companion.
+Oracle is a gaming-intelligence platform with web intelligence experiences and
+an external Windows Companion desktop host.
 
 Unlike traditional stat trackers, Oracle is designed to understand **how** an Operator plays rather than simply recording what happened.
 
@@ -24,17 +25,21 @@ Oracle is being built as an intelligence platform rather than a statistics dashb
 
 ## Version
 
-**Oracle v0.4 — Oracle Intelligence Platform**
+**Oracle v0.8.0 baseline with active Sprint 12.1 desktop-platform work**
 
 ## Current Milestone
 
-**Operation Horizon**
+**Sprint 12.1 — Desktop Platform Foundation and Hardening**
 
-**Sprint 4 — COMPLETE**
+**Status: Active; documentation synchronised, engineering closure pending**
 
 ## Build Status
 
-✅ Production Build Passing
+The last documented production baseline passed. A fresh full compile, lint and
+production-build verification remains required before Sprint 12.1 closure.
+
+The canonical verified status is maintained in
+[`docs/architecture/IMPLEMENTATION_STATUS.md`](docs/architecture/IMPLEMENTATION_STATUS.md).
 
 ---
 
@@ -283,11 +288,11 @@ Operator-facing intelligence.
 
 ## Operation Horizon
 
-🟢 In Progress
+Active through the Companion and Desktop Platform work.
 
 Platform consolidation and production architecture.
 
-Sprint 4 has completed:
+Verified delivery now includes:
 
 - Oracle Runtime
 - Oracle Lifecycle
@@ -295,6 +300,14 @@ Sprint 4 has completed:
 - Decision Intelligence
 - Explainability
 - Dashboard Modularisation
+- Electron Companion host and secure preload bridge
+- deterministic desktop target selection and attachment
+- Companion Session and immutable Context ownership
+- Desktop Host Snapshot and Event Stream
+- Desktop Diagnostics, Recovery, Timeline and Telemetry
+
+The Desktop Platform API Freeze, dependency-boundary closure and full
+verification remain Sprint 12.1 work. Sprint 13 has not started.
 
 ---
 
