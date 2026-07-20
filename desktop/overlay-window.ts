@@ -30,6 +30,9 @@ import {
 import {
   OracleCompanionSessionManager,
 } from "./companion/companion-session-manager.js";
+import {
+  OracleDesktopHostSnapshotCoordinator,
+} from "./platform/desktop-host-snapshot-coordinator.js";
 
 export type CompanionHostWindowOptions = {
   companionUrl: string;
@@ -65,6 +68,9 @@ export class CompanionHostWindowController {
   private readonly windowObserver =
     new OracleDesktopWindowObserver();
 
+  private readonly desktopHostSnapshots =
+    new OracleDesktopHostSnapshotCoordinator();
+
   private readonly companionSession =
     new OracleCompanionSessionManager();
 
@@ -83,6 +89,19 @@ export class CompanionHostWindowController {
   private readonly options:
     CompanionHostWindowOptions
 ) {
+  this.desktopHostSnapshots
+    .subscribeEvents((event) => {
+      if (
+        event.type ===
+        "desktop-host.snapshot-captured"
+      ) {
+        this.companionSession
+          .captureContext(
+            event.snapshot
+          );
+      }
+    });
+
   this.attachment =
     new OracleDesktopAttachmentController({
       trackingIntervalMs:
@@ -177,7 +196,7 @@ export class CompanionHostWindowController {
     this.registerScreenEvents();
 
     this.companionSession.start(
-      this.getState()
+      this.captureDesktopHostSnapshot()
     );
 
     await window.loadURL(
@@ -185,7 +204,7 @@ export class CompanionHostWindowController {
     );
 
     this.companionSession.markReady(
-      this.getState()
+      this.captureDesktopHostSnapshot()
     );
 
     if (!window.isDestroyed()) {
@@ -412,7 +431,10 @@ export class CompanionHostWindowController {
 this.developmentBounds = null;
 
 this.unregisterScreenEvents();
-this.companionSession.end();
+this.companionSession.end(
+  this.desktopHostSnapshots.getSnapshot()
+);
+this.desktopHostSnapshots.clear();
     if (!window) {
       this.window = null;
       return;
@@ -512,7 +534,7 @@ this.attachment.attach(
 );
 
 this.companionSession.markAttached(
-  this.getState()
+  this.captureDesktopHostSnapshot()
 );
 }
 private createTargetCandidateInputs(
@@ -869,7 +891,10 @@ private restoreDevelopmentBounds(): void {
 
 this.developmentBounds = null;
 
-this.companionSession.end();
+this.companionSession.end(
+  this.desktopHostSnapshots.getSnapshot()
+);
+this.desktopHostSnapshots.clear();
 
 this.window = null;
 this.hostState.reset();
@@ -976,6 +1001,11 @@ this.hostState.reset();
       false;
   }
 
+  private captureDesktopHostSnapshot() {
+    return this.desktopHostSnapshots
+      .capture(this.getState());
+  }
+
   private publishState(): void {
     const window =
       this.getWindow();
@@ -991,8 +1021,8 @@ this.hostState.reset();
     const state =
       this.getState();
 
-    this.companionSession
-      .captureContext(state);
+    this.desktopHostSnapshots
+      .capture(state);
 
     window.webContents.send(
       DESKTOP_CHANNELS

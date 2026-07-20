@@ -1,9 +1,6 @@
 import type {
-  OracleDesktopHostState,
-} from "../host-state.js";
-import {
-  createOracleDesktopHostSnapshot,
-} from "../platform/desktop-host-snapshot-builder.js";
+  OracleDesktopHostSnapshot,
+} from "../platform/desktop-host-snapshot.js";
 import {
   createOracleCompanionContext,
   type OracleCompanionContext,
@@ -20,17 +17,17 @@ import {
 /**
  * Owns the lifecycle of the current desktop Companion session.
  *
- * The desktop host reports lifecycle events and immutable host-state
- * snapshots to this manager. The manager is the only desktop class that
- * creates or transitions OracleCompanionSession state.
+ * The desktop platform supplies immutable host snapshots to this manager.
+ * The manager is the only desktop class that creates or transitions
+ * OracleCompanionSession state, but it does not produce platform snapshots.
  */
 export class OracleCompanionSessionManager {
   private currentSession:
     OracleCompanionSession | null = null;
 
   start(
-    desktopState:
-      OracleDesktopHostState | null = null
+    desktopSnapshot:
+      OracleDesktopHostSnapshot | null = null
   ): OracleCompanionSession {
     if (
       this.currentSession &&
@@ -44,15 +41,15 @@ export class OracleCompanionSessionManager {
     this.currentSession =
       createOracleCompanionSession({
         currentContext:
-          createContext(desktopState),
+          createContext(desktopSnapshot),
       });
 
     return this.getRequiredSnapshot();
   }
 
   markReady(
-    desktopState:
-      OracleDesktopHostState | null = null
+    desktopSnapshot:
+      OracleDesktopHostSnapshot | null = null
   ): OracleCompanionSession {
     const session =
       this.getRequiredSession();
@@ -62,7 +59,7 @@ export class OracleCompanionSessionManager {
         session,
         {
           currentContext:
-            createContext(desktopState),
+            createContext(desktopSnapshot),
         }
       );
 
@@ -70,8 +67,8 @@ export class OracleCompanionSessionManager {
   }
 
   markAttached(
-    desktopState:
-      OracleDesktopHostState | null = null
+    desktopSnapshot:
+      OracleDesktopHostSnapshot | null = null
   ): OracleCompanionSession {
     const session =
       this.getRequiredSession();
@@ -81,7 +78,7 @@ export class OracleCompanionSessionManager {
         session,
         {
           currentContext:
-            createContext(desktopState),
+            createContext(desktopSnapshot),
         }
       );
 
@@ -89,8 +86,8 @@ export class OracleCompanionSessionManager {
   }
 
   captureContext(
-    desktopState:
-      OracleDesktopHostState
+    desktopSnapshot:
+      OracleDesktopHostSnapshot
   ): OracleCompanionSession | null {
     const session =
       this.currentSession;
@@ -104,7 +101,7 @@ export class OracleCompanionSessionManager {
         session,
         {
           currentContext:
-            createContext(desktopState),
+            createContext(desktopSnapshot),
         }
       );
 
@@ -122,8 +119,8 @@ export class OracleCompanionSessionManager {
   }
 
   end(
-    desktopState:
-      OracleDesktopHostState | null = null
+    desktopSnapshot:
+      OracleDesktopHostSnapshot | null = null
   ): OracleCompanionSession | null {
     const session =
       this.currentSession;
@@ -146,7 +143,7 @@ export class OracleCompanionSessionManager {
         session,
         {
           currentContext:
-            createContext(desktopState),
+            createContext(desktopSnapshot),
         }
       );
 
@@ -190,16 +187,11 @@ export class OracleCompanionSessionManager {
 }
 
 function createContext(
-  desktopState:
-    OracleDesktopHostState | null
+  desktopSnapshot:
+    OracleDesktopHostSnapshot | null
 ) {
   return createOracleCompanionContext({
-    desktop:
-      desktopState == null
-        ? null
-        : createOracleDesktopHostSnapshot({
-            hostState: desktopState,
-          }),
+    desktop: desktopSnapshot,
   });
 }
 
