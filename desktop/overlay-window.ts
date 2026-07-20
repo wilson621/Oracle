@@ -45,6 +45,12 @@ import {
 import type {
   OracleDesktopRecovery,
 } from "./platform/desktop-recovery.js";
+import {
+  OracleDesktopTimelineService,
+} from "./platform/desktop-timeline-service.js";
+import type {
+  OracleDesktopTimelineEntry,
+} from "./platform/desktop-timeline.js";
 
 export type CompanionHostWindowOptions = {
   companionUrl: string;
@@ -92,6 +98,9 @@ export class CompanionHostWindowController {
   private readonly recovery =
     new OracleDesktopRecoveryService();
 
+  private readonly timeline =
+    new OracleDesktopTimelineService();
+
   private screenEventsRegistered = false;
 
   private discoveryRunId = 0;
@@ -107,8 +116,20 @@ export class CompanionHostWindowController {
   private readonly options:
     CompanionHostWindowOptions
 ) {
+  this.recovery.subscribe(
+    (recovery) => {
+      this.timeline.consumeRecovery(
+        recovery
+      );
+    }
+  );
+
   this.diagnostics.subscribe(
     (diagnostic) => {
+      this.timeline.consumeDiagnostic(
+        diagnostic
+      );
+
       this.recovery.consumeDiagnostic(
         diagnostic
       );
@@ -117,6 +138,10 @@ export class CompanionHostWindowController {
 
   this.desktopHostSnapshots
     .subscribeEvents((event) => {
+      this.timeline.consumeHostEvent(
+        event
+      );
+
       this.diagnostics
         .consumeHostEvent(event);
 
@@ -285,6 +310,11 @@ export class CompanionHostWindowController {
   getRecentRecoveries(): readonly OracleDesktopRecovery[] {
     return this.recovery
       .getRecentRecoveries();
+  }
+
+  getRecentTimelineEntries(): readonly OracleDesktopTimelineEntry[] {
+    return this.timeline
+      .getRecentEntries();
   }
 
   getState(): OracleDesktopHostState {
