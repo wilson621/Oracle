@@ -3,7 +3,7 @@
 **Version:** 4.0
 **Last updated:** 20 July 2026
 **Branch:** `sprint-9-overlay`
-**Implementation baseline before Commit 3:** `33fbe4e`
+**Implementation baseline before Commit 4:** `e14a379`
 
 ---
 
@@ -31,7 +31,8 @@ Sprint 13 has not started.
 - [x] Documentation implementation audit
 - [x] Canonical `IMPLEMENTATION_STATUS.md`
 - [x] Permanent `PROJECT_VISION.md`
-- [x] Commit 3 â€” Complete Session Lifecycle
+- [x] Commit 3 — Complete Session Lifecycle
+- [x] Commit 4 — Desktop Platform API Freeze
 
 Commit 3 synchronises attachment changes with the authoritative Companion
 Session lifecycle and guarantees cleanup when the renderer fails to load.
@@ -42,16 +43,15 @@ Session lifecycle and guarantees cleanup when the renderer fails to load.
 
 - [x] Commit 1
 - [x] Commit 2
-- [x] Commit 3 â€” Complete Session Lifecycle (review gate pending)
-- [ ] Commit 4 â€” pending; scope must be confirmed from repository evidence
-- [ ] Commit 5 â€” pending; scope must be confirmed from repository evidence
-- [ ] Commit 6 â€” final hardening and closure
+- [x] Commit 3 — Complete Session Lifecycle
+- [x] Commit 4 — Desktop Platform API Freeze
+- [ ] Commit 5 — pending; scope must be confirmed from repository evidence
+- [ ] Commit 6 — final hardening and closure
 
 ---
 
 # Remaining Sprint 12.1 Work
 
-- [ ] Desktop Platform API Freeze
 - [ ] Dependency-boundary audit acceptance
 - [ ] Final-closure desktop TypeScript compilation re-run
 - [ ] Final-closure lint verification re-run
@@ -60,7 +60,7 @@ Session lifecycle and guarantees cleanup when the renderer fails to load.
 - [ ] Fix issues found during verification
 - [ ] Sprint closure and release decision
 
-Commits 4â€“6 and the unchecked items above are planned future work. They are
+Commits 5–6 and the unchecked items above are planned future work. They are
 not implemented functionality.
 
 ---
@@ -90,7 +90,8 @@ not implemented functionality.
 - native Windows discovery and observation implemented
 - versioned immutable desktop contracts implemented
 - Diagnostics, Recovery, Timeline and Telemetry implemented
-- Desktop Platform public API is not frozen
+- Desktop Platform API version 1 is frozen through the sole supported external
+  import surface at `desktop/platform/index.ts`
 
 ## Companion
 
@@ -133,7 +134,6 @@ Open findings:
 3. registered Services and Applications are metadata foundations, not the
    exclusive runtime boundary
 4. Game Integration output is not connected to desktop Companion Context
-5. Desktop Platform contracts are versioned but have no frozen public surface
 
 These findings are recorded for dependency-boundary review. This board does
 not authorise redesign or begin Sprint 13.
@@ -150,6 +150,7 @@ not authorise redesign or begin Sprint 13.
 - [x] Roadmap distinguishes projection from delivered work
 - [x] Master Build Plan reflects Sprint 12.1
 - [x] ADRs record desktop snapshot/event and Timeline/Telemetry ownership
+- [x] ADR records the Desktop Platform API version 1 compatibility commitment
 - [x] Sprint 12.1 implementation audit added
 
 ---

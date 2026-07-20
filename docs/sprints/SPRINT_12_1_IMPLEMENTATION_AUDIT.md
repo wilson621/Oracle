@@ -2,7 +2,7 @@
 
 **Status:** Active — documentation synchronised, engineering closure pending
 **Branch:** `sprint-9-overlay`
-**Implementation baseline before Commit 3:** `33fbe4e`
+**Implementation baseline before Commit 4:** `e14a379`
 **Audit date:** 20 July 2026
 
 ---
@@ -28,6 +28,7 @@ Git history and source inspection confirm the following delivered milestones:
 8. Desktop Timeline
 9. Desktop Telemetry
 10. Complete Session Lifecycle (Commit 3)
+11. Desktop Platform API Freeze (Commit 4)
 
 The implementation uses immutable, serializable contracts and bounded
 in-process histories. Desktop Telemetry is rebuilt from the unified Timeline.
@@ -80,20 +81,16 @@ not change implementation.
 
 # Remaining Sprint 12.1 Objectives
 
-Commit 3 is implemented and verified in the working tree. The review, commit
-and push remain subject to the required approval gate.
+Commits 3 and 4 are complete. Commit 4 freezes Desktop Platform API version 1
+behind `desktop/platform/index.ts` and records its compatibility policy.
 
 The remaining planned sequence is intentionally future work:
 
-1. Commit 4 (pending; scope must be taken from repository evidence before
+1. Commit 5 (pending; scope must be taken from repository evidence before
    implementation).
-2. Commit 5 (pending; scope must be taken from repository evidence before
-   implementation).
-3. Commit 6 final hardening, including full verification, closure and release
+2. Commit 6 final hardening, including full verification, closure and release
    decision.
-4. Freeze the Desktop Platform public API when its assigned Sprint 12 commit
-   is reached.
-5. Complete and accept the dependency-boundary audit when its assigned Sprint
+3. Complete and accept the dependency-boundary audit when its assigned Sprint
    12 commit is reached.
 
 Sprint 12.1 is not complete. Sprint 13 must not begin.

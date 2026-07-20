@@ -3,7 +3,7 @@
 **Version:** 2.1
 **Status:** Active  
 **Owner:** Oracle Platform Engineering  
-**Last Updated:** Sprint 12.1 implementation audit — 20 July 2026
+**Last Updated:** Sprint 12.1 Commit 4 — 20 July 2026
 
 ---
 
@@ -105,14 +105,15 @@ Verified completed work:
 - Desktop Recovery
 - Desktop Timeline
 - Desktop Telemetry
+- Complete Session Lifecycle
+- Desktop Platform API Freeze
 
 Remaining work, in order:
 
-1. Desktop Platform API Freeze
-2. dependency-boundary audit acceptance
-3. full compile, lint, production build and runtime verification
-4. correction of issues found by verification
-5. formal Sprint 12.1 closure and release decision
+1. dependency-boundary audit acceptance
+2. full compile, lint, production build and runtime verification
+3. correction of issues found by verification
+4. formal Sprint 12.1 closure and release decision
 
 Documentation synchronisation records current implementation but does not
 complete those engineering gates. Sprint 13 must not begin.
@@ -123,7 +124,8 @@ Known integration boundaries requiring deliberate review:
 - web pages do not consistently consume Services through Applications.
 - desktop Companion Session Context does not yet consume Game Integrations.
 - the Platform-level and desktop-level Companion runtimes are not integrated.
-- Desktop Platform versioned contracts have no frozen public import surface.
+- Desktop Platform API version 1 is frozen through
+  `desktop/platform/index.ts`; internal implementations remain private.
 
 See `docs/architecture/IMPLEMENTATION_STATUS.md` for the canonical verified
 status.

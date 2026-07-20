@@ -805,6 +805,49 @@ reproduced from the same Timeline input.
 
 ---
 
+# ADR-030
+
+## Decision
+
+Desktop Platform API version 1 is frozen behind
+`desktop/platform/index.ts`, the sole supported public import surface for
+external consumers.
+
+The public surface contains only the immutable, serializable Host Snapshot,
+Host Event, Diagnostic, Recovery, Timeline Entry and Telemetry Snapshot
+contracts declared by `ORACLE_DESKTOP_PLATFORM_API_MANIFEST`. Desktop services,
+controllers, builders, coordinators, Electron objects, native helpers and
+game-specific knowledge remain internal.
+
+Existing internal desktop imports may continue to use leaf modules to avoid
+unnecessary churn. New external consumers must not import leaf modules
+directly.
+
+## Reason
+
+The implemented versioned contracts require one deliberate compatibility
+boundary before additional consumers are introduced. An explicit barrel and
+machine-readable manifest prevent accidental implementation exports, make the
+supported surface inspectable and preserve the Platform's serializable-data
+boundary.
+
+## Consequence
+
+API version 1 follows the guarantees and change policy in
+`desktop/platform/API_COMPATIBILITY.md`. Compatible additions must preserve
+existing names, schemas and meanings. Breaking changes require a versioned
+migration; Desktop Platform API version 2 requires a new accepted ADR before
+implementation.
+
+The restricted renderer `OracleDesktopBridge` remains a separate external
+boundary and is not changed by this decision.
+
+## Status
+
+✅ Accepted and implemented in Sprint 12.1 Commit 4
+
+---
+
 # Future Decision Records
 
 Every significant architectural decision should be documented before implementation whenever practical.

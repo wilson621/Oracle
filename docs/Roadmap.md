@@ -738,10 +738,10 @@ Completed in the current delivery line:
 - unified Desktop Timeline
 - derived Desktop Telemetry
 - first Call of Duty Game Integration foundation
+- frozen Desktop Platform API version 1
 
 Remaining before Sprint 12.1 closure:
 
-- Desktop Platform API Freeze
 - dependency-boundary audit acceptance
 - full verification and issue correction
 - formal sprint closure and release decision

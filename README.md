@@ -306,9 +306,10 @@ Verified delivery now includes:
 - Companion Session and immutable Context ownership
 - Desktop Host Snapshot and Event Stream
 - Desktop Diagnostics, Recovery, Timeline and Telemetry
+- frozen Desktop Platform API version 1 for immutable desktop contracts
 
-The Desktop Platform API Freeze, dependency-boundary closure and full
-verification remain Sprint 12.1 work. Sprint 13 has not started.
+Dependency-boundary closure and final hardening remain Sprint 12.1 work.
+Sprint 13 has not started.
 
 ---
 

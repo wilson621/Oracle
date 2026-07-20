@@ -1161,9 +1161,10 @@ the chronological source for Telemetry. These services exchange serializable
 data and do not expose Electron objects through their contracts.
 
 The renderer-accessible boundary remains `OracleDesktopBridge` from
-`desktop/contracts.ts`. The newer Desktop Platform contracts are versioned but
-do not yet have a frozen public import surface. API Freeze remains Sprint 12.1
-work.
+`desktop/contracts.ts`. Desktop Platform API version 1 freezes the newer
+versioned data contracts behind the sole supported external import surface at
+`desktop/platform/index.ts`. The API manifest and compatibility policy exclude
+services, controllers, Electron objects and native implementation details.
 
 # Verified Integration Limits
 

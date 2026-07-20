@@ -559,10 +559,10 @@ Current Runtime
 ✓ Desktop Host Snapshot and Event Stream
 ✓ Desktop Diagnostics and Recovery
 ✓ Desktop Timeline and Telemetry
+✓ Desktop Platform API version 1 freeze
 
 Not yet closed
 
-- Desktop Platform API Freeze
 - dependency-boundary audit acceptance
 - full Sprint 12.1 verification
 - Game Integration to desktop-context wiring

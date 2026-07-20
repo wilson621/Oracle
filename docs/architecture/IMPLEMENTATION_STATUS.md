@@ -3,7 +3,7 @@
 **Status:** Canonical living implementation record
 **Last verified:** 20 July 2026
 **Verified branch:** `sprint-9-overlay`
-**Verified baseline before Commit 3:** `33fbe4e`
+**Verified baseline before Commit 4:** `e14a379`
 
 ---
 
@@ -43,6 +43,7 @@ Implemented milestones:
 - Unified Desktop Timeline
 - Derived Desktop Telemetry
 - Complete Session Lifecycle (Commit 3)
+- Desktop Platform API version 1 freeze (Commit 4)
 
 Commit 3 keeps the active Session aligned with host attachment state:
 
@@ -54,12 +55,11 @@ Commit 3 keeps the active Session aligned with host attachment state:
 
 Remaining before Sprint 12.1 closure:
 
-- Desktop Platform API Freeze
 - Dependency-boundary decision and audit closure
 - Full build and runtime verification
 - Sprint closure commit, push and release decision
 
-Commits 4â€“6 and the remaining closure objectives are future work, not verified
+Commits 5–6 and the remaining closure objectives are future work, not verified
 functionality. Sprint 13 has not started.
 
 ---
@@ -118,6 +118,7 @@ Implemented under `desktop/`:
 - Companion Session lifecycle and context ownership
 - attachment-driven Session lifecycle synchronisation and renderer-load
   failure cleanup
+- frozen Desktop Platform API version 1 and compatibility manifest
 
 Desktop Platform services exchange serializable data and do not expose
 Electron objects through their contracts.
@@ -156,9 +157,10 @@ The renderer-accessible desktop API is `OracleDesktopBridge` in
 
 IPC requests are accepted only from the controller-owned renderer.
 
-## Internal Versioned Contracts
+## Frozen Desktop Platform API Version 1
 
-The following version 1 contracts exist but are not yet a frozen external API:
+The sole supported external import surface is `desktop/platform/index.ts`.
+It exposes the API manifest and these immutable version 1 contracts:
 
 - `oracle.desktop-host-snapshot`
 - `oracle.desktop-host-event`
@@ -167,8 +169,12 @@ The following version 1 contracts exist but are not yet a frozen external API:
 - `oracle.desktop-timeline-entry`
 - `oracle.desktop-telemetry-snapshot`
 
-There is no `desktop/platform` public barrel or API manifest. The Desktop
-Platform API Freeze remains an explicit Sprint 12.1 objective.
+`ORACLE_DESKTOP_PLATFORM_API_MANIFEST` records the API identity, version and
+contract versions without duplicating their values. Services, controllers,
+builders, coordinators, Electron objects and native helpers remain internal.
+Existing internal leaf imports may remain, but new external consumers must use
+the public index. Compatibility guarantees are documented in
+`desktop/platform/API_COMPATIBILITY.md`.
 
 ---
 
@@ -193,6 +199,8 @@ Verified strengths:
 - telemetry derives from the Timeline rather than duplicating source history
 - Companion Session Manager is the single desktop Session owner
 - diagnostics and recovery remain separate from Electron recovery mechanics
+- the Desktop Platform public surface exposes contracts rather than services
+  or host implementation objects
 
 Open boundary findings:
 
@@ -203,8 +211,6 @@ Open boundary findings:
 4. `lib/companion` and `desktop/companion` model different lifecycle layers but
    have no implemented integration contract.
 5. Game Integration evaluation is not connected to desktop Companion Context.
-6. Desktop Platform modules have versioned data contracts but no frozen public
-   import surface.
 
 These are recorded findings, not authorisation to redesign verified systems.
 
@@ -221,6 +227,8 @@ These are recorded findings, not authorisation to redesign verified systems.
   snapshots and versioned events.
 - Timeline is the authoritative chronological desktop record; Telemetry is a
   derived view.
+- Desktop Platform API version 1 is frozen behind one explicit public import
+  surface; breaking version 2 work requires an accepted ADR.
 
 See `docs/Decisions.md` for the complete ADR record.
 
@@ -229,8 +237,8 @@ See `docs/Decisions.md` for the complete ADR record.
 # Verification Scope
 
 This status was produced from source inspection and Git history using
-`33fbe4e` as the clean baseline before Commit 3. Commit 3 verification includes
-desktop TypeScript compilation, lint, production build, `git diff --check` and
+`e14a379` as the clean baseline before Commit 4. Commit 4 verification includes
+the Desktop Platform public-export audit, desktop TypeScript compilation,
+manifest validation, lint, production build, `git diff --check` and
 working-tree inspection. Runtime UI verification and the work explicitly
-listed under remaining Sprint 12.1 objectives are not claimed by this
-document.
+listed under remaining Sprint 12.1 objectives are not claimed by this document.

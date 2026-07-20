@@ -1202,9 +1202,11 @@ integration boundary. The implemented Call of Duty Game Integration is also
 not yet wired into desktop Companion Context. These are recorded remaining
 integration tasks, not completed capabilities.
 
-The current public renderer boundary is the restricted preload
-`OracleDesktopBridge`. The newer versioned Desktop Platform contracts remain
-internal until the Desktop Platform API Freeze is completed.
+The public renderer boundary is the restricted preload `OracleDesktopBridge`.
+Desktop Platform API version 1 separately exposes the immutable desktop data
+contracts through `desktop/platform/index.ts`, the sole supported external
+import surface. Desktop services, controllers and Electron/native details
+remain internal.
 
 ---
 
