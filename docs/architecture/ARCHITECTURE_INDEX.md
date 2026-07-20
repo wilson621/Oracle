@@ -34,6 +34,9 @@ repository also contains the Sprint 8 Platform coordination foundations and
 the Sprint 12.1 Desktop Platform. Current delivery truth is recorded in
 `IMPLEMENTATION_STATUS.md`.
 
+The Sprint 12 Commit 5 dependency findings and enforcement baseline are
+recorded in `DEPENDENCY_BOUNDARY_AUDIT.md`.
+
 The platform now executes intelligence through a validated Engine Runtime rather than a monolithic orchestration model.
 
 Runtime execution follows:
@@ -560,10 +563,10 @@ Current Runtime
 ✓ Desktop Diagnostics and Recovery
 ✓ Desktop Timeline and Telemetry
 ✓ Desktop Platform API version 1 freeze
+✓ Dependency Boundary Audit and automated enforcement
 
 Not yet closed
 
-- dependency-boundary audit acceptance
 - full Sprint 12.1 verification
 - Game Integration to desktop-context wiring
 - Platform bootstrap production wiring

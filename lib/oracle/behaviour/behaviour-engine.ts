@@ -1,6 +1,6 @@
 import type { OracleContext } from "@/lib/oracle/context";
 import type { OracleEngine } from "@/lib/oracle/engines";
-import { buildEngineResult } from "@/lib/oracle/engines";
+import { buildEngineResult } from "@/lib/oracle/engines/build-engine-result";
 import { calculateCombatRatingFromSession } from "@/lib/oracle/repositories/session-repository";
 import { analyseBehaviour } from "./behaviour-analysis";
 import type { BehaviourInput, BehaviourProfile } from "./behaviour-types";

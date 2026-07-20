@@ -3,7 +3,7 @@
 **Status:** Canonical living implementation record
 **Last verified:** 20 July 2026
 **Verified branch:** `sprint-9-overlay`
-**Verified baseline before Commit 4:** `e14a379`
+**Verified baseline before Commit 5:** `54a7298`
 
 ---
 
@@ -44,6 +44,8 @@ Implemented milestones:
 - Derived Desktop Telemetry
 - Complete Session Lifecycle (Commit 3)
 - Desktop Platform API version 1 freeze (Commit 4)
+- automated dependency-boundary baseline and enforcement (Commit 5)
+- zero runtime circular dependency groups after engine import-path correction
 
 Commit 3 keeps the active Session aligned with host attachment state:
 
@@ -55,11 +57,10 @@ Commit 3 keeps the active Session aligned with host attachment state:
 
 Remaining before Sprint 12.1 closure:
 
-- Dependency-boundary decision and audit closure
 - Full build and runtime verification
 - Sprint closure commit, push and release decision
 
-Commits 5–6 and the remaining closure objectives are future work, not verified
+Commit 6 and the remaining closure objectives are future work, not verified
 functionality. Sprint 13 has not started.
 
 ---
@@ -213,6 +214,10 @@ Open boundary findings:
 5. Game Integration evaluation is not connected to desktop Companion Context.
 
 These are recorded findings, not authorisation to redesign verified systems.
+They are now measured by `npm run architecture:audit`; documented legacy
+exceptions remain technical debt and new violations fail verification.
+See `docs/architecture/DEPENDENCY_BOUNDARY_AUDIT.md` for classifications,
+evidence and correction priorities.
 
 ---
 
@@ -237,8 +242,8 @@ See `docs/Decisions.md` for the complete ADR record.
 # Verification Scope
 
 This status was produced from source inspection and Git history using
-`e14a379` as the clean baseline before Commit 4. Commit 4 verification includes
-the Desktop Platform public-export audit, desktop TypeScript compilation,
-manifest validation, lint, production build, `git diff --check` and
-working-tree inspection. Runtime UI verification and the work explicitly
-listed under remaining Sprint 12.1 objectives are not claimed by this document.
+`54a7298` as the clean baseline before Commit 5. Commit 5 verification includes
+the automated dependency audit, desktop TypeScript compilation, lint,
+production build, `git diff --check` and working-tree inspection. Runtime UI
+verification and the work explicitly listed under remaining Sprint 12.1
+objectives are not claimed by this document.

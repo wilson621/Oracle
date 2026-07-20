@@ -1,6 +1,6 @@
 import type { OracleContext } from "@/lib/oracle/context";
 import type { OracleEngine } from "@/lib/oracle/engines";
-import { buildEngineResult } from "@/lib/oracle/engines";
+import { buildEngineResult } from "@/lib/oracle/engines/build-engine-result";
 import { calculateOperatorProfileConfidence } from "./operator-profile-confidence";
 import { classifyOperatorCombatIdentity } from "./operator-profile-identity";
 import { determineOperatorLearningStyle } from "./operator-profile-learning-style";

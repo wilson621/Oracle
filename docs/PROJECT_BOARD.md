@@ -33,6 +33,7 @@ Sprint 13 has not started.
 - [x] Permanent `PROJECT_VISION.md`
 - [x] Commit 3 — Complete Session Lifecycle
 - [x] Commit 4 — Desktop Platform API Freeze
+- [x] Commit 5 — Dependency Boundary Audit (review gate pending)
 
 Commit 3 synchronises attachment changes with the authoritative Companion
 Session lifecycle and guarantees cleanup when the renderer fails to load.
@@ -45,14 +46,14 @@ Session lifecycle and guarantees cleanup when the renderer fails to load.
 - [x] Commit 2
 - [x] Commit 3 — Complete Session Lifecycle
 - [x] Commit 4 — Desktop Platform API Freeze
-- [ ] Commit 5 — pending; scope must be confirmed from repository evidence
+- [x] Commit 5 — Dependency Boundary Audit (review gate pending)
 - [ ] Commit 6 — final hardening and closure
 
 ---
 
 # Remaining Sprint 12.1 Work
 
-- [ ] Dependency-boundary audit acceptance
+- [x] Dependency-boundary audit implementation and automated enforcement
 - [ ] Final-closure desktop TypeScript compilation re-run
 - [ ] Final-closure lint verification re-run
 - [ ] Final-closure Next.js production build re-run
@@ -60,7 +61,7 @@ Session lifecycle and guarantees cleanup when the renderer fails to load.
 - [ ] Fix issues found during verification
 - [ ] Sprint closure and release decision
 
-Commits 5–6 and the unchecked items above are planned future work. They are
+Commit 6 and the unchecked items above are planned future work. They are
 not implemented functionality.
 
 ---

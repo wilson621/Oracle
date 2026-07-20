@@ -29,6 +29,7 @@ Git history and source inspection confirm the following delivered milestones:
 9. Desktop Telemetry
 10. Complete Session Lifecycle (Commit 3)
 11. Desktop Platform API Freeze (Commit 4)
+12. Dependency Boundary Audit and enforcement (Commit 5)
 
 The implementation uses immutable, serializable contracts and bounded
 in-process histories. Desktop Telemetry is rebuilt from the unified Timeline.
@@ -81,17 +82,14 @@ not change implementation.
 
 # Remaining Sprint 12.1 Objectives
 
-Commits 3 and 4 are complete. Commit 4 freezes Desktop Platform API version 1
-behind `desktop/platform/index.ts` and records its compatibility policy.
+Commits 3 and 4 are complete. Commit 5 establishes a checked-in dependency
+baseline and automated enforcement. It also removes the engine runtime barrel
+cycle through import-path corrections without changing behavior.
 
 The remaining planned sequence is intentionally future work:
 
-1. Commit 5 (pending; scope must be taken from repository evidence before
-   implementation).
-2. Commit 6 final hardening, including full verification, closure and release
+1. Commit 6 final hardening, including full verification, closure and release
    decision.
-3. Complete and accept the dependency-boundary audit when its assigned Sprint
-   12 commit is reached.
 
 Sprint 12.1 is not complete. Sprint 13 must not begin.
 

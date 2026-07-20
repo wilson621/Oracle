@@ -3,7 +3,7 @@
 **Version:** 2.1
 **Status:** Active  
 **Owner:** Oracle Platform Engineering  
-**Last Updated:** Sprint 12.1 Commit 4 — 20 July 2026
+**Last Updated:** Sprint 12.1 Commit 5 — 20 July 2026
 
 ---
 
@@ -107,13 +107,13 @@ Verified completed work:
 - Desktop Telemetry
 - Complete Session Lifecycle
 - Desktop Platform API Freeze
+- Dependency Boundary Audit and automated enforcement
 
 Remaining work, in order:
 
-1. dependency-boundary audit acceptance
-2. full compile, lint, production build and runtime verification
-3. correction of issues found by verification
-4. formal Sprint 12.1 closure and release decision
+1. full compile, lint, production build and runtime verification
+2. correction of issues found by verification
+3. formal Sprint 12.1 closure and release decision
 
 Documentation synchronisation records current implementation but does not
 complete those engineering gates. Sprint 13 must not begin.

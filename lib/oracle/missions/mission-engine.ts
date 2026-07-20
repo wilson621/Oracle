@@ -1,6 +1,6 @@
 import type { BehaviourProfile } from "@/lib/oracle/behaviour/behaviour-types";
 import type { OracleEngine } from "@/lib/oracle/engines";
-import { buildEngineResult } from "@/lib/oracle/engines";
+import { buildEngineResult } from "@/lib/oracle/engines/build-engine-result";
 import { generateOracleDecision } from "@/lib/oracle/intelligence/decision-engine";
 import type { PredictionProfile } from "@/lib/oracle/prediction/prediction-types";
 import { calculateCombatRatingFromSession } from "@/lib/oracle/repositories/session-repository";

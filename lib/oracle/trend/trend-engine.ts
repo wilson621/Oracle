@@ -1,6 +1,6 @@
 import type { OracleContext } from "@/lib/oracle/context";
 import type { OracleEngine } from "@/lib/oracle/engines";
-import { buildEngineResult } from "@/lib/oracle/engines";
+import { buildEngineResult } from "@/lib/oracle/engines/build-engine-result";
 import { mapSessionRowsToTrendSessions } from "@/lib/oracle/repositories/session-repository";
 import { analyseTrends } from "./trend-analysis";
 import type { TrendProfile, TrendSession } from "./trend-types";

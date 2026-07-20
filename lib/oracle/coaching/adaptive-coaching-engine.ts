@@ -1,14 +1,20 @@
 import type { OracleContext } from "@/lib/oracle/context";
 import type { OracleEngine } from "@/lib/oracle/engines";
-import { buildEngineResult } from "@/lib/oracle/engines";
+import { buildEngineResult } from "@/lib/oracle/engines/build-engine-result";
 import { generateOracleDecision } from "@/lib/oracle/intelligence/decision-engine";
 
 import {
   buildAdaptiveCoachingPlan,
-  buildAdaptiveCoachingSignals,
-  buildAdaptiveCoachingSummary,
+} from "./adaptive-coaching-plan";
+import {
   calculateCoachingPriority,
-} from "@/lib/oracle/coaching";
+} from "./adaptive-coaching-priority";
+import {
+  buildAdaptiveCoachingSignals,
+} from "./adaptive-coaching-signals";
+import {
+  buildAdaptiveCoachingSummary,
+} from "./adaptive-coaching-summary";
 
 import type {
   AdaptiveCoachingProfile,

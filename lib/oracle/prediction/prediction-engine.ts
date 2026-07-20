@@ -1,5 +1,5 @@
 import type { OracleEngine } from "@/lib/oracle/engines";
-import { buildEngineResult } from "@/lib/oracle/engines";
+import { buildEngineResult } from "@/lib/oracle/engines/build-engine-result";
 import { calculateCombatRatingFromSession } from "@/lib/oracle/repositories/session-repository";
 import type { TrendProfile } from "@/lib/oracle/trend/trend-types";
 import { generatePrediction } from "./prediction-analysis";
