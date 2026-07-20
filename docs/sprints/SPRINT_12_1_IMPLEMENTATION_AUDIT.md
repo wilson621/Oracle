@@ -2,7 +2,7 @@
 
 **Status:** Active — documentation synchronised, engineering closure pending
 **Branch:** `sprint-9-overlay`
-**Implementation baseline:** `e02b254`
+**Implementation baseline before Commit 3:** `33fbe4e`
 **Audit date:** 20 July 2026
 
 ---
@@ -27,9 +27,19 @@ Git history and source inspection confirm the following delivered milestones:
 7. Desktop Recovery
 8. Desktop Timeline
 9. Desktop Telemetry
+10. Complete Session Lifecycle (Commit 3)
 
 The implementation uses immutable, serializable contracts and bounded
 in-process histories. Desktop Telemetry is rebuilt from the unified Timeline.
+
+Commit 3 closes the remaining host-owned Session lifecycle gaps:
+
+- attachment state changes now drive Session `ready`/`attached` transitions
+  through the existing authoritative Session Manager
+- detachment returns an attached Session to `ready`, allowing a later
+  reattachment without creating a replacement Session
+- renderer load failure closes the partially created desktop controller and
+  ends the started Session through the existing idempotent shutdown path
 
 ---
 
@@ -70,11 +80,21 @@ not change implementation.
 
 # Remaining Sprint 12.1 Objectives
 
-1. Freeze the Desktop Platform public API.
-2. Complete and accept the dependency-boundary audit.
-3. Run full compile, lint, production build and runtime verification.
-4. Resolve issues introduced by Sprint 12.1 work, if any.
-5. Complete formal sprint closure and release decision.
+Commit 3 is implemented and verified in the working tree. The review, commit
+and push remain subject to the required approval gate.
+
+The remaining planned sequence is intentionally future work:
+
+1. Commit 4 (pending; scope must be taken from repository evidence before
+   implementation).
+2. Commit 5 (pending; scope must be taken from repository evidence before
+   implementation).
+3. Commit 6 final hardening, including full verification, closure and release
+   decision.
+4. Freeze the Desktop Platform public API when its assigned Sprint 12 commit
+   is reached.
+5. Complete and accept the dependency-boundary audit when its assigned Sprint
+   12 commit is reached.
 
 Sprint 12.1 is not complete. Sprint 13 must not begin.
 
@@ -85,6 +105,7 @@ Sprint 12.1 is not complete. Sprint 13 must not begin.
 The following documents are synchronised by this audit task:
 
 - `README.md`
+- `docs/PROJECT_VISION.md`
 - `docs/Architecture.md`
 - `docs/architecture/ARCHITECTURE_INDEX.md`
 - `docs/architecture/ARCHITECTURE_v4.1.md`

@@ -3,7 +3,7 @@
 **Status:** Canonical living implementation record
 **Last verified:** 20 July 2026
 **Verified branch:** `sprint-9-overlay`
-**Verified commit:** `e02b254`
+**Verified baseline before Commit 3:** `33fbe4e`
 
 ---
 
@@ -12,6 +12,9 @@
 This document records what is demonstrably implemented in the Oracle
 repository. It is the first document engineers should read when determining
 current delivery status.
+
+`docs/PROJECT_VISION.md` explains what Oracle is being built to become and why.
+This document separately records what is implemented now.
 
 The Constitution and accepted ADRs remain the architectural authority. This
 document does not redefine them. When planning documents disagree with the
@@ -39,6 +42,15 @@ Implemented milestones:
 - Desktop Recovery lifecycle tracking
 - Unified Desktop Timeline
 - Derived Desktop Telemetry
+- Complete Session Lifecycle (Commit 3)
+
+Commit 3 keeps the active Session aligned with host attachment state:
+
+- attachment moves a ready Session to `attached`
+- detachment moves an attached Session back to `ready`
+- reattachment reuses the active Session
+- renderer load failure closes the controller and ends the started Session
+  through the existing idempotent shutdown path
 
 Remaining before Sprint 12.1 closure:
 
@@ -47,8 +59,8 @@ Remaining before Sprint 12.1 closure:
 - Full build and runtime verification
 - Sprint closure commit, push and release decision
 
-Documentation synchronisation is tracked separately from those engineering
-objectives. Sprint 13 has not started.
+Commits 4â€“6 and the remaining closure objectives are future work, not verified
+functionality. Sprint 13 has not started.
 
 ---
 
@@ -104,6 +116,8 @@ Implemented under `desktop/`:
 - immutable host snapshots and events
 - diagnostics, recovery, timeline and telemetry services
 - Companion Session lifecycle and context ownership
+- attachment-driven Session lifecycle synchronisation and renderer-load
+  failure cleanup
 
 Desktop Platform services exchange serializable data and do not expose
 Electron objects through their contracts.
@@ -214,7 +228,9 @@ See `docs/Decisions.md` for the complete ADR record.
 
 # Verification Scope
 
-This status was produced from source inspection and Git history at `e02b254`.
-Documentation synchronisation verification requires `git diff` and `git
-status`. Full compile, lint, production build and runtime verification remain
-part of Sprint 12.1 closure and are not claimed by this document.
+This status was produced from source inspection and Git history using
+`33fbe4e` as the clean baseline before Commit 3. Commit 3 verification includes
+desktop TypeScript compilation, lint, production build, `git diff --check` and
+working-tree inspection. Runtime UI verification and the work explicitly
+listed under remaining Sprint 12.1 objectives are not claimed by this
+document.

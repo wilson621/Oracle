@@ -3,7 +3,7 @@
 **Version:** 4.0
 **Last updated:** 20 July 2026
 **Branch:** `sprint-9-overlay`
-**Implementation baseline:** `e02b254`
+**Implementation baseline before Commit 3:** `33fbe4e`
 
 ---
 
@@ -30,6 +30,22 @@ Sprint 13 has not started.
 - [x] Desktop Telemetry
 - [x] Documentation implementation audit
 - [x] Canonical `IMPLEMENTATION_STATUS.md`
+- [x] Permanent `PROJECT_VISION.md`
+- [x] Commit 3 â€” Complete Session Lifecycle
+
+Commit 3 synchronises attachment changes with the authoritative Companion
+Session lifecycle and guarantees cleanup when the renderer fails to load.
+
+---
+
+# Sprint 12 Commit Sequence
+
+- [x] Commit 1
+- [x] Commit 2
+- [x] Commit 3 â€” Complete Session Lifecycle (review gate pending)
+- [ ] Commit 4 â€” pending; scope must be confirmed from repository evidence
+- [ ] Commit 5 â€” pending; scope must be confirmed from repository evidence
+- [ ] Commit 6 â€” final hardening and closure
 
 ---
 
@@ -37,12 +53,15 @@ Sprint 13 has not started.
 
 - [ ] Desktop Platform API Freeze
 - [ ] Dependency-boundary audit acceptance
-- [ ] Full desktop TypeScript compilation
-- [ ] Full lint verification
-- [ ] Full Next.js production build
-- [ ] Runtime verification proportional to desktop risk
+- [ ] Final-closure desktop TypeScript compilation re-run
+- [ ] Final-closure lint verification re-run
+- [ ] Final-closure Next.js production build re-run
+- [ ] Final-closure runtime verification proportional to desktop risk
 - [ ] Fix issues found during verification
 - [ ] Sprint closure and release decision
+
+Commits 4â€“6 and the unchecked items above are planned future work. They are
+not implemented functionality.
 
 ---
 
@@ -77,6 +96,10 @@ Sprint 13 has not started.
 
 - Platform-level Companion Runtime foundation implemented
 - desktop Companion Session and Context ownership implemented
+- attachment and detachment transitions are reflected in the active desktop
+  Companion Session
+- renderer load failure closes the desktop controller and ends the started
+  Session
 - the two lifecycle layers are not yet connected by an explicit contract
 - Electron currently loads `/oracle`; registered `/companion` route is absent
 

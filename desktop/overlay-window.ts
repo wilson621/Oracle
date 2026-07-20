@@ -180,6 +180,10 @@ export class CompanionHostWindowController {
         );
 
         this.publishState();
+
+        this.synchroniseCompanionSessionAttachment(
+          attachmentState
+        );
       },
     });
 }
@@ -264,9 +268,15 @@ export class CompanionHostWindowController {
       this.captureDesktopHostSnapshot()
     );
 
-    await window.loadURL(
-      this.options.companionUrl
-    );
+    try {
+      await window.loadURL(
+        this.options.companionUrl
+      );
+    } catch (error) {
+      this.close();
+
+      throw error;
+    }
 
     this.companionSession.markReady(
       this.captureDesktopHostSnapshot()
@@ -616,10 +626,43 @@ if (!selectedWindow) {
 this.attachment.attach(
   selectedWindow
 );
+}
 
-this.companionSession.markAttached(
-  this.captureDesktopHostSnapshot()
-);
+private synchroniseCompanionSessionAttachment(
+  attachmentState:
+    OracleDesktopAttachmentState
+): void {
+  const session =
+    this.companionSession.getSnapshot();
+
+  const desktopSnapshot =
+    this.desktopHostSnapshots.getSnapshot();
+
+  if (!session || !desktopSnapshot) {
+    return;
+  }
+
+  if (
+    attachmentState.status ===
+      "attached" &&
+    session.status === "ready"
+  ) {
+    this.companionSession.markAttached(
+      desktopSnapshot
+    );
+
+    return;
+  }
+
+  if (
+    attachmentState.status ===
+      "detached" &&
+    session.status === "attached"
+  ) {
+    this.companionSession.markReady(
+      desktopSnapshot
+    );
+  }
 }
 private createTargetCandidateInputs(
   discoveredWindows:

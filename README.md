@@ -219,6 +219,7 @@ Project Meta maintains comprehensive documentation inside `/docs`.
 | Document | Purpose |
 |----------|---------|
 | MASTER_BUILD_PLAN.md | Canonical engineering build plan |
+| PROJECT_VISION.md | What Oracle is being built to become and why |
 | Architecture.md | Platform architecture |
 | Oracle_Codex.md | Engineering standards |
 | Oracle-Principles.md | Product and engineering principles |

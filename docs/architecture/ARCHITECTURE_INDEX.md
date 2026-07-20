@@ -18,6 +18,7 @@ maintainable and consistent over many years of development.
 
 This document complements:
 
+- Project Vision
 - Manifesto
 - Codex
 - Principles
