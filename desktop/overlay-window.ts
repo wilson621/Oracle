@@ -28,12 +28,8 @@ import {
   type OracleDesktopTargetCandidateInput,
 } from "./targeting/index.js";
 import {
-  createOracleCompanionSession,
-  markOracleCompanionSessionReady,
-  markOracleCompanionSessionAttached,
-  endOracleCompanionSession,
-  type OracleCompanionSession,
-} from "./companion/companion-session.js";
+  OracleCompanionSessionManager,
+} from "./companion/companion-session-manager.js";
 
 export type CompanionHostWindowOptions = {
   companionUrl: string;
@@ -69,7 +65,8 @@ export class CompanionHostWindowController {
   private readonly windowObserver =
     new OracleDesktopWindowObserver();
 
-  private companionSession: OracleCompanionSession | null = null;
+  private readonly companionSession =
+    new OracleCompanionSessionManager();
 
   private screenEventsRegistered = false;
 
@@ -179,15 +176,15 @@ export class CompanionHostWindowController {
 
     this.registerScreenEvents();
 
-    this.companionSession = createOracleCompanionSession();
+    this.companionSession.start();
 
     await window.loadURL(
       this.options.companionUrl
     );
 
-    if (this.companionSession) {
-      this.companionSession = markOracleCompanionSessionReady(this.companionSession);
-    }
+    this.companionSession.markReady(
+      this.getState()
+    );
 
     if (!window.isDestroyed()) {
   this.developmentBounds =
@@ -413,12 +410,7 @@ export class CompanionHostWindowController {
 this.developmentBounds = null;
 
 this.unregisterScreenEvents();
-if (this.companionSession) {
-  this.companionSession = endOracleCompanionSession(
-    this.companionSession
-  );
-  this.companionSession = null;
-}
+this.companionSession.end();
     if (!window) {
       this.window = null;
       return;
@@ -517,9 +509,9 @@ this.attachment.attach(
   selectedWindow
 );
 
-if (this.companionSession) {
-  this.companionSession = markOracleCompanionSessionAttached(this.companionSession);
-}
+this.companionSession.markAttached(
+  this.getState()
+);
 }
 private createTargetCandidateInputs(
   discoveredWindows:
@@ -875,12 +867,7 @@ private restoreDevelopmentBounds(): void {
 
 this.developmentBounds = null;
 
-if (this.companionSession) {
-  this.companionSession = endOracleCompanionSession(
-    this.companionSession
-  );
-  this.companionSession = null;
-}
+this.companionSession.end();
 
 this.window = null;
 this.hostState.reset();
