@@ -25,18 +25,19 @@ Oracle is being built as an intelligence platform rather than a statistics dashb
 
 ## Version
 
-**Oracle v0.8.0 baseline with active Sprint 12.1 desktop-platform work**
+**Oracle v0.8.0 baseline with completed Sprint 12.1 desktop-platform work**
 
 ## Current Milestone
 
 **Sprint 12.1 — Desktop Platform Foundation and Hardening**
 
-**Status: Active; documentation synchronised, engineering closure pending**
+**Status: Complete; final hardening and closure verification passed**
 
 ## Build Status
 
-The last documented production baseline passed. A fresh full compile, lint and
-production-build verification remains required before Sprint 12.1 closure.
+Final Sprint 12.1 verification passed for the architecture audit, desktop
+TypeScript compilation, lint, Next.js production build, native Windows helper
+builds and installed dependency consistency.
 
 The canonical verified status is maintained in
 [`docs/architecture/IMPLEMENTATION_STATUS.md`](docs/architecture/IMPLEMENTATION_STATUS.md).
@@ -307,9 +308,10 @@ Verified delivery now includes:
 - Desktop Host Snapshot and Event Stream
 - Desktop Diagnostics, Recovery, Timeline and Telemetry
 - frozen Desktop Platform API version 1 for immutable desktop contracts
+- automated dependency-boundary enforcement with documented legacy exceptions
+- zero runtime dependency cycles
 
-Dependency-boundary closure and final hardening remain Sprint 12.1 work.
-Sprint 13 has not started.
+Sprint 12.1 is complete. Sprint 13 has not started.
 
 ---
 

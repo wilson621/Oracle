@@ -3,7 +3,7 @@
 **Version:** 2.1
 **Status:** Active  
 **Owner:** Oracle Platform Engineering  
-**Last Updated:** Sprint 12.1 Commit 5 — 20 July 2026
+**Last Updated:** Sprint 12.1 Commit 6 — 20 July 2026
 
 ---
 
@@ -92,7 +92,7 @@ This architecture was established during Sprint 8 and forms the permanent founda
 ## Sprint 12.1 — Desktop Platform Foundation and Hardening
 
 **Branch:** `sprint-9-overlay`
-**Status:** Active; implementation milestones delivered, closure pending
+**Status:** Complete; final hardening and closure verification passed
 
 Verified completed work:
 
@@ -108,15 +108,15 @@ Verified completed work:
 - Complete Session Lifecycle
 - Desktop Platform API Freeze
 - Dependency Boundary Audit and automated enforcement
+- Final Hardening and Sprint Closure
 
-Remaining work, in order:
+No Sprint 12.1 engineering work remains. Final verification passed for the
+architecture audit, desktop TypeScript, lint, production web build, native
+Windows helpers and installed dependency tree. No Sprint 12 source correction
+was required.
 
-1. full compile, lint, production build and runtime verification
-2. correction of issues found by verification
-3. formal Sprint 12.1 closure and release decision
-
-Documentation synchronisation records current implementation but does not
-complete those engineering gates. Sprint 13 must not begin.
+The branch milestone is closed without a product release tag. Tagging remains
+part of a separately authorised release workflow. Sprint 13 has not started.
 
 Known integration boundaries requiring deliberate review:
 

@@ -1,8 +1,8 @@
 # SPRINT 12.1 IMPLEMENTATION AUDIT
 
-**Status:** Active — documentation synchronised, engineering closure pending
+**Status:** Complete — final hardening and closure verification passed
 **Branch:** `sprint-9-overlay`
-**Implementation baseline before Commit 4:** `e14a379`
+**Implementation baseline before Commit 6:** `6084b7e`
 **Audit date:** 20 July 2026
 
 ---
@@ -30,6 +30,7 @@ Git history and source inspection confirm the following delivered milestones:
 10. Complete Session Lifecycle (Commit 3)
 11. Desktop Platform API Freeze (Commit 4)
 12. Dependency Boundary Audit and enforcement (Commit 5)
+13. Final Hardening and Sprint Closure (Commit 6)
 
 The implementation uses immutable, serializable contracts and bounded
 in-process histories. Desktop Telemetry is rebuilt from the unified Timeline.
@@ -80,18 +81,33 @@ not change implementation.
 
 ---
 
-# Remaining Sprint 12.1 Objectives
+# Final Verification
 
-Commits 3 and 4 are complete. Commit 5 establishes a checked-in dependency
-baseline and automated enforcement. It also removes the engine runtime barrel
-cycle through import-path corrections without changing behavior.
+Commit 6 re-verified the complete Sprint 12.1 repository state:
 
-The remaining planned sequence is intentionally future work:
+- dependency-boundary audit passed with no new violations
+- desktop TypeScript compilation passed
+- lint passed with zero errors and five unrelated existing warnings
+- Next.js production build passed and generated 19 pages
+- both native Windows helper projects published successfully
+- installed npm dependencies are consistent
+- no Sprint 12 debug residue, temporary markers or placeholder logic was found
+- no unexpected tracked or untracked files were present before closure updates
 
-1. Commit 6 final hardening, including full verification, closure and release
-   decision.
+No source correction was required during final hardening. The five lint
+warnings predate and are unrelated to the Sprint 12 desktop work. Interactive
+Electron UI testing remains a release-environment activity rather than a
+closure blocker for this non-feature commit.
 
-Sprint 12.1 is not complete. Sprint 13 must not begin.
+# Sprint 12.1 Closure
+
+All six planned commits and all Sprint 12.1 engineering objectives are
+complete. The verified branch is ready for Sprint 13 planning, but Sprint 13
+has not started. See `SPRINT_12_1_RETROSPECTIVE.md` for outcomes, accepted debt
+and lessons.
+
+The release decision is to close this branch milestone without creating a
+product release tag. A tag requires separate release authorisation.
 
 ---
 

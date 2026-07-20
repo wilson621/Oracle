@@ -3,7 +3,7 @@
 **Version:** 4.0
 **Last updated:** 20 July 2026
 **Branch:** `sprint-9-overlay`
-**Implementation baseline before Commit 4:** `e14a379`
+**Implementation baseline before Commit 6:** `6084b7e`
 
 ---
 
@@ -11,7 +11,7 @@
 
 ## Sprint 12.1 — Desktop Platform Foundation and Hardening
 
-**Status:** Active — documentation synchronised; engineering closure pending
+**Status:** Complete — final hardening and closure verification passed
 
 Sprint 13 has not started.
 
@@ -33,7 +33,8 @@ Sprint 13 has not started.
 - [x] Permanent `PROJECT_VISION.md`
 - [x] Commit 3 — Complete Session Lifecycle
 - [x] Commit 4 — Desktop Platform API Freeze
-- [x] Commit 5 — Dependency Boundary Audit (review gate pending)
+- [x] Commit 5 — Dependency Boundary Audit
+- [x] Commit 6 — Final Hardening and Sprint Closure
 
 Commit 3 synchronises attachment changes with the authoritative Companion
 Session lifecycle and guarantees cleanup when the renderer fails to load.
@@ -46,23 +47,25 @@ Session lifecycle and guarantees cleanup when the renderer fails to load.
 - [x] Commit 2
 - [x] Commit 3 — Complete Session Lifecycle
 - [x] Commit 4 — Desktop Platform API Freeze
-- [x] Commit 5 — Dependency Boundary Audit (review gate pending)
-- [ ] Commit 6 — final hardening and closure
+- [x] Commit 5 — Dependency Boundary Audit
+- [x] Commit 6 — Final Hardening and Sprint Closure
 
 ---
 
 # Remaining Sprint 12.1 Work
 
 - [x] Dependency-boundary audit implementation and automated enforcement
-- [ ] Final-closure desktop TypeScript compilation re-run
-- [ ] Final-closure lint verification re-run
-- [ ] Final-closure Next.js production build re-run
-- [ ] Final-closure runtime verification proportional to desktop risk
-- [ ] Fix issues found during verification
-- [ ] Sprint closure and release decision
+- [x] Final-closure desktop TypeScript compilation
+- [x] Final-closure lint verification
+- [x] Final-closure Next.js production build
+- [x] Native Windows helper build verification
+- [x] Runtime and lifecycle source review proportional to desktop risk
+- [x] Issue classification and documentation closure
+- [x] Sprint closure and release decision
 
-Commit 6 and the unchecked items above are planned future work. They are
-not implemented functionality.
+No Sprint 12.1 engineering objective remains open. The release decision is to
+close the verified sprint on `sprint-9-overlay` without creating a product
+release tag; tagging remains part of a separately authorised release workflow.
 
 ---
 
@@ -136,8 +139,9 @@ Open findings:
    exclusive runtime boundary
 4. Game Integration output is not connected to desktop Companion Context
 
-These findings are recorded for dependency-boundary review. This board does
-not authorise redesign or begin Sprint 13.
+These findings are measured legacy exceptions recorded by Commit 5. They are
+accepted technical debt for Sprint 12.1 closure and do not authorise redesign
+or begin Sprint 13.
 
 ---
 
@@ -153,11 +157,13 @@ not authorise redesign or begin Sprint 13.
 - [x] ADRs record desktop snapshot/event and Timeline/Telemetry ownership
 - [x] ADR records the Desktop Platform API version 1 compatibility commitment
 - [x] Sprint 12.1 implementation audit added
+- [x] Sprint 12.1 retrospective added
 
 ---
 
 # Closure Rule
 
-Sprint 12.1 is complete only after the remaining engineering gates pass and
-the repository is formally closed. Documentation synchronisation alone does
-not satisfy sprint closure.
+Sprint 12.1 closure verification passed on 20 July 2026. The architecture
+audit, desktop TypeScript compilation, lint, production build, native helper
+builds, dependency inspection and repository checks all passed. The five
+existing lint warnings remain documented, unrelated technical debt.

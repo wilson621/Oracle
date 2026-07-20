@@ -544,7 +544,7 @@ Completed
 
 Current Development Phase
 
-Sprint 12.1 — Desktop Platform Foundation and Hardening
+Sprint 12.1 — Complete; Sprint 13 planning has not started
 
 Current Runtime
 
@@ -564,10 +564,10 @@ Current Runtime
 ✓ Desktop Timeline and Telemetry
 ✓ Desktop Platform API version 1 freeze
 ✓ Dependency Boundary Audit and automated enforcement
+✓ Final hardening and closure verification
 
-Not yet closed
+Accepted integration debt
 
-- full Sprint 12.1 verification
 - Game Integration to desktop-context wiring
 - Platform bootstrap production wiring
 

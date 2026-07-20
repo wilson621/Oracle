@@ -740,11 +740,14 @@ Completed in the current delivery line:
 - first Call of Duty Game Integration foundation
 - frozen Desktop Platform API version 1
 
-Remaining before Sprint 12.1 closure:
+Sprint 12.1 is complete. Final closure verified:
 
-- dependency-boundary audit acceptance
-- full verification and issue correction
-- formal sprint closure and release decision
+- automated dependency-boundary enforcement with documented legacy exceptions
+- zero runtime dependency cycles
+- desktop TypeScript and Next.js production builds
+- native Windows discovery and observation helper builds
+- lint with zero errors and five unrelated existing warnings
+- documentation closure and Sprint retrospective
 
 Sprint 13 has not started. Marketplace remains a future strategic objective;
 it must not be inferred from the Sprint number alone.

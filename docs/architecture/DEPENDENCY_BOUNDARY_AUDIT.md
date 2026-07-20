@@ -3,7 +3,7 @@
 **Sprint:** 12.1 Commit 5
 **Baseline commit:** `54a7298`
 **Audit date:** 20 July 2026
-**Status:** Implemented; review gate pending
+**Status:** Accepted and enforced in Sprint 12.1 Commit 5
 
 ---
 

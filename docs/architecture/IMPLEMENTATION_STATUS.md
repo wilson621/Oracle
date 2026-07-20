@@ -3,7 +3,7 @@
 **Status:** Canonical living implementation record
 **Last verified:** 20 July 2026
 **Verified branch:** `sprint-9-overlay`
-**Verified baseline before Commit 5:** `54a7298`
+**Verified baseline before Commit 6:** `6084b7e`
 
 ---
 
@@ -29,7 +29,7 @@ Update this file during every sprint closure audit.
 
 ## Sprint 12.1 — Desktop Platform Foundation and Hardening
 
-The sprint is active on `sprint-9-overlay`.
+The sprint is complete on `sprint-9-overlay`.
 
 Implemented milestones:
 
@@ -46,6 +46,7 @@ Implemented milestones:
 - Desktop Platform API version 1 freeze (Commit 4)
 - automated dependency-boundary baseline and enforcement (Commit 5)
 - zero runtime circular dependency groups after engine import-path correction
+- final web, desktop and native build hardening and closure verification
 
 Commit 3 keeps the active Session aligned with host attachment state:
 
@@ -55,13 +56,12 @@ Commit 3 keeps the active Session aligned with host attachment state:
 - renderer load failure closes the controller and ends the started Session
   through the existing idempotent shutdown path
 
-Remaining before Sprint 12.1 closure:
+No Sprint 12.1 engineering objective remains open. Commit 6 verified the web,
+desktop and native build paths, classified remaining warnings and known issues,
+and closed the sprint documentation. Sprint 13 has not started.
 
-- Full build and runtime verification
-- Sprint closure commit, push and release decision
-
-Commit 6 and the remaining closure objectives are future work, not verified
-functionality. Sprint 13 has not started.
+The release decision is to close the verified sprint branch without creating
+a product release tag. A tag remains a separately authorised release action.
 
 ---
 
@@ -241,9 +241,25 @@ See `docs/Decisions.md` for the complete ADR record.
 
 # Verification Scope
 
-This status was produced from source inspection and Git history using
-`54a7298` as the clean baseline before Commit 5. Commit 5 verification includes
-the automated dependency audit, desktop TypeScript compilation, lint,
-production build, `git diff --check` and working-tree inspection. Runtime UI
-verification and the work explicitly listed under remaining Sprint 12.1
-objectives are not claimed by this document.
+This status was re-verified from source inspection and Git history using
+`6084b7e` as the clean baseline before Commit 6.
+
+Final closure verification passed:
+
+- `npm run architecture:audit`
+- `npm run desktop:compile`
+- `npm run lint` with zero errors and five unrelated existing warnings
+- `npm run build`
+- `npm run native:build`
+- `npm ls --depth=0`
+- `git diff --check`
+- working-tree and untracked-file inspection
+
+The composite `build:desktop` script was not repeated because its web build,
+native builds and desktop compilation were executed and recorded separately.
+No automated test script exists in `package.json`. An interactive Electron UI
+smoke test was not run as part of this non-feature closure; lifecycle and API
+consistency were reviewed from the compiled implementation and source.
+
+Accepted technical debt remains documented in
+`DEPENDENCY_BOUNDARY_AUDIT.md` and `SPRINT_12_1_RETROSPECTIVE.md`.
