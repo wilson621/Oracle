@@ -51,6 +51,12 @@ import {
 import type {
   OracleDesktopTimelineEntry,
 } from "./platform/desktop-timeline.js";
+import {
+  OracleDesktopTelemetryService,
+} from "./platform/desktop-telemetry-service.js";
+import type {
+  OracleDesktopTelemetrySnapshot,
+} from "./platform/desktop-telemetry.js";
 
 export type CompanionHostWindowOptions = {
   companionUrl: string;
@@ -100,6 +106,11 @@ export class CompanionHostWindowController {
 
   private readonly timeline =
     new OracleDesktopTimelineService();
+
+  private readonly telemetry =
+    new OracleDesktopTelemetryService(
+      this.timeline
+    );
 
   private screenEventsRegistered = false;
 
@@ -315,6 +326,10 @@ export class CompanionHostWindowController {
   getRecentTimelineEntries(): readonly OracleDesktopTimelineEntry[] {
     return this.timeline
       .getRecentEntries();
+  }
+
+  getDesktopTelemetry(): OracleDesktopTelemetrySnapshot {
+    return this.telemetry.getSnapshot();
   }
 
   getState(): OracleDesktopHostState {
