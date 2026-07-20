@@ -440,6 +440,31 @@ export class OracleDesktopDiagnostics {
       );
     }
 
+    if (
+      previous.attachment
+        .observationError !== null &&
+      current.attachment
+        .observationError === null
+    ) {
+      diagnostics.push(
+        this.reportFromEvent(event, {
+          severity: "info",
+          category: "attachment",
+          code: "desktop-attachment.observation-recovered",
+          message:
+            "Oracle Companion resumed observing its attached desktop target.",
+          data: {
+            targetHandle:
+              current.attachment.target
+                ?.handle ?? null,
+            targetTitle:
+              current.attachment.target
+                ?.title ?? null,
+          },
+        })
+      );
+    }
+
     return diagnostics;
   }
 

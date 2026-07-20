@@ -39,6 +39,12 @@ import {
 import type {
   OracleDesktopDiagnostic,
 } from "./platform/desktop-diagnostic.js";
+import {
+  OracleDesktopRecoveryService,
+} from "./platform/desktop-recovery-service.js";
+import type {
+  OracleDesktopRecovery,
+} from "./platform/desktop-recovery.js";
 
 export type CompanionHostWindowOptions = {
   companionUrl: string;
@@ -83,6 +89,9 @@ export class CompanionHostWindowController {
   private readonly diagnostics =
     new OracleDesktopDiagnostics();
 
+  private readonly recovery =
+    new OracleDesktopRecoveryService();
+
   private screenEventsRegistered = false;
 
   private discoveryRunId = 0;
@@ -98,6 +107,14 @@ export class CompanionHostWindowController {
   private readonly options:
     CompanionHostWindowOptions
 ) {
+  this.diagnostics.subscribe(
+    (diagnostic) => {
+      this.recovery.consumeDiagnostic(
+        diagnostic
+      );
+    }
+  );
+
   this.desktopHostSnapshots
     .subscribeEvents((event) => {
       this.diagnostics
@@ -263,6 +280,11 @@ export class CompanionHostWindowController {
   getRecentDiagnostics(): readonly OracleDesktopDiagnostic[] {
     return this.diagnostics
       .getRecentDiagnostics();
+  }
+
+  getRecentRecoveries(): readonly OracleDesktopRecovery[] {
+    return this.recovery
+      .getRecentRecoveries();
   }
 
   getState(): OracleDesktopHostState {
@@ -935,6 +957,19 @@ this.hostState.reset();
       }
     );
 
+    window.on(
+      "responsive",
+      () => {
+        this.diagnostics.report({
+          severity: "info",
+          category: "runtime",
+          code: "desktop-window.responsive",
+          message:
+            "Oracle Companion desktop window became responsive again.",
+        });
+      }
+    );
+
     window.webContents.on(
       "render-process-gone",
       (
@@ -995,6 +1030,27 @@ this.hostState.reset();
             validatedUrl,
           }
         );
+      }
+    );
+
+    window.webContents.on(
+      "did-finish-load",
+      () => {
+        this.diagnostics.report({
+          severity: "info",
+          category: "runtime",
+          code: "desktop-renderer.load-succeeded",
+          message:
+            "Oracle Companion loaded its application surface successfully.",
+        });
+
+        this.diagnostics.report({
+          severity: "info",
+          category: "runtime",
+          code: "desktop-renderer.process-restored",
+          message:
+            "Oracle Companion renderer is available.",
+        });
       }
     );
   }
