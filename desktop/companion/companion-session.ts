@@ -164,6 +164,39 @@ export function markOracleCompanionSessionAttached(
 }
 
 /**
+ * Replaces the immutable context snapshot for an active Companion session
+ * without changing its lifecycle status.
+ */
+export function updateOracleCompanionSessionContext(
+  session:
+    OracleCompanionSession,
+  input:
+    UpdateOracleCompanionSessionInput
+): OracleCompanionSession {
+  if (session.status === "ended") {
+    throw new Error(
+      "Oracle Companion session context cannot be updated after the session has ended."
+    );
+  }
+
+  const updatedAt =
+    input.updatedAt ??
+    new Date().toISOString();
+
+  return {
+    ...session,
+
+    updatedAt,
+
+    currentContext:
+      resolveCompanionContext(
+        session.currentContext,
+        input
+      ),
+  };
+}
+
+/**
  * Ends a Companion session.
  *
  * Ended sessions are terminal and cannot transition to another

@@ -176,7 +176,9 @@ export class CompanionHostWindowController {
 
     this.registerScreenEvents();
 
-    this.companionSession.start();
+    this.companionSession.start(
+      this.getState()
+    );
 
     await window.loadURL(
       this.options.companionUrl
@@ -986,11 +988,17 @@ this.hostState.reset();
       return;
     }
 
+    const state =
+      this.getState();
+
+    this.companionSession
+      .captureContext(state);
+
     window.webContents.send(
       DESKTOP_CHANNELS
         .hostStateChanged,
 
-      this.getState()
+      state
     );
   }
 

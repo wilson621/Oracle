@@ -3,12 +3,14 @@ import type {
 } from "../host-state.js";
 import {
   createOracleCompanionContext,
+  type OracleCompanionContext,
 } from "./companion-context.js";
 import {
   createOracleCompanionSession,
   endOracleCompanionSession,
   markOracleCompanionSessionAttached,
   markOracleCompanionSessionReady,
+  updateOracleCompanionSessionContext,
   type OracleCompanionSession,
 } from "./companion-session.js";
 
@@ -81,6 +83,39 @@ export class OracleCompanionSessionManager {
       );
 
     return this.getRequiredSnapshot();
+  }
+
+  captureContext(
+    desktopState:
+      OracleDesktopHostState
+  ): OracleCompanionSession | null {
+    const session =
+      this.currentSession;
+
+    if (!session) {
+      return null;
+    }
+
+    this.currentSession =
+      updateOracleCompanionSessionContext(
+        session,
+        {
+          currentContext:
+            createContext(desktopState),
+        }
+      );
+
+    return this.getRequiredSnapshot();
+  }
+
+  getContextSnapshot(): OracleCompanionContext | null {
+    return this.currentSession
+      ?.currentContext == null
+      ? null
+      : structuredClone(
+          this.currentSession
+            .currentContext
+        );
   }
 
   end(
