@@ -27,6 +27,13 @@ import {
   selectDesktopTarget,
   type OracleDesktopTargetCandidateInput,
 } from "./targeting/index.js";
+import {
+  createOracleCompanionSession,
+  markOracleCompanionSessionReady,
+  markOracleCompanionSessionAttached,
+  endOracleCompanionSession,
+  type OracleCompanionSession,
+} from "./companion/companion-session.js";
 
 export type CompanionHostWindowOptions = {
   companionUrl: string;
@@ -61,6 +68,8 @@ export class CompanionHostWindowController {
 
   private readonly windowObserver =
     new OracleDesktopWindowObserver();
+
+  private companionSession: OracleCompanionSession | null = null;
 
   private screenEventsRegistered = false;
 
@@ -170,9 +179,15 @@ export class CompanionHostWindowController {
 
     this.registerScreenEvents();
 
+    this.companionSession = createOracleCompanionSession();
+
     await window.loadURL(
       this.options.companionUrl
     );
+
+    if (this.companionSession) {
+      this.companionSession = markOracleCompanionSessionReady(this.companionSession);
+    }
 
     if (!window.isDestroyed()) {
   this.developmentBounds =
@@ -496,6 +511,10 @@ if (!selectedWindow) {
 this.attachment.attach(
   selectedWindow
 );
+
+if (this.companionSession) {
+  this.companionSession = markOracleCompanionSessionAttached(this.companionSession);
+}
 }
 private createTargetCandidateInputs(
   discoveredWindows:
