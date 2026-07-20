@@ -413,7 +413,18 @@ export class CompanionHostWindowController {
 this.developmentBounds = null;
 
 this.unregisterScreenEvents();
-
+if (this.companionSession) {
+  this.companionSession = endOracleCompanionSession(
+    this.companionSession
+  );
+  this.companionSession = null;
+}
+if (this.companionSession) {
+  this.companionSession = endOracleCompanionSession(
+    this.companionSession
+  );
+  this.companionSession = null;
+}
     if (!window) {
       this.window = null;
       return;
