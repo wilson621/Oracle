@@ -11,7 +11,7 @@
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 4.6
+**Version:** 4.7
 
 ---
 
@@ -66,7 +66,12 @@ constitute implementation approval.
 
 # Development Workflow
 
-Every Oracle sprint follows the same engineering lifecycle.
+Oracle delivery follows the hierarchy defined by
+[Oracle Engineering Governance](GOVERNANCE.md): Roadmap vision, Epics as major
+capabilities, Sprints as independently reviewable production objectives and
+Phases as internal implementation stages.
+
+Every Oracle Sprint follows the governed engineering lifecycle.
 
 ```text
 Architecture
@@ -120,17 +125,21 @@ They are not implied by Sprint closure.
 
 The Oracle Roadmap exists at the strategic level.
 
-Daily development is organised through Sprints.
+Operations and other named strategic programmes are Epics: major capabilities
+that may require multiple independently reviewed Sprints. Daily development is
+organised through internal Sprint Phases.
 
 Implementation history is represented by Git commits. Product release history
 is represented by separately authorised Git tags.
 
 Source control is organised through Sprint branches.
 
-Together they provide four complementary views of Oracle's evolution:
+Together they provide complementary views of Oracle's evolution:
 
-- Roadmap — Strategic direction
-- Sprints — Delivery milestones
+- Roadmap — Vision and strategic direction
+- Epics — Major platform capabilities
+- Sprints — Independently reviewable production objectives
+- Phases — Internal implementation stages
 - Git — Implementation history
 - Documentation — Architectural knowledge
 
@@ -680,12 +689,38 @@ Oracle becomes an extensible ecosystem where new capabilities can be added witho
 
 The Oracle Platform grows through extensions rather than increasing complexity inside the Platform itself.
 
-# Current Delivery — Sprint 15
+# Current Delivery
 
-Sprint 15 is formally active. Phase 1 — Ownership Foundation is complete and
-has passed founder closure review. Phase 2 — Understanding Contracts and Phase
-3 — Persistence and Migration are implemented, verified and approved through
-founder implementation review. Phase 4 has not been authorised.
+No implementation Sprint is active.
+
+## Sprint 16 — Trust Boundary
+
+**Status:** Complete
+**Historical execution alias:** Sprint 15.5A
+**Closure commit:** `58589b52de0db341e6518fa9f235bb18854e6b30`
+
+Sprint 16 completed the trusted Operator Intelligence boundary: exclusive
+server-side mutation authority, authenticated ownership injection, global
+policy definitions, append-only consent and evidence dispositions, immutable
+admissions, admissible game-scoped evidence contracts and service-role-only
+durable persistence. Migration 009 passed rollback and independent catalog
+validation but remains undeployed pending a separate founder decision.
+
+## Sprint 17 — Scale Hardening
+
+**Status:** Planned; not activated
+**Historical planning alias:** Sprint 15.5B
+
+Sprint 17 is the next proposed production objective. It is limited to bounded
+reads, pagination, targeted query optimisation, required indexes, Snapshot
+budgets and automated boundary enforcement. Roadmap placement does not
+authorise implementation.
+
+## Historical Sprint 15 — Operator Understanding Foundation
+
+Sprint 15 is historical. Phase 1 — Ownership Foundation, Phase 2 —
+Understanding Contracts and Phase 3 — Persistence and Migration established
+the approved foundation. Unstarted work from its plan is not implicitly active.
 
 ## Operator Intelligence: Operator Understanding Foundation
 
@@ -742,7 +777,7 @@ rollback and independent catalog validation but is not permanently deployed.
 No candidate producer, runtime Service, Understanding projection, Context
 integration or Application consumption has been activated.
 
-## Latest Closed Sprint — Sprint 14
+## Earlier Closed Sprint — Sprint 14
 
 The earlier Sprint 9–12 sequence in this roadmap was a strategic projection.
 Repository delivery continued on `sprint-9-overlay`. Sprint 14 established the
@@ -794,7 +829,7 @@ authoritative Session Context, execute the Provider Service and deliver
 immutable Application state safely. Architectural review placed the Operator
 Understanding Foundation ahead of that work. Authoritative live Guidance
 delivery has returned to the future queue and requires separate planning and
-approval; it is not automatically Sprint 16.
+approval. Sprint 16 is the completed Trust Boundary objective.
 
 Deferred capabilities also include AI inference, ranking and personalisation,
 additional game packages, automated source-freshness governance, end-to-end

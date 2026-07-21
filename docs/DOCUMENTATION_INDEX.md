@@ -70,6 +70,11 @@ Principles and Architecture:
 - both remain subordinate to the Constitution and Engineering Principles
 - Architecture must reflect accepted ADRs and compliant engineering practice
 
+[Oracle Engineering Governance](GOVERNANCE.md) governs how approved strategy
+and architecture become Epics, Sprints, internal Phases, deployments and
+closure evidence. It is subordinate to the Constitution, accepted ADRs and the
+Codex and does not create implementation authority by itself.
+
 # Document Classifications
 
 ## Stable
@@ -99,6 +104,8 @@ Examples:
 - Roadmap
 - Master Build Plan
 - Project Board
+- Oracle Engineering Governance
+- Sprint Index
 - this Documentation Index
 
 ## Historical
@@ -153,15 +160,17 @@ Continue with:
 8. [Architecture](Architecture.md)
 9. [Architecture Index](architecture/ARCHITECTURE_INDEX.md)
 10. [Implementation Status](architecture/IMPLEMENTATION_STATUS.md)
+11. [Oracle Engineering Governance](GOVERNANCE.md)
 
 ## Planning and Delivery
 
 Continue with:
 
-11. [Roadmap](Roadmap.md)
-12. [Master Build Plan](MASTER_BUILD_PLAN.md)
-13. [Project Board](PROJECT_BOARD.md)
-14. the relevant Sprint record under [`docs/sprints`](sprints/)
+12. [Roadmap](Roadmap.md)
+13. [Master Build Plan](MASTER_BUILD_PLAN.md)
+14. [Project Board](PROJECT_BOARD.md)
+15. [Sprint Index](sprints/SPRINT_INDEX.md)
+16. the relevant Sprint record under [`docs/sprints`](sprints/)
 
 Implementation begins only after the applicable governance, architecture and
 delivery authorities have been reviewed.
@@ -180,9 +189,11 @@ delivery authorities have been reviewed.
 | Current designed architecture | [Architecture](Architecture.md) | Living |
 | Subsystem ownership and boundaries | [Architecture Index](architecture/ARCHITECTURE_INDEX.md) | Living |
 | Verified repository capability | [Implementation Status](architecture/IMPLEMENTATION_STATUS.md) | Living |
+| Engineering delivery governance and approval gates | [Oracle Engineering Governance](GOVERNANCE.md) | Living |
 | Strategic delivery sequence | [Roadmap](Roadmap.md) | Living |
 | Approved engineering execution plan | [Master Build Plan](MASTER_BUILD_PLAN.md) | Living |
 | Current approved progress | [Project Board](PROJECT_BOARD.md) | Living |
+| Canonical Sprint numbering and aliases | [Sprint Index](sprints/SPRINT_INDEX.md) | Living index |
 | Closed Sprint evidence | [`docs/sprints`](sprints/) | Historical |
 
 # Supporting Documentation

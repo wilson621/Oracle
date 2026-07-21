@@ -1328,7 +1328,8 @@ product data.
 
 This foundation does not implement Understanding contracts, intelligence
 claims, Memory lifecycle changes, Operator-control services or Oracle Context
-projection. Those remain later Sprint 15 phases requiring separate approval.
+projection. Those remain separately planned production objectives requiring
+explicit approval; they are not implicitly active under historical Sprint 15.
 
 # Sprint 15 Phase 2 Operator Understanding Contracts
 

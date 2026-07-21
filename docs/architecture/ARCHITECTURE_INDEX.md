@@ -9,7 +9,7 @@
 **Supersedes:** Earlier Architecture Index versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 5.4
+**Version:** 5.5
 
 ---
 
@@ -750,8 +750,8 @@ Completed
 
 Current Development Phase
 
-Sprint 15 — Operator Understanding Foundation active; Phases 1 through 3
-complete and Phase 4 not authorised
+No implementation Sprint active. Sprint 16 — Trust Boundary is complete;
+Sprint 17 — Scale Hardening is planned and not activated.
 
 Current Runtime
 
@@ -786,6 +786,10 @@ Current Runtime
 ✓ explicit claim and declaration lifecycle validation
 ✓ deterministic evidence-backed claim explanations
 ✓ purpose-scoped immutable Operator Understanding Snapshot
+✓ exclusive Operator Intelligence Service mutation authority
+✓ server-only trusted Supabase boundary and ownership injection
+✓ global policy, consent, evidence-disposition and admission contracts
+✓ service-role-only durable Operator Intelligence persistence boundary
 
 Accepted integration debt
 

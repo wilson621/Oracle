@@ -10,11 +10,12 @@
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
 **Verified Branch:** `sprint-9-overlay`
-**Verified Repository Baseline:** `020f883bfe9bfeefa43e15494f6cf85371cc4759`
+**Verified Repository Baseline:** `58589b52de0db341e6518fa9f235bb18854e6b30`
 **Sprint 14 Implementation Baseline:** `3868975`
 **Sprint 15 Phase 1:** Complete and committed
 **Sprint 15 Phase 2:** Complete and committed
-**Sprint 15 Phase 3:** Verified and approved for closure commit
+**Sprint 15 Phase 3:** Complete and committed
+**Sprint 16:** Trust Boundary complete and committed; Migration 009 undeployed
 
 ---
 
@@ -127,14 +128,55 @@ direct-write denial. The deployed catalog and all existing Operator, Session
 and binding rows remain unchanged because permanent migration execution has
 not been authorised.
 
-Phase 3 does not register an Operator Intelligence Service, create a candidate
+Phase 3 did not register an Operator Intelligence Service, create a candidate
 producer, persist an Understanding Snapshot, integrate Oracle Context, expose
 Application consumption, execute retention or control operations, or add UI.
-Phase 4 has not begun and requires separate authorisation.
+Unstarted work from the historical Sprint 15 plan is not implicitly active.
+
+## Sprint 16 — Trust Boundary
+
+Sprint 16 is implemented, verified, founder-approved and committed at
+`58589b52de0db341e6518fa9f235bb18854e6b30`. It was executed under the
+historical alias Sprint 15.5A.
+
+Verified repository capability includes:
+
+- `OperatorIntelligenceService` as the only permitted durable Operator
+  Intelligence mutation authority
+- a server-only trusted Supabase client whose credential is unavailable to
+  client bundles
+- authenticated current-Operator resolution and trusted ownership injection
+- runtime rejection of caller-supplied Operator identifiers
+- global, Operator-independent policy definitions
+- append-only consent decisions and evidence lifecycle dispositions
+- immutable, game-scoped evidence admissions with stable Game Integration
+  identity and semantic-version validation
+- service-role-only persistence functions with no authenticated direct
+  mutation or RPC execution authority
+- durable evidence, admission, claim revision and eligibility invariants
+- focused trust and authority verification in addition to the existing
+  ownership, understanding and persistence suites
+
+Migration 009 now contains the hardened trust-boundary schema and permissions.
+It executed successfully inside an explicit rollback transaction and was
+followed by independent catalog verification proving that no schema object or
+constraint remained. It is not permanently deployed.
+
+No candidate producer, intelligence accumulation, runtime Service
+registration, Understanding Snapshot runtime, Context integration,
+Application consumption or Sprint 17 implementation is active.
 
 ---
 
 # Latest Closed Sprint
+
+## Sprint 16 — Trust Boundary
+
+Sprint 16 is the latest closed production objective. Founder closure, commit
+and push are complete. Permanent deployment of Migration 009 remains a
+separate decision.
+
+# Earlier Closed Sprint
 
 ## Sprint 14 — Companion Intelligence Foundation
 
@@ -168,10 +210,9 @@ Session Context into a Guidance Request, execute the Provider Service and
 deliver the resulting Application state through a renderer-safe runtime
 boundary. That live delivery remains deferred under a separate future plan.
 
-Sprint 15 is active for the Operator Understanding Foundation. Its Phase 1
-ownership foundation, Phase 2 contract foundation and Phase 3 persistence
-implementation are verified and founder-approved, while Sprint 14 remains the
-latest fully closed Sprint.
+Sprint 15 is historical. Its Phase 1 ownership foundation, Phase 2 contract
+foundation and Phase 3 persistence foundation are verified and
+founder-approved. Sprint 16 subsequently completed the Trust Boundary.
 
 No Sprint 14 engineering objective remains open. AI inference, ranking,
 personalisation, runtime networking, gameplay automation and any form of game

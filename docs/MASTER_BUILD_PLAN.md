@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 2.6
+**Version:** 2.7
 
 ---
 
@@ -79,22 +79,49 @@ This architecture was established during Sprint 8 and forms the permanent founda
 
 # Latest Approved Execution Status
 
-Sprint 15 is formally active. Phase 1 — Ownership Foundation is implemented,
-deployed, security-verified and closed. Phase 2 — Understanding Contracts and
-Phase 3 — Persistence and Migration are implemented, verified and approved
-through founder implementation review.
-Sprint 14 remains the latest fully closed Sprint. The Sprint 15 activation
-baseline is `d9d78c94acbc628fbbc35f4a42ba970d02b2f9e9` and the Phase 1 closure
-baseline is `c2dda130d60b351eb9f3cabf86cb012971c8ba96`.
+No implementation Sprint is active.
 
-ADR-033 through ADR-036, the Sprint 15 plan and the reconciled planning
-documents remain authoritative. Phase 4 has not begun and requires separate
-authorisation.
+Sprint 16 — Trust Boundary is complete at
+`58589b52de0db341e6518fa9f235bb18854e6b30`. It was executed under the
+transitional alias Sprint 15.5A. Migration 009 is deployment-ready through
+rollback validation but remains undeployed pending a separate founder decision.
 
-## Sprint 15 — Operator Intelligence: Operator Understanding Foundation
+Sprint 17 — Scale Hardening is planned but not activated. Its former planning
+alias was Sprint 15.5B. Planning placement does not authorise implementation.
+
+The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
+vision and strategic direction, Epics own major capabilities, Sprints own
+independently reviewable production objectives and Phases are internal
+implementation stages.
+
+## Sprint 16 — Trust Boundary
 
 **Branch:** `sprint-9-overlay`
-**Status:** Active — Phases 1 through 3 complete; Phase 4 not authorised
+**Status:** Complete — founder closure approved, committed and pushed
+**Historical execution alias:** Sprint 15.5A
+**Closure commit:** `58589b52de0db341e6518fa9f235bb18854e6b30`
+
+Sprint 16 delivered exclusive server-side Operator Intelligence mutation
+authority, trusted authenticated ownership injection, global policy
+definitions, append-only consent and evidence dispositions, immutable
+admissions, stable Game Integration provenance and service-role-only durable
+persistence. Candidate generation, runtime accumulation and consumption remain
+inactive.
+
+## Sprint 17 — Scale Hardening
+
+**Status:** Planned; not activated
+**Historical planning alias:** Sprint 15.5B
+
+The proposed objective is targeted scale hardening: bounded and purpose-scoped
+reads, pagination, query optimisation, required indexes, Snapshot budgets and
+automated boundary enforcement. It requires a separately approved Sprint Plan
+and explicit founder activation.
+
+## Historical Sprint 15 — Operator Intelligence: Operator Understanding Foundation
+
+**Branch:** `sprint-9-overlay`
+**Status:** Historical — approved foundation Phases 1 through 3 complete
 **Plan:** `docs/sprints/SPRINT_15_PLAN.md`
 
 Sprint 15 establishes the trusted foundation for Oracle to build a
@@ -209,9 +236,10 @@ Verification, Documentation and Closure
 ```
 
 Authoritative Companion Guidance delivery has returned to the future queue. It
-requires separate planning and approval and is not automatically Sprint 16.
+requires separate planning and approval. Sprint 16 is the completed Trust
+Boundary objective.
 
-## Latest Closed Sprint — Sprint 14 Companion Intelligence Foundation
+## Earlier Closed Sprint — Sprint 14 Companion Intelligence Foundation
 
 **Branch:** `sprint-9-overlay`
 **Status:** Complete; closure approved and documentation reconciled
@@ -446,7 +474,9 @@ Sprint 9 is complete when:
 
 # Sprint Workflow
 
-Every sprint follows the same lifecycle.
+Every Sprint follows the lifecycle in `docs/GOVERNANCE.md`. A Sprint is one
+independently reviewable production objective; the steps below are internal
+Phases and gates rather than fractional Sprints.
 
 ```text
 Architecture Review
@@ -482,7 +512,9 @@ No stage should be skipped.
 
 # Definition of Done
 
-A sprint is only considered complete when:
+A Sprint is only considered complete when the definition of done in
+`docs/GOVERNANCE.md` is satisfied, including founder closure approval. The
+checks below remain the execution checklist:
 
 ## Engineering
 

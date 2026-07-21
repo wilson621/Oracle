@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 4.7
+**Version:** 4.8
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -17,9 +17,38 @@
 
 # Current Sprint
 
+No implementation Sprint is active.
+
+Sprint 17 — Scale Hardening is planned but has not been activated. Its former
+planning alias was Sprint 15.5B. Planning placement does not authorise
+implementation.
+
+# Latest Closed Sprint
+
+## Sprint 16 — Trust Boundary
+
+**Status:** Complete — founder closure approved, committed and pushed
+**Historical execution alias:** Sprint 15.5A
+**Closure commit:** `58589b52de0db341e6518fa9f235bb18854e6b30`
+**Deployment status:** Migration 009 is rollback-validated and undeployed
+
+Sprint 16 established exclusive server-side Operator Intelligence mutation
+authority, a server-only trusted Supabase client, authenticated ownership
+injection, global policy definitions, append-only consent and evidence
+dispositions, immutable admission records and service-role-only durable
+persistence. All approved trust, ownership, persistence, architecture,
+Guidance, Companion, desktop, build, lint and credential-isolation gates
+passed.
+
+Migration 009 requires a separate founder deployment decision. Sprint 16 did
+not activate candidate generation, intelligence accumulation, runtime
+consumption or Sprint 17 work.
+
+# Historical Sprint 15 Foundation
+
 ## Sprint 15 — Operator Intelligence: Operator Understanding Foundation
 
-**Status:** Active — Phases 1 through 3 complete; Phase 4 not authorised
+**Status:** Historical — approved foundation Phases 1 through 3 complete
 **Activation baseline:** `d9d78c94acbc628fbbc35f4a42ba970d02b2f9e9`
 **Plan:** `docs/sprints/SPRINT_15_PLAN.md`
 
@@ -32,9 +61,10 @@ The ADRs and planning reconciliation remain authoritative. Phase 1 has passed
 implementation, deployment, authenticated isolation and founder closure review.
 Phase 2 has passed contract implementation and closure. Phase 3 has passed
 persistence implementation, rollback validation, independent catalog
-verification and founder implementation review. Phase 4 has not begun.
+verification and founder implementation review. Unstarted work from the
+approved plan is not implicitly active and requires a new production objective.
 
-# Sprint 15 Governance Gate
+# Historical Sprint 15 Governance Gate
 
 - [x] final founder architectural approval
 - [x] Recommended scope selected
@@ -50,7 +80,7 @@ verification and founder implementation review. Phase 4 has not begun.
 - [x] governance and planning verification passed
 - [x] clean planning baseline committed
 
-# Sprint 15 Approved Scope
+# Historical Sprint 15 Approved Scope
 
 - [x] deployed Supabase schema and RLS audit
 - [x] authenticated Account-to-Operator ownership
@@ -64,7 +94,7 @@ verification and founder implementation review. Phase 4 has not begun.
 - [ ] safe, gated Oracle Context integration
 - [ ] architecture, migration, privacy and regression verification
 
-# Sprint 15 Phase 1 Closure
+# Historical Sprint 15 Phase 1 Closure
 
 - [x] deployed schema reconciled against tracked SQL
 - [x] additive Account-to-Operator ownership migration implemented
@@ -85,7 +115,7 @@ exclusively for migration, ownership, RLS, authentication and security
 regression testing. They are not product accounts, user data or general-purpose
 development fixtures.
 
-# Sprint 15 Phase 2 Closure
+# Historical Sprint 15 Phase 2 Closure
 
 - [x] immutable versioned Operator Understanding contracts implemented
 - [x] certainty, evidence quality and claim confidence separated structurally
@@ -106,7 +136,7 @@ engine adapter, Context integration, Application consumption or UI. Phase 3
 adds only the approved persistence foundation and keeps runtime consumption
 inactive.
 
-# Sprint 15 Phase 3 Closure
+# Historical Sprint 15 Phase 3 Closure
 
 - [x] deployed Supabase catalog re-audited before migration design
 - [x] six-table Operator Intelligence persistence schema implemented
@@ -125,9 +155,10 @@ inactive.
 
 `database/009_operator_intelligence_persistence.sql` remains undeployed after
 successful rollback validation. Permanent execution requires a separate
-founder-approved migration gate. Phase 4 requires separate authorisation.
+founder-approved migration gate. Unstarted later work requires a separately
+approved production objective.
 
-# Sprint 15 Explicit Deferrals
+# Historical Sprint 15 Explicit Deferrals
 
 - broad Operator Understanding UI
 - sensitive or psychological inference
@@ -143,7 +174,7 @@ founder-approved migration gate. Phase 4 requires separate authorisation.
 
 ---
 
-# Latest Closed Sprint
+# Earlier Closed Sprint
 
 ## Sprint 14 — Companion Intelligence Foundation
 
@@ -154,8 +185,8 @@ external Companion to become the Operator's intelligent second screen.
 
 Authoritative live runtime delivery remains deferred. Sprint 15 architectural
 review placed the Operator Understanding Foundation ahead of that work. Live
-Guidance delivery has returned to the future queue, requires separate planning
-and approval and is not automatically Sprint 16.
+Guidance delivery has returned to the future queue and requires separate
+planning and approval. Sprint 16 is the completed Trust Boundary objective.
 
 ---
 
@@ -368,6 +399,8 @@ remain accepted technical debt and do not authorise unrelated redesign.
 - [x] Oracle Strategy establishes operational strategic doctrine
 - [x] Codex reconciled as the operational engineering standard
 - [x] Documentation Index establishes reading order, classification and ownership
+- [x] Engineering Governance defines the Roadmap, Epic, Sprint and Phase hierarchy
+- [x] Sprint Index records canonical numbering and historical aliases
 - [x] Project Vision and Oracle Principles marked superseded with history retained
 - [x] Manifesto retained as a non-authoritative interpretive statement
 - [x] Architecture aligned through the Sprint 14 Companion Intelligence Foundation
@@ -376,6 +409,7 @@ remain accepted technical debt and do not authorise unrelated redesign.
 - [x] Roadmap distinguishes the completed foundation from deferred live delivery
 - [x] Master Build Plan reflects Sprint 14 closure
 - [x] canonical implementation status reflects Sprint 14 closure
+- [x] living delivery records reflect Sprint 16 closure and Sprint 17 inactivity
 - [x] ADRs record desktop snapshot/event and Timeline/Telemetry ownership
 - [x] ADR records the Desktop Platform API version 1 compatibility commitment
 - [x] Sprint 12.1 implementation audit added

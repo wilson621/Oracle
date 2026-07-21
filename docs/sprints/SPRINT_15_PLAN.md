@@ -15,6 +15,15 @@
 
 ---
 
+> **Historical transition note — 21 July 2026:** This approved plan is
+> preserved as the execution authority for Sprint 15 — Operator Understanding
+> Foundation. Sprint 15 is now historical. The subsequently completed Trust
+> Boundary objective is canonically Sprint 16 and was executed under the
+> transitional alias Sprint 15.5A. The planned Scale Hardening objective is
+> canonically Sprint 17 and was previously proposed as Sprint 15.5B. The
+> original metadata, phase language and scope below remain unchanged as an
+> approved historical record.
+
 # Status
 
 Sprint 15 is formally active. Phase 1 — Ownership Foundation, Phase 2 —
