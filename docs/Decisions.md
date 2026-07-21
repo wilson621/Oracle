@@ -2,8 +2,8 @@
 
 # Architectural Decision Records (ADR)
 
-Version 4.1
-Last Updated: Sprint 12.1 implementation audit — 20 July 2026
+Version 4.2
+Last Updated: Sprint 13 closure — 21 July 2026
 
 ---
 
@@ -845,6 +845,80 @@ boundary and is not changed by this decision.
 ## Status
 
 ✅ Accepted and implemented in Sprint 12.1 Commit 4
+
+---
+
+# ADR-031
+
+## Decision
+
+Oracle permanently adopts an External Companion architecture. Oracle operates
+only through safe mechanisms outside the game process. Game Integrations may
+identify supported external windows and provide immutable, serializable game
+context; they do not provide in-process access or gameplay-control capability.
+
+Any feature that would require process injection, protected-memory access or
+modification, function or rendering hooks, executable patching, gameplay or
+input automation, simulated user input, anti-cheat bypass or interference, or
+a technique intended to create an unfair competitive advantage is an
+architectural blocker. It must be escalated rather than implemented.
+
+## Reason
+
+Oracle exists to assist the Operator without altering the game, replacing
+player skill or risking the Operator's account and system. A permanent external
+boundary makes fair play, security and publisher-policy compliance structural
+properties of the Platform instead of integration-specific judgments. It also
+keeps Game Integrations portable: shared Platform, Service and Application code
+consumes serializable identity and context rather than privileged process
+objects or anti-cheat-sensitive mechanisms.
+
+## Alternatives Considered
+
+### Optional in-process integrations
+
+Rejected. Even an opt-in or game-specific exception would introduce privileged
+capabilities into shared architecture, increase security and account risk, and
+make Oracle's safety position dependent on implementation details.
+
+### Publisher-approved hooks or memory access
+
+Rejected as a general Oracle architecture. A publisher-provided external API
+may be evaluated as an ordinary safe data source, but approval does not justify
+adding injection, memory access, patching or hook infrastructure to Oracle.
+
+### Case-by-case fair-play review without a permanent boundary
+
+Rejected. Review remains necessary for supported integrations, but without a
+normative prohibition future delivery pressure could gradually erode the
+external-companion model.
+
+## Trade-offs
+
+- Some context may be unavailable or less immediate than an in-process system
+  could obtain.
+- Unsupported or uncertain features must remain disabled, reducing coverage.
+- Detection and context quality depend on safe external evidence and approved
+  external data sources.
+- In return, Oracle gains a clear trust boundary, lower security and account
+  risk, deterministic serializable contracts and an integration model that can
+  support future games without privileged game access.
+
+## Long-Term Architectural Implications
+
+- The Constitution is the normative source for the prohibited-technique and
+  escalation rule.
+- Game-specific detection and context remain inside Game Integrations.
+- Reusable lifecycle, Session ownership and presentation remain in shared
+  Platform, Service and Application layers.
+- Shared contracts contain immutable, serializable data and never expose
+  executable references, process handles, integration instances or detectors.
+- Future proposals crossing the external boundary stop at architecture review;
+  they are not implementation tasks until redesigned to comply.
+
+## Status
+
+✅ Accepted and implemented as a permanent architectural constraint in Sprint 13
 
 ---
 

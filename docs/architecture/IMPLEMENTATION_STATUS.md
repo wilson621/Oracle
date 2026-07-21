@@ -1,9 +1,9 @@
 # ORACLE IMPLEMENTATION STATUS
 
 **Status:** Canonical living implementation record
-**Last verified:** 20 July 2026
+**Last verified:** 21 July 2026
 **Verified branch:** `sprint-9-overlay`
-**Verified baseline before Commit 6:** `6084b7e`
+**Verified baseline before Sprint 13 closure:** `fa36af4`
 
 ---
 
@@ -27,38 +27,37 @@ Update this file during every sprint closure audit.
 
 # Current Sprint
 
-## Sprint 12.1 — Desktop Platform Foundation and Hardening
+## Sprint 13 — End-to-End Game Integration Vertical Slice
 
-The sprint is complete on `sprint-9-overlay`.
+The sprint is complete on `sprint-9-overlay`. Call of Duty is the first
+production Game Integration used to prove the shared architecture; it is not a
+special-case Companion feature.
 
 Implemented milestones:
 
-- Companion Session lifecycle and authoritative Session Manager
-- Immutable desktop-owned Companion Context snapshots
-- Canonical Desktop Host Snapshot contract and builder
-- Desktop Host Snapshot Coordinator
-- Versioned Desktop Host Event Stream
-- Desktop Diagnostics
-- Desktop Recovery lifecycle tracking
-- Unified Desktop Timeline
-- Derived Desktop Telemetry
-- Complete Session Lifecycle (Commit 3)
-- Desktop Platform API version 1 freeze (Commit 4)
-- automated dependency-boundary baseline and enforcement (Commit 5)
-- zero runtime circular dependency groups after engine import-path correction
-- final web, desktop and native build hardening and closure verification
+- deterministic Game Detection contracts and outcomes
+- side-effect-free production Game Integration registry factory
+- immutable, serializable game context owned by the Companion Session Manager
+- game-agnostic coordination between Game Integration evaluation and the
+  existing Companion attachment lifecycle
+- serialized attach, detach, reattach and process replacement handling
+- renderer-safe active-game presentation through an additive restricted bridge
+- permanent External Companion and Fair Play rule in the Constitution
+- focused, web, desktop, lint and architecture closure verification
 
-Commit 3 keeps the active Session aligned with host attachment state:
+The active Session remains aligned with host attachment state:
 
-- attachment moves a ready Session to `attached`
+- supported-game attachment moves a ready Session to `attached` with context
+  from the exact selected integration
 - detachment moves an attached Session back to `ready`
 - reattachment reuses the active Session
+- process replacement clears stale state before attaching the replacement
 - renderer load failure closes the controller and ends the started Session
   through the existing idempotent shutdown path
 
-No Sprint 12.1 engineering objective remains open. Commit 6 verified the web,
-desktop and native build paths, classified remaining warnings and known issues,
-and closed the sprint documentation. Sprint 13 has not started.
+No Sprint 13 engineering objective remains open. AI coaching, vision, OCR,
+match analysis, dynamic guidance, weapon recommendations, statistics and
+gameplay automation remain explicitly out of scope.
 
 The release decision is to close the verified sprint branch without creating
 a product release tag. A tag remains a separately authorised release action.
@@ -119,6 +118,10 @@ Implemented under `desktop/`:
 - Companion Session lifecycle and context ownership
 - attachment-driven Session lifecycle synchronisation and renderer-load
   failure cleanup
+- game-agnostic Game Integration Coordinator and production registry wiring
+- serialized supported-game discovery, attachment and process replacement
+- renderer-safe Companion presentation projection and restricted additive
+  preload bridge
 - frozen Desktop Platform API version 1 and compatibility manifest
 
 Desktop Platform services exchange serializable data and do not expose
@@ -130,14 +133,17 @@ Implemented under `lib/oracle/game-integrations/`:
 
 - Game Integration contract and registry
 - deterministic integration evaluator
+- deterministic not-detected, detected and ambiguous outcomes
 - executable detection profile and matcher
 - Call of Duty integration with a verified `cod.exe` profile
 - Warzone title evidence and launcher exclusion
 - serializable game-context contract
+- side-effect-free production registry factory consumed by the desktop
+  coordinator
 
-The Call of Duty integration is not currently registered or invoked by the
-desktop host. It must not yet be described as an active end-to-end Companion
-integration.
+The Call of Duty integration is the first active end-to-end implementation of
+the shared Game Integration architecture. Game-specific executable and title
+knowledge remains isolated inside that integration.
 
 ---
 
@@ -155,6 +161,12 @@ The renderer-accessible desktop API is `OracleDesktopBridge` in
 - restoring interaction
 - minimizing, maximizing and closing the window
 - subscribing to host-state changes
+- reading the renderer-safe Companion presentation state
+- subscribing to validated Companion presentation-state changes
+
+The Companion presentation bridge is additive and separate from the frozen
+Desktop Platform API version 1 namespace. It exposes only contract identity,
+status, capture time and minimal active-game identity.
 
 IPC requests are accepted only from the controller-owned renderer.
 
@@ -211,8 +223,6 @@ Open boundary findings:
    exists; Electron currently loads `/oracle`.
 4. `lib/companion` and `desktop/companion` model different lifecycle layers but
    have no implemented integration contract.
-5. Game Integration evaluation is not connected to desktop Companion Context.
-
 These are recorded findings, not authorisation to redesign verified systems.
 They are now measured by `npm run architecture:audit`; documented legacy
 exceptions remain technical debt and new violations fail verification.
@@ -227,6 +237,8 @@ evidence and correction priorities.
 - Platform → Services → Applications → Game Integrations is the target ownership
   model.
 - Companion is an Oracle Platform subsystem and remains external to games.
+- Game Integrations provide only safe external detection and immutable,
+  serializable game context.
 - Desktop observation uses independent Windows facilities and never injects.
 - Desktop truth crosses subsystem boundaries as immutable serializable
   snapshots and versioned events.
@@ -234,6 +246,9 @@ evidence and correction priorities.
   derived view.
 - Desktop Platform API version 1 is frozen behind one explicit public import
   surface; breaking version 2 work requires an accepted ADR.
+- Any proposal requiring injection, protected-memory access or modification,
+  hooks, patching, automation, input simulation, anti-cheat interference or an
+  unfair-advantage technique is an architectural blocker and must be escalated.
 
 See `docs/Decisions.md` for the complete ADR record.
 
@@ -242,7 +257,7 @@ See `docs/Decisions.md` for the complete ADR record.
 # Verification Scope
 
 This status was re-verified from source inspection and Git history using
-`6084b7e` as the clean baseline before Commit 6.
+`fa36af4` as the clean implementation baseline before Sprint 13 closure.
 
 Final closure verification passed:
 
@@ -250,16 +265,18 @@ Final closure verification passed:
 - `npm run desktop:compile`
 - `npm run lint` with zero errors and five unrelated existing warnings
 - `npm run build`
-- `npm run native:build`
-- `npm ls --depth=0`
+- focused Game Detection verification
+- focused Session Context verification
+- focused Companion lifecycle verification
+- focused presentation and preload verification
+- emitted Electron entry and native-helper path validation
 - `git diff --check`
 - working-tree and untracked-file inspection
 
-The composite `build:desktop` script was not repeated because its web build,
-native builds and desktop compilation were executed and recorded separately.
-No automated test script exists in `package.json`. An interactive Electron UI
-smoke test was not run as part of this non-feature closure; lifecycle and API
-consistency were reviewed from the compiled implementation and source.
+No automated test script exists in `package.json`; focused verification uses
+temporary TypeScript harnesses that are removed before closure. An interactive
+Electron UI smoke test remains a release-environment activity rather than a
+documentation-closure requirement.
 
 Accepted technical debt remains documented in
 `DEPENDENCY_BOUNDARY_AUDIT.md` and `SPRINT_12_1_RETROSPECTIVE.md`.

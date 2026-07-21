@@ -3,6 +3,7 @@
 **Status:** Active  
 **Authority:** Highest-level Oracle product and architectural standard  
 **Established:** Sprint 8  
+**Last amended:** Sprint 13 closure — 21 July 2026
 **Applies to:** All Oracle Platform code, applications, services, integrations, extensions, documentation and future products
 
 ---
@@ -385,7 +386,30 @@ Oracle Companion must never:
 
 # Core Principle 13 — External Companion Architecture
 
-> Oracle Companion remains external to the game process.
+> Oracle operates exclusively as an external companion platform.
+
+Game Integrations may provide only safe, external detection and immutable,
+serializable game context. They must not expose process handles, executable
+objects, detector implementations, mutable integration instances or other
+in-process capabilities through shared Oracle contracts.
+
+Oracle and every Oracle extension, Service, Application and Game Integration
+must never:
+
+- Inject into a game process
+- Modify or read protected game memory
+- Hook game functions or rendering pipelines
+- Patch game executables
+- Automate gameplay or player input
+- Simulate user input
+- Bypass, evade or interfere with anti-cheat systems
+- Implement techniques whose purpose is to gain an unfair competitive
+  advantage
+
+Any proposed feature that requires one of these techniques is an architectural
+blocker. It must remain unimplemented and be escalated for architectural review;
+delivery scope, user demand or integration-specific convenience cannot override
+this rule.
 
 The intended Companion presentation model is:
 

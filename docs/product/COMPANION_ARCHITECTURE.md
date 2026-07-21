@@ -1,8 +1,8 @@
 # ORACLE COMPANION ARCHITECTURE
 
-Version 1.1
+Version 1.2
 
-Status: Sprint 12.1 implementation-aligned foundation
+Status: Sprint 13 end-to-end Game Integration implementation
 
 ---
 
@@ -71,6 +71,10 @@ Oracle Companion improves the experience.
 # Companion Principle
 
 Oracle Companion is an external desktop application.
+
+The Oracle Platform Constitution is the normative source for this boundary.
+Any proposed feature requiring a prohibited technique is an architectural
+blocker and must be escalated rather than implemented.
 
 It must never:
 
@@ -1186,7 +1190,7 @@ Shared contracts should not require either application to import the other appli
 
 # Current Verified Implementation
 
-As of Sprint 12.1, Oracle contains two distinct Companion foundations:
+As of Sprint 13, Oracle contains two distinct Companion foundations:
 
 - `lib/companion` defines the Platform-level Companion Runtime, presentation
   state, extensions, capabilities and connector contracts.
@@ -1197,16 +1201,42 @@ The Electron host additionally implements window discovery, deterministic
 target selection, attachment, native observation, Desktop Host Snapshots,
 events, diagnostics, recovery, Timeline and Telemetry.
 
-The two Companion foundations are not yet connected through an explicit
-integration boundary. The implemented Call of Duty Game Integration is also
-not yet wired into desktop Companion Context. These are recorded remaining
-integration tasks, not completed capabilities.
+Sprint 13 connects the production Game Integration registry to the desktop
+Companion through a game-agnostic coordinator. Detection produces deterministic
+not-detected, detected or ambiguous outcomes. Ambiguity never selects an
+arbitrary game, and one integration failure does not stop evaluation of later
+integrations.
+
+The Companion lifecycle remains the single attachment authority. Discovery,
+attachment and process replacement are serialized, and obsolete discovery work
+cannot overwrite newer lifecycle state. Supported attachment installs context
+from the exact integration that produced the selected result. Detach, process
+loss and shutdown clear that context; reattach reuses the active Session; and
+process replacement clears the old attachment before installing the new one.
+
+The desktop Companion Session Manager remains the single Session-state
+authority. Game context is immutable, serializable and clone-isolated when it
+enters Session ownership and when consumers receive snapshots. Omission
+preserves existing game context; an explicitly present `game` property replaces
+or clears it. Replacement is total and never merges stale integration state.
 
 The public renderer boundary is the restricted preload `OracleDesktopBridge`.
+One versioned presentation contract is used for both initial reads and
+subscription events. It exposes only a UTC ISO 8601 capture timestamp, status
+and minimal active-game identity. Payloads are validated, subscriptions use a
+fixed channel with idempotent cleanup, and renderer code fails safely when the
+bridge is unavailable. Presentation publishes only after authoritative Session
+transitions complete.
+
 Desktop Platform API version 1 separately exposes the immutable desktop data
 contracts through `desktop/platform/index.ts`, the sole supported external
 import surface. Desktop services, controllers and Electron/native details
 remain internal.
+
+Call of Duty is the first production implementation used to prove this shared
+vertical slice. Its executable and title knowledge stays inside its Game
+Integration. Detection outcomes, coordination, Session ownership, lifecycle
+rules and presentation contracts remain fully game-agnostic.
 
 ---
 

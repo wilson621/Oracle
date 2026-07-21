@@ -1,19 +1,42 @@
 # ORACLE PROJECT BOARD
 
-**Version:** 4.0
-**Last updated:** 20 July 2026
+**Version:** 4.1
+**Last updated:** 21 July 2026
 **Branch:** `sprint-9-overlay`
-**Implementation baseline before Commit 6:** `6084b7e`
+**Implementation baseline before Sprint 13 closure:** `fa36af4`
 
 ---
 
 # Current Sprint
 
-## Sprint 12.1 — Desktop Platform Foundation and Hardening
+## Sprint 13 — End-to-End Game Integration Vertical Slice
 
-**Status:** Complete — final hardening and closure verification passed
+**Status:** Complete — implementation and closure verification passed
 
-Sprint 13 has not started.
+Sprint 13 proved Oracle's end-to-end Game Integration architecture using Call
+of Duty as the first production integration, not as a special-case feature.
+
+---
+
+# Sprint 13 Commit Sequence
+
+- [x] Commit 1 — deterministic Game Detection contracts (`01ddbd5`)
+- [x] Commit 2 — immutable game Session Context (`3898d45`)
+- [x] Commit 3 — Companion lifecycle integration (`5a25ee7`)
+- [x] Commit 4 — renderer-safe Companion presentation (`fa36af4`)
+- [x] Commit 5 — verification, documentation and Sprint closure
+
+# Completed Sprint 13 Milestones
+
+- [x] supported Call of Duty windows are detected externally
+- [x] deterministic not-detected, detected and ambiguous outcomes
+- [x] authoritative, immutable game-agnostic Session Context
+- [x] serialized attach, detach, reattach and process replacement
+- [x] active-game presentation through a restricted additive preload bridge
+- [x] detector and coordinator failure isolation
+- [x] Desktop Platform API version 1 preserved unchanged
+- [x] Constitution and ADR formalise the External Companion boundary
+- [x] complete web, desktop, lint, architecture and focused verification
 
 ---
 
@@ -52,20 +75,22 @@ Session lifecycle and guarantees cleanup when the renderer fails to load.
 
 ---
 
-# Remaining Sprint 12.1 Work
+# Sprint 13 Closure
 
-- [x] Dependency-boundary audit implementation and automated enforcement
-- [x] Final-closure desktop TypeScript compilation
-- [x] Final-closure lint verification
-- [x] Final-closure Next.js production build
-- [x] Native Windows helper build verification
-- [x] Runtime and lifecycle source review proportional to desktop risk
-- [x] Issue classification and documentation closure
+- [x] focused game-detection verification
+- [x] focused Session Context verification
+- [x] focused Companion lifecycle verification
+- [x] focused presentation and preload verification
+- [x] desktop TypeScript compilation and emitted Electron entry validation
+- [x] Next.js production build and ESLint
+- [x] architecture audit, native-helper path and repository validation
 - [x] Sprint closure and release decision
 
-No Sprint 12.1 engineering objective remains open. The release decision is to
-close the verified sprint on `sprint-9-overlay` without creating a product
-release tag; tagging remains part of a separately authorised release workflow.
+No Sprint 13 engineering objective remains open. AI coaching, vision, OCR,
+match analysis, dynamic guidance, recommendations, statistics and gameplay
+automation were explicitly excluded. The release decision is to close the
+verified sprint on `sprint-9-overlay` without creating a product release tag;
+tagging remains part of a separately authorised release workflow.
 
 ---
 
@@ -103,6 +128,11 @@ release tag; tagging remains part of a separately authorised release workflow.
 - desktop Companion Session and Context ownership implemented
 - attachment and detachment transitions are reflected in the active desktop
   Companion Session
+- supported-game discovery, attachment and process replacement are serialized
+- game context is installed from the exact selected integration and cleared on
+  detach, process loss and shutdown
+- renderer presentation is a validated, game-agnostic projection of the
+  authoritative Session
 - renderer load failure closes the desktop controller and ends the started
   Session
 - the two lifecycle layers are not yet connected by an explicit contract
@@ -112,8 +142,10 @@ release tag; tagging remains part of a separately authorised release workflow.
 
 - Game Integration contract, registry and evaluator implemented
 - Call of Duty integration and executable profile implemented
-- integration is not registered into the desktop host
-- desktop Companion game context remains unset
+- production registry is invoked by the game-agnostic desktop coordinator
+- deterministic detection drives the desktop Companion lifecycle
+- Call of Duty-specific executable and title knowledge remains isolated inside
+  its Game Integration
 
 ---
 
@@ -137,17 +169,15 @@ Open findings:
 2. Platform bootstrap is not a production entry-point dependency
 3. registered Services and Applications are metadata foundations, not the
    exclusive runtime boundary
-4. Game Integration output is not connected to desktop Companion Context
 
-These findings are measured legacy exceptions recorded by Commit 5. They are
-accepted technical debt for Sprint 12.1 closure and do not authorise redesign
-or begin Sprint 13.
+These findings are measured legacy exceptions retained from Sprint 12.1. They
+remain accepted technical debt and do not authorise unrelated redesign.
 
 ---
 
 # Documentation Health
 
-- [x] Constitution reviewed; no change required
+- [x] Constitution updated with the permanent External Companion rule
 - [x] Codex reviewed; normative standards remain authoritative
 - [x] Oracle Principles reviewed; no change required
 - [x] Architecture aligned to verified implementation
@@ -158,12 +188,16 @@ or begin Sprint 13.
 - [x] ADR records the Desktop Platform API version 1 compatibility commitment
 - [x] Sprint 12.1 implementation audit added
 - [x] Sprint 12.1 retrospective added
+- [x] Sprint 13 implementation and closure record added
+- [x] Constitution defines the permanent External Companion rule
+- [x] ADR-031 records its rationale, alternatives and implications
 
 ---
 
 # Closure Rule
 
-Sprint 12.1 closure verification passed on 20 July 2026. The architecture
-audit, desktop TypeScript compilation, lint, production build, native helper
-builds, dependency inspection and repository checks all passed. The five
-existing lint warnings remain documented, unrelated technical debt.
+Sprint 13 closure verification passed on 21 July 2026. Focused detection,
+Session Context, lifecycle and presentation/preload checks passed, as did the
+architecture audit, desktop TypeScript compilation, production build, emitted
+Electron entry and native-helper path validation, lint and repository checks.
+The five existing lint warnings remain documented, unrelated technical debt.

@@ -3,7 +3,7 @@
 ## Strategic Product Roadmap
 
 **Version:** 4.2
-**Last Updated:** Sprint 12.1 implementation audit — 20 July 2026
+**Last Updated:** Sprint 13 closure — 21 July 2026
 
 ---
 
@@ -719,12 +719,13 @@ Oracle becomes an extensible ecosystem where new capabilities can be added witho
 
 The Oracle Platform grows through extensions rather than increasing complexity inside the Platform itself.
 
-# Current Delivery — Sprint 12.1
+# Current Delivery — Sprint 13
 
 The earlier Sprint 9–12 sequence in this roadmap was a strategic projection.
-Repository delivery continued on `sprint-9-overlay`, and the verified current
-work is Sprint 12.1 Desktop Platform Foundation and Hardening. It is not the
-projected Marketplace milestone.
+Repository delivery continued on `sprint-9-overlay`. Sprint 13 proved the
+end-to-end Game Integration architecture using Call of Duty as the first
+production implementation. It is not a Call of Duty feature sprint and is not
+the projected Marketplace milestone.
 
 Completed in the current delivery line:
 
@@ -739,18 +740,24 @@ Completed in the current delivery line:
 - derived Desktop Telemetry
 - first Call of Duty Game Integration foundation
 - frozen Desktop Platform API version 1
+- deterministic Game Detection outcomes and production registry
+- immutable game context under authoritative Companion Session ownership
+- game-agnostic lifecycle coordination for attach, detach, reattach and process
+  replacement
+- renderer-safe active-game presentation
 
-Sprint 12.1 is complete. Final closure verified:
+Sprint 13 is complete. Final closure verified:
 
-- automated dependency-boundary enforcement with documented legacy exceptions
-- zero runtime dependency cycles
+- focused detection, Session Context, lifecycle and presentation/preload
+  behaviour
 - desktop TypeScript and Next.js production builds
-- native Windows discovery and observation helper builds
+- emitted Electron entry and native-helper paths
+- dependency-boundary enforcement with zero runtime dependency cycles
 - lint with zero errors and five unrelated existing warnings
-- documentation closure and Sprint retrospective
+- documentation closure, constitutional Fair Play rule and ADR-031
 
-Sprint 13 has not started. Marketplace remains a future strategic objective;
-it must not be inferred from the Sprint number alone.
+Marketplace remains a future strategic objective; it must not be inferred from
+the Sprint number alone.
 
 # Current Oracle Platform
 
@@ -823,9 +830,16 @@ Applications do not own business logic.
 
 ## Game Integrations
 
-Current architecture provides Game Integration contracts, a registry, an
-evaluator and one Call of Duty implementation. No integration is currently
-wired into the desktop host.
+Current architecture provides deterministic Game Integration contracts, a
+side-effect-free production registry, an evaluator and one Call of Duty
+implementation wired into the desktop Companion lifecycle. The shared
+coordinator remains game-agnostic; executable and title knowledge remains
+inside the Call of Duty integration.
+
+Supported windows are detected externally. The exact selected integration
+provides immutable, serializable Session Context. Attachment state remains
+owned by the Companion lifecycle, while the renderer receives only a minimal
+presentation projection.
 
 Supported integrations will continue to grow without requiring Platform redesign.
 

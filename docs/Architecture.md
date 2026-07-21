@@ -4,7 +4,7 @@ Technical Architecture
 
 Version 5.1
 
-Last Updated: Sprint 12.1 implementation audit — 20 July 2026
+Last Updated: Sprint 13 closure — 21 July 2026
 
 ---
 
@@ -1026,10 +1026,20 @@ It is not designed to manipulate games.
 Oracle must never:
 
 - inject code
-- modify game processes
-- bypass anti-cheat systems
-- automate gameplay
+- modify or read protected game memory
+- hook game functions or rendering pipelines
+- patch executables
+- bypass or interfere with anti-cheat systems
+- automate gameplay or player input
+- simulate user input
+- implement techniques intended to gain an unfair competitive advantage
 - reveal hidden competitive information
+
+Oracle operates exclusively as an external companion platform. Game
+Integrations provide only safe external detection and immutable, serializable
+game context. Any proposed feature that requires a prohibited technique is an
+architectural blocker and must be escalated rather than implemented. Core
+Principle 13 of the Oracle Platform Constitution is the normative rule.
 
 Oracle only reasons over:
 
@@ -1166,6 +1176,53 @@ versioned data contracts behind the sole supported external import surface at
 `desktop/platform/index.ts`. The API manifest and compatibility policy exclude
 services, controllers, Electron objects and native implementation details.
 
+# Sprint 13 Game Integration Vertical Slice
+
+Sprint 13 connects the established Game Integration and desktop Companion
+foundations without changing Desktop Platform API version 1:
+
+```text
+External Window Discovery
+        ↓
+Deterministic Game Integration Evaluation
+        ↓
+Game-Agnostic Desktop Coordinator
+        ↓
+Authoritative Companion Attachment Lifecycle
+        ↓
+Immutable Session-owned Game Context
+        ↓
+Renderer-safe Companion Presentation
+```
+
+Detection has three deterministic outcomes: not detected, detected and
+ambiguous. Ambiguous matches preserve registry and evaluator ordering and never
+produce an arbitrary selection. Failure in one integration does not prevent
+the remaining integrations from being evaluated.
+
+The Companion lifecycle remains the sole attachment authority. Discovery and
+attachment work is serialized and obsolete runs are invalidated before their
+results can change newer state. Detach, process loss and shutdown clear stale
+game context. Reattachment reuses the active Session, while process replacement
+clears the previous attachment before installing context from the exact
+integration that selected the replacement process.
+
+The Session Manager remains the sole Session-state authority. It accepts only
+safe serializable game context, applies total replacement semantics and clones
+both incoming context and returned snapshots. No detector, executable
+reference, integration instance or mutable integration-owned object crosses
+that boundary.
+
+The renderer receives one validated presentation contract for both initial
+reads and subscription events. It contains only status, a UTC ISO 8601 capture
+timestamp and minimal active-game identity. The additive preload bridge is
+separate from Desktop Platform API version 1 and grants no lifecycle mutation
+authority.
+
+Call of Duty-specific executable and title evidence remains exclusively inside
+the Call of Duty Game Integration. Detection contracts, lifecycle coordination,
+Session ownership and presentation are shared, game-agnostic capabilities.
+
 # Verified Integration Limits
 
 - `bootstrapOraclePlatform()` is implemented but is not invoked by the current
@@ -1175,8 +1232,6 @@ services, controllers, Electron objects and native implementation details.
 - several web pages call repositories, pipelines or engines directly.
 - the registered Companion route `/companion` has no App Router page; Electron
   currently loads `/oracle`.
-- the Call of Duty Game Integration is implemented but not registered into the
-  desktop host, so desktop Companion game context remains unset.
 - `lib/companion` and `desktop/companion` are not yet joined by an explicit
   integration contract.
 
