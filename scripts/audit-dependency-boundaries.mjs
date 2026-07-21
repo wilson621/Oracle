@@ -428,6 +428,7 @@ function findImportBoundaryViolations() {
           "lib/"
         ) &&
         targetLayer !== "service" &&
+        targetLayer !== "application" &&
         dependency.target !==
           "lib/oracle/platform/index.ts"
       ) {

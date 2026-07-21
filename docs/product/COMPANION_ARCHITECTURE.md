@@ -1,8 +1,8 @@
 # ORACLE COMPANION ARCHITECTURE
 
-Version 1.6
+Version 1.7
 
-Status: Sprint 14 Companion Guidance Application boundary
+Status: Sprint 14 Companion Application presentation
 
 ---
 
@@ -1473,6 +1473,63 @@ This boundary introduces no UI, renderer integration, networking, provider
 composition, AI inference or runtime orchestration. A later commit may render
 the immutable application models through `/companion` without importing raw
 Guidance or provider contracts into React.
+
+## Companion Application Presentation
+
+Sprint 14 Commit 5 establishes `/companion` as the first Operator-facing React
+experience built entirely on Companion Guidance application models. React owns
+rendering only. Its Oracle dependency is limited to
+`CompanionGuidanceApplicationState` and the associated presentation view-model
+types produced by the Applications layer.
+
+The component hierarchy is:
+
+```text
+/companion page
+    |
+    v
+Companion Guidance Dashboard
+    |-- Operator-safe diagnostics
+    |-- Loading / empty / unavailable state panel
+    `-- Ready / partial-success guidance collection
+            `-- Guidance Card
+                    |-- Recommendation
+                    |-- Confidence, priority and spoiler labels
+                    |-- Rationale and evidence
+                    |-- Reviewed source attribution
+                    `-- Reassessment and freshness details
+```
+
+Every application state is rendered explicitly. Ready and partial-success
+states preserve card order exactly as supplied by the Application. React does
+not sort, filter, select, rank or personalise guidance. Loading, empty and
+unavailable states communicate their condition honestly without manufacturing
+Session Context, recommendations or Operator data.
+
+Until an authoritative runtime delivery boundary exists, the production route
+uses the Applications-owned unavailable-state factory. The screen states that
+Companion is not connected and explains that Oracle will not invent guidance.
+No sample Guidance is present in the production route.
+
+The presentation uses Server Components because this commit requires no local
+state, lifecycle effects or browser APIs. Native semantic elements provide the
+interaction required for progressive rationale and evidence disclosure. The
+page uses headings, labelled articles, definition lists, status regions,
+`aria-live`, `aria-busy`, descriptive source links and machine-readable time
+elements. Keyboard focus remains visible and information is never communicated
+by colour alone.
+
+Scoped CSS Modules provide a calm, coaching-oriented dashboard that reuses the
+existing Oracle shell and adapts to narrow displays. The primary navigation now
+links to `/companion`. Styling introduces no animation dependency and remains
+compatible with reduced-motion preferences.
+
+A focused verification gate protects the React ownership boundary. It rejects
+imports from non-Application Oracle layers, Client Component directives,
+Guidance Card sorting or filtering, missing application-state branches and
+omission of core explainability fields. Runtime delivery, desktop IPC, preload,
+Session lifecycle, provider execution and game-specific presentation remain
+outside this commit.
 
 ---
 
