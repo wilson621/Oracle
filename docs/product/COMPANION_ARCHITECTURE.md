@@ -1,8 +1,8 @@
 # ORACLE COMPANION ARCHITECTURE
 
-Version 1.5
+Version 1.6
 
-Status: Sprint 14 first curated Game Integration guidance package
+Status: Sprint 14 Companion Guidance Application boundary
 
 ---
 
@@ -1431,6 +1431,48 @@ rule in the shared orchestration Service.
 The reviewed sources, accepted and excluded claims, assumptions, Fair Play
 assessment and known limitations are recorded in
 `docs/product/CALL_OF_DUTY_GUIDANCE_PACKAGE.md`.
+
+## Companion Guidance Application Boundary
+
+Sprint 14 Commit 4 adds the Applications-owned adapter between validated
+Guidance Service results and future React presentation. The boundary is a pure
+projection: it receives a completed Service result and returns a deeply
+immutable application state. It cannot discover or execute providers and has
+no access to provider registration, Session lifecycle, desktop runtime,
+renderer objects or game-specific knowledge.
+
+The application state has five explicit outcomes:
+
+- `loading` while a future composition layer prepares a result
+- `ready` when one or more cards are available without failures
+- `empty` when the completed request has no applicable guidance
+- `partial-success` when useful cards remain but some guidance was unavailable
+- `unavailable` when no card can be presented safely
+
+React will consume application-owned Guidance Card view models rather than raw
+Platform Guidance contracts. Cards retain the presentation information needed
+for an explainable experience: category, type, recommendation, detail,
+rationale, evidence, confidence, priority, source attribution, spoiler level,
+reassessment trigger and freshness timestamps. Open category, type and source
+identifiers receive safe display labels without becoming closed enumerations.
+
+The projection deliberately removes contract identity, compatibility metadata,
+provider provenance and Service execution summaries from each card. React does
+not need those domain or orchestration details in order to render guidance.
+Card order remains Service order; the Application does not rank, select or
+personalise recommendations.
+
+Structured failures are collapsed by failure stage into stable Operator-safe
+diagnostics. Execution failures become a generic source-availability warning.
+Rejected output becomes a generic safely-omitted-content warning. Provider
+identifiers, versions, internal codes, exception messages and output indexes
+never enter application state. Repeated failures of the same class produce one
+diagnostic, avoiding implementation leakage and notification noise.
+
+This boundary introduces no UI, renderer integration, networking, provider
+composition, AI inference or runtime orchestration. A later commit may render
+the immutable application models through `/companion` without importing raw
+Guidance or provider contracts into React.
 
 ---
 
