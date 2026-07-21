@@ -31,6 +31,13 @@ import {
   OracleCompanionSessionManager,
 } from "./companion/companion-session-manager.js";
 import {
+  OracleDesktopGameIntegrationCoordinator,
+  type OracleDesktopSupportedGameCandidate,
+} from "./companion/game-integration-coordinator.js";
+import type {
+  OracleCompanionGameContext,
+} from "./companion/companion-context.js";
+import {
   OracleDesktopHostSnapshotCoordinator,
 } from "./platform/desktop-host-snapshot-coordinator.js";
 import {
@@ -76,6 +83,9 @@ const STANDARD_WINDOWS_DPI = 96;
 const ATTACHMENT_TRACKING_INTERVAL_MS =
   250;
 
+const WINDOW_DISCOVERY_RETRY_INTERVAL_MS =
+  1_000;
+
 export class CompanionHostWindowController {
   private window:
     BrowserWindow | null = null;
@@ -97,6 +107,15 @@ export class CompanionHostWindowController {
 
   private readonly companionSession =
     new OracleCompanionSessionManager();
+
+  private readonly gameIntegrations =
+    new OracleDesktopGameIntegrationCoordinator();
+
+  private pendingGameContext:
+    OracleCompanionGameContext | null = null;
+
+  private discoveryRetryTimer:
+    NodeJS.Timeout | null = null;
 
   private readonly diagnostics =
     new OracleDesktopDiagnostics();
@@ -186,6 +205,12 @@ export class CompanionHostWindowController {
 
         this.synchroniseCompanionSessionAttachment(
           attachmentState
+        );
+      },
+
+      onTargetUnavailable: () => {
+        this.scheduleWindowDiscovery(
+          0
         );
       },
     });
@@ -528,7 +553,7 @@ export class CompanionHostWindowController {
     const window =
       this.getWindow();
 
-    this.discoveryRunId += 1;
+    this.cancelWindowDiscovery();
 
     this.attachment.reset();
 this.developmentBounds = null;
@@ -550,6 +575,8 @@ this.desktopHostSnapshots.clear();
   }
 
   private async refreshWindowDiscovery(): Promise<void> {
+    this.cancelDiscoveryRetry();
+
     const runId =
       ++this.discoveryRunId;
 
@@ -591,12 +618,17 @@ this.desktopHostSnapshots.clear();
         discoveryState
       );
 
-    this.coordinateAttachment(
+    const attached =
+      this.coordinateAttachment(
       discoveryState.windows,
       foregroundHandle
     );
 
     this.publishState();
+
+    if (!attached) {
+      this.scheduleWindowDiscovery();
+    }
   }
 
   private coordinateAttachment(
@@ -604,7 +636,7 @@ this.desktopHostSnapshots.clear();
     OracleDesktopDiscoveredWindow[],
   foregroundHandle:
     string | null
-): void {
+): boolean {
   const attachmentState =
     this.attachment.getState();
 
@@ -612,7 +644,7 @@ this.desktopHostSnapshots.clear();
     attachmentState.status ===
       "attached"
   ) {
-    return;
+    return true;
   }
 
   const candidateInputs =
@@ -621,10 +653,26 @@ this.desktopHostSnapshots.clear();
       foregroundHandle
     );
 
+  const supportedCandidates =
+    this.gameIntegrations
+      .evaluateCandidates(
+        candidateInputs
+      )
+      .filter(
+        (
+          result
+        ): result is OracleDesktopSupportedGameCandidate =>
+          result.status ===
+          "supported"
+      );
+
   const decision =
-  selectDesktopTarget(
-    candidateInputs
-  );
+    selectDesktopTarget(
+      supportedCandidates.map(
+        (result) =>
+          result.candidate
+      )
+    );
 
 const selectedWindow =
   getSelectedDiscoveredWindow(
@@ -632,12 +680,55 @@ const selectedWindow =
   );
 
 if (!selectedWindow) {
-  return;
+  return false;
 }
 
-this.attachment.attach(
-  selectedWindow
-);
+const selectedCandidate =
+  supportedCandidates.find(
+    (result) =>
+      result.candidate
+        .discoveredWindow.id ===
+      selectedWindow.id
+  );
+
+if (!selectedCandidate) {
+  return false;
+}
+
+this.pendingGameContext =
+  selectedCandidate.gameContext;
+
+try {
+  this.attachment.attach(
+    selectedWindow
+  );
+
+  this.cancelDiscoveryRetry();
+
+  return (
+    this.attachment
+      .getState().status ===
+    "attached"
+  );
+} catch {
+  this.pendingGameContext =
+    null;
+
+  if (
+    this.attachment
+      .getState().status ===
+    "attached"
+  ) {
+    this.attachment.detach(
+      "Oracle Companion could not establish a safe game-aware attachment."
+    );
+  }
+
+  return false;
+} finally {
+  this.pendingGameContext =
+    null;
+}
 }
 
 private synchroniseCompanionSessionAttachment(
@@ -659,10 +750,19 @@ private synchroniseCompanionSessionAttachment(
       "attached" &&
     session.status === "ready"
   ) {
+    if (!this.pendingGameContext) {
+      throw new Error(
+        "Oracle Companion cannot attach a Session without resolved game context."
+      );
+    }
+
     this.companionSession.markAttached(
       {
         desktop:
           desktopSnapshot,
+
+        game:
+          this.pendingGameContext,
       }
     );
 
@@ -670,17 +770,73 @@ private synchroniseCompanionSessionAttachment(
   }
 
   if (
-    attachmentState.status ===
-      "detached" &&
-    session.status === "attached"
+    attachmentState.status !==
+      "detached"
   ) {
-    this.companionSession.markReady(
-      {
-        desktop:
-          desktopSnapshot,
-      }
-    );
+    return;
   }
+
+  if (session.status === "attached") {
+    this.companionSession.markReady({
+      desktop:
+        desktopSnapshot,
+
+      game: null,
+    });
+
+    return;
+  }
+
+  this.companionSession.captureContext({
+    desktop:
+      desktopSnapshot,
+
+    game: null,
+  });
+}
+
+private scheduleWindowDiscovery(
+  delayMs =
+    WINDOW_DISCOVERY_RETRY_INTERVAL_MS
+): void {
+  if (
+    this.discoveryRetryTimer ||
+    !this.getWindow() ||
+    this.attachment
+      .getState().status ===
+      "attached"
+  ) {
+    return;
+  }
+
+  this.discoveryRetryTimer =
+    setTimeout(
+      () => {
+        this.discoveryRetryTimer =
+          null;
+
+        void this.refreshWindowDiscovery();
+      },
+      delayMs
+    );
+}
+
+private cancelDiscoveryRetry(): void {
+  if (!this.discoveryRetryTimer) {
+    return;
+  }
+
+  clearTimeout(
+    this.discoveryRetryTimer
+  );
+
+  this.discoveryRetryTimer =
+    null;
+}
+
+private cancelWindowDiscovery(): void {
+  this.cancelDiscoveryRetry();
+  this.discoveryRunId += 1;
 }
 private createTargetCandidateInputs(
   discoveredWindows:
@@ -1028,7 +1184,7 @@ private restoreDevelopmentBounds(): void {
     window.on(
       "closed",
       () => {
-        this.discoveryRunId += 1;
+        this.cancelWindowDiscovery();
 
         this.unregisterScreenEvents();
 

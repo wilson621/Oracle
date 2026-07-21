@@ -10,7 +10,7 @@
     "types": [
       "node"
     ],
-    "rootDir": "./desktop",
+    "rootDir": ".",
     "outDir": "./dist-electron",
     "noEmit": false,
     "isolatedModules": false,
@@ -18,7 +18,8 @@
     "sourceMap": true
   },
   "include": [
-    "desktop/**/*.ts"
+    "desktop/**/*.ts",
+    "lib/oracle/game-integrations/**/*.ts"
   ],
   "exclude": [
     "node_modules",

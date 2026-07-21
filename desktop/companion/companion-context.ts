@@ -54,7 +54,7 @@ export function createOracleCompanionContext(
     game:
       input.game == null
         ? null
-        : cloneSerializableGameContext(
+        : createOracleCompanionGameContext(
             input.game
           ),
 
@@ -63,6 +63,17 @@ export function createOracleCompanionContext(
 
   return deepFreeze(
     context
+  );
+}
+
+export function createOracleCompanionGameContext(
+  context:
+    OracleCompanionGameContext
+): OracleCompanionGameContext {
+  return deepFreeze(
+    cloneSerializableGameContext(
+      context
+    )
   );
 }
 

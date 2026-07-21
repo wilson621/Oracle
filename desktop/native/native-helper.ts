@@ -46,7 +46,7 @@ export class OracleNativeHelper {
     /*
      * Compiled files under desktop/native are emitted to:
      *
-     * dist-electron/native/native-helper.js
+     * dist-electron/desktop/native/native-helper.js
      *
      * Native executables are built into:
      *
@@ -54,6 +54,7 @@ export class OracleNativeHelper {
      */
     return resolve(
       __dirname,
+      "..",
       "..",
       "..",
       "dist-native",

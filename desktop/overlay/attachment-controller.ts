@@ -23,6 +23,9 @@ export type OracleDesktopAttachmentControllerOptions = {
 
   onStateChanged?:
     OracleDesktopAttachmentStateListener;
+
+  onTargetUnavailable?:
+    () => void;
 };
 
 export class OracleDesktopAttachmentController {
@@ -38,6 +41,10 @@ export class OracleDesktopAttachmentController {
 
   private readonly onStateChanged:
     | OracleDesktopAttachmentStateListener
+    | undefined;
+
+  private readonly onTargetUnavailable:
+    | (() => void)
     | undefined;
 
   private trackingRunId = 0;
@@ -61,6 +68,9 @@ export class OracleDesktopAttachmentController {
 
     this.onStateChanged =
       options.onStateChanged;
+
+    this.onTargetUnavailable =
+      options.onTargetUnavailable;
   }
 
   attach(
@@ -272,6 +282,16 @@ export class OracleDesktopAttachmentController {
     observation:
       OracleDesktopWindowObservation
   ): void {
+    if (!observation.exists) {
+      this.detach(
+        `Attached target '${target.title}' is no longer available.`
+      );
+
+      this.onTargetUnavailable?.();
+
+      return;
+    }
+
     const previousState =
       this.state;
 
