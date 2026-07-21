@@ -5,15 +5,32 @@ import {
 } from "electron";
 import {
   DESKTOP_CHANNELS,
+  type OracleCompanionPresentationState,
   type OracleDesktopBridge,
   type OracleDesktopHostState,
 } from "./contracts.js";
+import {
+  isOracleCompanionPresentationState,
+} from "./companion/companion-presentation-state.js";
 
 const oracleDesktopBridge: OracleDesktopBridge = {
   getHostState: () =>
     ipcRenderer.invoke(
       DESKTOP_CHANNELS.getHostState
     ) as Promise<OracleDesktopHostState>,
+
+  getCompanionPresentationState:
+    async () => {
+      const value: unknown =
+        await ipcRenderer.invoke(
+          DESKTOP_CHANNELS
+            .getCompanionPresentationState
+        );
+
+      return requireCompanionPresentationState(
+        value
+      );
+    },
 
   toggleOverlayPreview: () =>
     ipcRenderer.invoke(
@@ -70,7 +87,64 @@ const oracleDesktopBridge: OracleDesktopBridge = {
       );
     };
   },
+
+  onCompanionPresentationStateChanged:
+    (listener) => {
+      let subscribed = true;
+
+      const handler = (
+        _event: IpcRendererEvent,
+        value: unknown
+      ) => {
+        if (
+          !subscribed ||
+          !isOracleCompanionPresentationState(
+            value
+          )
+        ) {
+          return;
+        }
+
+        listener(value);
+      };
+
+      ipcRenderer.on(
+        DESKTOP_CHANNELS
+          .companionPresentationStateChanged,
+        handler
+      );
+
+      return () => {
+        if (!subscribed) {
+          return;
+        }
+
+        subscribed = false;
+
+        ipcRenderer.removeListener(
+          DESKTOP_CHANNELS
+            .companionPresentationStateChanged,
+          handler
+        );
+      };
+    },
 };
+
+function requireCompanionPresentationState(
+  value: unknown
+): OracleCompanionPresentationState {
+  if (
+    !isOracleCompanionPresentationState(
+      value
+    )
+  ) {
+    throw new Error(
+      "Oracle desktop host returned an invalid Companion presentation state."
+    );
+  }
+
+  return value;
+}
 
 contextBridge.exposeInMainWorld(
   "oracleDesktop",

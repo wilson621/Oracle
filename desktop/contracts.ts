@@ -21,9 +21,16 @@ import type {
   OracleDesktopAttachmentTarget,
 } from "./overlay/attachment-state.js";
 
+import type {
+  OracleCompanionPresentationState,
+} from "./companion/companion-presentation-state.js";
+
 export const DESKTOP_CHANNELS = {
   getHostState:
     "oracle-desktop:get-host-state",
+
+  getCompanionPresentationState:
+    "oracle-desktop:get-companion-presentation-state",
 
   toggleOverlayPreview:
     "oracle-desktop:toggle-overlay-preview",
@@ -48,12 +55,16 @@ export const DESKTOP_CHANNELS = {
 
   hostStateChanged:
     "oracle-desktop:host-state-changed",
+
+  companionPresentationStateChanged:
+    "oracle-desktop:companion-presentation-state-changed",
 } as const;
 
 export const ORACLE_DESKTOP_RECOVERY_SHORTCUT =
   "CommandOrControl+Shift+O";
 
 export type {
+  OracleCompanionPresentationState,
   OracleDesktopAttachmentState,
   OracleDesktopAttachmentStatus,
   OracleDesktopAttachmentTarget,
@@ -73,6 +84,9 @@ export type {
 export type OracleDesktopBridge = {
   getHostState: () =>
     Promise<OracleDesktopHostState>;
+
+  getCompanionPresentationState: () =>
+    Promise<OracleCompanionPresentationState>;
 
   toggleOverlayPreview: () =>
     Promise<OracleDesktopHostState>;
@@ -98,6 +112,13 @@ export type OracleDesktopBridge = {
   onHostStateChanged: (
     listener: (
       state: OracleDesktopHostState
+    ) => void
+  ) => () => void;
+
+  onCompanionPresentationStateChanged: (
+    listener: (
+      state:
+        OracleCompanionPresentationState
     ) => void
   ) => () => void;
 };

@@ -38,6 +38,10 @@ import type {
   OracleCompanionGameContext,
 } from "./companion/companion-context.js";
 import {
+  createOracleCompanionPresentationState,
+  type OracleCompanionPresentationState,
+} from "./companion/companion-presentation-state.js";
+import {
   OracleDesktopHostSnapshotCoordinator,
 } from "./platform/desktop-host-snapshot-coordinator.js";
 import {
@@ -299,6 +303,8 @@ export class CompanionHostWindowController {
       }
     );
 
+    this.publishCompanionPresentationState();
+
     try {
       await window.loadURL(
         this.options.companionUrl
@@ -315,6 +321,8 @@ export class CompanionHostWindowController {
           this.captureDesktopHostSnapshot(),
       }
     );
+
+    this.publishCompanionPresentationState();
 
     if (!window.isDestroyed()) {
   this.developmentBounds =
@@ -416,6 +424,13 @@ export class CompanionHostWindowController {
       },
       process.env.NODE_ENV !==
         "production"
+    );
+  }
+
+  getCompanionPresentationState(): OracleCompanionPresentationState {
+    return createOracleCompanionPresentationState(
+      this.companionSession
+        .getSnapshot()
     );
   }
 
@@ -565,6 +580,7 @@ this.companionSession.end(
       this.desktopHostSnapshots.getSnapshot(),
   }
 );
+this.publishCompanionPresentationState();
 this.desktopHostSnapshots.clear();
     if (!window) {
       this.window = null;
@@ -766,6 +782,8 @@ private synchroniseCompanionSessionAttachment(
       }
     );
 
+    this.publishCompanionPresentationState();
+
     return;
   }
 
@@ -784,6 +802,8 @@ private synchroniseCompanionSessionAttachment(
       game: null,
     });
 
+    this.publishCompanionPresentationState();
+
     return;
   }
 
@@ -793,6 +813,8 @@ private synchroniseCompanionSessionAttachment(
 
     game: null,
   });
+
+  this.publishCompanionPresentationState();
 }
 
 private scheduleWindowDiscovery(
@@ -1198,6 +1220,7 @@ this.companionSession.end(
       this.desktopHostSnapshots.getSnapshot(),
   }
 );
+this.publishCompanionPresentationState();
 this.desktopHostSnapshots.clear();
 
 this.window = null;
@@ -1400,6 +1423,26 @@ this.hostState.reset();
         .hostStateChanged,
 
       state
+    );
+  }
+
+  private publishCompanionPresentationState(): void {
+    const window =
+      this.getWindow();
+
+    if (
+      !window ||
+      window.webContents
+        .isDestroyed()
+    ) {
+      return;
+    }
+
+    window.webContents.send(
+      DESKTOP_CHANNELS
+        .companionPresentationStateChanged,
+
+      this.getCompanionPresentationState()
     );
   }
 

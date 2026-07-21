@@ -16,7 +16,10 @@ import {
   useEffect,
   useState,
 } from "react";
-import type { OracleDesktopHostState } from "@/desktop/contracts";
+import type {
+  OracleCompanionPresentationState,
+  OracleDesktopHostState,
+} from "@/desktop/contracts";
 import DesktopDiagnosticsPanel from "./DesktopDiagnosticsPanel";
 
 const OVERLAY_PREVIEW_CLASS =
@@ -29,6 +32,18 @@ export default function CompanionTitleBar() {
     );
 
   const [
+    companionPresentation,
+    setCompanionPresentation,
+  ] = useState<
+    OracleCompanionPresentationState | null
+  >(null);
+
+  const [
+    desktopBridgeAvailable,
+    setDesktopBridgeAvailable,
+  ] = useState<boolean | null>(null);
+
+  const [
     diagnosticsOpen,
     setDiagnosticsOpen,
   ] = useState(false);
@@ -37,11 +52,26 @@ export default function CompanionTitleBar() {
   useEffect(() => {
     const bridge = window.oracleDesktop;
 
+    let cancelled = false;
+
     if (!bridge) {
-      return;
+      void Promise.resolve().then(
+        () => {
+          if (!cancelled) {
+            setDesktopBridgeAvailable(
+              false
+            );
+          }
+        }
+      );
+
+      return () => {
+        cancelled = true;
+      };
     }
 
-    let cancelled = false;
+    let receivedPresentationEvent =
+      false;
 
     void bridge
       .getHostState()
@@ -66,9 +96,44 @@ export default function CompanionTitleBar() {
         }
       );
 
+    const unsubscribePresentation =
+      bridge
+        .onCompanionPresentationStateChanged(
+          (state) => {
+            receivedPresentationEvent =
+              true;
+
+            if (!cancelled) {
+              setCompanionPresentation(
+                state
+              );
+            }
+          }
+        );
+
+    void bridge
+      .getCompanionPresentationState()
+      .then((state) => {
+        if (
+          !cancelled &&
+          !receivedPresentationEvent
+        ) {
+          setCompanionPresentation(
+            state
+          );
+        }
+      })
+      .catch((error: unknown) => {
+        console.error(
+          "Unable to read Oracle Companion presentation state.",
+          error
+        );
+      });
+
     return () => {
       cancelled = true;
       unsubscribe();
+      unsubscribePresentation();
     };
   }, []);
 
@@ -89,7 +154,10 @@ export default function CompanionTitleBar() {
     };
   }, [hostState?.windowMode]);
 
-  if (!hostState) {
+  if (
+    !hostState &&
+    desktopBridgeAvailable !== false
+  ) {
   return null;
 }
 
@@ -176,6 +244,12 @@ export default function CompanionTitleBar() {
           <span className="oracle-desktop-titlebar__division">
             COMPANION
           </span>
+
+          <CompanionGameStatus
+            state={
+              companionPresentation
+            }
+          />
 
           {overlayPreviewEnabled && (
             <span className="oracle-desktop-titlebar__mode">
@@ -394,5 +468,44 @@ export default function CompanionTitleBar() {
         }
       />
     </>
+  );
+}
+
+function CompanionGameStatus({
+  state,
+}: {
+  state:
+    OracleCompanionPresentationState | null;
+}) {
+  const attached =
+    state?.status === "attached";
+
+  const label = attached
+    ? state.activeGame.displayName
+    : state?.status === "ready"
+      ? "SEARCHING FOR SUPPORTED GAME"
+      : state?.status === "starting"
+        ? "COMPANION STARTING"
+        : "COMPANION UNAVAILABLE";
+
+  return (
+    <span
+      className={
+        attached
+          ? "oracle-desktop-titlebar__game oracle-desktop-titlebar__game--attached"
+          : "oracle-desktop-titlebar__game"
+      }
+      title={label}
+      aria-live="polite"
+    >
+      <span
+        className="oracle-desktop-titlebar__game-signal"
+        aria-hidden="true"
+      />
+
+      <span className="oracle-desktop-titlebar__game-label">
+        {label}
+      </span>
+    </span>
   );
 }

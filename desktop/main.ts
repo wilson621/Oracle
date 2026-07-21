@@ -139,6 +139,16 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
+    DESKTOP_CHANNELS
+      .getCompanionPresentationState,
+    (event) => {
+      return requireAuthorizedController(
+        event
+      ).getCompanionPresentationState();
+    }
+  );
+
+  ipcMain.handle(
     DESKTOP_CHANNELS.toggleOverlayPreview,
     (event) => {
       return requireAuthorizedController(
@@ -205,6 +215,11 @@ function registerIpcHandlers(): void {
 function removeIpcHandlers(): void {
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.getHostState
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS
+      .getCompanionPresentationState
   );
 
   ipcMain.removeHandler(

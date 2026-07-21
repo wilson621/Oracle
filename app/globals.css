@@ -99,6 +99,58 @@ body {
   white-space: nowrap;
 }
 
+.oracle-desktop-titlebar__game {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+
+  padding: 3px 7px;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(255, 255, 255, 0.42);
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+}
+
+.oracle-desktop-titlebar__game--attached {
+  border-color:
+    rgba(52, 211, 153, 0.28);
+
+  background: rgba(52, 211, 153, 0.09);
+  color: rgba(167, 243, 208, 0.92);
+}
+
+.oracle-desktop-titlebar__game-signal {
+  width: 5px;
+  height: 5px;
+  flex: 0 0 auto;
+
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.oracle-desktop-titlebar__game--attached
+  .oracle-desktop-titlebar__game-signal {
+  background: #34d399;
+  box-shadow:
+    0 0 7px rgba(52, 211, 153, 0.65);
+}
+
+.oracle-desktop-titlebar__game-label {
+  overflow: hidden;
+  max-width: 190px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .oracle-desktop-titlebar__mode {
   padding: 3px 7px;
 
