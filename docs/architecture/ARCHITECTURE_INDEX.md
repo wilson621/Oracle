@@ -574,8 +574,10 @@ Must Never
   automate gameplay or input, or interact with anti-cheat systems
 
 The foundation is complete as of Sprint 14. Authoritative live runtime delivery
-from desktop Session Context to `/companion` is deferred to Sprint 15 and is not
-part of the verified Sprint 14 implementation.
+from desktop Session Context to `/companion` remains deferred and is not part
+of the verified Sprint 14 implementation. Sprint 15 now establishes the
+Operator Understanding Foundation; live Guidance delivery requires separate
+future planning and approval.
 
 ---
 

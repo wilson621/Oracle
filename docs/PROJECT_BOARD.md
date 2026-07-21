@@ -9,23 +9,71 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 4.3
+**Version:** 4.4
 **Branch:** `sprint-9-overlay`
-**Governance refactor baseline:** `01a4bdb`
+**Governance v2 baseline:** `0423aad`
 
 ---
 
-# Current Governance Activity
+# Current Sprint
 
-## Oracle Governance Refactor
+## Sprint 15 — Operator Intelligence: Operator Understanding Foundation
 
-**Status:** Documentation implementation complete; uncommitted pending architectural review
+**Status:** Active — Phase 1 ready; implementation not yet begun
+**Activation baseline:** `0423aad0a64ab96598c30c8cb2147ec526f48359`
+**Plan:** `docs/sprints/SPRINT_15_PLAN.md`
 
-This is a non-Sprint governance activity. It introduces Oracle's founding
-governance layer, canonical Documentation Index, classifications and authority
-reconciliation. It introduces no product functionality or architecture change.
+Sprint 15 establishes the trusted foundation for progressively deeper,
+evidence-based and Operator-controlled understanding. Operator Understanding is
+the umbrella over Account relationship, Identity, Preferences, Goals, State,
+Memory, Evidence and evidence-derived Operator Intelligence.
 
-Sprint 15 has not started.
+The ADRs and planning reconciliation form the clean Sprint 15 implementation
+baseline. Phase 1 may begin from this commit; no implementation is yet recorded.
+
+# Sprint 15 Governance Gate
+
+- [x] final founder architectural approval
+- [x] Recommended scope selected
+- [x] Operator Understanding adopted as the architectural umbrella
+- [x] Operator Intelligence retained as the evidence-derived component
+- [x] Sprint sequencing conflict resolved
+- [x] ADR-033 — canonical Account and Operator ownership prepared and accepted
+- [x] ADR-034 — Operator Understanding and Intelligence lifecycle prepared and accepted
+- [x] ADR-035 — Operator data governance and control prepared and accepted
+- [x] ADR-036 — game scope and cross-game portability prepared and accepted
+- [x] certainty vocabulary incorporated without replacing confidence
+- [x] Sprint 15 execution plan prepared
+- [x] governance and planning verification passed
+- [x] clean planning baseline committed
+
+# Sprint 15 Approved Scope
+
+- [ ] deployed Supabase schema and RLS audit
+- [ ] authenticated Account-to-Operator ownership
+- [ ] separate Preference and Goal domains
+- [ ] Evidence, Claim, Revision and Data Policy contracts
+- [ ] Known, Declared, Observed, Inferred, Suspected and Unknown classification
+- [ ] confidence, provenance, scope and temporal lifecycle
+- [ ] Operator inspect, correction, dispute, export and deletion operations
+- [ ] one game-specific candidate family from the existing Memory Engine
+- [ ] immutable `OperatorUnderstandingSnapshot` read projection
+- [ ] safe, gated Oracle Context integration
+- [ ] architecture, migration, privacy and regression verification
+
+# Sprint 15 Explicit Deferrals
+
+- broad Operator Understanding UI
+- sensitive or psychological inference
+- persisted learning-style, motivation or frustration inference
+- automatic cross-game claim promotion
+- AI-generated Operator claims
+- Companion Guidance ranking or personalisation
+- authoritative live Companion Guidance delivery
+- changes to Guidance contract version 1
+- changes to Desktop Platform API version 1
+- new Game Integrations
+- wholesale engine or Application rewrites
 
 ---
 
@@ -38,8 +86,10 @@ Sprint 15 has not started.
 Sprint 14 established the permanent, game-agnostic foundation for Oracle's
 external Companion to become the Operator's intelligent second screen.
 
-Authoritative live runtime delivery remains deferred to Sprint 15. Sprint 15
-has not started and requires separate planning and approval.
+Authoritative live runtime delivery remains deferred. Sprint 15 architectural
+review placed the Operator Understanding Foundation ahead of that work. Live
+Guidance delivery has returned to the future queue, requires separate planning
+and approval and is not automatically Sprint 16.
 
 ---
 
@@ -280,7 +330,8 @@ passed, as did the architecture audit, desktop TypeScript compilation,
 production build, lint and desktop/narrow-screen visual review. Lint completed
 with zero errors and five pre-existing warnings.
 
-The Companion Intelligence Foundation is complete. Authoritative live runtime
-delivery is the recommended Sprint 15 objective but is not implemented or
-approved by this closure. See `docs/sprints/SPRINT_14_CLOSURE.md` for the formal
-record.
+The Companion Intelligence Foundation is complete. Sprint 15 architectural
+review subsequently approved the Operator Understanding Foundation as the next
+delivery objective. Authoritative live Guidance delivery remains unimplemented
+and separately deferred. See `docs/sprints/SPRINT_14_CLOSURE.md` for the formal
+Sprint 14 record.

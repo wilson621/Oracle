@@ -9,7 +9,7 @@
 **Supersedes:** Earlier ADR ledger versions as an index; individual accepted records retain their own status
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 4.4
+**Version:** 4.5
 
 ---
 
@@ -1078,6 +1078,368 @@ implementation convenience.
 ✅ Accepted and implemented across the five Sprint 14 Companion Intelligence
 Foundation commits. Authoritative live runtime delivery remains deferred to
 Sprint 15 and does not change this decision.
+
+---
+
+# ADR-033
+
+## Context
+
+Oracle currently retrieves the first available Operator row and may create a
+shared local-development identity. Authentication middleware refreshes a
+Supabase user session, but the repository does not establish a canonical,
+enforced relationship between that authenticated principal and a durable
+Operator. Operator Understanding cannot safely persist personal identity,
+preferences, goals, evidence or inferred conclusions until ownership and data
+isolation are explicit.
+
+## Decision
+
+Oracle separates Account from Operator.
+
+An Account is an authentication and access principal. An Operator is the
+durable person-centred platform entity Oracle serves. The Operator receives a
+stable Oracle-owned identifier that is not derived from an email address, game,
+device, Session or authentication-provider identifier.
+
+The Operator Service owns the Account-to-Operator binding and exposes the
+current authorised Operator through an explicit Service contract. Repositories
+own persistence. Production consumers must never discover the current Operator
+by selecting an arbitrary row, and Applications must not access Operator
+persistence directly.
+
+Persistent Operator data must be protected by authenticated ownership
+constraints and Row Level Security. Local desktop and development operation
+must use an explicit, inspectable identity mode; it must not weaken production
+ownership rules or silently fall back to a shared production identity.
+
+The initial supported cardinality is one primary Operator per authenticated
+Account. The persistence design must preserve the stable Operator identifier so
+that future authentication-provider changes or an explicitly approved
+cardinality migration do not redefine the Operator.
+
+## Alternatives Considered
+
+### Use the authentication user identifier as the Operator identifier
+
+Rejected. Authentication providers and Account relationships may change while
+the Operator must remain the durable platform entity.
+
+### Continue selecting the first Operator row
+
+Rejected. This cannot provide multi-Operator isolation, ownership evidence or
+a safe basis for personal understanding.
+
+### Allow every Application to resolve Account ownership independently
+
+Rejected. It would duplicate security-critical logic and violate Service and
+repository ownership.
+
+## Consequences
+
+- Existing Operator identifiers must be preserved through migration where
+  ownership can be established safely.
+- The deployed Supabase schema and policies must be audited before migration.
+- Production data access requires authenticated Operator scope.
+- Desktop identity resolution requires an explicit future composition boundary.
+- Account deletion and Operator deletion remain distinct governed operations.
+
+## Risks
+
+- Deployed schema drift may make migration more complex than the tracked SQL
+  indicates.
+- Existing local data may not contain sufficient ownership evidence for an
+  automatic migration.
+- Incorrect Row Level Security could expose or strand Operator data, so
+  multi-principal isolation verification is mandatory.
+
+## Status
+
+Accepted. Sprint 15 implementation has not begun.
+
+---
+
+# ADR-034
+
+## Context
+
+Oracle already derives Behaviour, Memory, Evolution, Coaching, Planner and
+Operator Profile outputs from Sessions. Those outputs are current runtime
+profiles rather than durable, revisable understanding. Identity, preferences,
+goals, temporary state, evidence, memory and inferred intelligence also have
+different provenance and lifecycle needs and must not be collapsed into one
+generic profile.
+
+Sprint 14 deferred authoritative Companion Guidance delivery to Sprint 15.
+Architectural review subsequently determined that durable Operator
+Understanding should precede that delivery because future personalisation
+requires identity, consent, evidence, correction and scope boundaries.
+
+## Decision
+
+Oracle adopts Operator Understanding as the architectural umbrella for its
+progressively deeper understanding of an Operator.
+
+Operator Understanding composes, without absorbing ownership of:
+
+- explicit Operator Identity
+- declared Preferences
+- declared Goals
+- temporary Operator State
+- governed Memory
+- permitted Evidence
+- Operator Intelligence
+
+Operator Intelligence is the evidence-derived component of Operator
+Understanding. Existing intelligence engines remain specialised producers and
+are not replaced.
+
+`OperatorUnderstandingSnapshot` is an immutable, versioned read projection for
+approved Service and Oracle Context consumption. It is not a persistence model,
+source of truth or generic profile object. Its sections preserve their source,
+scope, provenance and authoritative owner.
+
+Declared information and inferred conclusions follow separate lifecycles.
+Inferred conclusions begin as candidate claims and become eligible for
+consumption only when their approved evidence, confidence, consent, freshness
+and scope policies are satisfied. Correction, dispute, contradiction, decay,
+supersession, expiry and deletion can remove that eligibility.
+
+Oracle also records an epistemic classification describing how each item is
+known:
+
+- `known` — established by an authoritative, verifiable source
+- `declared` — stated or confirmed by the Operator
+- `observed` — directly recorded through a permitted observation source
+- `inferred` — concluded through an approved evidence and confidence policy
+- `suspected` — a provisional candidate with insufficient support for normal
+  personalisation use
+- `unknown` — not currently established
+
+Epistemic classification does not replace numeric or qualitative confidence.
+It communicates provenance and certainty class; confidence communicates the
+strength of support within the applicable class. `suspected` information is
+not eligible for ordinary personalisation in Sprint 15.
+
+Memory governs selective retention, reassessment, decay, supersession and
+removal. It does not manufacture evidence, turn assumptions into facts,
+reinterpret game-specific meaning or override Operator control.
+
+This decision supersedes only ADR-032's historical scheduling statement that
+authoritative Companion Guidance delivery was deferred to Sprint 15. ADR-032's
+Guidance contracts, ownership, compatibility and External Companion boundaries
+remain fully in force. Authoritative live Guidance delivery returns to the
+future queue and requires separate approval.
+
+## Alternatives Considered
+
+### Treat Operator Intelligence as every kind of Operator information
+
+Rejected. Explicit identity and declarations are not inferences, and temporary
+state and memory policy have different owners and lifecycles.
+
+### Persist one comprehensive Operator profile
+
+Rejected. It would collapse provenance, authority, temporal meaning and
+correction semantics into an ambiguous record.
+
+### Persist every engine output automatically
+
+Rejected. Existing heuristics include provisional and unsupported defaults.
+Durability must be earned through an approved claim policy.
+
+### Deliver live Companion Guidance before Operator Understanding
+
+Rejected for Sprint 15 sequencing. The Guidance Foundation remains valid, but
+durable understanding provides the safer basis for future personalisation.
+
+## Consequences
+
+- Sprint 15 implements only the narrow Operator Understanding trust foundation.
+- Existing engines and contracts remain unchanged unless a separately reviewed
+  additive adapter is required.
+- Identity, Preferences, Goals, State, Memory and Intelligence retain distinct
+  ownership.
+- Applications consume approved projections through Services rather than
+  persistence or engine internals.
+- Oracle explanations can distinguish how information is known from how
+  strongly it is supported.
+
+## Risks
+
+- The umbrella name could be mistaken for permission to expand Sprint scope;
+  the approved Sprint plan therefore remains intentionally narrow.
+- Epistemic classification and confidence could be conflated unless contracts
+  and presentation language keep them distinct.
+- A projection could become an accidental source of truth if consumers are
+  permitted to mutate or persist it.
+
+## Status
+
+Accepted. Sprint 15 implementation has not begun.
+
+---
+
+# ADR-035
+
+## Context
+
+Operator Understanding introduces durable personal information and derived
+conclusions. Existing repository code does not provide a complete consent,
+retention, correction, dispute, export or deletion lifecycle. Oracle's privacy
+principles require these controls to be architectural rather than deferred UI
+work.
+
+## Decision
+
+The Operator Service owns explicit identity, Preference and Goal control. The
+Operator Intelligence Service owns evidence-reference and claim lifecycle. The
+Memory Service owns approved retention, decay and eligibility policy. Each
+uses Repositories for persistence and exposes presentation-independent control
+contracts to Applications.
+
+Consent is purpose-specific, revocable, effective-dated and separate from
+Account processing required for authentication and ownership. Revocation stops
+future optional processing and removes affected understanding from subsequent
+consumption projections.
+
+The Operator may inspect, correct or withdraw declared information and may
+dispute inferred claims. A dispute makes the claim ineligible for
+personalisation immediately without rewriting source evidence. Corrections and
+system reassessments create explicit revisions. Superseded history remains
+available only while permitted by retention and deletion policy.
+
+Export must preserve declarations, claims, epistemic classification,
+confidence, evidence references, provenance, scope, lifecycle and policy
+versions in a versioned machine-readable form.
+
+Deletion may target an individual item, purpose, game scope, Operator
+Understanding domain or complete Operator. Derived claims and evidence links
+must be removed, recomputed or lawfully de-identified according to the approved
+deletion operation. Content-free tombstones are allowed only when necessary to
+prevent unsafe recreation and when retention is authorised.
+
+Raw evidence and derived understanding have separate retention policies.
+Temporary state is not retained indefinitely by default, and raw Session prompt
+content must not be copied into Operator Intelligence merely because it exists.
+
+Sprint 15 prohibits automated inference of sensitive personal attributes,
+including health, disability, protected characteristics, political or
+religious belief, sexuality, clinical mental state, addiction or comparable
+sensitive classifications. Motivation, frustration and coaching preferences
+may be stored when explicitly declared; automated inference requires a future
+approved privacy and evidence review.
+
+## Alternatives Considered
+
+### Add control UI after inference is enabled
+
+Rejected. Processing and control boundaries must exist before broad production
+inference or personalisation.
+
+### Treat correction as direct mutation
+
+Rejected. Silent mutation would destroy provenance and reassessment history.
+
+### Retain all observations indefinitely
+
+Rejected. Complete retention conflicts with data minimisation and selective
+Memory.
+
+## Consequences
+
+- Sprint 15 must implement application-ready inspect, dispute, correction,
+  export and deletion Service operations even though broad UI is deferred.
+- New inference remains gated until consent and control requirements are met.
+- Retention durations require explicit approval rather than implementation
+  invention.
+- Privacy, RLS, deletion and export verification become Sprint acceptance
+  criteria.
+
+## Risks
+
+- Revision history can conflict with deletion expectations if content is not
+  separated from minimal operational tombstones.
+- External processor and backup retention may require policy beyond repository
+  deletion.
+- Broad free-text evidence may contain personal information outside the claim's
+  intended purpose.
+
+## Status
+
+Accepted. Sprint 15 implementation has not begun.
+
+---
+
+# ADR-036
+
+## Context
+
+Oracle is game agnostic, but many existing Session measures have game-shaped
+meaning. An engine declaring support for every game does not establish that a
+conclusion is portable. Without an explicit scope model, Call of Duty evidence
+could be presented incorrectly as universal knowledge about an Operator.
+
+## Decision
+
+Every Operator Evidence reference and inferred claim has an explicit scope:
+
+- Operator-wide
+- Application-specific
+- Game Integration-specific
+- Session-specific
+
+Game-specific evidence remains Game Integration-specific by default. Game
+Integrations own the semantics and interpretation of their observations.
+Platform and shared Services own only the game-agnostic scope, portability and
+validation contracts.
+
+Cross-game portability must be explicit, versioned, evidence-backed and
+explainable. A claim may become Operator-wide only when an approved portability
+policy can demonstrate that the source meanings are compatible across the
+relevant Game Integrations. Absence of a game identifier, wildcard engine
+support or similarity of field names is not evidence of portability.
+
+Sprint 15 produces only Game Integration-specific candidate claims from the
+existing recurring Memory strength and weakness family. It does not promote
+cross-game conclusions.
+
+## Alternatives Considered
+
+### Treat all shared engine output as portable
+
+Rejected. Shared execution does not guarantee shared domain meaning.
+
+### Let shared Services reinterpret game metrics
+
+Rejected. Game-specific knowledge belongs inside Game Integrations.
+
+### Never permit cross-game understanding
+
+Rejected. Portable understanding is strategically valuable when its semantic
+and evidential basis is established responsibly.
+
+## Consequences
+
+- Existing game-shaped metrics are not automatically durable cross-game traits.
+- Future Game Integrations must expose approved semantics before contributing
+  to portable claims.
+- Understanding projections preserve game scope and portability status.
+- Applications must communicate scope rather than present all claims as
+  universal.
+
+## Risks
+
+- Historical Sessions use free-text game names that may not map safely to a
+  stable Integration identity.
+- Portability policies may become overly broad unless version and source
+  compatibility are explicit.
+- Cross-game claims may require reassessment when an Integration changes its
+  metric semantics.
+
+## Status
+
+Accepted. Cross-game promotion remains deferred.
 
 ---
 

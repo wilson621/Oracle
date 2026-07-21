@@ -1275,10 +1275,12 @@ external: no injection, game-memory access or modification, hooks, automation,
 input simulation or anti-cheat interaction is permitted. The Constitution is
 the permanent authority; ADR-032 records why Guidance uses this architecture.
 
-Authoritative live runtime delivery is deliberately deferred to Sprint 15. The
-desktop composition root does not yet create Guidance Requests from
-authoritative Session Context, invoke the Provider Service or deliver resulting
-Application state through a renderer-safe boundary.
+Authoritative live runtime delivery remains deliberately deferred. Sprint 15
+architectural review placed the Operator Understanding Foundation ahead of
+that work. The desktop composition root does not yet create Guidance Requests
+from authoritative Session Context, invoke the Provider Service or deliver
+resulting Application state through a renderer-safe boundary. Live Guidance
+delivery requires a separate future plan and approval.
 
 # Verified Integration Limits
 

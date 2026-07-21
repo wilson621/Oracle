@@ -11,7 +11,7 @@
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 4.4
+**Version:** 4.5
 
 ---
 
@@ -680,7 +680,43 @@ Oracle becomes an extensible ecosystem where new capabilities can be added witho
 
 The Oracle Platform grows through extensions rather than increasing complexity inside the Platform itself.
 
-# Current Delivery — Sprint 14
+# Current Delivery — Sprint 15
+
+Sprint 15 is formally active at the committed-planning gate.
+
+## Operator Intelligence: Operator Understanding Foundation
+
+Sprint 15 establishes the trusted foundation through which Oracle can build a
+progressively deeper understanding of each Operator. Operator Understanding is
+the architectural umbrella over Account relationship, explicit Identity,
+declared Preferences and Goals, temporary State, governed Memory, permitted
+Evidence and evidence-derived Operator Intelligence.
+
+The approved Sprint is intentionally narrow. It establishes:
+
+- canonical authenticated Account-to-Operator ownership
+- explicit Preference and Goal domains
+- evidence, candidate-claim, revision and data-policy contracts
+- provenance, epistemic classification, confidence, scope and temporal
+  lifecycle
+- Operator correction, dispute, export, deletion and retention boundaries
+- one game-specific candidate family adapted from the existing Memory Engine
+- an immutable, versioned `OperatorUnderstandingSnapshot` read projection
+- safe, gated projection into Oracle Context
+
+The epistemic classification distinguishes Known, Declared, Observed,
+Inferred, Suspected and Unknown information. It complements rather than
+replaces confidence.
+
+Sprint 15 does not introduce broad UI, cross-game claim promotion, sensitive
+inference, AI-generated Operator conclusions, Companion personalisation or
+authoritative live Companion Guidance delivery. Existing engines, contracts,
+Game Integration ownership and External Companion boundaries remain intact.
+
+The binding decisions are ADR-033 through ADR-036. The approved execution plan
+is `docs/sprints/SPRINT_15_PLAN.md`.
+
+## Latest Closed Sprint — Sprint 14
 
 The earlier Sprint 9–12 sequence in this roadmap was a strategic projection.
 Repository delivery continued on `sprint-9-overlay`. Sprint 14 established the
@@ -729,8 +765,10 @@ The Companion Intelligence Foundation is complete, but authoritative live
 runtime delivery is not. The production `/companion` route intentionally shows
 an unavailable state until a future composition boundary can project
 authoritative Session Context, execute the Provider Service and deliver
-immutable Application state safely. That work is recommended for Sprint 15 but
-has not been implemented or approved.
+immutable Application state safely. Architectural review placed the Operator
+Understanding Foundation ahead of that work. Authoritative live Guidance
+delivery has returned to the future queue and requires separate planning and
+approval; it is not automatically Sprint 16.
 
 Deferred capabilities also include AI inference, ranking and personalisation,
 additional game packages, automated source-freshness governance, end-to-end

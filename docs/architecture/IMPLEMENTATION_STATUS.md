@@ -67,7 +67,11 @@ factory. It does not fabricate Session Context, Guidance, recommendations or
 Operator data. The desktop composition root does not yet project authoritative
 Session Context into a Guidance Request, execute the Provider Service and
 deliver the resulting Application state through a renderer-safe runtime
-boundary. That live delivery is deferred to Sprint 15.
+boundary. That live delivery remains deferred under a separate future plan.
+
+Sprint 15 is active from its committed planning baseline for the Operator
+Understanding Foundation. No Sprint 15 product implementation is yet verified,
+so Sprint 14 remains the latest closed implementation recorded here.
 
 No Sprint 14 engineering objective remains open. AI inference, ranking,
 personalisation, runtime networking, gameplay automation and any form of game

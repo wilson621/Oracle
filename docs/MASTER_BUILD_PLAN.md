@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 2.3
+**Version:** 2.4
 
 ---
 
@@ -79,11 +79,78 @@ This architecture was established during Sprint 8 and forms the permanent founda
 
 # Latest Approved Execution Status
 
-No Sprint is active. Sprint 14 is formally closed. The current Oracle
-Governance Refactor is a documentation-only, non-Sprint activity pending
-architectural review. Sprint 15 has not started.
+Sprint 15 is formally active at the planning and governance gate. Sprint 14
+remains the latest closed and verified implementation Sprint. The Oracle
+Governance v2 baseline is established at
+`0423aad0a64ab96598c30c8cb2147ec526f48359`.
 
-## Sprint 14 — Companion Intelligence Foundation
+ADR-033 through ADR-036, the Sprint 15 plan and the reconciled planning
+documents form the clean implementation baseline. No Sprint 15 implementation
+is yet recorded.
+
+## Sprint 15 — Operator Intelligence: Operator Understanding Foundation
+
+**Branch:** `sprint-9-overlay`
+**Status:** Active — Phase 1 ready; implementation not yet begun
+**Plan:** `docs/sprints/SPRINT_15_PLAN.md`
+
+Sprint 15 establishes the trusted foundation for Oracle to build a
+progressively deeper understanding of every Operator. Operator Understanding
+is the umbrella over Account relationship, explicit Identity, declared
+Preferences and Goals, temporary State, governed Memory, permitted Evidence
+and evidence-derived Operator Intelligence.
+
+The approved implementation outcome is deliberately narrow:
+
+- canonical authenticated Account-to-Operator ownership and RLS
+- separate Preference and Goal models
+- immutable Evidence, Claim, Revision and Data Policy contracts
+- provenance, Known / Declared / Observed / Inferred / Suspected / Unknown
+  epistemic classification, confidence, scope and temporal lifecycle
+- Operator inspect, correction, dispute, export and deletion operations
+- one Game Integration-specific candidate family adapted from the existing
+  Memory Engine
+- an immutable, versioned `OperatorUnderstandingSnapshot` read projection
+- safe, gated Oracle Context integration
+
+Existing engines remain intelligence producers. The Understanding projection
+does not own truth, and no engine output becomes durable understanding merely
+because it exists.
+
+Explicit exclusions include broad UI, sensitive or psychological inference,
+automatic cross-game promotion, AI-generated Operator claims, Companion
+personalisation, authoritative live Companion Guidance delivery, public
+contract changes and wholesale architecture migration.
+
+The binding Sprint decisions are:
+
+1. ADR-033 — canonical Account and Operator ownership
+2. ADR-034 — Operator Understanding and Intelligence lifecycle
+3. ADR-035 — Operator data governance and control
+4. ADR-036 — game scope and cross-game portability
+
+The execution phases are:
+
+```text
+Committed Planning Baseline
+        ↓
+Ownership Foundation
+        ↓
+Understanding Contracts
+        ↓
+Persistence and Migration
+        ↓
+Narrow Candidate Lifecycle
+        ↓
+Context and Control Services
+        ↓
+Verification, Documentation and Closure
+```
+
+Authoritative Companion Guidance delivery has returned to the future queue. It
+requires separate planning and approval and is not automatically Sprint 16.
+
+## Latest Closed Sprint — Sprint 14 Companion Intelligence Foundation
 
 **Branch:** `sprint-9-overlay`
 **Status:** Complete; closure approved and documentation reconciled
@@ -129,14 +196,12 @@ Formal Sprint 14 implementation commits:
 5. `3868975` — `feat(companion): add Companion application presentation`
 
 The Companion Intelligence Foundation is complete. Authoritative live runtime
-delivery is deliberately deferred to Sprint 15: the desktop composition root
-does not yet project authoritative Session Context into a Guidance Request,
-execute the Provider Service and deliver the resulting Application state to
-`/companion`. The production route therefore presents an honest unavailable
-state and fabricates no Session, Guidance or Operator data.
-
-No Sprint 15 implementation has started. Sprint 15 requires separate planning
-and approval after this closure reconciliation is committed.
+delivery remains deferred: the desktop composition root does not yet project
+authoritative Session Context into a Guidance Request, execute the Provider
+Service and deliver the resulting Application state to `/companion`. The
+production route therefore presents an honest unavailable state and fabricates
+no Session, Guidance or Operator data. Sprint 15 architectural review placed
+the Operator Understanding Foundation ahead of that future delivery work.
 
 Known integration boundaries requiring deliberate review:
 

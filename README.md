@@ -33,16 +33,16 @@ Oracle is being built as an intelligence platform rather than a statistics dashb
 
 ## Current Milestone
 
-**No active Sprint — Sprint 14 formally closed**
+**Sprint 15 active — Operator Understanding Foundation planning gate**
 
-**Status: Non-Sprint governance refactor pending architectural review; Sprint 15 has not started**
+**Status: Planning baseline committed; Sprint 15 implementation not yet begun**
 
 ## Build Status
 
 Final Sprint 14 verification passed for Guidance contracts and Services,
 Companion presentation boundaries, architecture enforcement, desktop TypeScript,
-lint and the Next.js production build. The governance refactor changes
-documentation only.
+lint and the Next.js production build. Sprint 15 currently changes planning and
+governance documentation only; no Sprint 15 implementation is yet verified.
 
 The canonical verified status is maintained in
 [`docs/architecture/IMPLEMENTATION_STATUS.md`](docs/architecture/IMPLEMENTATION_STATUS.md).
@@ -323,8 +323,10 @@ Verified delivery now includes:
 - curated Call of Duty Guidance package through shared architecture
 - immutable Companion Guidance Application state and `/companion` presentation
 
-Sprint 14 is formally closed. Authoritative live Companion Guidance delivery
-remains deferred. Sprint 15 has not started.
+Sprint 14 is formally closed. Sprint 15 is active at the planning and
+governance gate for the Operator Understanding Foundation. Authoritative live
+Companion Guidance delivery remains separately deferred and is not
+automatically Sprint 16.
 
 ---
 
