@@ -1,8 +1,15 @@
 # CALL OF DUTY CURATED GUIDANCE PACKAGE
 
-Version 1.0
-
-Status: Sprint 14 reference Game Integration guidance package
+**Authority:** Canonical reviewed scope and source record for the Call of Duty Guidance package
+**Scope:** Supported guidance, sources, assumptions, deterministic behaviour, Fair Play and limitations
+**Owner:** Call of Duty Game Integration
+**Status:** Sprint 14 reference Game Integration guidance package
+**Classification:** Living
+**Expected Stability:** Reviewed whenever package content, sources or compatibility changes
+**Supersedes:** None
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 1.1
 
 Source review date: 21 July 2026
 

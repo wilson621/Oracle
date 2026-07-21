@@ -1,12 +1,25 @@
 # ORACLE PRINCIPLES
 
-Version 2.0
-
-Last Updated: 8 July 2026
+**Authority:** Superseded historical principles collection; not a current governance authority
+**Scope:** Preserves the pre-governance-refactor product, experience and engineering principles
+**Owner:** Oracle Governance
+**Status:** Superseded
+**Classification:** Historical
+**Expected Stability:** Retained without further substantive development
+**Supersedes:** None
+**Superseded By:** `docs/founding/THE_ORACLE_WAY.md`, `docs/ORACLE_PLATFORM_CONSTITUTION.md` and `docs/founding/ORACLE_ENGINEERING_PRINCIPLES.md`
+**Last Reviewed:** 21 July 2026
+**Version:** 2.0
 
 ---
 
 # Purpose
+
+> **Historical context:** This collection predates Oracle's formal governance
+> hierarchy. The Oracle Way now owns culture and behaviour, the Constitution
+> owns binding product and architectural principles, and Oracle Engineering
+> Principles owns durable engineering values. The content below is preserved
+> for history and must not be treated as a competing canonical source.
 
 This document defines Oracle's non-negotiable principles.
 

@@ -1,13 +1,35 @@
 # ORACLE PROJECT BOARD
 
-**Version:** 4.2
-**Last updated:** 21 July 2026
+**Authority:** Canonical record of current approved progress beneath the Master Build Plan
+**Scope:** Active governance work, latest closed Sprint, milestones and verified delivery state
+**Owner:** Oracle Delivery
+**Status:** Active
+**Classification:** Living
+**Expected Stability:** Updated whenever approved work changes state
+**Supersedes:** Earlier active Project Board versions
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 4.3
 **Branch:** `sprint-9-overlay`
-**Sprint 14 implementation baseline before documentation reconciliation:** `3868975`
+**Governance refactor baseline:** `01a4bdb`
 
 ---
 
-# Current Sprint
+# Current Governance Activity
+
+## Oracle Governance Refactor
+
+**Status:** Documentation implementation complete; uncommitted pending architectural review
+
+This is a non-Sprint governance activity. It introduces Oracle's founding
+governance layer, canonical Documentation Index, classifications and authority
+reconciliation. It introduces no product functionality or architecture change.
+
+Sprint 15 has not started.
+
+---
+
+# Latest Closed Sprint
 
 ## Sprint 14 — Companion Intelligence Foundation
 
@@ -45,10 +67,6 @@ has not started and requires separate planning and approval.
 - [x] External Companion and Platform → Services → Applications → Game
   Integrations boundaries preserved
 - [x] focused, architecture, desktop, production build, lint and visual verification
-
----
-
-# Sprint 13 Commit Sequence
 
 ---
 
@@ -227,8 +245,15 @@ remain accepted technical debt and do not authorise unrelated redesign.
 # Documentation Health
 
 - [x] Constitution updated with the permanent External Companion rule
-- [x] Codex reviewed; normative standards remain authoritative
-- [x] Oracle Principles reviewed; no change required
+- [x] Founding Charter establishes the highest institutional authority
+- [x] The Oracle Way establishes canonical culture and behaviour
+- [x] Constitution remains the highest product and architectural authority
+- [x] Engineering Principles establish canonical durable engineering values
+- [x] Oracle Strategy establishes operational strategic doctrine
+- [x] Codex reconciled as the operational engineering standard
+- [x] Documentation Index establishes reading order, classification and ownership
+- [x] Project Vision and Oracle Principles marked superseded with history retained
+- [x] Manifesto retained as a non-authoritative interpretive statement
 - [x] Architecture aligned through the Sprint 14 Companion Intelligence Foundation
 - [x] Companion Architecture aligned through Sprint 14 presentation
 - [x] Architecture Index records all four Guidance ownership boundaries

@@ -6,6 +6,10 @@ Project Meta is a software platform focused on creating intelligent coaching sys
 
 The flagship product is **Oracle**.
 
+The canonical repository documentation entry point is
+[`docs/DOCUMENTATION_INDEX.md`](docs/DOCUMENTATION_INDEX.md). Contributors
+should begin there before using planning, architecture or historical documents.
+
 ---
 
 # What is Oracle?
@@ -25,19 +29,20 @@ Oracle is being built as an intelligence platform rather than a statistics dashb
 
 ## Version
 
-**Oracle v0.8.0 baseline with completed Sprint 12.1 desktop-platform work**
+**Oracle v0.8.0 baseline with completed Sprint 14 Companion Intelligence Foundation**
 
 ## Current Milestone
 
-**Sprint 12.1 — Desktop Platform Foundation and Hardening**
+**No active Sprint — Sprint 14 formally closed**
 
-**Status: Complete; final hardening and closure verification passed**
+**Status: Non-Sprint governance refactor pending architectural review; Sprint 15 has not started**
 
 ## Build Status
 
-Final Sprint 12.1 verification passed for the architecture audit, desktop
-TypeScript compilation, lint, Next.js production build, native Windows helper
-builds and installed dependency consistency.
+Final Sprint 14 verification passed for Guidance contracts and Services,
+Companion presentation boundaries, architecture enforcement, desktop TypeScript,
+lint and the Next.js production build. The governance refactor changes
+documentation only.
 
 The canonical verified status is maintained in
 [`docs/architecture/IMPLEMENTATION_STATUS.md`](docs/architecture/IMPLEMENTATION_STATUS.md).
@@ -215,19 +220,23 @@ Oracle follows several non-negotiable engineering principles.
 
 # Documentation
 
-Project Meta maintains comprehensive documentation inside `/docs`.
+Project Meta maintains comprehensive documentation inside `/docs`. The
+[Documentation Index](docs/DOCUMENTATION_INDEX.md) defines authority,
+classification, reading order, canonical ownership and superseded documents.
 
 | Document | Purpose |
 |----------|---------|
+| founding/ORACLE_FOUNDING_CHARTER.md | Highest institutional authority |
+| founding/THE_ORACLE_WAY.md | Culture, conduct and leadership |
+| ORACLE_PLATFORM_CONSTITUTION.md | Highest product and architectural authority |
+| founding/ORACLE_ENGINEERING_PRINCIPLES.md | Durable engineering principles |
+| founding/ORACLE_STRATEGY.md | Long-term operational strategy |
 | MASTER_BUILD_PLAN.md | Canonical engineering build plan |
-| PROJECT_VISION.md | What Oracle is being built to become and why |
 | Architecture.md | Platform architecture |
 | Oracle_Codex.md | Engineering standards |
-| Oracle-Principles.md | Product and engineering principles |
 | PROJECT_BOARD.md | Active project board |
 | Roadmap.md | Strategic roadmap |
 | Decisions.md | Architectural decision log |
-| Manifesto.md | Product vision |
 | Brand-Bible.md | Brand identity |
 | Branding.md | Product hierarchy |
 | Ideas.md | Innovation backlog |
@@ -310,8 +319,12 @@ Verified delivery now includes:
 - frozen Desktop Platform API version 1 for immutable desktop contracts
 - automated dependency-boundary enforcement with documented legacy exceptions
 - zero runtime dependency cycles
+- immutable Companion Guidance contracts and deterministic Provider Service
+- curated Call of Duty Guidance package through shared architecture
+- immutable Companion Guidance Application state and `/companion` presentation
 
-Sprint 12.1 is complete. Sprint 13 has not started.
+Sprint 14 is formally closed. Authoritative live Companion Guidance delivery
+remains deferred. Sprint 15 has not started.
 
 ---
 

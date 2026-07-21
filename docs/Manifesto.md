@@ -2,9 +2,16 @@
 
 # Manifesto
 
-Version 2.0
-
-Last Updated: 8 July 2026
+**Authority:** Interpretive statement; not a governance authority
+**Scope:** Preserves Oracle's founding-era product conviction and voice
+**Owner:** Oracle Brand and Governance
+**Status:** Retained
+**Classification:** Historical
+**Expected Stability:** Preserved as an interpretive record
+**Supersedes:** None
+**Superseded By:** `docs/founding/ORACLE_FOUNDING_CHARTER.md` for canonical purpose, mission and vision
+**Last Reviewed:** 21 July 2026
+**Version:** 2.0
 
 ---
 
@@ -382,7 +389,10 @@ Every decision matters.
 
 # The Oracle Has Spoken.
 
-This manifesto is the foundation upon which every future architectural, engineering and product decision will be made.
+This manifesto expresses the conviction that informed Oracle's early product
+direction. The Oracle Founding Charter is now the canonical institutional
+foundation, and the Oracle Platform Constitution remains the highest product
+and architectural authority.
 
 Whenever uncertainty exists...
 

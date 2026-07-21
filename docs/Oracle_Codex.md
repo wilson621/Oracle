@@ -2,10 +2,16 @@
 
 ## Oracle Engineering Standards
 
-**Version:** 3.0  
-**Status:** Active  
-**Authority:** Secondary only to the Oracle Platform Constitution  
-**Last Updated:** Sprint 8 – Oracle Platform Foundation
+**Authority:** Operational engineering standard beneath the Constitution, Engineering Principles and accepted ADRs
+**Scope:** Engineering practices, repository standards, workflows, quality gates and reviews
+**Owner:** Oracle Platform Engineering
+**Status:** Active
+**Classification:** Living
+**Expected Stability:** Continuously reviewed as engineering practice evolves
+**Supersedes:** Archived Oracle Codex versions
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 3.1
 
 ---
 
@@ -13,9 +19,15 @@
 
 The Oracle Codex defines how Oracle is engineered.
 
-The Constitution defines **what Oracle is**.
+The Founding Charter defines **why Oracle exists**.
 
-The Codex defines **how Oracle is built**.
+The Oracle Way defines **how Oracle stewards behave**.
+
+The Constitution defines **binding product and architectural boundaries**.
+
+The Engineering Principles define **durable engineering values**.
+
+The Codex defines **the operational standards used to build Oracle**.
 
 Every implementation decision, architectural proposal, pull request and sprint should follow the standards contained within this document.
 
@@ -35,220 +47,80 @@ The Codex evolves as Oracle evolves.
 
 # Relationship to the Constitution
 
-The Oracle Platform Constitution is the highest engineering authority.
+The Oracle Platform Constitution is the highest product and architectural
+authority. Neither this Codex, Oracle Strategy nor Engineering Principles may
+override it.
 
 When conflicts occur:
 
 ```text
+Oracle Founding Charter
+        │
+        ▼
+The Oracle Way
+        │
+        ▼
 Oracle Platform Constitution
         │
-        ▼
-Oracle Codex
-        │
-        ▼
+        ├──────────────┐
+        ▼              ▼
+Oracle Engineering   Oracle Strategy
+Principles
+        │              │
+        └──────┬───────┘
+               ▼
+Accepted ADRs and Oracle Codex
+               ▼
 Architecture
-        │
-        ▼
+               ▼
 Roadmap
-        │
-        ▼
+               ▼
+Master Build Plan
+               ▼
 Project Board
-        │
-        ▼
+               ▼
+Sprint Execution
+               ▼
 Implementation
 ```
 
 Implementation must never contradict higher-level documentation.
 
----
+The External Companion Principle remains binding unless the Constitution itself
+is amended. No Codex workflow or engineering exception may authorise prohibited
+game-process interaction.
 
-# Oracle Identity
-
-> **Oracle is the operating platform for gaming intelligence.**
-
-Oracle exists to understand games, understand players and deliver intelligent, context-aware assistance through a reusable platform architecture.
-
-Oracle is not:
-
-- A Call of Duty application
-- A statistics dashboard
-- A coaching overlay
-- A collection of disconnected tools
-- A single-game companion
-
-Oracle is:
-
-- The operating platform for gaming intelligence
-- A reusable software platform
-- An intelligence platform
-- A behavioural intelligence platform
-- An AI reasoning platform
-- A companion platform
-- An extensible ecosystem
-
-Games become Game Integrations.
-
-Applications become Oracle experiences.
-
-Services become reusable capability.
-
-The Platform coordinates everything.
-
-The Operator remains the product.
+See `docs/DOCUMENTATION_INDEX.md` for canonical ownership, classifications and
+the complete reading order.
 
 ---
 
-# Long-Term Vision
+# Governance Context
 
-Oracle should become the platform every player launches before they launch a game.
+The Codex does not maintain a separate statement of Oracle's identity, vision,
+culture, strategy or durable engineering philosophy.
 
-Regardless of whether the Operator is playing:
+- `docs/founding/ORACLE_FOUNDING_CHARTER.md` owns purpose, mission and vision.
+- `docs/founding/THE_ORACLE_WAY.md` owns culture and behaviour.
+- `docs/ORACLE_PLATFORM_CONSTITUTION.md` owns binding product and architectural
+  principles.
+- `docs/founding/ORACLE_STRATEGY.md` owns long-term strategic doctrine.
+- `docs/founding/ORACLE_ENGINEERING_PRINCIPLES.md` owns durable engineering
+  values.
 
-- Call of Duty
-- Battlefield
-- RuneScape
-- Minecraft
-- Elden Ring
-- Factorio
-- Football Manager
-- Monster Hunter
-- or any future supported title,
-
-Oracle should provide one consistent experience.
-
-Every supported game extends Oracle.
-
-Oracle itself remains consistent.
-
----
-
-# Engineering Philosophy
-
-Oracle is architecture-driven.
-
-Every sprint should permanently improve one or more of:
-
-- Platform
-- Intelligence
-- User Experience
-- Extensibility
-- Maintainability
-- Explainability
-- Performance
-- Reliability
-
-Features are temporary.
-
-Capabilities remain.
-
-Architecture is permanent.
-
-Every engineering decision should improve Oracle for future games rather than solving only today's problem.
-
----
-
-# Product Philosophy
-
-Oracle owns the experience.
-
-Applications belong to Oracle.
-
-Games provide knowledge.
-
-Applications must never become permanently owned by an individual game.
-
-For example:
-
-AI Coach remains Oracle AI Coach.
-
-Loadouts remains Oracle Loadouts.
-
-Oracle Brain remains Oracle Brain.
-
-Companion remains Oracle Companion.
-
-Game Integrations provide context.
-
-Oracle delivers intelligence.
+This Codex translates those authorities into operational standards.
 
 ---
 
 # Engineering Principles
 
-Every implementation should satisfy the following principles.
+The canonical durable principles are defined in
+`docs/founding/ORACLE_ENGINEERING_PRINCIPLES.md`.
 
-## Platform First
-
-Strengthen the Platform before introducing new architecture.
-
----
-
-## Reuse Before Rebuild
-
-Reuse existing Services, Engines and Platform contracts whenever possible.
-
----
-
-## Explicit Ownership
-
-Every capability has one owner.
-
-Duplicate intelligence is prohibited.
-
----
-
-## Explainability
-
-Oracle should always be capable of explaining how intelligence was produced.
-
----
-
-## Confidence
-
-Confidence should always be calculated honestly.
-
-Oracle should never fabricate certainty.
-
----
-
-## Capability Resolution
-
-Applications request capabilities.
-
-The Platform resolves providers.
-
-Applications should not hard-code implementations.
-
----
-
-## Platform Stability
-
-The Platform should evolve slowly.
-
-Applications and Integrations should evolve rapidly.
-
----
-
-## Safety
-
-Oracle assists.
-
-Oracle does not automate gameplay.
-
-Oracle must remain external to the game process.
-
----
-
-## Extensibility
-
-Future growth should occur through:
-
-- Services
-- Applications
-- Game Integrations
-- Extensions
-
-rather than repeated Platform redesign.
+This Codex does not restate them. The standards and checklists below describe
+their operational application. When a detailed Codex rule appears to conflict
+with a canonical Engineering Principle, the higher-authority principle governs
+until the Codex is reconciled. Neither source may override the Constitution.
 
 ---
 
@@ -2325,12 +2197,6 @@ Sprint Closure
 Git Commit
         │
         ▼
-Git Push
-        │
-        ▼
-Version Tag
-        │
-        ▼
 Next Sprint
 ```
 
@@ -2342,7 +2208,12 @@ No stage should be skipped.
 
 Before writing code:
 
+- Review the Founding Charter.
+- Review the Oracle Way.
 - Review the Constitution.
+- Review Oracle Strategy.
+- Review the Engineering Principles.
+- Review accepted ADRs relevant to the work.
 - Review the Codex.
 - Review Architecture.
 - Review Roadmap.
@@ -2382,9 +2253,11 @@ A sprint is **not complete** until all of the following are true.
 ## Repository
 
 - Commit created.
-- Changes pushed.
-- Version tag created.
 - Repository clean.
+
+Push and product-release tagging are separately authorised release actions.
+They are required only when the approved workflow includes them; Sprint closure
+does not imply release authority.
 
 ---
 
@@ -2449,7 +2322,7 @@ Every tagged version should represent a meaningful milestone.
 
 # Git Workflow
 
-Standard workflow:
+Standard Sprint workflow:
 
 ```text
 Create Sprint Branch
@@ -2472,22 +2345,12 @@ Commit
 
 ↓
 
-Push
-
-↓
-
-Tag
-
-↓
-
-Merge
-
-↓
-
-Create Next Sprint Branch
+Closure Decision
 ```
 
-Never tag a failing build.
+When separately authorised, the release workflow may continue through push,
+merge and a meaningful version tag. Never push, merge or tag a failing build,
+and never infer release authority from Sprint closure.
 
 ---
 
@@ -2567,11 +2430,23 @@ Documentation is maintained continuously.
 
 Preferred order:
 
+Founding Charter
+
+↓
+
+The Oracle Way
+
+↓
+
 Constitution
 
 ↓
 
-Codex
+Engineering Principles and Strategy
+
+↓
+
+Accepted ADRs and Codex
 
 ↓
 
@@ -2583,7 +2458,15 @@ Roadmap
 
 ↓
 
+Master Build Plan
+
+↓
+
 Project Board
+
+↓
+
+Sprint Execution
 
 ↓
 
@@ -2598,9 +2481,10 @@ Documentation should never drift from reality.
 Production build must pass before:
 
 - Commit
-- Push
-- Tag
 - Sprint closure
+
+A release build must also pass before an authorised push or product release
+tag.
 
 A green build is non-negotiable.
 
@@ -3196,167 +3080,15 @@ Quality should trend upwards over time.
 
 > Every improvement should make the Platform stronger, clearer and easier to extend.
 
-# Oracle Engineering Commandments
-
-The following principles should guide every architectural decision made within Oracle.
-
-These are not suggestions.
-
-They represent the engineering culture of the Oracle Platform.
-
----
-
-## I. Strengthen the Platform
-
-Every sprint should strengthen the Platform.
-
-Avoid solutions that only solve today's problem.
-
-Prefer solutions that improve Oracle for every future Application, Service and Game Integration.
-
----
-
-## II. Respect Ownership
-
-Every capability has one owner.
-
-Ownership should always be obvious.
-
-If ownership becomes unclear,
-
-the architecture requires improvement.
-
----
-
-## III. Reuse Before Building
-
-Before creating something new ask:
-
-Can an existing Platform capability solve this?
-
-Can an existing Service own this?
-
-Can an existing Application orchestrate this?
-
-Can an Extension provide this?
-
-Reuse creates consistency.
-
-Duplication creates debt.
-
----
-
-## IV. Prefer Architecture Over Features
-
-Features create excitement.
-
-Architecture creates longevity.
-
-Oracle should always favour architectural quality over short-term feature velocity.
-
----
-
-## V. Intelligence Must Be Explainable
-
-Every recommendation should answer:
-
-Why?
-
-Every prediction should answer:
-
-How confident?
-
-Every decision should be supported by evidence.
-
-Explainability builds trust.
-
----
-
-## VI. Applications Present
-
-Applications should present intelligence.
-
-Applications should not own intelligence.
-
-Business logic belongs inside Services.
-
-Intelligence belongs to the Platform.
-
----
-
-## VII. Games Extend Oracle
-
-Games are integrations.
-
-Games are not Oracle.
-
-Oracle owns the experience.
-
-Game Integrations provide knowledge.
-
-This distinction must never be blurred.
-
----
-
-## VIII. Platform Before Product
-
-Whenever uncertainty exists,
-
-choose the option that strengthens the Platform.
-
-The Platform should outlive every individual feature.
-
----
-
-## IX. Keep Oracle Calm
-
-Oracle should feel:
-
-Professional
-
-Predictable
-
-Confident
-
-Minimal
-
-Helpful
-
-Never:
-
-Noisy
-
-Chaotic
-
-Overwhelming
-
-Distracting
-
-Calm software builds confidence.
-
----
-
-## X. Leave Oracle Better
-
-Every engineer should leave Oracle in a stronger state than they found it.
-
-Examples include:
-
-Reducing duplication
-
-Improving documentation
-
-Clarifying ownership
-
-Simplifying architecture
-
-Strengthening typing
-
-Improving diagnostics
-
-Removing technical debt
-
-Small improvements accumulate.
+# Canonical Engineering Principles
+
+The former Engineering Commandments duplicated durable principles inside this
+operational standard. Their canonical replacement is
+`docs/founding/ORACLE_ENGINEERING_PRINCIPLES.md`.
+
+Use the Engineering Principles for enduring judgment and this Codex for
+detailed practice, review criteria and workflow. Cultural expectations are
+owned by `docs/founding/THE_ORACLE_WAY.md`.
 
 ---
 
@@ -3474,9 +3206,9 @@ No Oracle release should be considered complete until:
 
 ✓ Git committed.
 
-✓ Git pushed.
+✓ Release decision recorded.
 
-✓ Version tagged.
+✓ Push and version tag completed when separately authorised.
 
 ✓ Ready for next sprint.
 
@@ -3484,70 +3216,15 @@ Release quality is measured by confidence rather than speed.
 
 ---
 
-# The Oracle Platform
+# Closing Governance Reference
 
-Oracle is no longer a collection of features.
+The Codex closes where engineering work begins: with the canonical governance
+chain in `docs/DOCUMENTATION_INDEX.md`.
 
-Oracle is no longer an AI coaching application.
+Use the Founding Charter for purpose, the Oracle Way for stewardship, the
+Constitution for binding product and architecture, the Engineering Principles
+for durable judgment, accepted ADRs for specific decisions and this Codex for
+operational practice.
 
-Oracle is no longer a single-game product.
-
-Oracle is the operating platform for gaming intelligence.
-
-The Platform provides stability.
-
-Services provide capability.
-
-Applications provide experience.
-
-Game Integrations provide knowledge.
-
-Extensions expand the ecosystem.
-
-Everything else builds upon these foundations.
-
----
-
-# Final Declaration
-
-Oracle exists to help Operators understand their games, understand themselves and continually improve.
-
-Every sprint should move Oracle closer to that vision.
-
-Every architectural decision should strengthen the Platform.
-
-Every line of code should have a clear purpose.
-
-Every recommendation should be explainable.
-
-Every prediction should be evidence-based.
-
-Every Application should feel unmistakably like Oracle.
-
-The Platform should remain stable.
-
-The ecosystem should continue to grow.
-
-The Operator should always remain at the centre of every decision.
-
----
-
-# Closing Principle
-
-When faced with multiple valid solutions, choose the one that future engineers will thank you for.
-
-Build for the next ten years.
-
-Not the next ten days.
-
----
-
-> **Oracle understands games.**
-
-> **Oracle understands players.**
-
-> **Oracle delivers intelligence.**
-
----
-
-**The Oracle has spoken.**
+Implementation must remain consistent with all higher authority and must be
+verified before it is declared complete.

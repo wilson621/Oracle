@@ -1,8 +1,15 @@
 # ORACLE DESIGN SYSTEM
 
-Version 1.0
-
-Last Updated: 8 July 2026
+**Authority:** Canonical Oracle visual and interaction standard within Brand and founding governance
+**Scope:** Visual language, layout, components, motion, accessibility and responsive design
+**Owner:** Oracle Design
+**Status:** Active
+**Classification:** Living
+**Expected Stability:** Reviewed when shared experience standards change
+**Supersedes:** Earlier Design System versions
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 1.1
 
 ---
 

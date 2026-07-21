@@ -1,9 +1,15 @@
 # ORACLE MASTER BUILD PLAN
 
-**Version:** 2.2
-**Status:** Active  
-**Owner:** Oracle Platform Engineering  
-**Last Updated:** Sprint 14 closure — 21 July 2026
+**Authority:** Canonical approved engineering execution plan beneath Roadmap and Architecture
+**Scope:** Current execution objective, sequencing, completion criteria and known boundaries
+**Owner:** Oracle Platform Engineering
+**Status:** Active
+**Classification:** Living
+**Expected Stability:** Reviewed whenever approved execution direction changes
+**Supersedes:** Earlier active Master Build Plan versions
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 2.3
 
 ---
 
@@ -11,9 +17,15 @@
 
 The Master Build Plan is Oracle's execution document.
 
-The Constitution defines what Oracle is.
+The Founding Charter defines why Oracle exists.
 
-The Codex defines how Oracle is built.
+The Oracle Way defines how Oracle stewards behave.
+
+The Constitution defines binding product and architectural constraints.
+
+Oracle Strategy defines long-term strategic direction.
+
+The Engineering Principles and Codex govern how Oracle is built.
 
 The Architecture defines how Oracle is organised.
 
@@ -29,40 +41,18 @@ This document should always reflect the current implementation plan.
 
 # Oracle Mission
 
-Oracle is the operating platform for gaming intelligence.
-
-The mission of the engineering team is to strengthen the Platform while continuously improving the Operator experience.
-
-Every completed sprint should permanently improve one or more of the following:
-
-- Platform
-- Intelligence
-- User Experience
-- Reliability
-- Extensibility
-- Explainability
-- Maintainability
-- Performance
+Oracle's canonical mission is defined in
+`docs/founding/ORACLE_FOUNDING_CHARTER.md`. This plan translates approved
+Roadmap direction into engineering execution and must not redefine the mission.
 
 ---
 
 # Engineering Principles
 
-Every implementation should follow these principles.
-
-- Platform before features.
-- Architecture before speed.
-- Green production build before commit.
-- Documentation is implementation.
-- One owner for every capability.
-- Services provide reusable capability.
-- Applications own user experience.
-- Game Integrations provide knowledge.
-- Extensions expand Oracle.
-- Avoid duplicate architecture.
-- Prefer capability resolution over direct coupling.
-- Every recommendation must be explainable.
-- Every confidence value must be evidence based.
+The canonical durable principles are defined in
+`docs/founding/ORACLE_ENGINEERING_PRINCIPLES.md`. The Oracle Codex supplies the
+operational workflow and quality gates. This plan records only execution-specific
+requirements.
 
 ---
 
@@ -87,7 +77,11 @@ This architecture was established during Sprint 8 and forms the permanent founda
 
 ---
 
-# Current Execution Status
+# Latest Approved Execution Status
+
+No Sprint is active. Sprint 14 is formally closed. The current Oracle
+Governance Refactor is a documentation-only, non-Sprint activity pending
+architectural review. Sprint 15 has not started.
 
 ## Sprint 14 — Companion Intelligence Foundation
 
@@ -353,12 +347,6 @@ Sprint Review
 Git Commit
         │
         ▼
-Git Push
-        │
-        ▼
-Release Tag
-        │
-        ▼
 Next Sprint
 ```
 
@@ -393,9 +381,10 @@ A sprint is only considered complete when:
 ## Repository
 
 - Commit created.
-- Changes pushed.
-- Release tag created.
 - Repository clean.
+
+Push and product-release tagging require separate release authority and are not
+implied by Sprint closure.
 
 ---
 
@@ -430,7 +419,7 @@ Before every release confirm:
 
 ✅ Repository clean
 
-✅ Release tag created
+✅ Release decision recorded; push and tag completed only when separately authorised
 
 ---
 

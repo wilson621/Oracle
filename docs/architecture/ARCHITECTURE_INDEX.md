@@ -1,8 +1,15 @@
 # ORACLE ARCHITECTURE INDEX
 
-Version: 5.2
-
-Status: Active
+**Authority:** Canonical subsystem ownership and boundary index beneath the Constitution and Architecture
+**Scope:** Locations, responsibilities, ownership, outputs and prohibited responsibilities
+**Owner:** Oracle Architecture
+**Status:** Active
+**Classification:** Living
+**Expected Stability:** Reviewed whenever subsystem ownership or implementation status changes
+**Supersedes:** Earlier Architecture Index versions
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 5.3
 
 ---
 
@@ -18,10 +25,13 @@ maintainable and consistent over many years of development.
 
 This document complements:
 
-- Project Vision
-- Manifesto
+- Founding Charter
+- The Oracle Way
+- Platform Constitution
+- Oracle Strategy
+- Engineering Principles
+- accepted ADRs
 - Codex
-- Principles
 - Roadmap
 - ADRs
 
@@ -30,9 +40,10 @@ It does not replace them.
 # Current Production Architecture
 
 Architecture v4.1 remains the historical engine-runtime baseline. The current
-repository also contains the Sprint 8 Platform coordination foundations and
-the Sprint 12.1 Desktop Platform. Current delivery truth is recorded in
-`IMPLEMENTATION_STATUS.md`.
+repository extends it through the Sprint 8 Platform coordination foundations,
+the Sprint 12.1 Desktop Platform, Sprint 13's Game Integration vertical slice
+and Sprint 14's Companion Intelligence Foundation. Current delivery truth is
+recorded in `IMPLEMENTATION_STATUS.md`.
 
 The Sprint 12 Commit 5 dependency findings and enforcement baseline are
 recorded in `DEPENDENCY_BOUNDARY_AUDIT.md`.

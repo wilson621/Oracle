@@ -1,14 +1,25 @@
 # ORACLE BRAND BIBLE
 
-Version 2.0
-
-Last Updated: 8 July 2026
+**Authority:** Canonical external Oracle brand and product-voice standard within founding governance
+**Scope:** External identity, language, voice, visual direction and product positioning
+**Owner:** Oracle Brand
+**Status:** Active
+**Classification:** Living
+**Expected Stability:** Reviewed when brand positioning or experience standards change
+**Supersedes:** Earlier Brand Bible versions
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 2.1
 
 ---
 
 # Purpose
 
 The Oracle Brand Bible defines the identity of Oracle.
+
+It governs external product expression. Internal culture and behaviour are
+owned by `docs/founding/THE_ORACLE_WAY.md`; purpose, mission and vision are
+owned by the Founding Charter.
 
 It exists to ensure that every interaction, every interface, every communication and every experience feels unmistakably Oracle.
 
@@ -46,13 +57,16 @@ Project Meta
 
 ## Platform Type
 
-AI-Powered Competitive Gaming Intelligence Platform
+Operator Intelligence Platform for gaming
 
 ---
 
 # Brand Position
 
-Oracle exists to become the world's most trusted competitive gaming intelligence platform.
+Oracle exists to become the world's most trusted gaming-intelligence platform.
+
+Competitive improvement is an important initial market and use case, not a
+limit on Oracle's institutional or architectural identity.
 
 Oracle is not another statistics website.
 
@@ -540,8 +554,6 @@ They are not Oracle.
 
 ---
 
-# Taglines
-
 Primary
 
 # Taglines
@@ -596,7 +608,9 @@ Evidence. Intelligence. Victory.
 
 # Elevator Pitch
 
-Oracle is an AI-powered competitive gaming intelligence platform that continuously learns every Operator, explains every recommendation through evidence and helps players improve through personalised intelligence rather than generic advice.
+Oracle is an Operator Intelligence Platform for gaming that builds durable
+understanding, explains recommendations through evidence and helps players
+improve through contextual intelligence rather than generic advice.
 
 ---
 

@@ -1,10 +1,15 @@
 # ORACLE ARCHITECTURE
 
-Technical Architecture
-
-Version 5.2
-
-Last Updated: Sprint 14 closure — 21 July 2026
+**Authority:** Canonical description of Oracle's current designed architecture beneath the Constitution and accepted ADRs
+**Scope:** Technical structure, runtime flow, subsystem responsibilities and integration boundaries
+**Owner:** Oracle Architecture
+**Status:** Active
+**Classification:** Living
+**Expected Stability:** Reviewed whenever accepted architecture or verified integration boundaries change
+**Supersedes:** Earlier current-architecture descriptions; historical baselines remain preserved
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 5.3
 
 ---
 
@@ -14,7 +19,11 @@ This document defines Oracle's technical architecture.
 
 Its purpose is to describe how Oracle is structured, how intelligence flows through the platform, and how future systems should integrate without requiring architectural redesign.
 
-Unlike the Manifesto or the Codex, this document focuses exclusively on production architecture.
+The Founding Charter owns institutional purpose. The Constitution and accepted
+ADRs own binding architectural rules. The Engineering Principles and Oracle
+Strategy provide compliant engineering and operational direction. This document
+describes the resulting production architecture without redefining those
+authorities.
 
 It answers one question.
 
@@ -553,7 +562,10 @@ Signals describe what Oracle has detected.
 
 Signals never contain recommendations.
 
-Recommendations belong exclusively to Decision Intelligence.
+Within the Oracle Intelligence pipeline, recommendations belong to Decision
+Intelligence. Companion Guidance recommendations separately follow ADR-032's
+versioned Guidance contract and ownership boundary; they do not turn Signals
+into recommendations or replace Decision Intelligence.
 
 Signals are intentionally lightweight so that every Oracle subsystem can communicate using a common vocabulary.
 
@@ -626,7 +638,10 @@ Decision Intelligence converts observations into recommendations.
 
 Every recommendation produced by Oracle uses the shared OracleDecision contract.
 
-Decision Intelligence remains the only subsystem that owns recommendations.
+Decision Intelligence remains the recommendation owner within the Oracle
+Intelligence pipeline. Companion Guidance is the separate, constitutionally
+external recommendation model established by ADR-032 for the Companion
+Application.
 
 Sprint 5 extended the decision taxonomy by introducing:
 
@@ -1132,16 +1147,10 @@ Every answer should be **Yes** before architecture changes are accepted.
 
 # Engineering Principles
 
-Oracle should always favour:
-
-- Stable architecture over rapid redesign.
-- Reusable systems over isolated implementations.
-- Extension over replacement.
-- Explainability over opaque intelligence.
-- Maintainability over short-term optimisation.
-- Consistency over convenience.
-
-These principles guide every future Operation.
+The canonical durable engineering principles are defined in
+`docs/founding/ORACLE_ENGINEERING_PRINCIPLES.md`. Architecture applies those
+principles within the constraints of the Oracle Platform Constitution and
+accepted ADRs; it does not maintain a competing principle set.
 
 ---
 

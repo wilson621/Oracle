@@ -1,11 +1,24 @@
 # ORACLE PROJECT VISION
 
-**Status:** Active
-**Purpose:** Explain what Oracle is being built to become and why
+**Authority:** Superseded historical context; not a current governance authority
+**Scope:** Preserves the former Project Vision and its repository path
+**Owner:** Oracle Governance
+**Status:** Superseded
+**Classification:** Historical
+**Expected Stability:** Retained without further substantive development
+**Supersedes:** None
+**Superseded By:** `docs/founding/ORACLE_FOUNDING_CHARTER.md` and `docs/founding/ORACLE_STRATEGY.md`
+**Last Reviewed:** 21 July 2026
 
 ---
 
 # What Are We Building?
+
+> **Historical context:** The canonical source for Oracle's purpose, mission and
+> vision is now `docs/founding/ORACLE_FOUNDING_CHARTER.md`. The canonical
+> strategic philosophy is `docs/founding/ORACLE_STRATEGY.md`. The content below
+> is retained to preserve the pre-governance-refactor record and must not
+> override those sources or imply current implementation status.
 
 Oracle is a long-term AI gaming-intelligence platform designed to help players
 improve across multiple games.

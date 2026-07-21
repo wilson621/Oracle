@@ -1,8 +1,15 @@
 # ORACLE COMPANION ARCHITECTURE
 
-Version 1.8
-
-Status: Sprint 14 Companion Intelligence Foundation complete
+**Authority:** Canonical Companion product and technical architecture beneath the Constitution and accepted ADRs
+**Scope:** External Companion product boundary, runtime model, guidance architecture and verified limits
+**Owner:** Oracle Companion Architecture
+**Status:** Sprint 14 Companion Intelligence Foundation complete
+**Classification:** Living
+**Expected Stability:** Reviewed whenever Companion architecture or verified runtime integration changes
+**Supersedes:** Earlier Companion Architecture versions
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 1.9
 
 ---
 

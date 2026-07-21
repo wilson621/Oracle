@@ -1,9 +1,17 @@
 # ORACLE IMPLEMENTATION STATUS
 
-**Status:** Canonical living implementation record
-**Last verified:** 21 July 2026
-**Verified branch:** `sprint-9-overlay`
-**Verified Sprint 14 implementation baseline before documentation reconciliation:** `3868975`
+**Authority:** Canonical evidence-backed record of implemented repository capability
+**Scope:** Verified implementation, public boundaries, known integration limits and verification evidence
+**Owner:** Oracle Platform Engineering
+**Status:** Active
+**Classification:** Living
+**Expected Stability:** Updated when verified implementation or accepted technical debt changes
+**Supersedes:** Earlier active implementation-status records
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Verified Branch:** `sprint-9-overlay`
+**Verified Repository Baseline:** `01a4bdb`
+**Sprint 14 Implementation Baseline:** `3868975`
 
 ---
 
@@ -13,8 +21,10 @@ This document records what is demonstrably implemented in the Oracle
 repository. It is the first document engineers should read when determining
 current delivery status.
 
-`docs/PROJECT_VISION.md` explains what Oracle is being built to become and why.
-This document separately records what is implemented now.
+`docs/founding/ORACLE_FOUNDING_CHARTER.md` defines why Oracle exists and
+`docs/founding/ORACLE_STRATEGY.md` defines the long-term strategic direction.
+This document separately records what is implemented now. Governance approval
+does not itself constitute product capability.
 
 The Constitution and accepted ADRs remain the architectural authority. This
 document does not redefine them. When planning documents disagree with the
@@ -25,7 +35,7 @@ Update this file during every sprint closure audit.
 
 ---
 
-# Current Sprint
+# Latest Closed Sprint
 
 ## Sprint 14 — Companion Intelligence Foundation
 

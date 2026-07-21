@@ -2,9 +2,16 @@
 
 # Innovation Lab
 
-Version 2.0
-
-Last Updated: 8 July 2026
+**Authority:** Non-authoritative exploration backlog
+**Scope:** Uncommitted research, product and platform ideas
+**Owner:** Oracle Innovation
+**Status:** Active
+**Classification:** Living
+**Expected Stability:** Continuously reviewed; ideas may be promoted or rejected
+**Supersedes:** Earlier Innovation Lab versions
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 2.1
 
 ---
 
@@ -19,6 +26,9 @@ Ideas belong here before they belong anywhere else.
 Being recorded does **not** mean an idea has been approved.
 
 It simply means it is valuable enough to preserve.
+
+No idea can override the Founding Charter or Constitution. Constitutionally
+prohibited behaviour is rejected rather than promoted to Strategy or Roadmap.
 
 This document protects the current Operation from feature creep while ensuring promising ideas are never forgotten.
 
@@ -566,7 +576,9 @@ Does it improve the Operator?
 
 Does it strengthen Oracle?
 
-Does it align with the Manifesto?
+Does it align with the Founding Charter and Oracle Strategy?
+
+Does it comply with the Constitution?
 
 Does it fit the Architecture?
 

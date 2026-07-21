@@ -2,9 +2,16 @@
 
 # Branding
 
-Version 2.0
-
-Last Updated: 7 July 2026
+**Authority:** Canonical product, repository and naming standard within founding governance
+**Scope:** Project Meta and Oracle naming, hierarchy and terminology
+**Owner:** Oracle Brand
+**Status:** Active
+**Classification:** Living
+**Expected Stability:** Reviewed only when product or organisational naming changes
+**Supersedes:** Earlier Branding versions
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 2.1
 
 ---
 
@@ -13,6 +20,11 @@ Last Updated: 7 July 2026
 This document defines the official naming conventions and product hierarchy for Project Meta.
 
 Visual identity, colours and design language are documented separately in **Brand-Bible.md**.
+
+The Oracle Founding Charter governs the Oracle initiative and everyone
+stewarding it. It does not silently rename the documented company, repository
+or product identities below. Any corporate or legal identity change requires a
+separate explicit decision.
 
 ---
 

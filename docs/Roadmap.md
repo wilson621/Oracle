@@ -2,8 +2,16 @@
 
 ## Strategic Product Roadmap
 
-**Version:** 4.3
-**Last Updated:** Sprint 14 closure — 21 July 2026
+**Authority:** Canonical strategic delivery sequence beneath Oracle Strategy and Architecture
+**Scope:** Long-term operations, horizons, sequencing and delivery outcomes
+**Owner:** Oracle Strategy and Product
+**Status:** Active
+**Classification:** Living
+**Expected Stability:** Reviewed at strategic and Sprint-boundary changes
+**Supersedes:** Earlier active Roadmap versions
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 4.4
 
 ---
 
@@ -36,67 +44,23 @@ This roadmap exists to ensure every development decision contributes towards Ora
 
 # Product Vision
 
-> **Oracle is the operating platform for gaming intelligence.**
+Oracle's canonical purpose, mission and vision are defined by the
+[Founding Charter](founding/ORACLE_FOUNDING_CHARTER.md). The strategic thesis,
+platform-first choices, compounding advantage and horizons are defined by
+[Oracle Strategy](founding/ORACLE_STRATEGY.md).
 
-Oracle exists to understand games, understand players and deliver intelligent, context-aware assistance through a unified platform architecture.
-
-Oracle is designed as a platform rather than a single-game application.
-
-The Platform owns the foundation.
-
-Oracle Services provide reusable capabilities.
-
-Oracle Applications deliver the Oracle experience.
-
-Game Integrations provide game-specific knowledge and context.
-
-Every supported game should feel like a natural extension of Oracle rather than a separate product.
-
-Oracle should:
-
-- Understand every Operator.
-- Learn continuously.
-- Reason from evidence.
-- Explain every recommendation.
-- Calculate confidence honestly.
-- Improve after every Oracle Session.
-- Adapt across multiple games.
-- Deliver intelligence rather than statistics.
-- Assist without interfering with gameplay.
-
-The long-term objective is not simply to support more games.
-
-It is to build one intelligence platform capable of understanding any supported game through a consistent Oracle experience.
+This Roadmap does not restate those authorities. It translates approved
+strategy into ordered operations and expected outcomes.
 
 ---
 
 # Development Philosophy
 
-Oracle is architecture-driven.
-
-Every completed sprint should improve one or more of the following:
-
-- Platform
-- Intelligence
-- Reusability
-- Scalability
-- Maintainability
-- Explainability
-- User Experience
-
-Features are temporary.
-
-Capabilities remain.
-
-Platform architecture is permanent.
-
-Applications evolve.
-
-Game Integrations expand.
-
-Oracle grows by strengthening reusable platform capabilities rather than producing isolated game-specific functionality.
-
-Whenever architectural decisions are required, preference should always be given to solutions that improve the Platform for every future game rather than solving only the current problem.
+Roadmap decisions follow the
+[Oracle Engineering Principles](founding/ORACLE_ENGINEERING_PRINCIPLES.md), the
+Oracle Platform Constitution and current Architecture. Strategy cannot
+authorise constitutionally prohibited behaviour, and Roadmap placement does not
+constitute implementation approval.
 
 ---
 
@@ -129,7 +93,7 @@ Documentation
 Sprint Closure Audit
       │
       ▼
-Release
+Release Decision
 ```
 
 No stage should be skipped.
@@ -144,9 +108,11 @@ Every sprint should conclude with:
 - Updated documentation
 - Reviewed architecture
 - Git commit
-- Git tag
 - Sprint summary
 - Handover readiness
+
+Push and product-release tagging are separately authorised release activities.
+They are not implied by Sprint closure.
 
 ---
 
@@ -156,7 +122,8 @@ The Oracle Roadmap exists at the strategic level.
 
 Daily development is organised through Sprints.
 
-Version history is represented by Git tags.
+Implementation history is represented by Git commits. Product release history
+is represented by separately authorised Git tags.
 
 Source control is organised through Sprint branches.
 
@@ -169,11 +136,15 @@ Together they provide four complementary views of Oracle's evolution:
 
 Each should remain consistent with the others.
 
-The roadmap describes *where Oracle is going*.
+Oracle Strategy defines *how Oracle intends to create compounding advantage*.
+
+The Roadmap describes *the ordered delivery path*.
 
 The Architecture explains *how Oracle is designed*.
 
-The Constitution defines *what Oracle is*.
+The Founding Charter defines *why Oracle exists*.
+
+The Constitution defines *binding product and architectural constraints*.
 
 The Codex explains *how Oracle is built*.
 
@@ -183,20 +154,9 @@ Implementation fulfils those documents.
 
 # Engineering Principles
 
-Every future capability should satisfy the following principles:
-
-- Strengthen the Oracle Platform.
-- Reuse existing Platform contracts where possible.
-- Preserve Platform → Services → Applications → Game Integrations.
-- Keep game-specific knowledge inside Game Integrations.
-- Avoid duplicate intelligence.
-- Prefer capability resolution over hard-coded implementations.
-- Preserve explicit ownership.
-- Remain extensible.
-- Maintain player safety.
-- Deliver visible customer value.
-
-Every completed sprint should leave Oracle in a stronger architectural position than before.
+The canonical principles are maintained in
+`docs/founding/ORACLE_ENGINEERING_PRINCIPLES.md`. This Roadmap records delivery
+implications rather than a duplicate principle set.
 
 # OPERATION GENESIS
 

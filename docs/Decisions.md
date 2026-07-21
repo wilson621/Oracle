@@ -1,9 +1,15 @@
-# ORACLE
+# ORACLE ARCHITECTURAL DECISION RECORDS
 
-# Architectural Decision Records (ADR)
-
-Version 4.4
-Last Updated: Sprint 14 closure — 21 July 2026
+**Authority:** Accepted architectural decisions beneath the Oracle Platform Constitution and Engineering Principles
+**Scope:** Specific architectural decisions, rationale, alternatives, consequences and status
+**Owner:** Oracle Architecture
+**Status:** Active append-only ledger
+**Classification:** Historical
+**Expected Stability:** Accepted records are immutable; new decisions or explicit superseding ADRs are appended
+**Supersedes:** Earlier ADR ledger versions as an index; individual accepted records retain their own status
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 4.4
 
 ---
 
@@ -18,6 +24,14 @@ It is defined by why it was built.
 These decisions preserve the reasoning behind Oracle's evolution and provide context for future development.
 
 Every significant architectural decision should be recorded here.
+
+The ledger is historical and append-only. Existing accepted ADR content is not
+rewritten during governance reconciliation. A later decision must append a new
+ADR and explicitly identify any record it supersedes.
+
+ADRs may refine Architecture but cannot override the Oracle Platform
+Constitution. See `docs/DOCUMENTATION_INDEX.md` for the authority chain and
+classification rules.
 
 ---
 

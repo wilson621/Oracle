@@ -6,9 +6,16 @@ Oracle is built so players never have to search at all.
 
 # Signature Features
 
-Version 1.0
-
-Last Updated: 8 July 2026
+**Authority:** Non-authoritative product-exploration record
+**Scope:** Candidate experiences that may distinguish Oracle
+**Owner:** Oracle Product
+**Status:** Active exploration
+**Classification:** Living
+**Expected Stability:** Reviewed when candidate experiences change status
+**Supersedes:** Earlier Signature Features versions
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
+**Version:** 1.1
 
 ---
 

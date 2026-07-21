@@ -1,10 +1,16 @@
 # THE ORACLE PLATFORM CONSTITUTION
 
-**Status:** Active  
-**Authority:** Highest-level Oracle product and architectural standard  
+**Authority:** Highest product and architectural authority within the Oracle Founding Charter
+**Scope:** All Oracle products, Platform code, Services, Applications, Game Integrations, extensions and product architecture
+**Owner:** Oracle Constitutional Governance
+**Status:** Active
+**Classification:** Stable
+**Expected Stability:** Changes only through explicit constitutional amendment
+**Supersedes:** Lower-authority product and architectural rules where conflict exists
+**Superseded By:** None
+**Last Reviewed:** 21 July 2026
 **Established:** Sprint 8  
-**Last amended:** Sprint 13 closure — 21 July 2026
-**Applies to:** All Oracle Platform code, applications, services, integrations, extensions, documentation and future products
+**Last Amended:** Sprint 13 closure — 21 July 2026
 
 ---
 
@@ -619,30 +625,62 @@ No technology is adopted merely because it is fashionable.
 
 # Engineering Authority
 
-The authority hierarchy is:
+The Founding Charter is Oracle's highest institutional authority. It defines
+purpose and enduring commitments but cannot override this Constitution's
+product or architectural principles.
+
+The core governance hierarchy is:
 
 ```text
+Oracle Founding Charter
+        │
+        ▼
+The Oracle Way
+        │
+        ▼
 Oracle Platform Constitution
         │
-        ▼
-Architecture Decision Records
-        │
-        ▼
-Oracle Codex
-        │
-        ▼
-Architecture Documentation
-        │
-        ▼
-Roadmap and Sprint Documentation
-        │
-        ▼
+        ├──────────────┐
+        ▼              ▼
+Oracle Engineering   Oracle Strategy
+Principles
+        │              │
+        └──────┬───────┘
+               ▼
+Architecture
+               ▼
+Roadmap
+               ▼
+Master Build Plan
+               ▼
+Project Board
+               ▼
+Sprint Execution
+               ▼
 Implementation
 ```
 
 Lower-level documentation and implementation must not contradict higher-level authority.
 
 Where a conflict exists, the higher-level authority governs until the conflict is formally resolved.
+
+Accepted ADRs preserve specific architectural decisions beneath the
+Constitution and Engineering Principles. The Oracle Codex defines operational
+engineering standards. Both inform Architecture and neither may override this
+Constitution.
+
+Neither Oracle Strategy nor Oracle Engineering Principles may override the
+Constitution. Strategy cannot authorise behaviour prohibited here. Founding
+documents cannot create or imply a constitutional exception.
+
+Core Principle 13, the External Companion Architecture, remains binding unless
+this Constitution itself is formally amended. No Strategy, Roadmap, Sprint,
+commercial priority, founding statement or engineering standard may authorise
+injection, game-memory access or modification, hooks, gameplay or input
+automation, anti-cheat interaction or another prohibited technique.
+
+See `docs/DOCUMENTATION_INDEX.md` for classifications, canonical ownership and
+the complete reading order.
 
 ---
 
