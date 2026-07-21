@@ -1392,6 +1392,66 @@ generation, Context projection, personalisation consumption, control
 operations or UI. Existing intelligence engines and verified contracts remain
 unchanged.
 
+# Sprint 15 Phase 3 Operator Intelligence Persistence
+
+Phase 3 makes the evidence-derived portion of Operator Understanding durable
+without persisting the Understanding projection itself:
+
+```text
+Authenticated Account
+        ↓
+Operator Service
+        ↓
+Operator Repository
+        ↓
+Operator Intelligence Service contract
+        ↓
+OperatorIntelligenceRepository
+        ↓
+Operator-owned policy, Evidence, claim and eligibility records
+```
+
+The persistence model contains six relations:
+
+1. `operator_data_policy_versions` stores immutable, versioned policy
+   references for one Operator.
+2. `operator_intelligence_evidence` stores minimal Evidence-reference
+   contracts, not raw Session or prompt content.
+3. `operator_intelligence_claims` owns stable claim identity and the current
+   immutable revision pointer.
+4. `operator_intelligence_claim_revisions` stores the versioned claim body,
+   confidence, provenance, scope, temporal validity and deterministic
+   explanation. Revisions are append-only.
+5. `operator_intelligence_claim_evidence` stores support or contradiction
+   relationships between one revision and same-Operator Evidence.
+6. `operator_intelligence_eligibility_assessments` stores append-only,
+   purpose-specific eligibility history independently of revision validity.
+
+Composite foreign keys carry `operator_id` across policies, Evidence, claims,
+revisions, links and eligibility. This prevents a valid child record from
+referencing another Operator's aggregate. RLS independently resolves access
+through `operator_account_bindings`; authenticated callers receive read-only
+table grants and may write only through narrow atomic functions that repeat
+the ownership check. Applications and engines do not own these functions or
+tables.
+
+`SupabaseOperatorIntelligenceRepository` is the sole application-code owner of
+the Phase 3 persistence relations. It validates inputs and reconstructed
+outputs through the immutable Phase 2 contract factories. Evidence source
+truth remains with its existing Repository, engine or Game Integration owner;
+only the approved reference is durable here.
+
+The migration is additive and preserves existing Operator identifiers,
+Sessions, bindings and unowned historical Sessions. It has passed exact
+rollback execution, independent catalog verification and transactional
+authenticated-isolation checks. It is not permanently deployed and requires a
+separate founder-approved deployment gate.
+
+No Operator Intelligence Service implementation is registered at runtime.
+Phase 3 produces no real candidate, performs no cross-game promotion, persists
+no `OperatorUnderstandingSnapshot`, changes no Oracle Context, and adds no
+Application or UI consumption. Those remain later explicitly approved phases.
+
 # Verified Integration Limits
 
 - `bootstrapOraclePlatform()` is implemented but is not invoked by the current

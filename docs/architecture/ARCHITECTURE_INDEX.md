@@ -675,6 +675,49 @@ introduced.
 
 ---
 
+# Operator Intelligence Persistence Foundation
+
+Location
+
+```text
+database/009_operator_intelligence_persistence.sql
+lib/oracle/repositories/operator-intelligence-repository.ts
+scripts/verify-operator-intelligence-persistence.ts
+```
+
+Owns
+
+- durable Operator Intelligence policy-version references
+- minimal Evidence-reference persistence
+- stable claim identity and immutable claim revisions
+- claim-to-evidence support and contradiction links
+- append-only purpose-specific eligibility history
+- authenticated atomic persistence and same-Operator relational integrity
+
+Produces
+
+- persisted contracts validated through the Phase 2 factories
+- current eligible claim revisions reconstructed by the Repository
+- deterministic explanations propagated unchanged from stored revisions
+- database-enforced ownership, lifecycle and direct-write boundaries
+
+Must Never
+
+- own raw Session, prompt or Game Integration source truth
+- persist `OperatorUnderstandingSnapshot`
+- let Applications or engines access persistence directly
+- allow cross-Operator Evidence or revision relationships
+- reinterpret game-specific meaning or promote claims across games
+- register runtime consumption before the approved control gates
+- create real candidates during Phase 3
+
+The migration has passed rollback and independent catalog verification but is
+not permanently deployed. The Repository is implemented without runtime
+Service registration, producer integration, Context projection, Application
+consumption or UI.
+
+---
+
 # Engineering Rules
 
 Every new subsystem must:
@@ -707,8 +750,8 @@ Completed
 
 Current Development Phase
 
-Sprint 15 — Operator Understanding Foundation active; Phases 1 and 2 complete
-and Phase 3 not authorised
+Sprint 15 — Operator Understanding Foundation active; Phases 1 through 3
+complete and Phase 4 not authorised
 
 Current Runtime
 

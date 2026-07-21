@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 4.6
+**Version:** 4.7
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -19,7 +19,7 @@
 
 ## Sprint 15 — Operator Intelligence: Operator Understanding Foundation
 
-**Status:** Active — Phases 1 and 2 complete; Phase 3 not authorised
+**Status:** Active — Phases 1 through 3 complete; Phase 4 not authorised
 **Activation baseline:** `d9d78c94acbc628fbbc35f4a42ba970d02b2f9e9`
 **Plan:** `docs/sprints/SPRINT_15_PLAN.md`
 
@@ -30,8 +30,9 @@ Memory, Evidence and evidence-derived Operator Intelligence.
 
 The ADRs and planning reconciliation remain authoritative. Phase 1 has passed
 implementation, deployment, authenticated isolation and founder closure review.
-Phase 2 has passed contract implementation, full verification and founder
-implementation review. Phase 3 has not begun.
+Phase 2 has passed contract implementation and closure. Phase 3 has passed
+persistence implementation, rollback validation, independent catalog
+verification and founder implementation review. Phase 4 has not begun.
 
 # Sprint 15 Governance Gate
 
@@ -100,9 +101,31 @@ development fixtures.
 - [x] architecture, Guidance, Companion, desktop, build and lint regressions pass
 - [x] founder Phase 2 implementation review approved
 
-Phase 2 introduces no database schema, migration, Repository, runtime Service,
+Phase 2 introduced no database schema, migration, Repository, runtime Service,
 engine adapter, Context integration, Application consumption or UI. Phase 3
-requires separate founder authorisation.
+adds only the approved persistence foundation and keeps runtime consumption
+inactive.
+
+# Sprint 15 Phase 3 Closure
+
+- [x] deployed Supabase catalog re-audited before migration design
+- [x] six-table Operator Intelligence persistence schema implemented
+- [x] immutable policy, Evidence and claim-revision persistence implemented
+- [x] append-only claim-evidence and eligibility history implemented
+- [x] composite Operator ownership constraints and indexes implemented
+- [x] authenticated atomic persistence functions implemented
+- [x] inherited public privileges revoked and authenticated reads restricted by RLS
+- [x] dedicated `OperatorIntelligenceRepository` implemented
+- [x] Repository persistence validated through Phase 2 contracts
+- [x] exact rollback migration validation and independent catalog verification passed
+- [x] transactional ownership, isolation and anonymous-rejection checks passed
+- [x] existing Operator, Session and binding truth remained unchanged
+- [x] no runtime registration, candidate producer, Context consumer or UI added
+- [x] founder Phase 3 implementation review approved
+
+`database/009_operator_intelligence_persistence.sql` remains undeployed after
+successful rollback validation. Permanent execution requires a separate
+founder-approved migration gate. Phase 4 requires separate authorisation.
 
 # Sprint 15 Explicit Deferrals
 

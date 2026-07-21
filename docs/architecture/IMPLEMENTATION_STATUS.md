@@ -10,10 +10,11 @@
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
 **Verified Branch:** `sprint-9-overlay`
-**Verified Repository Baseline:** `c2dda130d60b351eb9f3cabf86cb012971c8ba96`
+**Verified Repository Baseline:** `020f883bfe9bfeefa43e15494f6cf85371cc4759`
 **Sprint 14 Implementation Baseline:** `3868975`
 **Sprint 15 Phase 1:** Complete and committed
-**Sprint 15 Phase 2:** Verified and approved for closure commit
+**Sprint 15 Phase 2:** Complete and committed
+**Sprint 15 Phase 3:** Verified and approved for closure commit
 
 ---
 
@@ -97,8 +98,39 @@ Service projection boundaries.
 
 Phase 2 does not add persistence, migrations, Repositories, RLS, engine
 adapters, runtime Service registration, Oracle Context projection,
-Application consumption, Operator-control operations or UI. Phase 3 has not
-begun and requires separate authorisation.
+Application consumption, Operator-control operations or UI.
+
+## Sprint 15 Phase 3 — Operator Intelligence Persistence
+
+Phase 3 is implemented, rollback-verified and approved through founder
+implementation review. Verified repository capability includes:
+
+- six durable tables for per-Operator policy versions, minimal Evidence
+  references, claim identity, immutable claim revisions, evidence
+  relationships and append-only eligibility assessments
+- composite ownership foreign keys that prevent cross-Operator references
+- monotonic head revision enforcement and persisted content-free tombstones
+- deterministic accepted-claim explanations stored inside immutable revisions
+- explicit lifecycle transition checks and sensitive-inference rejection
+- RLS derived from authenticated Account-to-Operator bindings
+- revocation of inherited direct writes with authenticated read-only table
+  access and authenticated atomic function execution
+- a dedicated `SupabaseOperatorIntelligenceRepository` that validates Phase 2
+  contracts before persistence and reconstructs eligible current claims
+- focused schema, Repository and ownership verification through
+  `operator-intelligence:persistence:verify`
+
+The exact migration passed explicit rollback validation and independent
+post-rollback catalog verification. Transactional functional validation proved
+own-Operator visibility, cross-Operator isolation, anonymous rejection and
+direct-write denial. The deployed catalog and all existing Operator, Session
+and binding rows remain unchanged because permanent migration execution has
+not been authorised.
+
+Phase 3 does not register an Operator Intelligence Service, create a candidate
+producer, persist an Understanding Snapshot, integrate Oracle Context, expose
+Application consumption, execute retention or control operations, or add UI.
+Phase 4 has not begun and requires separate authorisation.
 
 ---
 
@@ -137,9 +169,9 @@ deliver the resulting Application state through a renderer-safe runtime
 boundary. That live delivery remains deferred under a separate future plan.
 
 Sprint 15 is active for the Operator Understanding Foundation. Its Phase 1
-ownership foundation is complete and its Phase 2 contract foundation is
-verified and founder-approved, while Sprint 14 remains the latest fully closed
-Sprint.
+ownership foundation, Phase 2 contract foundation and Phase 3 persistence
+implementation are verified and founder-approved, while Sprint 14 remains the
+latest fully closed Sprint.
 
 No Sprint 14 engineering objective remains open. AI inference, ranking,
 personalisation, runtime networking, gameplay automation and any form of game

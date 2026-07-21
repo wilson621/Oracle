@@ -3,7 +3,7 @@
 **Authority:** Approved Sprint execution plan beneath the Master Build Plan and accepted ADRs
 **Scope:** Operator Understanding Foundation planning, boundaries, phases and acceptance criteria
 **Owner:** Oracle Platform Engineering
-**Status:** Active — Phases 1 and 2 complete; Phase 3 not authorised
+**Status:** Active — Phases 1 through 3 complete; Phase 4 not authorised
 **Classification:** Living until Sprint closure
 **Expected Stability:** Updated only through approved Sprint 15 scope review
 **Supersedes:** The earlier recommendation that Sprint 15 deliver authoritative live Companion Guidance
@@ -17,9 +17,9 @@
 
 # Status
 
-Sprint 15 is formally active. Phase 1 — Ownership Foundation and Phase 2 —
-Understanding Contracts have passed founder implementation review. Phase 3 has
-not begun and requires separate authorisation.
+Sprint 15 is formally active. Phase 1 — Ownership Foundation, Phase 2 —
+Understanding Contracts and Phase 3 — Persistence and Migration have passed
+founder review. Phase 4 has not begun and requires separate authorisation.
 
 Sprint 14 remains the latest closed and verified implementation Sprint.
 
@@ -80,6 +80,34 @@ epistemic separation, confidence ownership, evidence integrity, lifecycle,
 revision history, expiry, deletion, prohibited inference, scope and Service
 boundaries. Phase 2 adds no migration, Repository, engine adapter, Context
 projection, Application consumption or UI.
+
+# Phase 3 Closure Outcome
+
+Phase 3 establishes the approved durable Operator Intelligence persistence
+foundation without activating a producer or consumer:
+
+- six Operator-owned tables persist policy versions, minimal Evidence
+  references, stable claims, immutable claim revisions, claim-to-evidence
+  relationships and append-only eligibility assessments
+- composite foreign keys prevent evidence, revisions and eligibility from
+  crossing Operator ownership
+- deterministic explanations remain embedded in their immutable accepted
+  revision rather than being reconstructed by a projection
+- authenticated atomic functions register immutable policy versions, persist a
+  complete revision transaction and append eligibility history
+- authenticated direct table writes are denied; RLS derives reads from the
+  Account-to-Operator binding
+- `SupabaseOperatorIntelligenceRepository` is the only application-code owner
+  of the new tables and validates persisted contracts through Phase 2 factories
+- `OperatorUnderstandingSnapshot` remains unpersisted and no runtime Service,
+  engine adapter, Context consumer, Application or UI is registered
+
+`database/009_operator_intelligence_persistence.sql` was reconciled against
+the deployed catalog, executed completely inside rollback transactions and
+followed by independent catalog verification. Functional rollback validation
+proved authenticated ownership, cross-Operator isolation, anonymous rejection
+and direct-write denial. The migration is not permanently deployed; permanent
+execution remains a separately approved migration gate.
 
 # Mission
 
@@ -299,11 +327,12 @@ data.
 
 ## Phase 3 — Persistence and Migration
 
-- [ ] implement approved Repositories and migrations
-- [ ] preserve existing Operator and Session truth
-- [ ] add ownership constraints, indexes and RLS
-- [ ] verify empty, production-shaped and failure migrations
-- [ ] verify rollback or forward-repair procedure
+- [x] implement approved Repository and migration
+- [x] preserve existing Operator and Session truth
+- [x] add ownership constraints, indexes and RLS
+- [x] verify production-shaped and failure migration paths
+- [x] verify rollback procedure and independent catalog state
+- [x] complete founder Phase 3 implementation review
 
 ## Phase 4 — Narrow Candidate Lifecycle
 

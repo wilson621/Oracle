@@ -1293,6 +1293,12 @@ validated claim and declaration lifecycles, deterministic claim-owned
 explanations and purpose-scoped `OperatorUnderstandingSnapshot`. The Snapshot
 remains a read projection and no runtime consumption is activated.
 
+Sprint 15 Phase 3 implemented the durable Operator Intelligence persistence
+boundary beneath those contracts. Stable claims, immutable revisions,
+deterministic explanations, minimal Evidence references and append-only
+eligibility history retain separate structures. The Snapshot remains
+unpersisted, and no producer or consumer is registered.
+
 ---
 
 # ADR-035
@@ -1392,6 +1398,13 @@ Service ownership. It does not implement persistence, consent processing,
 control operations, export, retention execution or deletion orchestration;
 those remain gated to later approved phases.
 
+Sprint 15 Phase 3 implemented Operator-owned policy-version, Evidence,
+claim-revision, relationship and eligibility persistence with composite
+ownership constraints, authenticated RLS and atomic Repository operations.
+Consent processing, correction, dispute commands, export, retention execution
+and complete deletion orchestration remain gated to later phases. The tracked
+migration is rollback-verified and not permanently deployed.
+
 ---
 
 # ADR-036
@@ -1471,6 +1484,11 @@ and Session scopes. Contract validation rejects implicit widening from game-
 or Session-scoped evidence to Operator-wide understanding and rejects evidence
 from a different Application, Game Integration or Session. Cross-game
 portability policy remains unimplemented and deferred.
+
+Sprint 15 Phase 3 persists the validated scope contract without interpreting
+or widening it. Composite ownership constraints prevent cross-Operator links;
+no cross-game portability rule, candidate producer or Operator-wide promotion
+has been added.
 
 ---
 
