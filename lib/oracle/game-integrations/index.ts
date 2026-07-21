@@ -7,7 +7,13 @@ export type {
 } from "./game-detection-input";
 
 export type {
+  OracleGameAmbiguousOutcome,
+  OracleGameDetectedOutcome,
+  OracleGameDetectionFailure,
+  OracleGameDetectionMatch,
+  OracleGameDetectionOutcome,
   OracleGameDetectionResult,
+  OracleGameNotDetectedOutcome,
 } from "./game-detection";
 
 export type {
@@ -21,6 +27,10 @@ export {
 export {
   evaluateGameIntegrations,
 } from "./game-integration-evaluator";
+
+export {
+  createOracleGameIntegrationRegistry,
+} from "./oracle-game-integration-registry";
 
 export type {
   ExecutableGameDetectionProfile,

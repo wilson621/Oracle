@@ -98,22 +98,31 @@ export class CallOfDutyIntegration
       this.match(input);
 
     if (!match.matched) {
-      return {
+      return Object.freeze({
         detected: false,
-      };
+      });
     }
 
-    return {
+    return Object.freeze({
       detected: true,
 
-      integrationId:
-        this.id,
+      match:
+        Object.freeze({
+          integrationId:
+            this.id,
 
-      explanation:
-        createDetectionExplanation(
-          match
-        ),
-    };
+          gameName:
+            this.gameName,
+
+          integrationVersion:
+            this.version,
+
+          explanation:
+            createDetectionExplanation(
+              match
+            ),
+        }),
+    });
   }
 
   createContext(
