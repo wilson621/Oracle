@@ -4,6 +4,7 @@ import type {
 import {
   createOracleCompanionContext,
   type OracleCompanionContext,
+  type OracleCompanionGameContext,
 } from "./companion-context.js";
 import {
   createOracleCompanionSession,
@@ -26,8 +27,10 @@ export class OracleCompanionSessionManager {
     OracleCompanionSession | null = null;
 
   start(
-    desktopSnapshot:
-      OracleDesktopHostSnapshot | null = null
+    input:
+      OracleCompanionSessionContextInput = {
+        desktop: null,
+      }
   ): OracleCompanionSession {
     if (
       this.currentSession &&
@@ -41,15 +44,20 @@ export class OracleCompanionSessionManager {
     this.currentSession =
       createOracleCompanionSession({
         currentContext:
-          createContext(desktopSnapshot),
+          createContext(
+            null,
+            input
+          ),
       });
 
     return this.getRequiredSnapshot();
   }
 
   markReady(
-    desktopSnapshot:
-      OracleDesktopHostSnapshot | null = null
+    input:
+      OracleCompanionSessionContextInput = {
+        desktop: null,
+      }
   ): OracleCompanionSession {
     const session =
       this.getRequiredSession();
@@ -59,7 +67,10 @@ export class OracleCompanionSessionManager {
         session,
         {
           currentContext:
-            createContext(desktopSnapshot),
+            createContext(
+              session.currentContext,
+              input
+            ),
         }
       );
 
@@ -67,8 +78,10 @@ export class OracleCompanionSessionManager {
   }
 
   markAttached(
-    desktopSnapshot:
-      OracleDesktopHostSnapshot | null = null
+    input:
+      OracleCompanionSessionContextInput = {
+        desktop: null,
+      }
   ): OracleCompanionSession {
     const session =
       this.getRequiredSession();
@@ -78,7 +91,10 @@ export class OracleCompanionSessionManager {
         session,
         {
           currentContext:
-            createContext(desktopSnapshot),
+            createContext(
+              session.currentContext,
+              input
+            ),
         }
       );
 
@@ -86,8 +102,8 @@ export class OracleCompanionSessionManager {
   }
 
   captureContext(
-    desktopSnapshot:
-      OracleDesktopHostSnapshot
+    input:
+      OracleCompanionSessionContextInput
   ): OracleCompanionSession | null {
     const session =
       this.currentSession;
@@ -101,7 +117,10 @@ export class OracleCompanionSessionManager {
         session,
         {
           currentContext:
-            createContext(desktopSnapshot),
+            createContext(
+              session.currentContext,
+              input
+            ),
         }
       );
 
@@ -119,8 +138,10 @@ export class OracleCompanionSessionManager {
   }
 
   end(
-    desktopSnapshot:
-      OracleDesktopHostSnapshot | null = null
+    input:
+      OracleCompanionSessionContextInput = {
+        desktop: null,
+      }
   ): OracleCompanionSession | null {
     const session =
       this.currentSession;
@@ -143,7 +164,10 @@ export class OracleCompanionSessionManager {
         session,
         {
           currentContext:
-            createContext(desktopSnapshot),
+            createContext(
+              session.currentContext,
+              input
+            ),
         }
       );
 
@@ -186,13 +210,60 @@ export class OracleCompanionSessionManager {
   }
 }
 
+type OracleCompanionSessionContextBaseInput =
+  Readonly<{
+    desktop:
+      OracleDesktopHostSnapshot | null;
+  }>;
+
+export type OracleCompanionSessionContextInput =
+  | OracleCompanionSessionContextBaseInput
+  | (
+      OracleCompanionSessionContextBaseInput &
+        Readonly<{
+          game:
+            | OracleCompanionGameContext
+            | null
+            | undefined;
+        }>
+    );
+
 function createContext(
-  desktopSnapshot:
-    OracleDesktopHostSnapshot | null
+  currentContext:
+    OracleCompanionContext | null,
+  input:
+    OracleCompanionSessionContextInput
 ) {
+  const game =
+    hasGameContextOperation(
+      input
+    )
+      ? input.game ?? null
+      : currentContext?.game ??
+        null;
+
   return createOracleCompanionContext({
-    desktop: desktopSnapshot,
+    desktop:
+      input.desktop,
+
+    game,
   });
+}
+
+function hasGameContextOperation(
+  input:
+    OracleCompanionSessionContextInput
+): input is OracleCompanionSessionContextBaseInput &
+  Readonly<{
+    game:
+      | OracleCompanionGameContext
+      | null
+      | undefined;
+  }> {
+  return Object.prototype.hasOwnProperty.call(
+    input,
+    "game"
+  );
 }
 
 function cloneSession(

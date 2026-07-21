@@ -162,7 +162,10 @@ export class CompanionHostWindowController {
       ) {
         this.companionSession
           .captureContext(
-            event.snapshot
+            {
+              desktop:
+                event.snapshot,
+            }
           );
       }
     });
@@ -265,7 +268,10 @@ export class CompanionHostWindowController {
     this.registerScreenEvents();
 
     this.companionSession.start(
-      this.captureDesktopHostSnapshot()
+      {
+        desktop:
+          this.captureDesktopHostSnapshot(),
+      }
     );
 
     try {
@@ -279,7 +285,10 @@ export class CompanionHostWindowController {
     }
 
     this.companionSession.markReady(
-      this.captureDesktopHostSnapshot()
+      {
+        desktop:
+          this.captureDesktopHostSnapshot(),
+      }
     );
 
     if (!window.isDestroyed()) {
@@ -526,7 +535,10 @@ this.developmentBounds = null;
 
 this.unregisterScreenEvents();
 this.companionSession.end(
-  this.desktopHostSnapshots.getSnapshot()
+  {
+    desktop:
+      this.desktopHostSnapshots.getSnapshot(),
+  }
 );
 this.desktopHostSnapshots.clear();
     if (!window) {
@@ -648,7 +660,10 @@ private synchroniseCompanionSessionAttachment(
     session.status === "ready"
   ) {
     this.companionSession.markAttached(
-      desktopSnapshot
+      {
+        desktop:
+          desktopSnapshot,
+      }
     );
 
     return;
@@ -660,7 +675,10 @@ private synchroniseCompanionSessionAttachment(
     session.status === "attached"
   ) {
     this.companionSession.markReady(
-      desktopSnapshot
+      {
+        desktop:
+          desktopSnapshot,
+      }
     );
   }
 }
@@ -1019,7 +1037,10 @@ private restoreDevelopmentBounds(): void {
 this.developmentBounds = null;
 
 this.companionSession.end(
-  this.desktopHostSnapshots.getSnapshot()
+  {
+    desktop:
+      this.desktopHostSnapshots.getSnapshot(),
+  }
 );
 this.desktopHostSnapshots.clear();
 

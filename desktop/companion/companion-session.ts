@@ -5,6 +5,9 @@ import {
 import type {
   OracleCompanionContext,
 } from "./companion-context.js";
+import {
+  cloneOracleCompanionContext,
+} from "./companion-context.js";
 
 export type OracleCompanionSessionStatus =
   | "created"
@@ -292,5 +295,7 @@ function cloneCompanionContext(
 ): OracleCompanionContext | null {
   return context == null
     ? null
-    : structuredClone(context);
+    : cloneOracleCompanionContext(
+        context
+      );
 }
