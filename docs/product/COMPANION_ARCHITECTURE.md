@@ -1,8 +1,8 @@
 # ORACLE COMPANION ARCHITECTURE
 
-Version 1.4
+Version 1.5
 
-Status: Sprint 14 deterministic Guidance Provider Service
+Status: Sprint 14 first curated Game Integration guidance package
 
 ---
 
@@ -1392,6 +1392,45 @@ The Service returns only deeply immutable Guidance, structured failures and
 provider execution summaries. It exposes no provider instance and introduces
 no Guidance content, UI, AI inference, renderer access, desktop lifecycle
 authority or game-specific behaviour.
+
+## First Game Integration Guidance Package
+
+The Call of Duty integration provides the first curated Guidance package and
+is the canonical structural example for future Game Integrations. It consumes
+the Platform contract and is explicitly injected into the Services-owned
+provider boundary; it does not define a parallel contract, register itself or
+introduce integration-specific behaviour into the Service.
+
+Its responsibilities are limited to:
+
+- an immutable, reviewed Warzone guidance catalogue
+- source and evidence attribution
+- integration and experience eligibility based on the immutable Session
+  projection
+- deterministic conversion of catalogue entries into Guidance candidates
+- package ownership, scope, assumptions and Fair Play documentation
+
+The initial catalogue covers pre-session control preparation, loadout
+familiarity, fundamentals practice and conditional PC shader-preload readiness.
+It deliberately excludes named weapon recommendations, seasonal balance
+claims, map tactics, live observation and any behaviour requiring game-process
+interaction.
+
+The provider snapshots its catalogue dependency at construction and uses no
+runtime networking or system clock. For an identical validated request and
+catalogue snapshot, it returns structurally identical candidates in catalogue
+order. Category and type filtering is exact. It does not rank, personalise,
+schedule or present recommendations.
+
+Warzone Guidance is produced only when the Session projection conclusively
+identifies the Warzone experience. A Call of Duty family-level detection is
+not sufficient, and an unknown future integration version remains ineligible
+until reviewed. This is integration knowledge inside the provider, not a new
+rule in the shared orchestration Service.
+
+The reviewed sources, accepted and excluded claims, assumptions, Fair Play
+assessment and known limitations are recorded in
+`docs/product/CALL_OF_DUTY_GUIDANCE_PACKAGE.md`.
 
 ---
 

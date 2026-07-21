@@ -48,8 +48,13 @@ export {
 
 export {
   CALL_OF_DUTY_DETECTION_PROFILE,
-} from "./call-of-duty/call-of-duty-detection-profile";
-
-export {
+  CALL_OF_DUTY_CURATED_GUIDANCE_PROVIDER_ID,
+  CALL_OF_DUTY_CURATED_GUIDANCE_PROVIDER_MANIFEST,
+  CALL_OF_DUTY_CURATED_GUIDANCE_PROVIDER_VERSION,
   CallOfDutyIntegration,
-} from "./call-of-duty/call-of-duty-integration";
+  createCallOfDutyCuratedGuidanceProvider,
+} from "./call-of-duty";
+
+export type {
+  CallOfDutyCuratedGuidanceProviderDependencies,
+} from "./call-of-duty";

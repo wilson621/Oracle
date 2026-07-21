@@ -15,8 +15,10 @@
   "include": [
     "lib/companion/guidance/**/*.ts",
     "lib/oracle/services/companion-guidance/**/*.ts",
+    "lib/oracle/game-integrations/call-of-duty/guidance/**/*.ts",
     "scripts/verify-companion-guidance-contracts.ts",
-    "scripts/verify-companion-guidance-service.ts"
+    "scripts/verify-companion-guidance-service.ts",
+    "scripts/verify-call-of-duty-guidance-provider.ts"
   ],
   "exclude": [
     "node_modules",
