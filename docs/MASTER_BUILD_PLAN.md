@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 2.5
+**Version:** 2.6
 
 ---
 
@@ -80,18 +80,20 @@ This architecture was established during Sprint 8 and forms the permanent founda
 # Latest Approved Execution Status
 
 Sprint 15 is formally active. Phase 1 — Ownership Foundation is implemented,
-deployed, security-verified and approved through founder closure. Sprint 14
-remains the latest fully closed Sprint. The Sprint 15 activation baseline is
-`d9d78c94acbc628fbbc35f4a42ba970d02b2f9e9`.
+deployed, security-verified and closed. Phase 2 — Understanding Contracts is
+implemented, verified and approved through founder implementation review.
+Sprint 14 remains the latest fully closed Sprint. The Sprint 15 activation
+baseline is `d9d78c94acbc628fbbc35f4a42ba970d02b2f9e9` and the Phase 1 closure
+baseline is `c2dda130d60b351eb9f3cabf86cb012971c8ba96`.
 
 ADR-033 through ADR-036, the Sprint 15 plan and the reconciled planning
-documents remain authoritative. Phase 2 has not begun and requires separate
+documents remain authoritative. Phase 3 has not begun and requires separate
 authorisation.
 
 ## Sprint 15 — Operator Intelligence: Operator Understanding Foundation
 
 **Branch:** `sprint-9-overlay`
-**Status:** Active — Phase 1 complete; Phase 2 not authorised
+**Status:** Active — Phases 1 and 2 complete; Phase 3 not authorised
 **Plan:** `docs/sprints/SPRINT_15_PLAN.md`
 
 Sprint 15 establishes the trusted foundation for Oracle to build a
@@ -130,8 +132,28 @@ Phase 1 delivered:
   authentication and security regression testing
 - verified anonymous rejection and authenticated cross-Operator isolation
 
-No Understanding contracts, candidate intelligence lifecycle, control service
-or Context projection from later phases has been introduced.
+Phase 2 delivered:
+
+- immutable, versioned contracts for Identity, Preferences, Goals, State,
+  Evidence, Intelligence claims, revisions, data policies and Understanding
+  projection
+- structural Known, Declared, Observed, Inferred, Suspected and Unknown
+  classification
+- separate evidence quality, producer-native confidence and accepted claim
+  confidence
+- deterministic, versioned and evidence-backed explanations owned by accepted
+  claim revisions
+- explicit claim and declaration lifecycle validation, monotonic revisions,
+  expiry semantics and content-free deletion tombstones
+- interface-only Operator Declaration, Operator Intelligence and Operator
+  Understanding Service contracts
+- immutable, purpose-scoped `OperatorUnderstandingSnapshot`
+- focused contract, lifecycle and Service verification
+
+Phase 2 introduced no persistence, migration, Repository, engine adapter,
+runtime Service registration, Context projection, Application consumption,
+control operation or UI. Those responsibilities remain gated to their approved
+later phases.
 
 Explicit exclusions include broad UI, sensitive or psychological inference,
 automatic cross-game promotion, AI-generated Operator claims, Companion

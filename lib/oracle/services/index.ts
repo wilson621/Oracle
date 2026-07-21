@@ -4,3 +4,5 @@ export * from "./service-runtime";
 export * from "./register-core-services";
 export * from "./companion-guidance";
 export * from "./operator";
+export * from "./operator-intelligence";
+export * from "./operator-understanding";

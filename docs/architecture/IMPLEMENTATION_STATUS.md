@@ -10,9 +10,10 @@
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
 **Verified Branch:** `sprint-9-overlay`
-**Verified Repository Baseline:** `d9d78c94acbc628fbbc35f4a42ba970d02b2f9e9`
+**Verified Repository Baseline:** `c2dda130d60b351eb9f3cabf86cb012971c8ba96`
 **Sprint 14 Implementation Baseline:** `3868975`
-**Sprint 15 Phase 1:** Verified and approved for closure commit
+**Sprint 15 Phase 1:** Complete and committed
+**Sprint 15 Phase 2:** Verified and approved for closure commit
 
 ---
 
@@ -62,8 +63,42 @@ two dedicated Operators, two bindings and two Sessions. These permanent
 fixtures are reserved exclusively for migration, ownership, RLS,
 authentication and security regression testing.
 
-Phase 2 has not begun. No Operator Understanding contracts, candidate claims,
-control operations or Oracle Context projection are implemented by Phase 1.
+Phase 1 does not implement Operator Understanding contracts, candidate claims,
+control operations or Oracle Context projection.
+
+## Sprint 15 Phase 2 — Understanding Contracts
+
+Phase 2 is implemented, verified and approved through founder implementation
+review. It establishes contract authority only:
+
+- immutable, versioned and serialisable Operator Understanding contracts
+- structural Known, Declared, Observed, Inferred, Suspected and Unknown
+  epistemic classes
+- separate evidence quality, producer-native confidence and accepted claim
+  confidence
+- authoritative-source Evidence references with raw-prompt minimisation
+- support and contradiction claim relationships
+- explicit claim and declaration lifecycle transition validation
+- monotonic immutable revisions and content-free deletion tombstones
+- deterministic, versioned and evidence-backed explanations owned by accepted
+  inferred claim revisions
+- explicit Operator, Application, Game Integration and Session scopes with no
+  implicit cross-game or Operator-wide promotion
+- interface-only Operator Declaration, Operator Intelligence and Operator
+  Understanding Service ownership
+- deeply immutable, purpose-scoped `OperatorUnderstandingSnapshot` projection
+  with distinct Identity, Preferences, Goals, State, Memory, Intelligence and
+  Unknown sections
+
+The implementation is located under `lib/oracle/understanding/` and the
+interface-only Service boundaries under `lib/oracle/services/`. The focused
+`operator-understanding:verify` suite validates contracts, lifecycle and
+Service projection boundaries.
+
+Phase 2 does not add persistence, migrations, Repositories, RLS, engine
+adapters, runtime Service registration, Oracle Context projection,
+Application consumption, Operator-control operations or UI. Phase 3 has not
+begun and requires separate authorisation.
 
 ---
 
@@ -102,8 +137,9 @@ deliver the resulting Application state through a renderer-safe runtime
 boundary. That live delivery remains deferred under a separate future plan.
 
 Sprint 15 is active for the Operator Understanding Foundation. Its Phase 1
-ownership foundation is verified and founder-approved, while Sprint 14 remains
-the latest fully closed Sprint.
+ownership foundation is complete and its Phase 2 contract foundation is
+verified and founder-approved, while Sprint 14 remains the latest fully closed
+Sprint.
 
 No Sprint 14 engineering objective remains open. AI inference, ranking,
 personalisation, runtime networking, gameplay automation and any form of game

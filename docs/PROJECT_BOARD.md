@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 4.5
+**Version:** 4.6
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -19,7 +19,7 @@
 
 ## Sprint 15 — Operator Intelligence: Operator Understanding Foundation
 
-**Status:** Active — Phase 1 complete; Phase 2 not authorised
+**Status:** Active — Phases 1 and 2 complete; Phase 3 not authorised
 **Activation baseline:** `d9d78c94acbc628fbbc35f4a42ba970d02b2f9e9`
 **Plan:** `docs/sprints/SPRINT_15_PLAN.md`
 
@@ -30,7 +30,8 @@ Memory, Evidence and evidence-derived Operator Intelligence.
 
 The ADRs and planning reconciliation remain authoritative. Phase 1 has passed
 implementation, deployment, authenticated isolation and founder closure review.
-Phase 2 has not begun.
+Phase 2 has passed contract implementation, full verification and founder
+implementation review. Phase 3 has not begun.
 
 # Sprint 15 Governance Gate
 
@@ -52,13 +53,13 @@ Phase 2 has not begun.
 
 - [x] deployed Supabase schema and RLS audit
 - [x] authenticated Account-to-Operator ownership
-- [ ] separate Preference and Goal domains
-- [ ] Evidence, Claim, Revision and Data Policy contracts
-- [ ] Known, Declared, Observed, Inferred, Suspected and Unknown classification
-- [ ] confidence, provenance, scope and temporal lifecycle
+- [x] separate Preference and Goal domain contracts
+- [x] Evidence, Claim, Revision and Data Policy contracts
+- [x] Known, Declared, Observed, Inferred, Suspected and Unknown classification
+- [x] confidence, provenance, scope and temporal lifecycle contracts
 - [ ] Operator inspect, correction, dispute, export and deletion operations
 - [ ] one game-specific candidate family from the existing Memory Engine
-- [ ] immutable `OperatorUnderstandingSnapshot` read projection
+- [x] immutable `OperatorUnderstandingSnapshot` read projection contract
 - [ ] safe, gated Oracle Context integration
 - [ ] architecture, migration, privacy and regression verification
 
@@ -82,6 +83,26 @@ The retained principals, Operators, bindings and Sessions are reserved
 exclusively for migration, ownership, RLS, authentication and security
 regression testing. They are not product accounts, user data or general-purpose
 development fixtures.
+
+# Sprint 15 Phase 2 Closure
+
+- [x] immutable versioned Operator Understanding contracts implemented
+- [x] certainty, evidence quality and claim confidence separated structurally
+- [x] deterministic durable claim explanations implemented and verified
+- [x] Evidence references preserve source ownership and exclude raw prompts
+- [x] claim and declaration lifecycle matrices implemented and verified
+- [x] monotonic revisions and content-free deletion tombstones verified
+- [x] sensitive and AI-generated inference rejected
+- [x] implicit cross-game and Operator-wide evidence promotion rejected
+- [x] interface-only Declaration, Intelligence and Understanding Services added
+- [x] purpose-scoped immutable `OperatorUnderstandingSnapshot` verified
+- [x] focused contract, lifecycle and Service verification added
+- [x] architecture, Guidance, Companion, desktop, build and lint regressions pass
+- [x] founder Phase 2 implementation review approved
+
+Phase 2 introduces no database schema, migration, Repository, runtime Service,
+engine adapter, Context integration, Application consumption or UI. Phase 3
+requires separate founder authorisation.
 
 # Sprint 15 Explicit Deferrals
 

@@ -622,8 +622,56 @@ Must Never
 The Phase 1 foundation is deployed and verified with two permanent regression
 principals and Operators. Those fixtures are reserved exclusively for
 migration, ownership, RLS, authentication and security regression testing.
-Later Operator Understanding contracts and lifecycle capabilities are not part
-of this completed foundation.
+Later Operator Understanding persistence, candidate production, control and
+Context capabilities are not part of this completed foundation.
+
+---
+
+# Operator Understanding Contract Foundation
+
+Location
+
+```text
+lib/oracle/understanding/
+lib/oracle/services/operator/operator-declaration-service-types.ts
+lib/oracle/services/operator-intelligence/
+lib/oracle/services/operator-understanding/
+scripts/verify-operator-understanding-*.ts
+```
+
+Owns
+
+- immutable, versioned Operator Understanding contracts
+- structural certainty, provenance, scope, temporal validity and eligibility
+- Evidence-reference and claim-revision language
+- deterministic durable explanation requirements
+- claim and declaration lifecycle validation
+- purpose-scoped `OperatorUnderstandingSnapshot`
+- interface-only Service ownership boundaries
+
+Produces
+
+- validated Known, Declared, Observed, Inferred, Suspected and Unknown items
+- minimal Evidence references with separate observation quality
+- confidence-aware claims with support and contradiction relationships
+- monotonic revisions and content-free deletion tombstones
+- deeply immutable and serialisable Understanding projections
+
+Must Never
+
+- own raw Session or Game Integration evidence
+- treat certainty as a confidence threshold
+- fabricate confidence for Known or Declared information
+- accept AI-generated or sensitive inferred claims
+- promote game-scoped evidence implicitly across games or to Operator scope
+- become a Repository, inference engine, generic profile or source of truth
+- expose arbitrary current-Operator selection to Applications
+- activate runtime consumption before later approved control gates
+
+Phase 2 is a contract-only foundation. Its Services have no runtime
+implementation or production registration, and no persistence, migration,
+candidate adapter, Context projection, Application integration or UI is
+introduced.
 
 ---
 
@@ -659,8 +707,8 @@ Completed
 
 Current Development Phase
 
-Sprint 15 — Operator Understanding Foundation active; Phase 1 complete and
-Phase 2 not authorised
+Sprint 15 — Operator Understanding Foundation active; Phases 1 and 2 complete
+and Phase 3 not authorised
 
 Current Runtime
 
@@ -691,6 +739,10 @@ Current Runtime
 ✓ Sprint 15 authenticated Account-to-Operator ownership foundation
 ✓ Operator Service and Repository ownership boundary
 ✓ deployed ownership RLS and authenticated multi-principal isolation
+✓ immutable and versioned Operator Understanding contracts
+✓ explicit claim and declaration lifecycle validation
+✓ deterministic evidence-backed claim explanations
+✓ purpose-scoped immutable Operator Understanding Snapshot
 
 Accepted integration debt
 

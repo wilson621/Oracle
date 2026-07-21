@@ -1,0 +1,30 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "lib": ["ES2022"],
+    "types": ["node"],
+    "rootDir": ".",
+    "outDir": "./.tmp-operator-understanding-verification",
+    "noEmit": false,
+    "isolatedModules": false,
+    "incremental": false
+  },
+  "include": [
+    "lib/oracle/understanding/**/*.ts",
+    "lib/oracle/services/operator/operator-declaration-service-types.ts",
+    "lib/oracle/services/operator-intelligence/**/*.ts",
+    "lib/oracle/services/operator-understanding/**/*.ts",
+    "scripts/operator-understanding-verification-fixtures.ts",
+    "scripts/verify-operator-understanding-contracts.ts",
+    "scripts/verify-operator-understanding-lifecycle.ts",
+    "scripts/verify-operator-understanding-services.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist-electron"
+  ]
+}

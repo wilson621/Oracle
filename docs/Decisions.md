@@ -1157,6 +1157,13 @@ repository ownership.
 
 Accepted. Sprint 15 implementation has not begun.
 
+### Implementation Note — 21 July 2026
+
+Sprint 15 Phase 1 implemented, deployed and verified the authenticated
+Account-to-Operator ownership boundary described by this decision. Phase 2
+continues to depend on Operator Service current-Operator resolution and does
+not introduce an alternate identity path.
+
 ---
 
 # ADR-034
@@ -1278,6 +1285,14 @@ durable understanding provides the safer basis for future personalisation.
 
 Accepted. Sprint 15 implementation has not begun.
 
+### Implementation Note — 21 July 2026
+
+Sprint 15 Phase 2 implemented the immutable, versioned Operator Understanding
+contracts, structural epistemic classes, separate confidence semantics,
+validated claim and declaration lifecycles, deterministic claim-owned
+explanations and purpose-scoped `OperatorUnderstandingSnapshot`. The Snapshot
+remains a read projection and no runtime consumption is activated.
+
 ---
 
 # ADR-035
@@ -1369,6 +1384,14 @@ Memory.
 
 Accepted. Sprint 15 implementation has not begun.
 
+### Implementation Note — 21 July 2026
+
+Sprint 15 Phase 2 implemented the contract boundaries for Evidence references,
+claims, revisions, data-policy references, expiry, deletion tombstones and
+Service ownership. It does not implement persistence, consent processing,
+control operations, export, retention execution or deletion orchestration;
+those remain gated to later approved phases.
+
 ---
 
 # ADR-036
@@ -1440,6 +1463,14 @@ and evidential basis is established responsibly.
 ## Status
 
 Accepted. Cross-game promotion remains deferred.
+
+### Implementation Note — 21 July 2026
+
+Sprint 15 Phase 2 implemented explicit Operator, Application, Game Integration
+and Session scopes. Contract validation rejects implicit widening from game-
+or Session-scoped evidence to Operator-wide understanding and rejects evidence
+from a different Application, Game Integration or Session. Cross-game
+portability policy remains unimplemented and deferred.
 
 ---
 

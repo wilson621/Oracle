@@ -1330,6 +1330,68 @@ This foundation does not implement Understanding contracts, intelligence
 claims, Memory lifecycle changes, Operator-control services or Oracle Context
 projection. Those remain later Sprint 15 phases requiring separate approval.
 
+# Sprint 15 Phase 2 Operator Understanding Contracts
+
+Sprint 15 Phase 2 establishes Oracle's durable, game-agnostic contract language
+for understanding an Operator:
+
+```text
+Authoritative source truth
+        ↓
+Minimal Evidence reference
+        ↓
+Suspected candidate claim
+        ↓
+Policy, scope and confidence assessment
+        ↓
+Inferred accepted claim revision
+        ↓
+Immutable purpose-scoped Understanding Snapshot
+```
+
+Known, Declared, Observed, Inferred, Suspected and Unknown are structural
+epistemic classes. They describe how information is known and do not replace
+confidence. Evidence quality, producer-native confidence and accepted claim
+confidence remain separate values with separate ownership.
+
+Raw evidence remains with its authoritative owner. Operator Intelligence owns
+only minimal Evidence references, support or contradiction links, claims and
+revisions. Derived Graph, Timeline, Brain and Explainability projections do not
+become additional evidence merely because they represent the same source.
+
+Every accepted inferred claim revision owns a concise, versioned,
+evidence-backed explanation produced by an identified deterministic template.
+The explanation is immutable with its revision and is propagated unchanged;
+presentation and Explainability layers do not reconstruct or rewrite it.
+
+Claim and declaration lifecycles validate candidate, active, disputed,
+corrected, superseded, withdrawn, expired and deleted outcomes as applicable.
+Revisions are monotonic and explicitly identify the prior revision. Deletion
+uses content-free tombstones. Validity and reassessment are distinct from later
+retention-policy execution.
+
+Every Evidence reference and claim has Operator, Application, Game Integration
+or Session scope. Game- and Session-scoped evidence cannot become
+Operator-wide understanding without a separately approved portability policy.
+Sensitive and AI-generated inference is not representable through the approved
+contracts.
+
+`OperatorUnderstandingSnapshot` is a deeply immutable, versioned and
+purpose-scoped read projection. Identity, Preferences, Goals, State, Memory,
+Intelligence and Unknown information remain separate sections. The Snapshot is
+not persistence, a generic profile or a source of truth.
+
+Operator Declaration Service, Operator Intelligence Service and Operator
+Understanding Service are interface-only ownership boundaries in Phase 2.
+`OperatorUnderstandingService` exposes only authenticated current-Operator
+projection semantics; it does not accept an arbitrary Application-supplied
+Operator identifier. No Phase 2 Service is registered into production runtime.
+
+Phase 2 does not implement Repositories, migrations, engine adapters, candidate
+generation, Context projection, personalisation consumption, control
+operations or UI. Existing intelligence engines and verified contracts remain
+unchanged.
+
 # Verified Integration Limits
 
 - `bootstrapOraclePlatform()` is implemented but is not invoked by the current

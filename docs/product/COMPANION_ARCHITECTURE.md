@@ -9,7 +9,7 @@
 **Supersedes:** Earlier Companion Architecture versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 1.9
+**Version:** 1.10
 
 ---
 
@@ -1610,8 +1610,11 @@ The Companion Intelligence Foundation is complete. The production
 state because authoritative live runtime delivery has not been connected. The
 desktop composition root does not yet project authoritative Session Context
 into a Guidance Request, invoke the Provider Service or deliver resulting
-Application state through a renderer-safe boundary. This is deferred to Sprint
-15; no Sprint 15 implementation has begun.
+Application state through a renderer-safe boundary. That delivery remains
+deferred to separately approved future work. Sprint 15 placed the Operator
+Understanding Foundation ahead of live Guidance delivery; its completed
+ownership and contract phases do not alter Companion architecture, personalise
+Guidance or activate Companion consumption.
 
 Verified remaining debt includes manual curated-source freshness review,
 structurally verified but not production-fed ready and partial-success states,

@@ -683,7 +683,9 @@ The Oracle Platform grows through extensions rather than increasing complexity i
 # Current Delivery — Sprint 15
 
 Sprint 15 is formally active. Phase 1 — Ownership Foundation is complete and
-has passed founder closure review. Phase 2 has not been authorised.
+has passed founder closure review. Phase 2 — Understanding Contracts is
+implemented, verified and approved through founder implementation review.
+Phase 3 has not been authorised.
 
 ## Operator Intelligence: Operator Understanding Foundation
 
@@ -723,6 +725,14 @@ protected Operator data. Existing Operator identifiers and all historical
 Sessions were preserved without speculative assignment. Dedicated permanent
 fixtures are retained exclusively for migration, ownership, RLS,
 authentication and security regression testing.
+
+The completed Phase 2 establishes immutable, versioned contracts for explicit
+and inferred understanding, the six epistemic classes, evidence references,
+separate evidence quality and claim confidence, deterministic explanations,
+revision lifecycles, explicit scope and purpose-scoped Understanding
+Snapshots. Its Services are interfaces only. No persistence, migration,
+candidate production, Context integration or Application consumption has been
+activated.
 
 ## Latest Closed Sprint — Sprint 14
 

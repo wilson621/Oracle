@@ -3,7 +3,7 @@
 **Authority:** Approved Sprint execution plan beneath the Master Build Plan and accepted ADRs
 **Scope:** Operator Understanding Foundation planning, boundaries, phases and acceptance criteria
 **Owner:** Oracle Platform Engineering
-**Status:** Active — Phase 1 complete; Phase 2 not authorised
+**Status:** Active — Phases 1 and 2 complete; Phase 3 not authorised
 **Classification:** Living until Sprint closure
 **Expected Stability:** Updated only through approved Sprint 15 scope review
 **Supersedes:** The earlier recommendation that Sprint 15 deliver authoritative live Companion Guidance
@@ -17,8 +17,9 @@
 
 # Status
 
-Sprint 15 is formally active. Phase 1 — Ownership Foundation has passed founder
-closure review. Phase 2 has not begun and requires separate authorisation.
+Sprint 15 is formally active. Phase 1 — Ownership Foundation and Phase 2 —
+Understanding Contracts have passed founder implementation review. Phase 3 has
+not begun and requires separate authorisation.
 
 Sprint 14 remains the latest closed and verified implementation Sprint.
 
@@ -47,6 +48,38 @@ The deployed migration is `database/008_operator_ownership.sql`. It was
 rollback-validated before founder approval, permanently deployed only after an
 independent catalog inspection and then exercised through authenticated
 multi-principal isolation verification.
+
+# Phase 2 Closure Outcome
+
+Phase 2 established Oracle's immutable, versioned and game-agnostic language
+for Operator Understanding without introducing persistence or production
+consumption:
+
+- Known, Declared, Observed, Inferred, Suspected and Unknown are structurally
+  distinct epistemic classes
+- evidence quality, producer-native confidence and accepted claim confidence
+  remain separate
+- Evidence references retain authoritative source ownership and exclude raw
+  prompt content
+- inferred claims require explicit provenance, policy, scope, temporal
+  validity, evidence relationships, confidence rationale and a concise
+  deterministic explanation
+- claim and declaration revisions follow validated lifecycles with monotonic
+  history and content-free deletion tombstones
+- game- and Session-scoped evidence cannot be promoted implicitly to
+  Operator-wide understanding
+- `OperatorUnderstandingSnapshot` is a deeply immutable, purpose-scoped read
+  projection with distinct Identity, Preferences, Goals, State, Memory,
+  Intelligence and Unknown sections
+- Operator Declaration, Operator Intelligence and Operator Understanding
+  Service contracts establish ownership without runtime implementation,
+  Repository access or production registration
+
+The focused verification harness covers serialisation, immutability,
+epistemic separation, confidence ownership, evidence integrity, lifecycle,
+revision history, expiry, deletion, prohibited inference, scope and Service
+boundaries. Phase 2 adds no migration, Repository, engine adapter, Context
+projection, Application consumption or UI.
 
 # Mission
 
@@ -255,11 +288,14 @@ data.
 
 ## Phase 2 — Understanding Contracts
 
-- [ ] define immutable versioned domain contracts
-- [ ] define lifecycle transitions
-- [ ] define certainty, provenance, confidence and scope semantics
-- [ ] define Operator and Operator Intelligence Service contracts
-- [ ] define `OperatorUnderstandingSnapshot`
+- [x] define immutable versioned domain contracts
+- [x] define lifecycle transitions
+- [x] define certainty, provenance, confidence and scope semantics
+- [x] define Operator and Operator Intelligence Service contracts
+- [x] define `OperatorUnderstandingSnapshot`
+- [x] verify deterministic durable explanations and evidence linkage
+- [x] verify serialisation, deep immutability, expiry and revision safety
+- [x] complete founder Phase 2 implementation review
 
 ## Phase 3 — Persistence and Migration
 
