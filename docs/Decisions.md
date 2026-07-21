@@ -2,8 +2,8 @@
 
 # Architectural Decision Records (ADR)
 
-Version 4.3
-Last Updated: Sprint 14 Commit 1 — 21 July 2026
+Version 4.4
+Last Updated: Sprint 14 closure — 21 July 2026
 
 ---
 
@@ -931,9 +931,9 @@ all contextual guidance delivered by the external Companion.
 
 The Platform Companion foundation owns the immutable, serializable and
 versioned Guidance, Guidance Request, Session projection, package manifest and
-provider-boundary contracts. Oracle Services will own future guidance
-generation, selection, ranking and orchestration. Oracle Applications own
-presentation and Operator interaction. Game Integrations may contribute
+provider-boundary contracts. Oracle Services own provider orchestration and
+will own future guidance generation, selection and ranking. Oracle Applications
+own presentation and Operator interaction. Game Integrations may contribute
 game-specific guidance packages and knowledge through the shared contracts;
 they do not define an alternative guidance model.
 
@@ -957,8 +957,8 @@ it does not replace or weaken them.
 ## Rationale
 
 Sprint 13 established safe deterministic game detection, authoritative Session
-Context and renderer-safe presentation. Sprint 14 requires a reusable path from
-that context to meaningful assistance without coupling the product to one
+Context and renderer-safe presentation. Sprint 14 established a reusable path
+from that context to meaningful assistance without coupling the product to one
 game, one presentation, one content source or one intelligence provider.
 
 One shared model allows curated knowledge, deterministic analysis and future
@@ -1061,7 +1061,9 @@ implementation convenience.
 
 ## Status
 
-✅ Accepted and implemented as the Sprint 14 Commit 1 contract foundation
+✅ Accepted and implemented across the five Sprint 14 Companion Intelligence
+Foundation commits. Authoritative live runtime delivery remains deferred to
+Sprint 15 and does not change this decision.
 
 ---
 

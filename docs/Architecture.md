@@ -2,9 +2,9 @@
 
 Technical Architecture
 
-Version 5.1
+Version 5.2
 
-Last Updated: Sprint 13 closure — 21 July 2026
+Last Updated: Sprint 14 closure — 21 July 2026
 
 ---
 
@@ -1223,6 +1223,54 @@ Call of Duty-specific executable and title evidence remains exclusively inside
 the Call of Duty Game Integration. Detection contracts, lifecycle coordination,
 Session ownership and presentation are shared, game-agnostic capabilities.
 
+# Sprint 14 Companion Intelligence Foundation
+
+Sprint 14 establishes the reusable external Companion Guidance architecture:
+
+```text
+Immutable authoritative Session projection
+        ↓
+Platform Guidance contracts and validation
+        ↓
+Services-owned deterministic provider orchestration
+        ↓
+Applications-owned immutable presentation state
+        ↓
+React `/companion` presentation
+
+Game Integrations contribute reviewed knowledge packages through the shared
+contracts and provider boundary.
+```
+
+Platform / Companion Foundation owns contract identity, versioning,
+compatibility, validation and deep immutability. Services discover providers
+only through explicit dependency injection, evaluate eligibility, execute in
+stable injection order, validate every output and isolate failures as structured
+diagnostics. Services do not rank, personalise or make coaching decisions.
+
+Applications project validated Service results into stable Guidance Card view
+models and Operator-safe diagnostics. React renders only those Application
+models, preserves their order and explicitly represents loading, ready, empty,
+partial-success and unavailable states. The production route currently uses an
+honest Applications-owned unavailable state and invents no data.
+
+The Call of Duty integration contributes the first curated, source-attributed
+package. Its game knowledge remains isolated in Game Integrations; it introduces
+no alternate contract, orchestration or presentation path. Future curated,
+AI-generated, performance, clip, Session-coaching and long-term Operator
+development guidance must extend the same Guidance contract.
+
+The Foundation consumes only immutable projections of authoritative Session
+Context and has no Session mutation or lifecycle authority. It remains entirely
+external: no injection, game-memory access or modification, hooks, automation,
+input simulation or anti-cheat interaction is permitted. The Constitution is
+the permanent authority; ADR-032 records why Guidance uses this architecture.
+
+Authoritative live runtime delivery is deliberately deferred to Sprint 15. The
+desktop composition root does not yet create Guidance Requests from
+authoritative Session Context, invoke the Provider Service or deliver resulting
+Application state through a renderer-safe boundary.
+
 # Verified Integration Limits
 
 - `bootstrapOraclePlatform()` is implemented but is not invoked by the current
@@ -1230,10 +1278,13 @@ Session ownership and presentation are shared, game-agnostic capabilities.
 - Service and Application registries are implemented metadata foundations;
   web pages do not consistently consume them as runtime boundaries.
 - several web pages call repositories, pipelines or engines directly.
-- the registered Companion route `/companion` has no App Router page; Electron
-  currently loads `/oracle`.
+- `/companion` exists and renders immutable Application state, but the Electron
+  composition root still loads `/oracle` and does not yet deliver authoritative
+  live Guidance state to the Companion route.
 - `lib/companion` and `desktop/companion` are not yet joined by an explicit
   integration contract.
+- curated Guidance source freshness remains manually governed, and production
+  runtime data has not exercised ready and partial-success presentation paths.
 
 These are audit findings. They do not invalidate verified systems or authorise
 architectural redesign.

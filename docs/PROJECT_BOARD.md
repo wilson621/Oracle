@@ -1,20 +1,54 @@
 # ORACLE PROJECT BOARD
 
-**Version:** 4.1
+**Version:** 4.2
 **Last updated:** 21 July 2026
 **Branch:** `sprint-9-overlay`
-**Implementation baseline before Sprint 13 closure:** `fa36af4`
+**Sprint 14 implementation baseline before documentation reconciliation:** `3868975`
 
 ---
 
 # Current Sprint
 
-## Sprint 13 — End-to-End Game Integration Vertical Slice
+## Sprint 14 — Companion Intelligence Foundation
 
-**Status:** Complete — implementation and closure verification passed
+**Status:** Complete — closure approved and documentation reconciled
 
-Sprint 13 proved Oracle's end-to-end Game Integration architecture using Call
-of Duty as the first production integration, not as a special-case feature.
+Sprint 14 established the permanent, game-agnostic foundation for Oracle's
+external Companion to become the Operator's intelligent second screen.
+
+Authoritative live runtime delivery remains deferred to Sprint 15. Sprint 15
+has not started and requires separate planning and approval.
+
+---
+
+# Sprint 14 Commit Sequence
+
+- [x] Commit 1 — immutable Guidance Framework contracts (`1ed10bb`)
+- [x] Commit 2 — deterministic Guidance Provider Service (`c93063b`)
+- [x] Commit 3 — curated Call of Duty Guidance package (`918a67c`)
+- [x] Commit 4 — Companion Guidance Application boundary (`b82bb49`)
+- [x] Commit 5 — Companion Application presentation (`3868975`)
+
+# Completed Sprint 14 Milestones
+
+- [x] one immutable, versioned Guidance model for curated, deterministic and
+  future AI-generated guidance
+- [x] immutable projection boundary from authoritative Session Context
+- [x] runtime validation rejects malformed, executable and non-serializable data
+- [x] unknown open identifiers remain safely consumable
+- [x] deterministic provider orchestration with structured failure isolation
+- [x] canonical Game Integration-owned curated knowledge package
+- [x] immutable Application state and Guidance Card view models
+- [x] Operator-safe diagnostics that isolate provider implementation details
+- [x] `/companion` renders loading, ready, empty, partial-success and unavailable
+- [x] honest production unavailable state until authoritative delivery exists
+- [x] External Companion and Platform → Services → Applications → Game
+  Integrations boundaries preserved
+- [x] focused, architecture, desktop, production build, lint and visual verification
+
+---
+
+# Sprint 13 Commit Sequence
 
 ---
 
@@ -135,8 +169,16 @@ tagging remains part of a separately authorised release workflow.
   authoritative Session
 - renderer load failure closes the desktop controller and ends the started
   Session
-- the two lifecycle layers are not yet connected by an explicit contract
-- Electron currently loads `/oracle`; registered `/companion` route is absent
+- Platform owns immutable Guidance contracts, validation, compatibility and
+  versioning
+- Services own deterministic provider orchestration and failure isolation
+- Applications own immutable presentation state, Guidance Cards and
+  Operator-safe diagnostics
+- `/companion` renders only Applications-owned models and maintains Service order
+- the production route honestly reports unavailable because authoritative live
+  runtime delivery is not yet connected
+- the Platform-level and desktop-level lifecycle foundations are not yet
+  connected by an explicit contract
 
 ## Game Integrations
 
@@ -146,6 +188,8 @@ tagging remains part of a separately authorised release workflow.
 - deterministic detection drives the desktop Companion lifecycle
 - Call of Duty-specific executable and title knowledge remains isolated inside
   its Game Integration
+- the first reviewed, source-attributed curated Guidance package is isolated
+  inside the Call of Duty Game Integration and uses no runtime networking
 
 ---
 
@@ -169,6 +213,11 @@ Open findings:
 2. Platform bootstrap is not a production entry-point dependency
 3. registered Services and Applications are metadata foundations, not the
    exclusive runtime boundary
+4. the desktop composition root does not yet project authoritative Session
+   Context into a Guidance Request, execute the Provider Service and deliver
+   Application state to `/companion`
+5. curated-source freshness is manually governed; production runtime has not
+   exercised ready and partial-success presentation paths
 
 These findings are measured legacy exceptions retained from Sprint 12.1. They
 remain accepted technical debt and do not authorise unrelated redesign.
@@ -180,10 +229,12 @@ remain accepted technical debt and do not authorise unrelated redesign.
 - [x] Constitution updated with the permanent External Companion rule
 - [x] Codex reviewed; normative standards remain authoritative
 - [x] Oracle Principles reviewed; no change required
-- [x] Architecture aligned to verified implementation
-- [x] Companion Architecture aligned to verified implementation
-- [x] Roadmap distinguishes projection from delivered work
-- [x] Master Build Plan reflects Sprint 12.1
+- [x] Architecture aligned through the Sprint 14 Companion Intelligence Foundation
+- [x] Companion Architecture aligned through Sprint 14 presentation
+- [x] Architecture Index records all four Guidance ownership boundaries
+- [x] Roadmap distinguishes the completed foundation from deferred live delivery
+- [x] Master Build Plan reflects Sprint 14 closure
+- [x] canonical implementation status reflects Sprint 14 closure
 - [x] ADRs record desktop snapshot/event and Timeline/Telemetry ownership
 - [x] ADR records the Desktop Platform API version 1 compatibility commitment
 - [x] Sprint 12.1 implementation audit added
@@ -191,13 +242,20 @@ remain accepted technical debt and do not authorise unrelated redesign.
 - [x] Sprint 13 implementation and closure record added
 - [x] Constitution defines the permanent External Companion rule
 - [x] ADR-031 records its rationale, alternatives and implications
+- [x] ADR-032 records Guidance ownership, compatibility and long-term evolution
+- [x] Sprint 14 closure record added with commits, verification, debt and lessons
 
 ---
 
-# Closure Rule
+# Sprint 14 Closure
 
-Sprint 13 closure verification passed on 21 July 2026. Focused detection,
-Session Context, lifecycle and presentation/preload checks passed, as did the
-architecture audit, desktop TypeScript compilation, production build, emitted
-Electron entry and native-helper path validation, lint and repository checks.
-The five existing lint warnings remain documented, unrelated technical debt.
+Sprint 14 closure was approved on 21 July 2026. The Guidance contract, Service,
+Game Integration package, Application boundary and React presentation checks
+passed, as did the architecture audit, desktop TypeScript compilation,
+production build, lint and desktop/narrow-screen visual review. Lint completed
+with zero errors and five pre-existing warnings.
+
+The Companion Intelligence Foundation is complete. Authoritative live runtime
+delivery is the recommended Sprint 15 objective but is not implemented or
+approved by this closure. See `docs/sprints/SPRINT_14_CLOSURE.md` for the formal
+record.

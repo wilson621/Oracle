@@ -1,8 +1,8 @@
 # ORACLE COMPANION ARCHITECTURE
 
-Version 1.7
+Version 1.8
 
-Status: Sprint 14 Companion Application presentation
+Status: Sprint 14 Companion Intelligence Foundation complete
 
 ---
 
@@ -1226,9 +1226,9 @@ Game Integrations
 ```
 
 Game Integrations consume the framework. They do not define it. Applications
-present validated Guidance. They do not generate or rank it. Services will
-coordinate providers in later Sprint 14 work. No generation, selection or
-presentation runtime is introduced by the contract foundation.
+present validated Guidance. They do not generate or rank it. Services
+coordinate providers through the deterministic Provider Service. The contract
+foundation itself introduces no generation, selection or presentation runtime.
 
 ## Guidance Contract
 
@@ -1535,12 +1535,21 @@ outside this commit.
 
 # Current Verified Implementation
 
-As of Sprint 13, Oracle contains two distinct Companion foundations:
+As of Sprint 14 closure, Oracle contains two established Companion lifecycle
+foundations and the completed Companion Intelligence Foundation:
 
 - `lib/companion` defines the Platform-level Companion Runtime, presentation
   state, extensions, capabilities and connector contracts.
 - `desktop/companion` defines the active desktop Session lifecycle and immutable
   Context snapshots used by the Electron host.
+- `lib/companion/guidance` defines immutable Guidance contracts, validation,
+  compatibility, versioning and the provider boundary.
+- `lib/oracle/services/companion-guidance` deterministically orchestrates
+  explicitly injected providers and isolates failures.
+- `lib/oracle/applications/companion` projects Service results into immutable
+  presentation state and Operator-safe diagnostics.
+- `app/companion` and `components/companion/guidance` render only Application
+  models across loading, ready, empty, partial-success and unavailable states.
 
 The Electron host additionally implements window discovery, deterministic
 target selection, attachment, native observation, Desktop Host Snapshots,
@@ -1582,6 +1591,27 @@ Call of Duty is the first production implementation used to prove this shared
 vertical slice. Its executable and title knowledge stays inside its Game
 Integration. Detection outcomes, coordination, Session ownership, lifecycle
 rules and presentation contracts remain fully game-agnostic.
+
+The Call of Duty integration also owns the first curated Guidance package. The
+package is deterministic, immutable, source-attributed and free from runtime
+networking or game-process interaction. It contributes knowledge through the
+shared Platform contracts and Services boundary and defines no integration-
+specific Companion architecture.
+
+The Companion Intelligence Foundation is complete. The production
+`/companion` route deliberately renders the Applications-owned unavailable
+state because authoritative live runtime delivery has not been connected. The
+desktop composition root does not yet project authoritative Session Context
+into a Guidance Request, invoke the Provider Service or deliver resulting
+Application state through a renderer-safe boundary. This is deferred to Sprint
+15; no Sprint 15 implementation has begun.
+
+Verified remaining debt includes manual curated-source freshness review,
+structurally verified but not production-fed ready and partial-success states,
+five pre-existing lint warnings, unwired Platform bootstrap, measured legacy
+web Application-boundary exceptions, and the lack of an explicit integration
+contract between the Platform-level and desktop-level Companion lifecycle
+foundations.
 
 ---
 

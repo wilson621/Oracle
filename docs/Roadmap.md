@@ -2,8 +2,8 @@
 
 ## Strategic Product Roadmap
 
-**Version:** 4.2
-**Last Updated:** Sprint 13 closure — 21 July 2026
+**Version:** 4.3
+**Last Updated:** Sprint 14 closure — 21 July 2026
 
 ---
 
@@ -647,7 +647,8 @@ Oracle becomes the Operator's gaming platform rather than a single-game assistan
 
 ## Live Companion Intelligence
 
-**Status:** ACTIVE FOUNDATION through Sprint 12.1
+**Status:** COMPANION INTELLIGENCE FOUNDATION COMPLETE; AUTHORITATIVE LIVE
+DELIVERY DEFERRED
 
 ---
 
@@ -719,13 +720,13 @@ Oracle becomes an extensible ecosystem where new capabilities can be added witho
 
 The Oracle Platform grows through extensions rather than increasing complexity inside the Platform itself.
 
-# Current Delivery — Sprint 13
+# Current Delivery — Sprint 14
 
 The earlier Sprint 9–12 sequence in this roadmap was a strategic projection.
-Repository delivery continued on `sprint-9-overlay`. Sprint 13 proved the
-end-to-end Game Integration architecture using Call of Duty as the first
-production implementation. It is not a Call of Duty feature sprint and is not
-the projected Marketplace milestone.
+Repository delivery continued on `sprint-9-overlay`. Sprint 14 established the
+Companion Intelligence Foundation on top of Sprint 13's Game Integration
+vertical slice. It is a reusable platform milestone, not a Call of Duty feature
+sprint and not the projected Marketplace milestone.
 
 Completed in the current delivery line:
 
@@ -745,16 +746,38 @@ Completed in the current delivery line:
 - game-agnostic lifecycle coordination for attach, detach, reattach and process
   replacement
 - renderer-safe active-game presentation
+- immutable, versioned and confidence-aware Guidance contracts
+- deterministic provider discovery, eligibility, execution and validation
+- structured provider failure isolation and immutable Service results
+- first reviewed, source-attributed Call of Duty Guidance package
+- immutable Companion Guidance Application state and Guidance Card view models
+- Operator-safe diagnostic mapping
+- `/companion` presentation of loading, ready, empty, partial-success and
+  unavailable states using Application-owned models only
 
-Sprint 13 is complete. Final closure verified:
+Sprint 14 is complete. Final closure verified:
 
-- focused detection, Session Context, lifecycle and presentation/preload
-  behaviour
+- focused Guidance contract, Service, Game Integration package, Application
+  boundary and presentation behaviour
 - desktop TypeScript and Next.js production builds
-- emitted Electron entry and native-helper paths
 - dependency-boundary enforcement with zero runtime dependency cycles
 - lint with zero errors and five unrelated existing warnings
-- documentation closure, constitutional Fair Play rule and ADR-031
+- desktop and narrow-screen visual review without console errors
+- documentation closure, constitutional Fair Play rule, ADR-031 and ADR-032
+
+The Companion Intelligence Foundation is complete, but authoritative live
+runtime delivery is not. The production `/companion` route intentionally shows
+an unavailable state until a future composition boundary can project
+authoritative Session Context, execute the Provider Service and deliver
+immutable Application state safely. That work is recommended for Sprint 15 but
+has not been implemented or approved.
+
+Deferred capabilities also include AI inference, ranking and personalisation,
+additional game packages, automated source-freshness governance, end-to-end
+live delivery tests, and Operator category, spoiler and request controls. Each
+must extend the completed framework without changing the External Companion
+Principle or the Platform → Services → Applications → Game Integrations
+ownership model.
 
 Marketplace remains a future strategic objective; it must not be inferred from
 the Sprint number alone.

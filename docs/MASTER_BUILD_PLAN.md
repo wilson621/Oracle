@@ -1,9 +1,9 @@
 # ORACLE MASTER BUILD PLAN
 
-**Version:** 2.1
+**Version:** 2.2
 **Status:** Active  
 **Owner:** Oracle Platform Engineering  
-**Last Updated:** Sprint 12.1 Commit 6 — 20 July 2026
+**Last Updated:** Sprint 14 closure — 21 July 2026
 
 ---
 
@@ -89,41 +89,72 @@ This architecture was established during Sprint 8 and forms the permanent founda
 
 # Current Execution Status
 
-## Sprint 12.1 — Desktop Platform Foundation and Hardening
+## Sprint 14 — Companion Intelligence Foundation
 
 **Branch:** `sprint-9-overlay`
-**Status:** Complete; final hardening and closure verification passed
+**Status:** Complete; closure approved and documentation reconciled
+
+Sprint 14 transformed the Companion from a game detector into the reusable
+foundation for an intelligent external second-screen assistant. The completed
+architecture is:
+
+```text
+Platform Guidance contracts
+        ↓
+Services provider orchestration
+        ↓
+Applications presentation models
+        ↓
+React Companion presentation
+
+Game Integrations contribute reviewed knowledge packages through the shared
+contracts and Services boundary.
+```
 
 Verified completed work:
 
-- Companion Session Manager
-- Companion Context Ownership
-- Desktop Host Snapshot
-- Snapshot Coordinator
-- Desktop Host Event Stream
-- Desktop Diagnostics
-- Desktop Recovery
-- Desktop Timeline
-- Desktop Telemetry
-- Complete Session Lifecycle
-- Desktop Platform API Freeze
-- Dependency Boundary Audit and automated enforcement
-- Final Hardening and Sprint Closure
+- immutable, versioned, confidence-aware and source-attributed Guidance
+  Framework contracts
+- deterministic, dependency-injected Guidance Provider Service with structured
+  failure isolation
+- first curated Call of Duty Guidance package as the canonical Game Integration
+  contribution pattern
+- immutable Companion Guidance Application state and presentation view models
+- `/companion` React presentation for loading, ready, empty, partial-success
+  and unavailable states
+- ADR-032 and Companion architecture documentation
+- focused contract, Service, package, Application and presentation verification
+- architecture audit, desktop compilation, production web build and lint
 
-No Sprint 12.1 engineering work remains. Final verification passed for the
-architecture audit, desktop TypeScript, lint, production web build, native
-Windows helpers and installed dependency tree. No Sprint 12 source correction
-was required.
+Formal Sprint 14 implementation commits:
 
-The branch milestone is closed without a product release tag. Tagging remains
-part of a separately authorised release workflow. Sprint 13 has not started.
+1. `1ed10bb` — `feat(companion): define immutable guidance framework contracts`
+2. `c93063b` — `feat(companion): add deterministic guidance provider service`
+3. `918a67c` — `feat(game-integrations): add curated Call of Duty guidance package`
+4. `b82bb49` — `feat(companion): add guidance application boundary`
+5. `3868975` — `feat(companion): add Companion application presentation`
+
+The Companion Intelligence Foundation is complete. Authoritative live runtime
+delivery is deliberately deferred to Sprint 15: the desktop composition root
+does not yet project authoritative Session Context into a Guidance Request,
+execute the Provider Service and deliver the resulting Application state to
+`/companion`. The production route therefore presents an honest unavailable
+state and fabricates no Session, Guidance or Operator data.
+
+No Sprint 15 implementation has started. Sprint 15 requires separate planning
+and approval after this closure reconciliation is committed.
 
 Known integration boundaries requiring deliberate review:
 
 - Platform bootstrap is not wired into production startup.
 - web pages do not consistently consume Services through Applications.
-- desktop Companion Session Context does not yet consume Game Integrations.
+- authoritative Companion Guidance delivery is not wired into the production
+  desktop composition root or renderer-safe delivery boundary.
 - the Platform-level and desktop-level Companion runtimes are not integrated.
+- curated source freshness remains a manual review responsibility.
+- ready and partial-success presentation paths are structurally verified but
+  do not yet receive production runtime data.
+- five pre-existing lint warnings remain accepted technical debt.
 - Desktop Platform API version 1 is frozen through
   `desktop/platform/index.ts`; internal implementations remain private.
 
@@ -436,9 +467,10 @@ Beta
 Public Release
 ```
 
-Delivery evolved into Sprint 12.1 desktop-platform hardening on
-`sprint-9-overlay`; the projected Sprint 12 Marketplace milestone was not the
-work represented by the current repository history. Future sprints may evolve,
+Delivery evolved through Sprint 12.1 desktop-platform hardening, Sprint 13's
+Game Integration vertical slice and Sprint 14's Companion Intelligence
+Foundation on `sprint-9-overlay`; the projected Sprint 12 Marketplace milestone
+was not the work represented by the current repository history. Future sprints may evolve,
 but every sprint should strengthen the Platform rather than introducing
 isolated functionality.
 

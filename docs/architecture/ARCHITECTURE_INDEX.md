@@ -1,6 +1,6 @@
 # ORACLE ARCHITECTURE INDEX
 
-Version: 5.1
+Version: 5.2
 
 Status: Active
 
@@ -512,6 +512,62 @@ Must Never
 
 ---
 
+## Companion Intelligence Foundation
+
+Purpose
+
+Provides one reusable path from immutable Companion Session projections to
+Operator-facing external guidance.
+
+Ownership and locations
+
+```text
+Platform / Companion Foundation
+lib/companion/guidance/
+    Immutable contracts, validation, compatibility and versioning
+        ↓
+Oracle Services
+lib/oracle/services/companion-guidance/
+    Provider discovery by dependency injection, eligibility, deterministic
+    execution, output validation and structured failure isolation
+        ↓
+Oracle Applications
+lib/oracle/applications/companion/
+    Immutable presentation state, Guidance Card view models and Operator-safe
+    diagnostics
+        ↓
+React Presentation
+app/companion/ and components/companion/guidance/
+    Rendering of Application-owned models only
+
+Game Integrations
+lib/oracle/game-integrations/*/guidance/
+    Reviewed game-specific knowledge packages contributed through the shared
+    Platform and Services boundaries
+```
+
+Produces
+
+- versioned Guidance, Guidance Request and Session projection contracts
+- immutable deterministic Provider Service results
+- presentation-safe Companion Guidance Application state
+- a calm `/companion` second-screen experience
+
+Must Never
+
+- mutate or own Companion Session lifecycle
+- expose provider implementations to Applications or React
+- move game-specific knowledge outside Game Integrations
+- rank, personalise or generate guidance inside provider orchestration or React
+- inject into games, inspect or modify game memory, hook game functions,
+  automate gameplay or input, or interact with anti-cheat systems
+
+The foundation is complete as of Sprint 14. Authoritative live runtime delivery
+from desktop Session Context to `/companion` is deferred to Sprint 15 and is not
+part of the verified Sprint 14 implementation.
+
+---
+
 # Engineering Rules
 
 Every new subsystem must:
@@ -544,7 +600,8 @@ Completed
 
 Current Development Phase
 
-Sprint 12.1 — Complete; Sprint 13 planning has not started
+Sprint 14 — Companion Intelligence Foundation complete; Sprint 15 has not
+started
 
 Current Runtime
 
@@ -565,11 +622,25 @@ Current Runtime
 ✓ Desktop Platform API version 1 freeze
 ✓ Dependency Boundary Audit and automated enforcement
 ✓ Final hardening and closure verification
+✓ Sprint 13 deterministic Game Integration vertical slice
+✓ Immutable and versioned Companion Guidance Framework
+✓ Deterministic Guidance Provider Service
+✓ Curated Call of Duty Guidance package
+✓ Companion Guidance Application boundary
+✓ `/companion` React presentation with honest unavailable fallback
+✓ Sprint 14 focused, architecture, desktop, web and lint verification
 
 Accepted integration debt
 
-- Game Integration to desktop-context wiring
 - Platform bootstrap production wiring
+- authoritative desktop Session Context to Guidance Request, Provider Service
+  and renderer-safe Application-state delivery
+- explicit integration between the Platform-level and desktop-level Companion
+  lifecycle foundations
+- manual curated-source freshness governance
+- production exercise of ready and partial-success Companion presentation paths
+- measured legacy web Application boundary exceptions and five pre-existing
+  lint warnings
 
 ---
 
@@ -582,7 +653,9 @@ Planned Subsystems
 - Strategy Engine
 - Voice Intelligence
 - Visual Intelligence
-- Companion assistance capabilities beyond the current desktop foundation
+- authoritative live Companion Guidance delivery
+- Companion assistance capabilities beyond the completed intelligence
+  foundation
 
 Each new subsystem must be added to this Architecture Index when introduced.
 
