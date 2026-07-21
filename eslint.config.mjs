@@ -15,5 +15,8 @@ export default defineConfig([
 
     // Generated Electron output
     "dist-electron/**",
+
+    // Focused Companion Guidance verification output
+    ".tmp-guidance-verification/**",
   ]),
 ]);

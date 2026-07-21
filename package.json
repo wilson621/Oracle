@@ -15,6 +15,8 @@
 
   "architecture:audit": "node scripts/audit-dependency-boundaries.mjs",
 
+  "guidance:verify": "tsc -p tsconfig.guidance-verification.json && node .tmp-guidance-verification/scripts/verify-companion-guidance-contracts.js && node -e \"require('node:fs').rmSync('.tmp-guidance-verification', { recursive: true, force: true })\"",
+
   "native:build:discovery": "dotnet publish desktop-native/Oracle.WindowDiscovery/Oracle.WindowDiscovery.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false --output dist-native",
 
   "native:build:observer": "dotnet publish desktop-native/Oracle.WindowObserver/Oracle.WindowObserver.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false --output dist-native",

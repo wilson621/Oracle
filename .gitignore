@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+/.tmp-guidance-verification/
 
 # next.js
 /.next/

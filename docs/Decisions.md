@@ -2,8 +2,8 @@
 
 # Architectural Decision Records (ADR)
 
-Version 4.2
-Last Updated: Sprint 13 closure — 21 July 2026
+Version 4.3
+Last Updated: Sprint 14 Commit 1 — 21 July 2026
 
 ---
 
@@ -919,6 +919,149 @@ external-companion model.
 ## Status
 
 ✅ Accepted and implemented as a permanent architectural constraint in Sprint 13
+
+---
+
+# ADR-032
+
+## Decision
+
+Oracle adopts one permanent, game-agnostic Companion Guidance Framework for
+all contextual guidance delivered by the external Companion.
+
+The Platform Companion foundation owns the immutable, serializable and
+versioned Guidance, Guidance Request, Session projection, package manifest and
+provider-boundary contracts. Oracle Services will own future guidance
+generation, selection, ranking and orchestration. Oracle Applications own
+presentation and Operator interaction. Game Integrations may contribute
+game-specific guidance packages and knowledge through the shared contracts;
+they do not define an alternative guidance model.
+
+Guidance represents an explainable recommendation to the Operator. It is not a
+command to a game, an automation instruction or a gameplay-control payload.
+Every Guidance result carries category and type, fixed advisory delivery,
+recommendation content, rationale, confidence, priority, spoiler classification, provenance,
+compatibility information and optional source, evidence, detail, expiry and
+reassessment information.
+
+Guidance providers consume only immutable projections of authoritative
+Companion Session Context. They receive no Session mutation or lifecycle
+authority, desktop controller, game detector, process handle, integration
+instance or other provider implementation detail.
+
+The Oracle Platform Constitution remains the normative source for Oracle's
+External Companion and Fair Play rules. This ADR explains why the Guidance
+Framework adopts contracts and ownership that preserve those permanent rules;
+it does not replace or weaken them.
+
+## Rationale
+
+Sprint 13 established safe deterministic game detection, authoritative Session
+Context and renderer-safe presentation. Sprint 14 requires a reusable path from
+that context to meaningful assistance without coupling the product to one
+game, one presentation, one content source or one intelligence provider.
+
+One shared model allows curated knowledge, deterministic analysis and future
+AI-generated guidance to be validated, explained and presented consistently.
+Separating data contracts from generation and presentation keeps confidence,
+source attribution, spoiler handling and compatibility inspectable while
+preserving the ownership model:
+
+```text
+Platform / Companion Foundation — contracts and compatibility
+Services                        — generation and orchestration
+Applications                    — presentation and interaction
+Game Integrations               — game-specific packages and knowledge
+```
+
+## Rejected Alternatives
+
+### Game-specific guidance models
+
+Rejected. Allowing every Game Integration to define its own response shape
+would couple Applications to individual games, duplicate confidence and source
+rules and prevent a consistent Oracle experience.
+
+### UI-owned guidance logic
+
+Rejected. Applications present guidance and collect Operator intent. They must
+not generate, rank or reinterpret intelligence that belongs to Services.
+
+### AI-specific guidance contracts
+
+Rejected. AI is a possible provider, not a separate Oracle product model.
+Curated, deterministic, AI-generated and hybrid guidance must populate the
+same contract so that confidence, evidence, provenance and safety remain
+consistent.
+
+### Mutable Session or provider access
+
+Rejected. Allowing providers to retain or mutate Session state, receive
+lifecycle objects or expose implementations across boundaries would create
+hidden authority, nondeterminism and unsafe coupling.
+
+### Real-time in-process tactical assistance
+
+Rejected. Guidance may never justify injection, protected-memory inspection or
+modification, hooks, executable patching, gameplay or input automation,
+simulated input, anti-cheat interaction or any technique prohibited by the
+Constitution and ADR-031.
+
+## Trade-offs
+
+- Providers must translate their output into the shared Guidance contract.
+- Strict validation adds deliberate work before Guidance can be consumed.
+- A scoped Session projection may omit information a provider would find
+  convenient, but prevents accidental authority and privacy expansion.
+- Open category, type, source-type and provenance identifiers require
+  consumers to provide safe unknown-value fallbacks.
+- In return, Oracle gains one explainable and testable guidance language that
+  can evolve across games, Applications and provider technologies.
+
+## Compatibility Strategy
+
+- Guidance, Guidance Request and Guidance Session projections have explicit
+  contract identities and independent numeric versions.
+- Existing versioned fields cannot be removed, renamed or given incompatible
+  meanings without a new contract version and migration plan.
+- Compatible evolution may add optional serializable fields with safe defaults.
+- Category, type, source-type and provenance-method identifiers are open
+  strings. Version 1 consumers must safely preserve or present unknown values.
+- Validators inspect the complete input, including unknown extension fields,
+  and reject functions, symbols, accessors, class instances, circular data,
+  non-finite numbers and other executable or non-serializable values.
+- Provider output remains unknown until validated and deep-frozen through the
+  shared Guidance factory.
+- An incompatible Guidance contract requires a new accepted ADR before
+  production consumers migrate.
+
+## Long-Term Evolution
+
+The framework is intended to support, without replacement:
+
+- curated public knowledge
+- AI-generated and hybrid guidance
+- performance and clip analysis
+- Session-level coaching
+- long-term Operator development
+- future game-specific knowledge packages
+
+New generation methods belong behind Services and provider contracts. New
+presentation surfaces consume validated Guidance. New games contribute
+packages through Game Integrations. None of these additions changes Session
+ownership or the External Companion boundary.
+
+## Consequence
+
+All future Companion guidance must use the shared versioned contracts.
+Guidance cannot mutate Session state, own Session lifecycle, expose provider
+implementations or cross the constitutional Fair Play boundary. Alternative
+guidance models require explicit architectural review rather than local
+implementation convenience.
+
+## Status
+
+✅ Accepted and implemented as the Sprint 14 Commit 1 contract foundation
 
 ---
 

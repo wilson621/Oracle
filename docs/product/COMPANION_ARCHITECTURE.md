@@ -1,8 +1,8 @@
 # ORACLE COMPANION ARCHITECTURE
 
-Version 1.2
+Version 1.3
 
-Status: Sprint 13 end-to-end Game Integration implementation
+Status: Sprint 14 Companion Guidance Framework contract foundation
 
 ---
 
@@ -1185,6 +1185,147 @@ Potential shared contracts include:
 - Compatibility status
 
 Shared contracts should not require either application to import the other application's internal code.
+
+---
+
+# Companion Guidance Framework
+
+Sprint 14 establishes one permanent Guidance Framework for every form of
+Companion guidance. The framework transforms immutable Session Context into a
+shared, explainable recommendation language without granting guidance systems
+Session lifecycle or gameplay authority.
+
+The ownership model is explicit:
+
+```text
+Platform / Companion Foundation
+        │
+        ├── Immutable Guidance contracts
+        ├── Session projection contract
+        ├── Runtime validation
+        ├── Versioning and compatibility
+        └── Provider boundary
+        │
+        ▼
+Oracle Services
+        │
+        ├── Generation
+        ├── Selection
+        ├── Ranking
+        └── Orchestration
+        │
+        ▼
+Oracle Applications
+        │
+        └── Presentation and Operator interaction
+        │
+        ▼
+Game Integrations
+        │
+        └── Game-specific packages and knowledge
+```
+
+Game Integrations consume the framework. They do not define it. Applications
+present validated Guidance. They do not generate or rank it. Services will
+coordinate providers in later Sprint 14 work. No generation, selection or
+presentation runtime is introduced by the contract foundation.
+
+## Guidance Contract
+
+`oracle.companion-guidance` version 1 represents an explainable recommendation
+to the Operator. It is not a command to a game or a gameplay-control payload.
+
+Every Guidance result contains:
+
+- open category and type identifiers
+- title, summary, fixed advisory delivery and recommendation
+- optional detailed explanation
+- rationale and structured evidence
+- calculated confidence and derived confidence level
+- priority
+- source attribution where applicable
+- spoiler classification
+- optional reassessment trigger
+- provider provenance
+- game, integration and Companion compatibility metadata
+- creation and optional expiry timestamps
+
+Curated, deterministic, AI-generated and hybrid providers use the same result
+contract. AI providers do not receive a separate Guidance model.
+
+## Immutable Session Projection
+
+`oracle.companion-guidance-session-projection` version 1 is a data-only view of
+authoritative Companion Session Context. It contains Session identity, capture
+time, a minimal serializable Session-context record and optional serializable
+game identity and context. The general context record allows future
+performance, clip, Session-coaching and Operator-development Services to
+project only the information they require without exposing the Session object
+or replacing the contract.
+
+The projection:
+
+- is constructed from authoritative Session Context
+- is cloned and deeply frozen during validation
+- cannot mutate or transition the Session
+- contains no Electron object, desktop controller, detector, process handle,
+  integration instance or provider implementation
+- grants no attachment, presentation or lifecycle authority
+
+Guidance requests may include Operator intent and maximum spoiler level, but
+remain immutable data. Future Services will decide which providers execute.
+
+## Validation and Immutability
+
+Version 1 validators inspect the complete incoming value, including unknown
+future extension fields. They reject:
+
+- functions and executable values
+- symbols and symbol keys
+- accessors and non-data properties
+- class instances and platform objects
+- circular references
+- sparse arrays
+- non-finite numbers
+- malformed timestamps, versions, URIs, references and enumerations
+
+Accepted values are normalised into new objects and deeply frozen. Provider
+output remains untrusted `unknown` data until it passes this boundary.
+
+Category, type, source-type and provenance-method identifiers are deliberately
+open strings. Consumers must handle unfamiliar values safely. This allows new
+guidance domains to appear without redesigning the contract or breaking older
+consumers.
+
+## Compatibility
+
+Guidance, Guidance Request and Session projection contracts version
+independently. Version 1 guarantees that existing required fields retain their
+names, types and meanings. Compatible optional serializable fields may be added
+when older consumers can ignore them safely. Incompatible schema changes
+require a new contract version, migration plan and accepted ADR.
+
+The Guidance Framework is designed to extend to:
+
+- curated game knowledge
+- AI-generated guidance
+- performance-analysis guidance
+- clip-analysis guidance
+- Session-level coaching
+- long-term Operator development
+
+These capabilities extend the shared model. They do not replace it.
+
+## Fair Play Boundary
+
+The Constitution defines Oracle's permanent External Companion and Fair Play
+rule. ADR-032 explains why Guidance adopts this ownership and contract model.
+
+Guidance must never become a mechanism for injection, memory inspection or
+modification, hooks, executable patching, gameplay automation, simulated input,
+anti-cheat interaction or real-time tactical assistance that requires access
+to the game process. Guidance helps the Operator through coaching, insight and
+permitted knowledge while Oracle remains entirely external.
 
 ---
 

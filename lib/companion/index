@@ -6,3 +6,4 @@ export * from "./companion-types";
 export * from "./capabilities";
 export * from "./connectors";
 export * from "./extensions";
+export * from "./guidance";
