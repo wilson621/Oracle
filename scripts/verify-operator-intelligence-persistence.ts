@@ -3,18 +3,27 @@ import fs from "node:fs";
 import path from "node:path";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import {
-  createOperatorDataPolicyReference,
+  OPERATOR_CONSENT_DECISION_CONTRACT,
+  OPERATOR_DATA_POLICY_DEFINITION_CONTRACT,
+  OPERATOR_EVIDENCE_DISPOSITION_CONTRACT,
+  OPERATOR_GAME_PATTERN_INTELLIGENCE_PURPOSE,
+  admitOperatorGameSessionEvidence,
+  createOperatorConsentDecision,
+  createOperatorDataPolicyDefinition,
+  createOperatorEvidenceDisposition,
   createOperatorEvidenceReference,
   createOperatorIntelligenceClaimRevision,
 } from "../lib/oracle/understanding";
 import { SupabaseOperatorIntelligenceRepository } from "../lib/oracle/repositories/operator-intelligence-repository";
 import {
   activeClaimInput,
-  dataPolicyInput,
-  evidenceInput,
 } from "./operator-understanding-verification-fixtures";
 
 const operatorId = "11111111-1111-4111-8111-111111111111";
+const sessionId = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
+const policyId = "operator-game-pattern-intelligence";
+const policyVersion = "1.0.0";
+const assessedAt = "2026-07-21T12:00:00.000Z";
 
 async function main() {
   verifyMigrationContract();
@@ -37,7 +46,10 @@ function verifyMigrationContract() {
   );
   const tables = [
     "operator_data_policy_versions",
+    "operator_consent_decisions",
     "operator_intelligence_evidence",
+    "operator_intelligence_evidence_dispositions",
+    "operator_intelligence_evidence_admissions",
     "operator_intelligence_claims",
     "operator_intelligence_claim_revisions",
     "operator_intelligence_claim_evidence",
@@ -54,7 +66,10 @@ function verifyMigrationContract() {
     );
     assert.match(
       migration,
-      new RegExp(`alter table public\\.${table} enable row level security`, "i")
+      new RegExp(
+        `alter table public\\.${table}\\s+enable row level security`,
+        "i"
+      )
     );
     assert.match(
       migration,
@@ -78,9 +93,18 @@ function verifyMigrationContract() {
   assert.match(migration, /sensitive_type_check/i);
   assert.match(
     migration,
-    /grant execute on function public\.persist_operator_intelligence_claim_revision[\s\S]+to authenticated/i
+    /grant execute on function public\.persist_operator_intelligence_claim_revision[\s\S]+to service_role/i
+  );
+  assert.match(migration, /Trusted Operator Intelligence authority is required/g);
+  assert.match(migration, /Durable intelligence requires admitted evidence/i);
+  assert.match(migration, /oracle_sessions_id_operator_unique/i);
+  assert.match(migration, /operator_data_policy_versions_select_authenticated/i);
+  assert.doesNotMatch(
+    migration,
+    /grant execute on function public\.[^;]+\s+to authenticated/i
   );
   assert.doesNotMatch(migration, /grant (insert|update|delete)[^;]+authenticated/i);
+  assert.doesNotMatch(migration, /grant (insert|update|delete)[^;]+service_role/i);
   assert.doesNotMatch(
     migration,
     /(insert into|update) public\.(operators|oracle_sessions|operator_account_bindings)/i
@@ -92,25 +116,27 @@ async function verifyRepositoryWriteBoundary() {
   const repository = new SupabaseOperatorIntelligenceRepository(
     client as unknown as SupabaseClient
   );
-  const policy = createOperatorDataPolicyReference(dataPolicyInput);
-  const persistedPolicy = await repository.registerPolicyVersion(
-    operatorId,
-    policy
+  const fixture = createTrustFixture();
+  const persistedPolicy = await repository.registerPolicyDefinition(
+    fixture.policy
   );
 
-  assert.deepEqual(persistedPolicy, policy);
-
-  const evidence = createOperatorEvidenceReference({
-    ...evidenceInput,
+  assert.deepEqual(persistedPolicy, fixture.policy);
+  await repository.appendConsentDecision(operatorId, fixture.consent);
+  await repository.admitGameSessionEvidence(
     operatorId,
-  });
+    fixture.evidence,
+    fixture.disposition,
+    fixture.admission
+  );
+
   const candidate = createOperatorIntelligenceClaimRevision(
-    createCandidateInput(operatorId),
-    [evidence]
+    createCandidateInput(operatorId, fixture.evidence),
+    [fixture.evidence]
   );
   const persisted = await repository.persistClaimRevision(
     operatorId,
-    [evidence],
+    [fixture.evidence],
     candidate
   );
 
@@ -119,10 +145,15 @@ async function verifyRepositoryWriteBoundary() {
     client.calls.map((call) => call.functionName),
     [
       "register_operator_data_policy_version",
+      "append_operator_consent_decision",
+      "admit_operator_game_session_evidence",
       "persist_operator_intelligence_claim_revision",
     ]
   );
+  assert.equal("p_operator_id" in client.calls[0].arguments, false);
   assert.equal(client.calls[1]?.arguments.p_operator_id, operatorId);
+  assert.equal(client.calls[2]?.arguments.p_operator_id, operatorId);
+  assert.equal(client.calls[3]?.arguments.p_operator_id, operatorId);
 }
 
 async function verifyCrossOperatorRejection() {
@@ -130,12 +161,9 @@ async function verifyCrossOperatorRejection() {
   const repository = new SupabaseOperatorIntelligenceRepository(
     client as unknown as SupabaseClient
   );
-  const evidence = createOperatorEvidenceReference({
-    ...evidenceInput,
-    operatorId,
-  });
+  const { evidence } = createTrustFixture();
   const candidate = createOperatorIntelligenceClaimRevision(
-    createCandidateInput(operatorId),
+    createCandidateInput(operatorId, evidence),
     [evidence]
   );
 
@@ -163,10 +191,26 @@ function verifyRepositoryOwnershipBoundary() {
   ]);
 }
 
-function createCandidateInput(candidateOperatorId: string) {
+function createCandidateInput(
+  candidateOperatorId: string,
+  evidence: ReturnType<typeof createOperatorEvidenceReference>
+) {
   return {
     ...activeClaimInput,
     operatorId: candidateOperatorId,
+    type: "recurring-game-strength",
+    evidence: [{
+      ...activeClaimInput.evidence[0],
+      evidenceReferenceId: evidence.id,
+    }],
+    scope: evidence.scope,
+    policyId,
+    policyVersion,
+    confidence: {
+      ...activeClaimInput.confidence,
+      policyId,
+      policyVersion,
+    },
     status: "candidate",
     epistemic: "suspected",
     explanation: null,
@@ -174,8 +218,156 @@ function createCandidateInput(candidateOperatorId: string) {
       ...activeClaimInput.eligibility,
       eligible: false,
       reasons: ["candidate"],
+      purpose: OPERATOR_GAME_PATTERN_INTELLIGENCE_PURPOSE,
+      policyId,
+      policyVersion,
+      assessedAt,
     },
   };
+}
+
+function createTrustFixture() {
+  const policy = createOperatorDataPolicyDefinition({
+    contract: {
+      name: OPERATOR_DATA_POLICY_DEFINITION_CONTRACT,
+      version: 1,
+    },
+    id: policyId,
+    policyVersion,
+    purpose: OPERATOR_GAME_PATTERN_INTELLIGENCE_PURPOSE,
+    retentionClass: "game-session-derived-intelligence",
+    effectiveFrom: "2026-07-01T00:00:00.000Z",
+    effectiveUntil: null,
+    allowedClaimTypes: [
+      "recurring-game-strength",
+      "recurring-game-weakness",
+    ],
+    evidenceAdmission: {
+      minimumQualityScore: 0.7,
+      allowedSourceClassifications: [
+        "game-integration-direct-observation",
+        "game-integration-deterministic-transformation",
+      ],
+    },
+    retention: {
+      evidenceReferenceDays: 180,
+      supersededClaimRevisionDays: 365,
+    },
+    claimLifecycle: {
+      maximumValidityDays: 90,
+      reassessAfterDays: 30,
+    },
+  });
+  const consent = createOperatorConsentDecision({
+    contract: {
+      name: OPERATOR_CONSENT_DECISION_CONTRACT,
+      version: 1,
+    },
+    id: "consent-1",
+    operatorId,
+    purpose: OPERATOR_GAME_PATTERN_INTELLIGENCE_PURPOSE,
+    policyId,
+    policyVersion,
+    decision: "granted",
+    effectiveAt: "2026-07-21T09:00:00.000Z",
+    recordedAt: "2026-07-21T09:00:00.000Z",
+    supersedesDecisionId: null,
+    provenance: {
+      sourceOwnerType: "operator-service",
+      sourceOwnerId: "operator-service",
+      method: "operator-declaration",
+      producerId: "operator-consent-service",
+      producerVersion: "1.0.0",
+      generatedAt: "2026-07-21T09:00:00.000Z",
+    },
+  });
+  const evidence = createOperatorEvidenceReference({
+    contract: {
+      name: "oracle.operator-evidence-reference",
+      version: 1,
+    },
+    id: "evidence-session-1",
+    operatorId,
+    sourceType: "game-integration-observation",
+    sourceOwnerId: "call-of-duty",
+    sourceRecordId: "game-observation-1",
+    observedAt: "2026-07-21T10:00:00.000Z",
+    capturedAt: "2026-07-21T10:01:00.000Z",
+    purpose: OPERATOR_GAME_PATTERN_INTELLIGENCE_PURPOSE,
+    scope: {
+      type: "session",
+      sessionId,
+      integrationId: "call-of-duty",
+      integrationVersion: "1.0.0",
+    },
+    producer: {
+      id: "call-of-duty",
+      version: "1.0.0",
+      method: "direct-observation",
+    },
+    quality: {
+      score: 0.8,
+      rationale: "The registered Game Integration directly observed the event.",
+      policyId,
+      policyVersion,
+      assessedAt: "2026-07-21T10:02:00.000Z",
+    },
+    summary: "A permitted game-scoped Session observation.",
+    contentDigest: `sha256:${"a".repeat(64)}`,
+    retentionClass: "game-session-derived-intelligence",
+    policyId,
+    policyVersion,
+  });
+  const disposition = createOperatorEvidenceDisposition({
+    contract: {
+      name: OPERATOR_EVIDENCE_DISPOSITION_CONTRACT,
+      version: 1,
+    },
+    id: "disposition-1",
+    operatorId,
+    evidenceReferenceId: evidence.id,
+    disposition: "available",
+    reason: "The authoritative source is present and within retention.",
+    effectiveAt: "2026-07-21T10:00:00.000Z",
+    recordedAt: "2026-07-21T10:00:00.000Z",
+    supersedesDispositionId: null,
+    provenance: {
+      sourceOwnerType: "session",
+      sourceOwnerId: "oracle-session-repository",
+      method: "authoritative-source",
+      producerId: "operator-evidence-admission",
+      producerVersion: "1.0.0",
+      generatedAt: "2026-07-21T10:00:00.000Z",
+    },
+  });
+  const admission = admitOperatorGameSessionEvidence(
+    {
+      id: "admission-1",
+      evidence,
+      sessionId,
+      sourceRecordId: evidence.sourceRecordId,
+      integrationId: "call-of-duty",
+      integrationVersion: "1.0.0",
+      purpose: OPERATOR_GAME_PATTERN_INTELLIGENCE_PURPOSE,
+      intendedClaimType: "recurring-game-strength",
+      sourceClassification: "game-integration-direct-observation",
+      admittedAt: assessedAt,
+    },
+    {
+      authenticatedOperatorId: operatorId,
+      policy,
+      consentHistory: [consent],
+      evidenceDispositionHistory: [disposition],
+      gameIntegrations: {
+        recognizes(integrationId, integrationVersion) {
+          return integrationId === "call-of-duty" &&
+            integrationVersion === "1.0.0";
+        },
+      },
+    }
+  );
+
+  return { policy, consent, evidence, disposition, admission };
 }
 
 class RecordingSupabaseClient {
@@ -189,6 +381,18 @@ class RecordingSupabaseClient {
 
     if (functionName === "register_operator_data_policy_version") {
       return { data: args.p_policy, error: null };
+    }
+
+    if (functionName === "append_operator_consent_decision") {
+      return { data: args.p_consent, error: null };
+    }
+
+    if (functionName === "admit_operator_game_session_evidence") {
+      return { data: args.p_admission, error: null };
+    }
+
+    if (functionName === "append_operator_evidence_disposition") {
+      return { data: args.p_disposition, error: null };
     }
 
     if (functionName === "persist_operator_intelligence_claim_revision") {

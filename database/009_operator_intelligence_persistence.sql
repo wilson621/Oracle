@@ -1,29 +1,148 @@
 begin;
 
 -- Sprint 15 Phase 3 persists versioned Operator Intelligence contracts only.
+-- Sprint 15.5A hardens the undeployed migration so durable intelligence can
+-- only be created through the trusted Operator Intelligence Service boundary.
 -- Operator identity, declarations, Sessions and raw evidence remain owned by
 -- their existing authoritative systems.
+alter table public.oracle_sessions
+    add constraint oracle_sessions_id_operator_unique
+    unique (id, operator_id);
+
 create table public.operator_data_policy_versions (
-    operator_id uuid not null
-        references public.operators(id) on delete cascade,
     policy_id text not null,
     policy_version text not null,
     purpose text not null,
     retention_class text not null,
+    effective_from timestamptz not null,
+    effective_until timestamptz,
+    allowed_claim_types text[] not null,
+    minimum_evidence_quality numeric not null,
+    allowed_source_classifications text[] not null,
+    evidence_reference_days integer not null,
+    superseded_claim_revision_days integer not null,
+    maximum_claim_validity_days integer not null,
+    reassess_after_days integer not null,
     policy_contract jsonb not null,
     recorded_at timestamptz not null default now(),
-    primary key (operator_id, policy_id, policy_version),
+    primary key (policy_id, policy_version),
     constraint operator_data_policy_versions_semver_check
         check (policy_version ~ '^[0-9]+\.[0-9]+\.[0-9]+([+-][0-9A-Za-z.-]+)?$'),
+    constraint operator_data_policy_versions_effective_check
+        check (effective_until is null or effective_until > effective_from),
+    constraint operator_data_policy_versions_claim_types_check
+        check (
+            cardinality(allowed_claim_types) > 0
+            and allowed_claim_types <@ array[
+                'recurring-game-strength', 'recurring-game-weakness'
+            ]::text[]
+        ),
+    constraint operator_data_policy_versions_admission_check
+        check (
+            minimum_evidence_quality between 0 and 1
+            and cardinality(allowed_source_classifications) > 0
+            and allowed_source_classifications <@ array[
+                'game-integration-direct-observation',
+                'game-integration-deterministic-transformation'
+            ]::text[]
+        ),
+    constraint operator_data_policy_versions_retention_check
+        check (
+            evidence_reference_days > 0
+            and superseded_claim_revision_days > 0
+            and maximum_claim_validity_days > 0
+            and reassess_after_days > 0
+            and reassess_after_days <= maximum_claim_validity_days
+        ),
     constraint operator_data_policy_versions_contract_check
         check (
             policy_contract -> 'contract' ->> 'name' =
-                'oracle.operator-data-policy-reference'
+                'oracle.operator-data-policy-definition'
             and (policy_contract -> 'contract' ->> 'version')::integer = 1
             and policy_contract ->> 'id' = policy_id
             and policy_contract ->> 'policyVersion' = policy_version
             and policy_contract ->> 'purpose' = purpose
             and policy_contract ->> 'retentionClass' = retention_class
+            and (policy_contract ->> 'effectiveFrom')::timestamptz = effective_from
+            and coalesce(
+                (policy_contract ->> 'effectiveUntil')::timestamptz,
+                '-infinity'::timestamptz
+            ) = coalesce(effective_until, '-infinity'::timestamptz)
+            and policy_contract -> 'allowedClaimTypes' =
+                to_jsonb(allowed_claim_types)
+            and (policy_contract -> 'evidenceAdmission' ->>
+                'minimumQualityScore')::numeric = minimum_evidence_quality
+            and policy_contract -> 'evidenceAdmission' ->
+                'allowedSourceClassifications' =
+                to_jsonb(allowed_source_classifications)
+            and (policy_contract -> 'retention' ->>
+                'evidenceReferenceDays')::integer = evidence_reference_days
+            and (policy_contract -> 'retention' ->>
+                'supersededClaimRevisionDays')::integer =
+                superseded_claim_revision_days
+            and (policy_contract -> 'claimLifecycle' ->>
+                'maximumValidityDays')::integer = maximum_claim_validity_days
+            and (policy_contract -> 'claimLifecycle' ->>
+                'reassessAfterDays')::integer = reassess_after_days
+        )
+);
+
+create table public.operator_consent_decisions (
+    operator_id uuid not null
+        references public.operators(id) on delete cascade,
+    consent_decision_id text not null,
+    purpose text not null,
+    policy_id text not null,
+    policy_version text not null,
+    decision text not null,
+    effective_at timestamptz not null,
+    recorded_at timestamptz not null,
+    supersedes_decision_id text,
+    consent_contract jsonb not null,
+    primary key (operator_id, consent_decision_id),
+    unique (
+        operator_id,
+        purpose,
+        policy_id,
+        policy_version,
+        consent_decision_id
+    ),
+    constraint operator_consent_decisions_policy_fkey
+        foreign key (policy_id, policy_version)
+        references public.operator_data_policy_versions(
+            policy_id,
+            policy_version
+        ),
+    constraint operator_consent_decisions_supersedes_fkey
+        foreign key (operator_id, supersedes_decision_id)
+        references public.operator_consent_decisions(
+            operator_id,
+            consent_decision_id
+        ),
+    constraint operator_consent_decisions_value_check
+        check (decision in ('granted', 'revoked')),
+    constraint operator_consent_decisions_time_check
+        check (recorded_at >= effective_at),
+    constraint operator_consent_decisions_contract_check
+        check (
+            consent_contract -> 'contract' ->> 'name' =
+                'oracle.operator-consent-decision'
+            and (consent_contract -> 'contract' ->> 'version')::integer = 1
+            and consent_contract ->> 'id' = consent_decision_id
+            and (consent_contract ->> 'operatorId')::uuid = operator_id
+            and consent_contract ->> 'purpose' = purpose
+            and consent_contract ->> 'policyId' = policy_id
+            and consent_contract ->> 'policyVersion' = policy_version
+            and consent_contract ->> 'decision' = decision
+            and (consent_contract ->> 'effectiveAt')::timestamptz = effective_at
+            and (consent_contract ->> 'recordedAt')::timestamptz = recorded_at
+            and coalesce(consent_contract ->> 'supersedesDecisionId', '') =
+                coalesce(supersedes_decision_id, '')
+            and not (consent_contract ? 'confidence')
+            and consent_contract -> 'provenance' ->> 'sourceOwnerType' =
+                'operator-service'
+            and consent_contract -> 'provenance' ->> 'method' =
+                'operator-declaration'
         )
 );
 
@@ -38,6 +157,11 @@ create table public.operator_intelligence_evidence (
     purpose text not null,
     producer_id text not null,
     producer_version text not null,
+    producer_method text not null,
+    session_id uuid,
+    integration_id text,
+    integration_version text,
+    evidence_quality_score numeric,
     content_digest text not null,
     retention_class text not null,
     policy_id text not null,
@@ -49,12 +173,14 @@ create table public.operator_intelligence_evidence (
         foreign key (operator_id)
         references public.operators(id) on delete cascade,
     constraint operator_intelligence_evidence_policy_fkey
-        foreign key (operator_id, policy_id, policy_version)
+        foreign key (policy_id, policy_version)
         references public.operator_data_policy_versions(
-            operator_id,
             policy_id,
             policy_version
         ),
+    constraint operator_intelligence_evidence_session_fkey
+        foreign key (session_id, operator_id)
+        references public.oracle_sessions(id, operator_id),
     constraint operator_intelligence_evidence_source_unique
         unique (
             operator_id,
@@ -75,6 +201,15 @@ create table public.operator_intelligence_evidence (
         )),
     constraint operator_intelligence_evidence_time_check
         check (captured_at >= observed_at),
+    constraint operator_intelligence_evidence_digest_check
+        check (content_digest ~ '^sha256:[0-9a-f]{64}$'),
+    constraint operator_intelligence_evidence_scope_check
+        check (
+            (session_id is null and integration_id is null
+                and integration_version is null)
+            or (session_id is not null and integration_id is not null
+                and integration_version is not null)
+        ),
     constraint operator_intelligence_evidence_contract_check
         check (
             evidence_contract -> 'contract' ->> 'name' =
@@ -90,13 +225,180 @@ create table public.operator_intelligence_evidence (
             and evidence_contract ->> 'purpose' = purpose
             and evidence_contract -> 'producer' ->> 'id' = producer_id
             and evidence_contract -> 'producer' ->> 'version' = producer_version
+            and evidence_contract -> 'producer' ->> 'method' = producer_method
+            and coalesce(
+                (evidence_contract -> 'scope' ->> 'sessionId')::uuid,
+                '00000000-0000-0000-0000-000000000000'::uuid
+            ) = coalesce(
+                session_id,
+                '00000000-0000-0000-0000-000000000000'::uuid
+            )
+            and coalesce(evidence_contract -> 'scope' ->> 'integrationId', '') =
+                coalesce(integration_id, '')
+            and coalesce(
+                evidence_contract -> 'scope' ->> 'integrationVersion', ''
+            ) = coalesce(integration_version, '')
+            and coalesce(
+                (evidence_contract -> 'quality' ->> 'score')::numeric,
+                -1
+            ) = coalesce(evidence_quality_score, -1)
             and evidence_contract ->> 'contentDigest' = content_digest
             and evidence_contract ->> 'retentionClass' = retention_class
             and evidence_contract ->> 'policyId' = policy_id
             and evidence_contract ->> 'policyVersion' = policy_version
-            and not (evidence_contract ?| array[
-                'prompt', 'rawPrompt', 'rawEvidence', 'transcript', 'payload'
-            ])
+            and evidence_contract::text !~*
+                '"(operatorPrompt|prompt|rawPrompt|rawEvidence|transcript|payload)"\s*:'
+        )
+);
+
+create table public.operator_intelligence_evidence_dispositions (
+    operator_id uuid not null,
+    evidence_reference_id text not null,
+    disposition_id text not null,
+    disposition text not null,
+    reason text not null,
+    effective_at timestamptz not null,
+    recorded_at timestamptz not null,
+    supersedes_disposition_id text,
+    disposition_contract jsonb not null,
+    primary key (operator_id, evidence_reference_id, disposition_id),
+    unique (operator_id, disposition_id),
+    constraint operator_intelligence_evidence_dispositions_evidence_fkey
+        foreign key (operator_id, evidence_reference_id)
+        references public.operator_intelligence_evidence(
+            operator_id,
+            evidence_reference_id
+        ) on delete cascade,
+    constraint operator_intelligence_evidence_dispositions_supersedes_fkey
+        foreign key (
+            operator_id,
+            evidence_reference_id,
+            supersedes_disposition_id
+        ) references public.operator_intelligence_evidence_dispositions(
+            operator_id,
+            evidence_reference_id,
+            disposition_id
+        ),
+    constraint operator_intelligence_evidence_dispositions_value_check
+        check (disposition in (
+            'available', 'withdrawn', 'source-deleted', 'retention-expired'
+        )),
+    constraint operator_intelligence_evidence_dispositions_time_check
+        check (recorded_at >= effective_at),
+    constraint operator_intelligence_evidence_dispositions_contract_check
+        check (
+            disposition_contract -> 'contract' ->> 'name' =
+                'oracle.operator-evidence-disposition'
+            and (disposition_contract -> 'contract' ->> 'version')::integer = 1
+            and disposition_contract ->> 'id' = disposition_id
+            and (disposition_contract ->> 'operatorId')::uuid = operator_id
+            and disposition_contract ->> 'evidenceReferenceId' =
+                evidence_reference_id
+            and disposition_contract ->> 'disposition' = disposition
+            and disposition_contract ->> 'reason' = reason
+            and (disposition_contract ->> 'effectiveAt')::timestamptz =
+                effective_at
+            and (disposition_contract ->> 'recordedAt')::timestamptz =
+                recorded_at
+            and coalesce(
+                disposition_contract ->> 'supersedesDispositionId', ''
+            ) = coalesce(supersedes_disposition_id, '')
+        )
+);
+
+create table public.operator_intelligence_evidence_admissions (
+    operator_id uuid not null,
+    admission_id text not null,
+    evidence_reference_id text not null,
+    evidence_disposition_id text not null,
+    session_id uuid not null,
+    source_record_id text not null,
+    integration_id text not null,
+    integration_version text not null,
+    purpose text not null,
+    intended_claim_type text not null,
+    source_classification text not null,
+    policy_id text not null,
+    policy_version text not null,
+    consent_decision_id text not null,
+    admitted_at timestamptz not null,
+    admission_contract jsonb not null,
+    recorded_at timestamptz not null default now(),
+    primary key (operator_id, admission_id),
+    unique (operator_id, evidence_reference_id, purpose, intended_claim_type),
+    constraint operator_intelligence_evidence_admissions_evidence_fkey
+        foreign key (operator_id, evidence_reference_id)
+        references public.operator_intelligence_evidence(
+            operator_id,
+            evidence_reference_id
+        ) on delete cascade,
+    constraint operator_intelligence_evidence_admissions_disposition_fkey
+        foreign key (
+            operator_id,
+            evidence_reference_id,
+            evidence_disposition_id
+        ) references public.operator_intelligence_evidence_dispositions(
+            operator_id,
+            evidence_reference_id,
+            disposition_id
+        ),
+    constraint operator_intelligence_evidence_admissions_session_fkey
+        foreign key (session_id, operator_id)
+        references public.oracle_sessions(id, operator_id),
+    constraint operator_intelligence_evidence_admissions_policy_fkey
+        foreign key (policy_id, policy_version)
+        references public.operator_data_policy_versions(
+            policy_id,
+            policy_version
+        ),
+    constraint operator_intelligence_evidence_admissions_consent_fkey
+        foreign key (
+            operator_id,
+            purpose,
+            policy_id,
+            policy_version,
+            consent_decision_id
+        ) references public.operator_consent_decisions(
+            operator_id,
+            purpose,
+            policy_id,
+            policy_version,
+            consent_decision_id
+        ),
+    constraint operator_intelligence_evidence_admissions_claim_type_check
+        check (intended_claim_type in (
+            'recurring-game-strength', 'recurring-game-weakness'
+        )),
+    constraint operator_intelligence_evidence_admissions_source_check
+        check (source_classification in (
+            'game-integration-direct-observation',
+            'game-integration-deterministic-transformation'
+        )),
+    constraint operator_intelligence_evidence_admissions_contract_check
+        check (
+            admission_contract -> 'contract' ->> 'name' =
+                'oracle.operator-game-session-evidence-admission'
+            and (admission_contract -> 'contract' ->> 'version')::integer = 1
+            and admission_contract ->> 'id' = admission_id
+            and (admission_contract ->> 'operatorId')::uuid = operator_id
+            and admission_contract ->> 'evidenceReferenceId' =
+                evidence_reference_id
+            and admission_contract ->> 'evidenceDispositionId' =
+                evidence_disposition_id
+            and (admission_contract ->> 'sessionId')::uuid = session_id
+            and admission_contract ->> 'sourceRecordId' = source_record_id
+            and admission_contract ->> 'integrationId' = integration_id
+            and admission_contract ->> 'integrationVersion' =
+                integration_version
+            and admission_contract ->> 'purpose' = purpose
+            and admission_contract ->> 'intendedClaimType' = intended_claim_type
+            and admission_contract ->> 'sourceClassification' =
+                source_classification
+            and admission_contract ->> 'policyId' = policy_id
+            and admission_contract ->> 'policyVersion' = policy_version
+            and admission_contract ->> 'consentDecisionId' =
+                consent_decision_id
+            and (admission_contract ->> 'admittedAt')::timestamptz = admitted_at
         )
 );
 
@@ -141,9 +443,8 @@ create table public.operator_intelligence_claim_revisions (
         references public.operator_intelligence_claims(operator_id, claim_id)
         on delete cascade,
     constraint operator_intelligence_claim_revisions_policy_fkey
-        foreign key (operator_id, policy_id, policy_version)
+        foreign key (policy_id, policy_version)
         references public.operator_data_policy_versions(
-            operator_id,
             policy_id,
             policy_version
         ),
@@ -203,6 +504,13 @@ create table public.operator_intelligence_claim_revisions (
         check (
             claim_type is null
             or claim_type !~* '(addiction|behavioral-dna|behavioural-dna|burnout|clinical-mental-state|disability|ethnicity|frustration|gender|health|learning-style|motivation|personality|political-belief|protected-characteristic|psychological-conclusion|race|religious-belief|religion|sexuality)'
+        ),
+    constraint operator_intelligence_claim_revisions_initial_family_check
+        check (
+            claim_type is null
+            or claim_type in (
+                'recurring-game-strength', 'recurring-game-weakness'
+            )
         ),
     constraint operator_intelligence_claim_revisions_contract_check
         check (
@@ -294,9 +602,8 @@ create table public.operator_intelligence_eligibility_assessments (
             claim_revision_id
         ) on delete cascade,
     constraint operator_intelligence_eligibility_policy_fkey
-        foreign key (operator_id, policy_id, policy_version)
+        foreign key (policy_id, policy_version)
         references public.operator_data_policy_versions(
-            operator_id,
             policy_id,
             policy_version
         ),
@@ -321,6 +628,28 @@ create table public.operator_intelligence_eligibility_assessments (
 
 create index operator_intelligence_evidence_operator_captured_idx
     on public.operator_intelligence_evidence(operator_id, captured_at desc);
+create index operator_consent_decisions_current_idx
+    on public.operator_consent_decisions(
+        operator_id,
+        purpose,
+        effective_at desc,
+        recorded_at desc
+    );
+create index operator_intelligence_evidence_dispositions_current_idx
+    on public.operator_intelligence_evidence_dispositions(
+        operator_id,
+        evidence_reference_id,
+        effective_at desc,
+        recorded_at desc
+    );
+create index operator_intelligence_evidence_admissions_policy_idx
+    on public.operator_intelligence_evidence_admissions(
+        operator_id,
+        purpose,
+        policy_id,
+        policy_version,
+        admitted_at desc
+    );
 create index operator_intelligence_claim_revisions_operator_status_idx
     on public.operator_intelligence_claim_revisions(
         operator_id,
@@ -341,7 +670,6 @@ create index operator_intelligence_eligibility_current_idx
     );
 
 create or replace function public.register_operator_data_policy_version(
-    p_operator_id uuid,
     p_policy jsonb
 )
 returns jsonb
@@ -352,49 +680,579 @@ as $$
 declare
     existing_contract jsonb;
 begin
-    if auth.uid() is null or not exists (
-        select 1
-        from public.operator_account_bindings binding
-        where binding.account_id = auth.uid()
-          and binding.operator_id = p_operator_id
-    ) then
-        raise exception 'Authenticated Operator ownership is required.'
+    if coalesce(auth.role(), '') <> 'service_role' then
+        raise exception 'Trusted Operator Intelligence authority is required.'
             using errcode = '42501';
     end if;
 
     if (p_policy -> 'contract' ->> 'name') <>
-            'oracle.operator-data-policy-reference'
+            'oracle.operator-data-policy-definition'
        or (p_policy -> 'contract' ->> 'version')::integer <> 1 then
         raise exception 'Unsupported Operator data policy contract.'
             using errcode = '22023';
     end if;
 
     insert into public.operator_data_policy_versions (
-        operator_id,
         policy_id,
         policy_version,
         purpose,
         retention_class,
+        effective_from,
+        effective_until,
+        allowed_claim_types,
+        minimum_evidence_quality,
+        allowed_source_classifications,
+        evidence_reference_days,
+        superseded_claim_revision_days,
+        maximum_claim_validity_days,
+        reassess_after_days,
         policy_contract
     ) values (
-        p_operator_id,
         p_policy ->> 'id',
         p_policy ->> 'policyVersion',
         p_policy ->> 'purpose',
         p_policy ->> 'retentionClass',
+        (p_policy ->> 'effectiveFrom')::timestamptz,
+        (p_policy ->> 'effectiveUntil')::timestamptz,
+        array(select jsonb_array_elements_text(
+            p_policy -> 'allowedClaimTypes'
+        )),
+        (p_policy -> 'evidenceAdmission' ->>
+            'minimumQualityScore')::numeric,
+        array(select jsonb_array_elements_text(
+            p_policy -> 'evidenceAdmission' ->
+                'allowedSourceClassifications'
+        )),
+        (p_policy -> 'retention' ->>
+            'evidenceReferenceDays')::integer,
+        (p_policy -> 'retention' ->>
+            'supersededClaimRevisionDays')::integer,
+        (p_policy -> 'claimLifecycle' ->>
+            'maximumValidityDays')::integer,
+        (p_policy -> 'claimLifecycle' ->>
+            'reassessAfterDays')::integer,
         p_policy
     )
-    on conflict (operator_id, policy_id, policy_version) do nothing;
+    on conflict (policy_id, policy_version) do nothing;
 
     select policy_contract
     into existing_contract
     from public.operator_data_policy_versions
-    where operator_id = p_operator_id
-      and policy_id = p_policy ->> 'id'
+    where policy_id = p_policy ->> 'id'
       and policy_version = p_policy ->> 'policyVersion';
 
     if existing_contract is distinct from p_policy then
         raise exception 'Operator data policy version is immutable.'
+            using errcode = '23505';
+    end if;
+
+    return existing_contract;
+end;
+$$;
+
+create or replace function public.append_operator_consent_decision(
+    p_operator_id uuid,
+    p_consent jsonb
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = pg_catalog
+as $$
+declare
+    current_decision record;
+    existing_contract jsonb;
+begin
+    if coalesce(auth.role(), '') <> 'service_role' then
+        raise exception 'Trusted Operator Intelligence authority is required.'
+            using errcode = '42501';
+    end if;
+
+    if (p_consent -> 'contract' ->> 'name') <>
+            'oracle.operator-consent-decision'
+       or (p_consent -> 'contract' ->> 'version')::integer <> 1
+       or (p_consent ->> 'operatorId')::uuid <> p_operator_id then
+        raise exception 'Invalid Operator consent contract or ownership.'
+            using errcode = '22023';
+    end if;
+
+    if not exists (
+        select 1
+        from public.operator_data_policy_versions policy
+        where policy.policy_id = p_consent ->> 'policyId'
+          and policy.policy_version = p_consent ->> 'policyVersion'
+          and policy.purpose = p_consent ->> 'purpose'
+    ) then
+        raise exception 'Consent must reference an existing purpose policy.'
+            using errcode = '23503';
+    end if;
+
+    select
+        consent_decision_id,
+        effective_at,
+        recorded_at
+    into current_decision
+    from public.operator_consent_decisions
+    where operator_id = p_operator_id
+      and purpose = p_consent ->> 'purpose'
+    order by recorded_at desc, effective_at desc, consent_decision_id desc
+    limit 1
+    for update;
+
+    if not found then
+        if p_consent ->> 'supersedesDecisionId' is not null then
+            raise exception 'Initial consent cannot supersede another decision.'
+                using errcode = '23514';
+        end if;
+    elsif p_consent ->> 'supersedesDecisionId' is distinct from
+            current_decision.consent_decision_id
+       or (p_consent ->> 'effectiveAt')::timestamptz <
+            current_decision.effective_at
+       or (p_consent ->> 'recordedAt')::timestamptz <
+            current_decision.recorded_at then
+        raise exception 'Consent decision does not append to the current history.'
+            using errcode = '40001';
+    end if;
+
+    insert into public.operator_consent_decisions (
+        operator_id,
+        consent_decision_id,
+        purpose,
+        policy_id,
+        policy_version,
+        decision,
+        effective_at,
+        recorded_at,
+        supersedes_decision_id,
+        consent_contract
+    ) values (
+        p_operator_id,
+        p_consent ->> 'id',
+        p_consent ->> 'purpose',
+        p_consent ->> 'policyId',
+        p_consent ->> 'policyVersion',
+        p_consent ->> 'decision',
+        (p_consent ->> 'effectiveAt')::timestamptz,
+        (p_consent ->> 'recordedAt')::timestamptz,
+        p_consent ->> 'supersedesDecisionId',
+        p_consent
+    )
+    on conflict (operator_id, consent_decision_id) do nothing;
+
+    select consent_contract
+    into existing_contract
+    from public.operator_consent_decisions
+    where operator_id = p_operator_id
+      and consent_decision_id = p_consent ->> 'id';
+
+    if existing_contract is distinct from p_consent then
+        raise exception 'Operator consent decisions are immutable.'
+            using errcode = '23505';
+    end if;
+
+    return existing_contract;
+end;
+$$;
+
+create or replace function public.admit_operator_game_session_evidence(
+    p_operator_id uuid,
+    p_evidence jsonb,
+    p_disposition jsonb,
+    p_admission jsonb
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = pg_catalog
+as $$
+declare
+    policy record;
+    current_consent record;
+    existing_evidence jsonb;
+    existing_disposition jsonb;
+    existing_admission jsonb;
+begin
+    if coalesce(auth.role(), '') <> 'service_role' then
+        raise exception 'Trusted Operator Intelligence authority is required.'
+            using errcode = '42501';
+    end if;
+
+    if (p_evidence ->> 'operatorId')::uuid <> p_operator_id
+       or (p_disposition ->> 'operatorId')::uuid <> p_operator_id
+       or (p_admission ->> 'operatorId')::uuid <> p_operator_id then
+        raise exception 'Evidence admission cannot cross Operator ownership.'
+            using errcode = '42501';
+    end if;
+
+    if p_evidence -> 'contract' ->> 'name' <>
+            'oracle.operator-evidence-reference'
+       or (p_evidence -> 'contract' ->> 'version')::integer <> 1
+       or p_disposition -> 'contract' ->> 'name' <>
+            'oracle.operator-evidence-disposition'
+       or (p_disposition -> 'contract' ->> 'version')::integer <> 1
+       or p_admission -> 'contract' ->> 'name' <>
+            'oracle.operator-game-session-evidence-admission'
+       or (p_admission -> 'contract' ->> 'version')::integer <> 1 then
+        raise exception 'Unsupported evidence admission contract.'
+            using errcode = '22023';
+    end if;
+
+    if p_admission ->> 'evidenceReferenceId' is distinct from p_evidence ->> 'id'
+       or p_disposition ->> 'evidenceReferenceId' is distinct from
+            p_evidence ->> 'id'
+       or p_admission ->> 'evidenceDispositionId' is distinct from
+            p_disposition ->> 'id'
+       or p_admission ->> 'sessionId' is distinct from
+            p_evidence -> 'scope' ->> 'sessionId'
+       or p_admission ->> 'sourceRecordId' is distinct from
+            p_evidence ->> 'sourceRecordId'
+       or p_admission ->> 'integrationId' is distinct from
+            p_evidence -> 'scope' ->> 'integrationId'
+       or p_admission ->> 'integrationVersion' is distinct from
+            p_evidence -> 'scope' ->> 'integrationVersion'
+       or p_admission ->> 'purpose' is distinct from p_evidence ->> 'purpose'
+       or p_admission ->> 'policyId' is distinct from p_evidence ->> 'policyId'
+       or p_admission ->> 'policyVersion' is distinct from
+            p_evidence ->> 'policyVersion' then
+        raise exception 'Evidence admission identity and scope do not match.'
+            using errcode = '23514';
+    end if;
+
+    if p_evidence -> 'producer' ->> 'version' !~
+            '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$'
+       or p_admission ->> 'integrationVersion' !~
+            '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$' then
+        raise exception 'Evidence producer and Game Integration versions must be stable semantic versions.'
+            using errcode = '23514';
+    end if;
+
+    select *
+    into policy
+    from public.operator_data_policy_versions policy_version
+    where policy_version.policy_id = p_admission ->> 'policyId'
+      and policy_version.policy_version = p_admission ->> 'policyVersion'
+      and policy_version.purpose = p_admission ->> 'purpose'
+      and (p_admission ->> 'admittedAt')::timestamptz >=
+            policy_version.effective_from
+      and (
+          policy_version.effective_until is null
+          or (p_admission ->> 'admittedAt')::timestamptz <
+                policy_version.effective_until
+      );
+
+    if not found
+       or not ((p_admission ->> 'intendedClaimType') =
+            any(policy.allowed_claim_types))
+       or not ((p_admission ->> 'sourceClassification') =
+            any(policy.allowed_source_classifications))
+       or p_evidence ->> 'retentionClass' is distinct from
+            policy.retention_class
+       or (p_evidence -> 'quality' ->> 'policyId') is distinct from
+            policy.policy_id
+       or (p_evidence -> 'quality' ->> 'policyVersion') is distinct from
+            policy.policy_version
+       or (p_evidence -> 'quality' ->> 'score')::numeric <
+            policy.minimum_evidence_quality then
+        raise exception 'Evidence does not satisfy the effective admission policy.'
+            using errcode = '23514';
+    end if;
+
+    select
+        consent_decision_id,
+        decision,
+        policy_id,
+        policy_version
+    into current_consent
+    from public.operator_consent_decisions
+    where operator_id = p_operator_id
+      and purpose = p_admission ->> 'purpose'
+      and effective_at <= (p_admission ->> 'admittedAt')::timestamptz
+    order by effective_at desc, recorded_at desc, consent_decision_id desc
+    limit 1;
+
+    if not found
+       or current_consent.decision <> 'granted'
+       or current_consent.consent_decision_id is distinct from
+            p_admission ->> 'consentDecisionId'
+       or current_consent.policy_id is distinct from p_admission ->> 'policyId'
+       or current_consent.policy_version is distinct from
+            p_admission ->> 'policyVersion' then
+        raise exception 'Current purpose-specific consent is required.'
+            using errcode = '42501';
+    end if;
+
+    if not exists (
+        select 1
+        from public.oracle_sessions session_record
+        where session_record.id = (p_admission ->> 'sessionId')::uuid
+          and session_record.operator_id = p_operator_id
+    ) then
+        raise exception 'Evidence Session ownership cannot be proven.'
+            using errcode = '42501';
+    end if;
+
+    if p_disposition ->> 'disposition' <> 'available'
+       or p_disposition ->> 'supersedesDispositionId' is not null
+       or (p_evidence ->> 'capturedAt')::timestamptz >
+            (p_admission ->> 'admittedAt')::timestamptz
+       or (p_evidence -> 'quality' ->> 'assessedAt')::timestamptz >
+            (p_admission ->> 'admittedAt')::timestamptz then
+        raise exception 'Initial evidence availability or timing is invalid.'
+            using errcode = '23514';
+    end if;
+
+    if p_admission ->> 'sourceClassification' =
+            'game-integration-direct-observation' then
+        if p_evidence ->> 'sourceType' <> 'game-integration-observation'
+           or p_evidence ->> 'sourceOwnerId' is distinct from
+                p_admission ->> 'integrationId'
+           or p_evidence -> 'producer' ->> 'method' <> 'direct-observation'
+           or p_evidence -> 'producer' ->> 'id' is distinct from
+                p_admission ->> 'integrationId'
+           or p_evidence -> 'producer' ->> 'version' is distinct from
+                p_admission ->> 'integrationVersion' then
+            raise exception 'Direct observation provenance is invalid.'
+                using errcode = '23514';
+        end if;
+    elsif p_evidence ->> 'sourceType' <> 'session'
+          or p_evidence -> 'producer' ->> 'method' <>
+                'deterministic-transformation' then
+        raise exception 'Deterministic Session provenance is invalid.'
+            using errcode = '23514';
+    end if;
+
+    insert into public.operator_intelligence_evidence (
+        operator_id,
+        evidence_reference_id,
+        source_type,
+        source_owner_id,
+        source_record_id,
+        observed_at,
+        captured_at,
+        purpose,
+        producer_id,
+        producer_version,
+        producer_method,
+        session_id,
+        integration_id,
+        integration_version,
+        evidence_quality_score,
+        content_digest,
+        retention_class,
+        policy_id,
+        policy_version,
+        evidence_contract
+    ) values (
+        p_operator_id,
+        p_evidence ->> 'id',
+        p_evidence ->> 'sourceType',
+        p_evidence ->> 'sourceOwnerId',
+        p_evidence ->> 'sourceRecordId',
+        (p_evidence ->> 'observedAt')::timestamptz,
+        (p_evidence ->> 'capturedAt')::timestamptz,
+        p_evidence ->> 'purpose',
+        p_evidence -> 'producer' ->> 'id',
+        p_evidence -> 'producer' ->> 'version',
+        p_evidence -> 'producer' ->> 'method',
+        (p_evidence -> 'scope' ->> 'sessionId')::uuid,
+        p_evidence -> 'scope' ->> 'integrationId',
+        p_evidence -> 'scope' ->> 'integrationVersion',
+        (p_evidence -> 'quality' ->> 'score')::numeric,
+        p_evidence ->> 'contentDigest',
+        p_evidence ->> 'retentionClass',
+        p_evidence ->> 'policyId',
+        p_evidence ->> 'policyVersion',
+        p_evidence
+    )
+    on conflict (operator_id, evidence_reference_id) do nothing;
+
+    select evidence_contract
+    into existing_evidence
+    from public.operator_intelligence_evidence
+    where operator_id = p_operator_id
+      and evidence_reference_id = p_evidence ->> 'id';
+
+    if existing_evidence is distinct from p_evidence then
+        raise exception 'Operator evidence references are immutable.'
+            using errcode = '23505';
+    end if;
+
+    insert into public.operator_intelligence_evidence_dispositions (
+        operator_id,
+        evidence_reference_id,
+        disposition_id,
+        disposition,
+        reason,
+        effective_at,
+        recorded_at,
+        supersedes_disposition_id,
+        disposition_contract
+    ) values (
+        p_operator_id,
+        p_disposition ->> 'evidenceReferenceId',
+        p_disposition ->> 'id',
+        p_disposition ->> 'disposition',
+        p_disposition ->> 'reason',
+        (p_disposition ->> 'effectiveAt')::timestamptz,
+        (p_disposition ->> 'recordedAt')::timestamptz,
+        p_disposition ->> 'supersedesDispositionId',
+        p_disposition
+    )
+    on conflict (
+        operator_id,
+        evidence_reference_id,
+        disposition_id
+    ) do nothing;
+
+    select disposition_contract
+    into existing_disposition
+    from public.operator_intelligence_evidence_dispositions
+    where operator_id = p_operator_id
+      and evidence_reference_id = p_disposition ->> 'evidenceReferenceId'
+      and disposition_id = p_disposition ->> 'id';
+
+    if existing_disposition is distinct from p_disposition then
+        raise exception 'Evidence dispositions are immutable.'
+            using errcode = '23505';
+    end if;
+
+    insert into public.operator_intelligence_evidence_admissions (
+        operator_id,
+        admission_id,
+        evidence_reference_id,
+        evidence_disposition_id,
+        session_id,
+        source_record_id,
+        integration_id,
+        integration_version,
+        purpose,
+        intended_claim_type,
+        source_classification,
+        policy_id,
+        policy_version,
+        consent_decision_id,
+        admitted_at,
+        admission_contract
+    ) values (
+        p_operator_id,
+        p_admission ->> 'id',
+        p_admission ->> 'evidenceReferenceId',
+        p_admission ->> 'evidenceDispositionId',
+        (p_admission ->> 'sessionId')::uuid,
+        p_admission ->> 'sourceRecordId',
+        p_admission ->> 'integrationId',
+        p_admission ->> 'integrationVersion',
+        p_admission ->> 'purpose',
+        p_admission ->> 'intendedClaimType',
+        p_admission ->> 'sourceClassification',
+        p_admission ->> 'policyId',
+        p_admission ->> 'policyVersion',
+        p_admission ->> 'consentDecisionId',
+        (p_admission ->> 'admittedAt')::timestamptz,
+        p_admission
+    )
+    on conflict (operator_id, admission_id) do nothing;
+
+    select admission_contract
+    into existing_admission
+    from public.operator_intelligence_evidence_admissions
+    where operator_id = p_operator_id
+      and admission_id = p_admission ->> 'id';
+
+    if existing_admission is distinct from p_admission then
+        raise exception 'Evidence admissions are immutable.'
+            using errcode = '23505';
+    end if;
+
+    return existing_admission;
+end;
+$$;
+
+create or replace function public.append_operator_evidence_disposition(
+    p_operator_id uuid,
+    p_disposition jsonb
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = pg_catalog
+as $$
+declare
+    current_disposition record;
+    existing_contract jsonb;
+begin
+    if coalesce(auth.role(), '') <> 'service_role' then
+        raise exception 'Trusted Operator Intelligence authority is required.'
+            using errcode = '42501';
+    end if;
+
+    if (p_disposition ->> 'operatorId')::uuid <> p_operator_id
+       or p_disposition -> 'contract' ->> 'name' <>
+            'oracle.operator-evidence-disposition'
+       or (p_disposition -> 'contract' ->> 'version')::integer <> 1 then
+        raise exception 'Invalid evidence disposition contract or ownership.'
+            using errcode = '22023';
+    end if;
+
+    select
+        disposition_id,
+        effective_at,
+        recorded_at
+    into current_disposition
+    from public.operator_intelligence_evidence_dispositions
+    where operator_id = p_operator_id
+      and evidence_reference_id = p_disposition ->> 'evidenceReferenceId'
+    order by recorded_at desc, effective_at desc, disposition_id desc
+    limit 1
+    for update;
+
+    if not found
+       or p_disposition ->> 'supersedesDispositionId' is distinct from
+            current_disposition.disposition_id
+       or (p_disposition ->> 'effectiveAt')::timestamptz <
+            current_disposition.effective_at
+       or (p_disposition ->> 'recordedAt')::timestamptz <
+            current_disposition.recorded_at then
+        raise exception 'Disposition does not append to current evidence history.'
+            using errcode = '40001';
+    end if;
+
+    insert into public.operator_intelligence_evidence_dispositions (
+        operator_id,
+        evidence_reference_id,
+        disposition_id,
+        disposition,
+        reason,
+        effective_at,
+        recorded_at,
+        supersedes_disposition_id,
+        disposition_contract
+    ) values (
+        p_operator_id,
+        p_disposition ->> 'evidenceReferenceId',
+        p_disposition ->> 'id',
+        p_disposition ->> 'disposition',
+        p_disposition ->> 'reason',
+        (p_disposition ->> 'effectiveAt')::timestamptz,
+        (p_disposition ->> 'recordedAt')::timestamptz,
+        p_disposition ->> 'supersedesDispositionId',
+        p_disposition
+    )
+    on conflict (
+        operator_id,
+        evidence_reference_id,
+        disposition_id
+    ) do nothing;
+
+    select disposition_contract
+    into existing_contract
+    from public.operator_intelligence_evidence_dispositions
+    where operator_id = p_operator_id
+      and evidence_reference_id = p_disposition ->> 'evidenceReferenceId'
+      and disposition_id = p_disposition ->> 'id';
+
+    if existing_contract is distinct from p_disposition then
+        raise exception 'Evidence dispositions are immutable.'
             using errcode = '23505';
     end if;
 
@@ -415,25 +1273,39 @@ as $$
 declare
     evidence_item jsonb;
     evidence_link jsonb;
-    existing_evidence jsonb;
     current_claim record;
     claim_existed boolean := false;
     revision_contract jsonb;
     eligibility jsonb;
 begin
-    if auth.uid() is null or not exists (
-        select 1
-        from public.operator_account_bindings binding
-        where binding.account_id = auth.uid()
-          and binding.operator_id = p_operator_id
-    ) then
-        raise exception 'Authenticated Operator ownership is required.'
+    if coalesce(auth.role(), '') <> 'service_role' then
+        raise exception 'Trusted Operator Intelligence authority is required.'
             using errcode = '42501';
     end if;
 
     if (p_claim_revision ->> 'operatorId')::uuid <> p_operator_id then
         raise exception 'Claim revision Operator ownership does not match.'
             using errcode = '42501';
+    end if;
+
+    revision_contract := p_claim_revision - 'evidence' - 'eligibility';
+    eligibility := p_claim_revision -> 'eligibility';
+
+    if p_claim_revision ->> 'status' <> 'deleted'
+       and coalesce(array_length(p_evidence, 1), 0) = 0 then
+        raise exception 'Durable intelligence requires admitted evidence.'
+            using errcode = '23514';
+    end if;
+
+    if p_claim_revision ->> 'status' <> 'deleted'
+       and (
+           jsonb_typeof(p_claim_revision -> 'evidence') is distinct from 'array'
+           or jsonb_array_length(p_claim_revision -> 'evidence') < 1
+           or jsonb_array_length(p_claim_revision -> 'evidence') <>
+                coalesce(array_length(p_evidence, 1), 0)
+       ) then
+        raise exception 'Claim evidence links must exactly match admitted evidence.'
+            using errcode = '23514';
     end if;
 
     foreach evidence_item in array coalesce(p_evidence, array[]::jsonb[])
@@ -443,50 +1315,50 @@ begin
                 using errcode = '42501';
         end if;
 
-        insert into public.operator_intelligence_evidence (
-            operator_id,
-            evidence_reference_id,
-            source_type,
-            source_owner_id,
-            source_record_id,
-            observed_at,
-            captured_at,
-            purpose,
-            producer_id,
-            producer_version,
-            content_digest,
-            retention_class,
-            policy_id,
-            policy_version,
-            evidence_contract
-        ) values (
-            p_operator_id,
-            evidence_item ->> 'id',
-            evidence_item ->> 'sourceType',
-            evidence_item ->> 'sourceOwnerId',
-            evidence_item ->> 'sourceRecordId',
-            (evidence_item ->> 'observedAt')::timestamptz,
-            (evidence_item ->> 'capturedAt')::timestamptz,
-            evidence_item ->> 'purpose',
-            evidence_item -> 'producer' ->> 'id',
-            evidence_item -> 'producer' ->> 'version',
-            evidence_item ->> 'contentDigest',
-            evidence_item ->> 'retentionClass',
-            evidence_item ->> 'policyId',
-            evidence_item ->> 'policyVersion',
-            evidence_item
-        )
-        on conflict (operator_id, evidence_reference_id) do nothing;
-
-        select evidence_contract
-        into existing_evidence
-        from public.operator_intelligence_evidence
-        where operator_id = p_operator_id
-          and evidence_reference_id = evidence_item ->> 'id';
-
-        if existing_evidence is distinct from evidence_item then
-            raise exception 'Operator evidence reference is immutable.'
-                using errcode = '23505';
+        if not exists (
+            select 1
+            from public.operator_intelligence_evidence evidence_record
+            join public.operator_intelligence_evidence_admissions admission
+              on admission.operator_id = evidence_record.operator_id
+             and admission.evidence_reference_id =
+                    evidence_record.evidence_reference_id
+            where evidence_record.operator_id = p_operator_id
+              and evidence_record.evidence_reference_id = evidence_item ->> 'id'
+              and evidence_record.evidence_contract = evidence_item
+              and admission.intended_claim_type = p_claim_revision ->> 'type'
+              and admission.purpose = eligibility ->> 'purpose'
+              and admission.policy_id = p_claim_revision ->> 'policyId'
+              and admission.policy_version =
+                    p_claim_revision ->> 'policyVersion'
+              and (
+                  select consent.decision
+                  from public.operator_consent_decisions consent
+                  where consent.operator_id = p_operator_id
+                    and consent.purpose = admission.purpose
+                    and consent.effective_at <=
+                        (eligibility ->> 'assessedAt')::timestamptz
+                  order by consent.effective_at desc,
+                      consent.recorded_at desc,
+                      consent.consent_decision_id desc
+                  limit 1
+              ) = 'granted'
+              and (
+                  select disposition.disposition
+                  from public.operator_intelligence_evidence_dispositions
+                      disposition
+                  where disposition.operator_id = p_operator_id
+                    and disposition.evidence_reference_id =
+                        evidence_record.evidence_reference_id
+                    and disposition.effective_at <=
+                        (eligibility ->> 'assessedAt')::timestamptz
+                  order by disposition.effective_at desc,
+                      disposition.recorded_at desc,
+                      disposition.disposition_id desc
+                  limit 1
+              ) = 'available'
+        ) then
+            raise exception 'Claim evidence is not currently admitted.'
+                using errcode = '23514';
         end if;
     end loop;
 
@@ -553,9 +1425,6 @@ begin
                 using errcode = '23514';
         end if;
     end if;
-
-    revision_contract := p_claim_revision - 'evidence' - 'eligibility';
-    eligibility := p_claim_revision -> 'eligibility';
 
     if p_claim_revision ->> 'status' = 'deleted' then
         if eligibility is not null then
@@ -626,6 +1495,16 @@ begin
             coalesce(p_claim_revision -> 'evidence', '[]'::jsonb)
         )
     loop
+        if not exists (
+            select 1
+            from unnest(coalesce(p_evidence, array[]::jsonb[])) evidence_record
+            where evidence_record ->> 'id' =
+                evidence_link ->> 'evidenceReferenceId'
+        ) then
+            raise exception 'Every claim evidence link must be admitted and supplied.'
+                using errcode = '23514';
+        end if;
+
         insert into public.operator_intelligence_claim_evidence (
             operator_id,
             claim_id,
@@ -694,15 +1573,92 @@ language plpgsql
 security definer
 set search_path = pg_catalog
 as $$
+declare
+    claim_record record;
 begin
-    if auth.uid() is null or not exists (
-        select 1
-        from public.operator_account_bindings binding
-        where binding.account_id = auth.uid()
-          and binding.operator_id = p_operator_id
-    ) then
-        raise exception 'Authenticated Operator ownership is required.'
+    if coalesce(auth.role(), '') <> 'service_role' then
+        raise exception 'Trusted Operator Intelligence authority is required.'
             using errcode = '42501';
+    end if;
+
+    select revision.status, revision.claim_type, revision.policy_id,
+        revision.policy_version
+    into claim_record
+    from public.operator_intelligence_claim_revisions revision
+    where revision.operator_id = p_operator_id
+      and revision.claim_id = p_claim_id
+      and revision.claim_revision_id = p_claim_revision_id;
+
+    if not found
+       or claim_record.policy_id is distinct from p_eligibility ->> 'policyId'
+       or claim_record.policy_version is distinct from
+            p_eligibility ->> 'policyVersion' then
+        raise exception 'Eligibility must reference the owned claim policy.'
+            using errcode = '23514';
+    end if;
+
+    if (p_eligibility ->> 'eligible')::boolean and (
+        claim_record.status <> 'active'
+        or not exists (
+            select 1
+            from public.operator_consent_decisions consent
+            where consent.operator_id = p_operator_id
+              and consent.purpose = p_eligibility ->> 'purpose'
+              and consent.policy_id = p_eligibility ->> 'policyId'
+              and consent.policy_version = p_eligibility ->> 'policyVersion'
+              and consent.decision = 'granted'
+              and consent.effective_at <=
+                    (p_eligibility ->> 'assessedAt')::timestamptz
+              and not exists (
+                  select 1
+                  from public.operator_consent_decisions later
+                  where later.operator_id = consent.operator_id
+                    and later.purpose = consent.purpose
+                    and later.effective_at <=
+                        (p_eligibility ->> 'assessedAt')::timestamptz
+                    and (
+                        later.effective_at > consent.effective_at
+                        or (later.effective_at = consent.effective_at
+                            and later.recorded_at > consent.recorded_at)
+                    )
+              )
+        )
+        or exists (
+            select 1
+            from public.operator_intelligence_claim_evidence link
+            where link.operator_id = p_operator_id
+              and link.claim_id = p_claim_id
+              and link.claim_revision_id = p_claim_revision_id
+              and not exists (
+                  select 1
+                  from public.operator_intelligence_evidence_admissions admission
+                  where admission.operator_id = link.operator_id
+                    and admission.evidence_reference_id =
+                        link.evidence_reference_id
+                    and admission.purpose = p_eligibility ->> 'purpose'
+                    and admission.intended_claim_type = claim_record.claim_type
+                    and admission.policy_id = p_eligibility ->> 'policyId'
+                    and admission.policy_version =
+                        p_eligibility ->> 'policyVersion'
+                    and (
+                        select disposition.disposition
+                        from public.operator_intelligence_evidence_dispositions
+                            disposition
+                        where disposition.operator_id = link.operator_id
+                          and disposition.evidence_reference_id =
+                            link.evidence_reference_id
+                          and disposition.effective_at <=
+                            (p_eligibility ->> 'assessedAt')::timestamptz
+                        order by disposition.effective_at desc,
+                            disposition.recorded_at desc,
+                            disposition.disposition_id desc
+                        limit 1
+                    ) = 'available'
+              )
+        )
+    ) then
+        raise exception 'Eligible intelligence requires current consent and evidence.'
+            using errcode = '23514';
     end if;
 
     insert into public.operator_intelligence_eligibility_assessments (
@@ -734,19 +1690,28 @@ end;
 $$;
 
 alter table public.operator_data_policy_versions enable row level security;
+alter table public.operator_consent_decisions enable row level security;
 alter table public.operator_intelligence_evidence enable row level security;
+alter table public.operator_intelligence_evidence_dispositions
+    enable row level security;
+alter table public.operator_intelligence_evidence_admissions
+    enable row level security;
 alter table public.operator_intelligence_claims enable row level security;
 alter table public.operator_intelligence_claim_revisions enable row level security;
 alter table public.operator_intelligence_claim_evidence enable row level security;
 alter table public.operator_intelligence_eligibility_assessments enable row level security;
 
-create policy operator_data_policy_versions_select_own
+create policy operator_data_policy_versions_select_authenticated
     on public.operator_data_policy_versions
+    for select to authenticated
+    using (true);
+create policy operator_consent_decisions_select_own
+    on public.operator_consent_decisions
     for select to authenticated
     using (exists (
         select 1 from public.operator_account_bindings binding
         where binding.account_id = (select auth.uid())
-          and binding.operator_id = operator_data_policy_versions.operator_id
+          and binding.operator_id = operator_consent_decisions.operator_id
     ));
 create policy operator_intelligence_evidence_select_own
     on public.operator_intelligence_evidence
@@ -755,6 +1720,24 @@ create policy operator_intelligence_evidence_select_own
         select 1 from public.operator_account_bindings binding
         where binding.account_id = (select auth.uid())
           and binding.operator_id = operator_intelligence_evidence.operator_id
+    ));
+create policy operator_intelligence_evidence_dispositions_select_own
+    on public.operator_intelligence_evidence_dispositions
+    for select to authenticated
+    using (exists (
+        select 1 from public.operator_account_bindings binding
+        where binding.account_id = (select auth.uid())
+          and binding.operator_id =
+            operator_intelligence_evidence_dispositions.operator_id
+    ));
+create policy operator_intelligence_evidence_admissions_select_own
+    on public.operator_intelligence_evidence_admissions
+    for select to authenticated
+    using (exists (
+        select 1 from public.operator_account_bindings binding
+        where binding.account_id = (select auth.uid())
+          and binding.operator_id =
+            operator_intelligence_evidence_admissions.operator_id
     ));
 create policy operator_intelligence_claims_select_own
     on public.operator_intelligence_claims
@@ -791,7 +1774,13 @@ create policy operator_intelligence_eligibility_select_own
 
 revoke all privileges on table public.operator_data_policy_versions
     from public, anon, authenticated, service_role;
+revoke all privileges on table public.operator_consent_decisions
+    from public, anon, authenticated, service_role;
 revoke all privileges on table public.operator_intelligence_evidence
+    from public, anon, authenticated, service_role;
+revoke all privileges on table public.operator_intelligence_evidence_dispositions
+    from public, anon, authenticated, service_role;
+revoke all privileges on table public.operator_intelligence_evidence_admissions
     from public, anon, authenticated, service_role;
 revoke all privileges on table public.operator_intelligence_claims
     from public, anon, authenticated, service_role;
@@ -802,25 +1791,48 @@ revoke all privileges on table public.operator_intelligence_claim_evidence
 revoke all privileges on table public.operator_intelligence_eligibility_assessments
     from public, anon, authenticated, service_role;
 
-grant select on table public.operator_data_policy_versions to authenticated;
-grant select on table public.operator_intelligence_evidence to authenticated;
-grant select on table public.operator_intelligence_claims to authenticated;
-grant select on table public.operator_intelligence_claim_revisions to authenticated;
-grant select on table public.operator_intelligence_claim_evidence to authenticated;
+grant select on table public.operator_data_policy_versions
+    to authenticated, service_role;
+grant select on table public.operator_consent_decisions
+    to authenticated, service_role;
+grant select on table public.operator_intelligence_evidence
+    to authenticated, service_role;
+grant select on table public.operator_intelligence_evidence_dispositions
+    to authenticated, service_role;
+grant select on table public.operator_intelligence_evidence_admissions
+    to authenticated, service_role;
+grant select on table public.operator_intelligence_claims
+    to authenticated, service_role;
+grant select on table public.operator_intelligence_claim_revisions
+    to authenticated, service_role;
+grant select on table public.operator_intelligence_claim_evidence
+    to authenticated, service_role;
 grant select on table public.operator_intelligence_eligibility_assessments
-    to authenticated;
+    to authenticated, service_role;
 
-revoke all privileges on function public.register_operator_data_policy_version(uuid, jsonb)
+revoke all privileges on function public.register_operator_data_policy_version(jsonb)
+    from public, anon, authenticated, service_role;
+revoke all privileges on function public.append_operator_consent_decision(uuid, jsonb)
+    from public, anon, authenticated, service_role;
+revoke all privileges on function public.admit_operator_game_session_evidence(uuid, jsonb, jsonb, jsonb)
+    from public, anon, authenticated, service_role;
+revoke all privileges on function public.append_operator_evidence_disposition(uuid, jsonb)
     from public, anon, authenticated, service_role;
 revoke all privileges on function public.persist_operator_intelligence_claim_revision(uuid, jsonb[], jsonb)
     from public, anon, authenticated, service_role;
 revoke all privileges on function public.append_operator_intelligence_eligibility(uuid, text, text, jsonb)
     from public, anon, authenticated, service_role;
-grant execute on function public.register_operator_data_policy_version(uuid, jsonb)
-    to authenticated;
+grant execute on function public.register_operator_data_policy_version(jsonb)
+    to service_role;
+grant execute on function public.append_operator_consent_decision(uuid, jsonb)
+    to service_role;
+grant execute on function public.admit_operator_game_session_evidence(uuid, jsonb, jsonb, jsonb)
+    to service_role;
+grant execute on function public.append_operator_evidence_disposition(uuid, jsonb)
+    to service_role;
 grant execute on function public.persist_operator_intelligence_claim_revision(uuid, jsonb[], jsonb)
-    to authenticated;
+    to service_role;
 grant execute on function public.append_operator_intelligence_eligibility(uuid, text, text, jsonb)
-    to authenticated;
+    to service_role;
 
 commit;

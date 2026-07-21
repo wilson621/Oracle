@@ -8,16 +8,14 @@ import type {
 } from "../../understanding";
 
 export type OperatorIntelligenceClaimQuery = Readonly<{
-  operatorId: string;
   purpose: OperatorUnderstandingPurpose;
   asOf: string;
   scope: OperatorUnderstandingScope | null;
 }>;
 
 export type OperatorIntelligenceCandidateSubmission = Readonly<{
-  operatorId: string;
-  evidenceReferences: readonly OperatorEvidenceReference[];
-  claim: OperatorIntelligenceClaimRevision &
+  evidenceReferences: readonly Omit<OperatorEvidenceReference, "operatorId">[];
+  claim: Omit<OperatorIntelligenceClaimRevision, "operatorId"> &
     Readonly<{
       status: "candidate";
       epistemic: "suspected";
@@ -26,7 +24,6 @@ export type OperatorIntelligenceCandidateSubmission = Readonly<{
 }>;
 
 export type OperatorIntelligenceTransitionRequest = Readonly<{
-  operatorId: string;
   claimId: string;
   fromRevisionId: string;
   fromStatus: OperatorClaimLifecycleStatus;
@@ -35,8 +32,9 @@ export type OperatorIntelligenceTransitionRequest = Readonly<{
 }>;
 
 /**
- * Service-owned claim and evidence lifecycle contract. Persistence remains a
- * future Repository responsibility; engines never implement this interface.
+ * Exclusive durable Operator Intelligence authority. Implementations resolve
+ * the current authenticated Operator through Operator Service; Applications
+ * and producers cannot select an Operator or access persistence directly.
  */
 export type OperatorIntelligenceService = Readonly<{
   listEligibleClaims(

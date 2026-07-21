@@ -1,11 +1,17 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import {
-  createOperatorDataPolicyReference,
+  OPERATOR_GAME_SESSION_EVIDENCE_ADMISSION_CONTRACT,
+  createOperatorConsentDecision,
+  createOperatorDataPolicyDefinition,
+  createOperatorEvidenceDisposition,
   createOperatorEvidenceReference,
   createOperatorIntelligenceClaimRevision,
   createOperatorIntelligenceClaimTombstone,
-  type OperatorDataPolicyReference,
+  type OperatorConsentDecision,
+  type OperatorDataPolicyDefinition,
+  type OperatorEvidenceDisposition,
   type OperatorEvidenceReference,
+  type OperatorGameSessionEvidenceAdmission,
   type OperatorIntelligenceClaimRevision,
   type OperatorIntelligenceClaimTombstone,
   type OperatorUnderstandingEligibility,
@@ -20,10 +26,23 @@ export type OperatorIntelligencePersistenceQuery = Readonly<{
 }>;
 
 export interface OperatorIntelligenceRepository {
-  registerPolicyVersion(
+  registerPolicyDefinition(
+    policy: OperatorDataPolicyDefinition
+  ): Promise<OperatorDataPolicyDefinition>;
+  appendConsentDecision(
     operatorId: string,
-    policy: OperatorDataPolicyReference
-  ): Promise<OperatorDataPolicyReference>;
+    decision: OperatorConsentDecision
+  ): Promise<OperatorConsentDecision>;
+  admitGameSessionEvidence(
+    operatorId: string,
+    evidence: OperatorEvidenceReference,
+    disposition: OperatorEvidenceDisposition,
+    admission: OperatorGameSessionEvidenceAdmission
+  ): Promise<OperatorGameSessionEvidenceAdmission>;
+  appendEvidenceDisposition(
+    operatorId: string,
+    disposition: OperatorEvidenceDisposition
+  ): Promise<OperatorEvidenceDisposition>;
   persistClaimRevision(
     operatorId: string,
     evidenceReferences: readonly OperatorEvidenceReference[],
@@ -79,15 +98,13 @@ export class SupabaseOperatorIntelligenceRepository
 {
   constructor(private readonly client: SupabaseClient) {}
 
-  async registerPolicyVersion(
-    operatorId: string,
-    policy: OperatorDataPolicyReference
-  ): Promise<OperatorDataPolicyReference> {
-    const validatedPolicy = createOperatorDataPolicyReference(policy);
+  async registerPolicyDefinition(
+    policy: OperatorDataPolicyDefinition
+  ): Promise<OperatorDataPolicyDefinition> {
+    const validatedPolicy = createOperatorDataPolicyDefinition(policy);
     const { data, error } = await this.client.rpc(
       "register_operator_data_policy_version",
       {
-        p_operator_id: operatorId,
         p_policy: validatedPolicy,
       }
     );
@@ -96,7 +113,92 @@ export class SupabaseOperatorIntelligenceRepository
       throw error;
     }
 
-    return createOperatorDataPolicyReference(data);
+    return createOperatorDataPolicyDefinition(data);
+  }
+
+  async appendConsentDecision(
+    operatorId: string,
+    decision: OperatorConsentDecision
+  ): Promise<OperatorConsentDecision> {
+    const validatedDecision = createOperatorConsentDecision(decision);
+    assertOperatorOwnership(operatorId, [validatedDecision]);
+    const { data, error } = await this.client.rpc(
+      "append_operator_consent_decision",
+      {
+        p_operator_id: operatorId,
+        p_consent: validatedDecision,
+      }
+    );
+
+    if (error) {
+      throw error;
+    }
+
+    return createOperatorConsentDecision(data);
+  }
+
+  async admitGameSessionEvidence(
+    operatorId: string,
+    evidence: OperatorEvidenceReference,
+    disposition: OperatorEvidenceDisposition,
+    admission: OperatorGameSessionEvidenceAdmission
+  ): Promise<OperatorGameSessionEvidenceAdmission> {
+    const validatedEvidence = createOperatorEvidenceReference(evidence);
+    const validatedDisposition = createOperatorEvidenceDisposition(disposition);
+    assertAdmissionBundle(
+      operatorId,
+      validatedEvidence,
+      validatedDisposition,
+      admission
+    );
+    const { data, error } = await this.client.rpc(
+      "admit_operator_game_session_evidence",
+      {
+        p_operator_id: operatorId,
+        p_evidence: validatedEvidence,
+        p_disposition: validatedDisposition,
+        p_admission: admission,
+      }
+    );
+
+    if (error) {
+      throw error;
+    }
+
+    assertAdmissionBundle(
+      operatorId,
+      validatedEvidence,
+      validatedDisposition,
+      data as OperatorGameSessionEvidenceAdmission
+    );
+
+    const persistedAdmission = structuredClone(
+      data as OperatorGameSessionEvidenceAdmission
+    );
+
+    Object.freeze(persistedAdmission.contract);
+    return Object.freeze(persistedAdmission);
+  }
+
+  async appendEvidenceDisposition(
+    operatorId: string,
+    disposition: OperatorEvidenceDisposition
+  ): Promise<OperatorEvidenceDisposition> {
+    const validatedDisposition = createOperatorEvidenceDisposition(disposition);
+    assertOperatorOwnership(operatorId, [validatedDisposition]);
+    const { data, error } = await this.client.rpc(
+      "append_operator_evidence_disposition",
+      {
+        p_operator_id: operatorId,
+        p_disposition: validatedDisposition,
+      }
+    );
+
+    if (error) {
+      throw error;
+    }
+
+    return createOperatorEvidenceDisposition(data);
   }
 
   async persistClaimRevision(
@@ -355,6 +457,35 @@ function assertOperatorOwnership(
   if (values.some((value) => value.operatorId !== operatorId)) {
     throw new Error(
       "Operator Intelligence persistence cannot cross Operator ownership."
+    );
+  }
+}
+
+function assertAdmissionBundle(
+  operatorId: string,
+  evidence: OperatorEvidenceReference,
+  disposition: OperatorEvidenceDisposition,
+  admission: OperatorGameSessionEvidenceAdmission
+): void {
+  assertOperatorOwnership(operatorId, [evidence, disposition, admission]);
+
+  if (
+    admission.contract.name !== OPERATOR_GAME_SESSION_EVIDENCE_ADMISSION_CONTRACT ||
+    admission.contract.version !== 1 ||
+    disposition.evidenceReferenceId !== evidence.id ||
+    admission.evidenceReferenceId !== evidence.id ||
+    admission.evidenceDispositionId !== disposition.id ||
+    admission.sourceRecordId !== evidence.sourceRecordId ||
+    admission.purpose !== evidence.purpose ||
+    admission.policyId !== evidence.policyId ||
+    admission.policyVersion !== evidence.policyVersion ||
+    evidence.scope.type !== "session" ||
+    admission.sessionId !== evidence.scope.sessionId ||
+    admission.integrationId !== evidence.scope.integrationId ||
+    admission.integrationVersion !== evidence.scope.integrationVersion
+  ) {
+    throw new Error(
+      "Operator Intelligence evidence admission bundle is inconsistent."
     );
   }
 }
