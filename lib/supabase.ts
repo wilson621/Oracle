@@ -1,9 +1,6 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase-client";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
-export const supabase = createClient(
-  supabaseUrl,
-  supabaseAnonKey
-);
+// All browser persistence uses the SSR-aware client so authenticated Operator
+// scope and RLS apply consistently to legacy repository adapters as they are
+// migrated behind Services.
+export const supabase = createClient();

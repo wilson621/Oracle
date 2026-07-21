@@ -39,7 +39,7 @@ export default function OnboardingPage() {
   async function handleComplete(callsign: string) {
     if (!operator) return;
 
-    await completeOperatorCommissioning(operator.id, callsign);
+    await completeOperatorCommissioning(callsign);
 
     router.replace("/operator");
   }

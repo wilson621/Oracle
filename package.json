@@ -15,6 +15,8 @@
 
   "architecture:audit": "node scripts/audit-dependency-boundaries.mjs",
 
+  "operator:ownership:verify": "tsc -p tsconfig.operator-ownership-verification.json && node .tmp-operator-ownership-verification/scripts/verify-operator-ownership.js && node -e \"require('node:fs').rmSync('.tmp-operator-ownership-verification', { recursive: true, force: true })\"",
+
   "guidance:verify": "tsc -p tsconfig.guidance-verification.json && node .tmp-guidance-verification/scripts/verify-companion-guidance-contracts.js && node .tmp-guidance-verification/scripts/verify-companion-guidance-service.js && node .tmp-guidance-verification/scripts/verify-call-of-duty-guidance-provider.js && node .tmp-guidance-verification/scripts/verify-companion-guidance-application.js && node -e \"require('node:fs').rmSync('.tmp-guidance-verification', { recursive: true, force: true })\"",
 
   "companion:presentation:verify": "node scripts/verify-companion-guidance-presentation.mjs",

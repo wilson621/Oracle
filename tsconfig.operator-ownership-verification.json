@@ -1,0 +1,26 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "lib": ["ES2022"],
+    "types": ["node"],
+    "rootDir": ".",
+    "outDir": "./.tmp-operator-ownership-verification",
+    "noEmit": false,
+    "isolatedModules": false,
+    "incremental": false
+  },
+  "include": [
+    "lib/oracle/repositories/operator-repository.ts",
+    "lib/oracle/services/operator/operator-service-types.ts",
+    "lib/oracle/services/operator/operator-service.ts",
+    "scripts/verify-operator-ownership.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist-electron"
+  ]
+}

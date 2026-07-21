@@ -11,7 +11,7 @@
 **Supersedes:** Archived Oracle Codex versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 3.1
+**Version:** 3.2
 
 ---
 
@@ -2487,6 +2487,52 @@ A release build must also pass before an authorised push or product release
 tag.
 
 A green build is non-negotiable.
+
+---
+
+# Database Migration Discipline
+
+Every production database migration follows this sequence:
+
+```text
+Implementation
+        ↓
+Rollback Validation
+        ↓
+Independent Catalog Verification
+        ↓
+Founder Approval
+        ↓
+Permanent Deployment
+        ↓
+Security Verification
+        ↓
+Authenticated Isolation Verification
+        ↓
+Founder Closure
+        ↓
+Commit
+```
+
+Implementation begins from an audited deployed schema rather than assuming
+tracked SQL is authoritative. Rollback validation executes the exact proposed
+migration inside an explicit transaction that ends in `ROLLBACK`. Independent
+catalog verification confirms that validation left the deployed schema,
+policies and data unchanged.
+
+Permanent deployment requires explicit founder approval after rollback and
+catalog evidence. After deployment, security verification rechecks schema
+objects, constraints, indexes, grants, functions, triggers, RLS and policies.
+Authenticated isolation verification uses approved principals to demonstrate
+the ownership boundary independently of application-side filtering.
+
+If a permanent migration fails, stop after reporting the exact failure. Do not
+repair, rerun or apply a second migration without a new review and approval.
+The implementation commit is created only after founder closure.
+
+Permanent database verification fixtures must be clearly identified, narrowly
+scoped and reserved exclusively for their approved regression purpose. Their
+credentials must never be committed.
 
 ---
 

@@ -10,8 +10,9 @@
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
 **Verified Branch:** `sprint-9-overlay`
-**Verified Repository Baseline:** `01a4bdb`
+**Verified Repository Baseline:** `d9d78c94acbc628fbbc35f4a42ba970d02b2f9e9`
 **Sprint 14 Implementation Baseline:** `3868975`
+**Sprint 15 Phase 1:** Verified and approved for closure commit
 
 ---
 
@@ -32,6 +33,37 @@ repository, this document records the verified implementation and identifies
 the disagreement for review.
 
 Update this file during every sprint closure audit.
+
+---
+
+# Latest Verified Sprint Progress
+
+## Sprint 15 Phase 1 — Ownership Foundation
+
+Phase 1 is implemented, permanently deployed and approved through founder
+closure review. Verified capability includes:
+
+- stable one-to-one Account-to-Operator bindings without changing existing
+  Operator identifiers
+- authenticated current-Operator resolution through the Operator Service
+- direct database access confined to the Operator Repository
+- removal of arbitrary first-row resolution and shared development fallback
+- production-equivalent authentication requirements in local development and
+  test
+- deployed RLS and least-privilege grants for bindings, Operators, Sessions and
+  achievements
+- anonymous rejection and authenticated cross-Operator isolation enforced by
+  the database independently of application filtering
+- preservation of one pre-existing Operator, five pre-existing Sessions and
+  two unowned historical Sessions with no speculative reassignment
+
+The deployed regression environment contains two dedicated Auth principals,
+two dedicated Operators, two bindings and two Sessions. These permanent
+fixtures are reserved exclusively for migration, ownership, RLS,
+authentication and security regression testing.
+
+Phase 2 has not begun. No Operator Understanding contracts, candidate claims,
+control operations or Oracle Context projection are implemented by Phase 1.
 
 ---
 
@@ -69,9 +101,9 @@ Session Context into a Guidance Request, execute the Provider Service and
 deliver the resulting Application state through a renderer-safe runtime
 boundary. That live delivery remains deferred under a separate future plan.
 
-Sprint 15 is active from its committed planning baseline for the Operator
-Understanding Foundation. No Sprint 15 product implementation is yet verified,
-so Sprint 14 remains the latest closed implementation recorded here.
+Sprint 15 is active for the Operator Understanding Foundation. Its Phase 1
+ownership foundation is verified and founder-approved, while Sprint 14 remains
+the latest fully closed Sprint.
 
 No Sprint 14 engineering objective remains open. AI inference, ranking,
 personalisation, runtime networking, gameplay automation and any form of game

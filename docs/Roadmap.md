@@ -11,7 +11,7 @@
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 4.5
+**Version:** 4.6
 
 ---
 
@@ -682,7 +682,8 @@ The Oracle Platform grows through extensions rather than increasing complexity i
 
 # Current Delivery — Sprint 15
 
-Sprint 15 is formally active at the committed-planning gate.
+Sprint 15 is formally active. Phase 1 — Ownership Foundation is complete and
+has passed founder closure review. Phase 2 has not been authorised.
 
 ## Operator Intelligence: Operator Understanding Foundation
 
@@ -715,6 +716,13 @@ Game Integration ownership and External Companion boundaries remain intact.
 
 The binding decisions are ADR-033 through ADR-036. The approved execution plan
 is `docs/sprints/SPRINT_15_PLAN.md`.
+
+The completed Phase 1 establishes authenticated one-to-one Account ownership,
+Operator Service resolution, Repository-owned access and deployed RLS for
+protected Operator data. Existing Operator identifiers and all historical
+Sessions were preserved without speculative assignment. Dedicated permanent
+fixtures are retained exclusively for migration, ownership, RLS,
+authentication and security regression testing.
 
 ## Latest Closed Sprint — Sprint 14
 

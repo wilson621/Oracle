@@ -9,7 +9,7 @@
 **Supersedes:** Earlier current-architecture descriptions; historical baselines remain preserved
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 5.3
+**Version:** 5.4
 
 ---
 
@@ -1281,6 +1281,54 @@ that work. The desktop composition root does not yet create Guidance Requests
 from authoritative Session Context, invoke the Provider Service or deliver
 resulting Application state through a renderer-safe boundary. Live Guidance
 delivery requires a separate future plan and approval.
+
+# Sprint 15 Phase 1 Operator Ownership Foundation
+
+Sprint 15 Phase 1 establishes authenticated ownership as the mandatory entry
+point for current-Operator access:
+
+```text
+Supabase Auth Account
+        ↓
+operator_account_bindings
+        ↓
+Operator Repository
+        ↓
+Operator Service
+        ↓
+Approved Application consumers
+```
+
+Authentication remains owned by Supabase Auth. An Account is not an Operator,
+and the binding relation does not merge credentials with Operator identity.
+`operator_account_bindings` records one Account-to-one Operator ownership
+without replacing existing Operator identifiers.
+
+Repositories own database access. The Operator Service owns authenticated
+current-Operator resolution and commissioning orchestration. Applications do
+not receive repository authority. Production, local development and test
+environments follow the same authenticated rule; there is no shared development
+Operator or first-row fallback.
+
+Row Level Security protects `operator_account_bindings`, `operators`,
+`oracle_sessions` and `operator_achievements`. Policies derive access from
+`auth.uid()` through the binding relation. Anonymous grants are revoked, and
+authenticated grants expose only the operations required by the approved
+Repository boundary.
+
+The migration preserves historical truth. It does not assign ownership to
+existing data without evidence, and unowned historical Sessions remain
+unowned and inaccessible through authenticated Operator scope.
+
+Two dedicated authenticated principals, two Operators, their one-to-one
+bindings and one Session per Operator remain deployed as permanent verification
+fixtures. They are reserved exclusively for migration, ownership, RLS,
+authentication and security regression testing and must not be consumed as
+product data.
+
+This foundation does not implement Understanding contracts, intelligence
+claims, Memory lifecycle changes, Operator-control services or Oracle Context
+projection. Those remain later Sprint 15 phases requiring separate approval.
 
 # Verified Integration Limits
 

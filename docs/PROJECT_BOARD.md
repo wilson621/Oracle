@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 4.4
+**Version:** 4.5
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -19,8 +19,8 @@
 
 ## Sprint 15 — Operator Intelligence: Operator Understanding Foundation
 
-**Status:** Active — Phase 1 ready; implementation not yet begun
-**Activation baseline:** `0423aad0a64ab96598c30c8cb2147ec526f48359`
+**Status:** Active — Phase 1 complete; Phase 2 not authorised
+**Activation baseline:** `d9d78c94acbc628fbbc35f4a42ba970d02b2f9e9`
 **Plan:** `docs/sprints/SPRINT_15_PLAN.md`
 
 Sprint 15 establishes the trusted foundation for progressively deeper,
@@ -28,8 +28,9 @@ evidence-based and Operator-controlled understanding. Operator Understanding is
 the umbrella over Account relationship, Identity, Preferences, Goals, State,
 Memory, Evidence and evidence-derived Operator Intelligence.
 
-The ADRs and planning reconciliation form the clean Sprint 15 implementation
-baseline. Phase 1 may begin from this commit; no implementation is yet recorded.
+The ADRs and planning reconciliation remain authoritative. Phase 1 has passed
+implementation, deployment, authenticated isolation and founder closure review.
+Phase 2 has not begun.
 
 # Sprint 15 Governance Gate
 
@@ -49,8 +50,8 @@ baseline. Phase 1 may begin from this commit; no implementation is yet recorded.
 
 # Sprint 15 Approved Scope
 
-- [ ] deployed Supabase schema and RLS audit
-- [ ] authenticated Account-to-Operator ownership
+- [x] deployed Supabase schema and RLS audit
+- [x] authenticated Account-to-Operator ownership
 - [ ] separate Preference and Goal domains
 - [ ] Evidence, Claim, Revision and Data Policy contracts
 - [ ] Known, Declared, Observed, Inferred, Suspected and Unknown classification
@@ -60,6 +61,27 @@ baseline. Phase 1 may begin from this commit; no implementation is yet recorded.
 - [ ] immutable `OperatorUnderstandingSnapshot` read projection
 - [ ] safe, gated Oracle Context integration
 - [ ] architecture, migration, privacy and regression verification
+
+# Sprint 15 Phase 1 Closure
+
+- [x] deployed schema reconciled against tracked SQL
+- [x] additive Account-to-Operator ownership migration implemented
+- [x] rollback validation completed before permanent deployment
+- [x] independent catalog verification completed before and after deployment
+- [x] founder deployment approval received
+- [x] permanent deployment completed successfully
+- [x] anonymous access rejected
+- [x] authenticated Operator Service resolution verified for two principals
+- [x] cross-Operator, binding and Session isolation verified directly through RLS
+- [x] existing Operator IDs and five historical Sessions preserved
+- [x] two unowned historical Sessions preserved and excluded
+- [x] permanent security regression fixtures retained under exclusive test use
+- [x] founder Phase 1 closure approved
+
+The retained principals, Operators, bindings and Sessions are reserved
+exclusively for migration, ownership, RLS, authentication and security
+regression testing. They are not product accounts, user data or general-purpose
+development fixtures.
 
 # Sprint 15 Explicit Deferrals
 

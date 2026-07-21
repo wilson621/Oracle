@@ -1,13 +1,5 @@
-import { supabase } from "@/lib/supabase";
+import { getBrowserOperatorService } from "@/lib/oracle/services/operator";
 
 export async function getOperatorProfile() {
-  const { data, error } = await supabase
-    .from("operators")
-    .select("*")
-    .limit(1)
-    .single();
-
-  if (error) throw error;
-
-  return data;
+  return getBrowserOperatorService().getCurrentOperator();
 }

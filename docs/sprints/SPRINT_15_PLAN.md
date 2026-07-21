@@ -3,7 +3,7 @@
 **Authority:** Approved Sprint execution plan beneath the Master Build Plan and accepted ADRs
 **Scope:** Operator Understanding Foundation planning, boundaries, phases and acceptance criteria
 **Owner:** Oracle Platform Engineering
-**Status:** Active — implementation authorised from the committed planning baseline
+**Status:** Active — Phase 1 complete; Phase 2 not authorised
 **Classification:** Living until Sprint closure
 **Expected Stability:** Updated only through approved Sprint 15 scope review
 **Supersedes:** The earlier recommendation that Sprint 15 deliver authoritative live Companion Guidance
@@ -11,16 +11,42 @@
 **Last Reviewed:** 21 July 2026
 **Sprint:** 15 — Operator Intelligence: Operator Understanding Foundation
 **Branch:** `sprint-9-overlay`
-**Activation Baseline:** `0423aad0a64ab96598c30c8cb2147ec526f48359`
+**Activation Baseline:** `d9d78c94acbc628fbbc35f4a42ba970d02b2f9e9`
 
 ---
 
 # Status
 
-Sprint 15 is formally active. This plan, ADR-033 through ADR-036 and the active
-planning documents form its committed, clean implementation baseline.
+Sprint 15 is formally active. Phase 1 — Ownership Foundation has passed founder
+closure review. Phase 2 has not begun and requires separate authorisation.
 
 Sprint 14 remains the latest closed and verified implementation Sprint.
+
+# Phase 1 Closure Outcome
+
+Phase 1 established the authenticated Account-to-Operator ownership boundary
+without changing existing Operator identifiers or assigning ownership to
+historical data:
+
+- `operator_account_bindings` owns the durable one-to-one relationship between
+  Supabase Auth Accounts and Oracle Operators
+- the Operator Service is the sole current-Operator resolution boundary
+- the Operator Repository owns direct database access
+- production, development and test resolution all require authentication
+- arbitrary first-row resolution and the shared development Operator fallback
+  are removed
+- RLS and restricted grants protect bindings, Operators, Sessions and
+  achievements
+- existing Operator and Session truth is preserved, including two unowned
+  historical Sessions
+- two permanent verification principals, Operators, bindings and Sessions are
+  retained exclusively for migration, ownership, RLS, authentication and
+  security regression testing
+
+The deployed migration is `database/008_operator_ownership.sql`. It was
+rollback-validated before founder approval, permanently deployed only after an
+independent catalog inspection and then exercised through authenticated
+multi-principal isolation verification.
 
 # Mission
 
@@ -214,11 +240,18 @@ Implementation is blocked until every Phase 0 item is complete.
 
 ## Phase 1 — Ownership Foundation
 
-- [ ] inspect deployed Supabase schema and policies
-- [ ] define Account-to-Operator migration
-- [ ] establish authenticated Repository scope and RLS
-- [ ] define explicit local-development and desktop identity behavior
-- [ ] verify multi-principal isolation
+- [x] inspect deployed Supabase schema and policies
+- [x] define Account-to-Operator migration
+- [x] establish authenticated Repository scope and RLS
+- [x] define explicit local-development and desktop identity behavior
+- [x] verify rollback safety and independent post-deployment catalog state
+- [x] verify authenticated multi-principal isolation and anonymous rejection
+- [x] preserve historical Operator and Session truth without speculative backfill
+- [x] complete founder Phase 1 closure review
+
+Phase 1 is complete. Its permanent verification fixtures are operational test
+assets only and must never be used as product Operators or ordinary application
+data.
 
 ## Phase 2 — Understanding Contracts
 

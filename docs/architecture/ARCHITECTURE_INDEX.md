@@ -9,7 +9,7 @@
 **Supersedes:** Earlier Architecture Index versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 5.3
+**Version:** 5.4
 
 ---
 
@@ -581,6 +581,52 @@ future planning and approval.
 
 ---
 
+# Operator Ownership Foundation
+
+Location
+
+```text
+database/008_operator_ownership.sql
+lib/oracle/repositories/operator-repository.ts
+lib/oracle/services/operator/
+lib/operator/getCurrentOperator.ts
+lib/operator/completeOperatorCommissioning.ts
+lib/oracle/getOperatorProfile.ts
+```
+
+Owns
+
+- authenticated current-Operator resolution through the Operator Service
+- direct Operator persistence through the Operator Repository
+- one-to-one Account-to-Operator ownership through
+  `operator_account_bindings`
+- production-equivalent authenticated behaviour in local development and test
+
+Produces
+
+- the Operator owned by the authenticated Supabase Account
+- explicit authentication, ownership-not-established and unavailable-record
+  failures
+- RLS-scoped Operator, Session, achievement and binding access
+
+Must Never
+
+- treat a Supabase Auth Account as Operator identity
+- select an arbitrary or first Operator
+- use a shared local-development Operator fallback
+- expose Repository ownership to Applications or engines
+- backfill historical ownership without evidence
+- expose one Operator's data to another Account
+- treat permanent security fixtures as product or general development data
+
+The Phase 1 foundation is deployed and verified with two permanent regression
+principals and Operators. Those fixtures are reserved exclusively for
+migration, ownership, RLS, authentication and security regression testing.
+Later Operator Understanding contracts and lifecycle capabilities are not part
+of this completed foundation.
+
+---
+
 # Engineering Rules
 
 Every new subsystem must:
@@ -613,8 +659,8 @@ Completed
 
 Current Development Phase
 
-Sprint 14 — Companion Intelligence Foundation complete; Sprint 15 has not
-started
+Sprint 15 — Operator Understanding Foundation active; Phase 1 complete and
+Phase 2 not authorised
 
 Current Runtime
 
@@ -642,6 +688,9 @@ Current Runtime
 ✓ Companion Guidance Application boundary
 ✓ `/companion` React presentation with honest unavailable fallback
 ✓ Sprint 14 focused, architecture, desktop, web and lint verification
+✓ Sprint 15 authenticated Account-to-Operator ownership foundation
+✓ Operator Service and Repository ownership boundary
+✓ deployed ownership RLS and authenticated multi-principal isolation
 
 Accepted integration debt
 

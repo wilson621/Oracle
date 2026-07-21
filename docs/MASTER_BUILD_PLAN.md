@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 21 July 2026
-**Version:** 2.4
+**Version:** 2.5
 
 ---
 
@@ -79,19 +79,19 @@ This architecture was established during Sprint 8 and forms the permanent founda
 
 # Latest Approved Execution Status
 
-Sprint 15 is formally active at the planning and governance gate. Sprint 14
-remains the latest closed and verified implementation Sprint. The Oracle
-Governance v2 baseline is established at
-`0423aad0a64ab96598c30c8cb2147ec526f48359`.
+Sprint 15 is formally active. Phase 1 — Ownership Foundation is implemented,
+deployed, security-verified and approved through founder closure. Sprint 14
+remains the latest fully closed Sprint. The Sprint 15 activation baseline is
+`d9d78c94acbc628fbbc35f4a42ba970d02b2f9e9`.
 
 ADR-033 through ADR-036, the Sprint 15 plan and the reconciled planning
-documents form the clean implementation baseline. No Sprint 15 implementation
-is yet recorded.
+documents remain authoritative. Phase 2 has not begun and requires separate
+authorisation.
 
 ## Sprint 15 — Operator Intelligence: Operator Understanding Foundation
 
 **Branch:** `sprint-9-overlay`
-**Status:** Active — Phase 1 ready; implementation not yet begun
+**Status:** Active — Phase 1 complete; Phase 2 not authorised
 **Plan:** `docs/sprints/SPRINT_15_PLAN.md`
 
 Sprint 15 establishes the trusted foundation for Oracle to build a
@@ -116,6 +116,22 @@ The approved implementation outcome is deliberately narrow:
 Existing engines remain intelligence producers. The Understanding projection
 does not own truth, and no engine output becomes durable understanding merely
 because it exists.
+
+Phase 1 delivered:
+
+- authenticated one-to-one Account-to-Operator bindings
+- Repository-owned persistence and Operator Service-owned resolution
+- RLS and least-privilege grants for bindings, Operators, Sessions and
+  achievements
+- authenticated local-development behaviour matching production
+- preservation of existing Operator identifiers and Session history without
+  speculative backfill
+- permanent, dedicated fixtures reserved only for migration, ownership, RLS,
+  authentication and security regression testing
+- verified anonymous rejection and authenticated cross-Operator isolation
+
+No Understanding contracts, candidate intelligence lifecycle, control service
+or Context projection from later phases has been introduced.
 
 Explicit exclusions include broad UI, sensitive or psychological inference,
 automatic cross-game promotion, AI-generated Operator claims, Companion
