@@ -251,6 +251,10 @@ export type OracleCompanionGuidancePackageManifest =
     id: string;
     version: string;
     integrationId: string | null;
+
+    /**
+     * Providers may declare "*" to support every current and future value.
+     */
     categories: readonly string[];
     types: readonly string[];
   }>;

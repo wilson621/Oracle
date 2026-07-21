@@ -1,8 +1,8 @@
 # ORACLE COMPANION ARCHITECTURE
 
-Version 1.3
+Version 1.4
 
-Status: Sprint 14 Companion Guidance Framework contract foundation
+Status: Sprint 14 deterministic Guidance Provider Service
 
 ---
 
@@ -1326,6 +1326,72 @@ modification, hooks, executable patching, gameplay automation, simulated input,
 anti-cheat interaction or real-time tactical assistance that requires access
 to the game process. Guidance helps the Operator through coaching, insight and
 permitted knowledge while Oracle remains entirely external.
+
+## Guidance Provider Service
+
+Sprint 14 Commit 2 implements the Services-owned orchestration boundary for
+Guidance providers. Providers are discovered only through explicit constructor
+injection. The Service validates and snapshots each package manifest, rejects
+duplicate provider identities and retains no mutable global provider registry.
+
+The provider lifecycle is:
+
+```text
+Injected
+    │
+    ▼
+Manifest Validated and Snapshotted
+    │
+    ▼
+Eligibility Evaluated
+    ├── Ineligible → Recorded without execution
+    │
+    ▼
+Executed Sequentially
+    │
+    ▼
+Each Output Validated Independently
+    ├── Invalid → Structured failure
+    ├── Disallowed spoiler or expired → Filtered
+    │
+    ▼
+Immutable Result Produced
+```
+
+Eligibility is game agnostic. It considers only the provider manifest, active
+integration identity and optional category or type requested through the
+shared contract. A provider may declare `*` for categories or types when it can
+support present and future identifiers. Ineligible providers are never called.
+
+Execution is deterministic and supports both synchronous and asynchronous
+providers through one Promise-based Service method. Providers execute
+sequentially in injection order. Accepted Guidance retains provider injection
+order and each provider's original output order. The Service does not sort by
+priority or confidence and does not make coaching, personalisation or
+recommendation decisions.
+
+Every output remains unknown until the Platform Guidance validator accepts it.
+The Service additionally verifies:
+
+- provenance matches the executing package manifest
+- category and type were declared by the provider
+- requested category and type are respected
+- integration compatibility matches the immutable Session projection
+- integration-specific providers declare integration-specific output
+- accepted Guidance identifiers remain unique
+- spoiler and expiry constraints are respected
+
+One provider exception does not prevent later providers from executing. One
+invalid item does not discard valid sibling items from the same provider.
+Failures contain provider identity and version, lifecycle stage, stable code,
+diagnostic message and optional output index. Provider execution summaries
+record ineligibility, completion, filtering and failure counts for future
+operational reporting.
+
+The Service returns only deeply immutable Guidance, structured failures and
+provider execution summaries. It exposes no provider instance and introduces
+no Guidance content, UI, AI inference, renderer access, desktop lifecycle
+authority or game-specific behaviour.
 
 ---
 

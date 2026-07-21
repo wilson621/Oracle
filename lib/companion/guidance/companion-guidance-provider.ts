@@ -88,7 +88,9 @@ export type OracleCompanionGuidanceProvider =
     provideGuidance: (
       request:
         OracleCompanionGuidanceRequest
-    ) => Promise<readonly unknown[]>;
+    ) =>
+      | readonly unknown[]
+      | Promise<readonly unknown[]>;
   }>;
 
 function requireUniqueStringArray(
@@ -100,6 +102,12 @@ function requireUniqueStringArray(
       value,
       path
     );
+
+  if (values.length === 0) {
+    throw new Error(
+      `Oracle Companion Guidance '${path}' must declare at least one value.`
+    );
+  }
 
   if (
     new Set(values).size !==

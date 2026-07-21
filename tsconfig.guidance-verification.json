@@ -14,7 +14,9 @@
   },
   "include": [
     "lib/companion/guidance/**/*.ts",
-    "scripts/verify-companion-guidance-contracts.ts"
+    "lib/oracle/services/companion-guidance/**/*.ts",
+    "scripts/verify-companion-guidance-contracts.ts",
+    "scripts/verify-companion-guidance-service.ts"
   ],
   "exclude": [
     "node_modules",
