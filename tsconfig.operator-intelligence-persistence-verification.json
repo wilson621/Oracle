@@ -17,7 +17,8 @@
     "lib/oracle/repositories/operator-intelligence-repository.ts",
     "lib/oracle/repositories/operator-intelligence-pagination.ts",
     "scripts/operator-understanding-verification-fixtures.ts",
-    "scripts/verify-operator-intelligence-persistence.ts"
+    "scripts/verify-operator-intelligence-persistence.ts",
+    "scripts/verify-operator-intelligence-concurrency.ts"
   ],
   "exclude": [
     "node_modules",

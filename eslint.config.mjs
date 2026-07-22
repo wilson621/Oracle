@@ -18,5 +18,9 @@ export default defineConfig([
 
     // Focused Companion Guidance verification output
     ".tmp-guidance-verification/**",
+    ".tmp-operator-intelligence-scale-verification/**",
+    ".tmp-operator-intelligence-persistence-verification/**",
+    ".tmp-postgres-sprint17/**",
+    ".tmp-tools/**",
   ]),
 ]);

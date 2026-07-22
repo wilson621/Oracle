@@ -26,11 +26,11 @@ import {
   activeClaimInput,
 } from "./operator-understanding-verification-fixtures";
 
-const operatorId = "11111111-1111-4111-8111-111111111111";
+export const operatorId = "11111111-1111-4111-8111-111111111111";
 const sessionId = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
 const policyId = "operator-game-pattern-intelligence";
 const policyVersion = "1.0.0";
-const assessedAt = "2026-07-21T12:00:00.000Z";
+export const assessedAt = "2026-07-21T12:00:00.000Z";
 
 async function main() {
   verifyMigrationContract();
@@ -406,7 +406,7 @@ function verifyRepositoryOwnershipBoundary() {
   ]);
 }
 
-function createCandidateInput(
+export function createCandidateInput(
   candidateOperatorId: string,
   evidence: ReturnType<typeof createOperatorEvidenceReference>
 ) {
@@ -441,7 +441,7 @@ function createCandidateInput(
   };
 }
 
-function createTrustFixture() {
+export function createTrustFixture() {
   const policy = createOperatorDataPolicyDefinition({
     contract: {
       name: OPERATOR_DATA_POLICY_DEFINITION_CONTRACT,
@@ -651,7 +651,9 @@ function collectTypeScriptFiles(directory: string): string[] {
   });
 }
 
-void main().catch((error: unknown) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+if (require.main === module) {
+  void main().catch((error: unknown) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+}

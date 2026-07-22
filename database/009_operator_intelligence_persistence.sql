@@ -776,6 +776,11 @@ begin
             using errcode = '22023';
     end if;
 
+    perform pg_advisory_xact_lock(hashtextextended(
+        p_operator_id::text || ':consent:' || (p_consent ->> 'purpose'),
+        0
+    ));
+
     if not exists (
         select 1
         from public.operator_data_policy_versions policy
@@ -917,6 +922,15 @@ begin
         raise exception 'Evidence admission identity and scope do not match.'
             using errcode = '23514';
     end if;
+
+    perform pg_advisory_xact_lock(hashtextextended(
+        p_operator_id::text || ':consent:' || (p_admission ->> 'purpose'),
+        0
+    ));
+    perform pg_advisory_xact_lock(hashtextextended(
+        p_operator_id::text || ':evidence:' || (p_evidence ->> 'id'),
+        0
+    ));
 
     if p_evidence -> 'producer' ->> 'version' !~
             '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$'
@@ -1193,6 +1207,12 @@ begin
         raise exception 'Invalid evidence disposition contract or ownership.'
             using errcode = '22023';
     end if;
+
+    perform pg_advisory_xact_lock(hashtextextended(
+        p_operator_id::text || ':evidence:' ||
+            (p_disposition ->> 'evidenceReferenceId'),
+        0
+    ));
 
     select
         disposition_id,
@@ -1655,6 +1675,7 @@ as $$
 declare
     claim_record record;
     existing_eligibility jsonb;
+    locked_evidence_id text;
 begin
     if coalesce(auth.role(), '') <> 'service_role' then
         raise exception 'Trusted Operator Intelligence authority is required.'
@@ -1702,6 +1723,26 @@ begin
 
         return existing_eligibility;
     end if;
+
+    perform pg_advisory_xact_lock(hashtextextended(
+        p_operator_id::text || ':consent:' ||
+            (p_eligibility ->> 'purpose'),
+        0
+    ));
+
+    for locked_evidence_id in
+        select link.evidence_reference_id
+        from public.operator_intelligence_claim_evidence link
+        where link.operator_id = p_operator_id
+          and link.claim_id = p_claim_id
+          and link.claim_revision_id = p_claim_revision_id
+        order by link.evidence_reference_id
+    loop
+        perform pg_advisory_xact_lock(hashtextextended(
+            p_operator_id::text || ':evidence:' || locked_evidence_id,
+            0
+        ));
+    end loop;
 
     if (p_eligibility ->> 'eligible')::boolean and (
         claim_record.status <> 'active'
