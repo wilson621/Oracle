@@ -751,11 +751,11 @@ Completed
 - Signal Framework
 - Repository Layer
 
-Current Development Phase
+Current Development Status
 
-Sprint 17 — Scale-Safe Trust Data Plane engineering implementation is complete
-and awaiting Founder closure review. Sprint 16 is the latest Founder-closed
-Sprint; Sprint 18 is not activated.
+Sprint 17 — Scale-Safe Trust Data Plane is Founder-approved and closed, and is
+the latest closed Sprint. Migration 009 remains undeployed pending a separate
+Founder deployment decision. Sprint 18 has not started and is not activated.
 
 Current Runtime
 

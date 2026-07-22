@@ -10,13 +10,14 @@
 **Superseded By:** None
 **Last Reviewed:** 22 July 2026
 **Verified Branch:** `sprint-9-overlay`
-**Verified Repository Baseline:** `58589b52de0db341e6518fa9f235bb18854e6b30`
+**Verified Repository Baseline:** `e873b515a149d392850cf4c6e0c00cfb4ecd3313`
 **Sprint 14 Implementation Baseline:** `3868975`
 **Sprint 15 Phase 1:** Complete and committed
 **Sprint 15 Phase 2:** Complete and committed
 **Sprint 15 Phase 3:** Complete and committed
 **Sprint 16:** Trust Boundary complete and committed; Migration 009 undeployed
-**Sprint 17:** Scale-Safe Trust Data Plane implementation complete; Founder closure review pending; Migration 009 undeployed
+**Sprint 17:** Scale-Safe Trust Data Plane complete, Founder-approved and closed; Migration 009 undeployed
+**Sprint 18:** Not started or activated
 
 ---
 
@@ -59,8 +60,9 @@ fresh transactional rollback plus independent catalog comparison.
 
 No runtime producer, consumer, control operation, Snapshot construction,
 Context projection, Application persistence path or Platform activation was
-added. Migration 009 remains undeployed. Founder closure review is pending, so
-Sprint 18 is not active.
+added. Sprint 17 is Founder-approved and closed. Migration 009 remains
+undeployed pending a separate Founder deployment decision. Sprint 18 has not
+started and is not active.
 
 ## Sprint 15 Phase 1 — Ownership Foundation
 

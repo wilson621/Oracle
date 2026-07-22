@@ -2,7 +2,7 @@
 
 **Sprint:** 17 — Scale-Safe Trust Data Plane
 
-**Engineering status:** Closure evidence remediation complete; resubmitted for Founder closure review
+**Engineering status:** Complete — Founder-approved and closed
 
 **Date:** 22 July 2026
 
@@ -10,7 +10,9 @@
 
 **Migration 009:** Undeployed
 
-**Next Sprint:** Not authorised
+**Founder closure approval:** 22 July 2026
+
+**Next Sprint:** Sprint 18 not started or authorised
 
 ## Outcome
 
@@ -121,13 +123,13 @@ be fetched; the approved network-enabled rerun completed successfully.
 | 21 | Migration 009 remains undeployed | Pass — disposable local databases only |
 | 22 | No producer, consumer, control, Application or Platform activation | Pass |
 | 23 | Living documentation reflects repository reality | Pass — nine phases recorded consistently |
-| 24 | Founder closure approval and separately approved closure commit | Pending Founder review |
+| 24 | Founder closure approval and separately approved closure commit | Pass — Founder approved closure on 22 July 2026 |
 | 25 | Working tree clean | Pass — confirmed for final closure submission |
 
-Criterion 24 cannot be self-approved by engineering. The implementation is
-complete and this report is the requested review artifact; Sprint 17 remains
-in Founder closure review until that approval is explicitly given. No Sprint
-18 work is authorised by this state.
+The Founder approved Sprint 17 closure on 22 July 2026 after accepting the
+independent review and closure evidence remediation. All approved success
+criteria are satisfied. This approval does not authorise Migration 009 deployment or
+Sprint 18 activation.
 
 ## Deployment and boundary confirmation
 
@@ -141,13 +143,12 @@ No Repository ownership exception, Application persistence access, alternate
 data store, cache, new runtime dependency, candidate producer, inference path,
 Snapshot consumer or Context projection was introduced.
 
-## Founder review request
+## Founder closure decision
 
-Engineering requests final Founder review of:
+The Founder approves Sprint 17 closure. Sprint 17 implementation,
+verification, documentation and permanent closure evidence are complete, and
+no further Sprint 17 engineering work is required.
 
-1. this closure report and the 25 success-criterion dispositions;
-2. the separately version-pinned Migration 009 dossier and permanent evidence;
-3. the explicit pending status of criterion 24;
-4. continued non-deployment of Migration 009 and non-activation of Sprint 18.
-
-Engineering stops here pending that review.
+Migration 009 remains intentionally undeployed and awaits a separate explicit
+Founder deployment decision. Sprint 18 has not started and requires its own
+explicit Founder instruction. Engineering stops at Sprint 17 closure.

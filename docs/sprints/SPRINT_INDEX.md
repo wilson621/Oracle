@@ -27,8 +27,8 @@ implementation stages and do not use fractional Sprint numbering.
 | 14 | Companion Intelligence Foundation | Historical, complete | None | [Closure](SPRINT_14_CLOSURE.md) |
 | 15 | Operator Understanding Foundation | Historical; approved foundation phases complete | None | [Approved plan](SPRINT_15_PLAN.md) |
 | 16 | Trust Boundary | Complete | Sprint 15.5A | Commit `58589b52de0db341e6518fa9f235bb18854e6b30` |
-| 17 | Scale-Safe Trust Data Plane | Engineering complete; Founder closure review pending | Sprint 15.5B; earlier proposed as Scale Hardening | [Plan](SPRINT_17_PLAN.md), [Closure](SPRINT_17_CLOSURE.md), [Migration dossier](SPRINT_17_MIGRATION_009_DOSSIER.md) |
-| 18 | Operator Trust and Control | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
+| 17 | Scale-Safe Trust Data Plane | Complete — Founder-approved and closed; Migration 009 undeployed | Sprint 15.5B; earlier proposed as Scale Hardening | [Plan](SPRINT_17_PLAN.md), [Closure](SPRINT_17_CLOSURE.md), [Migration dossier](SPRINT_17_MIGRATION_009_DOSSIER.md) |
+| 18 | Operator Trust and Control | Approved Programme; not started or activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 19 | Account, Identity and Commissioning | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 20 | Platform Runtime Activation | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 21 | Oracle Session and Evidence Lifecycle | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
@@ -51,5 +51,6 @@ are needed to trace contemporary reviews and implementation evidence.
 
 The approved Engineering Programme defines the sequence but grants no
 implementation authority. Every Sprint requires its own approved plan and
-explicit activation. Sprint 17 engineering is complete but not Founder-closed;
-Sprint 18 remains inactive.
+explicit activation. Sprint 17 is Founder-approved and closed. Migration 009
+remains undeployed pending a separate Founder deployment decision, and Sprint
+18 has not started or been activated.

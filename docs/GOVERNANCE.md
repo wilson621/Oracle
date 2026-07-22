@@ -156,9 +156,10 @@ never rewritten.
 
 - Sprint 15 — Operator Understanding Foundation: historical.
 - Sprint 16 — Trust Boundary: complete; executed under the alias Sprint 15.5A.
-- Sprint 17 — Scale-Safe Trust Data Plane: approved in the Engineering
-  Programme and inactive; previously proposed as Scale Hardening under the
-  alias Sprint 15.5B.
+- Sprint 17 — Scale-Safe Trust Data Plane: Founder-approved and closed;
+  previously proposed as Scale Hardening under the alias Sprint 15.5B.
+- Sprint 18 — Operator Trust and Control: approved in the Engineering
+  Programme but not started or activated.
 
-Sprint 17 requires a separate founder-approved plan and explicit activation.
-Approval of the Engineering Programme does not activate it.
+Migration 009 remains undeployed pending a separate Founder deployment
+decision. Approval or closure of one Sprint does not activate the next Sprint.

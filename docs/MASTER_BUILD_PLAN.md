@@ -79,8 +79,8 @@ This architecture was established during Sprint 8 and forms the permanent founda
 
 # Latest Approved Execution Status
 
-Sprint 17 engineering implementation is complete and awaiting Founder closure
-review. No later Sprint is active.
+Sprint 17 is Founder-approved and closed. No later Sprint is active. Sprint 18
+has not started and requires separate explicit Founder activation.
 
 Sprint 16 — Trust Boundary is complete at
 `58589b52de0db341e6518fa9f235bb18854e6b30`. It was executed under the
@@ -89,8 +89,8 @@ rollback validation but remains undeployed pending a separate founder decision.
 
 Sprint 17 — Scale-Safe Trust Data Plane has completed its nine approved
 implementation phases. Its former planning alias was Sprint 15.5B and its
-earlier proposed name was Scale Hardening. Migration 009 remains undeployed;
-Founder closure and any later deployment remain separate decisions.
+earlier proposed name was Scale Hardening. Migration 009 remains undeployed
+pending a separate Founder deployment decision.
 
 `docs/ENGINEERING_PROGRAMME.md` is the authoritative Sprint 17–Beta Programme.
 This Master Build Plan continues to identify the next execution objective; a
@@ -118,8 +118,9 @@ inactive.
 
 ## Sprint 17 — Scale-Safe Trust Data Plane
 
-**Status:** Engineering implementation complete; Founder closure review pending
+**Status:** Complete — Founder-approved and closed
 **Historical planning alias:** Sprint 15.5B
+**Closure evidence commit:** `e873b515a149d392850cf4c6e0c00cfb4ecd3313`
 
 The implemented Programme objective makes the Operator Intelligence
 persistence boundary safe for a separate controlled-production decision. It includes
@@ -127,6 +128,8 @@ bounded purpose-scoped reads, deterministic pagination, measured query
 optimisation, required indexes, Snapshot budgets, concurrency verification,
 automated boundary enforcement and the version-pinned Migration 009 deployment
 dossier. No runtime activation or permanent migration execution occurred.
+Migration 009 remains undeployed pending a separate Founder deployment
+decision. Sprint 18 has not started.
 
 ## Historical Sprint 15 — Operator Intelligence: Operator Understanding Foundation
 

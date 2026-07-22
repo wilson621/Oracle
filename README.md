@@ -29,21 +29,22 @@ Oracle is being built as an intelligence platform rather than a statistics dashb
 
 ## Version
 
-**Oracle v0.8.0 baseline with Sprint 17 engineering complete**
+**Oracle v0.8.0 baseline with Sprint 17 Founder-approved and closed**
 
 ## Current Milestone
 
-**Sprint 17 engineering complete; Founder closure review pending**
+**Sprint 17 closed with Founder approval; Sprint 18 not started**
 
-**Status: Sprint 17 — Scale-Safe Trust Data Plane implemented; Migration 009 undeployed**
+**Status: Sprint 17 — Scale-Safe Trust Data Plane closed; Migration 009 undeployed**
 
 ## Build Status
 
 Sprint 17 verification passed for bounded trust-data reads, pagination,
 budgets, idempotency, PostgreSQL concurrency, production-shaped plans and the
 existing ownership, trust, Guidance, Companion, architecture, desktop, lint
-and build baselines. Migration 009 remains undeployed. Founder closure review
-is pending and Sprint 18 has not been activated.
+and build baselines. Sprint 17 is Founder-approved and closed. Migration 009
+remains undeployed pending a separate Founder deployment decision, and Sprint
+18 has not started or been activated.
 
 The canonical verified status is maintained in
 [`docs/architecture/IMPLEMENTATION_STATUS.md`](docs/architecture/IMPLEMENTATION_STATUS.md).
@@ -328,9 +329,9 @@ Verified delivery now includes:
 - immutable Companion Guidance Application state and `/companion` presentation
 
 Sprint 16 — Trust Boundary is formally closed. Sprint 17 — Scale-Safe Trust
-Data Plane engineering implementation is complete and awaits Founder closure
-review. Migration 009 remains undeployed, and Sprint 18 is not active. The
-approved Oracle Engineering Programme continues to define Sprints 17–31
+Data Plane is Founder-approved and closed. Migration 009 remains undeployed
+pending a separate Founder deployment decision, and Sprint 18 has not started.
+The approved Oracle Engineering Programme continues to define Sprints 17–31
 through Beta without granting later implementation authority.
 
 ---
