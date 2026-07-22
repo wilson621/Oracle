@@ -17,6 +17,7 @@
 /.tmp-operator-intelligence-persistence-verification/
 /.tmp-postgres-sprint17/
 /.tmp-tools/
+/supabase/.temp/
 
 # next.js
 /.next/
