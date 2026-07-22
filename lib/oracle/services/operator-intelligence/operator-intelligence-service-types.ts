@@ -3,6 +3,8 @@ import type {
   OperatorEvidenceReference,
   OperatorIntelligenceClaimRevision,
   OperatorIntelligenceClaimTombstone,
+  OperatorIntelligencePageRequest,
+  OperatorIntelligencePageResult,
   OperatorUnderstandingPurpose,
   OperatorUnderstandingScope,
 } from "../../understanding";
@@ -11,6 +13,7 @@ export type OperatorIntelligenceClaimQuery = Readonly<{
   purpose: OperatorUnderstandingPurpose;
   asOf: string;
   scope: OperatorUnderstandingScope | null;
+  page: OperatorIntelligencePageRequest;
 }>;
 
 export type OperatorIntelligenceCandidateSubmission = Readonly<{
@@ -39,7 +42,7 @@ export type OperatorIntelligenceTransitionRequest = Readonly<{
 export type OperatorIntelligenceService = Readonly<{
   listEligibleClaims(
     query: OperatorIntelligenceClaimQuery
-  ): Promise<readonly OperatorIntelligenceClaimRevision[]>;
+  ): Promise<OperatorIntelligencePageResult<OperatorIntelligenceClaimRevision>>;
   submitCandidate(
     submission: OperatorIntelligenceCandidateSubmission
   ): Promise<OperatorIntelligenceClaimRevision>;

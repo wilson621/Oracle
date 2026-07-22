@@ -13,6 +13,7 @@ import {
   createOperatorEvidenceDisposition,
   createOperatorEvidenceReference,
   createOperatorIntelligenceClaimRevision,
+  createOperatorIntelligencePageRequest,
 } from "../lib/oracle/understanding";
 import { SupabaseOperatorIntelligenceRepository } from "../lib/oracle/repositories/operator-intelligence-repository";
 import {
@@ -28,6 +29,7 @@ const assessedAt = "2026-07-21T12:00:00.000Z";
 async function main() {
   verifyMigrationContract();
   await verifyRepositoryWriteBoundary();
+  await verifyBoundedReadBoundary();
   await verifyCrossOperatorRejection();
   verifyRepositoryOwnershipBoundary();
   process.stdout.write(
@@ -99,6 +101,11 @@ function verifyMigrationContract() {
   assert.match(migration, /Durable intelligence requires admitted evidence/i);
   assert.match(migration, /oracle_sessions_id_operator_unique/i);
   assert.match(migration, /operator_data_policy_versions_select_authenticated/i);
+  assert.match(migration, /read_operator_intelligence_eligible_claim_page/i);
+  assert.match(migration, /p_scope is null[\s\S]+claim_revision_contract -> 'scope' = p_scope/i);
+  assert.match(migration, /recorded_at <= effective_watermark/i);
+  assert.match(migration, /limit p_page_size \+ 1/i);
+  assert.match(migration, /order by head\.effective_from desc, head\.claim_revision_id asc/i);
   assert.doesNotMatch(
     migration,
     /grant execute on function public\.[^;]+\s+to authenticated/i
@@ -178,11 +185,102 @@ async function verifyCrossOperatorRejection() {
   assert.equal(client.calls.length, 0);
 }
 
+async function verifyBoundedReadBoundary() {
+  const fixture = createTrustFixture();
+  const activeClaim = createOperatorIntelligenceClaimRevision(
+    {
+      ...activeClaimInput,
+      operatorId,
+      evidence: [{
+        ...activeClaimInput.evidence[0],
+        evidenceReferenceId: fixture.evidence.id,
+      }],
+      scope: fixture.evidence.scope,
+      policyId,
+      policyVersion,
+      confidence: {
+        ...activeClaimInput.confidence,
+        policyId,
+        policyVersion,
+      },
+      eligibility: {
+        ...activeClaimInput.eligibility,
+        purpose: OPERATOR_GAME_PATTERN_INTELLIGENCE_PURPOSE,
+        policyId,
+        policyVersion,
+        assessedAt,
+      },
+    },
+    [fixture.evidence]
+  );
+  const { evidence, eligibility, ...claimRevisionContract } = activeClaim;
+  const client = new RecordingSupabaseClient();
+  client.readPageData = {
+    readWatermark: "2026-07-21T12:01:00.000Z",
+    hasMore: true,
+    rows: [{
+      claimRevisionId: activeClaim.id,
+      effectiveFrom: activeClaim.temporalValidity.effectiveFrom,
+      claimRevisionContract,
+      eligibilityContract: eligibility,
+      evidenceLinks: evidence,
+      evidenceContracts: [fixture.evidence],
+    }],
+  };
+  const repository = new SupabaseOperatorIntelligenceRepository(
+    client as unknown as SupabaseClient
+  );
+  const query = {
+    operatorId,
+    purpose: OPERATOR_GAME_PATTERN_INTELLIGENCE_PURPOSE,
+    asOf: assessedAt,
+    scope: fixture.evidence.scope,
+    page: createOperatorIntelligencePageRequest({ pageSize: 1 }),
+  };
+  const firstPage = await repository.listEligibleClaimRevisions(query);
+
+  assert.deepEqual(firstPage.items, [activeClaim]);
+  assert.equal(firstPage.hasMore, true);
+  assert.ok(firstPage.nextCursor);
+  assert.equal(client.calls.at(-1)?.functionName,
+    "read_operator_intelligence_eligible_claim_page");
+  assert.equal(client.calls.at(-1)?.arguments.p_operator_id, operatorId);
+  assert.equal(client.calls.at(-1)?.arguments.p_purpose,
+    OPERATOR_GAME_PATTERN_INTELLIGENCE_PURPOSE);
+  assert.deepEqual(client.calls.at(-1)?.arguments.p_scope, fixture.evidence.scope);
+  assert.equal(client.calls.at(-1)?.arguments.p_page_size, 1);
+
+  client.readPageData = {
+    readWatermark: "2026-07-21T12:01:00.000Z",
+    hasMore: false,
+    rows: [],
+  };
+  const secondPage = await repository.listEligibleClaimRevisions({
+    ...query,
+    page: createOperatorIntelligencePageRequest({
+      pageSize: 1,
+      cursor: firstPage.nextCursor,
+    }),
+  });
+
+  assert.equal(secondPage.items.length, 0);
+  assert.equal(
+    client.calls.at(-1)?.arguments.p_read_watermark,
+    "2026-07-21T12:01:00.000Z"
+  );
+  assert.equal(
+    client.calls.at(-1)?.arguments.p_after_revision_id,
+    activeClaim.id
+  );
+}
+
 function verifyRepositoryOwnershipBoundary() {
   const sourceFiles = collectTypeScriptFiles(path.join(process.cwd(), "lib"));
   const intelligenceTableReads = sourceFiles
     .filter((file) =>
-      fs.readFileSync(file, "utf8").includes('.from("operator_intelligence_')
+      /\.from\("operator_intelligence_|read_operator_intelligence_eligible_claim_page/.test(
+        fs.readFileSync(file, "utf8")
+      )
     )
     .map((file) => path.relative(process.cwd(), file).replaceAll("\\", "/"));
 
@@ -371,6 +469,7 @@ function createTrustFixture() {
 }
 
 class RecordingSupabaseClient {
+  readPageData: unknown = null;
   readonly calls: Array<{
     functionName: string;
     arguments: Record<string, unknown>;
@@ -397,6 +496,10 @@ class RecordingSupabaseClient {
 
     if (functionName === "persist_operator_intelligence_claim_revision") {
       return { data: args.p_claim_revision, error: null };
+    }
+
+    if (functionName === "read_operator_intelligence_eligible_claim_page") {
+      return { data: this.readPageData, error: null };
     }
 
     return { data: args.p_eligibility, error: null };

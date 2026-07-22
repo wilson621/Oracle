@@ -15,6 +15,7 @@
   "include": [
     "lib/oracle/understanding/**/*.ts",
     "lib/oracle/repositories/operator-intelligence-repository.ts",
+    "lib/oracle/repositories/operator-intelligence-pagination.ts",
     "lib/oracle/repositories/operator-repository.ts",
     "lib/oracle/services/operator/operator-service-types.ts",
     "lib/oracle/services/operator/operator-service.ts",

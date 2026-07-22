@@ -7,6 +7,7 @@ import {
   createOperatorEvidenceReference,
   createOperatorIntelligenceClaimRevision,
   createOperatorIntelligenceClaimTombstone,
+  createOperatorIntelligencePageResult,
   type OperatorConsentDecision,
   type OperatorDataPolicyDefinition,
   type OperatorEvidenceDisposition,
@@ -14,15 +15,22 @@ import {
   type OperatorGameSessionEvidenceAdmission,
   type OperatorIntelligenceClaimRevision,
   type OperatorIntelligenceClaimTombstone,
+  type OperatorIntelligencePageRequest,
+  type OperatorIntelligencePageResult,
   type OperatorUnderstandingEligibility,
   type OperatorUnderstandingScope,
 } from "../understanding";
+import {
+  decodeOperatorIntelligenceCursor,
+  encodeOperatorIntelligenceCursor,
+} from "./operator-intelligence-pagination";
 
 export type OperatorIntelligencePersistenceQuery = Readonly<{
   operatorId: string;
   purpose: string;
   asOf: string;
   scope: OperatorUnderstandingScope | null;
+  page: OperatorIntelligencePageRequest;
 }>;
 
 export interface OperatorIntelligenceRepository {
@@ -60,37 +68,24 @@ export interface OperatorIntelligenceRepository {
   ): Promise<OperatorUnderstandingEligibility>;
   listEligibleClaimRevisions(
     query: OperatorIntelligencePersistenceQuery
-  ): Promise<readonly OperatorIntelligenceClaimRevision[]>;
+  ): Promise<OperatorIntelligencePageResult<OperatorIntelligenceClaimRevision>>;
 }
 
 type JsonRecord = Record<string, unknown>;
 
-type ClaimHeadRow = Readonly<{
-  claim_id: string;
-  current_revision_id: string;
+type EligibleClaimPageRow = Readonly<{
+  claimRevisionId: string;
+  effectiveFrom: string;
+  claimRevisionContract: JsonRecord;
+  eligibilityContract: OperatorUnderstandingEligibility;
+  evidenceLinks: readonly JsonRecord[];
+  evidenceContracts: readonly JsonRecord[];
 }>;
 
-type ClaimRevisionRow = Readonly<{
-  claim_revision_id: string;
-  claim_revision_contract: JsonRecord;
-}>;
-
-type ClaimEvidenceRow = Readonly<{
-  claim_revision_id: string;
-  evidence_reference_id: string;
-  relationship: "support" | "contradict";
-  rationale: string;
-  linked_at: string;
-}>;
-
-type EvidenceRow = Readonly<{
-  evidence_reference_id: string;
-  evidence_contract: JsonRecord;
-}>;
-
-type EligibilityRow = Readonly<{
-  claim_revision_id: string;
-  eligibility_contract: OperatorUnderstandingEligibility;
+type EligibleClaimPageData = Readonly<{
+  readWatermark: string;
+  hasMore: boolean;
+  rows: readonly EligibleClaimPageRow[];
 }>;
 
 export class SupabaseOperatorIntelligenceRepository
@@ -268,185 +263,84 @@ export class SupabaseOperatorIntelligenceRepository
 
   async listEligibleClaimRevisions(
     query: OperatorIntelligencePersistenceQuery
-  ): Promise<readonly OperatorIntelligenceClaimRevision[]> {
-    const heads = await this.readClaimHeads(query.operatorId);
-
-    if (heads.length === 0) {
-      return Object.freeze([]);
-    }
-
-    const revisionIds = heads.map((head) => head.current_revision_id);
-    const [revisions, links, eligibilityRows] = await Promise.all([
-      this.readClaimRevisions(query.operatorId, revisionIds),
-      this.readEvidenceLinks(query.operatorId, revisionIds),
-      this.readEligibility(
-        query.operatorId,
-        revisionIds,
-        query.purpose,
-        query.asOf
-      ),
-    ]);
-    const evidenceIds = [...new Set(
-      links.map((link) => link.evidence_reference_id)
-    )];
-    const evidence = await this.readEvidence(query.operatorId, evidenceIds);
-    const evidenceById = new Map(
-      evidence.map((item) => [item.id, item] as const)
+  ): Promise<OperatorIntelligencePageResult<OperatorIntelligenceClaimRevision>> {
+    const cursor = query.page.cursor === null
+      ? null
+      : decodeOperatorIntelligenceCursor({
+          cursor: query.page.cursor,
+          kind: "eligible-claims",
+          query,
+        });
+    const { data, error } = await this.client.rpc(
+      "read_operator_intelligence_eligible_claim_page",
+      {
+        p_operator_id: query.operatorId,
+        p_purpose: query.purpose,
+        p_as_of: query.asOf,
+        p_scope: query.scope,
+        p_page_size: query.page.pageSize,
+        p_read_watermark: cursor?.readWatermark ?? null,
+        p_after_effective_from: cursor?.position.orderValue ?? null,
+        p_after_revision_id: cursor?.position.tieBreaker ?? null,
+      }
     );
-    const linksByRevision = groupBy(links, (link) => link.claim_revision_id);
-    const latestEligibility = new Map<string, OperatorUnderstandingEligibility>();
 
-    for (const row of eligibilityRows) {
-      if (!latestEligibility.has(row.claim_revision_id)) {
-        latestEligibility.set(
-          row.claim_revision_id,
-          row.eligibility_contract
-        );
-      }
+    if (error) {
+      throw error;
     }
 
-    const currentClaims: OperatorIntelligenceClaimRevision[] = [];
-
-    for (const revision of revisions) {
-      const eligibility = latestEligibility.get(revision.claim_revision_id);
-
-      if (!eligibility?.eligible) {
-        continue;
-      }
-
-      const revisionLinks = (linksByRevision.get(revision.claim_revision_id) ?? [])
-        .map((link) => ({
-          claimId: String(revision.claim_revision_contract.claimId),
-          claimRevisionId: revision.claim_revision_id,
-          evidenceReferenceId: link.evidence_reference_id,
-          relationship: link.relationship,
-          rationale: link.rationale,
-          linkedAt: link.linked_at,
-        }));
-      const revisionEvidence = revisionLinks.map((link) => {
-        const reference = evidenceById.get(link.evidenceReferenceId);
-
-        if (!reference) {
-          throw new Error(
-            `Operator Intelligence evidence '${link.evidenceReferenceId}' is unavailable.`
-          );
-        }
-
-        return reference;
-      });
+    const page = requireEligibleClaimPageData(data);
+    if (page.rows.length > query.page.pageSize) {
+      throw new Error("Operator Intelligence Repository exceeded its page limit.");
+    }
+    const claims = page.rows.map((row) => {
+      const evidence = row.evidenceContracts.map((contract) =>
+        createOperatorEvidenceReference(contract)
+      );
       const claim = createOperatorIntelligenceClaimRevision(
         {
-          ...revision.claim_revision_contract,
-          evidence: revisionLinks,
-          eligibility,
+          ...row.claimRevisionContract,
+          evidence: row.evidenceLinks,
+          eligibility: row.eligibilityContract,
         },
-        revisionEvidence
+        evidence
       );
 
       if (
-        claim.status === "active" &&
-        isCurrentAt(claim, query.asOf) &&
-        matchesScope(claim.scope, query.scope)
+        claim.operatorId !== query.operatorId ||
+        claim.status !== "active" ||
+        !claim.eligibility.eligible ||
+        claim.eligibility.purpose !== query.purpose ||
+        !isCurrentAt(claim, query.asOf) ||
+        !matchesScope(claim.scope, query.scope)
       ) {
-        currentClaims.push(claim);
+        throw new Error(
+          "Operator Intelligence eligible page violated its query boundary."
+        );
       }
-    }
 
-    return Object.freeze(currentClaims);
-  }
+      return claim;
+    });
+    const lastRow = page.rows.at(-1);
+    const nextCursor = page.hasMore && lastRow
+      ? encodeOperatorIntelligenceCursor({
+          kind: "eligible-claims",
+          query,
+          readWatermark: page.readWatermark,
+          position: {
+            orderValue: lastRow.effectiveFrom,
+            tieBreaker: lastRow.claimRevisionId,
+          },
+        })
+      : null;
 
-  private async readClaimHeads(operatorId: string): Promise<ClaimHeadRow[]> {
-    const { data, error } = await this.client
-      .from("operator_intelligence_claims")
-      .select("claim_id,current_revision_id")
-      .eq("operator_id", operatorId);
-
-    if (error) {
-      throw error;
-    }
-
-    return (data ?? []) as ClaimHeadRow[];
-  }
-
-  private async readClaimRevisions(
-    operatorId: string,
-    revisionIds: readonly string[]
-  ): Promise<ClaimRevisionRow[]> {
-    const { data, error } = await this.client
-      .from("operator_intelligence_claim_revisions")
-      .select("claim_revision_id,claim_revision_contract")
-      .eq("operator_id", operatorId)
-      .in("claim_revision_id", [...revisionIds]);
-
-    if (error) {
-      throw error;
-    }
-
-    return (data ?? []) as ClaimRevisionRow[];
-  }
-
-  private async readEvidenceLinks(
-    operatorId: string,
-    revisionIds: readonly string[]
-  ): Promise<ClaimEvidenceRow[]> {
-    const { data, error } = await this.client
-      .from("operator_intelligence_claim_evidence")
-      .select(
-        "claim_revision_id,evidence_reference_id,relationship,rationale,linked_at"
-      )
-      .eq("operator_id", operatorId)
-      .in("claim_revision_id", [...revisionIds]);
-
-    if (error) {
-      throw error;
-    }
-
-    return (data ?? []) as ClaimEvidenceRow[];
-  }
-
-  private async readEligibility(
-    operatorId: string,
-    revisionIds: readonly string[],
-    purpose: string,
-    asOf: string
-  ): Promise<EligibilityRow[]> {
-    const { data, error } = await this.client
-      .from("operator_intelligence_eligibility_assessments")
-      .select("claim_revision_id,eligibility_contract,assessed_at")
-      .eq("operator_id", operatorId)
-      .eq("purpose", purpose)
-      .in("claim_revision_id", [...revisionIds])
-      .lte("assessed_at", asOf)
-      .order("assessed_at", { ascending: false });
-
-    if (error) {
-      throw error;
-    }
-
-    return (data ?? []) as EligibilityRow[];
-  }
-
-  private async readEvidence(
-    operatorId: string,
-    evidenceIds: readonly string[]
-  ): Promise<OperatorEvidenceReference[]> {
-    if (evidenceIds.length === 0) {
-      return [];
-    }
-
-    const { data, error } = await this.client
-      .from("operator_intelligence_evidence")
-      .select("evidence_reference_id,evidence_contract")
-      .eq("operator_id", operatorId)
-      .in("evidence_reference_id", [...evidenceIds]);
-
-    if (error) {
-      throw error;
-    }
-
-    return ((data ?? []) as EvidenceRow[]).map((row) =>
-      createOperatorEvidenceReference(row.evidence_contract)
-    );
+    return createOperatorIntelligencePageResult({
+      kind: "eligible-claims",
+      items: claims,
+      readWatermark: page.readWatermark,
+      nextCursor,
+      hasMore: page.hasMore,
+    });
   }
 }
 
@@ -512,18 +406,43 @@ function matchesScope(
   return JSON.stringify(claimScope) === JSON.stringify(requestedScope);
 }
 
-function groupBy<Row, Key>(
-  rows: readonly Row[],
-  getKey: (row: Row) => Key
-): Map<Key, Row[]> {
-  const grouped = new Map<Key, Row[]>();
-
-  for (const row of rows) {
-    const key = getKey(row);
-    const group = grouped.get(key) ?? [];
-    group.push(row);
-    grouped.set(key, group);
+function requireEligibleClaimPageData(value: unknown): EligibleClaimPageData {
+  if (!isRecord(value) || !Array.isArray(value.rows)) {
+    throw new Error("Operator Intelligence Repository returned an invalid page.");
   }
 
-  return grouped;
+  const readWatermark = value.readWatermark;
+  const hasMore = value.hasMore;
+
+  if (
+    typeof readWatermark !== "string" ||
+    !Number.isFinite(Date.parse(readWatermark)) ||
+    typeof hasMore !== "boolean"
+  ) {
+    throw new Error("Operator Intelligence Repository returned invalid page metadata.");
+  }
+
+  const rows = value.rows.map((row) => {
+    if (
+      !isRecord(row) ||
+      typeof row.claimRevisionId !== "string" ||
+      typeof row.effectiveFrom !== "string" ||
+      !isRecord(row.claimRevisionContract) ||
+      !isRecord(row.eligibilityContract) ||
+      !Array.isArray(row.evidenceLinks) ||
+      !row.evidenceLinks.every(isRecord) ||
+      !Array.isArray(row.evidenceContracts) ||
+      !row.evidenceContracts.every(isRecord)
+    ) {
+      throw new Error("Operator Intelligence Repository returned an invalid row.");
+    }
+
+    return row as EligibleClaimPageRow;
+  });
+
+  return { readWatermark, hasMore, rows };
+}
+
+function isRecord(value: unknown): value is JsonRecord {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 }

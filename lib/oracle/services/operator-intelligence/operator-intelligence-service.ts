@@ -2,6 +2,7 @@ import type { OperatorIntelligenceRepository } from "../../repositories/operator
 import {
   createOperatorEvidenceReference,
   createOperatorIntelligenceClaimRevision,
+  createOperatorIntelligencePageRequest,
 } from "../../understanding";
 import type { OperatorService } from "../operator";
 import type {
@@ -32,6 +33,7 @@ export function createOperatorIntelligenceService(
     return repository.listEligibleClaimRevisions({
       ...query,
       operatorId: operator.id,
+      page: createOperatorIntelligencePageRequest(query.page),
     });
   }
 

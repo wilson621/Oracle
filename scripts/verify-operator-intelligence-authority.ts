@@ -23,6 +23,8 @@ import type {
 import {
   createOperatorEvidenceReference,
   createOperatorIntelligenceClaimRevision,
+  createOperatorIntelligencePageRequest,
+  createOperatorIntelligencePageResult,
 } from "../lib/oracle/understanding";
 import {
   activeClaimInput,
@@ -73,6 +75,7 @@ async function verifyCurrentOperatorInjection() {
     purpose: "operator-coaching",
     asOf: "2026-07-21T12:00:00.000Z",
     scope: null,
+    page: createOperatorIntelligencePageRequest(),
   });
   assert.equal(repository.queriedOperatorId, currentOperatorId);
 }
@@ -266,7 +269,13 @@ class RecordingRepository implements OperatorIntelligenceRepository {
     query: OperatorIntelligencePersistenceQuery
   ) {
     this.queriedOperatorId = query.operatorId;
-    return [];
+    return createOperatorIntelligencePageResult({
+      kind: "eligible-claims",
+      items: [],
+      readWatermark: "2026-07-21T12:00:00.000Z",
+      nextCursor: null,
+      hasMore: false,
+    });
   }
 }
 
