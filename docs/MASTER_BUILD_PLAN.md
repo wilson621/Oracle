@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 22 July 2026
-**Version:** 2.9
+**Version:** 3.0
 
 ---
 
@@ -79,17 +79,18 @@ This architecture was established during Sprint 8 and forms the permanent founda
 
 # Latest Approved Execution Status
 
-No implementation Sprint is active.
+Sprint 17 engineering implementation is complete and awaiting Founder closure
+review. No later Sprint is active.
 
 Sprint 16 — Trust Boundary is complete at
 `58589b52de0db341e6518fa9f235bb18854e6b30`. It was executed under the
 transitional alias Sprint 15.5A. Migration 009 is deployment-ready through
 rollback validation but remains undeployed pending a separate founder decision.
 
-Sprint 17 — Scale-Safe Trust Data Plane has a founder-approved Engineering Plan
-but is not activated. Its former planning alias was Sprint 15.5B and its earlier
-proposed name was Scale Hardening. Plan approval does not authorise
-implementation or Migration 009 deployment.
+Sprint 17 — Scale-Safe Trust Data Plane has completed its eight approved
+implementation phases. Its former planning alias was Sprint 15.5B and its
+earlier proposed name was Scale Hardening. Migration 009 remains undeployed;
+Founder closure and any later deployment remain separate decisions.
 
 `docs/ENGINEERING_PROGRAMME.md` is the authoritative Sprint 17–Beta Programme.
 This Master Build Plan continues to identify the next execution objective; a
@@ -117,15 +118,15 @@ inactive.
 
 ## Sprint 17 — Scale-Safe Trust Data Plane
 
-**Status:** Plan approved; not activated
+**Status:** Engineering implementation complete; Founder closure review pending
 **Historical planning alias:** Sprint 15.5B
 
-The approved Programme objective is to make the Operator Intelligence
-persistence boundary safe for controlled production activation. It includes
+The implemented Programme objective makes the Operator Intelligence
+persistence boundary safe for a separate controlled-production decision. It includes
 bounded purpose-scoped reads, deterministic pagination, measured query
 optimisation, required indexes, Snapshot budgets, concurrency verification,
-automated boundary enforcement and the Migration 009 deployment dossier. It
-requires a separately approved Sprint Plan and explicit founder activation.
+automated boundary enforcement and the version-pinned Migration 009 deployment
+dossier. No runtime activation or permanent migration execution occurred.
 
 ## Historical Sprint 15 — Operator Intelligence: Operator Understanding Foundation
 

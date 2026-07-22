@@ -29,22 +29,21 @@ Oracle is being built as an intelligence platform rather than a statistics dashb
 
 ## Version
 
-**Oracle v0.8.0 baseline with Sprint 16 Trust Boundary complete**
+**Oracle v0.8.0 baseline with Sprint 17 engineering complete**
 
 ## Current Milestone
 
-**Approved Sprint 17–Beta Engineering Programme; no implementation Sprint active**
+**Sprint 17 engineering complete; Founder closure review pending**
 
-**Status: Sprint 17 — Scale-Safe Trust Data Plane plan approved; not activated**
+**Status: Sprint 17 — Scale-Safe Trust Data Plane implemented; Migration 009 undeployed**
 
 ## Build Status
 
-Sprint 16 verification passed for Operator ownership, Understanding,
-persistence, trust and authority boundaries alongside Guidance, Companion,
-architecture, desktop TypeScript, lint and the Next.js production build.
-Migration 009 remains undeployed. The approved Sprint 17–Beta sequence is
-recorded in [`docs/ENGINEERING_PROGRAMME.md`](docs/ENGINEERING_PROGRAMME.md),
-and its approval does not activate Sprint 17.
+Sprint 17 verification passed for bounded trust-data reads, pagination,
+budgets, idempotency, PostgreSQL concurrency, production-shaped plans and the
+existing ownership, trust, Guidance, Companion, architecture, desktop, lint
+and build baselines. Migration 009 remains undeployed. Founder closure review
+is pending and Sprint 18 has not been activated.
 
 The canonical verified status is maintained in
 [`docs/architecture/IMPLEMENTATION_STATUS.md`](docs/architecture/IMPLEMENTATION_STATUS.md).
@@ -234,6 +233,8 @@ classification, reading order, canonical ownership and superseded documents.
 | founding/ORACLE_ENGINEERING_PRINCIPLES.md | Durable engineering principles |
 | founding/ORACLE_STRATEGY.md | Long-term operational strategy |
 | ENGINEERING_PROGRAMME.md | Approved Sprint 17–Beta Engineering Programme |
+| sprints/SPRINT_17_CLOSURE.md | Sprint 17 implementation and verification closure report |
+| sprints/SPRINT_17_MIGRATION_009_DOSSIER.md | Version-pinned Migration 009 deployment decision evidence |
 | MASTER_BUILD_PLAN.md | Canonical engineering build plan |
 | Architecture.md | Platform architecture |
 | Oracle_Codex.md | Engineering standards |
@@ -326,10 +327,11 @@ Verified delivery now includes:
 - curated Call of Duty Guidance package through shared architecture
 - immutable Companion Guidance Application state and `/companion` presentation
 
-Sprint 16 — Trust Boundary is formally closed. The approved Oracle Engineering
-Programme defines Sprints 17–31 through Beta. Sprint 17 — Scale-Safe Trust Data
-Plane has a founder-approved Engineering Plan but remains inactive and requires
-explicit Founder activation.
+Sprint 16 — Trust Boundary is formally closed. Sprint 17 — Scale-Safe Trust
+Data Plane engineering implementation is complete and awaits Founder closure
+review. Migration 009 remains undeployed, and Sprint 18 is not active. The
+approved Oracle Engineering Programme continues to define Sprints 17–31
+through Beta without granting later implementation authority.
 
 ---
 

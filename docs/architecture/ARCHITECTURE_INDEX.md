@@ -9,7 +9,7 @@
 **Supersedes:** Earlier Architecture Index versions
 **Superseded By:** None
 **Last Reviewed:** 22 July 2026
-**Version:** 5.7
+**Version:** 5.8
 
 ---
 
@@ -693,11 +693,13 @@ Owns
 - claim-to-evidence support and contradiction links
 - append-only purpose-specific eligibility history
 - authenticated atomic persistence and same-Operator relational integrity
+- immutable snapshot-visible claim-head events for bounded page selection
+- versioned, query-bound cursor mechanics and explicit result budgets
 
 Produces
 
 - persisted contracts validated through the Phase 2 factories
-- current eligible claim revisions reconstructed by the Repository
+- bounded current and historical claim pages reconstructed by the Repository
 - deterministic explanations propagated unchanged from stored revisions
 - database-enforced ownership, lifecycle and direct-write boundaries
 
@@ -711,8 +713,9 @@ Must Never
 - register runtime consumption before the approved control gates
 - create real candidates during Phase 3
 
-The migration has passed rollback and independent catalog verification but is
-not permanently deployed. The Repository is implemented without runtime
+The exact Sprint 17 migration has passed refreshed rollback, independent
+catalog and production-shaped scale verification but is not permanently
+deployed. The Repository is implemented without runtime
 Service registration, producer integration, Context projection, Application
 consumption or UI.
 
@@ -750,9 +753,9 @@ Completed
 
 Current Development Phase
 
-No implementation Sprint active. Sprint 16 — Trust Boundary is complete;
-Sprint 17 — Scale-Safe Trust Data Plane has a founder-approved Engineering Plan
-and is not activated.
+Sprint 17 — Scale-Safe Trust Data Plane engineering implementation is complete
+and awaiting Founder closure review. Sprint 16 is the latest Founder-closed
+Sprint; Sprint 18 is not activated.
 
 Current Runtime
 

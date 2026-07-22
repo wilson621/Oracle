@@ -3,11 +3,11 @@
 **Sprint:** 17 — Scale-Safe Trust Data Plane
 **Authority:** Approved Sprint Plan beneath the Oracle Engineering Programme
 **Owner:** Oracle Platform Engineering
-**Status:** Founder-approved; activated for implementation
-**Classification:** Living until Sprint closure
+**Status:** Engineering implementation complete; Founder closure review pending
+**Classification:** Closure-review record
 **Expected Stability:** Scope changes require explicit Founder approval
 **Approved:** 22 July 2026
-**Implementation:** Phase 0 complete; Phase 1 authorised to begin
+**Implementation:** Phases 0 through 8 complete
 **Deployment:** Migration 009 remains undeployed
 **Activated:** 22 July 2026 by explicit Founder instruction
 
@@ -24,8 +24,8 @@ Programme remains authoritative if this Plan is interpreted ambiguously.
 
 # Executive Assessment
 
-Sprint 17 remains the next authorised Sprint. Sprint 16 is complete and Sprint
-17 is approved but inactive. The repository already contains authenticated
+Sprint 17 engineering implementation is complete and awaiting Founder closure
+review. Sprint 16 is complete. The repository already contains authenticated
 Operator ownership, exclusive Operator Intelligence Service authority,
 server-only trusted database access, immutable evidence and claim structures,
 database uniqueness constraints, row locking, monotonic revision validation,

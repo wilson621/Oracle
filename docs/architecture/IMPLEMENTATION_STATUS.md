@@ -8,7 +8,7 @@
 **Expected Stability:** Updated when verified implementation or accepted technical debt changes
 **Supersedes:** Earlier active implementation-status records
 **Superseded By:** None
-**Last Reviewed:** 21 July 2026
+**Last Reviewed:** 22 July 2026
 **Verified Branch:** `sprint-9-overlay`
 **Verified Repository Baseline:** `58589b52de0db341e6518fa9f235bb18854e6b30`
 **Sprint 14 Implementation Baseline:** `3868975`
@@ -16,6 +16,7 @@
 **Sprint 15 Phase 2:** Complete and committed
 **Sprint 15 Phase 3:** Complete and committed
 **Sprint 16:** Trust Boundary complete and committed; Migration 009 undeployed
+**Sprint 17:** Scale-Safe Trust Data Plane implementation complete; Founder closure review pending; Migration 009 undeployed
 
 ---
 
@@ -40,6 +41,26 @@ Update this file during every sprint closure audit.
 ---
 
 # Latest Verified Sprint Progress
+
+## Sprint 17 — Scale-Safe Trust Data Plane
+
+Sprint 17 engineering implementation is complete through Phase 8. Verified
+capability includes bounded purpose- and scope-filtered current/history reads,
+opaque query-bound keyset cursors, snapshot-stable traversal, typed page and
+Snapshot budgets, exact-retry idempotency, immutable/stale conflict outcomes,
+real PostgreSQL contention verification and production-shaped plan gates.
+
+The immutable claim-head event projection and its scoped/unscoped indexes are
+supported by measured PostgreSQL 17.10 evidence. The one-command scale suite
+verifies empty, normal and 10,000-head hot fixtures, 1/8/32-worker behaviour,
+latency, payload, heap, plans, RLS and architecture boundaries. The exact final
+Migration 009 hash is pinned in the Sprint 17 deployment dossier and has passed
+fresh transactional rollback plus independent catalog comparison.
+
+No runtime producer, consumer, control operation, Snapshot construction,
+Context projection, Application persistence path or Platform activation was
+added. Migration 009 remains undeployed. Founder closure review is pending, so
+Sprint 18 is not active.
 
 ## Sprint 15 Phase 1 — Ownership Foundation
 

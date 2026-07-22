@@ -1453,6 +1453,38 @@ Phase 3 produces no real candidate, performs no cross-game promotion, persists
 no `OperatorUnderstandingSnapshot`, changes no Oracle Context, and adds no
 Application or UI consumption. Those remain later explicitly approved phases.
 
+# Sprint 17 Scale-Safe Trust Data Plane
+
+Sprint 17 hardens the existing Service/Repository/database boundary without
+changing its ownership. Current eligible claims, claim lifecycle and
+eligibility history use bounded Repository operations with maximum 100-item
+pages. Purpose and scope are applied in PostgreSQL before the page limit. An
+opaque versioned cursor binds Operator, purpose, scope, as-of time, keyset
+position and an immutable PostgreSQL snapshot watermark.
+
+Migration 009 maintains immutable claim-head events as a read projection. The
+projection does not become a second authority: accepted immutable claim
+revisions remain authoritative, and the projection is written atomically by
+the same service-role function. Scoped and unscoped page indexes are retained
+only because production-shaped plans select them and remove measured
+whole-history scans and disk spills.
+
+Exact Evidence admission, claim-revision and eligibility retries return their
+original durable result. Same-identity changes fail immutably; competing heads
+return typed stale outcomes. Shared transaction advisory locks preserve consent
+and Evidence-disposition trust decisions across concurrent eligibility writes.
+
+Page responses are limited to 512 KiB, reconstructed claims to 32 Evidence
+references, and the inactive Snapshot contract to 100 intelligence claims,
+250 total items and 512 KiB. These budgets do not activate Snapshot construction
+or consumption.
+
+The Repository remains the exclusive persistence owner, Services retain
+business behaviour, and Applications remain presentation-only. No producer,
+consumer, control path, cache, alternate persistence path or Platform runtime
+was activated. Migration 009 remains undeployed pending a separate Founder
+decision.
+
 # Verified Integration Limits
 
 - `bootstrapOraclePlatform()` is implemented but is not invoked by the current

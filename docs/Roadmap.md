@@ -691,7 +691,8 @@ The Oracle Platform grows through extensions rather than increasing complexity i
 
 # Current Delivery
 
-No implementation Sprint is active.
+Sprint 17 engineering implementation is complete and awaiting Founder closure
+review. No subsequent Sprint is active.
 
 The Founder-approved Sprint 17–Beta sequence, its five Epics, architectural
 dependencies, Beta Gates, Founder Beta Readiness Review and Oracle Beta
@@ -714,15 +715,15 @@ validation but remains undeployed pending a separate founder decision.
 
 ## Sprint 17 — Scale-Safe Trust Data Plane
 
-**Status:** Approved Programme; not activated
+**Status:** Engineering implementation complete; Founder closure review pending
 **Historical planning alias:** Sprint 15.5B
 
-Sprint 17 is the next approved Programme objective. It makes the Operator
+Sprint 17 has made the Operator
 Intelligence persistence boundary safe for controlled production activation
 through bounded reads, deterministic pagination, measured query optimisation,
 required indexes, Snapshot budgets, concurrency verification and automated
-boundary enforcement. It also produces the Migration 009 deployment dossier.
-Programme placement does not authorise implementation or deployment.
+boundary enforcement. It also produced the version-pinned Migration 009
+deployment dossier. Migration deployment and Sprint 18 remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

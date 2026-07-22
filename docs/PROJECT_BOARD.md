@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 22 July 2026
-**Version:** 5.0
+**Version:** 5.1
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -17,17 +17,19 @@
 
 # Current Sprint
 
-No implementation Sprint is active.
-
-Sprint 17 — Scale-Safe Trust Data Plane has a founder-approved Engineering Plan
-but has not been activated. Its former planning alias was Sprint 15.5B and its
-earlier proposed name was Scale Hardening. Plan approval does not authorise
-implementation or Migration 009 deployment.
+Sprint 17 — Scale-Safe Trust Data Plane engineering implementation is complete
+and submitted for Founder closure review. Criterion 24 (Founder closure and a
+separately approved closure commit) remains pending. Migration 009 remains
+undeployed and Sprint 18 is not active.
 
 The complete approved Sprint 17–31 sequence and Beta Gates are recorded in
 `docs/ENGINEERING_PROGRAMME.md`. The approved Sprint 17 implementation scope,
 phases, verification and exit governance are recorded in
 `docs/sprints/SPRINT_17_PLAN.md`.
+
+Implementation evidence is recorded in
+`docs/sprints/SPRINT_17_CLOSURE.md`; the version-pinned deployment decision
+artifact is `docs/sprints/SPRINT_17_MIGRATION_009_DOSSIER.md`.
 
 # Latest Closed Sprint
 
