@@ -329,20 +329,24 @@ async function main() {
 
   const payloadRaw = await runSql(`
     select set_config('request.jwt.claim.role', 'service_role', false);
-    select octet_length(page::text) || '|' || jsonb_array_length(page -> 'rows')
+    select page::text
     from (select public.read_operator_intelligence_eligible_claim_page(
       '${operatorId}'::uuid, '${purpose}', '${asOf}'::timestamptz,
       '${integrationScope}'::jsonb, 50
     ) page) measured;
   `);
-  const [payloadBytes, returnedItems] = payloadRaw.trim().split(/\r?\n/).at(-1)
-    .split("|").map(Number);
+  const payloadText = payloadRaw.trim().split(/\r?\n/).at(-1);
+  const payloadBytes = Buffer.byteLength(payloadText, "utf8");
   assert.ok(payloadBytes <= 512 * 1024, "approved page exceeded 512 KiB");
   const beforeHeap = process.memoryUsage().heapUsed;
-  const materialized = Buffer.alloc(payloadBytes);
-  const incrementalHeapBytes = process.memoryUsage().heapUsed - beforeHeap;
+  const materialized = JSON.parse(payloadText);
+  const incrementalHeapBytes = Math.max(
+    0,
+    process.memoryUsage().heapUsed - beforeHeap
+  );
   assert.ok(incrementalHeapBytes <= 32 * 1024 * 1024, "page exceeded 32 MiB heap budget");
-  assert.equal(materialized.byteLength, payloadBytes);
+  const returnedItems = materialized.rows.length;
+  assert.equal(returnedItems, 50);
 
   const indexSizes = JSON.parse(await runSql(`
     select json_object_agg(relname, bytes)
