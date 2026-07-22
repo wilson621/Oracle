@@ -5,6 +5,7 @@ import type {
   OperatorIntelligenceClaimTombstone,
   OperatorIntelligencePageRequest,
   OperatorIntelligencePageResult,
+  OperatorUnderstandingEligibility,
   OperatorUnderstandingPurpose,
   OperatorUnderstandingScope,
 } from "../../understanding";
@@ -13,6 +14,22 @@ export type OperatorIntelligenceClaimQuery = Readonly<{
   purpose: OperatorUnderstandingPurpose;
   asOf: string;
   scope: OperatorUnderstandingScope | null;
+  page: OperatorIntelligencePageRequest;
+}>;
+
+export type OperatorIntelligenceLifecycleQuery = Readonly<{
+  claimId: string;
+  purpose: OperatorUnderstandingPurpose;
+  asOf: string;
+  scope: OperatorUnderstandingScope | null;
+  page: OperatorIntelligencePageRequest;
+}>;
+
+export type OperatorIntelligenceEligibilityHistoryQuery = Readonly<{
+  claimId: string;
+  claimRevisionId: string;
+  purpose: OperatorUnderstandingPurpose;
+  asOf: string;
   page: OperatorIntelligencePageRequest;
 }>;
 
@@ -43,6 +60,16 @@ export type OperatorIntelligenceService = Readonly<{
   listEligibleClaims(
     query: OperatorIntelligenceClaimQuery
   ): Promise<OperatorIntelligencePageResult<OperatorIntelligenceClaimRevision>>;
+  listClaimLifecycle(
+    query: OperatorIntelligenceLifecycleQuery
+  ): Promise<OperatorIntelligencePageResult<
+    OperatorIntelligenceClaimRevision | OperatorIntelligenceClaimTombstone
+  >>;
+  listEligibilityHistory(
+    query: OperatorIntelligenceEligibilityHistoryQuery
+  ): Promise<OperatorIntelligencePageResult<
+    OperatorUnderstandingEligibility
+  >>;
   submitCandidate(
     submission: OperatorIntelligenceCandidateSubmission
   ): Promise<OperatorIntelligenceClaimRevision>;

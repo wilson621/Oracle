@@ -14,6 +14,7 @@ import {
   createOperatorEvidenceReference,
   createOperatorIntelligenceClaimRevision,
   createOperatorIntelligencePageRequest,
+  OperatorIntelligencePageBudgetError,
 } from "../lib/oracle/understanding";
 import { SupabaseOperatorIntelligenceRepository } from "../lib/oracle/repositories/operator-intelligence-repository";
 import {
@@ -272,6 +273,73 @@ async function verifyBoundedReadBoundary() {
     client.calls.at(-1)?.arguments.p_after_revision_id,
     activeClaim.id
   );
+
+  client.lifecyclePageData = {
+    readWatermark: "2026-07-21T12:01:00.000Z",
+    hasMore: false,
+    rows: [{
+      claimRevisionId: activeClaim.id,
+      effectiveFrom: activeClaim.temporalValidity.effectiveFrom,
+      revision: activeClaim.revision,
+      recordedAt: assessedAt,
+      status: activeClaim.status,
+      claimRevisionContract,
+      eligibilityContract: eligibility,
+      evidenceLinks: evidence,
+      evidenceContracts: [fixture.evidence],
+    }],
+  };
+  const lifecycle = await repository.listClaimLifecycle({
+    operatorId,
+    claimId: activeClaim.claimId,
+    purpose: OPERATOR_GAME_PATTERN_INTELLIGENCE_PURPOSE,
+    asOf: assessedAt,
+    scope: fixture.evidence.scope,
+    page: createOperatorIntelligencePageRequest({ pageSize: 1 }),
+  });
+  assert.deepEqual(lifecycle.items, [activeClaim]);
+  assert.equal(client.calls.at(-1)?.functionName,
+    "read_operator_intelligence_claim_lifecycle_page");
+
+  client.eligibilityPageData = {
+    readWatermark: "2026-07-21T12:01:00.000Z",
+    hasMore: false,
+    rows: [{
+      assessmentId: "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      assessedAt,
+      eligibilityContract: eligibility,
+    }],
+  };
+  const eligibilityHistory = await repository.listEligibilityHistory({
+    operatorId,
+    claimId: activeClaim.claimId,
+    claimRevisionId: activeClaim.id,
+    purpose: OPERATOR_GAME_PATTERN_INTELLIGENCE_PURPOSE,
+    asOf: assessedAt,
+    page: createOperatorIntelligencePageRequest({ pageSize: 1 }),
+  });
+  assert.deepEqual(eligibilityHistory.items, [eligibility]);
+  assert.equal(client.calls.at(-1)?.functionName,
+    "read_operator_intelligence_eligibility_history_page");
+
+  client.readPageData = {
+    readWatermark: "2026-07-21T12:01:00.000Z",
+    hasMore: false,
+    rows: [{
+      claimRevisionId: activeClaim.id,
+      effectiveFrom: activeClaim.temporalValidity.effectiveFrom,
+      claimRevisionContract,
+      eligibilityContract: eligibility,
+      evidenceLinks: Array.from({ length: 33 }, () => evidence[0]),
+      evidenceContracts: Array.from({ length: 33 }, () => fixture.evidence),
+    }],
+  };
+  await assert.rejects(
+    repository.listEligibleClaimRevisions(query),
+    (error: unknown) =>
+      error instanceof OperatorIntelligencePageBudgetError &&
+      error.budget === "evidence-fan-out"
+  );
 }
 
 function verifyRepositoryOwnershipBoundary() {
@@ -470,6 +538,8 @@ function createTrustFixture() {
 
 class RecordingSupabaseClient {
   readPageData: unknown = null;
+  lifecyclePageData: unknown = null;
+  eligibilityPageData: unknown = null;
   readonly calls: Array<{
     functionName: string;
     arguments: Record<string, unknown>;
@@ -500,6 +570,14 @@ class RecordingSupabaseClient {
 
     if (functionName === "read_operator_intelligence_eligible_claim_page") {
       return { data: this.readPageData, error: null };
+    }
+
+    if (functionName === "read_operator_intelligence_claim_lifecycle_page") {
+      return { data: this.lifecyclePageData, error: null };
+    }
+
+    if (functionName === "read_operator_intelligence_eligibility_history_page") {
+      return { data: this.eligibilityPageData, error: null };
     }
 
     return { data: args.p_eligibility, error: null };

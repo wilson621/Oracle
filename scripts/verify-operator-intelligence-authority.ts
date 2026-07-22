@@ -4,6 +4,8 @@ import path from "node:path";
 import type {
   OperatorIntelligencePersistenceQuery,
   OperatorIntelligenceRepository,
+  OperatorIntelligenceLifecycleQuery,
+  OperatorIntelligenceEligibilityHistoryQuery,
 } from "../lib/oracle/repositories/operator-intelligence-repository";
 import type { OperatorService } from "../lib/oracle/services/operator";
 import {
@@ -271,6 +273,30 @@ class RecordingRepository implements OperatorIntelligenceRepository {
     this.queriedOperatorId = query.operatorId;
     return createOperatorIntelligencePageResult({
       kind: "eligible-claims",
+      items: [],
+      readWatermark: "2026-07-21T12:00:00.000Z",
+      nextCursor: null,
+      hasMore: false,
+    });
+  }
+
+  async listClaimLifecycle(query: OperatorIntelligenceLifecycleQuery) {
+    this.queriedOperatorId = query.operatorId;
+    return createOperatorIntelligencePageResult({
+      kind: "claim-lifecycle",
+      items: [],
+      readWatermark: "2026-07-21T12:00:00.000Z",
+      nextCursor: null,
+      hasMore: false,
+    });
+  }
+
+  async listEligibilityHistory(
+    query: OperatorIntelligenceEligibilityHistoryQuery
+  ) {
+    this.queriedOperatorId = query.operatorId;
+    return createOperatorIntelligencePageResult({
+      kind: "eligibility-history",
       items: [],
       readWatermark: "2026-07-21T12:00:00.000Z",
       nextCursor: null,

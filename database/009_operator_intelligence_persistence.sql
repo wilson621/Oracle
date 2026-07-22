@@ -1799,9 +1799,17 @@ begin
                 evidence_projection.evidence_contracts,
                 '[]'::jsonb
             )
-          ) as projected
+        ) as projected
         from numbered_page page
         left join lateral (
+            with selected_links as (
+                select link.*
+                from public.operator_intelligence_claim_evidence link
+                where link.operator_id = p_operator_id
+                  and link.claim_revision_id = page.claim_revision_id
+                order by link.evidence_reference_id
+                limit 33
+            )
             select
                 jsonb_agg(
                     jsonb_build_object(
@@ -1817,12 +1825,10 @@ begin
                     evidence.evidence_contract
                     order by link.evidence_reference_id
                 ) as evidence_contracts
-            from public.operator_intelligence_claim_evidence link
+            from selected_links link
             join public.operator_intelligence_evidence evidence
               on evidence.operator_id = link.operator_id
              and evidence.evidence_reference_id = link.evidence_reference_id
-            where link.operator_id = p_operator_id
-              and link.claim_revision_id = page.claim_revision_id
         ) evidence_projection on true
         where page.page_row_number <= p_page_size
         order by page.effective_from desc, page.claim_revision_id asc
@@ -1838,6 +1844,265 @@ begin
         (select count(*) > p_page_size from numbered_page)
     into page_rows, page_has_more
     from projected_page;
+
+    return jsonb_build_object(
+        'readWatermark', effective_watermark,
+        'hasMore', page_has_more,
+        'rows', page_rows
+    );
+end;
+$$;
+
+create or replace function public.read_operator_intelligence_claim_lifecycle_page(
+    p_operator_id uuid,
+    p_claim_id text,
+    p_purpose text,
+    p_as_of timestamptz,
+    p_scope jsonb,
+    p_page_size integer,
+    p_read_watermark timestamptz default null,
+    p_after_revision integer default null,
+    p_after_revision_id text default null
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = pg_catalog
+as $$
+declare
+    effective_watermark timestamptz := coalesce(
+        p_read_watermark,
+        statement_timestamp()
+    );
+    page_rows jsonb;
+    page_has_more boolean;
+begin
+    if coalesce(auth.role(), '') <> 'service_role' then
+        raise exception 'Trusted Operator Intelligence authority is required.'
+            using errcode = '42501';
+    end if;
+
+    if p_page_size < 1 or p_page_size > 100 then
+        raise exception 'Operator Intelligence page size is outside its budget.'
+            using errcode = '22023';
+    end if;
+
+    if (p_after_revision is null) <> (p_after_revision_id is null) then
+        raise exception 'Operator Intelligence page position is incomplete.'
+            using errcode = '22023';
+    end if;
+
+    with bounded_revisions as (
+        select
+            revision.*,
+            eligibility.eligibility_contract
+        from public.operator_intelligence_claim_revisions revision
+        cross join lateral (
+            select assessment.eligibility_contract
+            from public.operator_intelligence_eligibility_assessments assessment
+            where assessment.operator_id = revision.operator_id
+              and assessment.claim_id = revision.claim_id
+              and (
+                  assessment.claim_revision_id = revision.claim_revision_id
+                  or revision.status = 'deleted'
+              )
+              and assessment.purpose = p_purpose
+              and assessment.assessed_at <= p_as_of
+              and assessment.recorded_at <= effective_watermark
+            order by assessment.assessed_at desc,
+                assessment.recorded_at desc,
+                assessment.assessment_id desc
+            limit 1
+        ) eligibility
+        where revision.operator_id = p_operator_id
+          and revision.claim_id = p_claim_id
+          and revision.recorded_at <= effective_watermark
+          and (
+              (revision.status = 'deleted' and revision.deleted_at <= p_as_of)
+              or (revision.status <> 'deleted'
+                  and revision.effective_from <= p_as_of)
+          )
+          and (
+              p_scope is null
+              or coalesce(
+                  revision.claim_revision_contract -> 'scope',
+                  (
+                      select previous.claim_revision_contract -> 'scope'
+                      from public.operator_intelligence_claim_revisions previous
+                      where previous.operator_id = revision.operator_id
+                        and previous.claim_id = revision.claim_id
+                        and previous.revision < revision.revision
+                        and previous.status <> 'deleted'
+                      order by previous.revision desc
+                      limit 1
+                  )
+              ) = p_scope
+          )
+          and (
+              p_after_revision is null
+              or revision.revision < p_after_revision
+              or (
+                  revision.revision = p_after_revision
+                  and revision.claim_revision_id > p_after_revision_id
+              )
+          )
+        order by revision.revision desc, revision.claim_revision_id asc
+        limit p_page_size + 1
+    ), numbered_page as (
+        select bounded_revisions.*, row_number() over (
+            order by revision desc, claim_revision_id asc
+        ) as page_row_number
+        from bounded_revisions
+    ), projected_page as (
+        select
+            page.revision,
+            page.claim_revision_id,
+            jsonb_build_object(
+                'claimRevisionId', page.claim_revision_id,
+                'effectiveFrom', coalesce(page.effective_from, page.deleted_at),
+                'revision', page.revision,
+                'recordedAt', page.recorded_at,
+                'status', page.status,
+                'claimRevisionContract', page.claim_revision_contract,
+                'eligibilityContract', case
+                    when page.status = 'deleted' then 'null'::jsonb
+                    else page.eligibility_contract
+                end,
+                'evidenceLinks', coalesce(evidence_projection.links, '[]'::jsonb),
+                'evidenceContracts', coalesce(
+                    evidence_projection.evidence_contracts,
+                    '[]'::jsonb
+                )
+            ) as projected
+        from numbered_page page
+        left join lateral (
+            with selected_links as (
+                select link.*
+                from public.operator_intelligence_claim_evidence link
+                where link.operator_id = p_operator_id
+                  and link.claim_revision_id = page.claim_revision_id
+                order by link.evidence_reference_id
+                limit 33
+            )
+            select
+                jsonb_agg(
+                    jsonb_build_object(
+                        'claimId', link.claim_id,
+                        'claimRevisionId', link.claim_revision_id,
+                        'evidenceReferenceId', link.evidence_reference_id,
+                        'relationship', link.relationship,
+                        'rationale', link.rationale,
+                        'linkedAt', link.linked_at
+                    ) order by link.evidence_reference_id
+                ) as links,
+                jsonb_agg(
+                    evidence.evidence_contract
+                    order by link.evidence_reference_id
+                ) as evidence_contracts
+            from selected_links link
+            join public.operator_intelligence_evidence evidence
+              on evidence.operator_id = link.operator_id
+             and evidence.evidence_reference_id = link.evidence_reference_id
+        ) evidence_projection on true
+        where page.page_row_number <= p_page_size
+    )
+    select
+        coalesce(
+            jsonb_agg(
+                projected order by revision desc, claim_revision_id asc
+            ),
+            '[]'::jsonb
+        ),
+        (select count(*) > p_page_size from numbered_page)
+    into page_rows, page_has_more
+    from projected_page;
+
+    return jsonb_build_object(
+        'readWatermark', effective_watermark,
+        'hasMore', page_has_more,
+        'rows', page_rows
+    );
+end;
+$$;
+
+create or replace function public.read_operator_intelligence_eligibility_history_page(
+    p_operator_id uuid,
+    p_claim_id text,
+    p_claim_revision_id text,
+    p_purpose text,
+    p_as_of timestamptz,
+    p_page_size integer,
+    p_read_watermark timestamptz default null,
+    p_after_assessed_at timestamptz default null,
+    p_after_assessment_id uuid default null
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = pg_catalog
+as $$
+declare
+    effective_watermark timestamptz := coalesce(
+        p_read_watermark,
+        statement_timestamp()
+    );
+    page_rows jsonb;
+    page_has_more boolean;
+begin
+    if coalesce(auth.role(), '') <> 'service_role' then
+        raise exception 'Trusted Operator Intelligence authority is required.'
+            using errcode = '42501';
+    end if;
+
+    if p_page_size < 1 or p_page_size > 100 then
+        raise exception 'Operator Intelligence page size is outside its budget.'
+            using errcode = '22023';
+    end if;
+
+    if (p_after_assessed_at is null) <> (p_after_assessment_id is null) then
+        raise exception 'Operator Intelligence page position is incomplete.'
+            using errcode = '22023';
+    end if;
+
+    with bounded_assessments as (
+        select assessment.*
+        from public.operator_intelligence_eligibility_assessments assessment
+        where assessment.operator_id = p_operator_id
+          and assessment.claim_id = p_claim_id
+          and assessment.claim_revision_id = p_claim_revision_id
+          and assessment.purpose = p_purpose
+          and assessment.assessed_at <= p_as_of
+          and assessment.recorded_at <= effective_watermark
+          and (
+              p_after_assessed_at is null
+              or assessment.assessed_at < p_after_assessed_at
+              or (
+                  assessment.assessed_at = p_after_assessed_at
+                  and assessment.assessment_id > p_after_assessment_id
+              )
+          )
+        order by assessment.assessed_at desc, assessment.assessment_id asc
+        limit p_page_size + 1
+    ), numbered_page as (
+        select bounded_assessments.*, row_number() over (
+            order by assessed_at desc, assessment_id asc
+        ) as page_row_number
+        from bounded_assessments
+    )
+    select
+        coalesce(
+            jsonb_agg(
+                jsonb_build_object(
+                    'assessmentId', assessment_id,
+                    'assessedAt', assessed_at,
+                    'eligibilityContract', eligibility_contract
+                ) order by assessed_at desc, assessment_id asc
+            ) filter (where page_row_number <= p_page_size),
+            '[]'::jsonb
+        ),
+        count(*) > p_page_size
+    into page_rows, page_has_more
+    from numbered_page;
 
     return jsonb_build_object(
         'readWatermark', effective_watermark,
@@ -1982,6 +2247,10 @@ revoke all privileges on function public.append_operator_intelligence_eligibilit
     from public, anon, authenticated, service_role;
 revoke all privileges on function public.read_operator_intelligence_eligible_claim_page(uuid, text, timestamptz, jsonb, integer, timestamptz, timestamptz, text)
     from public, anon, authenticated, service_role;
+revoke all privileges on function public.read_operator_intelligence_claim_lifecycle_page(uuid, text, text, timestamptz, jsonb, integer, timestamptz, integer, text)
+    from public, anon, authenticated, service_role;
+revoke all privileges on function public.read_operator_intelligence_eligibility_history_page(uuid, text, text, text, timestamptz, integer, timestamptz, timestamptz, uuid)
+    from public, anon, authenticated, service_role;
 grant execute on function public.register_operator_data_policy_version(jsonb)
     to service_role;
 grant execute on function public.append_operator_consent_decision(uuid, jsonb)
@@ -1995,6 +2264,10 @@ grant execute on function public.persist_operator_intelligence_claim_revision(uu
 grant execute on function public.append_operator_intelligence_eligibility(uuid, text, text, jsonb)
     to service_role;
 grant execute on function public.read_operator_intelligence_eligible_claim_page(uuid, text, timestamptz, jsonb, integer, timestamptz, timestamptz, text)
+    to service_role;
+grant execute on function public.read_operator_intelligence_claim_lifecycle_page(uuid, text, text, timestamptz, jsonb, integer, timestamptz, integer, text)
+    to service_role;
+grant execute on function public.read_operator_intelligence_eligibility_history_page(uuid, text, text, text, timestamptz, integer, timestamptz, timestamptz, uuid)
     to service_role;
 
 commit;

@@ -8,6 +8,8 @@ import type { OperatorService } from "../operator";
 import type {
   OperatorIntelligenceCandidateSubmission,
   OperatorIntelligenceClaimQuery,
+  OperatorIntelligenceEligibilityHistoryQuery,
+  OperatorIntelligenceLifecycleQuery,
   OperatorIntelligenceService,
   OperatorIntelligenceTransitionRequest,
 } from "./operator-intelligence-service-types";
@@ -72,6 +74,28 @@ export function createOperatorIntelligenceService(
     return persisted;
   }
 
+  async function listClaimLifecycle(query: OperatorIntelligenceLifecycleQuery) {
+    const operator = await operatorService.getCurrentOperator();
+
+    return repository.listClaimLifecycle({
+      ...query,
+      operatorId: operator.id,
+      page: createOperatorIntelligencePageRequest(query.page),
+    });
+  }
+
+  async function listEligibilityHistory(
+    query: OperatorIntelligenceEligibilityHistoryQuery
+  ) {
+    const operator = await operatorService.getCurrentOperator();
+
+    return repository.listEligibilityHistory({
+      ...query,
+      operatorId: operator.id,
+      page: createOperatorIntelligencePageRequest(query.page),
+    });
+  }
+
   async function transitionClaim(
     request: OperatorIntelligenceTransitionRequest
   ): Promise<never> {
@@ -81,6 +105,8 @@ export function createOperatorIntelligenceService(
 
   return Object.freeze({
     listEligibleClaims,
+    listClaimLifecycle,
+    listEligibilityHistory,
     submitCandidate,
     transitionClaim,
   });

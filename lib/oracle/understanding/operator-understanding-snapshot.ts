@@ -36,6 +36,26 @@ const EPISTEMIC_CLASSES: readonly OperatorUnderstandingEpistemicClass[] = [
   "unknown",
 ];
 
+export const OPERATOR_UNDERSTANDING_MAX_INTELLIGENCE_ITEMS = 100;
+export const OPERATOR_UNDERSTANDING_MAX_SNAPSHOT_ITEMS = 250;
+export const OPERATOR_UNDERSTANDING_MAX_SNAPSHOT_BYTES = 512 * 1024;
+export const OPERATOR_UNDERSTANDING_MAX_EVIDENCE_PER_CLAIM = 32;
+
+export class OperatorUnderstandingSnapshotBudgetError extends Error {
+  readonly code = "OPERATOR_UNDERSTANDING_SNAPSHOT_BUDGET_EXCEEDED";
+
+  constructor(
+    readonly budget:
+      | "intelligence-items"
+      | "total-items"
+      | "serialized-payload"
+      | "evidence-fan-out"
+  ) {
+    super(`Operator Understanding Snapshot ${budget} budget was exceeded.`);
+    this.name = "OperatorUnderstandingSnapshotBudgetError";
+  }
+}
+
 export function createOperatorUnderstandingSnapshot(
   value: unknown,
   evidenceReferences: readonly OperatorEvidenceReference[] = []
@@ -92,6 +112,26 @@ export function createOperatorUnderstandingSnapshot(
     "snapshot.unknowns"
   ).map(createOperatorUnknownItem);
   const memory = createMemoryItems(input.memory, "snapshot.memory");
+
+  if (intelligence.length > OPERATOR_UNDERSTANDING_MAX_INTELLIGENCE_ITEMS) {
+    throw new OperatorUnderstandingSnapshotBudgetError("intelligence-items");
+  }
+
+  if (
+    intelligence.some(
+      (claim) =>
+        claim.evidence.length > OPERATOR_UNDERSTANDING_MAX_EVIDENCE_PER_CLAIM
+    )
+  ) {
+    throw new OperatorUnderstandingSnapshotBudgetError("evidence-fan-out");
+  }
+
+  const totalItems = identity.length + preferences.length + goals.length +
+    state.length + memory.length + intelligence.length + unknowns.length;
+
+  if (totalItems > OPERATOR_UNDERSTANDING_MAX_SNAPSHOT_ITEMS) {
+    throw new OperatorUnderstandingSnapshotBudgetError("total-items");
+  }
 
   const understoodItems = [
     ...identity,
@@ -164,6 +204,13 @@ export function createOperatorUnderstandingSnapshot(
     intelligence,
     unknowns,
   };
+
+  if (
+    new TextEncoder().encode(JSON.stringify(snapshot)).byteLength >
+      OPERATOR_UNDERSTANDING_MAX_SNAPSHOT_BYTES
+  ) {
+    throw new OperatorUnderstandingSnapshotBudgetError("serialized-payload");
+  }
 
   return deepFreezeUnderstanding(snapshot);
 }

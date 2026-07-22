@@ -6,12 +6,7 @@ import type {
 export const OPERATOR_INTELLIGENCE_CURSOR_VERSION = 1 as const;
 export const OPERATOR_INTELLIGENCE_CURSOR_TTL_MS = 15 * 60 * 1000;
 
-type CursorQuery = Readonly<{
-  operatorId: string;
-  purpose: string;
-  asOf: string;
-  scope: unknown;
-}>;
+type CursorQuery = object;
 
 export type OperatorIntelligenceCursorPosition = Readonly<{
   orderValue: string;
@@ -139,14 +134,25 @@ export function decodeOperatorIntelligenceCursor(input: Readonly<{
 }
 
 function hashQuery(query: CursorQuery): string {
-  const canonical = JSON.stringify({
-    operatorId: query.operatorId,
-    purpose: query.purpose,
-    asOf: query.asOf,
-    scope: query.scope,
-  });
+  const canonical = JSON.stringify(canonicalize(query));
 
   return createHash("sha256").update(canonical).digest("base64url");
+}
+
+function canonicalize(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    return value.map(canonicalize);
+  }
+
+  if (value !== null && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value)
+        .sort(([left], [right]) => left.localeCompare(right))
+        .map(([key, entry]) => [key, canonicalize(entry)])
+    );
+  }
+
+  return value;
 }
 
 function requireTimestamp(value: string): string {

@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import {
+  OPERATOR_UNDERSTANDING_MAX_SNAPSHOT_BYTES,
+  OperatorUnderstandingSnapshotBudgetError,
   createOperatorEvidenceReference,
   createOperatorUnderstandingSnapshot,
 } from "../lib/oracle/understanding";
@@ -11,6 +13,7 @@ import {
   evidenceInput,
   expiresAt,
   snapshotInput,
+  unknownInput,
 } from "./operator-understanding-verification-fixtures";
 
 const evidence = createOperatorEvidenceReference(evidenceInput);
@@ -136,6 +139,74 @@ assert.throws(
       [evidence]
     ),
   /must preserve the epistemic class/
+);
+
+const maximumTotalSnapshot = createOperatorUnderstandingSnapshot(
+  {
+    ...snapshotInput,
+    unknowns: Array.from({ length: 247 }, (_, index) => ({
+      ...unknownInput,
+      id: `unknown-${index}`,
+      key: `unknown-key-${index}`,
+    })),
+  },
+  [evidence]
+);
+assert.equal(
+  maximumTotalSnapshot.identity.length +
+    maximumTotalSnapshot.memory.length +
+    maximumTotalSnapshot.intelligence.length +
+    maximumTotalSnapshot.unknowns.length,
+  250
+);
+
+assert.throws(
+  () => createOperatorUnderstandingSnapshot(
+    {
+      ...snapshotInput,
+      unknowns: Array.from({ length: 248 }, (_, index) => ({
+        ...unknownInput,
+        id: `over-budget-unknown-${index}`,
+        key: `over-budget-key-${index}`,
+      })),
+    },
+    [evidence]
+  ),
+  (error: unknown) =>
+    error instanceof OperatorUnderstandingSnapshotBudgetError &&
+    error.budget === "total-items"
+);
+
+assert.throws(
+  () => createOperatorUnderstandingSnapshot(
+    {
+      ...snapshotInput,
+      intelligence: Array.from({ length: 101 }, () => activeClaimInput),
+      memory: [],
+    },
+    [evidence]
+  ),
+  (error: unknown) =>
+    error instanceof OperatorUnderstandingSnapshotBudgetError &&
+    error.budget === "intelligence-items"
+);
+
+assert.throws(
+  () => createOperatorUnderstandingSnapshot(
+    {
+      ...snapshotInput,
+      unknowns: [{
+        ...unknownInput,
+        reason: "x".repeat(OPERATOR_UNDERSTANDING_MAX_SNAPSHOT_BYTES),
+      }],
+      memory: [],
+      intelligence: [],
+    },
+    [evidence]
+  ),
+  (error: unknown) =>
+    error instanceof OperatorUnderstandingSnapshotBudgetError &&
+    error.budget === "serialized-payload"
 );
 
 process.stdout.write("Operator Understanding service contract verification passed.\n");

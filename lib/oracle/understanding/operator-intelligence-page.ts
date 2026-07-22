@@ -41,7 +41,12 @@ export type OperatorIntelligencePageResult<Item> = Readonly<{
 export class OperatorIntelligencePageBudgetError extends Error {
   readonly code = "OPERATOR_INTELLIGENCE_PAGE_BUDGET_EXCEEDED";
 
-  constructor(readonly budget: "page-size" | "serialized-payload") {
+  constructor(
+    readonly budget:
+      | "page-size"
+      | "serialized-payload"
+      | "evidence-fan-out"
+  ) {
     super(`Operator Intelligence ${budget} budget was exceeded.`);
     this.name = "OperatorIntelligencePageBudgetError";
   }
@@ -102,8 +107,11 @@ export function createOperatorIntelligencePageResult<Item>(
     },
     ...value,
   };
-  const serializedBytes = new TextEncoder().encode(
-    JSON.stringify(resultWithoutSize)
+  let serializedBytes = new TextEncoder().encode(
+    JSON.stringify({ ...resultWithoutSize, serializedBytes: 0 })
+  ).byteLength;
+  serializedBytes = new TextEncoder().encode(
+    JSON.stringify({ ...resultWithoutSize, serializedBytes })
   ).byteLength;
 
   if (serializedBytes > OPERATOR_INTELLIGENCE_MAX_PAGE_BYTES) {
