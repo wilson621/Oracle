@@ -8,7 +8,7 @@
 **Expected Stability:** Scope changes require explicit Founder approval
 **Approved:** 22 July 2026
 **Implementation:** Phases 0 through 8 complete
-**Deployment:** Migration 009 remains undeployed
+**Deployment:** Migration 009 deployed after separate Founder approval; runtime inactive
 **Activated:** 22 July 2026 by explicit Founder instruction
 
 ---
@@ -24,9 +24,11 @@ Programme remains authoritative if this Plan is interpreted ambiguously.
 
 # Executive Assessment
 
-Sprint 17 engineering implementation, verification and closure are complete.
-The Founder approved closure on 22 July 2026. Migration 009 remains undeployed
-pending a separate Founder deployment decision, and Sprint 18 has not started.
+Sprint 17 engineering implementation, verification, deployment and closure are
+complete. The Founder approved engineering closure and later gave the separate
+authority required for Migration 009 production deployment on 22 July 2026.
+The deployment passed verification. Sprint 18 has not started, and runtime
+persistence remains disabled.
 The repository already contains authenticated
 Operator ownership, exclusive Operator Intelligence Service authority,
 server-only trusted database access, immutable evidence and claim structures,

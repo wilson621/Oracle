@@ -18,8 +18,9 @@
 # Current Delivery Status
 
 No Sprint is active. Sprint 17 — Scale-Safe Trust Data Plane is Founder-approved
-and closed, and all approved success criteria are satisfied. Migration 009 remains
-undeployed pending a separate Founder deployment decision. Sprint 18 has not
+and fully complete, and all approved success criteria are satisfied. Migration
+009 is deployed and verified in production; the persistence foundation is
+established while runtime persistence remains disabled. Sprint 18 has not
 started and is not activated.
 
 The complete approved Sprint 17–31 sequence and Beta Gates are recorded in
@@ -38,12 +39,13 @@ artifact is `docs/sprints/SPRINT_17_MIGRATION_009_DOSSIER.md`.
 **Status:** Complete — Founder-approved and closed
 **Historical planning alias:** Sprint 15.5B
 **Closure evidence commit:** `e873b515a149d392850cf4c6e0c00cfb4ecd3313`
-**Deployment status:** Migration 009 is deployment-ready, rollback-validated and undeployed pending a separate Founder decision
+**Deployment status:** Migration 009 deployed and verified; production deployment complete
 
 Sprint 17 delivered bounded trust-data reads, deterministic pagination,
 Snapshot budgets, idempotency and concurrency guarantees, measured query
 optimisation, automated boundary enforcement and permanent verification
-evidence. Closure did not activate any runtime producer, consumer, control
+evidence. The subsequent governed deployment established the production
+persistence foundation. Closure and deployment did not activate any runtime producer, consumer, control
 operation, Application, Platform capability or subsequent Sprint.
 
 ## Previous Closed Sprint — Sprint 16 Trust Boundary
@@ -430,8 +432,9 @@ remain accepted technical debt and do not authorise unrelated redesign.
 - [x] Roadmap distinguishes the completed foundation from deferred live delivery
 - [x] Master Build Plan reflects Sprint 14 closure
 - [x] canonical implementation status reflects Sprint 14 closure
-- [x] living delivery records reflect Sprint 17 Founder-approved closure,
-  Migration 009 non-deployment and Sprint 18 inactivity
+- [x] living delivery records reflect Sprint 17 completion, Migration 009
+  production deployment and verification, Sprint 18 inactivity and disabled
+  runtime persistence
 - [x] ADRs record desktop snapshot/event and Timeline/Telemetry ownership
 - [x] ADR records the Desktop Platform API version 1 compatibility commitment
 - [x] Sprint 12.1 implementation audit added

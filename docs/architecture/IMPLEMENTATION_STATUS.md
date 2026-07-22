@@ -15,8 +15,8 @@
 **Sprint 15 Phase 1:** Complete and committed
 **Sprint 15 Phase 2:** Complete and committed
 **Sprint 15 Phase 3:** Complete and committed
-**Sprint 16:** Trust Boundary complete and committed; Migration 009 undeployed
-**Sprint 17:** Scale-Safe Trust Data Plane complete, Founder-approved and closed; Migration 009 undeployed
+**Sprint 16:** Trust Boundary complete and committed
+**Sprint 17:** Scale-Safe Trust Data Plane fully complete; Migration 009 deployed and verified in production
 **Sprint 18:** Not started or activated
 
 ---
@@ -60,8 +60,9 @@ fresh transactional rollback plus independent catalog comparison.
 
 No runtime producer, consumer, control operation, Snapshot construction,
 Context projection, Application persistence path or Platform activation was
-added. Sprint 17 is Founder-approved and closed. Migration 009 remains
-undeployed pending a separate Founder deployment decision. Sprint 18 has not
+added or activated. Sprint 17 is Founder-approved and fully complete. Migration
+009 is deployed and verified, establishing the production persistence
+foundation while runtime persistence remains disabled. Sprint 18 has not
 started and is not active.
 
 ## Sprint 15 Phase 1 — Ownership Foundation

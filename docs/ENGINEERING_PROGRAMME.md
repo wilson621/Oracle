@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Upon completion of Sprint 17
+**Next Review:** Before Sprint 18 activation
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -49,7 +49,8 @@ Oracle enters this Programme with:
   foundation phases
 - Sprint 16 — Trust Boundary complete, founder-approved, committed and pushed
 - Migration 008 deployed
-- Migration 009 rollback-validated but undeployed
+- Migration 009 rollback-validated but undeployed at Programme approval;
+  subsequently deployed under separate Founder authority
 - Operator ownership, Understanding contracts, persistence, authority and
   trust verification passing
 - Companion Guidance contracts, provider orchestration, reference package,
@@ -57,12 +58,12 @@ Oracle enters this Programme with:
 - production build and desktop compilation passing
 - zero runtime dependency cycles
 - documented architectural debt and integration boundaries
-- no active Sprint 17 implementation
+- no active Sprint 17 implementation at Programme approval
 
 Oracle has strong foundations but is not yet Beta-complete:
 
 - Platform bootstrap is not active in production entry points
-- Migration 009 is not deployed
+- Migration 009 is deployed and verified, but runtime persistence is disabled
 - Operator control operations are not operational
 - no production candidate-generation or Understanding-consumption loop exists
 - authoritative Companion Guidance delivery is disconnected
@@ -74,6 +75,18 @@ Oracle has strong foundations but is not yet Beta-complete:
   qualification are absent
 - the latest engineering branch is not demonstrated as the current live
   production release
+
+# Current Execution Status
+
+Sprint 17 is Founder-approved and fully complete. The separately authorised
+Migration 009 production deployment completed successfully on 22 July 2026,
+passed post-deployment catalog, security, preservation and query-plan
+verification, and established the production persistence foundation. The
+empty-table planner Verification Hold is resolved through the authoritative
+production-shaped evidence rule recorded in the deployment dossier.
+
+No later Sprint is active. Sprint 18 has not started or been activated, and no
+runtime producer, consumer or persistence path has been enabled.
 
 # Beta Philosophy
 

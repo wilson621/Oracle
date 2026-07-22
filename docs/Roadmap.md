@@ -691,8 +691,9 @@ The Oracle Platform grows through extensions rather than increasing complexity i
 
 # Current Delivery
 
-Sprint 17 is Founder-approved and closed. No subsequent Sprint is active;
-Sprint 18 has not started.
+Sprint 17 is Founder-approved and fully complete, including Migration 009
+production deployment. No subsequent Sprint is active; Sprint 18 has not
+started, and runtime persistence remains disabled.
 
 The Founder-approved Sprint 17–Beta sequence, its five Epics, architectural
 dependencies, Beta Gates, Founder Beta Readiness Review and Oracle Beta
@@ -711,7 +712,8 @@ server-side mutation authority, authenticated ownership injection, global
 policy definitions, append-only consent and evidence dispositions, immutable
 admissions, admissible game-scoped evidence contracts and service-role-only
 durable persistence. Migration 009 passed rollback and independent catalog
-validation but remains undeployed pending a separate founder decision.
+validation, then completed its separately authorised production deployment and
+post-deployment verification.
 
 ## Sprint 17 — Scale-Safe Trust Data Plane
 
@@ -723,9 +725,9 @@ Intelligence persistence boundary safe for controlled production activation
 through bounded reads, deterministic pagination, measured query optimisation,
 required indexes, Snapshot budgets, concurrency verification and automated
 boundary enforcement. It also produced the version-pinned Migration 009
-deployment dossier. Migration 009 remains undeployed pending a separate
-Founder deployment decision. Sprint 18 has not started and remains
-unauthorised.
+deployment dossier. Migration 009 is deployed and verified, establishing the
+production persistence foundation without activating runtime persistence.
+Sprint 18 has not started and remains unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

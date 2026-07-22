@@ -753,9 +753,10 @@ Completed
 
 Current Development Status
 
-Sprint 17 — Scale-Safe Trust Data Plane is Founder-approved and closed, and is
-the latest closed Sprint. Migration 009 remains undeployed pending a separate
-Founder deployment decision. Sprint 18 has not started and is not activated.
+Sprint 17 — Scale-Safe Trust Data Plane is Founder-approved and fully complete,
+including the verified Migration 009 production deployment. The production
+persistence foundation is established, but runtime persistence remains
+disabled. Sprint 18 has not started and is not activated.
 
 Current Runtime
 

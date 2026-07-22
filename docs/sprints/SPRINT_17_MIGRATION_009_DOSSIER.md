@@ -10,13 +10,15 @@
 
 **Evidence date:** 22 July 2026
 
-**Status:** Decision-ready for a separate Founder deployment review
+**Status:** Deployed, verified and closed
 
-**Deployment state:** Undeployed
+**Deployment state:** Production deployment complete
 
-This dossier is evidence for a future decision. Its approval would not itself
-authorise or execute deployment. Migration 009 may be permanently executed
-only through a separate, explicit Founder deployment instruction.
+The Founder separately approved permanent production execution of this exact
+artifact and hash on 22 July 2026. The governed deployment completed
+successfully at `2026-07-22T19:54:43.8824144Z`; post-deployment verification
+passed and the temporary planner Verification Hold is resolved. This approval
+and deployment did not activate Sprint 18 or any runtime persistence feature.
 
 ## Artifact and environment
 
@@ -99,6 +101,12 @@ application is exercised before either fixture is loaded.
 
 ## Query-plan and benchmark evidence
 
+Representative workload verification is authoritative for planner acceptance.
+An empty-table plan is informational provided PostgreSQL uses an appropriate
+indexed access path and does not perform a sequential scan. Empty relations do
+not have representative cardinality or selectivity statistics, so choosing one
+of two valid covering indexes is not, by itself, an index-design failure.
+
 The retained before/after comparison executes the former pre-projection
 eligible-head algorithm and the final immutable projection against the same
 100,000-revision fixture. The former algorithm examined 223,202 rows across
@@ -159,6 +167,13 @@ size, backing constraint where applicable, final-plan selection and an explicit
 integrity or approved-path justification. The two page indexes are selected by
 their corresponding production-shaped plans; lifecycle, eligibility and
 Evidence fan-out plans record the exact constraint-backed indexes they select.
+
+The production empty-table verification selected the unscoped covering page
+index for the scoped query, retained an index-only access path and performed no
+sequential scan. The retained representative fixture of 100,000 head events and
+10,000 heads selected the scoped index for the scoped workload, with no spill
+or regression. The initially recorded Verification Hold is therefore resolved;
+no `ANALYZE`, index change or schema remediation is required.
 
 Rejected additions include a cache, materialized mutable head table, standalone
 purpose index and standalone JSON scope index. They either introduce a second
@@ -221,8 +236,8 @@ removal is safe after production writes exist.
 
 ## Deployment prerequisites and stop conditions
 
-Permanent execution is blocked until a separate deployment record names the
-Founder-authorised human migration operator and records:
+Before permanent execution, the deployment record was required to name the
+Founder-authorised migration operator and record:
 
 - explicit Founder approval for this exact commit and hash
 - an independently verified, restorable production backup
@@ -235,6 +250,11 @@ Stop before `COMMIT` on hash mismatch, catalog drift, backup uncertainty,
 unexpected locks, statement error, ownership-row change, permission divergence
 or threshold regression. After deployment, stop activation and enter recovery
 on any RLS, anonymous, cross-Operator, service-role, row-count or plan failure.
+
+All prerequisites passed immediately before execution. The certified artifact
+completed with exit code 0 and `COMMIT`; no retry, repair or artifact change was
+performed. The complete immutable deployment record is the
+[Migration 009 Deployment Closure Report](SPRINT_17_MIGRATION_009_DEPLOYMENT_CLOSURE.md).
 
 ## Recovery decision tree
 
@@ -251,6 +271,7 @@ After COMMIT, production writes exist
      data-preserving forward recovery through a separately approved plan.
 ```
 
-Transaction rehearsal gives high confidence before commit. Post-commit
-recovery remains backup- and incident-plan-dependent. This dossier is not
-deployment approval, Gate 1 approval or runtime activation authority.
+Transaction rehearsal established pre-commit confidence. Post-commit recovery
+remains backup- and incident-plan-dependent. Migration 009 deployment is now
+closed, but this dossier is not Sprint 18, Gate 1 or runtime activation
+authority.

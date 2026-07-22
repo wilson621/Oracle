@@ -35,16 +35,17 @@ Oracle is being built as an intelligence platform rather than a statistics dashb
 
 **Sprint 17 closed with Founder approval; Sprint 18 not started**
 
-**Status: Sprint 17 — Scale-Safe Trust Data Plane closed; Migration 009 undeployed**
+**Status: Sprint 17 — Scale-Safe Trust Data Plane and Migration 009 production deployment complete**
 
 ## Build Status
 
 Sprint 17 verification passed for bounded trust-data reads, pagination,
 budgets, idempotency, PostgreSQL concurrency, production-shaped plans and the
 existing ownership, trust, Guidance, Companion, architecture, desktop, lint
-and build baselines. Sprint 17 is Founder-approved and closed. Migration 009
-remains undeployed pending a separate Founder deployment decision, and Sprint
-18 has not started or been activated.
+and build baselines. Sprint 17 is Founder-approved and fully complete. Migration
+009 is deployed and verified in production, establishing the persistence
+foundation. Sprint 18 has not started or been activated, and runtime persistence
+remains disabled.
 
 The canonical verified status is maintained in
 [`docs/architecture/IMPLEMENTATION_STATUS.md`](docs/architecture/IMPLEMENTATION_STATUS.md).
@@ -329,8 +330,9 @@ Verified delivery now includes:
 - immutable Companion Guidance Application state and `/companion` presentation
 
 Sprint 16 — Trust Boundary is formally closed. Sprint 17 — Scale-Safe Trust
-Data Plane is Founder-approved and closed. Migration 009 remains undeployed
-pending a separate Founder deployment decision, and Sprint 18 has not started.
+Data Plane is Founder-approved and fully complete, including the governed
+Migration 009 production deployment. Sprint 18 has not started, and runtime
+persistence remains disabled.
 The approved Oracle Engineering Programme continues to define Sprints 17–31
 through Beta without granting later implementation authority.
 

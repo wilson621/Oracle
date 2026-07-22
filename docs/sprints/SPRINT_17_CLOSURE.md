@@ -8,7 +8,7 @@
 
 **Branch:** `sprint-9-overlay`
 
-**Migration 009:** Undeployed
+**Migration 009:** Subsequently deployed and verified under separate Founder approval
 
 **Founder closure approval:** 22 July 2026
 
@@ -128,16 +128,18 @@ be fetched; the approved network-enabled rerun completed successfully.
 
 The Founder approved Sprint 17 closure on 22 July 2026 after accepting the
 independent review and closure evidence remediation. All approved success
-criteria are satisfied. This approval does not authorise Migration 009 deployment or
-Sprint 18 activation.
+criteria are satisfied. This closure approval did not itself authorise
+Migration 009 deployment or Sprint 18 activation. The Founder subsequently
+issued the required separate deployment approval.
 
 ## Deployment and boundary confirmation
 
-Migration 009 was executed only in isolated disposable PostgreSQL databases
-for required migration, performance, security and rollback tests. No permanent
-or remote deployment was attempted. The production deployment decision remains
-separate and is governed by the
-[Migration 009 dossier](SPRINT_17_MIGRATION_009_DOSSIER.md).
+At engineering closure, Migration 009 had been executed only in isolated
+disposable PostgreSQL databases. The Founder subsequently approved the exact
+certified artifact for production; deployment and post-deployment verification
+completed successfully. The governed outcome is recorded in the
+[Migration 009 dossier](SPRINT_17_MIGRATION_009_DOSSIER.md) and
+[Deployment Closure Report](SPRINT_17_MIGRATION_009_DEPLOYMENT_CLOSURE.md).
 
 No Repository ownership exception, Application persistence access, alternate
 data store, cache, new runtime dependency, candidate producer, inference path,
@@ -149,6 +151,16 @@ The Founder approves Sprint 17 closure. Sprint 17 implementation,
 verification, documentation and permanent closure evidence are complete, and
 no further Sprint 17 engineering work is required.
 
-Migration 009 remains intentionally undeployed and awaits a separate explicit
-Founder deployment decision. Sprint 18 has not started and requires its own
-explicit Founder instruction. Engineering stops at Sprint 17 closure.
+The separate Migration 009 production decision has now been made and the
+deployment is complete. Sprint 18 has not started and requires its own explicit
+Founder instruction. Runtime persistence remains disabled.
+
+## Post-closure deployment addendum
+
+The certified Migration 009 artifact was deployed once on 22 July 2026 and
+completed at `2026-07-22T19:54:43.8824144Z`. Catalog, RLS, grants, protected row
+counts, trusted-role behaviour and rollback-only security probes passed. The
+production empty-table plan used an index-only path with no sequential scan;
+representative 100,000-event/10,000-head evidence selected the expected scoped
+index without spill or regression. The temporary Verification Hold is resolved
+with no production remediation required.

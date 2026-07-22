@@ -201,7 +201,8 @@ delivery authorities have been reviewed.
 | Canonical Sprint numbering and aliases | [Sprint Index](sprints/SPRINT_INDEX.md) | Living index |
 | Closed Sprint evidence | [`docs/sprints`](sprints/) | Historical |
 | Sprint 17 Founder-approved closure evidence | [Sprint 17 Closure Report](sprints/SPRINT_17_CLOSURE.md) | Closed Sprint record |
-| Migration 009 deployment decision evidence | [Migration 009 Dossier](sprints/SPRINT_17_MIGRATION_009_DOSSIER.md) | Decision artifact |
+| Migration 009 deployment and verification evidence | [Migration 009 Dossier](sprints/SPRINT_17_MIGRATION_009_DOSSIER.md) | Closed deployment record |
+| Migration 009 final production closure | [Migration 009 Deployment Closure Report](sprints/SPRINT_17_MIGRATION_009_DEPLOYMENT_CLOSURE.md) | Closed deployment record |
 | Sprint 17 machine-readable verification evidence | [Sprint 17 Permanent Evidence](sprints/evidence/sprint-17/README.md) | Closure evidence |
 
 # Supporting Documentation

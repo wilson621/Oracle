@@ -84,13 +84,13 @@ has not started and requires separate explicit Founder activation.
 
 Sprint 16 — Trust Boundary is complete at
 `58589b52de0db341e6518fa9f235bb18854e6b30`. It was executed under the
-transitional alias Sprint 15.5A. Migration 009 is deployment-ready through
-rollback validation but remains undeployed pending a separate founder decision.
+transitional alias Sprint 15.5A.
 
 Sprint 17 — Scale-Safe Trust Data Plane has completed its nine approved
-implementation phases. Its former planning alias was Sprint 15.5B and its
-earlier proposed name was Scale Hardening. Migration 009 remains undeployed
-pending a separate Founder deployment decision.
+implementation phases and its separately authorised production deployment. Its
+former planning alias was Sprint 15.5B and its earlier proposed name was Scale
+Hardening. Migration 009 is deployed and verified, establishing the production
+persistence foundation without enabling runtime persistence.
 
 `docs/ENGINEERING_PROGRAMME.md` is the authoritative Sprint 17–Beta Programme.
 This Master Build Plan continues to identify the next execution objective; a
@@ -127,9 +127,9 @@ persistence boundary safe for a separate controlled-production decision. It incl
 bounded purpose-scoped reads, deterministic pagination, measured query
 optimisation, required indexes, Snapshot budgets, concurrency verification,
 automated boundary enforcement and the version-pinned Migration 009 deployment
-dossier. No runtime activation or permanent migration execution occurred.
-Migration 009 remains undeployed pending a separate Founder deployment
-decision. Sprint 18 has not started.
+dossier. The separately Founder-approved Migration 009 production deployment
+completed successfully and passed post-deployment verification. No runtime
+activation occurred. Sprint 18 has not started.
 
 ## Historical Sprint 15 — Operator Intelligence: Operator Understanding Foundation
 

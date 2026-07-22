@@ -1482,8 +1482,8 @@ or consumption.
 The Repository remains the exclusive persistence owner, Services retain
 business behaviour, and Applications remain presentation-only. No producer,
 consumer, control path, cache, alternate persistence path or Platform runtime
-was activated. Migration 009 remains undeployed pending a separate Founder
-decision.
+was activated. Migration 009 is deployed and verified as the production
+persistence foundation; deployment did not activate its runtime use.
 
 # Verified Integration Limits
 
