@@ -235,6 +235,7 @@ classification, reading order, canonical ownership and superseded documents.
 | founding/ORACLE_ENGINEERING_PRINCIPLES.md | Durable engineering principles |
 | founding/ORACLE_STRATEGY.md | Long-term operational strategy |
 | ENGINEERING_PROGRAMME.md | Approved Sprint 17–Beta Engineering Programme |
+| ORACLE_PLATFORM_V0.9_BASELINE.md | Authoritative post-Migration 009 platform baseline |
 | sprints/SPRINT_17_CLOSURE.md | Sprint 17 implementation and verification closure report |
 | sprints/SPRINT_17_MIGRATION_009_DOSSIER.md | Version-pinned Migration 009 deployment decision evidence |
 | MASTER_BUILD_PLAN.md | Canonical engineering build plan |
