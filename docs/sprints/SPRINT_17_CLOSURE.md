@@ -99,7 +99,7 @@ be fetched; the approved network-enabled rerun completed successfully.
 | 22 | No producer, consumer, control, Application or Platform activation | Pass |
 | 23 | Living documentation reflects repository reality | Pass |
 | 24 | Founder closure approval and separately approved closure commit | Pending Founder review |
-| 25 | Working tree clean | To be confirmed after this closure commit |
+| 25 | Working tree clean | Pass — confirmed after closure evidence commit `ba61004` |
 
 Criterion 24 cannot be self-approved by engineering. The implementation is
 complete and this report is the requested review artifact; Sprint 17 remains
