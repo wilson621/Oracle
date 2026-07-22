@@ -35,7 +35,7 @@ Oracle is being built as an intelligence platform rather than a statistics dashb
 
 **Approved Sprint 17–Beta Engineering Programme; no implementation Sprint active**
 
-**Status: Sprint 17 — Scale-Safe Trust Data Plane is approved but not activated**
+**Status: Sprint 17 — Scale-Safe Trust Data Plane plan approved; not activated**
 
 ## Build Status
 
@@ -328,8 +328,8 @@ Verified delivery now includes:
 
 Sprint 16 — Trust Boundary is formally closed. The approved Oracle Engineering
 Programme defines Sprints 17–31 through Beta. Sprint 17 — Scale-Safe Trust Data
-Plane remains inactive and requires its own approved Sprint Plan and explicit
-Founder activation.
+Plane has a founder-approved Engineering Plan but remains inactive and requires
+explicit Founder activation.
 
 ---
 

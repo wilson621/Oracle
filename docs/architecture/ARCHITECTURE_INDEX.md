@@ -9,7 +9,7 @@
 **Supersedes:** Earlier Architecture Index versions
 **Superseded By:** None
 **Last Reviewed:** 22 July 2026
-**Version:** 5.6
+**Version:** 5.7
 
 ---
 
@@ -751,8 +751,8 @@ Completed
 Current Development Phase
 
 No implementation Sprint active. Sprint 16 — Trust Boundary is complete;
-Sprint 17 — Scale-Safe Trust Data Plane is approved in the Engineering
-Programme and not activated.
+Sprint 17 — Scale-Safe Trust Data Plane has a founder-approved Engineering Plan
+and is not activated.
 
 Current Runtime
 

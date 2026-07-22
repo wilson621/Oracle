@@ -27,7 +27,7 @@ implementation stages and do not use fractional Sprint numbering.
 | 14 | Companion Intelligence Foundation | Historical, complete | None | [Closure](SPRINT_14_CLOSURE.md) |
 | 15 | Operator Understanding Foundation | Historical; approved foundation phases complete | None | [Approved plan](SPRINT_15_PLAN.md) |
 | 16 | Trust Boundary | Complete | Sprint 15.5A | Commit `58589b52de0db341e6518fa9f235bb18854e6b30` |
-| 17 | Scale-Safe Trust Data Plane | Approved; not activated | Sprint 15.5B; earlier proposed as Scale Hardening | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
+| 17 | Scale-Safe Trust Data Plane | Plan approved; not activated | Sprint 15.5B; earlier proposed as Scale Hardening | [Approved plan](SPRINT_17_PLAN.md), [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 18 | Operator Trust and Control | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 19 | Account, Identity and Commissioning | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 20 | Platform Runtime Activation | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |

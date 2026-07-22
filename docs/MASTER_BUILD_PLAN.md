@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 22 July 2026
-**Version:** 2.8
+**Version:** 2.9
 
 ---
 
@@ -86,14 +86,15 @@ Sprint 16 — Trust Boundary is complete at
 transitional alias Sprint 15.5A. Migration 009 is deployment-ready through
 rollback validation but remains undeployed pending a separate founder decision.
 
-Sprint 17 — Scale-Safe Trust Data Plane is approved by the Oracle Engineering
-Programme but is not activated. Its former planning alias was Sprint 15.5B and
-its earlier proposed name was Scale Hardening. Programme approval does not
-authorise implementation or Migration 009 deployment.
+Sprint 17 — Scale-Safe Trust Data Plane has a founder-approved Engineering Plan
+but is not activated. Its former planning alias was Sprint 15.5B and its earlier
+proposed name was Scale Hardening. Plan approval does not authorise
+implementation or Migration 009 deployment.
 
 `docs/ENGINEERING_PROGRAMME.md` is the authoritative Sprint 17–Beta Programme.
 This Master Build Plan continues to identify the next execution objective; a
-separate Sprint 17 Plan and explicit founder activation are still required.
+separate explicit founder activation is still required. The approved Sprint 17
+scope and phases are recorded in `docs/sprints/SPRINT_17_PLAN.md`.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own
@@ -116,7 +117,7 @@ inactive.
 
 ## Sprint 17 — Scale-Safe Trust Data Plane
 
-**Status:** Approved Programme; not activated
+**Status:** Plan approved; not activated
 **Historical planning alias:** Sprint 15.5B
 
 The approved Programme objective is to make the Operator Intelligence
