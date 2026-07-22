@@ -1277,6 +1277,10 @@ declare
     claim_existed boolean := false;
     revision_contract jsonb;
     eligibility jsonb;
+    existing_revision_contract jsonb;
+    existing_eligibility jsonb;
+    supplied_evidence_count integer;
+    existing_evidence_count integer;
 begin
     if coalesce(auth.role(), '') <> 'service_role' then
         raise exception 'Trusted Operator Intelligence authority is required.'
@@ -1290,6 +1294,81 @@ begin
 
     revision_contract := p_claim_revision - 'evidence' - 'eligibility';
     eligibility := p_claim_revision -> 'eligibility';
+
+    perform pg_advisory_xact_lock(hashtextextended(
+        p_operator_id::text || ':' || (p_claim_revision ->> 'claimId'),
+        0
+    ));
+
+    select revision.claim_revision_contract
+    into existing_revision_contract
+    from public.operator_intelligence_claim_revisions revision
+    where revision.operator_id = p_operator_id
+      and revision.claim_revision_id = p_claim_revision ->> 'id';
+
+    if found then
+        select assessment.eligibility_contract
+        into existing_eligibility
+        from public.operator_intelligence_eligibility_assessments assessment
+        where assessment.operator_id = p_operator_id
+          and assessment.claim_id = p_claim_revision ->> 'claimId'
+          and assessment.claim_revision_id = p_claim_revision ->> 'id'
+          and assessment.purpose = eligibility ->> 'purpose'
+          and assessment.assessed_at =
+                (eligibility ->> 'assessedAt')::timestamptz;
+
+        select jsonb_array_length(coalesce(
+            p_claim_revision -> 'evidence',
+            '[]'::jsonb
+        )) into supplied_evidence_count;
+
+        select count(*)
+        into existing_evidence_count
+        from public.operator_intelligence_claim_evidence link
+        where link.operator_id = p_operator_id
+          and link.claim_revision_id = p_claim_revision ->> 'id';
+
+        if existing_revision_contract is distinct from revision_contract
+           or existing_eligibility is distinct from eligibility
+           or supplied_evidence_count <> existing_evidence_count
+           or exists (
+               select 1
+               from jsonb_array_elements(coalesce(
+                   p_claim_revision -> 'evidence',
+                   '[]'::jsonb
+               )) supplied_link
+               where not exists (
+                   select 1
+                   from public.operator_intelligence_claim_evidence stored_link
+                   where stored_link.operator_id = p_operator_id
+                     and stored_link.claim_revision_id =
+                            p_claim_revision ->> 'id'
+                     and stored_link.evidence_reference_id =
+                            supplied_link ->> 'evidenceReferenceId'
+                     and stored_link.relationship =
+                            supplied_link ->> 'relationship'
+                     and stored_link.rationale = supplied_link ->> 'rationale'
+                     and stored_link.linked_at =
+                            (supplied_link ->> 'linkedAt')::timestamptz
+               )
+           )
+           or exists (
+               select 1
+               from unnest(coalesce(p_evidence, array[]::jsonb[])) supplied
+               where not exists (
+                   select 1
+                   from public.operator_intelligence_evidence stored
+                   where stored.operator_id = p_operator_id
+                     and stored.evidence_reference_id = supplied ->> 'id'
+                     and stored.evidence_contract = supplied
+               )
+           ) then
+            raise exception 'Operator Intelligence claim revisions are immutable.'
+                using errcode = '23505';
+        end if;
+
+        return p_claim_revision;
+    end if;
 
     if p_claim_revision ->> 'status' <> 'deleted'
        and coalesce(array_length(p_evidence, 1), 0) = 0 then
@@ -1575,11 +1654,19 @@ set search_path = pg_catalog
 as $$
 declare
     claim_record record;
+    existing_eligibility jsonb;
 begin
     if coalesce(auth.role(), '') <> 'service_role' then
         raise exception 'Trusted Operator Intelligence authority is required.'
             using errcode = '42501';
     end if;
+
+    perform pg_advisory_xact_lock(hashtextextended(
+        p_operator_id::text || ':' || p_claim_revision_id || ':' ||
+            (p_eligibility ->> 'purpose') || ':' ||
+            (p_eligibility ->> 'assessedAt'),
+        0
+    ));
 
     select revision.status, revision.claim_type, revision.policy_id,
         revision.policy_version
@@ -1595,6 +1682,25 @@ begin
             p_eligibility ->> 'policyVersion' then
         raise exception 'Eligibility must reference the owned claim policy.'
             using errcode = '23514';
+    end if;
+
+    select assessment.eligibility_contract
+    into existing_eligibility
+    from public.operator_intelligence_eligibility_assessments assessment
+    where assessment.operator_id = p_operator_id
+      and assessment.claim_id = p_claim_id
+      and assessment.claim_revision_id = p_claim_revision_id
+      and assessment.purpose = p_eligibility ->> 'purpose'
+      and assessment.assessed_at =
+            (p_eligibility ->> 'assessedAt')::timestamptz;
+
+    if found then
+        if existing_eligibility is distinct from p_eligibility then
+            raise exception 'Operator Intelligence eligibility is immutable.'
+                using errcode = '23505';
+        end if;
+
+        return existing_eligibility;
     end if;
 
     if (p_eligibility ->> 'eligible')::boolean and (

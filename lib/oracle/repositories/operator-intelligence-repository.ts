@@ -101,6 +101,30 @@ export interface OperatorIntelligenceRepository {
 
 type JsonRecord = Record<string, unknown>;
 
+export class OperatorIntelligenceRepositoryImmutableConflictError extends Error {
+  readonly code = "OPERATOR_INTELLIGENCE_IMMUTABLE_CONFLICT";
+  constructor() {
+    super("Operator Intelligence identity already has different immutable content.");
+    this.name = "OperatorIntelligenceRepositoryImmutableConflictError";
+  }
+}
+
+export class OperatorIntelligenceRepositoryDuplicateError extends Error {
+  readonly code = "OPERATOR_INTELLIGENCE_DUPLICATE";
+  constructor() {
+    super("Operator Intelligence natural identity already exists.");
+    this.name = "OperatorIntelligenceRepositoryDuplicateError";
+  }
+}
+
+export class OperatorIntelligenceRepositoryStaleConflictError extends Error {
+  readonly code = "OPERATOR_INTELLIGENCE_STALE_CONCURRENCY";
+  constructor() {
+    super("Operator Intelligence operation lost a concurrency race.");
+    this.name = "OperatorIntelligenceRepositoryStaleConflictError";
+  }
+}
+
 type EligibleClaimPageRow = Readonly<{
   claimRevisionId: string;
   effectiveFrom: string;
@@ -146,7 +170,7 @@ export class SupabaseOperatorIntelligenceRepository
     );
 
     if (error) {
-      throw error;
+      throw translatePersistenceError(error);
     }
 
     return createOperatorDataPolicyDefinition(data);
@@ -167,7 +191,7 @@ export class SupabaseOperatorIntelligenceRepository
     );
 
     if (error) {
-      throw error;
+      throw translatePersistenceError(error);
     }
 
     return createOperatorConsentDecision(data);
@@ -198,7 +222,7 @@ export class SupabaseOperatorIntelligenceRepository
     );
 
     if (error) {
-      throw error;
+      throw translatePersistenceError(error);
     }
 
     assertAdmissionBundle(
@@ -231,7 +255,7 @@ export class SupabaseOperatorIntelligenceRepository
     );
 
     if (error) {
-      throw error;
+      throw translatePersistenceError(error);
     }
 
     return createOperatorEvidenceDisposition(data);
@@ -271,7 +295,7 @@ export class SupabaseOperatorIntelligenceRepository
     );
 
     if (error) {
-      throw error;
+      throw translatePersistenceError(error);
     }
 
     return validatedClaim.status === "deleted"
@@ -296,7 +320,7 @@ export class SupabaseOperatorIntelligenceRepository
     );
 
     if (error) {
-      throw error;
+      throw translatePersistenceError(error);
     }
 
     return data as OperatorUnderstandingEligibility;
@@ -789,4 +813,22 @@ function assertEvidenceFanOut(actual: number): void {
   if (actual > OPERATOR_INTELLIGENCE_MAX_EVIDENCE_PER_CLAIM) {
     throw new OperatorIntelligencePageBudgetError("evidence-fan-out");
   }
+}
+
+function translatePersistenceError(error: unknown): unknown {
+  if (!isRecord(error)) {
+    return error;
+  }
+
+  if (error.code === "40001") {
+    return new OperatorIntelligenceRepositoryStaleConflictError();
+  }
+
+  if (error.code === "23505") {
+    return typeof error.message === "string" && /immutable/i.test(error.message)
+      ? new OperatorIntelligenceRepositoryImmutableConflictError()
+      : new OperatorIntelligenceRepositoryDuplicateError();
+  }
+
+  return error;
 }

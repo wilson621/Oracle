@@ -1,4 +1,9 @@
-import type { OperatorIntelligenceRepository } from "../../repositories/operator-intelligence-repository";
+import {
+  OperatorIntelligenceRepositoryDuplicateError,
+  OperatorIntelligenceRepositoryImmutableConflictError,
+  OperatorIntelligenceRepositoryStaleConflictError,
+  type OperatorIntelligenceRepository,
+} from "../../repositories/operator-intelligence-repository";
 import {
   createOperatorEvidenceReference,
   createOperatorIntelligenceClaimRevision,
@@ -22,6 +27,30 @@ export class OperatorIntelligenceTransitionUnavailableError extends Error {
       "Operator Intelligence lifecycle transitions are not active before the approved control phase."
     );
     this.name = "OperatorIntelligenceTransitionUnavailableError";
+  }
+}
+
+export class OperatorIntelligenceImmutableConflictError extends Error {
+  readonly code = "OPERATOR_INTELLIGENCE_IMMUTABLE_CONFLICT";
+  constructor() {
+    super("Operator Intelligence immutable content conflicts with the original.");
+    this.name = "OperatorIntelligenceImmutableConflictError";
+  }
+}
+
+export class OperatorIntelligenceDuplicateError extends Error {
+  readonly code = "OPERATOR_INTELLIGENCE_DUPLICATE";
+  constructor() {
+    super("Operator Intelligence natural identity is already admitted.");
+    this.name = "OperatorIntelligenceDuplicateError";
+  }
+}
+
+export class OperatorIntelligenceStaleConcurrencyError extends Error {
+  readonly code = "OPERATOR_INTELLIGENCE_STALE_CONCURRENCY";
+  constructor() {
+    super("Operator Intelligence revision is stale after a competing write.");
+    this.name = "OperatorIntelligenceStaleConcurrencyError";
   }
 }
 
@@ -59,11 +88,17 @@ export function createOperatorIntelligenceService(
       evidenceReferences
     );
 
-    const persisted = await repository.persistClaimRevision(
-      operator.id,
-      evidenceReferences,
-      claim
-    );
+    let persisted;
+
+    try {
+      persisted = await repository.persistClaimRevision(
+        operator.id,
+        evidenceReferences,
+        claim
+      );
+    } catch (error) {
+      throw translateRepositoryConflict(error);
+    }
 
     if (persisted.status === "deleted") {
       throw new Error(
@@ -110,6 +145,22 @@ export function createOperatorIntelligenceService(
     submitCandidate,
     transitionClaim,
   });
+}
+
+function translateRepositoryConflict(error: unknown): unknown {
+  if (error instanceof OperatorIntelligenceRepositoryImmutableConflictError) {
+    return new OperatorIntelligenceImmutableConflictError();
+  }
+
+  if (error instanceof OperatorIntelligenceRepositoryDuplicateError) {
+    return new OperatorIntelligenceDuplicateError();
+  }
+
+  if (error instanceof OperatorIntelligenceRepositoryStaleConflictError) {
+    return new OperatorIntelligenceStaleConcurrencyError();
+  }
+
+  return error;
 }
 
 function assertNoCallerSelectedOperator(

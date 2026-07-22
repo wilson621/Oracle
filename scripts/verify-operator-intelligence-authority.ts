@@ -1,15 +1,21 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import type {
-  OperatorIntelligencePersistenceQuery,
-  OperatorIntelligenceRepository,
-  OperatorIntelligenceLifecycleQuery,
-  OperatorIntelligenceEligibilityHistoryQuery,
+import {
+  OperatorIntelligenceRepositoryDuplicateError,
+  OperatorIntelligenceRepositoryImmutableConflictError,
+  OperatorIntelligenceRepositoryStaleConflictError,
+  type OperatorIntelligencePersistenceQuery,
+  type OperatorIntelligenceRepository,
+  type OperatorIntelligenceLifecycleQuery,
+  type OperatorIntelligenceEligibilityHistoryQuery,
 } from "../lib/oracle/repositories/operator-intelligence-repository";
 import type { OperatorService } from "../lib/oracle/services/operator";
 import {
   createOperatorIntelligenceService,
+  OperatorIntelligenceDuplicateError,
+  OperatorIntelligenceImmutableConflictError,
+  OperatorIntelligenceStaleConcurrencyError,
   OperatorIntelligenceTransitionUnavailableError,
 } from "../lib/oracle/services/operator-intelligence";
 import type {
@@ -39,6 +45,7 @@ async function main() {
   await verifyCurrentOperatorInjection();
   await verifyCallerSelectionRejection();
   await verifyInactiveTransitionFailsClosed();
+  await verifyTypedServiceConflicts();
   verifyServerCredentialBoundary();
   verifyExclusiveRepositoryImportBoundary();
   process.stdout.write(
@@ -134,6 +141,44 @@ async function verifyInactiveTransitionFailsClosed() {
   );
 }
 
+async function verifyTypedServiceConflicts() {
+  const ownedEvidence = createOperatorEvidenceReference({
+    ...evidenceInput,
+    operatorId: currentOperatorId,
+  });
+  const cases = [
+    [
+      new OperatorIntelligenceRepositoryImmutableConflictError(),
+      OperatorIntelligenceImmutableConflictError,
+    ],
+    [
+      new OperatorIntelligenceRepositoryDuplicateError(),
+      OperatorIntelligenceDuplicateError,
+    ],
+    [
+      new OperatorIntelligenceRepositoryStaleConflictError(),
+      OperatorIntelligenceStaleConcurrencyError,
+    ],
+  ] as const;
+
+  for (const [repositoryError, expectedServiceError] of cases) {
+    const repository = new RecordingRepository();
+    repository.persistError = repositoryError;
+    const service = createOperatorIntelligenceService(
+      createRecordingOperatorService(),
+      repository
+    );
+
+    await assert.rejects(
+      service.submitCandidate({
+        evidenceReferences: [omitOperatorId(ownedEvidence)],
+        claim: createCandidateProposal(ownedEvidence),
+      }),
+      expectedServiceError
+    );
+  }
+}
+
 function verifyServerCredentialBoundary() {
   const trustedClientPath = path.join(
     process.cwd(),
@@ -208,6 +253,7 @@ function createRecordingOperatorService() {
 }
 
 class RecordingRepository implements OperatorIntelligenceRepository {
+  persistError: Error | null = null;
   persistedOperatorId: string | null = null;
   persistedEvidence: readonly OperatorEvidenceReference[] = [];
   persistedClaim:
@@ -252,6 +298,10 @@ class RecordingRepository implements OperatorIntelligenceRepository {
       | OperatorIntelligenceClaimRevision
       | OperatorIntelligenceClaimTombstone
   ) {
+    if (this.persistError) {
+      throw this.persistError;
+    }
+
     this.persistedOperatorId = operatorId;
     this.persistedEvidence = evidenceReferences;
     this.persistedClaim = claimRevision;

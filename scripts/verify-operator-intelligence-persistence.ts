@@ -16,7 +16,12 @@ import {
   createOperatorIntelligencePageRequest,
   OperatorIntelligencePageBudgetError,
 } from "../lib/oracle/understanding";
-import { SupabaseOperatorIntelligenceRepository } from "../lib/oracle/repositories/operator-intelligence-repository";
+import {
+  OperatorIntelligenceRepositoryDuplicateError,
+  OperatorIntelligenceRepositoryImmutableConflictError,
+  OperatorIntelligenceRepositoryStaleConflictError,
+  SupabaseOperatorIntelligenceRepository,
+} from "../lib/oracle/repositories/operator-intelligence-repository";
 import {
   activeClaimInput,
 } from "./operator-understanding-verification-fixtures";
@@ -32,6 +37,7 @@ async function main() {
   await verifyRepositoryWriteBoundary();
   await verifyBoundedReadBoundary();
   await verifyCrossOperatorRejection();
+  await verifyTypedConflicts();
   verifyRepositoryOwnershipBoundary();
   process.stdout.write(
     "Operator Intelligence persistence verification passed.\n"
@@ -107,6 +113,9 @@ function verifyMigrationContract() {
   assert.match(migration, /recorded_at <= effective_watermark/i);
   assert.match(migration, /limit p_page_size \+ 1/i);
   assert.match(migration, /order by head\.effective_from desc, head\.claim_revision_id asc/i);
+  assert.match(migration, /pg_advisory_xact_lock\(hashtextextended/i);
+  assert.match(migration, /claim revisions are immutable/i);
+  assert.match(migration, /eligibility is immutable/i);
   assert.doesNotMatch(
     migration,
     /grant execute on function public\.[^;]+\s+to authenticated/i
@@ -342,6 +351,46 @@ async function verifyBoundedReadBoundary() {
   );
 }
 
+async function verifyTypedConflicts() {
+  const fixture = createTrustFixture();
+  const candidate = createOperatorIntelligenceClaimRevision(
+    createCandidateInput(operatorId, fixture.evidence),
+    [fixture.evidence]
+  );
+  const cases = [
+    {
+      databaseError: { code: "23505", message: "Claim revisions are immutable." },
+      expected: OperatorIntelligenceRepositoryImmutableConflictError,
+    },
+    {
+      databaseError: { code: "23505", message: "duplicate key constraint" },
+      expected: OperatorIntelligenceRepositoryDuplicateError,
+    },
+    {
+      databaseError: { code: "40001", message: "stale revision" },
+      expected: OperatorIntelligenceRepositoryStaleConflictError,
+    },
+  ] as const;
+
+  for (const testCase of cases) {
+    const client = new RecordingSupabaseClient();
+    client.errors.persist_operator_intelligence_claim_revision =
+      testCase.databaseError;
+    const repository = new SupabaseOperatorIntelligenceRepository(
+      client as unknown as SupabaseClient
+    );
+
+    await assert.rejects(
+      repository.persistClaimRevision(
+        operatorId,
+        [fixture.evidence],
+        candidate
+      ),
+      testCase.expected
+    );
+  }
+}
+
 function verifyRepositoryOwnershipBoundary() {
   const sourceFiles = collectTypeScriptFiles(path.join(process.cwd(), "lib"));
   const intelligenceTableReads = sourceFiles
@@ -540,6 +589,7 @@ class RecordingSupabaseClient {
   readPageData: unknown = null;
   lifecyclePageData: unknown = null;
   eligibilityPageData: unknown = null;
+  readonly errors: Record<string, Readonly<{ code: string; message: string }>> = {};
   readonly calls: Array<{
     functionName: string;
     arguments: Record<string, unknown>;
@@ -547,6 +597,11 @@ class RecordingSupabaseClient {
 
   async rpc(functionName: string, args: Record<string, unknown>) {
     this.calls.push({ functionName, arguments: args });
+    const configuredError = this.errors[functionName];
+
+    if (configuredError) {
+      return { data: null, error: configuredError };
+    }
 
     if (functionName === "register_operator_data_policy_version") {
       return { data: args.p_policy, error: null };
