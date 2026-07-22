@@ -5,6 +5,7 @@ import { spawn } from "node:child_process";
 
 const psql = process.env.SPRINT17_PSQL;
 const databaseUrl = process.env.SPRINT17_DATABASE_URL;
+const evidenceFile = process.env.SPRINT17_ROLLBACK_EVIDENCE_FILE;
 const expectedHash = "fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f";
 
 if (!psql || !databaseUrl) {
@@ -118,14 +119,20 @@ async function main() {
   `), "0\n");
 
   const catalogHash = crypto.createHash("sha256").update(before).digest("hex");
-  process.stdout.write(`${JSON.stringify({
+  const evidence = {
+    schemaVersion: 1,
     postgres: (await query(databaseUrl, "show server_version;")).trim(),
     migrationSha256: migrationHash,
     catalogSha256Before: catalogHash,
     catalogSha256After: crypto.createHash("sha256").update(after).digest("hex"),
     catalogIdentical: true,
     preservedRows: JSON.parse(preservedAfter.trim()),
-  }, null, 2)}\n`);
+    result: "pass",
+  };
+  if (evidenceFile) {
+    fs.writeFileSync(evidenceFile, `${JSON.stringify(evidence, null, 2)}\n`, "utf8");
+  }
+  process.stdout.write(`${JSON.stringify(evidence, null, 2)}\n`);
   process.stdout.write("Migration 009 rollback and independent catalog verification passed.\n");
 }
 

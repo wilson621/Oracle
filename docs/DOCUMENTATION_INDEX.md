@@ -202,6 +202,7 @@ delivery authorities have been reviewed.
 | Closed Sprint evidence | [`docs/sprints`](sprints/) | Historical |
 | Sprint 17 engineering closure evidence | [Sprint 17 Closure Report](sprints/SPRINT_17_CLOSURE.md) | Closure review |
 | Migration 009 deployment decision evidence | [Migration 009 Dossier](sprints/SPRINT_17_MIGRATION_009_DOSSIER.md) | Decision artifact |
+| Sprint 17 machine-readable verification evidence | [Sprint 17 Permanent Evidence](sprints/evidence/sprint-17/README.md) | Closure evidence |
 
 # Supporting Documentation
 

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import { spawn } from "node:child_process";
 import {
   createOperatorConsentDecision,
@@ -17,6 +18,8 @@ import {
 
 const psql = process.env.SPRINT17_PSQL;
 const databaseUrl = process.env.SPRINT17_DATABASE_URL;
+const evidenceFile = process.env.SPRINT17_CONCURRENCY_EVIDENCE_FILE;
+const repetition = Number(process.env.SPRINT17_CONCURRENCY_REPETITION ?? "1");
 
 if (!psql || !databaseUrl) {
   throw new Error(
@@ -31,6 +34,12 @@ type SqlResult = Readonly<{
 }>;
 
 async function main() {
+  const workerRuns: Array<Readonly<{
+    scenario: string;
+    workers: number;
+    succeeded: number;
+    staleConflicts: number;
+  }>> = [];
   const fixture = createTrustFixture();
   await seedOwnership();
   await callTrusted(
@@ -55,7 +64,9 @@ async function main() {
     admission: fixture.admission,
   };
   for (const workers of [1, 8, 32]) {
-    assertAllSucceeded(await runConcurrent(workers, admissionSql, admissionVariables));
+    const results = await runConcurrent(workers, admissionSql, admissionVariables);
+    assertAllSucceeded(results);
+    workerRuns.push(summarizeWorkers("evidence-admission-exact-retry", workers, results));
   }
   assert.equal(await scalar("select count(*) from public.operator_intelligence_evidence;"), 1);
   assert.equal(await scalar("select count(*) from public.operator_intelligence_evidence_dispositions;"), 1);
@@ -71,11 +82,13 @@ async function main() {
     :'claim'::jsonb
   );`;
   for (const workers of [1, 8, 32]) {
-    assertAllSucceeded(await runConcurrent(workers, claimSql, {
+    const results = await runConcurrent(workers, claimSql, {
       operator_id: operatorId,
       evidence: fixture.evidence,
       claim: candidate,
-    }));
+    });
+    assertAllSucceeded(results);
+    workerRuns.push(summarizeWorkers("claim-revision-exact-retry", workers, results));
   }
   assert.equal(await scalar("select count(*) from public.operator_intelligence_claim_revisions;"), 1);
   assert.equal(await scalar("select count(*) from public.operator_intelligence_claim_evidence;"), 1);
@@ -104,6 +117,12 @@ async function main() {
   assert.equal(winners.length, 16);
   assert.equal(stale.length, 16);
   assert.equal(new Set(winners.map(({ index }) => index % 2)).size, 1);
+  workerRuns.push({
+    scenario: "competing-next-revision",
+    workers: 32,
+    succeeded: winners.length,
+    staleConflicts: stale.length,
+  });
   assert.equal(await scalar("select current_revision from public.operator_intelligence_claims;"), 2);
   assert.equal(await scalar("select count(*) from public.operator_intelligence_claim_revisions;"), 2);
   const winningClaim = competingClaims[winners[0].index % competingClaims.length];
@@ -119,12 +138,14 @@ async function main() {
     :'eligibility'::jsonb
   );`;
   for (const workers of [1, 8, 32]) {
-    assertAllSucceeded(await runConcurrent(workers, eligibilitySql, {
+    const results = await runConcurrent(workers, eligibilitySql, {
       operator_id: operatorId,
       claim_id: winningClaim.claimId,
       claim_revision_id: winningClaim.id,
       eligibility,
-    }));
+    });
+    assertAllSucceeded(results);
+    workerRuns.push(summarizeWorkers("eligibility-exact-retry", workers, results));
   }
   assert.equal(
     await scalar(
@@ -234,9 +255,39 @@ async function main() {
     candidate
   );
 
-  process.stdout.write(
-    "Operator Intelligence PostgreSQL concurrency verification passed.\n"
-  );
+  const durableRows = {
+    evidence: await scalar("select count(*) from public.operator_intelligence_evidence;"),
+    dispositions: await scalar("select count(*) from public.operator_intelligence_evidence_dispositions;"),
+    admissions: await scalar("select count(*) from public.operator_intelligence_evidence_admissions;"),
+    claims: await scalar("select count(*) from public.operator_intelligence_claims;"),
+    claimRevisions: await scalar("select count(*) from public.operator_intelligence_claim_revisions;"),
+    claimEvidenceLinks: await scalar("select count(*) from public.operator_intelligence_claim_evidence;"),
+    eligibilityAssessments: await scalar("select count(*) from public.operator_intelligence_eligibility_assessments;"),
+  };
+  const evidence = {
+    schemaVersion: 1,
+    repetition,
+    postgres: await textScalar("show server_version;"),
+    workerRuns,
+    trustMutationRaces: [
+      "consent-revocation-blocked-eligibility",
+      "evidence-withdrawal-blocked-eligibility",
+    ],
+    conflictChecks: [
+      "alternative-admission-identifier-rejected",
+      "immutable-claim-identity-conflict-rejected",
+    ],
+    transactionRollbackResidue: 0,
+    durableRows,
+    result: "pass",
+  };
+
+  if (evidenceFile) {
+    fs.writeFileSync(evidenceFile, `${JSON.stringify(evidence, null, 2)}\n`, "utf8");
+  }
+
+  process.stdout.write(`${JSON.stringify(evidence, null, 2)}\n`);
+  process.stdout.write("Operator Intelligence PostgreSQL concurrency verification passed.\n");
 }
 
 async function seedOwnership() {
@@ -365,9 +416,28 @@ function callTrustedResult(sql: string, variables: Record<string, unknown>) {
 }
 
 async function scalar(sql: string): Promise<number> {
+  return Number(await textScalar(sql));
+}
+
+async function textScalar(sql: string): Promise<string> {
   const result = await runSql(sql, {});
   await expectSuccess(result);
-  return Number(result.stdout.trim().split(/\r?\n/).at(-1));
+  return result.stdout.trim().split(/\r?\n/).at(-1) ?? "";
+}
+
+function summarizeWorkers(
+  scenario: string,
+  workers: number,
+  results: readonly SqlResult[]
+) {
+  return {
+    scenario,
+    workers,
+    succeeded: results.filter((result) => result.code === 0).length,
+    staleConflicts: results.filter(
+      (result) => result.code !== 0 && /40001/.test(result.stderr)
+    ).length,
+  };
 }
 
 function assertAllSucceeded(results: readonly SqlResult[]) {

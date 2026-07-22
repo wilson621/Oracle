@@ -1,0 +1,1515 @@
+{
+  "schemaVersion": 1,
+  "evidenceDate": "2026-07-22T15:40:52.741Z",
+  "migrationSha256": "fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f",
+  "environment": {
+    "postgres": "17.10",
+    "samples": 30,
+    "warmups": 5
+  },
+  "fixtureShape": {
+    "claimHeads": 10000,
+    "claimHeadEvents": 100000,
+    "claimRevisions": 100000,
+    "eligibilityAssessments": 250000,
+    "evidence": 100000,
+    "dispositions": 100000,
+    "admissions": 100000,
+    "claimEvidenceLinks": 300000,
+    "operators": 3
+  },
+  "latency": {
+    "claim-lifecycle-page": {
+      "samples": 30,
+      "p50Ms": 28.186,
+      "p95Ms": 28.631,
+      "p99Ms": 29.201
+    },
+    "claim-revision-replay": {
+      "samples": 30,
+      "p50Ms": 0.246,
+      "p95Ms": 0.496,
+      "p99Ms": 0.512
+    },
+    "eligibility-history-page": {
+      "samples": 30,
+      "p50Ms": 0.04,
+      "p95Ms": 0.065,
+      "p99Ms": 0.2
+    },
+    "eligibility-replay": {
+      "samples": 30,
+      "p50Ms": 0.016,
+      "p95Ms": 0.037,
+      "p99Ms": 0.13
+    },
+    "eligible-page": {
+      "samples": 30,
+      "p50Ms": 6.871,
+      "p95Ms": 8.398,
+      "p99Ms": 10.691
+    },
+    "evidence-admission-replay": {
+      "samples": 30,
+      "p50Ms": 0.029,
+      "p95Ms": 0.048,
+      "p99Ms": 0.123
+    }
+  },
+  "planSummaries": {
+    "eligible-head-page-scoped-before-projection": {
+      "planningMs": 2.413,
+      "executionMs": 254.939,
+      "rowsReturned": 101,
+      "rowsExaminedAcrossPlanNodes": 223202,
+      "bufferUsage": {
+        "sharedHitBlocks": 4859,
+        "sharedReadBlocks": 20410,
+        "sharedDirtiedBlocks": 0,
+        "sharedWrittenBlocks": 8161,
+        "tempReadBlocks": 0,
+        "tempWrittenBlocks": 0
+      },
+      "indexes": [
+        "operator_intelligence_claim_r_operator_id_claim_id_revision_key",
+        "operator_intelligence_eligibi_operator_id_claim_id_claim_re_key"
+      ],
+      "sorts": [
+        {
+          "method": "top-N heapsort",
+          "spaceUsedKiB": 32,
+          "spaceType": "Memory"
+        }
+      ]
+    },
+    "eligible-head-page-scoped": {
+      "planningMs": 1.658,
+      "executionMs": 1.258,
+      "rowsReturned": 101,
+      "rowsExaminedAcrossPlanNodes": 303,
+      "bufferUsage": {
+        "sharedHitBlocks": 308,
+        "sharedReadBlocks": 105,
+        "sharedDirtiedBlocks": 0,
+        "sharedWrittenBlocks": 0,
+        "tempReadBlocks": 0,
+        "tempWrittenBlocks": 0
+      },
+      "indexes": [
+        "operator_intelligence_claim_head_scope_page_idx",
+        "operator_intelligence_claim_head_events_pkey"
+      ],
+      "sorts": []
+    },
+    "eligible-head-page-unscoped": {
+      "planningMs": 1.624,
+      "executionMs": 0.455,
+      "rowsReturned": 101,
+      "rowsExaminedAcrossPlanNodes": 303,
+      "bufferUsage": {
+        "sharedHitBlocks": 347,
+        "sharedReadBlocks": 7,
+        "sharedDirtiedBlocks": 0,
+        "sharedWrittenBlocks": 0,
+        "tempReadBlocks": 0,
+        "tempWrittenBlocks": 0
+      },
+      "indexes": [
+        "operator_intelligence_claim_head_page_idx",
+        "operator_intelligence_claim_head_events_pkey"
+      ],
+      "sorts": []
+    },
+    "claim-lifecycle-page": {
+      "planningMs": 1.638,
+      "executionMs": 0.241,
+      "rowsReturned": 101,
+      "rowsExaminedAcrossPlanNodes": 304,
+      "bufferUsage": {
+        "sharedHitBlocks": 24,
+        "sharedReadBlocks": 11,
+        "sharedDirtiedBlocks": 0,
+        "sharedWrittenBlocks": 0,
+        "tempReadBlocks": 0,
+        "tempWrittenBlocks": 0
+      },
+      "indexes": [
+        "operator_intelligence_claim_r_operator_id_claim_id_revision_key"
+      ],
+      "sorts": []
+    },
+    "eligibility-history-page": {
+      "planningMs": 1.238,
+      "executionMs": 0.097,
+      "rowsReturned": 7,
+      "rowsExaminedAcrossPlanNodes": 21,
+      "bufferUsage": {
+        "sharedHitBlocks": 20,
+        "sharedReadBlocks": 0,
+        "sharedDirtiedBlocks": 0,
+        "sharedWrittenBlocks": 0,
+        "tempReadBlocks": 0,
+        "tempWrittenBlocks": 0
+      },
+      "indexes": [
+        "operator_intelligence_eligibi_operator_id_claim_id_claim_re_key"
+      ],
+      "sorts": []
+    },
+    "page-evidence-fan-out": {
+      "planningMs": 1.78,
+      "executionMs": 0.136,
+      "rowsReturned": 3,
+      "rowsExaminedAcrossPlanNodes": 12,
+      "bufferUsage": {
+        "sharedHitBlocks": 16,
+        "sharedReadBlocks": 0,
+        "sharedDirtiedBlocks": 0,
+        "sharedWrittenBlocks": 0,
+        "tempReadBlocks": 0,
+        "tempWrittenBlocks": 0
+      },
+      "indexes": [
+        "operator_intelligence_claim_evidence_pkey",
+        "operator_intelligence_evidence_pkey"
+      ],
+      "sorts": []
+    }
+  },
+  "rawExplainAnalyzeBuffersPlans": {
+    "beforeOptimization": {
+      "eligible-head-page-scoped-before-projection": [
+        {
+          "Plan": {
+            "Node Type": "Limit",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 55932.42,
+            "Total Cost": 55932.43,
+            "Plan Rows": 1,
+            "Plan Width": 33,
+            "Actual Startup Time": 254.796,
+            "Actual Total Time": 254.802,
+            "Actual Rows": 101,
+            "Actual Loops": 1,
+            "Shared Hit Blocks": 4859,
+            "Shared Read Blocks": 20410,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 8161,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Sort",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 55932.42,
+                "Total Cost": 55932.43,
+                "Plan Rows": 1,
+                "Plan Width": 33,
+                "Actual Startup Time": 254.794,
+                "Actual Total Time": 254.797,
+                "Actual Rows": 101,
+                "Actual Loops": 1,
+                "Sort Key": [
+                  "head.effective_from DESC",
+                  "head.claim_revision_id"
+                ],
+                "Sort Method": "top-N heapsort",
+                "Sort Space Used": 32,
+                "Sort Space Type": "Memory",
+                "Shared Hit Blocks": 4859,
+                "Shared Read Blocks": 20410,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 8161,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0,
+                "Plans": [
+                  {
+                    "Node Type": "Nested Loop",
+                    "Parent Relationship": "Outer",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Join Type": "Inner",
+                    "Startup Cost": 14.3,
+                    "Total Cost": 55932.41,
+                    "Plan Rows": 1,
+                    "Plan Width": 33,
+                    "Actual Startup Time": 2.107,
+                    "Actual Total Time": 254.668,
+                    "Actual Rows": 500,
+                    "Actual Loops": 1,
+                    "Inner Unique": false,
+                    "Shared Hit Blocks": 4853,
+                    "Shared Read Blocks": 20410,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 8161,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0,
+                    "Plans": [
+                      {
+                        "Node Type": "Subquery Scan",
+                        "Parent Relationship": "Outer",
+                        "Parallel Aware": false,
+                        "Async Capable": false,
+                        "Alias": "head",
+                        "Startup Cost": 5.84,
+                        "Total Cost": 55923.91,
+                        "Plan Rows": 1,
+                        "Plan Width": 63,
+                        "Actual Startup Time": 2.062,
+                        "Actual Total Time": 237.254,
+                        "Actual Rows": 500,
+                        "Actual Loops": 1,
+                        "Filter": "((head.effective_from <= '2026-07-22 01:00:00+01'::timestamp with time zone) AND ((head.claim_revision_contract ->> 'status'::text) = 'active'::text) AND ((head.claim_revision_contract -> 'scope'::text) = '{\"type\": \"game-integration\", \"integrationId\": \"call-of-duty\", \"integrationVersion\": \"1.0.0\"}'::jsonb))",
+                        "Rows Removed by Filter": 9500,
+                        "Shared Hit Blocks": 3646,
+                        "Shared Read Blocks": 19111,
+                        "Shared Dirtied Blocks": 0,
+                        "Shared Written Blocks": 7669,
+                        "Local Hit Blocks": 0,
+                        "Local Read Blocks": 0,
+                        "Local Dirtied Blocks": 0,
+                        "Local Written Blocks": 0,
+                        "Temp Read Blocks": 0,
+                        "Temp Written Blocks": 0,
+                        "Plans": [
+                          {
+                            "Node Type": "Unique",
+                            "Parent Relationship": "Subquery",
+                            "Parallel Aware": false,
+                            "Async Capable": false,
+                            "Startup Cost": 5.84,
+                            "Total Cost": 55699.96,
+                            "Plan Rows": 9953,
+                            "Plan Width": 1212,
+                            "Actual Startup Time": 1.879,
+                            "Actual Total Time": 215.152,
+                            "Actual Rows": 10000,
+                            "Actual Loops": 1,
+                            "Shared Hit Blocks": 3646,
+                            "Shared Read Blocks": 19111,
+                            "Shared Dirtied Blocks": 0,
+                            "Shared Written Blocks": 7669,
+                            "Local Hit Blocks": 0,
+                            "Local Read Blocks": 0,
+                            "Local Dirtied Blocks": 0,
+                            "Local Written Blocks": 0,
+                            "Temp Read Blocks": 0,
+                            "Temp Written Blocks": 0,
+                            "Plans": [
+                              {
+                                "Node Type": "Incremental Sort",
+                                "Parent Relationship": "Outer",
+                                "Parallel Aware": false,
+                                "Async Capable": false,
+                                "Startup Cost": 5.84,
+                                "Total Cost": 55450,
+                                "Plan Rows": 99986,
+                                "Plan Width": 1212,
+                                "Actual Startup Time": 1.879,
+                                "Actual Total Time": 210.905,
+                                "Actual Rows": 100000,
+                                "Actual Loops": 1,
+                                "Sort Key": [
+                                  "revision.claim_id",
+                                  "revision.revision DESC"
+                                ],
+                                "Presorted Key": [
+                                  "revision.claim_id"
+                                ],
+                                "Full-sort Groups": {
+                                  "Group Count": 2751,
+                                  "Sort Methods Used": [
+                                    "quicksort"
+                                  ],
+                                  "Sort Space Memory": {
+                                    "Average Sort Space Used": 100,
+                                    "Peak Sort Space Used": 100
+                                  }
+                                },
+                                "Pre-sorted Groups": {
+                                  "Group Count": 1,
+                                  "Sort Methods Used": [
+                                    "quicksort"
+                                  ],
+                                  "Sort Space Memory": {
+                                    "Average Sort Space Used": 1194,
+                                    "Peak Sort Space Used": 1194
+                                  }
+                                },
+                                "Shared Hit Blocks": 3646,
+                                "Shared Read Blocks": 19111,
+                                "Shared Dirtied Blocks": 0,
+                                "Shared Written Blocks": 7669,
+                                "Local Hit Blocks": 0,
+                                "Local Read Blocks": 0,
+                                "Local Dirtied Blocks": 0,
+                                "Local Written Blocks": 0,
+                                "Temp Read Blocks": 0,
+                                "Temp Written Blocks": 0,
+                                "Plans": [
+                                  {
+                                    "Node Type": "Index Scan",
+                                    "Parent Relationship": "Outer",
+                                    "Parallel Aware": false,
+                                    "Async Capable": false,
+                                    "Scan Direction": "Forward",
+                                    "Index Name": "operator_intelligence_claim_r_operator_id_claim_id_revision_key",
+                                    "Relation Name": "operator_intelligence_claim_revisions",
+                                    "Alias": "revision",
+                                    "Startup Cost": 0.42,
+                                    "Total Cost": 52337.09,
+                                    "Plan Rows": 99986,
+                                    "Plan Width": 1212,
+                                    "Actual Startup Time": 0.038,
+                                    "Actual Total Time": 174.537,
+                                    "Actual Rows": 100000,
+                                    "Actual Loops": 1,
+                                    "Index Cond": "(operator_id = '33333333-3333-4333-8333-333333333333'::uuid)",
+                                    "Rows Removed by Index Recheck": 0,
+                                    "Filter": "(recorded_at <= '2026-07-22 01:00:00+01'::timestamp with time zone)",
+                                    "Rows Removed by Filter": 0,
+                                    "Shared Hit Blocks": 3643,
+                                    "Shared Read Blocks": 19111,
+                                    "Shared Dirtied Blocks": 0,
+                                    "Shared Written Blocks": 7669,
+                                    "Local Hit Blocks": 0,
+                                    "Local Read Blocks": 0,
+                                    "Local Dirtied Blocks": 0,
+                                    "Local Written Blocks": 0,
+                                    "Temp Read Blocks": 0,
+                                    "Temp Written Blocks": 0
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "Node Type": "Subquery Scan",
+                        "Parent Relationship": "Inner",
+                        "Parallel Aware": false,
+                        "Async Capable": false,
+                        "Alias": "eligibility",
+                        "Startup Cost": 8.46,
+                        "Total Cost": 8.5,
+                        "Plan Rows": 1,
+                        "Plan Width": 0,
+                        "Actual Startup Time": 0.034,
+                        "Actual Total Time": 0.035,
+                        "Actual Rows": 1,
+                        "Actual Loops": 500,
+                        "Filter": "((eligibility.eligibility_contract ->> 'eligible'::text))::boolean",
+                        "Rows Removed by Filter": 0,
+                        "Shared Hit Blocks": 1207,
+                        "Shared Read Blocks": 1299,
+                        "Shared Dirtied Blocks": 0,
+                        "Shared Written Blocks": 492,
+                        "Local Hit Blocks": 0,
+                        "Local Read Blocks": 0,
+                        "Local Dirtied Blocks": 0,
+                        "Local Written Blocks": 0,
+                        "Temp Read Blocks": 0,
+                        "Temp Written Blocks": 0,
+                        "Plans": [
+                          {
+                            "Node Type": "Limit",
+                            "Parent Relationship": "Subquery",
+                            "Parallel Aware": false,
+                            "Async Capable": false,
+                            "Startup Cost": 8.46,
+                            "Total Cost": 8.48,
+                            "Plan Rows": 1,
+                            "Plan Width": 253,
+                            "Actual Startup Time": 0.034,
+                            "Actual Total Time": 0.034,
+                            "Actual Rows": 1,
+                            "Actual Loops": 500,
+                            "Shared Hit Blocks": 1207,
+                            "Shared Read Blocks": 1299,
+                            "Shared Dirtied Blocks": 0,
+                            "Shared Written Blocks": 492,
+                            "Local Hit Blocks": 0,
+                            "Local Read Blocks": 0,
+                            "Local Dirtied Blocks": 0,
+                            "Local Written Blocks": 0,
+                            "Temp Read Blocks": 0,
+                            "Temp Written Blocks": 0,
+                            "Plans": [
+                              {
+                                "Node Type": "Incremental Sort",
+                                "Parent Relationship": "Outer",
+                                "Parallel Aware": false,
+                                "Async Capable": false,
+                                "Startup Cost": 8.46,
+                                "Total Cost": 8.5,
+                                "Plan Rows": 2,
+                                "Plan Width": 253,
+                                "Actual Startup Time": 0.034,
+                                "Actual Total Time": 0.034,
+                                "Actual Rows": 1,
+                                "Actual Loops": 500,
+                                "Sort Key": [
+                                  "assessment.assessed_at DESC",
+                                  "assessment.recorded_at DESC",
+                                  "assessment.assessment_id DESC"
+                                ],
+                                "Presorted Key": [
+                                  "assessment.assessed_at"
+                                ],
+                                "Full-sort Groups": {
+                                  "Group Count": 500,
+                                  "Sort Methods Used": [
+                                    "quicksort"
+                                  ],
+                                  "Sort Space Memory": {
+                                    "Average Sort Space Used": 25,
+                                    "Peak Sort Space Used": 25
+                                  }
+                                },
+                                "Shared Hit Blocks": 1207,
+                                "Shared Read Blocks": 1299,
+                                "Shared Dirtied Blocks": 0,
+                                "Shared Written Blocks": 492,
+                                "Local Hit Blocks": 0,
+                                "Local Read Blocks": 0,
+                                "Local Dirtied Blocks": 0,
+                                "Local Written Blocks": 0,
+                                "Temp Read Blocks": 0,
+                                "Temp Written Blocks": 0,
+                                "Plans": [
+                                  {
+                                    "Node Type": "Index Scan",
+                                    "Parent Relationship": "Outer",
+                                    "Parallel Aware": false,
+                                    "Async Capable": false,
+                                    "Scan Direction": "Backward",
+                                    "Index Name": "operator_intelligence_eligibi_operator_id_claim_id_claim_re_key",
+                                    "Relation Name": "operator_intelligence_eligibility_assessments",
+                                    "Alias": "assessment",
+                                    "Startup Cost": 0.42,
+                                    "Total Cost": 8.45,
+                                    "Plan Rows": 1,
+                                    "Plan Width": 253,
+                                    "Actual Startup Time": 0.028,
+                                    "Actual Total Time": 0.033,
+                                    "Actual Rows": 2,
+                                    "Actual Loops": 500,
+                                    "Index Cond": "((operator_id = head.operator_id) AND (claim_id = head.claim_id) AND (claim_revision_id = head.claim_revision_id) AND (purpose = 'operator-game-pattern-intelligence'::text) AND (assessed_at <= '2026-07-22 01:00:00+01'::timestamp with time zone))",
+                                    "Rows Removed by Index Recheck": 0,
+                                    "Shared Hit Blocks": 1201,
+                                    "Shared Read Blocks": 1299,
+                                    "Shared Dirtied Blocks": 0,
+                                    "Shared Written Blocks": 492,
+                                    "Local Hit Blocks": 0,
+                                    "Local Read Blocks": 0,
+                                    "Local Dirtied Blocks": 0,
+                                    "Local Written Blocks": 0,
+                                    "Temp Read Blocks": 0,
+                                    "Temp Written Blocks": 0
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "Planning": {
+            "Shared Hit Blocks": 312,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 2.413,
+          "Triggers": [],
+          "Execution Time": 254.939
+        }
+      ]
+    },
+    "afterOptimization": {
+      "eligible-head-page-scoped": [
+        {
+          "Plan": {
+            "Node Type": "Limit",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 0.97,
+            "Total Cost": 17.02,
+            "Plan Rows": 1,
+            "Plan Width": 40,
+            "Actual Startup Time": 0.118,
+            "Actual Total Time": 1.235,
+            "Actual Rows": 101,
+            "Actual Loops": 1,
+            "Shared Hit Blocks": 308,
+            "Shared Read Blocks": 105,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Nested Loop",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Join Type": "Anti",
+                "Startup Cost": 0.97,
+                "Total Cost": 17.02,
+                "Plan Rows": 1,
+                "Plan Width": 40,
+                "Actual Startup Time": 0.117,
+                "Actual Total Time": 1.23,
+                "Actual Rows": 101,
+                "Actual Loops": 1,
+                "Inner Unique": false,
+                "Shared Hit Blocks": 308,
+                "Shared Read Blocks": 105,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0,
+                "Plans": [
+                  {
+                    "Node Type": "Index Only Scan",
+                    "Parent Relationship": "Outer",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Scan Direction": "Forward",
+                    "Index Name": "operator_intelligence_claim_head_scope_page_idx",
+                    "Relation Name": "operator_intelligence_claim_head_events",
+                    "Alias": "head",
+                    "Startup Cost": 0.55,
+                    "Total Cost": 8.57,
+                    "Plan Rows": 1,
+                    "Plan Width": 92,
+                    "Actual Startup Time": 0.1,
+                    "Actual Total Time": 0.592,
+                    "Actual Rows": 101,
+                    "Actual Loops": 1,
+                    "Index Cond": "((operator_id = '33333333-3333-4333-8333-333333333333'::uuid) AND (status = 'active'::text) AND (scope = '{\"type\": \"game-integration\", \"integrationId\": \"call-of-duty\", \"integrationVersion\": \"1.0.0\"}'::jsonb))",
+                    "Rows Removed by Index Recheck": 0,
+                    "Heap Fetches": 101,
+                    "Shared Hit Blocks": 56,
+                    "Shared Read Blocks": 54,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0
+                  },
+                  {
+                    "Node Type": "Index Only Scan",
+                    "Parent Relationship": "Inner",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Scan Direction": "Forward",
+                    "Index Name": "operator_intelligence_claim_head_events_pkey",
+                    "Relation Name": "operator_intelligence_claim_head_events",
+                    "Alias": "later",
+                    "Startup Cost": 0.42,
+                    "Total Cost": 8.44,
+                    "Plan Rows": 1,
+                    "Plan Width": 52,
+                    "Actual Startup Time": 0.006,
+                    "Actual Total Time": 0.006,
+                    "Actual Rows": 0,
+                    "Actual Loops": 101,
+                    "Index Cond": "((operator_id = '33333333-3333-4333-8333-333333333333'::uuid) AND (claim_id = head.claim_id) AND (revision > head.revision))",
+                    "Rows Removed by Index Recheck": 0,
+                    "Heap Fetches": 0,
+                    "Shared Hit Blocks": 252,
+                    "Shared Read Blocks": 51,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "Planning": {
+            "Shared Hit Blocks": 368,
+            "Shared Read Blocks": 6,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 1.658,
+          "Triggers": [],
+          "Execution Time": 1.258
+        }
+      ],
+      "eligible-head-page-unscoped": [
+        {
+          "Plan": {
+            "Node Type": "Limit",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 0.84,
+            "Total Cost": 41.84,
+            "Plan Rows": 2,
+            "Plan Width": 40,
+            "Actual Startup Time": 0.078,
+            "Actual Total Time": 0.424,
+            "Actual Rows": 101,
+            "Actual Loops": 1,
+            "Shared Hit Blocks": 347,
+            "Shared Read Blocks": 7,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Nested Loop",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Join Type": "Anti",
+                "Startup Cost": 0.84,
+                "Total Cost": 41.84,
+                "Plan Rows": 2,
+                "Plan Width": 40,
+                "Actual Startup Time": 0.077,
+                "Actual Total Time": 0.419,
+                "Actual Rows": 101,
+                "Actual Loops": 1,
+                "Inner Unique": false,
+                "Shared Hit Blocks": 347,
+                "Shared Read Blocks": 7,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0,
+                "Plans": [
+                  {
+                    "Node Type": "Index Only Scan",
+                    "Parent Relationship": "Outer",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Scan Direction": "Forward",
+                    "Index Name": "operator_intelligence_claim_head_page_idx",
+                    "Relation Name": "operator_intelligence_claim_head_events",
+                    "Alias": "head",
+                    "Startup Cost": 0.42,
+                    "Total Cost": 16.48,
+                    "Plan Rows": 3,
+                    "Plan Width": 92,
+                    "Actual Startup Time": 0.057,
+                    "Actual Total Time": 0.184,
+                    "Actual Rows": 101,
+                    "Actual Loops": 1,
+                    "Index Cond": "((operator_id = '33333333-3333-4333-8333-333333333333'::uuid) AND (status = 'active'::text))",
+                    "Rows Removed by Index Recheck": 0,
+                    "Heap Fetches": 101,
+                    "Shared Hit Blocks": 51,
+                    "Shared Read Blocks": 0,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0
+                  },
+                  {
+                    "Node Type": "Index Only Scan",
+                    "Parent Relationship": "Inner",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Scan Direction": "Forward",
+                    "Index Name": "operator_intelligence_claim_head_events_pkey",
+                    "Relation Name": "operator_intelligence_claim_head_events",
+                    "Alias": "later",
+                    "Startup Cost": 0.42,
+                    "Total Cost": 8.44,
+                    "Plan Rows": 1,
+                    "Plan Width": 52,
+                    "Actual Startup Time": 0.002,
+                    "Actual Total Time": 0.002,
+                    "Actual Rows": 0,
+                    "Actual Loops": 101,
+                    "Index Cond": "((operator_id = '33333333-3333-4333-8333-333333333333'::uuid) AND (claim_id = head.claim_id) AND (revision > head.revision))",
+                    "Rows Removed by Index Recheck": 0,
+                    "Heap Fetches": 0,
+                    "Shared Hit Blocks": 296,
+                    "Shared Read Blocks": 7,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "Planning": {
+            "Shared Hit Blocks": 377,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 1.624,
+          "Triggers": [],
+          "Execution Time": 0.455
+        }
+      ],
+      "claim-lifecycle-page": [
+        {
+          "Plan": {
+            "Node Type": "Limit",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 6.7,
+            "Total Cost": 199.55,
+            "Plan Rows": 101,
+            "Plan Width": 29,
+            "Actual Startup Time": 0.078,
+            "Actual Total Time": 0.216,
+            "Actual Rows": 101,
+            "Actual Loops": 1,
+            "Shared Hit Blocks": 24,
+            "Shared Read Blocks": 11,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Incremental Sort",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 6.7,
+                "Total Cost": 2044.05,
+                "Plan Rows": 1067,
+                "Plan Width": 29,
+                "Actual Startup Time": 0.077,
+                "Actual Total Time": 0.211,
+                "Actual Rows": 101,
+                "Actual Loops": 1,
+                "Sort Key": [
+                  "revision DESC",
+                  "claim_revision_id"
+                ],
+                "Presorted Key": [
+                  "revision"
+                ],
+                "Full-sort Groups": {
+                  "Group Count": 4,
+                  "Sort Methods Used": [
+                    "quicksort"
+                  ],
+                  "Sort Space Memory": {
+                    "Average Sort Space Used": 27,
+                    "Peak Sort Space Used": 27
+                  }
+                },
+                "Shared Hit Blocks": 24,
+                "Shared Read Blocks": 11,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0,
+                "Plans": [
+                  {
+                    "Node Type": "Index Scan",
+                    "Parent Relationship": "Outer",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Scan Direction": "Backward",
+                    "Index Name": "operator_intelligence_claim_r_operator_id_claim_id_revision_key",
+                    "Relation Name": "operator_intelligence_claim_revisions",
+                    "Alias": "revision",
+                    "Startup Cost": 0.42,
+                    "Total Cost": 2015.05,
+                    "Plan Rows": 1067,
+                    "Plan Width": 29,
+                    "Actual Startup Time": 0.021,
+                    "Actual Total Time": 0.174,
+                    "Actual Rows": 102,
+                    "Actual Loops": 1,
+                    "Index Cond": "((operator_id = '33333333-3333-4333-8333-333333333333'::uuid) AND (claim_id = 'hot-claim-1'::text))",
+                    "Rows Removed by Index Recheck": 0,
+                    "Filter": "(recorded_at <= '2026-07-22 01:00:00+01'::timestamp with time zone)",
+                    "Rows Removed by Filter": 0,
+                    "Shared Hit Blocks": 15,
+                    "Shared Read Blocks": 11,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "Planning": {
+            "Shared Hit Blocks": 194,
+            "Shared Read Blocks": 5,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 1.638,
+          "Triggers": [],
+          "Execution Time": 0.241
+        }
+      ],
+      "eligibility-history-page": [
+        {
+          "Plan": {
+            "Node Type": "Limit",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 8.46,
+            "Total Cost": 8.5,
+            "Plan Rows": 2,
+            "Plan Width": 24,
+            "Actual Startup Time": 0.072,
+            "Actual Total Time": 0.072,
+            "Actual Rows": 7,
+            "Actual Loops": 1,
+            "Shared Hit Blocks": 20,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Incremental Sort",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 8.46,
+                "Total Cost": 8.5,
+                "Plan Rows": 2,
+                "Plan Width": 24,
+                "Actual Startup Time": 0.071,
+                "Actual Total Time": 0.071,
+                "Actual Rows": 7,
+                "Actual Loops": 1,
+                "Sort Key": [
+                  "assessed_at DESC",
+                  "assessment_id"
+                ],
+                "Presorted Key": [
+                  "assessed_at"
+                ],
+                "Full-sort Groups": {
+                  "Group Count": 1,
+                  "Sort Methods Used": [
+                    "quicksort"
+                  ],
+                  "Sort Space Memory": {
+                    "Average Sort Space Used": 25,
+                    "Peak Sort Space Used": 25
+                  }
+                },
+                "Shared Hit Blocks": 20,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0,
+                "Plans": [
+                  {
+                    "Node Type": "Index Scan",
+                    "Parent Relationship": "Outer",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Scan Direction": "Backward",
+                    "Index Name": "operator_intelligence_eligibi_operator_id_claim_id_claim_re_key",
+                    "Relation Name": "operator_intelligence_eligibility_assessments",
+                    "Alias": "assessment",
+                    "Startup Cost": 0.42,
+                    "Total Cost": 8.45,
+                    "Plan Rows": 1,
+                    "Plan Width": 24,
+                    "Actual Startup Time": 0.027,
+                    "Actual Total Time": 0.048,
+                    "Actual Rows": 7,
+                    "Actual Loops": 1,
+                    "Index Cond": "((operator_id = '33333333-3333-4333-8333-333333333333'::uuid) AND (claim_id = 'hot-claim-1'::text) AND (claim_revision_id = 'hot-claim-1-revision-1000'::text) AND (purpose = 'operator-game-pattern-intelligence'::text) AND (assessed_at <= '2026-07-22 01:00:00+01'::timestamp with time zone))",
+                    "Rows Removed by Index Recheck": 0,
+                    "Shared Hit Blocks": 11,
+                    "Shared Read Blocks": 0,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "Planning": {
+            "Shared Hit Blocks": 156,
+            "Shared Read Blocks": 3,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 1.238,
+          "Triggers": [],
+          "Execution Time": 0.097
+        }
+      ],
+      "page-evidence-fan-out": [
+        {
+          "Plan": {
+            "Node Type": "Limit",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 0.84,
+            "Total Cost": 29.8,
+            "Plan Rows": 3,
+            "Plan Width": 1204,
+            "Actual Startup Time": 0.091,
+            "Actual Total Time": 0.1,
+            "Actual Rows": 3,
+            "Actual Loops": 1,
+            "Shared Hit Blocks": 16,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Nested Loop",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Join Type": "Inner",
+                "Startup Cost": 0.84,
+                "Total Cost": 29.8,
+                "Plan Rows": 3,
+                "Plan Width": 1204,
+                "Actual Startup Time": 0.09,
+                "Actual Total Time": 0.098,
+                "Actual Rows": 3,
+                "Actual Loops": 1,
+                "Inner Unique": true,
+                "Shared Hit Blocks": 16,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0,
+                "Plans": [
+                  {
+                    "Node Type": "Index Only Scan",
+                    "Parent Relationship": "Outer",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Scan Direction": "Forward",
+                    "Index Name": "operator_intelligence_claim_evidence_pkey",
+                    "Relation Name": "operator_intelligence_claim_evidence",
+                    "Alias": "link",
+                    "Startup Cost": 0.42,
+                    "Total Cost": 4.48,
+                    "Plan Rows": 3,
+                    "Plan Width": 34,
+                    "Actual Startup Time": 0.069,
+                    "Actual Total Time": 0.07,
+                    "Actual Rows": 3,
+                    "Actual Loops": 1,
+                    "Index Cond": "((operator_id = '33333333-3333-4333-8333-333333333333'::uuid) AND (claim_revision_id = 'hot-claim-1-revision-1000'::text))",
+                    "Rows Removed by Index Recheck": 0,
+                    "Heap Fetches": 0,
+                    "Shared Hit Blocks": 4,
+                    "Shared Read Blocks": 0,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0
+                  },
+                  {
+                    "Node Type": "Index Scan",
+                    "Parent Relationship": "Inner",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Scan Direction": "Forward",
+                    "Index Name": "operator_intelligence_evidence_pkey",
+                    "Relation Name": "operator_intelligence_evidence",
+                    "Alias": "evidence",
+                    "Startup Cost": 0.42,
+                    "Total Cost": 8.44,
+                    "Plan Rows": 1,
+                    "Plan Width": 1220,
+                    "Actual Startup Time": 0.008,
+                    "Actual Total Time": 0.008,
+                    "Actual Rows": 1,
+                    "Actual Loops": 3,
+                    "Index Cond": "((operator_id = '33333333-3333-4333-8333-333333333333'::uuid) AND (evidence_reference_id = link.evidence_reference_id))",
+                    "Rows Removed by Index Recheck": 0,
+                    "Shared Hit Blocks": 12,
+                    "Shared Read Blocks": 0,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "Planning": {
+            "Shared Hit Blocks": 201,
+            "Shared Read Blocks": 5,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 1.78,
+          "Triggers": [],
+          "Execution Time": 0.136
+        }
+      ]
+    }
+  },
+  "indexEvidence": [
+    {
+      "name": "operator_consent_decisions_current_idx",
+      "table": "operator_consent_decisions",
+      "definition": "CREATE INDEX operator_consent_decisions_current_idx ON public.operator_consent_decisions USING btree (operator_id, purpose, effective_at DESC, recorded_at DESC)",
+      "bytes": 16384,
+      "constraintName": null,
+      "constraintType": null,
+      "measuredPlans": [],
+      "justification": "Latest purpose-specific consent lookup in trusted admission and eligibility paths."
+    },
+    {
+      "name": "operator_consent_decisions_operator_id_purpose_policy_id_po_key",
+      "table": "operator_consent_decisions",
+      "definition": "CREATE UNIQUE INDEX operator_consent_decisions_operator_id_purpose_policy_id_po_key ON public.operator_consent_decisions USING btree (operator_id, purpose, policy_id, policy_version, consent_decision_id)",
+      "bytes": 16384,
+      "constraintName": "operator_consent_decisions_operator_id_purpose_policy_id_po_key",
+      "constraintType": "u",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (u: operator_consent_decisions_operator_id_purpose_policy_id_po_key)."
+    },
+    {
+      "name": "operator_consent_decisions_pkey",
+      "table": "operator_consent_decisions",
+      "definition": "CREATE UNIQUE INDEX operator_consent_decisions_pkey ON public.operator_consent_decisions USING btree (operator_id, consent_decision_id)",
+      "bytes": 16384,
+      "constraintName": "operator_consent_decisions_pkey",
+      "constraintType": "p",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (p: operator_consent_decisions_pkey)."
+    },
+    {
+      "name": "operator_data_policy_versions_pkey",
+      "table": "operator_data_policy_versions",
+      "definition": "CREATE UNIQUE INDEX operator_data_policy_versions_pkey ON public.operator_data_policy_versions USING btree (policy_id, policy_version)",
+      "bytes": 16384,
+      "constraintName": "operator_data_policy_versions_pkey",
+      "constraintType": "p",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (p: operator_data_policy_versions_pkey)."
+    },
+    {
+      "name": "operator_intelligence_claim_evidence_pkey",
+      "table": "operator_intelligence_claim_evidence",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_claim_evidence_pkey ON public.operator_intelligence_claim_evidence USING btree (operator_id, claim_revision_id, evidence_reference_id)",
+      "bytes": 31793152,
+      "constraintName": "operator_intelligence_claim_evidence_pkey",
+      "constraintType": "p",
+      "measuredPlans": [
+        "page-evidence-fan-out"
+      ],
+      "justification": "Constraint-backed integrity index (p: operator_intelligence_claim_evidence_pkey)."
+    },
+    {
+      "name": "operator_intelligence_claim_evidence_reference_idx",
+      "table": "operator_intelligence_claim_evidence",
+      "definition": "CREATE INDEX operator_intelligence_claim_evidence_reference_idx ON public.operator_intelligence_claim_evidence USING btree (operator_id, evidence_reference_id)",
+      "bytes": 12263424,
+      "constraintName": null,
+      "constraintType": null,
+      "measuredPlans": [],
+      "justification": "Reverse Evidence-to-claim relationship access and foreign-key maintenance."
+    },
+    {
+      "name": "operator_intelligence_claim_h_operator_id_claim_revision_id_key",
+      "table": "operator_intelligence_claim_head_events",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_claim_h_operator_id_claim_revision_id_key ON public.operator_intelligence_claim_head_events USING btree (operator_id, claim_revision_id)",
+      "bytes": 11354112,
+      "constraintName": "operator_intelligence_claim_h_operator_id_claim_revision_id_key",
+      "constraintType": "u",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (u: operator_intelligence_claim_h_operator_id_claim_revision_id_key)."
+    },
+    {
+      "name": "operator_intelligence_claim_head_events_pkey",
+      "table": "operator_intelligence_claim_head_events",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_claim_head_events_pkey ON public.operator_intelligence_claim_head_events USING btree (operator_id, claim_id, revision)",
+      "bytes": 9535488,
+      "constraintName": "operator_intelligence_claim_head_events_pkey",
+      "constraintType": "p",
+      "measuredPlans": [
+        "eligible-head-page-scoped",
+        "eligible-head-page-unscoped"
+      ],
+      "justification": "Constraint-backed integrity index (p: operator_intelligence_claim_head_events_pkey)."
+    },
+    {
+      "name": "operator_intelligence_claim_head_page_idx",
+      "table": "operator_intelligence_claim_head_events",
+      "definition": "CREATE INDEX operator_intelligence_claim_head_page_idx ON public.operator_intelligence_claim_head_events USING btree (operator_id, status, effective_from DESC, claim_revision_id) INCLUDE (claim_id, revision, valid_until, scope)",
+      "bytes": 47652864,
+      "constraintName": null,
+      "constraintType": null,
+      "measuredPlans": [
+        "eligible-head-page-unscoped"
+      ],
+      "justification": "Measured unscoped eligible-head page path."
+    },
+    {
+      "name": "operator_intelligence_claim_head_scope_page_idx",
+      "table": "operator_intelligence_claim_head_events",
+      "definition": "CREATE INDEX operator_intelligence_claim_head_scope_page_idx ON public.operator_intelligence_claim_head_events USING btree (operator_id, status, scope, effective_from DESC, claim_revision_id) INCLUDE (claim_id, revision, valid_until)",
+      "bytes": 48955392,
+      "constraintName": null,
+      "constraintType": null,
+      "measuredPlans": [
+        "eligible-head-page-scoped"
+      ],
+      "justification": "Measured scoped eligible-head page path."
+    },
+    {
+      "name": "operator_intelligence_claim_r_operator_id_claim_id_claim_r_key1",
+      "table": "operator_intelligence_claim_revisions",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_claim_r_operator_id_claim_id_claim_r_key1 ON public.operator_intelligence_claim_revisions USING btree (operator_id, claim_id, claim_revision_id, revision)",
+      "bytes": 14802944,
+      "constraintName": "operator_intelligence_claim_r_operator_id_claim_id_claim_r_key1",
+      "constraintType": "u",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (u: operator_intelligence_claim_r_operator_id_claim_id_claim_r_key1)."
+    },
+    {
+      "name": "operator_intelligence_claim_r_operator_id_claim_id_claim_re_key",
+      "table": "operator_intelligence_claim_revisions",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_claim_r_operator_id_claim_id_claim_re_key ON public.operator_intelligence_claim_revisions USING btree (operator_id, claim_id, claim_revision_id)",
+      "bytes": 14688256,
+      "constraintName": "operator_intelligence_claim_r_operator_id_claim_id_claim_re_key",
+      "constraintType": "u",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (u: operator_intelligence_claim_r_operator_id_claim_id_claim_re_key)."
+    },
+    {
+      "name": "operator_intelligence_claim_r_operator_id_claim_id_revision_key",
+      "table": "operator_intelligence_claim_revisions",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_claim_r_operator_id_claim_id_revision_key ON public.operator_intelligence_claim_revisions USING btree (operator_id, claim_id, revision)",
+      "bytes": 9502720,
+      "constraintName": "operator_intelligence_claim_r_operator_id_claim_id_revision_key",
+      "constraintType": "u",
+      "measuredPlans": [
+        "claim-lifecycle-page"
+      ],
+      "justification": "Constraint-backed integrity index (u: operator_intelligence_claim_r_operator_id_claim_id_revision_key)."
+    },
+    {
+      "name": "operator_intelligence_claim_revisions_operator_status_idx",
+      "table": "operator_intelligence_claim_revisions",
+      "definition": "CREATE INDEX operator_intelligence_claim_revisions_operator_status_idx ON public.operator_intelligence_claim_revisions USING btree (operator_id, status, effective_from DESC)",
+      "bytes": 720896,
+      "constraintName": null,
+      "constraintType": null,
+      "measuredPlans": [],
+      "justification": "Operator/status revision access retained for approved lifecycle persistence paths."
+    },
+    {
+      "name": "operator_intelligence_claim_revisions_pkey",
+      "table": "operator_intelligence_claim_revisions",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_claim_revisions_pkey ON public.operator_intelligence_claim_revisions USING btree (operator_id, claim_revision_id)",
+      "bytes": 11436032,
+      "constraintName": "operator_intelligence_claim_revisions_pkey",
+      "constraintType": "p",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (p: operator_intelligence_claim_revisions_pkey)."
+    },
+    {
+      "name": "operator_intelligence_claims_operator_id_claim_id_current_r_key",
+      "table": "operator_intelligence_claims",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_claims_operator_id_claim_id_current_r_key ON public.operator_intelligence_claims USING btree (operator_id, claim_id, current_revision_id, current_revision)",
+      "bytes": 1499136,
+      "constraintName": "operator_intelligence_claims_operator_id_claim_id_current_r_key",
+      "constraintType": "u",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (u: operator_intelligence_claims_operator_id_claim_id_current_r_key)."
+    },
+    {
+      "name": "operator_intelligence_claims_pkey",
+      "table": "operator_intelligence_claims",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_claims_pkey ON public.operator_intelligence_claims USING btree (operator_id, claim_id)",
+      "bytes": 868352,
+      "constraintName": "operator_intelligence_claims_pkey",
+      "constraintType": "p",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (p: operator_intelligence_claims_pkey)."
+    },
+    {
+      "name": "operator_intelligence_eligibi_operator_id_claim_id_claim_re_key",
+      "table": "operator_intelligence_eligibility_assessments",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_eligibi_operator_id_claim_id_claim_re_key ON public.operator_intelligence_eligibility_assessments USING btree (operator_id, claim_id, claim_revision_id, purpose, assessed_at)",
+      "bytes": 45670400,
+      "constraintName": "operator_intelligence_eligibi_operator_id_claim_id_claim_re_key",
+      "constraintType": "u",
+      "measuredPlans": [
+        "eligibility-history-page"
+      ],
+      "justification": "Constraint-backed integrity index (u: operator_intelligence_eligibi_operator_id_claim_id_claim_re_key)."
+    },
+    {
+      "name": "operator_intelligence_eligibility_assessments_pkey",
+      "table": "operator_intelligence_eligibility_assessments",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_eligibility_assessments_pkey ON public.operator_intelligence_eligibility_assessments USING btree (operator_id, assessment_id)",
+      "bytes": 16670720,
+      "constraintName": "operator_intelligence_eligibility_assessments_pkey",
+      "constraintType": "p",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (p: operator_intelligence_eligibility_assessments_pkey)."
+    },
+    {
+      "name": "operator_intelligence_eligibility_current_idx",
+      "table": "operator_intelligence_eligibility_assessments",
+      "definition": "CREATE INDEX operator_intelligence_eligibility_current_idx ON public.operator_intelligence_eligibility_assessments USING btree (operator_id, claim_revision_id, purpose, assessed_at DESC)",
+      "bytes": 40321024,
+      "constraintName": null,
+      "constraintType": null,
+      "measuredPlans": [],
+      "justification": "Latest purpose-specific eligibility lookup and bounded eligibility history."
+    },
+    {
+      "name": "operator_intelligence_evidenc_operator_id_evidence_referenc_key",
+      "table": "operator_intelligence_evidence_admissions",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_evidenc_operator_id_evidence_referenc_key ON public.operator_intelligence_evidence_admissions USING btree (operator_id, evidence_reference_id, purpose, intended_claim_type)",
+      "bytes": 12361728,
+      "constraintName": "operator_intelligence_evidenc_operator_id_evidence_referenc_key",
+      "constraintType": "u",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (u: operator_intelligence_evidenc_operator_id_evidence_referenc_key)."
+    },
+    {
+      "name": "operator_intelligence_evidence_admissions_pkey",
+      "table": "operator_intelligence_evidence_admissions",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_evidence_admissions_pkey ON public.operator_intelligence_evidence_admissions USING btree (operator_id, admission_id)",
+      "bytes": 9740288,
+      "constraintName": "operator_intelligence_evidence_admissions_pkey",
+      "constraintType": "p",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (p: operator_intelligence_evidence_admissions_pkey)."
+    },
+    {
+      "name": "operator_intelligence_evidence_admissions_policy_idx",
+      "table": "operator_intelligence_evidence_admissions",
+      "definition": "CREATE INDEX operator_intelligence_evidence_admissions_policy_idx ON public.operator_intelligence_evidence_admissions USING btree (operator_id, purpose, policy_id, policy_version, admitted_at DESC)",
+      "bytes": 24068096,
+      "constraintName": null,
+      "constraintType": null,
+      "measuredPlans": [],
+      "justification": "Operator, purpose and policy admission validation for trusted writes."
+    },
+    {
+      "name": "operator_intelligence_evidence_d_operator_id_disposition_id_key",
+      "table": "operator_intelligence_evidence_dispositions",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_evidence_d_operator_id_disposition_id_key ON public.operator_intelligence_evidence_dispositions USING btree (operator_id, disposition_id)",
+      "bytes": 9748480,
+      "constraintName": "operator_intelligence_evidence_d_operator_id_disposition_id_key",
+      "constraintType": "u",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (u: operator_intelligence_evidence_d_operator_id_disposition_id_key)."
+    },
+    {
+      "name": "operator_intelligence_evidence_dispositions_current_idx",
+      "table": "operator_intelligence_evidence_dispositions",
+      "definition": "CREATE INDEX operator_intelligence_evidence_dispositions_current_idx ON public.operator_intelligence_evidence_dispositions USING btree (operator_id, evidence_reference_id, effective_at DESC, recorded_at DESC)",
+      "bytes": 7749632,
+      "constraintName": null,
+      "constraintType": null,
+      "measuredPlans": [],
+      "justification": "Latest Evidence disposition lookup in trusted claim and eligibility paths."
+    },
+    {
+      "name": "operator_intelligence_evidence_dispositions_pkey",
+      "table": "operator_intelligence_evidence_dispositions",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_evidence_dispositions_pkey ON public.operator_intelligence_evidence_dispositions USING btree (operator_id, evidence_reference_id, disposition_id)",
+      "bytes": 8462336,
+      "constraintName": "operator_intelligence_evidence_dispositions_pkey",
+      "constraintType": "p",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (p: operator_intelligence_evidence_dispositions_pkey)."
+    },
+    {
+      "name": "operator_intelligence_evidence_operator_captured_idx",
+      "table": "operator_intelligence_evidence",
+      "definition": "CREATE INDEX operator_intelligence_evidence_operator_captured_idx ON public.operator_intelligence_evidence USING btree (operator_id, captured_at DESC)",
+      "bytes": 7331840,
+      "constraintName": null,
+      "constraintType": null,
+      "measuredPlans": [],
+      "justification": "Operator-owned Evidence chronology and bounded captured-at access."
+    },
+    {
+      "name": "operator_intelligence_evidence_pkey",
+      "table": "operator_intelligence_evidence",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_evidence_pkey ON public.operator_intelligence_evidence USING btree (operator_id, evidence_reference_id)",
+      "bytes": 9740288,
+      "constraintName": "operator_intelligence_evidence_pkey",
+      "constraintType": "p",
+      "measuredPlans": [
+        "page-evidence-fan-out"
+      ],
+      "justification": "Constraint-backed integrity index (p: operator_intelligence_evidence_pkey)."
+    },
+    {
+      "name": "operator_intelligence_evidence_source_unique",
+      "table": "operator_intelligence_evidence",
+      "definition": "CREATE UNIQUE INDEX operator_intelligence_evidence_source_unique ON public.operator_intelligence_evidence USING btree (operator_id, source_type, source_owner_id, source_record_id, producer_id, producer_version, content_digest, purpose)",
+      "bytes": 43311104,
+      "constraintName": "operator_intelligence_evidence_source_unique",
+      "constraintType": "u",
+      "measuredPlans": [],
+      "justification": "Constraint-backed integrity index (u: operator_intelligence_evidence_source_unique)."
+    }
+  ],
+  "envelope": {
+    "payloadBytes": 314005,
+    "returnedItems": 50,
+    "incrementalHeapBytes": 406176
+  },
+  "relationBytes": {
+    "operator_intelligence_claim_head_events": 27549696,
+    "operator_intelligence_claim_head_page_idx": 47652864,
+    "operator_intelligence_claim_head_scope_page_idx": 48955392,
+    "operator_intelligence_claim_revisions": 161873920
+  },
+  "result": "pass"
+}

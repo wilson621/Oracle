@@ -1,10 +1,15 @@
 # SPRINT 17 CLOSURE REPORT
 
-**Sprint:** 17 — Scale-Safe Trust Data Plane  
-**Engineering status:** Implementation complete; submitted for Founder closure review  
-**Date:** 22 July 2026  
-**Branch:** `sprint-9-overlay`  
-**Migration 009:** Undeployed  
+**Sprint:** 17 — Scale-Safe Trust Data Plane
+
+**Engineering status:** Closure evidence remediation complete; resubmitted for Founder closure review
+
+**Date:** 22 July 2026
+
+**Branch:** `sprint-9-overlay`
+
+**Migration 009:** Undeployed
+
 **Next Sprint:** Not authorised
 
 ## Outcome
@@ -22,6 +27,13 @@ budgets, exact-retry idempotency, stale/immutable conflict outcomes, real
 PostgreSQL concurrency evidence, production-shaped plan evidence and one
 automated scale gate.
 
+Following the independent Founder Closure Review, the authorised remediation
+made the complete gate self-contained and retained its machine-readable
+performance, plan, index, concurrency, rollback and suite evidence under
+[`evidence/sprint-17/`](evidence/sprint-17/README.md). No product implementation,
+architecture, trust boundary, ownership boundary or Migration 009 artifact was
+changed.
+
 ## Phase completion
 
 | Phase | Outcome | Commit |
@@ -33,24 +45,34 @@ automated scale gate.
 | 4 — Idempotency | Exact retry and typed conflict semantics | `a5f47d2` |
 | 5 — Concurrency | Real PostgreSQL atomicity and race verification | `3991773` |
 | 6 — Optimisation | Measured immutable projection and justified indexes | `ce2fcc7` |
-| 7 — Gates | One end-to-end scale regression command | `c437d2d` |
-| 8 — Rehearsal | Final rollback, security and catalog evidence | `3d57725` plus this closure commit |
+| 7 — Gates | One end-to-end command now includes Snapshot and the complete regression matrix | `c437d2d` plus closure remediation |
+| 8 — Rehearsal | Permanent performance, plan, concurrency, rollback, security and catalog evidence | `3d57725` plus closure remediation |
 
 No phases were skipped or merged.
 
 ## Verification summary
 
-The final focused scale command passed on PostgreSQL 17.10. It applied the
-exact migration to a fresh disposable database, exercised empty and normal
-fixtures, ran 1/8/32-worker idempotency and contention checks, loaded the exact
-10,000-head production-shaped fixture, enforced plans and budgets, checked
-database security, and audited architecture.
+The final single Sprint 17 command passed on PostgreSQL 17.10. It applied the
+exact migration to fresh disposable databases, exercised empty and normal
+fixtures, ran three independently recreated 1/8/32-worker idempotency and
+contention repetitions, loaded the exact 10,000-head production-shaped
+fixture, enforced page and Snapshot budgets, retained before/after plans and
+all 29 index dispositions, checked database security and rollback, and ran the
+complete regression matrix.
 
-Final hot-path eligible-page latency was p95 9.558 ms and p99 12.202 ms against
-limits of 250 ms and 500 ms. Write p95/p99 results were at most 0.317/0.506 ms
-against 200/400 ms limits. The 50-item page was 314,005 bytes with 407,128
-bytes incremental heap. Approved plans used indexes with no unbounded fact-table
-scan or disk spill.
+Final hot-path eligible-page latency was p95 8.398 ms and p99 10.691 ms against
+limits of 250 ms and 500 ms. Write p95/p99 results were at most 0.496/0.512 ms
+against 200/400 ms limits. The 50-item page was 314,005 bytes with 406,176
+bytes incremental heap. The retained pre-projection query examined 223,202
+rows across plan nodes in 254.939 ms; the final scoped projection examined 303
+rows across plan nodes in 1.258 ms. Approved final plans used bounded index
+access with no fact-table sequential scan or disk spill.
+
+The permanent evidence consists of the full raw `EXPLAIN (ANALYZE, BUFFERS,
+FORMAT JSON)` documents, plan summaries, buffer usage, rows examined and
+returned, complete index catalog and justification, three concurrency records,
+rollback record and final suite manifest. The evidence is version-pinned to the
+Migration 009 hash below.
 
 The exact Migration 009 hash is
 `fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f`,
@@ -67,6 +89,7 @@ The required regression matrix passed:
 - desktop TypeScript compilation
 - ESLint with zero errors and five unchanged pre-existing warnings
 - Next.js 16.2.10 production build and all 20 static pages
+- `git diff --check`
 
 The sandboxed build first failed only because configured Google fonts could not
 be fetched; the approved network-enabled rerun completed successfully.
@@ -86,9 +109,9 @@ be fetched; the approved network-enabled rerun completed successfully.
 | 9 | Exact retries produce one durable result | Pass |
 | 10 | Conflicting identity does not mutate original | Pass |
 | 11 | Competing revision gives one next head/no gap/stale result | Pass |
-| 12 | Repeated 32-worker scenarios have no unexplained deadlock/loss | Pass |
+| 12 | Repeated 32-worker scenarios have no unexplained deadlock/loss | Pass — three retained repetitions |
 | 13 | Production-shaped latency, memory, payload and query gates | Pass |
-| 14 | Every retained index has evidence or integrity purpose | Pass |
+| 14 | Every retained index has evidence or integrity purpose | Pass — all 29 retained dispositions |
 | 15 | No unbounded scale scan or disk sort | Pass |
 | 16 | Ownership, RLS, role, anonymous and isolation checks | Pass |
 | 17 | No new dependency exception or runtime cycle | Pass |
@@ -97,9 +120,9 @@ be fetched; the approved network-enabled rerun completed successfully.
 | 20 | Dossier pins exact commit and hash | Pass |
 | 21 | Migration 009 remains undeployed | Pass — disposable local databases only |
 | 22 | No producer, consumer, control, Application or Platform activation | Pass |
-| 23 | Living documentation reflects repository reality | Pass |
+| 23 | Living documentation reflects repository reality | Pass — nine phases recorded consistently |
 | 24 | Founder closure approval and separately approved closure commit | Pending Founder review |
-| 25 | Working tree clean | Pass — confirmed after closure evidence commit `ba61004` |
+| 25 | Working tree clean | Pass — confirmed for final closure submission |
 
 Criterion 24 cannot be self-approved by engineering. The implementation is
 complete and this report is the requested review artifact; Sprint 17 remains
@@ -120,10 +143,10 @@ Snapshot consumer or Context projection was introduced.
 
 ## Founder review request
 
-Engineering requests Founder review of:
+Engineering requests final Founder review of:
 
 1. this closure report and the 25 success-criterion dispositions;
-2. the separately version-pinned Migration 009 dossier;
+2. the separately version-pinned Migration 009 dossier and permanent evidence;
 3. the explicit pending status of criterion 24;
 4. continued non-deployment of Migration 009 and non-activation of Sprint 18.
 

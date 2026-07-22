@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "postgres": "17.10",
+  "migrationSha256": "fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f",
+  "catalogSha256Before": "c26169e4540f57f0cc0ba525ceade571327cb393d02ffd735d2a313cadb08c65",
+  "catalogSha256After": "c26169e4540f57f0cc0ba525ceade571327cb393d02ffd735d2a313cadb08c65",
+  "catalogIdentical": true,
+  "preservedRows": {
+    "operators": 1,
+    "bindings": 1,
+    "sessions": 1
+  },
+  "result": "pass"
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "evidenceDate": "2026-07-22T15:41:14.160Z",
+  "postgres": "17.10",
+  "migrationSha256": "fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f",
+  "concurrencyRepetitions": 3,
+  "suites": [
+    "pagination-and-page-budgets",
+    "snapshot-contract-and-budgets",
+    "persistence",
+    "postgresql-concurrency-three-repetitions",
+    "production-shaped-performance-and-query-plans",
+    "database-security",
+    "migration-rollback-and-catalog",
+    "operator-ownership",
+    "operator-intelligence-authority",
+    "operator-intelligence-trust",
+    "guidance",
+    "companion-presentation",
+    "architecture",
+    "desktop-typescript",
+    "lint",
+    "production-build",
+    "git-diff-check"
+  ],
+  "result": "pass"
+}

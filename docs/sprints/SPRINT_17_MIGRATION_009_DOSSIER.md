@@ -1,11 +1,17 @@
 # MIGRATION 009 PRODUCTION DEPLOYMENT DOSSIER
 
-**Sprint:** 17 — Scale-Safe Trust Data Plane  
-**Artifact:** `database/009_operator_intelligence_persistence.sql`  
-**Artifact commit:** `ce2fcc753ab5caf5769dff8a6fe1bb1ef7b1d6d8`  
-**SHA-256:** `fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f`  
-**Evidence date:** 22 July 2026  
-**Status:** Decision-ready for a separate Founder deployment review  
+**Sprint:** 17 — Scale-Safe Trust Data Plane
+
+**Artifact:** `database/009_operator_intelligence_persistence.sql`
+
+**Artifact commit:** `ce2fcc753ab5caf5769dff8a6fe1bb1ef7b1d6d8`
+
+**SHA-256:** `fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f`
+
+**Evidence date:** 22 July 2026
+
+**Status:** Decision-ready for a separate Founder deployment review
+
 **Deployment state:** Undeployed
 
 This dossier is evidence for a future decision. Its approval would not itself
@@ -38,6 +44,10 @@ npm run migration-009:rollback:verify
 
 Both commands require a dedicated disposable database and reject `postgres` as
 their target database. The rollback command is pinned to the SHA-256 above.
+The scale command now includes Snapshot verification, three independently
+recreated concurrency repetitions, rollback/catalog verification and the full
+Sprint regression matrix. It writes the permanent machine-readable evidence
+described in [`evidence/sprint-17/README.md`](evidence/sprint-17/README.md).
 
 ## Schema, functions and permissions
 
@@ -89,10 +99,18 @@ application is exercised before either fixture is loaded.
 
 ## Query-plan and benchmark evidence
 
-Before optimisation, the eligible-head workload scanned the 100,000-row
-revision history, performed external merge sorts totalling approximately
-120 MiB of disk space, and executed in 241.377 ms after warm-up. The complete
-pre-projection function took 477.191 ms.
+The retained before/after comparison executes the former pre-projection
+eligible-head algorithm and the final immutable projection against the same
+100,000-revision fixture. The former algorithm examined 223,202 rows across
+plan nodes, used 4,859 shared-hit and 20,410 shared-read blocks and executed in
+254.939 ms. The final scoped head selection examined 303 rows across plan
+nodes, used 308 shared-hit and 105 shared-read blocks and executed in 1.258 ms.
+The final unscoped selection executed in 0.455 ms. None wrote temporary blocks.
+
+Earlier Phase 6 investigation also observed an external merge spill before the
+projection was introduced. The permanent closure evidence relies on the newly
+retained raw before/after plans and does not require that historical observation
+as proof.
 
 The final immutable head-event projection makes the query proportional to the
 requested page and preserves a PostgreSQL snapshot watermark across pages.
@@ -100,22 +118,25 @@ Final repeated results were:
 
 | Scenario | p50 ms | p95 ms | p99 ms | Limit |
 |---|---:|---:|---:|---:|
-| Eligible page | 7.264 | 9.558 | 12.202 | p95 250 / p99 500 |
-| Claim lifecycle page | 28.380 | 30.332 | 31.459 | p95 250 / p99 500 |
-| Eligibility history page | 0.040 | 0.070 | 0.206 | p95 250 / p99 500 |
-| Evidence admission exact replay | 0.030 | 0.048 | 0.118 | p95 200 / p99 400 |
-| Claim revision exact replay | 0.214 | 0.317 | 0.506 | p95 200 / p99 400 |
-| Eligibility exact replay | 0.016 | 0.034 | 0.111 | p95 200 / p99 400 |
+| Eligible page | 6.871 | 8.398 | 10.691 | p95 250 / p99 500 |
+| Claim lifecycle page | 28.186 | 28.631 | 29.201 | p95 250 / p99 500 |
+| Eligibility history page | 0.040 | 0.065 | 0.200 | p95 250 / p99 500 |
+| Evidence admission exact replay | 0.029 | 0.048 | 0.123 | p95 200 / p99 400 |
+| Claim revision exact replay | 0.246 | 0.496 | 0.512 | p95 200 / p99 400 |
+| Eligibility exact replay | 0.016 | 0.037 | 0.130 | p95 200 / p99 400 |
 
-A separately restarted cold eligible-page function execution was 14.888 ms.
-The measured 50-item response was 314,005 bytes and added 407,128 bytes of
+A separately restarted Phase 6 cold eligible-page function execution was
+14.888 ms. The final retained 30-sample warm protocol used five warm-ups. The
+measured 50-item response was 314,005 bytes and added 406,176 bytes of
 heap, below the 512 KiB and 32 MiB budgets.
 
 Every approved direct plan used bounded index access. The scoped and unscoped
-head selections returned 101 look-ahead rows in 1.412 ms and 0.461 ms,
+head selections returned 101 look-ahead rows in 1.258 ms and 0.455 ms,
 respectively. Lifecycle, eligibility-history and Evidence fan-out plans used
-their ownership keys and returned in at most 0.243 ms. No approved plan
-performed an unbounded sequential scan, disk sort or spill.
+their ownership keys and executed in at most 0.241 ms. No approved plan
+performed an unbounded sequential scan, disk sort or spill. Full plans,
+planning and execution time, buffers, rows examined and rows returned are
+retained in `performance-and-query-plans.json`.
 
 ## Index decisions and write cost
 
@@ -132,6 +153,12 @@ material write/storage cost, but it replaces the measured whole-history scan
 and spill while keeping writes well inside their gate. Existing primary,
 unique, foreign-key and history indexes remain for integrity or a measured
 approved path.
+
+The permanent evidence inventories all 29 indexes with definition, table,
+size, backing constraint where applicable, final-plan selection and an explicit
+integrity or approved-path justification. The two page indexes are selected by
+their corresponding production-shaped plans; lifecycle, eligibility and
+Evidence fan-out plans record the exact constraint-backed indexes they select.
 
 Rejected additions include a cache, materialized mutable head table, standalone
 purpose index and standalone JSON scope index. They either introduce a second
@@ -151,6 +178,11 @@ conflicts. There was one revision-two head, no revision gap and no lost update.
 Consent revocation and Evidence withdrawal races block eligibility commits;
 transaction rollback left no residue. Three full repetitions completed with no
 unexplained deadlock.
+
+Each repetition now has a permanent record containing PostgreSQL version,
+worker counts, success and stale outcomes, trust-mutation races, conflict
+checks, rollback residue and final durable row counts. Each repetition begins
+after the single command recreates and migrates the disposable database.
 
 ## Security and preservation evidence
 

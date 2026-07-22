@@ -87,7 +87,7 @@ Sprint 16 — Trust Boundary is complete at
 transitional alias Sprint 15.5A. Migration 009 is deployment-ready through
 rollback validation but remains undeployed pending a separate founder decision.
 
-Sprint 17 — Scale-Safe Trust Data Plane has completed its eight approved
+Sprint 17 — Scale-Safe Trust Data Plane has completed its nine approved
 implementation phases. Its former planning alias was Sprint 15.5B and its
 earlier proposed name was Scale Hardening. Migration 009 remains undeployed;
 Founder closure and any later deployment remain separate decisions.

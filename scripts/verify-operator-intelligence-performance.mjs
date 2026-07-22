@@ -1,8 +1,11 @@
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
+import fs from "node:fs";
 import { spawn } from "node:child_process";
 
 const psql = process.env.SPRINT17_PSQL;
 const databaseUrl = process.env.SPRINT17_DATABASE_URL;
+const evidenceFile = process.env.SPRINT17_PERFORMANCE_EVIDENCE_FILE;
 
 if (!psql || !databaseUrl) {
   throw new Error(
@@ -260,11 +263,96 @@ const planQueries = [
   },
 ];
 
+const baselinePlanQueries = [
+  {
+    name: "eligible-head-page-scoped-before-projection",
+    sql: `with historical_heads as (
+        select distinct on (revision.claim_id)
+          revision.operator_id,
+          revision.claim_id,
+          revision.claim_revision_id,
+          revision.claim_revision_contract,
+          revision.effective_from
+        from public.operator_intelligence_claim_revisions revision
+        where revision.operator_id = '${operatorId}'::uuid
+          and revision.recorded_at <= '${asOf}'::timestamptz
+        order by revision.claim_id, revision.revision desc
+      ), eligible_heads as (
+        select head.claim_revision_id, head.effective_from
+        from historical_heads head
+        cross join lateral (
+          select assessment.eligibility_contract
+          from public.operator_intelligence_eligibility_assessments assessment
+          where assessment.operator_id = head.operator_id
+            and assessment.claim_id = head.claim_id
+            and assessment.claim_revision_id = head.claim_revision_id
+            and assessment.purpose = '${purpose}'
+            and assessment.assessed_at <= '${asOf}'::timestamptz
+          order by assessment.assessed_at desc,
+            assessment.recorded_at desc,
+            assessment.assessment_id desc
+          limit 1
+        ) eligibility
+        where head.claim_revision_contract ->> 'status' = 'active'
+          and (eligibility.eligibility_contract ->> 'eligible')::boolean
+          and head.effective_from <= '${asOf}'::timestamptz
+          and head.claim_revision_contract -> 'scope' = '${integrationScope}'::jsonb
+        order by head.effective_from desc, head.claim_revision_id asc
+        limit 101
+      )
+      select * from eligible_heads`,
+  },
+];
+
+const secondaryIndexJustifications = {
+  operator_intelligence_evidence_operator_captured_idx:
+    "Operator-owned Evidence chronology and bounded captured-at access.",
+  operator_consent_decisions_current_idx:
+    "Latest purpose-specific consent lookup in trusted admission and eligibility paths.",
+  operator_intelligence_evidence_dispositions_current_idx:
+    "Latest Evidence disposition lookup in trusted claim and eligibility paths.",
+  operator_intelligence_evidence_admissions_policy_idx:
+    "Operator, purpose and policy admission validation for trusted writes.",
+  operator_intelligence_claim_revisions_operator_status_idx:
+    "Operator/status revision access retained for approved lifecycle persistence paths.",
+  operator_intelligence_claim_evidence_reference_idx:
+    "Reverse Evidence-to-claim relationship access and foreign-key maintenance.",
+  operator_intelligence_claim_head_scope_page_idx:
+    "Measured scoped eligible-head page path.",
+  operator_intelligence_claim_head_page_idx:
+    "Measured unscoped eligible-head page path.",
+  operator_intelligence_eligibility_current_idx:
+    "Latest purpose-specific eligibility lookup and bounded eligibility history.",
+};
+
 function percentile(sorted, fraction) {
   return sorted[Math.ceil(sorted.length * fraction) - 1];
 }
 
 async function main() {
+  const fixtureShape = JSON.parse(await runSql(`
+    select json_build_object(
+      'claimHeads', (select count(*) from public.operator_intelligence_claims where operator_id = '${operatorId}'::uuid),
+      'claimHeadEvents', (select count(*) from public.operator_intelligence_claim_head_events where operator_id = '${operatorId}'::uuid),
+      'claimRevisions', (select count(*) from public.operator_intelligence_claim_revisions where operator_id = '${operatorId}'::uuid),
+      'eligibilityAssessments', (select count(*) from public.operator_intelligence_eligibility_assessments where operator_id = '${operatorId}'::uuid),
+      'evidence', (select count(*) from public.operator_intelligence_evidence where operator_id = '${operatorId}'::uuid),
+      'dispositions', (select count(*) from public.operator_intelligence_evidence_dispositions where operator_id = '${operatorId}'::uuid),
+      'admissions', (select count(*) from public.operator_intelligence_evidence_admissions where operator_id = '${operatorId}'::uuid),
+      'claimEvidenceLinks', (select count(*) from public.operator_intelligence_claim_evidence where operator_id = '${operatorId}'::uuid),
+      'operators', (select count(*) from public.operators)
+    );
+  `));
+  assert.equal(fixtureShape.claimHeads, 10_000);
+  assert.equal(fixtureShape.claimHeadEvents, 100_000);
+  assert.equal(fixtureShape.claimRevisions, 100_000);
+  assert.equal(fixtureShape.eligibilityAssessments, 250_000);
+  assert.equal(fixtureShape.evidence, 100_000);
+  assert.equal(fixtureShape.dispositions, 100_000);
+  assert.equal(fixtureShape.admissions, 100_000);
+  assert.equal(fixtureShape.claimEvidenceLinks, 300_000);
+  assert.ok(fixtureShape.operators >= 2);
+
   const latencyResult = await runSql(latencySql);
   const samples = new Map();
   for (const line of latencyResult.trim().split(/\r?\n/)) {
@@ -292,15 +380,33 @@ async function main() {
     assert.ok(metrics[scenario].p95Ms <= p95Limit, `${scenario} p95 exceeded`);
     assert.ok(metrics[scenario].p99Ms <= p99Limit, `${scenario} p99 exceeded`);
   }
-  assert.equal(metrics["eligible-page"] !== undefined, true);
-  assert.equal(metrics["evidence-admission-replay"] !== undefined, true);
+  for (const scenario of [
+    "eligible-page",
+    "claim-lifecycle-page",
+    "eligibility-history-page",
+    "evidence-admission-replay",
+    "claim-revision-replay",
+    "eligibility-replay",
+  ]) {
+    assert.equal(metrics[scenario] !== undefined, true, `${scenario} was not measured`);
+  }
 
   const plans = {};
+  const rawPlans = { beforeOptimization: {}, afterOptimization: {} };
+  for (const workload of baselinePlanQueries) {
+    const document = JSON.parse(await runSql(
+      `explain (analyze, buffers, format json) ${workload.sql};`
+    ));
+    rawPlans.beforeOptimization[workload.name] = document;
+    plans[workload.name] = summarizePlan(document[0]);
+  }
+
   for (const workload of planQueries) {
     const raw = await runSql(
       `explain (analyze, buffers, format json) ${workload.sql};`
     );
     const document = JSON.parse(raw);
+    rawPlans.afterOptimization[workload.name] = document;
     const root = document[0];
     const nodes = flattenPlan(root.Plan);
     for (const node of nodes) {
@@ -317,14 +423,7 @@ async function main() {
         `${workload.name} did not use ${workload.requiredIndex}`
       );
     }
-    plans[workload.name] = {
-      planningMs: root["Planning Time"],
-      executionMs: root["Execution Time"],
-      returnedRows: root.Plan["Actual Rows"],
-      sharedHitBlocks: sum(nodes, "Shared Hit Blocks"),
-      sharedReadBlocks: sum(nodes, "Shared Read Blocks"),
-      indexes: [...new Set(nodes.map((node) => node["Index Name"]).filter(Boolean))],
-    };
+    plans[workload.name] = summarizePlan(root);
   }
 
   const payloadRaw = await runSql(`
@@ -363,12 +462,96 @@ async function main() {
     ) sizes;
   `));
 
-  process.stdout.write(`${JSON.stringify({
-    environment: { postgres: await scalar("show server_version"), samples: 30, warmups: 5 },
+  const indexCatalog = JSON.parse(await runSql(`
+    select json_agg(json_build_object(
+      'name', indexes.indexname,
+      'table', indexes.tablename,
+      'definition', indexes.indexdef,
+      'bytes', pg_relation_size(index_class.oid),
+      'constraintName', constraint_record.conname,
+      'constraintType', constraint_record.contype
+    ) order by indexes.indexname)
+    from pg_indexes indexes
+    join pg_class index_class on index_class.relname = indexes.indexname
+    join pg_namespace index_namespace on index_namespace.oid = index_class.relnamespace
+      and index_namespace.nspname = indexes.schemaname
+    left join lateral (
+      select constraint_source.conname, constraint_source.contype
+      from pg_constraint constraint_source
+      where constraint_source.conindid = index_class.oid
+        and constraint_source.contype in ('p', 'u', 'x')
+      order by constraint_source.conname
+      limit 1
+    ) constraint_record on true
+    where indexes.schemaname = 'public'
+      and indexes.tablename in (
+        'operator_data_policy_versions',
+        'operator_consent_decisions',
+        'operator_intelligence_evidence',
+        'operator_intelligence_evidence_dispositions',
+        'operator_intelligence_evidence_admissions',
+        'operator_intelligence_claims',
+        'operator_intelligence_claim_revisions',
+        'operator_intelligence_claim_head_events',
+        'operator_intelligence_claim_evidence',
+        'operator_intelligence_eligibility_assessments'
+      );
+  `));
+  assert.equal(indexCatalog.length, 29, "Migration 009 index inventory changed");
+  const selectedIndexes = new Map();
+  for (const [planName, document] of Object.entries(rawPlans.afterOptimization)) {
+    for (const node of flattenPlan(document[0].Plan)) {
+      if (node["Index Name"]) {
+        const uses = selectedIndexes.get(node["Index Name"]) ?? [];
+        uses.push(planName);
+        selectedIndexes.set(node["Index Name"], uses);
+      }
+    }
+  }
+  const indexEvidence = indexCatalog.map((index) => {
+    const measuredPlans = [...new Set(selectedIndexes.get(index.name) ?? [])];
+    const justification = index.constraintName
+      ? `Constraint-backed integrity index (${index.constraintType}: ${index.constraintName}).`
+      : secondaryIndexJustifications[index.name];
+    assert.ok(justification, `Index ${index.name} has no retained justification`);
+    return { ...index, measuredPlans, justification };
+  });
+
+  const migration = fs.readFileSync(
+    "database/009_operator_intelligence_persistence.sql"
+  );
+  const evidence = {
+    schemaVersion: 1,
+    evidenceDate: new Date().toISOString(),
+    migrationSha256: crypto.createHash("sha256").update(migration).digest("hex"),
+    environment: {
+      postgres: await scalar("show server_version"),
+      samples: 30,
+      warmups: 5,
+    },
+    fixtureShape,
     latency: metrics,
-    plans,
+    planSummaries: plans,
+    rawExplainAnalyzeBuffersPlans: rawPlans,
+    indexEvidence,
     envelope: { payloadBytes, returnedItems, incrementalHeapBytes },
     relationBytes: indexSizes,
+    result: "pass",
+  };
+
+  if (evidenceFile) {
+    fs.writeFileSync(evidenceFile, `${JSON.stringify(evidence, null, 2)}\n`, "utf8");
+  }
+
+  process.stdout.write(`${JSON.stringify({
+    environment: evidence.environment,
+    fixtureShape: evidence.fixtureShape,
+    latency: evidence.latency,
+    planSummaries: evidence.planSummaries,
+    envelope: evidence.envelope,
+    retainedIndexCount: evidence.indexEvidence.length,
+    evidenceFile: evidenceFile ?? null,
+    result: evidence.result,
   }, null, 2)}\n`);
   process.stdout.write("Operator Intelligence performance verification passed.\n");
 }
@@ -377,8 +560,35 @@ function flattenPlan(plan) {
   return [plan, ...(plan.Plans ?? []).flatMap(flattenPlan)];
 }
 
-function sum(nodes, key) {
-  return nodes.reduce((total, node) => total + (node[key] ?? 0), 0);
+function summarizePlan(root) {
+  const nodes = flattenPlan(root.Plan);
+  return {
+    planningMs: root["Planning Time"],
+    executionMs: root["Execution Time"],
+    rowsReturned: root.Plan["Actual Rows"],
+    rowsExaminedAcrossPlanNodes: nodes.reduce((total, node) => {
+      const loops = node["Actual Loops"] ?? 1;
+      return total + loops * (
+        (node["Actual Rows"] ?? 0) +
+        (node["Rows Removed by Filter"] ?? 0) +
+        (node["Rows Removed by Index Recheck"] ?? 0)
+      );
+    }, 0),
+    bufferUsage: {
+      sharedHitBlocks: root.Plan["Shared Hit Blocks"] ?? 0,
+      sharedReadBlocks: root.Plan["Shared Read Blocks"] ?? 0,
+      sharedDirtiedBlocks: root.Plan["Shared Dirtied Blocks"] ?? 0,
+      sharedWrittenBlocks: root.Plan["Shared Written Blocks"] ?? 0,
+      tempReadBlocks: root.Plan["Temp Read Blocks"] ?? 0,
+      tempWrittenBlocks: root.Plan["Temp Written Blocks"] ?? 0,
+    },
+    indexes: [...new Set(nodes.map((node) => node["Index Name"]).filter(Boolean))],
+    sorts: nodes.filter((node) => node["Sort Method"]).map((node) => ({
+      method: node["Sort Method"],
+      spaceUsedKiB: node["Sort Space Used"],
+      spaceType: node["Sort Space Type"],
+    })),
+  };
 }
 
 async function scalar(sql) {

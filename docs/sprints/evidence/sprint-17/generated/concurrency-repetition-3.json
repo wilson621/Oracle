@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "repetition": 3,
+  "postgres": "17.10",
+  "workerRuns": [
+    {
+      "scenario": "evidence-admission-exact-retry",
+      "workers": 1,
+      "succeeded": 1,
+      "staleConflicts": 0
+    },
+    {
+      "scenario": "evidence-admission-exact-retry",
+      "workers": 8,
+      "succeeded": 8,
+      "staleConflicts": 0
+    },
+    {
+      "scenario": "evidence-admission-exact-retry",
+      "workers": 32,
+      "succeeded": 32,
+      "staleConflicts": 0
+    },
+    {
+      "scenario": "claim-revision-exact-retry",
+      "workers": 1,
+      "succeeded": 1,
+      "staleConflicts": 0
+    },
+    {
+      "scenario": "claim-revision-exact-retry",
+      "workers": 8,
+      "succeeded": 8,
+      "staleConflicts": 0
+    },
+    {
+      "scenario": "claim-revision-exact-retry",
+      "workers": 32,
+      "succeeded": 32,
+      "staleConflicts": 0
+    },
+    {
+      "scenario": "competing-next-revision",
+      "workers": 32,
+      "succeeded": 16,
+      "staleConflicts": 16
+    },
+    {
+      "scenario": "eligibility-exact-retry",
+      "workers": 1,
+      "succeeded": 1,
+      "staleConflicts": 0
+    },
+    {
+      "scenario": "eligibility-exact-retry",
+      "workers": 8,
+      "succeeded": 8,
+      "staleConflicts": 0
+    },
+    {
+      "scenario": "eligibility-exact-retry",
+      "workers": 32,
+      "succeeded": 32,
+      "staleConflicts": 0
+    }
+  ],
+  "trustMutationRaces": [
+    "consent-revocation-blocked-eligibility",
+    "evidence-withdrawal-blocked-eligibility"
+  ],
+  "conflictChecks": [
+    "alternative-admission-identifier-rejected",
+    "immutable-claim-identity-conflict-rejected"
+  ],
+  "transactionRollbackResidue": 0,
+  "durableRows": {
+    "evidence": 1,
+    "dispositions": 2,
+    "admissions": 1,
+    "claims": 1,
+    "claimRevisions": 2,
+    "claimEvidenceLinks": 2,
+    "eligibilityAssessments": 3
+  },
+  "result": "pass"
+}
