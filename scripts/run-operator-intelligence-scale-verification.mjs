@@ -73,6 +73,14 @@ async function main() {
     "scripts/sprint-17/load-production-shaped-fixture.sql",
   ]);
   await run("node", ["scripts/verify-operator-intelligence-performance.mjs"]);
+  await run(psql, [
+    databaseUrl,
+    "-X",
+    "-v",
+    "ON_ERROR_STOP=1",
+    "-f",
+    "scripts/sprint-17/verify-security.sql",
+  ]);
   await run(process.execPath, ["scripts/audit-dependency-boundaries.mjs"]);
 
   process.stdout.write(
