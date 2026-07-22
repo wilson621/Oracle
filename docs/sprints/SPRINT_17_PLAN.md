@@ -3,12 +3,13 @@
 **Sprint:** 17 — Scale-Safe Trust Data Plane
 **Authority:** Approved Sprint Plan beneath the Oracle Engineering Programme
 **Owner:** Oracle Platform Engineering
-**Status:** Founder-approved; not activated
+**Status:** Founder-approved; activated for implementation
 **Classification:** Living until Sprint closure
 **Expected Stability:** Scope changes require explicit Founder approval
 **Approved:** 22 July 2026
-**Implementation:** Not started
+**Implementation:** Phase 0 complete; Phase 1 authorised to begin
 **Deployment:** Migration 009 remains undeployed
+**Activated:** 22 July 2026 by explicit Founder instruction
 
 ---
 
@@ -930,7 +931,7 @@ Before Sprint 17 implementation begins, the Founder confirms:
 - [x] Sprint closure does not imply Migration 009 deployment approval.
 - [x] Gate 1 is not passed merely by completing Sprint 17.
 - [x] The implementation phases and measurable success criteria are approved.
-- [ ] Sprint 17 activation is still required before implementation begins.
+- [x] Sprint 17 was explicitly activated by the Founder on 22 July 2026.
 
 # Approval Outcome
 
