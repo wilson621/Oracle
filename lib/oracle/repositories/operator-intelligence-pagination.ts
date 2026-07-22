@@ -52,7 +52,7 @@ export function encodeOperatorIntelligenceCursor(input: Readonly<{
     version: OPERATOR_INTELLIGENCE_CURSOR_VERSION,
     kind: input.kind,
     queryHash: hashQuery(input.query),
-    readWatermark: requireTimestamp(input.readWatermark),
+    readWatermark: requireNonEmpty(input.readWatermark),
     position: {
       orderValue: requireNonEmpty(input.position.orderValue),
       tieBreaker: requireNonEmpty(input.position.tieBreaker),
@@ -118,7 +118,7 @@ export function decodeOperatorIntelligenceCursor(input: Readonly<{
     }
 
     return Object.freeze({
-      readWatermark: requireTimestamp(payload.readWatermark),
+      readWatermark: requireNonEmpty(payload.readWatermark),
       position: Object.freeze({
         orderValue: requireNonEmpty(payload.position.orderValue),
         tieBreaker: requireNonEmpty(payload.position.tieBreaker),

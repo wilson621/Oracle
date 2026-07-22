@@ -61,6 +61,7 @@ function verifyMigrationContract() {
     "operator_intelligence_evidence_admissions",
     "operator_intelligence_claims",
     "operator_intelligence_claim_revisions",
+    "operator_intelligence_claim_head_events",
     "operator_intelligence_claim_evidence",
     "operator_intelligence_eligibility_assessments",
   ];
@@ -109,9 +110,9 @@ function verifyMigrationContract() {
   assert.match(migration, /oracle_sessions_id_operator_unique/i);
   assert.match(migration, /operator_data_policy_versions_select_authenticated/i);
   assert.match(migration, /read_operator_intelligence_eligible_claim_page/i);
-  assert.match(migration, /p_scope is null[\s\S]+claim_revision_contract -> 'scope' = p_scope/i);
-  assert.match(migration, /recorded_at <= effective_watermark/i);
+  assert.match(migration, /p_scope is null[\s\S]+head\.scope = p_scope/i);
   assert.match(migration, /limit p_page_size \+ 1/i);
+  assert.match(migration, /pg_visible_in_snapshot/i);
   assert.match(migration, /order by head\.effective_from desc, head\.claim_revision_id asc/i);
   assert.match(migration, /pg_advisory_xact_lock\(hashtextextended/i);
   assert.match(migration, /claim revisions are immutable/i);

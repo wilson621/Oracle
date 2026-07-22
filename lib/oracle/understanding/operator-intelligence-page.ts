@@ -96,7 +96,7 @@ export function createOperatorIntelligencePageResult<Item>(
     );
   }
 
-  if (!Number.isFinite(Date.parse(value.readWatermark))) {
+  if (value.readWatermark.length === 0) {
     throw new Error("Operator Intelligence page watermark is invalid.");
   }
 

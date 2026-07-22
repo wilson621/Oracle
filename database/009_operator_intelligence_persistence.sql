@@ -547,6 +547,42 @@ alter table public.operator_intelligence_claims
     )
     deferrable initially deferred;
 
+create table public.operator_intelligence_claim_head_events (
+    operator_id uuid not null,
+    claim_id text not null,
+    claim_revision_id text not null,
+    revision integer not null,
+    status text not null,
+    effective_from timestamptz,
+    valid_until timestamptz,
+    scope jsonb,
+    recorded_at timestamptz not null default clock_timestamp(),
+    primary key (operator_id, claim_id, revision),
+    unique (operator_id, claim_revision_id),
+    constraint operator_intelligence_claim_head_events_revision_fkey
+        foreign key (operator_id, claim_id, claim_revision_id, revision)
+        references public.operator_intelligence_claim_revisions(
+            operator_id,
+            claim_id,
+            claim_revision_id,
+            revision
+        ) on delete cascade,
+    constraint operator_intelligence_claim_head_events_status_check
+        check (status in (
+            'candidate', 'active', 'disputed', 'superseded', 'expired', 'deleted'
+        )),
+    constraint operator_intelligence_claim_head_events_projection_check
+        check (
+            (status = 'deleted'
+                and effective_from is null
+                and valid_until is null
+                and scope is null)
+            or (status <> 'deleted'
+                and effective_from is not null
+                and scope is not null)
+        )
+);
+
 create table public.operator_intelligence_claim_evidence (
     operator_id uuid not null,
     claim_id text not null,
@@ -661,6 +697,21 @@ create index operator_intelligence_claim_evidence_reference_idx
         operator_id,
         evidence_reference_id
     );
+create index operator_intelligence_claim_head_scope_page_idx
+    on public.operator_intelligence_claim_head_events(
+        operator_id,
+        status,
+        scope,
+        effective_from desc,
+        claim_revision_id asc
+    ) include (claim_id, revision, valid_until);
+create index operator_intelligence_claim_head_page_idx
+    on public.operator_intelligence_claim_head_events(
+        operator_id,
+        status,
+        effective_from desc,
+        claim_revision_id asc
+    ) include (claim_id, revision, valid_until, scope);
 create index operator_intelligence_eligibility_current_idx
     on public.operator_intelligence_eligibility_assessments(
         operator_id,
@@ -931,6 +982,36 @@ begin
         p_operator_id::text || ':evidence:' || (p_evidence ->> 'id'),
         0
     ));
+
+    select admission_contract
+    into existing_admission
+    from public.operator_intelligence_evidence_admissions
+    where operator_id = p_operator_id
+      and admission_id = p_admission ->> 'id';
+
+    if found then
+        select evidence_contract
+        into existing_evidence
+        from public.operator_intelligence_evidence
+        where operator_id = p_operator_id
+          and evidence_reference_id = p_evidence ->> 'id';
+
+        select disposition_contract
+        into existing_disposition
+        from public.operator_intelligence_evidence_dispositions
+        where operator_id = p_operator_id
+          and evidence_reference_id = p_disposition ->> 'evidenceReferenceId'
+          and disposition_id = p_disposition ->> 'id';
+
+        if existing_admission is distinct from p_admission
+           or existing_evidence is distinct from p_evidence
+           or existing_disposition is distinct from p_disposition then
+            raise exception 'Evidence admission identities are immutable.'
+                using errcode = '23505';
+        end if;
+
+        return existing_admission;
+    end if;
 
     if p_evidence -> 'producer' ->> 'version' !~
             '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$'
@@ -1589,6 +1670,26 @@ begin
         (p_claim_revision ->> 'deletedAt')::timestamptz
     );
 
+    insert into public.operator_intelligence_claim_head_events (
+        operator_id,
+        claim_id,
+        claim_revision_id,
+        revision,
+        status,
+        effective_from,
+        valid_until,
+        scope
+    ) values (
+        p_operator_id,
+        p_claim_revision ->> 'claimId',
+        p_claim_revision ->> 'id',
+        (p_claim_revision ->> 'revision')::integer,
+        p_claim_revision ->> 'status',
+        (p_claim_revision -> 'temporalValidity' ->> 'effectiveFrom')::timestamptz,
+        (p_claim_revision -> 'temporalValidity' ->> 'validUntil')::timestamptz,
+        p_claim_revision -> 'scope'
+    );
+
     for evidence_link in
         select value from jsonb_array_elements(
             coalesce(p_claim_revision -> 'evidence', '[]'::jsonb)
@@ -1842,7 +1943,7 @@ create or replace function public.read_operator_intelligence_eligible_claim_page
     p_as_of timestamptz,
     p_scope jsonb,
     p_page_size integer,
-    p_read_watermark timestamptz default null,
+    p_read_watermark text default null,
     p_after_effective_from timestamptz default null,
     p_after_revision_id text default null
 )
@@ -1852,9 +1953,9 @@ security definer
 set search_path = pg_catalog
 as $$
 declare
-    effective_watermark timestamptz := coalesce(
+    effective_watermark text := coalesce(
         p_read_watermark,
-        statement_timestamp()
+        pg_current_snapshot()::text
     );
     page_rows jsonb;
     page_has_more boolean;
@@ -1874,22 +1975,19 @@ begin
             using errcode = '22023';
     end if;
 
-    with historical_heads as (
-        select distinct on (revision.claim_id)
-            revision.operator_id,
-            revision.claim_id,
-            revision.claim_revision_id,
-            revision.claim_revision_contract,
-            revision.effective_from
-        from public.operator_intelligence_claim_revisions revision
-        where revision.operator_id = p_operator_id
-          and revision.recorded_at <= effective_watermark
-        order by revision.claim_id, revision.revision desc
-    ), eligible_heads as (
+    with eligible_heads as (
         select
-            head.*,
+            head.operator_id,
+            head.claim_id,
+            head.claim_revision_id,
+            head.effective_from,
+            revision.claim_revision_contract,
             eligibility.eligibility_contract
-        from historical_heads head
+        from public.operator_intelligence_claim_head_events head
+        join public.operator_intelligence_claim_revisions revision
+          on revision.operator_id = head.operator_id
+         and revision.claim_id = head.claim_id
+         and revision.claim_revision_id = head.claim_revision_id
         cross join lateral (
             select assessment.eligibility_contract
             from public.operator_intelligence_eligibility_assessments assessment
@@ -1898,24 +1996,41 @@ begin
               and assessment.claim_revision_id = head.claim_revision_id
               and assessment.purpose = p_purpose
               and assessment.assessed_at <= p_as_of
-              and assessment.recorded_at <= effective_watermark
+              and pg_visible_in_snapshot(
+                  (assessment.xmin::text)::xid8,
+                  effective_watermark::pg_snapshot
+              )
             order by assessment.assessed_at desc,
                 assessment.recorded_at desc,
                 assessment.assessment_id desc
             limit 1
         ) eligibility
-        where head.claim_revision_contract ->> 'status' = 'active'
+        where head.operator_id = p_operator_id
+          and head.status = 'active'
+          and pg_visible_in_snapshot(
+              (head.xmin::text)::xid8,
+              effective_watermark::pg_snapshot
+          )
+          and not exists (
+              select 1
+              from public.operator_intelligence_claim_head_events later
+              where later.operator_id = head.operator_id
+                and later.claim_id = head.claim_id
+                and later.revision > head.revision
+                and pg_visible_in_snapshot(
+                    (later.xmin::text)::xid8,
+                    effective_watermark::pg_snapshot
+                )
+          )
           and (eligibility.eligibility_contract ->> 'eligible')::boolean
           and head.effective_from <= p_as_of
           and (
-              (head.claim_revision_contract -> 'temporalValidity'
-                  ->> 'validUntil') is null
-              or (head.claim_revision_contract -> 'temporalValidity'
-                  ->> 'validUntil')::timestamptz > p_as_of
+              head.valid_until is null
+              or head.valid_until > p_as_of
           )
           and (
               p_scope is null
-              or head.claim_revision_contract -> 'scope' = p_scope
+              or head.scope = p_scope
           )
           and (
               p_after_effective_from is null
@@ -2268,6 +2383,7 @@ alter table public.operator_intelligence_evidence_admissions
     enable row level security;
 alter table public.operator_intelligence_claims enable row level security;
 alter table public.operator_intelligence_claim_revisions enable row level security;
+alter table public.operator_intelligence_claim_head_events enable row level security;
 alter table public.operator_intelligence_claim_evidence enable row level security;
 alter table public.operator_intelligence_eligibility_assessments enable row level security;
 
@@ -2325,6 +2441,14 @@ create policy operator_intelligence_claim_revisions_select_own
         where binding.account_id = (select auth.uid())
           and binding.operator_id = operator_intelligence_claim_revisions.operator_id
     ));
+create policy operator_intelligence_claim_head_events_select_own
+    on public.operator_intelligence_claim_head_events
+    for select to authenticated
+    using (exists (
+        select 1 from public.operator_account_bindings binding
+        where binding.account_id = (select auth.uid())
+          and binding.operator_id = operator_intelligence_claim_head_events.operator_id
+    ));
 create policy operator_intelligence_claim_evidence_select_own
     on public.operator_intelligence_claim_evidence
     for select to authenticated
@@ -2356,6 +2480,8 @@ revoke all privileges on table public.operator_intelligence_claims
     from public, anon, authenticated, service_role;
 revoke all privileges on table public.operator_intelligence_claim_revisions
     from public, anon, authenticated, service_role;
+revoke all privileges on table public.operator_intelligence_claim_head_events
+    from public, anon, authenticated, service_role;
 revoke all privileges on table public.operator_intelligence_claim_evidence
     from public, anon, authenticated, service_role;
 revoke all privileges on table public.operator_intelligence_eligibility_assessments
@@ -2375,6 +2501,8 @@ grant select on table public.operator_intelligence_claims
     to authenticated, service_role;
 grant select on table public.operator_intelligence_claim_revisions
     to authenticated, service_role;
+grant select on table public.operator_intelligence_claim_head_events
+    to authenticated, service_role;
 grant select on table public.operator_intelligence_claim_evidence
     to authenticated, service_role;
 grant select on table public.operator_intelligence_eligibility_assessments
@@ -2392,7 +2520,7 @@ revoke all privileges on function public.persist_operator_intelligence_claim_rev
     from public, anon, authenticated, service_role;
 revoke all privileges on function public.append_operator_intelligence_eligibility(uuid, text, text, jsonb)
     from public, anon, authenticated, service_role;
-revoke all privileges on function public.read_operator_intelligence_eligible_claim_page(uuid, text, timestamptz, jsonb, integer, timestamptz, timestamptz, text)
+revoke all privileges on function public.read_operator_intelligence_eligible_claim_page(uuid, text, timestamptz, jsonb, integer, text, timestamptz, text)
     from public, anon, authenticated, service_role;
 revoke all privileges on function public.read_operator_intelligence_claim_lifecycle_page(uuid, text, text, timestamptz, jsonb, integer, timestamptz, integer, text)
     from public, anon, authenticated, service_role;
@@ -2410,7 +2538,7 @@ grant execute on function public.persist_operator_intelligence_claim_revision(uu
     to service_role;
 grant execute on function public.append_operator_intelligence_eligibility(uuid, text, text, jsonb)
     to service_role;
-grant execute on function public.read_operator_intelligence_eligible_claim_page(uuid, text, timestamptz, jsonb, integer, timestamptz, timestamptz, text)
+grant execute on function public.read_operator_intelligence_eligible_claim_page(uuid, text, timestamptz, jsonb, integer, text, timestamptz, text)
     to service_role;
 grant execute on function public.read_operator_intelligence_claim_lifecycle_page(uuid, text, text, timestamptz, jsonb, integer, timestamptz, integer, text)
     to service_role;

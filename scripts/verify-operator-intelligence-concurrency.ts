@@ -54,7 +54,9 @@ async function main() {
     disposition: fixture.disposition,
     admission: fixture.admission,
   };
-  assertAllSucceeded(await runConcurrent(32, admissionSql, admissionVariables));
+  for (const workers of [1, 8, 32]) {
+    assertAllSucceeded(await runConcurrent(workers, admissionSql, admissionVariables));
+  }
   assert.equal(await scalar("select count(*) from public.operator_intelligence_evidence;"), 1);
   assert.equal(await scalar("select count(*) from public.operator_intelligence_evidence_dispositions;"), 1);
   assert.equal(await scalar("select count(*) from public.operator_intelligence_evidence_admissions;"), 1);
@@ -68,11 +70,13 @@ async function main() {
     array[:'evidence'::jsonb],
     :'claim'::jsonb
   );`;
-  assertAllSucceeded(await runConcurrent(32, claimSql, {
-    operator_id: operatorId,
-    evidence: fixture.evidence,
-    claim: candidate,
-  }));
+  for (const workers of [1, 8, 32]) {
+    assertAllSucceeded(await runConcurrent(workers, claimSql, {
+      operator_id: operatorId,
+      evidence: fixture.evidence,
+      claim: candidate,
+    }));
+  }
   assert.equal(await scalar("select count(*) from public.operator_intelligence_claim_revisions;"), 1);
   assert.equal(await scalar("select count(*) from public.operator_intelligence_claim_evidence;"), 1);
   assert.equal(await scalar("select count(*) from public.operator_intelligence_eligibility_assessments;"), 1);
@@ -114,12 +118,14 @@ async function main() {
     :'claim_revision_id',
     :'eligibility'::jsonb
   );`;
-  assertAllSucceeded(await runConcurrent(32, eligibilitySql, {
-    operator_id: operatorId,
-    claim_id: winningClaim.claimId,
-    claim_revision_id: winningClaim.id,
-    eligibility,
-  }));
+  for (const workers of [1, 8, 32]) {
+    assertAllSucceeded(await runConcurrent(workers, eligibilitySql, {
+      operator_id: operatorId,
+      claim_id: winningClaim.claimId,
+      claim_revision_id: winningClaim.id,
+      eligibility,
+    }));
+  }
   assert.equal(
     await scalar(
       "select count(*) from public.operator_intelligence_eligibility_assessments where assessed_at = '2026-07-21T12:05:00Z';"
