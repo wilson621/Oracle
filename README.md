@@ -29,20 +29,22 @@ Oracle is being built as an intelligence platform rather than a statistics dashb
 
 ## Version
 
-**Oracle v0.8.0 baseline with completed Sprint 14 Companion Intelligence Foundation**
+**Oracle v0.8.0 baseline with Sprint 16 Trust Boundary complete**
 
 ## Current Milestone
 
-**Sprint 15 active — Operator Understanding Foundation planning gate**
+**Approved Sprint 17–Beta Engineering Programme; no implementation Sprint active**
 
-**Status: Planning baseline committed; Sprint 15 implementation not yet begun**
+**Status: Sprint 17 — Scale-Safe Trust Data Plane is approved but not activated**
 
 ## Build Status
 
-Final Sprint 14 verification passed for Guidance contracts and Services,
-Companion presentation boundaries, architecture enforcement, desktop TypeScript,
-lint and the Next.js production build. Sprint 15 currently changes planning and
-governance documentation only; no Sprint 15 implementation is yet verified.
+Sprint 16 verification passed for Operator ownership, Understanding,
+persistence, trust and authority boundaries alongside Guidance, Companion,
+architecture, desktop TypeScript, lint and the Next.js production build.
+Migration 009 remains undeployed. The approved Sprint 17–Beta sequence is
+recorded in [`docs/ENGINEERING_PROGRAMME.md`](docs/ENGINEERING_PROGRAMME.md),
+and its approval does not activate Sprint 17.
 
 The canonical verified status is maintained in
 [`docs/architecture/IMPLEMENTATION_STATUS.md`](docs/architecture/IMPLEMENTATION_STATUS.md).
@@ -231,6 +233,7 @@ classification, reading order, canonical ownership and superseded documents.
 | ORACLE_PLATFORM_CONSTITUTION.md | Highest product and architectural authority |
 | founding/ORACLE_ENGINEERING_PRINCIPLES.md | Durable engineering principles |
 | founding/ORACLE_STRATEGY.md | Long-term operational strategy |
+| ENGINEERING_PROGRAMME.md | Approved Sprint 17–Beta Engineering Programme |
 | MASTER_BUILD_PLAN.md | Canonical engineering build plan |
 | Architecture.md | Platform architecture |
 | Oracle_Codex.md | Engineering standards |
@@ -323,10 +326,10 @@ Verified delivery now includes:
 - curated Call of Duty Guidance package through shared architecture
 - immutable Companion Guidance Application state and `/companion` presentation
 
-Sprint 14 is formally closed. Sprint 15 is active at the planning and
-governance gate for the Operator Understanding Foundation. Authoritative live
-Companion Guidance delivery remains separately deferred and is not
-automatically Sprint 16.
+Sprint 16 — Trust Boundary is formally closed. The approved Oracle Engineering
+Programme defines Sprints 17–31 through Beta. Sprint 17 — Scale-Safe Trust Data
+Plane remains inactive and requires its own approved Sprint Plan and explicit
+Founder activation.
 
 ---
 

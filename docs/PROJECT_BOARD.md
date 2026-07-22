@@ -8,8 +8,8 @@
 **Expected Stability:** Updated whenever approved work changes state
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
-**Last Reviewed:** 21 July 2026
-**Version:** 4.8
+**Last Reviewed:** 22 July 2026
+**Version:** 4.9
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -19,9 +19,13 @@
 
 No implementation Sprint is active.
 
-Sprint 17 — Scale Hardening is planned but has not been activated. Its former
-planning alias was Sprint 15.5B. Planning placement does not authorise
-implementation.
+Sprint 17 — Scale-Safe Trust Data Plane is approved in the Oracle Engineering
+Programme but has not been activated. Its former planning alias was Sprint
+15.5B and its earlier proposed name was Scale Hardening. Programme approval
+does not authorise implementation or Migration 009 deployment.
+
+The complete approved Sprint 17–31 sequence and Beta Gates are recorded in
+`docs/ENGINEERING_PROGRAMME.md`.
 
 # Latest Closed Sprint
 

@@ -8,7 +8,7 @@
 **Expected Stability:** Reviewed whenever governance or canonical documentation changes
 **Supersedes:** The incomplete documentation table in `README.md` as the canonical documentation index
 **Superseded By:** None
-**Last Reviewed:** 21 July 2026
+**Last Reviewed:** 22 July 2026
 
 ---
 
@@ -42,6 +42,8 @@ Principles
 Architecture
                ▼
 Roadmap
+               ▼
+Engineering Programme
                ▼
 Master Build Plan
                ▼
@@ -102,6 +104,7 @@ Examples:
 - Architecture and Architecture Index
 - Implementation Status
 - Roadmap
+- Engineering Programme
 - Master Build Plan
 - Project Board
 - Oracle Engineering Governance
@@ -167,10 +170,11 @@ Continue with:
 Continue with:
 
 12. [Roadmap](Roadmap.md)
-13. [Master Build Plan](MASTER_BUILD_PLAN.md)
-14. [Project Board](PROJECT_BOARD.md)
-15. [Sprint Index](sprints/SPRINT_INDEX.md)
-16. the relevant Sprint record under [`docs/sprints`](sprints/)
+13. [Engineering Programme](ENGINEERING_PROGRAMME.md)
+14. [Master Build Plan](MASTER_BUILD_PLAN.md)
+15. [Project Board](PROJECT_BOARD.md)
+16. [Sprint Index](sprints/SPRINT_INDEX.md)
+17. the relevant Sprint record under [`docs/sprints`](sprints/)
 
 Implementation begins only after the applicable governance, architecture and
 delivery authorities have been reviewed.
@@ -191,6 +195,7 @@ delivery authorities have been reviewed.
 | Verified repository capability | [Implementation Status](architecture/IMPLEMENTATION_STATUS.md) | Living |
 | Engineering delivery governance and approval gates | [Oracle Engineering Governance](GOVERNANCE.md) | Living |
 | Strategic delivery sequence | [Roadmap](Roadmap.md) | Living |
+| Approved Sprint 17–Beta Epics, Sprints, dependencies and gates | [Engineering Programme](ENGINEERING_PROGRAMME.md) | Living |
 | Approved engineering execution plan | [Master Build Plan](MASTER_BUILD_PLAN.md) | Living |
 | Current approved progress | [Project Board](PROJECT_BOARD.md) | Living |
 | Canonical Sprint numbering and aliases | [Sprint Index](sprints/SPRINT_INDEX.md) | Living index |

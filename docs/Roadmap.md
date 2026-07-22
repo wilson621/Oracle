@@ -10,8 +10,8 @@
 **Expected Stability:** Reviewed at strategic and Sprint-boundary changes
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
-**Last Reviewed:** 21 July 2026
-**Version:** 4.7
+**Last Reviewed:** 22 July 2026
+**Version:** 4.8
 
 ---
 
@@ -693,6 +693,12 @@ The Oracle Platform grows through extensions rather than increasing complexity i
 
 No implementation Sprint is active.
 
+The Founder-approved Sprint 17–Beta sequence, its five Epics, architectural
+dependencies, Beta Gates, Founder Beta Readiness Review and Oracle Beta
+Certification are authoritative in
+[`ENGINEERING_PROGRAMME.md`](ENGINEERING_PROGRAMME.md). Programme approval does
+not activate a Sprint.
+
 ## Sprint 16 — Trust Boundary
 
 **Status:** Complete
@@ -706,15 +712,17 @@ admissions, admissible game-scoped evidence contracts and service-role-only
 durable persistence. Migration 009 passed rollback and independent catalog
 validation but remains undeployed pending a separate founder decision.
 
-## Sprint 17 — Scale Hardening
+## Sprint 17 — Scale-Safe Trust Data Plane
 
-**Status:** Planned; not activated
+**Status:** Approved Programme; not activated
 **Historical planning alias:** Sprint 15.5B
 
-Sprint 17 is the next proposed production objective. It is limited to bounded
-reads, pagination, targeted query optimisation, required indexes, Snapshot
-budgets and automated boundary enforcement. Roadmap placement does not
-authorise implementation.
+Sprint 17 is the next approved Programme objective. It makes the Operator
+Intelligence persistence boundary safe for controlled production activation
+through bounded reads, deterministic pagination, measured query optimisation,
+required indexes, Snapshot budgets, concurrency verification and automated
+boundary enforcement. It also produces the Migration 009 deployment dossier.
+Programme placement does not authorise implementation or deployment.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

@@ -8,8 +8,8 @@
 **Expected Stability:** Updated only through explicit founder governance approval
 **Supersedes:** Delivery-process guidance duplicated across living planning documents
 **Superseded By:** None
-**Last Reviewed:** 21 July 2026
-**Version:** 1.0
+**Last Reviewed:** 22 July 2026
+**Version:** 1.1
 
 ---
 
@@ -50,15 +50,17 @@ Internal implementation stage within a Sprint
 The governance documents have distinct responsibilities:
 
 1. The Roadmap orders approved strategic direction and Epics.
-2. Accepted ADRs bind architectural decisions within constitutional limits.
-3. The Master Build Plan identifies the next approved production objective and
+2. The Engineering Programme defines the approved multi-Epic Sprint sequence,
+   dependencies, Beta Gates and Founder review points from Sprint 17 to Beta.
+3. Accepted ADRs bind architectural decisions within constitutional limits.
+4. The Master Build Plan identifies the next approved production objective and
    its sequencing.
-4. A Sprint Plan defines scope, exclusions, phases, acceptance criteria and
+5. A Sprint Plan defines scope, exclusions, phases, acceptance criteria and
    verification for one Sprint.
-5. The Project Board records current approved progress.
-6. Implementation fulfils the approved Sprint Plan.
-7. Implementation Status records only evidence-backed repository capability.
-8. Sprint closure records preserve the accepted outcome and verification.
+6. The Project Board records current approved progress.
+7. Implementation fulfils the approved Sprint Plan.
+8. Implementation Status records only evidence-backed repository capability.
+9. Sprint closure records preserve the accepted outcome and verification.
 
 No lower record may silently expand or reinterpret a higher authority.
 
@@ -154,7 +156,9 @@ never rewritten.
 
 - Sprint 15 — Operator Understanding Foundation: historical.
 - Sprint 16 — Trust Boundary: complete; executed under the alias Sprint 15.5A.
-- Sprint 17 — Scale Hardening: planned and inactive; previously proposed under
-  the alias Sprint 15.5B.
+- Sprint 17 — Scale-Safe Trust Data Plane: approved in the Engineering
+  Programme and inactive; previously proposed as Scale Hardening under the
+  alias Sprint 15.5B.
 
 Sprint 17 requires a separate founder-approved plan and explicit activation.
+Approval of the Engineering Programme does not activate it.

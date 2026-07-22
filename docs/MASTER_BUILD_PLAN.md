@@ -1,6 +1,6 @@
 # ORACLE MASTER BUILD PLAN
 
-**Authority:** Canonical approved engineering execution plan beneath Roadmap and Architecture
+**Authority:** Canonical approved engineering execution plan beneath the Engineering Programme, Roadmap and Architecture
 **Scope:** Current execution objective, sequencing, completion criteria and known boundaries
 **Owner:** Oracle Platform Engineering
 **Status:** Active
@@ -8,8 +8,8 @@
 **Expected Stability:** Reviewed whenever approved execution direction changes
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
-**Last Reviewed:** 21 July 2026
-**Version:** 2.7
+**Last Reviewed:** 22 July 2026
+**Version:** 2.8
 
 ---
 
@@ -86,8 +86,14 @@ Sprint 16 — Trust Boundary is complete at
 transitional alias Sprint 15.5A. Migration 009 is deployment-ready through
 rollback validation but remains undeployed pending a separate founder decision.
 
-Sprint 17 — Scale Hardening is planned but not activated. Its former planning
-alias was Sprint 15.5B. Planning placement does not authorise implementation.
+Sprint 17 — Scale-Safe Trust Data Plane is approved by the Oracle Engineering
+Programme but is not activated. Its former planning alias was Sprint 15.5B and
+its earlier proposed name was Scale Hardening. Programme approval does not
+authorise implementation or Migration 009 deployment.
+
+`docs/ENGINEERING_PROGRAMME.md` is the authoritative Sprint 17–Beta Programme.
+This Master Build Plan continues to identify the next execution objective; a
+separate Sprint 17 Plan and explicit founder activation are still required.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own
@@ -108,15 +114,17 @@ admissions, stable Game Integration provenance and service-role-only durable
 persistence. Candidate generation, runtime accumulation and consumption remain
 inactive.
 
-## Sprint 17 — Scale Hardening
+## Sprint 17 — Scale-Safe Trust Data Plane
 
-**Status:** Planned; not activated
+**Status:** Approved Programme; not activated
 **Historical planning alias:** Sprint 15.5B
 
-The proposed objective is targeted scale hardening: bounded and purpose-scoped
-reads, pagination, query optimisation, required indexes, Snapshot budgets and
-automated boundary enforcement. It requires a separately approved Sprint Plan
-and explicit founder activation.
+The approved Programme objective is to make the Operator Intelligence
+persistence boundary safe for controlled production activation. It includes
+bounded purpose-scoped reads, deterministic pagination, measured query
+optimisation, required indexes, Snapshot budgets, concurrency verification,
+automated boundary enforcement and the Migration 009 deployment dossier. It
+requires a separately approved Sprint Plan and explicit founder activation.
 
 ## Historical Sprint 15 — Operator Intelligence: Operator Understanding Foundation
 
