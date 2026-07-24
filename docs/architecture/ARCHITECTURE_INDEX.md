@@ -9,7 +9,7 @@
 **Supersedes:** Earlier Architecture Index versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 6.3
+**Version:** 6.4
 
 ---
 
@@ -668,10 +668,10 @@ Must Never
 - expose arbitrary current-Operator selection to Applications
 - activate runtime consumption before later approved control gates
 
-Phase 2 is a contract-only foundation. Its Services have no runtime
-implementation or production registration, and no persistence, migration,
-candidate adapter, Context projection, Application integration or UI is
-introduced.
+Sprint 22 implements the authenticated projection Service and the narrow
+recurring Memory candidate adapter. The runtime manifest declares the Service
+as disabled, and no persisted producer, consumer, Application integration,
+production policy or UI is activated.
 
 ---
 
@@ -775,6 +775,12 @@ Sprint 21 is complete, certified and Founder-accepted under ADR-041. The
 Session Service is the permanent sole lifecycle authority. Desktop retains
 live capture and Context authority through versioned non-merging correlation.
 Migration 013 remains undeployed and inactive.
+
+Sprint 22 is implemented and locally certified. The recurring Memory adapter,
+governed Operator Intelligence transitions, authenticated Understanding
+Snapshot Service and renderer-safe Context projection are source-complete.
+Manifest version 1.2.0 declares the disabled Service exactly; persisted
+producers and consumers remain inactive.
 
 Current Runtime
 

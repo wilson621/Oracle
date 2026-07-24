@@ -226,6 +226,11 @@ delivery authorities have been reviewed.
 | Sprint 21 certification | [Sprint 21 Certification](sprints/SPRINT_21_CERTIFICATION.md) | Locally certified and Founder-accepted |
 | Sprint 21 closure | [Sprint 21 Closure](sprints/SPRINT_21_CLOSURE.md) | Closed; permanent sole Session authority directive recorded |
 | Sprint 21 machine evidence | [Sprint 21 Permanent Evidence](sprints/evidence/sprint-21/README.md) | Local certification evidence; no deployment or activation |
+| Sprint 22 authority | [Sprint 22 Plan](sprints/SPRINT_22_PLAN.md) | Implemented and locally certified under existing ADRs |
+| Sprint 22 implementation | [Sprint 22 Implementation](sprints/SPRINT_22_IMPLEMENTATION.md) | Source implementation complete; persistence inactive |
+| Sprint 22 certification | [Sprint 22 Certification](sprints/SPRINT_22_CERTIFICATION.md) | Locally certified; Founder acceptance pending |
+| Sprint 22 Founder decision | [Sprint 22 Founder Decision Required](sprints/SPRINT_22_FOUNDER_DECISION_REQUIRED.md) | Acceptance and closure pending |
+| Sprint 22 machine evidence | [Sprint 22 Permanent Evidence](sprints/evidence/sprint-22/README.md) | Local certification evidence; no deployment or activation |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

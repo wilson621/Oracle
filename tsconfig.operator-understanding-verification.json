@@ -20,7 +20,8 @@
     "scripts/operator-understanding-verification-fixtures.ts",
     "scripts/verify-operator-understanding-contracts.ts",
     "scripts/verify-operator-understanding-lifecycle.ts",
-    "scripts/verify-operator-understanding-services.ts"
+    "scripts/verify-operator-understanding-services.ts",
+    "scripts/verify-operator-understanding-accumulation.ts"
   ],
   "exclude": [
     "node_modules",

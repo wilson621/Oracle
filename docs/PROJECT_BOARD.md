@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 6.0
+**Version:** 6.2
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -42,6 +42,13 @@ Migration execution, Gate C and runtime persistence remain unauthorised.
 Sprint 21 — Oracle Session and Evidence Lifecycle is complete, certified and
 Founder-accepted under ADR-041. Migration 013 remains undeployed and inactive.
 The Session Service is the permanent sole lifecycle authority.
+
+Sprint 22 — Operator Understanding Accumulation is implemented and locally
+certified. It delivers the approved recurring game-strength and game-weakness
+candidate lifecycle through injected policy and existing Migration 009/010
+topology. Manifest version 1.2.0 mechanically matches both runtimes. No
+Migration 014, deployment, persistence activation or production policy value
+is authorised. Founder acceptance and closure are pending.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in

@@ -259,7 +259,7 @@ async function main() {
     recursive: true,
   });
   fs.writeFileSync(
-    "docs/sprints/evidence/sprint-21/generated/session-lifecycle-certification.json",
+    "docs/sprints/evidence/sprint-22/generated/session-lifecycle-regression-certification.json",
     `${JSON.stringify(certification, null, 2)}\n`,
     "utf8"
   );

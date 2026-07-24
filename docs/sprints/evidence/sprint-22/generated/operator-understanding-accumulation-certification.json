@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-24T21:20:11.548Z",
+  "sprint": 22,
+  "contract": "oracle.operator-understanding-accumulation",
+  "contractVersion": 1,
+  "candidateIdentity": "ae508d89-7a16-59cc-8ae5-c1a7a9b306e5",
+  "claimType": "recurring-game-strength",
+  "scope": {
+    "type": "game-integration",
+    "integrationId": "call-of-duty",
+    "integrationVersion": "1.0.0"
+  },
+  "transitions": [
+    "candidate",
+    "active",
+    "active",
+    "disputed",
+    "active",
+    "superseded",
+    "deleted"
+  ],
+  "evidence": {
+    "admitted": 2,
+    "supportingAtAcceptance": 2,
+    "contradictingAtReassessment": 1,
+    "rawObservationRetained": false
+  },
+  "idempotency": "pass-stable-exact-replay",
+  "snapshot": "pass-purpose-freshness-and-budget-gated",
+  "context": "pass-renderer-safe",
+  "crossGamePromotion": false,
+  "sensitiveInference": false,
+  "aiGeneratedInference": false,
+  "persistence": "disabled",
+  "deployment": "not-authorised",
+  "migrationIntroduced": false,
+  "result": "pass"
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-24T21:08:53.506Z",
+  "contract": "oracle.session",
+  "contractVersion": 1,
+  "authoritativeOwner": "session-service",
+  "companionAuthorityMerged": false,
+  "evidenceMinimised": true,
+  "completionIdempotent": true,
+  "recoveryVerified": true,
+  "deletionOrchestrated": true,
+  "historyApplicationVerified": true,
+  "crossOperatorIsolation": true,
+  "concurrentWinnerCount": 1,
+  "runtimePersistence": "disabled",
+  "deployed": false,
+  "activated": false,
+  "result": "pass"
+}

@@ -1634,6 +1634,43 @@ consumer, control path, cache, alternate persistence path or Platform runtime
 was activated. Migration 009 is deployed and verified as the production
 persistence foundation; deployment did not activate its runtime use.
 
+# Sprint 22 Operator Understanding Accumulation
+
+Sprint 22 activates the approved source boundary, not persistence. A completed
+authoritative Session and its admitted minimised Evidence may be transformed
+by the deterministic Memory adapter into only
+`recurring-game-strength` or `recurring-game-weakness` candidates.
+
+Candidate identity is stable across exact replay and includes Operator, Game
+Integration identity and version, claim family and Memory skill. Candidates
+remain game-scoped and Suspected. The Operator Intelligence Service injects
+the authenticated Operator, suppresses exact duplicates and is the only
+Service allowed to commit governed system transitions. Dispute and deletion
+execution remain owned by the existing Trust & Control path.
+
+Acceptance is controlled by an injected versioned policy. The implementation
+does not choose a production threshold or retention duration. Producer-native
+Memory confidence is preserved without rescaling; the accepted revision
+separately records its policy rationale, support and contradiction counts and
+deterministic Evidence-backed explanation.
+
+The authenticated Operator Understanding Service constructs immutable,
+purpose-scoped Snapshots from a Repository projection source. It enforces
+Operator ownership, source freshness and the existing item, Evidence fan-out
+and payload budgets. Suspected claims cannot enter a Snapshot. Unknown remains
+explicit.
+
+Oracle Context receives only a fresh, purpose-matching, renderer-safe
+projection of eligible inferred claims and Unknown keys. It receives no
+Evidence links or raw observations. Neither the Snapshot nor Context projection
+is persisted or becomes a source of truth.
+
+Web and Electron canonical manifests are version `1.2.0` and mechanically
+declare `operator-understanding`. The Service registry entry is disabled:
+persisted producers, consumers and runtime persistence remain inactive. No
+Migration 014 is required because Migrations 009 and 010 already own the
+approved durable claim and control topology.
+
 # Verified Integration Limits
 
 - the direct `analyseFight`, clip-upload, Combat Rating and game-statistics

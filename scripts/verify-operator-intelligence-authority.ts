@@ -16,7 +16,6 @@ import {
   OperatorIntelligenceDuplicateError,
   OperatorIntelligenceImmutableConflictError,
   OperatorIntelligenceStaleConcurrencyError,
-  OperatorIntelligenceTransitionUnavailableError,
 } from "../lib/oracle/services/operator-intelligence";
 import type {
   OperatorConsentDecision,
@@ -44,7 +43,7 @@ const currentOperatorId = "11111111-1111-4111-8111-111111111111";
 async function main() {
   await verifyCurrentOperatorInjection();
   await verifyCallerSelectionRejection();
-  await verifyInactiveTransitionFailsClosed();
+  await verifyGovernedSystemTransition();
   await verifyTypedServiceConflicts();
   verifyServerCredentialBoundary();
   verifyExclusiveRepositoryImportBoundary();
@@ -67,7 +66,7 @@ async function verifyCurrentOperatorInjection() {
   const evidence = omitOperatorId(ownedEvidence);
   const candidate = createCandidateProposal(ownedEvidence);
 
-  await service.submitCandidate({
+  const admitted = await service.submitCandidate({
     evidenceReferences: [evidence],
     claim: candidate,
   });
@@ -79,6 +78,15 @@ async function verifyCurrentOperatorInjection() {
     currentOperatorId
   );
   assert.equal(repository.persistedClaim?.operatorId, currentOperatorId);
+
+  repository.persistError = new OperatorIntelligenceRepositoryDuplicateError();
+  repository.lifecycleItems = [admitted];
+  const replayed = await service.submitCandidate({
+    evidenceReferences: [evidence],
+    claim: candidate,
+  });
+  assert.deepEqual(replayed, admitted);
+  repository.persistError = null;
 
   await service.listEligibleClaims({
     purpose: "operator-coaching",
@@ -123,22 +131,58 @@ async function verifyCallerSelectionRejection() {
   assert.equal(repository.persistedClaim, null);
 }
 
-async function verifyInactiveTransitionFailsClosed() {
+async function verifyGovernedSystemTransition() {
+  const repository = new RecordingRepository();
   const service = createOperatorIntelligenceService(
     createRecordingOperatorService(),
-    new RecordingRepository()
+    repository
+  );
+  const evidence = createOperatorEvidenceReference({
+    ...evidenceInput,
+    operatorId: currentOperatorId,
+  });
+  const previous = createOperatorIntelligenceClaimRevision(
+    {
+      ...activeClaimInput,
+      operatorId: currentOperatorId,
+      status: "candidate",
+      epistemic: "suspected",
+      explanation: null,
+      eligibility: {
+        ...activeClaimInput.eligibility,
+        eligible: false,
+        reasons: ["candidate"],
+      },
+    },
+    [evidence]
+  );
+  const nextId = "claim-1-revision-2";
+  const next = createOperatorIntelligenceClaimRevision(
+    {
+      ...activeClaimInput,
+      operatorId: currentOperatorId,
+      id: nextId,
+      revision: 2,
+      supersedesRevisionId: previous.id,
+      evidence: activeClaimInput.evidence.map((link) => ({
+        ...link,
+        claimRevisionId: nextId,
+      })),
+    },
+    [evidence]
   );
 
-  await assert.rejects(
-    service.transitionClaim({
-      claimId: "claim-1",
-      fromRevisionId: "claim-revision-1",
-      fromStatus: "candidate",
-      toStatus: "active",
-      policyVersion: "1.0.0",
-    }),
-    OperatorIntelligenceTransitionUnavailableError
-  );
+  const transitioned = await service.transitionClaim({
+    evidenceReferences: [omitOperatorId(evidence)],
+    previous: omitOperatorId(previous),
+    next: {
+      ...omitOperatorId(next),
+      status: "active",
+    },
+  });
+  assert.equal(transitioned.status, "active");
+  assert.equal(repository.persistedClaim?.id, nextId);
+  assert.equal(repository.persistedOperatorId, currentOperatorId);
 }
 
 async function verifyTypedServiceConflicts() {
@@ -261,6 +305,10 @@ class RecordingRepository implements OperatorIntelligenceRepository {
     | OperatorIntelligenceClaimTombstone
     | null = null;
   queriedOperatorId: string | null = null;
+  lifecycleItems: readonly (
+    | OperatorIntelligenceClaimRevision
+    | OperatorIntelligenceClaimTombstone
+  )[] = [];
 
   async registerPolicyDefinition(
     policy: OperatorDataPolicyDefinition
@@ -334,7 +382,7 @@ class RecordingRepository implements OperatorIntelligenceRepository {
     this.queriedOperatorId = query.operatorId;
     return createOperatorIntelligencePageResult({
       kind: "claim-lifecycle",
-      items: [],
+      items: this.lifecycleItems,
       readWatermark: "2026-07-21T12:00:00.000Z",
       nextCursor: null,
       hasMore: false,

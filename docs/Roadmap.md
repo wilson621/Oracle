@@ -11,7 +11,7 @@
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.3
+**Version:** 5.4
 
 ---
 
@@ -742,9 +742,10 @@ journeys, and inactive Desktop custody contracts are implemented. Migration
 011 and Migration 012 are certified. All remain undeployed and inactive.
 Sprint 20 — Platform Runtime Activation and Sprint 21 — Oracle Session and
 Evidence Lifecycle are complete, certified and Founder-accepted under ADR-040
-and ADR-041. Migration 013 remains undeployed and inactive. Sprint 22 is next
-in sequence. Production deployment and runtime persistence remain
-unauthorised.
+and ADR-041. Migration 013 remains undeployed and inactive. Sprint 22 is
+implemented and locally certified under the existing Understanding ADRs;
+Founder acceptance is pending. Production deployment and runtime persistence
+remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

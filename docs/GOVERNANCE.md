@@ -166,6 +166,9 @@ never rewritten.
   Founder-accepted under ADR-040; undeployed and inactive.
 - Sprint 21 — Oracle Session and Evidence Lifecycle: complete, certified and
   Founder-accepted under ADR-041; Migration 013 undeployed and inactive.
+- Sprint 22 — Operator Understanding Accumulation: implemented and locally
+  certified; Founder acceptance pending; no Migration 014 or runtime
+  persistence activation.
 
 Migration 009 is deployed and verified, but runtime persistence remains
 disabled. Migrations 010, 011 and 012 remain undeployed and inactive. Deployment

@@ -8,6 +8,8 @@ import {
   createOperatorEvidenceReference,
   createOperatorIntelligenceClaimRevision,
   createOperatorIntelligencePageRequest,
+  assertOperatorClaimRevisionTransition,
+  type OperatorIntelligenceClaimRevision,
 } from "../../understanding";
 import type { OperatorService } from "../operator";
 import type {
@@ -18,17 +20,6 @@ import type {
   OperatorIntelligenceService,
   OperatorIntelligenceTransitionRequest,
 } from "./operator-intelligence-service-types";
-
-export class OperatorIntelligenceTransitionUnavailableError extends Error {
-  readonly code = "OPERATOR_INTELLIGENCE_TRANSITION_UNAVAILABLE";
-
-  constructor() {
-    super(
-      "Operator Intelligence lifecycle transitions are not active before the approved control phase."
-    );
-    this.name = "OperatorIntelligenceTransitionUnavailableError";
-  }
-}
 
 export class OperatorIntelligenceImmutableConflictError extends Error {
   readonly code = "OPERATOR_INTELLIGENCE_IMMUTABLE_CONFLICT";
@@ -72,6 +63,7 @@ export function createOperatorIntelligenceService(
     submission: OperatorIntelligenceCandidateSubmission
   ) {
     assertNoCallerSelectedOperator(submission);
+    assertApprovedAutomatedClaimFamily(submission.claim.type);
 
     const operator = await operatorService.getCurrentOperator();
     const evidenceReferences = submission.evidenceReferences.map((evidence) =>
@@ -97,6 +89,13 @@ export function createOperatorIntelligenceService(
         claim
       );
     } catch (error) {
+      if (error instanceof OperatorIntelligenceRepositoryDuplicateError) {
+        const replay = await findIdempotentCandidateReplay(
+          repository,
+          claim
+        );
+        if (replay) return replay;
+      }
       throw translateRepositoryConflict(error);
     }
 
@@ -133,9 +132,50 @@ export function createOperatorIntelligenceService(
 
   async function transitionClaim(
     request: OperatorIntelligenceTransitionRequest
-  ): Promise<never> {
-    void request;
-    throw new OperatorIntelligenceTransitionUnavailableError();
+  ) {
+    assertNoCallerSelectedOperator(request);
+    assertApprovedAutomatedClaimFamily(request.previous.type);
+    assertApprovedAutomatedClaimFamily(request.next.type);
+    if (
+      request.previous.type !== request.next.type ||
+      !["active", "expired", "superseded"].includes(request.next.status)
+    ) {
+      throw new Error(
+        "System claim transitions cannot change claim family or bypass Trust & Control."
+      );
+    }
+    const operator = await operatorService.getCurrentOperator();
+    const evidenceReferences = request.evidenceReferences.map((evidence) =>
+      createOperatorEvidenceReference({
+        ...evidence,
+        operatorId: operator.id,
+      })
+    );
+    const previous = createOperatorIntelligenceClaimRevision(
+      { ...request.previous, operatorId: operator.id },
+      evidenceReferences
+    );
+    const next = createOperatorIntelligenceClaimRevision(
+      { ...request.next, operatorId: operator.id },
+      evidenceReferences
+    );
+    assertOperatorClaimRevisionTransition(previous, next);
+
+    try {
+      const persisted = await repository.persistClaimRevision(
+        operator.id,
+        evidenceReferences,
+        next
+      );
+      if (persisted.status === "deleted") {
+        throw new Error(
+          "System claim transition returned an invalid deletion tombstone."
+        );
+      }
+      return persisted;
+    } catch (error) {
+      throw translateRepositoryConflict(error);
+    }
   }
 
   return Object.freeze({
@@ -145,6 +185,38 @@ export function createOperatorIntelligenceService(
     submitCandidate,
     transitionClaim,
   });
+}
+
+function assertApprovedAutomatedClaimFamily(type: string): void {
+  if (
+    type !== "recurring-game-strength" &&
+    type !== "recurring-game-weakness"
+  ) {
+    throw new Error(
+      "Automated Operator Intelligence is limited to the approved recurring game-pattern family."
+    );
+  }
+}
+
+async function findIdempotentCandidateReplay(
+  repository: OperatorIntelligenceRepository,
+  claim: OperatorIntelligenceClaimRevision
+): Promise<OperatorIntelligenceClaimRevision | null> {
+  const lifecycle = await repository.listClaimLifecycle({
+    operatorId: claim.operatorId,
+    claimId: claim.claimId,
+    purpose: claim.eligibility.purpose,
+    asOf: claim.confidence.assessedAt,
+    scope: claim.scope,
+    page: createOperatorIntelligencePageRequest({ pageSize: 20, cursor: null }),
+  });
+  const replay = lifecycle.items.find(
+    (item): item is OperatorIntelligenceClaimRevision =>
+      item.status !== "deleted" && item.id === claim.id
+  );
+  return replay && JSON.stringify(replay) === JSON.stringify(claim)
+    ? replay
+    : null;
 }
 
 function translateRepositoryConflict(error: unknown): unknown {
@@ -164,9 +236,14 @@ function translateRepositoryConflict(error: unknown): unknown {
 }
 
 function assertNoCallerSelectedOperator(
-  submission: OperatorIntelligenceCandidateSubmission
+  submission:
+    | OperatorIntelligenceCandidateSubmission
+    | OperatorIntelligenceTransitionRequest
 ): void {
-  if (Object.hasOwn(submission.claim, "operatorId")) {
+  const claims = "claim" in submission
+    ? [submission.claim]
+    : [submission.previous, submission.next];
+  if (claims.some((claim) => Object.hasOwn(claim, "operatorId"))) {
     throw new Error(
       "Operator Intelligence candidate callers cannot select an Operator."
     );

@@ -26,6 +26,9 @@ inactive
 canonical manifest/runtime equality implemented; undeployed and inactive
 **Sprint 21:** Complete, certified and Founder-accepted under ADR-041 —
 Migration 013 certified, undeployed and inactive
+**Sprint 22:** Implemented and locally certified — governed recurring
+game-pattern accumulation, Snapshot and Context projection complete; Founder
+acceptance pending; persisted producers and consumers inactive
 
 ---
 

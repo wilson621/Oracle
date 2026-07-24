@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 3.6
+**Version:** 3.7
 
 ---
 
@@ -114,7 +114,8 @@ deployment, migration execution and runtime persistence remain unauthorised.
 Sprint 21 — Oracle Session and Evidence Lifecycle is complete, certified and
 Founder-accepted under ADR-041. The Session Service permanently owns the
 durable lifecycle. Migration 013 remains undeployed and inactive. Sprint 22 is
-next in sequence.
+implemented and locally certified; Founder acceptance is pending. No Migration
+014 was required and persisted accumulation remains inactive.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

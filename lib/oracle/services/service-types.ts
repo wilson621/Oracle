@@ -7,6 +7,7 @@ export type OracleServiceId =
   | "progression"
   | "missions"
   | "memory"
+  | "operator-understanding"
   | "operator"
   | "companion";
 

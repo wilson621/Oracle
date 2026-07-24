@@ -1,5 +1,4 @@
 import type {
-  OperatorClaimLifecycleStatus,
   OperatorEvidenceReference,
   OperatorIntelligenceClaimRevision,
   OperatorIntelligenceClaimTombstone,
@@ -44,11 +43,12 @@ export type OperatorIntelligenceCandidateSubmission = Readonly<{
 }>;
 
 export type OperatorIntelligenceTransitionRequest = Readonly<{
-  claimId: string;
-  fromRevisionId: string;
-  fromStatus: OperatorClaimLifecycleStatus;
-  toStatus: OperatorClaimLifecycleStatus;
-  policyVersion: string;
+  evidenceReferences: readonly Omit<OperatorEvidenceReference, "operatorId">[];
+  previous: Omit<OperatorIntelligenceClaimRevision, "operatorId">;
+  next: Omit<OperatorIntelligenceClaimRevision, "operatorId"> &
+    Readonly<{
+      status: "active" | "expired" | "superseded";
+    }>;
 }>;
 
 /**

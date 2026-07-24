@@ -33,7 +33,7 @@ export const ORACLE_ELECTRON_COMPOSITION_MANIFEST =
   createOracleRuntimeCompositionManifest({
     contract: "oracle.runtime-composition",
     contractVersion: 1,
-    manifestVersion: "1.1.0",
+    manifestVersion: "1.2.0",
     target: "electron",
     subsystems: ELECTRON_SUBSYSTEMS,
     services: [
@@ -41,6 +41,7 @@ export const ORACLE_ELECTRON_COMPOSITION_MANIFEST =
       "sessions",
       "missions",
       "memory",
+      "operator-understanding",
       "progression",
       "reports",
       "ai-coach",

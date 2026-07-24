@@ -34,6 +34,14 @@ const CORE_ORACLE_SERVICES: readonly OracleService[] = Object.freeze([
     status: "available",
   },
   {
+    id: "operator-understanding",
+    name: "Operator Understanding",
+    description:
+      "Builds governed purpose-scoped Understanding projections; persisted accumulation remains inactive.",
+    requiredCapabilities: [],
+    status: "disabled",
+  },
+  {
     id: "progression",
     name: "Progression",
     description: "Provides long-term Operator progression intelligence.",
