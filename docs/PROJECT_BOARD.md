@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 6.4
+**Version:** 6.5
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -48,15 +48,20 @@ Founder-accepted. Manifest version 1.2.0 mechanically matches both runtimes.
 No Migration 014 was required. Production and persisted accumulation remain
 inactive.
 
-Sprint 23 — Oracle Session Intelligence is implemented and locally certified
-under the existing Session, Understanding, runtime and confidence architecture.
-It awaits Founder acceptance. No migration, deployment or persistence
-activation is authorised.
+Sprint 23 — Oracle Session Intelligence is complete, certified and
+Founder-accepted. Session Report Service is the authoritative report-generation
+owner. Prompt-only authority is permanently retired and optional model
+enrichment cannot become factual authority.
+
+Sprint 24 — Adaptive Coaching, Planner and Progression has been architecturally
+assessed. A Founder proposal recommends ADR-042, distinct Mission, Planner and
+Progression authority, canonical manifest reconciliation and Migration 014
+implementation/certification. Sprint 24 is not active.
 
 ## Active Founder Review
 
-Sprint 23 implementation and certification evidence are complete. Founder
-acceptance is required to close the Sprint and govern entry into Sprint 24.
+`docs/sprints/SPRINT_24_PROPOSAL.md` awaits Founder architectural and planning
+direction. No Sprint 24 implementation or Migration 014 work is authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -85,7 +90,17 @@ decision implementation and current certification boundary in
 
 # Latest Closed Sprint
 
-## Sprint 22 — Operator Understanding Accumulation
+## Sprint 23 — Oracle Session Intelligence
+
+**Status:** Complete, certified and Founder-accepted
+**Closure report:** `docs/sprints/SPRINT_23_CLOSURE.md`
+**Deployment status:** Undeployed and inactive; no Migration 014
+
+Sprint 23 delivered deterministic evidence-bound Session reporting, governed
+confidence, disagreement handling, report history and safe optional model
+enrichment without changing production.
+
+## Previous Closed Sprint — Sprint 22 — Operator Understanding Accumulation
 
 **Status:** Complete, certified and Founder-accepted
 **Closure report:** `docs/sprints/SPRINT_22_CLOSURE.md`

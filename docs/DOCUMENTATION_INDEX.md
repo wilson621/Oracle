@@ -231,6 +231,12 @@ delivery authorities have been reviewed.
 | Sprint 22 certification | [Sprint 22 Certification](sprints/SPRINT_22_CERTIFICATION.md) | Locally certified and Founder-accepted |
 | Sprint 22 closure | [Sprint 22 Closure](sprints/SPRINT_22_CLOSURE.md) | Closed; permanent governed-Understanding directive recorded |
 | Sprint 22 machine evidence | [Sprint 22 Permanent Evidence](sprints/evidence/sprint-22/README.md) | Local certification evidence; no deployment or activation |
+| Sprint 23 authority | [Sprint 23 Plan](sprints/SPRINT_23_PLAN.md) | Complete, certified and Founder-accepted |
+| Sprint 23 implementation | [Sprint 23 Implementation](sprints/SPRINT_23_IMPLEMENTATION.md) | Source implementation complete; persistence inactive |
+| Sprint 23 certification | [Sprint 23 Certification](sprints/SPRINT_23_CERTIFICATION.md) | Locally certified and Founder-accepted |
+| Sprint 23 closure | [Sprint 23 Closure](sprints/SPRINT_23_CLOSURE.md) | Closed; permanent deterministic report-authority directive recorded |
+| Sprint 23 machine evidence | [Sprint 23 Certification Evidence](sprints/evidence/sprint-23/session-intelligence-certification.json) | Local certification evidence; no deployment or activation |
+| Sprint 24 proposal | [Sprint 24 Founder Proposal](sprints/SPRINT_24_PROPOSAL.md) | Proposed for Founder review; not activated |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

@@ -8,8 +8,8 @@
 **Expected Stability:** Updated only through explicit founder governance approval
 **Supersedes:** Delivery-process guidance duplicated across living planning documents
 **Superseded By:** None
-**Last Reviewed:** 22 July 2026
-**Version:** 1.1
+**Last Reviewed:** 24 July 2026
+**Version:** 1.2
 
 ---
 
@@ -168,7 +168,11 @@ never rewritten.
   Founder-accepted under ADR-041; Migration 013 undeployed and inactive.
 - Sprint 22 — Operator Understanding Accumulation: complete, certified and
   Founder-accepted; no Migration 014 or runtime persistence activation.
+- Sprint 23 — Oracle Session Intelligence: complete, certified and
+  Founder-accepted; no Migration 014 or runtime persistence activation.
+- Sprint 24 — Adaptive Coaching, Planner and Progression: proposed for Founder
+  review and not activated.
 
 Migration 009 is deployed and verified, but runtime persistence remains
-disabled. Migrations 010, 011 and 012 remain undeployed and inactive. Deployment
-or closure of one Sprint does not activate the next Sprint.
+disabled. Migrations 010, 011, 012 and 013 remain undeployed and inactive.
+Deployment or closure of one Sprint does not activate the next Sprint.

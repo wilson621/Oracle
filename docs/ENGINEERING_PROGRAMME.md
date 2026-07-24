@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 23 Founder acceptance
+**Next Review:** Sprint 24 architectural and planning proposal
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -102,8 +102,9 @@ disabled. Sprint 20 is complete, certified and Founder-accepted under ADR-040.
 Deployment and runtime persistence are not authorised. Sprint 21 is complete,
 certified and Founder-accepted under ADR-041. Migration 013 remains undeployed
 and inactive. Sprint 22 is complete, certified and Founder-accepted. No
-Migration 014 was required. Sprint 23 is implemented and locally certified
-without a new migration and awaits Founder acceptance.
+Migration 014 was required. Sprint 23 is complete, certified and
+Founder-accepted without a new migration. Sprint 24 has been assessed and
+proposed but is not activated.
 
 The ADR-040 composition manifest is a permanent runtime contract. Every future
 Sprint changing Services, Applications, Game Integrations, Guidance providers,

@@ -744,10 +744,11 @@ Sprint 20 — Platform Runtime Activation and Sprint 21 — Oracle Session and
 Evidence Lifecycle are complete, certified and Founder-accepted under ADR-040
 and ADR-041. Migration 013 remains undeployed and inactive. Sprint 22 is
 complete, certified and Founder-accepted under the existing Understanding
-ADRs. Sprint 23 is implemented and locally certified: evidence-bound Session
-reports, deterministic five-engine assessment, governed confidence, history,
-comparison and model degradation are source-complete. It awaits Founder
-acceptance. Production deployment and runtime persistence remain unauthorised.
+ADRs. Sprint 23 is complete, certified and Founder-accepted: evidence-bound
+Session reports, deterministic five-engine assessment, governed confidence,
+history, comparison and model degradation are source-complete. Sprint 24 has
+been assessed and proposed but is not activated. Production deployment and
+runtime persistence remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

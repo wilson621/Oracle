@@ -1,7 +1,7 @@
 # SPRINT 23 LOCAL CERTIFICATION
 
 **Sprint:** 23 — Oracle Session Intelligence
-**Status:** Certified locally; awaiting Founder acceptance
+**Status:** Certified locally and Founder-accepted
 **Date:** 24 July 2026
 **Deployment:** Not authorised and not performed
 
@@ -78,7 +78,7 @@ Static hashes:
 
 ## Conclusion
 
-Sprint 23 is implemented and certified within existing ADR authority. It
-requires Founder acceptance to close. No deployment, migration execution,
-Gate C, persistence activation, persisted producer/consumer activation,
-production change or External Companion trust-boundary change occurred.
+Sprint 23 is implemented, certified and Founder-accepted within existing ADR
+authority. No deployment, migration execution, Gate C, persistence activation,
+persisted producer/consumer activation, production change or External
+Companion trust-boundary change occurred.

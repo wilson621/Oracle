@@ -782,29 +782,18 @@ Snapshot Service and renderer-safe Context projection are source-complete.
 Manifest version 1.2.0 declares the disabled Service exactly; persisted
 producers and consumers remain inactive.
 
-Sprint 23 is implemented and locally certified. Session Report Service is the
-exclusive report-construction boundary over authoritative completed Sessions,
-admitted Evidence and eligible governed Understanding. Instance-owned report
-and Game Integration provider registries preserve explicit injection.
-Behaviour, Trend, bounded Prediction, Memory and Contextual outputs retain
-epistemic status, evidence, confidence and reassessment triggers. Optional
-model output is enrichment-only and strict-schema validated. Report history
-uses only an inactive in-memory certification Repository; production
-persistence remains disabled.
+Sprint 23 is complete, certified and Founder-accepted. Session Report Service
+is the authoritative report-generation boundary over completed Sessions,
+admitted Evidence and eligible governed Understanding. Deterministic engines
+remain factual authority. Instance-owned report and Game Integration provider
+registries preserve explicit injection. Behaviour, Trend, bounded Prediction,
+Memory and Contextual outputs retain epistemic status, evidence, confidence
+and reassessment triggers.
 
-The canonical composition inventory and lifecycle classification did not
-change, so manifest version 1.2.0 remains correct and mechanical equality
-verification remains mandatory.
-
-Sprint 23 is implemented and locally certified. Session Report Service is the
-exclusive report-construction boundary over authoritative completed Sessions,
-admitted Evidence and eligible governed Understanding. Instance-owned report
-and Game Integration provider registries preserve explicit injection.
-Behaviour, Trend, bounded Prediction, Memory and Contextual outputs retain
-epistemic status, evidence, confidence and reassessment triggers. Optional
-model output is enrichment-only and strict-schema validated. Report history
-uses only an inactive in-memory certification Repository; production
-persistence remains disabled.
+Optional model output is enrichment-only, strict-schema validated and
+non-authoritative. Provider failure degrades safely. Prompt-only analysis
+authority is permanently retired. Report history uses only an inactive
+in-memory certification Repository; production persistence remains disabled.
 
 The canonical composition inventory and lifecycle classification did not
 change, so manifest version 1.2.0 remains correct and mechanical equality

@@ -4,7 +4,7 @@
 **Authority:** Founder-authorised beneath ADR-003, ADR-015, ADR-016, ADR-040,
 ADR-041 and the Oracle Engineering Programme
 **Owner:** Oracle Platform Engineering
-**Status:** Implemented and locally certified; awaiting Founder acceptance
+**Status:** Complete, certified and Founder-accepted
 **Prepared:** 24 July 2026
 **Activated:** 24 July 2026
 **Production:** No deployment, migration execution, persisted producer or
