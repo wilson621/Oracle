@@ -32,7 +32,7 @@ implementation stages and do not use fractional Sprint numbering.
 | 19 | Account, Identity and Commissioning | Complete and certified — Migrations 011 and 012 undeployed and inactive | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md), [Closure](SPRINT_19_CLOSURE.md), [Founder decisions implementation](SPRINT_19_FOUNDER_DECISIONS_IMPLEMENTATION.md), [Migration 011 certification](SPRINT_19_MIGRATION_011_CERTIFICATION.md), [Migration 012 certification](SPRINT_19_MIGRATION_012_VERIFICATION.md), [Certification](SPRINT_19_CERTIFICATION.md) |
 | 20 | Platform Runtime Activation | Complete, certified and Founder-accepted; undeployed and inactive | None | [Plan](SPRINT_20_PLAN.md), [Implementation](SPRINT_20_IMPLEMENTATION.md), [Certification](SPRINT_20_CERTIFICATION.md), [Closure](SPRINT_20_CLOSURE.md), [ADR-040](../Decisions.md) |
 | 21 | Oracle Session and Evidence Lifecycle | Complete, certified and Founder-accepted; Migration 013 undeployed and inactive | None | [Plan](SPRINT_21_PLAN.md), [Implementation](SPRINT_21_IMPLEMENTATION.md), [Certification](SPRINT_21_CERTIFICATION.md), [Closure](SPRINT_21_CLOSURE.md), [ADR-041](../Decisions.md) |
-| 22 | Operator Understanding Accumulation | Implemented and locally certified; Founder acceptance pending | None | [Plan](SPRINT_22_PLAN.md), [Implementation](SPRINT_22_IMPLEMENTATION.md), [Certification](SPRINT_22_CERTIFICATION.md), [Founder decision](SPRINT_22_FOUNDER_DECISION_REQUIRED.md) |
+| 22 | Operator Understanding Accumulation | Complete, certified and Founder-accepted | None | [Plan](SPRINT_22_PLAN.md), [Implementation](SPRINT_22_IMPLEMENTATION.md), [Certification](SPRINT_22_CERTIFICATION.md), [Closure](SPRINT_22_CLOSURE.md) |
 | 23 | Oracle Session Intelligence | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 24 | Adaptive Coaching, Planner and Progression | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 25 | Conversational Oracle | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
@@ -60,5 +60,6 @@ Migrations 011 and 012 are implemented and certified but neither deployed nor
 activated. Production remains post-Migration-009 and pre-Migration-010, and
 runtime persistence remains disabled. Sprint 20 is complete, certified and
 Founder-accepted under ADR-040. Sprint 21 is complete, certified and
-Founder-accepted under ADR-041. Sprint 22 is implemented and locally certified
-under the existing Operator Understanding ADRs; Founder acceptance is pending.
+Founder-accepted under ADR-041. Sprint 22 is complete, certified and
+Founder-accepted under the existing Operator Understanding ADRs. Sprint 23 is
+next in sequence.

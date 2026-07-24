@@ -1,6 +1,6 @@
 # SPRINT 22 FOUNDER DECISION REQUIRED
 
-**Decision:** Accept or reject Sprint 22 implementation and certification
+**Decision:** Resolved — Sprint 22 accepted and closed
 
 **Engineering recommendation:** Accept and close Sprint 22
 

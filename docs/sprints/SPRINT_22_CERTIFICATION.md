@@ -2,7 +2,7 @@
 
 **Sprint:** 22 — Operator Understanding Accumulation
 
-**Status:** Certified locally; Founder acceptance pending
+**Status:** Certified locally and Founder-accepted
 
 **Date:** 24 July 2026
 
@@ -78,5 +78,5 @@ producers and consumers remain disabled. Gate C remains deferred.
 
 Sprint 22 satisfies its approved Programme objective and existing ADR-033
 through ADR-040 authority. No new architecture, security model, trust boundary,
-production policy or migration was introduced. Formal Sprint closure now
-requires Founder acceptance of this certification.
+production policy or migration was introduced. The Founder accepted this
+certification and formally closed Sprint 22 on 24 July 2026.

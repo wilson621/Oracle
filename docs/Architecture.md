@@ -1671,6 +1671,11 @@ persisted producers, consumers and runtime persistence remain inactive. No
 Migration 014 is required because Migrations 009 and 010 already own the
 approved durable claim and control topology.
 
+This governance is permanent. Stable identities, replay suppression, explicit
+Evidence admission, contradiction, dispute, freshness, expiry, supersession,
+deletion propagation, purpose scope and renderer safety cannot be bypassed by
+an independent Understanding writer.
+
 # Verified Integration Limits
 
 - the direct `analyseFight`, clip-upload, Combat Rating and game-statistics

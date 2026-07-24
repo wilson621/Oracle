@@ -9,7 +9,7 @@
 **Supersedes:** Earlier Architecture Index versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 6.4
+**Version:** 6.5
 
 ---
 
@@ -776,7 +776,7 @@ Session Service is the permanent sole lifecycle authority. Desktop retains
 live capture and Context authority through versioned non-merging correlation.
 Migration 013 remains undeployed and inactive.
 
-Sprint 22 is implemented and locally certified. The recurring Memory adapter,
+Sprint 22 is complete, certified and Founder-accepted. The recurring Memory adapter,
 governed Operator Intelligence transitions, authenticated Understanding
 Snapshot Service and renderer-safe Context projection are source-complete.
 Manifest version 1.2.0 declares the disabled Service exactly; persisted
