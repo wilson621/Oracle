@@ -7,6 +7,9 @@ export type OracleApplicationId =
   | "reports"
   | "sessions"
   | "career"
+  | "planner"
+  | "progress"
+  | "achievements"
   | "companion";
 
 export type OracleApplicationStatus =

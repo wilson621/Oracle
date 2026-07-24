@@ -746,9 +746,10 @@ and ADR-041. Migration 013 remains undeployed and inactive. Sprint 22 is
 complete, certified and Founder-accepted under the existing Understanding
 ADRs. Sprint 23 is complete, certified and Founder-accepted: evidence-bound
 Session reports, deterministic five-engine assessment, governed confidence,
-history, comparison and model degradation are source-complete. Sprint 24 has
-been assessed and proposed but is not activated. Production deployment and
-runtime persistence remain unauthorised.
+history, comparison and model degradation are source-complete. Sprint 24 is
+implemented and locally certified under ADR-042; Migration 014 remains
+undeployed and inactive. Production deployment and runtime persistence remain
+unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

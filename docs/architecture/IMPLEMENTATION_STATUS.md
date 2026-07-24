@@ -31,6 +31,9 @@ game-pattern accumulation, Snapshot and Context projection complete; persisted
 producers and consumers inactive
 **Sprint 23:** Complete, certified and Founder-accepted — evidence-bound Session
 reports complete; runtime delivery and persistence inactive
+**Sprint 24:** Implemented and locally certified under ADR-042 — authoritative
+Mission, Planner and Progression source complete; Migration 014 undeployed and
+inactive
 
 ---
 
@@ -55,6 +58,19 @@ Update this file during every sprint closure audit.
 ---
 
 # Latest Verified Sprint Progress
+
+## Sprint 24 — Adaptive Coaching, Planner and Progression
+
+ADR-042 establishes exclusive Mission lifecycle and progression accounting.
+Session Reports produce evidence-bound Coaching Focus, deterministic Mission
+generation, Planner projections and verified completion. Progression Service
+alone issues replay-safe XP and Achievement transactions. Reassessment is
+correlational and never claims causation.
+
+Web and Electron manifest version 1.3.0 adds Planner Service and Planner,
+Progress and Achievements Applications with mechanical runtime equality.
+Migration 014 is implemented and certified on disposable PostgreSQL 17.10 but
+remains undeployed and inactive.
 
 ## Sprint 23 — Oracle Session Intelligence
 

@@ -59,6 +59,30 @@ const CORE_ORACLE_APPLICATIONS: readonly OracleApplication[] = Object.freeze([
     status: "available",
   },
   {
+    id: "planner",
+    name: "Planner",
+    description: "Evidence-bound Mission priorities and scheduling.",
+    route: "/planner",
+    requiredServices: ["operator", "missions", "planner"],
+    status: "available",
+  },
+  {
+    id: "progress",
+    name: "Progress",
+    description: "Authoritative XP and progression projections.",
+    route: "/progress",
+    requiredServices: ["operator", "progression"],
+    status: "available",
+  },
+  {
+    id: "achievements",
+    name: "Achievements",
+    description: "Evidence-earned Achievement award projections.",
+    route: "/achievements",
+    requiredServices: ["operator", "progression"],
+    status: "available",
+  },
+  {
     id: "companion",
     name: "Companion",
     description:

@@ -2715,6 +2715,108 @@ Accepted — Founder-approved 24 July 2026.
 
 ---
 
+# ADR-042
+
+## Title
+
+Authoritative Operator Development Lifecycle and Progression Accounting
+
+## Decision
+
+Session Report Service remains the authoritative owner of factual Session
+recommendations. AI Coach Service owns evidence-bound coaching focus and
+presentation. Mission Engine owns deterministic Mission generation. Mission
+Service is the sole authoritative Mission lifecycle owner. Planner Service owns
+planning, prioritisation and scheduling projections without owning Mission or
+progression state. Progression Service is the sole authority for XP,
+Achievement and progression accounting.
+
+Operator progression is earned only from verified Evidence. AI output,
+client-side actions, renderer processes, language-model responses and other
+non-authoritative components cannot award XP, Achievements, Missions or
+progression. Progression mutations require authenticated Operator ownership,
+stable identities, deterministic rules, idempotency and exactly-once
+accounting.
+
+Mission completion requires measurable criteria evaluated against approved
+completed-Session Evidence. A versioned non-merging correlation connects the
+source report recommendation, coaching focus, Mission, Planner projection,
+later Session Evidence, completion and progression transaction. Replays return
+the same result; competing mutations use optimistic concurrency.
+
+Coaching effectiveness remains an evidence-backed correlation with scope,
+confidence and limitations. Oracle must not state causation unless a stronger
+methodology is explicitly approved through future governance.
+
+Applications and renderers consume immutable renderer-safe projections. Game
+measurement semantics remain within approved Game Integrations. Optional model
+enrichment cannot generate completion Evidence, determine award eligibility or
+become progression authority.
+
+Trust & Control export, retention, deletion and tombstone orchestration applies
+to every development owner. ADR-040 manifest equality and ADR-041 Session
+authority remain mandatory. This decision does not activate persistence.
+
+## Reason
+
+The existing Mission, Planner, XP and Achievement paths are fragmented and
+include direct browser-owned persistence. They cannot prove durable Mission
+identity, evidence-bound completion or exactly-once rewards. Separate
+authoritative Services preserve constitutional ownership while one correlation
+contract makes the complete development journey inspectable.
+
+## Alternatives Considered
+
+### In-memory lifecycle only
+
+Rejected because restart-safe history and exactly-once accounting are required.
+
+### Extend browser-owned tables and direct writes
+
+Rejected because Applications and renderers cannot own business lifecycle or
+progression accounting.
+
+### One monolithic Development Service
+
+Rejected because it would collapse independent responsibilities and conflict
+with Mission Engine generation authority.
+
+## Consequences
+
+- Mission Service owns Mission lifecycle and replay protection.
+- Planner projections never complete Missions or award progression.
+- Progression uses append-only idempotent transactions and compensating
+  corrections rather than history rewriting.
+- Existing XP and Achievement storage becomes a compatibility projection.
+- Migration 014 may implement the durable schema but remains undeployed until
+  separately authorised.
+- Manifest inventory and lifecycle declarations must be versioned and
+  mechanically equal for Web and Electron.
+
+## Reversibility
+
+Implementations, transports, Repositories, reward formulae and presentation
+may change behind versioned contracts. Changing authoritative Mission or
+Progression ownership requires a superseding Founder-approved ADR and governed
+migration.
+
+## Authority Boundary
+
+This ADR authorises Sprint 24 planning, source implementation, Migration 014
+implementation, disposable PostgreSQL verification, local certification,
+manifest reconciliation and documentation reconciliation only.
+
+It does not authorise production deployment; execution of Migrations 010–014
+in production; Gate C; runtime persistence; persisted producer or consumer
+activation; production-environment changes; External Companion trust-boundary
+changes; or weakening ADR-040, ADR-041 or ADR-042.
+
+## Status
+
+Accepted — Founder-approved 24 July 2026.
+
+---
+
 # Future Decision Records
 
 Every significant architectural decision should be documented before implementation whenever practical.

@@ -49,6 +49,14 @@ const CORE_ORACLE_SERVICES: readonly OracleService[] = Object.freeze([
     status: "available",
   },
   {
+    id: "planner",
+    name: "Planner",
+    description:
+      "Owns evidence-bound development priorities and scheduling projections.",
+    requiredCapabilities: [],
+    status: "available",
+  },
+  {
     id: "reports",
     name: "Reports",
     description: "Provides structured Oracle intelligence reports.",

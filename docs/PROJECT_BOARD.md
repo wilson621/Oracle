@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 6.5
+**Version:** 6.6
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -53,15 +53,15 @@ Founder-accepted. Session Report Service is the authoritative report-generation
 owner. Prompt-only authority is permanently retired and optional model
 enrichment cannot become factual authority.
 
-Sprint 24 — Adaptive Coaching, Planner and Progression has been architecturally
-assessed. A Founder proposal recommends ADR-042, distinct Mission, Planner and
-Progression authority, canonical manifest reconciliation and Migration 014
-implementation/certification. Sprint 24 is not active.
+Sprint 24 — Adaptive Coaching, Planner and Progression is implemented and
+locally certified under ADR-042 and awaits Founder acceptance. Migration 014 is
+certified, undeployed and inactive; deployment and persistence activation are
+not authorised.
 
 ## Active Founder Review
 
-`docs/sprints/SPRINT_24_PROPOSAL.md` awaits Founder architectural and planning
-direction. No Sprint 24 implementation or Migration 014 work is authorised.
+Sprint 24 implementation and certification evidence are complete. Founder
+acceptance is required to close the Sprint and govern entry into Sprint 25.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in

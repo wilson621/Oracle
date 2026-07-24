@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": ".tmp-operator-development-verification",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2022"
+  },
+  "include": [
+    "lib/oracle/development/**/*.ts",
+    "lib/oracle/reports/**/*.ts",
+    "lib/oracle/sessions/**/*.ts",
+    "lib/oracle/understanding/**/*.ts",
+    "lib/oracle/repositories/operator-development-repository.ts",
+    "lib/oracle/repositories/session-lifecycle-repository.ts",
+    "lib/oracle/repositories/session-report-repository.ts",
+    "lib/oracle/services/operator-development/**/*.ts",
+    "lib/oracle/services/sessions/**/*.ts",
+    "scripts/verify-operator-development.ts"
+  ]
+}

@@ -5,6 +5,7 @@ export type OracleServiceId =
   | "reports"
   | "sessions"
   | "progression"
+  | "planner"
   | "missions"
   | "memory"
   | "operator-understanding"

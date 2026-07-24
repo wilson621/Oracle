@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-24T22:15:00.000Z",
+  "postgres": "17.10 (Debian 17.10-1.pgdg13+1)",
+  "chain": "009 -> 010 -> 011 -> 012 -> 013 -> 014",
+  "migration014Sha256": "25682a9331102e51d6742988600697f9d23d94a53f09cd23bc585ed0a161d831",
+  "rollbackVerified": true,
+  "relations": 5,
+  "rlsPolicies": 5,
+  "authenticatedMutation": false,
+  "missionAuthority": "mission-service",
+  "progressionAuthority": "progression-service",
+  "deployed": false,
+  "activated": false,
+  "runtimePersistenceActivated": false,
+  "result": "pass"
+}

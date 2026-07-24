@@ -799,6 +799,17 @@ The canonical composition inventory and lifecycle classification did not
 change, so manifest version 1.2.0 remains correct and mechanical equality
 verification remains mandatory.
 
+Sprint 24 is implemented and locally certified under ADR-042. Mission Service
+owns Mission lifecycle, Planner Service owns planning projections and
+Progression Service exclusively owns XP and Achievement accounting. Completion
+requires admitted Evidence from an authoritative completed Session. AI,
+clients, renderers and models cannot award progression. Coaching effectiveness
+remains correlational.
+
+Canonical Web and Electron manifest version 1.3.0 adds Planner Service and the
+Planner, Progress and Achievements Applications and mechanically equals both
+constructed runtimes. Migration 014 remains undeployed and inactive.
+
 Current Runtime
 
 ✓ Engine Runtime

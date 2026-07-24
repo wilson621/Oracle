@@ -8,3 +8,4 @@ export * from "./operator-intelligence";
 export * from "./operator-understanding";
 export * from "./sessions";
 export * from "./session-reports";
+export * from "./operator-development";

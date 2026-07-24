@@ -2,7 +2,7 @@
 
 **Sprint:** 24 — Adaptive Coaching, Planner and Progression
 
-**Status:** Proposed for Founder architectural and planning review; not active
+**Status:** Option A Founder-approved; superseded by the active Sprint 24 Plan
 
 **Prepared:** 24 July 2026
 
