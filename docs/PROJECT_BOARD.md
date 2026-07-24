@@ -20,7 +20,8 @@
 Sprint 18 — Operator Trust and Control is Founder-approved and active from
 24 July 2026. Phases 1 and 2 are Founder-accepted. Phase 3 additive persistence
 and Repository boundaries are implemented, locally verified and
-rollback-proven; Founder Phase 3 review is pending.
+rollback-proven. Phase 3 is Founder-accepted. The Gate C operational package is
+prepared; permanent Migration 010 execution is not approved.
 The approved scope is recorded in `docs/sprints/SPRINT_18_PLAN.md`, and ADR-037,
 ADR-038 and ADR-039 are accepted.
 
