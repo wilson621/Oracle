@@ -2,7 +2,7 @@
 
 **Sprint:** 21 — Oracle Session and Evidence Lifecycle
 
-**Status:** Certified locally; awaiting Founder closure
+**Status:** Certified locally and Founder-accepted
 
 **Date:** 24 July 2026
 
@@ -103,6 +103,6 @@ disabled. Gate C remains deferred.
 ## Certification conclusion
 
 Sprint 21 source implementation satisfies ADR-041 and the approved Sprint
-Plan. All authorised local certification has passed. Founder acceptance and
-closure is the next governance decision; no deployment or activation authority
-is requested.
+Plan. The Founder accepted this certification and formally closed Sprint 21 on
+24 July 2026. Closure grants no deployment, migration execution, Gate C,
+runtime persistence or production authority.

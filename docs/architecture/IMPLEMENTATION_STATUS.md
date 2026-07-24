@@ -24,8 +24,8 @@ decisions implemented; Migrations 011 and 012 certified, undeployed and
 inactive
 **Sprint 20:** Complete, certified and Founder-accepted — composition roots and
 canonical manifest/runtime equality implemented; undeployed and inactive
-**Sprint 21:** Implemented and locally certified under ADR-041 — Migration 013
-certified, undeployed and inactive; Founder closure pending
+**Sprint 21:** Complete, certified and Founder-accepted under ADR-041 —
+Migration 013 certified, undeployed and inactive
 
 ---
 

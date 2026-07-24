@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.9
+**Version:** 6.0
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -39,12 +39,9 @@ Founder-accepted under ADR-040. The canonical runtime manifests mechanically
 equal the constructed Web and Electron runtimes. Production deployment,
 Migration execution, Gate C and runtime persistence remain unauthorised.
 
-Sprint 21 — Oracle Session and Evidence Lifecycle is implemented and locally
-certified under ADR-041. Migration 013 passed disposable PostgreSQL 16.14
-rollback, preservation, concurrency and RLS certification. The Session Service
-is the sole durable lifecycle authority; Desktop Companion retains live
-capture, attachment and Context authority through a versioned, non-merging
-correlation contract. Founder closure is pending.
+Sprint 21 — Oracle Session and Evidence Lifecycle is complete, certified and
+Founder-accepted under ADR-041. Migration 013 remains undeployed and inactive.
+The Session Service is the permanent sole lifecycle authority.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -73,7 +70,16 @@ decision implementation and current certification boundary in
 
 # Latest Closed Sprint
 
-## Sprint 20 — Platform Runtime Activation
+## Sprint 21 — Oracle Session and Evidence Lifecycle
+
+**Status:** Complete, certified and Founder-accepted
+**Closure report:** `docs/sprints/SPRINT_21_CLOSURE.md`
+**Deployment status:** Migration 013 undeployed and inactive
+
+Sprint 21 delivered the authoritative Session lifecycle and certified
+Migration 013 without changing production or activating persistence.
+
+## Previous Closed Sprint — Sprint 20 — Platform Runtime Activation
 
 **Status:** Complete, certified and Founder-accepted
 **Closure report:** `docs/sprints/SPRINT_20_CLOSURE.md`

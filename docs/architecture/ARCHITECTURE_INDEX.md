@@ -9,7 +9,7 @@
 **Supersedes:** Earlier Architecture Index versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 6.2
+**Version:** 6.3
 
 ---
 
@@ -771,11 +771,10 @@ runtime are not deployed. The manifest is a permanent runtime contract and
 exact equality verification remains mandatory. Runtime persistence remains
 disabled.
 
-Sprint 21 is implemented and locally certified under ADR-041. The Session
-Service is the sole durable lifecycle authority, Desktop retains live capture
-and Context authority, and their correlation is versioned and non-merging.
-Migration 013 is certified but undeployed and inactive. Founder closure is
-pending.
+Sprint 21 is complete, certified and Founder-accepted under ADR-041. The
+Session Service is the permanent sole lifecycle authority. Desktop retains
+live capture and Context authority through versioned non-merging correlation.
+Migration 013 remains undeployed and inactive.
 
 Current Runtime
 

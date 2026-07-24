@@ -1353,6 +1353,9 @@ deletes durable Sessions. Web, Desktop, Applications, Game Integrations,
 Guidance and future intelligence may observe, enrich or present immutable
 Session projections but cannot become lifecycle authorities.
 
+This ownership is permanent architectural foundation under ADR-041. Any future
+change to Session lifecycle ownership requires a new Founder-approved ADR.
+
 The Desktop Companion Session Manager remains authoritative only for live
 device capture, attachment and current Companion Context. Its local Session
 identity remains distinct from the durable Session identity. Their versioned
