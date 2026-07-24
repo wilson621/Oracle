@@ -172,7 +172,6 @@ Migration 011 passes its own Founder deployment gate, and later migrations
 follow normally. No exceptional ledger, renumbering or deployment mechanism is
 introduced.
 
-Migration 012 is implemented and static-verified but is not certified,
-deployed or activated. It cannot advance until disposable PostgreSQL
-persistence, security, concurrency and rollback evidence passes. This does not
-alter the certified identity or lifecycle state of Migrations 009–011.
+Migration 012 is implemented and certified on disposable PostgreSQL 17.10 but
+is not deployed or activated. Its certification does not alter the identity or
+lifecycle state of Migrations 009–011.

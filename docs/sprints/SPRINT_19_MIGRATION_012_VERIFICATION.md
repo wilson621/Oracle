@@ -2,8 +2,7 @@
 
 **Artifact:** `database/012_operator_identity_lifecycle.sql`
 
-**Status:** Implemented; static verification passed; disposable PostgreSQL
-certification pending
+**Status:** Implemented and certified; not deployed; not activated
 
 **Date:** 24 July 2026
 
@@ -42,17 +41,31 @@ Migrations 009–011.
 
 The static verifier passes.
 
-## Certification boundary
+## Disposable PostgreSQL certification
 
-Migration 012 is not yet certified for deployment. The available machine did
-not have a running disposable PostgreSQL/Supabase environment; Docker was not
-running, and no production or shared database was used as a substitute.
+PostgreSQL 17.10 exercised the canonical
+`009 → 010 → 011 → 012` chain in an isolated Docker container. Certification
+proved:
 
-Before this artifact can become certified, a disposable PostgreSQL
-certification must prove apply/rollback catalog identity, concurrent
-case-insensitive claims, token accrual, quarantine release, deletion capture,
-reserved/prohibited rejection, privilege isolation and compatibility on the
-canonical `009 → 010 → 011 → 012` chain.
+- apply and transactional rollback with identical pre/post catalogs;
+- preservation of existing Operator, binding, Session and predecessor data;
+- one winner under concurrent case-insensitive Callsign claims;
+- Founder-reserved, prohibited and Unicode-homoglyph rejection;
+- non-unique Display Name behavior;
+- three initial Callsign Change Tokens;
+- one-token consumption and six-month restoration up to the balance of three;
+- 12-month quarantine and release;
+- immediate Account-deletion quarantine while permanent Operator identity
+  remains;
+- service-role-only identity mutation;
+- trusted Callsign generation; and
+- unchanged hashes for Migrations 009, 010 and 011.
 
-This is an engineering verification dependency, not a Founder product or
-architecture decision. It grants no deployment authority.
+The rollback catalog hash was identical before and after:
+
+`988a529d4827dbef9b0182aae4c040dfb25768136c51f565263199ed04782167`
+
+Machine-readable evidence is stored at
+`docs/sprints/evidence/sprint-19/generated/migration-012-certification.json`.
+
+Certification does not grant deployment or activation authority.

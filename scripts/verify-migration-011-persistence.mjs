@@ -5,8 +5,13 @@ import { spawn } from "node:child_process";
 
 const psql = process.env.SPRINT19_PSQL;
 const databaseUrl = process.env.SPRINT19_DATABASE_URL;
-if (!psql || !databaseUrl) {
-  throw new Error("SPRINT19_PSQL and SPRINT19_DATABASE_URL are required.");
+const dockerExecutable = process.env.ORACLE_DOCKER_EXE;
+const dockerContainer = process.env.ORACLE_POSTGRES_CONTAINER;
+const useDockerPsql = Boolean(dockerExecutable && dockerContainer);
+if ((!psql && !useDockerPsql) || !databaseUrl) {
+  throw new Error(
+    "SPRINT19_DATABASE_URL and either SPRINT19_PSQL or the disposable Docker psql configuration are required."
+  );
 }
 
 const target = new URL(databaseUrl);
@@ -447,9 +452,24 @@ function execute(url, sql) {
 
 function query(url, sql) {
   return new Promise((resolve, reject) => {
+    const executable = useDockerPsql ? dockerExecutable : psql;
+    const args = useDockerPsql
+      ? [
+          "exec",
+          "-i",
+          dockerContainer,
+          "psql",
+          url,
+          "-X",
+          "-A",
+          "-t",
+          "-v",
+          "ON_ERROR_STOP=1",
+        ]
+      : [url, "-X", "-A", "-t", "-v", "ON_ERROR_STOP=1"];
     const child = spawn(
-      psql,
-      [url, "-X", "-A", "-t", "-v", "ON_ERROR_STOP=1"],
+      executable,
+      args,
       { windowsHide: true, stdio: "pipe" }
     );
     let stdout = "";

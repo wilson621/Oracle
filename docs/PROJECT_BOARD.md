@@ -27,17 +27,20 @@ Control persistence. The persistence architecture is complete but undeployed.
 The approved scope is recorded in `docs/sprints/SPRINT_18_PLAN.md`, and ADR-037,
 ADR-038 and ADR-039 are accepted.
 
-Sprint 19 — Account, Identity and Commissioning is active by Founder
-instruction. The Founder policy decisions are implemented across web
+Sprint 19 — Account, Identity and Commissioning is complete and certified.
+The Founder policy decisions are implemented across web
 authentication, mandatory verification, trusted commissioning, Display Name,
 Callsign lifecycle and inactive Desktop trusted-device custody. Migration 011
-remains implemented and certified through both approved chains, undeployed and
-inactive. Additive Migration 012 is implemented and static-verified but awaits
-disposable PostgreSQL certification; it is not deployed or activated.
+and Migration 012 are implemented and certified on PostgreSQL 17.10. Both
+remain undeployed and inactive.
 
-No Founder product or architecture decision is currently required. The active
-engineering gate is Migration 012 persistence, security, rollback and
-concurrency certification in a disposable PostgreSQL environment.
+Sprint 20 — Platform Runtime Activation is the next approved Programme
+objective, but it is not activated. Its required production composition-root
+ADR changes runtime authority, startup ownership and failure semantics. The
+Founder decision request is recorded in
+`docs/sprints/SPRINT_20_FOUNDER_DECISION_REQUIRED.md`. No Sprint 20
+implementation has begun. Production deployment, Migration execution, Gate C
+and runtime activation remain separate Founder gates.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -66,7 +69,17 @@ decision implementation and current certification boundary in
 
 # Latest Closed Sprint
 
-## Sprint 18 — Operator Trust and Control
+## Sprint 19 — Account, Identity and Commissioning
+
+**Status:** Complete and certified
+**Closure report:** `docs/sprints/SPRINT_19_CLOSURE.md`
+**Deployment status:** Migrations 011 and 012 certified, undeployed and inactive
+
+Sprint 19 delivered the implemented Account, authentication, verification,
+commissioning and durable Operator identity foundation without changing
+production or enabling runtime persistence.
+
+## Previous Closed Sprint — Sprint 18
 
 **Status:** Complete — Founder-approved and closed
 **Closure report:** `docs/sprints/SPRINT_18_CLOSURE.md`

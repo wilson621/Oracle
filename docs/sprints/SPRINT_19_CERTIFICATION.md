@@ -1,7 +1,6 @@
 # SPRINT 19 IMPLEMENTATION CERTIFICATION
 
-**Status:** Application and contract implementation certified; Migration 012
-database certification pending
+**Status:** Complete and certified; not deployed; not activated
 
 **Date:** 24 July 2026
 
@@ -16,6 +15,8 @@ database certification pending
 - Sprint 19 auth and identity boundary verifier: pass
 - Migration 011 static verifier: pass
 - Migration 012 static verifier: pass
+- Migration 012 PostgreSQL 17.10 persistence, rollback, security and
+  concurrency verifier: pass
 - Operator ownership and authority verification: pass
 - Architecture dependency audit: pass
 - Immutable Migration 009–011 hashes: pass
@@ -34,9 +35,8 @@ recorded in the Sprint 19 generated evidence.
 - Desktop passwords are neither accepted nor stored.
 - Refresh credentials do not cross the Electron preload bridge.
 
-## Open engineering gate
+## Certification conclusion
 
-Migration 012 requires disposable PostgreSQL persistence, security,
-concurrency and rollback certification. Sprint 19 must not be closed and
-Migration 012 must not be described as certified until that evidence passes.
-No Founder decision is required for that verification work.
+Sprint 19 implementation is certified. Migration 011 and Migration 012 remain
+undeployed and inactive. Production remains on the approved post-Migration-009
+baseline, Gate C remains deferred and runtime persistence remains disabled.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "verifiedAt": "2026-07-24",
+  "verifiedAt": "2026-07-24T19:00:36.448Z",
   "branch": "sprint-9-overlay",
   "checks": {
     "typescript": "pass",
@@ -20,16 +20,17 @@
     "sprint19AuthenticationIdentity": "pass",
     "migration010Static": "pass",
     "migration011Static": "pass",
+    "migration011DisposablePostgres": "pass-postgresql-17.10",
     "migration012Static": "pass",
-    "migration012DisposablePostgres": "blocked-no-disposable-postgres-runtime"
+    "migration012DisposablePostgres": "pass-postgresql-17.10"
   },
   "production": {
     "migration009": "deployed",
     "migration010": "certified-undeployed-inactive",
     "migration011": "certified-undeployed-inactive",
-    "migration012": "implemented-static-verified-undeployed-inactive",
+    "migration012": "certified-undeployed-inactive",
     "runtimePersistence": "disabled",
     "gateC": "deferred"
   },
-  "result": "application-pass-database-certification-pending"
+  "result": "pass"
 }

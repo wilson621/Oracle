@@ -28,6 +28,7 @@
   "migration-011:static:verify": "node scripts/verify-migration-011-static.mjs",
   "migration-011:persistence:verify": "node scripts/verify-migration-011-persistence.mjs",
   "migration-012:static:verify": "node scripts/verify-migration-012-static.mjs",
+  "migration-012:persistence:verify": "node scripts/verify-migration-012-persistence.mjs",
   "sprint-19:auth:verify": "node scripts/verify-sprint-19-auth.mjs",
   "operator-intelligence:authority:verify": "tsc -p tsconfig.operator-intelligence-authority-verification.json && node .tmp-operator-intelligence-authority-verification/scripts/verify-operator-intelligence-authority.js && node -e \"require('node:fs').rmSync('.tmp-operator-intelligence-authority-verification', { recursive: true, force: true })\"",
   "operator-intelligence:trust:verify": "tsc -p tsconfig.operator-intelligence-trust-verification.json && node .tmp-operator-intelligence-trust-verification/scripts/verify-operator-intelligence-trust-contracts.js && node -e \"require('node:fs').rmSync('.tmp-operator-intelligence-trust-verification', { recursive: true, force: true })\"",

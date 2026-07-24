@@ -85,7 +85,7 @@ Desktop auth composition is not activated.
 | Operator commissioning application journey | Yes | Yes | No | No |
 | Callsign and Display Name application controls | Yes | Yes | No | No |
 | Desktop trusted-device custody contracts | Yes | Yes | No | No |
-| Migration 012 SQL candidate | Yes | Static only | No | No |
+| Migration 012 SQL candidate | Yes | Yes | No | No |
 
 Migrations 009, 010 and 011 remain byte-for-byte unchanged. Migration 010 and
 Migration 011 remain undeployed. Gate C remains deferred. Runtime persistence

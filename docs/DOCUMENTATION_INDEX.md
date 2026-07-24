@@ -212,8 +212,10 @@ delivery authorities have been reviewed.
 | Sprint 19 implementation evidence | [Sprint 19 Phase 2 Implementation](sprints/SPRINT_19_PHASE_2_IMPLEMENTATION.md) | Implemented and verified |
 | Migration 011 certification | [Sprint 19 Migration 011 Certification](sprints/SPRINT_19_MIGRATION_011_CERTIFICATION.md) | Certified, undeployed and inactive |
 | Sprint 19 Founder decisions implementation | [Sprint 19 Founder Decisions Implementation](sprints/SPRINT_19_FOUNDER_DECISIONS_IMPLEMENTATION.md) | Implemented and application-certified |
-| Migration 012 verification | [Sprint 19 Migration 012 Verification](sprints/SPRINT_19_MIGRATION_012_VERIFICATION.md) | Static-verified; database certification pending |
-| Sprint 19 certification | [Sprint 19 Certification](sprints/SPRINT_19_CERTIFICATION.md) | Application certified; database gate open |
+| Migration 012 verification | [Sprint 19 Migration 012 Verification](sprints/SPRINT_19_MIGRATION_012_VERIFICATION.md) | Certified, undeployed and inactive |
+| Sprint 19 certification | [Sprint 19 Certification](sprints/SPRINT_19_CERTIFICATION.md) | Complete and certified |
+| Sprint 19 closure | [Sprint 19 Closure](sprints/SPRINT_19_CLOSURE.md) | Engineering-complete; production unchanged |
+| Sprint 20 architecture gate | [Sprint 20 Founder Decision Required](sprints/SPRINT_20_FOUNDER_DECISION_REQUIRED.md) | Not activated; composition-root ADR decision required |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

@@ -19,10 +19,9 @@
 **Sprint 17:** Scale-Safe Trust Data Plane fully complete; Migration 009 deployed and verified in production
 **Sprint 18:** Complete — Founder-approved and closed; persistence architecture
 complete; Migration 010 certified and Gate C intentionally deferred
-**Sprint 19:** Active — Founder authentication and identity decisions
-implemented; application and Desktop custody contracts certified; Migration
-011 certified; Migration 012 database certification pending; all undeployed
-and inactive
+**Sprint 19:** Complete and certified — Founder authentication and identity
+decisions implemented; Migrations 011 and 012 certified, undeployed and
+inactive
 
 ---
 
@@ -78,10 +77,10 @@ case-insensitive Callsign, Oracle generation, three renewable change tokens,
 implemented as an inactive main-process-only contract using OS-encrypted
 refresh-token storage and credential-free renderer projections.
 
-Migration 012 is the additive Operator identity lifecycle candidate. It is
-implemented and static-verified but is not database-certified, deployed or
-activated. Its remaining gate is disposable PostgreSQL persistence, rollback,
-security and concurrency certification; no Founder decision is required.
+Migration 012 is the additive Operator identity lifecycle candidate.
+PostgreSQL 17.10 certifies its persistence, rollback, security and concurrency
+behavior on the canonical `009 → 010 → 011 → 012` chain. It is not deployed or
+activated.
 
 ## Sprint 17 — Scale-Safe Trust Data Plane
 

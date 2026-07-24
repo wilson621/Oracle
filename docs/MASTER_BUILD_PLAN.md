@@ -79,13 +79,12 @@ This architecture was established during Sprint 8 and forms the permanent founda
 
 # Latest Approved Execution Status
 
-Sprint 17 and Sprint 18 are Founder-approved and closed. Sprint 18 remains
-immutable. Sprint 19 — Account, Identity and Commissioning is active by
-Founder instruction. The atomic provisioning boundary, Founder-selected
+Sprint 17 through Sprint 19 are complete. Sprint 18 remains immutable.
+Sprint 19 — Account, Identity and Commissioning has delivered the atomic
+provisioning boundary, Founder-selected
 authentication and identity behavior, application journeys and inactive
-Desktop credential custody are implemented. Migration 011 is certified;
-Migration 012 is static-verified and awaits disposable database certification.
-Neither migration is deployed or activated.
+Desktop credential custody. Migrations 011 and 012 are certified but neither
+deployed nor activated.
 
 Sprint 16 — Trust Boundary is complete at
 `58589b52de0db341e6518fa9f235bb18854e6b30`. It was executed under the
@@ -107,9 +106,12 @@ Activated lifecycle states. Development verification preserves the canonical
 future chain while production remains on its approved post-Migration-009
 baseline. Runtime persistence remains disabled.
 
-The next engineering stage is Migration 012 disposable PostgreSQL
-certification followed by Sprint 19 closure verification. The Founder policy
-selection is complete; no new Founder decision is required for that work.
+The next engineering stage is Sprint 20 — Platform Runtime Activation. It is
+not yet activated because its production composition-root ADR requires a
+Founder architecture decision. The decision request is recorded in
+`docs/sprints/SPRINT_20_FOUNDER_DECISION_REQUIRED.md`. Any later implementation
+and certification will remain independent of production deployment, migration
+execution and runtime activation.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

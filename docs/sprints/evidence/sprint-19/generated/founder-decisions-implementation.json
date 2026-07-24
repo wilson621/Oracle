@@ -41,7 +41,7 @@
   "lifecycle": {
     "implemented": true,
     "applicationCertified": true,
-    "migration012DatabaseCertified": false,
+    "migration012DatabaseCertified": true,
     "deployed": false,
     "activated": false
   }

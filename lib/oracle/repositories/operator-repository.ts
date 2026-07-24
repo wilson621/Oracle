@@ -23,7 +23,9 @@ import {
 export type OperatorRecord = {
   id: string;
   email: string | null;
+  display_name?: string | null;
   callsign: string | null;
+  callsign_change_tokens?: number;
   designation: string | null;
   primary_game: string | null;
   combat_rating: string | null;
@@ -86,7 +88,9 @@ export type OperatorDeclarationLifecycleQuery = Readonly<{
 const OPERATOR_COLUMNS = [
   "id",
   "email",
+  "display_name",
   "callsign",
+  "callsign_change_tokens",
   "designation",
   "primary_game",
   "combat_rating",

@@ -6,6 +6,7 @@ import {
 } from "../auth/auth-policy";
 import { createClient } from "@/lib/supabase-server";
 import { getTrustedSupabaseClient } from "@/lib/supabase-trusted-server";
+import { SupabaseOperatorRepository } from "@/lib/oracle/repositories/operator-repository";
 import { OPERATOR_PROVISIONING_CONTRACT } from "./operator-provisioning-types";
 import { ORACLE_COMMISSIONING_POLICY } from "./operator-identity-policy";
 import { createServerOperatorService } from "./server-operator-service";
@@ -40,15 +41,13 @@ export async function getOperatorOnboardingState() {
   if (authority.status !== "verified") return authority;
 
   const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("operator_account_bindings")
-    .select("operator_id")
-    .eq("account_id", authority.accountId)
-    .maybeSingle();
-  if (error) throw error;
+  const repository = new SupabaseOperatorRepository(supabase);
+  const operatorId = await repository.findOperatorIdForAccount(
+    authority.accountId
+  );
   return {
     ...authority,
-    status: data ? "commissioned" as const : "uncommissioned" as const,
+    status: operatorId ? "commissioned" as const : "uncommissioned" as const,
   };
 }
 
@@ -103,25 +102,26 @@ export async function getOperatorIdentitySettings() {
   if (authority.status !== "verified") return authority;
 
   const supabase = await createClient();
-  const { data: binding, error: bindingError } = await supabase
-    .from("operator_account_bindings")
-    .select("operator_id")
-    .eq("account_id", authority.accountId)
-    .maybeSingle();
-  if (bindingError) throw bindingError;
-  if (!binding) return { status: "uncommissioned" as const };
+  const repository = new SupabaseOperatorRepository(supabase);
+  const operatorId = await repository.findOperatorIdForAccount(
+    authority.accountId
+  );
+  if (!operatorId) return { status: "uncommissioned" as const };
 
-  const { data, error } = await supabase
-    .from("operators")
-    .select("display_name,callsign,callsign_change_tokens")
-    .eq("id", binding.operator_id)
-    .single();
-  if (error || !data) throw error ?? new Error("Operator identity is unavailable.");
+  const operator = await repository.findOperatorById(operatorId);
+  if (
+    !operator ||
+    typeof operator.callsign !== "string" ||
+    typeof operator.callsign_change_tokens !== "number" ||
+    !Number.isInteger(operator.callsign_change_tokens)
+  ) {
+    throw new Error("Operator identity is unavailable.");
+  }
   return {
     status: "available" as const,
-    displayName: data.display_name as string | null,
-    callsign: data.callsign as string,
-    tokens: data.callsign_change_tokens as number,
+    displayName: operator.display_name ?? null,
+    callsign: operator.callsign,
+    tokens: operator.callsign_change_tokens,
   };
 }
 

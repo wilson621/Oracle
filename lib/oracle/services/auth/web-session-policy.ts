@@ -12,9 +12,7 @@ export async function applyWebIdlePolicy(
   signOut: () => Promise<unknown>,
   now = new Date()
 ): Promise<"active" | "expired"> {
-  const secret =
-    process.env.ORACLE_WEB_SESSION_SECRET ??
-    process.env.SUPABASE_SECRET_KEY;
+  const secret = process.env.ORACLE_WEB_SESSION_SECRET;
   if (!secret) {
     throw new Error("Oracle web session integrity configuration is unavailable.");
   }

@@ -692,9 +692,10 @@ The Oracle Platform grows through extensions rather than increasing complexity i
 # Current Delivery
 
 Sprint 17 is Founder-approved and fully complete, including Migration 009
-production deployment. Sprint 18 — Operator Trust and Control is
-Founder-approved and active from 24 July 2026. Implementation has not started,
-and runtime persistence remains disabled.
+production deployment. Sprint 18 — Operator Trust and Control is complete and
+immutable. Sprint 19 — Account, Identity and Commissioning is complete and
+certified. Migrations 010, 011 and 012 remain undeployed and inactive, Gate C
+remains deferred, and runtime persistence remains disabled.
 
 The Founder-approved Sprint 17–Beta sequence, its five Epics, architectural
 dependencies, Beta Gates, Founder Beta Readiness Review and Oracle Beta
@@ -736,10 +737,12 @@ Sprint 18 established the accepted governance, contract and persistence
 architecture for Operator Trust and Control. Migration 010 is certified and
 deployment-ready, but Gate C is intentionally deferred. Production remains
 pre-Migration-010 and runtime persistence remains disabled. Sprint 19 is
-active; its atomic provisioning boundary, Founder authentication and identity
+complete; its atomic provisioning boundary, Founder authentication and identity
 journeys, and inactive Desktop custody contracts are implemented. Migration
-011 is certified. Migration 012 is static-verified but awaits disposable
-database certification. All remain undeployed and inactive.
+011 and Migration 012 are certified. All remain undeployed and inactive.
+Sprint 20 — Platform Runtime Activation is the next planned objective but is
+not activated pending the Founder architecture decision for its production
+composition-root ADR.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 
