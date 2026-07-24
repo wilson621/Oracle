@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": ".tmp-session-intelligence-verification",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2022"
+  },
+  "include": [
+    "lib/oracle/reports/**/*.ts",
+    "lib/oracle/sessions/**/*.ts",
+    "lib/oracle/understanding/**/*.ts",
+    "lib/oracle/services/sessions/**/*.ts",
+    "lib/oracle/services/operator-understanding/**/*.ts",
+    "lib/oracle/services/session-reports/**/*.ts",
+    "lib/oracle/services/operator/**/*.ts",
+    "lib/oracle/repositories/session-lifecycle-repository.ts",
+    "lib/oracle/repositories/session-report-repository.ts",
+    "scripts/verify-session-intelligence.ts"
+  ]
+}

@@ -16,6 +16,7 @@
   "architecture:audit": "node scripts/audit-dependency-boundaries.mjs",
   "platform-composition:verify": "tsc -p tsconfig.platform-composition-verification.json && node .tmp-platform-composition-verification/scripts/verify-platform-composition.js && node -e \"require('node:fs').rmSync('.tmp-platform-composition-verification', { recursive: true, force: true })\"",
   "session-lifecycle:verify": "tsc -p tsconfig.session-lifecycle-verification.json && node .tmp-session-lifecycle-verification/scripts/verify-session-lifecycle.js && node -e \"require('node:fs').rmSync('.tmp-session-lifecycle-verification', { recursive: true, force: true })\"",
+  "session-intelligence:verify": "tsc -p tsconfig.session-intelligence-verification.json && node .tmp-session-intelligence-verification/scripts/verify-session-intelligence.js && node -e \"require('node:fs').rmSync('.tmp-session-intelligence-verification', { recursive: true, force: true })\"",
 
   "operator:ownership:verify": "tsc -p tsconfig.operator-ownership-verification.json && node .tmp-operator-ownership-verification/scripts/verify-operator-ownership.js && node -e \"require('node:fs').rmSync('.tmp-operator-ownership-verification', { recursive: true, force: true })\"",
 

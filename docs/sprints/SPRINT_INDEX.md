@@ -33,7 +33,7 @@ implementation stages and do not use fractional Sprint numbering.
 | 20 | Platform Runtime Activation | Complete, certified and Founder-accepted; undeployed and inactive | None | [Plan](SPRINT_20_PLAN.md), [Implementation](SPRINT_20_IMPLEMENTATION.md), [Certification](SPRINT_20_CERTIFICATION.md), [Closure](SPRINT_20_CLOSURE.md), [ADR-040](../Decisions.md) |
 | 21 | Oracle Session and Evidence Lifecycle | Complete, certified and Founder-accepted; Migration 013 undeployed and inactive | None | [Plan](SPRINT_21_PLAN.md), [Implementation](SPRINT_21_IMPLEMENTATION.md), [Certification](SPRINT_21_CERTIFICATION.md), [Closure](SPRINT_21_CLOSURE.md), [ADR-041](../Decisions.md) |
 | 22 | Operator Understanding Accumulation | Complete, certified and Founder-accepted | None | [Plan](SPRINT_22_PLAN.md), [Implementation](SPRINT_22_IMPLEMENTATION.md), [Certification](SPRINT_22_CERTIFICATION.md), [Closure](SPRINT_22_CLOSURE.md) |
-| 23 | Oracle Session Intelligence | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
+| 23 | Oracle Session Intelligence | Implemented and locally certified; awaiting Founder acceptance | None | [Plan](SPRINT_23_PLAN.md), [Implementation](SPRINT_23_IMPLEMENTATION.md), [Certification](SPRINT_23_CERTIFICATION.md) |
 | 24 | Adaptive Coaching, Planner and Progression | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 25 | Conversational Oracle | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 26 | Authoritative Companion Guidance Delivery | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
@@ -62,4 +62,4 @@ runtime persistence remains disabled. Sprint 20 is complete, certified and
 Founder-accepted under ADR-040. Sprint 21 is complete, certified and
 Founder-accepted under ADR-041. Sprint 22 is complete, certified and
 Founder-accepted under the existing Operator Understanding ADRs. Sprint 23 is
-next in sequence.
+implemented and locally certified and awaits Founder acceptance.

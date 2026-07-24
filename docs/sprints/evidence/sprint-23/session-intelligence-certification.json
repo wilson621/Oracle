@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "sprint": 23,
+  "contract": "oracle.session-intelligence-report",
+  "contractVersion": 1,
+  "engines": [
+    "behaviour",
+    "trend",
+    "prediction",
+    "memory",
+    "contextual"
+  ],
+  "exactReplayVerified": true,
+  "disagreementPenaltyVerified": true,
+  "incompleteEvidenceEpistemic": "suspected",
+  "modelAuthority": "enrichment-only",
+  "invalidModelState": "degraded",
+  "providerOutageState": "degraded",
+  "crossOperatorIsolation": true,
+  "completedSessionRequired": true,
+  "unadmittedEvidenceRejected": true,
+  "rawObservationProjection": false,
+  "manifestVersion": "1.2.0",
+  "manifestRuntimeEquality": true,
+  "runtimePersistence": "disabled",
+  "productionDeployed": false,
+  "migration014Required": false,
+  "result": "pass"
+}

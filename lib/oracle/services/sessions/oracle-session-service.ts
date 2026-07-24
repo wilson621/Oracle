@@ -121,6 +121,43 @@ export class OracleSessionService {
       : null;
   }
 
+  async getCompletedSession(
+    authority: AuthenticatedOracleSessionAuthority,
+    sessionId: string
+  ): Promise<OracleSession | null> {
+    const session = await this.repository.findById(
+      authority.operatorId,
+      sessionId
+    );
+    if (!session) return null;
+    assertAuthority(authority, session.operatorId);
+    if (session.status !== "completed") {
+      throw new Error(
+        "Oracle Session Intelligence requires a completed Session."
+      );
+    }
+    return createOracleSession(session);
+  }
+
+  async listCompletedSessions(
+    authority: AuthenticatedOracleSessionAuthority,
+    input: Readonly<{
+      integrationId: string;
+      pageSize: number;
+    }>
+  ): Promise<readonly OracleSession[]> {
+    const page = await this.repository.list({
+      operatorId: authority.operatorId,
+      statuses: ["completed"],
+      integrationId: input.integrationId,
+      search: null,
+      pageSize: input.pageSize,
+      beforeStartedAt: null,
+      beforeSessionId: null,
+    });
+    return Object.freeze(page.sessions.map(createOracleSession));
+  }
+
   getMetrics(): OracleSessionServiceMetrics {
     return Object.freeze({ ...this.metrics });
   }

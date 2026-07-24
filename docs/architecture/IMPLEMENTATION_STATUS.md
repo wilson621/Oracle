@@ -29,6 +29,9 @@ Migration 013 certified, undeployed and inactive
 **Sprint 22:** Complete, certified and Founder-accepted — governed recurring
 game-pattern accumulation, Snapshot and Context projection complete; persisted
 producers and consumers inactive
+**Sprint 23:** Implemented and locally certified — evidence-bound Session
+reports complete; awaiting Founder acceptance; runtime delivery and
+persistence inactive
 
 ---
 
@@ -53,6 +56,21 @@ Update this file during every sprint closure audit.
 ---
 
 # Latest Verified Sprint Progress
+
+## Sprint 23 — Oracle Session Intelligence
+
+The Session Report Service constructs immutable reports from authoritative
+completed Sessions, admitted Evidence and governed Understanding. An
+instance-owned provider registry keeps game semantics within the owning Game
+Integration, while an instance-owned Engine Registry executes Behaviour,
+Trend, bounded Prediction, Memory and Contextual outputs. Reports preserve
+epistemic status, evidence, confidence, disagreements and reassessment
+triggers. Optional model output is strict-schema enrichment only.
+
+Exact replay, history and comparison use an in-memory certification Repository.
+The prompt-only report authority is retired. Manifest version 1.2.0 remains
+mechanically exact because Service inventory and lifecycle classification did
+not change. Runtime persistence and report delivery remain inactive.
 
 ## Sprint 19 — Account, Identity and Commissioning
 

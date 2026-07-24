@@ -1,21 +1,39 @@
 import { NextResponse } from "next/server";
-import { analyseFight } from "@/lib/oracle";
 
 export async function POST(request: Request) {
   try {
-    const { prompt } = await request.json();
-
-    const report = await analyseFight(prompt);
-
-    return NextResponse.json({ report });
-  } catch (error) {
-    console.error("ORACLE API ERROR:", error);
-
+    const input: unknown = await request.json();
+    if (
+      typeof input !== "object" ||
+      input === null ||
+      !("sessionId" in input) ||
+      typeof input.sessionId !== "string" ||
+      !input.sessionId
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Oracle analysis requires an authoritative completed Session identity.",
+        },
+        { status: 400 }
+      );
+    }
     return NextResponse.json(
       {
-        error: error instanceof Error ? error.message : "Unknown error",
+        error:
+          "Session Report runtime activation is not authorised in this environment.",
       },
-      { status: 500 }
+      { status: 503 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error:
+          error instanceof SyntaxError
+            ? "Oracle analysis request must be valid JSON."
+            : "Oracle analysis request could not be accepted.",
+      },
+      { status: 400 }
     );
   }
 }

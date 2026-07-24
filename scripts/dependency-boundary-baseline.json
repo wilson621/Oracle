@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "allowedBoundaryViolations": [
     "application-service-bypass:app/achievements/page.tsx->lib/achievements/getAchievements.ts",
-    "application-service-bypass:app/api/oracle/analyze/route.ts->lib/oracle.ts",
     "application-service-bypass:app/career/page.tsx->lib/progression/getOperatorProgression.ts",
     "application-service-bypass:app/coach/page.tsx->lib/coach/getCoachReport.ts",
     "application-service-bypass:app/dna/page.tsx->lib/oracle/getOracleDNA.ts",

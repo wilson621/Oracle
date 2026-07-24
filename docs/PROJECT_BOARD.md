@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 6.3
+**Version:** 6.4
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -47,6 +47,16 @@ Sprint 22 — Operator Understanding Accumulation is complete, certified and
 Founder-accepted. Manifest version 1.2.0 mechanically matches both runtimes.
 No Migration 014 was required. Production and persisted accumulation remain
 inactive.
+
+Sprint 23 — Oracle Session Intelligence is implemented and locally certified
+under the existing Session, Understanding, runtime and confidence architecture.
+It awaits Founder acceptance. No migration, deployment or persistence
+activation is authorised.
+
+## Active Founder Review
+
+Sprint 23 implementation and certification evidence are complete. Founder
+acceptance is required to close the Sprint and govern entry into Sprint 24.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in

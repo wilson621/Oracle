@@ -782,6 +782,34 @@ Snapshot Service and renderer-safe Context projection are source-complete.
 Manifest version 1.2.0 declares the disabled Service exactly; persisted
 producers and consumers remain inactive.
 
+Sprint 23 is implemented and locally certified. Session Report Service is the
+exclusive report-construction boundary over authoritative completed Sessions,
+admitted Evidence and eligible governed Understanding. Instance-owned report
+and Game Integration provider registries preserve explicit injection.
+Behaviour, Trend, bounded Prediction, Memory and Contextual outputs retain
+epistemic status, evidence, confidence and reassessment triggers. Optional
+model output is enrichment-only and strict-schema validated. Report history
+uses only an inactive in-memory certification Repository; production
+persistence remains disabled.
+
+The canonical composition inventory and lifecycle classification did not
+change, so manifest version 1.2.0 remains correct and mechanical equality
+verification remains mandatory.
+
+Sprint 23 is implemented and locally certified. Session Report Service is the
+exclusive report-construction boundary over authoritative completed Sessions,
+admitted Evidence and eligible governed Understanding. Instance-owned report
+and Game Integration provider registries preserve explicit injection.
+Behaviour, Trend, bounded Prediction, Memory and Contextual outputs retain
+epistemic status, evidence, confidence and reassessment triggers. Optional
+model output is enrichment-only and strict-schema validated. Report history
+uses only an inactive in-memory certification Repository; production
+persistence remains disabled.
+
+The canonical composition inventory and lifecycle classification did not
+change, so manifest version 1.2.0 remains correct and mechanical equality
+verification remains mandatory.
+
 Current Runtime
 
 ✓ Engine Runtime
@@ -803,6 +831,12 @@ Current Runtime
 ✓ Versioned non-merging Desktop Session correlation
 ✓ Minimised Evidence admission and renderer-safe Session projections
 ✓ Session History Application boundary
+✓ Evidence-bound immutable Session Report contract
+✓ Instance-owned Session Report Engine and provider registries
+✓ Deterministic report confidence, disagreement and degraded states
+✓ Evidence-bound immutable Session Report contract
+✓ Instance-owned Session Report Engine and provider registries
+✓ Deterministic report confidence, disagreement and degraded states
 ✓ Electron Companion host
 ✓ Companion Session Manager and Context ownership
 ✓ Desktop Host Snapshot and Event Stream
