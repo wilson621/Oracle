@@ -1590,16 +1590,21 @@ persistence foundation; deployment did not activate its runtime use.
 - they must not be expanded into new Operator Intelligence authority;
 - their migration belongs to later approved Session Intelligence and Unified
   Product Experience Sprints;
-- `bootstrapOraclePlatform()` is implemented but is not invoked by the current
-  web or Electron startup paths.
-- Service and Application registries are implemented metadata foundations;
+- Web and Electron source entry points invoke target-specific ADR-040
+  composition roots that construct one shared dependency-injected Platform
+  runtime.
+- Immutable versioned manifests are canonical and are mechanically compared
+  with the constructed Service, Application, Game Integration and Guidance
+  inventories before readiness.
+- Service and Application registries are instance-owned metadata foundations;
   web pages do not consistently consume them as runtime boundaries.
 - several web pages call repositories, pipelines or engines directly.
 - `/companion` exists and renders immutable Application state, but the Electron
   composition root still loads `/oracle` and does not yet deliver authoritative
   live Guidance state to the Companion route.
-- `lib/companion` and `desktop/companion` are not yet joined by an explicit
-  integration contract.
+- `lib/companion` owns Platform capability readiness while
+  `desktop/companion` retains Session and Context authority under an explicit
+  non-merging lifecycle contract.
 - curated Guidance source freshness remains manually governed, and production
   runtime data has not exercised ready and partial-success presentation paths.
 

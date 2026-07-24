@@ -3,27 +3,40 @@ import type {
   OracleApplicationId,
 } from "./application-types";
 
-const applications = new Map<
-  OracleApplicationId,
-  OracleApplication
->();
+export class OracleApplicationRegistry {
+  private readonly applications =
+    new Map<OracleApplicationId, OracleApplication>();
 
-export function registerOracleApplication(
-  application: OracleApplication
-): void {
-  applications.set(application.id, application);
-}
+  register(application: OracleApplication): void {
+    if (this.applications.has(application.id)) {
+      throw new Error(
+        `Oracle Application '${application.id}' is already registered.`
+      );
+    }
+    this.applications.set(
+      application.id,
+      Object.freeze({
+        ...application,
+        requiredServices: Object.freeze([
+          ...application.requiredServices,
+        ]),
+      })
+    );
+  }
 
-export function getOracleApplications(): OracleApplication[] {
-  return [...applications.values()];
-}
+  has(id: OracleApplicationId): boolean {
+    return this.applications.has(id);
+  }
 
-export function getOracleApplication(
-  id: OracleApplicationId
-): OracleApplication | undefined {
-  return applications.get(id);
-}
+  getAll(): OracleApplication[] {
+    return [...this.applications.values()];
+  }
 
-export function clearOracleApplications(): void {
-  applications.clear();
+  get(id: OracleApplicationId): OracleApplication | undefined {
+    return this.applications.get(id);
+  }
+
+  clear(): void {
+    this.applications.clear();
+  }
 }

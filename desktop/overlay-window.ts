@@ -35,6 +35,9 @@ import {
   type OracleDesktopSupportedGameCandidate,
 } from "./companion/game-integration-coordinator.js";
 import type {
+  OracleGameIntegrationRegistryContract,
+} from "../lib/oracle/game-integrations/index.js";
+import type {
   OracleCompanionGameContext,
 } from "./companion/companion-context.js";
 import {
@@ -71,6 +74,7 @@ import type {
 
 export type CompanionHostWindowOptions = {
   companionUrl: string;
+  gameIntegrationRegistry: OracleGameIntegrationRegistryContract;
 };
 
 const DEVELOPMENT_WINDOW_WIDTH = 1200;
@@ -112,8 +116,8 @@ export class CompanionHostWindowController {
   private readonly companionSession =
     new OracleCompanionSessionManager();
 
-  private readonly gameIntegrations =
-    new OracleDesktopGameIntegrationCoordinator();
+  private readonly gameIntegrations:
+    OracleDesktopGameIntegrationCoordinator;
 
   private pendingGameContext:
     OracleCompanionGameContext | null = null;
@@ -150,6 +154,11 @@ export class CompanionHostWindowController {
   private readonly options:
     CompanionHostWindowOptions
 ) {
+  this.gameIntegrations =
+    new OracleDesktopGameIntegrationCoordinator(
+      options.gameIntegrationRegistry
+    );
+
   this.recovery.subscribe(
     (recovery) => {
       this.timeline.consumeRecovery(

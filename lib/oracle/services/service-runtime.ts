@@ -2,7 +2,7 @@ import type {
   OracleService,
   OracleServiceId,
 } from "./service-types";
-import { getOracleService } from "./service-registry";
+import { OracleServiceRegistry } from "./service-registry";
 
 export type OracleServiceAvailability =
   | "available"
@@ -15,10 +15,12 @@ export type OracleServiceRuntimeState = {
 };
 
 export class OracleServiceRuntime {
+  constructor(private readonly registry: OracleServiceRegistry) {}
+
   getState(
     serviceId: OracleServiceId
   ): OracleServiceRuntimeState {
-    const service = getOracleService(serviceId);
+    const service = this.registry.get(serviceId);
 
     if (!service) {
       return {
@@ -58,7 +60,7 @@ export class OracleServiceRuntime {
     ];
 
     return serviceIds
-      .map((id) => getOracleService(id))
+      .map((id) => this.registry.get(id))
       .filter(
         (service): service is OracleService =>
           service !== undefined &&

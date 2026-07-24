@@ -18,6 +18,6 @@ export type OracleApplication = {
   name: string;
   description: string;
   route: string;
-  requiredServices: OracleServiceId[];
+  requiredServices: readonly OracleServiceId[];
   status: OracleApplicationStatus;
 };

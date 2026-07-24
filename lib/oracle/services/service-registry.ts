@@ -3,27 +3,37 @@ import type {
   OracleServiceId,
 } from "./service-types";
 
-const services = new Map<
-  OracleServiceId,
-  OracleService
->();
+export class OracleServiceRegistry {
+  private readonly services = new Map<OracleServiceId, OracleService>();
 
-export function registerOracleService(
-  service: OracleService
-): void {
-  services.set(service.id, service);
-}
+  register(service: OracleService): void {
+    if (this.services.has(service.id)) {
+      throw new Error(`Oracle Service '${service.id}' is already registered.`);
+    }
+    this.services.set(
+      service.id,
+      Object.freeze({
+        ...service,
+        requiredCapabilities: Object.freeze([
+          ...service.requiredCapabilities,
+        ]),
+      })
+    );
+  }
 
-export function getOracleServices(): OracleService[] {
-  return [...services.values()];
-}
+  has(id: OracleServiceId): boolean {
+    return this.services.has(id);
+  }
 
-export function getOracleService(
-  id: OracleServiceId
-): OracleService | undefined {
-  return services.get(id);
-}
+  getAll(): OracleService[] {
+    return [...this.services.values()];
+  }
 
-export function clearOracleServices(): void {
-  services.clear();
+  get(id: OracleServiceId): OracleService | undefined {
+    return this.services.get(id);
+  }
+
+  clear(): void {
+    this.services.clear();
+  }
 }

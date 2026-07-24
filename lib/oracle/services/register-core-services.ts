@@ -1,101 +1,91 @@
-import { registerOracleService } from "./service-registry";
+import {
+  OracleServiceRegistry,
+} from "./service-registry";
+import type { OracleService } from "./service-types";
 
-let registered = false;
-
-export function registerCoreOracleServices(): void {
-  if (registered) {
-    return;
-  }
-
-  registerOracleService({
+const CORE_ORACLE_SERVICES: readonly OracleService[] = Object.freeze([
+  {
     id: "operator",
     name: "Operator",
-    description:
-      "Provides the current Operator identity and profile.",
+    description: "Provides the current Operator identity and profile.",
     requiredCapabilities: [],
     status: "available",
-  });
-
-  registerOracleService({
+  },
+  {
     id: "sessions",
     name: "Sessions",
-    description:
-      "Provides analysed Oracle Session history.",
+    description: "Provides analysed Oracle Session history.",
     requiredCapabilities: [],
     status: "available",
-  });
-
-  registerOracleService({
+  },
+  {
     id: "missions",
     name: "Missions",
-    description:
-      "Provides generated Oracle missions and readiness intelligence.",
+    description: "Provides generated Oracle missions and readiness intelligence.",
     requiredCapabilities: [],
     status: "available",
-  });
-
-  registerOracleService({
+  },
+  {
     id: "memory",
     name: "Memory",
-    description:
-      "Provides persistent understanding of the Operator.",
+    description: "Provides persistent understanding of the Operator.",
     requiredCapabilities: [],
     status: "available",
-  });
-
-  registerOracleService({
+  },
+  {
     id: "progression",
     name: "Progression",
-    description:
-      "Provides long-term Operator progression intelligence.",
+    description: "Provides long-term Operator progression intelligence.",
     requiredCapabilities: [],
     status: "available",
-  });
-
-  registerOracleService({
+  },
+  {
     id: "reports",
     name: "Reports",
-    description:
-      "Provides structured Oracle intelligence reports.",
+    description: "Provides structured Oracle intelligence reports.",
     requiredCapabilities: [],
     status: "available",
-  });
-
-  registerOracleService({
+  },
+  {
     id: "ai-coach",
     name: "AI Coach",
-    description:
-      "Provides personalised coaching through Oracle intelligence.",
+    description: "Provides personalised coaching through Oracle intelligence.",
     requiredCapabilities: [],
     status: "available",
-  });
-
-  registerOracleService({
+  },
+  {
     id: "oracle-brain",
     name: "Oracle Brain",
-    description:
-      "Provides assessment, reasoning and strategic intelligence.",
+    description: "Provides assessment, reasoning and strategic intelligence.",
     requiredCapabilities: [],
     status: "available",
-  });
-
-  registerOracleService({
+  },
+  {
     id: "loadouts",
     name: "Loadouts",
-    description:
-      "Provides game-aware equipment and loadout intelligence.",
+    description: "Provides game-aware equipment and loadout intelligence.",
     requiredCapabilities: [],
     status: "available",
-  });
-
-  registerOracleService({
+  },
+  {
     id: "companion",
     name: "Companion",
-    description:
-      "Provides context-aware in-game assistance.",
+    description: "Provides context-aware in-game assistance.",
     requiredCapabilities: [],
     status: "available",
-  });
+  },
+]);
 
-  registered = true;
+export function registerCoreOracleServices(
+  registry: OracleServiceRegistry
+): void {
+  for (const service of CORE_ORACLE_SERVICES) {
+    if (!registry.has(service.id)) registry.register(service);
+  }
+}
+
+export function createCoreOracleServiceRegistry(): OracleServiceRegistry {
+  const registry = new OracleServiceRegistry();
+  registerCoreOracleServices(registry);
+  return registry;
 }

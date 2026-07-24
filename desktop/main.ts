@@ -9,6 +9,12 @@ import {
   ORACLE_DESKTOP_RECOVERY_SHORTCUT,
 } from "./contracts.js";
 import { CompanionHostWindowController } from "./overlay-window.js";
+import {
+  getOracleDesktopGameIntegrationRegistry,
+  getOracleDesktopPlatformHealth,
+  startOracleDesktopPlatform,
+  stopOracleDesktopPlatform,
+} from "./platform/desktop-composition-root.js";
 
 const DEFAULT_COMPANION_URL =
   "http://localhost:3000/oracle";
@@ -30,6 +36,13 @@ if (!hasSingleInstanceLock) {
   app
     .whenReady()
     .then(async () => {
+      const health = startOracleDesktopPlatform();
+      if (health.status === "failed") {
+        throw new Error(
+          "Oracle Desktop Platform failed its composition readiness gate."
+        );
+      }
+
       registerIpcHandlers();
       registerRecoveryShortcut();
 
@@ -78,6 +91,7 @@ app.on("before-quit", () => {
 
   hostWindowController?.close();
   hostWindowController = null;
+  stopOracleDesktopPlatform();
 });
 
 app.on("will-quit", () => {
@@ -91,6 +105,8 @@ function createHostWindowController(): CompanionHostWindowController {
     companionUrl:
       process.env.ORACLE_COMPANION_URL ??
       DEFAULT_COMPANION_URL,
+    gameIntegrationRegistry:
+      getOracleDesktopGameIntegrationRegistry(),
   });
 }
 
@@ -135,6 +151,18 @@ function registerIpcHandlers(): void {
       return requireAuthorizedController(
         event
       ).getState();
+    }
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.getPlatformHealth,
+    (event) => {
+      requireAuthorizedController(event);
+      const health = getOracleDesktopPlatformHealth();
+      if (!health) {
+        throw new Error("Oracle Desktop Platform health is unavailable.");
+      }
+      return health;
     }
   );
 
@@ -215,6 +243,10 @@ function registerIpcHandlers(): void {
 function removeIpcHandlers(): void {
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.getHostState
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.getPlatformHealth
   );
 
   ipcMain.removeHandler(

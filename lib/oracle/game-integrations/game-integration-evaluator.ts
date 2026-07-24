@@ -11,12 +11,12 @@ import type {
   OracleGameIntegration,
 } from "./game-integration";
 
-import {
-  OracleGameIntegrationRegistry,
+import type {
+  OracleGameIntegrationRegistryContract,
 } from "./game-integration-registry";
 
 export function evaluateGameIntegrations(
-  registry: OracleGameIntegrationRegistry,
+  registry: OracleGameIntegrationRegistryContract,
   input: OracleGameDetectionInput
 ): OracleGameDetectionOutcome {
   const matches:

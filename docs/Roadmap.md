@@ -740,9 +740,9 @@ pre-Migration-010 and runtime persistence remains disabled. Sprint 19 is
 complete; its atomic provisioning boundary, Founder authentication and identity
 journeys, and inactive Desktop custody contracts are implemented. Migration
 011 and Migration 012 are certified. All remain undeployed and inactive.
-Sprint 20 — Platform Runtime Activation is the next planned objective but is
-not activated pending the Founder architecture decision for its production
-composition-root ADR.
+Sprint 20 — Platform Runtime Activation is Founder-approved and active under
+ADR-040. Its implementation is complete and locally certified; Founder closure
+is pending. Production deployment and runtime persistence remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 
@@ -894,9 +894,9 @@ Implemented as architectural foundations:
 - Platform Contracts
 - Shared Diagnostics
 
-The Platform is designed to coordinate every major Oracle subsystem. The
-Platform bootstrap is not yet wired into production startup, so this list must
-not be interpreted as end-to-end activation of every subsystem.
+The Platform coordinates these subsystems through ADR-040 target-specific
+composition roots and canonical manifests. This production-capable source
+wiring is implemented and locally certified but not deployed.
 
 ---
 

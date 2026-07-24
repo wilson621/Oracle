@@ -1,21 +1,16 @@
-import { CompanionRuntime } from "@/lib/companion/companion-runtime";
-import { createInitialCompanionRuntimeState } from "@/lib/companion/companion-state";
-import { OracleExtensionRuntime } from "@/lib/companion/extensions/extension-runtime";
+import { createInitialCompanionRuntimeState } from "../../companion/companion-state";
 import {
-  getOracleApplications,
-  registerCoreOracleApplications,
-} from "../applications";
-import {
-  getOracleServices,
-  registerCoreOracleServices,
-} from "../services";
+  assertOracleCompositionMatchesManifest,
+  getOracleSubsystemDeclaration,
+  type OraclePlatformComposition,
+  type OraclePlatformSubsystemId,
+} from "./platform-composition";
 import type {
   OraclePlatformBootPhase,
   OraclePlatformDiagnostic,
   OraclePlatformDiagnosticLevel,
   OraclePlatformState,
   OraclePlatformSubsystem,
-  OraclePlatformSubsystemId,
   OraclePlatformSubsystemStatus,
 } from "./platform-types";
 
@@ -26,55 +21,34 @@ type MutablePlatformState = {
 export class OraclePlatformRuntime {
   private state: MutablePlatformState;
 
-  private readonly companionRuntime: CompanionRuntime;
+  constructor(private readonly composition: OraclePlatformComposition) {
+    this.state = createInitialPlatformState(composition);
+  }
 
-  constructor(companionRuntime = new CompanionRuntime()) {
-    this.companionRuntime = companionRuntime;
-    this.state = createInitialPlatformState();
+  getComposition(): OraclePlatformComposition {
+    return this.composition;
   }
 
   getState(): OraclePlatformState {
-    return {
+    return Object.freeze({
       ...this.state,
-      services: [...this.state.services],
-      applications: [...this.state.applications],
-      companion: {
-        ...this.state.companion,
-        context: this.state.companion.context
-          ? {
-              ...this.state.companion.context,
-              game: this.state.companion.context.game
-                ? {
-                    ...this.state.companion.context.game,
-                  }
-                : null,
-              activeWindow: this.state.companion.context.activeWindow
-                ? {
-                    ...this.state.companion.context.activeWindow,
-                  }
-                : null,
-              discoveries:
-                this.state.companion.context.discoveries.map(
-                  (discovery) => ({
-                    ...discovery,
-                  })
-                ),
-            }
-          : null,
-        failure: this.state.companion.failure
-          ? {
-              ...this.state.companion.failure,
-            }
-          : null,
-      },
-      subsystems: this.state.subsystems.map((subsystem) => ({
-        ...subsystem,
-      })),
-      diagnostics: this.state.diagnostics.map((diagnostic) => ({
-        ...diagnostic,
-      })),
-      errors: [...this.state.errors],
-    };
+      services: Object.freeze([...this.state.services]),
+      applications: Object.freeze([...this.state.applications]),
+      gameIntegrations: Object.freeze([...this.state.gameIntegrations]),
+      guidanceProviders: Object.freeze([...this.state.guidanceProviders]),
+      companion: cloneCompanion(this.state.companion),
+      subsystems: Object.freeze(
+        this.state.subsystems.map((subsystem) =>
+          Object.freeze({ ...subsystem })
+        )
+      ),
+      diagnostics: Object.freeze(
+        this.state.diagnostics.map((diagnostic) =>
+          Object.freeze({ ...diagnostic })
+        )
+      ),
+      errors: Object.freeze([...this.state.errors]),
+    });
   }
 
   start(): OraclePlatformState {
@@ -86,14 +60,12 @@ export class OraclePlatformRuntime {
       return this.getState();
     }
 
-    const startedAt = new Date().toISOString();
-
     this.state = {
-      ...createInitialPlatformState(),
+      ...createInitialPlatformState(this.composition),
       status: "booting",
-      phase: "registering-services",
-      startedAt,
-      diagnostics: [
+      phase: "validating-composition",
+      startedAt: new Date().toISOString(),
+      diagnostics: Object.freeze([
         createDiagnostic(
           "platform.boot.started",
           "info",
@@ -101,11 +73,14 @@ export class OraclePlatformRuntime {
           "idle",
           null
         ),
-      ],
+      ]),
     };
 
-    this.registerServices();
-    this.registerApplications();
+    this.validateComposition();
+    this.loadServices();
+    this.loadApplications();
+    this.loadGameIntegrations();
+    this.loadGuidance();
     this.initialiseExtensions();
     this.startCompanion();
     this.completeBoot();
@@ -114,15 +89,9 @@ export class OraclePlatformRuntime {
   }
 
   stop(): OraclePlatformState {
-    if (this.state.status === "stopped") {
-      return this.getState();
-    }
+    if (this.state.status === "stopped") return this.getState();
 
-    this.updateState({
-      status: "stopping",
-      phase: "stopping",
-    });
-
+    this.updateState({ status: "stopping", phase: "stopping" });
     this.addDiagnostic(
       "platform.stop.started",
       "info",
@@ -131,346 +100,295 @@ export class OraclePlatformRuntime {
     );
 
     try {
-      this.companionRuntime.stop();
-
-      this.updateSubsystem(
-        "companion",
-        "stopped",
-        "Companion Runtime stopped."
-      );
-
-      this.addDiagnostic(
-        "platform.companion.stopped",
-        "info",
-        "Companion Runtime stopped successfully.",
-        "stopping",
-        "companion"
-      );
+      this.composition.companion.stop();
+      this.updateSubsystem("companion", "stopped", "Companion Runtime stopped.");
     } catch (error) {
-      const message = getErrorMessage(error);
-
-      this.addError(
-        "platform.companion.stop.failed",
-        `Companion Runtime failed to stop: ${message}`,
-        "stopping",
-        "companion"
+      this.recordSubsystemFailure(
+        "companion",
+        `Companion Runtime failed to stop: ${getErrorMessage(error)}`,
+        "stopping"
       );
     }
 
-    const stoppedWithErrors = this.state.errors.length > 0;
-
-    this.updateState({
-      status: stoppedWithErrors ? "failed" : "stopped",
-      phase: stoppedWithErrors ? "failed" : "stopped",
-      stoppedAt: new Date().toISOString(),
-      companion: this.companionRuntime.getState(),
-    });
-
-    this.addDiagnostic(
-      "platform.stop.completed",
-      stoppedWithErrors ? "error" : "info",
-      stoppedWithErrors
-        ? "Oracle Platform stopped with errors."
-        : "Oracle Platform stopped successfully.",
-      stoppedWithErrors ? "failed" : "stopped"
+    const failed = this.state.subsystems.some(
+      ({ required, status }) => required && status === "failed"
     );
-
+    this.updateState({
+      status: failed ? "failed" : "stopped",
+      phase: failed ? "failed" : "stopped",
+      stoppedAt: new Date().toISOString(),
+      companion: this.composition.companion.getState(),
+    });
     return this.getState();
   }
 
-  private registerServices(): void {
-    this.setPhase("registering-services");
-
+  private validateComposition(): void {
+    this.setPhase("validating-composition");
     try {
-      registerCoreOracleServices();
-
-      const services = getOracleServices();
-      const status: OraclePlatformSubsystemStatus =
-        services.length > 0 ? "ready" : "unavailable";
-
-      this.updateState({
-        services,
-      });
-
+      assertOracleCompositionMatchesManifest(this.composition);
+      this.updateState({ manifestVerified: true });
       this.updateSubsystem(
-        "services",
-        status,
-        services.length > 0
-          ? `${services.length} Oracle services registered.`
-          : "No Oracle services are registered."
+        "composition",
+        "ready",
+        "Constructed runtime exactly matches the canonical manifest."
       );
-
       this.addDiagnostic(
-        "platform.services.registered",
-        status === "ready" ? "info" : "warning",
-        services.length > 0
-          ? `${services.length} Oracle services registered.`
-          : "Platform boot continued without registered Oracle services.",
-        "registering-services",
-        "services"
+        "platform.composition.verified",
+        "info",
+        "Runtime composition exactly matches its canonical manifest.",
+        "validating-composition",
+        "composition"
       );
     } catch (error) {
-      const message = getErrorMessage(error);
-
-      this.updateSubsystem(
-        "services",
-        "failed",
-        `Oracle Services registration failed: ${message}`
-      );
-
-      this.addError(
-        "platform.services.registration.failed",
-        `Oracle Services registration failed: ${message}`,
-        "registering-services",
-        "services"
+      this.recordSubsystemFailure(
+        "composition",
+        getErrorMessage(error),
+        "validating-composition"
       );
     }
   }
 
-  private registerApplications(): void {
-    this.setPhase("registering-applications");
-
+  private loadServices(): void {
+    this.setPhase("registering-services");
     try {
-      registerCoreOracleApplications();
-
-      const applications = getOracleApplications();
-      const status: OraclePlatformSubsystemStatus =
-        applications.length > 0 ? "ready" : "unavailable";
-
+      const services = this.composition.services.getAll();
       this.updateState({
-        applications,
+        services: Object.freeze(services) as OraclePlatformState["services"],
       });
-
-      this.updateSubsystem(
-        "applications",
-        status,
-        applications.length > 0
-          ? `${applications.length} Oracle applications registered.`
-          : "No Oracle applications are registered."
-      );
-
-      this.addDiagnostic(
-        "platform.applications.registered",
-        status === "ready" ? "info" : "warning",
-        applications.length > 0
-          ? `${applications.length} Oracle applications registered.`
-          : "Platform boot continued without registered Oracle applications.",
-        "registering-applications",
-        "applications"
+      this.markInventory(
+        "services",
+        services.length,
+        `${services.length} Oracle Services composed.`
       );
     } catch (error) {
-      const message = getErrorMessage(error);
-
-      this.updateSubsystem(
-        "applications",
-        "failed",
-        `Oracle Applications registration failed: ${message}`
+      this.recordSubsystemFailure(
+        "services",
+        `Oracle Services composition failed: ${getErrorMessage(error)}`,
+        "registering-services"
       );
+    }
+  }
 
-      this.addError(
-        "platform.applications.registration.failed",
-        `Oracle Applications registration failed: ${message}`,
-        "registering-applications",
-        "applications"
+  private loadApplications(): void {
+    this.setPhase("registering-applications");
+    try {
+      const applications = this.composition.applications.getAll();
+      const availableServiceIds = new Set<string>(
+        this.state.services.map(({ id }) => id)
+      );
+      for (const application of applications) {
+        for (const serviceId of application.requiredServices) {
+          if (!availableServiceIds.has(serviceId)) {
+            throw new Error(
+              `Application '${application.id}' requires unavailable Service '${serviceId}'.`
+            );
+          }
+        }
+      }
+      this.updateState({
+        applications:
+          Object.freeze(applications) as OraclePlatformState["applications"],
+      });
+      this.markInventory(
+        "applications",
+        applications.length,
+        `${applications.length} Oracle Applications composed.`
+      );
+    } catch (error) {
+      this.recordSubsystemFailure(
+        "applications",
+        `Oracle Applications composition failed: ${getErrorMessage(error)}`,
+        "registering-applications"
+      );
+    }
+  }
+
+  private loadGameIntegrations(): void {
+    this.setPhase("registering-game-integrations");
+    try {
+      const identities = this.composition.gameIntegrations
+        .getAll()
+        .map(({ id }) => id);
+      this.updateState({ gameIntegrations: Object.freeze(identities) });
+      this.markInventory(
+        "game-integrations",
+        identities.length,
+        `${identities.length} Game Integrations composed.`
+      );
+    } catch (error) {
+      this.recordSubsystemFailure(
+        "game-integrations",
+        `Game Integration composition failed: ${getErrorMessage(error)}`,
+        "registering-game-integrations"
+      );
+    }
+  }
+
+  private loadGuidance(): void {
+    this.setPhase("registering-guidance");
+    try {
+      const identities = this.composition.guidance
+        .getProviderManifests()
+        .map(({ id }) => id);
+      this.updateState({ guidanceProviders: Object.freeze(identities) });
+      this.markInventory(
+        "guidance",
+        identities.length,
+        `${identities.length} Guidance providers composed.`
+      );
+    } catch (error) {
+      this.recordSubsystemFailure(
+        "guidance",
+        `Guidance composition failed: ${getErrorMessage(error)}`,
+        "registering-guidance"
       );
     }
   }
 
   private initialiseExtensions(): void {
     this.setPhase("initialising-extensions");
-
     try {
-      const extensionRuntime = new OracleExtensionRuntime();
-      const extensionStates = extensionRuntime.getStates();
-
+      const count = this.composition.extensions.getStates().length;
       this.updateSubsystem(
         "extensions",
         "ready",
-        extensionStates.length > 0
-          ? `${extensionStates.length} extensions registered.`
-          : "Extension Runtime ready. No extensions registered yet."
-      );
-
-      this.addDiagnostic(
-        "platform.extensions.initialised",
-        "info",
-        extensionStates.length > 0
-          ? `${extensionStates.length} Oracle extensions initialised.`
-          : "Oracle Extension Runtime initialised without registered extensions.",
-        "initialising-extensions",
-        "extensions"
+        count > 0
+          ? `${count} extensions composed.`
+          : "Extension Runtime ready with no extensions."
       );
     } catch (error) {
-      const message = getErrorMessage(error);
-
-      this.updateSubsystem(
+      this.recordSubsystemFailure(
         "extensions",
-        "failed",
-        `Oracle Extension Runtime failed: ${message}`
-      );
-
-      this.addError(
-        "platform.extensions.initialisation.failed",
-        `Oracle Extension Runtime failed: ${message}`,
-        "initialising-extensions",
-        "extensions"
+        `Extension Runtime failed: ${getErrorMessage(error)}`,
+        "initialising-extensions"
       );
     }
   }
 
   private startCompanion(): void {
     this.setPhase("starting-companion");
+    const prerequisitesReady = this.state.subsystems
+      .filter(
+        ({ id, required }) =>
+          required && id !== "companion"
+      )
+      .every(({ status }) => status === "ready");
 
     try {
-      const prerequisitesReady = [
-        "services",
-        "applications",
-        "extensions",
-      ].every((subsystemId) =>
-        this.state.subsystems.some(
-          (subsystem) =>
-            subsystem.id === subsystemId &&
-            subsystem.status === "ready"
-        )
-      );
-
-      this.companionRuntime.start({
+      this.composition.companion.start({
         platformAuthorized: this.state.status === "booting",
         prerequisitesReady,
         waitingReason: prerequisitesReady
           ? undefined
           : "Required Oracle Platform subsystems are not ready.",
       });
-
-      const companion = this.companionRuntime.getState();
-      const isReady = companion.status === "ready";
-      const isWaiting =
-        companion.status === "waiting-for-platform";
-
-      this.updateState({
-        companion,
-      });
-
-      this.updateSubsystem(
-        "companion",
-        isReady
-          ? "ready"
-          : isWaiting
-            ? "unavailable"
-            : "failed",
-        isReady
-          ? "Companion Runtime ready."
-          : isWaiting
-            ? "Companion Runtime is waiting for Platform prerequisites."
-            : `Companion Runtime entered status '${companion.status}'.`
-      );
-
-      if (isReady) {
-        this.addDiagnostic(
-          "platform.companion.started",
-          "info",
-          "Companion Runtime started successfully.",
-          "starting-companion",
-          "companion"
-        );
-      } else if (isWaiting) {
-        this.addDiagnostic(
-          "platform.companion.waiting",
-          "warning",
-          "Companion Runtime is waiting for Platform prerequisites.",
-          "starting-companion",
-          "companion"
+      const companion = this.composition.companion.getState();
+      this.updateState({ companion });
+      if (companion.status === "ready") {
+        this.updateSubsystem(
+          "companion",
+          "ready",
+          "Platform Companion capability lifecycle is ready."
         );
       } else {
-        this.addError(
-          "platform.companion.start.failed",
+        this.recordSubsystemFailure(
+          "companion",
           companion.failure?.message ??
-            `Companion Runtime entered status '${companion.status}' during startup.`,
+            `Companion Runtime entered '${companion.status}'.`,
           "starting-companion",
-          "companion"
+          companion.status === "waiting-for-platform"
+            ? "unavailable"
+            : "failed"
         );
       }
     } catch (error) {
-      const message = getErrorMessage(error);
-
-      this.updateSubsystem(
+      this.recordSubsystemFailure(
         "companion",
-        "failed",
-        `Companion Runtime failed to start: ${message}`
-      );
-
-      this.addError(
-        "platform.companion.start.failed",
-        `Companion Runtime failed to start: ${message}`,
-        "starting-companion",
-        "companion"
+        `Companion Runtime failed to start: ${getErrorMessage(error)}`,
+        "starting-companion"
       );
     }
   }
 
   private completeBoot(): void {
     this.setPhase("validating");
-
-    const hasFailedSubsystem = this.state.subsystems.some(
-      (subsystem) => subsystem.status === "failed"
+    const requiredFailure = this.state.subsystems.some(
+      ({ required, status }) =>
+        required && status !== "ready"
     );
-
-    const hasUnavailableSubsystem = this.state.subsystems.some(
-      (subsystem) => subsystem.status === "unavailable"
-    );
-
-    if (hasFailedSubsystem || this.state.errors.length > 0) {
-      this.updateState({
-        status: "failed",
-        phase: "failed",
-        readyAt: null,
-      });
-
+    if (requiredFailure || !this.state.manifestVerified) {
+      this.updateState({ status: "failed", phase: "failed", readyAt: null });
       this.addDiagnostic(
         "platform.boot.failed",
         "error",
-        "Oracle Platform boot failed.",
+        "Oracle Platform boot failed closed.",
         "failed"
       );
-
       return;
     }
 
-    if (hasUnavailableSubsystem) {
-      this.updateState({
-        status: "degraded",
-        phase: "complete",
-        readyAt: new Date().toISOString(),
-      });
-
-      this.addDiagnostic(
-        "platform.boot.degraded",
-        "warning",
-        "Oracle Platform boot completed in a degraded state.",
-        "complete"
-      );
-
-      return;
-    }
-
+    const optionalFailure = this.state.subsystems.some(
+      ({ required, status }) =>
+        !required && status !== "ready"
+    );
     this.updateState({
-      status: "ready",
+      status: optionalFailure ? "degraded" : "ready",
       phase: "complete",
       readyAt: new Date().toISOString(),
     });
-
     this.addDiagnostic(
-      "platform.boot.ready",
-      "info",
-      "Oracle Platform is ready.",
+      optionalFailure ? "platform.boot.degraded" : "platform.boot.ready",
+      optionalFailure ? "warning" : "info",
+      optionalFailure
+        ? "Oracle Platform is ready with isolated optional degradation."
+        : "Oracle Platform is ready.",
       "complete"
     );
   }
 
-  private setPhase(phase: OraclePlatformBootPhase): void {
-    this.updateState({
+  private markInventory(
+    id: OraclePlatformSubsystemId,
+    count: number,
+    message: string
+  ): void {
+    if (count === 0) {
+      this.recordSubsystemFailure(
+        id,
+        `${getSubsystemName(id)} declared no runtime components.`,
+        this.state.phase,
+        "unavailable"
+      );
+      return;
+    }
+    this.updateSubsystem(id, "ready", message);
+  }
+
+  private recordSubsystemFailure(
+    id: OraclePlatformSubsystemId,
+    message: string,
+    phase: OraclePlatformBootPhase,
+    status: Extract<
+      OraclePlatformSubsystemStatus,
+      "failed" | "unavailable"
+    > = "failed"
+  ): void {
+    const { required } = getOracleSubsystemDeclaration(
+      this.composition.manifest,
+      id
+    );
+    this.updateSubsystem(id, status, message);
+    this.updateState({ errors: Object.freeze([...this.state.errors, message]) });
+    this.addDiagnostic(
+      `platform.${id}.${status}`,
+      required ? "error" : "warning",
+      message,
       phase,
-    });
+      id
+    );
+  }
+
+  private setPhase(phase: OraclePlatformBootPhase): void {
+    this.updateState({ phase });
   }
 
   private updateSubsystem(
@@ -478,24 +396,22 @@ export class OraclePlatformRuntime {
     status: OraclePlatformSubsystemStatus,
     message: string
   ): void {
-    const subsystem = createSubsystem(id, status, message);
-    const existingIndex = this.state.subsystems.findIndex(
-      (candidate) => candidate.id === id
+    const declaration = getOracleSubsystemDeclaration(
+      this.composition.manifest,
+      id
     );
-
-    if (existingIndex === -1) {
-      this.updateState({
-        subsystems: [...this.state.subsystems, subsystem],
-      });
-
-      return;
-    }
-
-    const subsystems = [...this.state.subsystems];
-    subsystems[existingIndex] = subsystem;
-
+    const subsystem = createSubsystem(
+      id,
+      declaration.required,
+      status,
+      message
+    );
     this.updateState({
-      subsystems,
+      subsystems: Object.freeze(
+        this.state.subsystems.map((current) =>
+          current.id === id ? subsystem : current
+        )
+      ),
     });
   }
 
@@ -507,43 +423,14 @@ export class OraclePlatformRuntime {
     subsystemId: OraclePlatformSubsystemId | null = null
   ): void {
     this.updateState({
-      diagnostics: [
+      diagnostics: Object.freeze([
         ...this.state.diagnostics,
-        createDiagnostic(
-          code,
-          level,
-          message,
-          phase,
-          subsystemId
-        ),
-      ],
+        createDiagnostic(code, level, message, phase, subsystemId),
+      ]),
     });
   }
 
-  private addError(
-    code: string,
-    message: string,
-    phase: OraclePlatformBootPhase,
-    subsystemId: OraclePlatformSubsystemId | null = null
-  ): void {
-    this.updateState({
-      errors: [...this.state.errors, message],
-      diagnostics: [
-        ...this.state.diagnostics,
-        createDiagnostic(
-          code,
-          "error",
-          message,
-          phase,
-          subsystemId
-        ),
-      ],
-    });
-  }
-
-  private updateState(
-    update: Partial<MutablePlatformState>
-  ): void {
+  private updateState(update: Partial<MutablePlatformState>): void {
     this.state = {
       ...this.state,
       ...update,
@@ -552,9 +439,10 @@ export class OraclePlatformRuntime {
   }
 }
 
-export function createInitialPlatformState(): MutablePlatformState {
+export function createInitialPlatformState(
+  composition: OraclePlatformComposition
+): MutablePlatformState {
   const now = new Date().toISOString();
-
   return {
     status: "idle",
     phase: "idle",
@@ -562,27 +450,37 @@ export function createInitialPlatformState(): MutablePlatformState {
     readyAt: null,
     stoppedAt: null,
     updatedAt: now,
-    services: [],
-    applications: [],
+    manifest: composition.manifest,
+    manifestVerified: false,
+    services: Object.freeze([]),
+    applications: Object.freeze([]),
+    gameIntegrations: Object.freeze([]),
+    guidanceProviders: Object.freeze([]),
     companion: createInitialCompanionRuntimeState(),
-    subsystems: [],
-    diagnostics: [],
-    errors: [],
+    subsystems: Object.freeze(
+      composition.manifest.subsystems.map(({ id, required }) =>
+        createSubsystem(id, required, "pending", "Not started.")
+      )
+    ),
+    diagnostics: Object.freeze([]),
+    errors: Object.freeze([]),
   };
 }
 
 function createSubsystem(
   id: OraclePlatformSubsystemId,
+  required: boolean,
   status: OraclePlatformSubsystemStatus,
   message: string
 ): OraclePlatformSubsystem {
-  return {
+  return Object.freeze({
     id,
     name: getSubsystemName(id),
+    required,
     status,
     message,
     updatedAt: new Date().toISOString(),
-  };
+  });
 }
 
 function createDiagnostic(
@@ -592,33 +490,60 @@ function createDiagnostic(
   phase: OraclePlatformBootPhase,
   subsystemId: OraclePlatformSubsystemId | null
 ): OraclePlatformDiagnostic {
-  return {
+  return Object.freeze({
     code,
     level,
     message,
     phase,
     subsystemId,
     timestamp: new Date().toISOString(),
-  };
+  });
 }
 
-function getSubsystemName(
-  id: OraclePlatformSubsystemId
-): string {
+function getSubsystemName(id: OraclePlatformSubsystemId): string {
   switch (id) {
+    case "composition":
+      return "Runtime Composition";
     case "services":
       return "Oracle Services";
     case "applications":
       return "Oracle Applications";
+    case "game-integrations":
+      return "Game Integrations";
+    case "guidance":
+      return "Guidance Providers";
     case "extensions":
       return "Oracle Extension Runtime";
     case "companion":
-      return "Oracle Companion Runtime";
+      return "Oracle Platform Companion Runtime";
   }
 }
 
+function cloneCompanion(
+  companion: ReturnType<typeof createInitialCompanionRuntimeState>
+) {
+  return {
+    ...companion,
+    context: companion.context
+      ? {
+          ...companion.context,
+          game: companion.context.game
+            ? { ...companion.context.game }
+            : null,
+          activeWindow: companion.context.activeWindow
+            ? { ...companion.context.activeWindow }
+            : null,
+          discoveries: companion.context.discoveries.map((item) => ({
+            ...item,
+          })),
+        }
+      : null,
+    failure: companion.failure
+      ? { ...companion.failure }
+      : null,
+  };
+}
+
 function getErrorMessage(error: unknown): string {
-  return error instanceof Error
-    ? error.message
-    : String(error);
+  return error instanceof Error ? error.message : String(error);
 }

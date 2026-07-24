@@ -22,7 +22,7 @@ export type OracleService = {
 
   description: string;
 
-  requiredCapabilities: string[];
+  requiredCapabilities: readonly string[];
 
   status: OracleServiceStatus;
 };

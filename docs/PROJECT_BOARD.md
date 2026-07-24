@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.5
+**Version:** 5.6
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -34,13 +34,11 @@ Callsign lifecycle and inactive Desktop trusted-device custody. Migration 011
 and Migration 012 are implemented and certified on PostgreSQL 17.10. Both
 remain undeployed and inactive.
 
-Sprint 20 — Platform Runtime Activation is the next approved Programme
-objective, but it is not activated. Its required production composition-root
-ADR changes runtime authority, startup ownership and failure semantics. The
-Founder decision request is recorded in
-`docs/sprints/SPRINT_20_FOUNDER_DECISION_REQUIRED.md`. No Sprint 20
-implementation has begun. Production deployment, Migration execution, Gate C
-and runtime activation remain separate Founder gates.
+Sprint 20 — Platform Runtime Activation is Founder-approved and active under
+ADR-040. Implementation is complete and locally certified. The canonical
+runtime manifests mechanically equal the constructed Web and Electron
+runtimes. Founder closure is pending. Production deployment, Migration
+execution, Gate C and runtime persistence remain unauthorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -385,11 +383,15 @@ tagging remains part of a separately authorised release workflow.
 
 ## Platform Coordination
 
-- Platform Runtime and bootstrap function implemented
-- ten Service definitions registered by Platform Runtime
-- six Application definitions registered by Platform Runtime
+- target-specific Web and Electron composition roots implemented
+- shared dependency-injected Platform Runtime implemented
+- ten Service and six Application definitions injected through instance-owned
+  registries
+- Game Integration and Guidance provider composition explicit
+- canonical Web and Electron manifests mechanically match constructed runtime
 - Extension Runtime and Capability Graph implemented
-- production startup does not currently invoke Platform bootstrap
+- required fail-closed, optional degraded and fresh recovery semantics verified
+- renderer-safe Platform health projection implemented
 
 ## Desktop Platform
 
@@ -422,8 +424,8 @@ tagging remains part of a separately authorised release workflow.
 - `/companion` renders only Applications-owned models and maintains Service order
 - the production route honestly reports unavailable because authoritative live
   runtime delivery is not yet connected
-- the Platform-level and desktop-level lifecycle foundations are not yet
-  connected by an explicit contract
+- Platform Companion readiness and Desktop Session/Context ownership are
+  connected by an explicit non-merging lifecycle contract
 
 ## Game Integrations
 
@@ -455,13 +457,12 @@ Game Integrations
 Open findings:
 
 1. some web Applications directly import repositories, pipelines and engines
-2. Platform bootstrap is not a production entry-point dependency
-3. registered Services and Applications are metadata foundations, not the
+2. registered Services and Applications are metadata foundations, not the
    exclusive runtime boundary
-4. the desktop composition root does not yet project authoritative Session
+3. the desktop composition root does not yet project authoritative Session
    Context into a Guidance Request, execute the Provider Service and deliver
    Application state to `/companion`
-5. curated-source freshness is manually governed; production runtime has not
+4. curated-source freshness is manually governed; production runtime has not
    exercised ready and partial-success presentation paths
 
 These findings are measured legacy exceptions retained from Sprint 12.1. They

@@ -8,10 +8,14 @@ import {
   type OracleCompanionPresentationState,
   type OracleDesktopBridge,
   type OracleDesktopHostState,
+  type OraclePlatformHealthSnapshot,
 } from "./contracts.js";
 import {
   isOracleCompanionPresentationState,
 } from "./companion/companion-presentation-state.js";
+import {
+  isOraclePlatformHealthSnapshot,
+} from "../lib/oracle/platform/platform-health.js";
 
 const oracleDesktopBridge: OracleDesktopBridge = {
   getHostState: () =>
@@ -31,6 +35,18 @@ const oracleDesktopBridge: OracleDesktopBridge = {
         value
       );
     },
+
+  getPlatformHealth: async () => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.getPlatformHealth
+    );
+    if (!isOraclePlatformHealthSnapshot(value)) {
+      throw new Error(
+        "Oracle desktop host returned an invalid Platform health snapshot."
+      );
+    }
+    return value as OraclePlatformHealthSnapshot;
+  },
 
   toggleOverlayPreview: () =>
     ipcRenderer.invoke(

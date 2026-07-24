@@ -9,7 +9,7 @@
 **Supersedes:** Earlier ADR ledger versions as an index; individual accepted records retain their own status
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 4.7
+**Version:** 4.8
 
 ---
 
@@ -2418,6 +2418,161 @@ Accepted — Founder-approved 24 July 2026. This decision creates no retention
 duration, implementation, migration, deletion operation or production
 authority. Undefined policy values remain configurable governance inputs and
 must not be hard-coded.
+
+---
+
+# ADR-040
+
+## Title
+
+Production Composition Roots and Runtime Authority
+
+## Decision
+
+Oracle adopts explicit target-specific composition roots for Web and Electron.
+Both roots construct one shared dependency-injected Oracle Platform runtime.
+Host-specific roots own host startup and shutdown only; they do not create
+parallel Platform architectures.
+
+The runtime composition manifest is the canonical runtime contract. Each root
+must declare an immutable, versioned manifest independently from the runtime
+instances it constructs. Certification must mechanically compare the
+constructed runtime with that declared manifest. Missing, additional,
+duplicated, reordered or differently identified runtime components constitute
+an architectural failure and must fail startup closed.
+
+Platform, Service, Application, Game Integration and Guidance dependencies are
+supplied explicitly. Runtime registries are instance-owned. Process-global
+registries and implicit module registration are prohibited as production
+runtime authority.
+
+Required subsystems fail startup closed. Optional subsystem failures remain
+isolated and produce an observable degraded Platform state. Every composition
+attempt exposes an immutable renderer-safe health projection identifying:
+
+- composition contract and manifest version;
+- target host;
+- attempt identity and lifecycle state;
+- declared subsystem requirement;
+- actual subsystem readiness;
+- renderer-safe diagnostics; and
+- available Service, Application, Game Integration and Guidance identities.
+
+Recovery constructs a fresh manifest-verified runtime and does not reuse
+failed registries, providers, lifecycle objects or hidden mutable authority.
+
+Next.js server instrumentation owns Web composition startup. Electron main owns
+Desktop composition startup and shutdown.
+
+The Platform Companion owns Platform-level capability readiness. The Desktop
+Companion Session Manager retains authoritative Desktop Session and Context
+lifecycle ownership. They are composed through an explicit lifecycle contract;
+their state or authority is not merged.
+
+Existing direct imports may remain only through the measured legacy migration
+seam. The dependency-boundary baseline cannot grow, and later work must reduce
+the seam over time.
+
+This decision does not activate runtime persistence.
+
+## Reason
+
+Oracle's Platform, Service and Application registries, Companion foundation,
+Game Integration registry and bootstrap existed as disconnected foundations.
+Neither Web nor Electron invoked one authoritative composition, and the
+existing bootstrap depended on global lower-layer registries.
+
+Production-capable entry points require one inspectable answer to what was
+declared, what was constructed, what became ready, what failed and which
+capabilities remain safely available. Target-specific roots preserve genuine
+host differences while a shared injected runtime prevents Web and Desktop from
+becoming competing Oracle architectures.
+
+Making the manifest canonical prevents documentation drift and hidden runtime
+authority. Mechanical equality turns composition divergence into a
+certification and startup failure rather than an operational surprise.
+
+## Alternatives Considered
+
+### One universal root with host conditionals
+
+Rejected. It would combine Next.js, Electron and future host ownership inside
+an increasingly conditional module and obscure genuine lifecycle boundaries.
+
+### Global registries as production runtime authority
+
+Rejected. Global mutable registration is an implicit service locator, weakens
+test and recovery isolation, and can preserve hidden state across retries or
+development reloads.
+
+### Distributed self-bootstrap by Application or subsystem
+
+Rejected. It creates multiple runtime authorities, duplicates capability
+construction and cannot produce one authoritative health or readiness result.
+
+### Continue deferring Platform activation
+
+Rejected. It would preserve current behaviour temporarily but block the
+approved Programme and allow legacy direct coupling to grow.
+
+## Consequences
+
+- Web and Electron gain explicit composition roots.
+- The shared Platform runtime receives constructed dependencies rather than
+  importing registration side effects.
+- Service and Application registries become instance-owned.
+- Game Integration and Guidance provider composition becomes explicit.
+- Manifest equality becomes a mandatory mechanical certification gate.
+- Required and optional subsystem semantics become part of runtime health.
+- Desktop and Platform Companion lifecycles remain distinct and contractually
+  composed.
+- Runtime recovery replaces failed composition instances.
+- New runtime capabilities must declare ownership, identity, requirement,
+  compatibility and health behaviour.
+- Service and Application global registry authority is removed. Any later
+  registry is instance-owned and explicitly injected.
+
+## Reversibility
+
+Host adapters, dependency-injection construction and manifest versions may be
+replaced through compatible or versioned successors. A future host can compose
+the shared runtime without changing the four-layer architecture.
+
+Returning to global registries, distributed bootstrap or parallel Web and
+Desktop Platforms would require a superseding ADR and migration because later
+Sprints will depend on this runtime authority.
+
+## Risks
+
+- incorrect required/optional classification could either block safe startup
+  or expose an incomplete product;
+- lifecycle drift could arise between Platform readiness and Desktop Session
+  ownership;
+- development reloads could create duplicate roots without idempotent host
+  ownership;
+- recovery could leak failed resources unless shutdown and replacement are
+  deterministic;
+- health projections could expose sensitive implementation detail;
+- manifest maintenance could become ceremonial unless mechanically verified;
+  and
+- the legacy seam could stagnate instead of shrinking.
+
+These risks require immutable contracts, exact manifest verification,
+renderer-safe diagnostics, lifecycle tests, fresh recovery construction and a
+non-growing dependency-boundary baseline.
+
+## Authority Boundary
+
+This ADR authorises Sprint 20 planning, implementation, local verification,
+certification and documentation reconciliation only.
+
+It does not authorise deployment, execution of any migration, reopening Gate C,
+runtime persistence, production-environment changes or alteration of the
+External Companion trust boundary.
+
+## Status
+
+Accepted — Founder-approved 24 July 2026.
 
 ---
 

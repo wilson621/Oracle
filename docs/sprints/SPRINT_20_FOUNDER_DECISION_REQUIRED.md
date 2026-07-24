@@ -2,7 +2,7 @@
 
 **Sprint:** 20 — Platform Runtime Activation
 
-**Status:** Not activated; Founder architecture decision required
+**Status:** Resolved — Option A approved and ADR-040 authorised
 
 **Date:** 24 July 2026
 
@@ -14,7 +14,7 @@ expected. This decision establishes runtime authority, startup ownership and
 failure semantics across the web Platform and Desktop Companion. It therefore
 cannot be treated as routine implementation.
 
-No Sprint 20 implementation has begun.
+The Founder approved Option A and activated Sprint 20 on 24 July 2026.
 
 ## Principal Engineer recommendation
 
@@ -37,11 +37,15 @@ Approve an ADR with these constraints:
 - existing direct imports remain only behind a measured legacy seam whose
   dependency-boundary baseline cannot grow
 
-## Founder decision requested
+## Founder decision
 
-Approve, reject or amend the recommended production composition-root
-architecture and authorise its ADR. Approval would activate Sprint 20
-implementation and certification only. It would not:
+Option A is approved, including the additional requirement that the immutable
+versioned runtime composition manifest is the canonical runtime contract and
+that certification mechanically proves exact equality with the constructed
+runtime. Any divergence is an architectural failure.
+
+The approval activates Sprint 20 implementation and certification only. It
+does not:
 
 - deploy Migration 010, 011 or 012
 - reopen Gate C
@@ -49,5 +53,4 @@ implementation and certification only. It would not:
 - deploy to production
 - activate any persisted producer or consumer
 
-Until that decision is recorded, Sprint 19 remains the latest closed Sprint
-and production remains on the approved post-Migration-009 baseline.
+Production remains on the approved post-Migration-009 baseline.

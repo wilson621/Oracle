@@ -1,40 +1,28 @@
-import { registerOracleApplication } from "./application-registry";
+import {
+  OracleApplicationRegistry,
+} from "./application-registry";
+import type { OracleApplication } from "./application-types";
 
-let registered = false;
-
-export function registerCoreOracleApplications(): void {
-  if (registered) {
-    return;
-  }
-
-  registerOracleApplication({
+const CORE_ORACLE_APPLICATIONS: readonly OracleApplication[] = Object.freeze([
+  {
     id: "ai-coach",
     name: "AI Coach",
     description:
       "Personalised missions, predictions and coaching based on how the Operator plays.",
     route: "/coach",
-    requiredServices: [
-      "operator",
-      "sessions",
-      "missions",
-    ],
+    requiredServices: ["operator", "sessions", "missions"],
     status: "available",
-  });
-
-  registerOracleApplication({
+  },
+  {
     id: "oracle-brain",
     name: "Oracle Brain",
     description:
       "Strategic intelligence, assessment and explanation for the Operator.",
     route: "/oracle",
-    requiredServices: [
-      "operator",
-      "sessions",
-    ],
+    requiredServices: ["operator", "sessions"],
     status: "available",
-  });
-
-  registerOracleApplication({
+  },
+  {
     id: "loadouts",
     name: "Loadouts",
     description:
@@ -42,9 +30,8 @@ export function registerCoreOracleApplications(): void {
     route: "/loadouts",
     requiredServices: ["loadouts"],
     status: "available",
-  });
-
-  registerOracleApplication({
+  },
+  {
     id: "reports",
     name: "Reports",
     description:
@@ -52,9 +39,8 @@ export function registerCoreOracleApplications(): void {
     route: "/reports",
     requiredServices: ["reports"],
     status: "available",
-  });
-
-  registerOracleApplication({
+  },
+  {
     id: "career",
     name: "Career",
     description:
@@ -62,9 +48,8 @@ export function registerCoreOracleApplications(): void {
     route: "/career",
     requiredServices: ["progression"],
     status: "available",
-  });
-
-  registerOracleApplication({
+  },
+  {
     id: "companion",
     name: "Companion",
     description:
@@ -72,7 +57,20 @@ export function registerCoreOracleApplications(): void {
     route: "/companion",
     requiredServices: ["companion"],
     status: "available",
-  });
+  },
+]);
 
-  registered = true;
+export function registerCoreOracleApplications(
+  registry: OracleApplicationRegistry
+): void {
+  for (const application of CORE_ORACLE_APPLICATIONS) {
+    if (!registry.has(application.id)) registry.register(application);
+  }
+}
+
+export function createCoreOracleApplicationRegistry():
+  OracleApplicationRegistry {
+  const registry = new OracleApplicationRegistry();
+  registerCoreOracleApplications(registry);
+  return registry;
 }

@@ -30,7 +30,7 @@ implementation stages and do not use fractional Sprint numbering.
 | 17 | Scale-Safe Trust Data Plane | Fully complete — Migration 009 deployed and verified in production | Sprint 15.5B; earlier proposed as Scale Hardening | [Plan](SPRINT_17_PLAN.md), [Closure](SPRINT_17_CLOSURE.md), [Migration dossier](SPRINT_17_MIGRATION_009_DOSSIER.md), [Deployment closure](SPRINT_17_MIGRATION_009_DEPLOYMENT_CLOSURE.md) |
 | 18 | Operator Trust and Control | Complete — Founder-approved and closed; Migration 010 certified, Gate C intentionally deferred | None | [Plan](SPRINT_18_PLAN.md), [Closure](SPRINT_18_CLOSURE.md), [Phase 1 audit](SPRINT_18_PHASE_1_AUDIT.md), [Phase 2 evidence](SPRINT_18_PHASE_2_IMPLEMENTATION.md), [Phase 3 evidence](SPRINT_18_PHASE_3_IMPLEMENTATION.md), [Gate C package](SPRINT_18_GATE_C_OPERATIONAL_PACKAGE.md), [Gate C deferral](SPRINT_18_GATE_C_DEFERRAL.md), [ADRs 037–039](../Decisions.md) |
 | 19 | Account, Identity and Commissioning | Complete and certified — Migrations 011 and 012 undeployed and inactive | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md), [Closure](SPRINT_19_CLOSURE.md), [Founder decisions implementation](SPRINT_19_FOUNDER_DECISIONS_IMPLEMENTATION.md), [Migration 011 certification](SPRINT_19_MIGRATION_011_CERTIFICATION.md), [Migration 012 certification](SPRINT_19_MIGRATION_012_VERIFICATION.md), [Certification](SPRINT_19_CERTIFICATION.md) |
-| 20 | Platform Runtime Activation | Approved Programme; not activated — Founder composition-root ADR decision required | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md), [Founder decision required](SPRINT_20_FOUNDER_DECISION_REQUIRED.md) |
+| 20 | Platform Runtime Activation | Implementation complete and locally certified; awaiting Founder closure | None | [Plan](SPRINT_20_PLAN.md), [Implementation](SPRINT_20_IMPLEMENTATION.md), [Certification](SPRINT_20_CERTIFICATION.md), [ADR-040](../Decisions.md) |
 | 21 | Oracle Session and Evidence Lifecycle | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 22 | Operator Understanding Accumulation | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 23 | Oracle Session Intelligence | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
@@ -58,5 +58,5 @@ synchronized governance baseline and is now complete and immutable. Sprint 19
 is complete and certified under the Founder's lifecycle interpretation.
 Migrations 011 and 012 are implemented and certified but neither deployed nor
 activated. Production remains post-Migration-009 and pre-Migration-010, and
-runtime persistence remains disabled. Sprint 20 is not activated pending its
-required Founder composition-root ADR decision.
+runtime persistence remains disabled. Sprint 20 is active under ADR-040 for
+implementation and local certification only.

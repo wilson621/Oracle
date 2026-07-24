@@ -159,9 +159,12 @@ never rewritten.
 - Sprint 17 — Scale-Safe Trust Data Plane: Founder-approved and fully complete,
   including Migration 009 production deployment; previously proposed as Scale
   Hardening under the alias Sprint 15.5B.
-- Sprint 18 — Operator Trust and Control: approved in the Engineering
-  Programme but not started or activated.
+- Sprint 18 — Operator Trust and Control: complete and immutable.
+- Sprint 19 — Account, Identity and Commissioning: complete and certified;
+  Migrations 011 and 012 remain undeployed and inactive.
+- Sprint 20 — Platform Runtime Activation: Founder-approved and active under
+  ADR-040 for implementation and local certification only.
 
 Migration 009 is deployed and verified, but runtime persistence remains
-disabled. Deployment or closure of one Sprint does not activate the next
-Sprint.
+disabled. Migrations 010, 011 and 012 remain undeployed and inactive. Deployment
+or closure of one Sprint does not activate the next Sprint.

@@ -1618,10 +1618,10 @@ personalise Guidance or activate Companion consumption.
 
 Verified remaining debt includes manual curated-source freshness review,
 structurally verified but not production-fed ready and partial-success states,
-five pre-existing lint warnings, unwired Platform bootstrap, measured legacy
-web Application-boundary exceptions, and the lack of an explicit integration
-contract between the Platform-level and desktop-level Companion lifecycle
-foundations.
+measured legacy web Application-boundary exceptions and authoritative live
+Guidance delivery. ADR-040 now provides target-specific Platform composition
+roots and an explicit non-merging contract between Platform Companion
+readiness and Desktop Companion Session ownership.
 
 ---
 

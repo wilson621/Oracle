@@ -14,6 +14,7 @@
   "lint": "eslint",
 
   "architecture:audit": "node scripts/audit-dependency-boundaries.mjs",
+  "platform-composition:verify": "tsc -p tsconfig.platform-composition-verification.json && node .tmp-platform-composition-verification/scripts/verify-platform-composition.js && node -e \"require('node:fs').rmSync('.tmp-platform-composition-verification', { recursive: true, force: true })\"",
 
   "operator:ownership:verify": "tsc -p tsconfig.operator-ownership-verification.json && node .tmp-operator-ownership-verification/scripts/verify-operator-ownership.js && node -e \"require('node:fs').rmSync('.tmp-operator-ownership-verification', { recursive: true, force: true })\"",
 

@@ -2,8 +2,8 @@
 
 **Sprint:** 12.1 Commit 5
 **Baseline commit:** `54a7298`
-**Audit date:** 20 July 2026
-**Status:** Accepted and enforced in Sprint 12.1 Commit 5
+**Audit date:** 24 July 2026
+**Status:** Active enforced baseline; reconciled by Sprint 20
 
 ---
 
@@ -15,10 +15,14 @@ the Desktop, preload, IPC and Companion Session ownership boundaries remain
 isolated from game-specific knowledge.
 
 The broader web architecture has documented legacy exceptions. Applications
-still bypass operational Service boundaries, Platform bootstrap imports lower
-layer registries, and five game-specific defaults remain outside Game
-Integrations. Five source-level type/barrel cycle groups also remain. These are
-accepted as a measured baseline for this commit, not accepted architecture.
+still bypass operational Service boundaries, and game-specific defaults remain
+outside Game Integrations. Five source-level type/barrel cycle groups also
+remain. These are a measured migration baseline, not accepted architecture.
+
+Sprint 20 removed the active Platform Runtime imports of lower-layer global
+registries. Target-specific composition roots now perform assembly outside the
+Platform layer and inject instance-owned registries through Platform-owned
+contracts.
 
 The genuine engine runtime barrel cycle was removed through import-path changes
 only. The verified runtime dependency graph now contains zero circular groups.
@@ -53,11 +57,11 @@ must not be hidden by regenerating the baseline.
 
 # Dependency Graph Assessment
 
-The Commit 5 graph covers 317 TypeScript files.
+The Sprint 20 graph covers 396 TypeScript files.
 
 - runtime circular groups: 0
 - source-level type/barrel circular groups: 5
-- documented boundary exceptions: 55
+- documented boundary exceptions: 47
 - new or unexpected violations: 0
 
 The source cycle groups contain 49 file memberships across Contextual Intent,
@@ -71,7 +75,8 @@ engine cycle correction.
 
 ## High — Applications bypass Services
 
-**Evidence:** 46 exact imports from `app/` or `components/` into repositories,
+**Evidence:** The enforced baseline retains exact imports from `app/` or
+`components/` into repositories,
 pipelines, engines, feature functions or Platform-owned types.
 
 **Impact:** Registered Services are metadata rather than the exclusive
@@ -99,21 +104,18 @@ Integration result is connected through an approved game-context boundary.
 **Implementation risk:** Medium to high. Premature removal would change current
 product defaults without a replacement runtime source.
 
-## Medium — Platform bootstrap imports lower-layer registries
+## Resolved in Sprint 20 — Platform bootstrap imported lower-layer registries
 
-**Evidence:** Four imports connect Platform runtime/types to Service and
-Application registry modules.
+**Prior evidence:** Platform runtime imported global Service and Application
+registries.
 
-**Impact:** Registration orchestration is coupled to lower-layer definitions,
-which weakens dependency inversion even though production bootstrap is not yet
-active.
+**Resolution:** ADR-040 introduced Web and Electron composition roots outside
+the Platform layer. They inject instance-owned Service, Application, Game
+Integration and Guidance registries through Platform-owned contracts. Global
+Service and Application registry authority was removed.
 
-**Recommended correction:** Supply registration definitions through an
-explicit bootstrap composition boundary when production Platform activation is
-planned.
-
-**Implementation risk:** Medium. Changing it before bootstrap activation would
-redesign an unproven integration seam.
+Eight resolved baseline entries were removed. Reintroduction now fails the
+audit.
 
 ## Medium — Source-level circular dependencies
 
@@ -129,11 +131,12 @@ subsystem.
 **Implementation risk:** Medium. A broad cleanup would touch mature
 intelligence code and is outside this commit.
 
-## Observation — Inactive integration foundations
+## Observation — Remaining integration limits
 
-Platform bootstrap is not called by production entry points, the Platform and
-desktop Companion lifecycle models remain separate, and Game Integration
-evaluation does not populate desktop Companion Context.
+Production-capable Web and Electron source entry points now invoke explicit
+composition roots. Platform Companion readiness and Desktop Companion Session
+ownership remain deliberately separate under a versioned lifecycle contract.
+Authoritative live Guidance delivery remains later Programme work.
 
 These are known integration limits, not dependency defects corrected by this
 commit.
@@ -144,9 +147,9 @@ commit.
 
 ## Platform
 
-Shared Desktop Platform contracts remain serializable and game-agnostic. The
-frozen public surface is respected. The four baselined registry imports remain
-the principal coordination-layer exception.
+Shared Platform and Desktop contracts remain serializable and game-agnostic.
+The Platform imports only composition contracts; host roots own lower-layer
+assembly.
 
 ## Services
 
@@ -180,8 +183,6 @@ remains the authoritative desktop Session and Context owner.
 1. Prevent new violations through the Commit 5 automated audit.
 2. Migrate Application workflows to operational Services incrementally.
 3. Connect Game Integration context before removing legacy game defaults.
-4. Invert Platform registration dependencies when production bootstrap is
-   activated.
-5. Reduce source-level type/barrel cycles during focused subsystem work.
+4. Reduce source-level type/barrel cycles during focused subsystem work.
 
 Only item 1 and the minimal runtime-cycle import correction belong to Commit 5.

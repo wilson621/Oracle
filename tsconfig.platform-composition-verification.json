@@ -1,0 +1,33 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "target": "ES2022",
+    "rootDir": ".",
+    "outDir": ".tmp-platform-composition-verification",
+    "noEmit": false,
+    "incremental": false,
+    "isolatedModules": false
+  },
+  "include": [
+    "scripts/verify-platform-composition.ts",
+    "desktop/platform/desktop-composition-root.ts",
+    "lib/companion/**/*.ts",
+    "lib/oracle/composition/**/*.ts",
+    "lib/oracle/applications/application-registry.ts",
+    "lib/oracle/applications/application-types.ts",
+    "lib/oracle/applications/register-core-applications.ts",
+    "lib/oracle/game-integrations/**/*.ts",
+    "lib/oracle/platform/**/*.ts",
+    "lib/oracle/services/companion-guidance/**/*.ts",
+    "lib/oracle/services/register-core-services.ts",
+    "lib/oracle/services/service-registry.ts",
+    "lib/oracle/services/service-types.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist-electron"
+  ]
+}

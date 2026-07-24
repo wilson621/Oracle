@@ -215,7 +215,10 @@ delivery authorities have been reviewed.
 | Migration 012 verification | [Sprint 19 Migration 012 Verification](sprints/SPRINT_19_MIGRATION_012_VERIFICATION.md) | Certified, undeployed and inactive |
 | Sprint 19 certification | [Sprint 19 Certification](sprints/SPRINT_19_CERTIFICATION.md) | Complete and certified |
 | Sprint 19 closure | [Sprint 19 Closure](sprints/SPRINT_19_CLOSURE.md) | Engineering-complete; production unchanged |
-| Sprint 20 architecture gate | [Sprint 20 Founder Decision Required](sprints/SPRINT_20_FOUNDER_DECISION_REQUIRED.md) | Not activated; composition-root ADR decision required |
+| Sprint 20 architecture decision | [Sprint 20 Founder Decision](sprints/SPRINT_20_FOUNDER_DECISION_REQUIRED.md) | Resolved; Option A approved and ADR-040 accepted |
+| Sprint 20 authority | [Sprint 20 Plan](sprints/SPRINT_20_PLAN.md) and [ADR-040](Decisions.md) | Founder-approved and active; implementation and local certification authorised |
+| Sprint 20 implementation | [Sprint 20 Implementation](sprints/SPRINT_20_IMPLEMENTATION.md) | Implementation complete; production unchanged |
+| Sprint 20 certification | [Sprint 20 Certification](sprints/SPRINT_20_CERTIFICATION.md) | Locally certified; awaiting Founder closure |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

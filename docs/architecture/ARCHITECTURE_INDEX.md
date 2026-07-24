@@ -765,6 +765,10 @@ deferred and runtime persistence remains disabled. Sprint 19 is complete. Its
 atomic Account-to-Operator provisioning boundary, Founder authentication and
 identity journeys, and inactive Desktop credential custody are implemented.
 Migrations 011 and 012 are certified. All remain undeployed and inactive.
+Sprint 20 is active under ADR-040. Its target-specific composition roots,
+canonical manifests and shared injected runtime are implemented and locally
+certified but not deployed. Founder closure is pending. Runtime persistence
+remains disabled.
 
 Current Runtime
 
@@ -777,6 +781,12 @@ Current Runtime
 ✓ Prediction Engine
 ✓ Mission Engine
 ✓ Platform, Service and Application registry foundations
+✓ Web and Electron target-specific composition roots
+✓ Canonical immutable runtime composition manifests
+✓ Mechanical manifest-to-runtime equality certification
+✓ Instance-owned injected runtime registries
+✓ Required fail-closed and optional degraded readiness
+✓ Fresh runtime recovery and renderer-safe health projection
 ✓ Electron Companion host
 ✓ Companion Session Manager and Context ownership
 ✓ Desktop Host Snapshot and Event Stream
@@ -806,15 +816,11 @@ Current Runtime
 
 Accepted integration debt
 
-- Platform bootstrap production wiring
 - authoritative desktop Session Context to Guidance Request, Provider Service
   and renderer-safe Application-state delivery
-- explicit integration between the Platform-level and desktop-level Companion
-  lifecycle foundations
 - manual curated-source freshness governance
 - production exercise of ready and partial-success Companion presentation paths
-- measured legacy web Application boundary exceptions and five pre-existing
-  lint warnings
+- measured legacy web Application boundary exceptions
 
 ---
 

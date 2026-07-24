@@ -1,9 +1,9 @@
 import {
   createOracleGameIntegrationRegistry,
   evaluateGameIntegrations,
-  OracleGameIntegrationRegistry,
   type OracleGameDetectionInput,
   type OracleGameDetectionMatch,
+  type OracleGameIntegrationRegistryContract,
 } from "../../lib/oracle/game-integrations/index.js";
 import type {
   OracleDesktopTargetCandidateInput,
@@ -63,7 +63,7 @@ export type OracleDesktopGameCandidateResult =
 export class OracleDesktopGameIntegrationCoordinator {
   constructor(
     private readonly registry:
-      OracleGameIntegrationRegistry =
+      OracleGameIntegrationRegistryContract =
         createOracleGameIntegrationRegistry()
   ) {}
 

@@ -62,12 +62,14 @@ Oracle enters this Programme with:
 
 Oracle has strong foundations but is not yet Beta-complete:
 
-- Platform bootstrap is not active in production entry points
+- Platform bootstrap was not active at Programme approval; Sprint 20 has since
+  implemented and locally certified target-specific source entry points
 - Migration 009 is deployed and verified, but runtime persistence is disabled
 - Operator control operations are not operational
 - no production candidate-generation or Understanding-consumption loop exists
 - authoritative Companion Guidance delivery is disconnected
-- the two Companion lifecycle foundations remain unjoined
+- the two Companion lifecycle foundations were unjoined at Programme approval;
+  Sprint 20 now composes them through a non-merging lifecycle contract
 - several Applications bypass Services
 - several product routes are placeholders or use mock data
 - sign-in and account recovery are not complete product journeys
@@ -96,8 +98,9 @@ Its provisioning boundary, web Account journey, identity
 lifecycle and inactive Desktop credential-custody contracts are implemented.
 Migrations 011 and 012 are certified but neither deployed nor activated.
 Production remains post-Migration-009 and runtime persistence remains
-disabled. Sprint 20 is the next planned objective and is awaiting the Founder
-architecture decision required for its production composition-root ADR.
+disabled. Sprint 20 is Founder-approved and active under ADR-040. Its
+composition-root implementation is complete and locally certified; Founder
+closure is pending. Deployment and runtime persistence are not authorised.
 
 # Beta Philosophy
 

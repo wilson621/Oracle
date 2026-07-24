@@ -106,12 +106,11 @@ Activated lifecycle states. Development verification preserves the canonical
 future chain while production remains on its approved post-Migration-009
 baseline. Runtime persistence remains disabled.
 
-The next engineering stage is Sprint 20 — Platform Runtime Activation. It is
-not yet activated because its production composition-root ADR requires a
-Founder architecture decision. The decision request is recorded in
-`docs/sprints/SPRINT_20_FOUNDER_DECISION_REQUIRED.md`. Any later implementation
-and certification will remain independent of production deployment, migration
-execution and runtime activation.
+Sprint 20 — Platform Runtime Activation is Founder-approved and active under
+ADR-040. Its target-specific roots, canonical manifests and shared injected
+runtime are implemented and locally certified. Founder closure is pending.
+Production deployment, migration execution and runtime persistence remain
+unauthorised.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own
@@ -340,15 +339,14 @@ the Operator Understanding Foundation ahead of that future delivery work.
 
 Known integration boundaries requiring deliberate review:
 
-- Platform bootstrap is not wired into production startup.
 - web pages do not consistently consume Services through Applications.
 - authoritative Companion Guidance delivery is not wired into the production
   desktop composition root or renderer-safe delivery boundary.
-- the Platform-level and desktop-level Companion runtimes are not integrated.
+- Platform Companion readiness and Desktop Session ownership are contractually
+  composed but intentionally not merged.
 - curated source freshness remains a manual review responsibility.
 - ready and partial-success presentation paths are structurally verified but
   do not yet receive production runtime data.
-- five pre-existing lint warnings remain accepted technical debt.
 - Desktop Platform API version 1 is frozen through
   `desktop/platform/index.ts`; internal implementations remain private.
 

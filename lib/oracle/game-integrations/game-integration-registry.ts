@@ -2,7 +2,13 @@ import type {
   OracleGameIntegration,
 } from "./game-integration";
 
-export class OracleGameIntegrationRegistry {
+export interface OracleGameIntegrationRegistryContract {
+  getAll(): OracleGameIntegration[];
+  getById(id: string): OracleGameIntegration | null;
+}
+
+export class OracleGameIntegrationRegistry
+  implements OracleGameIntegrationRegistryContract {
   private readonly integrations =
     new Map<
       string,

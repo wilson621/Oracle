@@ -23,6 +23,9 @@ export type {
 export {
   OracleGameIntegrationRegistry,
 } from "./game-integration-registry";
+export type {
+  OracleGameIntegrationRegistryContract,
+} from "./game-integration-registry";
 
 export {
   evaluateGameIntegrations,

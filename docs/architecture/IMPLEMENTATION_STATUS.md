@@ -346,20 +346,28 @@ exclusive production access path.
 
 ## Platform Coordination Foundations
 
-Implemented under `lib/oracle/platform/`, `services/`, `applications/` and
-`lib/companion/`:
+Implemented under `lib/oracle/platform/`, `lib/oracle/composition/`,
+`services/`, `applications/`, `lib/companion/` and `desktop/platform/`:
 
-- Platform Runtime and bootstrap function
-- ten registered Service definitions
-- six registered Application definitions
+- shared dependency-injected Platform Runtime
+- canonical immutable versioned Web and Electron manifests
+- exact manifest-to-constructed-runtime validation
+- instance-owned Service and Application registries
+- ten injected Service definitions
+- six injected Application definitions
+- explicit Game Integration and Guidance provider composition
 - Companion Runtime foundation
 - Extension Runtime and resolver
 - Capability Graph
 - Companion connector contracts and registry
+- required fail-closed and optional degraded readiness
+- fresh composition recovery attempts
+- renderer-safe unified Platform health snapshots
+- Next.js instrumentation and Electron main composition invocation
 
-These foundations compile, but `bootstrapOraclePlatform()` is not currently
-called by a production web or Electron entry point. Registry availability must
-not be described as end-to-end runtime activation.
+These foundations are implemented in production-capable source entry points
+and locally certified under ADR-040. They are not deployed. Runtime persistence
+remains disabled. Founder closure is pending.
 
 ## Companion Intelligence Foundation
 
@@ -403,6 +411,8 @@ Implemented under `desktop/`:
 - serialized supported-game discovery, attachment and process replacement
 - renderer-safe Companion presentation projection and restricted additive
   preload bridge
+- renderer-safe Platform health projection
+- injected composed Game Integration registry
 - frozen Desktop Platform API version 1 and compatibility manifest
 
 Desktop Platform services exchange serializable data and do not expose
@@ -445,6 +455,7 @@ The renderer-accessible desktop API is `OracleDesktopBridge` in
 - subscribing to host-state changes
 - reading the renderer-safe Companion presentation state
 - subscribing to validated Companion presentation-state changes
+- reading the validated renderer-safe Platform health snapshot
 
 The Companion presentation bridge is additive and separate from the frozen
 Desktop Platform API version 1 namespace. It exposes only contract identity,
@@ -500,13 +511,10 @@ Verified strengths:
 Open boundary findings:
 
 1. Web Applications still import repositories, pipelines and engines directly.
-2. Platform bootstrap is implemented but is not wired into production startup.
-3. `/companion` exists, but authoritative Guidance Application state is not yet
+2. `/companion` exists, but authoritative Guidance Application state is not yet
    delivered from the desktop composition root; the route therefore renders an
    honest unavailable state.
-4. `lib/companion` and `desktop/companion` model different lifecycle layers but
-   have no implemented integration contract.
-5. Curated source freshness is a manual review responsibility, and production
+3. Curated source freshness is a manual review responsibility, and production
    runtime data has not exercised ready and partial-success presentation paths.
 These are recorded findings, not authorisation to redesign verified systems.
 They are now measured by `npm run architecture:audit`; documented legacy
@@ -539,6 +547,8 @@ evidence and correction priorities.
   Memory promotion boundary.
 - ADR-039 defines retention, operational deletion, eligibility removal,
   legally required retention, physical deletion, audit and tombstone policy.
+- ADR-040 defines target-specific composition roots, the canonical manifest,
+  instance-owned injection, readiness, recovery and renderer-safe health.
 - Any proposal requiring injection, protected-memory access or modification,
   hooks, patching, automation, input simulation, anti-cheat interference or an
   unfair-advantage technique is an architectural blocker and must be escalated.

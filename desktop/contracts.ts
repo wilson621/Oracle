@@ -24,6 +24,9 @@ import type {
 import type {
   OracleCompanionPresentationState,
 } from "./companion/companion-presentation-state.js";
+import type {
+  OraclePlatformHealthSnapshot,
+} from "../lib/oracle/platform/platform-health.js";
 
 export const DESKTOP_CHANNELS = {
   getHostState:
@@ -31,6 +34,9 @@ export const DESKTOP_CHANNELS = {
 
   getCompanionPresentationState:
     "oracle-desktop:get-companion-presentation-state",
+
+  getPlatformHealth:
+    "oracle-desktop:get-platform-health",
 
   toggleOverlayPreview:
     "oracle-desktop:toggle-overlay-preview",
@@ -65,6 +71,7 @@ export const ORACLE_DESKTOP_RECOVERY_SHORTCUT =
 
 export type {
   OracleCompanionPresentationState,
+  OraclePlatformHealthSnapshot,
   OracleDesktopAttachmentState,
   OracleDesktopAttachmentStatus,
   OracleDesktopAttachmentTarget,
@@ -87,6 +94,9 @@ export type OracleDesktopBridge = {
 
   getCompanionPresentationState: () =>
     Promise<OracleCompanionPresentationState>;
+
+  getPlatformHealth: () =>
+    Promise<OraclePlatformHealthSnapshot>;
 
   toggleOverlayPreview: () =>
     Promise<OracleDesktopHostState>;

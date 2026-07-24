@@ -1,0 +1,259 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-24T19:42:14.364Z",
+  "contract": "oracle.runtime-composition",
+  "contractVersion": 1,
+  "targets": [
+    {
+      "target": "web",
+      "manifestVersion": "1.0.0",
+      "declared": {
+        "subsystems": [
+          {
+            "id": "composition",
+            "required": true
+          },
+          {
+            "id": "services",
+            "required": true
+          },
+          {
+            "id": "applications",
+            "required": true
+          },
+          {
+            "id": "game-integrations",
+            "required": true
+          },
+          {
+            "id": "guidance",
+            "required": true
+          },
+          {
+            "id": "extensions",
+            "required": false
+          },
+          {
+            "id": "companion",
+            "required": true
+          }
+        ],
+        "services": [
+          "operator",
+          "sessions",
+          "missions",
+          "memory",
+          "progression",
+          "reports",
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "companion"
+        ],
+        "applications": [
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "reports",
+          "career",
+          "companion"
+        ],
+        "gameIntegrations": [
+          "call-of-duty"
+        ],
+        "guidanceProviders": [
+          "game-integrations.call-of-duty.curated-guidance"
+        ]
+      },
+      "constructed": {
+        "subsystems": [
+          {
+            "id": "composition",
+            "required": true
+          },
+          {
+            "id": "services",
+            "required": true
+          },
+          {
+            "id": "applications",
+            "required": true
+          },
+          {
+            "id": "game-integrations",
+            "required": true
+          },
+          {
+            "id": "guidance",
+            "required": true
+          },
+          {
+            "id": "extensions",
+            "required": false
+          },
+          {
+            "id": "companion",
+            "required": true
+          }
+        ],
+        "services": [
+          "operator",
+          "sessions",
+          "missions",
+          "memory",
+          "progression",
+          "reports",
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "companion"
+        ],
+        "applications": [
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "reports",
+          "career",
+          "companion"
+        ],
+        "gameIntegrations": [
+          "call-of-duty"
+        ],
+        "guidanceProviders": [
+          "game-integrations.call-of-duty.curated-guidance"
+        ]
+      },
+      "exactMatch": true
+    },
+    {
+      "target": "electron",
+      "manifestVersion": "1.0.0",
+      "declared": {
+        "subsystems": [
+          {
+            "id": "composition",
+            "required": true
+          },
+          {
+            "id": "services",
+            "required": true
+          },
+          {
+            "id": "applications",
+            "required": true
+          },
+          {
+            "id": "game-integrations",
+            "required": true
+          },
+          {
+            "id": "guidance",
+            "required": true
+          },
+          {
+            "id": "extensions",
+            "required": false
+          },
+          {
+            "id": "companion",
+            "required": true
+          }
+        ],
+        "services": [
+          "operator",
+          "sessions",
+          "missions",
+          "memory",
+          "progression",
+          "reports",
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "companion"
+        ],
+        "applications": [
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "reports",
+          "career",
+          "companion"
+        ],
+        "gameIntegrations": [
+          "call-of-duty"
+        ],
+        "guidanceProviders": [
+          "game-integrations.call-of-duty.curated-guidance"
+        ]
+      },
+      "constructed": {
+        "subsystems": [
+          {
+            "id": "composition",
+            "required": true
+          },
+          {
+            "id": "services",
+            "required": true
+          },
+          {
+            "id": "applications",
+            "required": true
+          },
+          {
+            "id": "game-integrations",
+            "required": true
+          },
+          {
+            "id": "guidance",
+            "required": true
+          },
+          {
+            "id": "extensions",
+            "required": false
+          },
+          {
+            "id": "companion",
+            "required": true
+          }
+        ],
+        "services": [
+          "operator",
+          "sessions",
+          "missions",
+          "memory",
+          "progression",
+          "reports",
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "companion"
+        ],
+        "applications": [
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "reports",
+          "career",
+          "companion"
+        ],
+        "gameIntegrations": [
+          "call-of-duty"
+        ],
+        "guidanceProviders": [
+          "game-integrations.call-of-duty.curated-guidance"
+        ]
+      },
+      "exactMatch": true
+    }
+  ],
+  "requiredFailure": "pass-failed-closed",
+  "optionalFailure": "pass-observable-degraded",
+  "recovery": "pass-fresh-runtime",
+  "rendererSafety": "pass-redacted-serializable",
+  "lifecycleOwnership": "pass-not-merged",
+  "runtimePersistence": "disabled",
+  "deployment": "not-authorised",
+  "migrationsExecuted": false,
+  "result": "pass"
+}

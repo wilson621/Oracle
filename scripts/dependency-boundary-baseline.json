@@ -13,9 +13,6 @@
     "application-service-bypass:app/intelligence/page.tsx->lib/oracle/state/index.ts",
     "application-service-bypass:app/loadouts/page.tsx->lib/oracle/loadouts/loadout-engine.ts",
     "application-service-bypass:app/memory/page.tsx->lib/oracle/getOracleMemory.ts",
-    "application-service-bypass:app/onboarding/page.tsx->lib/operator/completeOperatorCommissioning.ts",
-    "application-service-bypass:app/onboarding/page.tsx->lib/operator/getCurrentOperator.ts",
-    "application-service-bypass:app/onboarding/page.tsx->lib/operator/isOperatorCommissioned.ts",
     "application-service-bypass:app/operator/page.tsx->lib/operator/getCurrentOperator.ts",
     "application-service-bypass:app/operator/page.tsx->lib/operator/getOperatorStatus.ts",
     "application-service-bypass:app/operator/page.tsx->lib/operator/isOperatorCommissioned.ts",
@@ -49,13 +46,8 @@
     "application-service-bypass:components/ui/StatusCard.tsx->lib/oracle/prediction/prediction-types.ts",
     "game-knowledge-outside-integration:app/intelligence/page.tsx:call of duty",
     "game-knowledge-outside-integration:app/operator/page.tsx:call of duty",
-    "game-knowledge-outside-integration:lib/operator/getCurrentOperator.ts:call of duty",
     "game-knowledge-outside-integration:lib/oracle/saveOracleSession.ts:call of duty",
-    "game-knowledge-outside-integration:lib/oraclePrompt.ts:call of duty",
-    "platform-lower-layer-import:lib/oracle/platform/platform-runtime.ts->lib/oracle/applications/index.ts",
-    "platform-lower-layer-import:lib/oracle/platform/platform-runtime.ts->lib/oracle/services/index.ts",
-    "platform-lower-layer-import:lib/oracle/platform/platform-types.ts->lib/oracle/applications/index.ts",
-    "platform-lower-layer-import:lib/oracle/platform/platform-types.ts->lib/oracle/services/index.ts"
+    "game-knowledge-outside-integration:lib/oraclePrompt.ts:call of duty"
   ],
   "allowedCircularGroups": {
     "source": [
