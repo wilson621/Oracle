@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.3
+**Version:** 5.4
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -17,16 +17,18 @@
 
 # Current Delivery Status
 
-Sprint 18 — Operator Trust and Control is Founder-approved and active from
-24 July 2026. Phases 1 and 2 are Founder-accepted. Phase 3 additive persistence
-and Repository boundaries are implemented, locally verified and
-rollback-proven. Phase 3 is Founder-accepted. The Gate C operational package is
-approved, and Migration 010 is the certified deployment-ready production
-candidate. Gate C execution is intentionally deferred until immediately before
-the first production release requiring Operator Trust and Control persistence.
-The persistence architecture is complete but undeployed.
+Sprint 18 — Operator Trust and Control is Founder-approved and closed.
+Governance, contracts, persistence architecture, Repository ownership,
+verification, the Persistence Contract, the Gate C package and its formal
+deferral are accepted. Migration 010 is the certified deployment-ready
+production candidate. Gate C execution is intentionally deferred until
+immediately before the first production release requiring Operator Trust and
+Control persistence. The persistence architecture is complete but undeployed.
 The approved scope is recorded in `docs/sprints/SPRINT_18_PLAN.md`, and ADR-037,
 ADR-038 and ADR-039 are accepted.
+
+No Sprint is currently active. Sprint 19 planning has not begun and requires
+explicit Founder instruction.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -49,7 +51,19 @@ The Sprint 18 deployment deferral is recorded in
 
 # Latest Closed Sprint
 
-## Sprint 17 — Scale-Safe Trust Data Plane
+## Sprint 18 — Operator Trust and Control
+
+**Status:** Complete — Founder-approved and closed
+**Closure report:** `docs/sprints/SPRINT_18_CLOSURE.md`
+**Completed baseline:** `sprint-18-complete`
+**Deployment status:** Migration 010 certified; Gate C intentionally deferred
+
+Sprint 18 delivered the accepted governance, contract and persistence
+foundation for Operator Trust and Control. Production remains
+pre-Migration-010, runtime persistence remains disabled and the unstarted
+Service-control and Trust Centre work is deferred rather than active.
+
+## Previous Closed Sprint — Sprint 17
 
 **Status:** Complete — Founder-approved and closed
 **Historical planning alias:** Sprint 15.5B

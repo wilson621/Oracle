@@ -11,7 +11,7 @@
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 4.9
+**Version:** 5.0
 
 ---
 
@@ -728,8 +728,15 @@ required indexes, Snapshot budgets, concurrency verification and automated
 boundary enforcement. It also produced the version-pinned Migration 009
 deployment dossier. Migration 009 is deployed and verified, establishing the
 production persistence foundation without activating runtime persistence.
-Sprint 18 is now active under its Founder-approved Plan. Its activation did not
-change the verified Sprint 17 implementation or production state.
+## Sprint 18 — Operator Trust and Control
+
+**Status:** Complete — Founder-approved and closed
+
+Sprint 18 established the accepted governance, contract and persistence
+architecture for Operator Trust and Control. Migration 010 is certified and
+deployment-ready, but Gate C is intentionally deferred. Production remains
+pre-Migration-010 and runtime persistence remains disabled. No Sprint is
+currently active; Sprint 19 planning requires explicit Founder instruction.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

@@ -9,7 +9,7 @@
 **Supersedes:** Earlier Architecture Index versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.9
+**Version:** 6.0
 
 ---
 
@@ -758,9 +758,11 @@ including the verified Migration 009 production deployment. The production
 persistence foundation is established, but runtime persistence remains
 disabled.
 
-Sprint 18 — Operator Trust and Control is Founder-approved and active from
-24 July 2026. Implementation has not started. Activation changed no subsystem
-ownership, runtime or production state.
+Sprint 18 — Operator Trust and Control is Founder-approved and closed. Its
+governance, contracts, persistence architecture and Repository ownership are
+accepted. Migration 010 is certified but undeployed, Gate C is intentionally
+deferred and runtime persistence remains disabled. No Sprint is currently
+active.
 
 Current Runtime
 

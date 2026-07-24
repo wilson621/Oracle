@@ -3,7 +3,7 @@
 **Sprint:** 18 — Operator Trust and Control
 **Authority:** Founder-approved Sprint Plan beneath the Oracle Engineering Programme
 **Owner:** Oracle Platform Engineering
-**Status:** Active — implementation authorised
+**Status:** Complete — Founder-approved and closed
 **Classification:** Living approved Sprint Plan
 **Expected Stability:** Scope changes require explicit Founder approval
 **Prepared:** 24 July 2026
@@ -12,6 +12,7 @@
 **Implementation:** Persistence architecture complete; Migration 010 certified
 and deployment-ready
 **Production:** Gate C intentionally deferred; no Sprint 18 production change
+**Closed:** 24 July 2026
 
 ---
 
@@ -610,8 +611,10 @@ Production control-path activation requires:
 
 ## Gate E — Sprint closure
 
-Closure does not activate Sprint 19, inference, runtime persistence consumers,
-production release, push or tagging.
+Founder closure was granted on 24 July 2026. The accepted closure terminates
+further Sprint 18 implementation and records Phases 4–6 as deferred rather
+than operational. Closure does not activate Sprint 19, inference, runtime
+persistence consumers or a production release.
 
 # Acceptance Criteria
 
@@ -704,8 +707,8 @@ because an implementation path exists.
 
 # Activation Declaration
 
-Sprint 18 is active from the clean synchronized governance baseline created
-from this approval.
+Sprint 18 was activated from the clean synchronized governance baseline
+created from this approval and was closed by the Founder on 24 July 2026.
 
 Activation:
 

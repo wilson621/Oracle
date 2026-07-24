@@ -10,15 +10,15 @@
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
 **Verified Branch:** `sprint-9-overlay`
-**Verified Repository Baseline:** `e873b515a149d392850cf4c6e0c00cfb4ecd3313`
+**Verified Repository Baseline:** `sprint-18-complete`
 **Sprint 14 Implementation Baseline:** `3868975`
 **Sprint 15 Phase 1:** Complete and committed
 **Sprint 15 Phase 2:** Complete and committed
 **Sprint 15 Phase 3:** Complete and committed
 **Sprint 16:** Trust Boundary complete and committed
 **Sprint 17:** Scale-Safe Trust Data Plane fully complete; Migration 009 deployed and verified in production
-**Sprint 18:** Active — persistence architecture complete; Migration 010
-certified and deployment-ready; Gate C intentionally deferred
+**Sprint 18:** Complete — Founder-approved and closed; persistence architecture
+complete; Migration 010 certified and Gate C intentionally deferred
 
 ---
 

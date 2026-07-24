@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 3.1
+**Version:** 3.2
 
 ---
 
@@ -79,9 +79,8 @@ This architecture was established during Sprint 8 and forms the permanent founda
 
 # Latest Approved Execution Status
 
-Sprint 17 is Founder-approved and closed. Sprint 18 — Operator Trust and
-Control is Founder-approved and active from 24 July 2026. Implementation has
-not started.
+Sprint 17 and Sprint 18 are Founder-approved and closed. No Sprint is
+currently active. Sprint 19 planning has not started or been authorised.
 
 Sprint 16 — Trust Boundary is complete at
 `58589b52de0db341e6518fa9f235bb18854e6b30`. It was executed under the
@@ -94,9 +93,9 @@ Hardening. Migration 009 is deployed and verified, establishing the production
 persistence foundation without enabling runtime persistence.
 
 `docs/ENGINEERING_PROGRAMME.md` is the authoritative Sprint 17–Beta Programme.
-This Master Build Plan identifies Sprint 18 as the current execution objective.
-Its approved scope, phases, exclusions, gates and acceptance criteria are
-recorded in `docs/sprints/SPRINT_18_PLAN.md`.
+Sprint 18 closure is recorded in `docs/sprints/SPRINT_18_CLOSURE.md`.
+Migration 010 is certified and deployment-ready, but Gate C is intentionally
+deferred and production remains pre-Migration-010.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own
@@ -134,7 +133,7 @@ activation occurred.
 
 ## Sprint 18 — Operator Trust and Control
 
-**Status:** Active — Founder-approved; implementation not started
+**Status:** Complete — Founder-approved and closed
 **Plan:** `docs/sprints/SPRINT_18_PLAN.md`
 **Activation date:** 24 July 2026
 
@@ -143,9 +142,11 @@ dispute, export, retention and deletion control before production inference.
 Undefined Founder policy values must be represented through configurable,
 versioned policy infrastructure rather than hard-coded defaults.
 
-Activation authorises implementation only within the approved Plan. It does
-not activate runtime persistence, inference, Understanding accumulation,
-personalisation, database migration or production control paths.
+The accepted outcome includes governance, contracts, persistence architecture,
+Repository ownership and verification. Gate C and the unstarted Service
+controls and Trust Centre remain deferred. Runtime persistence, inference,
+Understanding accumulation, personalisation and production control paths
+remain disabled.
 
 ## Historical Sprint 15 — Operator Intelligence: Operator Understanding Foundation
 

@@ -2,13 +2,13 @@
 
 **Document Status:** Approved
 
-**Version:** 1.0
+**Version:** 1.1
 
 **Owner:** Founder
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** At Sprint 18 closure
+**Next Review:** At Sprint 19 planning
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -85,9 +85,14 @@ verification, and established the production persistence foundation. The
 empty-table planner Verification Hold is resolved through the authoritative
 production-shaped evidence rule recorded in the deployment dossier.
 
-Sprint 18 — Operator Trust and Control is Founder-approved and active from
-24 July 2026 under `docs/sprints/SPRINT_18_PLAN.md`. No runtime producer,
-consumer or persistence path has been enabled by activation.
+Sprint 18 — Operator Trust and Control is Founder-approved and closed. The
+accepted governance, contract and persistence architecture is complete.
+Migration 010 is certified and deployment-ready, but Gate C is intentionally
+deferred. Production remains pre-Migration-010, and no runtime producer,
+consumer or persistence path is enabled.
+
+No Sprint is currently active. Sprint 19 planning requires explicit Founder
+instruction.
 
 # Beta Philosophy
 

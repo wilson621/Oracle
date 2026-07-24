@@ -205,7 +205,9 @@ delivery authorities have been reviewed.
 | Migration 009 deployment and verification evidence | [Migration 009 Dossier](sprints/SPRINT_17_MIGRATION_009_DOSSIER.md) | Closed deployment record |
 | Migration 009 final production closure | [Migration 009 Deployment Closure Report](sprints/SPRINT_17_MIGRATION_009_DEPLOYMENT_CLOSURE.md) | Closed deployment record |
 | Sprint 17 machine-readable verification evidence | [Sprint 17 Permanent Evidence](sprints/evidence/sprint-17/README.md) | Closure evidence |
-| Active Sprint 18 authority | [Sprint 18 Plan](sprints/SPRINT_18_PLAN.md) | Approved, active Sprint Plan |
+| Sprint 18 authority | [Sprint 18 Plan](sprints/SPRINT_18_PLAN.md) | Approved, closed Sprint Plan |
+| Sprint 18 Founder-approved closure evidence | [Sprint 18 Closure Report](sprints/SPRINT_18_CLOSURE.md) | Closed Sprint record |
+| Sprint 18 deferred production candidate | [Gate C Operational Package](sprints/SPRINT_18_GATE_C_OPERATIONAL_PACKAGE.md) and [Deferral](sprints/SPRINT_18_GATE_C_DEFERRAL.md) | Certified, undeployed |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation
