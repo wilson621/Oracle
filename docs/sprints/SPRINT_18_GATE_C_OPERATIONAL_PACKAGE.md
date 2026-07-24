@@ -4,9 +4,12 @@
 
 **Gate:** C — Permanent Migration 010 execution
 
-**Authority:** Founder-accepted Phase 3; execution not yet authorised
+**Authority:** Founder-approved production candidate; Gate C execution
+intentionally deferred
 
-**Status:** Prepared; awaiting explicit Founder Gate C approval
+**Status:** Certified and deployment-ready; execution deferred until
+immediately before the first production release requiring Operator Trust and
+Control persistence
 
 **Production change:** None
 
@@ -29,6 +32,12 @@ artifact, rebuilt artifact or artifact from another commit is not eligible.
 
 The tag is local until a separate push is authorised. Gate C must verify that
 the execution environment can resolve the exact accepted commit and tag.
+
+The Founder approved this certified candidate and subsequently deferred Gate C
+execution. The approval fixes the production candidate; it does not authorise
+execution while Gate C is deferred and does not complete any operational
+record field. Gate C must be revisited before the first production release
+that requires this persistence.
 
 ### Certified object manifest
 
@@ -441,5 +450,5 @@ It would not authorise:
 - Phase 4; or
 - an application release.
 
-No production action may occur until the Founder explicitly approves Gate C
-and all pending operational fields and checklists are complete.
+No production action may occur until the Founder explicitly reopens Gate C and
+all pending operational fields and checklists are complete.

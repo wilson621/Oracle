@@ -152,3 +152,9 @@ any permanent execution.
 
 Schema deployment, runtime registration and production control-path activation
 are separate decisions. None implies another.
+
+Migration 010 is the certified, deployment-ready production candidate. Its
+Gate C execution is intentionally deferred until immediately before the first
+production release that requires Operator Trust and Control persistence.
+Engineering may treat this persistence architecture as complete while
+continuing to treat the production schema as pre-Migration-010.

@@ -9,8 +9,9 @@
 **Prepared:** 24 July 2026
 **Approved:** 24 July 2026
 **Activated:** 24 July 2026
-**Implementation:** Phase 3 accepted; Gate C operational package prepared
-**Production:** No Sprint 18 production change authorised
+**Implementation:** Persistence architecture complete; Migration 010 certified
+and deployment-ready
+**Production:** Gate C intentionally deferred; no Sprint 18 production change
 
 ---
 
@@ -564,6 +565,13 @@ Required before implementing a migration:
 - no assumption that the next migration number or structure is predetermined.
 
 ## Gate C — Permanent database deployment
+
+Migration 010 is the Founder-approved production candidate. Gate C execution
+is intentionally deferred until immediately before the first production
+release requiring Operator Trust and Control persistence. Development may
+assume the approved persistence architecture is complete, but must not assume
+that Migration 010 exists in production or activate a production dependency
+on it.
 
 Required before any permanent execution:
 

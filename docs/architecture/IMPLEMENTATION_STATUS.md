@@ -17,7 +17,8 @@
 **Sprint 15 Phase 3:** Complete and committed
 **Sprint 16:** Trust Boundary complete and committed
 **Sprint 17:** Scale-Safe Trust Data Plane fully complete; Migration 009 deployed and verified in production
-**Sprint 18:** Active — Phase 3 persistence implemented and rollback-verified; undeployed
+**Sprint 18:** Active — persistence architecture complete; Migration 010
+certified and deployment-ready; Gate C intentionally deferred
 
 ---
 
@@ -79,6 +80,12 @@ completion gating, fail-closed policy, deletion residue removal, replay
 prevention, bounded indexed reads and byte-identical rollback catalogs.
 Migration 010 is undeployed, and no runtime registration, Service behavior,
 Application or future intelligence capability is active.
+
+The Founder has accepted Migration 010 as the production candidate and
+intentionally deferred Gate C until immediately before the first production
+release requiring Operator Trust and Control persistence. Development may rely
+on the accepted persistence architecture as complete, but production behavior
+must continue to treat Migration 010 as absent.
 
 ## Sprint 18 — Phase 2 Contracts and Policy Validation
 

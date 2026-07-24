@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.2
+**Version:** 5.3
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -21,7 +21,10 @@ Sprint 18 — Operator Trust and Control is Founder-approved and active from
 24 July 2026. Phases 1 and 2 are Founder-accepted. Phase 3 additive persistence
 and Repository boundaries are implemented, locally verified and
 rollback-proven. Phase 3 is Founder-accepted. The Gate C operational package is
-prepared; permanent Migration 010 execution is not approved.
+approved, and Migration 010 is the certified deployment-ready production
+candidate. Gate C execution is intentionally deferred until immediately before
+the first production release requiring Operator Trust and Control persistence.
+The persistence architecture is complete but undeployed.
 The approved scope is recorded in `docs/sprints/SPRINT_18_PLAN.md`, and ADR-037,
 ADR-038 and ADR-039 are accepted.
 
@@ -41,6 +44,8 @@ Implementation evidence is recorded in
 `docs/sprints/SPRINT_18_PHASE_3_IMPLEMENTATION.md`. Sprint 17 closure remains
 recorded in `docs/sprints/SPRINT_17_CLOSURE.md`; its version-pinned deployment
 decision artifact is `docs/sprints/SPRINT_17_MIGRATION_009_DOSSIER.md`.
+The Sprint 18 deployment deferral is recorded in
+`docs/sprints/SPRINT_18_GATE_C_DEFERRAL.md`.
 
 # Latest Closed Sprint
 
