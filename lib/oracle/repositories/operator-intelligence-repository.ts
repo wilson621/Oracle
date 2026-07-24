@@ -1,5 +1,11 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import {
+  createOperatorControlOperationReceipt,
+  createOperatorControlPolicySet,
+  type OperatorControlOperationReceipt,
+  type OperatorControlPolicySet,
+} from "../controls";
+import {
   OPERATOR_GAME_SESSION_EVIDENCE_ADMISSION_CONTRACT,
   OPERATOR_INTELLIGENCE_MAX_EVIDENCE_PER_CLAIM,
   OperatorIntelligencePageBudgetError,
@@ -99,6 +105,39 @@ export interface OperatorIntelligenceRepository {
   ): Promise<OperatorIntelligencePageResult<OperatorUnderstandingEligibility>>;
 }
 
+export interface OperatorIntelligenceControlRepository
+  extends OperatorIntelligenceRepository {
+  persistControlledClaimRevision(
+    operatorId: string,
+    commandDigest: string,
+    receipt: OperatorControlOperationReceipt,
+    evidenceReferences: readonly OperatorEvidenceReference[],
+    claimRevision:
+      | OperatorIntelligenceClaimRevision
+      | OperatorIntelligenceClaimTombstone,
+    policy: OperatorControlPolicySet
+  ): Promise<
+    OperatorIntelligenceClaimRevision | OperatorIntelligenceClaimTombstone
+  >;
+  appendControlledEvidenceDisposition(
+    operatorId: string,
+    commandDigest: string,
+    receipt: OperatorControlOperationReceipt,
+    disposition: OperatorEvidenceDisposition,
+    policy: OperatorControlPolicySet
+  ): Promise<OperatorEvidenceDisposition>;
+  appendControlIneligibilityBatch(
+    operatorId: string,
+    assessments: readonly OperatorControlIneligibilityAssessment[]
+  ): Promise<number>;
+}
+
+export type OperatorControlIneligibilityAssessment = Readonly<{
+  claimId: string;
+  claimRevisionId: string;
+  eligibility: OperatorUnderstandingEligibility;
+}>;
+
 type JsonRecord = Record<string, unknown>;
 
 export class OperatorIntelligenceRepositoryImmutableConflictError extends Error {
@@ -154,7 +193,7 @@ type EligibilityHistoryPageRow = Readonly<{
 }>;
 
 export class SupabaseOperatorIntelligenceRepository
-  implements OperatorIntelligenceRepository
+  implements OperatorIntelligenceControlRepository
 {
   constructor(private readonly client: SupabaseClient) {}
 
@@ -566,6 +605,144 @@ export class SupabaseOperatorIntelligenceRepository
       nextCursor,
       hasMore: page.hasMore,
     });
+  }
+
+  async persistControlledClaimRevision(
+    operatorId: string,
+    commandDigest: string,
+    receipt: OperatorControlOperationReceipt,
+    evidenceReferences: readonly OperatorEvidenceReference[],
+    claimRevision:
+      | OperatorIntelligenceClaimRevision
+      | OperatorIntelligenceClaimTombstone,
+    policy: OperatorControlPolicySet
+  ): Promise<
+    OperatorIntelligenceClaimRevision | OperatorIntelligenceClaimTombstone
+  > {
+    const validatedPolicy = createOperatorControlPolicySet(policy);
+    const validatedReceipt = createOperatorControlOperationReceipt(
+      receipt,
+      validatedPolicy
+    );
+    assertControlReceiptOwnership(operatorId, commandDigest, validatedReceipt);
+    if (
+      validatedReceipt.type !== "claim-correction" &&
+      validatedReceipt.type !== "claim-dispute"
+    ) {
+      throw new Error("Controlled claim receipt type is invalid.");
+    }
+    const validatedEvidence = evidenceReferences.map((evidence) =>
+      createOperatorEvidenceReference(evidence)
+    );
+    const validatedClaim = claimRevision.status === "deleted"
+      ? createOperatorIntelligenceClaimTombstone(claimRevision)
+      : createOperatorIntelligenceClaimRevision(
+          claimRevision,
+          validatedEvidence
+        );
+    assertOperatorOwnership(operatorId, [
+      ...validatedEvidence,
+      validatedClaim,
+    ]);
+
+    const { data, error } = await this.client.rpc(
+      "persist_operator_controlled_claim_revision",
+      {
+        p_operator_id: operatorId,
+        p_command_digest: commandDigest,
+        p_receipt: validatedReceipt,
+        p_evidence: validatedEvidence,
+        p_claim_revision: validatedClaim,
+      }
+    );
+    if (error) {
+      throw translatePersistenceError(error);
+    }
+
+    return validatedClaim.status === "deleted"
+      ? createOperatorIntelligenceClaimTombstone(data)
+      : createOperatorIntelligenceClaimRevision(data, validatedEvidence);
+  }
+
+  async appendControlledEvidenceDisposition(
+    operatorId: string,
+    commandDigest: string,
+    receipt: OperatorControlOperationReceipt,
+    disposition: OperatorEvidenceDisposition,
+    policy: OperatorControlPolicySet
+  ): Promise<OperatorEvidenceDisposition> {
+    const validatedPolicy = createOperatorControlPolicySet(policy);
+    const validatedReceipt = createOperatorControlOperationReceipt(
+      receipt,
+      validatedPolicy
+    );
+    assertControlReceiptOwnership(operatorId, commandDigest, validatedReceipt);
+    if (validatedReceipt.type !== "evidence-disposition") {
+      throw new Error("Controlled Evidence disposition receipt type is invalid.");
+    }
+    const validatedDisposition = createOperatorEvidenceDisposition(disposition);
+    assertOperatorOwnership(operatorId, [validatedDisposition]);
+    const { data, error } = await this.client.rpc(
+      "append_operator_controlled_evidence_disposition",
+      {
+        p_operator_id: operatorId,
+        p_command_digest: commandDigest,
+        p_receipt: validatedReceipt,
+        p_disposition: validatedDisposition,
+      }
+    );
+    if (error) {
+      throw translatePersistenceError(error);
+    }
+    return createOperatorEvidenceDisposition(data);
+  }
+
+  async appendControlIneligibilityBatch(
+    operatorId: string,
+    assessments: readonly OperatorControlIneligibilityAssessment[]
+  ): Promise<number> {
+    if (assessments.length < 1 || assessments.length > 100) {
+      throw new Error(
+        "Operator control ineligibility batch must contain 1 to 100 records."
+      );
+    }
+    const validated = assessments.map((assessment) => {
+      if (assessment.eligibility.eligible) {
+        throw new Error("Control batches cannot grant eligibility.");
+      }
+      return {
+        claimId: assessment.claimId,
+        claimRevisionId: assessment.claimRevisionId,
+        eligibility: assessment.eligibility,
+      };
+    });
+    const { data, error } = await this.client.rpc(
+      "append_operator_control_ineligibility_batch",
+      {
+        p_operator_id: operatorId,
+        p_assessments: validated,
+      }
+    );
+    if (error) {
+      throw translatePersistenceError(error);
+    }
+    if (!Number.isInteger(data) || data !== validated.length) {
+      throw new Error("Operator control ineligibility count is invalid.");
+    }
+    return data;
+  }
+}
+
+function assertControlReceiptOwnership(
+  operatorId: string,
+  commandDigest: string,
+  receipt: OperatorControlOperationReceipt
+): void {
+  if (
+    receipt.operatorId !== operatorId ||
+    !/^sha256:[0-9a-f]{64}$/.test(commandDigest)
+  ) {
+    throw new Error("Controlled persistence ownership or digest is invalid.");
   }
 }
 

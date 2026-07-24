@@ -17,7 +17,7 @@
 **Sprint 15 Phase 3:** Complete and committed
 **Sprint 16:** Trust Boundary complete and committed
 **Sprint 17:** Scale-Safe Trust Data Plane fully complete; Migration 009 deployed and verified in production
-**Sprint 18:** Active — Phase 2 contracts and policy validation implemented and verified
+**Sprint 18:** Active — Phase 3 persistence implemented and rollback-verified; undeployed
 
 ---
 
@@ -63,6 +63,22 @@ Context projection, Application persistence path or Platform activation was
 added or activated. Sprint 17 is Founder-approved and fully complete. Migration
 009 is deployed and verified, establishing the production persistence
 foundation while runtime persistence remains disabled.
+
+## Sprint 18 — Phase 3 Repository and Persistence
+
+Phase 3 implements the inert additive Migration 010 candidate, the Operator
+Control Repository, additive Operator and Operator Intelligence control
+Repository interfaces, RLS, narrow trusted SQL functions and rollback/catalog
+verification. Migration 009 remains byte-identical. Broad control purposes
+bind an exact Migration 009 admission policy or explicit null; the policy and
+consent authorities are not interchangeable.
+
+Disposable PostgreSQL 17.10 verification proves exact replay, stale
+concurrency, two-Operator isolation, direct-write denial, untrusted-RPC denial,
+completion gating, fail-closed policy, deletion residue removal, replay
+prevention, bounded indexed reads and byte-identical rollback catalogs.
+Migration 010 is undeployed, and no runtime registration, Service behavior,
+Application or future intelligence capability is active.
 
 ## Sprint 18 — Phase 2 Contracts and Policy Validation
 

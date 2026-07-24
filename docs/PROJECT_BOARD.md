@@ -18,9 +18,9 @@
 # Current Delivery Status
 
 Sprint 18 — Operator Trust and Control is Founder-approved and active from
-24 July 2026. Phase 1 was Founder-reviewed and approved. Phase 2 immutable
-control contracts and configurable fail-closed policy validation are
-implemented and verified; Phase 3 persistence implementation has not started.
+24 July 2026. Phases 1 and 2 are Founder-accepted. Phase 3 additive persistence
+and Repository boundaries are implemented, locally verified and
+rollback-proven; Founder Phase 3 review is pending.
 The approved scope is recorded in `docs/sprints/SPRINT_18_PLAN.md`, and ADR-037,
 ADR-038 and ADR-039 are accepted.
 
@@ -37,7 +37,7 @@ phases, verification and exit governance are recorded in
 `docs/sprints/SPRINT_17_PLAN.md`.
 
 Implementation evidence is recorded in
-`docs/sprints/SPRINT_18_PHASE_2_IMPLEMENTATION.md`. Sprint 17 closure remains
+`docs/sprints/SPRINT_18_PHASE_3_IMPLEMENTATION.md`. Sprint 17 closure remains
 recorded in `docs/sprints/SPRINT_17_CLOSURE.md`; its version-pinned deployment
 decision artifact is `docs/sprints/SPRINT_17_MIGRATION_009_DOSSIER.md`.
 

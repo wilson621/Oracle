@@ -1,0 +1,27 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "lib": ["ES2022"],
+    "types": ["node"],
+    "rootDir": ".",
+    "outDir": "./.tmp-operator-control-repository-verification",
+    "noEmit": false,
+    "isolatedModules": false,
+    "incremental": false
+  },
+  "include": [
+    "lib/oracle/controls/**/*.ts",
+    "lib/oracle/understanding/**/*.ts",
+    "lib/oracle/repositories/operator-control-repository.ts",
+    "scripts/operator-control-verification-fixtures.ts",
+    "scripts/verify-operator-control-repositories.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist-electron"
+  ]
+}
