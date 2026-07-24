@@ -8,8 +8,8 @@
 **Expected Stability:** Reviewed whenever accepted architecture or verified integration boundaries change
 **Supersedes:** Earlier current-architecture descriptions; historical baselines remain preserved
 **Superseded By:** None
-**Last Reviewed:** 21 July 2026
-**Version:** 5.4
+**Last Reviewed:** 24 July 2026
+**Version:** 5.5
 
 ---
 
@@ -38,7 +38,13 @@ must not be treated as the current sprint board.
 
 # Architectural Vision
 
-Oracle is the operating platform for gaming intelligence.
+Oracle is the Operator Intelligence Platform for supported gaming
+environments.
+
+The Operator is Oracle's durable subject. Games provide performance context,
+semantics and reviewed knowledge through Game Integrations. Oracle builds
+longitudinal understanding only from permitted, admitted and governed
+information.
 
 Oracle is designed as a platform rather than a single application.
 
@@ -62,7 +68,8 @@ The Platform is designed to support unlimited future games, applications, servic
 
 # Architectural Principles
 
-Oracle follows seven core architectural principles.
+Oracle follows seven structural architectural principles and one governing
+lifecycle principle.
 
 ## 1. Separation of Responsibility
 
@@ -83,6 +90,21 @@ Decision Intelligence recommends.
 The Pipeline orchestrates.
 
 Oracle Brain understands.
+
+---
+
+## Governing Lifecycle Principle — Trust and Promotion First
+
+Optional Observation, Evidence admission, Understanding eligibility and Memory
+retention are separate decisions. Promotion is never automatic, and no
+downstream system may bypass an upstream trust or promotion boundary.
+
+Not every Observation becomes Evidence. Not every Evidence becomes
+Understanding. Not every Understanding becomes Memory.
+
+“Intelligence First” means intelligence precedes presentation after the
+applicable trust and eligibility gates. It does not mean intelligence precedes
+Operator control.
 
 ---
 
@@ -209,6 +231,42 @@ The runtime currently consists of:
 
 # High-Level Architecture
 
+Before the current runtime-specific architecture, Oracle applies this governed
+Operator Intelligence lifecycle:
+
+```text
+Authenticated Operator and approved policy
+        ↓
+Trust and purpose-specific control
+        ↓
+Permitted transient Observation
+        ↓
+Authoritative source truth
+        ↓
+Minimal admitted Evidence reference
+        ↓
+Candidate and declared Understanding
+        ↓
+Eligibility, explanation and scope
+        ↓
+Selective Memory
+        ↓
+Purpose-scoped Oracle Context
+        ↓
+Specialised Behavioural Intelligence
+        ↓
+Guidance and Operator action
+        ↓
+Outcome reassessment
+        ↓
+Prediction and longitudinal refinement
+```
+
+This is the governed product lifecycle, not the current production runtime or
+a mandatory synchronous engine sequence. Later runtime activation remains
+governed by the Engineering Programme. Oracle Platform v0.9 has runtime
+persistence disabled.
+
 ```text
                      Operator
 
@@ -309,6 +367,21 @@ The Pipeline coordinates execution.
 It never performs intelligence reasoning.
 
 Business logic belongs inside Oracle engines.
+
+---
+
+# Operator Understanding and Game Context
+
+Oracle reasons across two different forms of context:
+
+- **Operator Understanding** is longitudinal, personal, purpose-scoped,
+  governed and revisable.
+- **Game Context** is environmental, Session-bound or integration-scoped and
+  interpreted by its Game Integration.
+
+Neither absorbs the other. Game Context may support Operator Understanding only
+through admitted Evidence and approved scope. Operator Understanding does not
+grant shared Services authority to reinterpret game-specific meaning.
 
 ---
 
@@ -425,6 +498,17 @@ Current production engines include:
 - Planner Engine
 - Operator Profile Engine
 - Contextual Intelligence Engine
+
+Governed Memory is selective retention, reassessment, decay and removal of
+eligible Understanding. The current `memoryEngine` derives a runtime pattern
+profile from historical Sessions and may later contribute candidate signals;
+it is not the durable Memory authority and its output is not automatically
+retained Understanding.
+
+The current Prediction Engine produces a bounded near-term performance
+forecast from existing Trend output. It must not be described as mature
+longitudinal Operator prediction until later governed Understanding, Guidance
+outcome and reassessment evidence exist.
 
 Additional future engines may include:
 
@@ -1487,6 +1571,13 @@ persistence foundation; deployment did not activate its runtime use.
 
 # Verified Integration Limits
 
+- the direct `analyseFight`, clip-upload, hard-coded Call of Duty Session,
+  Combat Rating and game-statistics paths are legacy product paths;
+- their continued presence does not make game analysis Oracle's architectural
+  centre;
+- they must not be expanded into new Operator Intelligence authority;
+- their migration belongs to later approved Session Intelligence and Unified
+  Product Experience Sprints;
 - `bootstrapOraclePlatform()` is implemented but is not invoked by the current
   web or Electron startup paths.
 - Service and Application registries are implemented metadata foundations;
@@ -1642,11 +1733,29 @@ Oracle is now operating on a stable production architecture with proven extensib
 
 ---
 
+## Version 5.5
+
+Operator-first governance reconciliation.
+
+Clarified:
+
+- Oracle is an Operator Intelligence Platform;
+- games are governed performance contexts;
+- Trust and promotion precede downstream intelligence;
+- Observation, Evidence, Understanding and Memory remain distinct;
+- promotion is never automatic;
+- Operator Understanding and Game Context retain separate authority;
+- current Memory and Prediction engines do not imply mature longitudinal
+  Memory or Prediction; and
+- the four-layer architecture remains unchanged.
+
+---
+
 # Closing Statement
 
 Oracle is no longer being built as a traditional gaming application.
 
-Oracle is an AI Gaming Intelligence Platform.
+Oracle is an Operator Intelligence Platform.
 
 The production architecture has been established.
 

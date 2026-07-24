@@ -8,8 +8,8 @@
 **Expected Stability:** Updated whenever approved work changes state
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
-**Last Reviewed:** 22 July 2026
-**Version:** 5.1
+**Last Reviewed:** 24 July 2026
+**Version:** 5.2
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -17,11 +17,16 @@
 
 # Current Delivery Status
 
-No Sprint is active. Sprint 17 — Scale-Safe Trust Data Plane is Founder-approved
-and fully complete, and all approved success criteria are satisfied. Migration
-009 is deployed and verified in production; the persistence foundation is
-established while runtime persistence remains disabled. Sprint 18 has not
-started and is not activated.
+Sprint 18 — Operator Trust and Control is Founder-approved and active from
+24 July 2026. Implementation has not started. Its approved scope is recorded in
+`docs/sprints/SPRINT_18_PLAN.md`, and ADR-037, ADR-038 and ADR-039 are accepted.
+
+Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
+success criteria are satisfied. Migration 009 is deployed and verified in
+production; the persistence foundation is established while runtime
+persistence remains disabled. Sprint 18 activation did not change production,
+activate runtime persistence, authorise a database migration or enable
+inference or personalisation.
 
 The complete approved Sprint 17–31 sequence and Beta Gates are recorded in
 `docs/ENGINEERING_PROGRAMME.md`. The approved Sprint 17 implementation scope,
@@ -433,8 +438,11 @@ remain accepted technical debt and do not authorise unrelated redesign.
 - [x] Master Build Plan reflects Sprint 14 closure
 - [x] canonical implementation status reflects Sprint 14 closure
 - [x] living delivery records reflect Sprint 17 completion, Migration 009
-  production deployment and verification, Sprint 18 inactivity and disabled
+  production deployment and verification, Sprint 18 activation and disabled
   runtime persistence
+- [x] ADR-037, ADR-038 and ADR-039 accepted
+- [x] Operator-first constitutional and architectural reconciliation applied
+- [x] Sprint 18 Plan approved and activated
 - [x] ADRs record desktop snapshot/event and Timeline/Telemetry ownership
 - [x] ADR records the Desktop Platform API version 1 compatibility commitment
 - [x] Sprint 12.1 implementation audit added

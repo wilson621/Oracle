@@ -8,23 +8,30 @@
 **Expected Stability:** Changes only through explicit constitutional amendment
 **Supersedes:** Lower-authority product and architectural rules where conflict exists
 **Superseded By:** None
-**Last Reviewed:** 21 July 2026
+**Last Reviewed:** 24 July 2026
 **Established:** Sprint 8  
-**Last Amended:** Sprint 13 closure — 21 July 2026
+**Last Amended:** Operator-first reconciliation and Sprint 18 activation — 24 July 2026
 
 ---
 
 # Mission Statement
 
-> **Oracle is the operating platform for gaming intelligence.**
+> **Oracle is the Operator Intelligence Platform.**
 
-Oracle exists to understand games, understand players and deliver intelligent, context-aware assistance through a unified and extensible platform.
+Oracle exists to develop trusted, explainable understanding of Operators and
+help them improve their judgment and capability across supported gaming
+environments.
+
+Games provide performance context. Oracle serves the Operator.
 
 ---
 
 # Vision Statement
 
-> **To augment every player's gaming experience through intelligent, context-aware assistance across every supported game.**
+> **To become the world's most trusted Operator Intelligence Platform: an
+> enduring platform that helps Operators improve over time through safe,
+> trusted and explainable intelligence across supported games and Oracle
+> Applications.**
 
 Oracle should become a natural part of the gaming experience: a platform that players launch because they are gaming, rather than because they are playing one particular title.
 
@@ -40,9 +47,17 @@ Oracle is not:
 - A collection of unrelated gaming tools
 - A game automation system
 - A replacement for the player
+- A clip-review product
+- A statistics platform
+- A system that treats every observation as durable personal intelligence
+- A generic human-surveillance platform
 
 Oracle is:
 
+- An Operator Intelligence Platform
+- A system for governed longitudinal understanding
+- A system in which games provide performance context
+- A system that separates Observation, Evidence, Understanding and Memory
 - A universal gaming intelligence platform
 - A system for understanding players
 - A system for understanding supported games
@@ -218,6 +233,22 @@ The same Oracle Applications must be capable of working with other supported gam
 New functionality must strengthen or correctly consume the Oracle Platform.
 
 A feature must not create a parallel architecture when an existing Platform contract can own the responsibility.
+
+---
+
+# Core Principle — Operator Intelligence Primacy
+
+> The Operator is Oracle's durable subject. Games are performance environments
+> that provide context, knowledge and permitted evidence.
+
+Oracle must optimise for durable Operator agency, understanding and improvement
+rather than isolated analysis, statistics, clips or game-specific feature
+volume.
+
+Game-specific meaning remains inside Game Integrations. Operator Intelligence
+remains governed through explicit Services, Evidence, scope, confidence,
+policy and lifecycle. This principle creates no new architectural layer and
+does not make every game-derived pattern an Operator-wide trait.
 
 ---
 
@@ -461,6 +492,23 @@ Desktop observation must be:
 - Excluded from unrelated desktop content where possible
 
 Sensitive data must not be collected merely because it is technically accessible.
+
+---
+
+# Core Principle — Promotion Requires Authority
+
+> Permission to observe is not permission to retain, infer or remember.
+
+Observation, Evidence, Understanding and Memory are separate lifecycle stages.
+Promotion between them is never automatic and requires explicit purpose,
+policy, consent where applicable, provenance, scope, quality, eligibility and
+retention authority.
+
+Not every Observation becomes Evidence. Not every Evidence becomes
+Understanding. Not every Understanding becomes Memory.
+
+No engine, model, Application, Game Integration or presentation component may
+promote information merely because it can access or generate it.
 
 ---
 
@@ -734,17 +782,30 @@ If the answer to any critical question is no, the proposal must be redesigned.
 
 # Guiding Statement
 
-Oracle understands games.
+Oracle studies Operators.
 
-Oracle understands players.
+Games provide performance context.
 
-Oracle delivers intelligence.
+Oracle turns permitted evidence into explainable intelligence.
+
+“Oracle studies Operators” is internal architectural doctrine. It means Oracle
+develops governed, longitudinal and explainable Understanding from permitted
+and admitted Evidence. It does not authorise continuous monitoring,
+indiscriminate collection or surveillance.
+
+Public-facing language must lead with Operator agency and benefit:
+
+> Oracle helps Operators improve their judgment and capability through safe,
+> trusted and explainable intelligence.
+
+The internal doctrine must not be used as an unqualified marketing claim where
+it could reasonably imply covert or unbounded surveillance.
 
 ---
 
 # Final Declaration
 
-> **Oracle is the operating platform for gaming intelligence.**
+> **Oracle is the Operator Intelligence Platform.**
 
 The Platform owns the foundation.
 
@@ -758,7 +819,7 @@ Extensions expand the ecosystem.
 
 Oracle assists without interfering.
 
-Oracle improves the player and enriches the gaming experience across every supported game.
+Oracle helps the Operator improve across supported gaming environments.
 
 ---
 

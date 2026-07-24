@@ -8,7 +8,7 @@
 **Expected Stability:** Updated at Sprint activation, closure or approved renumbering
 **Supersedes:** Informal Sprint numbering inferred from individual planning documents
 **Superseded By:** None
-**Last Reviewed:** 22 July 2026
+**Last Reviewed:** 24 July 2026
 
 ---
 
@@ -28,7 +28,7 @@ implementation stages and do not use fractional Sprint numbering.
 | 15 | Operator Understanding Foundation | Historical; approved foundation phases complete | None | [Approved plan](SPRINT_15_PLAN.md) |
 | 16 | Trust Boundary | Complete | Sprint 15.5A | Commit `58589b52de0db341e6518fa9f235bb18854e6b30` |
 | 17 | Scale-Safe Trust Data Plane | Fully complete — Migration 009 deployed and verified in production | Sprint 15.5B; earlier proposed as Scale Hardening | [Plan](SPRINT_17_PLAN.md), [Closure](SPRINT_17_CLOSURE.md), [Migration dossier](SPRINT_17_MIGRATION_009_DOSSIER.md), [Deployment closure](SPRINT_17_MIGRATION_009_DEPLOYMENT_CLOSURE.md) |
-| 18 | Operator Trust and Control | Approved Programme; not started or activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
+| 18 | Operator Trust and Control | Active — Founder-approved 24 July 2026; implementation not started | None | [Plan](SPRINT_18_PLAN.md), [ADRs 037–039](../Decisions.md) |
 | 19 | Account, Identity and Commissioning | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 20 | Platform Runtime Activation | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 21 | Oracle Session and Evidence Lifecycle | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
@@ -53,4 +53,7 @@ The approved Engineering Programme defines the sequence but grants no
 implementation authority. Every Sprint requires its own approved plan and
 explicit activation. Sprint 17 is Founder-approved and fully complete. Migration
 009 is deployed and verified, while runtime persistence remains disabled.
-Sprint 18 has not started or been activated.
+Sprint 18 was Founder-approved and activated on 24 July 2026 from the clean
+synchronized governance baseline. Activation authorises implementation only
+within the approved Plan. It did not enable runtime persistence, inference,
+personalisation, a database migration or a production control path.

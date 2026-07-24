@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Before Sprint 18 activation
+**Next Review:** At Sprint 18 closure
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -85,8 +85,9 @@ verification, and established the production persistence foundation. The
 empty-table planner Verification Hold is resolved through the authoritative
 production-shaped evidence rule recorded in the deployment dossier.
 
-No later Sprint is active. Sprint 18 has not started or been activated, and no
-runtime producer, consumer or persistence path has been enabled.
+Sprint 18 — Operator Trust and Control is Founder-approved and active from
+24 July 2026 under `docs/sprints/SPRINT_18_PLAN.md`. No runtime producer,
+consumer or persistence path has been enabled by activation.
 
 # Beta Philosophy
 
@@ -173,6 +174,15 @@ Version 1.0 should not require major architectural redesign.
     game-agnostic architecture before Beta.
 14. Quality, security, privacy, performance and accessibility apply throughout
     the Programme, not only in final qualification.
+15. The Operator is Oracle's durable subject; games are governed performance
+    contexts.
+16. Permission to observe does not imply Evidence admission, Understanding or
+    Memory.
+17. Promotion between Observation, Evidence, Understanding and Memory is never
+    automatic.
+18. Memory is selective and policy-governed.
+19. The Operator Intelligence maturity model is not a strict runtime dependency
+    graph and does not reorder this Programme.
 
 # EPIC I — TRUSTED OPERATOR PRODUCTION FOUNDATION
 
@@ -275,6 +285,15 @@ intelligence and optional processing.
 Operationalise the privacy, trust, agency and control obligations established
 by ADR-035 before production inference begins.
 
+Sprint 18 establishes the control plane for future Observation purposes
+without implementing Observation. It ensures that no later Observation,
+Evidence, Understanding or Memory capability can bypass purpose-specific
+consent, inspection, correction, dispute, retention and deletion control.
+
+Where Founder policy values remain undefined, Sprint 18 must implement
+configurable, versioned policy infrastructure and validation rather than
+hard-coded policy values.
+
 ### Deliverables
 
 - purpose-specific consent grant and revocation
@@ -295,6 +314,22 @@ by ADR-035 before production inference begins.
 - Operator Trust Centre Application experience
 - proof that revoked, disputed, expired or deleted information leaves
   subsequent projections
+- future-compatible purpose and observation-category control semantics
+- visibility of lifecycle stage and retention state in the Trust Centre
+- proof that Observation permission, Evidence admission, Understanding
+  eligibility and Memory retention remain distinct
+
+### Explicit Exclusions
+
+- observation capture
+- automatic Evidence admission
+- Understanding accumulation
+- Memory promotion
+- Behavioural Intelligence
+- Guidance
+- Prediction
+
+These exclusions preserve the approved scope of Sprints 21–24 and 26.
 
 ### Dependencies
 
@@ -633,6 +668,10 @@ Session and Understanding inputs.
 
 Replace the thin prompt-only analysis path with evidence-bound production
 intelligence.
+
+Prediction in Sprint 23 is a bounded Session and Trend forecast. Mature
+outcome-informed longitudinal prediction compounds through later Guidance and
+reassessment; this distinction does not reorder the Programme.
 
 ### Deliverables
 

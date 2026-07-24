@@ -8,8 +8,8 @@
 **Expected Stability:** Reviewed whenever approved execution direction changes
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
-**Last Reviewed:** 22 July 2026
-**Version:** 3.0
+**Last Reviewed:** 24 July 2026
+**Version:** 3.1
 
 ---
 
@@ -79,8 +79,9 @@ This architecture was established during Sprint 8 and forms the permanent founda
 
 # Latest Approved Execution Status
 
-Sprint 17 is Founder-approved and closed. No later Sprint is active. Sprint 18
-has not started and requires separate explicit Founder activation.
+Sprint 17 is Founder-approved and closed. Sprint 18 — Operator Trust and
+Control is Founder-approved and active from 24 July 2026. Implementation has
+not started.
 
 Sprint 16 — Trust Boundary is complete at
 `58589b52de0db341e6518fa9f235bb18854e6b30`. It was executed under the
@@ -93,9 +94,9 @@ Hardening. Migration 009 is deployed and verified, establishing the production
 persistence foundation without enabling runtime persistence.
 
 `docs/ENGINEERING_PROGRAMME.md` is the authoritative Sprint 17–Beta Programme.
-This Master Build Plan continues to identify the next execution objective; a
-separate explicit founder activation is still required. The approved Sprint 17
-scope and phases are recorded in `docs/sprints/SPRINT_17_PLAN.md`.
+This Master Build Plan identifies Sprint 18 as the current execution objective.
+Its approved scope, phases, exclusions, gates and acceptance criteria are
+recorded in `docs/sprints/SPRINT_18_PLAN.md`.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own
@@ -129,7 +130,22 @@ optimisation, required indexes, Snapshot budgets, concurrency verification,
 automated boundary enforcement and the version-pinned Migration 009 deployment
 dossier. The separately Founder-approved Migration 009 production deployment
 completed successfully and passed post-deployment verification. No runtime
-activation occurred. Sprint 18 has not started.
+activation occurred.
+
+## Sprint 18 — Operator Trust and Control
+
+**Status:** Active — Founder-approved; implementation not started
+**Plan:** `docs/sprints/SPRINT_18_PLAN.md`
+**Activation date:** 24 July 2026
+
+Sprint 18 operationalises consent, declarations, inspection, correction,
+dispute, export, retention and deletion control before production inference.
+Undefined Founder policy values must be represented through configurable,
+versioned policy infrastructure rather than hard-coded defaults.
+
+Activation authorises implementation only within the approved Plan. It does
+not activate runtime persistence, inference, Understanding accumulation,
+personalisation, database migration or production control paths.
 
 ## Historical Sprint 15 — Operator Intelligence: Operator Understanding Foundation
 
@@ -674,11 +690,11 @@ Everything Oracle becomes will be built upon those four layers.
 
 ---
 
-> **Oracle understands games.**
+> **Oracle studies Operators.**
 
-> **Oracle understands players.**
+> **Games provide performance context.**
 
-> **Oracle delivers intelligence.**
+> **Oracle turns permitted evidence into explainable intelligence.**
 
 ---
 

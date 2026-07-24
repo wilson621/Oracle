@@ -8,8 +8,8 @@
 **Expected Stability:** Reviewed whenever subsystem ownership or implementation status changes
 **Supersedes:** Earlier Architecture Index versions
 **Superseded By:** None
-**Last Reviewed:** 22 July 2026
-**Version:** 5.8
+**Last Reviewed:** 24 July 2026
+**Version:** 5.9
 
 ---
 
@@ -756,7 +756,11 @@ Current Development Status
 Sprint 17 — Scale-Safe Trust Data Plane is Founder-approved and fully complete,
 including the verified Migration 009 production deployment. The production
 persistence foundation is established, but runtime persistence remains
-disabled. Sprint 18 has not started and is not activated.
+disabled.
+
+Sprint 18 — Operator Trust and Control is Founder-approved and active from
+24 July 2026. Implementation has not started. Activation changed no subsystem
+ownership, runtime or production state.
 
 Current Runtime
 

@@ -10,8 +10,8 @@
 **Expected Stability:** Continuously reviewed as engineering practice evolves
 **Supersedes:** Archived Oracle Codex versions
 **Superseded By:** None
-**Last Reviewed:** 21 July 2026
-**Version:** 3.2
+**Last Reviewed:** 24 July 2026
+**Version:** 3.3
 
 ---
 
@@ -238,11 +238,11 @@ These systems are implementation details of the Platform rather than the Platfor
 
 # Guiding Statement
 
-Oracle understands games.
+Oracle studies Operators.
 
-Oracle understands players.
+Games provide performance context.
 
-Oracle delivers intelligence.
+Oracle turns permitted evidence into explainable intelligence.
 
 ---
 
@@ -3193,6 +3193,12 @@ Should this be an Extension instead?
 Can Oracle explain this recommendation?
 
 Can Oracle justify its confidence?
+
+Does this implementation preserve the promotion boundary between Observation,
+Evidence, Understanding and Memory?
+
+Optional information must not be retained or promoted merely because it was
+available to an implementation.
 
 ---
 

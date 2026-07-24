@@ -8,7 +8,7 @@
 **Expected Stability:** Updated when verified implementation or accepted technical debt changes
 **Supersedes:** Earlier active implementation-status records
 **Superseded By:** None
-**Last Reviewed:** 22 July 2026
+**Last Reviewed:** 24 July 2026
 **Verified Branch:** `sprint-9-overlay`
 **Verified Repository Baseline:** `e873b515a149d392850cf4c6e0c00cfb4ecd3313`
 **Sprint 14 Implementation Baseline:** `3868975`
@@ -17,7 +17,7 @@
 **Sprint 15 Phase 3:** Complete and committed
 **Sprint 16:** Trust Boundary complete and committed
 **Sprint 17:** Scale-Safe Trust Data Plane fully complete; Migration 009 deployed and verified in production
-**Sprint 18:** Not started or activated
+**Sprint 18:** Active — Founder-approved; implementation not started
 
 ---
 
@@ -62,8 +62,12 @@ No runtime producer, consumer, control operation, Snapshot construction,
 Context projection, Application persistence path or Platform activation was
 added or activated. Sprint 17 is Founder-approved and fully complete. Migration
 009 is deployed and verified, establishing the production persistence
-foundation while runtime persistence remains disabled. Sprint 18 has not
-started and is not active.
+foundation while runtime persistence remains disabled.
+
+Sprint 18 — Operator Trust and Control was Founder-approved and activated on
+24 July 2026. This is a governance state only: no Sprint 18 implementation has
+started, and activation changed no verified implementation or production
+state.
 
 ## Sprint 15 Phase 1 — Ownership Foundation
 
@@ -456,6 +460,12 @@ evidence and correction priorities.
   surface; breaking version 2 work requires an accepted ADR.
 - ADR-032 defines one Guidance model and the Platform → Services → Applications
   → Game Integrations ownership boundary for Companion Intelligence.
+- ADR-037 defines Operator Intelligence primacy and games as governed
+  performance contexts.
+- ADR-038 defines the non-automatic Observation → Evidence → Understanding →
+  Memory promotion boundary.
+- ADR-039 defines retention, operational deletion, eligibility removal,
+  legally required retention, physical deletion, audit and tombstone policy.
 - Any proposal requiring injection, protected-memory access or modification,
   hooks, patching, automation, input simulation, anti-cheat interference or an
   unfair-advantage technique is an architectural blocker and must be escalated.

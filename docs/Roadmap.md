@@ -10,8 +10,8 @@
 **Expected Stability:** Reviewed at strategic and Sprint-boundary changes
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
-**Last Reviewed:** 22 July 2026
-**Version:** 4.8
+**Last Reviewed:** 24 July 2026
+**Version:** 4.9
 
 ---
 
@@ -692,8 +692,9 @@ The Oracle Platform grows through extensions rather than increasing complexity i
 # Current Delivery
 
 Sprint 17 is Founder-approved and fully complete, including Migration 009
-production deployment. No subsequent Sprint is active; Sprint 18 has not
-started, and runtime persistence remains disabled.
+production deployment. Sprint 18 — Operator Trust and Control is
+Founder-approved and active from 24 July 2026. Implementation has not started,
+and runtime persistence remains disabled.
 
 The Founder-approved Sprint 17–Beta sequence, its five Epics, architectural
 dependencies, Beta Gates, Founder Beta Readiness Review and Oracle Beta
@@ -727,7 +728,8 @@ required indexes, Snapshot budgets, concurrency verification and automated
 boundary enforcement. It also produced the version-pinned Migration 009
 deployment dossier. Migration 009 is deployed and verified, establishing the
 production persistence foundation without activating runtime persistence.
-Sprint 18 has not started and remains unauthorised.
+Sprint 18 is now active under its Founder-approved Plan. Its activation did not
+change the verified Sprint 17 implementation or production state.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

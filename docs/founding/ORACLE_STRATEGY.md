@@ -8,7 +8,7 @@
 **Expected Stability:** Reviewed at major strategic and roadmap transitions
 **Supersedes:** Strategic philosophy previously duplicated across Project Vision, Roadmap, Manifesto and Oracle Principles
 **Superseded By:** None
-**Last Reviewed:** 21 July 2026
+**Last Reviewed:** 24 July 2026
 
 ---
 
@@ -38,8 +38,50 @@ Oracle therefore builds an Operator Intelligence Platform:
 - the Platform preserves shared infrastructure, contracts and trust
 
 Competitive improvement may be an important initial market and use case, but
-Oracle's institutional identity is broader: a gaming-intelligence platform for
-supported Operators, Applications and games.
+Oracle's institutional identity is broader: an Operator Intelligence Platform
+that helps supported Operators across Applications and governed gaming
+contexts.
+
+# Operator Intelligence Maturity Model
+
+```text
+Trust
+    ↓
+Permitted Observation
+    ↓
+Admitted Evidence
+    ↓
+Operator Understanding
+    ↓
+Selective Memory
+    ↓
+Behavioural Intelligence
+    ↓
+Guidance
+    ↓
+Outcome Reassessment
+    ↓
+Prediction
+```
+
+This sequence expresses Oracle's long-term product maturity and governance.
+It is not a strict runtime dependency graph and does not reorder the
+Engineering Programme.
+
+Each transition must earn authority:
+
+- Trust governs whether optional processing may begin.
+- Observation remains transient unless admitted.
+- Evidence preserves source, purpose, provenance and scope.
+- Understanding is governed, revisable and explainable.
+- Memory retains selectively rather than storing everything.
+- Behavioural Intelligence consumes approved projections.
+- Guidance strengthens Operator judgment rather than replacing it.
+- Reassessment measures outcomes and corrects Oracle.
+- Prediction is earned through longitudinal evidence and honest confidence.
+
+Games remain essential semantic contexts. They do not define Oracle's identity
+or justify cross-game conclusions without approved portability evidence.
 
 # Platform-First Strategy
 
@@ -106,18 +148,20 @@ and clearly valuable.
 # The Oracle Flywheel
 
 ```text
-Permitted evidence and reviewed knowledge
+Trust and permitted Observation
         ↓
-Deeper Operator and game understanding
+Admitted Evidence and reviewed game knowledge
         ↓
-Explainable, contextual assistance
+Governed Operator Understanding
         ↓
-Operator improvement and reduced friction
+Selective longitudinal Memory
         ↓
-Trust and continued voluntary use
+Explainable assistance and Operator action
         ↓
-Richer longitudinal understanding
-        └───────────────────────────────↺
+Outcome reassessment
+        ↓
+Deeper Understanding and better prediction
+        └──────────────────────────────────↺
 ```
 
 Privacy, consent, safety, confidence and constitutional Fair Play constraints

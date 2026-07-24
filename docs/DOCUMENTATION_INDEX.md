@@ -8,7 +8,7 @@
 **Expected Stability:** Reviewed whenever governance or canonical documentation changes
 **Supersedes:** The incomplete documentation table in `README.md` as the canonical documentation index
 **Superseded By:** None
-**Last Reviewed:** 22 July 2026
+**Last Reviewed:** 24 July 2026
 
 ---
 
@@ -205,6 +205,8 @@ delivery authorities have been reviewed.
 | Migration 009 deployment and verification evidence | [Migration 009 Dossier](sprints/SPRINT_17_MIGRATION_009_DOSSIER.md) | Closed deployment record |
 | Migration 009 final production closure | [Migration 009 Deployment Closure Report](sprints/SPRINT_17_MIGRATION_009_DEPLOYMENT_CLOSURE.md) | Closed deployment record |
 | Sprint 17 machine-readable verification evidence | [Sprint 17 Permanent Evidence](sprints/evidence/sprint-17/README.md) | Closure evidence |
+| Active Sprint 18 authority | [Sprint 18 Plan](sprints/SPRINT_18_PLAN.md) | Approved, active Sprint Plan |
+| Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation
 
@@ -223,6 +225,12 @@ delivery authorities have been reviewed.
 
 ## Brand and Experience
 
+- [Company Brand Bible Foundation](company/COMPANY_BRAND_BIBLE_FOUNDATION.md) —
+  proposed identity foundation for the unnamed company above Oracle; Draft,
+  non-canonical pending Founder approval
+- [Company Brand Bible Foundation Validation](company/COMPANY_BRAND_BIBLE_FOUNDATION_VALIDATION.md)
+  — independent validation retaining the Foundation as a non-canonical draft;
+  Historical review record
 - [Branding](BRANDING.md) — product and repository naming
 - [Brand Bible](Brand-Bible.md) — external product identity, language and voice
 - [Oracle Design System](Oracle-Design-System.md) — visual and interaction
