@@ -2,7 +2,7 @@
 
 **Sprint:** 20 — Platform Runtime Activation
 
-**Status:** Certified locally; awaiting Founder closure
+**Status:** Certified locally and Founder-accepted
 
 **Date:** 24 July 2026
 
@@ -78,5 +78,6 @@ Production remains post-Migration-009 and pre-Migration-010. Migrations 010,
 011 and 012 remain certified, undeployed and inactive. Gate C remains deferred,
 and runtime persistence remains disabled.
 
-Founder closure is now required before Sprint 20 can be declared closed or
-Sprint 21 can be activated.
+The Founder accepted this evidence and formally closed Sprint 20 on 24 July
+2026. The closure grants no deployment, migration execution, Gate C, runtime
+persistence or production-environment authority.

@@ -2,13 +2,13 @@
 
 **Document Status:** Approved
 
-**Version:** 1.1
+**Version:** 1.2
 
 **Owner:** Founder
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** At Sprint 19 planning
+**Next Review:** At Sprint 21 architectural decision
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -98,9 +98,16 @@ Its provisioning boundary, web Account journey, identity
 lifecycle and inactive Desktop credential-custody contracts are implemented.
 Migrations 011 and 012 are certified but neither deployed nor activated.
 Production remains post-Migration-009 and runtime persistence remains
-disabled. Sprint 20 is Founder-approved and active under ADR-040. Its
-composition-root implementation is complete and locally certified; Founder
-closure is pending. Deployment and runtime persistence are not authorised.
+disabled. Sprint 20 is complete, certified and Founder-accepted under ADR-040.
+Deployment and runtime persistence are not authorised. Sprint 21 is next in
+sequence; its expected durable Session lifecycle ADR requires Founder approval
+before activation or implementation.
+
+The ADR-040 composition manifest is a permanent runtime contract. Every future
+Sprint changing Services, Applications, Game Integrations, Guidance providers,
+subsystem requirement classification or runtime lifecycle behaviour must
+update the canonical manifest and retain mechanical manifest/runtime equality.
+Only a Founder-approved superseding ADR may weaken or bypass that gate.
 
 # Beta Philosophy
 

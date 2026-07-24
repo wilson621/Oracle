@@ -11,7 +11,7 @@
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.0
+**Version:** 5.1
 
 ---
 
@@ -740,9 +740,11 @@ pre-Migration-010 and runtime persistence remains disabled. Sprint 19 is
 complete; its atomic provisioning boundary, Founder authentication and identity
 journeys, and inactive Desktop custody contracts are implemented. Migration
 011 and Migration 012 are certified. All remain undeployed and inactive.
-Sprint 20 — Platform Runtime Activation is Founder-approved and active under
-ADR-040. Its implementation is complete and locally certified; Founder closure
-is pending. Production deployment and runtime persistence remain unauthorised.
+Sprint 20 — Platform Runtime Activation is complete, certified and
+Founder-accepted under ADR-040. Production deployment and runtime persistence
+remain unauthorised. Sprint 21 is next in sequence, but its durable Session
+lifecycle and the relationship between Service authority and Desktop
+Session/Context authority require a Founder-approved ADR before implementation.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

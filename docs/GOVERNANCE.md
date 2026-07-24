@@ -162,8 +162,11 @@ never rewritten.
 - Sprint 18 — Operator Trust and Control: complete and immutable.
 - Sprint 19 — Account, Identity and Commissioning: complete and certified;
   Migrations 011 and 012 remain undeployed and inactive.
-- Sprint 20 — Platform Runtime Activation: Founder-approved and active under
-  ADR-040 for implementation and local certification only.
+- Sprint 20 — Platform Runtime Activation: complete, certified and
+  Founder-accepted under ADR-040; undeployed and inactive.
+- Sprint 21 — Oracle Session and Evidence Lifecycle: next in the approved
+  Programme; durable Session lifecycle ADR approval is required before
+  activation or implementation.
 
 Migration 009 is deployed and verified, but runtime persistence remains
 disabled. Migrations 010, 011 and 012 remain undeployed and inactive. Deployment

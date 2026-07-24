@@ -9,7 +9,7 @@
 **Supersedes:** Earlier Architecture Index versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 6.0
+**Version:** 6.1
 
 ---
 
@@ -765,10 +765,12 @@ deferred and runtime persistence remains disabled. Sprint 19 is complete. Its
 atomic Account-to-Operator provisioning boundary, Founder authentication and
 identity journeys, and inactive Desktop credential custody are implemented.
 Migrations 011 and 012 are certified. All remain undeployed and inactive.
-Sprint 20 is active under ADR-040. Its target-specific composition roots,
-canonical manifests and shared injected runtime are implemented and locally
-certified but not deployed. Founder closure is pending. Runtime persistence
-remains disabled.
+Sprint 20 is complete, certified and Founder-accepted under ADR-040. Its
+target-specific composition roots, canonical manifests and shared injected
+runtime are not deployed. The manifest is a permanent runtime contract and
+exact equality verification remains mandatory. Sprint 21 requires a
+Founder-approved durable Session lifecycle ADR before implementation. Runtime
+persistence remains disabled.
 
 Current Runtime
 

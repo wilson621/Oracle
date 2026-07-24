@@ -22,6 +22,8 @@ complete; Migration 010 certified and Gate C intentionally deferred
 **Sprint 19:** Complete and certified — Founder authentication and identity
 decisions implemented; Migrations 011 and 012 certified, undeployed and
 inactive
+**Sprint 20:** Complete, certified and Founder-accepted — composition roots and
+canonical manifest/runtime equality implemented; undeployed and inactive
 
 ---
 
@@ -367,7 +369,8 @@ Implemented under `lib/oracle/platform/`, `lib/oracle/composition/`,
 
 These foundations are implemented in production-capable source entry points
 and locally certified under ADR-040. They are not deployed. Runtime persistence
-remains disabled. Founder closure is pending.
+remains disabled. Sprint 20 is Founder-accepted and closed. The canonical
+manifest remains a permanent mechanically verified runtime contract.
 
 ## Companion Intelligence Foundation
 

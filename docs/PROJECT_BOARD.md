@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.6
+**Version:** 5.7
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -34,11 +34,16 @@ Callsign lifecycle and inactive Desktop trusted-device custody. Migration 011
 and Migration 012 are implemented and certified on PostgreSQL 17.10. Both
 remain undeployed and inactive.
 
-Sprint 20 — Platform Runtime Activation is Founder-approved and active under
-ADR-040. Implementation is complete and locally certified. The canonical
-runtime manifests mechanically equal the constructed Web and Electron
-runtimes. Founder closure is pending. Production deployment, Migration
-execution, Gate C and runtime persistence remain unauthorised.
+Sprint 20 — Platform Runtime Activation is complete, certified and
+Founder-accepted under ADR-040. The canonical runtime manifests mechanically
+equal the constructed Web and Electron runtimes. Production deployment,
+Migration execution, Gate C and runtime persistence remain unauthorised.
+
+Sprint 21 — Oracle Session and Evidence Lifecycle is next in the approved
+Programme. Discovery confirms that it must formalise the relationship between
+durable Session Service authority and live Desktop Companion Session/Context
+authority. ADR-041 Founder approval is required before Sprint activation or
+implementation.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -67,7 +72,18 @@ decision implementation and current certification boundary in
 
 # Latest Closed Sprint
 
-## Sprint 19 — Account, Identity and Commissioning
+## Sprint 20 — Platform Runtime Activation
+
+**Status:** Complete, certified and Founder-accepted
+**Closure report:** `docs/sprints/SPRINT_20_CLOSURE.md`
+**Deployment status:** Undeployed and inactive; runtime persistence disabled
+
+Sprint 20 delivered explicit target composition roots, one shared injected
+Platform runtime, canonical manifests with exact runtime equality,
+instance-owned registries, governed readiness and fresh recovery without
+changing production.
+
+## Previous Closed Sprint — Sprint 19 — Account, Identity and Commissioning
 
 **Status:** Complete and certified
 **Closure report:** `docs/sprints/SPRINT_19_CLOSURE.md`

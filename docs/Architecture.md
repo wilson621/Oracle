@@ -9,7 +9,7 @@
 **Supersedes:** Earlier current-architecture descriptions; historical baselines remain preserved
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.5
+**Version:** 5.6
 
 ---
 
@@ -1596,6 +1596,11 @@ persistence foundation; deployment did not activate its runtime use.
 - Immutable versioned manifests are canonical and are mechanically compared
   with the constructed Service, Application, Game Integration and Guidance
   inventories before readiness.
+- The composition manifest is a permanent runtime contract. Any change to
+  those inventories, subsystem requirement classification or runtime lifecycle
+  behaviour must update the manifest and continue to pass exact mechanical
+  equality verification. Only a Founder-approved superseding ADR may weaken or
+  bypass that requirement.
 - Service and Application registries are instance-owned metadata foundations;
   web pages do not consistently consume them as runtime boundaries.
 - several web pages call repositories, pipelines or engines directly.

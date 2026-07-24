@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 3.3
+**Version:** 3.4
 
 ---
 
@@ -106,11 +106,15 @@ Activated lifecycle states. Development verification preserves the canonical
 future chain while production remains on its approved post-Migration-009
 baseline. Runtime persistence remains disabled.
 
-Sprint 20 — Platform Runtime Activation is Founder-approved and active under
-ADR-040. Its target-specific roots, canonical manifests and shared injected
-runtime are implemented and locally certified. Founder closure is pending.
-Production deployment, migration execution and runtime persistence remain
-unauthorised.
+Sprint 20 — Platform Runtime Activation is complete, certified and
+Founder-accepted under ADR-040. Its target-specific roots, canonical manifests
+and shared injected runtime remain undeployed and inactive. Production
+deployment, migration execution and runtime persistence remain unauthorised.
+
+Sprint 21 — Oracle Session and Evidence Lifecycle is next in sequence.
+Discovery confirms that a durable Session lifecycle ADR is required to settle
+Service authority, live Desktop ownership and evidence admission before
+activation or implementation.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

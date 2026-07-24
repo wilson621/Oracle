@@ -216,9 +216,11 @@ delivery authorities have been reviewed.
 | Sprint 19 certification | [Sprint 19 Certification](sprints/SPRINT_19_CERTIFICATION.md) | Complete and certified |
 | Sprint 19 closure | [Sprint 19 Closure](sprints/SPRINT_19_CLOSURE.md) | Engineering-complete; production unchanged |
 | Sprint 20 architecture decision | [Sprint 20 Founder Decision](sprints/SPRINT_20_FOUNDER_DECISION_REQUIRED.md) | Resolved; Option A approved and ADR-040 accepted |
-| Sprint 20 authority | [Sprint 20 Plan](sprints/SPRINT_20_PLAN.md) and [ADR-040](Decisions.md) | Founder-approved and active; implementation and local certification authorised |
+| Sprint 20 authority | [Sprint 20 Plan](sprints/SPRINT_20_PLAN.md) and [ADR-040](Decisions.md) | Founder-approved, complete and closed |
 | Sprint 20 implementation | [Sprint 20 Implementation](sprints/SPRINT_20_IMPLEMENTATION.md) | Implementation complete; production unchanged |
-| Sprint 20 certification | [Sprint 20 Certification](sprints/SPRINT_20_CERTIFICATION.md) | Locally certified; awaiting Founder closure |
+| Sprint 20 certification | [Sprint 20 Certification](sprints/SPRINT_20_CERTIFICATION.md) | Locally certified and Founder-accepted |
+| Sprint 20 closure | [Sprint 20 Closure](sprints/SPRINT_20_CLOSURE.md) | Closed; permanent manifest-contract directive recorded |
+| Sprint 21 architectural decision | [Sprint 21 Founder Decision Required](sprints/SPRINT_21_FOUNDER_DECISION_REQUIRED.md) | Founder decision required before activation or implementation |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation
