@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-24",
+  "canonicalAuthentication": "email-password",
+  "emailVerificationRequired": true,
+  "rememberMeDefault": true,
+  "webIdleTimeoutDays": 30,
+  "webIdleTimeoutEnforcedBySignedActivityCookie": true,
+  "recentAuthenticationMinutes": 15,
+  "optionalAuthenticationMethods": [
+    "passkey",
+    "magic-link"
+  ],
+  "futureAuthenticationMethods": [
+    "oauth"
+  ],
+  "callsign": {
+    "caseInsensitiveUnique": true,
+    "displayCasePreserved": true,
+    "minimumLength": 3,
+    "maximumLength": 32,
+    "asciiOnlyInitialImplementation": true,
+    "changeTokenMaximum": 3,
+    "tokenRestorationMonths": 6,
+    "quarantineMonths": 12,
+    "reservedCount": 8
+  },
+  "desktop": {
+    "passwordStorage": false,
+    "encryptedRefreshTokenStorage": true,
+    "rendererCredentialProjection": false,
+    "automaticRefreshContract": true,
+    "activated": false
+  },
+  "migrationHashes": {
+    "009": "fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f",
+    "010": "7c46a1c9a3a0ff7e8f5c2348a3179c98934ad34ec9e66a2c2632830b65c7d715",
+    "011": "5be24f86228d018dc2d5aacbf3f186c9414432c18c2b573a7a3a1e340496d505",
+    "012": "a436c0df6a2a9296c112d9c4ab6f6dd50dd44daa5fcf54dd01c5a2d213b435b0"
+  },
+  "lifecycle": {
+    "implemented": true,
+    "applicationCertified": true,
+    "migration012DatabaseCertified": false,
+    "deployed": false,
+    "activated": false
+  }
+}

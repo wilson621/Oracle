@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-24",
+  "branch": "sprint-9-overlay",
+  "checks": {
+    "typescript": "pass",
+    "eslint": "pass-zero-warnings",
+    "nextProductionBuild": "pass",
+    "desktopTypeScript": "pass",
+    "architectureAudit": "pass-no-new-violations",
+    "operatorOwnership": "pass",
+    "operatorUnderstanding": "pass",
+    "operatorIntelligencePersistenceContracts": "pass",
+    "operatorIntelligenceAuthority": "pass",
+    "operatorIntelligenceTrust": "pass",
+    "operatorControlContracts": "pass",
+    "operatorControlRepository": "pass",
+    "companionGuidance": "pass",
+    "companionPresentation": "pass",
+    "sprint19AuthenticationIdentity": "pass",
+    "migration010Static": "pass",
+    "migration011Static": "pass",
+    "migration012Static": "pass",
+    "migration012DisposablePostgres": "blocked-no-disposable-postgres-runtime"
+  },
+  "production": {
+    "migration009": "deployed",
+    "migration010": "certified-undeployed-inactive",
+    "migration011": "certified-undeployed-inactive",
+    "migration012": "implemented-static-verified-undeployed-inactive",
+    "runtimePersistence": "disabled",
+    "gateC": "deferred"
+  },
+  "result": "application-pass-database-certification-pending"
+}

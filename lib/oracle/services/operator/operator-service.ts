@@ -9,6 +9,10 @@ import {
   type Operator,
   type OperatorService,
 } from "./operator-service-types";
+import {
+  createOperatorProvisioningCommand,
+  OperatorCommissioningPolicyUnavailableError,
+} from "./operator-provisioning-types";
 
 export function createOperatorService(
   repository: OperatorRepository
@@ -35,31 +39,26 @@ export function createOperatorService(
     return projectOperator(operator);
   }
 
-  async function completeCurrentOperatorCommissioning(
-    callsign: string
-  ): Promise<Operator> {
-    const normalizedCallsign = callsign.trim();
-
-    if (!normalizedCallsign) {
-      throw new Error("Operator callsign is required.");
+  async function provisionCurrentOperator(
+    command: unknown,
+    policy: Parameters<OperatorService["provisionCurrentOperator"]>[1]
+  ) {
+    if (!policy) {
+      throw new OperatorCommissioningPolicyUnavailableError();
     }
 
-    const currentOperator = await getCurrentOperator();
-    const commissioned = await repository.commissionOperator(
-      currentOperator.id,
-      normalizedCallsign
-    );
-
-    if (!commissioned) {
-      throw new OperatorRecordUnavailableError(currentOperator.id);
+    const accountId = await repository.getAuthenticatedAccountId();
+    if (!accountId) {
+      throw new OperatorAuthenticationRequiredError();
     }
 
-    return projectOperator(commissioned);
+    const validated = createOperatorProvisioningCommand(command, policy);
+    return repository.provisionOperator(accountId, validated, policy);
   }
 
   return Object.freeze({
     getCurrentOperator,
-    completeCurrentOperatorCommissioning,
+    provisionCurrentOperator,
   });
 }
 

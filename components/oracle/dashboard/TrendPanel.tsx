@@ -30,14 +30,6 @@ function directionColour(value: string) {
   return "text-cyan-300";
 }
 
-function getMomentumStatus(score: number) {
-  if (score > 10) return "Positive momentum detected";
-  if (score > 0) return "Momentum improving";
-  if (score === 0) return "Momentum stable";
-  if (score > -10) return "Negative momentum detected";
-  return "Priority trend detected";
-}
-
 export default function TrendPanel({ trend }: TrendPanelProps) {
   const signalItems = [
     { label: "Performance", value: trend.performanceTrend },

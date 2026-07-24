@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.4
+**Version:** 5.5
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -27,8 +27,17 @@ Control persistence. The persistence architecture is complete but undeployed.
 The approved scope is recorded in `docs/sprints/SPRINT_18_PLAN.md`, and ADR-037,
 ADR-038 and ADR-039 are accepted.
 
-No Sprint is currently active. Sprint 19 planning has not begun and requires
-explicit Founder instruction.
+Sprint 19 — Account, Identity and Commissioning is active by Founder
+instruction. The Founder policy decisions are implemented across web
+authentication, mandatory verification, trusted commissioning, Display Name,
+Callsign lifecycle and inactive Desktop trusted-device custody. Migration 011
+remains implemented and certified through both approved chains, undeployed and
+inactive. Additive Migration 012 is implemented and static-verified but awaits
+disposable PostgreSQL certification; it is not deployed or activated.
+
+No Founder product or architecture decision is currently required. The active
+engineering gate is Migration 012 persistence, security, rollback and
+concurrency certification in a disposable PostgreSQL environment.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -48,6 +57,12 @@ recorded in `docs/sprints/SPRINT_17_CLOSURE.md`; its version-pinned deployment
 decision artifact is `docs/sprints/SPRINT_17_MIGRATION_009_DOSSIER.md`.
 The Sprint 18 deployment deferral is recorded in
 `docs/sprints/SPRINT_18_GATE_C_DEFERRAL.md`.
+Sprint 19 evidence is recorded in
+`docs/sprints/SPRINT_19_PHASE_2_IMPLEMENTATION.md` and
+`docs/sprints/SPRINT_19_MIGRATION_011_CERTIFICATION.md`, with the Founder
+decision implementation and current certification boundary in
+`docs/sprints/SPRINT_19_FOUNDER_DECISIONS_IMPLEMENTATION.md` and
+`docs/sprints/SPRINT_19_CERTIFICATION.md`.
 
 # Latest Closed Sprint
 

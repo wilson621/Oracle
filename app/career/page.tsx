@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import AppLayout from "@/components/layout/AppLayout";
 
-import CareerHeader from "@/components/career/CareerHeader";
 import RankBadge from "@/components/career/RankBadge";
 
 import PageHeader from "@/components/ui/PageHeader";

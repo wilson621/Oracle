@@ -19,6 +19,10 @@
 **Sprint 17:** Scale-Safe Trust Data Plane fully complete; Migration 009 deployed and verified in production
 **Sprint 18:** Complete — Founder-approved and closed; persistence architecture
 complete; Migration 010 certified and Gate C intentionally deferred
+**Sprint 19:** Active — Founder authentication and identity decisions
+implemented; application and Desktop custody contracts certified; Migration
+011 certified; Migration 012 database certification pending; all undeployed
+and inactive
 
 ---
 
@@ -43,6 +47,41 @@ Update this file during every sprint closure audit.
 ---
 
 # Latest Verified Sprint Progress
+
+## Sprint 19 — Account, Identity and Commissioning
+
+Sprint 19 Phase 1 is complete. Phase 2 implements immutable provisioning
+contracts, authenticated Account injection, an explicit fail-closed
+commissioning-policy boundary, Repository serialization and server-only trusted
+composition. The legacy browser-owned two-step commissioning mutation now
+fails closed. The replacement journey is implemented through verified
+server-owned commissioning and remains undeployed and inactive.
+
+Migration 011 is the minimum additive atomic provisioning candidate. It
+creates one Operator, one Account-to-Operator binding, one transactional
+designation and one original idempotent result in a single trusted operation.
+It has no dependency on Migration 010 and has been certified on disposable
+PostgreSQL 17.10 databases through both `009 → 011` and
+`009 → 010 → 011`, including rollback catalog identity, replay, conflict,
+concurrency and least-privilege verification.
+
+Migration 011 is implemented and certified but is not deployed or activated.
+Migration 010 remains byte-for-byte immutable and undeployed, Gate C remains
+deferred, production remains post-Migration-009, and runtime persistence
+remains disabled.
+
+The Founder authentication and identity decisions are implemented through
+canonical Email + Password authentication, mandatory verification, optional
+Magic Link and Passkey methods, separate mutable Display Name, globally unique
+case-insensitive Callsign, Oracle generation, three renewable change tokens,
+12-month quarantine and deletion capture. Desktop credential custody is
+implemented as an inactive main-process-only contract using OS-encrypted
+refresh-token storage and credential-free renderer projections.
+
+Migration 012 is the additive Operator identity lifecycle candidate. It is
+implemented and static-verified but is not database-certified, deployed or
+activated. Its remaining gate is disposable PostgreSQL persistence, rollback,
+security and concurrency certification; no Founder decision is required.
 
 ## Sprint 17 — Scale-Safe Trust Data Plane
 

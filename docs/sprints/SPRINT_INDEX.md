@@ -29,7 +29,7 @@ implementation stages and do not use fractional Sprint numbering.
 | 16 | Trust Boundary | Complete | Sprint 15.5A | Commit `58589b52de0db341e6518fa9f235bb18854e6b30` |
 | 17 | Scale-Safe Trust Data Plane | Fully complete — Migration 009 deployed and verified in production | Sprint 15.5B; earlier proposed as Scale Hardening | [Plan](SPRINT_17_PLAN.md), [Closure](SPRINT_17_CLOSURE.md), [Migration dossier](SPRINT_17_MIGRATION_009_DOSSIER.md), [Deployment closure](SPRINT_17_MIGRATION_009_DEPLOYMENT_CLOSURE.md) |
 | 18 | Operator Trust and Control | Complete — Founder-approved and closed; Migration 010 certified, Gate C intentionally deferred | None | [Plan](SPRINT_18_PLAN.md), [Closure](SPRINT_18_CLOSURE.md), [Phase 1 audit](SPRINT_18_PHASE_1_AUDIT.md), [Phase 2 evidence](SPRINT_18_PHASE_2_IMPLEMENTATION.md), [Phase 3 evidence](SPRINT_18_PHASE_3_IMPLEMENTATION.md), [Gate C package](SPRINT_18_GATE_C_OPERATIONAL_PACKAGE.md), [Gate C deferral](SPRINT_18_GATE_C_DEFERRAL.md), [ADRs 037–039](../Decisions.md) |
-| 19 | Account, Identity and Commissioning | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
+| 19 | Account, Identity and Commissioning | Active — Founder decisions implemented; application certified; Migration 011 certified and Migration 012 database certification pending; all undeployed and inactive | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md), [Phase 1 audit](SPRINT_19_PHASE_1_AUDIT.md), [Phase 2 evidence](SPRINT_19_PHASE_2_IMPLEMENTATION.md), [Founder decisions implementation](SPRINT_19_FOUNDER_DECISIONS_IMPLEMENTATION.md), [Migration 011 certification](SPRINT_19_MIGRATION_011_CERTIFICATION.md), [Migration 012 verification](SPRINT_19_MIGRATION_012_VERIFICATION.md), [Certification](SPRINT_19_CERTIFICATION.md) |
 | 20 | Platform Runtime Activation | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 21 | Oracle Session and Evidence Lifecycle | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 22 | Operator Understanding Accumulation | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
@@ -54,6 +54,10 @@ implementation authority. Every Sprint requires its own approved plan and
 explicit activation. Sprint 17 is Founder-approved and fully complete. Migration
 009 is deployed and verified, while runtime persistence remains disabled.
 Sprint 18 was Founder-approved and activated on 24 July 2026 from the clean
-synchronized governance baseline. Activation authorises implementation only
-within the approved Plan. It did not enable runtime persistence, inference,
-personalisation, a database migration or a production control path.
+synchronized governance baseline and is now complete and immutable. Sprint 19
+is active under the Founder's lifecycle interpretation. Its application and
+contract work is implemented and certified. Migration 011 is implemented and
+certified; Migration 012 is implemented and static-verified but awaits
+disposable PostgreSQL certification. Neither is deployed or activated.
+Production remains post-Migration-009 and pre-Migration-010, and runtime
+persistence remains disabled.

@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 3.2
+**Version:** 3.3
 
 ---
 
@@ -79,8 +79,13 @@ This architecture was established during Sprint 8 and forms the permanent founda
 
 # Latest Approved Execution Status
 
-Sprint 17 and Sprint 18 are Founder-approved and closed. No Sprint is
-currently active. Sprint 19 planning has not started or been authorised.
+Sprint 17 and Sprint 18 are Founder-approved and closed. Sprint 18 remains
+immutable. Sprint 19 — Account, Identity and Commissioning is active by
+Founder instruction. The atomic provisioning boundary, Founder-selected
+authentication and identity behavior, application journeys and inactive
+Desktop credential custody are implemented. Migration 011 is certified;
+Migration 012 is static-verified and awaits disposable database certification.
+Neither migration is deployed or activated.
 
 Sprint 16 — Trust Boundary is complete at
 `58589b52de0db341e6518fa9f235bb18854e6b30`. It was executed under the
@@ -96,6 +101,15 @@ persistence foundation without enabling runtime persistence.
 Sprint 18 closure is recorded in `docs/sprints/SPRINT_18_CLOSURE.md`.
 Migration 010 is certified and deployment-ready, but Gate C is intentionally
 deferred and production remains pre-Migration-010.
+
+Sprint 19 proceeds under the independent Implemented, Certified, Deployed and
+Activated lifecycle states. Development verification preserves the canonical
+future chain while production remains on its approved post-Migration-009
+baseline. Runtime persistence remains disabled.
+
+The next engineering stage is Migration 012 disposable PostgreSQL
+certification followed by Sprint 19 closure verification. The Founder policy
+selection is complete; no new Founder decision is required for that work.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

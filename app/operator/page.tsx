@@ -34,7 +34,6 @@ import {
   Trophy,
   Target,
   TrendingUp,
-  Crosshair,
   Activity,
   Clock,
   Gamepad2,

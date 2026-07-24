@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-24",
+  "postgres": "17.10",
+  "migration009Sha256": "fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f",
+  "migration010Sha256": "7c46a1c9a3a0ff7e8f5c2348a3179c98934ad34ec9e66a2c2632830b65c7d715",
+  "migration011Sha256": "5be24f86228d018dc2d5aacbf3f186c9414432c18c2b573a7a3a1e340496d505",
+  "chains": [
+    {
+      "chain": "009 -> 011",
+      "rollbackCatalogSha256Before": "af1979188c21ecb14d4a398ca4b1607856991b3dd4c74c774ef3629e65622f47",
+      "rollbackCatalogSha256After": "af1979188c21ecb14d4a398ca4b1607856991b3dd4c74c774ef3629e65622f47",
+      "catalogIdentical": true,
+      "exactReplay": true,
+      "immutableConflict": true,
+      "competingState": true,
+      "concurrentWinnerCount": 1,
+      "rollbackSafeDesignationAllocation": true,
+      "trustedRoleOnly": true,
+      "result": "pass"
+    },
+    {
+      "chain": "009 -> 010 -> 011",
+      "rollbackCatalogSha256Before": "991ed2d5ac4443a0b51688dd1583b7e77595934868b7fa65d23a646477105caa",
+      "rollbackCatalogSha256After": "991ed2d5ac4443a0b51688dd1583b7e77595934868b7fa65d23a646477105caa",
+      "catalogIdentical": true,
+      "exactReplay": true,
+      "immutableConflict": true,
+      "competingState": true,
+      "concurrentWinnerCount": 1,
+      "rollbackSafeDesignationAllocation": true,
+      "trustedRoleOnly": true,
+      "result": "pass"
+    }
+  ],
+  "lifecycle": {
+    "implemented": true,
+    "certified": true,
+    "deployed": false,
+    "activated": false
+  },
+  "result": "pass"
+}

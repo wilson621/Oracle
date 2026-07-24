@@ -42,7 +42,10 @@ const navItems = [
   },
   {
     section: "SYSTEM",
-    items: [{ label: "Settings", href: "/settings", icon: Settings }],
+    items: [
+      { label: "Profile", href: "/profile", icon: Settings },
+      { label: "Security", href: "/account/security", icon: Settings },
+    ],
   },
 ];
 

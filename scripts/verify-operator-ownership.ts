@@ -12,6 +12,14 @@ import {
   OperatorAuthenticationRequiredError,
   OperatorOwnershipNotEstablishedError,
 } from "../lib/oracle/services/operator/operator-service-types";
+import {
+  OPERATOR_COMMISSIONING_POLICY_CONTRACT,
+  OPERATOR_PROVISIONING_CONTRACT,
+  OperatorCommissioningPolicyUnavailableError,
+  type OperatorCommissioningPolicy,
+  type OperatorProvisioningCommand,
+  type OperatorProvisioningResult,
+} from "../lib/oracle/services/operator/operator-provisioning-types";
 
 const operatorOne = createOperator("operator-1", "Alpha");
 const operatorTwo = createOperator("operator-2", "Bravo");
@@ -20,7 +28,8 @@ async function main() {
   await verifyAuthenticationIsRequired();
   await verifyMissingOwnershipIsRejected();
   await verifyAccountIsolation();
-  await verifyCommissioningUsesResolvedOperator();
+  await verifyProvisioningUsesAuthenticatedAccount();
+  await verifyProvisioningFailsClosedWithoutPolicy();
   verifyAccessPolicy();
   verifyMigrationContract();
   verifyCurrentOperatorReadsUseRepository();
@@ -73,21 +82,31 @@ async function verifyAccountIsolation() {
   assert.deepEqual(repository.bindingLookups, ["account-1", "account-2"]);
 }
 
-async function verifyCommissioningUsesResolvedOperator() {
-  const repository = new InMemoryOperatorRepository(
-    "account-1",
-    { "account-1": operatorOne.id },
-    { [operatorOne.id]: operatorOne }
-  );
+async function verifyProvisioningUsesAuthenticatedAccount() {
+  const repository = new InMemoryOperatorRepository("account-1", {}, {});
+  const service = createOperatorService(repository);
+  const command = provisioningCommand();
+
+  const result = await service.provisionCurrentOperator(command, policy);
+
+  assert.deepEqual(repository.provisioningRequests, [
+    {
+      accountId: "account-1",
+      command,
+    },
+  ]);
+  assert.equal(result.operator.callsign, "Vanguard");
+}
+
+async function verifyProvisioningFailsClosedWithoutPolicy() {
+  const repository = new InMemoryOperatorRepository("account-1", {}, {});
   const service = createOperatorService(repository);
 
-  const commissioned =
-    await service.completeCurrentOperatorCommissioning("  Vanguard  ");
-
-  assert.deepEqual(repository.commissioningRequests, [
-    { operatorId: operatorOne.id, callsign: "Vanguard" },
-  ]);
-  assert.equal(commissioned.callsign, "Vanguard");
+  await assert.rejects(
+    service.provisionCurrentOperator(provisioningCommand(), null),
+    OperatorCommissioningPolicyUnavailableError
+  );
+  assert.equal(repository.provisioningRequests.length, 0);
 }
 
 function verifyAccessPolicy() {
@@ -173,9 +192,9 @@ function createOperator(id: string, callsign: string): OperatorRecord {
 
 class InMemoryOperatorRepository implements OperatorRepository {
   readonly bindingLookups: string[] = [];
-  readonly commissioningRequests: Array<{
-    operatorId: string;
-    callsign: string;
+  readonly provisioningRequests: Array<{
+    accountId: string;
+    command: OperatorProvisioningCommand;
   }> = [];
 
   constructor(
@@ -197,17 +216,48 @@ class InMemoryOperatorRepository implements OperatorRepository {
     return this.operators[operatorId] ?? null;
   }
 
-  async commissionOperator(
-    operatorId: string,
-    callsign: string
-  ): Promise<OperatorRecord | null> {
-    this.commissioningRequests.push({ operatorId, callsign });
-    const operator = this.operators[operatorId];
-
-    return operator
-      ? { ...operator, callsign, designation: "OR-000001" }
-      : null;
+  async provisionOperator(
+    accountId: string,
+    command: OperatorProvisioningCommand,
+    policy: OperatorCommissioningPolicy
+  ): Promise<OperatorProvisioningResult> {
+    void policy;
+    this.provisioningRequests.push({ accountId, command });
+    return Object.freeze({
+      outcome: "created",
+      operator: Object.freeze({
+        ...createOperator("operator-provisioned", command.callsign),
+        callsign: command.callsign,
+        designation: "OR-000001",
+      }),
+    });
   }
+}
+
+const policy: OperatorCommissioningPolicy = Object.freeze({
+  contract: Object.freeze({ ...OPERATOR_COMMISSIONING_POLICY_CONTRACT }),
+  id: "founder-policy",
+  policyVersion: "1.0.0",
+  callsign: Object.freeze({
+    unicodeNormalization: "NFC",
+    caseNormalization: "preserve",
+    minimumLength: 3,
+    maximumLength: 24,
+    allowedPattern: "^[A-Za-z]+$",
+    reserved: Object.freeze(["Oracle"]),
+    reservedComparison: "case-insensitive",
+    uniqueness: "not-required",
+  }),
+});
+
+function provisioningCommand(): OperatorProvisioningCommand {
+  return Object.freeze({
+    contract: Object.freeze({ ...OPERATOR_PROVISIONING_CONTRACT }),
+    commandId: "11111111-1111-4111-8111-111111111111",
+    callsign: "Vanguard",
+    policyId: policy.id,
+    policyVersion: policy.policyVersion,
+  });
 }
 
 function collectTypeScriptFiles(directory: string): string[] {

@@ -1,7 +1,8 @@
 # ORACLE PERSISTENCE CONTRACT
 
 **Authority:** Oracle Platform Constitution, Oracle Architecture, ADR-037,
-ADR-038, ADR-039 and Founder-approved Sprint 18 Phase 3
+ADR-038, ADR-039, Founder-approved Sprint 18 Phase 3 and the Founder Sprint 19
+lifecycle interpretation
 
 **Status:** Authoritative persistence architecture
 
@@ -145,16 +146,33 @@ content becomes available to normal runtime paths.
 
 ## Migration discipline
 
-Migration 009 is immutable. Migration 010 is additive and inert. A migration
-artifact is verified statically, exercised in a disposable database, rolled
-back with an independent catalog comparison and reviewed by the Founder before
-any permanent execution.
+Migration 009 and Migration 010 are byte-for-byte immutable. Migration 010 is
+additive and inert. Migration 011 is additive and independent of Migration
+010. Migration 012 is additive above the canonical
+`009 → 010 → 011 → 012` development chain and owns only Operator identity
+lifecycle state. A migration artifact is verified statically, exercised in a
+disposable database, rolled back with an independent catalog comparison and
+reviewed under its applicable Founder gate before any permanent execution.
 
-Schema deployment, runtime registration and production control-path activation
-are separate decisions. None implies another.
+Implemented, Certified, Deployed and Activated are independent lifecycle
+states. Schema deployment, runtime registration and production control-path
+activation are separate decisions. None implies another.
 
 Migration 010 is the certified, deployment-ready production candidate. Its
 Gate C execution is intentionally deferred until immediately before the first
 production release that requires Operator Trust and Control persistence.
 Engineering may treat this persistence architecture as complete while
 continuing to treat the production schema as pre-Migration-010.
+
+Migration 011 is implemented and certified through both the current-baseline
+verification chain `009 → 011` and canonical future chain
+`009 → 010 → 011`. It is not deployed or activated. Future production
+migrations preserve numerical order: Migration 010 passes its existing Gate C,
+Migration 011 passes its own Founder deployment gate, and later migrations
+follow normally. No exceptional ledger, renumbering or deployment mechanism is
+introduced.
+
+Migration 012 is implemented and static-verified but is not certified,
+deployed or activated. It cannot advance until disposable PostgreSQL
+persistence, security, concurrency and rollback evidence passes. This does not
+alter the certified identity or lifecycle state of Migrations 009–011.

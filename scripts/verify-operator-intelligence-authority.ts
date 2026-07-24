@@ -244,7 +244,7 @@ function createRecordingOperatorService() {
         created_at: "2026-07-21T12:00:00.000Z",
       };
     },
-    async completeCurrentOperatorCommissioning() {
+    async provisionCurrentOperator() {
       throw new Error("Not used by authority verification.");
     },
   } satisfies OperatorService & { calls: number };

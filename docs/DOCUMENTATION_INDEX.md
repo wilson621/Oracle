@@ -208,6 +208,12 @@ delivery authorities have been reviewed.
 | Sprint 18 authority | [Sprint 18 Plan](sprints/SPRINT_18_PLAN.md) | Approved, closed Sprint Plan |
 | Sprint 18 Founder-approved closure evidence | [Sprint 18 Closure Report](sprints/SPRINT_18_CLOSURE.md) | Closed Sprint record |
 | Sprint 18 deferred production candidate | [Gate C Operational Package](sprints/SPRINT_18_GATE_C_OPERATIONAL_PACKAGE.md) and [Deferral](sprints/SPRINT_18_GATE_C_DEFERRAL.md) | Certified, undeployed |
+| Sprint 19 lifecycle interpretation | [Sprint 19 Lifecycle Interpretation](sprints/SPRINT_19_LIFECYCLE_INTERPRETATION.md) | Active Founder interpretation |
+| Sprint 19 implementation evidence | [Sprint 19 Phase 2 Implementation](sprints/SPRINT_19_PHASE_2_IMPLEMENTATION.md) | Implemented and verified |
+| Migration 011 certification | [Sprint 19 Migration 011 Certification](sprints/SPRINT_19_MIGRATION_011_CERTIFICATION.md) | Certified, undeployed and inactive |
+| Sprint 19 Founder decisions implementation | [Sprint 19 Founder Decisions Implementation](sprints/SPRINT_19_FOUNDER_DECISIONS_IMPLEMENTATION.md) | Implemented and application-certified |
+| Migration 012 verification | [Sprint 19 Migration 012 Verification](sprints/SPRINT_19_MIGRATION_012_VERIFICATION.md) | Static-verified; database certification pending |
+| Sprint 19 certification | [Sprint 19 Certification](sprints/SPRINT_19_CERTIFICATION.md) | Application certified; database gate open |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

@@ -1,8 +1,17 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import {
+  ORACLE_AUTH_ROUTES,
+  safeRelativeReturnPath,
+} from "@/lib/oracle/services/auth/auth-policy";
+import { applyWebIdlePolicy } from "@/lib/oracle/services/auth/web-session-policy";
+
+const PUBLIC_PATHS = [
+  "/auth",
+] as const;
 
 export async function updateSession(request: NextRequest) {
-  const response = NextResponse.next({
+  let response = NextResponse.next({
     request,
   });
 
@@ -24,7 +33,59 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  await supabase.auth.getUser();
+  const { data } = await supabase.auth.getUser();
+  let currentUser = data.user;
+  if (currentUser?.email_confirmed_at) {
+    const idleState = await applyWebIdlePolicy(
+      request,
+      response,
+      currentUser,
+      () => supabase.auth.signOut({ scope: "local" })
+    );
+    if (idleState === "expired") currentUser = null;
+  }
+  const pathname = request.nextUrl.pathname;
+  const isPublic = PUBLIC_PATHS.some(
+    (path) => pathname === path || pathname.startsWith(`${path}/`)
+  );
+
+  if (currentUser && !currentUser.email_confirmed_at && !isPublic) {
+    const destination = request.nextUrl.clone();
+    destination.pathname = ORACLE_AUTH_ROUTES.verifyEmail;
+    destination.search = "";
+    const redirect = NextResponse.redirect(destination);
+    response.cookies.getAll().forEach((cookie) => {
+      redirect.cookies.set(cookie);
+    });
+    response = redirect;
+  } else if (!currentUser && !isPublic) {
+    const destination = request.nextUrl.clone();
+    destination.pathname = ORACLE_AUTH_ROUTES.signIn;
+    destination.search = "";
+    destination.searchParams.set(
+      "next",
+      safeRelativeReturnPath(`${pathname}${request.nextUrl.search}`)
+    );
+    const redirect = NextResponse.redirect(destination);
+    response.cookies.getAll().forEach((cookie) => {
+      redirect.cookies.set(cookie);
+    });
+    response = redirect;
+  } else if (
+    currentUser?.email_confirmed_at &&
+    pathname === ORACLE_AUTH_ROUTES.signIn
+  ) {
+    const destination = request.nextUrl.clone();
+    destination.pathname = safeRelativeReturnPath(
+      request.nextUrl.searchParams.get("next")
+    );
+    destination.search = "";
+    const redirect = NextResponse.redirect(destination);
+    response.cookies.getAll().forEach((cookie) => {
+      redirect.cookies.set(cookie);
+    });
+    response = redirect;
+  }
 
   return response;
 }

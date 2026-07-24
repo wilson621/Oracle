@@ -761,8 +761,11 @@ disabled.
 Sprint 18 — Operator Trust and Control is Founder-approved and closed. Its
 governance, contracts, persistence architecture and Repository ownership are
 accepted. Migration 010 is certified but undeployed, Gate C is intentionally
-deferred and runtime persistence remains disabled. No Sprint is currently
-active.
+deferred and runtime persistence remains disabled. Sprint 19 is active. Its
+atomic Account-to-Operator provisioning boundary, Founder authentication and
+identity journeys, and inactive Desktop credential custody are implemented.
+Migration 011 is certified. Migration 012 is static-verified but awaits
+disposable database certification. All remain undeployed and inactive.
 
 Current Runtime
 

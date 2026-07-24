@@ -91,8 +91,13 @@ Migration 010 is certified and deployment-ready, but Gate C is intentionally
 deferred. Production remains pre-Migration-010, and no runtime producer,
 consumer or persistence path is enabled.
 
-No Sprint is currently active. Sprint 19 planning requires explicit Founder
-instruction.
+Sprint 19 — Account, Identity and Commissioning is active by Founder
+instruction. Its provisioning boundary, web Account journey, identity
+lifecycle and inactive Desktop credential-custody contracts are implemented.
+Migration 011 is certified. Migration 012 is implemented and static-verified
+but awaits disposable PostgreSQL certification. Neither migration is deployed
+or activated. Production remains post-Migration-009 and runtime persistence
+remains disabled.
 
 # Beta Philosophy
 

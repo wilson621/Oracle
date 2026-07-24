@@ -1,69 +1,26 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-
-import AppLayout from "@/components/layout/AppLayout";
+import { randomUUID } from "node:crypto";
+import { redirect } from "next/navigation";
 import CommissioningWizard from "@/components/onboarding/CommissioningWizard";
-
 import {
-  getCurrentOperator,
-  type Operator,
-} from "@/lib/operator/getCurrentOperator";
+  ORACLE_AUTH_ROUTES,
+} from "@/lib/oracle/services/auth/auth-policy";
+import { getOperatorOnboardingState } from "@/lib/oracle/services/operator/server-operator-identity-service";
 
-import { completeOperatorCommissioning } from "@/lib/operator/completeOperatorCommissioning";
-import { isOperatorCommissioned } from "@/lib/operator/isOperatorCommissioned";
-
-export default function OnboardingPage() {
-  const router = useRouter();
-
-  const [operator, setOperator] = useState<Operator | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function loadOperator() {
-      const currentOperator = await getCurrentOperator();
-
-      if (isOperatorCommissioned(currentOperator)) {
-        router.replace("/operator");
-        return;
-      }
-
-      setOperator(currentOperator);
-      setLoading(false);
-    }
-
-    loadOperator();
-  }, [router]);
-
-  async function handleComplete(callsign: string) {
-    if (!operator) return;
-
-    await completeOperatorCommissioning(callsign);
-
-    router.replace("/operator");
+export default async function OnboardingPage() {
+  const state = await getOperatorOnboardingState();
+  if (state.status === "unauthenticated") {
+    redirect(ORACLE_AUTH_ROUTES.signIn);
   }
-
-  if (loading) {
-    return (
-      <AppLayout>
-        <div className="flex h-[70vh] items-center justify-center">
-          <p className="text-slate-400">Initialising Oracle...</p>
-        </div>
-      </AppLayout>
-    );
+  if (state.status === "unverified") {
+    redirect(ORACLE_AUTH_ROUTES.verifyEmail);
   }
-
-  if (!operator) {
-    return null;
+  if (state.status === "commissioned") {
+    redirect("/operator");
   }
 
   return (
-    <AppLayout>
-      <CommissioningWizard
-        operatorId={operator.id}
-        onComplete={handleComplete}
-      />
-    </AppLayout>
+    <main className="grid min-h-screen place-items-center bg-[#070A10] px-6 py-12 text-white">
+      <CommissioningWizard commandId={randomUUID()} />
+    </main>
   );
 }

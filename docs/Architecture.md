@@ -108,6 +108,18 @@ Operator control.
 
 ---
 
+## Governing Delivery Lifecycle Principle
+
+Implemented, Certified, Deployed and Activated are independent states.
+Certification may use the canonical future migration chain in disposable
+production-equivalent environments without changing the approved production
+baseline. Deployment does not grant runtime activation authority.
+
+This distinction preserves normal additive migration history while keeping
+production gates and runtime controls explicit.
+
+---
+
 ## 2. Intelligence First
 
 Oracle always produces intelligence before presentation.
@@ -1752,6 +1764,31 @@ Clarified:
 ---
 
 # Closing Statement
+
+## Sprint 19 Account and Operator Identity Boundary
+
+Supabase Auth owns Account credentials and verification. Email + Password is
+canonical; optional Magic Link and Passkey adapters supplement the same
+verified Account. OAuth remains a future adapter. Proxy may perform optimistic
+routing, but Server Components and Server Actions repeat authenticated,
+verified Account checks at data and mutation boundaries.
+
+Operator identity remains `operators.id`. Display Name and Callsign are
+presentation attributes and never own Intelligence, progression or history.
+Display Name is non-unique and freely mutable. Callsign is globally unique
+under case-insensitive comparison while preserving selected display case.
+Initial Callsigns use an ASCII-only policy to exclude Unicode homoglyphs.
+
+The Operator Repository remains the sole durable identity boundary. Migration
+011 owns atomic first provisioning. Additive Migration 012 owns Callsign
+uniqueness, reserved and prohibited policy data, three renewable change
+tokens, 12-month quarantine, generated Callsigns, Display Name projection and
+deletion capture. Neither migration is deployed or activated.
+
+Desktop credential custody remains a main-process concern. Passwords are
+never accepted by desktop storage. Only an OS-encrypted refresh token,
+trusted-device metadata and required identifiers may persist; access tokens
+remain in memory and credential values never cross the preload bridge.
 
 Oracle is no longer being built as a traditional gaming application.
 

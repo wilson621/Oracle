@@ -1,3 +1,8 @@
+import type {
+  OperatorCommissioningPolicy,
+  OperatorProvisioningResult,
+} from "./operator-provisioning-types";
+
 export const OPERATOR_ACCESS_POLICY = Object.freeze({
   mode: "authenticated-account" as const,
   appliesTo: Object.freeze([
@@ -52,5 +57,13 @@ export class OperatorRecordUnavailableError extends Error {
 
 export type OperatorService = Readonly<{
   getCurrentOperator(): Promise<Operator>;
-  completeCurrentOperatorCommissioning(callsign: string): Promise<Operator>;
+  provisionCurrentOperator(
+    command: unknown,
+    policy: OperatorCommissioningPolicy | null
+  ): Promise<OperatorProvisioningResult>;
 }>;
+
+export type {
+  OperatorCommissioningPolicy,
+  OperatorProvisioningResult,
+};

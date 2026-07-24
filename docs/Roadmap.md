@@ -735,8 +735,11 @@ production persistence foundation without activating runtime persistence.
 Sprint 18 established the accepted governance, contract and persistence
 architecture for Operator Trust and Control. Migration 010 is certified and
 deployment-ready, but Gate C is intentionally deferred. Production remains
-pre-Migration-010 and runtime persistence remains disabled. No Sprint is
-currently active; Sprint 19 planning requires explicit Founder instruction.
+pre-Migration-010 and runtime persistence remains disabled. Sprint 19 is
+active; its atomic provisioning boundary, Founder authentication and identity
+journeys, and inactive Desktop custody contracts are implemented. Migration
+011 is certified. Migration 012 is static-verified but awaits disposable
+database certification. All remain undeployed and inactive.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

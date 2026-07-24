@@ -13,6 +13,12 @@ import {
   type OperatorDeclarationRevision,
   type OperatorDeclarationTombstone,
 } from "../understanding";
+import {
+  createOperatorProvisioningCommand,
+  type OperatorCommissioningPolicy,
+  type OperatorProvisioningCommand,
+  type OperatorProvisioningResult,
+} from "../services/operator/operator-provisioning-types";
 
 export type OperatorRecord = {
   id: string;
@@ -31,10 +37,11 @@ export interface OperatorRepository {
   getAuthenticatedAccountId(): Promise<string | null>;
   findOperatorIdForAccount(accountId: string): Promise<string | null>;
   findOperatorById(operatorId: string): Promise<OperatorRecord | null>;
-  commissionOperator(
-    operatorId: string,
-    callsign: string
-  ): Promise<OperatorRecord | null>;
+  provisionOperator(
+    accountId: string,
+    command: OperatorProvisioningCommand,
+    policy: OperatorCommissioningPolicy
+  ): Promise<OperatorProvisioningResult>;
 }
 
 export interface OperatorControlDecisionRepository
@@ -91,10 +98,13 @@ const OPERATOR_COLUMNS = [
 
 export class SupabaseOperatorRepository
   implements OperatorControlDecisionRepository {
-  constructor(private readonly client: SupabaseClient) {}
+  constructor(
+    private readonly client: SupabaseClient,
+    private readonly authorityClient: SupabaseClient = client
+  ) {}
 
   async getAuthenticatedAccountId(): Promise<string | null> {
-    const { data, error } = await this.client.auth.getUser();
+    const { data, error } = await this.authorityClient.auth.getUser();
 
     if (error && error.name !== "AuthSessionMissingError") {
       throw error;
@@ -131,33 +141,25 @@ export class SupabaseOperatorRepository
     return data as OperatorRecord | null;
   }
 
-  async commissionOperator(
-    operatorId: string,
-    callsign: string
-  ): Promise<OperatorRecord | null> {
-    const { data: designation, error: designationError } =
-      await this.client.rpc("generate_operator_designation");
-
-    if (designationError) {
-      throw designationError;
-    }
-
-    if (typeof designation !== "string") {
-      throw new Error("Operator designation generation returned invalid data.");
-    }
-
-    const { data, error } = await this.client
-      .from("operators")
-      .update({ callsign, designation })
-      .eq("id", operatorId)
-      .select(OPERATOR_COLUMNS)
-      .maybeSingle();
+  async provisionOperator(
+    accountId: string,
+    command: OperatorProvisioningCommand,
+    policy: OperatorCommissioningPolicy
+  ): Promise<OperatorProvisioningResult> {
+    const validated = createOperatorProvisioningCommand(command, policy);
+    const { data, error } = await this.client.rpc(
+      "provision_operator_for_account",
+      {
+        p_account_id: accountId,
+        p_command: validated,
+      }
+    );
 
     if (error) {
       throw error;
     }
 
-    return data as OperatorRecord | null;
+    return requireOperatorProvisioningResult(data);
   }
 
   async appendControlConsent(
@@ -260,6 +262,58 @@ export class SupabaseOperatorRepository
     }
     return requireOperatorDeclarationRows(data, query.operatorId);
   }
+}
+
+function requireOperatorProvisioningResult(
+  value: unknown
+): OperatorProvisioningResult {
+  if (!isRecord(value) || !isRecord(value.operator)) {
+    throw new Error("Operator provisioning response is invalid.");
+  }
+
+  if (value.outcome !== "created") {
+    throw new Error("Operator provisioning outcome is invalid.");
+  }
+
+  const record = requireOperatorRecord(value.operator);
+  if (!record.callsign || !record.designation) {
+    throw new Error("Provisioned Operator identity is incomplete.");
+  }
+
+  return Object.freeze({
+    outcome: value.outcome,
+    operator: Object.freeze({
+      ...record,
+      callsign: record.callsign,
+      designation: record.designation,
+    }),
+  });
+}
+
+function requireOperatorRecord(value: Record<string, unknown>): OperatorRecord {
+  for (const field of ["id", "callsign", "designation", "created_at"] as const) {
+    if (typeof value[field] !== "string" || value[field].length === 0) {
+      throw new Error(`Operator provisioning ${field} is invalid.`);
+    }
+  }
+
+  for (const field of ["xp", "level", "total_sessions"] as const) {
+    if (!Number.isInteger(value[field])) {
+      throw new Error(`Operator provisioning ${field} is invalid.`);
+    }
+  }
+
+  for (const field of ["email", "primary_game", "combat_rating"] as const) {
+    if (value[field] !== null && typeof value[field] !== "string") {
+      throw new Error(`Operator provisioning ${field} is invalid.`);
+    }
+  }
+
+  return value as OperatorRecord;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 function assertOperatorPageSize(value: number): void {

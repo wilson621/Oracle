@@ -25,14 +25,6 @@ function textToPriority(text: string): PlannerPriority {
   return "positioning";
 }
 
-function confidenceToPlannerConfidence(
-  confidence: number
-): PlannerDecision["confidence"] {
-  if (confidence >= 0.75) return "high";
-  if (confidence >= 0.5) return "medium";
-  return "low";
-}
-
 function addBrainEvidence(input: PlannerIntelligenceInput): PlannerEvidence[] {
   return input.brain.findings.map((finding) => ({
     source: "brain",
