@@ -1,7 +1,7 @@
 # SPRINT 24 LOCAL CERTIFICATION
 
 **Sprint:** 24 — Adaptive Coaching, Planner and Progression
-**Status:** Certified locally; awaiting Founder acceptance
+**Status:** Certified locally and Founder-accepted
 **Date:** 24 July 2026
 **Deployment:** Not authorised and not performed
 
@@ -55,6 +55,6 @@ its query paths, assumptions or performance characteristics.
 
 ## Conclusion
 
-Sprint 24 is implemented and certified under ADR-042 and awaits Founder closure
-approval. No deployment, production migration, Gate C, persistence activation,
-production change or External Companion trust-boundary change occurred.
+Sprint 24 is implemented, certified and Founder-accepted under ADR-042. No
+deployment, production migration, Gate C, persistence activation, production
+change or External Companion trust-boundary change occurred.

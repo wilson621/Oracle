@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 6.6
+**Version:** 6.7
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -53,15 +53,15 @@ Founder-accepted. Session Report Service is the authoritative report-generation
 owner. Prompt-only authority is permanently retired and optional model
 enrichment cannot become factual authority.
 
-Sprint 24 — Adaptive Coaching, Planner and Progression is implemented and
-locally certified under ADR-042 and awaits Founder acceptance. Migration 014 is
-certified, undeployed and inactive; deployment and persistence activation are
-not authorised.
+Sprint 24 — Adaptive Coaching, Planner and Progression is complete, certified
+and Founder-accepted under ADR-042. Migration 014 remains certified, undeployed
+and inactive.
 
 ## Active Founder Review
 
-Sprint 24 implementation and certification evidence are complete. Founder
-acceptance is required to close the Sprint and govern entry into Sprint 25.
+Sprint 25 requires a Founder architectural and security decision. Option A in
+`docs/sprints/SPRINT_25_FOUNDER_DECISION_REQUIRED.md` recommends ADR-043 and a
+grounded transient Conversation Service. Sprint 25 is not active.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -90,7 +90,16 @@ decision implementation and current certification boundary in
 
 # Latest Closed Sprint
 
-## Sprint 23 — Oracle Session Intelligence
+## Sprint 24 — Adaptive Coaching, Planner and Progression
+
+**Status:** Complete, certified and Founder-accepted
+**Closure report:** `docs/sprints/SPRINT_24_CLOSURE.md`
+**Deployment status:** Migration 014 certified, undeployed and inactive
+
+Sprint 24 delivered evidence-led Operator development and authoritative
+exactly-once progression accounting without changing production.
+
+## Previous Closed Sprint — Sprint 23 — Oracle Session Intelligence
 
 **Status:** Complete, certified and Founder-accepted
 **Closure report:** `docs/sprints/SPRINT_23_CLOSURE.md`

@@ -31,9 +31,9 @@ game-pattern accumulation, Snapshot and Context projection complete; persisted
 producers and consumers inactive
 **Sprint 23:** Complete, certified and Founder-accepted — evidence-bound Session
 reports complete; runtime delivery and persistence inactive
-**Sprint 24:** Implemented and locally certified under ADR-042 — authoritative
-Mission, Planner and Progression source complete; Migration 014 undeployed and
-inactive
+**Sprint 24:** Complete, certified and Founder-accepted under ADR-042 —
+authoritative Mission, Planner and Progression source complete; Migration 014
+undeployed and inactive
 
 ---
 
@@ -70,7 +70,7 @@ correlational and never claims causation.
 Web and Electron manifest version 1.3.0 adds Planner Service and Planner,
 Progress and Achievements Applications with mechanical runtime equality.
 Migration 014 is implemented and certified on disposable PostgreSQL 17.10 but
-remains undeployed and inactive.
+remains undeployed and inactive. Sprint 24 is Founder-accepted and closed.
 
 ## Sprint 23 — Oracle Session Intelligence
 

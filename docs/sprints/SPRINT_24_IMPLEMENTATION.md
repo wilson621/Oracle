@@ -1,7 +1,7 @@
 # SPRINT 24 IMPLEMENTATION EVIDENCE
 
 **Sprint:** 24 — Adaptive Coaching, Planner and Progression
-**Status:** Implemented and locally certified; awaiting Founder acceptance
+**Status:** Implemented, certified and Founder-accepted
 **Date:** 24 July 2026
 **Deployment:** Not authorised and not performed
 

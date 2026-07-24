@@ -799,7 +799,7 @@ The canonical composition inventory and lifecycle classification did not
 change, so manifest version 1.2.0 remains correct and mechanical equality
 verification remains mandatory.
 
-Sprint 24 is implemented and locally certified under ADR-042. Mission Service
+Sprint 24 is complete, certified and Founder-accepted under ADR-042. Mission Service
 owns Mission lifecycle, Planner Service owns planning projections and
 Progression Service exclusively owns XP and Achievement accounting. Completion
 requires admitted Evidence from an authoritative completed Session. AI,

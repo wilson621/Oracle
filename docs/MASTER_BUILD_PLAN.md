@@ -116,8 +116,9 @@ Founder-accepted under ADR-041. The Session Service permanently owns the
 durable lifecycle. Migration 013 remains undeployed and inactive. Sprint 22 is
 complete, certified and Founder-accepted. No Migration 014 was required and
 persisted accumulation remains inactive. Sprint 23 is complete, certified and
-Founder-accepted without a new migration. Sprint 24 is implemented and locally
-certified under ADR-042. Migration 014 is certified, undeployed and inactive.
+Founder-accepted without a new migration. Sprint 24 is complete, certified and
+Founder-accepted under ADR-042. Migration 014 is undeployed and inactive.
+Sprint 25 requires a Founder architectural decision and is not activated.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own
