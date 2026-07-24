@@ -14,7 +14,8 @@ const CORE_ORACLE_SERVICES: readonly OracleService[] = Object.freeze([
   {
     id: "sessions",
     name: "Sessions",
-    description: "Provides analysed Oracle Session history.",
+    description:
+      "Owns the authoritative durable Oracle Session lifecycle and history.",
     requiredCapabilities: [],
     status: "available",
   },

@@ -43,9 +43,26 @@ export const ORACLE_RUNTIME_COMPOSITION_CONTRACT_VERSION = 1;
 
 export type OracleRuntimeTarget = "web" | "electron";
 
+export type OracleSessionLifecycleDeclaration = Readonly<{
+  contract: "oracle.session-lifecycle";
+  contractVersion: 1;
+  authority: "session-service";
+  persistence: "disabled";
+}>;
+
+export type OracleSessionLifecycleRuntimeContract = Readonly<{
+  getMetrics(): Readonly<{
+    commandAttempts: number;
+    committedMutations: number;
+    idempotentReplays: number;
+    rejectedCommands: number;
+  }>;
+}>;
+
 export type OraclePlatformSubsystemId =
   | "composition"
   | "services"
+  | "session-lifecycle"
   | "applications"
   | "game-integrations"
   | "guidance"
@@ -64,6 +81,7 @@ export type OracleRuntimeCompositionManifest = Readonly<{
   target: OracleRuntimeTarget;
   subsystems: readonly OracleRuntimeSubsystemDeclaration[];
   services: readonly string[];
+  sessionLifecycle: OracleSessionLifecycleDeclaration;
   applications: readonly string[];
   gameIntegrations: readonly string[];
   guidanceProviders: readonly string[];
@@ -72,6 +90,10 @@ export type OracleRuntimeCompositionManifest = Readonly<{
 export type OraclePlatformComposition = Readonly<{
   manifest: OracleRuntimeCompositionManifest;
   services: OracleServiceCompositionRegistry;
+  sessionLifecycle: Readonly<{
+    declaration: OracleSessionLifecycleDeclaration;
+    service: OracleSessionLifecycleRuntimeContract;
+  }>;
   applications: OracleApplicationCompositionRegistry;
   gameIntegrations: OracleGameIntegrationCompositionRegistry;
   guidance: OracleGuidanceCompositionRegistry;
@@ -101,6 +123,7 @@ export function createOracleRuntimeCompositionManifest(
     [
       "composition",
       "services",
+      "session-lifecycle",
       "applications",
       "game-integrations",
       "guidance",
@@ -122,6 +145,7 @@ export function createOracleRuntimeCompositionManifest(
       input.subsystems.map((subsystem) => Object.freeze({ ...subsystem }))
     ),
     services: freezeIdentities(input.services, "services"),
+    sessionLifecycle: Object.freeze({ ...input.sessionLifecycle }),
     applications: freezeIdentities(input.applications, "applications"),
     gameIntegrations: freezeIdentities(
       input.gameIntegrations,
@@ -152,6 +176,18 @@ export function assertOracleCompositionMatchesManifest(
     manifest.services,
     composition.services.getAll().map(({ id }) => id)
   );
+  if (
+    JSON.stringify(manifest.sessionLifecycle) !==
+      JSON.stringify(composition.sessionLifecycle.declaration) ||
+    manifest.sessionLifecycle.contract !== "oracle.session-lifecycle" ||
+    manifest.sessionLifecycle.contractVersion !== 1 ||
+    manifest.sessionLifecycle.authority !== "session-service" ||
+    manifest.sessionLifecycle.persistence !== "disabled"
+  ) {
+    throw new OracleRuntimeCompositionDivergenceError(
+      "Session lifecycle declaration does not match the constructed Session Service."
+    );
+  }
   assertExact(
     "applications",
     manifest.applications,
@@ -174,6 +210,7 @@ export function assertOracleCompositionMatchesManifest(
     [
       "composition",
       "services",
+      "session-lifecycle",
       "applications",
       "game-integrations",
       "guidance",

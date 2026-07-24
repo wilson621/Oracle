@@ -15,6 +15,7 @@
 
   "architecture:audit": "node scripts/audit-dependency-boundaries.mjs",
   "platform-composition:verify": "tsc -p tsconfig.platform-composition-verification.json && node .tmp-platform-composition-verification/scripts/verify-platform-composition.js && node -e \"require('node:fs').rmSync('.tmp-platform-composition-verification', { recursive: true, force: true })\"",
+  "session-lifecycle:verify": "tsc -p tsconfig.session-lifecycle-verification.json && node .tmp-session-lifecycle-verification/scripts/verify-session-lifecycle.js && node -e \"require('node:fs').rmSync('.tmp-session-lifecycle-verification', { recursive: true, force: true })\"",
 
   "operator:ownership:verify": "tsc -p tsconfig.operator-ownership-verification.json && node .tmp-operator-ownership-verification/scripts/verify-operator-ownership.js && node -e \"require('node:fs').rmSync('.tmp-operator-ownership-verification', { recursive: true, force: true })\"",
 
@@ -30,6 +31,8 @@
   "migration-011:persistence:verify": "node scripts/verify-migration-011-persistence.mjs",
   "migration-012:static:verify": "node scripts/verify-migration-012-static.mjs",
   "migration-012:persistence:verify": "node scripts/verify-migration-012-persistence.mjs",
+  "migration-013:static:verify": "node scripts/verify-migration-013-static.mjs",
+  "migration-013:persistence:verify": "node scripts/verify-migration-013-persistence.mjs",
   "sprint-19:auth:verify": "node scripts/verify-sprint-19-auth.mjs",
   "operator-intelligence:authority:verify": "tsc -p tsconfig.operator-intelligence-authority-verification.json && node .tmp-operator-intelligence-authority-verification/scripts/verify-operator-intelligence-authority.js && node -e \"require('node:fs').rmSync('.tmp-operator-intelligence-authority-verification', { recursive: true, force: true })\"",
   "operator-intelligence:trust:verify": "tsc -p tsconfig.operator-intelligence-trust-verification.json && node .tmp-operator-intelligence-trust-verification/scripts/verify-operator-intelligence-trust-contracts.js && node -e \"require('node:fs').rmSync('.tmp-operator-intelligence-trust-verification', { recursive: true, force: true })\"",

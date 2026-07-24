@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 3.4
+**Version:** 3.5
 
 ---
 
@@ -111,10 +111,10 @@ Founder-accepted under ADR-040. Its target-specific roots, canonical manifests
 and shared injected runtime remain undeployed and inactive. Production
 deployment, migration execution and runtime persistence remain unauthorised.
 
-Sprint 21 — Oracle Session and Evidence Lifecycle is next in sequence.
-Discovery confirms that a durable Session lifecycle ADR is required to settle
-Service authority, live Desktop ownership and evidence admission before
-activation or implementation.
+Sprint 21 — Oracle Session and Evidence Lifecycle is implemented and locally
+certified under ADR-041. The Session Service owns the durable lifecycle,
+Desktop retains live Context authority, and Migration 013 is certified but
+undeployed and inactive. Founder closure is pending.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

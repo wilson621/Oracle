@@ -21,7 +21,6 @@
     "application-service-bypass:app/operator/page.tsx->lib/oracle/oracle-brain.ts",
     "application-service-bypass:app/operator/page.tsx->lib/oracle/repositories/session-repository.ts",
     "application-service-bypass:app/oracle/page.tsx->lib/achievements/unlockAchievements.ts",
-    "application-service-bypass:app/oracle/page.tsx->lib/oracle/saveOracleSession.ts",
     "application-service-bypass:app/oracle/page.tsx->lib/xp/awardXp.ts",
     "application-service-bypass:components/coach/CoachHero.tsx->lib/oracle/OracleBrain.ts",
     "application-service-bypass:components/coach/MissionReadiness.tsx->lib/oracle/missions/index.ts",
@@ -46,7 +45,6 @@
     "application-service-bypass:components/ui/StatusCard.tsx->lib/oracle/prediction/prediction-types.ts",
     "game-knowledge-outside-integration:app/intelligence/page.tsx:call of duty",
     "game-knowledge-outside-integration:app/operator/page.tsx:call of duty",
-    "game-knowledge-outside-integration:lib/oracle/saveOracleSession.ts:call of duty",
     "game-knowledge-outside-integration:lib/oraclePrompt.ts:call of duty"
   ],
   "allowedCircularGroups": {

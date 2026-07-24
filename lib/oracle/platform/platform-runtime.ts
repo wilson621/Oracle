@@ -78,6 +78,7 @@ export class OraclePlatformRuntime {
 
     this.validateComposition();
     this.loadServices();
+    this.loadSessionLifecycle();
     this.loadApplications();
     this.loadGameIntegrations();
     this.loadGuidance();
@@ -199,6 +200,31 @@ export class OraclePlatformRuntime {
         "applications",
         `Oracle Applications composition failed: ${getErrorMessage(error)}`,
         "registering-applications"
+      );
+    }
+  }
+
+  private loadSessionLifecycle(): void {
+    this.setPhase("starting-session-lifecycle");
+    try {
+      const { declaration, service } = this.composition.sessionLifecycle;
+      if (
+        declaration.authority !== "session-service" ||
+        declaration.persistence !== "disabled" ||
+        !service
+      ) {
+        throw new Error("Authoritative Session Service composition is invalid.");
+      }
+      this.updateSubsystem(
+        "session-lifecycle",
+        "ready",
+        "Authoritative Session Service is composed with persistence disabled."
+      );
+    } catch (error) {
+      this.recordSubsystemFailure(
+        "session-lifecycle",
+        `Oracle Session lifecycle composition failed: ${getErrorMessage(error)}`,
+        "starting-session-lifecycle"
       );
     }
   }
@@ -506,6 +532,8 @@ function getSubsystemName(id: OraclePlatformSubsystemId): string {
       return "Runtime Composition";
     case "services":
       return "Oracle Services";
+    case "session-lifecycle":
+      return "Authoritative Session Lifecycle";
     case "applications":
       return "Oracle Applications";
     case "game-integrations":

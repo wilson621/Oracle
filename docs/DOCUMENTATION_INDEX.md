@@ -220,7 +220,11 @@ delivery authorities have been reviewed.
 | Sprint 20 implementation | [Sprint 20 Implementation](sprints/SPRINT_20_IMPLEMENTATION.md) | Implementation complete; production unchanged |
 | Sprint 20 certification | [Sprint 20 Certification](sprints/SPRINT_20_CERTIFICATION.md) | Locally certified and Founder-accepted |
 | Sprint 20 closure | [Sprint 20 Closure](sprints/SPRINT_20_CLOSURE.md) | Closed; permanent manifest-contract directive recorded |
-| Sprint 21 architectural decision | [Sprint 21 Founder Decision Required](sprints/SPRINT_21_FOUNDER_DECISION_REQUIRED.md) | Founder decision required before activation or implementation |
+| Sprint 21 architectural decision | [Sprint 21 Founder Decision Required](sprints/SPRINT_21_FOUNDER_DECISION_REQUIRED.md) | Resolved; Option A and ADR-041 approved |
+| Sprint 21 authority | [Sprint 21 Plan](sprints/SPRINT_21_PLAN.md) and [ADR-041](Decisions.md) | Founder-approved; implementation and local certification complete |
+| Sprint 21 implementation | [Sprint 21 Implementation](sprints/SPRINT_21_IMPLEMENTATION.md) | Source implementation complete; production unchanged |
+| Sprint 21 certification | [Sprint 21 Certification](sprints/SPRINT_21_CERTIFICATION.md) | Locally certified; awaiting Founder closure |
+| Sprint 21 machine evidence | [Sprint 21 Permanent Evidence](sprints/evidence/sprint-21/README.md) | Local certification evidence; no deployment or activation |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

@@ -4,3 +4,4 @@ export * from "./platform-composition-root";
 export * from "./platform-health";
 export * from "./platform-runtime";
 export * from "./platform-types";
+export * from "../sessions";

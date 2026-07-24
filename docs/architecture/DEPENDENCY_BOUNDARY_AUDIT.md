@@ -3,7 +3,7 @@
 **Sprint:** 12.1 Commit 5
 **Baseline commit:** `54a7298`
 **Audit date:** 24 July 2026
-**Status:** Active enforced baseline; reconciled by Sprint 20
+**Status:** Active enforced baseline; reconciled by Sprint 21
 
 ---
 
@@ -23,6 +23,10 @@ Sprint 20 removed the active Platform Runtime imports of lower-layer global
 registries. Target-specific composition roots now perform assembly outside the
 Platform layer and inject instance-owned registries through Platform-owned
 contracts.
+
+Sprint 21 removed the browser-owned direct Session persistence path and its
+hard-coded game knowledge. Session mutation now exists only behind the
+authoritative Session Service source boundary, reducing the baseline by two.
 
 The genuine engine runtime barrel cycle was removed through import-path changes
 only. The verified runtime dependency graph now contains zero circular groups.
@@ -57,11 +61,11 @@ must not be hidden by regenerating the baseline.
 
 # Dependency Graph Assessment
 
-The Sprint 20 graph covers 396 TypeScript files.
+The Sprint 21 graph covers 404 TypeScript files.
 
 - runtime circular groups: 0
 - source-level type/barrel circular groups: 5
-- documented boundary exceptions: 47
+- documented boundary exceptions: 45
 - new or unexpected violations: 0
 
 The source cycle groups contain 49 file memberships across Contextual Intent,

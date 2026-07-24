@@ -9,7 +9,7 @@
 **Supersedes:** Earlier Architecture Index versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 6.1
+**Version:** 6.2
 
 ---
 
@@ -768,9 +768,14 @@ Migrations 011 and 012 are certified. All remain undeployed and inactive.
 Sprint 20 is complete, certified and Founder-accepted under ADR-040. Its
 target-specific composition roots, canonical manifests and shared injected
 runtime are not deployed. The manifest is a permanent runtime contract and
-exact equality verification remains mandatory. Sprint 21 requires a
-Founder-approved durable Session lifecycle ADR before implementation. Runtime
-persistence remains disabled.
+exact equality verification remains mandatory. Runtime persistence remains
+disabled.
+
+Sprint 21 is implemented and locally certified under ADR-041. The Session
+Service is the sole durable lifecycle authority, Desktop retains live capture
+and Context authority, and their correlation is versioned and non-merging.
+Migration 013 is certified but undeployed and inactive. Founder closure is
+pending.
 
 Current Runtime
 
@@ -789,6 +794,10 @@ Current Runtime
 ✓ Instance-owned injected runtime registries
 ✓ Required fail-closed and optional degraded readiness
 ✓ Fresh runtime recovery and renderer-safe health projection
+✓ Authoritative Session Service lifecycle contracts
+✓ Versioned non-merging Desktop Session correlation
+✓ Minimised Evidence admission and renderer-safe Session projections
+✓ Session History Application boundary
 ✓ Electron Companion host
 ✓ Companion Session Manager and Context ownership
 ✓ Desktop Host Snapshot and Event Stream

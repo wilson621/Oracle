@@ -14,6 +14,10 @@ import {
   updateOracleCompanionSessionContext,
   type OracleCompanionSession,
 } from "./companion-session.js";
+import {
+  createOracleSessionCompanionCorrelation,
+  type OracleSessionCompanionCorrelation,
+} from "../../lib/oracle/sessions/index.js";
 
 /**
  * Owns the lifecycle of the current desktop Companion session.
@@ -135,6 +139,47 @@ export class OracleCompanionSessionManager {
           this.currentSession
             .currentContext
         );
+  }
+
+  correlateDurableSession(
+    correlation:
+      OracleSessionCompanionCorrelation
+  ): OracleCompanionSession {
+    const session =
+      this.getRequiredSession();
+    const validated =
+      createOracleSessionCompanionCorrelation(
+        correlation
+      );
+
+    if (
+      validated.desktopSessionId !==
+      session.id
+    ) {
+      throw new Error(
+        "Durable Session correlation must identify the active Desktop Companion Session."
+      );
+    }
+
+    if (
+      session.durableCorrelation &&
+      session.durableCorrelation.sessionId !==
+        validated.sessionId
+    ) {
+      throw new Error(
+        "Desktop Companion Session is already correlated to another durable Session."
+      );
+    }
+
+    this.currentSession = {
+      ...session,
+      updatedAt:
+        validated.establishedAt,
+      durableCorrelation:
+        validated,
+    };
+
+    return this.getRequiredSnapshot();
   }
 
   end(

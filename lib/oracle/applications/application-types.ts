@@ -5,6 +5,7 @@ export type OracleApplicationId =
   | "oracle-brain"
   | "loadouts"
   | "reports"
+  | "sessions"
   | "career"
   | "companion";
 

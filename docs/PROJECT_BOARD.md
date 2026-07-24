@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.7
+**Version:** 5.9
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -39,11 +39,12 @@ Founder-accepted under ADR-040. The canonical runtime manifests mechanically
 equal the constructed Web and Electron runtimes. Production deployment,
 Migration execution, Gate C and runtime persistence remain unauthorised.
 
-Sprint 21 — Oracle Session and Evidence Lifecycle is next in the approved
-Programme. Discovery confirms that it must formalise the relationship between
-durable Session Service authority and live Desktop Companion Session/Context
-authority. ADR-041 Founder approval is required before Sprint activation or
-implementation.
+Sprint 21 — Oracle Session and Evidence Lifecycle is implemented and locally
+certified under ADR-041. Migration 013 passed disposable PostgreSQL 16.14
+rollback, preservation, concurrency and RLS certification. The Session Service
+is the sole durable lifecycle authority; Desktop Companion retains live
+capture, attachment and Context authority through a versioned, non-merging
+correlation contract. Founder closure is pending.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -401,13 +402,25 @@ tagging remains part of a separately authorised release workflow.
 
 - target-specific Web and Electron composition roots implemented
 - shared dependency-injected Platform Runtime implemented
-- ten Service and six Application definitions injected through instance-owned
+- ten Service and seven Application definitions injected through instance-owned
   registries
 - Game Integration and Guidance provider composition explicit
 - canonical Web and Electron manifests mechanically match constructed runtime
 - Extension Runtime and Capability Graph implemented
 - required fail-closed, optional degraded and fresh recovery semantics verified
 - renderer-safe Platform health projection implemented
+- required authoritative Session lifecycle declaration implemented with
+  persistence disabled
+
+## Authoritative Sessions
+
+- Session Service is the sole durable lifecycle authority
+- stable authenticated lifecycle and optimistic concurrency implemented
+- explicit minimised Evidence admission implemented
+- renderer-safe history, detail, export and deletion Application implemented
+- Desktop correlation is immutable, versioned and non-merging
+- Migration 013 is PostgreSQL-certified, undeployed and inactive
+- direct browser Session persistence path removed
 
 ## Desktop Platform
 
@@ -473,8 +486,8 @@ Game Integrations
 Open findings:
 
 1. some web Applications directly import repositories, pipelines and engines
-2. registered Services and Applications are metadata foundations, not the
-   exclusive runtime boundary
+2. most registered Services and Applications remain metadata foundations;
+   Session lifecycle is operational in source but persisted runtime is disabled
 3. the desktop composition root does not yet project authoritative Session
    Context into a Guidance Request, execute the Provider Service and deliver
    Application state to `/companion`

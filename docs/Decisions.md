@@ -9,7 +9,7 @@
 **Supersedes:** Earlier ADR ledger versions as an index; individual accepted records retain their own status
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 4.8
+**Version:** 4.9
 
 ---
 
@@ -2569,6 +2569,145 @@ certification and documentation reconciliation only.
 It does not authorise deployment, execution of any migration, reopening Gate C,
 runtime persistence, production-environment changes or alteration of the
 External Companion trust boundary.
+
+## Status
+
+Accepted — Founder-approved 24 July 2026.
+
+---
+
+# ADR-041
+
+## Title
+
+Authoritative Session Lifecycle and Companion Correlation
+
+## Decision
+
+The Oracle Session Service is the sole authority for the durable Oracle
+Session aggregate and its lifecycle. A Session is the canonical historical
+record of player activity.
+
+Future subsystems may observe, analyse, enrich or present a Session, but they
+must not become its lifecycle authority. Oracle has exactly one authoritative
+Session lifecycle owner: the Session Service.
+
+The Desktop Companion Session Manager remains the sole live device authority
+for capture, attachment and current Companion Context. Desktop and Session
+Service authority are correlated through an immutable, versioned,
+non-merging contract. The durable Session identity remains stable across
+begin, resume, recover, complete, abandon, history, export and deletion.
+
+Every lifecycle command requires authenticated Operator ownership. Mutations
+use idempotency keys and optimistic concurrency. Completion is terminal and
+idempotent. Abandonment is explicit. Recovery constructs durable truth from
+the Session Service rather than promoting Desktop memory into authority.
+
+Evidence source owners retain authority over their source records. The Session
+Service admits only explicit, minimised, policy-bound Evidence references and
+provenance. Raw observations remain transient by default and gain no durable
+retention authority through this decision.
+
+Session deletion uses the recoverable Trust & Control orchestration established
+by ADR-038. Eligibility is removed immediately; physical deletion is reported
+truthfully as pending or complete across Session, Evidence and derived
+Understanding owners. A content-free tombstone may exist only where already
+permitted by ADR-038.
+
+Session command, projection and Companion correlation contracts are immutable,
+versioned and renderer-safe at presentation boundaries. Cross-Operator access
+fails closed.
+
+Sprint 21 must update the canonical ADR-040 runtime composition manifests for
+every altered Service or lifecycle declaration and must continue to pass exact
+mechanical manifest/runtime equality verification.
+
+This decision does not activate runtime persistence.
+
+## Reason
+
+ADR-003 makes a Session Oracle's atomic intelligence unit, but the existing
+system has an in-memory Desktop Companion Session and a separate thin
+`oracle_sessions` report row. Neither provides one authenticated, recoverable
+and governed historical lifecycle.
+
+One Service-owned durable aggregate gives Web, Desktop, history, export,
+deletion and future intelligence a single authority while preserving the
+Desktop Companion's genuine device-side responsibilities. Explicit evidence
+admission prevents observation from becoming retention by accident.
+
+## Alternatives Considered
+
+### Desktop-owned durable Sessions
+
+Rejected. It would make a device component a durable Platform authority,
+create multi-device conflict and recovery problems, and merge boundaries that
+ADR-040 deliberately keeps distinct.
+
+### Append-only Session event ledger as primary authority
+
+Rejected for Sprint 21. Event sourcing would introduce a new Platform-wide
+trust and persistence pattern, complicate deletion and minimisation, and
+exceed the required lifecycle scope.
+
+### Repository or database-owned lifecycle
+
+Rejected. Repositories own persistence; Services own business behaviour.
+Making database procedures the lifecycle authority would encourage host and
+Application bypasses and couple Oracle's Session contract to one store.
+
+## Consequences
+
+- Session Service becomes the only durable lifecycle mutation boundary.
+- Desktop retains live capture and Context authority without persistence
+  authority.
+- Web and Desktop use one versioned Session contract.
+- One gameplay period can correlate to exactly one stable durable Session.
+- Evidence is admitted deliberately and by reference rather than by retaining
+  every observation.
+- Session History, export and deletion consume Service-owned projections.
+- Legacy direct `oracle_sessions` writes become a shrinking compatibility seam.
+- Migration 013 may implement the approved durable schema but remains
+  undeployed until separately authorised.
+- Later Session Intelligence consumes completed, permitted Session projections
+  and cannot own Session lifecycle.
+
+## Reversibility
+
+Transport, Repository and database implementations may be replaced behind
+compatible versioned contracts. Correlation and recovery policies may evolve
+through explicit contract versions.
+
+Changing the durable lifecycle owner, merging Desktop and Service authority,
+or adopting an event ledger as primary authority requires a superseding
+Founder-approved ADR and a governed data migration.
+
+## Risks
+
+- retries or concurrent commands could create duplicate Sessions;
+- Desktop and durable state could diverge during interruption;
+- broad Evidence admission could retain raw content;
+- deletion could be reported complete before all owners finish;
+- projections could expose sensitive Evidence or diagnostics;
+- legacy direct writes could bypass the Service; and
+- manifest drift could hide the operational Session capability.
+
+These risks require ownership-bound idempotency, optimistic concurrency,
+cross-Operator isolation, explicit recovery, minimisation, deletion-topology
+verification, renderer-safe projections, a shrinking legacy seam and exact
+ADR-040 manifest equality.
+
+## Authority Boundary
+
+This ADR authorises Sprint 21 planning, source implementation, Migration 013
+implementation, disposable PostgreSQL verification, local certification,
+certification evidence and documentation reconciliation only.
+
+It does not authorise production deployment; execution of Migration 010, 011,
+012 or 013 in production; Gate C; runtime persistence; persisted producer or
+consumer activation; production-environment changes; raw observation
+retention; External Companion trust-boundary changes; or weakening ADR-040
+manifest verification.
 
 ## Status
 

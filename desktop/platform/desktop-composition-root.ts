@@ -21,6 +21,7 @@ const ELECTRON_SUBSYSTEMS: readonly OracleRuntimeSubsystemDeclaration[] =
   Object.freeze([
     Object.freeze({ id: "composition", required: true }),
     Object.freeze({ id: "services", required: true }),
+    Object.freeze({ id: "session-lifecycle", required: true }),
     Object.freeze({ id: "applications", required: true }),
     Object.freeze({ id: "game-integrations", required: true }),
     Object.freeze({ id: "guidance", required: true }),
@@ -32,7 +33,7 @@ export const ORACLE_ELECTRON_COMPOSITION_MANIFEST =
   createOracleRuntimeCompositionManifest({
     contract: "oracle.runtime-composition",
     contractVersion: 1,
-    manifestVersion: "1.0.0",
+    manifestVersion: "1.1.0",
     target: "electron",
     subsystems: ELECTRON_SUBSYSTEMS,
     services: [
@@ -47,11 +48,18 @@ export const ORACLE_ELECTRON_COMPOSITION_MANIFEST =
       "loadouts",
       "companion",
     ],
+    sessionLifecycle: {
+      contract: "oracle.session-lifecycle",
+      contractVersion: 1,
+      authority: "session-service",
+      persistence: "disabled",
+    },
     applications: [
       "ai-coach",
       "oracle-brain",
       "loadouts",
       "reports",
+      "sessions",
       "career",
       "companion",
     ],

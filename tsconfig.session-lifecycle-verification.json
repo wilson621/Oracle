@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": ".tmp-session-lifecycle-verification",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2022"
+  },
+  "include": [
+    "lib/oracle/sessions/**/*.ts",
+    "lib/oracle/services/sessions/**/*.ts",
+    "lib/oracle/repositories/session-lifecycle-repository.ts",
+    "lib/oracle/applications/sessions/**/*.ts",
+    "desktop/companion/companion-context.ts",
+    "desktop/companion/companion-session.ts",
+    "desktop/companion/companion-session-manager.ts",
+    "desktop/platform/desktop-host-snapshot.ts",
+    "scripts/verify-session-lifecycle.ts"
+  ]
+}

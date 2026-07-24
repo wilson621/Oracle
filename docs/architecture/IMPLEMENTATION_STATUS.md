@@ -24,6 +24,8 @@ decisions implemented; Migrations 011 and 012 certified, undeployed and
 inactive
 **Sprint 20:** Complete, certified and Founder-accepted — composition roots and
 canonical manifest/runtime equality implemented; undeployed and inactive
+**Sprint 21:** Implemented and locally certified under ADR-041 — Migration 013
+certified, undeployed and inactive; Founder closure pending
 
 ---
 
@@ -345,6 +347,28 @@ The Intelligence page builds Oracle Context and invokes the Intelligence
 Pipeline directly. Several other pages also call repositories or engines
 directly. The Service and Application registries are therefore not yet the
 exclusive production access path.
+
+## Authoritative Session Lifecycle
+
+Implemented under `lib/oracle/sessions/`, `lib/oracle/services/sessions/`,
+`lib/oracle/repositories/`, `lib/oracle/applications/sessions/` and
+`desktop/companion/`:
+
+- one versioned immutable Session aggregate and command contract;
+- sole durable lifecycle authority in Session Service;
+- authenticated idempotent begin, resume, recover, complete and abandon;
+- stable identity and optimistic concurrency;
+- explicit minimised Evidence-reference admission;
+- recoverable deletion and immediate eligibility removal;
+- renderer-safe history, detail and export projections;
+- versioned non-merging Desktop correlation;
+- Supabase Repository source adapter;
+- Migration 013 trusted persistence boundary; and
+- focused lifecycle, concurrency, RLS and PostgreSQL certification.
+
+Migration 013 and its Repository adapter are not composed into persisted
+runtime operation. Production remains unchanged and runtime persistence is
+disabled.
 
 ## Platform Coordination Foundations
 

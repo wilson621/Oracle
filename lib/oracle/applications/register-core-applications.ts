@@ -41,6 +41,15 @@ const CORE_ORACLE_APPLICATIONS: readonly OracleApplication[] = Object.freeze([
     status: "available",
   },
   {
+    id: "sessions",
+    name: "Session History",
+    description:
+      "Authoritative Session history, detail, export and lifecycle controls.",
+    route: "/sessions",
+    requiredServices: ["operator", "sessions"],
+    status: "available",
+  },
+  {
     id: "career",
     name: "Career",
     description:

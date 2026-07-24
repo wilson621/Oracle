@@ -19,6 +19,7 @@ export type OraclePlatformBootPhase =
   | "idle"
   | "validating-composition"
   | "registering-services"
+  | "starting-session-lifecycle"
   | "registering-applications"
   | "registering-game-integrations"
   | "registering-guidance"

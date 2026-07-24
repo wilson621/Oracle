@@ -6,3 +6,4 @@ export * from "./companion-guidance";
 export * from "./operator";
 export * from "./operator-intelligence";
 export * from "./operator-understanding";
+export * from "./sessions";

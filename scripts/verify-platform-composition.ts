@@ -31,7 +31,7 @@ function main(): void {
   verifyLifecycleOwnership();
   verifyEntryPointWiringAndLegacySeam();
   writeCertificationEvidence();
-  console.log("Sprint 20 Platform composition verification passed.");
+  console.log("Sprint 21 Platform composition verification passed.");
 }
 
 function verifyCanonicalManifests(): void {
@@ -64,6 +64,14 @@ function verifyExactRuntimeEquality(): void {
     assert.deepEqual(
       state.applications.map(({ id }) => id),
       manifest.applications
+    );
+    assert.deepEqual(
+      composition.sessionLifecycle.declaration,
+      manifest.sessionLifecycle
+    );
+    assert.equal(
+      state.subsystems.find(({ id }) => id === "session-lifecycle")?.status,
+      "ready"
     );
     assert.deepEqual(state.gameIntegrations, manifest.gameIntegrations);
     assert.deepEqual(state.guidanceProviders, manifest.guidanceProviders);
@@ -161,6 +169,10 @@ function verifyFreshRecovery(): void {
   assert.equal(recovered.attempt, 2);
   assert.notEqual(compositions[0], compositions[1]);
   assert.notEqual(compositions[0].services, compositions[1].services);
+  assert.notEqual(
+    compositions[0].sessionLifecycle.service,
+    compositions[1].sessionLifecycle.service
+  );
   assert.notEqual(compositions[0].companion, compositions[1].companion);
 }
 
@@ -188,6 +200,18 @@ function verifyLifecycleOwnership(): void {
     desktopOwner: "desktop-companion-session-and-context",
     authorityMerged: false,
   });
+  for (const manifest of [
+    ORACLE_WEB_COMPOSITION_MANIFEST,
+    ORACLE_ELECTRON_COMPOSITION_MANIFEST,
+  ]) {
+    assert.deepEqual(manifest.sessionLifecycle, {
+      contract: "oracle.session-lifecycle",
+      contractVersion: 1,
+      authority: "session-service",
+      persistence: "disabled",
+    });
+    assert.equal(manifest.manifestVersion, "1.1.0");
+  }
 }
 
 function verifyEntryPointWiringAndLegacySeam(): void {
@@ -235,6 +259,7 @@ function withoutTarget(manifest: typeof ORACLE_WEB_COMPOSITION_MANIFEST) {
     manifestVersion: manifest.manifestVersion,
     subsystems: manifest.subsystems,
     services: manifest.services,
+    sessionLifecycle: manifest.sessionLifecycle,
     applications: manifest.applications,
     gameIntegrations: manifest.gameIntegrations,
     guidanceProviders: manifest.guidanceProviders,
@@ -254,6 +279,7 @@ function writeCertificationEvidence(): void {
       declared: {
         subsystems: manifest.subsystems,
         services: manifest.services,
+        sessionLifecycle: manifest.sessionLifecycle,
         applications: manifest.applications,
         gameIntegrations: manifest.gameIntegrations,
         guidanceProviders: manifest.guidanceProviders,
@@ -264,6 +290,7 @@ function writeCertificationEvidence(): void {
           required,
         })),
         services: composition.services.getAll().map(({ id }) => id),
+        sessionLifecycle: composition.sessionLifecycle.declaration,
         applications: composition.applications.getAll().map(({ id }) => id),
         gameIntegrations:
           composition.gameIntegrations.getAll().map(({ id }) => id),
@@ -274,8 +301,8 @@ function writeCertificationEvidence(): void {
     };
   });
   const path =
-    "docs/sprints/evidence/sprint-20/generated/platform-composition-certification.json";
-  fs.mkdirSync("docs/sprints/evidence/sprint-20/generated", {
+    "docs/sprints/evidence/sprint-21/generated/platform-composition-certification.json";
+  fs.mkdirSync("docs/sprints/evidence/sprint-21/generated", {
     recursive: true,
   });
   fs.writeFileSync(

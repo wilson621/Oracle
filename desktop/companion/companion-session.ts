@@ -8,6 +8,10 @@ import type {
 import {
   cloneOracleCompanionContext,
 } from "./companion-context.js";
+import {
+  createOracleSessionCompanionCorrelation,
+  type OracleSessionCompanionCorrelation,
+} from "../../lib/oracle/sessions/index.js";
 
 export type OracleCompanionSessionStatus =
   | "created"
@@ -27,6 +31,9 @@ export type OracleCompanionSession = {
 
   currentContext:
     OracleCompanionContext | null;
+
+  durableCorrelation:
+    OracleSessionCompanionCorrelation | null;
 };
 
 export type CreateOracleCompanionSessionInput = {
@@ -35,6 +42,9 @@ export type CreateOracleCompanionSessionInput = {
 
   currentContext?:
     OracleCompanionContext | null;
+
+  durableCorrelation?:
+    OracleSessionCompanionCorrelation | null;
 };
 
 export type UpdateOracleCompanionSessionInput = {
@@ -86,6 +96,13 @@ export function createOracleCompanionSession(
       cloneCompanionContext(
         input.currentContext
       ),
+
+    durableCorrelation:
+      input.durableCorrelation == null
+        ? null
+        : createOracleSessionCompanionCorrelation(
+            input.durableCorrelation
+          ),
   };
 }
 

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-24T20:34:14.296Z",
+  "postgres": "16.14 (Debian 16.14-1.pgdg13+1)",
+  "chain": "009 -> 010 -> 011 -> 012 -> 013",
+  "hashes": {
+    "database/009_operator_intelligence_persistence.sql": "fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f",
+    "database/010_operator_trust_control_persistence.sql": "7c46a1c9a3a0ff7e8f5c2348a3179c98934ad34ec9e66a2c2632830b65c7d715",
+    "database/011_operator_account_provisioning.sql": "5be24f86228d018dc2d5aacbf3f186c9414432c18c2b573a7a3a1e340496d505",
+    "database/012_operator_identity_lifecycle.sql": "a436c0df6a2a9296c112d9c4ab6f6dd50dd44daa5fcf54dd01c5a2d213b435b0",
+    "database/013_authoritative_session_lifecycle.sql": "7228c0384caed59f2a042e17eb6b2ea935bfed6b72e6372649d93f0874c5f68a"
+  },
+  "rollbackCatalogSha256Before": "cd1b362954057a0dd1b8c08fcbefdb1c587a6b6439a05091501e80ec5e702692",
+  "rollbackCatalogSha256After": "cd1b362954057a0dd1b8c08fcbefdb1c587a6b6439a05091501e80ec5e702692",
+  "catalogIdentical": true,
+  "preservation": {
+    "ownedLegacySessions": 1,
+    "unownedLegacySessions": 1,
+    "operators": 2
+  },
+  "exactReplay": true,
+  "immutableIdempotencyConflict": true,
+  "optimisticConcurrency": true,
+  "concurrentWinnerCount": 1,
+  "evidenceMinimised": true,
+  "deletionEligibilityRemoved": true,
+  "trustedServiceMutationOnly": true,
+  "authenticatedDirectInsertDenied": true,
+  "crossOperatorRlsIsolation": true,
+  "rendererUnsafeColumnsDenied": true,
+  "deletedSessionIneligible": true,
+  "deployed": false,
+  "activated": false,
+  "runtimePersistenceActivated": false,
+  "result": "pass"
+}

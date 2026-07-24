@@ -14,7 +14,6 @@ import {
   unlockAchievements,
   type UnlockedAchievement,
 } from "@/lib/achievements/unlockAchievements";
-import { saveOracleSession } from "@/lib/oracle/saveOracleSession";
 import { awardXp } from "@/lib/xp/awardXp";
 import type { OracleReport as OracleReportType } from "@/types/oracle";
 
@@ -85,11 +84,6 @@ export default function OraclePage() {
       }
 
       setReport(data.report);
-
-      await saveOracleSession(
-        prompt,
-        data.report
-      );
 
       const xp = await awardXp(
         data.report.grade,

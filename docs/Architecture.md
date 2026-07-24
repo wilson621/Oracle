@@ -9,7 +9,7 @@
 **Supersedes:** Earlier current-architecture descriptions; historical baselines remain preserved
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.6
+**Version:** 5.7
 
 ---
 
@@ -1328,6 +1328,56 @@ Call of Duty-specific executable and title evidence remains exclusively inside
 the Call of Duty Game Integration. Detection contracts, lifecycle coordination,
 Session ownership and presentation are shared, game-agnostic capabilities.
 
+# Sprint 21 Authoritative Session Lifecycle
+
+ADR-041 establishes one durable Session authority without merging it with live
+Desktop ownership:
+
+```text
+Desktop Companion live capture and Context
+        ↓ versioned non-merging correlation
+Authoritative Session Service
+        ↓
+Explicit minimised Evidence admission
+        ↓
+Exclusive Session Repository
+        ↓
+Canonical historical Session
+        ├──→ Session History / Detail / Export
+        ├──→ Trust & Control deletion orchestration
+        └──→ Future Session Intelligence consumers
+```
+
+The Session Service alone begins, resumes, recovers, completes, abandons and
+deletes durable Sessions. Web, Desktop, Applications, Game Integrations,
+Guidance and future intelligence may observe, enrich or present immutable
+Session projections but cannot become lifecycle authorities.
+
+The Desktop Companion Session Manager remains authoritative only for live
+device capture, attachment and current Companion Context. Its local Session
+identity remains distinct from the durable Session identity. Their versioned
+correlation contract records the relationship without transferring authority
+or storing credentials.
+
+Evidence source owners retain source-record authority. A durable Session
+admits only bounded provenance, policy identity, timestamps and a content
+digest. Raw prompts, screenshots, game memory and observations are not admitted
+by default.
+
+Migration 013 implements the undeployed durable schema and trusted Repository
+boundary. It preserves historical owned and unowned rows, removes authenticated
+direct inserts and makes new mutation service-role-only. Runtime composition
+uses an in-memory Repository while persistence remains disabled. The Supabase
+adapter is implemented but not composed or activated.
+
+Session deletion removes eligibility immediately and uses ADR-038 recoverable
+orchestration for completion. Renderer projections expose status and counts,
+not Evidence contents or internal diagnostics.
+
+Web and Electron composition manifests version `1.1.0` declare the required
+Session lifecycle subsystem, `sessions` Application, Service authority and
+disabled persistence. Exact manifest/runtime equality remains mandatory.
+
 # Sprint 14 Companion Intelligence Foundation
 
 Sprint 14 establishes the reusable external Companion Guidance architecture:
@@ -1583,8 +1633,9 @@ persistence foundation; deployment did not activate its runtime use.
 
 # Verified Integration Limits
 
-- the direct `analyseFight`, clip-upload, hard-coded Call of Duty Session,
-  Combat Rating and game-statistics paths are legacy product paths;
+- the direct `analyseFight`, clip-upload, Combat Rating and game-statistics
+  paths are legacy product paths; the browser-owned hard-coded Call of Duty
+  Session writer was removed in Sprint 21;
 - their continued presence does not make game analysis Oracle's architectural
   centre;
 - they must not be expanded into new Operator Intelligence authority;

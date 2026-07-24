@@ -15,6 +15,10 @@ import {
 import {
   createCoreOracleServiceRegistry,
 } from "../services/register-core-services";
+import {
+  InMemoryOracleSessionLifecycleRepository,
+} from "../repositories/session-lifecycle-repository";
+import { OracleSessionService } from "../services/sessions";
 import type {
   OraclePlatformComposition,
   OracleRuntimeCompositionManifest,
@@ -26,10 +30,17 @@ export function createCoreOraclePlatformComposition(
   const providers = Object.freeze([
     createCallOfDutyCuratedGuidanceProvider(),
   ]);
+  const sessionService = new OracleSessionService(
+    new InMemoryOracleSessionLifecycleRepository()
+  );
 
   return Object.freeze({
     manifest,
     services: createCoreOracleServiceRegistry(),
+    sessionLifecycle: Object.freeze({
+      declaration: manifest.sessionLifecycle,
+      service: sessionService,
+    }),
     applications: createCoreOracleApplicationRegistry(),
     gameIntegrations: createOracleGameIntegrationRegistry(),
     guidance: new OracleCompanionGuidanceProviderService(providers),
