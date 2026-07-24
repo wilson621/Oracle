@@ -34,16 +34,19 @@ const DECLARATION_TRANSITIONS = {
     "corrected",
     "superseded",
     "withdrawn",
+    "expired",
     "deleted",
   ],
   corrected: [
     "active",
     "superseded",
     "withdrawn",
+    "expired",
     "deleted",
   ],
   superseded: ["deleted"],
   withdrawn: ["deleted"],
+  expired: ["active", "deleted"],
   deleted: [],
 } as const satisfies Readonly<
   Record<

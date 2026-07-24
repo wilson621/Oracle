@@ -17,7 +17,7 @@
 **Sprint 15 Phase 3:** Complete and committed
 **Sprint 16:** Trust Boundary complete and committed
 **Sprint 17:** Scale-Safe Trust Data Plane fully complete; Migration 009 deployed and verified in production
-**Sprint 18:** Active — Founder-approved; implementation not started
+**Sprint 18:** Active — Phase 2 contracts and policy validation implemented and verified
 
 ---
 
@@ -64,10 +64,22 @@ added or activated. Sprint 17 is Founder-approved and fully complete. Migration
 009 is deployed and verified, establishing the production persistence
 foundation while runtime persistence remains disabled.
 
-Sprint 18 — Operator Trust and Control was Founder-approved and activated on
-24 July 2026. This is a governance state only: no Sprint 18 implementation has
-started, and activation changed no verified implementation or production
-state.
+## Sprint 18 — Phase 2 Contracts and Policy Validation
+
+Sprint 18 Phase 1 was Founder-reviewed and approved on 24 July 2026. Phase 2
+now implements immutable, presentation-independent control contracts,
+configurable fail-closed governance policy, declaration expiry, typed command
+outcomes, deterministic bounded export, deletion scopes, content-free
+operation receipts and tombstones, and recoverable lifecycle matrices.
+
+The broad control-policy contract explicitly binds each purpose to an existing
+Migration 009 admission policy or to `null`, which grants no Evidence-admission
+authority. It does not replace the narrow admission-policy contract.
+
+Focused control, existing Understanding, existing trust, TypeScript, lint and
+architecture verification pass. No Repository persistence, migration, runtime
+registration, Application, production policy value, production deployment,
+runtime persistence, inference or personalisation was added or activated.
 
 ## Sprint 15 Phase 1 — Ownership Foundation
 

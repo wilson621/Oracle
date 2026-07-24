@@ -23,6 +23,7 @@
   "migration-009:rollback:verify": "node scripts/verify-migration-009-rollback.mjs",
   "operator-intelligence:authority:verify": "tsc -p tsconfig.operator-intelligence-authority-verification.json && node .tmp-operator-intelligence-authority-verification/scripts/verify-operator-intelligence-authority.js && node -e \"require('node:fs').rmSync('.tmp-operator-intelligence-authority-verification', { recursive: true, force: true })\"",
   "operator-intelligence:trust:verify": "tsc -p tsconfig.operator-intelligence-trust-verification.json && node .tmp-operator-intelligence-trust-verification/scripts/verify-operator-intelligence-trust-contracts.js && node -e \"require('node:fs').rmSync('.tmp-operator-intelligence-trust-verification', { recursive: true, force: true })\"",
+  "operator-control:verify": "tsc -p tsconfig.operator-control-verification.json && node .tmp-operator-control-verification/scripts/verify-operator-control-contracts.js && node -e \"require('node:fs').rmSync('.tmp-operator-control-verification', { recursive: true, force: true })\"",
 
   "guidance:verify": "tsc -p tsconfig.guidance-verification.json && node .tmp-guidance-verification/scripts/verify-companion-guidance-contracts.js && node .tmp-guidance-verification/scripts/verify-companion-guidance-service.js && node .tmp-guidance-verification/scripts/verify-call-of-duty-guidance-provider.js && node .tmp-guidance-verification/scripts/verify-companion-guidance-application.js && node -e \"require('node:fs').rmSync('.tmp-guidance-verification', { recursive: true, force: true })\"",
 

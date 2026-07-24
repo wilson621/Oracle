@@ -18,8 +18,11 @@
 # Current Delivery Status
 
 Sprint 18 — Operator Trust and Control is Founder-approved and active from
-24 July 2026. Implementation has not started. Its approved scope is recorded in
-`docs/sprints/SPRINT_18_PLAN.md`, and ADR-037, ADR-038 and ADR-039 are accepted.
+24 July 2026. Phase 1 was Founder-reviewed and approved. Phase 2 immutable
+control contracts and configurable fail-closed policy validation are
+implemented and verified; Phase 3 persistence implementation has not started.
+The approved scope is recorded in `docs/sprints/SPRINT_18_PLAN.md`, and ADR-037,
+ADR-038 and ADR-039 are accepted.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -34,8 +37,9 @@ phases, verification and exit governance are recorded in
 `docs/sprints/SPRINT_17_PLAN.md`.
 
 Implementation evidence is recorded in
-`docs/sprints/SPRINT_17_CLOSURE.md`; the version-pinned deployment decision
-artifact is `docs/sprints/SPRINT_17_MIGRATION_009_DOSSIER.md`.
+`docs/sprints/SPRINT_18_PHASE_2_IMPLEMENTATION.md`. Sprint 17 closure remains
+recorded in `docs/sprints/SPRINT_17_CLOSURE.md`; its version-pinned deployment
+decision artifact is `docs/sprints/SPRINT_17_MIGRATION_009_DOSSIER.md`.
 
 # Latest Closed Sprint
 

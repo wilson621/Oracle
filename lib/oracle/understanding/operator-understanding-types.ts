@@ -326,6 +326,7 @@ export type OperatorDeclarationLifecycleStatus =
   | "corrected"
   | "superseded"
   | "withdrawn"
+  | "expired"
   | "deleted";
 
 export type OperatorDeclarationDomain =

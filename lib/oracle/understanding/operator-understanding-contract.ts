@@ -746,6 +746,12 @@ function createScope(value: unknown, path: string): OperatorUnderstandingScope {
   }
 }
 
+export function createOperatorUnderstandingScope(
+  value: unknown
+): OperatorUnderstandingScope {
+  return deepFreezeUnderstanding(createScope(value, "scope"));
+}
+
 function createProducer(value: unknown, path: string) {
   const producer = requireUnderstandingRecord(value, path);
 
