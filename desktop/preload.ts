@@ -9,6 +9,7 @@ import {
   type OracleDesktopBridge,
   type OracleDesktopHostState,
   type OraclePlatformHealthSnapshot,
+  type CompanionGuidanceApplicationState,
 } from "./contracts.js";
 import {
   isOracleCompanionPresentationState,
@@ -16,6 +17,9 @@ import {
 import {
   isOraclePlatformHealthSnapshot,
 } from "../lib/oracle/platform/platform-health.js";
+import {
+  isCompanionGuidanceApplicationState,
+} from "../lib/oracle/applications/companion/index.js";
 
 const oracleDesktopBridge: OracleDesktopBridge = {
   getHostState: () =>
@@ -46,6 +50,21 @@ const oracleDesktopBridge: OracleDesktopBridge = {
       );
     }
     return value as OraclePlatformHealthSnapshot;
+  },
+
+  getCompanionGuidanceState: async () => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.getCompanionGuidanceState
+    );
+    return requireCompanionGuidanceState(value);
+  },
+
+  requestCompanionGuidance: async (control) => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.requestCompanionGuidance,
+      control
+    );
+    return requireCompanionGuidanceState(value);
   },
 
   toggleOverlayPreview: () =>
@@ -144,6 +163,31 @@ const oracleDesktopBridge: OracleDesktopBridge = {
         );
       };
     },
+
+  onCompanionGuidanceStateChanged:
+    (listener) => {
+      let subscribed = true;
+      const handler = (
+        _event: IpcRendererEvent,
+        value: unknown
+      ) => {
+        if (!subscribed) return;
+        if (isCompanionGuidanceApplicationState(value)) {
+          listener(value);
+        }
+      };
+      ipcRenderer.on(
+        DESKTOP_CHANNELS.companionGuidanceStateChanged,
+        handler
+      );
+      return () => {
+        subscribed = false;
+        ipcRenderer.removeListener(
+          DESKTOP_CHANNELS.companionGuidanceStateChanged,
+          handler
+        );
+      };
+    },
 };
 
 function requireCompanionPresentationState(
@@ -159,6 +203,17 @@ function requireCompanionPresentationState(
     );
   }
 
+  return value;
+}
+
+function requireCompanionGuidanceState(
+  value: unknown
+): CompanionGuidanceApplicationState {
+  if (!isCompanionGuidanceApplicationState(value)) {
+    throw new Error(
+      "Oracle desktop host returned invalid Companion Guidance state."
+    );
+  }
   return value;
 }
 

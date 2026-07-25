@@ -34,6 +34,10 @@ reports complete; runtime delivery and persistence inactive
 **Sprint 24:** Complete, certified and Founder-accepted under ADR-042 —
 authoritative Mission, Planner and Progression source complete; Migration 014
 undeployed and inactive
+**Sprint 25:** Complete, certified and Founder-accepted under ADR-043;
+transient grounded Conversation complete; no migration or retention
+**Sprint 26:** Implemented and locally certified; transient Desktop-owned
+Guidance delivery complete; Founder acceptance required
 
 ---
 
@@ -58,6 +62,25 @@ Update this file during every sprint closure audit.
 ---
 
 # Latest Verified Sprint Progress
+
+## Sprint 26 — Authoritative Companion Guidance Delivery
+
+The Desktop Companion now owns a transient Guidance delivery coordinator that
+projects immutable Guidance v1 Requests from authoritative attached Session
+Context. Guidance execution remains explicitly injected, deterministic,
+spoiler-bounded and source-freshness governed. Detach, Context replacement,
+renderer replacement and recovery invalidate obsolete work; generation
+ownership prevents stale asynchronous results from reaching presentation.
+
+The restricted renderer receives only validated immutable Application state
+and bounded category/spoiler controls through an additive bridge. It gains no
+Service, Repository, controller, native, process, Session mutation or retention
+authority. Offline curated Guidance remains available and provider failure
+degrades safely. Canonical Web and Electron manifest version 1.5.0 continues
+mechanical runtime equality. Guidance v1 and Desktop Platform API v1 remain
+unchanged. No migration, persistence, production activation or Gate C change
+exists. Sprint 26 is implemented and locally certified pending Founder
+acceptance.
 
 ## Sprint 25 — Conversational Oracle
 

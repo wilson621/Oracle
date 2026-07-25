@@ -822,6 +822,20 @@ Canonical Web and Electron manifest version 1.4.0 adds Conversation Service and
 mechanically equals both constructed runtimes. No Migration 015, conversation
 retention, persisted consumer activation or production change exists.
 
+Sprint 26 is implemented and locally certified. The Desktop Companion owns the
+transient Guidance delivery coordinator and projects immutable Guidance v1
+Requests from authoritative attached Session Context. Explicitly injected
+deterministic providers remain the Guidance source. Detach, Context change,
+renderer replacement and fresh-runtime recovery invalidate obsolete state and
+generation ownership suppresses stale asynchronous results.
+
+The restricted renderer receives only validated immutable Application state
+and bounded controls; it gains no authoritative or native capability. Canonical
+Web and Electron manifest version 1.5.0 mechanically equals both constructed
+runtimes. Guidance v1 and Desktop Platform API v1 remain unchanged. No
+retention, migration, persistence activation, production change or Gate C
+change exists.
+
 Current Runtime
 
 ✓ Engine Runtime

@@ -27,6 +27,12 @@ import type {
 import type {
   OraclePlatformHealthSnapshot,
 } from "../lib/oracle/platform/platform-health.js";
+import type {
+  CompanionGuidanceApplicationState,
+} from "../lib/oracle/applications/companion/index.js";
+import type {
+  OracleCompanionGuidanceControl,
+} from "./companion/companion-guidance-delivery-contract.js";
 
 export const DESKTOP_CHANNELS = {
   getHostState:
@@ -37,6 +43,12 @@ export const DESKTOP_CHANNELS = {
 
   getPlatformHealth:
     "oracle-desktop:get-platform-health",
+
+  getCompanionGuidanceState:
+    "oracle-desktop:get-companion-guidance-state",
+
+  requestCompanionGuidance:
+    "oracle-desktop:request-companion-guidance",
 
   toggleOverlayPreview:
     "oracle-desktop:toggle-overlay-preview",
@@ -64,6 +76,9 @@ export const DESKTOP_CHANNELS = {
 
   companionPresentationStateChanged:
     "oracle-desktop:companion-presentation-state-changed",
+
+  companionGuidanceStateChanged:
+    "oracle-desktop:companion-guidance-state-changed",
 } as const;
 
 export const ORACLE_DESKTOP_RECOVERY_SHORTCUT =
@@ -72,6 +87,8 @@ export const ORACLE_DESKTOP_RECOVERY_SHORTCUT =
 export type {
   OracleCompanionPresentationState,
   OraclePlatformHealthSnapshot,
+  CompanionGuidanceApplicationState,
+  OracleCompanionGuidanceControl,
   OracleDesktopAttachmentState,
   OracleDesktopAttachmentStatus,
   OracleDesktopAttachmentTarget,
@@ -97,6 +114,13 @@ export type OracleDesktopBridge = {
 
   getPlatformHealth: () =>
     Promise<OraclePlatformHealthSnapshot>;
+
+  getCompanionGuidanceState: () =>
+    Promise<CompanionGuidanceApplicationState>;
+
+  requestCompanionGuidance: (
+    control: OracleCompanionGuidanceControl
+  ) => Promise<CompanionGuidanceApplicationState>;
 
   toggleOverlayPreview: () =>
     Promise<OracleDesktopHostState>;
@@ -129,6 +153,12 @@ export type OracleDesktopBridge = {
     listener: (
       state:
         OracleCompanionPresentationState
+    ) => void
+  ) => () => void;
+
+  onCompanionGuidanceStateChanged: (
+    listener: (
+      state: CompanionGuidanceApplicationState
     ) => void
   ) => () => void;
 };

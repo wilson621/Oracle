@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": ".tmp-companion-guidance-delivery-verification",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2022"
+  },
+  "include": [
+    "desktop/companion/**/*.ts",
+    "desktop/platform/desktop-host-snapshot.ts",
+    "lib/companion/guidance/**/*.ts",
+    "lib/oracle/applications/companion/**/*.ts",
+    "lib/oracle/game-integrations/call-of-duty/guidance/**/*.ts",
+    "lib/oracle/services/companion-guidance/**/*.ts",
+    "lib/oracle/sessions/**/*.ts",
+    "scripts/verify-companion-guidance-delivery.ts"
+  ]
+}

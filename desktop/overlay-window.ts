@@ -31,6 +31,15 @@ import {
   OracleCompanionSessionManager,
 } from "./companion/companion-session-manager.js";
 import {
+  OracleCompanionGuidanceDeliveryCoordinator,
+} from "./companion/companion-guidance-delivery-coordinator.js";
+import type {
+  CompanionGuidanceApplicationState,
+} from "../lib/oracle/applications/companion/index.js";
+import type {
+  OracleCompanionGuidanceProviderService,
+} from "../lib/oracle/services/companion-guidance/index.js";
+import {
   OracleDesktopGameIntegrationCoordinator,
   type OracleDesktopSupportedGameCandidate,
 } from "./companion/game-integration-coordinator.js";
@@ -75,6 +84,7 @@ import type {
 export type CompanionHostWindowOptions = {
   companionUrl: string;
   gameIntegrationRegistry: OracleGameIntegrationRegistryContract;
+  guidanceService: OracleCompanionGuidanceProviderService;
 };
 
 const DEVELOPMENT_WINDOW_WIDTH = 1200;
@@ -115,6 +125,9 @@ export class CompanionHostWindowController {
 
   private readonly companionSession =
     new OracleCompanionSessionManager();
+
+  private readonly guidanceDelivery:
+    OracleCompanionGuidanceDeliveryCoordinator;
 
   private readonly gameIntegrations:
     OracleDesktopGameIntegrationCoordinator;
@@ -158,6 +171,15 @@ export class CompanionHostWindowController {
     new OracleDesktopGameIntegrationCoordinator(
       options.gameIntegrationRegistry
     );
+
+  this.guidanceDelivery =
+    new OracleCompanionGuidanceDeliveryCoordinator(
+      options.guidanceService
+    );
+
+  this.guidanceDelivery.subscribe(
+    () => this.publishCompanionGuidanceState()
+  );
 
   this.recovery.subscribe(
     (recovery) => {
@@ -441,6 +463,16 @@ export class CompanionHostWindowController {
       this.companionSession
         .getSnapshot()
     );
+  }
+
+  getCompanionGuidanceState(): CompanionGuidanceApplicationState {
+    return this.guidanceDelivery.getState();
+  }
+
+  requestCompanionGuidance(
+    control: unknown
+  ): Promise<CompanionGuidanceApplicationState> {
+    return this.guidanceDelivery.request(control);
   }
 
   showAndFocus(): void {
@@ -1273,6 +1305,7 @@ this.hostState.reset();
         _event,
         details
       ) => {
+        this.guidanceDelivery.invalidate();
         this.diagnostics.report({
           severity: "critical",
           category: "runtime",
@@ -1333,6 +1366,7 @@ this.hostState.reset();
     window.webContents.on(
       "did-finish-load",
       () => {
+        this.publishCompanionPresentationState();
         this.diagnostics.report({
           severity: "info",
           category: "runtime",
@@ -1436,6 +1470,10 @@ this.hostState.reset();
   }
 
   private publishCompanionPresentationState(): void {
+    this.guidanceDelivery.synchronise(
+      this.companionSession.getSnapshot()
+    );
+
     const window =
       this.getWindow();
 
@@ -1452,6 +1490,15 @@ this.hostState.reset();
         .companionPresentationStateChanged,
 
       this.getCompanionPresentationState()
+    );
+  }
+
+  private publishCompanionGuidanceState(): void {
+    const window = this.getWindow();
+    if (!window || window.webContents.isDestroyed()) return;
+    window.webContents.send(
+      DESKTOP_CHANNELS.companionGuidanceStateChanged,
+      this.getCompanionGuidanceState()
     );
   }
 

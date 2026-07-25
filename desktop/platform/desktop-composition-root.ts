@@ -7,6 +7,9 @@ import { OraclePlatformCompositionRoot } from "../../lib/oracle/platform/platfor
 import type {
   OracleGameIntegrationRegistryContract,
 } from "../../lib/oracle/game-integrations/game-integration-registry.js";
+import type {
+  OracleCompanionGuidanceProviderService,
+} from "../../lib/oracle/services/companion-guidance/index.js";
 
 export const ORACLE_PLATFORM_DESKTOP_COMPANION_LIFECYCLE =
   Object.freeze({
@@ -33,7 +36,7 @@ export const ORACLE_ELECTRON_COMPOSITION_MANIFEST =
   createOracleRuntimeCompositionManifest({
     contract: "oracle.runtime-composition",
     contractVersion: 1,
-    manifestVersion: "1.4.0",
+    manifestVersion: "1.5.0",
     target: "electron",
     subsystems: ELECTRON_SUBSYSTEMS,
     services: [
@@ -99,4 +102,10 @@ export function getOracleDesktopGameIntegrationRegistry():
   OracleGameIntegrationRegistryContract {
   return desktopRoot.getGameIntegrationRegistry() as
     OracleGameIntegrationRegistryContract;
+}
+
+export function getOracleDesktopGuidanceProviderService():
+  OracleCompanionGuidanceProviderService {
+  return desktopRoot.getGuidanceService() as
+    OracleCompanionGuidanceProviderService;
 }

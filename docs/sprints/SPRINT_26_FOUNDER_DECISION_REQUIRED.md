@@ -1,7 +1,7 @@
 # SPRINT 26 FOUNDER DECISION REQUIRED
 
 **Sprint:** 26 — Authoritative Companion Guidance Delivery
-**Status:** Founder activation decision required; implementation not started
+**Status:** Option A approved; superseded by Sprint 26 plan
 **Prepared:** 25 July 2026
 
 ## Decision requested

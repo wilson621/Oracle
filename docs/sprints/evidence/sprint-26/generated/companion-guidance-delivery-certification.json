@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-25T13:55:08.614Z",
+  "contract": "oracle.companion-guidance-delivery",
+  "contractVersion": 1,
+  "cases": [
+    "attached-offline-curated-guidance",
+    "bounded-transient-controls",
+    "detach-clears-guidance",
+    "stale-async-result-suppressed",
+    "recovery-builds-fresh-delivery",
+    "stale-reviewed-source-omitted",
+    "provider-failure-unavailable",
+    "renderer-state-validation",
+    "restricted-renderer-and-no-retention"
+  ],
+  "guidanceContractVersion": 1,
+  "desktopPlatformApiVersion": 1,
+  "persistence": "disabled",
+  "retention": "none",
+  "migrationCreated": false,
+  "deployment": "not-authorised",
+  "result": "pass"
+}

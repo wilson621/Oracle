@@ -1,4 +1,4 @@
-import CompanionGuidanceDashboard from "@/components/companion/guidance/CompanionGuidanceDashboard";
+import CompanionGuidanceLive from "@/components/companion/guidance/CompanionGuidanceLive";
 import AppLayout from "@/components/layout/AppLayout";
 import {
   COMPANION_PAGE_INITIAL_STATE,
@@ -9,10 +9,8 @@ export default function CompanionPage() {
     <AppLayout
       compactNavigationOnSmallScreens
     >
-      <CompanionGuidanceDashboard
-        state={
-          COMPANION_PAGE_INITIAL_STATE
-        }
+      <CompanionGuidanceLive
+        initialState={COMPANION_PAGE_INITIAL_STATE}
       />
     </AppLayout>
   );

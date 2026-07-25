@@ -11,13 +11,14 @@ import {
 import { CompanionHostWindowController } from "./overlay-window.js";
 import {
   getOracleDesktopGameIntegrationRegistry,
+  getOracleDesktopGuidanceProviderService,
   getOracleDesktopPlatformHealth,
   startOracleDesktopPlatform,
   stopOracleDesktopPlatform,
 } from "./platform/desktop-composition-root.js";
 
 const DEFAULT_COMPANION_URL =
-  "http://localhost:3000/oracle";
+  "http://localhost:3000/companion";
 
 let hostWindowController:
   | CompanionHostWindowController
@@ -107,6 +108,8 @@ function createHostWindowController(): CompanionHostWindowController {
       DEFAULT_COMPANION_URL,
     gameIntegrationRegistry:
       getOracleDesktopGameIntegrationRegistry(),
+    guidanceService:
+      getOracleDesktopGuidanceProviderService(),
   });
 }
 
@@ -177,6 +180,24 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
+    DESKTOP_CHANNELS.getCompanionGuidanceState,
+    (event) => {
+      return requireAuthorizedController(
+        event
+      ).getCompanionGuidanceState();
+    }
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.requestCompanionGuidance,
+    (event, control: unknown) => {
+      return requireAuthorizedController(
+        event
+      ).requestCompanionGuidance(control);
+    }
+  );
+
+  ipcMain.handle(
     DESKTOP_CHANNELS.toggleOverlayPreview,
     (event) => {
       return requireAuthorizedController(
@@ -243,6 +264,14 @@ function registerIpcHandlers(): void {
 function removeIpcHandlers(): void {
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.getHostState
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.getCompanionGuidanceState
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.requestCompanionGuidance
   );
 
   ipcMain.removeHandler(

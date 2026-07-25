@@ -119,7 +119,9 @@ persisted accumulation remains inactive. Sprint 23 is complete, certified and
 Founder-accepted without a new migration. Sprint 24 is complete, certified and
 Founder-accepted under ADR-042. Migration 014 is undeployed and inactive.
 Sprint 25 is complete, certified and Founder-accepted under ADR-043 with no
-Migration 015 or retention. Sprint 26 awaits a Founder activation decision.
+Migration 015 or retention. Sprint 26 is Founder-approved, implemented and
+locally certified using Guidance v1 and Desktop Platform API v1. It remains
+transient and undeployed pending Founder acceptance.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

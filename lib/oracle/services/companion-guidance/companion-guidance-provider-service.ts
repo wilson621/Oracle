@@ -18,6 +18,15 @@ import type {
 
 const WILDCARD_CAPABILITY = "*";
 
+export type OracleCompanionGuidanceExecutionPolicy = Readonly<{
+  maximumSourceAgeMs: number | null;
+}>;
+
+const DEFAULT_EXECUTION_POLICY: OracleCompanionGuidanceExecutionPolicy =
+  Object.freeze({
+    maximumSourceAgeMs: 180 * 24 * 60 * 60 * 1_000,
+  });
+
 const SPOILER_ORDER:
   Readonly<
     Record<
@@ -53,8 +62,20 @@ export class OracleCompanionGuidanceProviderService {
 
   constructor(
     providers:
-      readonly OracleCompanionGuidanceProvider[]
+      readonly OracleCompanionGuidanceProvider[],
+    private readonly policy:
+      OracleCompanionGuidanceExecutionPolicy =
+        DEFAULT_EXECUTION_POLICY
   ) {
+    if (
+      this.policy.maximumSourceAgeMs !== null &&
+      (!Number.isFinite(this.policy.maximumSourceAgeMs) ||
+        this.policy.maximumSourceAgeMs < 0)
+    ) {
+      throw new Error(
+        "Oracle Companion Guidance source freshness policy is invalid."
+      );
+    }
     this.providers =
       createProviderSnapshot(
         providers
@@ -117,6 +138,7 @@ export class OracleCompanionGuidanceProviderService {
           provider,
           request,
           acceptedIds,
+          policy: this.policy,
         });
 
       guidance.push(
@@ -253,6 +275,8 @@ async function executeProvider(
     request:
       OracleCompanionGuidanceRequest;
     acceptedIds: Set<string>;
+    policy:
+      OracleCompanionGuidanceExecutionPolicy;
   }>
 ): Promise<
   Readonly<{
@@ -363,7 +387,8 @@ async function executeProvider(
       if (
         shouldFilterGuidance(
           input.request,
-          candidate
+          candidate,
+          input.policy
         )
       ) {
         filteredCount += 1;
@@ -538,7 +563,9 @@ function shouldFilterGuidance(
   request:
     OracleCompanionGuidanceRequest,
   guidance:
-    OracleCompanionGuidance
+    OracleCompanionGuidance,
+  policy:
+    OracleCompanionGuidanceExecutionPolicy
 ): boolean {
   if (
     SPOILER_ORDER[
@@ -547,6 +574,27 @@ function shouldFilterGuidance(
     SPOILER_ORDER[
       request.maximumSpoilerLevel
     ]
+  ) {
+    return true;
+  }
+
+  if (
+    policy.maximumSourceAgeMs !== null &&
+    guidance.sources.some(
+      (source) => {
+        if (source.verifiedAt === null) {
+          return true;
+        }
+        const age =
+          Date.parse(request.requestedAt) -
+          Date.parse(source.verifiedAt);
+        return (
+          age < 0 ||
+          age >
+            policy.maximumSourceAgeMs!
+        );
+      }
+    )
   ) {
     return true;
   }

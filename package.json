@@ -47,6 +47,7 @@
   "guidance:verify": "tsc -p tsconfig.guidance-verification.json && node .tmp-guidance-verification/scripts/verify-companion-guidance-contracts.js && node .tmp-guidance-verification/scripts/verify-companion-guidance-service.js && node .tmp-guidance-verification/scripts/verify-call-of-duty-guidance-provider.js && node .tmp-guidance-verification/scripts/verify-companion-guidance-application.js && node -e \"require('node:fs').rmSync('.tmp-guidance-verification', { recursive: true, force: true })\"",
 
   "companion:presentation:verify": "node scripts/verify-companion-guidance-presentation.mjs",
+  "companion:delivery:verify": "tsc -p tsconfig.companion-guidance-delivery-verification.json && node .tmp-companion-guidance-delivery-verification/scripts/verify-companion-guidance-delivery.js && node -e \"require('node:fs').rmSync('.tmp-companion-guidance-delivery-verification', { recursive: true, force: true })\"",
 
   "native:build:discovery": "dotnet publish desktop-native/Oracle.WindowDiscovery/Oracle.WindowDiscovery.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false --output dist-native",
 

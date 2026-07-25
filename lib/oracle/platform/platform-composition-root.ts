@@ -71,4 +71,11 @@ export class OraclePlatformCompositionRoot {
     }
     return this.runtime.getComposition().gameIntegrations;
   }
+
+  getGuidanceService(): OraclePlatformComposition["guidance"] {
+    if (!this.runtime) {
+      throw new Error("Oracle Platform composition has not started.");
+    }
+    return this.runtime.getComposition().guidance;
+  }
 }

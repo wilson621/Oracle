@@ -61,13 +61,14 @@ Sprint 25 — Conversational Oracle is complete, certified and Founder-accepted
 under ADR-043. Conversation remains transient and non-authoritative. No
 Migration 015 was introduced.
 
-## Active Founder Review
+## Active Sprint
 
-Sprint 26 requires a Founder activation decision. Option A in
-`docs/sprints/SPRINT_26_FOUNDER_DECISION_REQUIRED.md` proposes a Desktop-owned
-transient Guidance delivery coordinator using the existing Guidance v1,
-Desktop Platform API v1 and ADR-031/032/040/041 boundaries. No new ADR is
-recommended and implementation has not started.
+Sprint 26 — Authoritative Companion Guidance Delivery is Founder-approved and
+implemented under ADR-031/032/040/041/042/043. Local certification is complete
+and Founder acceptance is required before closure. Option A connects
+authoritative Desktop Session Context to existing Guidance v1 Service and
+Application boundaries through a transient Desktop-owned coordinator. No new
+ADR, migration, persistence or production activation is authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in

@@ -110,6 +110,33 @@ export function createCompanionGuidanceUnavailableState():
   });
 }
 
+export function isCompanionGuidanceApplicationState(
+  value: unknown
+): value is CompanionGuidanceApplicationState {
+  if (!isRecord(value)) return false;
+  if (
+    !hasExactKeys(
+      value,
+      ["contract", "status", "message", "cards", "diagnostics"]
+    ) ||
+    !isRecord(value.contract) ||
+    value.contract.name !== ORACLE_COMPANION_GUIDANCE_APPLICATION_STATE ||
+    value.contract.version !==
+      ORACLE_COMPANION_GUIDANCE_APPLICATION_STATE_VERSION ||
+    typeof value.message !== "string" ||
+    !["loading", "ready", "empty", "partial-success", "unavailable"]
+      .includes(String(value.status)) ||
+    !Array.isArray(value.cards) ||
+    !Array.isArray(value.diagnostics)
+  ) {
+    return false;
+  }
+  return (
+    value.cards.every(isGuidanceCard) &&
+    value.diagnostics.every(isGuidanceDiagnostic)
+  );
+}
+
 function createCardViewModel(
   guidance:
     OracleCompanionGuidance
@@ -340,4 +367,60 @@ function deepFreeze<T>(
   }
 
   return Object.freeze(value);
+}
+
+function isGuidanceCard(value: unknown): boolean {
+  if (!isRecord(value)) return false;
+  return (
+    isString(value.id) &&
+    isString(value.title) &&
+    isString(value.summary) &&
+    isString(value.recommendation) &&
+    (value.detailedExplanation === null ||
+      isString(value.detailedExplanation)) &&
+    isString(value.rationale) &&
+    isRecord(value.category) &&
+    isString(value.category.id) &&
+    isString(value.category.label) &&
+    isRecord(value.type) &&
+    isString(value.type.id) &&
+    isString(value.type.label) &&
+    Array.isArray(value.evidence) &&
+    Array.isArray(value.sources) &&
+    isRecord(value.confidence) &&
+    typeof value.confidence.score === "number" &&
+    isRecord(value.priority) &&
+    isRecord(value.spoiler) &&
+    isString(value.createdAt) &&
+    (value.expiresAt === null || isString(value.expiresAt))
+  );
+}
+
+function isGuidanceDiagnostic(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    isString(value.code) &&
+    value.severity === "warning" &&
+    isString(value.title) &&
+    isString(value.message)
+  );
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function hasExactKeys(
+  value: Record<string, unknown>,
+  keys: readonly string[]
+): boolean {
+  const actual = Reflect.ownKeys(value);
+  return (
+    actual.length === keys.length &&
+    keys.every((key) => actual.includes(key))
+  );
+}
+
+function isString(value: unknown): value is string {
+  return typeof value === "string";
 }
