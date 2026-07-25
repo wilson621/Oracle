@@ -258,6 +258,7 @@ delivery authorities have been reviewed.
 | Sprint 27 implementation | [Sprint 27 Implementation](sprints/SPRINT_27_IMPLEMENTATION.md) | Source complete, transient and undeployed |
 | Sprint 27 certification | [Sprint 27 Certification](sprints/SPRINT_27_CERTIFICATION.md) | Source-certified; live observation provisional and disabled |
 | Sprint 27 evidence | [Sprint 27 Evidence](sprints/evidence/sprint-27/README.md) | Machine-readable local certification |
+| Sprint 27 Founder acceptance package | [Sprint 27 Founder Acceptance Required](sprints/SPRINT_27_FOUNDER_ACCEPTANCE_REQUIRED.md) | Operational certification deferred; acceptance review pending |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

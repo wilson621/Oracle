@@ -38,8 +38,9 @@ undeployed and inactive
 transient grounded Conversation complete; no migration or retention
 **Sprint 26:** Complete, certified and Founder-accepted; transient Desktop-owned
 Guidance delivery complete
-**Sprint 27:** Source-certified under ADR-044 and ADR-045; live observation
-profile provisional and disabled pending exact workstation test
+**Sprint 27:** Operational Certification Deferred — Required Test Environment
+Unavailable; source complete and source-certified; live profile provisional,
+observation disabled and Founder acceptance pending
 
 ---
 
@@ -86,6 +87,8 @@ migration, persistence, retained observation/progress, upload, multiplayer,
 API, mod, automated-input, production or Gate C change exists. Source and
 synthetic certification are complete. Because the pinned game is absent from
 the workstation, live observation remains provisional and disabled.
+Operational Certification Deferred is the Sprint status explaining that
+limitation; it is not an ADR-045 certificate state or support claim.
 
 ## Sprint 26 — Authoritative Companion Guidance Delivery
 

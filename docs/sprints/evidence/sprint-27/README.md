@@ -17,6 +17,10 @@ declared live profile remains `provisionally-certified`; observation is
 disabled because the pinned game is not installed on the certification
 workstation and no live attached-window test has been performed.
 
+**Programme status:** Operational Certification Deferred — Required Test
+Environment Unavailable. This is not a certificate state, operational support
+claim, activation or deployment authority.
+
 Production remains unchanged. Migration 009 remains the only deployed
 migration; Migrations 010–014 remain certified, undeployed and inactive.
 

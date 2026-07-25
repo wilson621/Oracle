@@ -1,6 +1,7 @@
 # SPRINT 27 CERTIFICATION
 
-**Status:** Source-certified; live observation certification pending
+**Status:** Operational Certification Deferred — Required Test Environment
+Unavailable; source and synthetic certification passed
 **Date:** 25 July 2026
 **Environment:** Windows development workstation
 **Production affected:** No
@@ -38,6 +39,14 @@ certificate to `certified` requires one local test using Minecraft: Java
 Edition `26.1.1`, English (United States), GUI scale 3, a Founder-controlled
 single-player world and a visible windowed or borderless-windowed game window
 of at least 1280 by 720.
+
+The Founder has approved deferral because the required third-party runtime is
+unavailable and will not be purchased solely for certification. Deferral does
+not alter ADR-045: the certificate remains `provisionally-certified`,
+observation remains disabled, and no operational-support claim is permitted.
+
+**Founder acceptance status:** Not yet accepted or closed. The revised Founder
+Acceptance Package is pending review.
 
 # Commands
 

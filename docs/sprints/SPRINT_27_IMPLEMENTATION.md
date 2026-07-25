@@ -1,8 +1,8 @@
 # SPRINT 27 IMPLEMENTATION
 
 **Sprint:** Contextual Companion and Reference Integration
-**Status:** Source complete and source-certified; exact live observation
-profile remains provisionally certified
+**Status:** Operational Certification Deferred — Required Test Environment
+Unavailable; source complete and source-certified; Founder acceptance pending
 **Date:** 25 July 2026
 **Deployment:** Not authorised
 **Persistence:** Disabled
@@ -50,6 +50,16 @@ retention, external processing, multiplayer, Realms, server support, mods,
 add-ons, plugins, Minecraft API, AI Guidance, automated input, authoritative
 mutation, Gate C, Guidance v2, Desktop Platform API v2 or External Companion
 trust-boundary change was introduced.
+
+# Outstanding Operational State
+
+Minecraft live attached-window observation has not been tested. The necessary
+third-party runtime is unavailable. The exact profile therefore remains
+`provisionally-certified`, its observation capability remains disabled, and
+Oracle must not be represented as operationally supporting Minecraft.
+
+This is an approved operational-certification deferral, not an implementation
+defect, a fifth certificate lifecycle state or permission to weaken ADR-045.
 
 # Files of Record
 

@@ -754,8 +754,10 @@ and Founder-accepted using the unchanged Guidance v1 and Desktop Platform API
 v1 boundaries. Sprint 27 Option A is implemented and source-certified with
 Minecraft: Java Edition `26.1.1`, ADR-044 observation privacy and ADR-045
 compatibility certification. Live observation is provisional and disabled
-pending an exact-profile workstation test. Production deployment and runtime
-persistence remain unauthorised.
+under the approved status Operational Certification Deferred — Required Test
+Environment Unavailable. Source and synthetic certification passed; live
+attached-window observation did not. Founder acceptance remains pending.
+Production deployment and runtime persistence remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

@@ -1,7 +1,7 @@
 # SPRINT 27 PLAN — CONTEXTUAL COMPANION AND REFERENCE INTEGRATION
 
-**Status:** Founder-approved; source complete and source-certified; exact live
-observation profile remains provisionally certified pending workstation test
+**Status:** Operational Certification Deferred — Required Test Environment
+Unavailable; source complete and source-certified; Founder acceptance pending
 **Architecture:** ADR-031, ADR-032, ADR-040, ADR-041, ADR-042, ADR-043,
 ADR-044 and ADR-045
 **Reference profile:** Minecraft: Java Edition 26.1.1, Windows, English (US),
@@ -107,3 +107,15 @@ recognition. Uncertainty, expiry, revocation, profile mismatch, detach and stale
 work remove affected capability before presentation. The one bounded journey
 produces validated transient Guidance and progress without authoritative
 mutation. All focused and complete verification passes.
+
+## Approved Operational Certification Deferral
+
+The required third-party runtime is unavailable and will not be purchased
+solely for this test. Source implementation and source/synthetic certification
+are complete. Live attached-window observation is untested, the exact profile
+remains `provisionally-certified`, and observation remains disabled.
+
+This Sprint status does not add a certificate lifecycle state and grants no
+support, activation or deployment authority. An authorised tester may complete
+the exact live profile later under ADR-045 without rewriting this historical
+deferral.

@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 25 July 2026
-**Version:** 7.0
+**Version:** 7.1
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -71,14 +71,16 @@ Manifest version `1.6.0` exactly matches Web and Electron. No deployment,
 migration, persistence, retention, upload, multiplayer, API, mod,
 automated-input, authoritative mutation or Gate C activity occurred.
 
-The exact live observation profile is `provisionally-certified`. Observation
-is disabled pending a workstation test with the pinned game installed.
+Operational Certification Deferred — Required Test Environment Unavailable.
+The exact live observation profile is `provisionally-certified`, live capture
+is untested and observation remains disabled.
 
-## Active Certification Work
+## Active Founder Review
 
-Sprint 27 requires exact-profile live observation certification before Founder
-implementation and certification acceptance. Its product, privacy and
-architectural decisions are already approved.
+The revised Sprint 27 Founder Acceptance Package recommends accepting and
+closing the engineering and architectural Sprint with the operational
+certificate explicitly provisional and deferred. Sprint 27 is not yet
+Founder-accepted or closed.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in

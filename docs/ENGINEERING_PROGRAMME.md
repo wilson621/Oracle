@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 27 exact-profile live observation certification
+**Next Review:** Sprint 27 Founder Acceptance Package
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -111,7 +111,9 @@ certified and Founder-accepted through the existing Guidance v1 architecture
 without a new ADR. Sprint 27 Option A, Minecraft: Java Edition `26.1.1`,
 ADR-044 and ADR-045 are approved. Its bounded source implementation and
 synthetic certification are complete. Live observation remains provisional
-and disabled pending exact-profile workstation verification.
+and disabled. Operational Certification Deferred — Required Test Environment
+Unavailable is approved because the third-party runtime will not be acquired
+solely for this test. Founder acceptance remains pending.
 
 The ADR-040 composition manifest is a permanent runtime contract. Every future
 Sprint changing Services, Applications, Game Integrations, Guidance providers,
@@ -1038,7 +1040,9 @@ state are implemented. Manifest version `1.6.0` preserves exact Web/Electron
 runtime equality. No deployment, migration, persistence, retention, upload,
 multiplayer, API, mod, automated-input, authoritative mutation or Gate C
 change exists. The exact live observation profile remains provisional and
-disabled because the pinned game is not installed on this workstation.
+disabled because the pinned game is unavailable. Operational Certification
+Deferred describes the Sprint/programme state only and grants no support,
+activation or deployment authority.
 
 # EPIC V — PRODUCT COMPLETION AND BETA RELEASE
 
@@ -2087,7 +2091,8 @@ claims, universal game support or incompatible contract changes before Beta.
 - Sprint 24 converts intelligence into development.
 - Sprint 25 exposes intelligence conversationally.
 - Sprint 26 delivers live Guidance.
-- Sprint 27 proves contextual and multi-game operation.
+- Sprint 27 proves multi-game composition and contextual-assistance source
+  architecture; live second-game observation remains operationally deferred.
 - Sprint 28 completes the product experience.
 - Sprint 29 establishes secure desktop operations and distribution.
 - Sprint 30 qualifies the complete product.
