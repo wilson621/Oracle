@@ -17,7 +17,7 @@ export const MINECRAFT_JAVA_COMPATIBILITY_CERTIFICATE =
     certificateId: "minecraft-java-26.1.1-windows-en-us-single-player",
     integrationId: "minecraft-java",
     integrationVersion: "1.0.0",
-    state: "certified",
+    state: "provisionally-certified",
     profile: {
       gameId: "minecraft",
       edition: "java",
@@ -44,11 +44,10 @@ export const MINECRAFT_JAVA_COMPATIBILITY_CERTIFICATE =
     verifiedCapabilities: [
       "detection",
       "context",
-      "observation",
       "guidance",
       "transient-progress",
     ],
-    uncertainCapabilities: [],
+    uncertainCapabilities: ["observation"],
     policySources: [
       {
         url: "https://www.minecraft.net/en-us/eula",
@@ -66,5 +65,5 @@ export const MINECRAFT_JAVA_COMPATIBILITY_CERTIFICATE =
     issuedAt: "2026-07-25T00:00:00.000Z",
     expiresAt: "2026-10-23T00:00:00.000Z",
     stateReason:
-      "Bounded local certification for the approved Windows, Java 26.1.1, en-US, UI scale 3, single-player profile.",
+      "Source conformance is certified, but live attached-window observation awaits verification against the installed pinned game; observation remains disabled.",
   });

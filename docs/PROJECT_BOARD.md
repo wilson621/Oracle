@@ -65,18 +65,20 @@ Sprint 26 — Authoritative Companion Guidance Delivery is complete, certified
 and Founder-accepted. Guidance delivery remains transient, instance-scoped and
 non-authoritative. Manifest version 1.5.0 exactly matches Web and Electron.
 
-Sprint 27 is source complete and locally certified under accepted ADR-044 and
+Sprint 27 is source complete and source-certified under accepted ADR-044 and
 ADR-045. Minecraft: Java Edition `26.1.1` is the bounded second Beta reference.
 Manifest version `1.6.0` exactly matches Web and Electron. No deployment,
 migration, persistence, retention, upload, multiplayer, API, mod,
 automated-input, authoritative mutation or Gate C activity occurred.
 
-## Active Founder Review
+The exact live observation profile is `provisionally-certified`. Observation
+is disabled pending a workstation test with the pinned game installed.
 
-Sprint 27 — Contextual Companion and Reference Integration requires a Founder
-implementation and certification acceptance only. Its product, privacy and
-architectural decisions are already approved and implemented within their
-bounded authority.
+## Active Certification Work
+
+Sprint 27 requires exact-profile live observation certification before Founder
+implementation and certification acceptance. Its product, privacy and
+architectural decisions are already approved.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in

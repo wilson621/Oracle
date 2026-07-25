@@ -46,7 +46,8 @@ export class OracleCompanionScreenObservationCoordinator {
 
   constructor(
     private readonly capture: OracleCompanionLocalWindowCapture,
-    private readonly now = () => new Date().toISOString()
+    private readonly now = () => new Date().toISOString(),
+    private readonly certificate = MINECRAFT_JAVA_COMPATIBILITY_CERTIFICATE
   ) {}
 
   getState(): OracleCompanionScreenObservationState {
@@ -77,15 +78,23 @@ export class OracleCompanionScreenObservationCoordinator {
       return;
     }
     if (!this.consent && this.state.status !== "ready") {
+      const observationDeclaredEligible =
+        this.certificate.state === "certified" ||
+        (
+          this.certificate.state === "provisionally-certified" &&
+          this.certificate.verifiedCapabilities.includes("observation")
+        );
       this.publish({
-        status: "ready",
+        status: observationDeclaredEligible ? "ready" : "unavailable",
         active: false,
         consented: false,
         indicator: "observation-off",
         gameIntegrationId: "minecraft-java",
-        certificateState: MINECRAFT_JAVA_COMPATIBILITY_CERTIFICATE.state,
+        certificateState: this.certificate.state,
         latestObservation: null,
-        message: "Minecraft is attached. Screen observation remains off until enabled.",
+        message: observationDeclaredEligible
+          ? "Minecraft is attached. Screen observation remains off until enabled."
+          : "Minecraft observation is provisionally certified and remains disabled pending exact-profile live verification.",
         updatedAt: this.now(),
       });
     }
@@ -139,7 +148,7 @@ export class OracleCompanionScreenObservationCoordinator {
       return this.state;
     }
     const resolution = resolveOracleGameIntegrationCompatibility(
-      MINECRAFT_JAVA_COMPATIBILITY_CERTIFICATE,
+      this.certificate,
       createRuntimeProfile(target, control),
       this.now()
     );

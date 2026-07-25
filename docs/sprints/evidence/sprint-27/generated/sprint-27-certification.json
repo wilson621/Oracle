@@ -1,8 +1,9 @@
 {
   "sprint": 27,
-  "generatedAt": "2026-07-25T15:54:31.513Z",
+  "generatedAt": "2026-07-25T16:06:56.803Z",
   "result": "passed",
   "cases": [
+    "declared-provisional-observation-disabled",
     "certified-lifecycle",
     "provisional-uncertainty-fails-closed",
     "expiry-fails-closed",
@@ -17,6 +18,7 @@
     "spoiler-bounded-progressive-disclosure",
     "non-single-player-guidance-rejected",
     "explicit-consent-required",
+    "declared-provisional-runtime-capture-disabled",
     "observe-without-consent-rejected",
     "allowlisted-local-frame-derived",
     "raw-buffer-zeroed",
@@ -32,5 +34,7 @@
   "rawFrameRetention": false,
   "externalProcessing": false,
   "multiplayerSupport": false,
-  "automatedInput": false
+  "automatedInput": false,
+  "declaredCompatibilityState": "provisionally-certified",
+  "liveProfileVerified": false
 }

@@ -3,7 +3,7 @@
 Sprint 27 evidence records local implementation certification only. It grants
 no deployment or activation authority.
 
-- `generated/sprint-27-certification.json` records exact-profile,
+- `generated/sprint-27-certification.json` records provisional exact-profile,
   certificate-lifecycle, Guidance, observation-ephemerality and prohibited-path
   checks.
 - `generated/platform-composition-certification.json` records exact
@@ -11,6 +11,11 @@ no deployment or activation authority.
 
 Raw frames, screenshots, clips, observations, Guidance and contextual progress
 are not evidence artifacts and are not retained.
+
+The source, synthetic frame path and fail-closed lifecycle are certified. The
+declared live profile remains `provisionally-certified`; observation is
+disabled because the pinned game is not installed on the certification
+workstation and no live attached-window test has been performed.
 
 Production remains unchanged. Migration 009 remains the only deployed
 migration; Migrations 010–014 remain certified, undeployed and inactive.

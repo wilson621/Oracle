@@ -122,8 +122,9 @@ Sprint 25 is complete, certified and Founder-accepted under ADR-043 with no
 Migration 015 or retention. Sprint 26 is complete, certified and
 Founder-accepted using Guidance v1 and Desktop Platform API v1. Sprint 27
 Option A, ADR-044 and ADR-045 are approved; its bounded Minecraft Java
-`26.1.1` source implementation and local certification are complete pending
-Founder acceptance.
+`26.1.1` source implementation and synthetic certification are complete. Live
+observation is provisional and disabled pending exact-profile workstation
+verification.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

@@ -751,10 +751,11 @@ complete, certified and Founder-accepted under ADR-042; Migration 014 remains
 undeployed and inactive. Sprint 25 is complete, certified and Founder-accepted
 under ADR-043 with no migration or retention. Sprint 26 is complete, certified
 and Founder-accepted using the unchanged Guidance v1 and Desktop Platform API
-v1 boundaries. Sprint 27 Option A is implemented and locally certified with
+v1 boundaries. Sprint 27 Option A is implemented and source-certified with
 Minecraft: Java Edition `26.1.1`, ADR-044 observation privacy and ADR-045
-compatibility certification. Founder acceptance remains pending. Production
-deployment and runtime persistence remain unauthorised.
+compatibility certification. Live observation is provisional and disabled
+pending an exact-profile workstation test. Production deployment and runtime
+persistence remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

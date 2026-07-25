@@ -1,6 +1,6 @@
 # SPRINT 27 CERTIFICATION
 
-**Status:** Locally certified; Founder acceptance pending
+**Status:** Source-certified; live observation certification pending
 **Date:** 25 July 2026
 **Environment:** Windows development workstation
 **Production affected:** No
@@ -9,13 +9,18 @@
 
 # Certification Result
 
-Sprint 27 passes its bounded source and local certification.
+Sprint 27 passes its bounded source and synthetic local certification. The
+workstation does not currently contain a Minecraft installation or running
+`javaw.exe` game window, so the exact live observation profile is correctly
+`provisionally-certified`. Observation is the uncertain capability and remains
+disabled until it is reverified against the installed pinned game.
 
 The dedicated suite proves:
 
 - exact Minecraft Java `26.1.1` single-player detection;
 - rejection of other versions, multiplayer and the launcher;
-- all four compatibility-certificate lifecycle states;
+- all four compatibility-certificate lifecycle states, including the declared
+  provisional profile;
 - fail-closed provisional uncertainty, expiry, revocation and profile mismatch;
 - the 90-day maximum review interval;
 - deterministic original text-only Guidance with spoiler bounds;
@@ -27,6 +32,12 @@ The dedicated suite proves:
 - pause and revocation invalidation;
 - absence of upload, storage and automated-input paths; and
 - ADR-040 exact manifest/runtime equality for version `1.6.0`.
+
+This report does not claim a successful live-game capture. Promoting the
+certificate to `certified` requires one local test using Minecraft: Java
+Edition `26.1.1`, English (United States), GUI scale 3, a Founder-controlled
+single-player world and a visible windowed or borderless-windowed game window
+of at least 1280 by 720.
 
 # Commands
 

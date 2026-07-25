@@ -1,7 +1,7 @@
 # SPRINT 27 PLAN — CONTEXTUAL COMPANION AND REFERENCE INTEGRATION
 
-**Status:** Founder-approved; source complete and locally certified; Founder
-acceptance pending
+**Status:** Founder-approved; source complete and source-certified; exact live
+observation profile remains provisionally certified pending workstation test
 **Architecture:** ADR-031, ADR-032, ADR-040, ADR-041, ADR-042, ADR-043,
 ADR-044 and ADR-045
 **Reference profile:** Minecraft: Java Edition 26.1.1, Windows, English (US),

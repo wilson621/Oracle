@@ -1,7 +1,8 @@
 # SPRINT 27 IMPLEMENTATION
 
 **Sprint:** Contextual Companion and Reference Integration
-**Status:** Source complete; locally certified; Founder acceptance pending
+**Status:** Source complete and source-certified; exact live observation
+profile remains provisionally certified
 **Date:** 25 July 2026
 **Deployment:** Not authorised
 **Persistence:** Disabled
@@ -15,9 +16,12 @@
   Beta reference integration on Windows.
 - Detection requires `javaw.exe` and the exact single-player title. Other
   versions, multiplayer titles and the launcher fail closed.
-- An immutable compatibility certificate binds version, executable, locale,
+- An immutable provisional compatibility certificate binds version, executable, locale,
   display mode, minimum window size, UI scale, player mode, observation method,
   capability set, reviewed policy sources and a maximum 90-day lifetime.
+- Detection, Context, Guidance and transient progress conformance are verified.
+  Observation remains explicitly uncertain and disabled until the installed
+  pinned game passes the live attached-window test.
 - Certificate resolution mechanically implements `certified`,
   `provisionally-certified`, `expired` and `revoked`. Provisional uncertainty
   disables every affected capability.

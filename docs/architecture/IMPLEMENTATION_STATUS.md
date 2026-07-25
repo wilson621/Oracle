@@ -38,8 +38,8 @@ undeployed and inactive
 transient grounded Conversation complete; no migration or retention
 **Sprint 26:** Complete, certified and Founder-accepted; transient Desktop-owned
 Guidance delivery complete
-**Sprint 27:** Source complete and locally certified under ADR-044 and ADR-045;
-Founder acceptance pending; undeployed and inactive
+**Sprint 27:** Source-certified under ADR-044 and ADR-045; live observation
+profile provisional and disabled pending exact workstation test
 
 ---
 
@@ -84,7 +84,8 @@ Manifest version `1.6.0` mechanically equals Web and Electron composition and
 adds exactly the Minecraft integration and diamond Guidance provider. No
 migration, persistence, retained observation/progress, upload, multiplayer,
 API, mod, automated-input, production or Gate C change exists. Source and
-local certification are complete; Founder acceptance is pending.
+synthetic certification are complete. Because the pinned game is absent from
+the workstation, live observation remains provisional and disabled.
 
 ## Sprint 26 — Authoritative Companion Guidance Delivery
 

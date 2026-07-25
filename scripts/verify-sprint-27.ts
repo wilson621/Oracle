@@ -51,6 +51,9 @@ async function main(): Promise<void> {
       externalProcessing: false,
       multiplayerSupport: false,
       automatedInput: false,
+      declaredCompatibilityState:
+        MINECRAFT_JAVA_COMPATIBILITY_CERTIFICATE.state,
+      liveProfileVerified: false,
     }, null, 2)}\n`,
     "utf8"
   );
@@ -59,8 +62,31 @@ async function main(): Promise<void> {
 
 function verifyCertificateLifecycle(): string[] {
   const exact = exactRuntimeProfile();
-  const certified = resolveOracleGameIntegrationCompatibility(
+  const declaredProvisional = resolveOracleGameIntegrationCompatibility(
     MINECRAFT_JAVA_COMPATIBILITY_CERTIFICATE,
+    exact,
+    NOW
+  );
+  assert.equal(declaredProvisional.effectiveState, "provisionally-certified");
+  assert.equal(declaredProvisional.exactProfileMatch, true);
+  assert.ok(
+    declaredProvisional.disabledCapabilities.includes("observation")
+  );
+
+  const certifiedCertificate = createCertificate({
+    state: "certified",
+    verifiedCapabilities: [
+      "detection",
+      "context",
+      "observation",
+      "guidance",
+      "transient-progress",
+    ],
+    uncertainCapabilities: [],
+    stateReason: "Exact live profile reverified.",
+  });
+  const certified = resolveOracleGameIntegrationCompatibility(
+    certifiedCertificate,
     exact,
     NOW
   );
@@ -120,6 +146,7 @@ function verifyCertificateLifecycle(): string[] {
     /90-day/u
   );
   return [
+    "declared-provisional-observation-disabled",
     "certified-lifecycle",
     "provisional-uncertainty-fails-closed",
     "expiry-fails-closed",
@@ -206,8 +233,35 @@ async function verifyEphemeralObservation(): Promise<string[]> {
       return { pixels, width: 16, height: 16 };
     },
   };
-  const coordinator =
+  const provisionalCoordinator =
     new OracleCompanionScreenObservationCoordinator(capture, () => NOW);
+  provisionalCoordinator.synchronise(attachedSession(), attachment());
+  assert.equal(provisionalCoordinator.getState().status, "unavailable");
+  await provisionalCoordinator.applyControl(
+    observationControl("enable"),
+    attachedSession(),
+    attachment()
+  );
+  assert.equal(provisionalCoordinator.getState().consented, false);
+  assert.equal(provisionalCoordinator.getState().latestObservation, null);
+
+  const coordinator =
+    new OracleCompanionScreenObservationCoordinator(
+      capture,
+      () => NOW,
+      createCertificate({
+        state: "certified",
+        verifiedCapabilities: [
+          "detection",
+          "context",
+          "observation",
+          "guidance",
+          "transient-progress",
+        ],
+        uncertainCapabilities: [],
+        stateReason: "Synthetic exact-profile observation fixture.",
+      })
+    );
   coordinator.synchronise(attachedSession(), attachment());
   assert.equal(coordinator.getState().consented, false);
   assert.equal(coordinator.getState().status, "ready");
@@ -243,6 +297,7 @@ async function verifyEphemeralObservation(): Promise<string[]> {
   assert.equal(coordinator.getState().gameIntegrationId, null);
   return [
     "explicit-consent-required",
+    "declared-provisional-runtime-capture-disabled",
     "observe-without-consent-rejected",
     "allowlisted-local-frame-derived",
     "raw-buffer-zeroed",
