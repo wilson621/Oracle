@@ -37,7 +37,7 @@ implementation stages and do not use fractional Sprint numbering.
 | 24 | Adaptive Coaching, Planner and Progression | Complete, certified and Founder-accepted; Migration 014 undeployed and inactive | None | [Proposal](SPRINT_24_PROPOSAL.md), [Plan](SPRINT_24_PLAN.md), [Implementation](SPRINT_24_IMPLEMENTATION.md), [Certification](SPRINT_24_CERTIFICATION.md), [Closure](SPRINT_24_CLOSURE.md), [ADR-042](../Decisions.md) |
 | 25 | Conversational Oracle | Complete, certified and Founder-accepted | None | [Plan](SPRINT_25_PLAN.md), [Implementation](SPRINT_25_IMPLEMENTATION.md), [Certification](SPRINT_25_CERTIFICATION.md), [Closure](SPRINT_25_CLOSURE.md), [ADR-043](../Decisions.md) |
 | 26 | Authoritative Companion Guidance Delivery | Complete, certified and Founder-accepted | None | [Plan](SPRINT_26_PLAN.md), [Implementation](SPRINT_26_IMPLEMENTATION.md), [Certification](SPRINT_26_CERTIFICATION.md), [Closure](SPRINT_26_CLOSURE.md), [Decision package](SPRINT_26_FOUNDER_DECISION_REQUIRED.md) |
-| 27 | Contextual Companion and Reference Integration | Founder product, privacy and architecture decision required; not implemented | None | [Decision package](SPRINT_27_FOUNDER_DECISION_REQUIRED.md), [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
+| 27 | Contextual Companion and Reference Integration | Source complete and locally certified; Founder acceptance pending | None | [Plan](SPRINT_27_PLAN.md), [Implementation](SPRINT_27_IMPLEMENTATION.md), [Certification](SPRINT_27_CERTIFICATION.md), [Decision package](SPRINT_27_FOUNDER_DECISION_REQUIRED.md), [ADRs 044–045](../Decisions.md) |
 | 28 | Unified Oracle Product Experience | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 29 | Secure Desktop Operations and Distribution | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 30 | Production Qualification | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
@@ -65,5 +65,6 @@ Founder-accepted under the existing Operator Understanding ADRs. Sprint 23 is
 complete, certified and Founder-accepted. Sprint 24 is complete, certified and
 Founder-accepted. Sprint 25 is complete, certified and Founder-accepted under
 ADR-043. Sprint 26 is complete, certified and Founder-accepted. Sprint 27
-requires Founder selection of the second Beta reference game and approval of
-observation-privacy and compatibility-certification architecture.
+Option A, Minecraft: Java Edition `26.1.1`, ADR-044 and ADR-045 are approved.
+Its bounded source implementation and local certification are complete;
+Founder acceptance is pending.

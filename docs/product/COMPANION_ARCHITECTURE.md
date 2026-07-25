@@ -1631,14 +1631,21 @@ generation ownership rejects stale asynchronous results.
 
 Source freshness is enforced by policy. Ready, empty, partial-success,
 unavailable and loading paths are production-wired and certified. Guidance
-v1 and Desktop Platform API v1 remain unchanged. ADR-040 manifest version 1.5.0
+v1 and Desktop Platform API v1 remain unchanged. ADR-040 manifest version 1.6.0
 exactly represents Web and Electron runtimes, while Platform Companion
 readiness and Desktop Companion Session ownership remain explicitly
 non-merging.
 
+Sprint 27 adds Minecraft: Java Edition `26.1.1` as the bounded second Beta
+reference. ADR-044 makes screen observation explicit-consent, visible,
+attached-window-only, allowlisted, local and ephemeral. Raw frames never cross
+the capture operation. ADR-045 makes compatibility an expiring lifecycle
+rather than a support boolean. The original diamond discovery journey remains
+text-only, spoiler-bounded, transient and non-authoritative.
+
 Verified remaining debt includes measured legacy web Application-boundary
-exceptions and the not-yet-approved Sprint 27 screen-observation,
-compatibility-certification and second-Game-Integration work.
+exceptions and production qualification of every support certificate before
+activation.
 
 ---
 

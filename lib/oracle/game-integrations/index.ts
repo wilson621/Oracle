@@ -35,6 +35,8 @@ export {
   createOracleGameIntegrationRegistry,
 } from "./oracle-game-integration-registry";
 
+export * from "./compatibility";
+
 export type {
   ExecutableGameDetectionProfile,
   ExecutableGameMatcherInput,
@@ -61,3 +63,17 @@ export {
 export type {
   CallOfDutyCuratedGuidanceProviderDependencies,
 } from "./call-of-duty";
+
+export {
+  MINECRAFT_JAVA_CERTIFIED_GAME_VERSION,
+  MINECRAFT_JAVA_CERTIFIED_LOCALE,
+  MINECRAFT_JAVA_CERTIFIED_UI_SCALE,
+  MINECRAFT_JAVA_COMPATIBILITY_CERTIFICATE,
+  MINECRAFT_JAVA_DIAMOND_GUIDANCE_PROVIDER_ID,
+  MINECRAFT_JAVA_DIAMOND_GUIDANCE_PROVIDER_MANIFEST,
+  MINECRAFT_JAVA_DIAMOND_GUIDANCE_PROVIDER_VERSION,
+  MINECRAFT_JAVA_INTEGRATION_ID,
+  MINECRAFT_JAVA_INTEGRATION_VERSION,
+  MinecraftJavaIntegration,
+  createMinecraftJavaDiamondGuidanceProvider,
+} from "./minecraft-java";

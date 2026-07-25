@@ -2901,6 +2901,208 @@ Accepted — Founder-approved 25 July 2026.
 
 ---
 
+# ADR-044
+
+## Title
+
+Companion Observation Privacy, Consent and Ephemerality
+
+## Decision
+
+Oracle Companion may observe visible pixels only through an external,
+Operator-enabled and purpose-scoped desktop boundary. Observation is disabled
+by default. Enabling it requires an explicit transient consent action for the
+currently attached supported target and approved observation purpose.
+
+Active observation must always have a renderer-safe visible indicator.
+Pause, revoke, detach, target replacement, process loss, unsupported display
+mode, certificate invalidation and runtime recovery stop observation and
+invalidate pending work immediately.
+
+Capture is restricted to the attached game window and versioned allowlisted
+regions. The capture implementation must reject screens, unrelated windows,
+unapproved regions, minimized targets and dimensions outside the certified
+profile. Renderers receive observation state and bounded controls only; they
+never receive pixels, native images, capture sources, window handles or
+recognizer implementations.
+
+Sprint 27 processing is local only. Raw frames are transient capabilities:
+they may exist only inside one capture operation, must never be logged,
+serialized, retained, cached, uploaded or projected to another boundary, and
+must be released and overwritten where practical immediately after local
+recognition. Screenshots and clips are not created.
+
+Derived observations must be immutable, schema-validated, confidence-bearing,
+freshness-bounded, purpose-scoped and non-authoritative. Low-confidence,
+contradictory, stale or out-of-profile results fail closed and cannot advance
+Context. Contextual progress is an instance-owned transient projection. It
+cannot create or mutate Session, Evidence, Understanding, Memory, Mission,
+Progression or any other authoritative Oracle state.
+
+Any retention, upload, external processing, cross-session progress, hidden
+observation or additional observation purpose requires a new Founder decision.
+
+## Reason
+
+Visible desktop pixels can contain unrelated and sensitive information even
+when capture is technically possible. Permission to observe is not permission
+to retain, upload, infer broadly or create durable truth. A permanent,
+fail-closed boundary makes consent, minimisation and ephemerality structural
+properties of the Companion rather than integration-specific conventions.
+
+## Alternatives Considered
+
+Always-on capture was rejected because it removes meaningful consent and
+increases privacy exposure. Full-display capture was rejected because it can
+collect unrelated applications and notifications. Frame retention for later
+analysis was rejected because it creates a new sensitive retention domain.
+Cloud OCR was rejected because Sprint 27 authorises no upload or external
+processing.
+
+## Consequences
+
+- observation begins only after explicit transient consent;
+- capture indication and immediate pause/revoke are mandatory;
+- raw frames never cross the local observation operation;
+- recognition must work from bounded local input;
+- recovery constructs a fresh observation runtime with consent disabled;
+- uncertainty reduces capability rather than broadening capture; and
+- durable progress remains unavailable in Sprint 27.
+
+## Reversibility
+
+Capture and local recognition implementations may be replaced behind the same
+boundary. Allowlisted regions and purposes may evolve through versioned,
+certified profiles. Weakening consent, minimisation, local processing or
+ephemerality requires a superseding Founder-approved ADR.
+
+## Authority Boundary
+
+This ADR authorises the bounded Sprint 27 Windows single-player observation
+implementation, local verification, certification and documentation only. It
+does not authorise production deployment, persistence, retention, upload,
+external processing, multiplayer, game APIs, mods, automated input,
+authoritative mutation or any change to ADR-031's External Companion boundary.
+
+## Status
+
+Accepted — Founder-approved 25 July 2026.
+
+---
+
+# ADR-045
+
+## Title
+
+Game Integration Compatibility and Certification
+
+## Decision
+
+Oracle support is governed by immutable, versioned compatibility certificates.
+Support must never be represented as a permanent boolean.
+
+Every certificate has one explicit lifecycle state:
+
+- `certified` — all declared capabilities are currently verified for the exact
+  profile and may operate;
+- `provisionally-certified` — the profile is under bounded revalidation;
+  only capabilities independently proven unaffected may operate and every
+  capability affected by uncertainty remains disabled;
+- `expired` — the review interval elapsed and all profile capabilities are
+  disabled; or
+- `revoked` — policy, account-safety, version, executable, capture, integration
+  or incident evidence invalidated the certificate and all capabilities are
+  disabled immediately.
+
+Provisionally certified is fail-closed. It never means "probably supported"
+and cannot preserve a capability whose relevant assumption is uncertain.
+
+Certificates bind the game, edition, version, operating system, executable
+identity, locale, display mode, UI assumptions, player mode, observation
+methods, capability set, policy sources, review evidence, issue time and expiry
+time. The maximum review interval is 90 days. Material publisher-policy,
+account-safety, game-version, executable, capture-assumption or integration
+changes invalidate the affected certificate immediately.
+
+Runtime eligibility is resolved from the certificate state, exact profile
+match and per-capability evidence. Unknown, missing, malformed, mismatched,
+expired or revoked certificates fail closed. Detection may identify a game
+without representing it as supported.
+
+Every Game Integration must pass common deterministic detection, immutable
+Context, serialisation, observation, privacy, Guidance, performance,
+invalidation and failure conformance tests. Game-specific recognition and
+knowledge remain inside the Game Integration. Shared Platform code consumes
+only versioned serializable contracts.
+
+Certification, deployment and activation remain independent lifecycle states.
+ADR-040 manifest equality remains mandatory whenever an integration or provider
+changes runtime composition.
+
+## Initial Certificate
+
+Sprint 27 may create one certificate for:
+
+- Minecraft: Java Edition `26.1.1`;
+- Windows;
+- Founder-controlled single-player;
+- English (United States);
+- windowed or borderless-windowed mode;
+- the bounded UI scale and capture regions recorded by the certificate;
+- local screen observation only; and
+- one original text-only diamond advancement/discovery Guidance journey.
+
+Multiplayer, Realms, servers, mods, add-ons, plugins, APIs, other versions,
+locales and display profiles are outside the certificate.
+
+## Reason
+
+Publisher rules, anti-cheat systems, executables and UI assumptions change.
+A simple `supported` flag would silently outlive the evidence that justified
+it. Explicit lifecycle and expiry make account safety, policy drift and
+capability reduction visible and mechanically enforceable.
+
+## Alternatives Considered
+
+A permanent support boolean was rejected because it cannot express review or
+invalidation. Manual documentation without runtime enforcement was rejected
+because stale claims could remain active. Treating provisional status as broad
+temporary support was rejected because uncertainty must disable affected
+capabilities. Per-launch publisher networking was rejected because it adds an
+unapproved remote dependency and cannot replace reviewed interpretation.
+
+## Consequences
+
+- exact profiles, not game names, are certified;
+- certificates expire after at most 90 days;
+- material changes revoke support immediately;
+- provisional capability is explicitly narrowed;
+- unsupported modes remain detectable but ineligible;
+- future integrations reuse one conformance suite; and
+- release claims must name the certified scope.
+
+## Reversibility
+
+Certificates can expire or be revoked without migrating data. New profiles,
+versions, locales and modes can be added independently after evidence review.
+Removing an integration from composition is safe because Sprint 27 creates no
+durable observation or progress. Replacing the lifecycle model or weakening
+fail-closed semantics requires a superseding Founder-approved ADR.
+
+## Authority Boundary
+
+This ADR authorises Sprint 27 source implementation, local certification,
+manifest 1.6.0 reconciliation and documentation only. It does not authorise
+production deployment, migrations, persistence, broad Minecraft support,
+multiplayer, APIs, mods, External Companion boundary changes or weakening
+ADR-031 through ADR-044.
+
+## Status
+
+Accepted — Founder-approved 25 July 2026.
+
+---
+
 # Future Decision Records
 
 Every significant architectural decision should be documented before implementation whenever practical.

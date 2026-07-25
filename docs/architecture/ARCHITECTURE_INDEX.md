@@ -836,6 +836,18 @@ runtimes. Guidance v1 and Desktop Platform API v1 remain unchanged. No
 retention, migration, persistence activation, production change or Gate C
 change exists.
 
+Sprint 27 implements ADR-044 and ADR-045. Minecraft: Java Edition `26.1.1`
+is the bounded second Beta reference Game Integration. Its exact compatibility
+profile is governed by a non-boolean certificate lifecycle with a 90-day
+maximum review interval and immediate material-change invalidation.
+
+Local observation is Operator-enabled, attached-window-only, region-allowlisted
+and ephemeral. Raw pixels remain inside one main-process capture operation,
+are overwritten after recognition and never enter renderer, storage or network
+boundaries. Derived observations are transient, confidence-bearing,
+purpose-scoped and non-authoritative. Canonical Web and Electron manifest
+version `1.6.0` mechanically equals both constructed runtimes.
+
 Current Runtime
 
 ✓ Engine Runtime

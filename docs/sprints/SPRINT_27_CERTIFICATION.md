@@ -1,0 +1,54 @@
+# SPRINT 27 CERTIFICATION
+
+**Status:** Locally certified; Founder acceptance pending
+**Date:** 25 July 2026
+**Environment:** Windows development workstation
+**Production affected:** No
+
+---
+
+# Certification Result
+
+Sprint 27 passes its bounded source and local certification.
+
+The dedicated suite proves:
+
+- exact Minecraft Java `26.1.1` single-player detection;
+- rejection of other versions, multiplayer and the launcher;
+- all four compatibility-certificate lifecycle states;
+- fail-closed provisional uncertainty, expiry, revocation and profile mismatch;
+- the 90-day maximum review interval;
+- deterministic original text-only Guidance with spoiler bounds;
+- rejection of non-single-player Guidance;
+- explicit consent before observation;
+- allowlisted local frame derivation;
+- raw-buffer overwrite after recognition;
+- pixel-free and handle-free renderer projection;
+- pause and revocation invalidation;
+- absence of upload, storage and automated-input paths; and
+- ADR-040 exact manifest/runtime equality for version `1.6.0`.
+
+# Commands
+
+```text
+npm.cmd run sprint-27:verify
+npm.cmd run platform-composition:verify
+npx.cmd tsc --noEmit
+```
+
+The complete repository verification results are recorded in the evidence
+README after final execution.
+
+The accepted Sprint 17 load evidence remains authoritative under the Sprint 22
+Founder directive because Sprint 27 changes none of its query paths,
+assumptions or performance characteristics. Its native-`psql` harness was
+therefore not modified merely to duplicate accepted load evidence. Migration
+010's immutable hashes and downstream canonical-chain execution were
+reverified without changing or deploying it.
+
+# Lifecycle and Production Boundary
+
+Migration 009 remains the only production-deployed migration. Migrations
+010–014 remain implemented and certified, undeployed and inactive. No Migration
+015 was created. Runtime persistence and persisted producers/consumers remain
+disabled. Gate C remains deferred. Sprint 27 is not deployed or activated.

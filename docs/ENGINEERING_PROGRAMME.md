@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 27 Founder product, privacy and architecture decision
+**Next Review:** Sprint 27 Founder acceptance
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -108,9 +108,9 @@ Founder-accepted under ADR-042. Migration 014 is undeployed and inactive.
 Sprint 25 is complete, certified and Founder-accepted under ADR-043. No
 Migration 015 or conversation retention was introduced. Sprint 26 is complete,
 certified and Founder-accepted through the existing Guidance v1 architecture
-without a new ADR. Sprint 27 requires Founder selection of the second Beta
-reference game and approval of observation-privacy and
-compatibility-certification architecture before implementation.
+without a new ADR. Sprint 27 Option A, Minecraft: Java Edition `26.1.1`,
+ADR-044 and ADR-045 are approved. Its bounded source implementation and local
+certification are complete; Founder acceptance is pending.
 
 The ADR-040 composition manifest is a permanent runtime contract. Every future
 Sprint changing Services, Applications, Game Integrations, Guidance providers,
@@ -1026,6 +1026,17 @@ immediately.
 Validates the extension model. ADRs are expected for observation privacy and
 Game Integration certification. Full general-purpose computer vision is not
 required.
+
+### Implementation Status
+
+Source complete and locally certified under accepted ADR-044 and ADR-045.
+Exact-profile Minecraft detection, a versioned non-boolean certificate
+lifecycle, one original text-only diamond journey, explicit transient consent,
+local allowlisted capture, raw-buffer overwrite and renderer-safe observation
+state are implemented. Manifest version `1.6.0` preserves exact Web/Electron
+runtime equality. No deployment, migration, persistence, retention, upload,
+multiplayer, API, mod, automated-input, authoritative mutation or Gate C
+change exists. Founder acceptance is pending.
 
 # EPIC V — PRODUCT COMPLETION AND BETA RELEASE
 

@@ -1870,6 +1870,33 @@ Clarified:
 
 ---
 
+# Sprint 27 Observation and Compatibility Boundary
+
+Minecraft: Java Edition `26.1.1` is Oracle's bounded second Beta reference
+Game Integration. It does not replace Call of Duty/Warzone as Oracle's first
+proving ground and does not establish broad Minecraft support.
+
+ADR-044 makes permitted desktop observation disabled by default,
+Operator-enabled, visibly indicated, attached-window-only, allowlisted, local
+and ephemeral. Raw frames remain inside a single main-process capture
+operation, are overwritten after recognition and never enter renderer,
+retention or network boundaries. Derived observations are confidence-bearing,
+freshness-bounded, purpose-scoped, transient and non-authoritative.
+
+ADR-045 makes Game Integration support an immutable certificate lifecycle:
+certified, provisionally certified, expired or revoked. Provisional uncertainty
+disables every affected capability. Exact profile mismatch, expiry and
+revocation fail closed. Certificates are reviewed at most every 90 days and
+invalidate immediately after a material policy, account-safety, version,
+executable, capture or behaviour change.
+
+Manifest version `1.6.0` declares the second Game Integration and its
+deterministic text-only Guidance provider exactly in Web and Electron. No
+runtime persistence, authoritative mutation or External Companion trust
+boundary changes.
+
+---
+
 # Closing Statement
 
 ## Sprint 19 Account and Operator Identity Boundary

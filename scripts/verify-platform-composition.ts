@@ -31,7 +31,7 @@ function main(): void {
   verifyLifecycleOwnership();
   verifyEntryPointWiringAndLegacySeam();
   writeCertificationEvidence();
-  console.log("Sprint 26 Platform composition verification passed.");
+  console.log("Sprint 27 Platform composition verification passed.");
 }
 
 function verifyCanonicalManifests(): void {
@@ -210,7 +210,7 @@ function verifyLifecycleOwnership(): void {
       authority: "session-service",
       persistence: "disabled",
     });
-    assert.equal(manifest.manifestVersion, "1.5.0");
+    assert.equal(manifest.manifestVersion, "1.6.0");
   }
 }
 
@@ -301,8 +301,8 @@ function writeCertificationEvidence(): void {
     };
   });
   const path =
-    "docs/sprints/evidence/sprint-26/generated/platform-composition-certification.json";
-  fs.mkdirSync("docs/sprints/evidence/sprint-26/generated", {
+    "docs/sprints/evidence/sprint-27/generated/platform-composition-certification.json";
+  fs.mkdirSync("docs/sprints/evidence/sprint-27/generated", {
     recursive: true,
   });
   fs.writeFileSync(

@@ -254,7 +254,10 @@ delivery authorities have been reviewed.
 | Sprint 26 certification | [Sprint 26 Certification](sprints/SPRINT_26_CERTIFICATION.md) | Locally certified and Founder-accepted |
 | Sprint 26 evidence | [Sprint 26 Evidence](sprints/evidence/sprint-26/README.md) | Machine-readable local certification |
 | Sprint 26 closure | [Sprint 26 Closure](sprints/SPRINT_26_CLOSURE.md) | Closed; permanent non-authoritative Guidance delivery directive recorded |
-| Sprint 27 decision package | [Sprint 27 Founder Decision Required](sprints/SPRINT_27_FOUNDER_DECISION_REQUIRED.md) | Founder game-selection, privacy and certification decision required |
+| Sprint 27 authority | [Sprint 27 Plan](sprints/SPRINT_27_PLAN.md), [decision package](sprints/SPRINT_27_FOUNDER_DECISION_REQUIRED.md) and [ADRs 044–045](Decisions.md) | Option A approved; bounded implementation complete |
+| Sprint 27 implementation | [Sprint 27 Implementation](sprints/SPRINT_27_IMPLEMENTATION.md) | Source complete, transient and undeployed |
+| Sprint 27 certification | [Sprint 27 Certification](sprints/SPRINT_27_CERTIFICATION.md) | Locally certified; Founder acceptance pending |
+| Sprint 27 evidence | [Sprint 27 Evidence](sprints/evidence/sprint-27/README.md) | Machine-readable local certification |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

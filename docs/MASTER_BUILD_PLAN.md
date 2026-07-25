@@ -121,8 +121,9 @@ Founder-accepted under ADR-042. Migration 014 is undeployed and inactive.
 Sprint 25 is complete, certified and Founder-accepted under ADR-043 with no
 Migration 015 or retention. Sprint 26 is complete, certified and
 Founder-accepted using Guidance v1 and Desktop Platform API v1. Sprint 27
-requires Founder game-selection, observation-privacy and
-compatibility-certification decisions before implementation.
+Option A, ADR-044 and ADR-045 are approved; its bounded Minecraft Java
+`26.1.1` source implementation and local certification are complete pending
+Founder acceptance.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

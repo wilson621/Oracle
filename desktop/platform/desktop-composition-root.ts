@@ -36,7 +36,7 @@ export const ORACLE_ELECTRON_COMPOSITION_MANIFEST =
   createOracleRuntimeCompositionManifest({
     contract: "oracle.runtime-composition",
     contractVersion: 1,
-    manifestVersion: "1.5.0",
+    manifestVersion: "1.6.0",
     target: "electron",
     subsystems: ELECTRON_SUBSYSTEMS,
     services: [
@@ -72,9 +72,10 @@ export const ORACLE_ELECTRON_COMPOSITION_MANIFEST =
       "achievements",
       "companion",
     ],
-    gameIntegrations: ["call-of-duty"],
+    gameIntegrations: ["call-of-duty", "minecraft-java"],
     guidanceProviders: [
       "game-integrations.call-of-duty.curated-guidance",
+      "game-integrations.minecraft-java.diamond-discovery-guidance",
     ],
   });
 

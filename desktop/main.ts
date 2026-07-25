@@ -198,6 +198,20 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
+    DESKTOP_CHANNELS.getCompanionScreenObservationState,
+    (event) =>
+      requireAuthorizedController(event)
+        .getCompanionScreenObservationState()
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.controlCompanionScreenObservation,
+    (event, control: unknown) =>
+      requireAuthorizedController(event)
+        .controlCompanionScreenObservation(control)
+  );
+
+  ipcMain.handle(
     DESKTOP_CHANNELS.toggleOverlayPreview,
     (event) => {
       return requireAuthorizedController(
@@ -272,6 +286,14 @@ function removeIpcHandlers(): void {
 
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.requestCompanionGuidance
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.getCompanionScreenObservationState
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.controlCompanionScreenObservation
   );
 
   ipcMain.removeHandler(

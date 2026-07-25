@@ -7,6 +7,9 @@ import {
   createCallOfDutyCuratedGuidanceProvider,
 } from "../game-integrations/call-of-duty/guidance/call-of-duty-curated-guidance-provider";
 import {
+  createMinecraftJavaDiamondGuidanceProvider,
+} from "../game-integrations/minecraft-java/guidance";
+import {
   OracleCompanionGuidanceProviderService,
 } from "../services/companion-guidance/companion-guidance-provider-service";
 import {
@@ -29,6 +32,7 @@ export function createCoreOraclePlatformComposition(
 ): OraclePlatformComposition {
   const providers = Object.freeze([
     createCallOfDutyCuratedGuidanceProvider(),
+    createMinecraftJavaDiamondGuidanceProvider(),
   ]);
   const sessionService = new OracleSessionService(
     new InMemoryOracleSessionLifecycleRepository()

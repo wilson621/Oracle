@@ -38,6 +38,8 @@ undeployed and inactive
 transient grounded Conversation complete; no migration or retention
 **Sprint 26:** Complete, certified and Founder-accepted; transient Desktop-owned
 Guidance delivery complete
+**Sprint 27:** Source complete and locally certified under ADR-044 and ADR-045;
+Founder acceptance pending; undeployed and inactive
 
 ---
 
@@ -62,6 +64,27 @@ Update this file during every sprint closure audit.
 ---
 
 # Latest Verified Sprint Progress
+
+## Sprint 27 — Contextual Companion and Reference Integration
+
+Minecraft: Java Edition `26.1.1` is Oracle's second bounded Beta reference
+integration. Exact Windows single-player detection, immutable compatibility
+certification, a deterministic text-only diamond discovery journey and
+Operator-enabled local observation are implemented.
+
+ADR-044 keeps observation disabled by default, visible, revocable, local and
+ephemeral. Raw buffers are overwritten after one operation and never cross the
+main-process boundary. The renderer receives only a confidence-bearing,
+purpose-scoped, two-second non-authoritative visible-frame projection.
+ADR-045 replaces permanent support booleans with certified, provisional,
+expired and revoked lifecycle states. Provisional uncertainty, expiry,
+revocation and profile mismatch fail closed.
+
+Manifest version `1.6.0` mechanically equals Web and Electron composition and
+adds exactly the Minecraft integration and diamond Guidance provider. No
+migration, persistence, retained observation/progress, upload, multiplayer,
+API, mod, automated-input, production or Gate C change exists. Source and
+local certification are complete; Founder acceptance is pending.
 
 ## Sprint 26 — Authoritative Companion Guidance Delivery
 

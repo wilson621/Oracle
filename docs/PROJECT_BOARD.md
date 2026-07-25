@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 25 July 2026
-**Version:** 6.9
+**Version:** 7.0
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -65,13 +65,18 @@ Sprint 26 — Authoritative Companion Guidance Delivery is complete, certified
 and Founder-accepted. Guidance delivery remains transient, instance-scoped and
 non-authoritative. Manifest version 1.5.0 exactly matches Web and Electron.
 
+Sprint 27 is source complete and locally certified under accepted ADR-044 and
+ADR-045. Minecraft: Java Edition `26.1.1` is the bounded second Beta reference.
+Manifest version `1.6.0` exactly matches Web and Electron. No deployment,
+migration, persistence, retention, upload, multiplayer, API, mod,
+automated-input, authoritative mutation or Gate C activity occurred.
+
 ## Active Founder Review
 
 Sprint 27 — Contextual Companion and Reference Integration requires a Founder
-product, privacy and architecture decision. The decision package recommends
-Minecraft: Java Edition single-player as the bounded second Beta reference,
-ADR-044 for observation privacy and ephemerality, and ADR-045 for versioned
-Game Integration compatibility certification. Implementation has not started.
+implementation and certification acceptance only. Its product, privacy and
+architectural decisions are already approved and implemented within their
+bounded authority.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -100,14 +105,14 @@ decision implementation and current certification boundary in
 
 # Latest Closed Sprint
 
-## Sprint 25 — Conversational Oracle
+## Sprint 26 — Authoritative Companion Guidance Delivery
 
 **Status:** Complete, certified and Founder-accepted
-**Closure report:** `docs/sprints/SPRINT_25_CLOSURE.md`
-**Deployment status:** Undeployed and inactive; no Migration 015
+**Closure report:** `docs/sprints/SPRINT_26_CLOSURE.md`
+**Deployment status:** Undeployed and inactive; no migration
 
-Sprint 25 delivered grounded transient Conversation without creating a new
-truth, mutation or retention authority.
+Sprint 26 delivered transient authoritative Guidance coordination without
+creating a knowledge, mutation or retention authority.
 
 ## Previous Closed Sprint — Sprint 24 — Adaptive Coaching, Planner and Progression
 

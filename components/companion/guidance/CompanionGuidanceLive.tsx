@@ -6,6 +6,8 @@ import type {
 } from "@/lib/oracle/applications/companion";
 import type {
   OracleCompanionGuidanceControl,
+  OracleCompanionScreenObservationControl,
+  OracleCompanionScreenObservationState,
 } from "@/desktop/contracts";
 import CompanionGuidanceDashboard from "./CompanionGuidanceDashboard";
 import styles from "./companion-guidance.module.css";
@@ -15,6 +17,14 @@ const DEFAULT_CONTROL: OracleCompanionGuidanceControl = {
   maximumSpoilerLevel: "none",
 };
 
+const OBSERVATION_PROFILE:
+  Omit<OracleCompanionScreenObservationControl, "action"> = {
+    locale: "en-US",
+    uiScale: 3,
+    displayMode: "windowed",
+    playerMode: "single-player",
+  };
+
 export default function CompanionGuidanceLive({
   initialState,
 }: Readonly<{
@@ -23,6 +33,12 @@ export default function CompanionGuidanceLive({
   const [state, setState] = useState(initialState);
   const [control, setControl] =
     useState<OracleCompanionGuidanceControl>(DEFAULT_CONTROL);
+  const [observation, setObservation] =
+    useState<OracleCompanionScreenObservationState | null>(null);
+  const [observationDisplayMode, setObservationDisplayMode] =
+    useState<OracleCompanionScreenObservationControl["displayMode"]>(
+      "windowed"
+    );
 
   useEffect(() => {
     const bridge = window.oracleDesktop;
@@ -34,9 +50,19 @@ export default function CompanionGuidanceLive({
     const unsubscribe = bridge.onCompanionGuidanceStateChanged((value) => {
       if (active) setState(value);
     });
+    void bridge.getCompanionScreenObservationState()
+      .then((value) => {
+        if (active) setObservation(value);
+      })
+      .catch(() => undefined);
+    const unsubscribeObservation =
+      bridge.onCompanionScreenObservationStateChanged((value) => {
+        if (active) setObservation(value);
+      });
     return () => {
       active = false;
       unsubscribe();
+      unsubscribeObservation();
     };
   }, []);
 
@@ -47,6 +73,24 @@ export default function CompanionGuidanceLive({
       setState(await bridge.requestCompanionGuidance(control));
     } catch {
       // The subscribed renderer-safe state remains the source of presentation.
+    }
+  }
+
+  async function controlObservation(
+    action: OracleCompanionScreenObservationControl["action"]
+  ) {
+    const bridge = window.oracleDesktop;
+    if (!bridge) return;
+    try {
+      setObservation(
+        await bridge.controlCompanionScreenObservation({
+          ...OBSERVATION_PROFILE,
+          displayMode: observationDisplayMode,
+          action,
+        })
+      );
+    } catch {
+      // The validated subscription remains the renderer source of truth.
     }
   }
 
@@ -68,6 +112,7 @@ export default function CompanionGuidanceLive({
             <option value="preparation">Preparation</option>
             <option value="operator-development">Operator development</option>
             <option value="performance">Performance</option>
+            <option value="discovery">Discovery</option>
           </select>
         </label>
         <label>
@@ -91,6 +136,48 @@ export default function CompanionGuidanceLive({
         </label>
         <button type="button" onClick={requestGuidance}>
           Refresh guidance
+        </button>
+      </section>
+      <section className={styles.controls} aria-label="Local screen observation">
+        <div aria-live="polite">
+          <strong>
+            {observation?.indicator === "observation-on"
+              ? "Observation on"
+              : observation?.indicator === "observation-paused"
+                ? "Observation paused"
+                : "Observation off"}
+          </strong>
+          <p>
+            {observation?.message ??
+              "Local observation state is not available in this browser."}
+          </p>
+        </div>
+        <label>
+          Certified display mode
+          <select
+            value={observationDisplayMode}
+            onChange={(event) =>
+              setObservationDisplayMode(
+                event.target.value as
+                  OracleCompanionScreenObservationControl["displayMode"]
+              )
+            }
+          >
+            <option value="windowed">Windowed</option>
+            <option value="borderless-windowed">Borderless windowed</option>
+          </select>
+        </label>
+        <button type="button" onClick={() => void controlObservation("enable")}>
+          Enable and observe once
+        </button>
+        <button type="button" onClick={() => void controlObservation("observe")}>
+          Observe again
+        </button>
+        <button type="button" onClick={() => void controlObservation("pause")}>
+          Pause
+        </button>
+        <button type="button" onClick={() => void controlObservation("revoke")}>
+          Revoke consent
         </button>
       </section>
       <CompanionGuidanceDashboard state={state} />

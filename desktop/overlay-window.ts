@@ -33,6 +33,15 @@ import {
 import {
   OracleCompanionGuidanceDeliveryCoordinator,
 } from "./companion/companion-guidance-delivery-coordinator.js";
+import {
+  OracleCompanionScreenObservationCoordinator,
+} from "./companion/companion-screen-observation-coordinator.js";
+import {
+  OracleElectronLocalWindowCapture,
+} from "./companion/electron-local-window-capture.js";
+import type {
+  OracleCompanionScreenObservationState,
+} from "./companion/companion-screen-observation-contract.js";
 import type {
   CompanionGuidanceApplicationState,
 } from "../lib/oracle/applications/companion/index.js";
@@ -129,6 +138,11 @@ export class CompanionHostWindowController {
   private readonly guidanceDelivery:
     OracleCompanionGuidanceDeliveryCoordinator;
 
+  private readonly screenObservation =
+    new OracleCompanionScreenObservationCoordinator(
+      new OracleElectronLocalWindowCapture()
+    );
+
   private readonly gameIntegrations:
     OracleDesktopGameIntegrationCoordinator;
 
@@ -179,6 +193,9 @@ export class CompanionHostWindowController {
 
   this.guidanceDelivery.subscribe(
     () => this.publishCompanionGuidanceState()
+  );
+  this.screenObservation.subscribe(
+    () => this.publishCompanionScreenObservationState()
   );
 
   this.recovery.subscribe(
@@ -473,6 +490,23 @@ export class CompanionHostWindowController {
     control: unknown
   ): Promise<CompanionGuidanceApplicationState> {
     return this.guidanceDelivery.request(control);
+  }
+
+  getCompanionScreenObservationState():
+    OracleCompanionScreenObservationState {
+    return this.screenObservation.getState();
+  }
+
+  controlCompanionScreenObservation(
+    control: unknown
+  ): Promise<OracleCompanionScreenObservationState> {
+    const session = this.companionSession.getSnapshot();
+    const attachment = this.attachment.getState();
+    return this.screenObservation.applyControl(
+      control,
+      session,
+      attachment.status === "attached" ? attachment.target : null
+    );
   }
 
   showAndFocus(): void {
@@ -1306,6 +1340,9 @@ this.hostState.reset();
         details
       ) => {
         this.guidanceDelivery.invalidate();
+        this.screenObservation.invalidate(
+          "Renderer recovery invalidated local screen observation consent."
+        );
         this.diagnostics.report({
           severity: "critical",
           category: "runtime",
@@ -1473,6 +1510,11 @@ this.hostState.reset();
     this.guidanceDelivery.synchronise(
       this.companionSession.getSnapshot()
     );
+    const attachment = this.attachment.getState();
+    this.screenObservation.synchronise(
+      this.companionSession.getSnapshot(),
+      attachment.status === "attached" ? attachment.target : null
+    );
 
     const window =
       this.getWindow();
@@ -1499,6 +1541,15 @@ this.hostState.reset();
     window.webContents.send(
       DESKTOP_CHANNELS.companionGuidanceStateChanged,
       this.getCompanionGuidanceState()
+    );
+  }
+
+  private publishCompanionScreenObservationState(): void {
+    const window = this.getWindow();
+    if (!window || window.webContents.isDestroyed()) return;
+    window.webContents.send(
+      DESKTOP_CHANNELS.companionScreenObservationStateChanged,
+      this.getCompanionScreenObservationState()
     );
   }
 

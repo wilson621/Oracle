@@ -1,8 +1,8 @@
 # SPRINT 27 FOUNDER DECISION REQUIRED
 
 **Sprint:** 27 — Contextual Companion and Reference Integration
-**Status:** Founder product, privacy and architecture decision required;
-implementation not started
+**Status:** Option A, ADR-044 and ADR-045 Founder-approved; superseded by
+Sprint 27 plan
 **Prepared:** 25 July 2026
 
 ## Decision requested

@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": ".tmp-sprint-27-verification",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2022"
+  },
+  "include": [
+    "desktop/companion/companion-screen-observation-contract.ts",
+    "desktop/companion/companion-screen-observation-coordinator.ts",
+    "desktop/companion/companion-session.ts",
+    "desktop/companion/companion-context.ts",
+    "desktop/overlay/attachment-state.ts",
+    "desktop/overlay/window-observer.ts",
+    "desktop/platform/desktop-host-snapshot.ts",
+    "desktop/window-discovery.ts",
+    "lib/companion/guidance/**/*.ts",
+    "lib/oracle/game-integrations/compatibility/**/*.ts",
+    "lib/oracle/game-integrations/minecraft-java/**/*.ts",
+    "lib/oracle/sessions/**/*.ts",
+    "scripts/verify-sprint-27.ts"
+  ]
+}

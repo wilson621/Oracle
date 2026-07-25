@@ -33,6 +33,10 @@ import type {
 import type {
   OracleCompanionGuidanceControl,
 } from "./companion/companion-guidance-delivery-contract.js";
+import type {
+  OracleCompanionScreenObservationControl,
+  OracleCompanionScreenObservationState,
+} from "./companion/companion-screen-observation-contract.js";
 
 export const DESKTOP_CHANNELS = {
   getHostState:
@@ -49,6 +53,12 @@ export const DESKTOP_CHANNELS = {
 
   requestCompanionGuidance:
     "oracle-desktop:request-companion-guidance",
+
+  getCompanionScreenObservationState:
+    "oracle-desktop:get-companion-screen-observation-state",
+
+  controlCompanionScreenObservation:
+    "oracle-desktop:control-companion-screen-observation",
 
   toggleOverlayPreview:
     "oracle-desktop:toggle-overlay-preview",
@@ -79,6 +89,9 @@ export const DESKTOP_CHANNELS = {
 
   companionGuidanceStateChanged:
     "oracle-desktop:companion-guidance-state-changed",
+
+  companionScreenObservationStateChanged:
+    "oracle-desktop:companion-screen-observation-state-changed",
 } as const;
 
 export const ORACLE_DESKTOP_RECOVERY_SHORTCUT =
@@ -89,6 +102,8 @@ export type {
   OraclePlatformHealthSnapshot,
   CompanionGuidanceApplicationState,
   OracleCompanionGuidanceControl,
+  OracleCompanionScreenObservationControl,
+  OracleCompanionScreenObservationState,
   OracleDesktopAttachmentState,
   OracleDesktopAttachmentStatus,
   OracleDesktopAttachmentTarget,
@@ -121,6 +136,13 @@ export type OracleDesktopBridge = {
   requestCompanionGuidance: (
     control: OracleCompanionGuidanceControl
   ) => Promise<CompanionGuidanceApplicationState>;
+
+  getCompanionScreenObservationState: () =>
+    Promise<OracleCompanionScreenObservationState>;
+
+  controlCompanionScreenObservation: (
+    control: OracleCompanionScreenObservationControl
+  ) => Promise<OracleCompanionScreenObservationState>;
 
   toggleOverlayPreview: () =>
     Promise<OracleDesktopHostState>;
@@ -159,6 +181,12 @@ export type OracleDesktopBridge = {
   onCompanionGuidanceStateChanged: (
     listener: (
       state: CompanionGuidanceApplicationState
+    ) => void
+  ) => () => void;
+
+  onCompanionScreenObservationStateChanged: (
+    listener: (
+      state: OracleCompanionScreenObservationState
     ) => void
   ) => () => void;
 };

@@ -1,0 +1,16 @@
+export {
+  ORACLE_GAME_INTEGRATION_COMPATIBILITY_CERTIFICATE,
+  ORACLE_GAME_INTEGRATION_COMPATIBILITY_CERTIFICATE_VERSION,
+  ORACLE_GAME_INTEGRATION_MAXIMUM_CERTIFICATE_AGE_MS,
+  createOracleGameIntegrationCompatibilityCertificate,
+  resolveOracleGameIntegrationCompatibility,
+  type OracleGameIntegrationCapability,
+  type OracleGameIntegrationCertificateState,
+  type OracleGameIntegrationCompatibilityCertificate,
+  type OracleGameIntegrationCompatibilityProfile,
+  type OracleGameIntegrationCompatibilityResolution,
+  type OracleGameIntegrationDisplayMode,
+  type OracleGameIntegrationPlayerMode,
+  type OracleGameIntegrationPolicySource,
+  type OracleGameIntegrationRuntimeProfile,
+} from "./game-integration-compatibility-certificate";
