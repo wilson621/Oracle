@@ -1,7 +1,7 @@
 # SPRINT 27 FOUNDER ACCEPTANCE PACKAGE
 
 **Sprint:** 27 — Contextual Companion and Reference Integration
-**Status:** Founder acceptance required; do not close yet
+**Status:** Decision resolved; Founder accepted and closed Sprint 27 on 25 July 2026
 **Operational status:** Operational Certification Deferred — Required Test
 Environment Unavailable
 **Prepared:** 25 July 2026
@@ -13,6 +13,11 @@ Environment Unavailable
 Accept and close Sprint 27 as an engineering and architectural Sprint while
 retaining the exact Minecraft live observation certificate as
 `provisionally-certified`, deferred and fail-closed.
+
+**Founder decision:** Approved. The Founder accepted and closed Sprint 27
+without promoting the compatibility certificate or authorising deployment,
+activation, persistence or operational support. See
+[Sprint 27 Closure](SPRINT_27_CLOSURE.md).
 
 Closure should accept the completed architecture, implementation and
 source/synthetic certification. It must not imply live-game certification,
@@ -177,6 +182,9 @@ It would not authorise:
 - Sprint 28 implementation.
 
 # Founder Decision Requested
+
+**Decision:** Approved on 25 July 2026. This section preserves the exact
+question that was presented for independent review.
 
 Approve or reject the recommendation to accept and close Sprint 27 with:
 

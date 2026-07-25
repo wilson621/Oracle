@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 25 July 2026
-**Version:** 7.1
+**Version:** 7.2
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -65,8 +65,9 @@ Sprint 26 — Authoritative Companion Guidance Delivery is complete, certified
 and Founder-accepted. Guidance delivery remains transient, instance-scoped and
 non-authoritative. Manifest version 1.5.0 exactly matches Web and Electron.
 
-Sprint 27 is source complete and source-certified under accepted ADR-044 and
-ADR-045. Minecraft: Java Edition `26.1.1` is the bounded second Beta reference.
+Sprint 27 is complete, source-certified, Founder-accepted and closed under
+ADR-044 and ADR-045. Minecraft: Java Edition `26.1.1` is the bounded second
+Beta reference.
 Manifest version `1.6.0` exactly matches Web and Electron. No deployment,
 migration, persistence, retention, upload, multiplayer, API, mod,
 automated-input, authoritative mutation or Gate C activity occurred.
@@ -77,10 +78,9 @@ is untested and observation remains disabled.
 
 ## Active Founder Review
 
-The revised Sprint 27 Founder Acceptance Package recommends accepting and
-closing the engineering and architectural Sprint with the operational
-certificate explicitly provisional and deferred. Sprint 27 is not yet
-Founder-accepted or closed.
+The Sprint 28 Founder Decision Package recommends Option A, governed
+full-journey product convergence. Sprint 28 implementation has not begun and
+awaits independent Founder review.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -109,7 +109,22 @@ decision implementation and current certification boundary in
 
 # Latest Closed Sprint
 
-## Sprint 26 — Authoritative Companion Guidance Delivery
+## Sprint 27 — Contextual Companion and Reference Integration
+
+**Status:** Complete, certified and Founder-accepted
+**Closure report:** `docs/sprints/SPRINT_27_CLOSURE.md`
+**Deployment status:** Undeployed and inactive; no migration or activation
+**Operational status:** Operational Certification Deferred — Required Test
+Environment Unavailable; compatibility profile provisional and observation
+disabled
+
+Sprint 27 delivered a bounded second reference integration, privacy and
+compatibility governance, deterministic Guidance and fail-closed local
+observation architecture. Source and synthetic certification are accepted.
+Live attached-window certification was not performed and no Minecraft
+operational-support claim exists.
+
+## Previous Closed Sprint — Sprint 26 — Authoritative Companion Guidance Delivery
 
 **Status:** Complete, certified and Founder-accepted
 **Closure report:** `docs/sprints/SPRINT_26_CLOSURE.md`
@@ -117,6 +132,15 @@ decision implementation and current certification boundary in
 
 Sprint 26 delivered transient authoritative Guidance coordination without
 creating a knowledge, mutation or retention authority.
+
+## Previous Closed Sprint — Sprint 25 — Conversational Oracle
+
+**Status:** Complete, certified and Founder-accepted
+**Closure report:** `docs/sprints/SPRINT_25_CLOSURE.md`
+**Deployment status:** Undeployed and inactive; no migration or retention
+
+Sprint 25 delivered grounded transient Conversation without creating a source
+of Oracle truth, model mutation authority or retained transcript.
 
 ## Previous Closed Sprint — Sprint 24 — Adaptive Coaching, Planner and Progression
 

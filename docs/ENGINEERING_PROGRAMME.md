@@ -2,13 +2,13 @@
 
 **Document Status:** Approved
 
-**Version:** 1.6
+**Version:** 1.7
 
 **Owner:** Founder
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 27 Founder Acceptance Package
+**Next Review:** Sprint 28 Founder Decision Package
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -113,7 +113,10 @@ ADR-044 and ADR-045 are approved. Its bounded source implementation and
 synthetic certification are complete. Live observation remains provisional
 and disabled. Operational Certification Deferred — Required Test Environment
 Unavailable is approved because the third-party runtime will not be acquired
-solely for this test. Founder acceptance remains pending.
+solely for this test. Sprint 27 is Founder-accepted and closed. Operational
+certification remains deferred, the profile remains provisional and
+observation remains disabled. Sprint 28 implementation has not begun and
+requires an independent Founder decision.
 
 The ADR-040 composition manifest is a permanent runtime contract. Every future
 Sprint changing Services, Applications, Game Integrations, Guidance providers,
@@ -1043,6 +1046,11 @@ change exists. The exact live observation profile remains provisional and
 disabled because the pinned game is unavailable. Operational Certification
 Deferred describes the Sprint/programme state only and grants no support,
 activation or deployment authority.
+
+Sprint 27 is Founder-accepted and closed as an engineering and architectural
+Sprint. Engineering completion, source certification and operational
+certification remain distinct milestones. Its operational deferral persists
+until an authorised exact-profile live test creates new ADR-045 evidence.
 
 # EPIC V — PRODUCT COMPLETION AND BETA RELEASE
 

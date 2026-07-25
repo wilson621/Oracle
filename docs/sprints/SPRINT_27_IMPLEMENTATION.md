@@ -2,7 +2,8 @@
 
 **Sprint:** Contextual Companion and Reference Integration
 **Status:** Operational Certification Deferred — Required Test Environment
-Unavailable; source complete and source-certified; Founder acceptance pending
+Unavailable; source complete and source-certified; Founder-accepted and closed;
+live profile provisional and observation disabled
 **Date:** 25 July 2026
 **Deployment:** Not authorised
 **Persistence:** Disabled

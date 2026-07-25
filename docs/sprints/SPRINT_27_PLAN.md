@@ -1,7 +1,8 @@
 # SPRINT 27 PLAN — CONTEXTUAL COMPANION AND REFERENCE INTEGRATION
 
 **Status:** Operational Certification Deferred — Required Test Environment
-Unavailable; source complete and source-certified; Founder acceptance pending
+Unavailable; source complete and source-certified; Founder-accepted and closed;
+live profile provisional and observation disabled
 **Architecture:** ADR-031, ADR-032, ADR-040, ADR-041, ADR-042, ADR-043,
 ADR-044 and ADR-045
 **Reference profile:** Minecraft: Java Edition 26.1.1, Windows, English (US),

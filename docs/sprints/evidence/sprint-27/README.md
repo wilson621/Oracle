@@ -21,6 +21,10 @@ workstation and no live attached-window test has been performed.
 Environment Unavailable. This is not a certificate state, operational support
 claim, activation or deployment authority.
 
+**Sprint status:** Founder-accepted and closed on 25 July 2026. Engineering
+closure does not change the provisional certificate or the disabled
+observation capability.
+
 Production remains unchanged. Migration 009 remains the only deployed
 migration; Migrations 010–014 remain certified, undeployed and inactive.
 

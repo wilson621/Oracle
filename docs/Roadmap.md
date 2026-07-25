@@ -11,7 +11,7 @@
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.5
+**Version:** 5.6
 
 ---
 
@@ -756,8 +756,11 @@ Minecraft: Java Edition `26.1.1`, ADR-044 observation privacy and ADR-045
 compatibility certification. Live observation is provisional and disabled
 under the approved status Operational Certification Deferred — Required Test
 Environment Unavailable. Source and synthetic certification passed; live
-attached-window observation did not. Founder acceptance remains pending.
-Production deployment and runtime persistence remain unauthorised.
+attached-window observation did not. Sprint 27 is Founder-accepted and closed.
+Its operational certification remains deferred, the compatibility profile
+remains provisional and observation remains disabled. Sprint 28 awaits a
+Founder decision; its implementation has not begun. Production deployment and
+runtime persistence remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

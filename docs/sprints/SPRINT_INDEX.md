@@ -37,8 +37,8 @@ implementation stages and do not use fractional Sprint numbering.
 | 24 | Adaptive Coaching, Planner and Progression | Complete, certified and Founder-accepted; Migration 014 undeployed and inactive | None | [Proposal](SPRINT_24_PROPOSAL.md), [Plan](SPRINT_24_PLAN.md), [Implementation](SPRINT_24_IMPLEMENTATION.md), [Certification](SPRINT_24_CERTIFICATION.md), [Closure](SPRINT_24_CLOSURE.md), [ADR-042](../Decisions.md) |
 | 25 | Conversational Oracle | Complete, certified and Founder-accepted | None | [Plan](SPRINT_25_PLAN.md), [Implementation](SPRINT_25_IMPLEMENTATION.md), [Certification](SPRINT_25_CERTIFICATION.md), [Closure](SPRINT_25_CLOSURE.md), [ADR-043](../Decisions.md) |
 | 26 | Authoritative Companion Guidance Delivery | Complete, certified and Founder-accepted | None | [Plan](SPRINT_26_PLAN.md), [Implementation](SPRINT_26_IMPLEMENTATION.md), [Certification](SPRINT_26_CERTIFICATION.md), [Closure](SPRINT_26_CLOSURE.md), [Decision package](SPRINT_26_FOUNDER_DECISION_REQUIRED.md) |
-| 27 | Contextual Companion and Reference Integration | Operational Certification Deferred — Required Test Environment Unavailable; source complete; source/synthetic certification passed; Founder acceptance pending; live profile provisional and observation disabled | None | [Plan](SPRINT_27_PLAN.md), [Implementation](SPRINT_27_IMPLEMENTATION.md), [Certification](SPRINT_27_CERTIFICATION.md), [Founder acceptance package](SPRINT_27_FOUNDER_ACCEPTANCE_REQUIRED.md), [ADRs 044–045](../Decisions.md) |
-| 28 | Unified Oracle Product Experience | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
+| 27 | Contextual Companion and Reference Integration | Complete — Founder-accepted and closed; source/synthetic certification accepted; Operational Certification Deferred; live profile provisional and observation disabled | None | [Plan](SPRINT_27_PLAN.md), [Implementation](SPRINT_27_IMPLEMENTATION.md), [Certification](SPRINT_27_CERTIFICATION.md), [Closure](SPRINT_27_CLOSURE.md), [Founder acceptance package](SPRINT_27_FOUNDER_ACCEPTANCE_REQUIRED.md), [ADRs 044–045](../Decisions.md) |
+| 28 | Unified Oracle Product Experience | Founder decision package prepared; implementation not started | None | [Decision package](SPRINT_28_FOUNDER_DECISION_REQUIRED.md), [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 29 | Secure Desktop Operations and Distribution | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 30 | Production Qualification | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 31 | Oracle Beta Certification | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
@@ -69,5 +69,7 @@ Option A, Minecraft: Java Edition `26.1.1`, ADR-044 and ADR-045 are approved.
 Its bounded source implementation and synthetic certification are complete.
 Operational certification is formally deferred because the required
 third-party environment is unavailable. The exact live observation profile
-remains provisional, observation remains disabled and Founder acceptance is
-pending.
+remains provisional and observation remains disabled. Sprint 27 is
+Founder-accepted and closed; its operational certification remains deferred
+without creating a support, activation or deployment claim. Sprint 28 has not
+begun and awaits an independent Founder decision.

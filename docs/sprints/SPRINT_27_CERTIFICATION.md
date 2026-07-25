@@ -1,7 +1,8 @@
 # SPRINT 27 CERTIFICATION
 
 **Status:** Operational Certification Deferred — Required Test Environment
-Unavailable; source and synthetic certification passed
+Unavailable; source and synthetic certification passed and Founder-accepted;
+Sprint closed; live observation untested and disabled
 **Date:** 25 July 2026
 **Environment:** Windows development workstation
 **Production affected:** No
@@ -45,8 +46,9 @@ unavailable and will not be purchased solely for certification. Deferral does
 not alter ADR-045: the certificate remains `provisionally-certified`,
 observation remains disabled, and no operational-support claim is permitted.
 
-**Founder acceptance status:** Not yet accepted or closed. The revised Founder
-Acceptance Package is pending review.
+**Founder acceptance status:** Accepted and closed on 25 July 2026. This does
+not alter the deferred operational certificate: it remains provisional and
+observation remains disabled.
 
 # Commands
 

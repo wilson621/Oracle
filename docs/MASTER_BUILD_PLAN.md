@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 3.8
+**Version:** 3.9
 
 ---
 
@@ -124,8 +124,11 @@ Founder-accepted using Guidance v1 and Desktop Platform API v1. Sprint 27
 Option A, ADR-044 and ADR-045 are approved; its bounded Minecraft Java
 `26.1.1` source implementation and synthetic certification are complete. Live
 observation is provisional and disabled under Operational Certification
-Deferred — Required Test Environment Unavailable. Founder acceptance is
-pending; deployment and activation remain unauthorised.
+Deferred — Required Test Environment Unavailable. Sprint 27 is
+Founder-accepted and closed while its compatibility profile remains
+provisional and observation remains disabled. The Sprint 28 Founder Decision
+Package is prepared; implementation has not begun. Deployment and activation
+remain unauthorised.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own
