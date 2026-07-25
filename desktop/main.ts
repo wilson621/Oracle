@@ -16,13 +16,51 @@ import {
   startOracleDesktopPlatform,
   stopOracleDesktopPlatform,
 } from "./platform/desktop-composition-root.js";
+import {
+  ORACLE_DESKTOP_RELEASE_CHANNELS,
+} from "./release/desktop-release-contract.js";
+import {
+  OracleDesktopUpdateCoordinator,
+} from "./release/desktop-update-coordinator.js";
+import {
+  OraclePackagedNextServer,
+} from "./runtime/packaged-next-server.js";
 
 const DEFAULT_COMPANION_URL =
   "http://localhost:3000/companion";
 
+app.enableSandbox();
+
 let hostWindowController:
   | CompanionHostWindowController
   | null = null;
+let companionUrl =
+  DEFAULT_COMPANION_URL;
+
+const packagedNextServer =
+  new OraclePackagedNextServer();
+
+const desktopUpdateCoordinator =
+  new OracleDesktopUpdateCoordinator({
+    currentVersion: app.getVersion(),
+    manifestProvider: null,
+    replacementBoundary: {
+      invalidateObservation: () => {
+        hostWindowController
+          ?.invalidateObservationForReplacement();
+      },
+      detachCompanion: () => {
+        hostWindowController
+          ?.detachForReplacement();
+      },
+      stopRuntime: () => {
+        hostWindowController?.close();
+        hostWindowController = null;
+        packagedNextServer.stop();
+        stopOracleDesktopPlatform();
+      },
+    },
+  });
 
 const hasSingleInstanceLock =
   app.requestSingleInstanceLock();
@@ -37,6 +75,9 @@ if (!hasSingleInstanceLock) {
   app
     .whenReady()
     .then(async () => {
+      companionUrl =
+        await resolveCompanionUrl();
+
       const health = startOracleDesktopPlatform();
       if (health.status === "failed") {
         throw new Error(
@@ -45,6 +86,7 @@ if (!hasSingleInstanceLock) {
       }
 
       registerIpcHandlers();
+      registerReleaseIpcHandlers();
       registerRecoveryShortcut();
 
       hostWindowController =
@@ -89,9 +131,11 @@ app.on("window-all-closed", () => {
 
 app.on("before-quit", () => {
   removeIpcHandlers();
+  removeReleaseIpcHandlers();
 
   hostWindowController?.close();
   hostWindowController = null;
+  packagedNextServer.stop();
   stopOracleDesktopPlatform();
 });
 
@@ -103,14 +147,26 @@ app.on("will-quit", () => {
 
 function createHostWindowController(): CompanionHostWindowController {
   return new CompanionHostWindowController({
-    companionUrl:
-      process.env.ORACLE_COMPANION_URL ??
-      DEFAULT_COMPANION_URL,
+    companionUrl,
     gameIntegrationRegistry:
       getOracleDesktopGameIntegrationRegistry(),
     guidanceService:
       getOracleDesktopGuidanceProviderService(),
   });
+}
+
+async function resolveCompanionUrl():
+  Promise<string> {
+  if (app.isPackaged) {
+    return await packagedNextServer.start(
+      process.resourcesPath
+    );
+  }
+
+  return (
+    process.env.ORACLE_COMPANION_URL ??
+    DEFAULT_COMPANION_URL
+  );
 }
 
 function registerRecoveryShortcut(): void {
@@ -334,6 +390,49 @@ function removeIpcHandlers(): void {
   );
 }
 
+function registerReleaseIpcHandlers(): void {
+  removeReleaseIpcHandlers();
+
+  ipcMain.handle(
+    ORACLE_DESKTOP_RELEASE_CHANNELS
+      .getState,
+    (event) => {
+      requireAuthorizedController(event);
+      return desktopUpdateCoordinator
+        .getState();
+    }
+  );
+
+  ipcMain.handle(
+    ORACLE_DESKTOP_RELEASE_CHANNELS.check,
+    async (event) => {
+      const controller =
+        requireAuthorizedController(event);
+      const state =
+        await desktopUpdateCoordinator
+          .checkForUpdates();
+      controller
+        .getWindow()
+        ?.webContents.send(
+          ORACLE_DESKTOP_RELEASE_CHANNELS
+            .stateChanged,
+          state
+        );
+      return state;
+    }
+  );
+}
+
+function removeReleaseIpcHandlers(): void {
+  ipcMain.removeHandler(
+    ORACLE_DESKTOP_RELEASE_CHANNELS
+      .getState
+  );
+  ipcMain.removeHandler(
+    ORACLE_DESKTOP_RELEASE_CHANNELS.check
+  );
+}
+
 function requireAuthorizedController(
   event: IpcMainInvokeEvent
 ): CompanionHostWindowController {
@@ -346,6 +445,9 @@ function requireAuthorizedController(
   if (
     !hostWindowController.ownsWebContentsId(
       event.sender.id
+    ) ||
+    !hostWindowController.ownsFrameUrl(
+      event.senderFrame?.url ?? ""
     )
   ) {
     throw new Error(

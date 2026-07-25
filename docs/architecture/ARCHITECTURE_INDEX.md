@@ -9,7 +9,7 @@
 **Supersedes:** Earlier Architecture Index versions
 **Superseded By:** None
 **Last Reviewed:** 25 July 2026
-**Version:** 6.5
+**Version:** 6.6
 
 ---
 
@@ -909,6 +909,27 @@ Accepted integration debt
 - manual curated-source freshness governance
 - production exercise of ready and partial-success Companion presentation paths
 - measured legacy web Application boundary exceptions
+
+## Desktop Distribution Contract
+
+ADR-046 establishes:
+
+- Windows MSIX package deployment as install, replace, repair and remove
+  authority;
+- one immutable signed Release Manifest as the canonical distribution
+  contract;
+- mechanical package, helper, SBOM, provenance and rollback equality;
+- a separate instance-owned main-process update coordinator;
+- sandboxed, origin-bound and presentation-only renderers;
+- observation invalidation, Companion detach and runtime shutdown before
+  replacement;
+- fresh-process recovery;
+- isolated release channels and fail-closed eligibility; and
+- a permanent prohibition on treating local test signing as production trust,
+  release readiness, operational certification, distribution or deployment.
+
+Runtime composition remains independently governed by ADR-040 manifest
+`1.6.0`.
 
 ---
 

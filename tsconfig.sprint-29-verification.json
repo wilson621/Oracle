@@ -1,0 +1,29 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": [
+      "ES2022"
+    ],
+    "types": [
+      "node"
+    ],
+    "rootDir": ".",
+    "outDir": "./.tmp-sprint-29-verification",
+    "noEmit": false,
+    "isolatedModules": false,
+    "incremental": false,
+    "sourceMap": false
+  },
+  "include": [
+    "desktop/release/**/*.ts",
+    "scripts/verify-sprint-29-contracts.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist-electron"
+  ]
+}

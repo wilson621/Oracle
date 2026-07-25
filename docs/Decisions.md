@@ -8,8 +8,8 @@
 **Expected Stability:** Accepted records are immutable; new decisions or explicit superseding ADRs are appended
 **Supersedes:** Earlier ADR ledger versions as an index; individual accepted records retain their own status
 **Superseded By:** None
-**Last Reviewed:** 24 July 2026
-**Version:** 4.9
+**Last Reviewed:** 25 July 2026
+**Version:** 5.0
 
 ---
 
@@ -3096,6 +3096,167 @@ manifest 1.6.0 reconciliation and documentation only. It does not authorise
 production deployment, migrations, persistence, broad Minecraft support,
 multiplayer, APIs, mods, External Companion boundary changes or weakening
 ADR-031 through ADR-044.
+
+## Status
+
+Accepted — Founder-approved 25 July 2026.
+
+---
+
+# ADR-046
+
+## Title
+
+Desktop Distribution, Release Integrity and Update Authority
+
+## Decision
+
+Oracle's Windows Desktop distribution uses a governed MSIX package. Windows
+package deployment owns installation, package replacement, repair and removal.
+An instance-owned Desktop Update Coordinator in the Electron main process may
+check the configured release channel, validate release eligibility, coordinate
+safe Companion detach and runtime shutdown, and project immutable update state
+to the renderer. It cannot create or modify Oracle truth.
+
+The immutable, versioned and signed Oracle Release Manifest is the canonical
+distribution contract. It declares the exact package identity, publisher
+identity, release channel, version, architecture, artifact hashes, native-
+helper hashes, runtime composition-manifest version, rollback eligibility,
+provenance and SBOM references. Certification must mechanically verify that the
+constructed package and every declared artifact exactly match the manifest.
+Any divergence is a release failure.
+
+The Release Manifest and ADR-040 runtime composition manifest govern separate
+contracts. The Release Manifest answers exactly what Oracle distributes. The
+runtime composition manifest answers exactly what Oracle constructs. Neither
+may replace or weaken the other.
+
+Package, executable, native-helper and Release Manifest signatures are
+mandatory for an externally distributable release. Production signing
+credentials must be non-exportable, externally protected and unavailable to
+source code, artifacts, renderers, runtime Services and developer
+workstations. Release automation may receive only short-lived,
+least-privilege signing authority.
+
+Release channels are isolated and versioned. Unknown, missing, malformed,
+unsigned, altered, cross-channel, wrong-identity or unauthorised-version
+artifacts fail closed. Rollback is not a general downgrade capability. A
+rollback target must remain signed, explicitly authorised by the active
+channel contract and compatible with the current local-data schema.
+
+The packaged renderer remains presentation-only. It receives validated
+availability, progress, failure, limitation and recovery projections plus
+bounded check, consent, defer and restart controls. It receives no package
+path, release URL, signing material, filesystem authority, process object,
+installer handle or arbitrary execution capability.
+
+Release builds load only packaged immutable renderer content and allowlisted
+HTTPS Service endpoints. They must not depend on a separately started
+development server or execute remotely supplied renderer code. Renderer
+sandboxing, context isolation, disabled Node integration, navigation
+allowlisting and IPC sender validation are mandatory.
+
+Update and repair preserve the OS-protected encrypted refresh-token vault and
+required trusted-device metadata. Uninstall removes Oracle binaries, native
+helpers, update cache, transient diagnostics and the local encrypted
+credential vault. It does not delete the permanent Operator or authoritative
+server-owned data. Online device revocation uses the existing Trust & Control
+lifecycle; offline uninstall clears local credentials immediately without
+inventing remote revocation success.
+
+The following principle is permanent:
+
+> **Local test signing proves packaging and distribution mechanics only. It
+> must never be interpreted as production publisher trust, public release
+> readiness, operational certification, deployment authority or permission to
+> distribute Oracle externally.**
+
+Accordingly:
+
+- packaged does not mean published;
+- locally signed does not mean production trusted;
+- locally certified does not mean externally distributed; and
+- release mechanics proven does not mean production release authorised.
+
+These distinctions survive Sprint 29 closure and every future local
+certification.
+
+## Reason
+
+Installer and update mechanisms can replace executable software on an
+Operator's machine. Without a canonical signed contract and a single
+least-privilege authority, a compromised signing identity, mutable release
+feed, renderer-controlled updater, confused channel, substituted helper or
+destructive uninstall could bypass Oracle's established runtime boundaries.
+
+MSIX provides Windows package identity, signature enforcement and
+transactional package deployment. The additional Release Manifest prevents
+the packaging tool or hosting layout from becoming informal architecture and
+makes the intended artifact set mechanically auditable.
+
+## Alternatives Considered
+
+Microsoft Store-first MSIX was rejected as the initial Sprint 29 path because
+it would introduce publication, Partner Center and third-party review
+decisions beyond local implementation and certification.
+
+A direct Squirrel, WiX or NSIS installer with an application-managed updater
+was rejected as the default because it gives Oracle more privileged
+replacement, repair and rollback code and creates a larger custom update
+attack surface.
+
+A signed manual installer without updates was rejected because it does not
+satisfy secure maintenance, recovery or version-governance requirements.
+
+## Consequences
+
+- Windows package deployment is the sole install, replace, repair and remove
+  authority.
+- The Release Manifest becomes a permanent mechanically verified
+  distribution contract.
+- Release and runtime manifests remain independently mandatory.
+- Update coordination is main-process-only, instance-owned and
+  renderer-safe.
+- Safe detach and fresh runtime construction precede replacement or recovery.
+- `beta` and `stable` channels remain isolated; Sprint 29 exercises only
+  `beta`.
+- Test and production signing identities are structurally distinct.
+- Local certification cannot create a publication, trust, distribution or
+  deployment claim.
+- Production publisher identity, managed signing, hosting and rollout remain
+  separate Founder operational gates.
+
+## Reversibility
+
+Packaging tools and release hosting may change behind the Release Manifest and
+Windows package authority. A future Store channel may reuse the same MSIX
+model.
+
+Package identity and publisher identity become difficult to change after
+external distribution because Windows uses them for trust and update
+continuity. Sprint 29 therefore uses an explicitly non-production test
+identity and grants no authority to establish or publish the production
+identity.
+
+Weakening the Release Manifest, mechanical equality, renderer isolation,
+channel separation, production-key protection or permanent local-signing
+distinction requires a superseding Founder-approved ADR.
+
+## Authority Boundary
+
+This ADR authorises Sprint 29 planning, source implementation, project-local
+packaging dependencies, isolated self-signed test identities, local Windows
+packaging, local install/update/repair/rollback/uninstall tests, SBOM and
+provenance generation, clean-machine local certification and documentation.
+
+It does not authorise production publisher registration, certificate purchase,
+production signing credentials, managed signing enrolment, release hosting,
+Store submission, external distribution, publication, deployment, remote
+push, database migrations, runtime persistence, persisted producers or
+consumers, Gate C, Minecraft certificate promotion or observation activation,
+retention, AI/renderer/updater authority over Oracle truth, Guidance v2,
+Desktop Platform API v2, External Companion boundary changes or weakening
+ADR-040 through ADR-045.
 
 ## Status
 

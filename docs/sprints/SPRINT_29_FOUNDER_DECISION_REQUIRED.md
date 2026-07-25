@@ -1,6 +1,6 @@
 # SPRINT 29 FOUNDER DECISION PACKAGE — SECURE DESKTOP OPERATIONS AND DISTRIBUTION
 
-**Status:** Founder decision required; implementation not started
+**Status:** Decision resolved — Founder approved Option A and ADR-046
 **Prepared:** 25 July 2026
 **Recommended option:** Option A — Windows-native governed MSIX distribution
 **ADR required:** ADR-046 — Desktop Distribution, Release Integrity and Update Authority
@@ -26,6 +26,17 @@ Approve or reject:
 
 This package does not request production deployment, publication, certificate
 purchase, signing-service enrolment or remote push authority.
+
+# Founder Decision
+
+The Founder approved Option A, ADR-046, Sprint 29 planning, implementation and
+local certification on 25 July 2026. The approval added the permanent rule
+that local test signing proves mechanics only and can never imply production
+publisher trust, public release readiness, operational certification,
+deployment authority or permission to distribute Oracle externally.
+
+The resulting implementation authority is recorded in
+[Sprint 29 Plan](SPRINT_29_PLAN.md).
 
 # Architectural Problem
 

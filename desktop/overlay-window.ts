@@ -316,7 +316,7 @@ export class CompanionHostWindowController {
 
         nodeIntegration: false,
         contextIsolation: true,
-        sandbox: false,
+        sandbox: true,
 
         webSecurity: true,
 
@@ -413,6 +413,26 @@ export class CompanionHostWindowController {
     );
   }
 
+  ownsFrameUrl(
+    frameUrl: string
+  ): boolean {
+    try {
+      const expected =
+        new URL(
+          this.options.companionUrl
+        );
+      const actual =
+        new URL(frameUrl);
+      return (
+        actual.origin ===
+          expected.origin &&
+        actual.pathname.startsWith("/")
+      );
+    } catch {
+      return false;
+    }
+  }
+
   getRecentDiagnostics(): readonly OracleDesktopDiagnostic[] {
     return this.diagnostics
       .getRecentDiagnostics();
@@ -507,6 +527,25 @@ export class CompanionHostWindowController {
       session,
       attachment.status === "attached" ? attachment.target : null
     );
+  }
+
+  invalidateObservationForReplacement():
+    void {
+    this.screenObservation.synchronise(
+      null,
+      null
+    );
+  }
+
+  detachForReplacement(): void {
+    if (
+      this.attachment.getState()
+        .status === "attached"
+    ) {
+      this.attachment.detach(
+        "Oracle Companion detached before governed package replacement."
+      );
+    }
   }
 
   showAndFocus(): void {
@@ -1185,6 +1224,56 @@ private restoreDevelopmentBounds(): void {
       );
 
     window.webContents.on(
+      "will-attach-webview",
+      (event) => {
+        event.preventDefault();
+      }
+    );
+
+    window.webContents.session
+      .setPermissionCheckHandler(
+        () => false
+      );
+    window.webContents.session
+      .setPermissionRequestHandler(
+        (
+          _webContents,
+          _permission,
+          callback
+        ) => {
+          callback(false);
+        }
+      );
+
+    if (app.isPackaged) {
+      const allowedRequestOrigins =
+        createPackagedRequestOrigins(
+          allowedOrigin
+        );
+      window.webContents.session
+        .webRequest
+        .onBeforeRequest(
+          {
+            urls: [
+              "http://*/*",
+              "https://*/*",
+              "ws://*/*",
+              "wss://*/*",
+            ],
+          },
+          (details, callback) => {
+            callback({
+              cancel:
+                !isAllowedRequestUrl(
+                  details.url,
+                  allowedRequestOrigins
+                ),
+            });
+          }
+        );
+    }
+
+    window.webContents.on(
       "will-navigate",
       (
         event,
@@ -1207,6 +1296,26 @@ private restoreDevelopmentBounds(): void {
           navigationOrigin !==
           allowedOrigin
         ) {
+          event.preventDefault();
+        }
+      }
+    );
+
+    window.webContents.on(
+      "will-redirect",
+      (
+        event,
+        navigationUrl
+      ) => {
+        try {
+          if (
+            new URL(navigationUrl)
+              .origin !==
+            allowedOrigin
+          ) {
+            event.preventDefault();
+          }
+        } catch {
           event.preventDefault();
         }
       }
@@ -1724,4 +1833,50 @@ function normaliseScaleFactor(
   return Number(
     scaleFactor.toFixed(3)
   );
+}
+
+function createPackagedRequestOrigins(
+  rendererOrigin: string
+): ReadonlySet<string> {
+  const origins =
+    new Set<string>([
+      rendererOrigin,
+    ]);
+  const configuredService =
+    process.env
+      .NEXT_PUBLIC_SUPABASE_URL;
+  if (configuredService) {
+    try {
+      const url =
+        new URL(
+          configuredService
+        );
+      if (url.protocol === "https:") {
+        origins.add(url.origin);
+        const websocket =
+          new URL(url.origin);
+        websocket.protocol = "wss:";
+        origins.add(
+          websocket.origin
+        );
+      }
+    } catch {
+      // Invalid optional configuration stays absent from the allowlist.
+    }
+  }
+  return origins;
+}
+
+function isAllowedRequestUrl(
+  requestUrl: string,
+  allowedOrigins:
+    ReadonlySet<string>
+): boolean {
+  try {
+    return allowedOrigins.has(
+      new URL(requestUrl).origin
+    );
+  } catch {
+    return false;
+  }
 }

@@ -762,9 +762,12 @@ remains provisional and observation remains disabled. Sprint 28 Option A is
 complete, locally certified, Founder-accepted and closed: every route was
 evaluated for truth and Operator value, one coherent Beta journey remains,
 unsupported production mocks were removed and Web/Electron verification
-passed. The Sprint 29 Founder Decision Package is prepared and implementation
-has not begun. Production deployment and runtime persistence remain
-unauthorised.
+passed. Sprint 29 Option A and ADR-046 are approved. Its MSIX source
+implementation, canonical signed Release Manifest equality and current-host
+Windows package lifecycle certification are complete. Founder acceptance is
+required. Clean-machine certification remains explicitly deferred because no
+disposable Windows environment is available. Production signing, publication,
+distribution, deployment and runtime persistence remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

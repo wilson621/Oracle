@@ -45,7 +45,10 @@ Environment Unavailable; live profile provisional and observation disabled
 Product Truth Inventory, canonical product shell, truthful inactive states,
 route consolidation, production mock removal and bounded Web/Electron
 walkthrough accepted
-**Sprint 29:** Founder Decision Package prepared; implementation not started
+**Sprint 29:** Source implementation and current-host Windows lifecycle
+certification complete under ADR-046; Founder acceptance required;
+clean-machine certification deferred because no disposable Windows environment
+is available
 
 ---
 
@@ -70,6 +73,33 @@ Update this file during every sprint closure audit.
 ---
 
 # Latest Verified Sprint Progress
+
+## Sprint 29 — Secure Desktop Operations and Distribution
+
+ADR-046 establishes MSIX as the Windows package authority and the signed
+immutable Release Manifest as the canonical distribution contract. The local
+package binds its standalone Next.js server only to an ephemeral loopback
+origin, enables Electron sandboxing, disables renderer Node integration,
+denies navigation, window, webview and permission escalation, and validates
+both WebContents and frame origin for IPC.
+
+The instance-owned update coordinator exposes only immutable local-test
+availability state and remains inactive because release hosting is not
+authorised. It invalidates observation, detaches the Companion and stops the
+runtime before replacement. Desktop Platform API v1 and Guidance v1 are
+unchanged.
+
+The Windows x64 candidate, both native helpers, SBOM and provenance
+mechanically equal the signed Release Manifest. Current-host install,
+invalid-signature rejection, update, packaged startup, repair, declared
+rollback, uninstall and temporary certificate cleanup pass. Exported private
+test-signing material is destroyed.
+
+Clean-machine certification remains explicitly deferred because this Windows
+Home workstation has no Windows Sandbox or disposable Windows VM. This is not
+production publisher trust, operational certification, release readiness,
+distribution or deployment. Manifest `1.6.0` remains exact because runtime
+composition did not change.
 
 ## Sprint 28 — Unified Oracle Product Experience
 

@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "date": "2026-07-25",
+  "environment": "current Windows host",
+  "cleanMachine": false,
+  "cleanMachineStatus": "deferred-required-windows-vm-or-sandbox-unavailable",
+  "steps": [
+    "isolated-test-trust",
+    "install",
+    "failed-update-recovery",
+    "update",
+    "packaged-startup",
+    "repair-reset",
+    "authorised-rollback",
+    "uninstall",
+    "cleanup"
+  ],
+  "packageRemaining": false,
+  "testCertificateRemaining": false,
+  "productionTrusted": false,
+  "published": false,
+  "externallyDistributed": false,
+  "deployed": false
+}

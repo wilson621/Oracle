@@ -8,8 +8,8 @@
 **Expected Stability:** Reviewed whenever accepted architecture or verified integration boundaries change
 **Supersedes:** Earlier current-architecture descriptions; historical baselines remain preserved
 **Superseded By:** None
-**Last Reviewed:** 24 July 2026
-**Version:** 5.7
+**Last Reviewed:** 25 July 2026
+**Version:** 5.8
 
 ---
 
@@ -1898,6 +1898,32 @@ boundary changes.
 ---
 
 # Closing Statement
+
+## Sprint 29 Distribution and Update Boundary
+
+ADR-046 establishes Windows MSIX package deployment as the authority for
+installation, replacement, repair and removal. The immutable signed Release
+Manifest is the canonical distribution contract and remains distinct from the
+ADR-040 runtime composition manifest. Certification mechanically compares
+package identity, publisher, versions, channel, architecture, payload and
+native-helper hashes, SBOM, provenance and rollback eligibility against that
+contract.
+
+The Electron main process owns only an instance-scoped transient update
+coordinator. Renderers receive bounded immutable status and cannot access
+package paths, release URLs, signing material, installer handles, filesystem
+authority, process objects or arbitrary execution. Observation invalidation,
+Companion detach and runtime shutdown precede replacement; recovery constructs
+a fresh process and runtime.
+
+Packaged content is immutable and served only from an instance-owned ephemeral
+loopback origin. Electron sandboxing, context isolation, disabled Node
+integration, origin-bound navigation, denied permissions and frame-aware IPC
+authorization are mandatory.
+
+Local test signing is permanently non-production. It proves packaging
+mechanics only and grants no publisher trust, public readiness, operational
+certification, distribution, deployment or release authority.
 
 ## Sprint 19 Account and Operator Identity Boundary
 

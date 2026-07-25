@@ -53,3 +53,9 @@ dist-electron/
 dist-native/
 desktop-native/**/bin/
 desktop-native/**/obj/
+
+# Sprint-local release construction and signing material
+/.tmp-sprint-29/
+
+# Sprint-local release construction and signing material
+/.tmp-sprint-29/

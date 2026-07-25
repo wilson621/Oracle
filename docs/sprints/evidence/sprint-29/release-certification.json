@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "date": "2026-07-25",
+  "packageIdentity": "Oracle.Platform.LocalCertification",
+  "publisher": "CN=Oracle Local Test Signing - NOT PRODUCTION",
+  "packageVersion": "0.1.0.0",
+  "runtimeCompositionManifestVersion": "1.6.0",
+  "candidateSha256": "cf8b71dc83d5b51410a385b8be92bf9e1368d02d1170ef1694308a68157313a3",
+  "certificateThumbprint": "6850342CDD851B97F35FD90F93E4B7AEF51DB1D2",
+  "certificateNotAfter": "2026-07-27T20:36:12.0000000Z",
+  "releaseManifest": "mechanically-equal",
+  "releaseManifestSignature": "cryptographically-valid-detached-cms",
+  "sbom": "cyclonedx-1.6-verified",
+  "provenance": "slsa-shaped-verified",
+  "privateSigningMaterial": "destroyed",
+  "productionDependencyVulnerabilities": 0,
+  "developmentToolingHighAdvisories": 9,
+  "productionTrusted": false,
+  "published": false,
+  "externallyDistributed": false,
+  "deployed": false,
+  "limitation": "Local test signing proves packaging and distribution mechanics only. It must never be interpreted as production publisher trust, public release readiness, operational certification, deployment authority or permission to distribute Oracle externally."
+}

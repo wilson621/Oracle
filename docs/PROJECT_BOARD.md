@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 25 July 2026
-**Version:** 7.4
+**Version:** 7.5
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -87,11 +87,17 @@ Gate C activity occurred.
 
 ## Active Founder Review
 
-The Sprint 29 Founder Decision Package recommends Option A — Windows-native
-governed MSIX distribution and ADR-046 — Desktop Distribution, Release
-Integrity and Update Authority. Sprint 29 implementation has not begun.
-Production publisher identity, managed signing, hosting, distribution,
-deployment and remote push remain separately gated.
+Sprint 29 Option A and ADR-046 are Founder-approved. Source implementation,
+signed Release Manifest verification and current-host Windows lifecycle
+certification are complete. Install, tampered-update rejection, update,
+packaged startup, repair, declared rollback, uninstall and cleanup passed.
+
+The Sprint 29 Founder Acceptance Package recommends engineering closure while
+recording **Clean-Machine Certification Deferred — Required Disposable
+Windows Environment Unavailable**. Windows Home provides no Windows Sandbox
+and no disposable Windows VM is configured. No clean-machine, production
+trust, publication, distribution, deployment or operational-readiness claim is
+made.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -117,6 +123,10 @@ Sprint 19 evidence is recorded in
 decision implementation and current certification boundary in
 `docs/sprints/SPRINT_19_FOUNDER_DECISIONS_IMPLEMENTATION.md` and
 `docs/sprints/SPRINT_19_CERTIFICATION.md`.
+Sprint 29 evidence is recorded in
+`docs/sprints/SPRINT_29_IMPLEMENTATION.md`,
+`docs/sprints/SPRINT_29_CERTIFICATION.md` and
+`docs/sprints/evidence/sprint-29/`.
 
 # Latest Closed Sprint
 

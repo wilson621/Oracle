@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 25 July 2026
-**Version:** 4.1
+**Version:** 4.2
 
 ---
 
@@ -129,9 +129,13 @@ Founder-accepted and closed while its compatibility profile remains
 provisional and observation remains disabled. Sprint 28 Option A is complete,
 locally certified, Founder-accepted and closed. Its Product Truth Inventory,
 canonical eight-destination journey, mock removal, route convergence and
-Web/Electron walkthrough establish the truthful product baseline. The Sprint
-29 Founder Decision Package is prepared; implementation has not begun.
-Deployment and activation remain unauthorised.
+Web/Electron walkthrough establish the truthful product baseline. Sprint 29
+Option A and ADR-046 are approved. Its governed MSIX implementation, signed
+Release Manifest equality and current-host install/update/repair/rollback/
+uninstall certification are complete. Founder acceptance is required.
+Clean-machine certification is deferred because no disposable Windows
+environment is available. Production signing, publication, distribution,
+deployment and activation remain unauthorised.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

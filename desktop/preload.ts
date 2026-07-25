@@ -24,6 +24,11 @@ import {
 import {
   isOracleCompanionScreenObservationState,
 } from "./companion/companion-screen-observation-contract.js";
+import {
+  ORACLE_DESKTOP_RELEASE_CHANNELS,
+  isOracleDesktopReleaseState,
+  type OracleDesktopReleaseBridge,
+} from "./release/desktop-release-contract.js";
 
 const oracleDesktopBridge: OracleDesktopBridge = {
   getHostState: () =>
@@ -233,8 +238,55 @@ const oracleDesktopBridge: OracleDesktopBridge = {
           handler
         );
       };
-    },
+  },
 };
+
+const oracleDesktopReleaseBridge:
+  OracleDesktopReleaseBridge = {
+    getState: async () => {
+      return requireDesktopReleaseState(
+        await ipcRenderer.invoke(
+          ORACLE_DESKTOP_RELEASE_CHANNELS
+            .getState
+        )
+      );
+    },
+    checkForUpdates: async () => {
+      return requireDesktopReleaseState(
+        await ipcRenderer.invoke(
+          ORACLE_DESKTOP_RELEASE_CHANNELS
+            .check
+        )
+      );
+    },
+    onStateChanged: (listener) => {
+      let subscribed = true;
+      const handler = (
+        _event: IpcRendererEvent,
+        value: unknown
+      ) => {
+        if (
+          subscribed &&
+          isOracleDesktopReleaseState(value)
+        ) {
+          listener(value);
+        }
+      };
+      ipcRenderer.on(
+        ORACLE_DESKTOP_RELEASE_CHANNELS
+          .stateChanged,
+        handler
+      );
+      return () => {
+        subscribed = false;
+        ipcRenderer.removeListener(
+          ORACLE_DESKTOP_RELEASE_CHANNELS
+            .stateChanged,
+          handler
+        );
+      };
+    },
+  };
 
 function requireCompanionPresentationState(
   value: unknown
@@ -274,7 +326,23 @@ function requireCompanionScreenObservationState(
   return value;
 }
 
+function requireDesktopReleaseState(
+  value: unknown
+) {
+  if (!isOracleDesktopReleaseState(value)) {
+    throw new Error(
+      "Oracle desktop host returned invalid release state."
+    );
+  }
+  return value;
+}
+
 contextBridge.exposeInMainWorld(
   "oracleDesktop",
   oracleDesktopBridge
+);
+
+contextBridge.exposeInMainWorld(
+  "oracleDesktopRelease",
+  oracleDesktopReleaseBridge
 );

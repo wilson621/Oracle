@@ -21,6 +21,8 @@ export default defineConfig([
     ".tmp-operator-intelligence-scale-verification/**",
     ".tmp-operator-intelligence-persistence-verification/**",
     ".tmp-postgres-sprint17/**",
+    ".tmp-sprint-29/**",
+    ".tmp-sprint-29-verification/**",
     ".tmp-tools/**",
   ]),
 ]);

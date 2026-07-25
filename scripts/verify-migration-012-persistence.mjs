@@ -374,7 +374,10 @@ async function verifyIdentityLifecycle() {
   );
   await execute(databaseUrl, `
     update public.operator_callsign_quarantine
-    set release_at = now() - interval '1 second'
+    set release_at = greatest(
+      quarantined_at + interval '1 microsecond',
+      now() - interval '1 second'
+    )
     where callsign_key = 'vanguard';
   `);
   changed = parseJsonResult(await query(databaseUrl, trustedSql(`
