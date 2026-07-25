@@ -268,7 +268,13 @@ delivery authorities have been reviewed.
 | Sprint 28 evidence | [Sprint 28 Evidence](sprints/evidence/sprint-28/README.md) | Accepted machine-readable and walkthrough evidence |
 | Sprint 28 Founder acceptance package | [Sprint 28 Founder Acceptance Required](sprints/SPRINT_28_FOUNDER_ACCEPTANCE_REQUIRED.md) | Decision resolved; recommendation accepted |
 | Sprint 28 closure | [Sprint 28 Closure](sprints/SPRINT_28_CLOSURE.md) | Founder-accepted and closed; limitations preserved |
-| Sprint 29 Founder Decision Package | [Sprint 29 Founder Decision Required](sprints/SPRINT_29_FOUNDER_DECISION_REQUIRED.md) | Independent review required; implementation not started |
+| Sprint 29 Founder Decision Package | [Sprint 29 Founder Decision Required](sprints/SPRINT_29_FOUNDER_DECISION_REQUIRED.md) | Resolved; Option A approved |
+| Sprint 29 plan | [Sprint 29 Plan](sprints/SPRINT_29_PLAN.md) | Complete, locally certified, Founder-accepted and closed |
+| Sprint 29 implementation | [Sprint 29 Implementation](sprints/SPRINT_29_IMPLEMENTATION.md) | Source implementation complete |
+| Sprint 29 certification | [Sprint 29 Certification](sprints/SPRINT_29_CERTIFICATION.md) | Current-host lifecycle passed; clean-machine certification deferred |
+| Sprint 29 Founder acceptance package | [Sprint 29 Founder Acceptance Required](sprints/SPRINT_29_FOUNDER_ACCEPTANCE_REQUIRED.md) | Decision resolved; recommendation accepted |
+| Sprint 29 closure | [Sprint 29 Closure](sprints/SPRINT_29_CLOSURE.md) | Founder-accepted and closed; clean-machine deferral preserved |
+| Sprint 30 Founder Decision Package | [Sprint 30 Founder Decision Required](sprints/SPRINT_30_FOUNDER_DECISION_REQUIRED.md) | Independent review required; implementation not started |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

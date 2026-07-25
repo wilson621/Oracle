@@ -130,12 +130,13 @@ provisional and observation remains disabled. Sprint 28 Option A is complete,
 locally certified, Founder-accepted and closed. Its Product Truth Inventory,
 canonical eight-destination journey, mock removal, route convergence and
 Web/Electron walkthrough establish the truthful product baseline. Sprint 29
-Option A and ADR-046 are approved. Its governed MSIX implementation, signed
-Release Manifest equality and current-host install/update/repair/rollback/
-uninstall certification are complete. Founder acceptance is required.
-Clean-machine certification is deferred because no disposable Windows
-environment is available. Production signing, publication, distribution,
-deployment and activation remain unauthorised.
+Option A is complete, locally certified, Founder-accepted and closed under
+ADR-046. Its governed MSIX implementation, signed Release Manifest equality
+and current-host install/update/repair/rollback/uninstall certification are
+accepted. Clean-Machine Certification Deferred — Required Disposable Windows
+Environment Unavailable remains the independent programme status. Sprint 30
+is not activated. Production signing, publication, distribution, deployment
+and activation remain unauthorised.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

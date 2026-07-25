@@ -45,10 +45,9 @@ Environment Unavailable; live profile provisional and observation disabled
 Product Truth Inventory, canonical product shell, truthful inactive states,
 route consolidation, production mock removal and bounded Web/Electron
 walkthrough accepted
-**Sprint 29:** Source implementation and current-host Windows lifecycle
-certification complete under ADR-046; Founder acceptance required;
-clean-machine certification deferred because no disposable Windows environment
-is available
+**Sprint 29:** Complete, locally certified, Founder-accepted and closed under
+ADR-046; Clean-Machine Certification Deferred — Required Disposable Windows
+Environment Unavailable remains the independent programme status
 
 ---
 

@@ -1,11 +1,15 @@
 # SPRINT 29 FOUNDER ACCEPTANCE PACKAGE
 
-**Status:** Founder review required
+**Status:** Founder-accepted on 25 July 2026; Sprint closed
 **Recommendation:** Accept and close Sprint 29 as an engineering and
 current-host distribution-mechanics Sprint; retain clean-machine certification
 as explicitly deferred
 **Prepared:** 25 July 2026
 **Deployment:** Not authorised
+
+**Decision:** Recommendation approved. Clean-Machine Certification Deferred
+remains the accepted independent programme status. See
+`SPRINT_29_CLOSURE.md`.
 
 ---
 

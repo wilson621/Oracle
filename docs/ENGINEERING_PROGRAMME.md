@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 29 Founder Acceptance Package
+**Next Review:** Sprint 30 Founder Decision Package
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -118,11 +118,12 @@ certification remains deferred, the profile remains provisional and
 observation remains disabled. Sprint 28 Option A is complete, locally
 certified, Founder-accepted and closed. Its Product Truth Inventory, canonical
 journey, Web/Electron verification and Founder Beta walkthrough establish the
-truthful product baseline. Sprint 29 Option A and ADR-046 are approved. Source
-implementation, signed Release Manifest equality and current-host Windows
-lifecycle certification are complete. Founder acceptance is required.
-Clean-machine certification is explicitly deferred because the Windows Home
-workstation has no Windows Sandbox or configured disposable Windows VM.
+truthful product baseline. Sprint 29 Option A is complete, locally certified,
+Founder-accepted and closed under ADR-046. Clean-Machine Certification
+Deferred — Required Disposable Windows Environment Unavailable remains the
+independent programme status because the Windows Home workstation has no
+Windows Sandbox or configured disposable Windows VM. Sprint 30 is not
+activated; its Founder Decision Package is ready for review.
 
 The ADR-040 composition manifest is a permanent runtime contract. Every future
 Sprint changing Services, Applications, Game Integrations, Guidance providers,
@@ -1234,16 +1235,18 @@ desktop operations and release-security ADR is expected.
 
 ### Current Status
 
-Option A and ADR-046 are Founder-approved. Implementation, artifact integrity
-and current-host Windows lifecycle certification are complete. The signed
+Option A is complete, locally certified, Founder-accepted and closed under
+ADR-046. Implementation, artifact integrity and current-host Windows lifecycle
+certification are complete. The signed
 Release Manifest mechanically matches package identity, native helpers, SBOM,
 provenance and runtime manifest `1.6.0`.
 
 The clean-machine portion of the Definition of Done remains untested because
-no disposable Windows Sandbox or VM is available. The Founder Acceptance
-Package recommends engineering closure with that independent certification
-explicitly deferred. No production publisher identity, hosting, publication,
-external distribution, deployment or Sprint 30 implementation is authorised.
+no disposable Windows Sandbox or VM is available. **Clean-Machine
+Certification Deferred — Required Disposable Windows Environment
+Unavailable** is the accepted independent programme status. No production
+publisher identity, hosting, publication, external distribution, deployment
+or Sprint 30 implementation is authorised.
 
 ## Sprint 30 — Production Qualification
 
@@ -1322,6 +1325,13 @@ and support and can independently assess whether the evidence is sufficient.
 
 Adds operational visibility and enforcement. No new major product architecture
 should be introduced.
+
+### Current Status
+
+Sprint 30 is not activated. Its Founder Decision Package recommends Option A —
+Governed Isolated Production Qualification and ADR-047 — Privacy-Safe
+Operational Diagnostics and Crash Reporting. No implementation, qualification
+runtime activation or Gate 7 activity has begun.
 
 # FOUNDER BETA READINESS REVIEW
 

@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 25 July 2026
-**Version:** 7.5
+**Version:** 7.6
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -87,17 +87,10 @@ Gate C activity occurred.
 
 ## Active Founder Review
 
-Sprint 29 Option A and ADR-046 are Founder-approved. Source implementation,
-signed Release Manifest verification and current-host Windows lifecycle
-certification are complete. Install, tampered-update rejection, update,
-packaged startup, repair, declared rollback, uninstall and cleanup passed.
-
-The Sprint 29 Founder Acceptance Package recommends engineering closure while
-recording **Clean-Machine Certification Deferred — Required Disposable
-Windows Environment Unavailable**. Windows Home provides no Windows Sandbox
-and no disposable Windows VM is configured. No clean-machine, production
-trust, publication, distribution, deployment or operational-readiness claim is
-made.
+Sprint 30 — Production Qualification is not activated. Its Founder Decision
+Package recommends Option A — Governed Isolated Production Qualification and
+ADR-047 — Privacy-Safe Operational Diagnostics and Crash Reporting. No Sprint
+30 implementation has begun.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -130,19 +123,30 @@ Sprint 29 evidence is recorded in
 
 # Latest Closed Sprint
 
-## Sprint 28 — Unified Oracle Product Experience
+## Sprint 29 — Secure Desktop Operations and Distribution
+
+**Status:** Complete, locally certified, Founder-accepted and closed
+**Closure report:** `docs/sprints/SPRINT_29_CLOSURE.md`
+**Deployment status:** Undeployed and inactive; no production signing,
+publication, distribution, migration or activation
+**Certification limitation:** Clean-Machine Certification Deferred — Required
+Disposable Windows Environment Unavailable
+
+Sprint 29 delivered ADR-046, Windows-native MSIX packaging, the canonical
+signed Release Manifest and accepted current-host install, update, repair,
+rollback and uninstall evidence. The independent clean-machine milestone
+remains unavailable and must not be represented as passed, production trusted
+or release ready.
+
+## Previous Closed Sprint — Sprint 28 — Unified Oracle Product Experience
 
 **Status:** Complete, locally certified, Founder-accepted and closed
 **Closure report:** `docs/sprints/SPRINT_28_CLOSURE.md`
 **Deployment status:** Undeployed and inactive; no migration or activation
-**Certification limitations:** No production operation, live end-to-end
-authenticated Supabase validation, runtime persistence, desktop distribution,
-Minecraft operational support or Loadout accuracy claim
 
 Sprint 28 delivered the governed Product Truth Inventory, one canonical
 eight-destination product journey, truthful inactive and deferred states,
-production mock removal and bounded Web/Electron certification. It establishes
-the truthful coherent product baseline for future development.
+production mock removal and bounded Web/Electron certification.
 
 ## Previous Closed Sprint — Sprint 27 — Contextual Companion and Reference Integration
 

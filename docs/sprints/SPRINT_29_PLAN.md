@@ -1,7 +1,7 @@
 # SPRINT 29 PLAN — SECURE DESKTOP OPERATIONS AND DISTRIBUTION
 
-**Status:** Founder-approved; implementation and local current-host
-certification complete; Founder acceptance required
+**Status:** Complete, locally certified, Founder-accepted and closed;
+clean-machine certification deferred
 **Approved option:** Option A — Windows-native governed MSIX distribution
 **ADR:** ADR-046
 **Migration:** None
