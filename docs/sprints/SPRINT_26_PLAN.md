@@ -1,6 +1,6 @@
 # SPRINT 26 PLAN — AUTHORITATIVE COMPANION GUIDANCE DELIVERY
 
-**Status:** Implemented and locally certified; Founder acceptance required
+**Status:** Complete, certified and Founder-accepted
 **Architecture:** ADR-031, ADR-032, ADR-040, ADR-041, ADR-042 and ADR-043
 **Deployment:** Not authorised
 

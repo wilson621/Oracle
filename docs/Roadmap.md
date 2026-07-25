@@ -616,8 +616,8 @@ Oracle becomes the Operator's gaming platform rather than a single-game assistan
 
 ## Live Companion Intelligence
 
-**Status:** COMPANION INTELLIGENCE FOUNDATION COMPLETE; AUTHORITATIVE LIVE
-DELIVERY DEFERRED
+**Status:** COMPANION INTELLIGENCE FOUNDATION AND AUTHORITATIVE TRANSIENT
+DELIVERY COMPLETE
 
 ---
 
@@ -749,10 +749,11 @@ Session reports, deterministic five-engine assessment, governed confidence,
 history, comparison and model degradation are source-complete. Sprint 24 is
 complete, certified and Founder-accepted under ADR-042; Migration 014 remains
 undeployed and inactive. Sprint 25 is complete, certified and Founder-accepted
-under ADR-043 with no migration or retention. Sprint 26 is Founder-approved,
-implemented and locally certified using the unchanged Guidance v1 and Desktop
-Platform API v1 boundaries; Founder acceptance is required before closure.
-Production deployment and runtime persistence remain unauthorised.
+under ADR-043 with no migration or retention. Sprint 26 is complete, certified
+and Founder-accepted using the unchanged Guidance v1 and Desktop Platform API
+v1 boundaries. Sprint 27 awaits Founder selection of the second Beta reference
+game and approval of observation and certification governance. Production
+deployment and runtime persistence remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 
@@ -860,19 +861,17 @@ Sprint 14 is complete. Final closure verified:
 - desktop and narrow-screen visual review without console errors
 - documentation closure, constitutional Fair Play rule, ADR-031 and ADR-032
 
-The Companion Intelligence Foundation is complete, but authoritative live
-runtime delivery is not. The production `/companion` route intentionally shows
-an unavailable state until a future composition boundary can project
-authoritative Session Context, execute the Provider Service and deliver
-immutable Application state safely. Architectural review placed the Operator
-Understanding Foundation ahead of that work. Authoritative live Guidance
-delivery has returned to the future queue and requires separate planning and
-approval. Sprint 16 is the completed Trust Boundary objective.
+At Sprint 14 closure, the Companion Intelligence Foundation was complete but
+authoritative runtime delivery remained deferred. Sprint 26 later completed
+that seam through a transient Desktop-owned coordinator, immutable Guidance v1
+Requests, explicitly injected Service execution and a restricted renderer-safe
+Application-state bridge. Sprint 16 remains the completed Trust Boundary
+objective.
 
-Deferred capabilities also include AI inference, ranking and personalisation,
-additional game packages, automated source-freshness governance, end-to-end
-live delivery tests, and Operator category, spoiler and request controls. Each
-must extend the completed framework without changing the External Companion
+AI Guidance, ranking and personalisation remain deferred. Sprint 26 completed
+source-freshness governance, end-to-end transient delivery and bounded category
+and spoiler controls. Additional Game Integrations must extend the completed
+framework without changing the External Companion
 Principle or the Platform → Services → Applications → Game Integrations
 ownership model.
 

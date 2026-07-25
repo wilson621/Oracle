@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 26 Founder acceptance
+**Next Review:** Sprint 27 Founder product, privacy and architecture decision
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -106,10 +106,11 @@ Migration 014 was required. Sprint 23 is complete, certified and
 Founder-accepted without a new migration. Sprint 24 is complete, certified and
 Founder-accepted under ADR-042. Migration 014 is undeployed and inactive.
 Sprint 25 is complete, certified and Founder-accepted under ADR-043. No
-Migration 015 or conversation retention was introduced. Sprint 26 is
-Founder-approved, implemented and locally certified through the existing
-Guidance v1 architecture without a new ADR. Founder acceptance is required
-before closure.
+Migration 015 or conversation retention was introduced. Sprint 26 is complete,
+certified and Founder-accepted through the existing Guidance v1 architecture
+without a new ADR. Sprint 27 requires Founder selection of the second Beta
+reference game and approval of observation-privacy and
+compatibility-certification architecture before implementation.
 
 The ADR-040 composition manifest is a permanent runtime contract. Every future
 Sprint changing Services, Applications, Game Integrations, Guidance providers,
@@ -954,14 +955,13 @@ Desktop Platform API v2 is prohibited unless an ADR demonstrates necessity.
 
 ### Implementation Status
 
-Implemented and locally certified. A transient Desktop-owned coordinator
+Complete, certified and Founder-accepted. A transient Desktop-owned coordinator
 projects immutable requests from authoritative Session Context, executes the
 injected deterministic Guidance Service, invalidates obsolete work and exposes
 only validated immutable Application state plus bounded controls to the
 restricted renderer. Manifest version 1.5.0 preserves exact Web/Electron
 runtime equality. No migration, retention, persistence activation, production
-change or Gate C change was introduced. Founder acceptance is required before
-closure.
+change or Gate C change was introduced.
 
 ## Sprint 27 — Contextual Companion and Reference Integration
 

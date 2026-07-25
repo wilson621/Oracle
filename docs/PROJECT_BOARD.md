@@ -61,14 +61,17 @@ Sprint 25 — Conversational Oracle is complete, certified and Founder-accepted
 under ADR-043. Conversation remains transient and non-authoritative. No
 Migration 015 was introduced.
 
-## Active Sprint
+Sprint 26 — Authoritative Companion Guidance Delivery is complete, certified
+and Founder-accepted. Guidance delivery remains transient, instance-scoped and
+non-authoritative. Manifest version 1.5.0 exactly matches Web and Electron.
 
-Sprint 26 — Authoritative Companion Guidance Delivery is Founder-approved and
-implemented under ADR-031/032/040/041/042/043. Local certification is complete
-and Founder acceptance is required before closure. Option A connects
-authoritative Desktop Session Context to existing Guidance v1 Service and
-Application boundaries through a transient Desktop-owned coordinator. No new
-ADR, migration, persistence or production activation is authorised.
+## Active Founder Review
+
+Sprint 27 — Contextual Companion and Reference Integration requires a Founder
+product, privacy and architecture decision. The decision package recommends
+Minecraft: Java Edition single-player as the bounded second Beta reference,
+ADR-044 for observation privacy and ephemerality, and ADR-045 for versioned
+Game Integration compatibility certification. Implementation has not started.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -348,10 +351,10 @@ approved production objective.
 Sprint 14 established the permanent, game-agnostic foundation for Oracle's
 external Companion to become the Operator's intelligent second screen.
 
-Authoritative live runtime delivery remains deferred. Sprint 15 architectural
-review placed the Operator Understanding Foundation ahead of that work. Live
-Guidance delivery has returned to the future queue and requires separate
-planning and approval. Sprint 16 is the completed Trust Boundary objective.
+Authoritative live runtime delivery was deferred at Sprint 14 closure. Sprint
+26 later implemented, certified and closed that delivery seam through the
+unchanged Guidance v1 architecture. Sprint 16 remains the completed Trust
+Boundary objective.
 
 ---
 
@@ -521,8 +524,8 @@ tagging remains part of a separately authorised release workflow.
 - Applications own immutable presentation state, Guidance Cards and
   Operator-safe diagnostics
 - `/companion` renders only Applications-owned models and maintains Service order
-- the production route honestly reports unavailable because authoritative live
-  runtime delivery is not yet connected
+- the production route honestly reported unavailable before Sprint 26
+  connected authoritative transient delivery
 - Platform Companion readiness and Desktop Session/Context ownership are
   connected by an explicit non-merging lifecycle contract
 
@@ -615,8 +618,9 @@ passed, as did the architecture audit, desktop TypeScript compilation,
 production build, lint and desktop/narrow-screen visual review. Lint completed
 with zero errors and five pre-existing warnings.
 
-The Companion Intelligence Foundation is complete. Sprint 15 architectural
-review subsequently approved the Operator Understanding Foundation as the next
-delivery objective. Authoritative live Guidance delivery remains unimplemented
-and separately deferred. See `docs/sprints/SPRINT_14_CLOSURE.md` for the formal
-Sprint 14 record.
+The Companion Intelligence Foundation was complete at Sprint 14 closure.
+Sprint 15 architectural review subsequently approved Operator Understanding
+as the next delivery objective. Sprint 26 later implemented and certified
+authoritative transient Guidance delivery. See
+`docs/sprints/SPRINT_14_CLOSURE.md` for the historical foundation record and
+`docs/sprints/SPRINT_26_CLOSURE.md` for the delivery resolution.

@@ -251,8 +251,10 @@ delivery authorities have been reviewed.
 | Sprint 26 decision package | [Sprint 26 Founder Decision Required](sprints/SPRINT_26_FOUNDER_DECISION_REQUIRED.md) | Resolved; Option A approved |
 | Sprint 26 authority | [Sprint 26 Plan](sprints/SPRINT_26_PLAN.md) | Founder-approved; implementation complete |
 | Sprint 26 implementation | [Sprint 26 Implementation](sprints/SPRINT_26_IMPLEMENTATION.md) | Source complete, transient and undeployed |
-| Sprint 26 certification | [Sprint 26 Certification](sprints/SPRINT_26_CERTIFICATION.md) | Locally certified; Founder acceptance required |
+| Sprint 26 certification | [Sprint 26 Certification](sprints/SPRINT_26_CERTIFICATION.md) | Locally certified and Founder-accepted |
 | Sprint 26 evidence | [Sprint 26 Evidence](sprints/evidence/sprint-26/README.md) | Machine-readable local certification |
+| Sprint 26 closure | [Sprint 26 Closure](sprints/SPRINT_26_CLOSURE.md) | Closed; permanent non-authoritative Guidance delivery directive recorded |
+| Sprint 27 decision package | [Sprint 27 Founder Decision Required](sprints/SPRINT_27_FOUNDER_DECISION_REQUIRED.md) | Founder game-selection, privacy and certification decision required |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

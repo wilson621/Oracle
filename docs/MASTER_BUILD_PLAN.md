@@ -119,9 +119,10 @@ persisted accumulation remains inactive. Sprint 23 is complete, certified and
 Founder-accepted without a new migration. Sprint 24 is complete, certified and
 Founder-accepted under ADR-042. Migration 014 is undeployed and inactive.
 Sprint 25 is complete, certified and Founder-accepted under ADR-043 with no
-Migration 015 or retention. Sprint 26 is Founder-approved, implemented and
-locally certified using Guidance v1 and Desktop Platform API v1. It remains
-transient and undeployed pending Founder acceptance.
+Migration 015 or retention. Sprint 26 is complete, certified and
+Founder-accepted using Guidance v1 and Desktop Platform API v1. Sprint 27
+requires Founder game-selection, observation-privacy and
+compatibility-certification decisions before implementation.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own
@@ -291,9 +292,9 @@ Context and Control Services
 Verification, Documentation and Closure
 ```
 
-Authoritative Companion Guidance delivery has returned to the future queue. It
-requires separate planning and approval. Sprint 16 is the completed Trust
-Boundary objective.
+Authoritative Companion Guidance delivery was deferred at this historical
+point. Sprint 26 later implemented, certified and closed that delivery seam.
+Sprint 16 remains the completed Trust Boundary objective.
 
 ## Earlier Closed Sprint — Sprint 14 Companion Intelligence Foundation
 
@@ -340,24 +341,22 @@ Formal Sprint 14 implementation commits:
 4. `b82bb49` — `feat(companion): add guidance application boundary`
 5. `3868975` — `feat(companion): add Companion application presentation`
 
-The Companion Intelligence Foundation is complete. Authoritative live runtime
-delivery remains deferred: the desktop composition root does not yet project
-authoritative Session Context into a Guidance Request, execute the Provider
-Service and deliver the resulting Application state to `/companion`. The
-production route therefore presents an honest unavailable state and fabricates
-no Session, Guidance or Operator data. Sprint 15 architectural review placed
-the Operator Understanding Foundation ahead of that future delivery work.
+At Sprint 14 closure, authoritative live runtime delivery remained deferred
+and the production route presented an honest unavailable state. Sprint 26
+later resolved that historical seam through a transient Desktop-owned
+coordinator and restricted renderer boundary without changing Guidance v1,
+Desktop Platform API v1 or Session authority.
 
 Known integration boundaries requiring deliberate review:
 
 - web pages do not consistently consume Services through Applications.
-- authoritative Companion Guidance delivery is not wired into the production
-  desktop composition root or renderer-safe delivery boundary.
+- authoritative Companion Guidance delivery was not wired at Sprint 14
+  closure; Sprint 26 has now resolved this item.
 - Platform Companion readiness and Desktop Session ownership are contractually
   composed but intentionally not merged.
-- curated source freshness remains a manual review responsibility.
-- ready and partial-success presentation paths are structurally verified but
-  do not yet receive production runtime data.
+- curated source freshness is now enforced by the Sprint 26 execution policy.
+- ready and partial-success presentation paths now receive validated runtime
+  Application state through the restricted desktop bridge.
 - Desktop Platform API version 1 is frozen through
   `desktop/platform/index.ts`; internal implementations remain private.
 

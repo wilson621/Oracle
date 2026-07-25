@@ -3,13 +3,13 @@
 **Authority:** Canonical Companion product and technical architecture beneath the Constitution and accepted ADRs
 **Scope:** External Companion product boundary, runtime model, guidance architecture and verified limits
 **Owner:** Oracle Companion Architecture
-**Status:** Sprint 14 Companion Intelligence Foundation complete
+**Status:** Sprint 26 authoritative transient Guidance delivery complete
 **Classification:** Living
 **Expected Stability:** Reviewed whenever Companion architecture or verified runtime integration changes
 **Supersedes:** Earlier Companion Architecture versions
 **Superseded By:** None
-**Last Reviewed:** 21 July 2026
-**Version:** 1.10
+**Last Reviewed:** 25 July 2026
+**Version:** 1.11
 
 ---
 
@@ -98,6 +98,21 @@ It must never:
 - Provide unfair competitive information
 
 Oracle Companion observes permitted desktop output and presents independent information through its own window.
+
+---
+
+# Guidance Delivery Authority
+
+Guidance delivery is permanently a coordination responsibility, not a
+knowledge authority.
+
+The Desktop Companion may coordinate transport of validated current Guidance
+from authoritative Services to presentation. It must never create, modify or
+supersede Oracle knowledge, Session state, Understanding, Missions,
+Progression or any other authoritative Oracle state.
+
+Delivery owns transient lifecycle, invalidation and renderer-safe projection.
+It does not own the truth being delivered.
 
 ---
 
@@ -1513,18 +1528,18 @@ not sort, filter, select, rank or personalise guidance. Loading, empty and
 unavailable states communicate their condition honestly without manufacturing
 Session Context, recommendations or Operator data.
 
-Until an authoritative runtime delivery boundary exists, the production route
-uses the Applications-owned unavailable-state factory. The screen states that
-Companion is not connected and explains that Oracle will not invent guidance.
-No sample Guidance is present in the production route.
+Sprint 26 connects the production desktop route to validated Application state
+through a restricted preload bridge. A narrow Client Component owns only
+subscription lifecycle and bounded category/spoiler controls. It receives no
+Service, Repository, controller, capture, native, process or Session authority.
+When the bridge is absent, the route continues to use the honest
+Applications-owned unavailable state and invents no Guidance.
 
-The presentation uses Server Components because this commit requires no local
-state, lifecycle effects or browser APIs. Native semantic elements provide the
-interaction required for progressive rationale and evidence disclosure. The
-page uses headings, labelled articles, definition lists, status regions,
-`aria-live`, `aria-busy`, descriptive source links and machine-readable time
-elements. Keyboard focus remains visible and information is never communicated
-by colour alone.
+Native semantic elements provide progressive rationale and evidence
+disclosure. The page uses headings, labelled articles, definition lists,
+status regions, `aria-live`, `aria-busy`, descriptive source links and
+machine-readable time elements. Keyboard focus remains visible and information
+is never communicated by colour alone.
 
 Scoped CSS Modules provide a calm, coaching-oriented dashboard that reuses the
 existing Oracle shell and adapts to narrow displays. The primary navigation now
@@ -1532,18 +1547,19 @@ links to `/companion`. Styling introduces no animation dependency and remains
 compatible with reduced-motion preferences.
 
 A focused verification gate protects the React ownership boundary. It rejects
-imports from non-Application Oracle layers, Client Component directives,
-Guidance Card sorting or filtering, missing application-state branches and
-omission of core explainability fields. Runtime delivery, desktop IPC, preload,
-Session lifecycle, provider execution and game-specific presentation remain
-outside this commit.
+imports from non-Application Oracle layers, Guidance Card sorting or filtering,
+missing application-state branches and omission of core explainability fields.
+Sprint 26 separately certifies desktop IPC, preload validation, transient
+delivery, Session Context projection, provider execution and stale-result
+invalidation.
 
 ---
 
 # Current Verified Implementation
 
-As of Sprint 14 closure, Oracle contains two established Companion lifecycle
-foundations and the completed Companion Intelligence Foundation:
+As of Sprint 26 closure, Oracle contains two established Companion lifecycle
+foundations, the completed Companion Intelligence Foundation and authoritative
+transient Guidance delivery:
 
 - `lib/companion` defines the Platform-level Companion Runtime, presentation
   state, extensions, capabilities and connector contracts.
@@ -1605,23 +1621,24 @@ networking or game-process interaction. It contributes knowledge through the
 shared Platform contracts and Services boundary and defines no integration-
 specific Companion architecture.
 
-The Companion Intelligence Foundation is complete. The production
-`/companion` route deliberately renders the Applications-owned unavailable
-state because authoritative live runtime delivery has not been connected. The
-desktop composition root does not yet project authoritative Session Context
-into a Guidance Request, invoke the Provider Service or deliver resulting
-Application state through a renderer-safe boundary. That delivery remains
-deferred to separately approved future work. Sprint 15 placed the Operator
-Understanding Foundation ahead of live Guidance delivery; its completed
-ownership, contract and persistence phases do not alter Companion architecture,
-personalise Guidance or activate Companion consumption.
+The Companion Intelligence Foundation and authoritative delivery seam are
+complete. The Desktop Companion owns a transient instance-scoped coordinator
+that projects immutable Guidance v1 Requests from attached Session Context,
+invokes the injected Provider Service and delivers validated immutable
+Application state through the restricted renderer bridge. Detach, Context
+replacement, renderer replacement and recovery invalidate obsolete Guidance;
+generation ownership rejects stale asynchronous results.
 
-Verified remaining debt includes manual curated-source freshness review,
-structurally verified but not production-fed ready and partial-success states,
-measured legacy web Application-boundary exceptions and authoritative live
-Guidance delivery. ADR-040 now provides target-specific Platform composition
-roots and an explicit non-merging contract between Platform Companion
-readiness and Desktop Companion Session ownership.
+Source freshness is enforced by policy. Ready, empty, partial-success,
+unavailable and loading paths are production-wired and certified. Guidance
+v1 and Desktop Platform API v1 remain unchanged. ADR-040 manifest version 1.5.0
+exactly represents Web and Electron runtimes, while Platform Companion
+readiness and Desktop Companion Session ownership remain explicitly
+non-merging.
+
+Verified remaining debt includes measured legacy web Application-boundary
+exceptions and the not-yet-approved Sprint 27 screen-observation,
+compatibility-certification and second-Game-Integration work.
 
 ---
 

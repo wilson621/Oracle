@@ -1,7 +1,7 @@
 # SPRINT 26 LOCAL CERTIFICATION
 
 **Sprint:** 26 — Authoritative Companion Guidance Delivery
-**Status:** Certified locally; Founder acceptance required
+**Status:** Certified and Founder-accepted
 **Date:** 25 July 2026
 **Deployment:** Not authorised and not performed
 
@@ -51,7 +51,7 @@ persistence query path, assumption or performance characteristic.
 
 ## Conclusion
 
-Sprint 26 is implemented and locally certified within its Founder authority.
+Sprint 26 is implemented, certified and Founder-accepted within its authority.
 Guidance v1 and Desktop Platform API v1 remain unchanged. No deployment,
 migration, persistence, retention, Gate C, AI Guidance, Session mutation,
 renderer privilege expansion or External Companion trust-boundary change

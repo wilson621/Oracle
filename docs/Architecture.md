@@ -1409,8 +1409,9 @@ diagnostics. Services do not rank, personalise or make coaching decisions.
 Applications project validated Service results into stable Guidance Card view
 models and Operator-safe diagnostics. React renders only those Application
 models, preserves their order and explicitly represents loading, ready, empty,
-partial-success and unavailable states. The production route currently uses an
-honest Applications-owned unavailable state and invents no data.
+partial-success and unavailable states. When the restricted desktop bridge is
+absent, the route uses an honest Applications-owned unavailable state and
+invents no data.
 
 The Call of Duty integration contributes the first curated, source-attributed
 package. Its game knowledge remains isolated in Game Integrations; it introduces
@@ -1424,12 +1425,12 @@ external: no injection, game-memory access or modification, hooks, automation,
 input simulation or anti-cheat interaction is permitted. The Constitution is
 the permanent authority; ADR-032 records why Guidance uses this architecture.
 
-Authoritative live runtime delivery remains deliberately deferred. Sprint 15
-architectural review placed the Operator Understanding Foundation ahead of
-that work. The desktop composition root does not yet create Guidance Requests
-from authoritative Session Context, invoke the Provider Service or deliver
-resulting Application state through a renderer-safe boundary. Live Guidance
-delivery requires a separate future plan and approval.
+Sprint 26 subsequently completed authoritative transient runtime delivery. The
+Desktop Companion owns the instance-scoped coordinator, projects immutable
+Guidance v1 Requests from authoritative Session Context, invokes explicitly
+injected providers and delivers validated immutable Application state through
+the restricted renderer bridge. It gains no knowledge or Session authority.
+Guidance v1 and Desktop Platform API v1 remain unchanged.
 
 # Sprint 15 Phase 1 Operator Ownership Foundation
 

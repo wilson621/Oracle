@@ -573,11 +573,11 @@ Must Never
 - inject into games, inspect or modify game memory, hook game functions,
   automate gameplay or input, or interact with anti-cheat systems
 
-The foundation is complete as of Sprint 14. Authoritative live runtime delivery
-from desktop Session Context to `/companion` remains deferred and is not part
-of the verified Sprint 14 implementation. Sprint 15 now establishes the
-Operator Understanding Foundation; live Guidance delivery requires separate
-future planning and approval.
+The foundation was complete as of Sprint 14. Sprint 26 subsequently completed
+authoritative transient runtime delivery from desktop Session Context to
+`/companion` through the unchanged Guidance v1 and Desktop Platform API v1
+boundaries. The delivery coordinator remains Desktop-owned, instance-scoped
+and non-authoritative.
 
 ---
 
@@ -822,7 +822,7 @@ Canonical Web and Electron manifest version 1.4.0 adds Conversation Service and
 mechanically equals both constructed runtimes. No Migration 015, conversation
 retention, persisted consumer activation or production change exists.
 
-Sprint 26 is implemented and locally certified. The Desktop Companion owns the
+Sprint 26 is complete, certified and Founder-accepted. The Desktop Companion owns the
 transient Guidance delivery coordinator and projects immutable Guidance v1
 Requests from authoritative attached Session Context. Explicitly injected
 deterministic providers remain the Guidance source. Detach, Context change,

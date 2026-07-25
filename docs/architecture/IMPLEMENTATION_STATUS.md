@@ -36,8 +36,8 @@ authoritative Mission, Planner and Progression source complete; Migration 014
 undeployed and inactive
 **Sprint 25:** Complete, certified and Founder-accepted under ADR-043;
 transient grounded Conversation complete; no migration or retention
-**Sprint 26:** Implemented and locally certified; transient Desktop-owned
-Guidance delivery complete; Founder acceptance required
+**Sprint 26:** Complete, certified and Founder-accepted; transient Desktop-owned
+Guidance delivery complete
 
 ---
 
@@ -79,8 +79,7 @@ authority. Offline curated Guidance remains available and provider failure
 degrades safely. Canonical Web and Electron manifest version 1.5.0 continues
 mechanical runtime equality. Guidance v1 and Desktop Platform API v1 remain
 unchanged. No migration, persistence, production activation or Gate C change
-exists. Sprint 26 is implemented and locally certified pending Founder
-acceptance.
+exists. Sprint 26 is complete, certified and Founder-accepted.
 
 ## Sprint 25 — Conversational Oracle
 
@@ -351,13 +350,12 @@ Application consumption or Sprint 17 implementation is active.
 
 ---
 
-# Latest Closed Sprint
+# Historical Closure Context
 
 ## Sprint 16 — Trust Boundary
 
-Sprint 16 is the latest closed production objective. Founder closure, commit
-and push are complete. Permanent deployment of Migration 009 remains a
-separate decision.
+Sprint 16 Founder closure, commit and push are complete. Migration 009 was
+subsequently deployed through its separately authorised production decision.
 
 # Earlier Closed Sprint
 
@@ -386,12 +384,12 @@ Implemented milestones:
 - focused Guidance, presentation, web, desktop, lint, architecture and visual
   closure verification
 
-The production `/companion` route uses the Applications-owned unavailable-state
-factory. It does not fabricate Session Context, Guidance, recommendations or
-Operator data. The desktop composition root does not yet project authoritative
-Session Context into a Guidance Request, execute the Provider Service and
-deliver the resulting Application state through a renderer-safe runtime
-boundary. That live delivery remains deferred under a separate future plan.
+At Sprint 14 closure, the production `/companion` route used the
+Applications-owned unavailable-state factory and authoritative delivery
+remained deferred. Sprint 26 later resolved that historical seam with a
+transient Desktop-owned coordinator and restricted renderer-safe
+Application-state boundary. It does not fabricate Session Context, Guidance,
+recommendations or Operator data.
 
 Sprint 15 is historical. Its Phase 1 ownership foundation, Phase 2 contract
 foundation and Phase 3 persistence foundation are verified and
