@@ -1,7 +1,7 @@
 # SPRINT 25 LOCAL CERTIFICATION
 
 **Sprint:** 25 — Conversational Oracle
-**Status:** Certified locally; Founder acceptance required
+**Status:** Certified locally and Founder-accepted
 **Date:** 25 July 2026
 **Deployment:** Not authorised and not performed
 

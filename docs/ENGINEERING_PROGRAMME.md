@@ -105,9 +105,10 @@ and inactive. Sprint 22 is complete, certified and Founder-accepted. No
 Migration 014 was required. Sprint 23 is complete, certified and
 Founder-accepted without a new migration. Sprint 24 is complete, certified and
 Founder-accepted under ADR-042. Migration 014 is undeployed and inactive.
-Sprint 25 is implemented and locally certified under Founder-approved ADR-043.
-No Migration 015 or conversation retention was introduced; Founder acceptance
-is required before closure.
+Sprint 25 is complete, certified and Founder-accepted under ADR-043. No
+Migration 015 or conversation retention was introduced. Sprint 26 requires a
+Founder activation decision; Option A proposes the existing Guidance v1
+architecture without a new ADR.
 
 The ADR-040 composition manifest is a permanent runtime contract. Every future
 Sprint changing Services, Applications, Game Integrations, Guidance providers,

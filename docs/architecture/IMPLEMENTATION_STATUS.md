@@ -8,7 +8,7 @@
 **Expected Stability:** Updated when verified implementation or accepted technical debt changes
 **Supersedes:** Earlier active implementation-status records
 **Superseded By:** None
-**Last Reviewed:** 24 July 2026
+**Last Reviewed:** 25 July 2026
 **Verified Branch:** `sprint-9-overlay`
 **Verified Repository Baseline:** `sprint-18-complete`
 **Sprint 14 Implementation Baseline:** `3868975`
@@ -73,7 +73,7 @@ scope and limitations. Prompt injection, conversational mutation, stale
 evidence and cross-Operator access fail safely. No transcript, prompt or
 provider response is retained. Manifest version 1.4.0 declares Conversation
 Service exactly in Web and Electron. No Migration 015 was created and runtime
-persistence remains disabled.
+persistence remains disabled. Sprint 25 is Founder-accepted and closed.
 
 ## Sprint 24 — Adaptive Coaching, Planner and Progression
 

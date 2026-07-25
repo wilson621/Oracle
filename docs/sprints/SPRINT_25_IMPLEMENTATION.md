@@ -1,7 +1,7 @@
 # SPRINT 25 IMPLEMENTATION EVIDENCE
 
 **Sprint:** 25 — Conversational Oracle
-**Status:** Implemented and locally certified; Founder acceptance required
+**Status:** Implemented, certified and Founder-accepted
 **Date:** 25 July 2026
 **Deployment:** Not authorised and not performed
 

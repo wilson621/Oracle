@@ -8,8 +8,8 @@
 **Expected Stability:** Updated whenever approved work changes state
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
-**Last Reviewed:** 24 July 2026
-**Version:** 6.8
+**Last Reviewed:** 25 July 2026
+**Version:** 6.9
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -57,14 +57,17 @@ Sprint 24 — Adaptive Coaching, Planner and Progression is complete, certified
 and Founder-accepted under ADR-042. Migration 014 remains certified, undeployed
 and inactive.
 
-## Active Sprint
+Sprint 25 — Conversational Oracle is complete, certified and Founder-accepted
+under ADR-043. Conversation remains transient and non-authoritative. No
+Migration 015 was introduced.
 
-Sprint 25 — Conversational Oracle is Founder-approved and active under
-ADR-043. Implementation and local certification are complete; Founder
-acceptance is required before closure. Work remains limited to transient
-grounded conversation, local verification, certification, manifest
-reconciliation and documentation. No migration, deployment, retention or
-runtime-persistence activation is authorised.
+## Active Founder Review
+
+Sprint 26 requires a Founder activation decision. Option A in
+`docs/sprints/SPRINT_26_FOUNDER_DECISION_REQUIRED.md` proposes a Desktop-owned
+transient Guidance delivery coordinator using the existing Guidance v1,
+Desktop Platform API v1 and ADR-031/032/040/041 boundaries. No new ADR is
+recommended and implementation has not started.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -93,7 +96,16 @@ decision implementation and current certification boundary in
 
 # Latest Closed Sprint
 
-## Sprint 24 — Adaptive Coaching, Planner and Progression
+## Sprint 25 — Conversational Oracle
+
+**Status:** Complete, certified and Founder-accepted
+**Closure report:** `docs/sprints/SPRINT_25_CLOSURE.md`
+**Deployment status:** Undeployed and inactive; no Migration 015
+
+Sprint 25 delivered grounded transient Conversation without creating a new
+truth, mutation or retention authority.
+
+## Previous Closed Sprint — Sprint 24 — Adaptive Coaching, Planner and Progression
 
 **Status:** Complete, certified and Founder-accepted
 **Closure report:** `docs/sprints/SPRINT_24_CLOSURE.md`

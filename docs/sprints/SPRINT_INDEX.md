@@ -8,7 +8,7 @@
 **Expected Stability:** Updated at Sprint activation, closure or approved renumbering
 **Supersedes:** Informal Sprint numbering inferred from individual planning documents
 **Superseded By:** None
-**Last Reviewed:** 24 July 2026
+**Last Reviewed:** 25 July 2026
 
 ---
 
@@ -35,8 +35,8 @@ implementation stages and do not use fractional Sprint numbering.
 | 22 | Operator Understanding Accumulation | Complete, certified and Founder-accepted | None | [Plan](SPRINT_22_PLAN.md), [Implementation](SPRINT_22_IMPLEMENTATION.md), [Certification](SPRINT_22_CERTIFICATION.md), [Closure](SPRINT_22_CLOSURE.md) |
 | 23 | Oracle Session Intelligence | Complete, certified and Founder-accepted | None | [Plan](SPRINT_23_PLAN.md), [Implementation](SPRINT_23_IMPLEMENTATION.md), [Certification](SPRINT_23_CERTIFICATION.md), [Closure](SPRINT_23_CLOSURE.md) |
 | 24 | Adaptive Coaching, Planner and Progression | Complete, certified and Founder-accepted; Migration 014 undeployed and inactive | None | [Proposal](SPRINT_24_PROPOSAL.md), [Plan](SPRINT_24_PLAN.md), [Implementation](SPRINT_24_IMPLEMENTATION.md), [Certification](SPRINT_24_CERTIFICATION.md), [Closure](SPRINT_24_CLOSURE.md), [ADR-042](../Decisions.md) |
-| 25 | Conversational Oracle | Implemented and locally certified; Founder acceptance required | None | [Plan](SPRINT_25_PLAN.md), [Implementation](SPRINT_25_IMPLEMENTATION.md), [Certification](SPRINT_25_CERTIFICATION.md), [ADR-043](../Decisions.md) |
-| 26 | Authoritative Companion Guidance Delivery | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
+| 25 | Conversational Oracle | Complete, certified and Founder-accepted | None | [Plan](SPRINT_25_PLAN.md), [Implementation](SPRINT_25_IMPLEMENTATION.md), [Certification](SPRINT_25_CERTIFICATION.md), [Closure](SPRINT_25_CLOSURE.md), [ADR-043](../Decisions.md) |
+| 26 | Authoritative Companion Guidance Delivery | Founder activation decision required; not implemented | None | [Decision package](SPRINT_26_FOUNDER_DECISION_REQUIRED.md), [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 27 | Contextual Companion and Reference Integration | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 28 | Unified Oracle Product Experience | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 29 | Secure Desktop Operations and Distribution | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
@@ -63,4 +63,5 @@ Founder-accepted under ADR-040. Sprint 21 is complete, certified and
 Founder-accepted under ADR-041. Sprint 22 is complete, certified and
 Founder-accepted under the existing Operator Understanding ADRs. Sprint 23 is
 complete, certified and Founder-accepted. Sprint 24 is complete, certified and
-Founder-accepted. Sprint 25 is active under Founder-approved ADR-043.
+Founder-accepted. Sprint 25 is complete, certified and Founder-accepted under
+ADR-043. Sprint 26 awaits a Founder activation decision.

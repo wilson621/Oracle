@@ -8,7 +8,7 @@
 **Expected Stability:** Reviewed whenever governance or canonical documentation changes
 **Supersedes:** The incomplete documentation table in `README.md` as the canonical documentation index
 **Superseded By:** None
-**Last Reviewed:** 24 July 2026
+**Last Reviewed:** 25 July 2026
 
 ---
 
@@ -243,10 +243,12 @@ delivery authorities have been reviewed.
 | Sprint 24 evidence | [Sprint 24 Evidence](sprints/evidence/sprint-24/README.md) | Local certification; no deployment or activation |
 | Sprint 24 closure | [Sprint 24 Closure](sprints/SPRINT_24_CLOSURE.md) | Closed; permanent evidence-led progression directive recorded |
 | Sprint 25 decision package | [Sprint 25 Founder Decision Required](sprints/SPRINT_25_FOUNDER_DECISION_REQUIRED.md) | Resolved; Option A and ADR-043 approved |
-| Sprint 25 authority | [Sprint 25 Plan](sprints/SPRINT_25_PLAN.md) and [ADR-043](Decisions.md) | Founder-approved; implementation and local certification complete |
-| Sprint 25 implementation | [Sprint 25 Implementation](sprints/SPRINT_25_IMPLEMENTATION.md) | Source complete; transient and undeployed |
-| Sprint 25 certification | [Sprint 25 Certification](sprints/SPRINT_25_CERTIFICATION.md) | Locally certified; Founder acceptance required |
+| Sprint 25 authority | [Sprint 25 Plan](sprints/SPRINT_25_PLAN.md) and [ADR-043](Decisions.md) | Founder-approved and closed |
+| Sprint 25 implementation | [Sprint 25 Implementation](sprints/SPRINT_25_IMPLEMENTATION.md) | Source complete, accepted, transient and undeployed |
+| Sprint 25 certification | [Sprint 25 Certification](sprints/SPRINT_25_CERTIFICATION.md) | Locally certified and Founder-accepted |
 | Sprint 25 evidence | [Sprint 25 Evidence](sprints/evidence/sprint-25/README.md) | Machine-readable local certification |
+| Sprint 25 closure | [Sprint 25 Closure](sprints/SPRINT_25_CLOSURE.md) | Closed; permanent non-authoritative Conversation directive recorded |
+| Sprint 26 decision package | [Sprint 26 Founder Decision Required](sprints/SPRINT_26_FOUNDER_DECISION_REQUIRED.md) | Option A recommended; implementation not started |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation
