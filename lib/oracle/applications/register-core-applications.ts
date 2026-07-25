@@ -39,7 +39,7 @@ const CORE_ORACLE_APPLICATIONS: readonly OracleApplication[] = Object.freeze([
       "Game-aware loadout intelligence and equipment recommendations.",
     route: "/loadouts",
     requiredServices: ["loadouts"],
-    status: "available",
+    status: "disabled",
   },
   {
     id: "reports",

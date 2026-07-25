@@ -3,6 +3,7 @@ import AppLayout from "@/components/layout/AppLayout";
 import {
   COMPANION_PAGE_INITIAL_STATE,
 } from "./companion-page-state";
+import EvidenceBoundary from "@/components/ui/EvidenceBoundary";
 
 export default function CompanionPage() {
   return (
@@ -11,6 +12,12 @@ export default function CompanionPage() {
     >
       <CompanionGuidanceLive
         initialState={COMPANION_PAGE_INITIAL_STATE}
+      />
+      <EvidenceBoundary
+        evidence="Only validated, current Guidance Requests from approved Game Integrations."
+        confidence="Each Guidance card carries its own governed confidence."
+        freshness="Detach, Context change and stale async results invalidate delivery."
+        limitation="The primary game integration remains the first proving ground. The second reference profile remains provisional and observation disabled."
       />
     </AppLayout>
   );

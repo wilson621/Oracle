@@ -11,7 +11,7 @@
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 5.6
+**Version:** 5.7
 
 ---
 
@@ -758,9 +758,11 @@ under the approved status Operational Certification Deferred — Required Test
 Environment Unavailable. Source and synthetic certification passed; live
 attached-window observation did not. Sprint 27 is Founder-accepted and closed.
 Its operational certification remains deferred, the compatibility profile
-remains provisional and observation remains disabled. Sprint 28 awaits a
-Founder decision; its implementation has not begun. Production deployment and
-runtime persistence remain unauthorised.
+remains provisional and observation remains disabled. Sprint 28 Option A is
+source complete and locally certified: every route was evaluated for truth and
+Operator value, one coherent Beta journey remains, unsupported production
+mocks were removed and Web/Electron verification passed. Founder acceptance is
+pending. Production deployment and runtime persistence remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

@@ -38,7 +38,7 @@ implementation stages and do not use fractional Sprint numbering.
 | 25 | Conversational Oracle | Complete, certified and Founder-accepted | None | [Plan](SPRINT_25_PLAN.md), [Implementation](SPRINT_25_IMPLEMENTATION.md), [Certification](SPRINT_25_CERTIFICATION.md), [Closure](SPRINT_25_CLOSURE.md), [ADR-043](../Decisions.md) |
 | 26 | Authoritative Companion Guidance Delivery | Complete, certified and Founder-accepted | None | [Plan](SPRINT_26_PLAN.md), [Implementation](SPRINT_26_IMPLEMENTATION.md), [Certification](SPRINT_26_CERTIFICATION.md), [Closure](SPRINT_26_CLOSURE.md), [Decision package](SPRINT_26_FOUNDER_DECISION_REQUIRED.md) |
 | 27 | Contextual Companion and Reference Integration | Complete — Founder-accepted and closed; source/synthetic certification accepted; Operational Certification Deferred; live profile provisional and observation disabled | None | [Plan](SPRINT_27_PLAN.md), [Implementation](SPRINT_27_IMPLEMENTATION.md), [Certification](SPRINT_27_CERTIFICATION.md), [Closure](SPRINT_27_CLOSURE.md), [Founder acceptance package](SPRINT_27_FOUNDER_ACCEPTANCE_REQUIRED.md), [ADRs 044–045](../Decisions.md) |
-| 28 | Unified Oracle Product Experience | Founder decision package prepared; implementation not started | None | [Decision package](SPRINT_28_FOUNDER_DECISION_REQUIRED.md), [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
+| 28 | Unified Oracle Product Experience | Option A source complete and locally certified; Founder acceptance pending | None | [Decision package](SPRINT_28_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_28_PLAN.md), [Product Truth Inventory](SPRINT_28_PRODUCT_TRUTH_INVENTORY.md), [Implementation](SPRINT_28_IMPLEMENTATION.md), [Certification](SPRINT_28_CERTIFICATION.md), [Founder acceptance package](SPRINT_28_FOUNDER_ACCEPTANCE_REQUIRED.md) |
 | 29 | Secure Desktop Operations and Distribution | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 30 | Production Qualification | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 | 31 | Oracle Beta Certification | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
@@ -71,5 +71,6 @@ Operational certification is formally deferred because the required
 third-party environment is unavailable. The exact live observation profile
 remains provisional and observation remains disabled. Sprint 27 is
 Founder-accepted and closed; its operational certification remains deferred
-without creating a support, activation or deployment claim. Sprint 28 has not
-begun and awaits an independent Founder decision.
+without creating a support, activation or deployment claim. Sprint 28 Option A
+is source complete and locally certified. Founder acceptance and closure remain
+pending.

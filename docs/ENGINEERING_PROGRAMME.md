@@ -2,13 +2,13 @@
 
 **Document Status:** Approved
 
-**Version:** 1.7
+**Version:** 1.8
 
 **Owner:** Founder
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 28 Founder Decision Package
+**Next Review:** Sprint 28 Founder Acceptance Package
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -115,8 +115,10 @@ and disabled. Operational Certification Deferred — Required Test Environment
 Unavailable is approved because the third-party runtime will not be acquired
 solely for this test. Sprint 27 is Founder-accepted and closed. Operational
 certification remains deferred, the profile remains provisional and
-observation remains disabled. Sprint 28 implementation has not begun and
-requires an independent Founder decision.
+observation remains disabled. Sprint 28 Option A is source complete and locally
+certified. Its Product Truth Inventory, canonical journey, Web/Electron
+verification and Founder Beta walkthrough await independent Founder
+acceptance.
 
 The ADR-040 composition manifest is a permanent runtime contract. Every future
 Sprint changing Services, Applications, Game Integrations, Guidance providers,
@@ -1142,6 +1144,16 @@ placeholder, mock, dead link, unexplained failure or implementation diagnostic.
 
 Consolidates Application presentation. Business logic remains in Services and
 engines.
+
+### Implementation Status
+
+Option A is source complete and locally certified. Every route and navigation
+entry was assessed for Architectural Truth and Operator Value. One canonical
+eight-destination shell remains; duplicate and low-value routes consolidate
+through verified redirects; inactive Services are presented honestly; and the
+mock connector and hard-coded loadout evidence are removed from production
+paths. Manifest `1.6.0` remains exact across Web and Electron because runtime
+composition did not change. Founder acceptance is pending.
 
 ## Sprint 29 — Secure Desktop Operations and Distribution
 

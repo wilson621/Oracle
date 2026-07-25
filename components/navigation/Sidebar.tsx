@@ -5,46 +5,30 @@ import { usePathname } from "next/navigation";
 import {
   Brain,
   ScrollText,
-  User,
-  Crosshair,
   TrendingUp,
   Settings,
-  DatabaseZap,
-  Dna,
-  Trophy,
-  Medal,
   Target,
   RadioTower,
+  FileText,
 } from "lucide-react";
 
 const navItems = [
   {
-    section: "ANALYSIS",
+    section: "YOUR ORACLE JOURNEY",
     items: [
       { label: "Oracle", href: "/oracle", icon: Brain },
       { label: "Companion", href: "/companion", icon: RadioTower },
-      { label: "Session History", href: "/sessions", icon: ScrollText },
-      { label: "AI Coach", href: "/coach", icon: Target },
-      { label: "AI Memory", href: "/memory", icon: DatabaseZap },
+      { label: "Sessions", href: "/sessions", icon: ScrollText },
+      { label: "Reports", href: "/reports", icon: FileText },
       { label: "Intelligence", href: "/intelligence", icon: Brain },
-      { label: "Oracle DNA", href: "/dna", icon: Dna },
+      { label: "Coach & Plan", href: "/coach", icon: Target },
+      { label: "Progress", href: "/progress", icon: TrendingUp },
     ],
   },
   {
-    section: "OPERATOR",
+    section: "CONTROL",
     items: [
-      { label: "Operator", href: "/operator", icon: User },
-      { label: "Career", href: "/career", icon: Trophy },
-      { label: "Achievements", href: "/achievements", icon: Medal },
-      { label: "Loadouts", href: "/loadouts", icon: Crosshair },
-      { label: "Combat Progress", href: "/progress", icon: TrendingUp },
-    ],
-  },
-  {
-    section: "SYSTEM",
-    items: [
-      { label: "Profile", href: "/profile", icon: Settings },
-      { label: "Security", href: "/account/security", icon: Settings },
+      { label: "Settings", href: "/settings", icon: Settings },
     ],
   },
 ];
@@ -67,13 +51,16 @@ export default function Sidebar({
       }`}
     >
       <p className="text-xs font-bold tracking-[0.35em] text-cyan-300">
-        PROJECT META
+        ORACLE
+      </p>
+      <p className="mt-2 text-xs leading-5 text-slate-500">
+        Evidence-led player intelligence
       </p>
 
       <div
         className={
           compactOnSmallScreens
-            ? "mt-5 flex min-w-0 max-w-full gap-6 overflow-x-auto pb-2 lg:mt-10 lg:block lg:space-y-8 lg:overflow-visible lg:pb-0"
+            ? "mt-5 flex min-w-0 max-w-full flex-wrap gap-3 lg:mt-10 lg:block lg:space-y-8"
             : "mt-10 space-y-8"
         }
       >
@@ -82,7 +69,7 @@ export default function Sidebar({
             key={section.section}
             className={
               compactOnSmallScreens
-                ? "flex-none"
+                ? "min-w-0"
                 : undefined
             }
           >
@@ -99,14 +86,18 @@ export default function Sidebar({
             <nav
               className={
                 compactOnSmallScreens
-                  ? "flex gap-2 lg:block lg:space-y-2"
+                  ? "flex flex-wrap gap-2 lg:block lg:space-y-2"
                   : "space-y-2"
               }
               aria-label={section.section}
             >
               {section.items.map((item) => {
                 const Icon = item.icon;
-                const active = pathname === item.href;
+                const active =
+                  pathname === item.href ||
+                  (item.href === "/settings" &&
+                    (pathname === "/profile" ||
+                      pathname.startsWith("/account/")));
 
                 return (
                   <Link
@@ -117,6 +108,7 @@ export default function Sidebar({
                         ? "bg-cyan-400 text-slate-950 shadow-[0_0_24px_rgba(34,211,238,0.35)]"
                         : "text-slate-400 hover:bg-slate-900 hover:text-white"
                     }`}
+                    aria-current={active ? "page" : undefined}
                   >
                     <Icon size={18} />
                     {item.label}

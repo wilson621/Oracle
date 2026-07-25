@@ -14,29 +14,35 @@ export default function OracleInput({
   const [prompt, setPrompt] = useState("");
 
   return (
-    <div className="mx-auto mt-10 max-w-3xl rounded-3xl border border-slate-800 bg-slate-950 p-4">
+    <div className="mx-auto mt-8 max-w-3xl rounded-3xl border border-slate-800 bg-slate-950 p-4">
+      <label
+        htmlFor="oracle-question"
+        className="mb-3 block text-sm font-bold text-slate-200"
+      >
+        Ask Oracle about your governed evidence
+      </label>
       <textarea
+        id="oracle-question"
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         className="min-h-44 w-full resize-none rounded-2xl bg-slate-900 p-5 text-white outline-none placeholder:text-slate-500"
-        placeholder="Ask about a Session, trend, coaching focus, Mission, plan or progression..."
+        placeholder="Ask about a Session, report, pattern, coaching focus, Mission or progress..."
       />
 
-      <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+      <div className="mt-4">
         <button
-          className="flex-1 rounded-2xl border border-slate-700 px-5 py-4 font-bold text-slate-300 hover:border-cyan-400 hover:text-cyan-300"
-        >
-          Upload Clip
-        </button>
-
-        <button
-          disabled={isAnalysing}
+          type="button"
+          disabled={isAnalysing || !prompt.trim()}
           onClick={() => onAskOracle(prompt)}
-          className="flex-1 rounded-2xl bg-cyan-400 px-5 py-4 font-bold text-slate-950 hover:bg-cyan-300 disabled:opacity-50"
+          className="w-full rounded-2xl bg-cyan-400 px-5 py-4 font-bold text-slate-950 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isAnalysing ? "Grounding..." : "Ask Oracle"}
         </button>
       </div>
+      <p className="mt-3 text-xs leading-5 text-slate-500">
+        Conversation is transient and cannot create evidence, mutate Oracle
+        state or replace an authoritative Service.
+      </p>
     </div>
   );
 }

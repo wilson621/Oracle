@@ -1,0 +1,33 @@
+{
+  "sprint": 28,
+  "generatedAt": "2026-07-25T18:50:03.962Z",
+  "result": "passed",
+  "canonicalRoutes": [
+    "/oracle",
+    "/companion",
+    "/sessions",
+    "/reports",
+    "/intelligence",
+    "/coach",
+    "/progress",
+    "/settings"
+  ],
+  "cases": [
+    "product-truth-inventory-complete",
+    "architectural-truth-assessed",
+    "operator-value-assessed",
+    "single-canonical-navigation",
+    "legacy-routes-consolidated",
+    "inactive-capabilities-explicit",
+    "production-mock-connector-removed",
+    "production-mock-loadout-evidence-removed",
+    "renderer-business-data-bypasses-retired",
+    "minecraft-provisional-and-disabled",
+    "cod-warzone-first-proving-ground"
+  ],
+  "productionDeployment": false,
+  "migrationIntroduced": false,
+  "runtimePersistence": "disabled",
+  "minecraftOperationalSupport": false,
+  "minecraftObservation": "disabled"
+}

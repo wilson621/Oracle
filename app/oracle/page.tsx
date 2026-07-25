@@ -6,6 +6,13 @@ import AppLayout from "@/components/layout/AppLayout";
 import OracleHero from "@/components/oracle/OracleHero";
 import OracleInput from "@/components/oracle/OracleInput";
 import OracleLoading from "@/components/oracle/OracleLoading";
+import JourneyCard from "@/components/ui/JourneyCard";
+import {
+  FileText,
+  RadioTower,
+  ScrollText,
+  Target,
+} from "lucide-react";
 import type {
   OracleConversationApplicationResponse,
 } from "@/lib/oracle/applications/conversation/oracle-conversation-application";
@@ -54,6 +61,20 @@ export default function OraclePage() {
       <div className="oracle-desktop-content">
         <AppLayout>
           <OracleHero isAnalysing={isAnalysing} />
+          <div
+            className="mx-auto mt-8 max-w-3xl rounded-2xl border border-blue-400/20 bg-blue-400/[0.06] p-5"
+            role="status"
+          >
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-blue-200">
+              Current runtime
+            </p>
+            <p className="mt-2 text-sm leading-6 text-slate-300">
+              Oracle&apos;s authoritative capabilities are implemented, but
+              runtime persistence and persisted evidence consumers remain
+              disabled. Questions requiring personal history will explain that
+              limitation instead of inventing an answer.
+            </p>
+          </div>
           <OracleInput
             isAnalysing={isAnalysing}
             onAskOracle={handleAskOracle}
@@ -105,6 +126,51 @@ export default function OraclePage() {
               )}
             </article>
           )}
+          <section className="mt-10" aria-labelledby="oracle-journey-heading">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-cyan-300">
+              Your Oracle journey
+            </p>
+            <h2
+              id="oracle-journey-heading"
+              className="mt-3 text-3xl font-black text-white"
+            >
+              From play to purposeful improvement
+            </h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <JourneyCard
+                href="/companion"
+                icon={RadioTower}
+                eyebrow="During play"
+                title="Check Companion readiness"
+                description="See whether current, consented and game-safe Guidance can be delivered."
+                status="Transient · Operator controlled"
+              />
+              <JourneyCard
+                href="/sessions"
+                icon={ScrollText}
+                eyebrow="After play"
+                title="Trace Session Evidence"
+                description="Sessions are the sole historical source for every later Oracle conclusion."
+                status="Implemented · runtime inactive"
+              />
+              <JourneyCard
+                href="/reports"
+                icon={FileText}
+                eyebrow="Understand"
+                title="Explain what happened"
+                description="Deterministic Reports separate factual analysis from optional presentation enrichment."
+                status="Evidence required"
+              />
+              <JourneyCard
+                href="/coach"
+                icon={Target}
+                eyebrow="Return stronger"
+                title="Choose the next action"
+                description="Coaching and planning turn verified findings into one governed development focus."
+                status="Evidence-bound · no arbitrary rewards"
+              />
+            </div>
+          </section>
         </AppLayout>
       </div>
     </>

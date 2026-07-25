@@ -1,6 +1,6 @@
 # SPRINT 28 FOUNDER DECISION PACKAGE — UNIFIED ORACLE PRODUCT EXPERIENCE
 
-**Status:** Founder decision required; implementation not started
+**Status:** Decision resolved — Founder approved Option A
 **Prepared:** 25 July 2026
 **Recommended option:** Option A
 **ADR required:** No
@@ -286,7 +286,11 @@ It would not authorise:
 
 # Founder Decision Required
 
+**Decision:** Option A approved on 25 July 2026. This section preserves the
+question presented for independent review.
+
 Approve or reject Option A and authorise Sprint 28 implementation and local
 certification within the boundaries above.
 
-Sprint 28 implementation has not begun.
+Sprint 28 implementation was subsequently completed and locally certified
+within the approved boundaries.

@@ -260,7 +260,13 @@ delivery authorities have been reviewed.
 | Sprint 27 evidence | [Sprint 27 Evidence](sprints/evidence/sprint-27/README.md) | Machine-readable local certification |
 | Sprint 27 Founder acceptance package | [Sprint 27 Founder Acceptance Required](sprints/SPRINT_27_FOUNDER_ACCEPTANCE_REQUIRED.md) | Decision resolved; operational certification remains deferred |
 | Sprint 27 closure | [Sprint 27 Closure](sprints/SPRINT_27_CLOSURE.md) | Closed; operational certificate remains provisional and observation disabled |
-| Sprint 28 Founder decision package | [Sprint 28 Founder Decision Required](sprints/SPRINT_28_FOUNDER_DECISION_REQUIRED.md) | Independent review required; implementation not started |
+| Sprint 28 Founder decision package | [Sprint 28 Founder Decision Required](sprints/SPRINT_28_FOUNDER_DECISION_REQUIRED.md) | Resolved; Option A approved |
+| Sprint 28 authority | [Sprint 28 Plan](sprints/SPRINT_28_PLAN.md) | Founder-approved; source implementation complete |
+| Sprint 28 product decisions | [Sprint 28 Product Truth Inventory](sprints/SPRINT_28_PRODUCT_TRUTH_INVENTORY.md) | Complete; governs retained and consolidated routes |
+| Sprint 28 implementation | [Sprint 28 Implementation](sprints/SPRINT_28_IMPLEMENTATION.md) | Source complete; production unchanged |
+| Sprint 28 certification | [Sprint 28 Certification](sprints/SPRINT_28_CERTIFICATION.md) | Locally certified; Founder acceptance pending |
+| Sprint 28 evidence | [Sprint 28 Evidence](sprints/evidence/sprint-28/README.md) | Machine-readable and walkthrough evidence |
+| Sprint 28 Founder acceptance package | [Sprint 28 Founder Acceptance Required](sprints/SPRINT_28_FOUNDER_ACCEPTANCE_REQUIRED.md) | Independent review required; do not close yet |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

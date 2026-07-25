@@ -41,6 +41,10 @@ Guidance delivery complete
 **Sprint 27:** Complete — Founder-accepted and closed; source and synthetic
 certification accepted; Operational Certification Deferred — Required Test
 Environment Unavailable; live profile provisional and observation disabled
+**Sprint 28:** Source complete and locally certified — Product Truth Inventory,
+canonical product shell, truthful inactive states, route consolidation,
+production mock removal and bounded Web/Electron walkthrough complete; Founder
+acceptance pending
 
 ---
 
@@ -65,6 +69,26 @@ Update this file during every sprint closure audit.
 ---
 
 # Latest Verified Sprint Progress
+
+## Sprint 28 — Unified Oracle Product Experience
+
+Every route and navigation entry has an explicit Architectural Truth and
+Operator Value decision. Oracle now exposes one canonical navigation across
+Oracle, Companion, Sessions, Reports, Intelligence, Coach & Plan, Progress and
+Settings.
+
+Legacy Memory/DNA, Career/Achievements, Operator and Planner pages consolidate
+through redirects. Evidence-dependent surfaces no longer use legacy browser
+calculations or direct Repository access. They expose explicit inactive states
+while runtime persistence and persisted consumers remain disabled. The mock
+game connector and hard-coded weapon evidence are removed; Loadouts is
+disabled and honestly deferred.
+
+The Web production build, Electron and native helper builds, architectural
+audit and bounded Founder Beta walkthrough pass. Documented dependency
+exceptions fell from 42 to 22 with zero runtime cycles. Manifest version
+`1.6.0` remains exact across Web and Electron because runtime composition did
+not change. Founder acceptance is pending.
 
 ## Sprint 27 — Contextual Companion and Reference Integration
 

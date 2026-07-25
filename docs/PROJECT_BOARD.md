@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 25 July 2026
-**Version:** 7.2
+**Version:** 7.3
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -76,11 +76,19 @@ Operational Certification Deferred — Required Test Environment Unavailable.
 The exact live observation profile is `provisionally-certified`, live capture
 is untested and observation remains disabled.
 
+Sprint 28 Option A is source complete and locally certified. The Product Truth
+Inventory assessed every route and navigation entry for Architectural Truth
+and Operator Value. Oracle now has one canonical eight-destination journey,
+truthful inactive and deferred states, consolidated legacy routes and no
+production mock game or loadout evidence. Manifest `1.6.0` remains exact
+across Web and Electron. No deployment, migration, persistence, activation or
+Gate C activity occurred.
+
 ## Active Founder Review
 
-The Sprint 28 Founder Decision Package recommends Option A, governed
-full-journey product convergence. Sprint 28 implementation has not begun and
-awaits independent Founder review.
+The Sprint 28 Founder Acceptance Package recommends accepting and closing the
+completed engineering and product-convergence Sprint. Sprint 28 is not yet
+Founder-accepted or closed.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in

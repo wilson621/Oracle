@@ -20,13 +20,17 @@ export default function OracleHero({ isAnalysing }: OracleHeroProps) {
         }`}
       />
 
-      <h2 className="text-5xl font-bold tracking-tight">
-        Tell Oracle what happened.
-      </h2>
+      <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+        YOUR EVIDENCE-LED GUIDE
+      </p>
+      <h1 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
+        Know what matters next.
+      </h1>
 
       <p className="mt-4 max-w-2xl text-slate-400">
-        Describe the fight. Oracle will break down what cost you the engagement
-        and what to do differently next time.
+        Oracle explains governed knowledge from your Sessions, Reports,
+        Understanding and development plan. It shows its evidence and tells
+        you when the required sources are not active.
       </p>
     </div>
   );
