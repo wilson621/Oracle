@@ -2817,6 +2817,90 @@ Accepted — Founder-approved 24 July 2026.
 
 ---
 
+# ADR-043
+
+## Title
+
+Grounded Conversation, Model Provider, Provenance and Retention Boundaries
+
+## Decision
+
+Conversation Service owns conversational orchestration and presentation, never
+underlying truth. Existing Oracle Services remain the sole authorities for
+facts, lifecycle and mutation. Retrieval is authenticated, allowlisted,
+purpose-scoped and read-only.
+
+Conversation uses deterministic intent classification and retrieval planning.
+Models receive only minimised, versioned evidence packets and have no direct
+Repository, Service, Session, Understanding, Mission, Progression, tool or
+mutation authority. Model output is schema-validated, non-authoritative
+presentation synthesis. Deterministic handlers remain responsible for factual
+answers and provider-outage fallback.
+
+Every substantive renderer-safe response exposes evidence, provenance,
+confidence, freshness, scope and limitations. Factual model references must
+close over the admitted evidence packet. Unsupported, stale, prohibited and
+cross-Operator requests fail closed or require clarification.
+
+System instructions, user content and retrieved content are structurally
+separated. User and retrieved content are untrusted data and can never grant
+authority or issue instructions. Provider packets exclude credentials, raw
+observations and unrelated Operator data.
+
+Conversation is transient by default. Sprint 25 stores no transcript, prompt,
+provider response, Evidence, Understanding, Memory or authoritative state. Any
+future retention requires separate Founder governance and Trust & Control
+integration.
+
+The canonical ADR-040 manifest declares the Conversation Service. Web and
+Electron must continue to match it mechanically. This decision does not
+activate runtime persistence.
+
+## Reason
+
+Oracle needs natural-language explanation across existing authoritative
+Services without allowing a model, prompt or presentation layer to become a
+new source of truth. A grounded transient boundary preserves ownership,
+minimises disclosure and remains useful during provider outage.
+
+## Alternatives Considered
+
+Persisted conversation history was rejected because it creates a sensitive
+retention domain. A model-native agent with direct tools was rejected because
+prompt injection could influence authority-bearing operations. Deterministic
+conversation alone was rejected as the sole experience, but remains the
+mandatory factual authority and outage fallback.
+
+## Consequences
+
+- Conversation Service owns orchestration only.
+- Source Services provide authenticated read-only projections.
+- Provider failure produces an observable degraded response.
+- Strict grounding may clarify or refuse broad, stale or unsupported requests.
+- No Migration 015 is required.
+
+## Reversibility
+
+Providers, prompts, classifiers and synthesis implementations may be replaced
+behind compatible contracts. Retention may be introduced only through a
+separately approved decision. Direct model authority or weaker grounding
+requires a superseding Founder-approved ADR.
+
+## Authority Boundary
+
+This ADR authorises Sprint 25 planning, source implementation, local
+verification, certification, manifest reconciliation and documentation only.
+It does not authorise production deployment, any migration, conversation
+retention, runtime persistence, persisted producers or consumers, Gate C,
+production changes, model mutation or direct tool authority, or weakening
+ADR-040 through ADR-043.
+
+## Status
+
+Accepted — Founder-approved 25 July 2026.
+
+---
+
 # Future Decision Records
 
 Every significant architectural decision should be documented before implementation whenever practical.

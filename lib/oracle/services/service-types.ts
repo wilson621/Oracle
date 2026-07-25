@@ -1,4 +1,5 @@
 export type OracleServiceId =
+  | "conversation"
   | "ai-coach"
   | "oracle-brain"
   | "loadouts"

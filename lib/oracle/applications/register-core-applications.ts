@@ -19,7 +19,17 @@ const CORE_ORACLE_APPLICATIONS: readonly OracleApplication[] = Object.freeze([
     description:
       "Strategic intelligence, assessment and explanation for the Operator.",
     route: "/oracle",
-    requiredServices: ["operator", "sessions"],
+    requiredServices: [
+      "operator",
+      "conversation",
+      "sessions",
+      "reports",
+      "operator-understanding",
+      "ai-coach",
+      "missions",
+      "planner",
+      "progression",
+    ],
     status: "available",
   },
   {

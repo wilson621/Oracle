@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-25T08:34:50.818Z",
+  "contract": "oracle.grounded-conversation",
+  "contractVersion": 1,
+  "cases": [
+    "known-grounded-enrichment",
+    "provider-outage-deterministic-fallback",
+    "model-evidence-closure",
+    "stale-evidence-clarification",
+    "injection-and-mutation-refusal",
+    "cross-operator-fail-closed"
+  ],
+  "authenticatedRetrieval": "pass",
+  "allowlistedReadOnlySources": "pass",
+  "evidenceReferenceClosure": "pass",
+  "rendererSafeProvenance": "pass",
+  "injectionControl": "pass",
+  "providerFallback": "pass",
+  "retention": "none",
+  "migrationCreated": false,
+  "runtimePersistence": "disabled",
+  "deployment": "not-authorised",
+  "result": "pass"
+}

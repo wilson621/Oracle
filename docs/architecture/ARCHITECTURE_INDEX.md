@@ -810,6 +810,30 @@ Canonical Web and Electron manifest version 1.3.0 adds Planner Service and the
 Planner, Progress and Achievements Applications and mechanically equals both
 constructed runtimes. Migration 014 remains undeployed and inactive.
 
+Sprint 25 is implemented and locally certified under ADR-043. Conversation
+Service owns transient orchestration and presentation only. Deterministic,
+authenticated and allowlisted retrieval consumes read-only projections from
+authoritative Services. Optional model synthesis receives a minimised evidence
+packet, has no tool or mutation authority, and degrades to deterministic
+answers. Every response projects evidence, provenance, confidence, freshness,
+scope and limitations.
+
+Canonical Web and Electron manifest version 1.4.0 adds Conversation Service and
+mechanically equals both constructed runtimes. No Migration 015, conversation
+retention, persisted consumer activation or production change exists.
+
+Sprint 25 is implemented and locally certified under ADR-043. Conversation
+Service owns transient orchestration and presentation only. Deterministic,
+authenticated and allowlisted retrieval consumes read-only projections from
+authoritative Services. Optional model synthesis receives a minimised evidence
+packet, has no tool or mutation authority, and degrades to deterministic
+answers. Every response projects evidence, provenance, confidence, freshness,
+scope and limitations.
+
+Canonical Web and Electron manifest version 1.4.0 adds Conversation Service and
+mechanically equals both constructed runtimes. No Migration 015, conversation
+retention, persisted consumer activation or production change exists.
+
 Current Runtime
 
 ✓ Engine Runtime

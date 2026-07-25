@@ -5,6 +5,14 @@ import type { OracleService } from "./service-types";
 
 const CORE_ORACLE_SERVICES: readonly OracleService[] = Object.freeze([
   {
+    id: "conversation",
+    name: "Conversation",
+    description:
+      "Orchestrates transient grounded explanation without owning Oracle truth.",
+    requiredCapabilities: [],
+    status: "available",
+  },
+  {
     id: "operator",
     name: "Operator",
     description: "Provides the current Operator identity and profile.",

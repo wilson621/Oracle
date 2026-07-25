@@ -21,10 +21,11 @@ export const ORACLE_WEB_COMPOSITION_MANIFEST =
   createOracleRuntimeCompositionManifest({
     contract: "oracle.runtime-composition",
     contractVersion: 1,
-    manifestVersion: "1.3.0",
+    manifestVersion: "1.4.0",
     target: "web",
     subsystems: WEB_SUBSYSTEMS,
     services: [
+      "conversation",
       "operator",
       "sessions",
       "missions",

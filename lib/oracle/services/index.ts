@@ -9,3 +9,6 @@ export * from "./operator-understanding";
 export * from "./sessions";
 export * from "./session-reports";
 export * from "./operator-development";
+export * from "./conversation";
+export * from "./conversation";
+export * from "./conversation";

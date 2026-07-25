@@ -19,7 +19,7 @@ export default function OracleInput({
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         className="min-h-44 w-full resize-none rounded-2xl bg-slate-900 p-5 text-white outline-none placeholder:text-slate-500"
-        placeholder="Tell Oracle what happened..."
+        placeholder="Ask about a Session, trend, coaching focus, Mission, plan or progression..."
       />
 
       <div className="mt-4 flex flex-col gap-3 sm:flex-row">
@@ -34,7 +34,7 @@ export default function OracleInput({
           onClick={() => onAskOracle(prompt)}
           className="flex-1 rounded-2xl bg-cyan-400 px-5 py-4 font-bold text-slate-950 hover:bg-cyan-300 disabled:opacity-50"
         >
-          {isAnalysing ? "Analysing..." : "Ask Oracle"}
+          {isAnalysing ? "Grounding..." : "Ask Oracle"}
         </button>
       </div>
     </div>

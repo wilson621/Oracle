@@ -59,6 +59,22 @@ Update this file during every sprint closure audit.
 
 # Latest Verified Sprint Progress
 
+## Sprint 25 — Conversational Oracle
+
+ADR-043 establishes Conversation Service as a transient orchestration and
+presentation boundary, never an authority for truth or mutation.
+Authenticated, purpose-scoped and allowlisted retrieval consumes only
+read-only source-Service projections. Deterministic handlers own factual
+answers and outage fallback. Optional model synthesis is schema-bound to a
+minimised evidence packet and cannot use tools or cite unadmitted evidence.
+
+Renderer-safe responses expose evidence, provenance, confidence, freshness,
+scope and limitations. Prompt injection, conversational mutation, stale
+evidence and cross-Operator access fail safely. No transcript, prompt or
+provider response is retained. Manifest version 1.4.0 declares Conversation
+Service exactly in Web and Electron. No Migration 015 was created and runtime
+persistence remains disabled.
+
 ## Sprint 24 — Adaptive Coaching, Planner and Progression
 
 ADR-042 establishes exclusive Mission lifecycle and progression accounting.

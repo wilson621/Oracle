@@ -1,8 +1,10 @@
 # SPRINT 25 FOUNDER DECISION REQUIRED
 
 **Sprint:** 25 — Conversational Oracle
-**Status:** Architectural and security decision required; not activated
+**Status:** Decision accepted; superseded by ADR-043 and Sprint 25 plan
 **Prepared:** 24 July 2026
+**Resolution:** Option A and ADR-043 Founder-approved 25 July 2026; superseded
+by `SPRINT_25_PLAN.md`.
 
 ## Decision requested
 

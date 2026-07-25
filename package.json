@@ -18,6 +18,7 @@
   "session-lifecycle:verify": "tsc -p tsconfig.session-lifecycle-verification.json && node .tmp-session-lifecycle-verification/scripts/verify-session-lifecycle.js && node -e \"require('node:fs').rmSync('.tmp-session-lifecycle-verification', { recursive: true, force: true })\"",
   "session-intelligence:verify": "tsc -p tsconfig.session-intelligence-verification.json && node .tmp-session-intelligence-verification/scripts/verify-session-intelligence.js && node -e \"require('node:fs').rmSync('.tmp-session-intelligence-verification', { recursive: true, force: true })\"",
   "operator-development:verify": "tsc -p tsconfig.operator-development-verification.json && node .tmp-operator-development-verification/scripts/verify-operator-development.js && node -e \"require('node:fs').rmSync('.tmp-operator-development-verification', { recursive: true, force: true })\"",
+  "grounded-conversation:verify": "tsc -p tsconfig.grounded-conversation-verification.json && node .tmp-grounded-conversation-verification/scripts/verify-grounded-conversation.js && node -e \"require('node:fs').rmSync('.tmp-grounded-conversation-verification', { recursive: true, force: true })\"",
 
   "operator:ownership:verify": "tsc -p tsconfig.operator-ownership-verification.json && node .tmp-operator-ownership-verification/scripts/verify-operator-ownership.js && node -e \"require('node:fs').rmSync('.tmp-operator-ownership-verification', { recursive: true, force: true })\"",
 

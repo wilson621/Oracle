@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 24 July 2026
-**Version:** 6.7
+**Version:** 6.8
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -57,11 +57,14 @@ Sprint 24 — Adaptive Coaching, Planner and Progression is complete, certified
 and Founder-accepted under ADR-042. Migration 014 remains certified, undeployed
 and inactive.
 
-## Active Founder Review
+## Active Sprint
 
-Sprint 25 requires a Founder architectural and security decision. Option A in
-`docs/sprints/SPRINT_25_FOUNDER_DECISION_REQUIRED.md` recommends ADR-043 and a
-grounded transient Conversation Service. Sprint 25 is not active.
+Sprint 25 — Conversational Oracle is Founder-approved and active under
+ADR-043. Implementation and local certification are complete; Founder
+acceptance is required before closure. Work remains limited to transient
+grounded conversation, local verification, certification, manifest
+reconciliation and documentation. No migration, deployment, retention or
+runtime-persistence activation is authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in

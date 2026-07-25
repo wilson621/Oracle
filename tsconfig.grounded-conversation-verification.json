@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": ".tmp-grounded-conversation-verification",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2022"
+  },
+  "include": [
+    "lib/oracle/conversation/**/*.ts",
+    "lib/oracle/services/conversation/**/*.ts",
+    "lib/oracle/applications/conversation/**/*.ts",
+    "scripts/verify-grounded-conversation.ts"
+  ]
+}
