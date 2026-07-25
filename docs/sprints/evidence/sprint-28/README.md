@@ -1,5 +1,7 @@
 # Sprint 28 Evidence
 
+**Status:** Locally certified, Founder-accepted and closed
+
 Sprint 28 evidence certifies local source and product-journey convergence only.
 It grants no deployment, activation, migration or persistence authority.
 

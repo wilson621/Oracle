@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 25 July 2026
-**Version:** 7.3
+**Version:** 7.4
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -76,9 +76,10 @@ Operational Certification Deferred — Required Test Environment Unavailable.
 The exact live observation profile is `provisionally-certified`, live capture
 is untested and observation remains disabled.
 
-Sprint 28 Option A is source complete and locally certified. The Product Truth
-Inventory assessed every route and navigation entry for Architectural Truth
-and Operator Value. Oracle now has one canonical eight-destination journey,
+Sprint 28 Option A is complete, locally certified, Founder-accepted and
+closed. The Product Truth Inventory assessed every route and navigation entry
+for Architectural Truth and Operator Value. Oracle now has one canonical
+eight-destination journey,
 truthful inactive and deferred states, consolidated legacy routes and no
 production mock game or loadout evidence. Manifest `1.6.0` remains exact
 across Web and Electron. No deployment, migration, persistence, activation or
@@ -86,9 +87,11 @@ Gate C activity occurred.
 
 ## Active Founder Review
 
-The Sprint 28 Founder Acceptance Package recommends accepting and closing the
-completed engineering and product-convergence Sprint. Sprint 28 is not yet
-Founder-accepted or closed.
+The Sprint 29 Founder Decision Package recommends Option A — Windows-native
+governed MSIX distribution and ADR-046 — Desktop Distribution, Release
+Integrity and Update Authority. Sprint 29 implementation has not begun.
+Production publisher identity, managed signing, hosting, distribution,
+deployment and remote push remain separately gated.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -117,7 +120,21 @@ decision implementation and current certification boundary in
 
 # Latest Closed Sprint
 
-## Sprint 27 — Contextual Companion and Reference Integration
+## Sprint 28 — Unified Oracle Product Experience
+
+**Status:** Complete, locally certified, Founder-accepted and closed
+**Closure report:** `docs/sprints/SPRINT_28_CLOSURE.md`
+**Deployment status:** Undeployed and inactive; no migration or activation
+**Certification limitations:** No production operation, live end-to-end
+authenticated Supabase validation, runtime persistence, desktop distribution,
+Minecraft operational support or Loadout accuracy claim
+
+Sprint 28 delivered the governed Product Truth Inventory, one canonical
+eight-destination product journey, truthful inactive and deferred states,
+production mock removal and bounded Web/Electron certification. It establishes
+the truthful coherent product baseline for future development.
+
+## Previous Closed Sprint — Sprint 27 — Contextual Companion and Reference Integration
 
 **Status:** Complete, certified and Founder-accepted
 **Closure report:** `docs/sprints/SPRINT_27_CLOSURE.md`

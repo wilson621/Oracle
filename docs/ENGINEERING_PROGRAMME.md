@@ -2,13 +2,13 @@
 
 **Document Status:** Approved
 
-**Version:** 1.8
+**Version:** 1.9
 
 **Owner:** Founder
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 28 Founder Acceptance Package
+**Next Review:** Sprint 29 Founder Decision Package
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -115,10 +115,11 @@ and disabled. Operational Certification Deferred — Required Test Environment
 Unavailable is approved because the third-party runtime will not be acquired
 solely for this test. Sprint 27 is Founder-accepted and closed. Operational
 certification remains deferred, the profile remains provisional and
-observation remains disabled. Sprint 28 Option A is source complete and locally
-certified. Its Product Truth Inventory, canonical journey, Web/Electron
-verification and Founder Beta walkthrough await independent Founder
-acceptance.
+observation remains disabled. Sprint 28 Option A is complete, locally
+certified, Founder-accepted and closed. Its Product Truth Inventory, canonical
+journey, Web/Electron verification and Founder Beta walkthrough establish the
+truthful product baseline. The Sprint 29 Founder Decision Package is prepared;
+implementation has not begun.
 
 The ADR-040 composition manifest is a permanent runtime contract. Every future
 Sprint changing Services, Applications, Game Integrations, Guidance providers,
@@ -1147,13 +1148,15 @@ engines.
 
 ### Implementation Status
 
-Option A is source complete and locally certified. Every route and navigation
-entry was assessed for Architectural Truth and Operator Value. One canonical
+Option A is complete, locally certified, Founder-accepted and closed. Every
+route and navigation entry was assessed for Architectural Truth and Operator
+Value. One canonical
 eight-destination shell remains; duplicate and low-value routes consolidate
 through verified redirects; inactive Services are presented honestly; and the
 mock connector and hard-coded loadout evidence are removed from production
 paths. Manifest `1.6.0` remains exact across Web and Electron because runtime
-composition did not change. Founder acceptance is pending.
+composition did not change. The accepted certification limitations remain
+explicit.
 
 ## Sprint 29 — Secure Desktop Operations and Distribution
 
@@ -1225,6 +1228,11 @@ predictably.
 
 Establishes the desktop distribution, maintenance and update trust boundary. A
 desktop operations and release-security ADR is expected.
+
+### Current Status
+
+The Founder Decision Package recommends Option A and ADR-046. Implementation
+has not begun and requires explicit Founder approval.
 
 ## Sprint 30 — Production Qualification
 

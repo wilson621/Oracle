@@ -1,6 +1,6 @@
 # SPRINT 28 FOUNDER ACCEPTANCE PACKAGE
 
-**Status:** Founder acceptance required; do not close yet
+**Status:** Decision resolved — recommendation accepted; Sprint closed
 **Recommendation:** Accept and close Sprint 28
 **Prepared:** 25 July 2026
 **Deployment:** Not authorised
@@ -15,6 +15,13 @@ product-convergence Sprint.
 The implementation satisfies Option A and the Founder's dual Product Truth
 criteria. It creates a coherent useful journey while refusing to represent
 inactive capability, mock data or provisional game support as active truth.
+
+# Founder Decision
+
+The Founder accepted the recommendation on 25 July 2026. Sprint 28 is
+formally closed. This package remains the historical independent-review
+record; the resulting state is recorded in
+[Sprint 28 Closure](SPRINT_28_CLOSURE.md).
 
 # What Sprint 28 Conclusively Proved
 
@@ -79,12 +86,12 @@ personal history is unavailable and what separate activation would be needed.
 - Guidance delivery remains transient and non-authoritative.
 - Minecraft remains provisional and fail-closed.
 
-# Closure State if Accepted
+# Accepted Closure State
 
-Acceptance would close Sprint 28 as an engineering and product-convergence
-Sprint only.
+Acceptance closed Sprint 28 as an engineering and product-convergence Sprint
+only.
 
-It would not authorise:
+It did not authorise:
 
 - production deployment or production environment changes;
 - database migrations;
@@ -111,9 +118,9 @@ It would not authorise:
 - Sprint 27 remains closed; its operational certification remains deferred.
 - Minecraft remains `provisionally-certified` with observation disabled.
 
-# Founder Decision Requested
+# Founder Decision Requested — Resolved
 
-Approve or reject:
+The Founder approved:
 
 1. Sprint 28 implementation and certification;
 2. the Product Truth Inventory decisions;

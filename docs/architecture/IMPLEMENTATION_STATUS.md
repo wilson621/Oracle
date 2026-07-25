@@ -41,10 +41,11 @@ Guidance delivery complete
 **Sprint 27:** Complete — Founder-accepted and closed; source and synthetic
 certification accepted; Operational Certification Deferred — Required Test
 Environment Unavailable; live profile provisional and observation disabled
-**Sprint 28:** Source complete and locally certified — Product Truth Inventory,
-canonical product shell, truthful inactive states, route consolidation,
-production mock removal and bounded Web/Electron walkthrough complete; Founder
-acceptance pending
+**Sprint 28:** Complete, locally certified, Founder-accepted and closed —
+Product Truth Inventory, canonical product shell, truthful inactive states,
+route consolidation, production mock removal and bounded Web/Electron
+walkthrough accepted
+**Sprint 29:** Founder Decision Package prepared; implementation not started
 
 ---
 
@@ -88,7 +89,8 @@ The Web production build, Electron and native helper builds, architectural
 audit and bounded Founder Beta walkthrough pass. Documented dependency
 exceptions fell from 42 to 22 with zero runtime cycles. Manifest version
 `1.6.0` remains exact across Web and Electron because runtime composition did
-not change. Founder acceptance is pending.
+not change. The Founder accepted and closed Sprint 28 on 25 July 2026. The
+accepted operational and certification limitations remain explicit.
 
 ## Sprint 27 — Contextual Companion and Reference Integration
 
