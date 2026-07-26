@@ -1,0 +1,7 @@
+{
+  "name": "oracle-stage1-gpu-admission-probe",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "main.js"
+}

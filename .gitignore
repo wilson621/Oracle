@@ -57,5 +57,6 @@ desktop-native/**/obj/
 # Sprint-local release construction and signing material
 /.tmp-sprint-29/
 
-# Sprint-local release construction and signing material
-/.tmp-sprint-29/
+# Sprint 30.5 self-contained qualification kit build products
+/.tmp-sprint-30-5-stage1-kit/
+/.artifacts/
