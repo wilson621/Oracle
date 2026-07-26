@@ -20,7 +20,10 @@ for (const [target, state] of [
 ] as const) {
   assert.equal(state.status, "ready", `${target} runtime must be ready.`);
   assert.equal(state.manifestVerified, true);
-  assert.equal(state.manifestVersion, "1.6.0");
+  assert.equal(
+    state.manifestVersion,
+    ORACLE_WEB_COMPOSITION_MANIFEST.manifestVersion
+  );
   assert.equal(state.capabilities.services.length, 13);
   assert.equal(state.capabilities.applications.length, 10);
   assert.deepEqual(state.capabilities.gameIntegrations, [
@@ -60,7 +63,8 @@ const result = {
   schemaVersion: 1,
   verifiedAt: new Date().toISOString(),
   result: "passed",
-  runtimeManifestVersion: "1.6.0",
+  runtimeManifestVersion:
+    ORACLE_WEB_COMPOSITION_MANIFEST.manifestVersion,
   targets: {
     web: "critical-runtime-ready",
     electron: "release-compiled-runtime-ready",

@@ -1,5 +1,11 @@
 import type { CompanionRuntime } from "../../companion/companion-runtime";
 import type { OracleExtensionRuntime } from "../../companion/extensions/extension-runtime";
+import type {
+  OracleOperationalDiagnosticsRuntimeDeclaration,
+} from "./operational-diagnostics/operational-diagnostic-contract";
+import type {
+  OracleOperationalDiagnosticsService,
+} from "./operational-diagnostics/operational-diagnostics-service";
 
 export type OracleComposedService = Readonly<{
   id: string;
@@ -61,6 +67,7 @@ export type OracleSessionLifecycleRuntimeContract = Readonly<{
 
 export type OraclePlatformSubsystemId =
   | "composition"
+  | "operational-diagnostics"
   | "services"
   | "session-lifecycle"
   | "applications"
@@ -80,6 +87,7 @@ export type OracleRuntimeCompositionManifest = Readonly<{
   manifestVersion: string;
   target: OracleRuntimeTarget;
   subsystems: readonly OracleRuntimeSubsystemDeclaration[];
+  operationalDiagnostics: OracleOperationalDiagnosticsRuntimeDeclaration;
   services: readonly string[];
   sessionLifecycle: OracleSessionLifecycleDeclaration;
   applications: readonly string[];
@@ -89,6 +97,7 @@ export type OracleRuntimeCompositionManifest = Readonly<{
 
 export type OraclePlatformComposition = Readonly<{
   manifest: OracleRuntimeCompositionManifest;
+  operationalDiagnostics: OracleOperationalDiagnosticsService;
   services: OracleServiceCompositionRegistry;
   sessionLifecycle: Readonly<{
     declaration: OracleSessionLifecycleDeclaration;
@@ -122,6 +131,7 @@ export function createOracleRuntimeCompositionManifest(
     "subsystems",
     [
       "composition",
+      "operational-diagnostics",
       "services",
       "session-lifecycle",
       "applications",
@@ -144,6 +154,19 @@ export function createOracleRuntimeCompositionManifest(
     subsystems: Object.freeze(
       input.subsystems.map((subsystem) => Object.freeze({ ...subsystem }))
     ),
+    operationalDiagnostics: Object.freeze({
+      ...input.operationalDiagnostics,
+      definitions: Object.freeze(
+        input.operationalDiagnostics.definitions.map((definition) =>
+          Object.freeze({
+            ...definition,
+            allowedAttributes: Object.freeze([
+              ...definition.allowedAttributes,
+            ]),
+          })
+        )
+      ),
+    }),
     services: freezeIdentities(input.services, "services"),
     sessionLifecycle: Object.freeze({ ...input.sessionLifecycle }),
     applications: freezeIdentities(input.applications, "applications"),
@@ -171,6 +194,14 @@ export function assertOracleCompositionMatchesManifest(
     );
   }
 
+  if (
+    JSON.stringify(manifest.operationalDiagnostics) !==
+    JSON.stringify(composition.operationalDiagnostics.getDeclaration())
+  ) {
+    throw new OracleRuntimeCompositionDivergenceError(
+      "Operational Diagnostics declaration does not match the constructed runtime."
+    );
+  }
   assertExact(
     "services",
     manifest.services,
@@ -209,6 +240,7 @@ export function assertOracleCompositionMatchesManifest(
     "subsystems",
     [
       "composition",
+      "operational-diagnostics",
       "services",
       "session-lifecycle",
       "applications",

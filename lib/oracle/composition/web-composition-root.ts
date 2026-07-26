@@ -4,10 +4,15 @@ import {
   type OracleRuntimeSubsystemDeclaration,
 } from "../platform/platform-composition";
 import { OraclePlatformCompositionRoot } from "../platform/platform-composition-root";
+import {
+  createOracleOperationalDiagnosticsDeclaration,
+  createOracleOperationalDiagnosticsService,
+} from "../platform/operational-diagnostics";
 
 const WEB_SUBSYSTEMS: readonly OracleRuntimeSubsystemDeclaration[] =
   Object.freeze([
     Object.freeze({ id: "composition", required: true }),
+    Object.freeze({ id: "operational-diagnostics", required: true }),
     Object.freeze({ id: "services", required: true }),
     Object.freeze({ id: "session-lifecycle", required: true }),
     Object.freeze({ id: "applications", required: true }),
@@ -21,9 +26,11 @@ export const ORACLE_WEB_COMPOSITION_MANIFEST =
   createOracleRuntimeCompositionManifest({
     contract: "oracle.runtime-composition",
     contractVersion: 1,
-    manifestVersion: "1.6.0",
+    manifestVersion: "1.7.0",
     target: "web",
     subsystems: WEB_SUBSYSTEMS,
+    operationalDiagnostics:
+      createOracleOperationalDiagnosticsDeclaration("disabled"),
     services: [
       "conversation",
       "operator",
@@ -65,7 +72,12 @@ export const ORACLE_WEB_COMPOSITION_MANIFEST =
   });
 
 const webRoot = new OraclePlatformCompositionRoot(() =>
-  createCoreOraclePlatformComposition(ORACLE_WEB_COMPOSITION_MANIFEST)
+  createCoreOraclePlatformComposition(
+    ORACLE_WEB_COMPOSITION_MANIFEST,
+    createOracleOperationalDiagnosticsService(
+      ORACLE_WEB_COMPOSITION_MANIFEST.operationalDiagnostics
+    )
+  )
 );
 
 export function startOracleWebPlatform() {

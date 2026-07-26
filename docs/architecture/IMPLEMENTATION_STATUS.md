@@ -48,9 +48,10 @@ walkthrough accepted
 **Sprint 29:** Complete, locally certified, Founder-accepted and closed under
 ADR-046; Clean-Machine Certification Deferred — Required Disposable Windows
 Environment Unavailable remains the independent programme status
-**Sprint 30:** Founder-approved and active under ADR-047; Phases 1–2
+**Sprint 30:** Founder-approved and active under ADR-047; Phases 1–3
 implemented and locally verified; provider-level authentication transaction
-unavailable; production qualification not yet complete
+unavailable; package/runtime reconciliation required; production qualification
+not yet complete
 
 ---
 
@@ -108,7 +109,26 @@ journeys using synthetic data. The exact container is removed afterwards.
 The database authenticated role/JWT boundary passed. A live Supabase
 Auth/GoTrue Email + Password provider transaction is unavailable because the
 local provider is not configured; no production endpoint or credential was
-substituted. Phase 3 has not begun.
+substituted.
+
+## Sprint 30 Phase 3 — Runtime Diagnostics, Reliability and Recovery
+
+Operational Diagnostics is explicitly injected through both composition
+roots and declared as a required subsystem in Runtime Manifest `1.7.0`.
+Canonical Web and Electron delivery remains disabled. The renderer-safe health
+projection exposes only fixed authority, mode, status, transport, retention
+and aggregate metrics.
+
+Isolated local certification passes smoke, bounded soak, minimised crash
+envelopes, optional and sink failure degradation, required failure closure,
+teardown clearing and fresh-runtime recovery. Disposable PostgreSQL
+backup/restore preserves eligible, deletion-pending and final-deleted states
+through Migration 014 while preserving permanent Operator identity.
+
+The accepted Sprint 29 package remains immutable and bound to manifest
+`1.6.0`. It passed rollback regression but requires candidate reconciliation
+before later integrated qualification. No rebuild, signing, deployment or
+push occurred. Phase 4 has not begun.
 
 ## Sprint 29 — Secure Desktop Operations and Distribution
 

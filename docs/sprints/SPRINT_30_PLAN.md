@@ -1,6 +1,6 @@
 # SPRINT 30 PLAN — PRODUCTION QUALIFICATION
 
-**Status:** Founder-approved; Phases 1–2 complete; Phase 3 not started
+**Status:** Founder-approved; Phases 1–3 complete; Phase 4 not started
 **Approved option:** Option A — Governed Isolated Production Qualification
 **ADR:** ADR-047
 **Migration:** None
@@ -84,7 +84,7 @@ frozen, Web and release-environment Electron target qualification passes, and
 the disposable PostgreSQL critical journey through Migration 014 passes.
 Authenticated database role/JWT isolation is proven. A live Supabase
 Auth/GoTrue Email + Password transaction is honestly unavailable because no
-local provider is configured. Phase 3 has not begun.
+local provider is configured. At the Phase 2 exit, Phase 3 had not begun.
 
 # Phase 3 — Runtime Diagnostics, Reliability and Recovery
 
@@ -95,6 +95,15 @@ health, local crash envelopes, smoke, soak, failure isolation, fresh recovery,
 backup, restore, deletion, incident response and Sprint 29 rollback mechanics.
 
 No external provider, network upload or retention is permitted.
+
+**Completion status:** Complete and locally verified. ADR-047 is explicitly
+injected through both composition roots as a required manifest-declared
+subsystem. Canonical delivery remains disabled. Runtime Manifest `1.7.0`
+equality, renderer-safe health, local crash envelopes, smoke, bounded soak,
+failure isolation, fresh recovery, disposable backup/restore/deletion and
+Sprint 29 rollback regression pass. The immutable Sprint 29 package remains
+bound to `1.6.0`; later integrated candidate reconciliation is required and no
+rebuild or signing occurred. Phase 4 has not begun.
 
 # Phase 4 — Performance, Accessibility, Compatibility and Support
 

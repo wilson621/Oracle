@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { OracleExtensionRuntime } from "../lib/companion/extensions/extension-runtime";
-import { createCoreOraclePlatformComposition } from "../lib/oracle/composition/core-platform-composition";
+import {
+  createCoreOraclePlatformComposition as createCorePlatformComposition,
+} from "../lib/oracle/composition/core-platform-composition";
 import {
   createOracleRuntimeCompositionManifest,
   OracleRuntimeCompositionDivergenceError,
@@ -14,6 +16,9 @@ import {
   isOraclePlatformHealthSnapshot,
 } from "../lib/oracle/platform/platform-health";
 import { OraclePlatformRuntime } from "../lib/oracle/platform/platform-runtime";
+import {
+  createOracleOperationalDiagnosticsService,
+} from "../lib/oracle/platform/operational-diagnostics";
 import { ORACLE_WEB_COMPOSITION_MANIFEST } from "../lib/oracle/composition/web-composition-root";
 import {
   ORACLE_ELECTRON_COMPOSITION_MANIFEST,
@@ -31,7 +36,7 @@ function main(): void {
   verifyLifecycleOwnership();
   verifyEntryPointWiringAndLegacySeam();
   writeCertificationEvidence();
-  console.log("Sprint 27 Platform composition verification passed.");
+  console.log("Oracle Platform composition verification passed.");
 }
 
 function verifyCanonicalManifests(): void {
@@ -210,7 +215,7 @@ function verifyLifecycleOwnership(): void {
       authority: "session-service",
       persistence: "disabled",
     });
-    assert.equal(manifest.manifestVersion, "1.6.0");
+    assert.equal(manifest.manifestVersion, "1.7.0");
   }
 }
 
@@ -252,12 +257,24 @@ function createFailingGuidance(): OraclePlatformComposition["guidance"] {
   return guidance;
 }
 
+function createCoreOraclePlatformComposition(
+  manifest: typeof ORACLE_WEB_COMPOSITION_MANIFEST
+): OraclePlatformComposition {
+  return createCorePlatformComposition(
+    manifest,
+    createOracleOperationalDiagnosticsService(
+      manifest.operationalDiagnostics
+    )
+  );
+}
+
 function withoutTarget(manifest: typeof ORACLE_WEB_COMPOSITION_MANIFEST) {
   return {
     contract: manifest.contract,
     contractVersion: manifest.contractVersion,
     manifestVersion: manifest.manifestVersion,
     subsystems: manifest.subsystems,
+    operationalDiagnostics: manifest.operationalDiagnostics,
     services: manifest.services,
     sessionLifecycle: manifest.sessionLifecycle,
     applications: manifest.applications,
@@ -278,6 +295,7 @@ function writeCertificationEvidence(): void {
       manifestVersion: manifest.manifestVersion,
       declared: {
         subsystems: manifest.subsystems,
+        operationalDiagnostics: manifest.operationalDiagnostics,
         services: manifest.services,
         sessionLifecycle: manifest.sessionLifecycle,
         applications: manifest.applications,
@@ -289,6 +307,8 @@ function writeCertificationEvidence(): void {
           id,
           required,
         })),
+        operationalDiagnostics:
+          composition.operationalDiagnostics.getDeclaration(),
         services: composition.services.getAll().map(({ id }) => id),
         sessionLifecycle: composition.sessionLifecycle.declaration,
         applications: composition.applications.getAll().map(({ id }) => id),
@@ -301,8 +321,8 @@ function writeCertificationEvidence(): void {
     };
   });
   const path =
-    "docs/sprints/evidence/sprint-27/generated/platform-composition-certification.json";
-  fs.mkdirSync("docs/sprints/evidence/sprint-27/generated", {
+    "docs/sprints/evidence/sprint-30/phase-3/generated/platform-composition-certification.json";
+  fs.mkdirSync("docs/sprints/evidence/sprint-30/phase-3/generated", {
     recursive: true,
   });
   fs.writeFileSync(

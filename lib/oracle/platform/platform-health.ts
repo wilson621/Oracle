@@ -13,6 +13,20 @@ export type OraclePlatformHealthSnapshot = Readonly<{
   manifestVerified: boolean;
   status: OraclePlatformState["status"];
   phase: OraclePlatformState["phase"];
+  operationalDiagnostics: Readonly<{
+    purpose: "software-support";
+    authority: "non-authoritative";
+    mode: string;
+    status: string;
+    transport: string;
+    retention: "none";
+    metrics: Readonly<{
+      attempts: number;
+      admitted: number;
+      rejected: number;
+      sinkFailures: number;
+    }>;
+  }>;
   subsystems: readonly Readonly<{
     id: string;
     required: boolean;
@@ -47,6 +61,15 @@ export function createOraclePlatformHealthSnapshot(
     manifestVerified: state.manifestVerified,
     status: state.status,
     phase: state.phase,
+    operationalDiagnostics: Object.freeze({
+      purpose: state.operationalDiagnostics.purpose,
+      authority: state.operationalDiagnostics.authority,
+      mode: state.operationalDiagnostics.mode,
+      status: state.operationalDiagnostics.status,
+      transport: state.operationalDiagnostics.transport,
+      retention: state.operationalDiagnostics.retention,
+      metrics: Object.freeze({ ...state.operationalDiagnostics.metrics }),
+    }),
     subsystems: Object.freeze(
       state.subsystems.map(({ id, required, status, message }) =>
         Object.freeze({
@@ -91,6 +114,7 @@ export function isOraclePlatformHealthSnapshot(
     typeof value.manifestVerified === "boolean" &&
     typeof value.status === "string" &&
     typeof value.phase === "string" &&
+    isOperationalDiagnosticsHealth(value.operationalDiagnostics) &&
     Array.isArray(value.subsystems) &&
     value.subsystems.every(isHealthSubsystem) &&
     isRecord(value.capabilities) &&
@@ -100,6 +124,34 @@ export function isOraclePlatformHealthSnapshot(
     isStringArray(value.capabilities.guidanceProviders) &&
     Array.isArray(value.diagnostics) &&
     value.diagnostics.every(isHealthDiagnostic)
+  );
+}
+
+function isOperationalDiagnosticsHealth(value: unknown): boolean {
+  if (!isRecord(value) || !isRecord(value.metrics)) return false;
+  return (
+    value.purpose === "software-support" &&
+    value.authority === "non-authoritative" &&
+    (value.mode === "disabled" ||
+      value.mode === "local-certification") &&
+    (value.status === "disabled" ||
+      value.status === "ready" ||
+      value.status === "degraded" ||
+      value.status === "stopped") &&
+    (value.transport === "none" ||
+      value.transport === "local-transient") &&
+    ((value.mode === "disabled" && value.transport === "none") ||
+      (value.mode === "local-certification" &&
+        value.transport === "local-transient")) &&
+    value.retention === "none" &&
+    Number.isInteger(value.metrics.attempts) &&
+    Number(value.metrics.attempts) >= 0 &&
+    Number.isInteger(value.metrics.admitted) &&
+    Number(value.metrics.admitted) >= 0 &&
+    Number.isInteger(value.metrics.rejected) &&
+    Number(value.metrics.rejected) >= 0 &&
+    Number.isInteger(value.metrics.sinkFailures) &&
+    Number(value.metrics.sinkFailures) >= 0
   );
 }
 

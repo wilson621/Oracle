@@ -1,0 +1,603 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-26T09:28:07.727Z",
+  "contract": "oracle.runtime-composition",
+  "contractVersion": 1,
+  "targets": [
+    {
+      "target": "web",
+      "manifestVersion": "1.7.0",
+      "declared": {
+        "subsystems": [
+          {
+            "id": "composition",
+            "required": true
+          },
+          {
+            "id": "operational-diagnostics",
+            "required": true
+          },
+          {
+            "id": "services",
+            "required": true
+          },
+          {
+            "id": "session-lifecycle",
+            "required": true
+          },
+          {
+            "id": "applications",
+            "required": true
+          },
+          {
+            "id": "game-integrations",
+            "required": true
+          },
+          {
+            "id": "guidance",
+            "required": true
+          },
+          {
+            "id": "extensions",
+            "required": false
+          },
+          {
+            "id": "companion",
+            "required": true
+          }
+        ],
+        "operationalDiagnostics": {
+          "contract": "oracle.operational-diagnostics",
+          "contractVersion": 1,
+          "purpose": "software-support",
+          "authority": "non-authoritative",
+          "mode": "disabled",
+          "transport": "none",
+          "retention": "none",
+          "definitions": [
+            {
+              "code": "platform.runtime.started",
+              "subsystem": "platform",
+              "severity": "info",
+              "summary": "Oracle Platform runtime started.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "attempt"
+              ]
+            },
+            {
+              "code": "platform.runtime.failed",
+              "subsystem": "platform",
+              "severity": "error",
+              "summary": "Oracle Platform runtime failed closed.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "phase",
+                "subsystem",
+                "failureClass"
+              ]
+            },
+            {
+              "code": "platform.runtime.stopping",
+              "subsystem": "platform",
+              "severity": "info",
+              "summary": "Oracle Platform runtime is stopping.",
+              "allowedAttributes": [
+                "runtimeTarget"
+              ]
+            },
+            {
+              "code": "platform.runtime.recovery-started",
+              "subsystem": "platform",
+              "severity": "warning",
+              "summary": "Oracle Platform fresh-runtime recovery started.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "attempt"
+              ]
+            },
+            {
+              "code": "platform.runtime.recovery-completed",
+              "subsystem": "platform",
+              "severity": "info",
+              "summary": "Oracle Platform fresh-runtime recovery completed.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "attempt",
+                "status"
+              ]
+            }
+          ]
+        },
+        "services": [
+          "conversation",
+          "operator",
+          "sessions",
+          "missions",
+          "memory",
+          "operator-understanding",
+          "progression",
+          "planner",
+          "reports",
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "companion"
+        ],
+        "sessionLifecycle": {
+          "contract": "oracle.session-lifecycle",
+          "contractVersion": 1,
+          "authority": "session-service",
+          "persistence": "disabled"
+        },
+        "applications": [
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "reports",
+          "sessions",
+          "career",
+          "planner",
+          "progress",
+          "achievements",
+          "companion"
+        ],
+        "gameIntegrations": [
+          "call-of-duty",
+          "minecraft-java"
+        ],
+        "guidanceProviders": [
+          "game-integrations.call-of-duty.curated-guidance",
+          "game-integrations.minecraft-java.diamond-discovery-guidance"
+        ]
+      },
+      "constructed": {
+        "subsystems": [
+          {
+            "id": "composition",
+            "required": true
+          },
+          {
+            "id": "operational-diagnostics",
+            "required": true
+          },
+          {
+            "id": "services",
+            "required": true
+          },
+          {
+            "id": "session-lifecycle",
+            "required": true
+          },
+          {
+            "id": "applications",
+            "required": true
+          },
+          {
+            "id": "game-integrations",
+            "required": true
+          },
+          {
+            "id": "guidance",
+            "required": true
+          },
+          {
+            "id": "extensions",
+            "required": false
+          },
+          {
+            "id": "companion",
+            "required": true
+          }
+        ],
+        "operationalDiagnostics": {
+          "contract": "oracle.operational-diagnostics",
+          "contractVersion": 1,
+          "purpose": "software-support",
+          "authority": "non-authoritative",
+          "mode": "disabled",
+          "transport": "none",
+          "retention": "none",
+          "definitions": [
+            {
+              "code": "platform.runtime.started",
+              "subsystem": "platform",
+              "severity": "info",
+              "summary": "Oracle Platform runtime started.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "attempt"
+              ]
+            },
+            {
+              "code": "platform.runtime.failed",
+              "subsystem": "platform",
+              "severity": "error",
+              "summary": "Oracle Platform runtime failed closed.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "phase",
+                "subsystem",
+                "failureClass"
+              ]
+            },
+            {
+              "code": "platform.runtime.stopping",
+              "subsystem": "platform",
+              "severity": "info",
+              "summary": "Oracle Platform runtime is stopping.",
+              "allowedAttributes": [
+                "runtimeTarget"
+              ]
+            },
+            {
+              "code": "platform.runtime.recovery-started",
+              "subsystem": "platform",
+              "severity": "warning",
+              "summary": "Oracle Platform fresh-runtime recovery started.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "attempt"
+              ]
+            },
+            {
+              "code": "platform.runtime.recovery-completed",
+              "subsystem": "platform",
+              "severity": "info",
+              "summary": "Oracle Platform fresh-runtime recovery completed.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "attempt",
+                "status"
+              ]
+            }
+          ]
+        },
+        "services": [
+          "conversation",
+          "operator",
+          "sessions",
+          "missions",
+          "memory",
+          "operator-understanding",
+          "progression",
+          "planner",
+          "reports",
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "companion"
+        ],
+        "sessionLifecycle": {
+          "contract": "oracle.session-lifecycle",
+          "contractVersion": 1,
+          "authority": "session-service",
+          "persistence": "disabled"
+        },
+        "applications": [
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "reports",
+          "sessions",
+          "career",
+          "planner",
+          "progress",
+          "achievements",
+          "companion"
+        ],
+        "gameIntegrations": [
+          "call-of-duty",
+          "minecraft-java"
+        ],
+        "guidanceProviders": [
+          "game-integrations.call-of-duty.curated-guidance",
+          "game-integrations.minecraft-java.diamond-discovery-guidance"
+        ]
+      },
+      "exactMatch": true
+    },
+    {
+      "target": "electron",
+      "manifestVersion": "1.7.0",
+      "declared": {
+        "subsystems": [
+          {
+            "id": "composition",
+            "required": true
+          },
+          {
+            "id": "operational-diagnostics",
+            "required": true
+          },
+          {
+            "id": "services",
+            "required": true
+          },
+          {
+            "id": "session-lifecycle",
+            "required": true
+          },
+          {
+            "id": "applications",
+            "required": true
+          },
+          {
+            "id": "game-integrations",
+            "required": true
+          },
+          {
+            "id": "guidance",
+            "required": true
+          },
+          {
+            "id": "extensions",
+            "required": false
+          },
+          {
+            "id": "companion",
+            "required": true
+          }
+        ],
+        "operationalDiagnostics": {
+          "contract": "oracle.operational-diagnostics",
+          "contractVersion": 1,
+          "purpose": "software-support",
+          "authority": "non-authoritative",
+          "mode": "disabled",
+          "transport": "none",
+          "retention": "none",
+          "definitions": [
+            {
+              "code": "platform.runtime.started",
+              "subsystem": "platform",
+              "severity": "info",
+              "summary": "Oracle Platform runtime started.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "attempt"
+              ]
+            },
+            {
+              "code": "platform.runtime.failed",
+              "subsystem": "platform",
+              "severity": "error",
+              "summary": "Oracle Platform runtime failed closed.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "phase",
+                "subsystem",
+                "failureClass"
+              ]
+            },
+            {
+              "code": "platform.runtime.stopping",
+              "subsystem": "platform",
+              "severity": "info",
+              "summary": "Oracle Platform runtime is stopping.",
+              "allowedAttributes": [
+                "runtimeTarget"
+              ]
+            },
+            {
+              "code": "platform.runtime.recovery-started",
+              "subsystem": "platform",
+              "severity": "warning",
+              "summary": "Oracle Platform fresh-runtime recovery started.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "attempt"
+              ]
+            },
+            {
+              "code": "platform.runtime.recovery-completed",
+              "subsystem": "platform",
+              "severity": "info",
+              "summary": "Oracle Platform fresh-runtime recovery completed.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "attempt",
+                "status"
+              ]
+            }
+          ]
+        },
+        "services": [
+          "conversation",
+          "operator",
+          "sessions",
+          "missions",
+          "memory",
+          "operator-understanding",
+          "progression",
+          "planner",
+          "reports",
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "companion"
+        ],
+        "sessionLifecycle": {
+          "contract": "oracle.session-lifecycle",
+          "contractVersion": 1,
+          "authority": "session-service",
+          "persistence": "disabled"
+        },
+        "applications": [
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "reports",
+          "sessions",
+          "career",
+          "planner",
+          "progress",
+          "achievements",
+          "companion"
+        ],
+        "gameIntegrations": [
+          "call-of-duty",
+          "minecraft-java"
+        ],
+        "guidanceProviders": [
+          "game-integrations.call-of-duty.curated-guidance",
+          "game-integrations.minecraft-java.diamond-discovery-guidance"
+        ]
+      },
+      "constructed": {
+        "subsystems": [
+          {
+            "id": "composition",
+            "required": true
+          },
+          {
+            "id": "operational-diagnostics",
+            "required": true
+          },
+          {
+            "id": "services",
+            "required": true
+          },
+          {
+            "id": "session-lifecycle",
+            "required": true
+          },
+          {
+            "id": "applications",
+            "required": true
+          },
+          {
+            "id": "game-integrations",
+            "required": true
+          },
+          {
+            "id": "guidance",
+            "required": true
+          },
+          {
+            "id": "extensions",
+            "required": false
+          },
+          {
+            "id": "companion",
+            "required": true
+          }
+        ],
+        "operationalDiagnostics": {
+          "contract": "oracle.operational-diagnostics",
+          "contractVersion": 1,
+          "purpose": "software-support",
+          "authority": "non-authoritative",
+          "mode": "disabled",
+          "transport": "none",
+          "retention": "none",
+          "definitions": [
+            {
+              "code": "platform.runtime.started",
+              "subsystem": "platform",
+              "severity": "info",
+              "summary": "Oracle Platform runtime started.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "attempt"
+              ]
+            },
+            {
+              "code": "platform.runtime.failed",
+              "subsystem": "platform",
+              "severity": "error",
+              "summary": "Oracle Platform runtime failed closed.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "phase",
+                "subsystem",
+                "failureClass"
+              ]
+            },
+            {
+              "code": "platform.runtime.stopping",
+              "subsystem": "platform",
+              "severity": "info",
+              "summary": "Oracle Platform runtime is stopping.",
+              "allowedAttributes": [
+                "runtimeTarget"
+              ]
+            },
+            {
+              "code": "platform.runtime.recovery-started",
+              "subsystem": "platform",
+              "severity": "warning",
+              "summary": "Oracle Platform fresh-runtime recovery started.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "attempt"
+              ]
+            },
+            {
+              "code": "platform.runtime.recovery-completed",
+              "subsystem": "platform",
+              "severity": "info",
+              "summary": "Oracle Platform fresh-runtime recovery completed.",
+              "allowedAttributes": [
+                "runtimeTarget",
+                "attempt",
+                "status"
+              ]
+            }
+          ]
+        },
+        "services": [
+          "conversation",
+          "operator",
+          "sessions",
+          "missions",
+          "memory",
+          "operator-understanding",
+          "progression",
+          "planner",
+          "reports",
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "companion"
+        ],
+        "sessionLifecycle": {
+          "contract": "oracle.session-lifecycle",
+          "contractVersion": 1,
+          "authority": "session-service",
+          "persistence": "disabled"
+        },
+        "applications": [
+          "ai-coach",
+          "oracle-brain",
+          "loadouts",
+          "reports",
+          "sessions",
+          "career",
+          "planner",
+          "progress",
+          "achievements",
+          "companion"
+        ],
+        "gameIntegrations": [
+          "call-of-duty",
+          "minecraft-java"
+        ],
+        "guidanceProviders": [
+          "game-integrations.call-of-duty.curated-guidance",
+          "game-integrations.minecraft-java.diamond-discovery-guidance"
+        ]
+      },
+      "exactMatch": true
+    }
+  ],
+  "requiredFailure": "pass-failed-closed",
+  "optionalFailure": "pass-observable-degraded",
+  "recovery": "pass-fresh-runtime",
+  "rendererSafety": "pass-redacted-serializable",
+  "lifecycleOwnership": "pass-not-merged",
+  "runtimePersistence": "disabled",
+  "deployment": "not-authorised",
+  "migrationsExecuted": false,
+  "result": "pass"
+}

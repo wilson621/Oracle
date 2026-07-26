@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 26 July 2026
-**Version:** 7.8
+**Version:** 7.9
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -89,17 +89,25 @@ Gate C activity occurred.
 
 Sprint 30 — Production Qualification is Founder-approved and active under
 Option A and ADR-047. Delivery is divided into separately verified and
-committed phases. Phases 1 and 2 are complete and locally verified. Phase 1
+committed phases. Phases 1 through 3 are complete and locally verified. Phase 1
 implements the
 non-authoritative diagnostic admission contract, allowlisted definitions,
 minimisation policy and bounded local transient sink. Runtime composition
-remains unchanged at manifest `1.6.0`.
+now mechanically matches manifest `1.7.0` across Web and Electron with
+canonical diagnostic delivery disabled.
 
 Phase 2 freezes the exact candidate and proves repeatable Web,
 release-environment Electron and disposable PostgreSQL critical journeys
 through Migration 014. Authenticated database role/JWT isolation passes. A
 live Supabase Auth/GoTrue Email + Password transaction is unavailable because
-no local provider is configured and is not claimed as passed. Phase 3 has not
+no local provider is configured and is not claimed as passed.
+
+Phase 3 proves renderer-safe health, bounded local diagnostics, failure
+isolation, fresh recovery, disposable backup/restore/deletion and Sprint 29
+rollback regression. The immutable Sprint 29 package remains bound to
+manifest `1.6.0`; candidate reconciliation is required before later integrated
+qualification. The branch was 26 commits ahead of remote at Phase 3 start,
+which remains a local continuity risk without push authority. Phase 4 has not
 begun. Clean-Machine Certification Deferred — Required
 Disposable Windows Environment Unavailable remains unchanged. Gate 7 is not
 authorised.

@@ -40,7 +40,7 @@ implementation stages and do not use fractional Sprint numbering.
 | 27 | Contextual Companion and Reference Integration | Complete — Founder-accepted and closed; source/synthetic certification accepted; Operational Certification Deferred; live profile provisional and observation disabled | None | [Plan](SPRINT_27_PLAN.md), [Implementation](SPRINT_27_IMPLEMENTATION.md), [Certification](SPRINT_27_CERTIFICATION.md), [Closure](SPRINT_27_CLOSURE.md), [Founder acceptance package](SPRINT_27_FOUNDER_ACCEPTANCE_REQUIRED.md), [ADRs 044–045](../Decisions.md) |
 | 28 | Unified Oracle Product Experience | Complete, locally certified, Founder-accepted and closed | None | [Decision package](SPRINT_28_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_28_PLAN.md), [Product Truth Inventory](SPRINT_28_PRODUCT_TRUTH_INVENTORY.md), [Implementation](SPRINT_28_IMPLEMENTATION.md), [Certification](SPRINT_28_CERTIFICATION.md), [Founder acceptance package](SPRINT_28_FOUNDER_ACCEPTANCE_REQUIRED.md), [Closure](SPRINT_28_CLOSURE.md) |
 | 29 | Secure Desktop Operations and Distribution | Complete, locally certified, Founder-accepted and closed; Clean-Machine Certification Deferred | None | [Decision package](SPRINT_29_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_29_PLAN.md), [Implementation](SPRINT_29_IMPLEMENTATION.md), [Certification](SPRINT_29_CERTIFICATION.md), [Founder acceptance package](SPRINT_29_FOUNDER_ACCEPTANCE_REQUIRED.md), [Closure](SPRINT_29_CLOSURE.md), [ADR-046](../Decisions.md) |
-| 30 | Production Qualification | Founder-approved and active; Phases 1–2 implemented and locally verified; provider auth transaction unavailable | None | [Decision package](SPRINT_30_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_30_PLAN.md), [Phase 1 implementation](SPRINT_30_PHASE_1_IMPLEMENTATION.md), [Phase 2 implementation](SPRINT_30_PHASE_2_IMPLEMENTATION.md), [ADR-047](../Decisions.md) |
+| 30 | Production Qualification | Founder-approved and active; Phases 1–3 implemented and locally verified; provider auth transaction unavailable; package/runtime reconciliation required | None | [Decision package](SPRINT_30_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_30_PLAN.md), [Phase 1 implementation](SPRINT_30_PHASE_1_IMPLEMENTATION.md), [Phase 2 implementation](SPRINT_30_PHASE_2_IMPLEMENTATION.md), [Phase 3 implementation](SPRINT_30_PHASE_3_IMPLEMENTATION.md), [incident runbook](SPRINT_30_PHASE_3_INCIDENT_RUNBOOK.md), [ADR-047](../Decisions.md) |
 | 31 | Oracle Beta Certification | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 
 # Historical Integrity
@@ -76,8 +76,10 @@ is complete, locally certified, Founder-accepted and closed. Sprint 29 Option A
 is complete, locally certified, Founder-accepted and closed under ADR-046.
 Clean-Machine Certification Deferred — Required Disposable Windows
 Environment Unavailable remains the independent programme status. Sprint 30
-Option A and ADR-047 are Founder-approved. Phases 1 and 2 are complete and
-locally verified. Phase 2 freezes the candidate and proves the Web, Electron
-and disposable PostgreSQL critical journeys through Migration 014. The live
-Supabase Auth provider transaction is unavailable and is not claimed as
-passed. Phase 3 has not begun.
+Option A and ADR-047 are Founder-approved. Phases 1–3 are complete and locally
+verified. Phase 3 integrates disabled Operational Diagnostics through exact
+manifest `1.7.0` composition, and proves failure isolation, bounded local
+diagnostics, fresh recovery, backup/restore/deletion and Sprint 29 rollback
+regression. The live Supabase Auth provider transaction remains unavailable.
+The immutable Sprint 29 package remains at `1.6.0` and requires later
+candidate reconciliation. Phase 4 has not begun.

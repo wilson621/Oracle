@@ -278,6 +278,8 @@ delivery authorities have been reviewed.
 | Sprint 30 plan | [Sprint 30 Plan](sprints/SPRINT_30_PLAN.md) | Founder-approved phased delivery |
 | Sprint 30 Phase 1 implementation | [Sprint 30 Phase 1 Implementation](sprints/SPRINT_30_PHASE_1_IMPLEMENTATION.md) | Diagnostic admission foundation implemented |
 | Sprint 30 Phase 2 implementation | [Sprint 30 Phase 2 Implementation](sprints/SPRINT_30_PHASE_2_IMPLEMENTATION.md) | Candidate and critical journeys locally qualified; provider transaction unavailable |
+| Sprint 30 Phase 3 implementation | [Sprint 30 Phase 3 Implementation](sprints/SPRINT_30_PHASE_3_IMPLEMENTATION.md) | Runtime diagnostics, reliability and recovery locally qualified |
+| Sprint 30 Phase 3 incident runbook | [Sprint 30 Phase 3 Incident Runbook](sprints/SPRINT_30_PHASE_3_INCIDENT_RUNBOOK.md) | Isolated local detect, fail-closed and fresh-recovery sequence |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

@@ -1,10 +1,15 @@
 import {
   ORACLE_OPERATIONAL_DIAGNOSTIC_CONTRACT,
   ORACLE_OPERATIONAL_DIAGNOSTIC_CONTRACT_VERSION,
+  ORACLE_OPERATIONAL_DIAGNOSTICS_RUNTIME_CONTRACT,
+  ORACLE_OPERATIONAL_DIAGNOSTICS_RUNTIME_CONTRACT_VERSION,
   type OracleOperationalDiagnosticAdmissionResult,
   type OracleOperationalDiagnosticDefinition,
   type OracleOperationalDiagnosticEnvelope,
   type OracleOperationalDiagnosticMetrics,
+  type OracleOperationalDiagnosticsHealth,
+  type OracleOperationalDiagnosticsMode,
+  type OracleOperationalDiagnosticsRuntimeDeclaration,
   type ReportOracleOperationalDiagnosticInput,
 } from "./operational-diagnostic-contract";
 import type {
@@ -18,10 +23,6 @@ import {
   requireOperationalDiagnosticDefinitions,
   validateOperationalDiagnosticAttributes,
 } from "./operational-diagnostic-policy";
-
-export type OracleOperationalDiagnosticsMode =
-  | "disabled"
-  | "local-certification";
 
 export type OracleOperationalDiagnosticsOptions = Readonly<{
   mode: OracleOperationalDiagnosticsMode;
@@ -68,7 +69,7 @@ export class OracleOperationalDiagnosticsService {
     this.now = options.now ?? (() => new Date().toISOString());
     this.createId =
       options.createId ??
-      (() => globalThis.crypto.randomUUID());
+      (() => `diagnostic-${globalThis.crypto.randomUUID()}`);
 
     if (
       (this.mode === "disabled" && this.sink !== null) ||
@@ -158,6 +159,56 @@ export class OracleOperationalDiagnosticsService {
 
   getMetrics(): OracleOperationalDiagnosticMetrics {
     return Object.freeze({ ...this.metrics });
+  }
+
+  getDeclaration(): OracleOperationalDiagnosticsRuntimeDeclaration {
+    return Object.freeze({
+      contract: ORACLE_OPERATIONAL_DIAGNOSTICS_RUNTIME_CONTRACT,
+      contractVersion:
+        ORACLE_OPERATIONAL_DIAGNOSTICS_RUNTIME_CONTRACT_VERSION,
+      purpose: "software-support",
+      authority: "non-authoritative",
+      mode: this.mode,
+      transport:
+        this.mode === "local-certification"
+          ? "local-transient"
+          : "none",
+      retention: "none",
+      definitions: Object.freeze(
+        [...this.definitions.values()].map((definition) =>
+          Object.freeze({
+            ...definition,
+            allowedAttributes: Object.freeze([
+              ...definition.allowedAttributes,
+            ]),
+          })
+        )
+      ),
+    });
+  }
+
+  getHealth(): OracleOperationalDiagnosticsHealth {
+    return Object.freeze({
+      contract: ORACLE_OPERATIONAL_DIAGNOSTICS_RUNTIME_CONTRACT,
+      contractVersion:
+        ORACLE_OPERATIONAL_DIAGNOSTICS_RUNTIME_CONTRACT_VERSION,
+      purpose: "software-support",
+      authority: "non-authoritative",
+      mode: this.mode,
+      status: this.stopped
+        ? "stopped"
+        : this.mode === "disabled"
+          ? "disabled"
+          : this.metrics.sinkFailures > 0
+            ? "degraded"
+            : "ready",
+      transport:
+        this.mode === "local-certification"
+          ? "local-transient"
+          : "none",
+      retention: "none",
+      metrics: this.getMetrics(),
+    });
   }
 
   stop(): void {

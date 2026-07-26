@@ -5,6 +5,9 @@ import type {
   OraclePlatformSubsystemId,
   OracleRuntimeCompositionManifest,
 } from "./platform-composition";
+import type {
+  OracleOperationalDiagnosticsHealth,
+} from "./operational-diagnostics/operational-diagnostic-contract";
 
 export type OraclePlatformStatus =
   | "idle"
@@ -18,6 +21,7 @@ export type OraclePlatformStatus =
 export type OraclePlatformBootPhase =
   | "idle"
   | "validating-composition"
+  | "starting-operational-diagnostics"
   | "registering-services"
   | "starting-session-lifecycle"
   | "registering-applications"
@@ -67,6 +71,7 @@ export type OraclePlatformState = Readonly<{
   updatedAt: string;
   manifest: OracleRuntimeCompositionManifest;
   manifestVerified: boolean;
+  operationalDiagnostics: OracleOperationalDiagnosticsHealth;
   services: readonly OracleComposedService[];
   applications: readonly OracleComposedApplication[];
   gameIntegrations: readonly string[];

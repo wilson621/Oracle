@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 30 Phase 2 progress report
+**Next Review:** Sprint 30 Phase 3 progress report
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -123,11 +123,13 @@ Founder-accepted and closed under ADR-046. Clean-Machine Certification
 Deferred — Required Disposable Windows Environment Unavailable remains the
 independent programme status because the Windows Home workstation has no
 Windows Sandbox or configured disposable Windows VM. Sprint 30 Option A and
-ADR-047 are Founder-approved. Phases 1 and 2 are complete and locally
-verified. Phase 2 freezes the candidate and proves Web, release-environment
-Electron and disposable PostgreSQL critical journeys while recording the
-unavailable live Supabase Auth provider transaction honestly. Runtime
-composition remains unchanged.
+ADR-047 are Founder-approved. Phases 1 through 3 are complete and locally
+verified. Phase 3 integrates canonically disabled Operational Diagnostics
+through manifest `1.7.0` and proves renderer-safe health, bounded local
+diagnostics, failure isolation, fresh recovery, backup/restore/deletion and
+Sprint 29 rollback regression. The unavailable live Supabase Auth provider
+transaction remains explicit. The immutable Sprint 29 package remains at
+manifest `1.6.0` and requires later candidate reconciliation.
 
 The ADR-040 composition manifest is a permanent runtime contract. Every future
 Sprint changing Services, Applications, Game Integrations, Guidance providers,
@@ -1333,15 +1335,15 @@ should be introduced.
 ### Current Status
 
 Option A and ADR-047 are Founder-approved. Sprint 30 is active and proceeds in
-separately verified and committed phases. Phases 1 and 2 have completed local
-verification. Phase 1 established governed non-authoritative diagnostic
-admission. Phase 2 froze the exact candidate and passed repeatable Web,
-release-environment Electron and disposable PostgreSQL critical journeys
-through Migration 014. The database authenticated role/JWT boundary passed;
-the live Supabase Auth provider transaction is unavailable because no local
-provider is configured. Runtime composition remains unchanged and Phase 3 has
-not begun. No production deployment, persistence, telemetry, migration,
-external provider or Gate 7 activity is authorised.
+separately verified and committed phases. Phases 1 through 3 have completed
+local verification. Phase 3 integrates canonically disabled Operational
+Diagnostics through exact manifest `1.7.0` composition and passes
+renderer-safe health, bounded soak, failure isolation, fresh recovery,
+disposable backup/restore/deletion and Sprint 29 rollback regression. The live
+Supabase Auth provider transaction remains unavailable. The immutable Sprint
+29 package remains bound to manifest `1.6.0` and requires later candidate
+reconciliation. Phase 4 has not begun. No production deployment, persistence,
+telemetry, migration, external provider or Gate 7 activity is authorised.
 
 # FOUNDER BETA READINESS REVIEW
 

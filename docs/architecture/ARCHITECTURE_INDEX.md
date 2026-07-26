@@ -928,8 +928,25 @@ ADR-046 establishes:
 - a permanent prohibition on treating local test signing as production trust,
   release readiness, operational certification, distribution or deployment.
 
-Runtime composition remains independently governed by ADR-040 manifest
-`1.6.0`.
+The accepted Sprint 29 package remains independently bound to ADR-040
+manifest `1.6.0`. Current source runtime composition is governed by manifest
+`1.7.0`; later integrated qualification must reconcile that explicit
+candidate difference.
+
+## Operational Diagnostics Contract
+
+ADR-047 and Sprint 30 Phase 3 establish:
+
+- one required, manifest-declared Operational Diagnostics subsystem;
+- fixed `software-support` purpose and `non-authoritative` authority;
+- exact allowlisted definition equality;
+- disabled canonical Web and Electron delivery;
+- bounded process-memory-only local qualification delivery;
+- metrics-only renderer-safe health;
+- fail-closed admission and observable isolated sink degradation;
+- transient teardown and fresh-instance recovery; and
+- no Evidence, Understanding, Memory, coaching, planning, Mission,
+  progression, persistence, upload or external-provider path.
 
 ---
 

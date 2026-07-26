@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-26T09:28:10.147Z",
+  "result": "passed",
+  "runtimeManifestVersion": "1.7.0",
+  "canonicalTargets": {
+    "web": "diagnostics-disabled",
+    "electron": "diagnostics-disabled"
+  },
+  "localCertification": {
+    "transport": "bounded-process-memory",
+    "retention": "none",
+    "upload": false,
+    "externalProvider": false,
+    "rendererProjection": "metrics-only"
+  },
+  "smoke": "passed",
+  "boundedSoakAdmissions": 500,
+  "boundedSoakRetained": 25,
+  "optionalFailureIsolation": "passed-degraded",
+  "requiredFailureIsolation": "passed-failed-closed",
+  "sinkFailureIsolation": "passed-observable-degraded",
+  "crashEnvelope": "passed-minimised-non-authoritative",
+  "freshRecovery": "passed-new-runtime-new-diagnostics-instance",
+  "teardown": "passed-transient-state-cleared",
+  "incidentResponseExercise": "passed-detect-fail-closed-clear-reconstruct-recover",
+  "productionDiagnostics": false,
+  "runtimePersistence": false,
+  "deployment": false
+}

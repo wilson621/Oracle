@@ -1,6 +1,26 @@
 export const ORACLE_OPERATIONAL_DIAGNOSTIC_CONTRACT =
   "oracle.operational-diagnostic-envelope" as const;
 export const ORACLE_OPERATIONAL_DIAGNOSTIC_CONTRACT_VERSION = 1 as const;
+export const ORACLE_OPERATIONAL_DIAGNOSTICS_RUNTIME_CONTRACT =
+  "oracle.operational-diagnostics" as const;
+export const ORACLE_OPERATIONAL_DIAGNOSTICS_RUNTIME_CONTRACT_VERSION =
+  1 as const;
+
+export type OracleOperationalDiagnosticsMode =
+  | "disabled"
+  | "local-certification";
+
+export type OracleOperationalDiagnosticsRuntimeDeclaration = Readonly<{
+  contract: typeof ORACLE_OPERATIONAL_DIAGNOSTICS_RUNTIME_CONTRACT;
+  contractVersion:
+    typeof ORACLE_OPERATIONAL_DIAGNOSTICS_RUNTIME_CONTRACT_VERSION;
+  purpose: "software-support";
+  authority: "non-authoritative";
+  mode: OracleOperationalDiagnosticsMode;
+  transport: "none" | "local-transient";
+  retention: "none";
+  definitions: readonly OracleOperationalDiagnosticDefinition[];
+}>;
 
 export type OracleOperationalDiagnosticSeverity =
   | "info"
@@ -81,4 +101,17 @@ export type OracleOperationalDiagnosticMetrics = Readonly<{
   admitted: number;
   rejected: number;
   sinkFailures: number;
+}>;
+
+export type OracleOperationalDiagnosticsHealth = Readonly<{
+  contract: typeof ORACLE_OPERATIONAL_DIAGNOSTICS_RUNTIME_CONTRACT;
+  contractVersion:
+    typeof ORACLE_OPERATIONAL_DIAGNOSTICS_RUNTIME_CONTRACT_VERSION;
+  purpose: "software-support";
+  authority: "non-authoritative";
+  mode: OracleOperationalDiagnosticsMode;
+  status: "disabled" | "ready" | "degraded" | "stopped";
+  transport: "none" | "local-transient";
+  retention: "none";
+  metrics: OracleOperationalDiagnosticMetrics;
 }>;

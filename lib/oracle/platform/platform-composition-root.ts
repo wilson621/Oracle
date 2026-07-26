@@ -28,12 +28,7 @@ export class OraclePlatformCompositionRoot {
       return createOraclePlatformHealthSnapshot(existing, this.attempt);
     }
 
-    this.attempt += 1;
-    this.runtime = new OraclePlatformRuntime(this.createComposition());
-    return createOraclePlatformHealthSnapshot(
-      this.runtime.start(),
-      this.attempt
-    );
+    return this.startFresh(false);
   }
 
   recover(): OraclePlatformHealthSnapshot {
@@ -46,7 +41,7 @@ export class OraclePlatformCompositionRoot {
         this.runtime = null;
       }
     }
-    return this.start();
+    return this.startFresh(true);
   }
 
   stop(): OraclePlatformHealthSnapshot | null {
@@ -77,5 +72,21 @@ export class OraclePlatformCompositionRoot {
       throw new Error("Oracle Platform composition has not started.");
     }
     return this.runtime.getComposition().guidance;
+  }
+
+  private startFresh(recovery: boolean): OraclePlatformHealthSnapshot {
+    this.attempt += 1;
+    this.runtime = new OraclePlatformRuntime(this.createComposition());
+    if (recovery) {
+      this.runtime.reportRecovery("started", this.attempt);
+    }
+    this.runtime.start();
+    if (recovery) {
+      this.runtime.reportRecovery("completed", this.attempt);
+    }
+    return createOraclePlatformHealthSnapshot(
+      this.runtime.getState(),
+      this.attempt
+    );
   }
 }

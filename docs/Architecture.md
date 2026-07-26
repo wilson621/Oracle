@@ -1950,6 +1950,26 @@ composition therefore remains unchanged at manifest `1.6.0`. Any later
 composition change must update both target-specific manifests and preserve
 ADR-040 mechanical equality.
 
+Sprint 30 Phase 3 performs that later composition change. Runtime Manifest
+`1.7.0` declares Operational Diagnostics as a required subsystem in both Web
+and Electron and mechanically equals the injected instance. Canonical target
+delivery is disabled with no transport and no retention. Isolated local
+qualification may instead inject a bounded process-memory sink behind the same
+declaration and admission boundary.
+
+The renderer-safe Platform health projection exposes only diagnostic purpose,
+authority, mode, status, transport, retention and aggregate admission metrics.
+It exposes no envelopes, attributes, sink, transport or arbitrary diagnostic
+query. Required diagnostic control failure remains fail-closed; isolated
+local delivery failure produces observable degradation without broadening
+collection.
+
+Stop clears transient diagnostic state. Recovery constructs a fresh
+composition, Platform runtime, registries, diagnostic admission service and
+sink. The immutable Sprint 29 package remains bound to manifest `1.6.0`;
+Phase 3 does not rebuild or re-sign it, so later integrated qualification must
+reconcile the candidate explicitly.
+
 ## Sprint 19 Account and Operator Identity Boundary
 
 Supabase Auth owns Account credentials and verification. Email + Password is

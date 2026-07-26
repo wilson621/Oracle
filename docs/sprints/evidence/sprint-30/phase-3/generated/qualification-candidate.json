@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.production-qualification-candidate",
+  "contractVersion": 1,
+  "phase": 3,
+  "frozenAt": "2026-07-26T09:28:10.553Z",
+  "acceptedPhase2Commit": "2288c61b4c361833d6464739b8331483bb379ba1",
+  "sourceBaselineCommit": "2288c61b4c361833d6464739b8331483bb379ba1",
+  "sourceTreeSha256": "1863e5685ad59cccfd1e9d08fdad3f0f75536ebee73556b93e27aec91f1c24ab",
+  "verificationSuiteSha256": "1335261f4d6a49db2344a3e615e9f218d02e31166915f1b05ab07dcc1994e9a1",
+  "runtimeManifest": {
+    "version": "1.7.0",
+    "webSourceSha256": "658e9a39808c07ca839280d99a1162da3386b1f8fd7f3280443548d51afd8718",
+    "electronSourceSha256": "b0d72009b84fcb587a161207e7e8b9792b09dc3ca9a5024f351b0e50f45d6b8a",
+    "canonicalTargetsEqual": true,
+    "operationalDiagnosticsDelivery": "disabled"
+  },
+  "phase2Candidate": "superseded-by-approved-phase-3-composition-change",
+  "releaseManifest": {
+    "path": ".tmp-sprint-29/release/oracle-release-manifest.json",
+    "sha256": "76153fda24bc8d22f9119d5b86b3d0f6db75de6782a383c7eddb863429aae3f8",
+    "runtimeManifestVersion": "1.6.0",
+    "immutableSprint29Candidate": true,
+    "rebuilt": false,
+    "resigned": false,
+    "reconciliation": "required-before-integrated-qualification"
+  },
+  "dependencies": {
+    "packageLockSha256": "8948f6d1128e02217805fc88f8fa057740a4e6040106252b041f573934769adf",
+    "node": "v24.18.0"
+  },
+  "migrations": {
+    "database/009_operator_intelligence_persistence.sql": "fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f",
+    "database/010_operator_trust_control_persistence.sql": "7c46a1c9a3a0ff7e8f5c2348a3179c98934ad34ec9e66a2c2632830b65c7d715",
+    "database/011_operator_account_provisioning.sql": "5be24f86228d018dc2d5aacbf3f186c9414432c18c2b573a7a3a1e340496d505",
+    "database/012_operator_identity_lifecycle.sql": "a436c0df6a2a9296c112d9c4ab6f6dd50dd44daa5fcf54dd01c5a2d213b435b0",
+    "database/013_authoritative_session_lifecycle.sql": "7228c0384caed59f2a042e17eb6b2ea935bfed6b72e6372649d93f0874c5f68a",
+    "database/014_operator_development_lifecycle.sql": "25682a9331102e51d6742988600697f9d23d94a53f09cd23bc585ed0a161d831"
+  },
+  "environment": {
+    "platform": "win32",
+    "architecture": "x64",
+    "osRelease": "10.0.26200",
+    "osVersion": "Windows 11 Home"
+  },
+  "localContinuityRisk": {
+    "branch": "sprint-9-overlay",
+    "commitsAheadOfRemoteAtFreeze": 26,
+    "pushAuthorised": false
+  },
+  "authority": {
+    "production": "unchanged",
+    "productionDiagnostics": "disabled",
+    "externalProvider": "none",
+    "upload": false,
+    "retention": "none",
+    "runtimePersistence": "disabled",
+    "deployment": "not-authorised",
+    "signing": "not-authorised",
+    "gateC": "deferred",
+    "gate7": "not-authorised"
+  }
+}

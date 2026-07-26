@@ -32,6 +32,12 @@ export class OraclePlatformRuntime {
   getState(): OraclePlatformState {
     return Object.freeze({
       ...this.state,
+      operationalDiagnostics: Object.freeze({
+        ...this.state.operationalDiagnostics,
+        metrics: Object.freeze({
+          ...this.state.operationalDiagnostics.metrics,
+        }),
+      }),
       services: Object.freeze([...this.state.services]),
       applications: Object.freeze([...this.state.applications]),
       gameIntegrations: Object.freeze([...this.state.gameIntegrations]),
@@ -77,6 +83,7 @@ export class OraclePlatformRuntime {
     };
 
     this.validateComposition();
+    this.initialiseOperationalDiagnostics();
     this.loadServices();
     this.loadSessionLifecycle();
     this.loadApplications();
@@ -99,6 +106,9 @@ export class OraclePlatformRuntime {
       "Oracle Platform shutdown started.",
       "stopping"
     );
+    this.reportOperationalDiagnostic("platform.runtime.stopping", {
+      runtimeTarget: this.composition.manifest.target,
+    });
 
     try {
       this.composition.companion.stop();
@@ -111,6 +121,17 @@ export class OraclePlatformRuntime {
       );
     }
 
+    this.composition.operationalDiagnostics.stop();
+    this.updateState({
+      operationalDiagnostics:
+        this.composition.operationalDiagnostics.getHealth(),
+    });
+    this.updateSubsystem(
+      "operational-diagnostics",
+      "stopped",
+      "Operational Diagnostics transient state cleared."
+    );
+
     const failed = this.state.subsystems.some(
       ({ required, status }) => required && status === "failed"
     );
@@ -120,6 +141,25 @@ export class OraclePlatformRuntime {
       stoppedAt: new Date().toISOString(),
       companion: this.composition.companion.getState(),
     });
+    return this.getState();
+  }
+
+  reportRecovery(
+    stage: "started" | "completed",
+    attempt: number
+  ): OraclePlatformState {
+    this.reportOperationalDiagnostic(
+      stage === "started"
+        ? "platform.runtime.recovery-started"
+        : "platform.runtime.recovery-completed",
+      {
+        runtimeTarget: this.composition.manifest.target,
+        attempt,
+        ...(stage === "completed"
+          ? { status: this.state.status }
+          : {}),
+      }
+    );
     return this.getState();
   }
 
@@ -145,6 +185,39 @@ export class OraclePlatformRuntime {
         "composition",
         getErrorMessage(error),
         "validating-composition"
+      );
+    }
+  }
+
+  private initialiseOperationalDiagnostics(): void {
+    this.setPhase("starting-operational-diagnostics");
+    try {
+      const health = this.composition.operationalDiagnostics.getHealth();
+      if (
+        health.authority !== "non-authoritative" ||
+        health.purpose !== "software-support" ||
+        health.retention !== "none" ||
+        (health.mode === "disabled" && health.transport !== "none") ||
+        (health.mode === "local-certification" &&
+          health.transport !== "local-transient")
+      ) {
+        throw new Error(
+          "Operational Diagnostics authority, privacy or delivery declaration is invalid."
+        );
+      }
+      this.updateState({ operationalDiagnostics: health });
+      this.updateSubsystem(
+        "operational-diagnostics",
+        "ready",
+        health.mode === "disabled"
+          ? "Operational Diagnostics admission is composed and delivery is disabled."
+          : "Operational Diagnostics local transient delivery is ready."
+      );
+    } catch (error) {
+      this.recordSubsystemFailure(
+        "operational-diagnostics",
+        `Operational Diagnostics failed closed: ${getErrorMessage(error)}`,
+        "starting-operational-diagnostics"
       );
     }
   }
@@ -350,6 +423,12 @@ export class OraclePlatformRuntime {
         "Oracle Platform boot failed closed.",
         "failed"
       );
+      this.reportOperationalDiagnostic("platform.runtime.failed", {
+        runtimeTarget: this.composition.manifest.target,
+        phase: this.state.phase,
+        subsystem: "platform",
+        failureClass: "required-subsystem-failure",
+      });
       return;
     }
 
@@ -370,6 +449,15 @@ export class OraclePlatformRuntime {
         : "Oracle Platform is ready.",
       "complete"
     );
+    this.reportOperationalDiagnostic("platform.runtime.started", {
+      runtimeTarget: this.composition.manifest.target,
+    });
+    if (
+      this.state.operationalDiagnostics.status === "degraded" &&
+      this.state.status === "ready"
+    ) {
+      this.updateState({ status: "degraded" });
+    }
   }
 
   private markInventory(
@@ -411,6 +499,28 @@ export class OraclePlatformRuntime {
       phase,
       id
     );
+    if (id !== "operational-diagnostics") {
+      this.reportOperationalDiagnostic("platform.runtime.failed", {
+        runtimeTarget: this.composition.manifest.target,
+        phase,
+        subsystem: id,
+        failureClass: "subsystem-failure",
+      });
+    }
+  }
+
+  private reportOperationalDiagnostic(
+    code: string,
+    attributes: Readonly<Record<string, string | number | boolean | null>>
+  ): void {
+    this.composition.operationalDiagnostics.report({
+      code,
+      attributes,
+    });
+    this.updateState({
+      operationalDiagnostics:
+        this.composition.operationalDiagnostics.getHealth(),
+    });
   }
 
   private setPhase(phase: OraclePlatformBootPhase): void {
@@ -478,6 +588,8 @@ export function createInitialPlatformState(
     updatedAt: now,
     manifest: composition.manifest,
     manifestVerified: false,
+    operationalDiagnostics:
+      composition.operationalDiagnostics.getHealth(),
     services: Object.freeze([]),
     applications: Object.freeze([]),
     gameIntegrations: Object.freeze([]),
@@ -530,6 +642,8 @@ function getSubsystemName(id: OraclePlatformSubsystemId): string {
   switch (id) {
     case "composition":
       return "Runtime Composition";
+    case "operational-diagnostics":
+      return "Operational Diagnostics";
     case "services":
       return "Oracle Services";
     case "session-lifecycle":

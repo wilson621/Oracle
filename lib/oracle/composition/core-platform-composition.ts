@@ -26,9 +26,13 @@ import type {
   OraclePlatformComposition,
   OracleRuntimeCompositionManifest,
 } from "../platform/platform-composition";
+import type {
+  OracleOperationalDiagnosticsService,
+} from "../platform/operational-diagnostics";
 
 export function createCoreOraclePlatformComposition(
-  manifest: OracleRuntimeCompositionManifest
+  manifest: OracleRuntimeCompositionManifest,
+  operationalDiagnostics: OracleOperationalDiagnosticsService
 ): OraclePlatformComposition {
   const providers = Object.freeze([
     createCallOfDutyCuratedGuidanceProvider(),
@@ -40,6 +44,7 @@ export function createCoreOraclePlatformComposition(
 
   return Object.freeze({
     manifest,
+    operationalDiagnostics,
     services: createCoreOracleServiceRegistry(),
     sessionLifecycle: Object.freeze({
       declaration: manifest.sessionLifecycle,

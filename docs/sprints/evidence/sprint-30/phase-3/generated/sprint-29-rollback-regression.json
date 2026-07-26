@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-26T09:24:57.920Z",
+  "result": "passed-with-explicit-candidate-reconciliation-required",
+  "sprint29Regression": "passed-before-evidence-recording",
+  "releaseId": "oracle-desktop-beta-0.1.0-local-certification",
+  "packageVersion": "0.1.0.0",
+  "releaseManifestRuntimeVersion": "1.6.0",
+  "currentRuntimeManifestVersion": "1.7.0",
+  "rollbackAllowlist": [
+    "0.0.9.0"
+  ],
+  "arbitraryDowngrade": false,
+  "packageHash": "verified",
+  "replacementOrdering": "verified-by-sprint-29-contract-regression",
+  "releaseCandidateReconciliation": "required-before-integrated-qualification",
+  "packageRebuilt": false,
+  "packageResigned": false,
+  "productionTrusted": false,
+  "deployed": false,
+  "distributed": false
+}
