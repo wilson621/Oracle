@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 26 July 2026
-**Version:** 7.9
+**Version:** 8.0
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -116,10 +116,18 @@ remain unavailable, and none is claimed as passed. Phase 5 completes the
 integrated matrix, closes the development-tool supply-chain finding and
 produces the Production Qualification dossier. Full and production dependency
 audits report zero vulnerabilities. Sprint 30 remains qualification-incomplete
-because mandatory external environment evidence and authorised package
-reconciliation are absent. Clean-Machine Certification Deferred — Required
-Disposable Windows Environment Unavailable remains unchanged. Gate 7 is not
-authorised.
+because later mandatory environment evidence and authorised package
+reconciliation remain absent.
+
+Sprint 30.5 Stage 1 — Environment Admission is Founder-accepted and closed.
+Transfer integrity, the controlled non-pristine Windows baseline, isolated
+Auth route, PostgreSQL/Mailpit denial, standalone Electron `39.8.10` hardware
+GPU admission and complete teardown pass. The raw evidence package is frozen
+under SHA-256
+`841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
+This does not satisfy the separate clean Windows requirement. Stage 2 —
+Candidate Freeze and Package Reconciliation is proposed but not authorised.
+Gate 7 is not authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -149,6 +157,21 @@ Sprint 29 evidence is recorded in
 `docs/sprints/SPRINT_29_IMPLEMENTATION.md`,
 `docs/sprints/SPRINT_29_CERTIFICATION.md` and
 `docs/sprints/evidence/sprint-29/`.
+Sprint 30.5 Stage 1 closure and evidence are recorded in
+`docs/sprints/SPRINT_30_5_STAGE_1_CLOSURE.md`,
+`docs/sprints/evidence/sprint-30-5/stage-1/` and the canonical
+`docs/QUALIFICATION_REGISTER.md`.
+
+# Latest Closed Qualification Stage
+
+## Sprint 30.5 Stage 1 — Environment Admission
+
+**Status:** Founder-accepted and closed
+**Host:** Controlled non-pristine physical qualification host
+**Clean Windows:** Not satisfied; remains mandatory later
+**Next stage:** Stage 2 proposed; Founder authority required
+**Deployment status:** Production unchanged; no signing, distribution,
+deployment, migration, persistence or Gate authority
 
 # Latest Closed Sprint
 

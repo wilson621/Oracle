@@ -780,8 +780,12 @@ Protected authenticated rendering, installed-package GPU evidence and clean
 Windows remain honestly unavailable or deferred. Phase 5 completes the
 integrated source, domain, runtime, database, recovery, package-integrity,
 quality and support matrix and closes the discovered development dependency
-advisory. Sprint 30 remains qualification-incomplete pending mandatory
-environment evidence and separately authorised package reconciliation.
+advisory. Sprint 30.5 Stage 1 is Founder-accepted and closed: the controlled
+non-pristine physical host, isolated Auth route, standalone hardware GPU
+admission and teardown evidence pass and are frozen. The host is not a clean
+Windows environment. Sprint 30 remains qualification-incomplete pending
+Stages 2–7, including separately authorised package reconciliation, clean
+Windows, live Auth, protected rendering and installed-package qualification.
 Production signing, publication, distribution, deployment and runtime
 persistence remain unauthorised.
 

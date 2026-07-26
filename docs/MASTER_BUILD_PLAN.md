@@ -135,14 +135,14 @@ ADR-046. Its governed MSIX implementation, signed Release Manifest equality
 and current-host install/update/repair/rollback/uninstall certification are
 accepted. Clean-Machine Certification Deferred — Required Disposable Windows
 Environment Unavailable remains the independent programme status. Sprint 30
-Option A and ADR-047 are Founder-approved. Phases 1 through 3 are complete and
-locally verified. Operational Diagnostics remains separate from Oracle
-Intelligence and is canonically disabled through exact Web/Electron manifest
-`1.7.0` composition. Failure isolation, fresh recovery, disposable
-backup/restore/deletion and Sprint 29 rollback regression pass. The live
-Supabase Auth provider transaction remains unavailable. The immutable Sprint
-29 package remains at manifest `1.6.0` and requires later candidate
-reconciliation. Phase 4 has not begun.
+Option A and ADR-047 are Founder-approved. Phases 1 through 5 are complete and
+locally verified. Sprint 30.5 Stage 1 Environment Admission is
+Founder-accepted and closed with frozen transfer, controlled non-pristine
+host, isolated network, standalone GPU and cleanup evidence. It does not
+satisfy clean Windows qualification. Runtime Manifest `1.7.0` still requires
+a separately authorised reconciled package. Stage 2 is proposed and not
+authorised; live Auth, protected rendering, installed-package qualification
+and later integrated evidence remain outstanding.
 Production signing, publication, distribution, deployment and activation
 remain unauthorised.
 

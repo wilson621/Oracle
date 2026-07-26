@@ -73,3 +73,25 @@ software defects. They cannot be closed by inference:
 Phase 5 is complete as an engineering and local-certification phase. Sprint 30
 must remain qualification-incomplete under its approved Definition of Done.
 This dossier grants no Beta, deployment, distribution or Gate authority.
+
+## Sprint 30.5 Stage 1 evidence extension
+
+On 26 July 2026 the Founder accepted and closed Sprint 30.5 Stage 1
+Environment Admission. The controlled non-pristine physical host now has
+hash-verified transfer, baseline, restore-point, isolated Auth route,
+PostgreSQL/Mailpit denial, standalone Electron hardware GPU and teardown
+evidence.
+
+This closes the earlier environment-suitability and standalone-GPU evidence
+gap. It does not prove:
+
+- a reconciled Runtime Manifest `1.7.0` installed package;
+- clean Windows installation;
+- installed-package GPU, performance or accessibility;
+- live Supabase Auth and protected rendering; or
+- reproducible final integrated qualification.
+
+The frozen Stage 1 evidence archive SHA-256 is
+`841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
+Sprint 30 remains qualification-incomplete while Sprint 30.5 Stages 2–7
+remain. Stage 2 is proposed and requires separate Founder authority.

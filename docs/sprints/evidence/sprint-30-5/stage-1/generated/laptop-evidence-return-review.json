@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.laptop-evidence-return-review",
+  "contractVersion": 1,
+  "reviewedAt": "2026-07-26T14:12:14.3646530Z",
+  "result": "founder-accepted-and-closed",
+  "returnArchive": {
+    "filename": "Oracle.Stage1EvidenceReturn.zip",
+    "sha256": "c2a9efba54b041021a88174de80b53e47953175740d574a235987304f970a293",
+    "hashVerified": true,
+    "kitManifestVerified": true,
+    "sourceDestinationHashMatched": true
+  },
+  "hostClassification": {
+    "value": "controlled-non-pristine-physical-qualification-host",
+    "pristineOrCleanMachine": false,
+    "ambientDevelopmentToolsRequireRemovalSolelyForStage1": false,
+    "separateCleanWindowsQualificationRequired": true
+  },
+  "evidence": {
+    "baseline": {
+      "present": true,
+      "sha256Verified": true,
+      "originalResult": "failed",
+      "developmentToolsAbsent": false,
+      "acceptedUnderRevisedHostPolicy": true
+    },
+    "network": {
+      "present": true,
+      "sha256Verified": true,
+      "result": "passed",
+      "productionUsed": false
+    },
+    "gpu": {
+      "processExitCode": 0,
+      "jsonPresent": true,
+      "sha256Present": true,
+      "sha256": "5ada3cd6682f981bb0bcc9ab44b60ad6ccc57ba771e6163d06ac2de61908bfe9",
+      "sha256Verified": true,
+      "result": "passed",
+      "electronVersion": "39.8.10",
+      "chromiumVersion": "142.0.7444.265",
+      "hardwareAccelerationEnabled": true,
+      "gpuProcessCount": 1,
+      "hardwareRenderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001638) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "rtx3070Detected": true,
+      "activeFallbackIndicators": [],
+      "certificationStatus": "passed",
+      "recoveryRequired": false
+    }
+  },
+  "developmentPcTeardown": {
+    "firewallRulesRemaining": 0,
+    "authRelayPresent": false,
+    "containersRemaining": 0,
+    "dataVolumesRemaining": 0,
+    "networksRemaining": 0,
+    "temporaryConfigurationPresent": false,
+    "result": "passed"
+  },
+  "laptopCleanup": {
+    "contract": "oracle.sprint-30-5.artifact-removal",
+    "contractVersion": 1,
+    "result": "passed",
+    "sha256": "96f2d2b92ca6bfcc915c45c8048a96ec7610a7f7375b519b0f6556ddd22e5c2b",
+    "sha256Verified": true,
+    "kitDirectoryRemoved": true,
+    "gpuProbeProcessRunning": false,
+    "misplacedGpuEvidenceFound": true,
+    "misplacedGpuEvidenceRemoved": true,
+    "developmentToolsInstalledByKit": false,
+    "oracleInstalledByKit": false
+  },
+  "stage2Started": false
+}

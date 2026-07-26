@@ -83,7 +83,7 @@ $baselineExit = Invoke-EvidenceProcess "powershell.exe" @(
 )
 $gpuExit = Invoke-EvidenceProcess `
   (Join-Path $kitRoot "gpu-probe\OracleStage1GpuProbe.exe") `
-  @("--output=$gpuPath")
+  @("`"--output=$gpuPath`"")
 $networkExit = Invoke-EvidenceProcess "powershell.exe" @(
   "-NoProfile", "-ExecutionPolicy", "Bypass",
   "-File", "`"$(Join-Path $kitRoot 'Test-OracleStage1LaptopRoute.ps1')`"",
@@ -91,9 +91,15 @@ $networkExit = Invoke-EvidenceProcess "powershell.exe" @(
   "-OutputPath", "`"$networkPath`""
 )
 
+$gpuEvidencePresent = (
+  (Test-Path -LiteralPath $gpuPath -PathType Leaf) -and
+  (Test-Path -LiteralPath "$gpuPath.sha256.txt" -PathType Leaf)
+)
+
 $executionResult = if (
   $baselineExit -eq 0 -and
   $gpuExit -eq 0 -and
+  $gpuEvidencePresent -and
   $networkExit -eq 0
 ) { "passed" } else { "failed" }
 
@@ -117,6 +123,7 @@ $transferEvidence = [ordered]@{
   execution = [ordered]@{
     baselineExitCode = $baselineExit
     gpuExitCode = $gpuExit
+    gpuEvidencePresent = $gpuEvidencePresent
     networkExitCode = $networkExit
   }
   removal = "pending-confirmation-script"

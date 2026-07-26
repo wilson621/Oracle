@@ -1,8 +1,19 @@
 # Sprint 30.5 Stage 1 — Laptop Evidence Kit
 
-**Status:** Ready for controlled transfer and qualification-machine execution
+**Status:** Founder-accepted and closed; retained as execution history
 **Scope:** Stage 1 environment admission only
 **Stage 2:** Not started
+
+## Founder-approved host classification
+
+The ASUS qualification laptop is admitted as a **controlled non-pristine
+physical qualification host**. It must not be represented as a pristine or
+clean-machine environment.
+
+The presence of Node.js, npm, Python, .NET or Visual Studio Build Tools does
+not fail Stage 1 solely because those tools are installed. Oracle must not
+invoke or depend on them during qualification. A separate clean Windows
+qualification remains mandatory before production certification.
 
 ## Supplied files
 
@@ -158,7 +169,12 @@ Codex will recommend Stage 1 acceptance only when:
 - Windows version, build, display, scaling, drivers and software inventory are
   recorded;
 - Oracle is absent;
-- Node.js, npm, Git, Docker, compilers and development tools are absent;
+- Node.js, npm, Git, Docker, compilers and other development tools are
+  inventoried;
+- the evidence kit and Oracle qualification path do not invoke or depend on
+  ambient Node.js, npm, Python, .NET or Visual Studio Build Tools;
+- the host is represented as controlled and non-pristine;
+- separate clean Windows qualification remains outstanding;
 - the documented restore point is enumerated;
 - Electron is exactly `39.8.10`;
 - Chromium version is recorded;

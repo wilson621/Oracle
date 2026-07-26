@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 30 Phase 3 progress report
+**Next Review:** Sprint 30.5 Stage 2 Founder decision
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1334,16 +1334,22 @@ should be introduced.
 
 ### Current Status
 
-Option A and ADR-047 are Founder-approved. Sprint 30 is active and proceeds in
-separately verified and committed phases. Phases 1 through 3 have completed
-local verification. Phase 3 integrates canonically disabled Operational
-Diagnostics through exact manifest `1.7.0` composition and passes
-renderer-safe health, bounded soak, failure isolation, fresh recovery,
-disposable backup/restore/deletion and Sprint 29 rollback regression. The live
-Supabase Auth provider transaction remains unavailable. The immutable Sprint
-29 package remains bound to manifest `1.6.0` and requires later candidate
-reconciliation. Phase 4 has not begun. No production deployment, persistence,
-telemetry, migration, external provider or Gate 7 activity is authorised.
+Option A and ADR-047 are Founder-approved. Sprint 30 Phases 1 through 5 are
+complete and locally verified. Sprint 30.5 is the approved seven-stage bounded
+qualification-completion milestone. Stage 1 Environment Admission is
+Founder-accepted and closed with frozen evidence from the controlled
+non-pristine physical host, isolated network route, standalone hardware GPU
+probe and complete teardown. It does not satisfy separate clean Windows
+qualification.
+
+Stage 2 Candidate Freeze and Package Reconciliation is proposed and not
+authorised. It requires explicit Founder authority to construct and locally
+test-sign a new Runtime Manifest `1.7.0` qualification package without
+altering the immutable Sprint 29 package. Live Auth, protected rendering,
+clean Windows, installed-package GPU/performance/accessibility,
+reproducibility and final integrated qualification remain in later sequential
+stages. No production deployment, persistence, telemetry, migration, external
+provider, remote push or Gate 7 activity is authorised.
 
 # FOUNDER BETA READINESS REVIEW
 

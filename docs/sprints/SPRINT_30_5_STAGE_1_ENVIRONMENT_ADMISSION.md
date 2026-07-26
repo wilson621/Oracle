@@ -1,5 +1,10 @@
 # Sprint 30.5 Stage 1 — Environment Admission Record
 
+**Historical status:** Superseded by the Founder-authorised controlled
+non-pristine physical-host model and the closed
+`SPRINT_30_5_STAGE_1_ENVIRONMENT_ADMISSION_REVISED.md` record. The result below
+is retained as the honest outcome of the original environment-model attempt.
+
 **Result:** Blocked — mandatory resettable Windows/GPU environment unavailable
 **Admission decision:** Fail closed
 **Product source changed:** No

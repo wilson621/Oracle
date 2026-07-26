@@ -1,14 +1,15 @@
 # Sprint 30.5 Stage 1 — Revised Environment Admission Record
 
-**Result:** Admission incomplete — authorised physical machine evidence pending
+**Result:** Founder-accepted and closed; superseded by the final closure record
 **Previous blocker:** Superseded by Founder clarification
 **Product source changed:** No
 **Stage 2 started:** No
 
 ## Founder-authorised qualification machine
 
-The Founder has authorised the following dedicated physical environment as
-satisfying the clean-machine model without a factory reset:
+The Founder authorised the following dedicated physical environment for
+qualification. The later Stage 1 policy decision classifies it as a controlled
+non-pristine physical qualification host, not as a clean-machine environment:
 
 | Property | Founder-provided specification |
 | --- | --- |
@@ -19,7 +20,7 @@ satisfying the clean-machine model without a factory reset:
 | GPU | NVIDIA GeForce RTX 3070 Laptop GPU |
 | Drivers | NVIDIA and ASUS updates completed |
 | Baseline | Documented Windows restore point |
-| Use | Dedicated Oracle qualification |
+| Use | Controlled non-pristine Oracle qualification host |
 | Separation | Isolated from Oracle development |
 | Data boundary | No production credentials or data |
 
@@ -122,20 +123,8 @@ are not running infrastructure.
 No purchase, paid provider, factory reset or new virtualisation provider is
 required. The minimum outstanding actions are:
 
-1. Run a read-only baseline collector on the authorised laptop and return the
-   machine-generated OS, hardware, GPU driver, installed-software, Oracle
-   absence, developer-tool absence and restore-point evidence.
-2. Transfer a hash-bound, standalone Electron `39.8.10` GPU admission probe by
-   the controlled local method; run it without installing development tooling;
-   return its immutable JSON result.
-3. Confirm hardware acceleration, GPU feature status and the absence of
-   unexpected software fallback on the laptop.
-4. Record the restore-point identifier and verify that System Restore is
-   enabled and the baseline is selectable.
-5. Establish and test the temporary allowlisted laptop-to-Auth route while
-   keeping PostgreSQL and Mailpit inaccessible to non-allowlisted machines.
-6. Record the artifact-transfer medium, source hash, destination hash and
-   removal result.
+1. Remove the extracted kit, GPU probe and any misplaced GPU evidence from the
+   laptop, then return cleanup evidence.
 
 These actions are within the existing Stage 1 authority. They require access
 to or coordinated execution on the qualification laptop, not new Founder
@@ -143,12 +132,15 @@ architecture or product authority.
 
 ## Admission recommendation
 
-Do not accept Stage 1 yet.
+Cleanup evidence is verified and Stage 1 is formally closed.
 
-The physical-machine model is accepted in principle and the disposable service
-topology, migration chain, local email capture, teardown and recreation have
-passed. Stage 1 remains incomplete solely because laptop-local inventory,
-restore, Electron GPU and isolated cross-machine-route evidence has not been
-collected.
+The physical machine is accepted as a controlled non-pristine qualification
+host. Baseline inventory, restore-point evidence and the isolated
+cross-machine route have been collected. Installed development tooling does
+not require removal solely for Stage 1 unless Oracle invokes or depends on it.
+The recovered GPU record and SHA-256 pass the approved minimal hardware
+admission criteria. All mandatory technical admission evidence is present and
+the cleanup record passes. A separate clean Windows qualification remains
+mandatory before production certification.
 
 Stage 2 must not begin.

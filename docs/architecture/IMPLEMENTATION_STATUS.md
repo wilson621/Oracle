@@ -48,10 +48,11 @@ walkthrough accepted
 **Sprint 29:** Complete, locally certified, Founder-accepted and closed under
 ADR-046; Clean-Machine Certification Deferred — Required Disposable Windows
 Environment Unavailable remains the independent programme status
-**Sprint 30:** Founder-approved and active under ADR-047; Phases 1–3
-implemented and locally verified; provider-level authentication transaction
-unavailable; package/runtime reconciliation required; production qualification
-not yet complete
+**Sprint 30:** Founder-approved and active under ADR-047; Phases 1–5
+implemented and locally verified; Sprint 30.5 Stage 1 Environment Admission
+Founder-accepted and closed; package/runtime reconciliation, clean Windows,
+live Auth, protected rendering and installed-package qualification remain;
+production qualification not yet complete
 
 ---
 
@@ -128,7 +129,36 @@ through Migration 014 while preserving permanent Operator identity.
 The accepted Sprint 29 package remains immutable and bound to manifest
 `1.6.0`. It passed rollback regression but requires candidate reconciliation
 before later integrated qualification. No rebuild, signing, deployment or
-push occurred. Phase 4 has not begun.
+push occurred in Phase 3.
+
+## Sprint 30 Phases 4–5 — Quality Envelope and Integrated Dossier
+
+Phase 4 passes the frozen current-host startup, CPU, memory, response-size,
+authentication-boundary, deterministic Guidance-latency, public
+authentication accessibility and Runtime Manifest `1.7.0` equality checks.
+Unavailable live Auth, protected rendering, installed-package GPU and clean
+Windows evidence remain explicit.
+
+Phase 5 completes the authorised integrated architecture, source, domain,
+database, recovery, supply-chain, package-integrity, performance,
+accessibility and support matrix. All critical and high-severity engineering
+findings are closed. The Production Qualification dossier remains incomplete
+only for the separately governed Sprint 30.5 evidence sequence.
+
+## Sprint 30.5 Stage 1 — Environment Admission
+
+Stage 1 is Founder-accepted and closed. The ASUS ROG Zephyrus G15 is admitted
+as a controlled non-pristine physical qualification host. Transfer integrity,
+Windows and hardware inventory, restore point, isolated Auth access,
+PostgreSQL/Mailpit denial, non-allowlisted denial, standalone Electron
+`39.8.10` hardware GPU operation and complete teardown pass.
+
+Installed development tools were inventoried but were not invoked by the
+qualification path. The host is not a clean Windows environment and does not
+satisfy that later mandatory qualification. The frozen local evidence archive
+has SHA-256
+`841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
+Stage 2 is proposed and not authorised.
 
 ## Sprint 29 — Secure Desktop Operations and Distribution
 

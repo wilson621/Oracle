@@ -173,8 +173,9 @@ Continue with:
 13. [Engineering Programme](ENGINEERING_PROGRAMME.md)
 14. [Master Build Plan](MASTER_BUILD_PLAN.md)
 15. [Project Board](PROJECT_BOARD.md)
-16. [Sprint Index](sprints/SPRINT_INDEX.md)
-17. the relevant Sprint record under [`docs/sprints`](sprints/)
+16. [Qualification Register](QUALIFICATION_REGISTER.md)
+17. [Sprint Index](sprints/SPRINT_INDEX.md)
+18. the relevant Sprint record under [`docs/sprints`](sprints/)
 
 Implementation begins only after the applicable governance, architecture and
 delivery authorities have been reviewed.
@@ -199,6 +200,7 @@ delivery authorities have been reviewed.
 | Approved Sprint 17–Beta Epics, Sprints, dependencies and gates | [Engineering Programme](ENGINEERING_PROGRAMME.md) | Living |
 | Approved engineering execution plan | [Master Build Plan](MASTER_BUILD_PLAN.md) | Living |
 | Current approved progress | [Project Board](PROJECT_BOARD.md) | Living |
+| Operational qualification states and evidence gaps | [Qualification Register](QUALIFICATION_REGISTER.md) | Living register over immutable evidence |
 | Canonical Sprint numbering and aliases | [Sprint Index](sprints/SPRINT_INDEX.md) | Living index |
 | Closed Sprint evidence | [`docs/sprints`](sprints/) | Historical |
 | Sprint 17 Founder-approved closure evidence | [Sprint 17 Closure Report](sprints/SPRINT_17_CLOSURE.md) | Closed Sprint record |
@@ -280,6 +282,9 @@ delivery authorities have been reviewed.
 | Sprint 30 Phase 2 implementation | [Sprint 30 Phase 2 Implementation](sprints/SPRINT_30_PHASE_2_IMPLEMENTATION.md) | Candidate and critical journeys locally qualified; provider transaction unavailable |
 | Sprint 30 Phase 3 implementation | [Sprint 30 Phase 3 Implementation](sprints/SPRINT_30_PHASE_3_IMPLEMENTATION.md) | Runtime diagnostics, reliability and recovery locally qualified |
 | Sprint 30 Phase 3 incident runbook | [Sprint 30 Phase 3 Incident Runbook](sprints/SPRINT_30_PHASE_3_INCIDENT_RUNBOOK.md) | Isolated local detect, fail-closed and fresh-recovery sequence |
+| Sprint 30.5 Stage 1 closure | [Sprint 30.5 Stage 1 Closure](sprints/SPRINT_30_5_STAGE_1_CLOSURE.md) | Founder-accepted and closed; controlled non-pristine host admitted |
+| Sprint 30.5 Stage 1 evidence | [Sprint 30.5 Stage 1 Evidence](sprints/evidence/sprint-30-5/stage-1/README.md) | Complete, frozen and hash-bound |
+| Sprint 30.5 Stage 2 plan | [Sprint 30.5 Stage 2 Plan](sprints/SPRINT_30_5_STAGE_2_PLAN.md) | Proposed; separate Founder authority required |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation
