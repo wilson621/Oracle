@@ -1,0 +1,4 @@
+# Preserve byte-for-byte Sprint 30.5 Stage 3 hash-bound governance artifacts.
+docs/sprints/SPRINT_30_5_STAGE_3_PROVENANCE_EXCEPTION_FOUNDER_APPROVAL_PACKAGE.md -text
+docs/sprints/evidence/sprint-30-5/stage-3-host-admission/** -text
+scripts/sprint-30-5/stage-3-host-admission/** -text

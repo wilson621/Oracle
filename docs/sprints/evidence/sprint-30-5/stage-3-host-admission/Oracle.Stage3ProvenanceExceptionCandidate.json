@@ -1,0 +1,83 @@
+﻿{
+    "schemaVersion":  1,
+    "contract":  "oracle.sprint-30-5.stage-3-provenance-exception-candidate",
+    "contractVersion":  1,
+    "evaluatedAtUtc":  "2026-07-26T22:49:59.6111557Z",
+    "state":  "eligible-for-founder-approval",
+    "maximumState":  "eligible-for-founder-approval",
+    "admissionGranted":  false,
+    "stage3AuthorityGranted":  false,
+    "founderApprovalRequired":  true,
+    "exception":  {
+                      "identifier":  "sprint-30-5-stage-3-founder-qa-01-retained-media-provenance",
+                      "scope":  {
+                                    "deviceName":  "Founder-QA-01",
+                                    "manufacturer":  "MEDION",
+                                    "model":  "ERAZER P6605 MD61596",
+                                    "installationBinding":  "6dfaa176ed2d43595511d44401612536c6c0f1955f94527469d0f22af09c3b0e",
+                                    "transferable":  false
+                                },
+                      "assertion":  "Windows was clean-installed using Microsoft\u0027s official Media Creation Tool USB workflow, but the original USB or ISO hash was not retained.",
+                      "installationMediaEvidencePresent":  false,
+                      "residualRisk":  "Oracle cannot cryptographically prove the identity of the original installation media. It instead proves the observed freshness, integrity and uncontaminated state of the resulting Windows installation.",
+                      "invalidatedBy":  [
+                                            "windows-reinstall",
+                                            "windows-reset",
+                                            "system-disk-replacement",
+                                            "system-image-restoration",
+                                            "secure-boot-change",
+                                            "tpm-change",
+                                            "contamination",
+                                            "unexplained-software",
+                                            "failed-integrity-controls"
+                                        ]
+                  },
+    "evidence":  {
+                     "hostAdmissionFilename":  "Oracle.Stage3HostAdmission.json",
+                     "hostAdmissionSha256":  "6dfaa176ed2d43595511d44401612536c6c0f1955f94527469d0f22af09c3b0e",
+                     "baselineRecoveryFilename":  "FOUNDER_QA_01_BASELINE_AND_RECOVERY.md",
+                     "baselineRecoverySha256":  "6674b900fccadcc8f6d476dda6a787f859aad948dc78033dbfb7793ac90e8d44",
+                     "compensatingControlsFilename":  "Oracle.Stage3CompensatingControls.json",
+                     "compensatingControlsSha256":  "9455f45f61b96eaabb33f009b9c8fb1aca2d8f99d1744bb9857453db24855eda"
+                 },
+    "evaluator":  {
+                      "filename":  "Test-OracleStage3ProvenanceException.ps1",
+                      "sha256":  "2383e27293212a10b05adcaf4f8ee40bd0b7f49c73d1989fce015288dab6f1bb",
+                      "powershell":  "5.1.26100.8875"
+                  },
+    "checks":  {
+                   "admissionHashMatches":  true,
+                   "admissionContractMatches":  true,
+                   "admissionCollectorRevisionMatches":  true,
+                   "deviceNameMatches":  true,
+                   "manufacturerMatches":  true,
+                   "modelMatches":  true,
+                   "baselineHashMatches":  true,
+                   "installationMediaEvidenceRemainsFalse":  true,
+                   "soleFailedAdmissionCheckIsMedia":  true,
+                   "allTechnicalAdmissionChecksPass":  true,
+                   "allFounderConfirmationsPass":  true,
+                   "controlsContractMatches":  true,
+                   "controlsAdmissionBindingMatches":  true,
+                   "controlsBaselineBindingMatches":  true,
+                   "controlsPreserveMissingMedia":  true,
+                   "controlsResultPasses":  true,
+                   "allCompensatingChecksPass":  true,
+                   "dismPasses":  true,
+                   "sfcPasses":  true,
+                   "defenderPasses":  true,
+                   "controlsCannotGrantAdmission":  true,
+                   "controlsCannotGrantStage3":  true,
+                   "controlsMaximumStateIsBounded":  true
+               },
+    "failedChecks":  [
+
+                     ],
+    "limitations":  [
+                        "This candidate does not grant host admission.",
+                        "This candidate does not authorise Stage 3.",
+                        "installationMediaEvidencePresent remains false.",
+                        "Only the Founder may approve the host-specific exception.",
+                        "Qualification Register and programme status remain unchanged until Founder approval."
+                    ]
+}

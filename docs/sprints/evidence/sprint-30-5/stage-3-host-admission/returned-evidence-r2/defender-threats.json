@@ -1,0 +1,17 @@
+﻿{
+    "scanStartedAtUtc":  "2026-07-26T22:42:39.1556644Z",
+    "scanCommandCompletedAtUtc":  "2026-07-26T22:42:54.2272013Z",
+    "activeThreats":  [
+
+                      ],
+    "detectionsSinceScanStart":  [
+
+                                 ],
+    "allThreatMetadata":  [
+
+                          ],
+    "allDetectionMetadata":  [
+
+                             ],
+    "resourcesOrPathsRetained":  false
+}

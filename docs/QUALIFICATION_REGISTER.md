@@ -33,7 +33,7 @@ results.
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
 | 2 | Candidate Freeze and Package Reconciliation | **Founder-accepted and closed** | Runtime Manifest `1.7.0` package and Release Manifest reconcile; artifact/content/signature/SBOM/provenance checks pass; signer destroyed and trust removed; frozen evidence SHA-256 `8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876` | None for Stage 2; history is closed |
-| 3 | Clean Windows Qualification | **Not started — replacement host admission and Founder authority required** | Founder-designated replacement physical laptop supersedes the ASUS for Stage 3; exact hardware identity pending admission; clean Windows installation required; frozen package certificate expires `2026-07-28T15:45:27Z` and the 24-hour start deadline is `2026-07-27T15:45:27Z` | Admit and designate exact replacement hardware, then separately approve destructive clean installation, Stage 3 execution, bounded environment access and temporary public-certificate trust |
+| 3 | Clean Windows Qualification | **Not started — host admitted with Founder Provenance Exception; Stage 3 authority required** | `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, is `admitted-with-founder-provenance-exception`; `installationMediaEvidencePresent` remains false; all mandatory technical and compensating controls pass; frozen package certificate expires `2026-07-28T15:45:27Z` and the 24-hour start deadline is `2026-07-27T15:45:27Z` | Separately approve Stage 3 execution, host designation for execution, bounded artifact transfer and temporary public-certificate trust |
 | 4 | Live Authentication and Protected Rendering | **Not started** | Disposable live Supabase Email + Password and protected rendering evidence remain outstanding | Stage 3 acceptance, then separate Stage 4 authority |
 | 5 | Installed Package GPU, Performance and Accessibility | **Not started** | Must use the reconciled installed package on the replacement host; ASUS Stage 1 GPU evidence does not transfer | Stage 4 acceptance, then separate Stage 5 authority and replacement-host GPU admission |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
@@ -64,6 +64,30 @@ results.
 - No Stage 1 or Stage 2 repetition is required.
 - Replacement-host installed GPU evidence remains a separate Stage 5
   requirement.
+
+# Stage 3 Host Admission Position
+
+- `Founder-QA-01`, manufacturer/model `MEDION ERAZER P6605 MD61596`, is
+  **Admitted with Founder Provenance Exception**.
+- Machine state:
+  `admitted-with-founder-provenance-exception`.
+- Admission classification:
+  `founder-provenance-exception`.
+- This is distinct from `standard` admission. Standard admission requires all
+  mandatory technical and provenance controls to pass.
+- The exception is bound to host-admission SHA-256
+  `6dfaa176ed2d43595511d44401612536c6c0f1955f94527469d0f22af09c3b0e`
+  and the current Windows installation only.
+- `installationMediaEvidencePresent` remains `false`; the missing original
+  installation-media hash has not been inferred or represented as passed.
+- The machine-readable approval record has SHA-256
+  `0d9a9668dbbf11c91f08d58bd84261f48baa2d3d3fd13184434965b66ffe2282`.
+- Admission is invalidated by reinstall, reset, system-disk replacement,
+  system-image restoration, Secure Boot or TPM changes, contamination,
+  unexplained software or failed integrity controls.
+- Host admission grants no Stage 3 execution, certificate trust, artifact
+  transfer, package installation, deployment or security-boundary authority.
+- Stage 3 remains not started and requires a separate Founder decision.
 
 # Independent Carried Qualification States
 

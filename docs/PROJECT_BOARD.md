@@ -130,9 +130,11 @@ Candidate Freeze and Package Reconciliation is Founder-accepted and closed
 with frozen evidence. Runtime Manifest `1.7.0` mechanically reconciles to the
 local qualification MSIX and signed Release Manifest. The signer and trust
 were removed. Stage 3 Clean Windows Qualification is proposed but remains
-unauthorised. The Founder has selected a replacement physical laptop; its
-exact identity awaits minimum host-admission evidence before designation and
-clean installation authority. Gate 7 is not authorised.
+unauthorised. `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, is admitted for
+its current Windows installation with a Founder provenance exception.
+`installationMediaEvidencePresent` remains false. Stage 3 execution, artifact
+transfer, certificate trust and package installation remain subject to a
+separate Founder decision. Gate 7 is not authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -175,6 +177,10 @@ Stage 2 closure and the proposed Stage 3 execution plan are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_3_PLAN.md`.
 Replacement-host admission requirements are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION.md`.
+The Founder exception approval and machine-readable admission classification
+are recorded in
+`docs/sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION_DECISION.md` and
+`docs/sprints/evidence/sprint-30-5/stage-3-host-admission/Oracle.Stage3HostAdmissionApproval.json`.
 
 # Latest Closed Qualification Stage
 
@@ -183,8 +189,8 @@ Replacement-host admission requirements are recorded in
 **Status:** Founder-accepted and closed
 **Host:** Controlled non-pristine physical qualification host
 **Clean Windows:** Not satisfied; remains mandatory later
-**Next stage:** Stage 2 Founder-accepted and closed; Stage 3 proposed and
-separately unauthorised
+**Next stage:** Stage 2 Founder-accepted and closed; Stage 3 host admitted with
+Founder provenance exception; Stage 3 execution separately unauthorised
 **Deployment status:** Production unchanged; Stage 2 local test signing only;
 no production signing, distribution, deployment, migration, persistence or
 Gate authority

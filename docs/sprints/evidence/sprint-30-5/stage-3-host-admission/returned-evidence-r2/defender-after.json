@@ -1,0 +1,15 @@
+﻿{
+    "antivirusEnabled":  true,
+    "antispywareEnabled":  true,
+    "behaviorMonitorEnabled":  true,
+    "realTimeProtectionEnabled":  true,
+    "ioavProtectionEnabled":  true,
+    "nISEnabled":  true,
+    "antivirusSignatureVersion":  "1.455.362.0",
+    "antivirusSignatureLastUpdated":  "\/Date(1785071236000)\/",
+    "quickScanAge":  0,
+    "quickScanStartTime":  "\/Date(1785105759232)\/",
+    "quickScanEndTime":  "\/Date(1785105774211)\/",
+    "fullScanAge":  4294967295,
+    "rebootRequired":  false
+}

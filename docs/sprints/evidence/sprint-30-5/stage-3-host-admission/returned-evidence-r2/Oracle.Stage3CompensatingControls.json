@@ -1,0 +1,95 @@
+﻿{
+    "schemaVersion":  1,
+    "contract":  "oracle.sprint-30-5.stage-3-compensating-controls",
+    "contractVersion":  1,
+    "collectedAtUtc":  "2026-07-26T22:42:54.4620635Z",
+    "result":  "passed",
+    "authority":  {
+                      "classification":  "evidence-only",
+                      "grantsHostAdmission":  false,
+                      "grantsStage3Authority":  false,
+                      "maximumDownstreamState":  "eligible-for-founder-approval"
+                  },
+    "collector":  {
+                      "filename":  "Collect-OracleStage3CompensatingControls.ps1",
+                      "sha256":  "d071a9c86a77c41b50315fadb3d6f24297d0e7dcad0bb8933ab2adc56b7f79ac",
+                      "powershell":  "5.1.26100.8894",
+                      "elevated":  true
+                  },
+    "binding":  {
+                    "deviceName":  "Founder-QA-01",
+                    "manufacturer":  "MEDION",
+                    "model":  "ERAZER P6605 MD61596",
+                    "hostAdmissionFilename":  "Oracle.Stage3HostAdmission.json",
+                    "hostAdmissionSha256":  "6dfaa176ed2d43595511d44401612536c6c0f1955f94527469d0f22af09c3b0e",
+                    "expectedHostAdmissionSha256":  "6dfaa176ed2d43595511d44401612536c6c0f1955f94527469d0f22af09c3b0e",
+                    "baselineRecoveryDocumentSha256":  "6674b900fccadcc8f6d476dda6a787f859aad948dc78033dbfb7793ac90e8d44",
+                    "installationMediaEvidencePresent":  false,
+                    "soleUnavailableEvidence":  "installationMediaEvidencePresent"
+                },
+    "controls":  {
+                     "dism":  {
+                                  "command":  "DISM.exe /Online /Cleanup-Image /CheckHealth",
+                                  "filename":  "dism-checkhealth.txt",
+                                  "sha256":  "89ab92f8cc1c9ba5950fca89abc8430d8ab1b0f8294f158cf5a6a65354b9820b",
+                                  "exitCode":  0,
+                                  "noCorruptionDetected":  true,
+                                  "startedAtUtc":  "2026-07-26T22:40:04.8340915Z",
+                                  "completedAtUtc":  "2026-07-26T22:40:05.2291907Z"
+                              },
+                     "sfc":  {
+                                 "command":  "sfc.exe /verifyonly",
+                                 "filename":  "sfc-verifyonly.txt",
+                                 "sha256":  "cb7397e8481be25461a4b1c5382b6747f35ab37cb4aabf32d03cb84706747e1b",
+                                 "exitCode":  0,
+                                 "noIntegrityViolations":  true,
+                                 "assessment":  {
+                                                    "parserVersion":  2,
+                                                    "classificationBasis":  "hash-bound raw evidence exact success marker without failure marker",
+                                                    "detectedEncoding":  "utf-8-bom",
+                                                    "nulCodeUnitsRemoved":  4600,
+                                                    "successMarkerCount":  1,
+                                                    "failureMarkerCount":  0,
+                                                    "noIntegrityViolations":  true
+                                                },
+                                 "startedAtUtc":  "2026-07-26T22:40:05.3061194Z",
+                                 "completedAtUtc":  "2026-07-26T22:42:37.8324688Z"
+                             },
+                     "defender":  {
+                                      "command":  "Start-MpScan -ScanType QuickScan",
+                                      "beforeFilename":  "defender-before.json",
+                                      "beforeSha256":  "7c3fdc5f40d17311cd06a8d9e604bf189a4b42d4add8a95104e2fb57fd85d449",
+                                      "afterFilename":  "defender-after.json",
+                                      "afterSha256":  "609e177a2e7daf8bf1ce814e4f856b15441334613966cbfc21ad61945003404a",
+                                      "threatsFilename":  "defender-threats.json",
+                                      "threatsSha256":  "163e6d5d6f9a0b21ea8acd5be92a0750dcc1cb886b85b98dee46d7e91c097fd0",
+                                      "scanStartedAtUtc":  "2026-07-26T22:42:39.1556644Z",
+                                      "scanCommandCompletedAtUtc":  "2026-07-26T22:42:54.2272013Z",
+                                      "quickScanCompleted":  true,
+                                      "healthy":  true,
+                                      "threatEvidenceComplete":  true,
+                                      "activeThreatCount":  0,
+                                      "newDetectionCount":  0,
+                                      "passed":  true
+                                  }
+                 },
+    "checks":  {
+                   "hostAdmissionBinding":  true,
+                   "dismCheckHealth":  true,
+                   "sfcVerifyOnly":  true,
+                   "defenderQuickScanCompleted":  true,
+                   "defenderHealthy":  true,
+                   "defenderThreatEvidenceComplete":  true,
+                   "defenderNoActiveThreats":  true,
+                   "defenderNoNewDetections":  true
+               },
+    "failedChecks":  [
+
+                     ],
+    "limitations":  [
+                        "This record does not prove or replace original installation-media provenance.",
+                        "installationMediaEvidencePresent remains false.",
+                        "This record cannot grant host admission or Stage 3 authority.",
+                        "Defender resource paths and unrelated personal data are not retained."
+                    ]
+}

@@ -120,9 +120,11 @@ reproducibility and final integrated qualification remain outstanding.
 ## Sprint 30.5 Stage 3 host direction
 
 The Founder withdrew the ASUS ROG Zephyrus G15 from the proposed Stage 3 role
-and selected a different physical laptop. Exact replacement hardware identity
-is pending the bounded Stage 3 host-admission record. No destructive action or
-Stage 3 execution is authorised.
+and selected `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`. The host is
+`admitted-with-founder-provenance-exception` for its current Windows
+installation. The missing installation-media hash remains explicitly
+unavailable. No destructive action, artifact transfer, certificate trust,
+package installation or Stage 3 execution is authorised.
 
 This is an environment substitution only. It does not alter the accepted
 Stage 2 source candidate, Runtime Manifest `1.7.0`, signed Release Manifest,

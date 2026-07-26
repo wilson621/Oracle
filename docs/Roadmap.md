@@ -789,9 +789,12 @@ SBOM, provenance, package inventory and complete signing teardown. Sprint 30
 remains qualification-incomplete pending Stages 3–7, including separately
 authorised clean Windows, live Auth, protected rendering and installed-package
 qualification. Stage 3 is proposed and unauthorised.
-The Founder-designated replacement physical laptop must first provide a
-hash-bound host-admission record and then receive separately authorised clean
-Windows installation. This host change leaves Stages 1 and 2 intact.
+The Founder-designated replacement physical laptop `Founder-QA-01` is
+`admitted-with-founder-provenance-exception` for its current Windows
+installation. The missing original-media hash remains explicitly unavailable.
+Separate Founder authority is still required for Stage 3 execution, artifact
+transfer, certificate trust and package installation. This host admission
+leaves Stages 1 and 2 intact.
 Production signing, publication, distribution, deployment and runtime
 persistence remain unauthorised.
 

@@ -159,7 +159,8 @@ qualification path. The host is not a clean Windows environment and does not
 satisfy that later mandatory qualification. The frozen local evidence archive
 has SHA-256
 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
-Stage 2 is Founder-accepted and closed with frozen evidence. Stage 3 is
+Stage 2 is Founder-accepted and closed with frozen evidence. The designated
+Stage 3 host is admitted with a Founder provenance exception. Stage 3 remains
 proposed and not authorised.
 
 ## Sprint 30.5 Stage 2 — Candidate Freeze and Package Reconciliation
@@ -183,11 +184,12 @@ state. It may not rebuild or resign the package, and it must remain separate
 from live Auth, protected rendering and installed-package
 GPU/performance/accessibility qualification.
 
-The proposed Stage 3 host is now a Founder-designated replacement physical
-laptop. Its exact hardware identity is pending the bounded admission record.
-The ASUS Stage 1 hardware/GPU facts do not transfer, but the host change does
-not alter or invalidate any accepted Stage 2 source, manifest, package, hash
-or evidence contract.
+The proposed Stage 3 host is `Founder-QA-01`, a `MEDION ERAZER P6605
+MD61596`. It is `admitted-with-founder-provenance-exception` for its current
+Windows installation. `installationMediaEvidencePresent` remains false; the
+Founder-approved exception is permanently bound to the immutable admission
+and compensating-control evidence. The ASUS Stage 1 hardware/GPU facts do not
+transfer, and no Stage 3 execution authority has been granted.
 
 ## Sprint 29 — Secure Desktop Operations and Distribution
 

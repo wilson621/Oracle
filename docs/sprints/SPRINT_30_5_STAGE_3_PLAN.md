@@ -23,19 +23,21 @@ Beta.
 
 ## Designated environment
 
-Use the Founder-designated replacement physical laptop. Its manufacturer,
-model and hash-bound device identity must be recorded through
-`SPRINT_30_5_STAGE_3_HOST_ADMISSION.md` before destructive action.
+Use the Founder-designated replacement physical laptop `Founder-QA-01`,
+manufacturer/model `MEDION ERAZER P6605 MD61596`. Its current Windows
+installation is bound to host-admission evidence SHA-256
+`6dfaa176ed2d43595511d44401612536c6c0f1955f94527469d0f22af09c3b0e`
+and the governed process in `SPRINT_30_5_STAGE_3_HOST_ADMISSION.md`.
 
 The ASUS ROG Zephyrus G15 remains the immutable Stage 1 controlled
 non-pristine host but is withdrawn from the proposed Stage 3 role. Its
 host-specific facts must not be attributed to the replacement.
 
-The replacement must receive an explicit Founder-authorised clean
-installation of a supported, licensed Windows 11 x64 edition from official
-Microsoft media. The install must remove applications, settings and data from
-the Windows installation being qualified. It must not require a purchase,
-edition upgrade, paid provider or new virtualisation provider.
+The current clean Windows installation is
+`admitted-with-founder-provenance-exception` through passed technical controls
+and the Founder-approved retained-media provenance exception. This admission
+does not authorise Stage 3. No reinstall, reset, reconstruction or destructive
+action is authorised or required by this plan.
 
 ## Time-critical prerequisite
 
@@ -43,13 +45,13 @@ The frozen package is signed by an untimestamped local test certificate that
 expires at `2026-07-28T15:45:27Z`.
 
 At `2026-07-26T19:55:59Z`, approximately 43 hours 49 minutes remained. The
-24-hour execution window remains available only if the clean installation,
-host admission and Founder approvals complete in time for Stage 3
+24-hour execution window remains available only if host admission,
+provenance-exception evidence and Founder approvals complete in time for Stage 3
 qualification to begin no later than `2026-07-27T15:45:27Z`.
 
 Stage 3 installation and signature enforcement must complete while the
 certificate is valid. The former six-hour admission margin is no longer
-sufficient for a planned one-day execution after a host change. If the
+sufficient for a planned one-day execution after host admission. If the
 24-hour start deadline cannot be met, Stage 3 must not begin. Rebuilding or
 resigning would create a new package hash and requires separate Founder
 authority to return to candidate reconciliation; Stage 3 may not manufacture
@@ -58,57 +60,52 @@ a replacement.
 ## Prerequisites
 
 1. Stage 2 closure commit exists and the repository is clean.
-2. The Founder explicitly authorises Stage 3.
-3. The replacement host has passed the pre-install admission requirements in
-   `SPRINT_30_5_STAGE_3_HOST_ADMISSION.md`.
-4. The Founder explicitly designates that admitted replacement laptop as the
+2. The replacement host has either:
+   - passed every mandatory host-admission control; or
+   - received the state `admitted-with-founder-provenance-exception` through
+     the governed process in `SPRINT_30_5_STAGE_3_HOST_ADMISSION.md`.
+3. Any provenance exception is bound to the exact host, Windows installation,
+   admission evidence, compensating-control evidence and Founder approval
+   record.
+4. The Founder explicitly designates the admitted replacement laptop as the
    Stage 3 clean Windows qualification host.
-5. The Founder explicitly authorises destructive clean installation of the
-   designated replacement host.
-6. The Founder confirms that all data requiring retention is backed up
-   independently and that the machine may be erased.
-7. Official installation media for the licensed Windows 11 x64 edition and
-   its provenance are
-   available without purchase.
-8. The machine's existing Windows digital licence and recovery information are
+5. The Founder explicitly authorises Stage 3 execution.
+6. No reinstall or destructive host action is implied when the existing clean
+   Windows installation has been admitted through the approved host-admission
+   process.
+7. The machine's existing Windows digital licence and recovery information are
    available.
-9. If the selected Windows edition requires an online Microsoft identity, the
-   Founder explicitly authorises one Founder-controlled, non-Oracle setup
-   identity. No Oracle Operator, production or project credential may be used.
-10. The Founder authorises Windows Update and official manufacturer driver
-    retrieval solely for qualification-host preparation.
-11. The Founder authorises temporary trust of the Stage 2 public test
+8. The Founder authorises temporary trust of the Stage 2 public test
    certificate solely on the qualification laptop. No private key is
    transferred.
-12. The Founder authorises offline removable-media artifact transfer, or
-    separately approves another isolated transfer method.
-13. At least 24 hours remain before test-certificate expiry when Stage 3
+9. The Founder authorises offline removable-media artifact transfer, or
+   separately approves another isolated transfer method.
+10. At least 24 hours remain before test-certificate expiry when Stage 3
     qualification begins.
+
+Prerequisite 2 is satisfied for `Founder-QA-01`. Prerequisites 4, 5, 8 and 9
+remain subject to the separate Stage 3 Founder decision. No execution action
+may begin from host admission alone.
 
 ## Execution
 
-### 1. Pre-destructive admission
+### 1. Host-admission evidence freeze
 
-- establish the replacement laptop's exact hash-bound hardware identity;
-- record Windows activation and recovery readiness without retaining licence
-  keys, account identifiers or recovery secrets;
-- verify the external backup and recovery route;
-- hash the official Windows installation media;
-- record the planned Windows edition, build and language;
-- confirm stable power and network availability; and
-- stop for the explicit destructive-action confirmation.
+- verify the exact hash-bound hardware identity;
+- verify Windows activation and recovery readiness;
+- verify the admission evidence and baseline/recovery document hashes;
+- verify every mandatory technical admission control;
+- preserve `installationMediaEvidencePresent: false`;
+- verify the compensating-control evidence; and
+- verify the Founder-approved host-specific provenance-exception record.
 
-### 2. Clean Windows construction
+### 2. Existing clean Windows baseline
 
-- perform an official clean installation of the licensed Windows 11 x64
-  edition;
-- do not restore applications, settings or user data;
-- complete OOBE using only the authorised setup identity if required;
-- apply stable Windows and official manufacturer updates;
-- reboot until no mandatory update remains;
-- enable no optional development, gaming, cloud-sync or telemetry product;
-  and
-- create a documented post-update qualification baseline.
+`Founder-QA-01` uses its admitted existing Windows installation. Stage 3 must
+not reinstall, reset or reconstruct Windows under this plan.
+
+Any reinstall, reset, system-disk replacement or image restoration invalidates
+the exception and requires new host admission.
 
 ### 3. Clean-state admission
 
@@ -233,14 +230,19 @@ Stage 3 passes only if all criteria are met:
 13. The repository is clean after the local completion commit.
 14. Stage 4 remains not started.
 
-Any failed mandatory criterion fails Stage 3. Partial results remain evidence
-but do not create a pass.
+Any failed mandatory Stage 3 execution criterion fails Stage 3. Host admission
+may rely on a Founder-approved provenance exception only where every technical
+admission control passes and the unavailable provenance remains explicitly
+recorded as unavailable. Partial or unavailable evidence never becomes a
+pass.
 
 ## Evidence requirements
 
 The Stage 3 package must contain:
 
-- clean-install provenance and media SHA-256;
+- clean-install provenance and media SHA-256; or, when the approved exception
+  applies, the unchanged failed media-evidence check, compensating-control
+  evidence and Founder-approved host-specific exception record;
 - redacted Windows activation, edition, version and build record;
 - hardware, Secure Boot, TPM, Defender, driver and display record;
 - before/after installed-software inventory;
@@ -271,9 +273,12 @@ signing material must never enter the evidence package.
 
 Stop immediately if:
 
-- the Founder has not explicitly authorised laptop erasure;
+- the Founder has not explicitly authorised Stage 3 execution;
+- reinstall, reset, erasure or another destructive host action becomes
+  necessary;
 - backup, recovery or Windows activation readiness cannot be demonstrated;
-- official installation-media provenance cannot be established;
+- official installation-media provenance cannot be established and no valid
+  Founder-approved provenance exception applies;
 - a purchase, edition upgrade, paid provider or new virtualisation provider is
   required;
 - fewer than 24 hours remain before certificate expiry;
@@ -289,14 +294,17 @@ Stop immediately if:
 - certificate trust or private-key material cannot be completely removed;
 - product source, architecture, security policy, trust boundary, migration or
   product behaviour would need to change; or
-- any missing evidence would have to be inferred.
+- missing evidence would need to be inferred, concealed or represented as
+  passed instead of remaining explicitly unavailable under an approved
+  exception.
 
 ## Rollback and recovery
 
-- Before reinstall: make no change unless the backup, recovery information and
-  explicit destructive confirmation are complete.
-- Reinstall failure: use only the documented official Windows recovery path;
-  do not improvise an unsupported image.
+- Before destructive recovery: make no change unless the backup, recovery
+  information and separate explicit destructive confirmation are complete.
+- Baseline invalidation: preserve evidence, perform no recovery or
+  reconstruction under Stage 3 authority, return the host to admission review
+  and stop.
 - Qualification failure: preserve failure evidence, remove Oracle and
   temporary certificate trust, return the laptop to the admitted clean
   baseline and stop.
@@ -312,17 +320,10 @@ The Founder must explicitly approve:
 1. **Sprint 30.5 Stage 3 execution.**
 2. **Designation of the admitted replacement physical laptop as the Stage 3
    clean Windows qualification host.**
-3. **Destructive clean installation of its licensed Windows 11 x64 edition**,
-   after confirming backup and recovery.
-4. **Use of official Microsoft installation media, Windows Update, existing
-   digital licensing and official manufacturer drivers** solely for host
-   preparation.
-5. **Use of a Founder-controlled non-Oracle Microsoft setup identity**, only
-   if the selected edition's OOBE requires it.
-6. **Temporary local trust of the Stage 2 public test certificate and local
+3. **Temporary local trust of the Stage 2 public test certificate and local
    installation of the frozen Stage 2 MSIX.**
-7. **The approved offline artifact-transfer method.**
-8. **Execution before the 24-hour certificate-validity start deadline**, with
+4. **The approved offline artifact-transfer method.**
+5. **Execution before the 24-hour certificate-validity start deadline**, with
    no implicit authority to rebuild or resign if the deadline cannot be met.
 
 These approvals may be granted together in one Stage 3 Founder decision.

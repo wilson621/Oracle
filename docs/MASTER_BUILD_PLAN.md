@@ -146,9 +146,11 @@ is frozen, and all temporary signing material and trust are removed. Stage 3
 Clean Windows Qualification is proposed and not authorised. Clean Windows,
 live Auth, protected rendering, installed-package
 qualification and later integrated evidence remain outstanding.
-The Stage 3 host is now a Founder-designated replacement physical laptop whose
-exact hardware identity must pass admission before clean installation. This
-does not alter accepted Stage 1 or Stage 2 evidence.
+The Stage 3 host is `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, admitted
+for its current Windows installation with a Founder provenance exception.
+The unavailable installation-media evidence remains false. Admission does not
+authorise Stage 3 execution, artifact transfer, certificate trust or package
+installation and does not alter accepted Stage 1 or Stage 2 evidence.
 Production signing, publication, distribution, deployment and activation
 remain unauthorised.
 

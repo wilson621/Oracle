@@ -290,7 +290,9 @@ delivery authorities have been reviewed.
 | Sprint 30.5 Stage 2 closure | [Sprint 30.5 Stage 2 Closure](sprints/SPRINT_30_5_STAGE_2_CLOSURE.md) | Founder-accepted and closed |
 | Sprint 30.5 Stage 2 evidence | [Sprint 30.5 Stage 2 Evidence](sprints/evidence/sprint-30-5/stage-2/README.md) | Founder-accepted, frozen and hash-bound |
 | Sprint 30.5 Stage 3 plan | [Sprint 30.5 Stage 3 Plan](sprints/SPRINT_30_5_STAGE_3_PLAN.md) | Proposed; separate Founder authority required |
-| Sprint 30.5 Stage 3 host admission | [Sprint 30.5 Stage 3 Host Admission](sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION.md) | Replacement physical host identity and evidence pending; no action authorised |
+| Sprint 30.5 Stage 3 host admission | [Sprint 30.5 Stage 3 Host Admission](sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION.md) | Founder-QA-01 admitted with Founder provenance exception; Stage 3 unauthorised |
+| Sprint 30.5 Stage 3 admission decision | [Sprint 30.5 Stage 3 Host Admission Decision](sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION_DECISION.md) | Founder-approved repository admission state; execution authority excluded |
+| Sprint 30.5 Stage 3 provenance package | [Sprint 30.5 Stage 3 Provenance Exception Founder Approval Package](sprints/SPRINT_30_5_STAGE_3_PROVENANCE_EXCEPTION_FOUNDER_APPROVAL_PACKAGE.md) | Approved evidence and residual-risk package |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

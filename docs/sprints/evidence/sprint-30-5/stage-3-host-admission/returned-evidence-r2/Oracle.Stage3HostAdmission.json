@@ -1,0 +1,2528 @@
+﻿{
+    "schemaVersion":  1,
+    "contract":  "oracle.sprint-30-5.stage-3-host-admission",
+    "contractVersion":  1,
+    "collectedAtUtc":  "2026-07-26T21:44:02.3467028Z",
+    "status":  "failed",
+    "designation":  {
+                        "expectedDeviceName":  "Founder-QA-01",
+                        "expectedManufacturer":  "MEDION",
+                        "expectedModelPattern":  "ERAZER P6605|MD61596"
+                    },
+    "privacy":  {
+                    "hashAlgorithm":  "salted-sha256",
+                    "saltBase64":  "9h2aft9WOOnVS+hOte3sqRMnNro6+f3jDOi4oRdoJoQ=",
+                    "rawSerialsRetained":  false,
+                    "rawMacAddressesRetained":  false,
+                    "productKeysRetained":  false,
+                    "credentialValuesInspected":  false
+                },
+    "collector":  {
+                      "revision":  3,
+                      "filename":  "Collect-OracleStage3HostAdmission.ps1",
+                      "sha256":  "245e8e8a7af2735593ad3cf531af4c125fc4909917c7722e4b45a7483af6e459",
+                      "powershell":  "5.1.26100.8894",
+                      "elevated":  true
+                  },
+    "host":  {
+                 "deviceName":  "FOUNDER-QA-01",
+                 "manufacturer":  "MEDION",
+                 "model":  "ERAZER P6605 MD61596",
+                 "systemFamily":  "P6605",
+                 "systemSku":  "ML-210008 30027141",
+                 "serialSha256":  "7628685308f0b3ce1cd7c104ff16fc082f6eb80a586173fee11d086784bbe2dd",
+                 "productUuidSha256":  "c9b98735e685f59f33627d728000ba529b2efe4dd78bb6f26ef380e6c79df0ab",
+                 "processors":  [
+                                    {
+                                        "name":  "Intel(R) Core(TM) i5-8300H CPU @ 2.30GHz",
+                                        "architecture":  9,
+                                        "cores":  4,
+                                        "logicalProcessors":  8
+                                    }
+                                ],
+                 "installedMemoryBytes":  8430682112,
+                 "memoryModules":  [
+                                       {
+                                           "capacityBytes":  8589934592,
+                                           "speedMhz":  2667,
+                                           "manufacturer":  "Samsung",
+                                           "partNumber":  "M471A1K43CB1-CTD",
+                                           "serialSha256":  "b6c0953f6901ead99562a60f7c684836b3c63e456d0cc90b2025756378318997"
+                                       }
+                                   ]
+             },
+    "firmware":  {
+                     "manufacturer":  "American Megatrends Inc.",
+                     "smbiosVersion":  "1.07.06RGM3_00067",
+                     "releaseDate":  "\/Date(1531958400000)\/",
+                     "uefiSecureBoot":  {
+                                            "available":  true,
+                                            "enabled":  true
+                                        },
+                     "tpm":  {
+                                 "available":  true,
+                                 "present":  true,
+                                 "ready":  true,
+                                 "enabled":  true,
+                                 "activated":  true,
+                                 "manufacturerVersion":  "5.63.3353.0\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+                             }
+                 },
+    "operatingSystem":  {
+                            "caption":  "Microsoft Windows 11 Home",
+                            "editionId":  "Core",
+                            "displayVersion":  "25H2",
+                            "version":  "10.0.26200",
+                            "buildNumber":  "26200",
+                            "architecture":  "64-bit",
+                            "locale":  "0809",
+                            "installDate":  "\/Date(1785090603000)\/",
+                            "lastBootUpTime":  "\/Date(1785097419500)\/",
+                            "activation":  [
+                                               {
+                                                   "name":  "Windows(R), Core edition",
+                                                   "description":  "Windows(R) Operating System, OEM_DM channel",
+                                                   "licenseStatus":  1,
+                                                   "gracePeriodRemainingMinutes":  0
+                                               }
+                                           ],
+                            "recoveryEnvironmentEnabled":  true,
+                            "defender":  {
+                                             "available":  true,
+                                             "antivirusEnabled":  true,
+                                             "antispywareEnabled":  true,
+                                             "realTimeProtectionEnabled":  true,
+                                             "tamperProtectionSource":  "Signatures",
+                                             "antivirusSignatureLastUpdated":  "\/Date(1785071236000)\/"
+                                         }
+                        },
+    "installationMedia":  {
+                              "supplied":  false,
+                              "filename":  null,
+                              "sizeBytes":  null,
+                              "sha256":  null,
+                              "available":  false,
+                              "error":  null
+                          },
+    "storage":  {
+                    "physical":  [
+                                     {
+                                         "model":  "HFS128G39TND-N210A",
+                                         "interfaceType":  "SCSI",
+                                         "mediaType":  "Fixed hard disk media",
+                                         "firmwareRevision":  "30000P10",
+                                         "sizeBytes":  128034708480,
+                                         "status":  "OK",
+                                         "serialSha256":  "dd51a02ac49bf2953b9d52c840ddecebafe403a191926a93ad28cf5b89370e70"
+                                     },
+                                     {
+                                         "model":  "Sony Storage Media USB Device",
+                                         "interfaceType":  "USB",
+                                         "mediaType":  "Removable Media",
+                                         "firmwareRevision":  "0100",
+                                         "sizeBytes":  16031070720,
+                                         "status":  "OK",
+                                         "serialSha256":  "9589193f03d7103908b679fe147a87e0a6f6040ac53e51db0e35eeb1b0574688"
+                                     },
+                                     {
+                                         "model":  "TOSHIBA MQ04ABF100",
+                                         "interfaceType":  "SCSI",
+                                         "mediaType":  "Fixed hard disk media",
+                                         "firmwareRevision":  "JU000A",
+                                         "sizeBytes":  1000202273280,
+                                         "status":  "OK",
+                                         "serialSha256":  "6c23e40705e9c5a2735528871bdc550dc64cc6786cc026427a5099d61da49c76"
+                                     }
+                                 ],
+                    "logical":  [
+                                    {
+                                        "deviceId":  "C:",
+                                        "fileSystem":  "NTFS",
+                                        "sizeBytes":  126908100608,
+                                        "freeSpaceBytes":  81003515904
+                                    },
+                                    {
+                                        "deviceId":  "D:",
+                                        "fileSystem":  "NTFS",
+                                        "sizeBytes":  967990833152,
+                                        "freeSpaceBytes":  967853522944
+                                    },
+                                    {
+                                        "deviceId":  "E:",
+                                        "fileSystem":  "NTFS",
+                                        "sizeBytes":  32212250624,
+                                        "freeSpaceBytes":  32137109504
+                                    }
+                                ]
+                },
+    "display":  {
+                    "appliedDpi":  120,
+                    "adapters":  [
+                                     {
+                                         "name":  "Intel(R) UHD Graphics 630",
+                                         "adapterCompatibility":  "Intel Corporation",
+                                         "driverVersion":  "31.0.101.2140",
+                                         "driverDate":  "\/Date(1762300800000)\/",
+                                         "videoProcessor":  "Intel(R) UHD Graphics Family",
+                                         "adapterRamBytes":  1073741824,
+                                         "status":  "OK",
+                                         "horizontalResolution":  1920,
+                                         "verticalResolution":  1080,
+                                         "refreshRate":  60
+                                     },
+                                     {
+                                         "name":  "NVIDIA GeForce GTX 1050",
+                                         "adapterCompatibility":  "NVIDIA",
+                                         "driverVersion":  "32.0.15.8266",
+                                         "driverDate":  "\/Date(1780963200000)\/",
+                                         "videoProcessor":  "NVIDIA GeForce GTX 1050",
+                                         "adapterRamBytes":  4293918720,
+                                         "status":  "OK",
+                                         "horizontalResolution":  null,
+                                         "verticalResolution":  null,
+                                         "refreshRate":  null
+                                     }
+                                 ]
+                },
+    "network":  {
+                    "adapters":  [
+                                     {
+                                         "name":  "Realtek PCIe GbE Family Controller",
+                                         "manufacturer":  "Realtek",
+                                         "adapterType":  "Ethernet 802.3",
+                                         "netConnectionId":  "Ethernet",
+                                         "enabled":  false,
+                                         "status":  "7",
+                                         "macSha256":  "3e183299bbedb874bb54cd116a423b52f391950a67e3224074b59166956be387"
+                                     },
+                                     {
+                                         "name":  "Intel(R) Wireless-AC 9560 160MHz",
+                                         "manufacturer":  "Intel Corporation",
+                                         "adapterType":  "Ethernet 802.3",
+                                         "netConnectionId":  "WiFi",
+                                         "enabled":  true,
+                                         "status":  "2",
+                                         "macSha256":  "59413de41e862db24703a977cb485d693332c434779ae5db28ddbb5980f1f86b"
+                                     },
+                                     {
+                                         "name":  "Bluetooth Device (Personal Area Network)",
+                                         "manufacturer":  "Microsoft",
+                                         "adapterType":  "Ethernet 802.3",
+                                         "netConnectionId":  "Bluetooth Network Connection",
+                                         "enabled":  false,
+                                         "status":  "7",
+                                         "macSha256":  "ec56e0be0253513218b6ac40c7ea63254a167e5cc8bc21b657cc7a0d70a2b692"
+                                     }
+                                 ]
+                },
+    "drivers":  [
+                    {
+                        "deviceName":  "ACPI Fixed Feature Button",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "ACPI Lid",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "ACPI Power Button",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "ACPI Processor Aggregator",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "ACPI Sleep Button",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "ACPI Thermal Zone",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "ACPI x64-based PC",
+                        "manufacturer":  "(Standard computers)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Audio Endpoint",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1711843200000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Audio Endpoint",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1711843200000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Bluetooth Device (Personal Area Network)",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8655",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Bluetooth Device (RFCOMM Protocol TDI)",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8875",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Charge Arbitration Driver",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Composite Bus Enumerator",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Computer Device",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Disk drive",
+                        "manufacturer":  "(Standard disk drives)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Disk drive",
+                        "manufacturer":  "(Standard disk drives)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Disk drive",
+                        "manufacturer":  "(Standard disk drives)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "DolbyAPO Software Device (HSA)",
+                        "manufacturer":  "Dolby",
+                        "driverProvider":  "Dolby",
+                        "driverVersion":  "2.1001.237.0",
+                        "driverDate":  "\/Date(1523577600000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "DolbyAPO Software Device (HSA)",
+                        "manufacturer":  "Dolby",
+                        "driverProvider":  "Dolby",
+                        "driverVersion":  "2.1001.237.0",
+                        "driverDate":  "\/Date(1523577600000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "DolbyAPO SWC Device",
+                        "manufacturer":  "Dolby",
+                        "driverProvider":  "Dolby",
+                        "driverVersion":  "2.1001.237.0",
+                        "driverDate":  "\/Date(1517702400000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "DolbyAPO SWC Device",
+                        "manufacturer":  "Dolby",
+                        "driverProvider":  "Dolby",
+                        "driverVersion":  "2.1001.237.0",
+                        "driverDate":  "\/Date(1517702400000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Generic PnP Monitor",
+                        "manufacturer":  "(Standard monitor types)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Generic software device",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Generic software device",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Generic software device",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Generic software device",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Generic software device",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Generic software device",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "HID Keyboard Device",
+                        "manufacturer":  "(Standard keyboards)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "HID-compliant consumer control device",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "HID-compliant device",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8875",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "HID-compliant mouse",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "HID-compliant system controller",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8875",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "HID-compliant wireless radio controls",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8875",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "High Definition Audio Controller",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1778889600000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "High precision event timer",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel Chipset SATA RAID Controller",
+                        "manufacturer":  "Intel Corporation",
+                        "driverProvider":  "Intel Corporation",
+                        "driverVersion":  "15.44.0.1015",
+                        "driverDate":  "\/Date(1533168000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel Processor",
+                        "manufacturer":  "Intel",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1240272000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel Processor",
+                        "manufacturer":  "Intel",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1240272000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel Processor",
+                        "manufacturer":  "Intel",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1240272000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel Processor",
+                        "manufacturer":  "Intel",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1240272000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel Processor",
+                        "manufacturer":  "Intel",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1240272000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel Processor",
+                        "manufacturer":  "Intel",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1240272000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel Processor",
+                        "manufacturer":  "Intel",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1240272000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel Processor",
+                        "manufacturer":  "Intel",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1240272000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) 300 Series Chipset Family LPC Controller (HM370) - A30D",
+                        "manufacturer":  "INTEL",
+                        "driverProvider":  "INTEL",
+                        "driverVersion":  "10.1.16.8",
+                        "driverDate":  "\/Date(-45964800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) Display Audio",
+                        "manufacturer":  "Intel(R) Corporation",
+                        "driverProvider":  "Intel(R) Corporation",
+                        "driverVersion":  "10.27.0.14",
+                        "driverDate":  "\/Date(1714348800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) Dynamic Application Loader Host Interface",
+                        "manufacturer":  "Intel",
+                        "driverProvider":  "Intel",
+                        "driverVersion":  "1.44.2023.710",
+                        "driverDate":  "\/Date(1699315200000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) Gaussian Mixture Model - 1911",
+                        "manufacturer":  "INTEL",
+                        "driverProvider":  "INTEL",
+                        "driverVersion":  "10.1.7.4",
+                        "driverDate":  "\/Date(-45964800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) Graphics Command Center",
+                        "manufacturer":  "Intel Corporation",
+                        "driverProvider":  "Intel Corporation",
+                        "driverVersion":  "31.0.101.2140",
+                        "driverDate":  "\/Date(1746921600000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) Graphics Control Panel",
+                        "manufacturer":  "Intel Corporation",
+                        "driverProvider":  "Intel Corporation",
+                        "driverVersion":  "31.0.101.2140",
+                        "driverDate":  "\/Date(1746921600000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) HID Event Filter",
+                        "manufacturer":  "Intel(R) Corporation",
+                        "driverProvider":  "Intel(R) Corporation",
+                        "driverVersion":  "2.2.2.12",
+                        "driverDate":  "\/Date(1732838400000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) Host Bridge/DRAM Registers - 3E10",
+                        "manufacturer":  "INTEL",
+                        "driverProvider":  "INTEL",
+                        "driverVersion":  "10.1.14.8",
+                        "driverDate":  "\/Date(-45964800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) iCLS Client",
+                        "manufacturer":  "Intel",
+                        "driverProvider":  "Intel",
+                        "driverVersion":  "1.71.99.0",
+                        "driverDate":  "\/Date(1686528000000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) Management and Security Application Local Management",
+                        "manufacturer":  "Intel",
+                        "driverProvider":  "Intel",
+                        "driverVersion":  "2316.5.1.12",
+                        "driverDate":  "\/Date(1708473600000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) Management Engine Interface ",
+                        "manufacturer":  "Intel",
+                        "driverProvider":  "Intel",
+                        "driverVersion":  "2031.15.0.1743",
+                        "driverDate":  "\/Date(1595894400000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) PCI Express Root Port #15 - A336",
+                        "manufacturer":  "INTEL",
+                        "driverProvider":  "INTEL",
+                        "driverVersion":  "10.1.16.8",
+                        "driverDate":  "\/Date(-45964800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) PCI Express Root Port #9 - A330",
+                        "manufacturer":  "INTEL",
+                        "driverProvider":  "INTEL",
+                        "driverVersion":  "10.1.16.8",
+                        "driverDate":  "\/Date(-45964800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) PCIe Controller (x16) - 1901",
+                        "manufacturer":  "INTEL",
+                        "driverProvider":  "INTEL",
+                        "driverVersion":  "10.1.7.4",
+                        "driverDate":  "\/Date(-45964800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) Power Engine Plug-in",
+                        "manufacturer":  "Intel Corporation",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) SMBus - A323",
+                        "manufacturer":  "INTEL",
+                        "driverProvider":  "INTEL",
+                        "driverVersion":  "10.1.16.8",
+                        "driverDate":  "\/Date(-45964800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) SPI (flash) Controller - A324",
+                        "manufacturer":  "INTEL",
+                        "driverProvider":  "INTEL",
+                        "driverVersion":  "10.1.16.8",
+                        "driverDate":  "\/Date(-45964800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) Thermal Subsystem - A379",
+                        "manufacturer":  "INTEL",
+                        "driverProvider":  "INTEL",
+                        "driverVersion":  "10.1.16.8",
+                        "driverDate":  "\/Date(-45964800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) UHD Graphics 630",
+                        "manufacturer":  "Intel Corporation",
+                        "driverProvider":  "Intel Corporation",
+                        "driverVersion":  "31.0.101.2140",
+                        "driverDate":  "\/Date(1746921600000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) Wireless Bluetooth(R)",
+                        "manufacturer":  "Intel Corporation",
+                        "driverProvider":  "Intel Corporation",
+                        "driverVersion":  "23.150.0.3",
+                        "driverDate":  "\/Date(1757116800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Intel(R) Wireless-AC 9560 160MHz",
+                        "manufacturer":  "Intel Corporation",
+                        "driverProvider":  "Intel",
+                        "driverVersion":  "23.150.0.4",
+                        "driverDate":  "\/Date(1764979200000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Local Print Queue",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Local Print Queue",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft AC Adapter",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8655",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft ACPI-Compliant Control Method Battery",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8655",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft ACPI-Compliant Embedded Controller",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft ACPI-Compliant System",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Basic Display Driver",
+                        "manufacturer":  "(Standard display types)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Basic Render Driver",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Bluetooth Enumerator",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8875",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Bluetooth LE Enumerator",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Hyper-V Virtualization Infrastructure Driver",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Kernel Debug Network Adapter",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Storage Spaces Controller",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8875",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Streaming Service Proxy",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft System Management BIOS Driver",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft UEFI-Compliant System",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Virtual Drive Enumerator",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1591",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Wi-Fi Direct Virtual Adapter",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Wi-Fi Direct Virtual Adapter",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Windows Management Interface for ACPI",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Windows Management Interface for ACPI",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Windows Management Interface for ACPI",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Windows Management Interface for ACPI",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Microsoft Windows Management Interface for ACPI",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Motherboard resources",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Motherboard resources",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Motherboard resources",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Motherboard resources",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Motherboard resources",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Motherboard resources",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Motherboard resources",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Motherboard resources",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Motherboard resources",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "NDIS Virtual Network Adapter Enumerator",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Numeric data processor",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "NVIDIA GeForce GTX 1050",
+                        "manufacturer":  "NVIDIA",
+                        "driverProvider":  "NVIDIA",
+                        "driverVersion":  "32.0.15.8266",
+                        "driverDate":  "\/Date(1788652800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "PCI Express Root Complex",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "PCI standard RAM Controller",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Plug and Play Software Device Enumerator",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.4202",
+                        "driverDate":  "\/Date(1747958400000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Programmable interrupt controller",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "PS/2 Compatible Mouse",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Realtek Audio Effects Component",
+                        "manufacturer":  "Realtek",
+                        "driverProvider":  "Realtek",
+                        "driverVersion":  "13.0.6000.1097",
+                        "driverDate":  "\/Date(1689724800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Realtek Audio Universal Service",
+                        "manufacturer":  "Realtek",
+                        "driverProvider":  "Realtek",
+                        "driverVersion":  "1.0.658.0",
+                        "driverDate":  "\/Date(1697500800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Realtek Hardware Support Application",
+                        "manufacturer":  "Realtek",
+                        "driverProvider":  "Realtek",
+                        "driverVersion":  "11.0.6000.310",
+                        "driverDate":  "\/Date(1697500800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Realtek High Definition Audio",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Realtek Semiconductor Corp.",
+                        "driverVersion":  "6.0.9030.1",
+                        "driverDate":  "\/Date(1600128000000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Realtek PCIE CardReader",
+                        "manufacturer":  "Realtek Semiconductor Corp.",
+                        "driverProvider":  "Realtek Semiconductor Corp.",
+                        "driverVersion":  "10.0.19041.21341",
+                        "driverDate":  "\/Date(1602633600000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Realtek PCIe GbE Family Controller",
+                        "manufacturer":  "Realtek",
+                        "driverProvider":  "Realtek",
+                        "driverVersion":  "10.72.524.2024",
+                        "driverDate":  "\/Date(1716508800000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Remote Desktop Device Redirector Bus",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Standard PS/2 Keyboard",
+                        "manufacturer":  "(Standard keyboards)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Storage Media   ",
+                        "manufacturer":  "Sony    ",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.5074",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "System CMOS/real time clock",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "System Firmware",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.4768",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "System timer",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Trusted Platform Module 2.0",
+                        "manufacturer":  "(Standard)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "UMBus Root Bus Enumerator",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1150",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "USB Composite Device",
+                        "manufacturer":  "(Standard USB Host Controller)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "USB Composite Device",
+                        "manufacturer":  "(Standard USB Host Controller)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "USB Input Device",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8875",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "USB Input Device",
+                        "manufacturer":  "(Standard system devices)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8875",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "USB Mass Storage Device",
+                        "manufacturer":  "Compatible USB storage device",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "USB Root Hub (USB 3.0)",
+                        "manufacturer":  "(Standard USB HUBs)",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8737",
+                        "driverDate":  "\/Date(1781740800000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "USB Video Device",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8875",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "USB xHCI Compliant Host Controller",
+                        "manufacturer":  "Generic USB xHCI Host Controller",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8875",
+                        "driverDate":  "\/Date(1791331200000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Voice Clarity",
+                        "manufacturer":  "Microsoft Corporation",
+                        "driverProvider":  "Microsoft Corporation",
+                        "driverVersion":  "1.0.4.7057",
+                        "driverDate":  "\/Date(1781568000000)\/",
+                        "signer":  "Microsoft Windows Hardware Compatibility Publisher",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Volume",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.5074",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Volume",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.5074",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Volume",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.5074",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Volume",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.5074",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Volume",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.5074",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Volume",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.5074",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Volume",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.5074",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "Volume Manager",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.8521",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "WAN Miniport (IKEv2)",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "WAN Miniport (IP)",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "WAN Miniport (IPv6)",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "WAN Miniport (L2TP)",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "WAN Miniport (Network Monitor)",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "WAN Miniport (PPPOE)",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "WAN Miniport (PPTP)",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    },
+                    {
+                        "deviceName":  "WAN Miniport (SSTP)",
+                        "manufacturer":  "Microsoft",
+                        "driverProvider":  "Microsoft",
+                        "driverVersion":  "10.0.26100.1",
+                        "driverDate":  "\/Date(1150848000000)\/",
+                        "signer":  "Microsoft Windows",
+                        "isSigned":  true
+                    }
+                ],
+    "installedSoftware":  [
+                              {
+                                  "name":  "Copilot",
+                                  "version":  "150.0.4078.65",
+                                  "publisher":  "Microsoft Corporation"
+                              },
+                              {
+                                  "name":  "Microsoft Edge",
+                                  "version":  "150.0.4078.99",
+                                  "publisher":  "Microsoft Corporation"
+                              },
+                              {
+                                  "name":  "Microsoft Edge WebView2 Runtime",
+                                  "version":  "150.0.4078.99",
+                                  "publisher":  "Microsoft Corporation"
+                              },
+                              {
+                                  "name":  "NVIDIA Graphics Driver 582.66",
+                                  "version":  "582.66",
+                                  "publisher":  "NVIDIA Corporation"
+                              },
+                              {
+                                  "name":  "NVIDIA HD Audio Driver 1.4.5.7",
+                                  "version":  "1.4.5.7",
+                                  "publisher":  "NVIDIA Corporation"
+                              },
+                              {
+                                  "name":  "NVIDIA Install Application",
+                                  "version":  "2.1002.438.0",
+                                  "publisher":  "NVIDIA Corporation"
+                              },
+                              {
+                                  "name":  "NVIDIA PhysX System Software 9.23.1019",
+                                  "version":  "9.23.1019",
+                                  "publisher":  "NVIDIA Corporation"
+                              }
+                          ],
+    "appxInventory":  [
+                          {
+                              "name":  "1527c705-839a-4832-9118-54d4Bd6a0c89",
+                              "version":  "10.0.19640.1000",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "1527c705-839a-4832-9118-54d4Bd6a0c89_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "AppUp.IntelGraphicsExperience",
+                              "version":  "1.100.5688.0",
+                              "publisher":  "CN=EB51A5DA-0E72-4863-82E4-EA21C1F8DFE3",
+                              "packageFamilyName":  "AppUp.IntelGraphicsExperience_8j3eq9eme6ctt"
+                          },
+                          {
+                              "name":  "c5e2524a-ea46-4f67-841f-6a9465d9d515",
+                              "version":  "10.0.26100.1",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "c5e2524a-ea46-4f67-841f-6a9465d9d515_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Clipchamp.Clipchamp",
+                              "version":  "4.4.10720.0",
+                              "publisher":  "CN=33F0F141-36F3-4EC2-A77D-51B53D0BA0E4",
+                              "packageFamilyName":  "Clipchamp.Clipchamp_yxz26nhyzhsrt"
+                          },
+                          {
+                              "name":  "DolbyLaboratories.DolbyAudioPremium",
+                              "version":  "2.1001.237.0",
+                              "publisher":  "CN=58D26209-1D57-482C-B403-B655571B5C7B",
+                              "packageFamilyName":  "DolbyLaboratories.DolbyAudioPremium_rz1tebttyb220"
+                          },
+                          {
+                              "name":  "E2A4F912-2574-4A75-9BB0-0D023378592B",
+                              "version":  "10.0.19640.1000",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "E2A4F912-2574-4A75-9BB0-0D023378592B_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE",
+                              "version":  "10.0.26100.1",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MdOdrMcpFilterPackage",
+                              "version":  "1.0.0.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MdOdrMcpFilterPackage_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.AAD.BrokerPlugin",
+                              "version":  "1000.19580.1000.2",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.AAD.BrokerPlugin_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.AccountsControl",
+                              "version":  "10.0.26100.1",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.AccountsControl_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.AIFabric.CBS.1.6",
+                              "version":  "1.6.938.100",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.AIFabric.CBS.1.6_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.ApplicationCompatibilityEnhancements",
+                              "version":  "1.2511.9.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.ApplicationCompatibilityEnhancements_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.AsyncTextService",
+                              "version":  "10.0.26100.1",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.AsyncTextService_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.AV1VideoExtension",
+                              "version":  "2.0.7.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.AV1VideoExtension_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.AVCEncoderVideoExtension",
+                              "version":  "1.1.23.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.AVCEncoderVideoExtension_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.BingNews",
+                              "version":  "1.0.2.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.BingNews_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.BingSearch",
+                              "version":  "1.1.43.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.BingSearch_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.BingWeather",
+                              "version":  "4.54.63045.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.BingWeather_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.BioEnrollment",
+                              "version":  "10.0.19587.1000",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.BioEnrollment_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Copilot",
+                              "version":  "150.0.4078.65",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Copilot_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.CredDialogHost",
+                              "version":  "10.0.19595.1001",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.CredDialogHost_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.DesktopAppInstaller",
+                              "version":  "1.29.279.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.ECApp",
+                              "version":  "10.0.26100.8737",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.ECApp_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.GamingApp",
+                              "version":  "2605.900.13.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.GamingApp_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.GetHelp",
+                              "version":  "10.2409.41742.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.GetHelp_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.HEIFImageExtension",
+                              "version":  "1.2.36.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.HEIFImageExtension_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.HEVCVideoExtension",
+                              "version":  "2.5.28.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.HEVCVideoExtension_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.LockApp",
+                              "version":  "10.0.26100.8737",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.LockApp_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.MicrosoftEdge.Stable",
+                              "version":  "150.0.4078.99",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.MicrosoftEdge.Stable_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.MicrosoftEdgeDevToolsClient",
+                              "version":  "1000.25128.1000.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.MicrosoftSolitaireCollection",
+                              "version":  "4.25.7150.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.MicrosoftStickyNotes",
+                              "version":  "4.0.6105.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.MPEG2VideoExtension",
+                              "version":  "1.2.13.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.MPEG2VideoExtension_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.NET.Native.Framework.1.7",
+                              "version":  "1.7.27413.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.NET.Native.Framework.1.7_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.NET.Native.Framework.1.7",
+                              "version":  "1.7.27413.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.NET.Native.Framework.1.7_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.NET.Native.Framework.2.2",
+                              "version":  "2.2.29512.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.NET.Native.Framework.2.2_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.NET.Native.Framework.2.2",
+                              "version":  "2.2.29512.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.NET.Native.Framework.2.2_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.NET.Native.Runtime.1.7",
+                              "version":  "1.7.27422.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.NET.Native.Runtime.1.7_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.NET.Native.Runtime.1.7",
+                              "version":  "1.7.27422.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.NET.Native.Runtime.1.7_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.NET.Native.Runtime.2.2",
+                              "version":  "2.2.28604.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.NET.Native.Runtime.2.2_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.NET.Native.Runtime.2.2",
+                              "version":  "2.2.28604.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.NET.Native.Runtime.2.2_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.OneDriveSync",
+                              "version":  "26129.706.3.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.OneDriveSync_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.OutlookForWindows",
+                              "version":  "1.2026.713.100",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.OutlookForWindows_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.Paint",
+                              "version":  "11.2605.71.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Paint_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.PowerAutomateDesktop",
+                              "version":  "1.0.2117.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.PowerAutomateDesktop_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.RawImageExtension",
+                              "version":  "2.5.24.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.RawImageExtension_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.ScreenSketch",
+                              "version":  "11.2602.49.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.ScreenSketch_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.SecHealthUI",
+                              "version":  "1000.29554.1001.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.SecHealthUI_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.StartExperiencesApp",
+                              "version":  "1.151.0.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.StartExperiencesApp_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.StorePurchaseApp",
+                              "version":  "22606.1401.2.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.StorePurchaseApp_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.Todos",
+                              "version":  "0.176.7601.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Todos_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.UI.Xaml.2.8",
+                              "version":  "8.2501.31001.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.UI.Xaml.2.8_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.UI.Xaml.2.8",
+                              "version":  "8.2511.26001.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.UI.Xaml.2.8_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.UI.Xaml.CBS",
+                              "version":  "9.2603.18001.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.UI.Xaml.CBS_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.VCLibs.140.00",
+                              "version":  "14.0.33519.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.VCLibs.140.00_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.VCLibs.140.00",
+                              "version":  "14.0.33519.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.VCLibs.140.00_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.VCLibs.140.00.UWPDesktop",
+                              "version":  "14.0.33728.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.VCLibs.140.00.UWPDesktop_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.VCLibs.140.00.UWPDesktop",
+                              "version":  "14.0.33728.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.VCLibs.140.00.UWPDesktop_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.VP9VideoExtensions",
+                              "version":  "1.2.20.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.VP9VideoExtensions_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WebMediaExtensions",
+                              "version":  "2.1.38.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WebMediaExtensions_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WebpImageExtension",
+                              "version":  "1.2.14.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WebpImageExtension_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WidgetsPlatformRuntime",
+                              "version":  "1.6.14.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WidgetsPlatformRuntime_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WidgetsPlatformRuntime",
+                              "version":  "1.6.19.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WidgetsPlatformRuntime_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.Win32WebViewHost",
+                              "version":  "10.0.26100.1",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Win32WebViewHost_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.Apprep.ChxApp",
+                              "version":  "1000.25128.1000.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.Apprep.ChxApp_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.AugLoop.CBS",
+                              "version":  "1.1126.2131.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.AugLoop.CBS_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.CapturePicker",
+                              "version":  "10.0.19580.1000",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.CapturePicker_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.CloudExperienceHost",
+                              "version":  "10.0.26100.1",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.CloudExperienceHost_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.ContentDeliveryManager",
+                              "version":  "10.0.26100.1",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.DevHome",
+                              "version":  "0.0.0.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.DevHome_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.NarratorQuickStart",
+                              "version":  "10.0.26100.1",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.NarratorQuickStart_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.OOBENetworkCaptivePortal",
+                              "version":  "10.0.26569.1000",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.OOBENetworkCaptivePortal_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.OOBENetworkConnectionFlow",
+                              "version":  "10.0.26569.1000",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.OOBENetworkConnectionFlow_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.ParentalControls",
+                              "version":  "1000.25128.1000.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.ParentalControls_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.PeopleExperienceHost",
+                              "version":  "10.0.26100.1",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.PeopleExperienceHost_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.Photos",
+                              "version":  "2026.11060.2004.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.Photos_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.PinningConfirmationDialog",
+                              "version":  "1000.25140.1001.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.PinningConfirmationDialog_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.PrintQueueActionCenter",
+                              "version":  "1.0.2.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.PrintQueueActionCenter_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.ShellExperienceHost",
+                              "version":  "10.0.26100.8115",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.ShellExperienceHost_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.StartMenuExperienceHost",
+                              "version":  "10.0.26100.4768",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.Windows.XGpuEjectDialog",
+                              "version":  "10.0.26100.1",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Windows.XGpuEjectDialog_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAlarms",
+                              "version":  "1.1.85.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAlarms_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.1.5",
+                              "version":  "5001.311.2039.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.1.5_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.1.5",
+                              "version":  "5001.373.1736.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.1.5_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.1.5",
+                              "version":  "5001.373.1736.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.1.5_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.1.6",
+                              "version":  "6000.424.1611.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.1.6_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.1.6",
+                              "version":  "6000.519.329.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.1.6_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.1.6",
+                              "version":  "6000.519.329.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.1.6_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.1.7",
+                              "version":  "7000.785.2325.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.1.7_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.1.7",
+                              "version":  "7000.785.2325.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.1.7_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.1.8",
+                              "version":  "8000.921.1539.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.1.8_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.1.8",
+                              "version":  "8000.921.1539.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.1.8_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.2",
+                              "version":  "2.3.1.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.2_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.2",
+                              "version":  "2.3.1.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.2_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.CBS.1.6",
+                              "version":  "6000.872.154.100",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.CBS.1.6_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsAppRuntime.CBS.2",
+                              "version":  "2.1.1.100",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsAppRuntime.CBS.2_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsCalculator",
+                              "version":  "11.2605.9.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsCalculator_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsCamera",
+                              "version":  "2025.2510.2.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsCamera_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsFeedbackHub",
+                              "version":  "2.2606.702.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsFeedbackHub_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsNotepad",
+                              "version":  "11.2605.34.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsNotepad_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsSoundRecorder",
+                              "version":  "1.1.86.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsSoundRecorder_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsStore",
+                              "version":  "22606.1401.7.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsStore_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.WindowsTerminal",
+                              "version":  "1.24.11911.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.WindowsTerminal_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.Xbox.TCUI",
+                              "version":  "1.24.10001.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.Xbox.TCUI_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.XboxGameCallableUI",
+                              "version":  "1000.25128.1000.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.XboxGameCallableUI_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Microsoft.XboxGamingOverlay",
+                              "version":  "7.326.6011.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.XboxGamingOverlay_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.XboxIdentityProvider",
+                              "version":  "12.130.16001.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.XboxIdentityProvider_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.XboxSpeechToTextOverlay",
+                              "version":  "1.123.11001.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.YourPhone",
+                              "version":  "0.26012.102.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.YourPhone_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "Microsoft.ZuneMusic",
+                              "version":  "11.2512.10.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Microsoft.ZuneMusic_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "MicrosoftCorporationII.MicrosoftFamily",
+                              "version":  "0.2.103.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftCorporationII.MicrosoftFamily_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "MicrosoftCorporationII.QuickAssist",
+                              "version":  "2.0.43.0",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftCorporationII.QuickAssist_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.57242383.Tasbar",
+                              "version":  "1000.26100.8737.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.57242383.Tasbar_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.61869720.Voiess",
+                              "version":  "1000.26100.8737.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.61869720.Voiess_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.61869721.Livtop",
+                              "version":  "1000.26100.8737.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.61869721.Livtop_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.61869722.Speion",
+                              "version":  "1000.26100.8737.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.61869722.Speion_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.61869836.InpApp",
+                              "version":  "1000.26100.8737.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.61869836.InpApp_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.Client.CBS",
+                              "version":  "1000.26100.334.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.Client.CBS_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.Client.Core",
+                              "version":  "1000.26100.131.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.Client.Core_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.Client.CoreAI",
+                              "version":  "1000.26100.8894.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.Client.CoreAI_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.Client.FileExp",
+                              "version":  "1000.26100.7.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.Client.FileExp_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.Client.OOBE",
+                              "version":  "1000.26100.47.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.Client.OOBE_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.Client.Photon",
+                              "version":  "1000.26100.10.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.Client.Photon_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.Client.WebExperience",
+                              "version":  "526.17301.40.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.Client.WebExperience_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.CrossDevice",
+                              "version":  "0.26012.79.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.CrossDevice_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MicrosoftWindows.UndockedDevKit",
+                              "version":  "10.0.26100.1",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MicrosoftWindows.UndockedDevKit_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "MSTeams",
+                              "version":  "26183.1903.4892.4448",
+                              "publisher":  "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "MSTeams_8wekyb3d8bbwe"
+                          },
+                          {
+                              "name":  "NVIDIACorp.NVIDIAControlPanel",
+                              "version":  "8.1.969.0",
+                              "publisher":  "CN=D6816951-877F-493B-B4EE-41AB9419C326",
+                              "packageFamilyName":  "NVIDIACorp.NVIDIAControlPanel_56jybvy8sckqj"
+                          },
+                          {
+                              "name":  "OpenAI.Codex",
+                              "version":  "26.721.4979.0",
+                              "publisher":  "CN=50BDFD77-8903-4850-9FFE-6E8522F64D5B",
+                              "packageFamilyName":  "OpenAI.Codex_2p2nqsd0c76g0"
+                          },
+                          {
+                              "name":  "RealtekSemiconductorCorp.RealtekAudioControl",
+                              "version":  "1.1.137.0",
+                              "publisher":  "CN=83564403-0B26-46B8-9D84-040F43691D31",
+                              "packageFamilyName":  "RealtekSemiconductorCorp.RealtekAudioControl_dt26b99r8h8gj"
+                          },
+                          {
+                              "name":  "Windows.CBSPreview",
+                              "version":  "10.0.19580.1000",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Windows.CBSPreview_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "windows.immersivecontrolpanel",
+                              "version":  "10.0.8.1000",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "windows.immersivecontrolpanel_cw5n1h2txyewy"
+                          },
+                          {
+                              "name":  "Windows.PrintDialog",
+                              "version":  "6.2.3.0",
+                              "publisher":  "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+                              "packageFamilyName":  "Windows.PrintDialog_cw5n1h2txyewy"
+                          }
+                      ],
+    "absence":  {
+                    "oracle":  {
+                                   "absent":  true,
+                                   "installedSoftwareMatches":  [
+
+                                                                ],
+                                   "appxMatches":  [
+
+                                                   ],
+                                   "processMatches":  [
+
+                                                      ],
+                                   "serviceMatches":  [
+
+                                                      ],
+                                   "scheduledTaskMatches":  [
+
+                                                            ],
+                                   "certificateMatches":  [
+
+                                                          ]
+                               },
+                    "developmentTools":  {
+                                             "absent":  true,
+                                             "commandInventory":  [
+                                                                      {
+                                                                          "name":  "node.exe",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      },
+                                                                      {
+                                                                          "name":  "npm.cmd",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      },
+                                                                      {
+                                                                          "name":  "npx.cmd",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      },
+                                                                      {
+                                                                          "name":  "git.exe",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      },
+                                                                      {
+                                                                          "name":  "python.exe",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      },
+                                                                      {
+                                                                          "name":  "py.exe",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      },
+                                                                      {
+                                                                          "name":  "docker.exe",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      },
+                                                                      {
+                                                                          "name":  "cl.exe",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      },
+                                                                      {
+                                                                          "name":  "msbuild.exe",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      },
+                                                                      {
+                                                                          "name":  "code.cmd",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      },
+                                                                      {
+                                                                          "name":  "cargo.exe",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      },
+                                                                      {
+                                                                          "name":  "rustc.exe",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      },
+                                                                      {
+                                                                          "name":  "go.exe",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      },
+                                                                      {
+                                                                          "name":  "javac.exe",
+                                                                          "present":  false,
+                                                                          "sourceType":  null
+                                                                      }
+                                                                  ],
+                                             "installedSoftwareMatches":  [
+
+                                                                          ]
+                                         },
+                    "qualificationResidue":  {
+                                                 "absent":  true,
+                                                 "knownMatches":  [
+
+                                                                  ]
+                                             },
+                    "productionIndicators":  {
+                                                 "absent":  true,
+                                                 "matchingEnvironmentVariableNames":  [
+
+                                                                                      ],
+                                                 "limitation":  "Only variable names were inspected; values and credential stores were not read."
+                                             }
+                },
+    "founderConfirmations":  {
+                                 "requiredDataBackedUp":  true,
+                                 "deviceMayBeErasedAfterSeparateApproval":  true,
+                                 "officialRecoveryRouteAvailable":  true,
+                                 "currentWindowsWasCleanInstalledFromOfficialMedia":  true,
+                                 "windowsUpdateStable":  true,
+                                 "officialDeviceDriversInstalled":  true,
+                                 "cleanBaselineAndRecoveryProcedureDocumented":  true,
+                                 "noProductionOracleCredentials":  true,
+                                 "noProductionOracleData":  true,
+                                 "noPurchaseRequired":  true
+                             },
+    "mandatoryChecks":  {
+                            "deviceNameMatches":  true,
+                            "manufacturerMatches":  true,
+                            "modelMatches":  true,
+                            "windows11X64":  true,
+                            "activationPassed":  true,
+                            "secureBootPassed":  true,
+                            "tpmPassed":  true,
+                            "storageHealthyAndCapacitySufficient":  true,
+                            "gpuInventoryPresent":  true,
+                            "driverInventoryPresent":  true,
+                            "recoveryEnvironmentEnabled":  true,
+                            "installationMediaEvidencePresent":  false,
+                            "oracleAbsent":  true,
+                            "developmentToolsAbsent":  true,
+                            "qualificationResidueAbsent":  true,
+                            "productionEnvironmentIndicatorsAbsent":  true,
+                            "founderConfirmationsPassed":  true
+                        },
+    "failedChecks":  [
+                         "installationMediaEvidencePresent"
+                     ],
+    "limitations":  [
+                        "This is read-only host admission, not Stage 3 execution.",
+                        "The collector does not install, transfer or inspect the Stage 2 package.",
+                        "The collector does not import or inspect the Stage 2 public certificate.",
+                        "No credential values, browser profiles, personal files or production systems are inspected.",
+                        "Production credential and data absence requires the recorded Founder attestations in addition to bounded machine indicators.",
+                        "If this run occurs before the authorised clean installation, installation-media identity and post-install clean-state evidence will remain outstanding and admission must fail closed.",
+                        "Installed-package GPU qualification remains a later Stage 5 requirement."
+                    ]
+}

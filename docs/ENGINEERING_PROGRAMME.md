@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 30.5 Stage 3 Founder decision
+**Next Review:** Sprint 30.5 Stage 3 execution Founder decision
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1347,10 +1347,13 @@ closed with frozen evidence. The new local-only package and signed Release
 Manifest mechanically reconcile Runtime Manifest `1.7.0` without altering the
 immutable Sprint 29 package. Temporary signing material and trust were
 removed. Stage 3 Clean Windows Qualification is proposed and not authorised.
-It requires a separate clean Windows state on a Founder-designated replacement
-physical laptop. Exact hardware identity, recovery readiness, licensing and
-clean-install suitability must pass bounded host admission before any
-destructive or Stage 3 authority.
+The replacement host `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, is
+`admitted-with-founder-provenance-exception` for its current Windows
+installation. The unavailable installation-media hash remains explicitly
+false, while every mandatory technical and compensating control passes.
+Host admission is complete, but Stage 3 execution, artifact transfer,
+certificate trust and package installation require a separate Founder
+decision.
 Live Auth, protected rendering,
 clean Windows, installed-package GPU/performance/accessibility,
 reproducibility and final integrated qualification remain in later sequential
