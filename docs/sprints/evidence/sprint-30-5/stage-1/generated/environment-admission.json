@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.environment-admission",
+  "contractVersion": 1,
+  "stage": 1,
+  "result": "blocked",
+  "reason": "required-resettable-windows-gpu-environment-unavailable",
+  "baselineCommit": "6c5dd022cdb106dd125c854a9e141e19a3be18f1",
+  "host": {
+    "operatingSystem": "Microsoft Windows 11 Home",
+    "version": "10.0.26200",
+    "architecture": "x64",
+    "bios": "American Megatrends 3902",
+    "hypervisorPresent": true,
+    "firmwareVirtualisationEnabled": true,
+    "wslVersion": 2,
+    "dockerDesktopVersion": "4.83.0",
+    "dockerEngineVersion": "29.6.2",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 4080",
+        "driver": "610.62",
+        "hostDisplayActive": true
+      },
+      {
+        "name": "AMD Radeon Graphics",
+        "driver": "32.0.21043.5001",
+        "hostDisplayActive": null
+      }
+    ]
+  },
+  "resettableWindowsEnvironment": {
+    "admitted": false,
+    "windowsSandbox": false,
+    "hyperVManager": false,
+    "hyperVVmConsole": false,
+    "virtualBoxController": false,
+    "vmwareController": false,
+    "existingGuestDiscovered": false,
+    "guestGpuVerified": false
+  },
+  "dependentInfrastructure": {
+    "supabaseAuthProvisioned": false,
+    "postgresProvisioned": false,
+    "emailCaptureProvisioned": false,
+    "syntheticIdentitiesCreated": false,
+    "testCertificatesCreated": false,
+    "artifactTransferred": false
+  },
+  "teardown": {
+    "required": false,
+    "stageContainersRemaining": 0,
+    "identitiesRemaining": 0,
+    "certificatesRemaining": 0,
+    "trustEntriesRemaining": 0,
+    "statement": "No disposable Stage 1 infrastructure was created because the first mandatory admission check failed."
+  },
+  "authority": {
+    "purchaseMade": false,
+    "paidProviderUsed": false,
+    "productionUsed": false,
+    "productSourceChanged": false,
+    "architectureChanged": false,
+    "migrationChanged": false,
+    "remotePush": false,
+    "stage2Started": false
+  },
+  "conclusion": {
+    "stage1Complete": false,
+    "founderReviewRequired": true,
+    "resumeRequirement": "authorised-resettable-windows-11-x64-environment-with-guest-gpu-acceleration"
+  }
+}
