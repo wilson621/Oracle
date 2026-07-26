@@ -183,6 +183,12 @@ state. It may not rebuild or resign the package, and it must remain separate
 from live Auth, protected rendering and installed-package
 GPU/performance/accessibility qualification.
 
+The proposed Stage 3 host is now a Founder-designated replacement physical
+laptop. Its exact hardware identity is pending the bounded admission record.
+The ASUS Stage 1 hardware/GPU facts do not transfer, but the host change does
+not alter or invalidate any accepted Stage 2 source, manifest, package, hash
+or evidence contract.
+
 ## Sprint 29 — Secure Desktop Operations and Distribution
 
 ADR-046 establishes MSIX as the Windows package authority and the signed

@@ -1347,8 +1347,10 @@ closed with frozen evidence. The new local-only package and signed Release
 Manifest mechanically reconcile Runtime Manifest `1.7.0` without altering the
 immutable Sprint 29 package. Temporary signing material and trust were
 removed. Stage 3 Clean Windows Qualification is proposed and not authorised.
-It requires a separate clean Windows state; the recommended path is an
-explicitly authorised clean reinstall of the dedicated qualification laptop.
+It requires a separate clean Windows state on a Founder-designated replacement
+physical laptop. Exact hardware identity, recovery readiness, licensing and
+clean-install suitability must pass bounded host admission before any
+destructive or Stage 3 authority.
 Live Auth, protected rendering,
 clean Windows, installed-package GPU/performance/accessibility,
 reproducibility and final integrated qualification remain in later sequential

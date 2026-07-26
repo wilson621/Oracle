@@ -116,3 +116,15 @@ The Founder accepted and closed Stage 2. Stage 3 has not begun and remains
 unauthorised. Sprint 30 remains qualification-incomplete because clean Windows,
 live Auth, protected rendering, installed-package GPU/performance/accessibility,
 reproducibility and final integrated qualification remain outstanding.
+
+## Sprint 30.5 Stage 3 host direction
+
+The Founder withdrew the ASUS ROG Zephyrus G15 from the proposed Stage 3 role
+and selected a different physical laptop. Exact replacement hardware identity
+is pending the bounded Stage 3 host-admission record. No destructive action or
+Stage 3 execution is authorised.
+
+This is an environment substitution only. It does not alter the accepted
+Stage 2 source candidate, Runtime Manifest `1.7.0`, signed Release Manifest,
+MSIX, artifact hashes or frozen evidence. ASUS-specific hardware/GPU evidence
+remains valid Stage 1 history but does not transfer to the replacement.

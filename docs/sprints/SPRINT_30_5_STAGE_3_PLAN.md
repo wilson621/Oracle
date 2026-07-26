@@ -21,75 +21,75 @@ authenticated rendering, installed-package GPU/performance/accessibility,
 reproducibility, production signing, publication, distribution, deployment or
 Beta.
 
-## Recommended environment
+## Designated environment
 
-Use the already authorised ASUS ROG Zephyrus G15, but only after an explicit
-Founder-authorised clean reinstall of Windows 11 Home x64 from official
-Microsoft installation media.
+Use the Founder-designated replacement physical laptop. Its manufacturer,
+model and hash-bound device identity must be recorded through
+`SPRINT_30_5_STAGE_3_HOST_ADMISSION.md` before destructive action.
 
-The install must remove applications, settings and data from the Windows
-installation being qualified. It must use the machine's existing digital
-licence and must not require a purchase, edition upgrade, paid provider or new
-virtualisation provider.
+The ASUS ROG Zephyrus G15 remains the immutable Stage 1 controlled
+non-pristine host but is withdrawn from the proposed Stage 3 role. Its
+host-specific facts must not be attributed to the replacement.
 
-This is recommended because:
-
-- Windows Sandbox is not supported on Windows Home:
-  <https://learn.microsoft.com/windows/security/application-security/application-isolation/windows-sandbox/>;
-- client Hyper-V is not supported on Windows Home:
-  <https://learn.microsoft.com/windows-server/virtualization/hyper-v/get-started/Install-Hyper-V>;
-- a third-party VM would add a new provider, software and Windows licensing
-  decision; and
-- native-boot VHDX changes boot configuration and carries storage, BitLocker
-  and recovery complexity without giving stronger evidence than a clean
-  physical reinstall:
-  <https://learn.microsoft.com/windows-hardware/manufacture/desktop/deploy-windows-on-a-vhd--native-boot>.
-
-Microsoft documents that a clean reinstall using installation media erases
-data, applications, settings and customisations:
-<https://support.microsoft.com/windows/reinstall-windows-with-the-installation-media-d8369486-3e33-7d9c-dccc-859e2b022fc7>.
+The replacement must receive an explicit Founder-authorised clean
+installation of a supported, licensed Windows 11 x64 edition from official
+Microsoft media. The install must remove applications, settings and data from
+the Windows installation being qualified. It must not require a purchase,
+edition upgrade, paid provider or new virtualisation provider.
 
 ## Time-critical prerequisite
 
 The frozen package is signed by an untimestamped local test certificate that
 expires at `2026-07-28T15:45:27Z`.
 
-Stage 3 installation and signature enforcement must complete while that
-certificate is valid. If sufficient time remains unavailable, Stage 3 must
-not begin. Rebuilding or resigning would create a new package hash and requires
-separate Founder authority to return to candidate reconciliation; Stage 3 may
-not manufacture a replacement.
+At `2026-07-26T19:55:59Z`, approximately 43 hours 49 minutes remained. The
+24-hour execution window remains available only if the clean installation,
+host admission and Founder approvals complete in time for Stage 3
+qualification to begin no later than `2026-07-27T15:45:27Z`.
+
+Stage 3 installation and signature enforcement must complete while the
+certificate is valid. The former six-hour admission margin is no longer
+sufficient for a planned one-day execution after a host change. If the
+24-hour start deadline cannot be met, Stage 3 must not begin. Rebuilding or
+resigning would create a new package hash and requires separate Founder
+authority to return to candidate reconciliation; Stage 3 may not manufacture
+a replacement.
 
 ## Prerequisites
 
 1. Stage 2 closure commit exists and the repository is clean.
 2. The Founder explicitly authorises Stage 3.
-3. The Founder explicitly authorises destructive clean reinstallation of the
-   dedicated ASUS qualification laptop.
-4. The Founder confirms that all data requiring retention is backed up
+3. The replacement host has passed the pre-install admission requirements in
+   `SPRINT_30_5_STAGE_3_HOST_ADMISSION.md`.
+4. The Founder explicitly designates that admitted replacement laptop as the
+   Stage 3 clean Windows qualification host.
+5. The Founder explicitly authorises destructive clean installation of the
+   designated replacement host.
+6. The Founder confirms that all data requiring retention is backed up
    independently and that the machine may be erased.
-5. Official Windows 11 Home x64 installation media and its provenance are
+7. Official installation media for the licensed Windows 11 x64 edition and
+   its provenance are
    available without purchase.
-6. The machine's existing Windows digital licence and recovery information are
+8. The machine's existing Windows digital licence and recovery information are
    available.
-7. If Windows Home setup requires an online Microsoft identity, the Founder
-   explicitly authorises one Founder-controlled, non-Oracle setup identity.
-   No Oracle Operator, production or project credential may be used.
-8. The Founder authorises Windows Update and official NVIDIA/ASUS driver
-   retrieval solely for qualification-host preparation.
-9. The Founder authorises temporary trust of the Stage 2 public test
+9. If the selected Windows edition requires an online Microsoft identity, the
+   Founder explicitly authorises one Founder-controlled, non-Oracle setup
+   identity. No Oracle Operator, production or project credential may be used.
+10. The Founder authorises Windows Update and official manufacturer driver
+    retrieval solely for qualification-host preparation.
+11. The Founder authorises temporary trust of the Stage 2 public test
    certificate solely on the qualification laptop. No private key is
    transferred.
-10. The Founder authorises offline removable-media artifact transfer, or
+12. The Founder authorises offline removable-media artifact transfer, or
     separately approves another isolated transfer method.
-11. At least six hours remain before test-certificate expiry when installation
+13. At least 24 hours remain before test-certificate expiry when Stage 3
     qualification begins.
 
 ## Execution
 
 ### 1. Pre-destructive admission
 
-- verify the laptop serial/model against Stage 1 evidence;
+- establish the replacement laptop's exact hash-bound hardware identity;
 - record Windows activation and recovery readiness without retaining licence
   keys, account identifiers or recovery secrets;
 - verify the external backup and recovery route;
@@ -100,10 +100,11 @@ not manufacture a replacement.
 
 ### 2. Clean Windows construction
 
-- perform an official clean Windows 11 Home x64 reinstall;
+- perform an official clean installation of the licensed Windows 11 x64
+  edition;
 - do not restore applications, settings or user data;
 - complete OOBE using only the authorised setup identity if required;
-- apply stable Windows, NVIDIA and ASUS updates;
+- apply stable Windows and official manufacturer updates;
 - reboot until no mandatory update remains;
 - enable no optional development, gaming, cloud-sync or telemetry product;
   and
@@ -275,7 +276,7 @@ Stop immediately if:
 - official installation-media provenance cannot be established;
 - a purchase, edition upgrade, paid provider or new virtualisation provider is
   required;
-- fewer than six hours remain before certificate expiry;
+- fewer than 24 hours remain before certificate expiry;
 - the certificate is expired or the package requires rebuilding/resigning;
 - the Stage 2 archive, package, manifest or signature hash diverges;
 - clean-state admission finds Oracle or development tooling;
@@ -309,18 +310,20 @@ Stop immediately if:
 The Founder must explicitly approve:
 
 1. **Sprint 30.5 Stage 3 execution.**
-2. **Destructive clean reinstallation of Windows 11 Home x64 on the dedicated
-   ASUS qualification laptop**, after confirming backup and recovery.
-3. **Use of official Microsoft installation media, Windows Update, existing
-   digital licensing and official NVIDIA/ASUS drivers** solely for host
+2. **Designation of the admitted replacement physical laptop as the Stage 3
+   clean Windows qualification host.**
+3. **Destructive clean installation of its licensed Windows 11 x64 edition**,
+   after confirming backup and recovery.
+4. **Use of official Microsoft installation media, Windows Update, existing
+   digital licensing and official manufacturer drivers** solely for host
    preparation.
-4. **Use of a Founder-controlled non-Oracle Microsoft setup identity**, only
-   if Windows Home OOBE requires it.
-5. **Temporary local trust of the Stage 2 public test certificate and local
+5. **Use of a Founder-controlled non-Oracle Microsoft setup identity**, only
+   if the selected edition's OOBE requires it.
+6. **Temporary local trust of the Stage 2 public test certificate and local
    installation of the frozen Stage 2 MSIX.**
-6. **The approved offline artifact-transfer method.**
-7. **Execution before the certificate-validity deadline**, with no implicit
-   authority to rebuild or resign if the deadline cannot be met.
+7. **The approved offline artifact-transfer method.**
+8. **Execution before the 24-hour certificate-validity start deadline**, with
+   no implicit authority to rebuild or resign if the deadline cannot be met.
 
 These approvals may be granted together in one Stage 3 Founder decision.
 

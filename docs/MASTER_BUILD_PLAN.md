@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 26 July 2026
-**Version:** 4.4
+**Version:** 4.5
 
 ---
 
@@ -146,6 +146,9 @@ is frozen, and all temporary signing material and trust are removed. Stage 3
 Clean Windows Qualification is proposed and not authorised. Clean Windows,
 live Auth, protected rendering, installed-package
 qualification and later integrated evidence remain outstanding.
+The Stage 3 host is now a Founder-designated replacement physical laptop whose
+exact hardware identity must pass admission before clean installation. This
+does not alter accepted Stage 1 or Stage 2 evidence.
 Production signing, publication, distribution, deployment and activation
 remain unauthorised.
 

@@ -290,6 +290,7 @@ delivery authorities have been reviewed.
 | Sprint 30.5 Stage 2 closure | [Sprint 30.5 Stage 2 Closure](sprints/SPRINT_30_5_STAGE_2_CLOSURE.md) | Founder-accepted and closed |
 | Sprint 30.5 Stage 2 evidence | [Sprint 30.5 Stage 2 Evidence](sprints/evidence/sprint-30-5/stage-2/README.md) | Founder-accepted, frozen and hash-bound |
 | Sprint 30.5 Stage 3 plan | [Sprint 30.5 Stage 3 Plan](sprints/SPRINT_30_5_STAGE_3_PLAN.md) | Proposed; separate Founder authority required |
+| Sprint 30.5 Stage 3 host admission | [Sprint 30.5 Stage 3 Host Admission](sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION.md) | Replacement physical host identity and evidence pending; no action authorised |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

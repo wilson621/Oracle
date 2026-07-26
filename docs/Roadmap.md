@@ -11,7 +11,7 @@
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
 **Last Reviewed:** 26 July 2026
-**Version:** 6.0
+**Version:** 6.1
 
 ---
 
@@ -789,6 +789,9 @@ SBOM, provenance, package inventory and complete signing teardown. Sprint 30
 remains qualification-incomplete pending Stages 3–7, including separately
 authorised clean Windows, live Auth, protected rendering and installed-package
 qualification. Stage 3 is proposed and unauthorised.
+The Founder-designated replacement physical laptop must first provide a
+hash-bound host-admission record and then receive separately authorised clean
+Windows installation. This host change leaves Stages 1 and 2 intact.
 Production signing, publication, distribution, deployment and runtime
 persistence remain unauthorised.
 
