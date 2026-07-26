@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022", "DOM"],
+    "types": ["node"],
+    "rootDir": ".",
+    "outDir": "./.tmp-sprint-30-phase-2-verification",
+    "noEmit": false,
+    "isolatedModules": false,
+    "incremental": false,
+    "sourceMap": false
+  },
+  "include": [
+    "lib/**/*.ts",
+    "desktop/**/*.ts",
+    "scripts/verify-sprint-30-phase-2-targets.ts"
+  ],
+  "exclude": ["node_modules", ".next", "dist-electron"]
+}

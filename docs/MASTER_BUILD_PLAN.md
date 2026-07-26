@@ -135,8 +135,13 @@ ADR-046. Its governed MSIX implementation, signed Release Manifest equality
 and current-host install/update/repair/rollback/uninstall certification are
 accepted. Clean-Machine Certification Deferred — Required Disposable Windows
 Environment Unavailable remains the independent programme status. Sprint 30
-Option A and ADR-047 are Founder-approved. Phase 1 establishes the governed
-diagnostic admission foundation without changing runtime composition.
+Option A and ADR-047 are Founder-approved. Phases 1 and 2 are complete and
+locally verified. The diagnostic admission foundation remains separate from
+Oracle Intelligence. The exact candidate and its Web, release-environment
+Electron and disposable PostgreSQL journeys through Migration 014 are
+qualified. The live Supabase Auth provider transaction remains unavailable
+and is not claimed as passed. Runtime composition remains unchanged and Phase
+3 has not begun.
 Production signing, publication, distribution, deployment and activation
 remain unauthorised.
 

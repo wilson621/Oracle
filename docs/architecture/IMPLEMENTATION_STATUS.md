@@ -48,9 +48,9 @@ walkthrough accepted
 **Sprint 29:** Complete, locally certified, Founder-accepted and closed under
 ADR-046; Clean-Machine Certification Deferred — Required Disposable Windows
 Environment Unavailable remains the independent programme status
-**Sprint 30:** Founder-approved and active under ADR-047; Phase 1 diagnostic
-admission foundation implemented and locally verified; production
-qualification not yet complete
+**Sprint 30:** Founder-approved and active under ADR-047; Phases 1–2
+implemented and locally verified; provider-level authentication transaction
+unavailable; production qualification not yet complete
 
 ---
 
@@ -92,6 +92,23 @@ Understanding, Memory, coaching, planning or progression.
 Phase 1 has not changed Web or Electron runtime construction. Manifest `1.6.0`
 therefore remains unchanged and mandatory. No production diagnostics,
 persistence, migration, deployment or Gate activity has occurred.
+
+## Sprint 30 Phase 2 — Qualification Candidate and Critical Journeys
+
+The exact local candidate is frozen across source, Runtime Manifest, Release
+Manifest, dependency lock, Migration 009–014 and environment provenance. Web
+and release-environment Electron composition roots construct ready runtimes
+that mechanically match manifest `1.6.0`.
+
+Disposable PostgreSQL 17 certification applies the canonical chain through
+Migration 014 and passes the authenticated Session, Evidence, Understanding,
+Mission, Planner, Progression, export, deletion and cross-Operator isolation
+journeys using synthetic data. The exact container is removed afterwards.
+
+The database authenticated role/JWT boundary passed. A live Supabase
+Auth/GoTrue Email + Password provider transaction is unavailable because the
+local provider is not configured; no production endpoint or credential was
+substituted. Phase 3 has not begun.
 
 ## Sprint 29 — Secure Desktop Operations and Distribution
 

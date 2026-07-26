@@ -277,6 +277,7 @@ delivery authorities have been reviewed.
 | Sprint 30 Founder Decision Package | [Sprint 30 Founder Decision Required](sprints/SPRINT_30_FOUNDER_DECISION_REQUIRED.md) | Resolved; Option A and ADR-047 approved |
 | Sprint 30 plan | [Sprint 30 Plan](sprints/SPRINT_30_PLAN.md) | Founder-approved phased delivery |
 | Sprint 30 Phase 1 implementation | [Sprint 30 Phase 1 Implementation](sprints/SPRINT_30_PHASE_1_IMPLEMENTATION.md) | Diagnostic admission foundation implemented |
+| Sprint 30 Phase 2 implementation | [Sprint 30 Phase 2 Implementation](sprints/SPRINT_30_PHASE_2_IMPLEMENTATION.md) | Candidate and critical journeys locally qualified; provider transaction unavailable |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

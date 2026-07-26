@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.production-qualification-candidate",
+  "contractVersion": 1,
+  "frozenAt": "2026-07-26T08:57:32.236Z",
+  "sourceBaselineCommit": "8dd521775d9544d3fedc4e3a95544ec147a3788e",
+  "sourceTreeSha256": "c3b76f6cc619c3afed8dbdc31c506259913aacdd8ba4a5dc87ea7988b1611678",
+  "runtimeManifest": {
+    "version": "1.6.0",
+    "webSourceSha256": "8512ada5b94ed766806fc828b72b9e432ac2679bf2d091dfc6f957211f0b988e",
+    "electronSourceSha256": "9b0b2dd35820708d02be2c460867fc5878c40ac108541763aabcdef1c40a57c3"
+  },
+  "releaseManifest": {
+    "path": ".tmp-sprint-29/release/oracle-release-manifest.json",
+    "sha256": "76153fda24bc8d22f9119d5b86b3d0f6db75de6782a383c7eddb863429aae3f8",
+    "releaseId": "oracle-desktop-beta-0.1.0-local-certification",
+    "packageVersion": "0.1.0.0",
+    "productionTrusted": false,
+    "deploymentAuthorised": false
+  },
+  "dependencies": {
+    "packageLockSha256": "8948f6d1128e02217805fc88f8fa057740a4e6040106252b041f573934769adf",
+    "node": "v24.18.0",
+    "next": "16.2.11",
+    "electron": "39.8.10"
+  },
+  "migrations": {
+    "database/009_operator_intelligence_persistence.sql": "fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f",
+    "database/010_operator_trust_control_persistence.sql": "7c46a1c9a3a0ff7e8f5c2348a3179c98934ad34ec9e66a2c2632830b65c7d715",
+    "database/011_operator_account_provisioning.sql": "5be24f86228d018dc2d5aacbf3f186c9414432c18c2b573a7a3a1e340496d505",
+    "database/012_operator_identity_lifecycle.sql": "a436c0df6a2a9296c112d9c4ab6f6dd50dd44daa5fcf54dd01c5a2d213b435b0",
+    "database/013_authoritative_session_lifecycle.sql": "7228c0384caed59f2a042e17eb6b2ea935bfed6b72e6372649d93f0874c5f68a",
+    "database/014_operator_development_lifecycle.sql": "25682a9331102e51d6742988600697f9d23d94a53f09cd23bc585ed0a161d831"
+  },
+  "environment": {
+    "platform": "win32",
+    "architecture": "x64",
+    "osRelease": "10.0.26200",
+    "osVersion": "Windows 11 Home"
+  },
+  "authority": {
+    "production": "unchanged",
+    "runtimePersistence": "disabled",
+    "productionPersistence": "not-authorised",
+    "deployment": "not-authorised",
+    "gateC": "deferred",
+    "gate7": "not-authorised"
+  }
+}

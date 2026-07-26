@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-26T08:54:28.788Z",
+  "result": "passed",
+  "runtimeManifestVersion": "1.6.0",
+  "targets": {
+    "web": "critical-runtime-ready",
+    "electron": "release-compiled-runtime-ready"
+  },
+  "journeys": [
+    "authentication-boundary",
+    "session-and-evidence",
+    "understanding",
+    "mission-and-progression",
+    "export-and-deletion"
+  ],
+  "limitations": {
+    "liveSupabaseGoTruePasswordTransaction": "unavailable-local-provider-not-configured",
+    "installedCleanWindowsExecution": "deferred-required-disposable-windows-environment-unavailable"
+  },
+  "productionDeployment": false,
+  "productionPersistence": false
+}

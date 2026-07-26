@@ -1,11 +1,15 @@
 import assert from "node:assert/strict";
 import crypto from "node:crypto";
 import fs from "node:fs";
+import path from "node:path";
 import { spawn } from "node:child_process";
 
 const dockerExecutable = process.env.ORACLE_DOCKER_EXE;
 const dockerContainer = process.env.ORACLE_POSTGRES_CONTAINER;
 const databaseUrl = process.env.SPRINT21_DATABASE_URL;
+const evidencePath =
+  process.env.ORACLE_CERTIFICATION_EVIDENCE_PATH ??
+  "docs/sprints/evidence/sprint-21/generated/migration-013-certification.json";
 if (!dockerExecutable || !dockerContainer || !databaseUrl) {
   throw new Error(
     "ORACLE_DOCKER_EXE, ORACLE_POSTGRES_CONTAINER and SPRINT21_DATABASE_URL are required."
@@ -74,11 +78,11 @@ async function main() {
     runtimePersistenceActivated: false,
     result: "pass",
   };
-  fs.mkdirSync("docs/sprints/evidence/sprint-21/generated", {
+  fs.mkdirSync(path.dirname(evidencePath), {
     recursive: true,
   });
   fs.writeFileSync(
-    "docs/sprints/evidence/sprint-21/generated/migration-013-certification.json",
+    evidencePath,
     `${JSON.stringify(evidence, null, 2)}\n`,
     "utf8"
   );
