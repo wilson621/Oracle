@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.environment-admission",
+  "contractVersion": 1,
+  "revision": 2,
+  "stage": 1,
+  "result": "incomplete",
+  "reason": "authorised-physical-machine-local-evidence-pending",
+  "baselineCommit": "9d7499e6b59783a540541ae098f4a819fcfdc102",
+  "founderAuthorisedMachine": {
+    "model": "ASUS ROG Zephyrus G15 GA503QR",
+    "operatingSystem": "Windows 11 Home x64",
+    "processor": "AMD Ryzen 9 5900HS",
+    "memoryGiB": 16,
+    "gpu": "NVIDIA GeForce RTX 3070 Laptop GPU",
+    "windowsUpdated": true,
+    "nvidiaDriversUpdated": true,
+    "asusUpdatesCompleted": true,
+    "documentedRestorePoint": true,
+    "factoryResetRequired": false,
+    "source": "Founder clarification",
+    "machineGeneratedEvidenceCollected": false
+  },
+  "serviceTopology": {
+    "supabaseCli": "2.109.1",
+    "runsCompleted": 2,
+    "canonicalChainThroughMigration014": true,
+    "terminalTablesVerified": 4,
+    "localEmailCaptureVerified": true,
+    "sessionIssuedBeforeVerification": false,
+    "externalEmailDeliveryUsed": false,
+    "productionEndpointUsed": false,
+    "productionCredentialUsed": false,
+    "productionDataUsed": false,
+    "images": {
+      "postgres": {
+        "reference": "public.ecr.aws/supabase/postgres:17.6.1.143",
+        "id": "sha256:80d7b27c3e8d77cfa7226eee9508671796da214781ff15a35b3670d7ad5ee453"
+      },
+      "gotrue": {
+        "reference": "public.ecr.aws/supabase/gotrue:v2.192.0",
+        "id": "sha256:b252efb680be37d4a8bf77c210cf0439c19b63a4b51929233a65dd101d25bdab"
+      },
+      "kong": {
+        "reference": "public.ecr.aws/supabase/kong:2.8.1",
+        "id": "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d"
+      },
+      "mailpit": {
+        "reference": "public.ecr.aws/supabase/mailpit:v1.30.2",
+        "id": "sha256:37a38e48e9338cd7e89dfeb487f37b02ebfcd9cb23111bed2d345e79d37d6dd6"
+      }
+    }
+  },
+  "isolation": {
+    "localhostAdmissionPassed": true,
+    "cliHostPortBinding": "all-host-interfaces",
+    "crossMachineAllowlistVerified": false,
+    "result": "pending"
+  },
+  "teardown": {
+    "recreationVerified": true,
+    "containersRemaining": 0,
+    "volumesRemaining": 0,
+    "networksRemaining": 0,
+    "identitiesRemaining": 0,
+    "certificatesRemaining": 0,
+    "trustEntriesRemaining": 0,
+    "temporaryDirectoriesRemaining": 0,
+    "publicContainerImagesCached": true,
+    "cachedImagesContainQualificationState": false
+  },
+  "pendingEvidence": {
+    "laptopInventory": true,
+    "restorePointEnumeration": true,
+    "electronGpuProbe": true,
+    "crossMachineIsolation": true,
+    "artifactTransferIntegrity": true
+  },
+  "authority": {
+    "purchaseMade": false,
+    "paidProviderUsed": false,
+    "productSourceChanged": false,
+    "architectureChanged": false,
+    "migrationChanged": false,
+    "runtimePersistenceActivated": false,
+    "remotePush": false,
+    "stage2Started": false
+  },
+  "conclusion": {
+    "stage1Complete": false,
+    "founderAcceptanceRecommended": false,
+    "founderReviewRequired": true
+  }
+}

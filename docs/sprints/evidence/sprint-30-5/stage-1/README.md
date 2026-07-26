@@ -1,30 +1,34 @@
 # Sprint 30.5 Stage 1 Evidence Index
 
-**Stage result:** Blocked at mandatory Windows environment admission
+**Stage result:** Incomplete — authorised physical-machine evidence pending
 
 ## Evidence
 
-- `SPRINT_30_5_STAGE_1_ENVIRONMENT_ADMISSION.md` records the environment audit,
-  prohibited paths, fail-closed outcome and absence of residual
-  infrastructure.
+- `SPRINT_30_5_STAGE_1_ENVIRONMENT_ADMISSION.md` preserves the original
+  fail-closed environment audit.
+- `SPRINT_30_5_STAGE_1_ENVIRONMENT_ADMISSION_REVISED.md` records the
+  Founder-authorised physical-machine model, successfully exercised disposable
+  service topology and remaining machine-local evidence.
 - `SPRINT_30_5_STAGE_1_GPU_PROTOCOL_PROPOSED.md` records the proposed
   measurement method and thresholds. It is not frozen or executed.
-- `generated/environment-admission.json` provides the machine-readable
+- `generated/environment-admission.json` preserves the original machine-readable
   admission result.
+- `generated/environment-admission-revised.json` provides the current
+  machine-readable admission state.
 
 ## Deliverable disposition
 
 | Required deliverable | Disposition |
 | --- | --- |
-| Environment Admission Record | Produced — blocked |
-| Windows environment specification | Host recorded; required guest unavailable |
-| GPU capability record | Host GPU recorded; disposable guest GPU unavailable |
-| Auth/PostgreSQL/email topology | Designed only; not provisioned |
-| Isolation/prohibited-path checklist | Produced |
-| Snapshot/reset/teardown procedure | Blocked; no guest exists |
+| Revised Environment Admission Record | Produced — incomplete |
+| Windows environment specification | Founder-authorised; machine evidence pending |
+| GPU capability record | RTX 3070 specified; Electron GPU probe pending |
+| Auth/PostgreSQL/email topology | Provisioned, recreated and removed |
+| Isolation/prohibited-path checklist | Localhost passed; laptop allowlist pending |
+| Snapshot/reset/teardown procedure | Service teardown passed; laptop restore evidence pending |
 | Proposed GPU protocol and thresholds | Produced; not frozen |
 | Stage 1 evidence index | Produced |
 
-No Supabase instance, PostgreSQL database, email sink, identity, session,
-certificate, trust entry or container was created. No teardown success is
-inferred from an environment that was never provisioned.
+The disposable service topology left no Supabase instance, PostgreSQL volume,
+email, identity, session, certificate, trust entry, container, network or
+temporary directory. Stage 2 has not begun.
