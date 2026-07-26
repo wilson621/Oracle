@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 25 July 2026
-**Version:** 7.6
+**Version:** 7.7
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -85,12 +85,18 @@ production mock game or loadout evidence. Manifest `1.6.0` remains exact
 across Web and Electron. No deployment, migration, persistence, activation or
 Gate C activity occurred.
 
-## Active Founder Review
+## Active Sprint
 
-Sprint 30 — Production Qualification is not activated. Its Founder Decision
-Package recommends Option A — Governed Isolated Production Qualification and
-ADR-047 — Privacy-Safe Operational Diagnostics and Crash Reporting. No Sprint
-30 implementation has begun.
+Sprint 30 — Production Qualification is Founder-approved and active under
+Option A and ADR-047. Delivery is divided into separately verified and
+committed phases. Phase 1 is complete and locally verified: it implements the
+non-authoritative diagnostic admission contract, allowlisted definitions,
+minimisation policy and bounded local transient sink. Runtime composition
+remains unchanged at manifest `1.6.0`.
+
+Phase 2 has not begun. Clean-Machine Certification Deferred — Required
+Disposable Windows Environment Unavailable remains unchanged. Gate 7 is not
+authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in

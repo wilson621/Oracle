@@ -46,6 +46,7 @@
     "sprint-29:build-release": "node scripts/build-sprint-29-release.mjs",
     "sprint-29:verify": "tsc -p tsconfig.sprint-29-verification.json && node .tmp-sprint-29-verification/scripts/verify-sprint-29-contracts.js && node scripts/verify-sprint-29.mjs && node -e \"require('node:fs').rmSync('.tmp-sprint-29-verification', { recursive: true, force: true })\"",
     "sprint-29:lifecycle": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/test-sprint-29-appx-lifecycle.ps1",
+    "sprint-30:phase-1:verify": "tsc -p tsconfig.sprint-30-phase-1-verification.json && node .tmp-sprint-30-phase-1-verification/scripts/verify-sprint-30-phase-1.js && node -e \"require('node:fs').rmSync('.tmp-sprint-30-phase-1-verification', { recursive: true, force: true })\"",
     "native:build:discovery": "dotnet publish desktop-native/Oracle.WindowDiscovery/Oracle.WindowDiscovery.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false --output dist-native",
     "native:build:observer": "dotnet publish desktop-native/Oracle.WindowObserver/Oracle.WindowObserver.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false --output dist-native",
     "native:build": "npm run native:build:discovery && npm run native:build:observer",

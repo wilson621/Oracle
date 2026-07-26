@@ -1925,6 +1925,31 @@ Local test signing is permanently non-production. It proves packaging
 mechanics only and grants no publisher trust, public readiness, operational
 certification, distribution, deployment or release authority.
 
+## Sprint 30 Operational Diagnostics Boundary
+
+ADR-047 separates operational software-support diagnostics from Oracle
+Intelligence and every authoritative lifecycle. A diagnostic envelope has one
+fixed purpose, `software-support`, and one fixed authority,
+`non-authoritative`. It cannot become Evidence, Understanding or Memory and
+cannot influence coaching, recommendations, planning, Missions, progression or
+future intelligence.
+
+Diagnostic definitions are immutable and code-allowlisted. Each definition
+owns its stable summary and exact permitted attributes. Admission rejects
+unknown codes, arbitrary messages, undeclared or prohibited fields, unsafe
+values, invalid timestamps and invalid correlation identifiers.
+
+The admission service and sink are instance-owned and explicitly injected.
+Phase 1 provides only a bounded process-memory local-certification sink with no
+filesystem, network, upload or retention authority. Stop clears transient
+state. Production diagnostics and external crash reporting remain
+unauthorised.
+
+Phase 1 does not construct the capability in Web or Electron. Runtime
+composition therefore remains unchanged at manifest `1.6.0`. Any later
+composition change must update both target-specific manifests and preserve
+ADR-040 mechanical equality.
+
 ## Sprint 19 Account and Operator Identity Boundary
 
 Supabase Auth owns Account credentials and verification. Email + Password is

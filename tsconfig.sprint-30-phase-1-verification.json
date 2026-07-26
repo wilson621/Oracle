@@ -1,0 +1,29 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": [
+      "ES2022"
+    ],
+    "types": [
+      "node"
+    ],
+    "rootDir": ".",
+    "outDir": "./.tmp-sprint-30-phase-1-verification",
+    "noEmit": false,
+    "isolatedModules": false,
+    "incremental": false,
+    "sourceMap": false
+  },
+  "include": [
+    "lib/oracle/platform/operational-diagnostics/**/*.ts",
+    "scripts/verify-sprint-30-phase-1.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist-electron"
+  ]
+}

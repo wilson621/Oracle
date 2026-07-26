@@ -3264,6 +3264,127 @@ Accepted — Founder-approved 25 July 2026.
 
 ---
 
+# ADR-047
+
+## Title
+
+Privacy-Safe Operational Diagnostics and Crash Reporting
+
+## Decision
+
+Oracle owns one governed operational-diagnostics capability for diagnosing,
+recovering, supporting and improving Oracle as software. Operational
+diagnostics are non-authoritative and remain structurally separate from
+Operator Intelligence and every lifecycle that creates Oracle Truth.
+
+The following principle is permanent:
+
+> **Operational diagnostics exist solely to diagnose, recover, support and
+> improve Oracle as software. They must never become a source of Operator
+> Intelligence, Memory, behavioural profiling, gameplay understanding or
+> Oracle Truth.**
+
+Diagnostic data must never:
+
+- become Evidence, Understanding or Memory;
+- influence coaching, recommendations, planning, Missions, progression or
+  future intelligence;
+- enter an Operator profile or cross-session behavioural record;
+- contain raw frames, screenshots, clips, captured content, credentials,
+  tokens, prompts, provider responses or authoritative Oracle payloads; or
+- grant mutation, tool, Service, Repository or lifecycle authority.
+
+Every admitted diagnostic uses a versioned immutable envelope with fixed
+`software-support` purpose and `non-authoritative` authority. Admission is
+explicit, schema-bound, code-allowlisted, field-minimised and fail-closed.
+Arbitrary messages and undeclared attributes are prohibited. Diagnostic
+definitions own stable summaries and exact allowed attributes.
+
+The admission service and diagnostic sink are explicitly injected and
+instance-owned. Required admission and privacy controls fail startup or
+admission closed. Optional delivery may enter an observable degraded state,
+but uncertainty never broadens collection.
+
+Renderers may receive only bounded immutable health or support projections.
+They receive no diagnostic sink, transport, filesystem, process, native,
+credential or arbitrary-query authority.
+
+Sprint 30 local certification uses only a bounded process-memory sink with no
+filesystem or network transport. Stop and recovery clear the sink and construct
+fresh diagnostic state. No production endpoint, external provider, automatic
+upload, retention period or consent model is approved.
+
+Any future external provider, upload, retention, production telemetry or
+support-correlation model requires a new Founder decision and applicable
+privacy, consent, security and trust-boundary review.
+
+If diagnostics become part of runtime construction, ADR-040 requires both
+target-specific canonical manifests to declare the exact capability and
+mechanically equal their constructed runtimes.
+
+## Reason
+
+Operational failures must be diagnosable without creating a shadow
+intelligence system or silently collecting sensitive Operator or gameplay
+content. A narrow Platform-owned admission boundary makes privacy,
+non-authority, minimisation and ephemerality enforceable rather than relying on
+logging conventions.
+
+## Alternatives Considered
+
+Unstructured application logging was rejected because arbitrary messages and
+fields can leak sensitive content and cannot be governed mechanically.
+
+Reusing Evidence, Understanding or Memory storage was rejected because
+software-support data has a different purpose and must never influence
+Operator Intelligence.
+
+A production external crash-reporting provider was rejected for Sprint 30
+because it would create unapproved upload, processing, retention, consent and
+trust boundaries.
+
+Disabling all diagnostic work was rejected because Sprint 30 must establish
+repeatable privacy-safe support and recovery evidence.
+
+## Consequences
+
+- Operational diagnostics become a governed Platform capability.
+- Stable diagnostic definitions replace arbitrary support messages.
+- Diagnostic admission can reject information even when a subsystem can see
+  it.
+- Local qualification proves the contract and privacy controls, not production
+  telemetry operation.
+- A future provider may replace the sink only behind the same non-authoritative
+  admission boundary and separate Founder authority.
+
+## Reversibility
+
+Definitions, local sinks and future providers are replaceable behind the
+versioned contract. Local qualification state is transient and removable.
+
+The separation from Oracle Intelligence and the prohibition on diagnostic
+truth or mutation authority are permanent. Weakening them requires a
+Founder-approved superseding ADR.
+
+## Authority Boundary
+
+This ADR authorises Sprint 30 planning, source implementation, isolated local
+verification, disposable qualification persistence and certification evidence
+under the approved phased plan.
+
+It does not authorise production deployment, production database migration,
+production persistence, Gate C, production signing, publication, external
+distribution, production telemetry, external crash-reporting providers,
+automatic upload, retention, Guidance v2, Desktop Platform API v2, Gate 7
+approval, Sprint 31, Beta certification, release, remote push or weakening
+ADR-040 through ADR-046.
+
+## Status
+
+Accepted — Founder-approved 26 July 2026.
+
+---
+
 # Future Decision Records
 
 Every significant architectural decision should be documented before implementation whenever practical.

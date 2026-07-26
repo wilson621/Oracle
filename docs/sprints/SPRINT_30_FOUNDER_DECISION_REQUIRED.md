@@ -1,6 +1,6 @@
 # SPRINT 30 FOUNDER DECISION PACKAGE
 
-**Status:** Founder decision required
+**Status:** Founder decision resolved — Option A approved 26 July 2026
 **Sprint:** 30 — Production Qualification
 **Prepared:** 25 July 2026
 **Implementation:** Not started
@@ -8,9 +8,26 @@
 **Expected ADR:** ADR-047 — Privacy-Safe Operational Diagnostics and Crash Reporting
 **Deployment:** Not authorised
 
+**Decision:** Option A and creation of ADR-047 are approved. Sprint 30 is
+activated under the phased delivery plan in `SPRINT_30_PLAN.md`.
+
 ---
 
 # Decision Requested
+
+## Founder Resolution
+
+The Founder approved Option A on 26 July 2026 and made the following principle
+permanent:
+
+> Operational diagnostics exist solely to diagnose, recover, support and
+> improve Oracle as software. They must never become a source of Operator
+> Intelligence, Memory, behavioural profiling, gameplay understanding or
+> Oracle Truth.
+
+Diagnostic data remains completely separate from Oracle Intelligence. It never
+becomes Evidence, Understanding or Memory and never influences coaching,
+recommendations, planning or future intelligence.
 
 Approve or reject the authority needed to independently qualify the assembled
 Oracle product without treating qualification as deployment, release or

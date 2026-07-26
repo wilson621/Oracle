@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 30 Founder Decision Package
+**Next Review:** Sprint 30 Phase 1 progress report
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -122,8 +122,9 @@ truthful product baseline. Sprint 29 Option A is complete, locally certified,
 Founder-accepted and closed under ADR-046. Clean-Machine Certification
 Deferred — Required Disposable Windows Environment Unavailable remains the
 independent programme status because the Windows Home workstation has no
-Windows Sandbox or configured disposable Windows VM. Sprint 30 is not
-activated; its Founder Decision Package is ready for review.
+Windows Sandbox or configured disposable Windows VM. Sprint 30 Option A and
+ADR-047 are Founder-approved. Phase 1 establishes the governed diagnostic
+admission foundation without changing runtime composition.
 
 The ADR-040 composition manifest is a permanent runtime contract. Every future
 Sprint changing Services, Applications, Game Integrations, Guidance providers,
@@ -1328,10 +1329,12 @@ should be introduced.
 
 ### Current Status
 
-Sprint 30 is not activated. Its Founder Decision Package recommends Option A —
-Governed Isolated Production Qualification and ADR-047 — Privacy-Safe
-Operational Diagnostics and Crash Reporting. No implementation, qualification
-runtime activation or Gate 7 activity has begun.
+Option A and ADR-047 are Founder-approved. Sprint 30 is active and proceeds in
+separately verified and committed phases. Phase 1 has completed and locally
+verified the governed, non-authoritative diagnostic admission foundation
+without changing runtime composition. Phase 2 has not begun. No production
+deployment, persistence, telemetry, migration, external provider or Gate 7
+activity is authorised.
 
 # FOUNDER BETA READINESS REVIEW
 

@@ -40,7 +40,7 @@ implementation stages and do not use fractional Sprint numbering.
 | 27 | Contextual Companion and Reference Integration | Complete — Founder-accepted and closed; source/synthetic certification accepted; Operational Certification Deferred; live profile provisional and observation disabled | None | [Plan](SPRINT_27_PLAN.md), [Implementation](SPRINT_27_IMPLEMENTATION.md), [Certification](SPRINT_27_CERTIFICATION.md), [Closure](SPRINT_27_CLOSURE.md), [Founder acceptance package](SPRINT_27_FOUNDER_ACCEPTANCE_REQUIRED.md), [ADRs 044–045](../Decisions.md) |
 | 28 | Unified Oracle Product Experience | Complete, locally certified, Founder-accepted and closed | None | [Decision package](SPRINT_28_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_28_PLAN.md), [Product Truth Inventory](SPRINT_28_PRODUCT_TRUTH_INVENTORY.md), [Implementation](SPRINT_28_IMPLEMENTATION.md), [Certification](SPRINT_28_CERTIFICATION.md), [Founder acceptance package](SPRINT_28_FOUNDER_ACCEPTANCE_REQUIRED.md), [Closure](SPRINT_28_CLOSURE.md) |
 | 29 | Secure Desktop Operations and Distribution | Complete, locally certified, Founder-accepted and closed; Clean-Machine Certification Deferred | None | [Decision package](SPRINT_29_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_29_PLAN.md), [Implementation](SPRINT_29_IMPLEMENTATION.md), [Certification](SPRINT_29_CERTIFICATION.md), [Founder acceptance package](SPRINT_29_FOUNDER_ACCEPTANCE_REQUIRED.md), [Closure](SPRINT_29_CLOSURE.md), [ADR-046](../Decisions.md) |
-| 30 | Production Qualification | Founder decision required; not activated | None | [Decision package](SPRINT_30_FOUNDER_DECISION_REQUIRED.md), [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
+| 30 | Production Qualification | Founder-approved and active; Phase 1 diagnostic admission foundation implemented and locally verified | None | [Decision package](SPRINT_30_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_30_PLAN.md), [Phase 1 implementation](SPRINT_30_PHASE_1_IMPLEMENTATION.md), [ADR-047](../Decisions.md) |
 | 31 | Oracle Beta Certification | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 
 # Historical Integrity
@@ -76,4 +76,6 @@ is complete, locally certified, Founder-accepted and closed. Sprint 29 Option A
 is complete, locally certified, Founder-accepted and closed under ADR-046.
 Clean-Machine Certification Deferred — Required Disposable Windows
 Environment Unavailable remains the independent programme status. Sprint 30
-is not activated; its Founder Decision Package is ready for review.
+Option A and ADR-047 are Founder-approved. Phase 1 establishes the governed
+diagnostic admission foundation without changing runtime composition. Later
+phases have not begun.

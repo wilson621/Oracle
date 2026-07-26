@@ -135,8 +135,10 @@ ADR-046. Its governed MSIX implementation, signed Release Manifest equality
 and current-host install/update/repair/rollback/uninstall certification are
 accepted. Clean-Machine Certification Deferred — Required Disposable Windows
 Environment Unavailable remains the independent programme status. Sprint 30
-is not activated. Production signing, publication, distribution, deployment
-and activation remain unauthorised.
+Option A and ADR-047 are Founder-approved. Phase 1 establishes the governed
+diagnostic admission foundation without changing runtime composition.
+Production signing, publication, distribution, deployment and activation
+remain unauthorised.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

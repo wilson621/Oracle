@@ -767,8 +767,10 @@ closed under ADR-046. Its MSIX source implementation, canonical signed Release
 Manifest equality and current-host Windows package lifecycle certification are
 accepted. Clean-Machine Certification Deferred — Required Disposable Windows
 Environment Unavailable remains the independent programme status. Sprint 30
-is not activated. Production signing, publication, distribution, deployment
-and runtime persistence remain unauthorised.
+Option A and ADR-047 are Founder-approved. Phase 1 establishes the governed
+diagnostic admission foundation without changing runtime composition.
+Production signing, publication, distribution, deployment and runtime
+persistence remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

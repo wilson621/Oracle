@@ -8,7 +8,7 @@
 **Expected Stability:** Updated when verified implementation or accepted technical debt changes
 **Supersedes:** Earlier active implementation-status records
 **Superseded By:** None
-**Last Reviewed:** 25 July 2026
+**Last Reviewed:** 26 July 2026
 **Verified Branch:** `sprint-9-overlay`
 **Verified Repository Baseline:** `sprint-18-complete`
 **Sprint 14 Implementation Baseline:** `3868975`
@@ -48,6 +48,9 @@ walkthrough accepted
 **Sprint 29:** Complete, locally certified, Founder-accepted and closed under
 ADR-046; Clean-Machine Certification Deferred — Required Disposable Windows
 Environment Unavailable remains the independent programme status
+**Sprint 30:** Founder-approved and active under ADR-047; Phase 1 diagnostic
+admission foundation implemented and locally verified; production
+qualification not yet complete
 
 ---
 
@@ -72,6 +75,23 @@ Update this file during every sprint closure audit.
 ---
 
 # Latest Verified Sprint Progress
+
+## Sprint 30 Phase 1 — Diagnostic Admission Foundation
+
+ADR-047 is accepted. The implemented Platform contract fixes operational
+diagnostics to `software-support` purpose and `non-authoritative` authority.
+Definitions are immutable and code-allowlisted, attributes are explicitly
+minimised, arbitrary messages are absent, and prohibited or unsafe data fails
+admission closed.
+
+The local certification sink is bounded, process-memory-only and cleared on
+stop. It has no filesystem, network, upload, retention, Service, Repository or
+renderer authority. The capability has no dependency on Evidence,
+Understanding, Memory, coaching, planning or progression.
+
+Phase 1 has not changed Web or Electron runtime construction. Manifest `1.6.0`
+therefore remains unchanged and mandatory. No production diagnostics,
+persistence, migration, deployment or Gate activity has occurred.
 
 ## Sprint 29 — Secure Desktop Operations and Distribution
 
