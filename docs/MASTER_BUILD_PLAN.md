@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 26 July 2026
-**Version:** 4.3
+**Version:** 4.4
 
 ---
 
@@ -141,9 +141,10 @@ Founder-accepted and closed with frozen transfer, controlled non-pristine
 host, isolated network, standalone GPU and cleanup evidence. It does not
 satisfy clean Windows qualification. Stage 2 has constructed and mechanically
 verified a local-only package and signed Release Manifest reconciled to
-Runtime Manifest `1.7.0`; evidence is frozen pending Founder acceptance and
-all temporary signing material and trust are removed. Stage 3 is not
-authorised. Clean Windows, live Auth, protected rendering, installed-package
+Runtime Manifest `1.7.0`; Stage 2 is Founder-accepted and closed, its evidence
+is frozen, and all temporary signing material and trust are removed. Stage 3
+Clean Windows Qualification is proposed and not authorised. Clean Windows,
+live Auth, protected rendering, installed-package
 qualification and later integrated evidence remain outstanding.
 Production signing, publication, distribution, deployment and activation
 remain unauthorised.

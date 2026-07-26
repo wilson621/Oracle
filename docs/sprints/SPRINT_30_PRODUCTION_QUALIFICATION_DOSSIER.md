@@ -112,7 +112,7 @@ package remains unchanged at Runtime Manifest `1.6.0`.
 
 The frozen Stage 2 evidence archive SHA-256 is
 `8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876`.
-Stage 2 awaits Founder acceptance. Stage 3 has not begun and remains
+The Founder accepted and closed Stage 2. Stage 3 has not begun and remains
 unauthorised. Sprint 30 remains qualification-incomplete because clean Windows,
 live Auth, protected rendering, installed-package GPU/performance/accessibility,
 reproducibility and final integrated qualification remain outstanding.

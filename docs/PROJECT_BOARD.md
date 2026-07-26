@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 26 July 2026
-**Version:** 8.1
+**Version:** 8.2
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -126,11 +126,11 @@ GPU admission and complete teardown pass. The raw evidence package is frozen
 under SHA-256
 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
 This does not satisfy the separate clean Windows requirement. Stage 2 —
-Candidate Freeze and Package Reconciliation is engineering-complete with
-frozen evidence and awaits Founder acceptance. Runtime Manifest `1.7.0` now
-mechanically reconciles to the local qualification MSIX and signed Release
-Manifest. The signer and trust were removed. Stage 3 and Gate 7 are not
-authorised.
+Candidate Freeze and Package Reconciliation is Founder-accepted and closed
+with frozen evidence. Runtime Manifest `1.7.0` mechanically reconciles to the
+local qualification MSIX and signed Release Manifest. The signer and trust
+were removed. Stage 3 Clean Windows Qualification is proposed but remains
+unauthorised. Gate 7 is not authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -168,6 +168,9 @@ Stage 2 implementation, qualification package and evidence are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_2_IMPLEMENTATION.md`,
 `docs/sprints/SPRINT_30_5_STAGE_2_QUALIFICATION_PACKAGE.md` and
 `docs/sprints/evidence/sprint-30-5/stage-2/`.
+Stage 2 closure and the proposed Stage 3 execution plan are recorded in
+`docs/sprints/SPRINT_30_5_STAGE_2_CLOSURE.md` and
+`docs/sprints/SPRINT_30_5_STAGE_3_PLAN.md`.
 
 # Latest Closed Qualification Stage
 
@@ -176,7 +179,7 @@ Stage 2 implementation, qualification package and evidence are recorded in
 **Status:** Founder-accepted and closed
 **Host:** Controlled non-pristine physical qualification host
 **Clean Windows:** Not satisfied; remains mandatory later
-**Next stage:** Stage 2 complete awaiting Founder acceptance; Stage 3
+**Next stage:** Stage 2 Founder-accepted and closed; Stage 3 proposed and
 separately unauthorised
 **Deployment status:** Production unchanged; Stage 2 local test signing only;
 no production signing, distribution, deployment, migration, persistence or

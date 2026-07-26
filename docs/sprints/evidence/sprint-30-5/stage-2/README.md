@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Evidence
 
-**Status:** Complete and frozen; awaiting Founder review
+**Status:** Founder-accepted, closed and frozen
 **Candidate source commit:** `d850743977735929f6873457fe122d2cf9697d9e`
 **Stage 3:** Not started
 

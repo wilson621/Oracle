@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 30.5 Stage 2 Founder acceptance
+**Next Review:** Sprint 30.5 Stage 3 Founder decision
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1342,11 +1342,14 @@ non-pristine physical host, isolated network route, standalone hardware GPU
 probe and complete teardown. It does not satisfy separate clean Windows
 qualification.
 
-Stage 2 Candidate Freeze and Package Reconciliation is engineering-complete
-with frozen evidence and awaits Founder acceptance. The new local-only package
-and signed Release Manifest mechanically reconcile Runtime Manifest `1.7.0`
-without altering the immutable Sprint 29 package. Temporary signing material
-and trust were removed. Stage 3 is not authorised. Live Auth, protected rendering,
+Stage 2 Candidate Freeze and Package Reconciliation is Founder-accepted and
+closed with frozen evidence. The new local-only package and signed Release
+Manifest mechanically reconcile Runtime Manifest `1.7.0` without altering the
+immutable Sprint 29 package. Temporary signing material and trust were
+removed. Stage 3 Clean Windows Qualification is proposed and not authorised.
+It requires a separate clean Windows state; the recommended path is an
+explicitly authorised clean reinstall of the dedicated qualification laptop.
+Live Auth, protected rendering,
 clean Windows, installed-package GPU/performance/accessibility,
 reproducibility and final integrated qualification remain in later sequential
 stages. No production deployment, persistence, telemetry, migration, external

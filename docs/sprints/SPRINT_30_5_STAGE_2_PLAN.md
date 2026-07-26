@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 — Candidate Freeze and Package Reconciliation Plan
 
-**Status:** Execution complete and evidence frozen — awaiting Founder review
+**Status:** Founder-accepted and closed
 **Parent milestone:** Sprint 30.5 Production Qualification Completion
 **Sequence:** Stage 2 of 7; Stage 1 is Founder-accepted and closed
 **Estimated duration:** 1–2 engineering days
@@ -76,7 +76,8 @@ Stage 2 stops after verification and its local commit. Stage 3 may not begin
 until the Founder independently reviews and accepts the Stage 2 evidence and
 separately authorises Stage 3.
 
-The execution has reached this stop point. Stage 3 has not begun.
+The Founder accepted and closed Stage 2. Stage 3 has not begun and remains
+separately unauthorised.
 
 ## Rollback and invalidation
 

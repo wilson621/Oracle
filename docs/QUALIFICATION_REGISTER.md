@@ -32,8 +32,8 @@ results.
 | Stage | Scope | Current state | Evidence or blocker | Next authority |
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
-| 2 | Candidate Freeze and Package Reconciliation | **Complete — awaiting Founder acceptance** | Runtime Manifest `1.7.0` package and Release Manifest reconcile; artifact/content/signature/SBOM/provenance checks pass; signer destroyed and trust removed; frozen evidence SHA-256 `8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876` | Founder Stage 2 review; Stage 3 remains separately unauthorised |
-| 3 | Clean Windows Qualification | **Not started** | Separate clean Windows state remains mandatory; Stage 1 host is expressly non-pristine | Stage 2 acceptance, then separate Stage 3 authority |
+| 2 | Candidate Freeze and Package Reconciliation | **Founder-accepted and closed** | Runtime Manifest `1.7.0` package and Release Manifest reconcile; artifact/content/signature/SBOM/provenance checks pass; signer destroyed and trust removed; frozen evidence SHA-256 `8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876` | None for Stage 2; history is closed |
+| 3 | Clean Windows Qualification | **Not started — Founder authority required** | Separate clean Windows state remains mandatory; recommended path is an explicitly authorised clean reinstall of the dedicated Windows Home laptop; frozen package certificate expires `2026-07-28T15:45:27Z` | Approve Stage 3, destructive clean reinstall, bounded environment access, temporary public-certificate trust and execution before expiry |
 | 4 | Live Authentication and Protected Rendering | **Not started** | Disposable live Supabase Email + Password and protected rendering evidence remain outstanding | Stage 3 acceptance, then separate Stage 4 authority |
 | 5 | Installed Package GPU, Performance and Accessibility | **Not started** | Must use the reconciled installed package; Stage 1 proves host suitability only | Stage 4 acceptance, then separate Stage 5 authority |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
@@ -58,7 +58,7 @@ results.
 | --- | --- | --- |
 | Sprint 29 clean-machine distribution | **Deferred** | Current-host package mechanics passed; separate clean Windows package qualification remains outstanding and is not satisfied by Sprint 30.5 Stage 1 |
 | Minecraft Java observation | **Provisionally certified** | Operational Certification Deferred — Required Test Environment Unavailable; observation disabled and no support claim authorised |
-| Production qualification | **Incomplete** | Stage 2 engineering is complete awaiting acceptance; Stages 3–7 remain incomplete |
+| Production qualification | **Incomplete** | Stages 1 and 2 are Founder-accepted and closed; Stages 3–7 remain incomplete |
 | Gate 7 | **Not authorised** | May be considered only after Production Qualification completes |
 | Beta | **Not authorised** | Requires later Founder decision after the governed qualification and Gate sequence |
 

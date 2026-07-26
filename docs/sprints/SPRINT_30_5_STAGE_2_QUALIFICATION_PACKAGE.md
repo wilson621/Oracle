@@ -1,7 +1,7 @@
 # Sprint 30.5 Stage 2 — Founder Qualification Package
 
-**Recommendation:** Accept Stage 2 as complete
-**Decision required:** Stage 2 acceptance only
+**Decision:** Founder accepted Stage 2 as complete
+**Status:** Resolved and closed
 **Stage 3:** Not authorised and not started
 
 ## What Stage 2 conclusively proves
@@ -73,11 +73,11 @@ Stage 2 does not prove:
 Those boundaries remain available only through later separately authorised
 stages and Founder decisions.
 
-## Founder decision requested
+## Founder decision
 
-Accept Stage 2 as complete and preserve its frozen evidence.
+The Founder accepted Stage 2 as complete and accepted this package, the
+implementation report and frozen evidence as the canonical Stage 2 record.
 
-If accepted, Stage 3 — Clean Windows Qualification still requires a separate
-Founder authorisation. Acceptance of Stage 2 must not automatically begin
-Stage 3 or grant any production, signing, distribution, deployment, Gate or
-Beta authority.
+Stage 3 — Clean Windows Qualification still requires a separate Founder
+authorisation. Stage 2 acceptance did not begin Stage 3 or grant any
+production, signing, distribution, deployment, Gate or Beta authority.

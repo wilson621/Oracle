@@ -51,7 +51,7 @@ Environment Unavailable remains the independent programme status
 **Sprint 30:** Founder-approved and active under ADR-047; Phases 1–5
 implemented and locally verified; Sprint 30.5 Stage 1 Environment Admission
 Founder-accepted and closed; Stage 2 package/runtime reconciliation
-engineering complete awaiting Founder acceptance; clean Windows, live Auth,
+Founder-accepted and closed; clean Windows, live Auth,
 protected rendering and installed-package qualification remain; production
 qualification not yet complete
 
@@ -159,8 +159,8 @@ qualification path. The host is not a clean Windows environment and does not
 satisfy that later mandatory qualification. The frozen local evidence archive
 has SHA-256
 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
-Stage 2 engineering is complete with frozen evidence and awaits Founder
-acceptance. Stage 3 is not authorised.
+Stage 2 is Founder-accepted and closed with frozen evidence. Stage 3 is
+proposed and not authorised.
 
 ## Sprint 30.5 Stage 2 — Candidate Freeze and Package Reconciliation
 
@@ -177,6 +177,11 @@ private key were removed, teardown was corrected, and final verification
 reports zero certificate-store matches and no retained PFX, CER, PEM or key.
 No runtime, product, architecture, trust-boundary or migration change was
 introduced.
+
+Stage 3 must qualify the exact frozen package on a genuinely clean Windows
+state. It may not rebuild or resign the package, and it must remain separate
+from live Auth, protected rendering and installed-package
+GPU/performance/accessibility qualification.
 
 ## Sprint 29 — Secure Desktop Operations and Distribution
 

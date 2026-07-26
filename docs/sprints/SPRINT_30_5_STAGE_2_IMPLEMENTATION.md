@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 — Candidate Freeze and Package Reconciliation
 
-**Status:** Engineering and local qualification complete; awaiting Founder review
+**Status:** Founder-accepted and closed
 **Date:** 26 July 2026
 **Candidate source commit:** `d850743977735929f6873457fe122d2cf9697d9e`
 **Runtime Manifest:** `1.7.0`
