@@ -21,6 +21,8 @@ fs.mkdirSync(artifactsRoot, { recursive: true });
 
 for (const name of [
   "Collect-OracleStage1Baseline.ps1",
+  "Identify-OracleStage1Laptop.ps1",
+  "Identify-OracleStage1Laptop.cmd",
   "Test-OracleStage1LaptopRoute.ps1",
   "Run-OracleStage1EvidenceKit.ps1",
   "Start-OracleStage1EvidenceKit.cmd",
