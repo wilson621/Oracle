@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.rendered-accessibility-review",
+  "contractVersion": 1,
+  "phase": 4,
+  "result": "passed-with-explicit-limitations",
+  "target": "local-production-web-build",
+  "publicAuthenticationJourney": {
+    "desktop1440x900": {
+      "result": "passed",
+      "documentLanguage": "en",
+      "mainLandmarks": 1,
+      "levelOneHeadings": 1,
+      "enabledFocusables": 6,
+      "inputLabels": [
+        "Email",
+        "Password"
+      ],
+      "horizontalDocumentOverflow": false,
+      "screenReaderSemanticSnapshot": "passed"
+    },
+    "compact390x844": {
+      "result": "passed",
+      "levelOneHeadings": 1,
+      "horizontalDocumentOverflow": false,
+      "verticalReflow": true,
+      "allPrimaryControlsPresent": true
+    },
+    "keyboardAndFocus": {
+      "result": "passed",
+      "method": "DOM-order review of enabled native interactive controls plus source verification of the global focus-visible rule",
+      "enabledFocusableCount": 6,
+      "allEnabledControlsInNaturalTabOrder": true,
+      "positiveTabIndexCount": 0,
+      "globalFocusIndicator": "2px solid #67e8f9 with 3px offset"
+    },
+    "contrast": {
+      "result": "passed",
+      "method": "bounded computed foreground/background review of visible headings, paragraphs, labels and controls",
+      "sampleCount": 10,
+      "wcagThresholdViolations": 0
+    },
+    "scalableText": {
+      "result": "passed-with-method-limitation",
+      "method": "390 CSS-pixel responsive layout, equivalent to the layout width exposed by 200% zoom on a 780-pixel viewport",
+      "nativeBrowserZoomControlUsed": false,
+      "horizontalDocumentOverflow": false
+    },
+    "reducedMotion": {
+      "result": "passed-by-source-contract",
+      "renderedPreferenceEmulationAvailable": false,
+      "contract": "prefers-reduced-motion collapses animation and transition duration to 0.01ms and disables smooth scrolling"
+    },
+    "browserConsole": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "protectedCanonicalRoutes": {
+    "result": "unavailable",
+    "routes": [
+      "/oracle",
+      "/companion",
+      "/sessions",
+      "/reports",
+      "/intelligence",
+      "/coach",
+      "/progress",
+      "/settings"
+    ],
+    "observedBoundary": "/oracle redirected to /auth?next=%2Foracle",
+    "reason": "No authorised live Supabase Auth provider is configured.",
+    "boundaryBypassed": false,
+    "passClaimed": false
+  },
+  "limitations": [
+    "The semantic screen-reader review uses the browser accessibility snapshot; it is not an external assistive-technology certification.",
+    "Protected route rendering remains unavailable without live authentication.",
+    "Native browser zoom and reduced-motion emulation were unavailable in the bounded browser controller; equivalent responsive reflow and the source contract were reviewed without claiming those controls were exercised."
+  ],
+  "authority": {
+    "production": "unchanged",
+    "productionCredentialsUsed": false,
+    "externalUpload": false,
+    "retention": "evidence-summary-only",
+    "deployment": "not-authorised"
+  }
+}

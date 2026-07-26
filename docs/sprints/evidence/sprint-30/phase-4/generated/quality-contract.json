@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.production-quality-contract",
+  "contractVersion": 1,
+  "phase": 4,
+  "result": "passed",
+  "scope": "local-source-and-synthetic-qualification",
+  "accessibility": {
+    "keyboardSkipTarget": "passed",
+    "globalFocusIndicator": "passed",
+    "reducedMotionOverride": "passed",
+    "documentLanguage": "passed",
+    "labelledNavigation": "passed",
+    "publicAuthenticationRenderedReview": "passed-with-method-limitations-in-browser-evidence",
+    "protectedCanonicalRouteRenderedReview": "unavailable-without-live-auth"
+  },
+  "guidance": {
+    "result": "passed",
+    "budget": {
+      "samples": 1000,
+      "warmupSamples": 50,
+      "p95Milliseconds": 5,
+      "p99Milliseconds": 10
+    },
+    "observed": {
+      "p50Milliseconds": 0.048,
+      "p95Milliseconds": 0.097,
+      "p99Milliseconds": 0.171,
+      "maximumMilliseconds": 0.605
+    },
+    "workload": "deterministic-curated-warzone-provider",
+    "retained": false
+  },
+  "compatibility": {
+    "currentWindowsHost": "qualified-locally",
+    "cleanDisposableWindows": "deferred",
+    "liveSupabaseAuth": "unavailable",
+    "minecraftObservation": "disabled-provisional"
+  },
+  "authority": {
+    "production": "unchanged",
+    "externalDiagnostics": "disabled",
+    "runtimePersistence": "disabled",
+    "signing": "not-authorised",
+    "publication": "not-authorised",
+    "distribution": "not-authorised",
+    "remotePush": "not-authorised",
+    "gate7": "not-authorised"
+  }
+}

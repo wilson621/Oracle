@@ -1,6 +1,6 @@
 # SPRINT 30 PLAN — PRODUCTION QUALIFICATION
 
-**Status:** Founder-approved; Phases 1–3 complete; Phase 4 not started
+**Status:** Founder-approved; Phases 1–4 complete; Phase 5 not started
 **Approved option:** Option A — Governed Isolated Production Qualification
 **ADR:** ADR-047
 **Migration:** None
@@ -103,7 +103,7 @@ equality, renderer-safe health, local crash envelopes, smoke, bounded soak,
 failure isolation, fresh recovery, disposable backup/restore/deletion and
 Sprint 29 rollback regression pass. The immutable Sprint 29 package remains
 bound to `1.6.0`; later integrated candidate reconciliation is required and no
-rebuild or signing occurred. Phase 4 has not begun.
+rebuild or signing occurred. At the Phase 3 exit, Phase 4 had not begun.
 
 # Phase 4 — Performance, Accessibility, Compatibility and Support
 
@@ -114,6 +114,15 @@ register, support runbooks, triage and escalation.
 
 The disposable clean-Windows suite remains mandatory. If the environment is
 unavailable, the affected evidence and Sprint 30 completion remain blocked.
+
+**Completion status:** Complete and locally verified. Frozen current-host
+budgets pass for production-build startup, authenticated route/API boundaries,
+CPU, memory and deterministic Guidance latency. The public authentication
+journey passes bounded keyboard/focus, contrast, semantic, compact-layout,
+scalable-text reflow and reduced-motion source review. Live authenticated
+protected-route rendering, installed-package GPU evidence and disposable
+clean-Windows certification remain unavailable or deferred and are not
+represented as passed. Phase 5 has not begun.
 
 # Phase 5 — Integrated Qualification and Founder Acceptance Package
 

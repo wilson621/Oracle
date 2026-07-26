@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-phase-verification-summary",
+  "contractVersion": 1,
+  "sprint": 30,
+  "phase": 4,
+  "verifiedAt": "2026-07-26T09:59:18.6988652Z",
+  "acceptedBaselineCommit": "8f5cc0d7cceb959ae078925859b366ca55a00ce2",
+  "result": "passed-with-explicit-deferred-and-unavailable-evidence",
+  "commands": [
+    {
+      "command": "npx tsc --noEmit",
+      "result": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "result": "passed",
+      "warnings": 0
+    },
+    {
+      "command": "npm run build",
+      "result": "passed"
+    },
+    {
+      "command": "npm run desktop:compile",
+      "result": "passed"
+    },
+    {
+      "command": "npm run architecture:audit",
+      "result": "passed",
+      "documentedExceptions": 22,
+      "runtimeCycles": 0
+    },
+    {
+      "command": "npm run platform-composition:verify",
+      "result": "passed",
+      "runtimeManifestVersion": "1.7.0"
+    },
+    {
+      "command": "npm run sprint-28:verify",
+      "result": "passed"
+    },
+    {
+      "command": "npm run sprint-30:phase-1:verify",
+      "result": "passed"
+    },
+    {
+      "command": "npm run sprint-30:phase-3:runtime",
+      "result": "passed"
+    },
+    {
+      "command": "npm run sprint-30:phase-4:verify",
+      "result": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "evidenceStates": {
+    "currentHostPerformance": "passed",
+    "publicWebAccessibility": "passed-with-method-limitations",
+    "deterministicGuidanceLatency": "passed",
+    "supportGovernance": "passed",
+    "liveSupabaseAuth": "unavailable",
+    "protectedRouteRenderedAccessibility": "unavailable",
+    "installedElectronGpu": "unavailable",
+    "cleanDisposableWindows": "deferred"
+  },
+  "architecture": {
+    "changed": false,
+    "runtimeCompositionChanged": false,
+    "runtimeManifestVersion": "1.7.0",
+    "canonicalTargetsEqual": true,
+    "externalDiagnostics": "disabled",
+    "runtimePersistence": "disabled",
+    "persistedProducersConsumers": "disabled"
+  },
+  "migrations": {
+    "productionDeployed": [
+      "009"
+    ],
+    "certifiedUndeployedInactive": [
+      "010",
+      "011",
+      "012",
+      "013",
+      "014"
+    ],
+    "migration015Exists": false
+  },
+  "authority": {
+    "production": "unchanged",
+    "deployment": "not-authorised",
+    "signing": "not-authorised",
+    "publication": "not-authorised",
+    "distribution": "not-authorised",
+    "remotePush": "not-authorised",
+    "gateC": "deferred",
+    "gate7": "not-authorised",
+    "phase5": "not-started"
+  },
+  "localContinuityRisk": {
+    "commitsAheadOfRemoteBeforePhase4Commit": 27,
+    "pushAuthorised": false
+  }
+}

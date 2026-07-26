@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022", "DOM"],
+    "types": ["node"],
+    "rootDir": ".",
+    "outDir": "./.tmp-sprint-30-phase-4-verification",
+    "noEmit": false,
+    "isolatedModules": false,
+    "incremental": false,
+    "sourceMap": false
+  },
+  "include": [
+    "lib/companion/guidance/**/*.ts",
+    "lib/oracle/services/companion-guidance/**/*.ts",
+    "lib/oracle/game-integrations/call-of-duty/guidance/**/*.ts",
+    "scripts/verify-sprint-30-phase-4-quality.ts"
+  ],
+  "exclude": ["node_modules", ".next", "dist-electron"]
+}
