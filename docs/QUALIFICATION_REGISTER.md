@@ -32,7 +32,7 @@ results.
 | Stage | Scope | Current state | Evidence or blocker | Next authority |
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
-| 2 | Candidate Freeze and Package Reconciliation | **Not started — Founder authority required** | Runtime Manifest `1.7.0` source has no reconciled immutable MSIX candidate; Sprint 29 package remains immutable at `1.6.0` | Explicit Stage 2 start, package reconciliation and isolated local test-signing authority |
+| 2 | Candidate Freeze and Package Reconciliation | **In progress — Founder authorised** | Runtime Manifest `1.7.0` package reconciliation, a local qualification MSIX and isolated local test-signing are authorised; Sprint 29 package remains immutable at `1.6.0` | Stop after frozen evidence and local completion commit for Founder review |
 | 3 | Clean Windows Qualification | **Not started** | Separate clean Windows state remains mandatory; Stage 1 host is expressly non-pristine | Stage 2 acceptance, then separate Stage 3 authority |
 | 4 | Live Authentication and Protected Rendering | **Not started** | Disposable live Supabase Email + Password and protected rendering evidence remain outstanding | Stage 3 acceptance, then separate Stage 4 authority |
 | 5 | Installed Package GPU, Performance and Accessibility | **Not started** | Must use the reconciled installed package; Stage 1 proves host suitability only | Stage 4 acceptance, then separate Stage 5 authority |

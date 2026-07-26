@@ -60,6 +60,8 @@
     "sprint-30:phase-5:freeze": "node scripts/freeze-sprint-30-phase-5-candidate.mjs",
     "sprint-30:phase-5:verify": "node scripts/verify-sprint-30-phase-5-integrated.mjs",
     "sprint-30-5:stage-1:build-kit": "node scripts/build-sprint-30-5-stage1-evidence-kit.mjs",
+    "sprint-30-5:stage-2:build": "node scripts/build-sprint-30-5-stage-2-release.mjs",
+    "sprint-30-5:stage-2:verify": "node scripts/verify-sprint-30-5-stage-2.mjs",
     "native:build:discovery": "dotnet publish desktop-native/Oracle.WindowDiscovery/Oracle.WindowDiscovery.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false --output dist-native",
     "native:build:observer": "dotnet publish desktop-native/Oracle.WindowObserver/Oracle.WindowObserver.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false --output dist-native",
     "native:build": "npm run native:build:discovery && npm run native:build:observer",

@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 — Candidate Freeze and Package Reconciliation Plan
 
-**Status:** Proposed — not authorised to begin
+**Status:** Founder-authorised — execution in progress
 **Parent milestone:** Sprint 30.5 Production Qualification Completion
 **Sequence:** Stage 2 of 7; Stage 1 is Founder-accepted and closed
 **Estimated duration:** 1–2 engineering days
@@ -18,8 +18,8 @@ qualification.
 ## Prerequisites
 
 1. Stage 1 closure commit exists and the repository is clean.
-2. The Founder explicitly authorises Stage 2.
-3. The Founder separately authorises:
+2. The Founder explicitly authorised Stage 2.
+3. The Founder separately authorised:
    - construction of a new local qualification package reconciled to Runtime
      Manifest `1.7.0`; and
    - isolated local test signing using a temporary test identity.
@@ -87,9 +87,9 @@ separately authorises Stage 3.
   decision stops Stage 2 for separate Founder authority.
 - Failed artifacts remain local, untrusted, unpublished and undistributed.
 
-## Authority required before beginning
+## Authority granted
 
-The Founder must explicitly authorise:
+The Founder explicitly authorised:
 
 1. **Sprint 30.5 Stage 2 execution**; and
 2. **Runtime Manifest `1.7.0` package reconciliation and isolated local
