@@ -44,6 +44,7 @@ export default defineConfig([
     ".tmp-postgres-sprint17/**",
     ".tmp-sprint-29/**",
     ".tmp-sprint-29-verification/**",
+    ".tmp-sprint-30-5-stage-2/**",
     ".tmp-tools/**",
   ]),
 ]);

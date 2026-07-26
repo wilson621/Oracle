@@ -8,8 +8,8 @@
 **Expected Stability:** Reviewed whenever approved execution direction changes
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
-**Last Reviewed:** 25 July 2026
-**Version:** 4.2
+**Last Reviewed:** 26 July 2026
+**Version:** 4.3
 
 ---
 
@@ -139,10 +139,12 @@ Option A and ADR-047 are Founder-approved. Phases 1 through 5 are complete and
 locally verified. Sprint 30.5 Stage 1 Environment Admission is
 Founder-accepted and closed with frozen transfer, controlled non-pristine
 host, isolated network, standalone GPU and cleanup evidence. It does not
-satisfy clean Windows qualification. Runtime Manifest `1.7.0` still requires
-a separately authorised reconciled package. Stage 2 is proposed and not
-authorised; live Auth, protected rendering, installed-package qualification
-and later integrated evidence remain outstanding.
+satisfy clean Windows qualification. Stage 2 has constructed and mechanically
+verified a local-only package and signed Release Manifest reconciled to
+Runtime Manifest `1.7.0`; evidence is frozen pending Founder acceptance and
+all temporary signing material and trust are removed. Stage 3 is not
+authorised. Clean Windows, live Auth, protected rendering, installed-package
+qualification and later integrated evidence remain outstanding.
 Production signing, publication, distribution, deployment and activation
 remain unauthorised.
 

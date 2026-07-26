@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 26 July 2026
-**Version:** 8.0
+**Version:** 8.1
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -126,8 +126,11 @@ GPU admission and complete teardown pass. The raw evidence package is frozen
 under SHA-256
 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
 This does not satisfy the separate clean Windows requirement. Stage 2 —
-Candidate Freeze and Package Reconciliation is proposed but not authorised.
-Gate 7 is not authorised.
+Candidate Freeze and Package Reconciliation is engineering-complete with
+frozen evidence and awaits Founder acceptance. Runtime Manifest `1.7.0` now
+mechanically reconciles to the local qualification MSIX and signed Release
+Manifest. The signer and trust were removed. Stage 3 and Gate 7 are not
+authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -161,6 +164,10 @@ Sprint 30.5 Stage 1 closure and evidence are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_1_CLOSURE.md`,
 `docs/sprints/evidence/sprint-30-5/stage-1/` and the canonical
 `docs/QUALIFICATION_REGISTER.md`.
+Stage 2 implementation, qualification package and evidence are recorded in
+`docs/sprints/SPRINT_30_5_STAGE_2_IMPLEMENTATION.md`,
+`docs/sprints/SPRINT_30_5_STAGE_2_QUALIFICATION_PACKAGE.md` and
+`docs/sprints/evidence/sprint-30-5/stage-2/`.
 
 # Latest Closed Qualification Stage
 
@@ -169,9 +176,11 @@ Sprint 30.5 Stage 1 closure and evidence are recorded in
 **Status:** Founder-accepted and closed
 **Host:** Controlled non-pristine physical qualification host
 **Clean Windows:** Not satisfied; remains mandatory later
-**Next stage:** Stage 2 proposed; Founder authority required
-**Deployment status:** Production unchanged; no signing, distribution,
-deployment, migration, persistence or Gate authority
+**Next stage:** Stage 2 complete awaiting Founder acceptance; Stage 3
+separately unauthorised
+**Deployment status:** Production unchanged; Stage 2 local test signing only;
+no production signing, distribution, deployment, migration, persistence or
+Gate authority
 
 # Latest Closed Sprint
 

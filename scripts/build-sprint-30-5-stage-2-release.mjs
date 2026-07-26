@@ -207,6 +207,17 @@ try {
   rmSync(pfxPath, { force: true });
   if (generatedCer) rmSync(generatedCer, { force: true });
   rmSync(signing, { recursive: true, force: true });
+  run("powershell.exe", [
+    "-NoProfile",
+    "-ExecutionPolicy",
+    "Bypass",
+    "-File",
+    join(root, "scripts", "remove-sprint-30-5-stage-2-test-certificate.ps1"),
+    "-ExpectedSubject",
+    publisher,
+    "-OutputPath",
+    join(release, "signing-store-cleanup.json"),
+  ]);
 }
 
 assertNoSigningMaterial();

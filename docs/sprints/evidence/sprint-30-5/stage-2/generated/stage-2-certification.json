@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-2-certification",
+  "contractVersion": 1,
+  "verifiedAt": "2026-07-26T16:08:49.601Z",
+  "status": "passed",
+  "sourceCommit": "d850743977735929f6873457fe122d2cf9697d9e",
+  "sourceTree": "818a4c6a52a9e7c2fc4f59ae12c557f0b61ca28d",
+  "runtimeManifest": {
+    "version": "1.7.0",
+    "webElectronMechanicalEquality": "passed",
+    "releaseManifestReconciliation": "passed"
+  },
+  "package": {
+    "filename": "Oracle_0.1.1.0_x64_STAGE2_LOCAL_TEST_ONLY.msix",
+    "packageVersion": "0.1.1.0",
+    "sha256": "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276",
+    "size": 215475575,
+    "contentEntries": 2201,
+    "contentInventory": "mechanically-verified",
+    "forbiddenContent": "absent",
+    "installed": false
+  },
+  "releaseManifest": {
+    "sha256": "854b909a8d93a08ebd165d19a2f865ad6f3e84abe31f4bf1326e0647e761113d",
+    "signature": "cryptographically-valid-detached-cms",
+    "artifactEquality": "passed"
+  },
+  "sbom": "cyclonedx-1.6-verified",
+  "provenance": "slsa-shaped-verified",
+  "signing": {
+    "classification": "local-test-only",
+    "subject": "CN=Oracle Stage 2 Local Test Signing - NOT PRODUCTION",
+    "thumbprint": "D4D34619405B4EEF7B6622EA4641181D8AD793DB",
+    "certificateNotAfter": "2026-07-28T15:45:27.0000000Z",
+    "privateMaterialDestroyed": true,
+    "exportedCertificateDestroyed": true,
+    "certificateTrustRemoved": true,
+    "certificateStoreMatches": 0,
+    "productionTrusted": false,
+    "initialTeardownDefect": {
+      "detectedFailClosed": true,
+      "cause": "packaging-tool-current-user-personal-store-residue",
+      "residueIncludedPrivateKey": true,
+      "corrected": true,
+      "finalStoreMatches": 0
+    }
+  },
+  "immutableSprint29Package": {
+    "modified": false,
+    "sha256": "cf8b71dc83d5b51410a385b8be92bf9e1368d02d1170ef1694308a68157313a3",
+    "acceptedEvidenceMatch": true,
+    "historicalProvenancePackageLockSha256": "8948f6d1128e02217805fc88f8fa057740a4e6040106252b041f573934769adf",
+    "currentPackageLockSha256": "c181e50794bd2f1c40f6a54c8e3793dd8edaffd11e3077707738f2b2fea734c9",
+    "genericVerifierCompatibility": "historical-provenance-lock-differs-from-current-source-lock"
+  },
+  "production": {
+    "published": false,
+    "externallyDistributed": false,
+    "deployed": false,
+    "remotePush": false
+  },
+  "stage3Started": false,
+  "limitation": "Local test signing proves packaging and distribution mechanics only. It must never be interpreted as production publisher trust, public release readiness, operational certification, deployment authority or permission to distribute Oracle externally."
+}

@@ -140,6 +140,49 @@ assert.equal(
   provenance.predicate.buildDefinition.internalParameters.sourceCommit,
   candidate.sourceCommit
 );
+const storeCleanup = readJson(join(release, "signing-store-cleanup.json"));
+assert.equal(storeCleanup.status, "passed");
+assert.equal(storeCleanup.trustRemoved, true);
+assert.equal(storeCleanup.remaining.length, 0);
+assert.ok(
+  storeCleanup.removed.some(
+    (entry) =>
+      entry.location === "CurrentUser" &&
+      entry.store === "My" &&
+      entry.hadPrivateKey === true
+  ),
+  "The initial packaging-tool signing-store residue was not recorded."
+);
+const sprint29Certification = readJson(
+  join(
+    root,
+    "docs",
+    "sprints",
+    "evidence",
+    "sprint-29",
+    "release-certification.json"
+  )
+);
+const sprint29PackagePath = join(
+  root,
+  ".tmp-sprint-29",
+  "release",
+  "Oracle_0.1.0.0_x64_LOCAL_TEST_ONLY.msix"
+);
+assert.ok(existsSync(sprint29PackagePath), "Immutable Sprint 29 package is missing.");
+assert.equal(
+  sha256(sprint29PackagePath),
+  sprint29Certification.candidateSha256,
+  "Immutable Sprint 29 package hash changed."
+);
+const sprint29Provenance = readJson(
+  join(
+    root,
+    ".tmp-sprint-29",
+    "release",
+    "oracle-0.1.0.provenance.json"
+  )
+);
 
 const signatureEvidence = JSON.parse(
   run("powershell.exe", [
@@ -203,8 +246,25 @@ const summary = {
     certificateTrustRemoved: true,
     certificateStoreMatches: 0,
     productionTrusted: false,
+    initialTeardownDefect: {
+      detectedFailClosed: true,
+      cause: "packaging-tool-current-user-personal-store-residue",
+      residueIncludedPrivateKey: true,
+      corrected: true,
+      finalStoreMatches: 0,
+    },
   },
-  immutableSprint29PackageModified: false,
+  immutableSprint29Package: {
+    modified: false,
+    sha256: sprint29Certification.candidateSha256,
+    acceptedEvidenceMatch: true,
+    historicalProvenancePackageLockSha256:
+      sprint29Provenance.predicate.buildDefinition.resolvedDependencies[0]
+        .digest.sha256,
+    currentPackageLockSha256: candidate.dependencies.packageLockSha256,
+    genericVerifierCompatibility:
+      "historical-provenance-lock-differs-from-current-source-lock",
+  },
   production: {
     published: false,
     externallyDistributed: false,
@@ -246,12 +306,14 @@ const archive = join(
   "Oracle.Sprint30.5.Stage2QualificationEvidence.zip"
 );
 rmSync(archive, { force: true });
-run("powershell.exe", [
-  "-NoProfile",
-  "-Command",
-  "Compress-Archive -LiteralPath $args[0] -DestinationPath $args[1] -CompressionLevel Optimal",
-  release,
+run("tar.exe", [
+  "-a",
+  "-c",
+  "-f",
   archive,
+  "-C",
+  artifactRoot,
+  "release",
 ]);
 const frozenEvidence = {
   schemaVersion: 1,
@@ -309,7 +371,7 @@ function findFiles(directory, predicate) {
 }
 
 function readJson(path) {
-  return JSON.parse(readFileSync(path, "utf8"));
+  return JSON.parse(readFileSync(path, "utf8").replace(/^\uFEFF/u, ""));
 }
 
 function sha256(path) {

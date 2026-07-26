@@ -94,4 +94,25 @@ gap. It does not prove:
 The frozen Stage 1 evidence archive SHA-256 is
 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
 Sprint 30 remains qualification-incomplete while Sprint 30.5 Stages 2–7
-remain. Stage 2 is proposed and requires separate Founder authority.
+remain.
+
+## Sprint 30.5 Stage 2 evidence extension
+
+On 26 July 2026 Stage 2 engineering completed under explicit Founder
+authority. Source commit
+`d850743977735929f6873457fe122d2cf9697d9e` was frozen into a local-only MSIX.
+Runtime Manifest `1.7.0` now mechanically reconciles with the signed Release
+Manifest, package identity, artifact set, complete 2,201-entry package
+inventory, CycloneDX SBOM and SLSA-shaped provenance.
+
+The temporary signing identity was destroyed and trust removed. An initial
+packaging-tool certificate-store residue was detected fail-closed, removed and
+covered by the corrected final teardown verification. The immutable Sprint 29
+package remains unchanged at Runtime Manifest `1.6.0`.
+
+The frozen Stage 2 evidence archive SHA-256 is
+`8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876`.
+Stage 2 awaits Founder acceptance. Stage 3 has not begun and remains
+unauthorised. Sprint 30 remains qualification-incomplete because clean Windows,
+live Auth, protected rendering, installed-package GPU/performance/accessibility,
+reproducibility and final integrated qualification remain outstanding.

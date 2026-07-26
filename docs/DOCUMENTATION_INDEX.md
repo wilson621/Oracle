@@ -284,7 +284,10 @@ delivery authorities have been reviewed.
 | Sprint 30 Phase 3 incident runbook | [Sprint 30 Phase 3 Incident Runbook](sprints/SPRINT_30_PHASE_3_INCIDENT_RUNBOOK.md) | Isolated local detect, fail-closed and fresh-recovery sequence |
 | Sprint 30.5 Stage 1 closure | [Sprint 30.5 Stage 1 Closure](sprints/SPRINT_30_5_STAGE_1_CLOSURE.md) | Founder-accepted and closed; controlled non-pristine host admitted |
 | Sprint 30.5 Stage 1 evidence | [Sprint 30.5 Stage 1 Evidence](sprints/evidence/sprint-30-5/stage-1/README.md) | Complete, frozen and hash-bound |
-| Sprint 30.5 Stage 2 plan | [Sprint 30.5 Stage 2 Plan](sprints/SPRINT_30_5_STAGE_2_PLAN.md) | Proposed; separate Founder authority required |
+| Sprint 30.5 Stage 2 plan | [Sprint 30.5 Stage 2 Plan](sprints/SPRINT_30_5_STAGE_2_PLAN.md) | Executed; evidence frozen awaiting Founder review |
+| Sprint 30.5 Stage 2 implementation | [Sprint 30.5 Stage 2 Implementation](sprints/SPRINT_30_5_STAGE_2_IMPLEMENTATION.md) | Candidate and package reconciliation complete |
+| Sprint 30.5 Stage 2 qualification package | [Sprint 30.5 Stage 2 Qualification Package](sprints/SPRINT_30_5_STAGE_2_QUALIFICATION_PACKAGE.md) | Recommendation: accept Stage 2 |
+| Sprint 30.5 Stage 2 evidence | [Sprint 30.5 Stage 2 Evidence](sprints/evidence/sprint-30-5/stage-2/README.md) | Complete, frozen and hash-bound |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

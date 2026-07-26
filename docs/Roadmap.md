@@ -10,8 +10,8 @@
 **Expected Stability:** Reviewed at strategic and Sprint-boundary changes
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
-**Last Reviewed:** 25 July 2026
-**Version:** 5.8
+**Last Reviewed:** 26 July 2026
+**Version:** 5.9
 
 ---
 
@@ -783,8 +783,11 @@ quality and support matrix and closes the discovered development dependency
 advisory. Sprint 30.5 Stage 1 is Founder-accepted and closed: the controlled
 non-pristine physical host, isolated Auth route, standalone hardware GPU
 admission and teardown evidence pass and are frozen. The host is not a clean
-Windows environment. Sprint 30 remains qualification-incomplete pending
-Stages 2–7, including separately authorised package reconciliation, clean
+Windows environment. Stage 2 engineering is complete with a frozen local
+Runtime Manifest `1.7.0` MSIX, mechanically equal Release Manifest, SBOM,
+provenance, package inventory and complete signing teardown. It awaits Founder
+acceptance. Sprint 30 remains qualification-incomplete pending Stage 2
+acceptance and Stages 3–7, including separately authorised clean
 Windows, live Auth, protected rendering and installed-package qualification.
 Production signing, publication, distribution, deployment and runtime
 persistence remain unauthorised.

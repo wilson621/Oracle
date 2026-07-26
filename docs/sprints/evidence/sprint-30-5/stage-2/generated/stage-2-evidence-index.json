@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-2-evidence-index",
+  "contractVersion": 1,
+  "createdAt": "2026-07-26T16:08:49.856Z",
+  "status": "complete",
+  "evidenceFiles": [
+    {
+      "filename": "Oracle_0.1.1.0_x64_STAGE2_LOCAL_TEST_ONLY.msix",
+      "sha256": "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276",
+      "size": 215475575
+    },
+    {
+      "filename": "oracle-0.1.1.cdx.json",
+      "sha256": "c6a958c47b36baec3f7b924073909dc7701865cfea26552bafd986564641017f",
+      "size": 75384
+    },
+    {
+      "filename": "oracle-0.1.1.provenance.json",
+      "sha256": "53239478f6e666406727737c603e748c66a5b10bffd8d28a33fbdbca06e87779",
+      "size": 1226
+    },
+    {
+      "filename": "oracle-release-manifest.json",
+      "sha256": "854b909a8d93a08ebd165d19a2f865ad6f3e84abe31f4bf1326e0647e761113d",
+      "size": 1810
+    },
+    {
+      "filename": "oracle-release-manifest.json.p7s",
+      "sha256": "df4d3c9aa8e924a2b1c3968cec17041b5e5a0ff095c108e43ec2befe92af79bb",
+      "size": 1245
+    },
+    {
+      "filename": "package-content-inventory.json",
+      "sha256": "9fd8def2a0d45d97f6374780243b7a5bed61118e86e5619466c31ef330e77c7e",
+      "size": 453051
+    },
+    {
+      "filename": "qualification-candidate.json",
+      "sha256": "9ee368383bd1d05d3af8bfa26760b1f9c915108a3ac2e1c604e2de1849e4b9c4",
+      "size": 2449
+    },
+    {
+      "filename": "release-build-summary.json",
+      "sha256": "237343bacb3edb0c66849fb556db6c9c587e2bfed5b1edcc2631974066ba6d28",
+      "size": 935
+    },
+    {
+      "filename": "signature-and-trust-verification.json",
+      "sha256": "febb90ad793a53b1d6bb28c07e28d7e82bf77ee140e12ef3de5e21ca929c9fc2",
+      "size": 1568
+    },
+    {
+      "filename": "signing-store-cleanup.json",
+      "sha256": "41b68faaa76bee04545d2fdf498efed4fc34ef3175e28b314711e237ddff0cea",
+      "size": 677
+    },
+    {
+      "filename": "stage-2-certification.json",
+      "sha256": "c8d7d1134ac4adbd3a907170541972cbc3c25ec988371621a2a191b72e7810bb",
+      "size": 2659
+    }
+  ]
+}

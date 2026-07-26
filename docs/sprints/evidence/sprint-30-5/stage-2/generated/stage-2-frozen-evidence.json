@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-2-frozen-evidence",
+  "contractVersion": 1,
+  "frozenAt": "2026-07-26T16:08:53.341Z",
+  "status": "complete-awaiting-founder-review",
+  "archive": {
+    "filename": "Oracle.Sprint30.5.Stage2QualificationEvidence.zip",
+    "sha256": "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876",
+    "size": 214510031,
+    "storage": "workspace-local-ignored-artifact"
+  },
+  "releaseManifestSha256": "854b909a8d93a08ebd165d19a2f865ad6f3e84abe31f4bf1326e0647e761113d",
+  "packageSha256": "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276",
+  "privateSigningMaterialDestroyed": true,
+  "certificateTrustRemoved": true,
+  "stage3Started": false
+}
