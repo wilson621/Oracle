@@ -15,6 +15,10 @@
   admission result.
 - `generated/environment-admission-revised.json` provides the current
   machine-readable admission state.
+- `SPRINT_30_5_STAGE_1_LAPTOP_EVIDENCE_KIT.md` provides the exact Founder and
+  development-PC execution procedure.
+- `generated/laptop-evidence-kit.json` records the transfer artifact, source
+  commit, runtime versions, integrity result and bounded self-test.
 
 ## Deliverable disposition
 

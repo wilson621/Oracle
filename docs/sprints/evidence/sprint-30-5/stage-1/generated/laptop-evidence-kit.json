@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.laptop-evidence-kit",
+  "contractVersion": 1,
+  "stage": 1,
+  "result": "ready-for-controlled-execution",
+  "sourceCommit": "3165ebda8d2c4fed30205be234b49e46e381459e",
+  "artifact": {
+    "filename": "Oracle.Stage1EvidenceKit.zip",
+    "size": 136577218,
+    "sha256": "3bafa02a39bafa3d9425c1d325c3cc03e911f97445fc52e8782c24d752f8c2a6",
+    "manifestFiles": 83,
+    "manifestEqualityVerified": true
+  },
+  "runtime": {
+    "electron": "39.8.10",
+    "chromium": "142.0.7444.265",
+    "developmentToolsRequiredOnLaptop": false,
+    "oracleSourceIncluded": false
+  },
+  "localSelfTest": {
+    "result": "passed",
+    "hardwareAcceleration": true,
+    "activeGpu": "NVIDIA GeForce RTX 4080",
+    "gpuProcessCount": 1,
+    "activeFallbackIndicators": 0
+  },
+  "scope": {
+    "windowsBaseline": true,
+    "minimalElectronGpuAdmission": true,
+    "artifactTransfer": true,
+    "temporaryNetworkIsolation": true,
+    "msixQualification": false,
+    "certificateQualification": false,
+    "operatorJourney": false,
+    "companionJourney": false,
+    "longDurationSoak": false,
+    "stage2Started": false
+  },
+  "authority": {
+    "productionUsed": false,
+    "productionSigning": false,
+    "deployment": false,
+    "remotePush": false
+  }
+}
