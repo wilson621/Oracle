@@ -89,7 +89,7 @@ Gate C activity occurred.
 
 Sprint 30 — Production Qualification is Founder-approved and active under
 Option A and ADR-047. Delivery is divided into separately verified and
-committed phases. Phases 1 through 4 are complete and locally verified. Phase 1
+committed phases. Phases 1 through 5 are complete and locally verified. Phase 1
 implements the
 non-authoritative diagnostic admission contract, allowlisted definitions,
 minimisation policy and bounded local transient sink. Runtime composition
@@ -112,8 +112,12 @@ and passes bounded current-host startup, authenticated route/API boundary,
 CPU, memory and deterministic Guidance-latency budgets. Public authentication
 accessibility, compact layout, semantic structure and support triage pass.
 Protected-route rendering, installed-package GPU measurement and live Auth
-remain unavailable, and none is claimed as passed. Phase 5 has not begun.
-Clean-Machine Certification Deferred — Required
+remain unavailable, and none is claimed as passed. Phase 5 completes the
+integrated matrix, closes the development-tool supply-chain finding and
+produces the Production Qualification dossier. Full and production dependency
+audits report zero vulnerabilities. Sprint 30 remains qualification-incomplete
+because mandatory external environment evidence and authorised package
+reconciliation are absent. Clean-Machine Certification Deferred — Required
 Disposable Windows Environment Unavailable remains unchanged. Gate 7 is not
 authorised.
 

@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.local-performance-qualification",
+  "contractVersion": 1,
+  "phase": 5,
+  "result": "passed",
+  "scope": "current-host-production-build-with-synthetic-requests",
+  "budgets": {
+    "startupMilliseconds": 15000,
+    "routeP95Milliseconds": 250,
+    "routeP99Milliseconds": 500,
+    "apiP95Milliseconds": 250,
+    "workingSetMiB": 768,
+    "cpuSecondsForMeasuredWorkload": 15,
+    "maximumHtmlBytes": 524288
+  },
+  "observed": {
+    "startupMilliseconds": 574.482,
+    "maximumRouteP95Milliseconds": 4.601,
+    "maximumRouteP99Milliseconds": 4.601,
+    "maximumApiP95Milliseconds": 5.105,
+    "peakWorkingSetMiB": 120.91,
+    "cpuSecondsForMeasuredWorkload": 0.156
+  },
+  "routes": [
+    {
+      "id": "/oracle",
+      "status": 307,
+      "bytes": 20,
+      "result": "authentication-boundary-passed",
+      "location": "/auth?next=%2Foracle",
+      "samples": 15,
+      "p50Milliseconds": 2.239,
+      "p95Milliseconds": 3.456,
+      "p99Milliseconds": 3.456,
+      "maximumMilliseconds": 3.456
+    },
+    {
+      "id": "/companion",
+      "status": 307,
+      "bytes": 23,
+      "result": "authentication-boundary-passed",
+      "location": "/auth?next=%2Fcompanion",
+      "samples": 15,
+      "p50Milliseconds": 2.926,
+      "p95Milliseconds": 4.055,
+      "p99Milliseconds": 4.055,
+      "maximumMilliseconds": 4.055
+    },
+    {
+      "id": "/sessions",
+      "status": 307,
+      "bytes": 22,
+      "result": "authentication-boundary-passed",
+      "location": "/auth?next=%2Fsessions",
+      "samples": 15,
+      "p50Milliseconds": 2.976,
+      "p95Milliseconds": 4.074,
+      "p99Milliseconds": 4.074,
+      "maximumMilliseconds": 4.074
+    },
+    {
+      "id": "/reports",
+      "status": 307,
+      "bytes": 21,
+      "result": "authentication-boundary-passed",
+      "location": "/auth?next=%2Freports",
+      "samples": 15,
+      "p50Milliseconds": 2.054,
+      "p95Milliseconds": 3.928,
+      "p99Milliseconds": 3.928,
+      "maximumMilliseconds": 3.928
+    },
+    {
+      "id": "/intelligence",
+      "status": 307,
+      "bytes": 26,
+      "result": "authentication-boundary-passed",
+      "location": "/auth?next=%2Fintelligence",
+      "samples": 15,
+      "p50Milliseconds": 2.058,
+      "p95Milliseconds": 4.601,
+      "p99Milliseconds": 4.601,
+      "maximumMilliseconds": 4.601
+    },
+    {
+      "id": "/coach",
+      "status": 307,
+      "bytes": 19,
+      "result": "authentication-boundary-passed",
+      "location": "/auth?next=%2Fcoach",
+      "samples": 15,
+      "p50Milliseconds": 1.987,
+      "p95Milliseconds": 2.98,
+      "p99Milliseconds": 2.98,
+      "maximumMilliseconds": 2.98
+    },
+    {
+      "id": "/progress",
+      "status": 307,
+      "bytes": 22,
+      "result": "authentication-boundary-passed",
+      "location": "/auth?next=%2Fprogress",
+      "samples": 15,
+      "p50Milliseconds": 2.013,
+      "p95Milliseconds": 4.016,
+      "p99Milliseconds": 4.016,
+      "maximumMilliseconds": 4.016
+    },
+    {
+      "id": "/settings",
+      "status": 307,
+      "bytes": 22,
+      "result": "authentication-boundary-passed",
+      "location": "/auth?next=%2Fsettings",
+      "samples": 15,
+      "p50Milliseconds": 1.276,
+      "p95Milliseconds": 3.903,
+      "p99Milliseconds": 3.903,
+      "maximumMilliseconds": 3.903
+    }
+  ],
+  "publicAuthRoute": {
+    "id": "/auth",
+    "status": 200,
+    "bytes": 8601,
+    "result": "passed",
+    "samples": 15,
+    "p50Milliseconds": 3.642,
+    "p95Milliseconds": 5.255,
+    "p99Milliseconds": 5.255,
+    "maximumMilliseconds": 5.255
+  },
+  "apiBoundaries": [
+    {
+      "id": "/api/oracle/analyze",
+      "status": 307,
+      "result": "authentication-boundary-passed",
+      "innerHandler": "unavailable-without-live-auth",
+      "samples": 15,
+      "p50Milliseconds": 2.951,
+      "p95Milliseconds": 5.105,
+      "p99Milliseconds": 5.105,
+      "maximumMilliseconds": 5.105
+    },
+    {
+      "id": "/api/oracle/conversation",
+      "status": 307,
+      "result": "authentication-boundary-passed",
+      "innerHandler": "unavailable-without-live-auth",
+      "samples": 15,
+      "p50Milliseconds": 2.969,
+      "p95Milliseconds": 4.124,
+      "p99Milliseconds": 4.124,
+      "maximumMilliseconds": 4.124
+    }
+  ],
+  "protectedRenderedRoutes": {
+    "result": "unavailable",
+    "reason": "The approved environment has no live Supabase Auth provider; protected routes correctly redirect to authentication.",
+    "passClaimed": false
+  },
+  "gpu": {
+    "result": "unavailable",
+    "reason": "Installed clean-Windows Electron GPU-process measurement requires the deferred disposable Windows environment.",
+    "passClaimed": false
+  },
+  "limitations": [
+    "Local loopback timings do not establish production network performance.",
+    "Protected route and API measurements prove the authentication boundary only, not inner route rendering or active persisted consumers.",
+    "GPU qualification is unavailable and is not represented as passed."
+  ]
+}

@@ -154,7 +154,7 @@ function isSafeOperationalDiagnosticValue(
   }
   return (
     value.length <= 160 &&
-    !/[\r\n\u0000-\u001f]/u.test(value) &&
+    !containsControlCharacter(value) &&
     !EMAIL_PATTERN.test(value) &&
     !WINDOWS_PATH_PATTERN.test(value) &&
     !SECRET_VALUE_PATTERN.test(value)
@@ -171,13 +171,20 @@ function requireSummary(value: string): void {
   if (
     value.length < 1 ||
     value.length > 160 ||
-    /[\r\n\u0000-\u001f]/u.test(value) ||
+    containsControlCharacter(value) ||
     EMAIL_PATTERN.test(value) ||
     WINDOWS_PATH_PATTERN.test(value) ||
     SECRET_VALUE_PATTERN.test(value)
   ) {
     throw new Error("Operational diagnostic summary is invalid.");
   }
+}
+
+function containsControlCharacter(value: string): boolean {
+  return Array.from(value).some((character) => {
+    const codePoint = character.codePointAt(0);
+    return codePoint !== undefined && codePoint <= 0x1f;
+  });
 }
 
 export function deepFreeze<T>(value: T): T {

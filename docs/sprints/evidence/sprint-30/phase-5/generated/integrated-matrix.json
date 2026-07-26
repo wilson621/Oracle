@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.production-qualification-matrix",
+  "contractVersion": 1,
+  "phase": 5,
+  "result": "passed-with-mandatory-deferred-and-unavailable-evidence",
+  "candidate": {
+    "acceptedPhase4Commit": "0d0c2e8f658479c27adb0dd96f30c95369e759e0",
+    "runtimeManifestVersion": "1.7.0",
+    "releaseManifestRuntimeVersion": "1.6.0"
+  },
+  "domains": {
+    "typescript": "passed",
+    "lint": "passed-zero-warnings",
+    "productionWebBuild": "passed",
+    "electronCompilation": "passed",
+    "architectureAudit": "passed-22-documented-exceptions-zero-runtime-cycles",
+    "runtimeManifestEquality": "passed-1.7.0",
+    "authenticationIdentityContracts": "passed",
+    "operatorOwnershipTrustControl": "passed",
+    "sessionEvidenceLifecycle": "passed",
+    "understanding": "passed",
+    "reportingConversation": "passed",
+    "missionPlannerProgression": "passed",
+    "guidanceAndRendererBoundaries": "passed",
+    "diagnosticSeparation": "passed",
+    "runtimeFailureIsolationRecovery": "passed",
+    "disposablePostgresCanonicalChain": "passed-009-through-014",
+    "authenticatedRlsAndCrossOperatorIsolation": "passed",
+    "backupRestoreDeletion": "passed",
+    "sprint29PackageIntegrity": "passed-immutable-1.6.0",
+    "currentHostPerformance": "passed",
+    "publicAuthenticationAccessibility": "passed-with-method-limitations",
+    "supportAndTriage": "passed",
+    "fullDependencyAudit": "passed-zero-vulnerabilities",
+    "productionDependencyAudit": "passed-zero-vulnerabilities",
+    "minecraftCompatibility": "provisionally-certified-observation-disabled",
+    "liveSupabaseAuth": "unavailable",
+    "protectedAuthenticatedRendering": "unavailable",
+    "installedElectronGpu": "unavailable",
+    "cleanDisposableWindows": "deferred",
+    "packageRuntimeReconciliation": "not-authorised"
+  },
+  "findings": {
+    "openCriticalSourceFindings": 0,
+    "openHighSourceFindings": 0,
+    "closedHighFindings": [
+      "GHSA-mh99-v99m-4gvg development dependency path"
+    ],
+    "qualificationBlockers": [
+      "live Supabase Auth environment unavailable",
+      "protected authenticated rendering unavailable",
+      "installed-package Electron GPU evidence unavailable",
+      "clean disposable Windows environment unavailable",
+      "Runtime Manifest 1.7.0 package reconciliation not authorised"
+    ]
+  },
+  "disposableEnvironment": {
+    "postgresVersion": "17.10",
+    "containersRemoved": true,
+    "syntheticDataOnly": true,
+    "productionCredentialsUsed": false
+  },
+  "authority": {
+    "production": "unchanged",
+    "migrationExecutionInProduction": false,
+    "runtimePersistence": "disabled",
+    "persistedProducersConsumers": "disabled",
+    "diagnosticDelivery": "disabled",
+    "deployment": false,
+    "signing": false,
+    "publication": false,
+    "distribution": false,
+    "remotePush": false,
+    "gateC": "deferred",
+    "gate7": "not-authorised"
+  },
+  "programmeConclusion": {
+    "phase5Engineering": "complete",
+    "sprint30DefinitionOfDone": "not-satisfied",
+    "productionQualification": "incomplete",
+    "releaseAuthority": false
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.supply-chain-qualification",
+  "contractVersion": 1,
+  "phase": 5,
+  "result": "passed",
+  "initialFinding": {
+    "advisory": "GHSA-mh99-v99m-4gvg",
+    "cve": "CVE-2026-14257",
+    "upstreamSeverity": "high",
+    "scope": "development-only ESLint/minimatch/brace-expansion dependency path",
+    "productionDependencyExposure": false,
+    "status": "closed"
+  },
+  "correction": {
+    "eslint": "10.8.0",
+    "configuration": "official-direct-next-plugin-flat-config",
+    "nextPlugin": "16.2.11",
+    "typescriptEslint": "8.65.0",
+    "reactHooks": "7.1.1",
+    "legacyEslintConfigNextRemoved": true,
+    "forceAuditFixUsed": false
+  },
+  "verification": {
+    "fullNpmAuditVulnerabilities": 0,
+    "productionNpmAuditVulnerabilities": 0,
+    "dependencyTreeIntegrity": "passed",
+    "lint": "passed-zero-warnings",
+    "typescript": "passed",
+    "productionBuild": "passed"
+  },
+  "runtimeEffect": "none",
+  "architectureEffect": "none",
+  "releasePackageEffect": "none",
+  "immutableSprint29PackageChanged": false
+}

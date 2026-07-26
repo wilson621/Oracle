@@ -7,7 +7,9 @@ import { spawn, execFileSync } from "node:child_process";
 const port = 4310;
 const origin = `http://127.0.0.1:${port}`;
 const output =
+  process.env.ORACLE_PERFORMANCE_EVIDENCE_PATH ??
   "docs/sprints/evidence/sprint-30/phase-4/generated/web-performance.json";
+const evidencePhase = Number(process.env.ORACLE_PERFORMANCE_PHASE ?? "4");
 const routes = [
   "/oracle",
   "/companion",
@@ -71,7 +73,7 @@ try {
     schemaVersion: 1,
     contract: "oracle.local-performance-qualification",
     contractVersion: 1,
-    phase: 4,
+    phase: evidencePhase,
     result: "passed",
     scope: "current-host-production-build-with-synthetic-requests",
     budgets,
@@ -120,7 +122,9 @@ async function waitForReady() {
     try {
       const response = await fetch(`${origin}/oracle`);
       if (response.status === 200) return;
-    } catch {}
+    } catch {
+      // Expected while the bounded loopback server is still starting.
+    }
     await new Promise((resolve) => setTimeout(resolve, 100));
   }
   throw new Error(`Next server did not become ready.\n${serverOutput}`);

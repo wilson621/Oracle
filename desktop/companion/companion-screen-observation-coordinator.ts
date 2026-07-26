@@ -234,7 +234,6 @@ export class OracleCompanionScreenObservationCoordinator {
       }
     } finally {
       frame?.pixels.fill(0);
-      frame = null;
     }
     return this.state;
   }

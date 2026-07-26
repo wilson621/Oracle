@@ -767,7 +767,7 @@ closed under ADR-046. Its MSIX source implementation, canonical signed Release
 Manifest equality and current-host Windows package lifecycle certification are
 accepted. Clean-Machine Certification Deferred — Required Disposable Windows
 Environment Unavailable remains the independent programme status. Sprint 30
-Option A and ADR-047 are Founder-approved. Phases 1 through 4 are complete and
+Option A and ADR-047 are Founder-approved. Phases 1 through 5 are complete and
 locally verified. Operational Diagnostics remains separate from Oracle
 Intelligence and is canonically disabled through exact Web/Electron manifest
 `1.7.0` composition. Failure isolation, fresh recovery, disposable
@@ -777,7 +777,11 @@ Supabase Auth provider transaction remains unavailable. The immutable Sprint
 reconciliation. Phase 4 passes frozen current-host Web boundary, CPU, memory,
 startup, deterministic Guidance, public accessibility and support evidence.
 Protected authenticated rendering, installed-package GPU evidence and clean
-Windows remain honestly unavailable or deferred. Phase 5 has not begun.
+Windows remain honestly unavailable or deferred. Phase 5 completes the
+integrated source, domain, runtime, database, recovery, package-integrity,
+quality and support matrix and closes the discovered development dependency
+advisory. Sprint 30 remains qualification-incomplete pending mandatory
+environment evidence and separately authorised package reconciliation.
 Production signing, publication, distribution, deployment and runtime
 persistence remain unauthorised.
 

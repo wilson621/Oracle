@@ -1,6 +1,6 @@
 # SPRINT 30 PLAN — PRODUCTION QUALIFICATION
 
-**Status:** Founder-approved; Phases 1–4 complete; Phase 5 not started
+**Status:** Founder-approved; Phases 1–5 complete; Founder review required
 **Approved option:** Option A — Governed Isolated Production Qualification
 **ADR:** ADR-047
 **Migration:** None
@@ -122,7 +122,8 @@ journey passes bounded keyboard/focus, contrast, semantic, compact-layout,
 scalable-text reflow and reduced-motion source review. Live authenticated
 protected-route rendering, installed-package GPU evidence and disposable
 clean-Windows certification remain unavailable or deferred and are not
-represented as passed. Phase 5 has not begun.
+represented as passed. Phase 5 subsequently completed without changing these
+evidence states.
 
 # Phase 5 — Integrated Qualification and Founder Acceptance Package
 
@@ -132,6 +133,26 @@ produce the final Production Qualification dossier and prepare the Sprint 30
 Founder Acceptance Package.
 
 This phase does not approve Gate 7. Gate 7 remains a separate Founder decision.
+
+**Completion status:** Complete and locally verified. The integrated
+qualification matrix, Production Qualification dossier and Founder Acceptance
+Package are ready for review. Mandatory live-authentication, protected-rendering,
+installed-package GPU, clean disposable Windows and reconciled Runtime Manifest
+`1.7.0` package evidence remain unavailable, deferred or unauthorised. Sprint 30
+therefore remains qualification-incomplete under its approved Definition of
+Done.
+
+**Completion status:** Complete and locally verified against the corrected
+frozen candidate. The integrated source, domain, runtime, disposable
+PostgreSQL, recovery, package-integrity, performance, accessibility, privacy
+and support matrix passes within its authorised environments. A high-severity
+development-only dependency advisory found during qualification was corrected;
+full and production-only npm audits now report zero vulnerabilities. Mandatory
+live Auth, protected authenticated rendering, installed-package GPU and clean
+Windows evidence remain unavailable or deferred. The immutable Sprint 29
+package remains at Runtime Manifest `1.6.0`; reconciliation to current source
+`1.7.0` remains outside authority. Sprint 30 cannot yet satisfy its complete
+Definition of Done.
 
 # Authority Not Granted
 

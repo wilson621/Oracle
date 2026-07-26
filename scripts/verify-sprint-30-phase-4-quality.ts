@@ -8,7 +8,9 @@ import { OracleCompanionGuidanceProviderService } from "../lib/oracle/services/c
 
 const root = process.cwd();
 const output =
+  process.env.ORACLE_QUALITY_EVIDENCE_PATH ??
   "docs/sprints/evidence/sprint-30/phase-4/generated/quality-contract.json";
+const evidencePhase = Number(process.env.ORACLE_QUALITY_PHASE ?? "4");
 const guidanceBudget = Object.freeze({
   samples: 1_000,
   warmupSamples: 50,
@@ -27,7 +29,7 @@ async function verify(): Promise<void> {
     schemaVersion: 1,
     contract: "oracle.production-quality-contract",
     contractVersion: 1,
-    phase: 4,
+    phase: evidencePhase,
     result: "passed",
     scope: "local-source-and-synthetic-qualification",
     accessibility: {

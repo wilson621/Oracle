@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-phase-5-integrated-verification",
+  "contractVersion": 1,
+  "phase": 5,
+  "verifiedAt": "2026-07-26T10:30:01.187Z",
+  "result": "passed-with-deferred-and-unavailable-mandatory-evidence",
+  "candidate": {
+    "acceptedPhase4Commit": "0d0c2e8f658479c27adb0dd96f30c95369e759e0",
+    "productSourceSha256": "96965cf36696fe7ee0e9c9f7ac818cac0cd07bc2b053a2c07aa604e74aff0388",
+    "packageLockSha256": "c181e50794bd2f1c40f6a54c8e3793dd8edaffd11e3077707738f2b2fea734c9",
+    "runtimeManifestVersion": "1.7.0",
+    "releaseManifestRuntimeVersion": "1.6.0"
+  },
+  "verified": {
+    "frozenProductSource": true,
+    "frozenDependencies": true,
+    "migrations009Through014Immutable": true,
+    "migration015Absent": true,
+    "runtimeManifest17SourcesFrozen": true,
+    "sprint29ReleaseManifest16Immutable": true,
+    "qualityEvidence": true,
+    "performanceEvidence": true,
+    "supplyChainEvidence": true,
+    "integratedMatrix": true,
+    "documentation": true
+  },
+  "conclusion": {
+    "phase5Engineering": "complete",
+    "productionQualification": "incomplete",
+    "sprint30DefinitionOfDone": "not-satisfied",
+    "releaseAuthority": false
+  }
+}

@@ -40,7 +40,7 @@ implementation stages and do not use fractional Sprint numbering.
 | 27 | Contextual Companion and Reference Integration | Complete — Founder-accepted and closed; source/synthetic certification accepted; Operational Certification Deferred; live profile provisional and observation disabled | None | [Plan](SPRINT_27_PLAN.md), [Implementation](SPRINT_27_IMPLEMENTATION.md), [Certification](SPRINT_27_CERTIFICATION.md), [Closure](SPRINT_27_CLOSURE.md), [Founder acceptance package](SPRINT_27_FOUNDER_ACCEPTANCE_REQUIRED.md), [ADRs 044–045](../Decisions.md) |
 | 28 | Unified Oracle Product Experience | Complete, locally certified, Founder-accepted and closed | None | [Decision package](SPRINT_28_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_28_PLAN.md), [Product Truth Inventory](SPRINT_28_PRODUCT_TRUTH_INVENTORY.md), [Implementation](SPRINT_28_IMPLEMENTATION.md), [Certification](SPRINT_28_CERTIFICATION.md), [Founder acceptance package](SPRINT_28_FOUNDER_ACCEPTANCE_REQUIRED.md), [Closure](SPRINT_28_CLOSURE.md) |
 | 29 | Secure Desktop Operations and Distribution | Complete, locally certified, Founder-accepted and closed; Clean-Machine Certification Deferred | None | [Decision package](SPRINT_29_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_29_PLAN.md), [Implementation](SPRINT_29_IMPLEMENTATION.md), [Certification](SPRINT_29_CERTIFICATION.md), [Founder acceptance package](SPRINT_29_FOUNDER_ACCEPTANCE_REQUIRED.md), [Closure](SPRINT_29_CLOSURE.md), [ADR-046](../Decisions.md) |
-| 30 | Production Qualification | Founder-approved and active; Phases 1–4 implemented and locally verified; live Auth, installed GPU and clean Windows unavailable/deferred; package/runtime reconciliation required | None | [Decision package](SPRINT_30_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_30_PLAN.md), [Phase 1 implementation](SPRINT_30_PHASE_1_IMPLEMENTATION.md), [Phase 2 implementation](SPRINT_30_PHASE_2_IMPLEMENTATION.md), [Phase 3 implementation](SPRINT_30_PHASE_3_IMPLEMENTATION.md), [Phase 4 implementation](SPRINT_30_PHASE_4_IMPLEMENTATION.md), [incident runbook](SPRINT_30_PHASE_3_INCIDENT_RUNBOOK.md), [support runbook](../runbooks/SPRINT_30_LOCAL_SUPPORT_AND_TRIAGE.md), [ADR-047](../Decisions.md) |
+| 30 | Production Qualification | Founder-approved and active; Phases 1–5 implemented and locally verified; qualification incomplete pending live Auth, protected rendering, installed GPU, clean Windows and authorised package reconciliation | None | [Decision package](SPRINT_30_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_30_PLAN.md), [Phase 1 implementation](SPRINT_30_PHASE_1_IMPLEMENTATION.md), [Phase 2 implementation](SPRINT_30_PHASE_2_IMPLEMENTATION.md), [Phase 3 implementation](SPRINT_30_PHASE_3_IMPLEMENTATION.md), [Phase 4 implementation](SPRINT_30_PHASE_4_IMPLEMENTATION.md), [Phase 5 implementation](SPRINT_30_PHASE_5_IMPLEMENTATION.md), [Production Qualification dossier](SPRINT_30_PRODUCTION_QUALIFICATION_DOSSIER.md), [Founder acceptance package](SPRINT_30_FOUNDER_ACCEPTANCE_REQUIRED.md), [incident runbook](SPRINT_30_PHASE_3_INCIDENT_RUNBOOK.md), [support runbook](../runbooks/SPRINT_30_LOCAL_SUPPORT_AND_TRIAGE.md), [ADR-047](../Decisions.md) |
 | 31 | Oracle Beta Certification | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 
 # Historical Integrity
@@ -76,7 +76,7 @@ is complete, locally certified, Founder-accepted and closed. Sprint 29 Option A
 is complete, locally certified, Founder-accepted and closed under ADR-046.
 Clean-Machine Certification Deferred — Required Disposable Windows
 Environment Unavailable remains the independent programme status. Sprint 30
-Option A and ADR-047 are Founder-approved. Phases 1–4 are complete and locally
+Option A and ADR-047 are Founder-approved. Phases 1–5 are complete and locally
 verified. Phase 3 integrates disabled Operational Diagnostics through exact
 manifest `1.7.0` composition, and proves failure isolation, bounded local
 diagnostics, fresh recovery, backup/restore/deletion and Sprint 29 rollback
@@ -85,4 +85,7 @@ The immutable Sprint 29 package remains at `1.6.0` and requires later
 candidate reconciliation. Phase 4 passes bounded current-host performance,
 public accessibility and support qualification. Live authenticated rendering,
 installed-package GPU evidence and clean Windows remain unavailable or
-deferred without a pass claim. Phase 5 has not begun.
+deferred without a pass claim. Phase 5 completes the integrated matrix and
+Production Qualification dossier. Sprint 30 remains qualification-incomplete
+until mandatory environment evidence and separately authorised package
+reconciliation exist.
