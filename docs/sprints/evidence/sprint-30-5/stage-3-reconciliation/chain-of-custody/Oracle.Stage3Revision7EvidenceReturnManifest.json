@@ -1,0 +1,87 @@
+{
+    "schemaVersion":  "1.0.0",
+    "purpose":  "Sprint 30.5 Stage 3 Revision 7 baseline evidence return",
+    "classification":  "governed-offline-evidence-return",
+    "sourceHost":  {
+                       "deviceName":  "FOUNDER-QA-01",
+                       "manufacturer":  "MEDION",
+                       "model":  "ERAZER P6605 MD61596"
+                   },
+    "transfer":  {
+                     "method":  "offline-removable-media",
+                     "fileCount":  10,
+                     "totalBytes":  1501936032,
+                     "deleteSourceAfterCopy":  false,
+                     "sourceCleanupPermitted":  false
+                 },
+    "governance":  {
+                       "preserveHistoricalEvidence":  true,
+                       "preserveRecoveredRevision4Pair":  true,
+                       "developmentPcVerificationRequired":  true,
+                       "repositoryReconciliationRequired":  true,
+                       "qualificationAuthorityGranted":  false,
+                       "revision7ExecutionAuthorised":  false
+                   },
+    "files":  [
+                  {
+                      "destinationRelativePath":  "historical-archive/Oracle.Stage3Revision7LaptopArchiveRecord.json",
+                      "sourceLabel":  "historical-archive/Oracle.Stage3Revision7LaptopArchiveRecord.json",
+                      "size":  1338,
+                      "sha256":  "e01d9446e779143d52939e0c44a9e11c88b0530d6417fddda33ba300b86a9245"
+                  },
+                  {
+                      "destinationRelativePath":  "historical-archive/Oracle.Stage3Revision7LaptopArchiveRecord.json.sha256.txt",
+                      "sourceLabel":  "historical-archive/Oracle.Stage3Revision7LaptopArchiveRecord.json.sha256.txt",
+                      "size":  114,
+                      "sha256":  "88fae28e9a1b66470437c12db5fae9138338f42bf6a36dccfb11341eddd7fa47"
+                  },
+                  {
+                      "destinationRelativePath":  "historical-archive/Oracle.Stage3Revision7LaptopInventory.json",
+                      "sourceLabel":  "historical-archive/Oracle.Stage3Revision7LaptopInventory.json",
+                      "size":  27904,
+                      "sha256":  "2717948332f4395e6126b0052ff7d65c2bc8ba6aff4b90605a63c1f227ba1700"
+                  },
+                  {
+                      "destinationRelativePath":  "historical-archive/Oracle.Stage3Revision7LaptopInventory.json.sha256.txt",
+                      "sourceLabel":  "historical-archive/Oracle.Stage3Revision7LaptopInventory.json.sha256.txt",
+                      "size":  110,
+                      "sha256":  "8d28bc62985d1509920a54f07eb31251d2ff6ee6fbe9b66863631a70715c287f"
+                  },
+                  {
+                      "destinationRelativePath":  "historical-archive/Oracle.Stage3RevisionHistory.zip",
+                      "sourceLabel":  "historical-archive/Oracle.Stage3RevisionHistory.zip",
+                      "size":  1501901728,
+                      "sha256":  "6b188bf7993ef013ee53a95b225de203a296e03db023e7bacc0400d2d4bfe458"
+                  },
+                  {
+                      "destinationRelativePath":  "historical-archive/Oracle.Stage3RevisionHistory.zip.sha256.txt",
+                      "sourceLabel":  "historical-archive/Oracle.Stage3RevisionHistory.zip.sha256.txt",
+                      "size":  100,
+                      "sha256":  "09c3b582099f5d3f7065807c5130d448041264bdc5ecd0421df8d6982326441f"
+                  },
+                  {
+                      "destinationRelativePath":  "recovered-revision-4/02b-negative-path-and-trust-r4.json",
+                      "sourceLabel":  "recovered-revision-4/02b-negative-path-and-trust-r4.json",
+                      "size":  2629,
+                      "sha256":  "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2"
+                  },
+                  {
+                      "destinationRelativePath":  "recovered-revision-4/02b-negative-path-and-trust-r4.json.sha256.txt",
+                      "sourceLabel":  "recovered-revision-4/02b-negative-path-and-trust-r4.json.sha256.txt",
+                      "size":  103,
+                      "sha256":  "3278ab63bfd5c36dc0ed85d46be1b9625681a16e70d521b060df03bcbf44d72c"
+                  },
+                  {
+                      "destinationRelativePath":  "recovered-revision-4/Oracle.Stage3Revision4RecoveredEvidenceRecord.json",
+                      "sourceLabel":  "recovered-revision-4/Oracle.Stage3Revision4RecoveredEvidenceRecord.json",
+                      "size":  1888,
+                      "sha256":  "4285f189d6d183ee49a920abc6ce2706635dd9fba449445b5e8d71a4f8598ba2"
+                  },
+                  {
+                      "destinationRelativePath":  "recovered-revision-4/Oracle.Stage3Revision4RecoveredEvidenceRecord.json.sha256.txt",
+                      "sourceLabel":  "recovered-revision-4/Oracle.Stage3Revision4RecoveredEvidenceRecord.json.sha256.txt",
+                      "size":  118,
+                      "sha256":  "e4c7ef66ce5ff93797d97a6aa991c136e4f20716ec73a24e5c564c20c0522cae"
+                  }
+              ]
+}

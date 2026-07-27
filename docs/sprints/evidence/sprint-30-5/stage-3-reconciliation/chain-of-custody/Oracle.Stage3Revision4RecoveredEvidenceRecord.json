@@ -1,0 +1,34 @@
+{
+    "schemaVersion":  "1.0.0",
+    "classification":  "recovered-original-immutable-qualification-evidence",
+    "disposition":  "preserve-and-return-for-governance-reconciliation",
+    "host":  {
+                 "deviceName":  "FOUNDER-QA-01",
+                 "manufacturer":  "MEDION",
+                 "model":  "ERAZER P6605 MD61596"
+             },
+    "recoveredEvidence":  {
+                              "fileName":  "02b-negative-path-and-trust-r4.json",
+                              "sha256":  "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2",
+                              "expectedHash":  "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2",
+                              "byteIdenticalCopy":  true
+                          },
+    "originalSidecar":  {
+                            "fileName":  "02b-negative-path-and-trust-r4.json.sha256.txt",
+                            "sha256":  "3278ab63bfd5c36dc0ed85d46be1b9625681a16e70d521b060df03bcbf44d72c",
+                            "declaresEvidence":  "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2",
+                            "byteIdenticalCopy":  true
+                        },
+    "historicalArchive":  {
+                              "fileName":  "Oracle.Stage3RevisionHistory.zip",
+                              "sha256":  "6b188bf7993ef013ee53a95b225de203a296e03db023e7bacc0400d2d4bfe458",
+                              "containsRecoveredPair":  true
+                          },
+    "governance":  {
+                       "originalEvidenceModified":  false,
+                       "originalEvidenceRemoved":  false,
+                       "priorAttemptReclassified":  false,
+                       "qualificationAuthorityGranted":  false,
+                       "repositoryReconciliationNeeded":  true
+                   }
+}

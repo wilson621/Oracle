@@ -1,0 +1,31 @@
+{
+    "schemaVersion":  "1.0.0",
+    "purpose":  "Revision 7 baseline preparation archive",
+    "classification":  "archived-immutable-historical-evidence",
+    "host":  {
+                 "deviceName":  "FOUNDER-QA-01",
+                 "manufacturer":  "MEDION",
+                 "model":  "ERAZER P6605 MD61596"
+             },
+    "source":  {
+                   "rootLabel":  "Oracle-Stage3-Qualification",
+                   "fileCount":  91,
+                   "totalBytes":  1506319641
+               },
+    "inventory":  {
+                      "fileName":  "Oracle.Stage3Revision7LaptopInventory.json",
+                      "sha256":  "2717948332f4395e6126b0052ff7d65c2bc8ba6aff4b90605a63c1f227ba1700"
+                  },
+    "archive":  {
+                    "fileName":  "Oracle.Stage3RevisionHistory.zip",
+                    "size":  1501901728,
+                    "sha256":  "6b188bf7993ef013ee53a95b225de203a296e03db023e7bacc0400d2d4bfe458"
+                },
+    "verification":  {
+                         "everySourceFileInventoried":  true,
+                         "everyZipEntryVerified":  true,
+                         "sourceReverifiedAfterCopy":  true,
+                         "sourceModified":  false,
+                         "sourceRemoved":  false
+                     }
+}

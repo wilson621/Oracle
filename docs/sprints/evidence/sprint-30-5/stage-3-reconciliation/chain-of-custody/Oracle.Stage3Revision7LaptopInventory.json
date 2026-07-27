@@ -1,0 +1,470 @@
+{
+    "schemaVersion":  "1.0.0",
+    "purpose":  "Sprint 30.5 Stage 3 Revision 7 baseline preparation",
+    "classification":  "immutable-historical-evidence-inventory",
+    "host":  {
+                 "deviceName":  "FOUNDER-QA-01",
+                 "manufacturer":  "MEDION",
+                 "model":  "ERAZER P6605 MD61596"
+             },
+    "sourceRootLabel":  "Oracle-Stage3-Qualification",
+    "sourceFileCount":  91,
+    "sourceTotalBytes":  1506319641,
+    "files":  [
+                  {
+                      "relativePath":  "offline-transfer/Oracle.Sprint30.5.Stage2QualificationEvidence.zip",
+                      "size":  214510031,
+                      "sha256":  "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/Oracle.Stage3OfflineTransferManifest.json",
+                      "size":  2425,
+                      "sha256":  "cfe4828d9accff14cc6ddcf28934af6a3305c499a50254776ba3cfb1cede6733"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/Oracle.Stage3OfflineTransferManifest.json.sha256.txt",
+                      "size":  108,
+                      "sha256":  "87b23dafe6aa74ca91987686346cdd08ff88d0553bc50d5d2c07763494e3e8b1"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-evidence/01-pre-execution.json",
+                      "size":  1502,
+                      "sha256":  "eb19cf0f64f48331fed0464439ba855bafea8d8e425ec3f420da9dec6d348ccd"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-evidence/01-pre-execution.json.sha256.txt",
+                      "size":  89,
+                      "sha256":  "323bf555fd3acea19ab444a27270d02634cf4c38d41553b00311617b1a36240f"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-evidence/02a-revision-2-trust-cleanup.json",
+                      "size":  3970,
+                      "sha256":  "0cb7283d3e2742871d92a825c3419ba674cdaffe4771838ce4a410884ad95da8"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-evidence/02a-revision-2-trust-cleanup.json.sha256.txt",
+                      "size":  101,
+                      "sha256":  "bda17177c84d7c2a3d895c031cc71d9c87b898591150f082d057b3a27fdf9922"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-evidence/02-negative-path-and-trust.json",
+                      "size":  809,
+                      "sha256":  "988d44099e7f4836f1a0070b1faa0950aa40abb6bd5618616d5a4011e079495b"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-evidence/02-negative-path-and-trust.json.sha256.txt",
+                      "size":  99,
+                      "sha256":  "9cc0d06cfd4f06cd73e4ad3cb2d994b8baaa66c30ec37a601193b02dd5438560"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-qualification-kit/Invoke-OracleStage3Qualification.ps1",
+                      "size":  16945,
+                      "sha256":  "26688814494fe3a1e67baf14ce056b6f667f55f51fd534f75bd6b24925b874ea"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-qualification-kit/Oracle.Stage3QualificationContract.json",
+                      "size":  1487,
+                      "sha256":  "61c56dd5c6ac52cdd5ac833d4a1a1b7b6a5b6d9883eccf87fbc3de0f31e29707"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-qualification-kit/Oracle.Stage3QualificationKit.manifest.json",
+                      "size":  1636,
+                      "sha256":  "46beb2742df4a06cbb3752f02fc2e4f8e4d80f36da0265359e402f4c41aa0e8f"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-qualification-kit/README.txt",
+                      "size":  1448,
+                      "sha256":  "1dd88343a921ca3e979ceec703ab2b0963013080f92790e2ccf32b03b56fa845"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-work/Oracle.Stage2.PublicTest.cer",
+                      "size":  816,
+                      "sha256":  "d9eb333f8de759cfb242d28606dbb8800c2aa87231b4beca2c89ad6611f55e7b"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-work/stage-2/release/Oracle_0.1.1.0_x64_STAGE2_LOCAL_TEST_ONLY.msix",
+                      "size":  215475575,
+                      "sha256":  "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-work/stage-2/release/oracle-0.1.1.cdx.json",
+                      "size":  75384,
+                      "sha256":  "c6a958c47b36baec3f7b924073909dc7701865cfea26552bafd986564641017f"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-work/stage-2/release/oracle-0.1.1.provenance.json",
+                      "size":  1226,
+                      "sha256":  "53239478f6e666406727737c603e748c66a5b10bffd8d28a33fbdbca06e87779"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-work/stage-2/release/oracle-release-manifest.json",
+                      "size":  1810,
+                      "sha256":  "854b909a8d93a08ebd165d19a2f865ad6f3e84abe31f4bf1326e0647e761113d"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-work/stage-2/release/oracle-release-manifest.json.p7s",
+                      "size":  1245,
+                      "sha256":  "df4d3c9aa8e924a2b1c3968cec17041b5e5a0ff095c108e43ec2befe92af79bb"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-work/stage-2/release/package-content-inventory.json",
+                      "size":  453051,
+                      "sha256":  "9fd8def2a0d45d97f6374780243b7a5bed61118e86e5619466c31ef330e77c7e"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-work/stage-2/release/qualification-candidate.json",
+                      "size":  2449,
+                      "sha256":  "9ee368383bd1d05d3af8bfa26760b1f9c915108a3ac2e1c604e2de1849e4b9c4"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-work/stage-2/release/release-build-summary.json",
+                      "size":  935,
+                      "sha256":  "237343bacb3edb0c66849fb556db6c9c587e2bfed5b1edcc2631974066ba6d28"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-work/stage-2/release/signature-and-trust-verification.json",
+                      "size":  1568,
+                      "sha256":  "febb90ad793a53b1d6bb28c07e28d7e82bf77ee140e12ef3de5e21ca929c9fc2"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-work/stage-2/release/signing-store-cleanup.json",
+                      "size":  677,
+                      "sha256":  "41b68faaa76bee04545d2fdf498efed4fc34ef3175e28b314711e237ddff0cea"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-work/stage-2/release/stage-2-certification.json",
+                      "size":  2659,
+                      "sha256":  "c8d7d1134ac4adbd3a907170541972cbc3c25ec988371621a2a191b72e7810bb"
+                  },
+                  {
+                      "relativePath":  "offline-transfer/stage-3-work/stage-2/release/stage-2-evidence-index.json",
+                      "size":  2052,
+                      "sha256":  "f3e1de68cdf41e5248ca691452a2d148c62f3bda20a3a1f692e69c1e0aef52bb"
+                  },
+                  {
+                      "relativePath":  "revision-3-incoming/Oracle.Sprint30.5.Stage2QualificationEvidence.zip",
+                      "size":  214510031,
+                      "sha256":  "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876"
+                  },
+                  {
+                      "relativePath":  "revision-3-incoming/Oracle.Stage3OfflineTransferManifest.json",
+                      "size":  3565,
+                      "sha256":  "1f577548e9868174bb51e670998577e83b65e03c2c6e2efefb6c71a75b74d70d"
+                  },
+                  {
+                      "relativePath":  "revision-3-incoming/Oracle.Stage3OfflineTransferManifest.json.sha256.txt",
+                      "size":  108,
+                      "sha256":  "f3edba0a51ddd3ab05abbc4aff53456074b4bf5c41937047497c7663f38fe529"
+                  },
+                  {
+                      "relativePath":  "revision-3-incoming/stage-3-qualification-kit/Invoke-OracleStage3Qualification.ps1",
+                      "size":  23227,
+                      "sha256":  "fbbe53d75bbf1f323aed389f42dd771223602f8aff7b6a46e060d718e9eb316f"
+                  },
+                  {
+                      "relativePath":  "revision-3-incoming/stage-3-qualification-kit/Oracle.Stage3QualificationContract.json",
+                      "size":  1989,
+                      "sha256":  "f864c4991d0eb78c2be09b7ad46f51faecbd927fe4507fede614863425342d22"
+                  },
+                  {
+                      "relativePath":  "revision-3-incoming/stage-3-qualification-kit/Oracle.Stage3QualificationKit.manifest.json",
+                      "size":  2581,
+                      "sha256":  "d9317e8b01b56bb95e67e73c67466f90716f846aae7165a8c81f1391c0a3cc28"
+                  },
+                  {
+                      "relativePath":  "revision-3-incoming/stage-3-qualification-kit/Oracle.Stage3Revision2FailureRecord.json",
+                      "size":  1999,
+                      "sha256":  "c22a0704075909dc22b8c04e95aa347d39340a2bd6f40fb8b2893942ee42cca8"
+                  },
+                  {
+                      "relativePath":  "revision-3-incoming/stage-3-qualification-kit/README.txt",
+                      "size":  2289,
+                      "sha256":  "23c9efc14c06e5997ec18fbab742272d79a01de2493d73c43673a3324ef5d0eb"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/Oracle.Sprint30.5.Stage2QualificationEvidence.zip",
+                      "size":  214510031,
+                      "sha256":  "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/Oracle.Stage3OfflineTransferManifest.json",
+                      "size":  4705,
+                      "sha256":  "ee18fbd03cd44ac45bcc1bf2307ea680a083e301f7a5c6ebc74f5bb32848c971"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/Oracle.Stage3OfflineTransferManifest.json.sha256.txt",
+                      "size":  108,
+                      "sha256":  "e49e3c7d41ab17401042d179a75c88e74f665bbf99f2c6e75cf993b234efb6d7"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-evidence/01-pre-execution.json",
+                      "size":  1502,
+                      "sha256":  "eb19cf0f64f48331fed0464439ba855bafea8d8e425ec3f420da9dec6d348ccd"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-evidence/01-pre-execution.json.sha256.txt",
+                      "size":  89,
+                      "sha256":  "323bf555fd3acea19ab444a27270d02634cf4c38d41553b00311617b1a36240f"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-evidence/02a-revision-2-trust-cleanup.json",
+                      "size":  3970,
+                      "sha256":  "0cb7283d3e2742871d92a825c3419ba674cdaffe4771838ce4a410884ad95da8"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-evidence/02a-revision-2-trust-cleanup.json.sha256.txt",
+                      "size":  101,
+                      "sha256":  "bda17177c84d7c2a3d895c031cc71d9c87b898591150f082d057b3a27fdf9922"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-evidence/02b-negative-path-and-trust-r4.json",
+                      "size":  2629,
+                      "sha256":  "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-evidence/02b-negative-path-and-trust-r4.json.sha256.txt",
+                      "size":  103,
+                      "sha256":  "3278ab63bfd5c36dc0ed85d46be1b9625681a16e70d521b060df03bcbf44d72c"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-evidence/02-negative-path-and-trust.json",
+                      "size":  809,
+                      "sha256":  "988d44099e7f4836f1a0070b1faa0950aa40abb6bd5618616d5a4011e079495b"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-evidence/02-negative-path-and-trust.json.sha256.txt",
+                      "size":  99,
+                      "sha256":  "9cc0d06cfd4f06cd73e4ad3cb2d994b8baaa66c30ec37a601193b02dd5438560"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-qualification-kit/Invoke-OracleStage3Qualification.ps1",
+                      "size":  27675,
+                      "sha256":  "57bb72d21274e05d3ad91db84a4d4351db90af54663dffccc60a21723abb3789"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-qualification-kit/Oracle.Stage3QualificationContract.json",
+                      "size":  2097,
+                      "sha256":  "9ba5b834309cca163ad11454a112bf1e970ad4d6da15623eb81ec51fc472dec8"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-qualification-kit/Oracle.Stage3QualificationKit.manifest.json",
+                      "size":  3574,
+                      "sha256":  "875f795b89ed72af95b43ed2f6924939ef3480d65501aab5cf8eee9dd900d6b0"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-qualification-kit/Oracle.Stage3Revision2FailureRecord.json",
+                      "size":  1999,
+                      "sha256":  "c22a0704075909dc22b8c04e95aa347d39340a2bd6f40fb8b2893942ee42cca8"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-qualification-kit/Oracle.Stage3Revision3FailureRecord.json",
+                      "size":  2457,
+                      "sha256":  "ca646b0951b18f3234b38b0f70f369479d3f76373dad985a19df5aa009082654"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-qualification-kit/README.txt",
+                      "size":  2784,
+                      "sha256":  "53af33bd221049645b3a39447bc7f43fbd6c19bf1851931581e0cb7d94c41e87"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-work/Oracle.Stage2.PublicTest.cer",
+                      "size":  816,
+                      "sha256":  "d9eb333f8de759cfb242d28606dbb8800c2aa87231b4beca2c89ad6611f55e7b"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-work/stage-2/release/Oracle_0.1.1.0_x64_STAGE2_LOCAL_TEST_ONLY.msix",
+                      "size":  215475575,
+                      "sha256":  "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-work/stage-2/release/oracle-0.1.1.cdx.json",
+                      "size":  75384,
+                      "sha256":  "c6a958c47b36baec3f7b924073909dc7701865cfea26552bafd986564641017f"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-work/stage-2/release/oracle-0.1.1.provenance.json",
+                      "size":  1226,
+                      "sha256":  "53239478f6e666406727737c603e748c66a5b10bffd8d28a33fbdbca06e87779"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-work/stage-2/release/oracle-release-manifest.json",
+                      "size":  1810,
+                      "sha256":  "854b909a8d93a08ebd165d19a2f865ad6f3e84abe31f4bf1326e0647e761113d"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-work/stage-2/release/oracle-release-manifest.json.p7s",
+                      "size":  1245,
+                      "sha256":  "df4d3c9aa8e924a2b1c3968cec17041b5e5a0ff095c108e43ec2befe92af79bb"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-work/stage-2/release/package-content-inventory.json",
+                      "size":  453051,
+                      "sha256":  "9fd8def2a0d45d97f6374780243b7a5bed61118e86e5619466c31ef330e77c7e"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-work/stage-2/release/qualification-candidate.json",
+                      "size":  2449,
+                      "sha256":  "9ee368383bd1d05d3af8bfa26760b1f9c915108a3ac2e1c604e2de1849e4b9c4"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-work/stage-2/release/release-build-summary.json",
+                      "size":  935,
+                      "sha256":  "237343bacb3edb0c66849fb556db6c9c587e2bfed5b1edcc2631974066ba6d28"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-work/stage-2/release/signature-and-trust-verification.json",
+                      "size":  1568,
+                      "sha256":  "febb90ad793a53b1d6bb28c07e28d7e82bf77ee140e12ef3de5e21ca929c9fc2"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-work/stage-2/release/signing-store-cleanup.json",
+                      "size":  677,
+                      "sha256":  "41b68faaa76bee04545d2fdf498efed4fc34ef3175e28b314711e237ddff0cea"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-work/stage-2/release/stage-2-certification.json",
+                      "size":  2659,
+                      "sha256":  "c8d7d1134ac4adbd3a907170541972cbc3c25ec988371621a2a191b72e7810bb"
+                  },
+                  {
+                      "relativePath":  "revision-4-incoming/stage-3-work/stage-2/release/stage-2-evidence-index.json",
+                      "size":  2052,
+                      "sha256":  "f3e1de68cdf41e5248ca691452a2d148c62f3bda20a3a1f692e69c1e0aef52bb"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/Oracle.Sprint30.5.Stage2QualificationEvidence.zip",
+                      "size":  214510031,
+                      "sha256":  "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/Oracle.Stage3OfflineTransferManifest.json",
+                      "size":  6017,
+                      "sha256":  "68f92eac7a7dffdc4cd98b4d7f66c2cb5ab0e8f18fd10ac38d036581b31bf7eb"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/Oracle.Stage3OfflineTransferManifest.json.sha256.txt",
+                      "size":  108,
+                      "sha256":  "b7ec9e25323a6e0d37ce94a194361720641959faf6a588bd4eaa40ae2d804efe"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-evidence/01-pre-execution.json",
+                      "size":  1502,
+                      "sha256":  "4ca600a0777971d84976d99fe3144f136b27b2a8a99b9113841e991865a2c271"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-evidence/01-pre-execution.json.sha256.txt",
+                      "size":  89,
+                      "sha256":  "5511177db644952fdb78267d8b488733aae23dbed266f47920b9a3586b067198"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-evidence/03a-install-and-startup-r5-diagnostic.json",
+                      "size":  1380,
+                      "sha256":  "64f465508c7403798a24c7d4ffe129706ad6ea023973d3ec626d787c4dc282ea"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-evidence/03a-install-and-startup-r5-diagnostic.json.sha256.txt",
+                      "size":  110,
+                      "sha256":  "f6602b5cfbab1d5ed673ce18208c2c459a4a0390da13a42f0d74bc0aa404d4b0"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-qualification-kit/Invoke-OracleStage3Qualification.ps1",
+                      "size":  70923,
+                      "sha256":  "1275df72240eae48a3939e13011ac1a5f00b9fc1b1c1f8d7de1b8954d9244395"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-qualification-kit/Oracle.Stage3QualificationContract.json",
+                      "size":  3183,
+                      "sha256":  "445f42253ac954dbf3a711dad951ee9d5c5fc0820611b2dd086670514ffec1c1"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-qualification-kit/Oracle.Stage3QualificationKit.manifest.json",
+                      "size":  4670,
+                      "sha256":  "e9c99092f2c95f8db04734ecec21ca206967d601a0736d371370bde08ff87791"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-qualification-kit/Oracle.Stage3Revision2FailureRecord.json",
+                      "size":  1999,
+                      "sha256":  "c22a0704075909dc22b8c04e95aa347d39340a2bd6f40fb8b2893942ee42cca8"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-qualification-kit/Oracle.Stage3Revision3FailureRecord.json",
+                      "size":  2457,
+                      "sha256":  "ca646b0951b18f3234b38b0f70f369479d3f76373dad985a19df5aa009082654"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-qualification-kit/Oracle.Stage3Revision4FailureRecord.json",
+                      "size":  2937,
+                      "sha256":  "68d97c4c45cd028ef7bdc915543d8a56e20928d50031b8d6787a8c5101ec6c83"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-qualification-kit/README.txt",
+                      "size":  4723,
+                      "sha256":  "6a98bf41241926d6fb719ffcfc2f356f7406a3bf8b52e1a4845be8d619f36638"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-work/Oracle.Stage2.PublicTest.cer",
+                      "size":  816,
+                      "sha256":  "d9eb333f8de759cfb242d28606dbb8800c2aa87231b4beca2c89ad6611f55e7b"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-work/stage-2/release/Oracle_0.1.1.0_x64_STAGE2_LOCAL_TEST_ONLY.msix",
+                      "size":  215475575,
+                      "sha256":  "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-work/stage-2/release/oracle-0.1.1.cdx.json",
+                      "size":  75384,
+                      "sha256":  "c6a958c47b36baec3f7b924073909dc7701865cfea26552bafd986564641017f"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-work/stage-2/release/oracle-0.1.1.provenance.json",
+                      "size":  1226,
+                      "sha256":  "53239478f6e666406727737c603e748c66a5b10bffd8d28a33fbdbca06e87779"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-work/stage-2/release/oracle-release-manifest.json",
+                      "size":  1810,
+                      "sha256":  "854b909a8d93a08ebd165d19a2f865ad6f3e84abe31f4bf1326e0647e761113d"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-work/stage-2/release/oracle-release-manifest.json.p7s",
+                      "size":  1245,
+                      "sha256":  "df4d3c9aa8e924a2b1c3968cec17041b5e5a0ff095c108e43ec2befe92af79bb"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-work/stage-2/release/package-content-inventory.json",
+                      "size":  453051,
+                      "sha256":  "9fd8def2a0d45d97f6374780243b7a5bed61118e86e5619466c31ef330e77c7e"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-work/stage-2/release/qualification-candidate.json",
+                      "size":  2449,
+                      "sha256":  "9ee368383bd1d05d3af8bfa26760b1f9c915108a3ac2e1c604e2de1849e4b9c4"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-work/stage-2/release/release-build-summary.json",
+                      "size":  935,
+                      "sha256":  "237343bacb3edb0c66849fb556db6c9c587e2bfed5b1edcc2631974066ba6d28"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-work/stage-2/release/signature-and-trust-verification.json",
+                      "size":  1568,
+                      "sha256":  "febb90ad793a53b1d6bb28c07e28d7e82bf77ee140e12ef3de5e21ca929c9fc2"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-work/stage-2/release/signing-store-cleanup.json",
+                      "size":  677,
+                      "sha256":  "41b68faaa76bee04545d2fdf498efed4fc34ef3175e28b314711e237ddff0cea"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-work/stage-2/release/stage-2-certification.json",
+                      "size":  2659,
+                      "sha256":  "c8d7d1134ac4adbd3a907170541972cbc3c25ec988371621a2a191b72e7810bb"
+                  },
+                  {
+                      "relativePath":  "revision-5-incoming/stage-3-work/stage-2/release/stage-2-evidence-index.json",
+                      "size":  2052,
+                      "sha256":  "f3e1de68cdf41e5248ca691452a2d148c62f3bda20a3a1f692e69c1e0aef52bb"
+                  }
+              ]
+}

@@ -1,0 +1,29 @@
+﻿{
+    "schemaVersion":  1,
+    "contract":  "oracle.sprint-30-5.stage-3-pre-execution",
+    "result":  "passed",
+    "recordedAtUtc":  "2026-07-27T00:37:01.2977424Z",
+    "host":  {
+                 "deviceName":  "FOUNDER-QA-01",
+                 "manufacturer":  "MEDION",
+                 "model":  "ERAZER P6605 MD61596",
+                 "admissionState":  "admitted-with-founder-provenance-exception",
+                 "installationMediaEvidencePresent":  false
+             },
+    "transfer":  {
+                     "archiveSha256":  "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876",
+                     "evidenceFilesVerified":  11,
+                     "msixSha256":  "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276",
+                     "releaseManifestSha256":  "854b909a8d93a08ebd165d19a2f865ad6f3e84abe31f4bf1326e0647e761113d"
+                 },
+    "certificate":  {
+                        "subject":  "CN=Oracle Stage 2 Local Test Signing - NOT PRODUCTION",
+                        "thumbprint":  "D4D34619405B4EEF7B6622EA4641181D8AD793DB",
+                        "notAfterUtc":  "2026-07-28T15:45:27.0000000Z",
+                        "hasPrivateKey":  false,
+                        "trusted":  false,
+                        "publicCertificateSha256":  "d9eb333f8de759cfb242d28606dbb8800c2aa87231b4beca2c89ad6611f55e7b"
+                    },
+    "oracleInstalled":  false,
+    "certificateStoreMatches":  0
+}

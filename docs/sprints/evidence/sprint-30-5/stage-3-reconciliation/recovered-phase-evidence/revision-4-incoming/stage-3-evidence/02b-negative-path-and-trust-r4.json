@@ -1,0 +1,45 @@
+﻿{
+    "schemaVersion":  1,
+    "contract":  "oracle.sprint-30-5.stage-3-negative-path-and-trust-r4",
+    "result":  "passed",
+    "recordedAtUtc":  "2026-07-27T11:18:45.7837439Z",
+    "revision":  4,
+    "revision2FailureRecordSha256":  "c22a0704075909dc22b8c04e95aa347d39340a2bd6f40fb8b2893942ee42cca8",
+    "revision3FailureRecordSha256":  "ca646b0951b18f3234b38b0f70f369479d3f76373dad985a19df5aa009082654",
+    "untrustedOriginalRejected":  true,
+    "acceptedOriginalSignatureStatus":  "Valid",
+    "acceptedOriginalSignerThumbprint":  "D4D34619405B4EEF7B6622EA4641181D8AD793DB",
+    "tamperedCopyRejected":  true,
+    "acceptedPackageModified":  false,
+    "physicalTemporaryTrust":  [
+                                   {
+                                       "location":  "LocalMachine",
+                                       "store":  "TrustedPeople",
+                                       "registryPath":  "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\TrustedPeople\\Certificates\\D4D34619405B4EEF7B6622EA4641181D8AD793DB",
+                                       "subject":  "CN=Oracle Stage 2 Local Test Signing - NOT PRODUCTION",
+                                       "thumbprint":  "D4D34619405B4EEF7B6622EA4641181D8AD793DB",
+                                       "hasPrivateKey":  false,
+                                       "physical":  true
+                                   }
+                               ],
+    "logicalTrustViews":  [
+                              {
+                                  "location":  "CurrentUser",
+                                  "store":  "TrustedPeople",
+                                  "subject":  "CN=Oracle Stage 2 Local Test Signing - NOT PRODUCTION",
+                                  "thumbprint":  "D4D34619405B4EEF7B6622EA4641181D8AD793DB",
+                                  "hasPrivateKey":  false,
+                                  "physicalAuthority":  false
+                              },
+                              {
+                                  "location":  "LocalMachine",
+                                  "store":  "TrustedPeople",
+                                  "subject":  "CN=Oracle Stage 2 Local Test Signing - NOT PRODUCTION",
+                                  "thumbprint":  "D4D34619405B4EEF7B6622EA4641181D8AD793DB",
+                                  "hasPrivateKey":  false,
+                                  "physicalAuthority":  false
+                              }
+                          ],
+    "inheritedLogicalProjectionCount":  1,
+    "privateKeyPresent":  false
+}

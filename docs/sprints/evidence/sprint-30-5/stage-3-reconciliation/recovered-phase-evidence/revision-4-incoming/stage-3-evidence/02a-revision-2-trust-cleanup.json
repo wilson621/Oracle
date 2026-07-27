@@ -1,0 +1,42 @@
+﻿{
+    "schemaVersion":  1,
+    "contract":  "oracle.sprint-30-5.stage-3-revision-2-trust-cleanup",
+    "result":  "passed",
+    "recordedAtUtc":  "2026-07-27T10:01:45.2410829Z",
+    "revision":  3,
+    "revision2Failure":  {
+                             "activityId":  "a549c0c7-1d3c-0004-a443-9ba53c1ddd01",
+                             "hresult":  "0x800B0109",
+                             "deploymentLogRecordCount":  7,
+                             "deploymentMessages":  [
+                                                        "Started deployment Add operation on a package with main parameter Oracle_0.1.1.0_x64_STAGE2_LOCAL_TEST_ONLY.msix and Options 0 and 0. See http://go.microsoft.com/fwlink/?LinkId=235160 for help diagnosing app deployment issues.",
+                                                        "error 0x800B0109: The root certificate of the signature in the app package or bundle must be trusted.",
+                                                        "error 0x800B0109: Opening the package from location Oracle_0.1.1.0_x64_STAGE2_LOCAL_TEST_ONLY.msix failed.",
+                                                        "Error 0x80070002: Opening the Msixvc package from location Oracle_0.1.1.0_x64_STAGE2_LOCAL_TEST_ONLY.msix failed. Please check whether the Msixvc support services are installed.",
+                                                        "error 0x800B0109: Failure to get staging session for: file:///C:/Users/wilso/AppData/Local/Oracle-Stage3-Qualification/offline-transfer/stage-3-work/stage-2/release/Oracle_0.1.1.0_x64_STAGE2_LOCAL_TEST_ONLY.msix.",
+                                                        "AppX Deployment operation failed for package  with error 0x800B0109. The specific error text for this failure is: error 0x800B0109: The root certificate of the signature in the app package or bundle must be trusted.",
+                                                        "Performance summary of Deployment Add operation on Package : Failed to reach state DeQueued\r\nOverall time: 312 ms (Active time: 312 ms)\r\nEnqueue cost: 0 ms\r\nDequeue delay: 0 ms\r\nBundle processing cost: 0 ms\r\nIndexing cost: 0 ms\r\nResolve dependency cost: 0 ms\r\nCheck approval cost: 0 ms\r\nEvaluation cost: 0 ms\r\nHardlinking evaluation cost: 0 ms\r\nStage required cost: 0 ms\r\nFlushing and closing files cost: 0 ms\r\nMachine register cost: 0 ms\r\nStage user data cost: 0 ms\r\nRegistration cost: 0 ms\r\nRepository commit transaction cost: 0 ms\r\nData flush cost: 0 ms\r\nPost DeStage repository commit transaction cost: 0 ms\r\nRemaining cost: 312 ms\r\n"
+                                                    ],
+                             "readOnlyCaptureSha256":  "38805ea7a4fcb5ab3b8205499251ade71c5c44686251795082508abb9a36f500",
+                             "preExecutionSha256":  "eb19cf0f64f48331fed0464439ba855bafea8d8e425ec3f420da9dec6d348ccd",
+                             "negativePathSha256":  "988d44099e7f4836f1a0070b1faa0950aa40abb6bd5618616d5a4011e079495b"
+                         },
+    "obsoleteTrustBefore":  [
+                                {
+                                    "location":  "CurrentUser",
+                                    "store":  "Root",
+                                    "subject":  "CN=Oracle Stage 2 Local Test Signing - NOT PRODUCTION",
+                                    "thumbprint":  "D4D34619405B4EEF7B6622EA4641181D8AD793DB",
+                                    "hasPrivateKey":  false
+                                }
+                            ],
+    "obsoleteTrustRemoved":  true,
+    "certificateStoreMatchesAfter":  [
+
+                                     ],
+    "oracleInstalled":  false,
+    "oracleProcessCount":  0,
+    "acceptedMsixSha256":  "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276",
+    "originalEvidencePreserved":  true,
+    "nextPermittedPhase":  "NegativePathAndTrust"
+}

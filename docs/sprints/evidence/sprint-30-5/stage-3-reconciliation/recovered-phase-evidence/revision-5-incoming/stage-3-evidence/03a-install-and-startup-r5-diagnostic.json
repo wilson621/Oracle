@@ -1,0 +1,32 @@
+﻿{
+    "schemaVersion":  1,
+    "contract":  "oracle.sprint-30-5.stage-3-install-and-startup-r5-diagnostic",
+    "revision":  5,
+    "result":  "failed",
+    "recordedAtUtc":  "2026-07-27T13:31:42.1868781Z",
+    "failedMilestone":  "preconditions",
+    "failureMessage":  "Required bound evidence is missing: 02b-negative-path-and-trust-r4.json",
+    "revision4PreservedAsFailure":  true,
+    "automaticReinstallAttempted":  false,
+    "preconditions":  {
+                          "hostIdentity":  true,
+                          "revision4FailureRecord":  true
+                      },
+    "package":  null,
+    "certificate":  null,
+    "finalCertificateRevalidation":  null,
+    "networkIsolation":  {
+                             "strategy":  "exact-program-outbound-firewall-block",
+                             "enabled":  null,
+                             "removal":  null
+                         },
+    "observation":  null,
+    "founderConfirmations":  {
+                                 "windowVisiblyPresent":  null,
+                                 "expectedLocalQualificationInterface":  null,
+                                 "normalInteractionResponsive":  null,
+                                 "visibleInterfaceFreeOfError":  null
+                             },
+    "closure":  null,
+    "canonicalPhase03Eligible":  false
+}
