@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-3-revision-3-failure",
+  "contractVersion": 1,
+  "revision": 3,
+  "outcome": "negative-path-controls-passed-trust-scope-evaluator-failed",
+  "defectClassification": "qualification-harness-logical-store-projection-defect",
+  "rootCause": {
+    "description": "Windows projects Local Machine certificates through inherited Current User logical store views. Revision 3 counted logical projections as independent physical trust entries.",
+    "physicalTrustBroaderThanDeclared": false,
+    "evaluatorBroaderThanDeclaredResult": true
+  },
+  "deploymentFailure": {
+    "originalUntrusted": {
+      "activityId": "a549c0c7-1d3c-0000-5547-89a53c1ddd01",
+      "hresult": "0x800B0109",
+      "outcome": "rejected-before-trust"
+    },
+    "tamperedAfterTrust": {
+      "activityId": "a549c0c7-1d3c-0001-586b-79a53c1ddd01",
+      "hresult": "0x80096010",
+      "outcome": "rejected-bad-digest"
+    },
+    "packageRegistered": false,
+    "packageLaunched": false,
+    "installAndStartupEvidenceCreated": false
+  },
+  "returnedEvidence": {
+    "failedExecutionTranscriptSha256": "631bb05621ad1d78c871a392821496a10431777cf3230a6d519ac8eb9ba2608e",
+    "readOnlyStateCaptureSha256": "2facc7f98180a835e2bda03051936c0697c099a2ea2925b22dfb215ecdfc105a",
+    "physicalCertificateMatchCountAfterCleanup": 0,
+    "logicalCertificateMatchCountAfterCleanup": 0,
+    "tamperedCopyPresentAfterCleanup": false,
+    "revision3NegativeEvidenceCreated": false,
+    "phase03EvidenceCreated": false
+  },
+  "existingEvidence": {
+    "preExecutionSha256": "eb19cf0f64f48331fed0464439ba855bafea8d8e425ec3f420da9dec6d348ccd",
+    "revision2NegativePathSha256": "988d44099e7f4836f1a0070b1faa0950aa40abb6bd5618616d5a4011e079495b",
+    "revision2TrustCleanupSha256": "0cb7283d3e2742871d92a825c3419ba674cdaffe4771838ce4a410884ad95da8"
+  },
+  "frozenCandidate": {
+    "archiveSha256": "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876",
+    "msixSha256": "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276",
+    "rebuilt": false,
+    "resigned": false
+  },
+  "governance": {
+    "preserveAllExistingEvidence": true,
+    "resumeFrom": "NegativePathAndTrust",
+    "resumeAtInstallAndStartup": false,
+    "physicalStoreEvaluationRequired": true,
+    "logicalProjectionMustRemainVisible": true,
+    "productSourceChanged": false,
+    "architectureChanged": false,
+    "releaseManifestChanged": false
+  }
+}

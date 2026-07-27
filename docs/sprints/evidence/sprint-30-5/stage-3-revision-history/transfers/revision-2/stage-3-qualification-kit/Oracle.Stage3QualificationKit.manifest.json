@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-3-qualification-kit-manifest",
+  "contractVersion": 1,
+  "revision": 2,
+  "supersedes": {
+    "revision": 1,
+    "transferManifestSha256": "327083ed6418e064a7d737e3c5608ee526bc847050aa08fe6581627c8cd7d8b2",
+    "transferManifestSidecarSha256": "d414c932afcea8d7b0cbaed79caa88cb8320b0d6a51c81304f7911a38315f49d",
+    "kitManifestSha256": "6bc41d6f16826fe0c7b5015f74056d3c0c7383572cda8b36a4fc7f5db15dad23",
+    "qualificationScriptSha256": "ce1b4ab77b2082f4e7292e628fd2e7a6fce2667e69afcc512fe07e10dd8d7781",
+    "outcome": "pre-execution-failed-before-evidence",
+    "defect": "PowerShell 5.1 zero-output pipeline returned null under strict mode"
+  },
+  "host": "Founder-QA-01",
+  "runtimeRequirements": [
+    "Windows PowerShell 5.1",
+    "Windows 11 x64"
+  ],
+  "forbiddenDependencies": [
+    "Node.js",
+    "Git",
+    "compiler",
+    "SDK",
+    "development server",
+    "Oracle source"
+  ],
+  "files": [
+    {
+      "relativePath": "Invoke-OracleStage3Qualification.ps1",
+      "sha256": "26688814494fe3a1e67baf14ce056b6f667f55f51fd534f75bd6b24925b874ea",
+      "size": 16945
+    },
+    {
+      "relativePath": "Oracle.Stage3QualificationContract.json",
+      "sha256": "61c56dd5c6ac52cdd5ac833d4a1a1b7b6a5b6d9883eccf87fbc3de0f31e29707",
+      "size": 1487
+    },
+    {
+      "relativePath": "README.txt",
+      "sha256": "1dd88343a921ca3e979ceec703ab2b0963013080f92790e2ccf32b03b56fa845",
+      "size": 1448
+    }
+  ],
+  "authority": {
+    "stage3Only": true,
+    "stage4": false,
+    "production": false,
+    "deployment": false,
+    "privateKeyTransfer": false
+  }
+}

@@ -1,0 +1,148 @@
+{
+    "schemaVersion":  1,
+    "contract":  "oracle.sprint-30-5.stage-3-revision-history",
+    "classification":  "immutable-historical-evidence",
+    "sourceFileCount":  23,
+    "originalRevision4EvidenceAvailable":  false,
+    "originalRevision4EvidenceExpectedSha256":  "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2",
+    "files":  [
+                  {
+                      "relativePath":  "transfers/revision-2/Oracle.Stage3OfflineTransferManifest.json",
+                      "bytes":  2425,
+                      "sha256":  "cfe4828d9accff14cc6ddcf28934af6a3305c499a50254776ba3cfb1cede6733",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\superseded\\offline-transfer-r2\\Oracle.Stage3OfflineTransferManifest.json"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-2/Oracle.Stage3OfflineTransferManifest.json.sha256.txt",
+                      "bytes":  108,
+                      "sha256":  "87b23dafe6aa74ca91987686346cdd08ff88d0553bc50d5d2c07763494e3e8b1",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\superseded\\offline-transfer-r2\\Oracle.Stage3OfflineTransferManifest.json.sha256.txt"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-2/stage-3-qualification-kit/Oracle.Stage3QualificationKit.manifest.json",
+                      "bytes":  1636,
+                      "sha256":  "46beb2742df4a06cbb3752f02fc2e4f8e4d80f36da0265359e402f4c41aa0e8f",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\superseded\\offline-transfer-r2\\stage-3-qualification-kit\\Oracle.Stage3QualificationKit.manifest.json"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-2/stage-3-qualification-kit/Invoke-OracleStage3Qualification.ps1",
+                      "bytes":  16945,
+                      "sha256":  "26688814494fe3a1e67baf14ce056b6f667f55f51fd534f75bd6b24925b874ea",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\superseded\\offline-transfer-r2\\stage-3-qualification-kit\\Invoke-OracleStage3Qualification.ps1"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-3/Oracle.Stage3OfflineTransferManifest.json",
+                      "bytes":  3565,
+                      "sha256":  "1f577548e9868174bb51e670998577e83b65e03c2c6e2efefb6c71a75b74d70d",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\superseded\\offline-transfer-r3\\Oracle.Stage3OfflineTransferManifest.json"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-3/Oracle.Stage3OfflineTransferManifest.json.sha256.txt",
+                      "bytes":  108,
+                      "sha256":  "f3edba0a51ddd3ab05abbc4aff53456074b4bf5c41937047497c7663f38fe529",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\superseded\\offline-transfer-r3\\Oracle.Stage3OfflineTransferManifest.json.sha256.txt"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-3/stage-3-qualification-kit/Oracle.Stage3QualificationKit.manifest.json",
+                      "bytes":  2581,
+                      "sha256":  "d9317e8b01b56bb95e67e73c67466f90716f846aae7165a8c81f1391c0a3cc28",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\superseded\\offline-transfer-r3\\stage-3-qualification-kit\\Oracle.Stage3QualificationKit.manifest.json"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-3/stage-3-qualification-kit/Invoke-OracleStage3Qualification.ps1",
+                      "bytes":  23227,
+                      "sha256":  "fbbe53d75bbf1f323aed389f42dd771223602f8aff7b6a46e060d718e9eb316f",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\superseded\\offline-transfer-r3\\stage-3-qualification-kit\\Invoke-OracleStage3Qualification.ps1"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-4/Oracle.Stage3OfflineTransferManifest.json",
+                      "bytes":  4705,
+                      "sha256":  "ee18fbd03cd44ac45bcc1bf2307ea680a083e301f7a5c6ebc74f5bb32848c971",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\superseded\\offline-transfer-r4\\Oracle.Stage3OfflineTransferManifest.json"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-4/Oracle.Stage3OfflineTransferManifest.json.sha256.txt",
+                      "bytes":  108,
+                      "sha256":  "e49e3c7d41ab17401042d179a75c88e74f665bbf99f2c6e75cf993b234efb6d7",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\superseded\\offline-transfer-r4\\Oracle.Stage3OfflineTransferManifest.json.sha256.txt"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-4/stage-3-qualification-kit/Oracle.Stage3QualificationKit.manifest.json",
+                      "bytes":  3574,
+                      "sha256":  "875f795b89ed72af95b43ed2f6924939ef3480d65501aab5cf8eee9dd900d6b0",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\superseded\\offline-transfer-r4\\stage-3-qualification-kit\\Oracle.Stage3QualificationKit.manifest.json"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-4/stage-3-qualification-kit/Invoke-OracleStage3Qualification.ps1",
+                      "bytes":  27675,
+                      "sha256":  "57bb72d21274e05d3ad91db84a4d4351db90af54663dffccc60a21723abb3789",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\superseded\\offline-transfer-r4\\stage-3-qualification-kit\\Invoke-OracleStage3Qualification.ps1"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-5/Oracle.Stage3OfflineTransferManifest.json",
+                      "bytes":  6017,
+                      "sha256":  "68f92eac7a7dffdc4cd98b4d7f66c2cb5ab0e8f18fd10ac38d036581b31bf7eb",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\offline-transfer\\Oracle.Stage3OfflineTransferManifest.json"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-5/Oracle.Stage3OfflineTransferManifest.json.sha256.txt",
+                      "bytes":  108,
+                      "sha256":  "b7ec9e25323a6e0d37ce94a194361720641959faf6a588bd4eaa40ae2d804efe",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\offline-transfer\\Oracle.Stage3OfflineTransferManifest.json.sha256.txt"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-5/stage-3-qualification-kit/Oracle.Stage3QualificationKit.manifest.json",
+                      "bytes":  4670,
+                      "sha256":  "e9c99092f2c95f8db04734ecec21ca206967d601a0736d371370bde08ff87791",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\offline-transfer\\stage-3-qualification-kit\\Oracle.Stage3QualificationKit.manifest.json"
+                  },
+                  {
+                      "relativePath":  "transfers/revision-5/stage-3-qualification-kit/Invoke-OracleStage3Qualification.ps1",
+                      "bytes":  70923,
+                      "sha256":  "1275df72240eae48a3939e13011ac1a5f00b9fc1b1c1f8d7de1b8954d9244395",
+                      "sourcePath":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-3\\offline-transfer\\stage-3-qualification-kit\\Invoke-OracleStage3Qualification.ps1"
+                  },
+                  {
+                      "relativePath":  "failure-records/Oracle.Stage3Revision2FailureRecord.json",
+                      "bytes":  1999,
+                      "sha256":  "c22a0704075909dc22b8c04e95aa347d39340a2bd6f40fb8b2893942ee42cca8",
+                      "sourcePath":  "C:\\Dev\\project-meta\\scripts\\sprint-30-5\\stage-3-qualification\\Oracle.Stage3Revision2FailureRecord.json"
+                  },
+                  {
+                      "relativePath":  "failure-records/Oracle.Stage3Revision3FailureRecord.json",
+                      "bytes":  2457,
+                      "sha256":  "ca646b0951b18f3234b38b0f70f369479d3f76373dad985a19df5aa009082654",
+                      "sourcePath":  "C:\\Dev\\project-meta\\scripts\\sprint-30-5\\stage-3-qualification\\Oracle.Stage3Revision3FailureRecord.json"
+                  },
+                  {
+                      "relativePath":  "failure-records/Oracle.Stage3Revision4FailureRecord.json",
+                      "bytes":  2937,
+                      "sha256":  "68d97c4c45cd028ef7bdc915543d8a56e20928d50031b8d6787a8c5101ec6c83",
+                      "sourcePath":  "C:\\Dev\\project-meta\\scripts\\sprint-30-5\\stage-3-qualification\\Oracle.Stage3Revision4FailureRecord.json"
+                  },
+                  {
+                      "relativePath":  "failure-records/Oracle.Stage3Revision5FailureRecord.json",
+                      "bytes":  1935,
+                      "sha256":  "9536a189562d6ab58878e779625e06e6131072c4159764ddfbb80fdae01d188d",
+                      "sourcePath":  "C:\\Dev\\project-meta\\scripts\\sprint-30-5\\stage-3-qualification\\Oracle.Stage3Revision5FailureRecord.json"
+                  },
+                  {
+                      "relativePath":  "transcripts/revision-4-negative-path-execution.txt",
+                      "bytes":  7639,
+                      "sha256":  "8b1ea3a8c5aa4fdb517f4d46c1e5207f663ae5b18868c36e7d893f18e4043271",
+                      "sourcePath":  "C:\\Users\\wilso.DESKTOP-M3H22E4\\.codex\\attachments\\e1013ee4-9646-4454-9e51-c66333a67b2c\\pasted-text.txt"
+                  },
+                  {
+                      "relativePath":  "transcripts/revision-4-negative-path-checkpoint.txt",
+                      "bytes":  8574,
+                      "sha256":  "18d00a4f3a7faab2825896d5674ef35251642e0b13b9eb3ee1d6571ea09c4297",
+                      "sourcePath":  "C:\\Users\\wilso.DESKTOP-M3H22E4\\.codex\\attachments\\768742ad-7e7d-45c8-85de-efd2fff6590f\\pasted-text.txt"
+                  },
+                  {
+                      "relativePath":  "transcripts/revision-4-installation-wrapper.txt",
+                      "bytes":  8394,
+                      "sha256":  "ab3344781985548280bd1a45975473a9cfdbd4444370d16b23d8642009f9fb60",
+                      "sourcePath":  "C:\\Users\\wilso.DESKTOP-M3H22E4\\.codex\\attachments\\ca62cec2-cf9a-4d5e-a9de-ee6d615b527c\\pasted-text.txt"
+                  }
+              ]
+}

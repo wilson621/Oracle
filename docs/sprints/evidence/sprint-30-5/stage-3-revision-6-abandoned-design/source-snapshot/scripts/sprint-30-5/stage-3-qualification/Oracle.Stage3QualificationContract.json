@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-3-qualification",
+  "contractVersion": 1,
+  "qualificationKitRevision": 6,
+  "host": {
+    "deviceName": "Founder-QA-01",
+    "manufacturer": "MEDION",
+    "model": "ERAZER P6605 MD61596",
+    "admissionState": "admitted-with-founder-provenance-exception",
+    "hostAdmissionSha256": "6dfaa176ed2d43595511d44401612536c6c0f1955f94527469d0f22af09c3b0e",
+    "approvalSha256": "0d9a9668dbbf11c91f08d58bd84261f48baa2d3d3fd13184434965b66ffe2282",
+    "installationMediaEvidencePresent": false
+  },
+  "candidate": {
+    "archiveFilename": "Oracle.Sprint30.5.Stage2QualificationEvidence.zip",
+    "archiveSha256": "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876",
+    "msixFilename": "Oracle_0.1.1.0_x64_STAGE2_LOCAL_TEST_ONLY.msix",
+    "msixSha256": "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276",
+    "releaseManifestSha256": "854b909a8d93a08ebd165d19a2f865ad6f3e84abe31f4bf1326e0647e761113d",
+    "packageIdentity": "Oracle.Platform.LocalCertification",
+    "packageFullName": "Oracle.Platform.LocalCertification_0.1.1.0_x64__fw69ec0wxwzn4",
+    "packageVersion": "0.1.1.0",
+    "packageArchitecture": "X64",
+    "packageStatus": "Ok",
+    "publisher": "CN=Oracle Stage 2 Local Test Signing - NOT PRODUCTION",
+    "installedExecutable": "Oracle.exe",
+    "installedExecutableSha256": "0cd98c06fae63d980fdd1c68446d576d4e3045d2ee293ebab21f94c5366abba6",
+    "certificateThumbprint": "D4D34619405B4EEF7B6622EA4641181D8AD793DB",
+    "certificateNotAfterUtc": "2026-07-28T15:45:27.0000000Z"
+  },
+  "temporaryTrust": {
+    "location": "LocalMachine",
+    "store": "TrustedPeople",
+    "publicCertificateOnly": true,
+    "temporary": true
+  },
+  "obsoleteRevision2Trust": {
+    "location": "CurrentUser",
+    "store": "Root"
+  },
+  "requalification": {
+    "cleanupEvidence": "02a-revision-2-trust-cleanup.json",
+    "negativePathEvidence": "02b-negative-path-and-trust-r4.json",
+    "revision4RestartFrom": "NegativePathAndTrust",
+    "revision4ResumeAtInstallAndStartup": false,
+    "trustScopeAuthority": "physical-certificate-store-entry",
+    "logicalProjectionsAreAuthority": false,
+    "revision4FailureRecord": "Oracle.Stage3Revision4FailureRecord.json",
+    "revision4NegativePathEvidence": "02b-negative-path-and-trust-r4.json",
+    "revision4NegativePathEvidenceSha256": "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2",
+    "continuationPhase": "InstallAndStartupContinuation",
+    "revision5RestartFrom": "InstallAndStartupContinuation",
+    "automaticReinstallPermitted": false
+  },
+  "recovery": {
+    "attempt": "revision-6-recovery",
+    "freshAttemptDirectoryRequired": true,
+    "revision5FailedAttemptImmutable": true,
+    "revision5FailureRecord": "Oracle.Stage3Revision5FailureRecord.json",
+    "revision5Evidence": {
+      "preExecutionFilename": "01-pre-execution.json",
+      "preExecutionSha256": "4ca600a0777971d84976d99fe3144f136b27b2a8a99b9113841e991865a2c271",
+      "diagnosticFilename": "03a-install-and-startup-r5-diagnostic.json",
+      "diagnosticSha256": "64f465508c7403798a24c7d4ffe129706ad6ea023973d3ec626d787c4dc282ea",
+      "sidecarsRequired": true
+    },
+    "requiredRevision4Evidence": {
+      "filename": "02b-negative-path-and-trust-r4.json",
+      "sha256": "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2",
+      "sidecarRequired": true,
+      "mustBeOriginalBytes": true
+    },
+    "restoration": {
+      "separateOperation": true,
+      "automatic": false,
+      "founderAuthorityRequired": true,
+      "requiredFounderAuthorityId": "UNAUTHORISED-PENDING-FOUNDER-DECISION",
+      "packageInitiallyRequiredAbsent": true,
+      "certificateInitiallyRequiredAbsent": true,
+      "exactFrozenMsixOnly": true,
+      "exactPublicCertificateOnly": true,
+      "trustLocation": "LocalMachine",
+      "trustStore": "TrustedPeople"
+    },
+    "continuationPreflightPhase": "RecoveryContinuationPreflight",
+    "continuationPhase": "InstallAndStartupRecoveryContinuation",
+    "legacyPreExecutionProhibited": true
+  },
+  "startupObservation": {
+    "processCreationDeadlineSeconds": 90,
+    "windowReadinessDeadlineSeconds": 60,
+    "samplingIntervalSeconds": 1,
+    "consecutiveResponsiveSamples": 5,
+    "sustainedRuntimeSeconds": 120,
+    "gracefulCloseDeadlineSeconds": 30,
+    "minimumCertificateMinutesRemaining": 30,
+    "nonLoopbackConnectionsPermitted": false
+  },
+  "authority": {
+    "production": false,
+    "deployment": false,
+    "publication": false,
+    "externalDistribution": false,
+    "privateKeyTransfer": false,
+    "productModification": false,
+    "stage4": false
+  }
+}

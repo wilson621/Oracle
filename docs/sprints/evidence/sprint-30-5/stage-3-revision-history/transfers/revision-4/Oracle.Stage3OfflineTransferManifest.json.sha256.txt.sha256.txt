@@ -1,0 +1,1 @@
+e49e3c7d41ab17401042d179a75c88e74f665bbf99f2c6e75cf993b234efb6d7  Oracle.Stage3OfflineTransferManifest.json.sha256.txt

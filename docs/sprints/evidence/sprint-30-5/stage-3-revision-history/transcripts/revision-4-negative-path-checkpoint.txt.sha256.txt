@@ -1,0 +1,1 @@
+18d00a4f3a7faab2825896d5674ef35251642e0b13b9eb3ee1d6571ea09c4297  revision-4-negative-path-checkpoint.txt

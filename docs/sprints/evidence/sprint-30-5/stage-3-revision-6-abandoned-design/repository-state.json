@@ -1,0 +1,26 @@
+{
+    "recordedAtUtc":  "2026-07-27T14:54:24.8951173Z",
+    "repositoryRoot":  "C:\\Dev\\project-meta",
+    "branch":  "sprint-9-overlay",
+    "head":  "7e6cca76c250a806a61f59c12556e6121824a3f7",
+    "upstream":  "origin/sprint-9-overlay",
+    "aheadBehind":  "41\t0",
+    "status":  [
+                   " M package.json",
+                   " M scripts/prepare-sprint-30-5-stage-3-offline-transfer.mjs",
+                   " M scripts/sprint-30-5/stage-3-qualification/Invoke-OracleStage3Qualification.ps1",
+                   " M scripts/sprint-30-5/stage-3-qualification/Oracle.Stage3QualificationContract.json",
+                   " M scripts/sprint-30-5/stage-3-qualification/README.txt",
+                   "?? docs/sprints/evidence/sprint-30-5/.stage-3-revision-6-abandoned-design-preparing/",
+                   "?? docs/sprints/evidence/sprint-30-5/stage-3-revision-history/",
+                   "?? scripts/prepare-sprint-30-5-stage-3-recovery-transfer.mjs",
+                   "?? scripts/sprint-30-5/stage-3-qualification/Invoke-OracleStage3RecoveryRestoration.ps1",
+                   "?? scripts/sprint-30-5/stage-3-qualification/Oracle.Stage3Revision2FailureRecord.json",
+                   "?? scripts/sprint-30-5/stage-3-qualification/Oracle.Stage3Revision3FailureRecord.json",
+                   "?? scripts/sprint-30-5/stage-3-qualification/Oracle.Stage3Revision4FailureRecord.json",
+                   "?? scripts/sprint-30-5/stage-3-qualification/Oracle.Stage3Revision5FailureRecord.json"
+               ],
+    "revision6Classification":  "abandoned-before-transfer-mandatory-immutable-input-unavailable",
+    "originalRevision4EvidenceAvailable":  false,
+    "originalRevision4EvidenceExpectedSha256":  "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2"
+}

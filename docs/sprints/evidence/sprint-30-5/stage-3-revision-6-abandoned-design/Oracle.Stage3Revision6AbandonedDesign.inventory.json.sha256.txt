@@ -1,0 +1,1 @@
+cb49f1544e842c8e2209836def7114b21cd57c536bad810d74637a6b48bb8c31  Oracle.Stage3Revision6AbandonedDesign.inventory.json

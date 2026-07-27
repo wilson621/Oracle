@@ -1,0 +1,205 @@
+PS C:\WINDOWS\system32> & {
+>>   $ErrorActionPreference = "Stop"
+>>   Set-StrictMode -Version Latest
+>>
+>>   $transferRoot = Join-Path `
+>>     $env:LOCALAPPDATA `
+>>     "Oracle-Stage3-Qualification\revision-4-incoming"
+>>
+>>   $kit = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-qualification-kit\Invoke-OracleStage3Qualification.ps1"
+>>
+>>   $contractPath = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-qualification-kit\Oracle.Stage3QualificationContract.json"
+>>
+>>   $r2FailurePath = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-qualification-kit\Oracle.Stage3Revision2FailureRecord.json"
+>>
+>>   $r3FailurePath = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-qualification-kit\Oracle.Stage3Revision3FailureRecord.json"
+>>
+>>   $evidenceRoot = Join-Path $transferRoot "stage-3-evidence"
+>>   $cleanupEvidence = Join-Path `
+>>     $evidenceRoot `
+>>     "02a-revision-2-trust-cleanup.json"
+>>
+>>   $newEvidence = Join-Path `
+>>     $evidenceRoot `
+>>     "02b-negative-path-and-trust-r4.json"
+>>
+>>   $phase3Evidence = Join-Path `
+>>     $evidenceRoot `
+>>     "03-install-and-startup.json"
+>>
+>>   $certificatePath = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-work\Oracle.Stage2.PublicTest.cer"
+>>
+>>   $msixPath = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-work\stage-2\release\Oracle_0.1.1.0_x64_STAGE2_LOCAL_TEST_ONLY.msix"
+>>
+>>   $principal = [Security.Principal.WindowsPrincipal](
+>>     [Security.Principal.WindowsIdentity]::GetCurrent()
+>>   )
+>>
+>>   $isAdministrator = $principal.IsInRole(
+>>     [Security.Principal.WindowsBuiltInRole]::Administrator
+>>   )
+>>
+>>   if (-not $isAdministrator) {
+>>     throw "This phase must run in Windows PowerShell as Administrator."
+>>   }
+>>
+>>   $bindings = [ordered]@{
+>>     $kit =
+>>       "57bb72d21274e05d3ad91db84a4d4351db90af54663dffccc60a21723abb3789"
+>>
+>>     $contractPath =
+>>       "9ba5b834309cca163ad11454a112bf1e970ad4d6da15623eb81ec51fc472dec8"
+>>
+>>     $r2FailurePath =
+>>       "c22a0704075909dc22b8c04e95aa347d39340a2bd6f40fb8b2893942ee42cca8"
+>>
+>>     $r3FailurePath =
+>>       "ca646b0951b18f3234b38b0f70f369479d3f76373dad985a19df5aa009082654"
+>>
+>>     $cleanupEvidence =
+>>       "0cb7283d3e2742871d92a825c3419ba674cdaffe4771838ce4a410884ad95da8"
+>>
+>>     $certificatePath =
+>>       "d9eb333f8de759cfb242d28606dbb8800c2aa87231b4beca2c89ad6611f55e7b"
+>>
+>>     $msixPath =
+>>       "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276"
+>>   }
+>>
+>>   foreach ($binding in $bindings.GetEnumerator()) {
+>>     if (-not (Test-Path -LiteralPath $binding.Key -PathType Leaf)) {
+>>       throw "Required file is missing: $($binding.Key)"
+>>     }
+>>
+>>     $hash = (
+>>       Get-FileHash -LiteralPath $binding.Key -Algorithm SHA256
+>>     ).Hash.ToLowerInvariant()
+>>
+>>     if ($hash -ne $binding.Value) {
+>>       throw "SHA-256 mismatch: $($binding.Key)"
+>>     }
+>>   }
+>>
+>>   $cleanupSidecar = "$cleanupEvidence.sha256.txt"
+>>
+>>   if (-not (
+>>     Test-Path -LiteralPath $cleanupSidecar -PathType Leaf
+>>   )) {
+>>     throw "Cleanup evidence sidecar is missing."
+>>   }
+>>
+>>   $cleanupSidecarValue = (
+>>     (Get-Content -LiteralPath $cleanupSidecar -Raw).Trim() -split "\s+"
+>>   )[0].ToLowerInvariant()
+>>
+>>   if ($cleanupSidecarValue -ne $bindings[$cleanupEvidence]) {
+>>     throw "Cleanup evidence sidecar binding is invalid."
+>>   }
+>>
+>>   foreach ($forbiddenPath in @(
+>>     $newEvidence,
+>>     "$newEvidence.sha256.txt",
+>>     $phase3Evidence,
+>>     "$phase3Evidence.sha256.txt"
+>>   )) {
+>>     if (Test-Path -LiteralPath $forbiddenPath) {
+>>       throw "Later-phase evidence already exists: $forbiddenPath"
+>>     }
+>>   }
+>>
+>>   $certificate = New-Object `
+>>     System.Security.Cryptography.X509Certificates.X509Certificate2 `
+>>     $certificatePath
+>>
+>>   if (
+>>     $certificate.Thumbprint -ne
+>>     "D4D34619405B4EEF7B6622EA4641181D8AD793DB" -or
+>>     $certificate.HasPrivateKey
+>>   ) {
+>>     throw "The public certificate identity is invalid."
+>>   }
+>>
+>>   $remaining = $certificate.NotAfter.ToUniversalTime() - [DateTime]::UtcNow
+>>
+>>   if ($remaining.TotalHours -lt 24) {
+>>     throw (
+>>       "Fewer than 24 hours remain before certificate expiry. " +
+>>       "Remaining hours: {0:N2}" -f $remaining.TotalHours
+>>     )
+>>   }
+>>
+>>   $thumbprint = $certificate.Thumbprint
+>>
+>>   $logicalMatches = @(
+>>     foreach ($location in @("CurrentUser", "LocalMachine")) {
+>>       foreach ($store in @("My", "Root", "TrustedPeople")) {
+>>         $storePath = "Cert:\$location\$store"
+>>
+>>         if (Test-Path -LiteralPath $storePath) {
+>>           Get-ChildItem -LiteralPath $storePath |
+>>             Where-Object { $_.Thumbprint -eq $thumbprint }
+>>         }
+>>       }
+>>     }
+>>   )
+>>
+>>   if ($logicalMatches.Count -ne 0) {
+>>     throw "The Stage 2 certificate is unexpectedly already trusted."
+>>   }
+>>
+>>   $package = Get-AppxPackage `
+>>     -Name "Oracle.Platform.LocalCertification" `
+>>     -ErrorAction SilentlyContinue
+>>
+>>   if ($null -ne $package) {
+>>     throw "Oracle is unexpectedly already installed."
+>>   }
+>>
+>>   $processes = @(
+>>     Get-Process -Name "Oracle" -ErrorAction SilentlyContinue
+>>   )
+>>
+>>   if ($processes.Count -ne 0) {
+>>     throw "An Oracle process is unexpectedly running."
+>>   }
+>>
+>>   Write-Host ""
+>>   Write-Host "REVISION 4 NEGATIVE-PATH PRECHECK PASSED" `
+>>     -ForegroundColor Green
+>>   Write-Host ("Certificate hours remaining: {0:N2}" -f $remaining.TotalHours)
+>>   Write-Host "Beginning governed Revision 4 NegativePathAndTrust."                                                   >>   Write-Host ""                                                                                                      >>                                                                                                                      >>   powershell.exe `                                                                                                   >>     -NoProfile `                                                                                                     >>     -ExecutionPolicy Bypass `                                                                                        >>     -File $kit `                                                                                                     >>     -Phase NegativePathAndTrust `                                                                                    >>     -TransferRoot $transferRoot                                                                                      >>
+>>   if ($LASTEXITCODE -ne 0) {
+>>     throw (
+>>       "Revision 4 NegativePathAndTrust failed with exit code " +
+>>       "$LASTEXITCODE. Do not rerun or continue."
+>>     )
+>>   }
+>>
+>>   Write-Host ""
+>>   Write-Host "REVISION 4 NEGATIVE PATH AND TRUST COMPLETED" `
+>>     -ForegroundColor Green
+>>   Write-Host "Stop here and return the complete PowerShell output."
+>> }
+
+REVISION 4 NEGATIVE-PATH PRECHECK PASSED
+Certificate hours remaining: 28.46
+Beginning governed Revision 4 NegativePathAndTrust.
+
+Evidence: C:\Users\wilso\AppData\Local\Oracle-Stage3-Qualification\revision-4-incoming\stage-3-evidence\02b-negative-path-and-trust-r4.json
+SHA-256: 164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2
+
+REVISION 4 NEGATIVE PATH AND TRUST COMPLETED
+Stop here and return the complete PowerShell output.
+PS C:\WINDOWS\system32>

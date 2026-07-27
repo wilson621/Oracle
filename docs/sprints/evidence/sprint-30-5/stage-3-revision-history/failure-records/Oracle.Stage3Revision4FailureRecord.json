@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-3-revision-4-failure",
+  "contractVersion": 1,
+  "revision": 4,
+  "outcome": "install-and-startup-timeout-after-successful-appx-activation",
+  "classification": "qualification-harness-process-observation-timeout",
+  "conclusions": {
+    "installSucceeded": true,
+    "packageIdentityProven": true,
+    "executableSignatureProven": true,
+    "windowsAppxActivationProven": true,
+    "processCreationDelayedBeyondHarnessDeadline": true,
+    "visibleReadinessProven": false,
+    "sustainedReadinessProven": false,
+    "founderConfirmationsRecorded": false,
+    "phase03SuccessEvidenceCreated": false,
+    "productDefectProven": false
+  },
+  "timing": {
+    "defectiveProcessObservationDeadlineSeconds": 20,
+    "observedApproximateProcessCreationDelaySeconds": 24,
+    "appContainerCreatedLocal": "2026-07-27T12:29:13",
+    "activationAttemptedLocal": "2026-07-27T12:29:14",
+    "processCreatedLocal": "2026-07-27T12:29:38",
+    "desktopAppxContainerDestroyedLocal": "2026-07-27T12:30:03",
+    "observedProcessId": 8568
+  },
+  "bindings": {
+    "revision4TransferManifestSha256": "ee18fbd03cd44ac45bcc1bf2307ea680a083e301f7a5c6ebc74f5bb32848c971",
+    "revision4KitManifestSha256": "875f795b89ed72af95b43ed2f6924939ef3480d65501aab5cf8eee9dd900d6b0",
+    "revision4QualificationHarnessSha256": "57bb72d21274e05d3ad91db84a4d4351db90af54663dffccc60a21723abb3789",
+    "revision4NegativePathEvidenceFilename": "02b-negative-path-and-trust-r4.json",
+    "revision4NegativePathEvidenceSha256": "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2",
+    "installAndStartupTimeoutTranscriptSha256": "ab3344781985548280bd1a45975473a9cfdbd4444370d16b23d8642009f9fb60",
+    "initialDiagnosticTranscriptSha256": "f39933fcce5bede87839cddb535f97e836d6db39646220121c7e9068ede9d070",
+    "correctedDiagnosticTranscriptSha256": "6fe9fed02be64fbf68a5553049cbd45ce5217f57025ef8c21a370a1e7698fc3",
+    "frozenStage2ArchiveSha256": "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876",
+    "frozenMsixSha256": "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276",
+    "installedOracleExeSha256": "0cd98c06fae63d980fdd1c68446d576d4e3045d2ee293ebab21f94c5366abba6"
+  },
+  "installedPackage": {
+    "name": "Oracle.Platform.LocalCertification",
+    "packageFullName": "Oracle.Platform.LocalCertification_0.1.1.0_x64__fw69ec0wxwzn4",
+    "version": "0.1.1.0",
+    "publisher": "CN=Oracle Stage 2 Local Test Signing - NOT PRODUCTION",
+    "architecture": "X64",
+    "status": "Ok",
+    "executable": "Oracle.exe"
+  },
+  "governance": {
+    "immutable": true,
+    "mustRemainFailure": true,
+    "mayNotBeReclassifiedAsPassed": true,
+    "revision5MayUseInstalledPackage": true,
+    "revision5MayReinstallAutomatically": false,
+    "productSourceChanged": false,
+    "msixRebuilt": false,
+    "msixResigned": false,
+    "phase03SuccessEvidenceAbsent": true
+  }
+}

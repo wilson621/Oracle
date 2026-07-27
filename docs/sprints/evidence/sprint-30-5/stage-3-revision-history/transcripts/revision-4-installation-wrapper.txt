@@ -1,0 +1,226 @@
+PS C:\WINDOWS\system32> & {
+>>   $ErrorActionPreference = "Stop"
+>>   Set-StrictMode -Version Latest
+>>
+>>   $transferRoot = Join-Path `
+>>     $env:LOCALAPPDATA `
+>>     "Oracle-Stage3-Qualification\revision-4-incoming"
+>>
+>>   $kit = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-qualification-kit\Invoke-OracleStage3Qualification.ps1"
+>>
+>>   $negativeEvidence = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-evidence\02b-negative-path-and-trust-r4.json"
+>>
+>>   $negativeSidecar = "$negativeEvidence.sha256.txt"
+>>
+>>   $installEvidence = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-evidence\03-install-and-startup.json"
+>>
+>>   $certificatePath = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-work\Oracle.Stage2.PublicTest.cer"
+>>
+>>   $msixPath = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-work\stage-2\release\Oracle_0.1.1.0_x64_STAGE2_LOCAL_TEST_ONLY.msix"
+>>
+>>   $principal = [Security.Principal.WindowsPrincipal](
+>>     [Security.Principal.WindowsIdentity]::GetCurrent()
+>>   )
+>>
+>>   if (-not $principal.IsInRole(
+>>     [Security.Principal.WindowsBuiltInRole]::Administrator
+>>   )) {
+>>     throw "Run this phase in Windows PowerShell as Administrator."
+>>   }
+>>
+>>   $bindings = [ordered]@{
+>>     $kit =
+>>       "57bb72d21274e05d3ad91db84a4d4351db90af54663dffccc60a21723abb3789"
+>>
+>>     $negativeEvidence =
+>>       "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2"
+>>
+>>     $certificatePath =
+>>       "d9eb333f8de759cfb242d28606dbb8800c2aa87231b4beca2c89ad6611f55e7b"
+>>
+>>     $msixPath =
+>>       "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276"
+>>   }
+>>
+>>   foreach ($binding in $bindings.GetEnumerator()) {
+>>     if (-not (Test-Path -LiteralPath $binding.Key -PathType Leaf)) {
+>>       throw "Required file is missing: $($binding.Key)"
+>>     }
+>>
+>>     $hash = (
+>>       Get-FileHash -LiteralPath $binding.Key -Algorithm SHA256
+>>     ).Hash.ToLowerInvariant()
+>>
+>>     if ($hash -ne $binding.Value) {
+>>       throw "SHA-256 mismatch: $($binding.Key)"
+>>     }
+>>   }
+>>
+>>   if (-not (Test-Path -LiteralPath $negativeSidecar -PathType Leaf)) {
+>>     throw "Revision 4 evidence sidecar is missing."
+>>   }
+>>
+>>   $sidecarValue = (
+>>     (Get-Content -LiteralPath $negativeSidecar -Raw).Trim() -split "\s+"
+>>   )[0].ToLowerInvariant()
+>>
+>>   if ($sidecarValue -ne $bindings[$negativeEvidence]) {
+>>     throw "Revision 4 evidence sidecar binding is invalid."
+>>   }
+>>
+>>   $negativeRecord = Get-Content -LiteralPath $negativeEvidence -Raw |
+>>     ConvertFrom-Json
+>>
+>>   if ([string]$negativeRecord.result -ne "passed") {
+>>     throw "Revision 4 NegativePathAndTrust did not pass."
+>>   }
+>>
+>>   if (
+>>     (Test-Path -LiteralPath $installEvidence) -or
+>>     (Test-Path -LiteralPath "$installEvidence.sha256.txt")
+>>   ) {
+>>     throw "InstallAndStartup evidence already exists."
+>>   }
+>>
+>>   $certificate = New-Object `
+>>     System.Security.Cryptography.X509Certificates.X509Certificate2 `
+>>     $certificatePath
+>>
+>>   $remaining = $certificate.NotAfter.ToUniversalTime() - [DateTime]::UtcNow
+>>
+>>   if (
+>>     $certificate.Thumbprint -ne
+>>     "D4D34619405B4EEF7B6622EA4641181D8AD793DB" -or
+>>     $certificate.HasPrivateKey -or
+>>     $remaining.TotalHours -lt 24
+>>   ) {
+>>     throw "The temporary public certificate is invalid or too near expiry."
+>>   }
+>>
+>>   $thumbprint = $certificate.Thumbprint
+>>
+>>   $physicalLocations = @(
+>>     [pscustomobject]@{
+>>       Location = "CurrentUser"
+>>       Store = "My"
+>>       Path = "HKCU:\SOFTWARE\Microsoft\SystemCertificates\My\Certificates"
+>>     }
+>>     [pscustomobject]@{
+>>       Location = "CurrentUser"
+>>       Store = "Root"
+>>       Path = "HKCU:\SOFTWARE\Microsoft\SystemCertificates\Root\Certificates"
+>>     }
+>>     [pscustomobject]@{
+>>       Location = "CurrentUser"
+>>       Store = "TrustedPeople"
+>>       Path = "HKCU:\SOFTWARE\Microsoft\SystemCertificates\TrustedPeople\Certificates"
+>>     }
+>>     [pscustomobject]@{
+>>       Location = "LocalMachine"
+>>       Store = "My"
+>>       Path = "HKLM:\SOFTWARE\Microsoft\SystemCertificates\My\Certificates"
+>>     }
+>>     [pscustomobject]@{
+>>       Location = "LocalMachine"
+>>       Store = "Root"
+>>       Path = "HKLM:\SOFTWARE\Microsoft\SystemCertificates\Root\Certificates"
+>>     }
+>>     [pscustomobject]@{
+>>       Location = "LocalMachine"
+>>       Store = "TrustedPeople"
+>>       Path = "HKLM:\SOFTWARE\Microsoft\SystemCertificates\TrustedPeople\Certificates"
+>>     }
+>>   )
+>>
+>>   $physicalMatches = @(
+>>     foreach ($location in $physicalLocations) {
+>>       $path = Join-Path $location.Path $thumbprint
+>>
+>>       if (Test-Path -LiteralPath $path) {
+>>         [pscustomobject]@{
+>>           Location = $location.Location
+>>           Store = $location.Store
+>>         }
+>>       }
+>>     }
+>>   )
+>>
+>>   if (
+>>     $physicalMatches.Count -ne 1 -or
+>>     $physicalMatches[0].Location -ne "LocalMachine" -or
+>>     $physicalMatches[0].Store -ne "TrustedPeople"
+>>   ) {
+>>     throw "Temporary physical trust is not exactly as approved."
+>>   }
+>>
+>>   $existingPackage = Get-AppxPackage `
+>>     -Name "Oracle.Platform.LocalCertification" `
+>>     -ErrorAction SilentlyContinue
+>>
+>>   $existingProcesses = @(
+>>     Get-Process -Name "Oracle" -ErrorAction SilentlyContinue
+>>   )
+>>
+>>   if ($null -ne $existingPackage -or $existingProcesses.Count -ne 0) {
+>>     throw "Oracle is unexpectedly installed or running."
+>>   }
+>>
+>>   Write-Host ""
+>>   Write-Host "INSTALL AND STARTUP PRECHECK PASSED" -ForegroundColor Green
+>>   Write-Host "Frozen MSIX SHA-256: $($bindings[$msixPath])"
+>>   Write-Host ("Certificate hours remaining: {0:N2}" -f $remaining.TotalHours)
+>>   Write-Host ""
+>>   Write-Host "Oracle will now be installed and opened."
+>>   Write-Host "Observe the application without entering credentials or data."
+>>   Write-Host "Return to PowerShell and answer each question Y or N truthfully."
+>>   Write-Host ""
+>>
+>>   powershell.exe `
+>>     -NoProfile `                                                                                                     >>     -ExecutionPolicy Bypass `                                                                                        >>     -File $kit `                                                                                                     >>     -Phase InstallAndStartup `                                                                                       >>     -TransferRoot $transferRoot                                                                                      >>
+>>   if ($LASTEXITCODE -ne 0) {
+>>     throw (
+>>       "InstallAndStartup failed with exit code " +
+>>       "$LASTEXITCODE. Do not rerun or continue."
+>>     )
+>>   }
+>>
+>>   Write-Host ""
+>>   Write-Host "INSTALL AND STARTUP PHASE COMPLETED" `
+>>     -ForegroundColor Green
+>>   Write-Host "Stop here and return the complete PowerShell output."
+>> }
+
+INSTALL AND STARTUP PRECHECK PASSED
+Frozen MSIX SHA-256: 00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276
+Certificate hours remaining: 28.27
+
+Oracle will now be installed and opened.
+Observe the application without entering credentials or data.
+Return to PowerShell and answer each question Y or N truthfully.
+
+The installed Oracle package did not start.
+At C:\Users\wilso\AppData\Local\Oracle-Stage3-Qualification\revision-4-incoming\stage-3-qualification-kit\Invoke-Oracle
+Stage3Qualification.ps1:568 char:5
++     throw "The installed Oracle package did not start."
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (The installed O... did not start.:String) [], RuntimeException
+    + FullyQualifiedErrorId : The installed Oracle package did not start.
+
+InstallAndStartup failed with exit code 1. Do not rerun or continue.
+At line:196 char:5
++     throw (
++     ~~~~~~~
+    + CategoryInfo          : OperationStopped: (InstallAndStart...un or continue.:String) [], RuntimeException
+    + FullyQualifiedErrorId : InstallAndStartup failed with exit code 1. Do not rerun or continue.
+
+PS C:\WINDOWS\system32>

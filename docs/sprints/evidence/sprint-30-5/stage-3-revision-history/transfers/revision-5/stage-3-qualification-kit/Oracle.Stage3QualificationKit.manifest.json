@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-3-qualification-kit-manifest",
+  "contractVersion": 1,
+  "revision": 5,
+  "supersedes": {
+    "revision": 4,
+    "transferManifestSha256": "ee18fbd03cd44ac45bcc1bf2307ea680a083e301f7a5c6ebc74f5bb32848c971",
+    "transferManifestSidecarSha256": "e49e3c7d41ab17401042d179a75c88e74f665bbf99f2c6e75cf993b234efb6d7",
+    "kitManifestSha256": "875f795b89ed72af95b43ed2f6924939ef3480d65501aab5cf8eee9dd900d6b0",
+    "qualificationScriptSha256": "57bb72d21274e05d3ad91db84a4d4351db90af54663dffccc60a21723abb3789",
+    "negativePathEvidenceSha256": "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2",
+    "failureRecordSha256": "68d97c4c45cd028ef7bdc915543d8a56e20928d50031b8d6787a8c5101ec6c83",
+    "outcome": "install-and-startup-timeout-after-successful-appx-activation",
+    "installedPackage": "Oracle.Platform.LocalCertification_0.1.1.0_x64__fw69ec0wxwzn4",
+    "installedExecutableSha256": "0cd98c06fae63d980fdd1c68446d576d4e3045d2ee293ebab21f94c5366abba6"
+  },
+  "revisionHistory": [
+    {
+      "revision": 1,
+      "transferManifestSha256": "327083ed6418e064a7d737e3c5608ee526bc847050aa08fe6581627c8cd7d8b2",
+      "transferManifestSidecarSha256": "d414c932afcea8d7b0cbaed79caa88cb8320b0d6a51c81304f7911a38315f49d",
+      "kitManifestSha256": "6bc41d6f16826fe0c7b5015f74056d3c0c7383572cda8b36a4fc7f5db15dad23",
+      "qualificationScriptSha256": "ce1b4ab77b2082f4e7292e628fd2e7a6fce2667e69afcc512fe07e10dd8d7781",
+      "outcome": "pre-execution-failed-before-evidence",
+      "defect": "PowerShell 5.1 zero-output pipeline returned null under strict mode"
+    },
+    {
+      "revision": 2,
+      "transferManifestSha256": "cfe4828d9accff14cc6ddcf28934af6a3305c499a50254776ba3cfb1cede6733",
+      "transferManifestSidecarSha256": "87b23dafe6aa74ca91987686346cdd08ff88d0553bc50d5d2c07763494e3e8b1",
+      "kitManifestSha256": "46beb2742df4a06cbb3752f02fc2e4f8e4d80f36da0265359e402f4c41aa0e8f",
+      "qualificationScriptSha256": "26688814494fe3a1e67baf14ce056b6f667f55f51fd534f75bd6b24925b874ea",
+      "failureRecordSha256": "c22a0704075909dc22b8c04e95aa347d39340a2bd6f40fb8b2893942ee42cca8",
+      "outcome": "install-and-startup-blocked-before-package-registration",
+      "hresult": "0x800B0109",
+      "defect": "CurrentUser Root trust is not accepted by the Windows MSIX deployment provider"
+    },
+    {
+      "revision": 3,
+      "transferManifestSha256": "1f577548e9868174bb51e670998577e83b65e03c2c6e2efefb6c71a75b74d70d",
+      "transferManifestSidecarSha256": "f3edba0a51ddd3ab05abbc4aff53456074b4bf5c41937047497c7663f38fe529",
+      "kitManifestSha256": "d9317e8b01b56bb95e67e73c67466f90716f846aae7165a8c81f1391c0a3cc28",
+      "qualificationScriptSha256": "fbbe53d75bbf1f323aed389f42dd771223602f8aff7b6a46e060d718e9eb316f",
+      "failureRecordSha256": "ca646b0951b18f3234b38b0f70f369479d3f76373dad985a19df5aa009082654",
+      "outcome": "negative-path-controls-passed-trust-scope-evaluator-failed",
+      "originalUntrustedHresult": "0x800B0109",
+      "tamperedHresult": "0x80096010",
+      "defect": "Inherited Current User logical projections were counted as additional physical trust entries"
+    }
+  ],
+  "host": "Founder-QA-01",
+  "runtimeRequirements": [
+    "Windows PowerShell 5.1",
+    "Windows 11 x64"
+  ],
+  "forbiddenDependencies": [
+    "Node.js",
+    "Git",
+    "compiler",
+    "SDK",
+    "development server",
+    "Oracle source"
+  ],
+  "files": [
+    {
+      "relativePath": "Invoke-OracleStage3Qualification.ps1",
+      "sha256": "1275df72240eae48a3939e13011ac1a5f00b9fc1b1c1f8d7de1b8954d9244395",
+      "size": 70923
+    },
+    {
+      "relativePath": "Oracle.Stage3QualificationContract.json",
+      "sha256": "445f42253ac954dbf3a711dad951ee9d5c5fc0820611b2dd086670514ffec1c1",
+      "size": 3183
+    },
+    {
+      "relativePath": "Oracle.Stage3Revision2FailureRecord.json",
+      "sha256": "c22a0704075909dc22b8c04e95aa347d39340a2bd6f40fb8b2893942ee42cca8",
+      "size": 1999
+    },
+    {
+      "relativePath": "Oracle.Stage3Revision3FailureRecord.json",
+      "sha256": "ca646b0951b18f3234b38b0f70f369479d3f76373dad985a19df5aa009082654",
+      "size": 2457
+    },
+    {
+      "relativePath": "Oracle.Stage3Revision4FailureRecord.json",
+      "sha256": "68d97c4c45cd028ef7bdc915543d8a56e20928d50031b8d6787a8c5101ec6c83",
+      "size": 2937
+    },
+    {
+      "relativePath": "README.txt",
+      "sha256": "6a98bf41241926d6fb719ffcfc2f356f7406a3bf8b52e1a4845be8d619f36638",
+      "size": 4723
+    }
+  ],
+  "authority": {
+    "stage3Only": true,
+    "stage4": false,
+    "production": false,
+    "deployment": false,
+    "privateKeyTransfer": false
+  }
+}

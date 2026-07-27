@@ -1,0 +1,79 @@
+{
+    "schemaVersion":  1,
+    "contract":  "oracle.sprint-30-5.stage-3-revision-6-abandoned-design",
+    "classification":  "immutable-historical-design-snapshot",
+    "sourceFileCount":  8,
+    "generatedContextFileCount":  2,
+    "files":  [
+                  {
+                      "relativePath":  "source-snapshot/package.json",
+                      "bytes":  11964,
+                      "sha256":  "179ca3ac2bb034af662d24ccbae7c16256d1fff31e059cf81caa58f4ddc4c6be",
+                      "sourcePath":  "C:\\Dev\\project-meta\\package.json",
+                      "classification":  "abandoned-revision-6-design"
+                  },
+                  {
+                      "relativePath":  "source-snapshot/scripts/prepare-sprint-30-5-stage-3-offline-transfer.mjs",
+                      "bytes":  22001,
+                      "sha256":  "09705b2fcce6ac5367ebd9d68ea5d89067f02b64bb4a230f18254d1d4628bba4",
+                      "sourcePath":  "C:\\Dev\\project-meta\\scripts\\prepare-sprint-30-5-stage-3-offline-transfer.mjs",
+                      "classification":  "abandoned-revision-6-design"
+                  },
+                  {
+                      "relativePath":  "source-snapshot/scripts/prepare-sprint-30-5-stage-3-recovery-transfer.mjs",
+                      "bytes":  9878,
+                      "sha256":  "628752b09fdb32d090e7dee998ff95ce6cf6f5e3d1950161eb5577edc0c60260",
+                      "sourcePath":  "C:\\Dev\\project-meta\\scripts\\prepare-sprint-30-5-stage-3-recovery-transfer.mjs",
+                      "classification":  "abandoned-revision-6-design"
+                  },
+                  {
+                      "relativePath":  "source-snapshot/scripts/sprint-30-5/stage-3-qualification/Invoke-OracleStage3Qualification.ps1",
+                      "bytes":  78820,
+                      "sha256":  "199d1dfd2a641512abddd9a9701aad87ddfdcaf8bc3b5b7786b97d6ab4ffe228",
+                      "sourcePath":  "C:\\Dev\\project-meta\\scripts\\sprint-30-5\\stage-3-qualification\\Invoke-OracleStage3Qualification.ps1",
+                      "classification":  "abandoned-revision-6-design"
+                  },
+                  {
+                      "relativePath":  "source-snapshot/scripts/sprint-30-5/stage-3-qualification/Invoke-OracleStage3RecoveryRestoration.ps1",
+                      "bytes":  11695,
+                      "sha256":  "9fdc212649680d00a130a5e04d7d2aff047c8562896a3437c4603f29d5eb9a93",
+                      "sourcePath":  "C:\\Dev\\project-meta\\scripts\\sprint-30-5\\stage-3-qualification\\Invoke-OracleStage3RecoveryRestoration.ps1",
+                      "classification":  "abandoned-revision-6-design"
+                  },
+                  {
+                      "relativePath":  "source-snapshot/scripts/sprint-30-5/stage-3-qualification/Oracle.Stage3QualificationContract.json",
+                      "bytes":  4662,
+                      "sha256":  "c3c673d1636b9467be07851a65cdaa7273b375bd31f5d884b7e88309eed11d44",
+                      "sourcePath":  "C:\\Dev\\project-meta\\scripts\\sprint-30-5\\stage-3-qualification\\Oracle.Stage3QualificationContract.json",
+                      "classification":  "abandoned-revision-6-design"
+                  },
+                  {
+                      "relativePath":  "source-snapshot/scripts/sprint-30-5/stage-3-qualification/Oracle.Stage3Revision5FailureRecord.json",
+                      "bytes":  1935,
+                      "sha256":  "9536a189562d6ab58878e779625e06e6131072c4159764ddfbb80fdae01d188d",
+                      "sourcePath":  "C:\\Dev\\project-meta\\scripts\\sprint-30-5\\stage-3-qualification\\Oracle.Stage3Revision5FailureRecord.json",
+                      "classification":  "abandoned-revision-6-design"
+                  },
+                  {
+                      "relativePath":  "source-snapshot/scripts/sprint-30-5/stage-3-qualification/README.txt",
+                      "bytes":  6514,
+                      "sha256":  "f90e36ec7d688c4797e10b26471bc0a3e39c2755c801d138b1f61c3ac964a3b0",
+                      "sourcePath":  "C:\\Dev\\project-meta\\scripts\\sprint-30-5\\stage-3-qualification\\README.txt",
+                      "classification":  "abandoned-revision-6-design"
+                  },
+                  {
+                      "relativePath":  "repository-state.json",
+                      "bytes":  1821,
+                      "sha256":  "42d8585604e9f8bafa573ad88ca9588d28325ec9b8f3fff16835d5a5052d03f0",
+                      "sourcePath":  "\u003cgenerated from read-only Git state\u003e",
+                      "classification":  "repository-context"
+                  },
+                  {
+                      "relativePath":  "tracked-working-tree.patch",
+                      "bytes":  113227,
+                      "sha256":  "0b607f0755b37a3cb3ae8139932e1dde2c3933899d9c2fd632bd8b3e830c9843",
+                      "sourcePath":  "\u003cgenerated by git diff --binary\u003e",
+                      "classification":  "repository-context"
+                  }
+              ]
+}

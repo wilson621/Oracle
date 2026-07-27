@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-3-offline-transfer-manifest",
+  "contractVersion": 1,
+  "revision": 4,
+  "supersedes": {
+    "revision": 3,
+    "transferManifestSha256": "1f577548e9868174bb51e670998577e83b65e03c2c6e2efefb6c71a75b74d70d",
+    "transferManifestSidecarSha256": "f3edba0a51ddd3ab05abbc4aff53456074b4bf5c41937047497c7663f38fe529",
+    "kitManifestSha256": "d9317e8b01b56bb95e67e73c67466f90716f846aae7165a8c81f1391c0a3cc28",
+    "qualificationScriptSha256": "fbbe53d75bbf1f323aed389f42dd771223602f8aff7b6a46e060d718e9eb316f",
+    "failureRecordSha256": "ca646b0951b18f3234b38b0f70f369479d3f76373dad985a19df5aa009082654",
+    "outcome": "negative-path-controls-passed-trust-scope-evaluator-failed",
+    "originalUntrustedHresult": "0x800B0109",
+    "tamperedHresult": "0x80096010",
+    "defect": "Inherited Current User logical projections were counted as additional physical trust entries"
+  },
+  "revisionHistory": [
+    {
+      "revision": 1,
+      "transferManifestSha256": "327083ed6418e064a7d737e3c5608ee526bc847050aa08fe6581627c8cd7d8b2",
+      "transferManifestSidecarSha256": "d414c932afcea8d7b0cbaed79caa88cb8320b0d6a51c81304f7911a38315f49d",
+      "kitManifestSha256": "6bc41d6f16826fe0c7b5015f74056d3c0c7383572cda8b36a4fc7f5db15dad23",
+      "qualificationScriptSha256": "ce1b4ab77b2082f4e7292e628fd2e7a6fce2667e69afcc512fe07e10dd8d7781",
+      "outcome": "pre-execution-failed-before-evidence",
+      "defect": "PowerShell 5.1 zero-output pipeline returned null under strict mode"
+    },
+    {
+      "revision": 2,
+      "transferManifestSha256": "cfe4828d9accff14cc6ddcf28934af6a3305c499a50254776ba3cfb1cede6733",
+      "transferManifestSidecarSha256": "87b23dafe6aa74ca91987686346cdd08ff88d0553bc50d5d2c07763494e3e8b1",
+      "kitManifestSha256": "46beb2742df4a06cbb3752f02fc2e4f8e4d80f36da0265359e402f4c41aa0e8f",
+      "qualificationScriptSha256": "26688814494fe3a1e67baf14ce056b6f667f55f51fd534f75bd6b24925b874ea",
+      "failureRecordSha256": "c22a0704075909dc22b8c04e95aa347d39340a2bd6f40fb8b2893942ee42cca8",
+      "outcome": "install-and-startup-blocked-before-package-registration",
+      "hresult": "0x800B0109",
+      "defect": "CurrentUser Root trust is not accepted by the Windows MSIX deployment provider"
+    }
+  ],
+  "transferMethod": "Founder-approved offline removable media",
+  "sourceCheckpoint": {
+    "branch": "sprint-9-overlay",
+    "baseCommit": "7e6cca76c250a806a61f59c12556e6121824a3f7",
+    "qualificationHarnessBoundByHash": true,
+    "productSourceChanged": false
+  },
+  "destinationHost": {
+    "deviceName": "Founder-QA-01",
+    "manufacturer": "MEDION",
+    "model": "ERAZER P6605 MD61596",
+    "admissionState": "admitted-with-founder-provenance-exception"
+  },
+  "payloadFiles": [
+    {
+      "relativePath": "Oracle.Sprint30.5.Stage2QualificationEvidence.zip",
+      "sha256": "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876",
+      "size": 214510031
+    },
+    {
+      "relativePath": "stage-3-qualification-kit/Invoke-OracleStage3Qualification.ps1",
+      "sha256": "57bb72d21274e05d3ad91db84a4d4351db90af54663dffccc60a21723abb3789",
+      "size": 27675
+    },
+    {
+      "relativePath": "stage-3-qualification-kit/Oracle.Stage3QualificationContract.json",
+      "sha256": "9ba5b834309cca163ad11454a112bf1e970ad4d6da15623eb81ec51fc472dec8",
+      "size": 2097
+    },
+    {
+      "relativePath": "stage-3-qualification-kit/Oracle.Stage3Revision2FailureRecord.json",
+      "sha256": "c22a0704075909dc22b8c04e95aa347d39340a2bd6f40fb8b2893942ee42cca8",
+      "size": 1999
+    },
+    {
+      "relativePath": "stage-3-qualification-kit/Oracle.Stage3Revision3FailureRecord.json",
+      "sha256": "ca646b0951b18f3234b38b0f70f369479d3f76373dad985a19df5aa009082654",
+      "size": 2457
+    },
+    {
+      "relativePath": "stage-3-qualification-kit/README.txt",
+      "sha256": "53af33bd221049645b3a39447bc7f43fbd6c19bf1851931581e0cb7d94c41e87",
+      "size": 2784
+    },
+    {
+      "relativePath": "stage-3-qualification-kit/Oracle.Stage3QualificationKit.manifest.json",
+      "sha256": "875f795b89ed72af95b43ed2f6924939ef3480d65501aab5cf8eee9dd900d6b0",
+      "size": 3574
+    }
+  ],
+  "approvals": {
+    "exactFrozenStage2Archive": true,
+    "selfContainedPowerShellKit": true,
+    "publicCertificateDerivedLaterFromSignedEvidence": true,
+    "privateKeyIncluded": false,
+    "productionCredentialIncluded": false,
+    "productionDataIncluded": false,
+    "productSourceIncluded": false,
+    "revision2EvidencePreserved": true,
+    "revision3FailurePreserved": true,
+    "physicalStoreTrustAuthority": true,
+    "logicalProjectionAuthority": false,
+    "restartFromNegativePathAndTrust": true
+  }
+}

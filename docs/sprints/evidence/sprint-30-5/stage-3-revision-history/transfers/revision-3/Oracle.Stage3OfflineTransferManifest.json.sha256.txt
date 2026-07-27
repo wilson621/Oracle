@@ -1,0 +1,1 @@
+1f577548e9868174bb51e670998577e83b65e03c2c6e2efefb6c71a75b74d70d  Oracle.Stage3OfflineTransferManifest.json

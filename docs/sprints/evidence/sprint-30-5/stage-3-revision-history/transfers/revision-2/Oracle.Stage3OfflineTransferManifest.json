@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-3-offline-transfer-manifest",
+  "contractVersion": 1,
+  "revision": 2,
+  "supersedes": {
+    "revision": 1,
+    "transferManifestSha256": "327083ed6418e064a7d737e3c5608ee526bc847050aa08fe6581627c8cd7d8b2",
+    "transferManifestSidecarSha256": "d414c932afcea8d7b0cbaed79caa88cb8320b0d6a51c81304f7911a38315f49d",
+    "kitManifestSha256": "6bc41d6f16826fe0c7b5015f74056d3c0c7383572cda8b36a4fc7f5db15dad23",
+    "qualificationScriptSha256": "ce1b4ab77b2082f4e7292e628fd2e7a6fce2667e69afcc512fe07e10dd8d7781",
+    "outcome": "pre-execution-failed-before-evidence",
+    "defect": "PowerShell 5.1 zero-output pipeline returned null under strict mode"
+  },
+  "transferMethod": "Founder-approved offline removable media",
+  "sourceCheckpoint": {
+    "branch": "sprint-9-overlay",
+    "commit": "7c8af26eba548ad083abd8dfdd9dcb915b9f60b2"
+  },
+  "destinationHost": {
+    "deviceName": "Founder-QA-01",
+    "manufacturer": "MEDION",
+    "model": "ERAZER P6605 MD61596",
+    "admissionState": "admitted-with-founder-provenance-exception"
+  },
+  "payloadFiles": [
+    {
+      "relativePath": "Oracle.Sprint30.5.Stage2QualificationEvidence.zip",
+      "sha256": "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876",
+      "size": 214510031
+    },
+    {
+      "relativePath": "stage-3-qualification-kit/Invoke-OracleStage3Qualification.ps1",
+      "sha256": "26688814494fe3a1e67baf14ce056b6f667f55f51fd534f75bd6b24925b874ea",
+      "size": 16945
+    },
+    {
+      "relativePath": "stage-3-qualification-kit/Oracle.Stage3QualificationContract.json",
+      "sha256": "61c56dd5c6ac52cdd5ac833d4a1a1b7b6a5b6d9883eccf87fbc3de0f31e29707",
+      "size": 1487
+    },
+    {
+      "relativePath": "stage-3-qualification-kit/README.txt",
+      "sha256": "1dd88343a921ca3e979ceec703ab2b0963013080f92790e2ccf32b03b56fa845",
+      "size": 1448
+    },
+    {
+      "relativePath": "stage-3-qualification-kit/Oracle.Stage3QualificationKit.manifest.json",
+      "sha256": "46beb2742df4a06cbb3752f02fc2e4f8e4d80f36da0265359e402f4c41aa0e8f",
+      "size": 1636
+    }
+  ],
+  "approvals": {
+    "exactFrozenStage2Archive": true,
+    "selfContainedPowerShellKit": true,
+    "publicCertificateDerivedLaterFromSignedEvidence": true,
+    "privateKeyIncluded": false,
+    "productionCredentialIncluded": false,
+    "productionDataIncluded": false,
+    "productSourceIncluded": false
+  }
+}

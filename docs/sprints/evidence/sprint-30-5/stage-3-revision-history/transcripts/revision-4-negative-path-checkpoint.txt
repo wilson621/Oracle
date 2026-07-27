@@ -1,0 +1,261 @@
+PS C:\WINDOWS\System32> & {
+>>   $ErrorActionPreference = "Stop"
+>>   Set-StrictMode -Version Latest
+>>
+>>   $transferRoot = Join-Path `
+>>     $env:LOCALAPPDATA `
+>>     "Oracle-Stage3-Qualification\revision-4-incoming"
+>>
+>>   $evidencePath = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-evidence\02b-negative-path-and-trust-r4.json"
+>>
+>>   $sidecarPath = "$evidencePath.sha256.txt"
+>>
+>>   $phase3Evidence = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-evidence\03-install-and-startup.json"
+>>
+>>   $certificatePath = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-work\Oracle.Stage2.PublicTest.cer"
+>>
+>>   $msixPath = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-work\stage-2\release\Oracle_0.1.1.0_x64_STAGE2_LOCAL_TEST_ONLY.msix"
+>>
+>>   $tamperedPath = Join-Path `
+>>     $transferRoot `
+>>     "stage-3-work\Oracle.Stage2.TAMPERED.msix"
+>>
+>>   foreach ($requiredPath in @(
+>>     $evidencePath,
+>>     $sidecarPath,
+>>     $certificatePath,
+>>     $msixPath
+>>   )) {
+>>     if (-not (Test-Path -LiteralPath $requiredPath -PathType Leaf)) {
+>>       throw "Required checkpoint file is missing: $requiredPath"
+>>     }
+>>   }
+>>
+>>   $evidenceHash = (
+>>     Get-FileHash -LiteralPath $evidencePath -Algorithm SHA256
+>>   ).Hash.ToLowerInvariant()
+>>
+>>   $sidecarValue = (
+>>     (Get-Content -LiteralPath $sidecarPath -Raw).Trim() -split "\s+"
+>>   )[0].ToLowerInvariant()
+>>
+>>   if (
+>>     $evidenceHash -ne
+>>     "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2" -or
+>>     $sidecarValue -ne $evidenceHash
+>>   ) {
+>>     throw "Revision 4 evidence binding is invalid."
+>>   }
+>>
+>>   $evidence = Get-Content -LiteralPath $evidencePath -Raw |
+>>     ConvertFrom-Json
+>>
+>>   if (
+>>     [string]$evidence.result -ne "passed" -or
+>>     [int]$evidence.revision -ne 4
+>>   ) {
+>>     throw "Revision 4 evidence does not report a pass."
+>>   }
+>>
+>>   if (
+>>     [string]$evidence.revision2FailureRecordSha256 -ne
+>>     "c22a0704075909dc22b8c04e95aa347d39340a2bd6f40fb8b2893942ee42cca8"
+>>   ) {
+>>     throw "Revision 2 failure binding is invalid."
+>>   }
+>>
+>>   if (
+>>     [string]$evidence.revision3FailureRecordSha256 -ne
+>>     "ca646b0951b18f3234b38b0f70f369479d3f76373dad985a19df5aa009082654"
+>>   ) {
+>>     throw "Revision 3 failure binding is invalid."
+>>   }
+>>
+>>   if (
+>>     -not [bool]$evidence.untrustedOriginalRejected -or
+>>     [string]$evidence.acceptedOriginalSignatureStatus -ne "Valid" -or
+>>     [string]$evidence.acceptedOriginalSignerThumbprint -ne
+>>       "D4D34619405B4EEF7B6622EA4641181D8AD793DB" -or
+>>     -not [bool]$evidence.tamperedCopyRejected -or
+>>     [bool]$evidence.acceptedPackageModified -or
+>>     [bool]$evidence.privateKeyPresent
+>>   ) {
+>>     throw "Revision 4 negative-path assertions are invalid."
+>>   }
+>>
+>>   $physicalEvidence = @($evidence.physicalTemporaryTrust)
+>>
+>>   if (
+>>     $physicalEvidence.Count -ne 1 -or
+>>     [string]$physicalEvidence[0].location -ne "LocalMachine" -or
+>>     [string]$physicalEvidence[0].store -ne "TrustedPeople" -or
+>>     -not [bool]$physicalEvidence[0].physical -or
+>>     [bool]$physicalEvidence[0].hasPrivateKey
+>>   ) {
+>>     throw "Evidence does not report exactly one approved physical trust entry."
+>>   }
+>>
+>>   $logicalEvidence = @($evidence.logicalTrustViews)
+>>
+>>   $invalidLogicalEvidence = @(
+>>     $logicalEvidence |
+>>       Where-Object {
+>>         [string]$_.store -ne "TrustedPeople" -or
+>>         [string]$_.location -notin @("CurrentUser", "LocalMachine") -or
+>>         [bool]$_.hasPrivateKey
+>>       }
+>>   )
+>>
+>>   if ($invalidLogicalEvidence.Count -ne 0) {
+>>     throw "Evidence reports an invalid logical certificate projection."
+>>   }
+>>
+>>   $thumbprint = "D4D34619405B4EEF7B6622EA4641181D8AD793DB"
+>>
+>>   $physicalStores = @(
+>>     [pscustomobject]@{
+>>       Location = "CurrentUser"
+>>       Store = "My"
+>>       Path = "HKCU:\SOFTWARE\Microsoft\SystemCertificates\My\Certificates"
+>>     }
+>>     [pscustomobject]@{
+>>       Location = "CurrentUser"
+>>       Store = "Root"
+>>       Path = "HKCU:\SOFTWARE\Microsoft\SystemCertificates\Root\Certificates"
+>>     }
+>>     [pscustomobject]@{
+>>       Location = "CurrentUser"
+>>       Store = "TrustedPeople"
+>>       Path = "HKCU:\SOFTWARE\Microsoft\SystemCertificates\TrustedPeople\Certificates"
+>>     }
+>>     [pscustomobject]@{
+>>       Location = "LocalMachine"
+>>       Store = "My"
+>>       Path = "HKLM:\SOFTWARE\Microsoft\SystemCertificates\My\Certificates"
+>>     }
+>>     [pscustomobject]@{
+>>       Location = "LocalMachine"
+>>       Store = "Root"
+>>       Path = "HKLM:\SOFTWARE\Microsoft\SystemCertificates\Root\Certificates"
+>>     }
+>>     [pscustomobject]@{
+>>       Location = "LocalMachine"
+>>       Store = "TrustedPeople"
+>>       Path = "HKLM:\SOFTWARE\Microsoft\SystemCertificates\TrustedPeople\Certificates"
+>>     }
+>>   )
+>>
+>>   $physicalMatches = @(
+>>     foreach ($store in $physicalStores) {
+>>       $path = Join-Path $store.Path $thumbprint
+>>
+>>       if (Test-Path -LiteralPath $path) {
+>>         [pscustomobject]@{
+>>           Location = $store.Location
+>>           Store = $store.Store
+>>           Path = $path
+>>         }
+>>       }
+>>     }
+>>   )
+>>
+>>   if (
+>>     $physicalMatches.Count -ne 1 -or
+>>     $physicalMatches[0].Location -ne "LocalMachine" -or
+>>     $physicalMatches[0].Store -ne "TrustedPeople"
+>>   ) {
+>>     throw "Current physical certificate trust is not exactly approved."
+>>   }
+>>
+>>   $certificate = New-Object `
+>>     System.Security.Cryptography.X509Certificates.X509Certificate2 `
+>>     $certificatePath
+>>
+>>   if (
+>>     $certificate.Thumbprint -ne $thumbprint -or
+>>     $certificate.HasPrivateKey
+>>   ) {
+>>     throw "The public certificate identity is invalid."
+>>   }
+>>
+>>   $remaining = $certificate.NotAfter.ToUniversalTime() - [DateTime]::UtcNow
+>>
+>>   if ($remaining.TotalHours -lt 24) {
+>>     throw "Fewer than 24 certificate hours remain."
+>>   }
+>>
+>>   $msixHash = (
+>>     Get-FileHash -LiteralPath $msixPath -Algorithm SHA256
+>>   ).Hash.ToLowerInvariant()
+>>
+>>   if (
+>>     $msixHash -ne
+>>     "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276"
+>>   ) {
+>>     throw "The frozen MSIX has changed."
+>>   }
+>>
+>>   if (Test-Path -LiteralPath $tamperedPath) {
+>>     throw "The temporary tampered MSIX was not removed."
+>>   }
+>>
+>>   if (
+>>     (Test-Path -LiteralPath $phase3Evidence) -or
+>>     (Test-Path -LiteralPath "$phase3Evidence.sha256.txt")
+>>   ) {
+>>     throw "InstallAndStartup evidence unexpectedly exists."
+>>   }
+>>
+>>   $package = Get-AppxPackage `
+>>     -Name "Oracle.Platform.LocalCertification" `
+>>     -ErrorAction SilentlyContinue
+>>
+>>   $processes = @(
+>>     Get-Process -Name "Oracle" -ErrorAction SilentlyContinue
+>>   )
+>>
+>>   if ($null -ne $package -or $processes.Count -ne 0) {
+>>     throw "Oracle is unexpectedly installed or running."
+>>   }
+>>
+>>   Write-Host ""
+>>   Write-Host "REVISION 4 NEGATIVE-PATH CHECKPOINT PASSED" `
+>>     -ForegroundColor Green
+>>   Write-Host "Evidence SHA-256: $evidenceHash"
+>>   Write-Host "Untrusted original rejected: true"
+>>   Write-Host "Accepted signature: Valid"
+>>   Write-Host "Tampered copy rejected: true"
+>>   Write-Host "Physical trust: LocalMachine\TrustedPeople"
+>>   Write-Host "Physical trust entries: $($physicalMatches.Count)"
+>>   Write-Host "Logical projections recorded: $($logicalEvidence.Count)"
+>>   Write-Host "Private key present: false"
+>>   Write-Host "Oracle installed: false"
+>>   Write-Host "Oracle processes: 0"
+>>   Write-Host ("Certificate hours remaining: {0:N2}" -f $remaining.TotalHours)
+>>   Write-Host "No state was changed by this verification."
+>>   Write-Host "Stop here and return the complete output."
+>> }
+
+REVISION 4 NEGATIVE-PATH CHECKPOINT PASSED
+Evidence SHA-256: 164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2
+Untrusted original rejected: true
+Accepted signature: Valid
+Tampered copy rejected: true
+Physical trust: LocalMachine\TrustedPeople
+Physical trust entries: 1
+Logical projections recorded: 2
+Private key present: false
+Oracle installed: false
+Oracle processes: 0
+Certificate hours remaining: 28.36
+No state was changed by this verification.
+Stop here and return the complete output.
+PS C:\WINDOWS\System32>

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-3-revision-2-failure",
+  "contractVersion": 1,
+  "revision": 2,
+  "outcome": "install-and-startup-blocked-before-package-registration",
+  "defectClassification": "qualification-harness-trust-store-defect",
+  "deploymentFailure": {
+    "activityId": "a549c0c7-1d3c-0004-a443-9ba53c1ddd01",
+    "hresult": "0x800B0109",
+    "message": "The root certificate of the signature in the app package or bundle must be trusted.",
+    "packageRegistered": false,
+    "packageLaunched": false,
+    "founderConfirmationsEntered": false,
+    "installAndStartupEvidenceCreated": false
+  },
+  "defectiveTrust": {
+    "location": "CurrentUser",
+    "store": "Root",
+    "thumbprint": "D4D34619405B4EEF7B6622EA4641181D8AD793DB",
+    "hasPrivateKey": false
+  },
+  "requiredTrust": {
+    "location": "LocalMachine",
+    "store": "TrustedPeople",
+    "temporary": true,
+    "publicCertificateOnly": true
+  },
+  "evidence": {
+    "readOnlyStateCaptureSha256": "38805ea7a4fcb5ab3b8205499251ade71c5c44686251795082508abb9a36f500",
+    "preExecutionSha256": "eb19cf0f64f48331fed0464439ba855bafea8d8e425ec3f420da9dec6d348ccd",
+    "preExecutionSidecarSha256": "323bf555fd3acea19ab444a27270d02634cf4c38d41553b00311617b1a36240f",
+    "negativePathSha256": "988d44099e7f4836f1a0070b1faa0950aa40abb6bd5618616d5a4011e079495b",
+    "negativePathSidecarSha256": "9cc0d06cfd4f06cd73e4ad3cb2d994b8baaa66c30ec37a601193b02dd5438560",
+    "phase03CompletelyAbsent": true
+  },
+  "frozenCandidate": {
+    "archiveSha256": "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876",
+    "msixSha256": "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276",
+    "rebuilt": false,
+    "resigned": false
+  },
+  "governance": {
+    "preserveRevision2Evidence": true,
+    "restartFrom": "NegativePathAndTrust",
+    "resumeAtInstallAndStartup": false,
+    "productSourceChanged": false,
+    "architectureChanged": false,
+    "releaseManifestChanged": false
+  }
+}
