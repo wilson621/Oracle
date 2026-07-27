@@ -11,7 +11,7 @@ expiry or revocation
 **Supersedes:** Qualification status inferred across Sprint and programme
 documents
 **Superseded By:** None
-**Last Reviewed:** 26 July 2026
+**Last Reviewed:** 27 July 2026
 
 ---
 
@@ -33,7 +33,7 @@ results.
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
 | 2 | Candidate Freeze and Package Reconciliation | **Founder-accepted and closed** | Runtime Manifest `1.7.0` package and Release Manifest reconcile; artifact/content/signature/SBOM/provenance checks pass; signer destroyed and trust removed; frozen evidence SHA-256 `8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876` | None for Stage 2; history is closed |
-| 3 | Clean Windows Qualification | **Not started — host admitted with Founder Provenance Exception; Stage 3 authority required** | `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, is `admitted-with-founder-provenance-exception`; `installationMediaEvidencePresent` remains false; all mandatory technical and compensating controls pass; frozen package certificate expires `2026-07-28T15:45:27Z` and the 24-hour start deadline is `2026-07-27T15:45:27Z` | Separately approve Stage 3 execution, host designation for execution, bounded artifact transfer and temporary public-certificate trust |
+| 3 | Clean Windows Qualification | **Historically attempted — incomplete and blocked** | `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, remains `admitted-with-founder-provenance-exception`; `installationMediaEvidencePresent` remains false; recovered Revision 4 NegativePathAndTrust evidence passed with SHA-256 `164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2`; Revision 4 InstallAndStartup failed; canonical Phase 03 success evidence is absent; Revision 5 remained incomplete; Revision 6 is abandoned; the certificate 24-hour start gate closed at `2026-07-27T15:45:27Z` | No current authority exists to resume Stage 3; any new harness, certificate, candidate or qualification revision requires a separate Founder decision |
 | 4 | Live Authentication and Protected Rendering | **Not started** | Disposable live Supabase Email + Password and protected rendering evidence remain outstanding | Stage 3 acceptance, then separate Stage 4 authority |
 | 5 | Installed Package GPU, Performance and Accessibility | **Not started** | Must use the reconciled installed package on the replacement host; ASUS Stage 1 GPU evidence does not transfer | Stage 4 acceptance, then separate Stage 5 authority and replacement-host GPU admission |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
@@ -87,7 +87,10 @@ results.
   unexplained software or failed integrity controls.
 - Host admission grants no Stage 3 execution, certificate trust, artifact
   transfer, package installation, deployment or security-boundary authority.
-- Stage 3 remains not started and requires a separate Founder decision.
+- Stage 3 was historically Founder-authorised and attempted. It remains
+  incomplete and blocked. Host admission remains valid for the admitted
+  installation, but it creates no current execution, certificate-trust,
+  artifact-transfer, package-installation or requalification authority.
 
 # Independent Carried Qualification States
 
@@ -95,7 +98,7 @@ results.
 | --- | --- | --- |
 | Sprint 29 clean-machine distribution | **Deferred** | Current-host package mechanics passed; separate clean Windows package qualification remains outstanding and is not satisfied by Sprint 30.5 Stage 1 |
 | Minecraft Java observation | **Provisionally certified** | Operational Certification Deferred — Required Test Environment Unavailable; observation disabled and no support claim authorised |
-| Production qualification | **Incomplete** | Stages 1 and 2 are Founder-accepted and closed; Stages 3–7 remain incomplete |
+| Production qualification | **Incomplete** | Stages 1 and 2 are Founder-accepted and closed; Stage 3 was historically attempted but remains incomplete and blocked; Stages 4–7 have not started |
 | Gate 7 | **Not authorised** | May be considered only after Production Qualification completes |
 | Beta | **Not authorised** | Requires later Founder decision after the governed qualification and Gate sequence |
 

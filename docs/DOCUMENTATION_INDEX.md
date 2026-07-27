@@ -8,7 +8,7 @@
 **Expected Stability:** Reviewed whenever governance or canonical documentation changes
 **Supersedes:** The incomplete documentation table in `README.md` as the canonical documentation index
 **Superseded By:** None
-**Last Reviewed:** 25 July 2026
+**Last Reviewed:** 27 July 2026
 
 ---
 
@@ -289,10 +289,12 @@ delivery authorities have been reviewed.
 | Sprint 30.5 Stage 2 qualification package | [Sprint 30.5 Stage 2 Qualification Package](sprints/SPRINT_30_5_STAGE_2_QUALIFICATION_PACKAGE.md) | Decision resolved; accepted |
 | Sprint 30.5 Stage 2 closure | [Sprint 30.5 Stage 2 Closure](sprints/SPRINT_30_5_STAGE_2_CLOSURE.md) | Founder-accepted and closed |
 | Sprint 30.5 Stage 2 evidence | [Sprint 30.5 Stage 2 Evidence](sprints/evidence/sprint-30-5/stage-2/README.md) | Founder-accepted, frozen and hash-bound |
-| Sprint 30.5 Stage 3 plan | [Sprint 30.5 Stage 3 Plan](sprints/SPRINT_30_5_STAGE_3_PLAN.md) | Proposed; separate Founder authority required |
-| Sprint 30.5 Stage 3 host admission | [Sprint 30.5 Stage 3 Host Admission](sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION.md) | Founder-QA-01 admitted with Founder provenance exception; Stage 3 unauthorised |
-| Sprint 30.5 Stage 3 admission decision | [Sprint 30.5 Stage 3 Host Admission Decision](sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION_DECISION.md) | Founder-approved repository admission state; execution authority excluded |
-| Sprint 30.5 Stage 3 provenance package | [Sprint 30.5 Stage 3 Provenance Exception Founder Approval Package](sprints/SPRINT_30_5_STAGE_3_PROVENANCE_EXCEPTION_FOUNDER_APPROVAL_PACKAGE.md) | Approved evidence and residual-risk package |
+| Sprint 30.5 Stage 3 plan | [Sprint 30.5 Stage 3 Plan](sprints/SPRINT_30_5_STAGE_3_PLAN.md) | Historical execution plan; Stage 3 was attempted but remains incomplete and blocked |
+| Sprint 30.5 Stage 3 host admission | [Sprint 30.5 Stage 3 Host Admission](sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION.md) | Historical host-admission requirements; Founder-QA-01 remains admitted with Founder provenance exception |
+| Sprint 30.5 Stage 3 admission decision | [Sprint 30.5 Stage 3 Host Admission Decision](sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION_DECISION.md) | Founder-approved historical admission decision; admission remains distinct from current execution authority |
+| Sprint 30.5 Stage 3 provenance package | [Sprint 30.5 Stage 3 Provenance Exception Founder Approval Package](sprints/SPRINT_30_5_STAGE_3_PROVENANCE_EXCEPTION_FOUNDER_APPROVAL_PACKAGE.md) | Approved historical evidence and residual-risk package |
+| Sprint 30.5 Stage 3 reconciliation | [Sprint 30.5 Stage 3 Reconciliation](sprints/SPRINT_30_5_STAGE_3_RECONCILIATION.md) | Stage 3 historically attempted, incomplete and blocked; no current resume authority |
+| Sprint 30.5 Stage 3 reconciliation evidence | [Sprint 30.5 Stage 3 Reconciliation Evidence](sprints/evidence/sprint-30-5/stage-3-reconciliation/README.md) | Recovered phase evidence, chain of custody, unavailable dispositions and USB integrity incident |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation

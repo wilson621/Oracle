@@ -8,7 +8,7 @@
 **Expected Stability:** Updated at Sprint activation, closure or approved renumbering
 **Supersedes:** Informal Sprint numbering inferred from individual planning documents
 **Superseded By:** None
-**Last Reviewed:** 25 July 2026
+**Last Reviewed:** 27 July 2026
 
 ---
 
@@ -40,7 +40,7 @@ implementation stages and do not use fractional Sprint numbering.
 | 27 | Contextual Companion and Reference Integration | Complete — Founder-accepted and closed; source/synthetic certification accepted; Operational Certification Deferred; live profile provisional and observation disabled | None | [Plan](SPRINT_27_PLAN.md), [Implementation](SPRINT_27_IMPLEMENTATION.md), [Certification](SPRINT_27_CERTIFICATION.md), [Closure](SPRINT_27_CLOSURE.md), [Founder acceptance package](SPRINT_27_FOUNDER_ACCEPTANCE_REQUIRED.md), [ADRs 044–045](../Decisions.md) |
 | 28 | Unified Oracle Product Experience | Complete, locally certified, Founder-accepted and closed | None | [Decision package](SPRINT_28_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_28_PLAN.md), [Product Truth Inventory](SPRINT_28_PRODUCT_TRUTH_INVENTORY.md), [Implementation](SPRINT_28_IMPLEMENTATION.md), [Certification](SPRINT_28_CERTIFICATION.md), [Founder acceptance package](SPRINT_28_FOUNDER_ACCEPTANCE_REQUIRED.md), [Closure](SPRINT_28_CLOSURE.md) |
 | 29 | Secure Desktop Operations and Distribution | Complete, locally certified, Founder-accepted and closed; Clean-Machine Certification Deferred | None | [Decision package](SPRINT_29_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_29_PLAN.md), [Implementation](SPRINT_29_IMPLEMENTATION.md), [Certification](SPRINT_29_CERTIFICATION.md), [Founder acceptance package](SPRINT_29_FOUNDER_ACCEPTANCE_REQUIRED.md), [Closure](SPRINT_29_CLOSURE.md), [ADR-046](../Decisions.md) |
-| 30 | Production Qualification | Founder-approved and active; Phases 1–5 locally verified; Sprint 30.5 Stages 1–2 Founder-accepted and closed; Stage 3 host admitted with Founder provenance exception; Stage 3 execution not authorised; Stages 3–7 remain | None | [Decision package](SPRINT_30_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_30_PLAN.md), [Phase 1 implementation](SPRINT_30_PHASE_1_IMPLEMENTATION.md), [Phase 2 implementation](SPRINT_30_PHASE_2_IMPLEMENTATION.md), [Phase 3 implementation](SPRINT_30_PHASE_3_IMPLEMENTATION.md), [Phase 4 implementation](SPRINT_30_PHASE_4_IMPLEMENTATION.md), [Phase 5 implementation](SPRINT_30_PHASE_5_IMPLEMENTATION.md), [Production Qualification dossier](SPRINT_30_PRODUCTION_QUALIFICATION_DOSSIER.md), [Founder acceptance package](SPRINT_30_FOUNDER_ACCEPTANCE_REQUIRED.md), [Stage 1 closure](SPRINT_30_5_STAGE_1_CLOSURE.md), [Stage 1 evidence](evidence/sprint-30-5/stage-1/README.md), [Stage 2 plan](SPRINT_30_5_STAGE_2_PLAN.md), [Stage 2 implementation](SPRINT_30_5_STAGE_2_IMPLEMENTATION.md), [Stage 2 qualification package](SPRINT_30_5_STAGE_2_QUALIFICATION_PACKAGE.md), [Stage 2 closure](SPRINT_30_5_STAGE_2_CLOSURE.md), [Stage 2 evidence](evidence/sprint-30-5/stage-2/README.md), [Stage 3 plan](SPRINT_30_5_STAGE_3_PLAN.md), [Stage 3 host admission](SPRINT_30_5_STAGE_3_HOST_ADMISSION.md), [Stage 3 admission decision](SPRINT_30_5_STAGE_3_HOST_ADMISSION_DECISION.md), [Qualification Register](../QUALIFICATION_REGISTER.md), [ADR-047](../Decisions.md) |
+| 30 | Production Qualification | Founder-approved and active; Phases 1–5 locally verified; Sprint 30.5 Stages 1–2 Founder-accepted and closed; Stage 3 historically Founder-authorised and attempted but incomplete and blocked; Stages 4–7 remain | None | [Decision package](SPRINT_30_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_30_PLAN.md), [Phase 1 implementation](SPRINT_30_PHASE_1_IMPLEMENTATION.md), [Phase 2 implementation](SPRINT_30_PHASE_2_IMPLEMENTATION.md), [Phase 3 implementation](SPRINT_30_PHASE_3_IMPLEMENTATION.md), [Phase 4 implementation](SPRINT_30_PHASE_4_IMPLEMENTATION.md), [Phase 5 implementation](SPRINT_30_PHASE_5_IMPLEMENTATION.md), [Production Qualification dossier](SPRINT_30_PRODUCTION_QUALIFICATION_DOSSIER.md), [Founder acceptance package](SPRINT_30_FOUNDER_ACCEPTANCE_REQUIRED.md), [Stage 1 closure](SPRINT_30_5_STAGE_1_CLOSURE.md), [Stage 1 evidence](evidence/sprint-30-5/stage-1/README.md), [Stage 2 plan](SPRINT_30_5_STAGE_2_PLAN.md), [Stage 2 implementation](SPRINT_30_5_STAGE_2_IMPLEMENTATION.md), [Stage 2 qualification package](SPRINT_30_5_STAGE_2_QUALIFICATION_PACKAGE.md), [Stage 2 closure](SPRINT_30_5_STAGE_2_CLOSURE.md), [Stage 2 evidence](evidence/sprint-30-5/stage-2/README.md), [Stage 3 plan](SPRINT_30_5_STAGE_3_PLAN.md), [Stage 3 host admission](SPRINT_30_5_STAGE_3_HOST_ADMISSION.md), [Stage 3 admission decision](SPRINT_30_5_STAGE_3_HOST_ADMISSION_DECISION.md), [Stage 3 reconciliation](SPRINT_30_5_STAGE_3_RECONCILIATION.md), [Stage 3 reconciliation evidence](evidence/sprint-30-5/stage-3-reconciliation/README.md), [Qualification Register](../QUALIFICATION_REGISTER.md), [ADR-047](../Decisions.md) |
 | 31 | Oracle Beta Certification | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 
 # Historical Integrity
@@ -90,7 +90,10 @@ Production Qualification dossier. Sprint 30.5 Stage 1 Environment Admission
 is Founder-accepted and closed with frozen controlled non-pristine host,
 isolated network, standalone GPU and cleanup evidence. It does not satisfy the
 separate clean Windows requirement. Stage 2 package reconciliation is
-Founder-accepted and closed with frozen evidence. Sprint 30 remains
-qualification-incomplete until Stages 3–7 complete, beginning with separately
-authorised clean Windows qualification. The Stage 3 host is admitted with a
-Founder provenance exception, but Stage 3 has not begun.
+Founder-accepted and closed with frozen evidence. Stage 3 was subsequently
+Founder-authorised and attempted on the host admitted with a Founder
+provenance exception. Recovered Revision 4 NegativePathAndTrust evidence
+passed, but Revision 4 InstallAndStartup failed, Revision 5 remained incomplete
+and Revision 6 is abandoned. Sprint 30 remains qualification-incomplete:
+Stage 3 is historically attempted, incomplete and blocked, and Stages 4–7
+have not started.

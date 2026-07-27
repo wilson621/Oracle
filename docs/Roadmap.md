@@ -10,8 +10,8 @@
 **Expected Stability:** Reviewed at strategic and Sprint-boundary changes
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
-**Last Reviewed:** 26 July 2026
-**Version:** 6.1
+**Last Reviewed:** 27 July 2026
+**Version:** 6.2
 
 ---
 
@@ -785,18 +785,21 @@ non-pristine physical host, isolated Auth route, standalone hardware GPU
 admission and teardown evidence pass and are frozen. The host is not a clean
 Windows environment. Stage 2 is Founder-accepted and closed with a frozen
 local Runtime Manifest `1.7.0` MSIX, mechanically equal Release Manifest,
-SBOM, provenance, package inventory and complete signing teardown. Sprint 30
-remains qualification-incomplete pending Stages 3–7, including separately
-authorised clean Windows, live Auth, protected rendering and installed-package
-qualification. Stage 3 is proposed and unauthorised.
-The Founder-designated replacement physical laptop `Founder-QA-01` is
+SBOM, provenance, package inventory and complete signing teardown.
+
+Stage 3 was Founder-authorised and attempted on `Founder-QA-01`, which remains
 `admitted-with-founder-provenance-exception` for its current Windows
-installation. The missing original-media hash remains explicitly unavailable.
-Separate Founder authority is still required for Stage 3 execution, artifact
-transfer, certificate trust and package installation. This host admission
-leaves Stages 1 and 2 intact.
-Production signing, publication, distribution, deployment and runtime
-persistence remain unauthorised.
+installation. The missing original-media hash remains explicitly unavailable
+and `installationMediaEvidencePresent` remains false. Recovered Revision 4
+NegativePathAndTrust evidence passed, but Revision 4 InstallAndStartup failed.
+Canonical Phase 03 success evidence is absent, Revision 5 remained incomplete
+and Revision 6 is abandoned.
+
+Sprint 30 remains qualification-incomplete. Stage 3 is historically attempted,
+incomplete and blocked, while Stages 4–7 have not started. No current authority
+exists to resume Stage 3 or to create a replacement harness, certificate,
+candidate or qualification revision. Production signing, publication,
+distribution, deployment and runtime persistence remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

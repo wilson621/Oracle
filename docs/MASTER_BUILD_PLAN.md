@@ -8,8 +8,8 @@
 **Expected Stability:** Reviewed whenever approved execution direction changes
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
-**Last Reviewed:** 26 July 2026
-**Version:** 4.5
+**Last Reviewed:** 27 July 2026
+**Version:** 4.6
 
 ---
 
@@ -142,17 +142,24 @@ host, isolated network, standalone GPU and cleanup evidence. It does not
 satisfy clean Windows qualification. Stage 2 has constructed and mechanically
 verified a local-only package and signed Release Manifest reconciled to
 Runtime Manifest `1.7.0`; Stage 2 is Founder-accepted and closed, its evidence
-is frozen, and all temporary signing material and trust are removed. Stage 3
-Clean Windows Qualification is proposed and not authorised. Clean Windows,
-live Auth, protected rendering, installed-package
-qualification and later integrated evidence remain outstanding.
-The Stage 3 host is `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, admitted
-for its current Windows installation with a Founder provenance exception.
-The unavailable installation-media evidence remains false. Admission does not
-authorise Stage 3 execution, artifact transfer, certificate trust or package
-installation and does not alter accepted Stage 1 or Stage 2 evidence.
-Production signing, publication, distribution, deployment and activation
-remain unauthorised.
+is frozen, and all temporary signing material and trust are removed.
+
+Stage 3 Clean Windows Qualification was Founder-authorised and attempted on
+`Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, which remains admitted for its
+current Windows installation with a Founder provenance exception.
+`installationMediaEvidencePresent` remains false. Recovered Revision 4
+NegativePathAndTrust evidence passed, but Revision 4 InstallAndStartup failed.
+Canonical Phase 03 success evidence is absent, Revision 5 remained incomplete
+and Revision 6 is abandoned.
+
+Stage 3 is historically attempted, incomplete and blocked. Clean Windows
+acceptance, live Auth, protected rendering, installed-package qualification
+and later integrated evidence remain outstanding. No current authority exists
+to resume Stage 3, execute or repair the harness observed during
+reconciliation, create or trust a replacement certificate, reinstall the
+package or begin a new qualification revision. Accepted Stage 1 and Stage 2
+evidence remains unchanged. Production signing, publication, distribution,
+deployment and activation remain unauthorised.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

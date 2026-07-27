@@ -8,8 +8,8 @@
 **Expected Stability:** Updated whenever approved work changes state
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
-**Last Reviewed:** 26 July 2026
-**Version:** 8.3
+**Last Reviewed:** 27 July 2026
+**Version:** 8.4
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -125,16 +125,24 @@ Auth route, PostgreSQL/Mailpit denial, standalone Electron `39.8.10` hardware
 GPU admission and complete teardown pass. The raw evidence package is frozen
 under SHA-256
 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
-This does not satisfy the separate clean Windows requirement. Stage 2 —
-Candidate Freeze and Package Reconciliation is Founder-accepted and closed
-with frozen evidence. Runtime Manifest `1.7.0` mechanically reconciles to the
-local qualification MSIX and signed Release Manifest. The signer and trust
-were removed. Stage 3 Clean Windows Qualification is proposed but remains
-unauthorised. `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, is admitted for
-its current Windows installation with a Founder provenance exception.
-`installationMediaEvidencePresent` remains false. Stage 3 execution, artifact
-transfer, certificate trust and package installation remain subject to a
-separate Founder decision. Gate 7 is not authorised.
+This does not satisfy the separate clean Windows requirement.
+
+Stage 2 — Candidate Freeze and Package Reconciliation is Founder-accepted and
+closed with frozen evidence. Runtime Manifest `1.7.0` mechanically reconciles
+to the local qualification MSIX and signed Release Manifest. The signer and
+trust were removed.
+
+Stage 3 Clean Windows Qualification was Founder-authorised and attempted.
+`Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, remains admitted for its
+current Windows installation with a Founder provenance exception, and
+`installationMediaEvidencePresent` remains false. Recovered Revision 4
+NegativePathAndTrust evidence passed. Revision 4 InstallAndStartup failed,
+canonical Phase 03 success evidence is absent, Revision 5 remained incomplete
+and Revision 6 is abandoned.
+
+Stage 3 is historically attempted, incomplete and blocked. No current
+execution, artifact-transfer, certificate-trust, package-installation,
+harness-repair or requalification authority exists. Gate 7 is not authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -172,7 +180,7 @@ Stage 2 implementation, qualification package and evidence are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_2_IMPLEMENTATION.md`,
 `docs/sprints/SPRINT_30_5_STAGE_2_QUALIFICATION_PACKAGE.md` and
 `docs/sprints/evidence/sprint-30-5/stage-2/`.
-Stage 2 closure and the proposed Stage 3 execution plan are recorded in
+Stage 2 closure and the historical Stage 3 execution plan are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_2_CLOSURE.md` and
 `docs/sprints/SPRINT_30_5_STAGE_3_PLAN.md`.
 Replacement-host admission requirements are recorded in
@@ -182,18 +190,28 @@ are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION_DECISION.md` and
 `docs/sprints/evidence/sprint-30-5/stage-3-host-admission/Oracle.Stage3HostAdmissionApproval.json`.
 
-# Latest Closed Qualification Stage
+The recovered Stage 3 phase evidence, chain of custody and superseding
+reconciliation are recorded in
+`docs/sprints/evidence/sprint-30-5/stage-3-reconciliation/` and
+`docs/sprints/SPRINT_30_5_STAGE_3_RECONCILIATION.md`.
 
-## Sprint 30.5 Stage 1 — Environment Admission
+# Current Qualification Position
 
-**Status:** Founder-accepted and closed
-**Host:** Controlled non-pristine physical qualification host
-**Clean Windows:** Not satisfied; remains mandatory later
-**Next stage:** Stage 2 Founder-accepted and closed; Stage 3 host admitted with
-Founder provenance exception; Stage 3 execution separately unauthorised
-**Deployment status:** Production unchanged; Stage 2 local test signing only;
-no production signing, distribution, deployment, migration, persistence or
-Gate authority
+## Sprint 30.5 Stage 3 — Clean Windows Qualification
+
+**Status:** Historically Founder-authorised and attempted; incomplete and
+blocked
+**Host:** `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`;
+`admitted-with-founder-provenance-exception`
+**Installation-media evidence:** `installationMediaEvidencePresent: false`
+**Evidence:** Revision 4 NegativePathAndTrust passed; Revision 4
+InstallAndStartup failed; canonical Phase 03 success evidence absent; Revision
+5 incomplete; Revision 6 abandoned
+**Current authority:** None to resume Stage 3, repair or execute the observed
+harness, create or trust a replacement certificate, reinstall the package or
+begin a new qualification revision
+**Deployment status:** Production unchanged; no production signing,
+distribution, deployment, migration, persistence or Gate authority
 
 # Latest Closed Sprint
 

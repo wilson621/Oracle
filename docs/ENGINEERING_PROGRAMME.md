@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 30.5 Stage 3 execution Founder decision
+**Next Review:** Sprint 30.5 Stage 3 post-reconciliation Founder direction
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1343,22 +1343,30 @@ probe and complete teardown. It does not satisfy separate clean Windows
 qualification.
 
 Stage 2 Candidate Freeze and Package Reconciliation is Founder-accepted and
-closed with frozen evidence. The new local-only package and signed Release
+closed with frozen evidence. The local-only package and signed Release
 Manifest mechanically reconcile Runtime Manifest `1.7.0` without altering the
 immutable Sprint 29 package. Temporary signing material and trust were
-removed. Stage 3 Clean Windows Qualification is proposed and not authorised.
-The replacement host `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, is
-`admitted-with-founder-provenance-exception` for its current Windows
-installation. The unavailable installation-media hash remains explicitly
-false, while every mandatory technical and compensating control passes.
-Host admission is complete, but Stage 3 execution, artifact transfer,
-certificate trust and package installation require a separate Founder
-decision.
-Live Auth, protected rendering,
-clean Windows, installed-package GPU/performance/accessibility,
-reproducibility and final integrated qualification remain in later sequential
-stages. No production deployment, persistence, telemetry, migration, external
-provider, remote push or Gate 7 activity is authorised.
+removed.
+
+Stage 3 Clean Windows Qualification was subsequently Founder-authorised and
+attempted on `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, whose current
+Windows installation remains `admitted-with-founder-provenance-exception`.
+`installationMediaEvidencePresent` remains false. Recovered Revision 4
+NegativePathAndTrust evidence passed, but Revision 4 InstallAndStartup failed
+and no canonical Phase 03 success evidence was created. Revision 5 remained
+incomplete, Revision 6 is abandoned, and the certificate 24-hour start gate
+has closed.
+
+Stage 3 is therefore historically attempted, incomplete and blocked. No
+current authority exists to resume it, execute the harness observed during
+reconciliation, create or trust a replacement certificate, reinstall the
+package, repair the harness or begin another qualification revision.
+
+Live Auth, protected rendering, clean Windows acceptance, installed-package
+GPU/performance/accessibility, reproducibility and final integrated
+qualification remain outstanding in later sequential stages. No production
+deployment, persistence, telemetry, migration, external provider, remote push
+or Gate 7 activity is authorised.
 
 # FOUNDER BETA READINESS REVIEW
 

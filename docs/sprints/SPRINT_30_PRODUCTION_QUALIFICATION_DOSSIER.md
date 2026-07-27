@@ -93,8 +93,8 @@ gap. It does not prove:
 
 The frozen Stage 1 evidence archive SHA-256 is
 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
-Sprint 30 remains qualification-incomplete while Sprint 30.5 Stages 2–7
-remain.
+Sprint 30 remains qualification-incomplete while Sprint 30.5 Stage 3 remains
+incomplete and Stages 4–7 remain outstanding.
 
 ## Sprint 30.5 Stage 2 evidence extension
 
@@ -112,21 +112,36 @@ package remains unchanged at Runtime Manifest `1.6.0`.
 
 The frozen Stage 2 evidence archive SHA-256 is
 `8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876`.
-The Founder accepted and closed Stage 2. Stage 3 has not begun and remains
-unauthorised. Sprint 30 remains qualification-incomplete because clean Windows,
-live Auth, protected rendering, installed-package GPU/performance/accessibility,
+The Founder accepted and closed Stage 2. Stage 3 was subsequently
+Founder-authorised and attempted. It did not pass. Sprint 30 remains
+qualification-incomplete because clean Windows acceptance, live Auth,
+protected rendering, installed-package GPU/performance/accessibility,
 reproducibility and final integrated qualification remain outstanding.
 
-## Sprint 30.5 Stage 3 host direction
+## Sprint 30.5 Stage 3 attempt and reconciliation
 
-The Founder withdrew the ASUS ROG Zephyrus G15 from the proposed Stage 3 role
-and selected `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`. The host is
+The Founder withdrew the ASUS ROG Zephyrus G15 from the Stage 3 role and
+selected `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`. The host remains
 `admitted-with-founder-provenance-exception` for its current Windows
 installation. The missing installation-media hash remains explicitly
-unavailable. No destructive action, artifact transfer, certificate trust,
-package installation or Stage 3 execution is authorised.
+unavailable and `installationMediaEvidencePresent` remains false.
 
-This is an environment substitution only. It does not alter the accepted
-Stage 2 source candidate, Runtime Manifest `1.7.0`, signed Release Manifest,
-MSIX, artifact hashes or frozen evidence. ASUS-specific hardware/GPU evidence
-remains valid Stage 1 history but does not transfer to the replacement.
+Revision 4 NegativePathAndTrust passed. Revision 4 InstallAndStartup failed,
+and canonical Phase 03 success evidence was not created. Revision 5 remained
+incomplete after failing closed on missing required bound Revision 4 evidence.
+Revision 6 accurately recorded that evidence as unavailable when prepared and
+is abandoned. The original Revision 4 evidence was later recovered, verified
+and imported without rewriting any historical attempt.
+
+The recovered evidence was imported in commit
+`a31acd42f19d71811ebb18d7dc7176debfc35a6d`. The superseding reconciliation
+was recorded in commit
+`1e090dfc9b1ce60c39a8f492482c28f2844bdea4` and is bound by reconciliation
+record SHA-256
+`9d5f0cafe2a49792c04fed34702cd63ec9962f0187623a1300a8132beeec830f`.
+
+Stage 3 is historically attempted, incomplete and blocked. No current
+authority exists to resume it. This outcome does not alter the accepted Stage
+2 source candidate, Runtime Manifest `1.7.0`, signed Release Manifest, MSIX,
+artifact hashes or frozen evidence. ASUS-specific hardware/GPU evidence
+remains valid Stage 1 history but does not transfer to the replacement host.
