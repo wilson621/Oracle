@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-3-usb-integrity-incident",
+  "contractVersion": 1,
+  "classification": "removable-media-integrity-incident",
+  "medium": {
+    "volumeLabel": "ESD-USB",
+    "filesystem": "FAT32",
+    "size": 16021192704,
+    "laptopDriveLetter": "F:",
+    "developmentPcDriveLetter": "E:",
+    "preExistingContentInventorySha256": "f2fb5cb31024d979df178bfa1c11b3179fdd89214a5ae7f27130aa37ff394951"
+  },
+  "returnedEvidence": {
+    "manifestPath": "docs/sprints/evidence/sprint-30-5/stage-3-reconciliation/chain-of-custody/Oracle.Stage3Revision7EvidenceReturnManifest.json",
+    "manifestSha256": "ec8bc3f1e731f1368bd5240db262b7582b741ea606997f2da8c7b042922aae23",
+    "payloadFileCount": 10,
+    "governedReturnFileCount": 12,
+    "payloadBytes": 1501936032,
+    "preservedDevelopmentPcLocation": "C:\\Dev\\Oracle-Stage3-Revision7-Returned-Evidence",
+    "preservationResult": "passed"
+  },
+  "observations": {
+    "affectedPath": "sources\\install.swm",
+    "affectedPathExpectedSize": 3949570616,
+    "getFileHashResult": "failed-file-or-directory-corrupted-and-unreadable",
+    "sequentialReadBytes": 0,
+    "sequentialReadResult": "failed-file-or-directory-corrupted-and-unreadable",
+    "volumeHealthStatus": "Warning",
+    "volumeOperationalStatus": "Full Repair Needed",
+    "readOnlyChkdskExitCode": 0,
+    "readOnlyChkdskSummary": "Windows reported no file-system problems despite the direct read failure.",
+    "repairAttempted": false,
+    "returnedOracleEvidenceReadAndPreserved": true
+  },
+  "disposition": {
+    "state": "retired-permanent-no-reuse",
+    "reuseForQualification": false,
+    "reuseForInstallationMedia": false,
+    "repairAuthorised": false,
+    "destructiveActionAuthorised": false,
+    "preservePendingSeparateDisposalAuthority": true
+  },
+  "governance": {
+    "doesNotSupplyInstallationMediaProvenance": true,
+    "installationMediaEvidencePresent": false,
+    "doesNotChangeHostAdmissionClassification": true,
+    "doesNotGrantQualificationAuthority": true
+  }
+}

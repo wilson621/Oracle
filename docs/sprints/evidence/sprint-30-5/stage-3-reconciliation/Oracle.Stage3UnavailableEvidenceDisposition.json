@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-3-unavailable-evidence-disposition",
+  "contractVersion": 1,
+  "classification": "explicit-unavailable-evidence-disposition",
+  "scope": "Historical Stage 3 artifacts referenced by immutable failure records but not present in the recovered return set.",
+  "dispositions": [
+    {
+      "id": "revision-2-read-only-state-capture",
+      "artifactType": "transcript",
+      "referencedBy": "docs/sprints/evidence/sprint-30-5/stage-3-revision-history/failure-records/Oracle.Stage3Revision2FailureRecord.json",
+      "expectedSha256": "38805ea7a4fcb5ab3b8205499251ade71c5c44686251795082508abb9a36f500",
+      "state": "unavailable",
+      "exactBytesAvailable": false,
+      "mayBeRecreated": false,
+      "mayBeRepresentedAsPassed": false
+    },
+    {
+      "id": "revision-3-failed-execution-transcript",
+      "artifactType": "transcript",
+      "referencedBy": "docs/sprints/evidence/sprint-30-5/stage-3-revision-history/failure-records/Oracle.Stage3Revision3FailureRecord.json",
+      "expectedSha256": "631bb05621ad1d78c871a392821496a10431777cf3230a6d519ac8eb9ba2608e",
+      "state": "unavailable",
+      "exactBytesAvailable": false,
+      "mayBeRecreated": false,
+      "mayBeRepresentedAsPassed": false
+    },
+    {
+      "id": "revision-3-read-only-state-capture",
+      "artifactType": "transcript",
+      "referencedBy": "docs/sprints/evidence/sprint-30-5/stage-3-revision-history/failure-records/Oracle.Stage3Revision3FailureRecord.json",
+      "expectedSha256": "2facc7f98180a835e2bda03051936c0697c099a2ea2925b22dfb215ecdfc105a",
+      "state": "unavailable",
+      "exactBytesAvailable": false,
+      "mayBeRecreated": false,
+      "mayBeRepresentedAsPassed": false
+    },
+    {
+      "id": "revision-4-initial-diagnostic-transcript",
+      "artifactType": "transcript",
+      "referencedBy": "docs/sprints/evidence/sprint-30-5/stage-3-revision-history/failure-records/Oracle.Stage3Revision4FailureRecord.json",
+      "expectedSha256": "f39933fcce5bede87839cddb535f97e836d6db39646220121c7e9068ede9d070",
+      "state": "unavailable",
+      "exactBytesAvailable": false,
+      "mayBeRecreated": false,
+      "mayBeRepresentedAsPassed": false
+    },
+    {
+      "id": "revision-4-corrected-diagnostic-transcript",
+      "artifactType": "transcript",
+      "referencedBy": "docs/sprints/evidence/sprint-30-5/stage-3-revision-history/failure-records/Oracle.Stage3Revision4FailureRecord.json",
+      "expectedSha256": "6fe9fed02be64fbf68a5553049cbd45ce5217f57025ef8c21a370a1e7698fc3",
+      "state": "unavailable",
+      "exactBytesAvailable": false,
+      "mayBeRecreated": false,
+      "mayBeRepresentedAsPassed": false
+    },
+    {
+      "id": "revision-4-installed-oracle-executable",
+      "artifactType": "installed-binary-observation",
+      "referencedBy": "docs/sprints/evidence/sprint-30-5/stage-3-revision-history/failure-records/Oracle.Stage3Revision4FailureRecord.json",
+      "observedSha256": "0cd98c06fae63d980fdd1c68446d576d4e3045d2ee293ebab21f94c5366abba6",
+      "state": "observed-hash-only-bytes-not-separately-retained",
+      "exactBytesAvailable": false,
+      "mayBeRecreated": false,
+      "mayBeRepresentedAsPassed": false
+    }
+  ],
+  "exclusions": [
+    {
+      "id": "revision-4-negative-path-and-trust-evidence",
+      "path": "docs/sprints/evidence/sprint-30-5/stage-3-reconciliation/recovered-phase-evidence/revision-4-incoming/stage-3-evidence/02b-negative-path-and-trust-r4.json",
+      "sha256": "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2",
+      "reason": "Recovered, verified, and imported; it is not unavailable."
+    }
+  ],
+  "conclusions": {
+    "unavailableArtifactsRemainHistoricalReferencesOnly": true,
+    "noUnavailableArtifactIsInferredRecreatedOrPromoted": true,
+    "recoveryOfRevision4NegativePathEvidenceDoesNotAlterTheseDispositions": true
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "contract": "oracle.sprint-30-5.stage-3-reconciliation-record",
+  "contractVersion": 1,
+  "classification": "superseding-evidence-reconciliation-without-historical-rewrite",
+  "repository": {
+    "branch": "sprint-9-overlay",
+    "evidenceImportCommit": "a31acd42f19d71811ebb18d7dc7176debfc35a6d"
+  },
+  "host": {
+    "deviceName": "Founder-QA-01",
+    "manufacturer": "MEDION",
+    "model": "ERAZER P6605 MD61596",
+    "admissionClassification": "admitted-with-founder-provenance-exception",
+    "installationMediaEvidencePresent": false
+  },
+  "bindings": {
+    "hostAdmission": {
+      "sha256": "6dfaa176ed2d43595511d44401612536c6c0f1955f94527469d0f22af09c3b0e"
+    },
+    "founderProvenanceExceptionApproval": {
+      "sha256": "0d9a9668dbbf11c91f08d58bd84261f48baa2d3d3fd13184434965b66ffe2282"
+    },
+    "baselineRecoveryDocument": {
+      "sha256": "6674b900fccadcc8f6d476dda6a787f859aad948dc78033dbfb7793ac90e8d44"
+    },
+    "stage2Archive": {
+      "sha256": "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876"
+    },
+    "frozenMsix": {
+      "sha256": "00b045996e8a7e90400ce3208b2ab36bacccf48831a6ab770827f2ecd6e45276"
+    },
+    "releaseManifest": {
+      "sha256": "854b909a8d93a08ebd165d19a2f865ad6f3e84abe31f4bf1326e0647e761113d"
+    },
+    "recoveredRevision4NegativePathEvidence": {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-3-reconciliation/recovered-phase-evidence/revision-4-incoming/stage-3-evidence/02b-negative-path-and-trust-r4.json",
+      "size": 2629,
+      "sha256": "164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2",
+      "sidecarPath": "docs/sprints/evidence/sprint-30-5/stage-3-reconciliation/recovered-phase-evidence/revision-4-incoming/stage-3-evidence/02b-negative-path-and-trust-r4.json.sha256.txt",
+      "sidecarSha256": "3278ab63bfd5c36dc0ed85d46be1b9625681a16e70d521b060df03bcbf44d72c"
+    },
+    "revisionHistoryInventory": {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-3-revision-history/Oracle.Stage3RevisionHistory.inventory.json",
+      "sha256": "186f9bbf6b55d3ea5f95e2408f75e2e1f7135f5d0fca41854310cf81879b7134"
+    },
+    "revision2FailureRecord": {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-3-revision-history/failure-records/Oracle.Stage3Revision2FailureRecord.json",
+      "sha256": "c22a0704075909dc22b8c04e95aa347d39340a2bd6f40fb8b2893942ee42cca8"
+    },
+    "revision3FailureRecord": {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-3-revision-history/failure-records/Oracle.Stage3Revision3FailureRecord.json",
+      "sha256": "ca646b0951b18f3234b38b0f70f369479d3f76373dad985a19df5aa009082654"
+    },
+    "revision4FailureRecord": {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-3-revision-history/failure-records/Oracle.Stage3Revision4FailureRecord.json",
+      "sha256": "68d97c4c45cd028ef7bdc915543d8a56e20928d50031b8d6787a8c5101ec6c83"
+    },
+    "revision5FailureRecord": {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-3-revision-history/failure-records/Oracle.Stage3Revision5FailureRecord.json",
+      "sha256": "9536a189562d6ab58878e779625e06e6131072c4159764ddfbb80fdae01d188d"
+    },
+    "revision6RepositoryState": {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-3-revision-6-abandoned-design/repository-state.json",
+      "sha256": "42d8585604e9f8bafa573ad88ca9588d28325ec9b8f3fff16835d5a5052d03f0"
+    },
+    "revision6AbandonedDesignInventory": {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-3-revision-6-abandoned-design/Oracle.Stage3Revision6AbandonedDesign.inventory.json",
+      "sha256": "cb49f1544e842c8e2209836def7114b21cd57c536bad810d74637a6b48bb8c31"
+    },
+    "importedEvidenceInventory": {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-3-reconciliation/Oracle.Stage3ReconciliationInventory.json",
+      "sha256": "5eb3405caa4ce58414d4ecde0b995babdb3d05b412bae401d55895af0e935599"
+    },
+    "unavailableEvidenceDisposition": {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-3-reconciliation/Oracle.Stage3UnavailableEvidenceDisposition.json",
+      "sha256": "4e0890e26563b095348b498a9ebad358291be189f82048a2c4b6203c67fff466"
+    },
+    "usbIntegrityIncident": {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-3-reconciliation/Oracle.Stage3UsbIntegrityIncident.json",
+      "sha256": "4305db8b1ca7d21078ab67a647895b8daea4a7c72411201c1aaa1f15a3ea0a44"
+    },
+    "harnessObservedAtReconciliation": {
+      "path": "scripts/sprint-30-5/stage-3-qualification/Invoke-OracleStage3Qualification.ps1",
+      "sha256": "343d15d4a8172524a649f2925079de00c0a6e6a55203423fbc2de515ec6b0598",
+      "observedAtEvidenceImportCommit": "a31acd42f19d71811ebb18d7dc7176debfc35a6d",
+      "sha256Purpose": "historical-state-binding"
+    }
+  },
+  "conclusions": {
+    "revision4NegativePathAndTrust": "passed",
+    "revision4InstallAndStartup": "failed",
+    "revision4InstallationAndAppxActivationClaims": "retained-from-immutable-revision4-failure-record-not-independently-reproven-by-recovered-phase-evidence",
+    "revision4Overall": "failed",
+    "canonicalPhase03SuccessEvidencePresent": false,
+    "revision5": "incomplete-failed-closed-missing-required-bound-revision4-evidence",
+    "revision5LaterRecoveryDoesNotRetroactivelyCompleteAttempt": true,
+    "revision6OriginalEvidenceUnavailablePremise": "accurate-when-recorded",
+    "revision6CurrentAvailabilityDisposition": "superseded-by-later-recovery",
+    "revision6Overall": "abandoned-not-resumable",
+    "stage3HistoricallyFounderAuthorised": true,
+    "stage3HistoricallyAttempted": true,
+    "stage3CurrentStatus": "historically-attempted-incomplete-and-blocked",
+    "stage3Passed": false,
+    "stage4AndLaterBlocked": true,
+    "productSourceChanged": false,
+    "msixRebuiltOrResigned": false,
+    "frozenPackageHashChanged": false,
+    "historicalRecordsRewritten": false
+  },
+  "authority": {
+    "currentAuthorityToResumeStage3": false,
+    "currentAuthorityToExecuteHarnessObservedAtReconciliation": false,
+    "currentAuthorityToCreateReplacementCertificate": false,
+    "currentAuthorityToRepairHarness": false,
+    "currentAuthorityToRequalify": false,
+    "separateFounderDecisionRequired": true
+  },
+  "timing": {
+    "certificateNotAfterUtc": "2026-07-28T15:45:27Z",
+    "certificate24HourStartGateClosedAtUtc": "2026-07-27T15:45:27Z",
+    "certificate24HourStartGateClosed": true,
+    "certificateMayNotBeReusedAsQualificationAuthority": true
+  },
+  "harnessDisposition": {
+    "stateAtReconciliation": "obsolete-prohibited-from-execution",
+    "observedAtEvidenceImportCommit": "a31acd42f19d71811ebb18d7dc7176debfc35a6d",
+    "reason": "At reconciliation time, the observed harness belonged to the incomplete Revision 5/6 workflow and did not provide an authorised resumable path.",
+    "recordedSha256IsHistoricalStateBinding": true,
+    "recordedSha256PermanentlyFreezesImplementation": false,
+    "futureGovernedHarnessMayDiffer": true,
+    "futureHarnessWorkSeparateFromReconciliation": true
+  },
+  "separation": {
+    "reconciliationOnly": true,
+    "futureHarnessRepairSeparate": true,
+    "futureCandidateResigningSeparate": true,
+    "futureQualificationRevisionSeparate": true,
+    "stage3ExecutionIncluded": false
+  },
+  "preservation": {
+    "revision4RecordsImmutable": true,
+    "revision5RecordsImmutable": true,
+    "revision6RecordsImmutable": true,
+    "recoveredEvidenceImportedWithoutHistoricalRewrite": true,
+    "externalHistoricalZipRetainedOutsideGit": true
+  }
+}
