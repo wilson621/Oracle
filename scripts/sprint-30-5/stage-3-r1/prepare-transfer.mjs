@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { basename, join, resolve } from "node:path";
+import { spawnSync } from "node:child_process";
 import {
   assertCreateOnlyDestination,
   assertOutsideHistoricalRoots,
@@ -11,17 +12,28 @@ import {
   validateAcceptedBindings,
   validateCertificateWindow,
   validateTransferIdentity,
+  validateProcessEnvelope,
   writeFileCreateOnly,
   writeJsonAtomicCreateOnly,
 } from "./stage3-core.mjs";
 
 const argumentsMap = parseArguments(process.argv.slice(2));
+const gitExecutable = resolve(
+  process.env.ProgramFiles ?? "C:\\Program Files",
+  "Git",
+  "cmd",
+  "git.exe"
+);
+if (!existsSync(gitExecutable)) {
+  throw new Error(`Required deterministic Git executable is missing: ${gitExecutable}`);
+}
 for (const name of [
   "founder-authority",
   "transfer-id",
   "timestamp-utc",
   "approved-root",
   "method",
+  "expected-harness-commit",
 ]) {
   if (!argumentsMap.has(name)) throw new Error(`Missing --${name}.`);
 }
@@ -33,6 +45,25 @@ const transferId = argumentsMap.get("transfer-id");
 const timestampUtc = argumentsMap.get("timestamp-utc");
 validateTransferIdentity({ transferId, timestampUtc });
 validateCertificateWindow(timestampUtc);
+const harnessCommit = runGit(["rev-parse", "HEAD"]);
+const harnessTree = runGit(["rev-parse", "HEAD^{tree}"]);
+const branch = runGit(["branch", "--show-current"]);
+const status = runGit(["status", "--porcelain=v1", "--untracked-files=all"]);
+if (
+  branch !== contract.requiredBranch ||
+  status !== "" ||
+  !/^[0-9a-f]{40}$/u.test(harnessCommit) ||
+  !/^[0-9a-f]{40}$/u.test(harnessTree) ||
+  harnessCommit !== argumentsMap.get("expected-harness-commit")
+) {
+  throw new Error("Stage 3 preparation repository identity is unsafe or differs.");
+}
+runGit([
+  "merge-base",
+  "--is-ancestor",
+  contract.stage2.candidateCommit,
+  harnessCommit,
+]);
 
 const approvedRoot = assertOutsideHistoricalRoots(resolve(argumentsMap.get("approved-root")));
 const transferRoot = join(approvedRoot, transferId);
@@ -138,6 +169,12 @@ writeJsonAtomicCreateOnly(manifestPath, {
   contract: "oracle.sprint-30-5.stage-3-r1-transfer",
   programmeIdentity: contract.programmeIdentity,
   revision: contract.revision,
+  preparation: {
+    branch,
+    harnessCommit,
+    harnessTree,
+    oeomVersion: "1.0",
+  },
   transferId,
   timestampUtc,
   method: argumentsMap.get("method"),
@@ -168,4 +205,16 @@ function parseArguments(args) {
     parsed.set(key.slice(2), value);
   }
   return parsed;
+}
+
+function runGit(args) {
+  const result = spawnSync(gitExecutable, args, {
+    cwd: repositoryRoot,
+    encoding: "utf8",
+    shell: false,
+    windowsHide: true,
+    maxBuffer: 4 * 1024 * 1024,
+  });
+  validateProcessEnvelope(result);
+  return result.stdout.trim();
 }

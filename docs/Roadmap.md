@@ -813,7 +813,8 @@ and Revision 6 is abandoned.
 Sprint 30 remains qualification-incomplete. Historical Stage 3 remains
 attempted, incomplete and immutable. Stage 3 Qualification R1 preparation is
 Founder-authorised and bound exclusively to the accepted R2 candidate; its
-execution remains blocked and unauthorised. Stages 4–7 have not started.
+preparation and pre-execution gate are complete. Execution remains blocked and
+unauthorised. Stages 4–7 have not started.
 Production signing, publication, distribution, deployment and runtime
 persistence remain unauthorised.
 

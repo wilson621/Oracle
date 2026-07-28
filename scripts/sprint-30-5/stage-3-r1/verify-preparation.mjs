@@ -203,11 +203,28 @@ const continuityCollector = readFileSync(
   join(import.meta.dirname, "Get-OracleStage3R1HostContinuity.ps1"),
   "utf8"
 );
+const preExecutionGate = readFileSync(
+  join(
+    repositoryRoot,
+    "docs",
+    "sprints",
+    "SPRINT_30_5_STAGE_3_R1_PRE_EXECUTION_GATE.md"
+  ),
+  "utf8"
+);
+const packageScripts = JSON.parse(
+  readFileSync(join(repositoryRoot, "package.json"), "utf8")
+).scripts;
 assert.match(transferBuilder, /candidate\.candidateCommit/u);
 assert.match(transferBuilder, /candidate\.sourceTree/u);
 assert.doesNotMatch(transferBuilder, /candidate\.repository/u);
 assert.doesNotMatch(transferBuilder, /randomBytes|Math\.random/u);
 assert.match(transferBuilder, /Get-OracleStage3R1HostContinuity\.ps1/u);
+assert.match(transferBuilder, /expected-harness-commit/u);
+assert.match(transferBuilder, /status --porcelain|--porcelain=v1/u);
+assert.match(transferBuilder, /merge-base/u);
+assert.match(transferBuilder, /harnessTree/u);
+assert.match(transferBuilder, /ProgramFiles[\s\S]*Git[\s\S]*cmd[\s\S]*git\.exe/u);
 for (const required of [
   "FOUNDER-AUTHORISED-STAGE3-R1-EXECUTION",
   "Write-CreateOnlyJson",
@@ -221,9 +238,11 @@ for (const required of [
   "Reset-AppxPackage",
   "HostContinuityPath",
   "ExpectedHostContinuitySha256",
+  "ExpectedHarnessCommit",
   "continuityMaximumAgeMinutes",
   "candidateCommit",
   "candidateTree",
+  "Executing harness or contract bytes differ from the transfer",
   "processEvidenceCounts",
   "Assert-PackageContent",
   "package-content-reconciliation.json",
@@ -235,6 +254,19 @@ for (const required of [
 ]) {
   assert.ok(harness.includes(required), `Harness contract missing: ${required}`);
 }
+assert.equal(
+  packageScripts["sprint-30-5:stage-3:r1:validate"],
+  "node scripts/sprint-30-5/stage-3-r1/verify-preparation.mjs"
+);
+assert.equal(
+  packageScripts["sprint-30-5:stage-3:r1:prepare-transfer"],
+  "node scripts/sprint-30-5/stage-3-r1/prepare-transfer.mjs"
+);
+assert.equal(
+  packageScripts["sprint-30-5:stage-3:r1:verify-return"],
+  "node scripts/sprint-30-5/stage-3-r1/verify-return.mjs"
+);
+assert.equal(packageScripts["sprint-30-5:stage-3:r1:execute"], undefined);
 for (const forbidden of [
   "Import-Certificate",
   "Remove-Item -LiteralPath \"Cert:",
@@ -243,6 +275,23 @@ for (const forbidden of [
   "Set-Content",
 ]) {
   assert.ok(!harness.includes(forbidden), `Forbidden harness behaviour: ${forbidden}`);
+}
+for (const required of [
+  "Stage 3 Qualification R1 Pre-Execution Gate",
+  "Execution:** Blocked and unauthorised",
+  "ExpectedHarnessCommit",
+  "ExpectedTransferManifestSha256",
+  "ExpectedHostContinuitySha256",
+  "FOUNDER-AUTHORISED-STAGE3-R1-TRANSFER",
+  "FOUNDER-AUTHORISED-STAGE3-R1-EXECUTION",
+  contract.stage2.candidateCommit,
+  contract.stage2.msixSha256,
+  contract.stage2.latestExecutionStartUtc.replace(".000Z", "Z"),
+]) {
+  assert.ok(
+    preExecutionGate.includes(required),
+    `Pre-execution gate contract missing: ${required}`
+  );
 }
 assert.ok(!harness.includes('"-addstore", "TrustedPeople"'));
 assert.match(harness, /ExpectedTransferManifestSha256/u);
@@ -306,7 +355,8 @@ const governance = [
 ].map((path) => readFileSync(join(repositoryRoot, path), "utf8"));
 for (const text of governance) {
   assert.match(text, /Stage 3 (?:Qualification )?R1/iu);
-  assert.match(text, /execution\s+(?:remains\s+)?(?:blocked|unauthorised)/iu);
+  assert.match(text, /Stage 3[\s\S]{0,600}execution/iu);
+  assert.match(text, /Stage 3[\s\S]{0,600}(?:blocked|unauthorised)/iu);
 }
 
 assert.equal(contract.authority.preparation, "founder-authorised");

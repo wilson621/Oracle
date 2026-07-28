@@ -59,10 +59,12 @@ candidate; clean Windows, live Auth, protected rendering and
 installed-package qualification remain; production
 qualification not yet complete
 
-Stage 3 Qualification R1 preparation is Founder-authorised and bound
-exclusively to the accepted Stage 2 Requalification R2 candidate. Its
-versioned contract, transfer builder and ordered clean-host harness are
-preparation tooling only; Stage 3 execution remains blocked and unauthorised.
+Stage 3 Qualification R1 preparation and its pre-execution gate are complete
+and bound exclusively to the accepted Stage 2 Requalification R2 candidate.
+The preparation-only system provides a versioned contract, transfer builder,
+fresh host-continuity collection, exact preparation commit/tree binding,
+ordered clean-host harness, complete operator instructions and deterministic
+return verification. Stage 3 execution remains blocked and unauthorised.
 
 ---
 
@@ -219,14 +221,13 @@ The accepted evidence is indexed by
 Requalification R1 acceptance creates no authority to resume Stage 3 or begin
 Stage 4 or any later stage.
 
-## Sprint 30.5 Stage 2 Requalification R2 — Candidate Refresh
+## Sprint 30.5 Stage 2 Requalification R2 - Candidate Refresh
 
-R1 remains accepted, closed and immutable. R2 is separately
-Founder-authorised and active because R1's remaining certificate-validity
-window cannot safely accommodate the full Stage 3 preparation and execution
-lifecycle. R2 permits a maximum 30-day isolated local-test signer per attempt,
-with exact trust and private-material teardown. No R2 candidate has yet been
-accepted, and R2 creates no Stage 3 authority.
+R1 remains accepted, closed and immutable. R2 was separately
+Founder-authorised because R1's remaining certificate-validity window could
+not safely accommodate the full Stage 3 preparation and execution lifecycle.
+R2 permits a maximum 30-day isolated local-test signer per attempt, with exact
+trust and private-material teardown.
 
 R2 attempt `r2-20260728T203503018Z-ec577cf4` passed from candidate and harness
 commit `11475fe01fff2ec69f0188547107f4e901c531d7`, tree

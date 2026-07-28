@@ -56,8 +56,8 @@ The proposed host remains `Founder-QA-01`, MEDION ERAZER P6605 MD61596, under
 the historical host-specific admission and provenance exception. Historical
 admission is not current continuity proof.
 
-Immediately before transfer and again before execution the governed lifecycle
-must verify the host identity, admitted Windows-installation continuity,
+Immediately after verified transfer arrival and before execution, the governed
+lifecycle must verify the host identity, admitted Windows-installation continuity,
 activation, recovery readiness, Secure Boot, TPM, Defender, development-tool
 absence, Oracle absence, package absence, certificate absence and absence of
 production resources. Reinstall, reset, restoration or material identity drift
@@ -65,6 +65,8 @@ returns the host to admission review.
 
 The fresh continuity record is create-only, has a maximum age of 60 minutes
 at execution admission and is bound by an exact Founder-approved SHA-256.
+Transfer approval relies on the immutable historical admission plus explicit
+custody controls; it does not treat that admission as current continuity proof.
 
 ## Transfer
 

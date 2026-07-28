@@ -166,10 +166,10 @@ stage.
 
 A governed mission ends only as:
 
-- **PASS** — every authorised objective and closure requirement is proven;
-- **FOUNDER DECISION REQUIRED** — a genuine governance choice or new authority
+- **PASS** - every authorised objective and closure requirement is proven;
+- **FOUNDER DECISION REQUIRED** - a genuine governance choice or new authority
   is necessary; or
-- **EXTERNAL BLOCKER** — an external condition prevents safe progress.
+- **EXTERNAL BLOCKER** - an external condition prevents safe progress.
 
 Difficulty, elapsed time, a commit or partial success is not a terminal state.
 

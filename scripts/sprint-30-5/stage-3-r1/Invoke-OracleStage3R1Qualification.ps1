@@ -5,6 +5,7 @@ param(
   [Parameter(Mandatory = $true)][string]$AttemptId,
   [Parameter(Mandatory = $true)][string]$TimestampUtc,
   [Parameter(Mandatory = $true)][string]$ExpectedTransferManifestSha256,
+  [Parameter(Mandatory = $true)][string]$ExpectedHarnessCommit,
   [Parameter(Mandatory = $true)][string]$HostContinuityPath,
   [Parameter(Mandatory = $true)][string]$ExpectedHostContinuitySha256,
   [Parameter(Mandatory = $true)][string]$TransferRoot,
@@ -337,6 +338,14 @@ function Assert-IdentityAndTransfer {
     $ExpectedTransferManifestSha256 -cnotmatch '^[0-9a-f]{64}$' -or
     (Get-Sha256 $manifestPath) -cne $ExpectedTransferManifestSha256
   ) { throw "Founder-approved transfer manifest hash differs." }
+  if (
+    $ExpectedHarnessCommit -cnotmatch '^[0-9a-f]{40}$' -or
+    [string]$manifest.preparation.branch -cne
+      [string]$contract.requiredBranch -or
+    [string]$manifest.preparation.harnessCommit -cne $ExpectedHarnessCommit -or
+    [string]$manifest.preparation.harnessTree -cnotmatch '^[0-9a-f]{40}$' -or
+    [string]$manifest.preparation.oeomVersion -cne "1.0"
+  ) { throw "Founder-approved Stage 3 harness identity differs." }
   $sidecarValue = (
     Get-Content -LiteralPath "$manifestPath.sha256.txt" -Raw
   ).Trim().Split(" ")[0].ToLowerInvariant()
@@ -398,6 +407,20 @@ function Assert-IdentityAndTransfer {
       (Get-Item -LiteralPath $path).Length -ne $entry.size
     ) { throw "Transfer payload mismatch: $($entry.path)" }
   }
+  $runningHarnessEntry = @($manifest.payload | Where-Object {
+    [string]$_.path -ceq "payload/Invoke-OracleStage3R1Qualification.ps1"
+  })
+  $runningContractEntry = @($manifest.payload | Where-Object {
+    [string]$_.path -ceq "payload/Oracle.Stage3R1Contract.json"
+  })
+  if (
+    $runningHarnessEntry.Count -ne 1 -or
+    $runningContractEntry.Count -ne 1 -or
+    (Get-Sha256 $MyInvocation.MyCommand.Path) -cne
+      [string]$runningHarnessEntry[0].sha256 -or
+    (Get-Sha256 (Join-Path $scriptRoot "Oracle.Stage3R1Contract.json")) -cne
+      [string]$runningContractEntry[0].sha256
+  ) { throw "Executing harness or contract bytes differ from the transfer." }
   $hostAdmissionPath = Join-Path $payloadRoot $contract.host.hostAdmissionFileName
   $releaseManifestPath = Join-Path $payloadRoot "oracle-release-manifest.json"
   $releaseSignaturePath = "$releaseManifestPath.p7s"

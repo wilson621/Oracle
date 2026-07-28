@@ -209,4 +209,7 @@ The signer expires at `2026-08-27T20:35:39Z`. The Founder accepted the result
 and R2 is formally closed. Candidate
 `11475fe01fff2ec69f0188547107f4e901c531d7` is the authoritative Stage 2
 execution candidate for any later separately authorised Stage 3 preparation.
-Stage 3 remains unauthorised.
+Stage 3 Qualification R1 preparation and its pre-execution gate are complete
+under OEOM v1.0 and bind exclusively to the accepted R2 candidate. Transfer
+construction and execution remain blocked pending separate Founder decisions.
+No Stage 3 execution authority exists.

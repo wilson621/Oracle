@@ -1388,10 +1388,11 @@ package, repair the harness or begin another qualification revision.
 Stage 2 Requalification R1 acceptance and closure create no Stage 3
 authority.
 
-Stage 3 Qualification R1 preparation is now Founder-authorised and binds only
-the accepted, formally closed Stage 2 Requalification R2 candidate. Stage 3
-execution remains blocked and unauthorised pending preparation validation,
-fresh host continuity, transfer-method approval and a separate Founder gate.
+Stage 3 Qualification R1 preparation and its pre-execution review are complete
+under OEOM v1.0 and bind only the accepted, formally closed Stage 2
+Requalification R2 candidate. Transfer construction and execution remain
+blocked pending fresh host continuity, transfer-method approval and separate
+Founder decisions.
 
 Live Auth, protected rendering, clean Windows acceptance, installed-package
 GPU/performance/accessibility, reproducibility and final integrated

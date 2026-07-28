@@ -37,6 +37,10 @@ Current preparation validation:
 npm.cmd run sprint-30-5:stage-3:r1:validate
 ```
 
+The complete operator sequence, parameter bindings, stop conditions and
+Founder gates are recorded in
+`docs/sprints/SPRINT_30_5_STAGE_3_R1_PRE_EXECUTION_GATE.md`.
+
 No command in this README grants transfer, trust, installation, qualification,
 Stage 4, production signing, publication, distribution, deployment or release
 authority.

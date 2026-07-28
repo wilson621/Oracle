@@ -11,7 +11,7 @@ param(
   [string]$Phase,
 
   [Parameter(Mandatory = $false)]
-  [string]$TransferRoot = (Split-Path -Parent $PSScriptRoot)
+  [string]$TransferRoot = "."
 )
 
 $ErrorActionPreference = "Stop"

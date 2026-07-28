@@ -165,15 +165,15 @@ NegativePathAndTrust evidence passed. Revision 4 InstallAndStartup failed,
 canonical Phase 03 success evidence is absent, Revision 5 remained incomplete
 and Revision 6 is abandoned.
 
-Stage 3 is historically attempted, incomplete and blocked. No current
-execution, artifact-transfer, certificate-trust, package-installation,
-harness-repair or Stage 3 requalification authority exists. Gate 7 is not
-authorised.
+Stage 3 is historically attempted, incomplete and blocked. The historical
+reconciliation authorised no new harness, transfer, trust, installation or
+execution. Gate 7 remains unauthorised.
 
-Stage 3 Qualification R1 preparation is Founder-authorised. The preparation
-system is bound exclusively to the accepted Stage 2 Requalification R2
-candidate. Stage 3 execution remains blocked and unauthorised; no clean-host,
-transfer, trust or installation action is permitted by preparation authority.
+Stage 3 Qualification R1 preparation and its pre-execution gate are complete
+and validated. The system binds exclusively to the accepted Stage 2
+Requalification R2 candidate. The board remains stopped at the separate
+Founder transfer/execution gate; no clean-host, transfer, trust or installation
+action is authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in

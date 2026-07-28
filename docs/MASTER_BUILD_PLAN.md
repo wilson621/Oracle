@@ -175,20 +175,19 @@ and Revision 6 is abandoned.
 
 Stage 3 is historically attempted, incomplete and blocked. Clean Windows
 acceptance, live Auth, protected rendering, installed-package qualification
-and later integrated evidence remain outstanding. No current authority exists
-to resume Stage 3, execute or repair the harness observed during
-reconciliation, create or trust a replacement certificate, reinstall the
-package or begin a new Stage 3 qualification revision. Accepted Stage 1,
-historical Stage 2 and Stage 2 Requalification R1 evidence remain unchanged.
-Stage 2 Requalification R1 closure does not authorise Stage 3. Production
-signing, publication, distribution, deployment and activation remain
-unauthorised.
+and later integrated evidence remain outstanding. At reconciliation, no
+authority existed to resume Stage 3 or repair its historical harness. That
+historical position is preserved; the later R1 preparation authority did not
+authorise execution, certificate trust or package installation. Accepted
+Stage 1, historical Stage 2 and Stage 2 Requalification R1 evidence remain
+unchanged. Production signing, publication, distribution, deployment and
+activation remain unauthorised.
 
-Stage 3 Qualification R1 preparation is the active engineering objective. It
-is bound exclusively to the accepted Stage 2 Requalification R2 candidate and
-must produce a versioned contract, create-only transfer system, ordered
-clean-host harness and structural validation. Stage 3 execution remains
-blocked and unauthorised.
+Stage 3 Qualification R1 preparation and its pre-execution gate are complete
+under OEOM v1.0. The R2-bound result includes a versioned contract, create-only
+transfer system, ordered clean-host harness and structural validation. The
+next gate is a Founder decision on one transfer method and one execution; no
+transfer or execution authority is implied.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own
