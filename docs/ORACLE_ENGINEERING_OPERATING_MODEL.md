@@ -188,3 +188,14 @@ Before completion, verify:
 The final report states what changed, what passed, what remains unauthorised
 and the exact next governed operation.
 
+# Mission recovery
+
+If execution is interrupted by a model reset, environment loss, development
+environment restart, machine reboot or similar event, the Lead Engineer shall:
+
+- recover the repository state;
+- determine completed and outstanding work;
+- validate recovered work;
+- continue the authorised mission;
+- avoid repeating or undoing valid engineering; and
+- return only when the original mission reaches a terminal state.
