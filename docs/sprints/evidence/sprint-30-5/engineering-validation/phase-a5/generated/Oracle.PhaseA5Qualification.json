@@ -1,0 +1,1574 @@
+{
+    "schemaVersion":  "1.0.0",
+    "qualification":  "Oracle Engineering Validation Phase A5",
+    "runId":  "20260728T124957338Z-13d3309b",
+    "startedAt":  "2026-07-28T12:49:57.3474743Z",
+    "completedAt":  "2026-07-28T12:50:21.3850725Z",
+    "result":  "PASS",
+    "repository":  {
+                       "root":  "C:\\Dev\\project-meta",
+                       "branch":  "sprint-9-overlay",
+                       "head":  "6113565765a95b990415b6cdf2f2f1d7ff3e83c8",
+                       "statusBefore":  "## sprint-9-overlay...origin/sprint-9-overlay [ahead 46]",
+                       "statusAfter":  "## sprint-9-overlay...origin/sprint-9-overlay [ahead 46]",
+                       "unchanged":  true
+                   },
+    "environment":  {
+                        "computerName":  "DESKTOP-M3H22E4",
+                        "userName":  "wilso",
+                        "userInteractive":  true,
+                        "operatingSystem":  "Microsoft Windows NT 10.0.26200.0",
+                        "processId":  27300,
+                        "powershellVersion":  "5.1.26100.8875",
+                        "webPort":  3105,
+                        "debugPort":  9335
+                    },
+    "paths":  {
+                  "standaloneSource":  "C:\\Dev\\project-meta\\.next\\standalone",
+                  "staticSource":  "C:\\Dev\\project-meta\\.next\\static",
+                  "publicSource":  "C:\\Dev\\project-meta\\public",
+                  "temporaryRuntime":  "C:\\Users\\WILSO~1.DES\\AppData\\Local\\Temp\\Oracle-PhaseA5-20260728T124957338Z-13d3309b\\standalone",
+                  "desktopEntry":  "C:\\Dev\\project-meta\\dist-electron\\desktop\\main.js",
+                  "nodeExecutable":  "C:\\Program Files\\nodejs\\node.exe",
+                  "electronExecutable":  "C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe",
+                  "windowDiscoveryExecutable":  "C:\\Dev\\project-meta\\dist-native\\Oracle.WindowDiscovery.exe",
+                  "report":  "C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Local\\Oracle-Engineering-Validation\\Phase-A5\\20260728T124957338Z-13d3309b\\Oracle.PhaseA5Qualification.json"
+              },
+    "generatedOutputOperations":  [
+                                      {
+                                          "operation":  "temporary-copy",
+                                          "source":  "C:\\Dev\\project-meta\\.next\\standalone",
+                                          "destination":  "C:\\Users\\WILSO~1.DES\\AppData\\Local\\Temp\\Oracle-PhaseA5-20260728T124957338Z-13d3309b\\standalone"
+                                      },
+                                      {
+                                          "operation":  "temporary-copy",
+                                          "source":  "C:\\Dev\\project-meta\\.next\\static",
+                                          "destination":  "C:\\Users\\WILSO~1.DES\\AppData\\Local\\Temp\\Oracle-PhaseA5-20260728T124957338Z-13d3309b\\standalone\\.next\\static"
+                                      },
+                                      {
+                                          "operation":  "temporary-copy",
+                                          "source":  "C:\\Dev\\project-meta\\public",
+                                          "destination":  "C:\\Users\\WILSO~1.DES\\AppData\\Local\\Temp\\Oracle-PhaseA5-20260728T124957338Z-13d3309b\\standalone\\public"
+                                      }
+                                  ],
+    "server":  {
+                   "startedAt":  "2026-07-28T12:50:00.2764782Z",
+                   "readyAt":  "2026-07-28T12:50:00.9296122Z",
+                   "startupDurationMs":  653,
+                   "processId":  6548,
+                   "exitCode":  -1,
+                   "stdout":  "Ôû▓ Next.js 16.2.11\n- Local:         http://127.0.0.1:3105\n- Network:       http://127.0.0.1:3105\nÔ£ô Ready in 0ms\n",
+                   "stderr":  ""
+               },
+    "electron":  {
+                     "startedAt":  "2026-07-28T12:50:00.9316140Z",
+                     "processId":  7524,
+                     "processSnapshots":  [
+                                              {
+                                                  "observedAt":  "2026-07-28T12:50:02.6875631Z",
+                                                  "processes":  [
+                                                                    {
+                                                                        "processId":  7524,
+                                                                        "parentProcessId":  27300,
+                                                                        "name":  "electron.exe",
+                                                                        "executablePath":  "C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe",
+                                                                        "commandLine":  "\"C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe\" \"--remote-debugging-port=9335\" \"C:\\Dev\\project-meta\""
+                                                                    },
+                                                                    {
+                                                                        "processId":  31072,
+                                                                        "parentProcessId":  7524,
+                                                                        "name":  "electron.exe",
+                                                                        "executablePath":  "C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe",
+                                                                        "commandLine":  "\"C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe\" --type=renderer --user-data-dir=\"C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Roaming\\project-meta\" --enable-sandbox --app-path=\"C:\\Dev\\project-meta\" --enable-sandbox --remote-debugging-port=9335 --video-capture-use-gpu-memory-buffer --lang=en-GB --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=4 --time-ticks-at-unix-epoch=-1785231091370574 --launch-time-ticks=11909739914 --field-trial-handle=1784,i,7800118534752669595,3347673771426867622,262144 --enable-features=EnableTransparentHwndEnlargement,PdfUseShowSaveFilePicker --disable-features=LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2628 /prefetch:1"
+                                                                    },
+                                                                    {
+                                                                        "processId":  34832,
+                                                                        "parentProcessId":  7524,
+                                                                        "name":  "electron.exe",
+                                                                        "executablePath":  "C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe",
+                                                                        "commandLine":  "\"C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-GB --service-sandbox-type=none --user-data-dir=\"C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Roaming\\project-meta\" --enable-sandbox --field-trial-handle=1784,i,7800118534752669595,3347673771426867622,262144 --enable-features=EnableTransparentHwndEnlargement,PdfUseShowSaveFilePicker --disable-features=LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=1996 /prefetch:11"
+                                                                    },
+                                                                    {
+                                                                        "processId":  37132,
+                                                                        "parentProcessId":  7524,
+                                                                        "name":  "electron.exe",
+                                                                        "executablePath":  "C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe",
+                                                                        "commandLine":  "\"C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe\" --type=gpu-process --user-data-dir=\"C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Roaming\\project-meta\" --gpu-preferences=SAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAAQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --field-trial-handle=1784,i,7800118534752669595,3347673771426867622,262144 --enable-features=EnableTransparentHwndEnlargement,PdfUseShowSaveFilePicker --disable-features=LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=1776 /prefetch:2"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "observedAt":  "2026-07-28T12:50:03.8575933Z",
+                                                  "processes":  [
+                                                                    {
+                                                                        "processId":  7524,
+                                                                        "parentProcessId":  27300,
+                                                                        "name":  "electron.exe",
+                                                                        "executablePath":  "C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe",
+                                                                        "commandLine":  "\"C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe\" \"--remote-debugging-port=9335\" \"C:\\Dev\\project-meta\""
+                                                                    },
+                                                                    {
+                                                                        "processId":  31072,
+                                                                        "parentProcessId":  7524,
+                                                                        "name":  "electron.exe",
+                                                                        "executablePath":  "C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe",
+                                                                        "commandLine":  "\"C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe\" --type=renderer --user-data-dir=\"C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Roaming\\project-meta\" --enable-sandbox --app-path=\"C:\\Dev\\project-meta\" --enable-sandbox --remote-debugging-port=9335 --video-capture-use-gpu-memory-buffer --lang=en-GB --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=4 --time-ticks-at-unix-epoch=-1785231091370574 --launch-time-ticks=11909739914 --field-trial-handle=1784,i,7800118534752669595,3347673771426867622,262144 --enable-features=EnableTransparentHwndEnlargement,PdfUseShowSaveFilePicker --disable-features=LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2628 /prefetch:1"
+                                                                    },
+                                                                    {
+                                                                        "processId":  34832,
+                                                                        "parentProcessId":  7524,
+                                                                        "name":  "electron.exe",
+                                                                        "executablePath":  "C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe",
+                                                                        "commandLine":  "\"C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-GB --service-sandbox-type=none --user-data-dir=\"C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Roaming\\project-meta\" --enable-sandbox --field-trial-handle=1784,i,7800118534752669595,3347673771426867622,262144 --enable-features=EnableTransparentHwndEnlargement,PdfUseShowSaveFilePicker --disable-features=LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=1996 /prefetch:11"
+                                                                    },
+                                                                    {
+                                                                        "processId":  37132,
+                                                                        "parentProcessId":  7524,
+                                                                        "name":  "electron.exe",
+                                                                        "executablePath":  "C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe",
+                                                                        "commandLine":  "\"C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe\" --type=gpu-process --user-data-dir=\"C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Roaming\\project-meta\" --gpu-preferences=SAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAAQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --field-trial-handle=1784,i,7800118534752669595,3347673771426867622,262144 --enable-features=EnableTransparentHwndEnlargement,PdfUseShowSaveFilePicker --disable-features=LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=1776 /prefetch:2"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "observedAt":  "2026-07-28T12:50:05.0016732Z",
+                                                  "processes":  [
+                                                                    {
+                                                                        "processId":  7524,
+                                                                        "parentProcessId":  27300,
+                                                                        "name":  "electron.exe",
+                                                                        "executablePath":  "C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe",
+                                                                        "commandLine":  "\"C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe\" \"--remote-debugging-port=9335\" \"C:\\Dev\\project-meta\""
+                                                                    },
+                                                                    {
+                                                                        "processId":  31072,
+                                                                        "parentProcessId":  7524,
+                                                                        "name":  "electron.exe",
+                                                                        "executablePath":  "C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe",
+                                                                        "commandLine":  "\"C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe\" --type=renderer --user-data-dir=\"C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Roaming\\project-meta\" --enable-sandbox --app-path=\"C:\\Dev\\project-meta\" --enable-sandbox --remote-debugging-port=9335 --video-capture-use-gpu-memory-buffer --lang=en-GB --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=4 --time-ticks-at-unix-epoch=-1785231091370574 --launch-time-ticks=11909739914 --field-trial-handle=1784,i,7800118534752669595,3347673771426867622,262144 --enable-features=EnableTransparentHwndEnlargement,PdfUseShowSaveFilePicker --disable-features=LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2628 /prefetch:1"
+                                                                    },
+                                                                    {
+                                                                        "processId":  34832,
+                                                                        "parentProcessId":  7524,
+                                                                        "name":  "electron.exe",
+                                                                        "executablePath":  "C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe",
+                                                                        "commandLine":  "\"C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-GB --service-sandbox-type=none --user-data-dir=\"C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Roaming\\project-meta\" --enable-sandbox --field-trial-handle=1784,i,7800118534752669595,3347673771426867622,262144 --enable-features=EnableTransparentHwndEnlargement,PdfUseShowSaveFilePicker --disable-features=LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=1996 /prefetch:11"
+                                                                    },
+                                                                    {
+                                                                        "processId":  37132,
+                                                                        "parentProcessId":  7524,
+                                                                        "name":  "electron.exe",
+                                                                        "executablePath":  "C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe",
+                                                                        "commandLine":  "\"C:\\Dev\\project-meta\\node_modules\\electron\\dist\\electron.exe\" --type=gpu-process --user-data-dir=\"C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Roaming\\project-meta\" --gpu-preferences=SAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAAQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --field-trial-handle=1784,i,7800118534752669595,3347673771426867622,262144 --enable-features=EnableTransparentHwndEnlargement,PdfUseShowSaveFilePicker --disable-features=LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=1776 /prefetch:2"
+                                                                    }
+                                                                ]
+                                              }
+                                          ],
+                     "exitCode":  0,
+                     "stdout":  "\r\n",
+                     "stderr":  "\r\nDevTools listening on ws://127.0.0.1:9335/devtools/browser/e0af349a-c714-4048-9f96-12ca5e2f1dd2\r\n[7524:0728/135002.182:INFO:CONSOLE:2] \"%cElectron Security Warning (Insecure Content-Security-Policy) font-weight: bold; This renderer process has either no Content Security\r\n  Policy set or a policy with \"unsafe-eval\" enabled. This exposes users of\r\n  this app to unnecessary security risks.\r\n\r\nFor more information and help, consult\r\nhttps://electronjs.org/docs/tutorial/security.\r\nThis warning will not show up\r\nonce the app is packaged.\", source: node:electron/js2c/sandbox_bundle (2)\r\n"
+                 },
+    "renderer":  {
+                     "targetId":  "DA43753AFDBCA94594AA458074FBA74E",
+                     "targetUrl":  "http://127.0.0.1:3105/companion",
+                     "readyState":  "complete",
+                     "title":  "Oracle",
+                     "loadCompleted":  true,
+                     "identitySamples":  [
+                                             {
+                                                 "observedAt":  "2026-07-28T12:50:01.5910445Z",
+                                                 "readyState":  "complete",
+                                                 "title":  "",
+                                                 "location":  "about:blank",
+                                                 "sameOrigin":  false
+                                             },
+                                             {
+                                                 "observedAt":  "2026-07-28T12:50:02.0955545Z",
+                                                 "readyState":  "complete",
+                                                 "title":  "",
+                                                 "location":  "about:blank",
+                                                 "sameOrigin":  false
+                                             },
+                                             {
+                                                 "observedAt":  "2026-07-28T12:50:02.5985631Z",
+                                                 "readyState":  "complete",
+                                                 "title":  "Oracle",
+                                                 "location":  "http://127.0.0.1:3105/auth?next=%2Fcompanion",
+                                                 "sameOrigin":  true
+                                             }
+                                         ]
+                 },
+    "platformHealth":  {
+                           "contract":  "oracle.platform-health",
+                           "contractVersion":  1,
+                           "capturedAt":  "2026-07-28T12:50:02.599Z",
+                           "attempt":  1,
+                           "target":  "electron",
+                           "manifestVersion":  "1.7.0",
+                           "manifestVerified":  true,
+                           "status":  "ready",
+                           "phase":  "complete",
+                           "operationalDiagnostics":  {
+                                                          "purpose":  "software-support",
+                                                          "authority":  "non-authoritative",
+                                                          "mode":  "disabled",
+                                                          "status":  "disabled",
+                                                          "transport":  "none",
+                                                          "retention":  "none",
+                                                          "metrics":  {
+                                                                          "attempts":  1,
+                                                                          "admitted":  0,
+                                                                          "rejected":  1,
+                                                                          "sinkFailures":  0
+                                                                      }
+                                                      },
+                           "subsystems":  [
+                                              {
+                                                  "id":  "composition",
+                                                  "required":  true,
+                                                  "status":  "ready",
+                                                  "message":  "Constructed runtime exactly matches the canonical manifest."
+                                              },
+                                              {
+                                                  "id":  "operational-diagnostics",
+                                                  "required":  true,
+                                                  "status":  "ready",
+                                                  "message":  "Operational Diagnostics admission is composed and delivery is disabled."
+                                              },
+                                              {
+                                                  "id":  "services",
+                                                  "required":  true,
+                                                  "status":  "ready",
+                                                  "message":  "13 Oracle Services composed."
+                                              },
+                                              {
+                                                  "id":  "session-lifecycle",
+                                                  "required":  true,
+                                                  "status":  "ready",
+                                                  "message":  "Authoritative Session Service is composed with persistence disabled."
+                                              },
+                                              {
+                                                  "id":  "applications",
+                                                  "required":  true,
+                                                  "status":  "ready",
+                                                  "message":  "10 Oracle Applications composed."
+                                              },
+                                              {
+                                                  "id":  "game-integrations",
+                                                  "required":  true,
+                                                  "status":  "ready",
+                                                  "message":  "2 Game Integrations composed."
+                                              },
+                                              {
+                                                  "id":  "guidance",
+                                                  "required":  true,
+                                                  "status":  "ready",
+                                                  "message":  "2 Guidance providers composed."
+                                              },
+                                              {
+                                                  "id":  "extensions",
+                                                  "required":  false,
+                                                  "status":  "ready",
+                                                  "message":  "Extension Runtime ready with no extensions."
+                                              },
+                                              {
+                                                  "id":  "companion",
+                                                  "required":  true,
+                                                  "status":  "ready",
+                                                  "message":  "Platform Companion capability lifecycle is ready."
+                                              }
+                                          ],
+                           "capabilities":  {
+                                                "services":  [
+                                                                 "conversation",
+                                                                 "operator",
+                                                                 "sessions",
+                                                                 "missions",
+                                                                 "memory",
+                                                                 "operator-understanding",
+                                                                 "progression",
+                                                                 "planner",
+                                                                 "reports",
+                                                                 "ai-coach",
+                                                                 "oracle-brain",
+                                                                 "loadouts",
+                                                                 "companion"
+                                                             ],
+                                                "applications":  [
+                                                                     "ai-coach",
+                                                                     "oracle-brain",
+                                                                     "loadouts",
+                                                                     "reports",
+                                                                     "sessions",
+                                                                     "career",
+                                                                     "planner",
+                                                                     "progress",
+                                                                     "achievements",
+                                                                     "companion"
+                                                                 ],
+                                                "gameIntegrations":  [
+                                                                         "call-of-duty",
+                                                                         "minecraft-java"
+                                                                     ],
+                                                "guidanceProviders":  [
+                                                                          "game-integrations.call-of-duty.curated-guidance",
+                                                                          "game-integrations.minecraft-java.diamond-discovery-guidance"
+                                                                      ]
+                                            },
+                           "diagnostics":  [
+                                               {
+                                                   "code":  "platform.boot.started",
+                                                   "level":  "info",
+                                                   "message":  "Oracle Platform boot started.",
+                                                   "subsystemId":  null
+                                               },
+                                               {
+                                                   "code":  "platform.composition.verified",
+                                                   "level":  "info",
+                                                   "message":  "Runtime composition exactly matches its canonical manifest.",
+                                                   "subsystemId":  "composition"
+                                               },
+                                               {
+                                                   "code":  "platform.boot.ready",
+                                                   "level":  "info",
+                                                   "message":  "Oracle Platform is ready.",
+                                                   "subsystemId":  null
+                                               }
+                                           ]
+                       },
+    "discoveryAttempts":  [
+                              {
+                                  "observedAt":  "2026-07-28T12:50:02.6895632Z",
+                                  "exitCode":  0,
+                                  "stdout":  "[{\"handle\":\"131310\",\"title\":\"ChatGPT\",\"processId\":1820,\"processName\":\"ChatGPT\",\"visible\":true,\"minimized\":false,\"x\":0,\"y\":0,\"width\":1280,\"height\":1392},{\"handle\":\"263776\",\"title\":\"operator-understanding-snapshot.ts - project-meta - Visual Studio Code\",\"processId\":14964,\"processName\":\"Code\",\"visible\":true,\"minimized\":false,\"x\":-7,\"y\":0,\"width\":1294,\"height\":1399},{\"handle\":\"4786176\",\"title\":\"Oracle\",\"processId\":7524,\"processName\":\"electron\",\"visible\":true,\"minimized\":false,\"x\":680,\"y\":296,\"width\":1200,\"height\":800},{\"handle\":\"4917128\",\"title\":\"Oracle Sprint 26 Review - Google Chrome\",\"processId\":31232,\"processName\":\"chrome\",\"visible\":true,\"minimized\":false,\"x\":1273,\"y\":0,\"width\":1294,\"height\":1399},{\"handle\":\"65828\",\"title\":\"Program Manager\",\"processId\":10932,\"processName\":\"explorer\",\"visible\":true,\"minimized\":false,\"x\":0,\"y\":0,\"width\":2560,\"height\":1440},{\"handle\":\"66350\",\"title\":\"Shell Handwriting Canvas\",\"processId\":16516,\"processName\":\"TabTip\",\"visible\":true,\"minimized\":false,\"x\":0,\"y\":0,\"width\":2560,\"height\":1440},{\"handle\":\"1574920\",\"title\":\"Windows PowerShell\",\"processId\":40388,\"processName\":\"WindowsTerminal\",\"visible\":true,\"minimized\":false,\"x\":96,\"y\":104,\"width\":1129,\"height\":635},{\"handle\":\"854168\",\"title\":\"20260728T123104141Z-6dc6760b - File Explorer\",\"processId\":10932,\"processName\":\"explorer\",\"visible\":true,\"minimized\":true,\"x\":-32000,\"y\":-32000,\"width\":160,\"height\":28},{\"handle\":\"67228\",\"title\":\"ArmouryAudioAgent\",\"processId\":25864,\"processName\":\"ArmouryAudioAgent\",\"visible\":true,\"minimized\":true,\"x\":0,\"y\":1364,\"width\":160,\"height\":28},{\"handle\":\"657098\",\"title\":\"Containers - Docker Desktop\",\"processId\":29464,\"processName\":\"Docker Desktop\",\"visible\":true,\"minimized\":true,\"x\":-32000,\"y\":-32000,\"width\":160,\"height\":28}]",
+                                  "stderr":  "{\"contract\":\"oracle.window-discovery-diagnostic\",\"contractVersion\":1,\"classification\":\"completed-with-records\",\"message\":\"EnumWindows completed with eligible records.\",\"enumWindowsReturned\":true,\"win32Error\":null,\"callbackInvoked\":true,\"topLevelWindowsVisited\":310,\"eligibleRecordsProduced\":10,\"callbackTerminationRequested\":false,\"callbackException\":null,\"executionContext\":{\"operatingSystem\":\"Microsoft Windows 10.0.26200\",\"processId\":5072,\"sessionId\":1,\"userInteractive\":true,\"is64BitProcess\":true,\"windowStation\":\"WinSta0\",\"threadDesktop\":\"Default\",\"inputDesktop\":\"Default\",\"compatible\":true,\"incompatibilityReason\":null}}",
+                                  "parseError":  null,
+                                  "windows":  [
+                                                  {
+                                                      "handle":  "131310",
+                                                      "title":  "ChatGPT",
+                                                      "processId":  1820,
+                                                      "processName":  "ChatGPT",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  0,
+                                                      "y":  0,
+                                                      "width":  1280,
+                                                      "height":  1392
+                                                  },
+                                                  {
+                                                      "handle":  "263776",
+                                                      "title":  "operator-understanding-snapshot.ts - project-meta - Visual Studio Code",
+                                                      "processId":  14964,
+                                                      "processName":  "Code",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  -7,
+                                                      "y":  0,
+                                                      "width":  1294,
+                                                      "height":  1399
+                                                  },
+                                                  {
+                                                      "handle":  "4786176",
+                                                      "title":  "Oracle",
+                                                      "processId":  7524,
+                                                      "processName":  "electron",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  680,
+                                                      "y":  296,
+                                                      "width":  1200,
+                                                      "height":  800
+                                                  },
+                                                  {
+                                                      "handle":  "4917128",
+                                                      "title":  "Oracle Sprint 26 Review - Google Chrome",
+                                                      "processId":  31232,
+                                                      "processName":  "chrome",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  1273,
+                                                      "y":  0,
+                                                      "width":  1294,
+                                                      "height":  1399
+                                                  },
+                                                  {
+                                                      "handle":  "65828",
+                                                      "title":  "Program Manager",
+                                                      "processId":  10932,
+                                                      "processName":  "explorer",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  0,
+                                                      "y":  0,
+                                                      "width":  2560,
+                                                      "height":  1440
+                                                  },
+                                                  {
+                                                      "handle":  "66350",
+                                                      "title":  "Shell Handwriting Canvas",
+                                                      "processId":  16516,
+                                                      "processName":  "TabTip",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  0,
+                                                      "y":  0,
+                                                      "width":  2560,
+                                                      "height":  1440
+                                                  },
+                                                  {
+                                                      "handle":  "1574920",
+                                                      "title":  "Windows PowerShell",
+                                                      "processId":  40388,
+                                                      "processName":  "WindowsTerminal",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  96,
+                                                      "y":  104,
+                                                      "width":  1129,
+                                                      "height":  635
+                                                  },
+                                                  {
+                                                      "handle":  "854168",
+                                                      "title":  "20260728T123104141Z-6dc6760b - File Explorer",
+                                                      "processId":  10932,
+                                                      "processName":  "explorer",
+                                                      "visible":  true,
+                                                      "minimized":  true,
+                                                      "x":  -32000,
+                                                      "y":  -32000,
+                                                      "width":  160,
+                                                      "height":  28
+                                                  },
+                                                  {
+                                                      "handle":  "67228",
+                                                      "title":  "ArmouryAudioAgent",
+                                                      "processId":  25864,
+                                                      "processName":  "ArmouryAudioAgent",
+                                                      "visible":  true,
+                                                      "minimized":  true,
+                                                      "x":  0,
+                                                      "y":  1364,
+                                                      "width":  160,
+                                                      "height":  28
+                                                  },
+                                                  {
+                                                      "handle":  "657098",
+                                                      "title":  "Containers - Docker Desktop",
+                                                      "processId":  29464,
+                                                      "processName":  "Docker Desktop",
+                                                      "visible":  true,
+                                                      "minimized":  true,
+                                                      "x":  -32000,
+                                                      "y":  -32000,
+                                                      "width":  160,
+                                                      "height":  28
+                                                  }
+                                              ]
+                              },
+                              {
+                                  "observedAt":  "2026-07-28T12:50:03.8575933Z",
+                                  "exitCode":  0,
+                                  "stdout":  "[{\"handle\":\"131310\",\"title\":\"ChatGPT\",\"processId\":1820,\"processName\":\"ChatGPT\",\"visible\":true,\"minimized\":false,\"x\":0,\"y\":0,\"width\":1280,\"height\":1392},{\"handle\":\"263776\",\"title\":\"operator-understanding-snapshot.ts - project-meta - Visual Studio Code\",\"processId\":14964,\"processName\":\"Code\",\"visible\":true,\"minimized\":false,\"x\":-7,\"y\":0,\"width\":1294,\"height\":1399},{\"handle\":\"4786176\",\"title\":\"Oracle\",\"processId\":7524,\"processName\":\"electron\",\"visible\":true,\"minimized\":false,\"x\":680,\"y\":296,\"width\":1200,\"height\":800},{\"handle\":\"4917128\",\"title\":\"Oracle Sprint 26 Review - Google Chrome\",\"processId\":31232,\"processName\":\"chrome\",\"visible\":true,\"minimized\":false,\"x\":1273,\"y\":0,\"width\":1294,\"height\":1399},{\"handle\":\"65828\",\"title\":\"Program Manager\",\"processId\":10932,\"processName\":\"explorer\",\"visible\":true,\"minimized\":false,\"x\":0,\"y\":0,\"width\":2560,\"height\":1440},{\"handle\":\"66350\",\"title\":\"Shell Handwriting Canvas\",\"processId\":16516,\"processName\":\"TabTip\",\"visible\":true,\"minimized\":false,\"x\":0,\"y\":0,\"width\":2560,\"height\":1440},{\"handle\":\"1574920\",\"title\":\"Windows PowerShell\",\"processId\":40388,\"processName\":\"WindowsTerminal\",\"visible\":true,\"minimized\":false,\"x\":96,\"y\":104,\"width\":1129,\"height\":635},{\"handle\":\"854168\",\"title\":\"20260728T123104141Z-6dc6760b - File Explorer\",\"processId\":10932,\"processName\":\"explorer\",\"visible\":true,\"minimized\":true,\"x\":-32000,\"y\":-32000,\"width\":160,\"height\":28},{\"handle\":\"67228\",\"title\":\"ArmouryAudioAgent\",\"processId\":25864,\"processName\":\"ArmouryAudioAgent\",\"visible\":true,\"minimized\":true,\"x\":0,\"y\":1364,\"width\":160,\"height\":28},{\"handle\":\"657098\",\"title\":\"Containers - Docker Desktop\",\"processId\":29464,\"processName\":\"Docker Desktop\",\"visible\":true,\"minimized\":true,\"x\":-32000,\"y\":-32000,\"width\":160,\"height\":28}]",
+                                  "stderr":  "{\"contract\":\"oracle.window-discovery-diagnostic\",\"contractVersion\":1,\"classification\":\"completed-with-records\",\"message\":\"EnumWindows completed with eligible records.\",\"enumWindowsReturned\":true,\"win32Error\":null,\"callbackInvoked\":true,\"topLevelWindowsVisited\":308,\"eligibleRecordsProduced\":10,\"callbackTerminationRequested\":false,\"callbackException\":null,\"executionContext\":{\"operatingSystem\":\"Microsoft Windows 10.0.26200\",\"processId\":5900,\"sessionId\":1,\"userInteractive\":true,\"is64BitProcess\":true,\"windowStation\":\"WinSta0\",\"threadDesktop\":\"Default\",\"inputDesktop\":\"Default\",\"compatible\":true,\"incompatibilityReason\":null}}",
+                                  "parseError":  null,
+                                  "windows":  [
+                                                  {
+                                                      "handle":  "131310",
+                                                      "title":  "ChatGPT",
+                                                      "processId":  1820,
+                                                      "processName":  "ChatGPT",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  0,
+                                                      "y":  0,
+                                                      "width":  1280,
+                                                      "height":  1392
+                                                  },
+                                                  {
+                                                      "handle":  "263776",
+                                                      "title":  "operator-understanding-snapshot.ts - project-meta - Visual Studio Code",
+                                                      "processId":  14964,
+                                                      "processName":  "Code",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  -7,
+                                                      "y":  0,
+                                                      "width":  1294,
+                                                      "height":  1399
+                                                  },
+                                                  {
+                                                      "handle":  "4786176",
+                                                      "title":  "Oracle",
+                                                      "processId":  7524,
+                                                      "processName":  "electron",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  680,
+                                                      "y":  296,
+                                                      "width":  1200,
+                                                      "height":  800
+                                                  },
+                                                  {
+                                                      "handle":  "4917128",
+                                                      "title":  "Oracle Sprint 26 Review - Google Chrome",
+                                                      "processId":  31232,
+                                                      "processName":  "chrome",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  1273,
+                                                      "y":  0,
+                                                      "width":  1294,
+                                                      "height":  1399
+                                                  },
+                                                  {
+                                                      "handle":  "65828",
+                                                      "title":  "Program Manager",
+                                                      "processId":  10932,
+                                                      "processName":  "explorer",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  0,
+                                                      "y":  0,
+                                                      "width":  2560,
+                                                      "height":  1440
+                                                  },
+                                                  {
+                                                      "handle":  "66350",
+                                                      "title":  "Shell Handwriting Canvas",
+                                                      "processId":  16516,
+                                                      "processName":  "TabTip",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  0,
+                                                      "y":  0,
+                                                      "width":  2560,
+                                                      "height":  1440
+                                                  },
+                                                  {
+                                                      "handle":  "1574920",
+                                                      "title":  "Windows PowerShell",
+                                                      "processId":  40388,
+                                                      "processName":  "WindowsTerminal",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  96,
+                                                      "y":  104,
+                                                      "width":  1129,
+                                                      "height":  635
+                                                  },
+                                                  {
+                                                      "handle":  "854168",
+                                                      "title":  "20260728T123104141Z-6dc6760b - File Explorer",
+                                                      "processId":  10932,
+                                                      "processName":  "explorer",
+                                                      "visible":  true,
+                                                      "minimized":  true,
+                                                      "x":  -32000,
+                                                      "y":  -32000,
+                                                      "width":  160,
+                                                      "height":  28
+                                                  },
+                                                  {
+                                                      "handle":  "67228",
+                                                      "title":  "ArmouryAudioAgent",
+                                                      "processId":  25864,
+                                                      "processName":  "ArmouryAudioAgent",
+                                                      "visible":  true,
+                                                      "minimized":  true,
+                                                      "x":  0,
+                                                      "y":  1364,
+                                                      "width":  160,
+                                                      "height":  28
+                                                  },
+                                                  {
+                                                      "handle":  "657098",
+                                                      "title":  "Containers - Docker Desktop",
+                                                      "processId":  29464,
+                                                      "processName":  "Docker Desktop",
+                                                      "visible":  true,
+                                                      "minimized":  true,
+                                                      "x":  -32000,
+                                                      "y":  -32000,
+                                                      "width":  160,
+                                                      "height":  28
+                                                  }
+                                              ]
+                              },
+                              {
+                                  "observedAt":  "2026-07-28T12:50:05.0016732Z",
+                                  "exitCode":  0,
+                                  "stdout":  "[{\"handle\":\"131310\",\"title\":\"ChatGPT\",\"processId\":1820,\"processName\":\"ChatGPT\",\"visible\":true,\"minimized\":false,\"x\":0,\"y\":0,\"width\":1280,\"height\":1392},{\"handle\":\"263776\",\"title\":\"operator-understanding-snapshot.ts - project-meta - Visual Studio Code\",\"processId\":14964,\"processName\":\"Code\",\"visible\":true,\"minimized\":false,\"x\":-7,\"y\":0,\"width\":1294,\"height\":1399},{\"handle\":\"4786176\",\"title\":\"Oracle\",\"processId\":7524,\"processName\":\"electron\",\"visible\":true,\"minimized\":false,\"x\":680,\"y\":296,\"width\":1200,\"height\":800},{\"handle\":\"4917128\",\"title\":\"Oracle Sprint 26 Review - Google Chrome\",\"processId\":31232,\"processName\":\"chrome\",\"visible\":true,\"minimized\":false,\"x\":1273,\"y\":0,\"width\":1294,\"height\":1399},{\"handle\":\"65828\",\"title\":\"Program Manager\",\"processId\":10932,\"processName\":\"explorer\",\"visible\":true,\"minimized\":false,\"x\":0,\"y\":0,\"width\":2560,\"height\":1440},{\"handle\":\"66350\",\"title\":\"Shell Handwriting Canvas\",\"processId\":16516,\"processName\":\"TabTip\",\"visible\":true,\"minimized\":false,\"x\":0,\"y\":0,\"width\":2560,\"height\":1440},{\"handle\":\"1574920\",\"title\":\"Windows PowerShell\",\"processId\":40388,\"processName\":\"WindowsTerminal\",\"visible\":true,\"minimized\":false,\"x\":96,\"y\":104,\"width\":1129,\"height\":635},{\"handle\":\"854168\",\"title\":\"20260728T123104141Z-6dc6760b - File Explorer\",\"processId\":10932,\"processName\":\"explorer\",\"visible\":true,\"minimized\":true,\"x\":-32000,\"y\":-32000,\"width\":160,\"height\":28},{\"handle\":\"67228\",\"title\":\"ArmouryAudioAgent\",\"processId\":25864,\"processName\":\"ArmouryAudioAgent\",\"visible\":true,\"minimized\":true,\"x\":0,\"y\":1364,\"width\":160,\"height\":28},{\"handle\":\"657098\",\"title\":\"Containers - Docker Desktop\",\"processId\":29464,\"processName\":\"Docker Desktop\",\"visible\":true,\"minimized\":true,\"x\":-32000,\"y\":-32000,\"width\":160,\"height\":28}]",
+                                  "stderr":  "{\"contract\":\"oracle.window-discovery-diagnostic\",\"contractVersion\":1,\"classification\":\"completed-with-records\",\"message\":\"EnumWindows completed with eligible records.\",\"enumWindowsReturned\":true,\"win32Error\":null,\"callbackInvoked\":true,\"topLevelWindowsVisited\":308,\"eligibleRecordsProduced\":10,\"callbackTerminationRequested\":false,\"callbackException\":null,\"executionContext\":{\"operatingSystem\":\"Microsoft Windows 10.0.26200\",\"processId\":16556,\"sessionId\":1,\"userInteractive\":true,\"is64BitProcess\":true,\"windowStation\":\"WinSta0\",\"threadDesktop\":\"Default\",\"inputDesktop\":\"Default\",\"compatible\":true,\"incompatibilityReason\":null}}",
+                                  "parseError":  null,
+                                  "windows":  [
+                                                  {
+                                                      "handle":  "131310",
+                                                      "title":  "ChatGPT",
+                                                      "processId":  1820,
+                                                      "processName":  "ChatGPT",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  0,
+                                                      "y":  0,
+                                                      "width":  1280,
+                                                      "height":  1392
+                                                  },
+                                                  {
+                                                      "handle":  "263776",
+                                                      "title":  "operator-understanding-snapshot.ts - project-meta - Visual Studio Code",
+                                                      "processId":  14964,
+                                                      "processName":  "Code",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  -7,
+                                                      "y":  0,
+                                                      "width":  1294,
+                                                      "height":  1399
+                                                  },
+                                                  {
+                                                      "handle":  "4786176",
+                                                      "title":  "Oracle",
+                                                      "processId":  7524,
+                                                      "processName":  "electron",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  680,
+                                                      "y":  296,
+                                                      "width":  1200,
+                                                      "height":  800
+                                                  },
+                                                  {
+                                                      "handle":  "4917128",
+                                                      "title":  "Oracle Sprint 26 Review - Google Chrome",
+                                                      "processId":  31232,
+                                                      "processName":  "chrome",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  1273,
+                                                      "y":  0,
+                                                      "width":  1294,
+                                                      "height":  1399
+                                                  },
+                                                  {
+                                                      "handle":  "65828",
+                                                      "title":  "Program Manager",
+                                                      "processId":  10932,
+                                                      "processName":  "explorer",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  0,
+                                                      "y":  0,
+                                                      "width":  2560,
+                                                      "height":  1440
+                                                  },
+                                                  {
+                                                      "handle":  "66350",
+                                                      "title":  "Shell Handwriting Canvas",
+                                                      "processId":  16516,
+                                                      "processName":  "TabTip",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  0,
+                                                      "y":  0,
+                                                      "width":  2560,
+                                                      "height":  1440
+                                                  },
+                                                  {
+                                                      "handle":  "1574920",
+                                                      "title":  "Windows PowerShell",
+                                                      "processId":  40388,
+                                                      "processName":  "WindowsTerminal",
+                                                      "visible":  true,
+                                                      "minimized":  false,
+                                                      "x":  96,
+                                                      "y":  104,
+                                                      "width":  1129,
+                                                      "height":  635
+                                                  },
+                                                  {
+                                                      "handle":  "854168",
+                                                      "title":  "20260728T123104141Z-6dc6760b - File Explorer",
+                                                      "processId":  10932,
+                                                      "processName":  "explorer",
+                                                      "visible":  true,
+                                                      "minimized":  true,
+                                                      "x":  -32000,
+                                                      "y":  -32000,
+                                                      "width":  160,
+                                                      "height":  28
+                                                  },
+                                                  {
+                                                      "handle":  "67228",
+                                                      "title":  "ArmouryAudioAgent",
+                                                      "processId":  25864,
+                                                      "processName":  "ArmouryAudioAgent",
+                                                      "visible":  true,
+                                                      "minimized":  true,
+                                                      "x":  0,
+                                                      "y":  1364,
+                                                      "width":  160,
+                                                      "height":  28
+                                                  },
+                                                  {
+                                                      "handle":  "657098",
+                                                      "title":  "Containers - Docker Desktop",
+                                                      "processId":  29464,
+                                                      "processName":  "Docker Desktop",
+                                                      "visible":  true,
+                                                      "minimized":  true,
+                                                      "x":  -32000,
+                                                      "y":  -32000,
+                                                      "width":  160,
+                                                      "height":  28
+                                                  }
+                                              ]
+                              }
+                          ],
+    "selectedWindow":  {
+                           "handle":  "4786176",
+                           "title":  "Oracle",
+                           "processId":  7524,
+                           "processName":  "electron",
+                           "visible":  true,
+                           "minimized":  false,
+                           "x":  680,
+                           "y":  296,
+                           "width":  1200,
+                           "height":  800
+                       },
+    "startupDurationMs":  4150,
+    "stability":  {
+                      "requiredSeconds":  15,
+                      "completedSeconds":  15,
+                      "samples":  [
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:05.0855149Z",
+                                          "second":  1,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:06.0876499Z",
+                                          "second":  2,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:07.0886721Z",
+                                          "second":  3,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:08.0897011Z",
+                                          "second":  4,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:09.0907255Z",
+                                          "second":  5,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:10.0917492Z",
+                                          "second":  6,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:11.0927691Z",
+                                          "second":  7,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:12.0937908Z",
+                                          "second":  8,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:13.0948131Z",
+                                          "second":  9,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:14.0958425Z",
+                                          "second":  10,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:15.0968663Z",
+                                          "second":  11,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:16.0978866Z",
+                                          "second":  12,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:17.0989134Z",
+                                          "second":  13,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:18.0999348Z",
+                                          "second":  14,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      },
+                                      {
+                                          "observedAt":  "2026-07-28T12:50:19.1009592Z",
+                                          "second":  15,
+                                          "rendererReadyState":  "complete",
+                                          "platformStatus":  "ready",
+                                          "platformPhase":  "complete",
+                                          "manifestVerified":  true
+                                      }
+                                  ]
+                  },
+    "cdpEvidence":  {
+                        "responses":  [
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:01.5800446Z",
+                                              "commandId":  1,
+                                              "method":  "Runtime.enable",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  1,
+                                                               "result":  {
+
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:01.5820446Z",
+                                              "commandId":  2,
+                                              "method":  "Log.enable",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  2,
+                                                               "result":  {
+
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:01.5860446Z",
+                                              "commandId":  3,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  3,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "title":  "",
+                                                                                                           "location":  "about:blank"
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:02.0955545Z",
+                                              "commandId":  4,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  4,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "title":  "",
+                                                                                                           "location":  "about:blank"
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:02.5975633Z",
+                                              "commandId":  5,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  5,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "title":  "Oracle",
+                                                                                                           "location":  "http://127.0.0.1:3105/auth?next=%2Fcompanion"
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:02.6005631Z",
+                                              "commandId":  6,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  6,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "title":  "Oracle",
+                                                                                                           "location":  "http://127.0.0.1:3105/auth?next=%2Fcompanion",
+                                                                                                           "bridgeAvailable":  true,
+                                                                                                           "platformHealth":  {
+                                                                                                                                  "contract":  "oracle.platform-health",
+                                                                                                                                  "contractVersion":  1,
+                                                                                                                                  "capturedAt":  "2026-07-28T12:50:02.599Z",
+                                                                                                                                  "attempt":  1,
+                                                                                                                                  "target":  "electron",
+                                                                                                                                  "manifestVersion":  "1.7.0",
+                                                                                                                                  "manifestVerified":  true,
+                                                                                                                                  "status":  "ready",
+                                                                                                                                  "phase":  "complete",
+                                                                                                                                  "operationalDiagnostics":  {
+                                                                                                                                                                 "purpose":  "software-support",
+                                                                                                                                                                 "authority":  "non-authoritative",
+                                                                                                                                                                 "mode":  "disabled",
+                                                                                                                                                                 "status":  "disabled",
+                                                                                                                                                                 "transport":  "none",
+                                                                                                                                                                 "retention":  "none",
+                                                                                                                                                                 "metrics":  {
+                                                                                                                                                                                 "attempts":  1,
+                                                                                                                                                                                 "admitted":  0,
+                                                                                                                                                                                 "rejected":  1,
+                                                                                                                                                                                 "sinkFailures":  0
+                                                                                                                                                                             }
+                                                                                                                                                             },
+                                                                                                                                  "subsystems":  [
+                                                                                                                                                     {
+                                                                                                                                                         "id":  "composition",
+                                                                                                                                                         "required":  true,
+                                                                                                                                                         "status":  "ready",
+                                                                                                                                                         "message":  "Constructed runtime exactly matches the canonical manifest."
+                                                                                                                                                     },
+                                                                                                                                                     {
+                                                                                                                                                         "id":  "operational-diagnostics",
+                                                                                                                                                         "required":  true,
+                                                                                                                                                         "status":  "ready",
+                                                                                                                                                         "message":  "Operational Diagnostics admission is composed and delivery is disabled."
+                                                                                                                                                     },
+                                                                                                                                                     {
+                                                                                                                                                         "id":  "services",
+                                                                                                                                                         "required":  true,
+                                                                                                                                                         "status":  "ready",
+                                                                                                                                                         "message":  "13 Oracle Services composed."
+                                                                                                                                                     },
+                                                                                                                                                     {
+                                                                                                                                                         "id":  "session-lifecycle",
+                                                                                                                                                         "required":  true,
+                                                                                                                                                         "status":  "ready",
+                                                                                                                                                         "message":  "Authoritative Session Service is composed with persistence disabled."
+                                                                                                                                                     },
+                                                                                                                                                     {
+                                                                                                                                                         "id":  "applications",
+                                                                                                                                                         "required":  true,
+                                                                                                                                                         "status":  "ready",
+                                                                                                                                                         "message":  "10 Oracle Applications composed."
+                                                                                                                                                     },
+                                                                                                                                                     {
+                                                                                                                                                         "id":  "game-integrations",
+                                                                                                                                                         "required":  true,
+                                                                                                                                                         "status":  "ready",
+                                                                                                                                                         "message":  "2 Game Integrations composed."
+                                                                                                                                                     },
+                                                                                                                                                     {
+                                                                                                                                                         "id":  "guidance",
+                                                                                                                                                         "required":  true,
+                                                                                                                                                         "status":  "ready",
+                                                                                                                                                         "message":  "2 Guidance providers composed."
+                                                                                                                                                     },
+                                                                                                                                                     {
+                                                                                                                                                         "id":  "extensions",
+                                                                                                                                                         "required":  false,
+                                                                                                                                                         "status":  "ready",
+                                                                                                                                                         "message":  "Extension Runtime ready with no extensions."
+                                                                                                                                                     },
+                                                                                                                                                     {
+                                                                                                                                                         "id":  "companion",
+                                                                                                                                                         "required":  true,
+                                                                                                                                                         "status":  "ready",
+                                                                                                                                                         "message":  "Platform Companion capability lifecycle is ready."
+                                                                                                                                                     }
+                                                                                                                                                 ],
+                                                                                                                                  "capabilities":  {
+                                                                                                                                                       "services":  [
+                                                                                                                                                                        "conversation",
+                                                                                                                                                                        "operator",
+                                                                                                                                                                        "sessions",
+                                                                                                                                                                        "missions",
+                                                                                                                                                                        "memory",
+                                                                                                                                                                        "operator-understanding",
+                                                                                                                                                                        "progression",
+                                                                                                                                                                        "planner",
+                                                                                                                                                                        "reports",
+                                                                                                                                                                        "ai-coach",
+                                                                                                                                                                        "oracle-brain",
+                                                                                                                                                                        "loadouts",
+                                                                                                                                                                        "companion"
+                                                                                                                                                                    ],
+                                                                                                                                                       "applications":  [
+                                                                                                                                                                            "ai-coach",
+                                                                                                                                                                            "oracle-brain",
+                                                                                                                                                                            "loadouts",
+                                                                                                                                                                            "reports",
+                                                                                                                                                                            "sessions",
+                                                                                                                                                                            "career",
+                                                                                                                                                                            "planner",
+                                                                                                                                                                            "progress",
+                                                                                                                                                                            "achievements",
+                                                                                                                                                                            "companion"
+                                                                                                                                                                        ],
+                                                                                                                                                       "gameIntegrations":  [
+                                                                                                                                                                                "call-of-duty",
+                                                                                                                                                                                "minecraft-java"
+                                                                                                                                                                            ],
+                                                                                                                                                       "guidanceProviders":  [
+                                                                                                                                                                                 "game-integrations.call-of-duty.curated-guidance",
+                                                                                                                                                                                 "game-integrations.minecraft-java.diamond-discovery-guidance"
+                                                                                                                                                                             ]
+                                                                                                                                                   },
+                                                                                                                                  "diagnostics":  [
+                                                                                                                                                      {
+                                                                                                                                                          "code":  "platform.boot.started",
+                                                                                                                                                          "level":  "info",
+                                                                                                                                                          "message":  "Oracle Platform boot started.",
+                                                                                                                                                          "subsystemId":  null
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "code":  "platform.composition.verified",
+                                                                                                                                                          "level":  "info",
+                                                                                                                                                          "message":  "Runtime composition exactly matches its canonical manifest.",
+                                                                                                                                                          "subsystemId":  "composition"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "code":  "platform.boot.ready",
+                                                                                                                                                          "level":  "info",
+                                                                                                                                                          "message":  "Oracle Platform is ready.",
+                                                                                                                                                          "subsystemId":  null
+                                                                                                                                                      }
+                                                                                                                                                  ]
+                                                                                                                              }
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:05.0835098Z",
+                                              "commandId":  7,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  7,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:06.0876499Z",
+                                              "commandId":  8,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  8,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:07.0886721Z",
+                                              "commandId":  9,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  9,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:08.0897011Z",
+                                              "commandId":  10,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  10,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:09.0907255Z",
+                                              "commandId":  11,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  11,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:10.0917492Z",
+                                              "commandId":  12,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  12,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:11.0927691Z",
+                                              "commandId":  13,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  13,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:12.0937908Z",
+                                              "commandId":  14,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  14,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:13.0948131Z",
+                                              "commandId":  15,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  15,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:14.0958425Z",
+                                              "commandId":  16,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  16,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:15.0968663Z",
+                                              "commandId":  17,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  17,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:16.0978866Z",
+                                              "commandId":  18,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  18,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:17.0989134Z",
+                                              "commandId":  19,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  19,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:18.0999348Z",
+                                              "commandId":  20,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  20,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:19.1009592Z",
+                                              "commandId":  21,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  21,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "readyState":  "complete",
+                                                                                                           "healthStatus":  "ready",
+                                                                                                           "healthPhase":  "complete",
+                                                                                                           "manifestVerified":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          },
+                                          {
+                                              "observedAt":  "2026-07-28T12:50:20.1059878Z",
+                                              "commandId":  22,
+                                              "method":  "Runtime.evaluate",
+                                              "classification":  "command-response",
+                                              "envelope":  {
+                                                               "id":  22,
+                                                               "result":  {
+                                                                              "result":  {
+                                                                                             "type":  "object",
+                                                                                             "value":  {
+                                                                                                           "requested":  true
+                                                                                                       }
+                                                                                         }
+                                                                          }
+                                                           }
+                                          }
+                                      ],
+                        "events":  [
+                                       {
+                                           "method":  "Runtime.executionContextCreated",
+                                           "params":  {
+                                                          "context":  {
+                                                                          "id":  2,
+                                                                          "origin":  "://",
+                                                                          "name":  "Electron Isolated Context",
+                                                                          "uniqueId":  "-7324130749339027515.-2862133886312300488",
+                                                                          "auxData":  {
+                                                                                          "isDefault":  false,
+                                                                                          "type":  "isolated",
+                                                                                          "frameId":  "DA43753AFDBCA94594AA458074FBA74E"
+                                                                                      }
+                                                                      }
+                                                      }
+                                       },
+                                       {
+                                           "method":  "Runtime.executionContextCreated",
+                                           "params":  {
+                                                          "context":  {
+                                                                          "id":  1,
+                                                                          "origin":  "://",
+                                                                          "name":  "",
+                                                                          "uniqueId":  "1138145855114029105.-2606951508379990170",
+                                                                          "auxData":  {
+                                                                                          "isDefault":  true,
+                                                                                          "type":  "default",
+                                                                                          "frameId":  "DA43753AFDBCA94594AA458074FBA74E"
+                                                                                      }
+                                                                      }
+                                                      }
+                                       },
+                                       {
+                                           "method":  "Runtime.executionContextsCleared",
+                                           "params":  {
+
+                                                      }
+                                       },
+                                       {
+                                           "method":  "Runtime.executionContextCreated",
+                                           "params":  {
+                                                          "context":  {
+                                                                          "id":  3,
+                                                                          "origin":  "http://127.0.0.1:3105",
+                                                                          "name":  "",
+                                                                          "uniqueId":  "8124704713797786687.7929838913686022066",
+                                                                          "auxData":  {
+                                                                                          "isDefault":  true,
+                                                                                          "type":  "default",
+                                                                                          "frameId":  "DA43753AFDBCA94594AA458074FBA74E"
+                                                                                      }
+                                                                      }
+                                                      }
+                                       },
+                                       {
+                                           "method":  "Runtime.executionContextCreated",
+                                           "params":  {
+                                                          "context":  {
+                                                                          "id":  4,
+                                                                          "origin":  "http://127.0.0.1:3105",
+                                                                          "name":  "Electron Isolated Context",
+                                                                          "uniqueId":  "3927494439547197192.-7718233935954581693",
+                                                                          "auxData":  {
+                                                                                          "isDefault":  false,
+                                                                                          "type":  "isolated",
+                                                                                          "frameId":  "DA43753AFDBCA94594AA458074FBA74E"
+                                                                                      }
+                                                                      }
+                                                      }
+                                       },
+                                       {
+                                           "method":  "Runtime.consoleAPICalled",
+                                           "params":  {
+                                                          "type":  "warning",
+                                                          "args":  [
+                                                                       {
+                                                                           "type":  "string",
+                                                                           "value":  "%cElectron Security Warning (Insecure Content-Security-Policy)"
+                                                                       },
+                                                                       {
+                                                                           "type":  "string",
+                                                                           "value":  "font-weight: bold;"
+                                                                       },
+                                                                       {
+                                                                           "type":  "string",
+                                                                           "value":  "This renderer process has either no Content Security\n  Policy set or a policy with \"unsafe-eval\" enabled. This exposes users of\n  this app to unnecessary security risks.\n\nFor more information and help, consult\nhttps://electronjs.org/docs/tutorial/security.\nThis warning will not show up\nonce the app is packaged."
+                                                                       }
+                                                                   ],
+                                                          "executionContextId":  4,
+                                                          "timestamp":  1785243002174.62,
+                                                          "stackTrace":  {
+                                                                             "callFrames":  [
+                                                                                                {
+                                                                                                    "functionName":  "warnAboutInsecureCSP",
+                                                                                                    "scriptId":  "4",
+                                                                                                    "url":  "node:electron/js2c/sandbox_bundle",
+                                                                                                    "lineNumber":  1,
+                                                                                                    "columnNumber":  124820
+                                                                                                },
+                                                                                                {
+                                                                                                    "functionName":  "logSecurityWarnings",
+                                                                                                    "scriptId":  "4",
+                                                                                                    "url":  "node:electron/js2c/sandbox_bundle",
+                                                                                                    "lineNumber":  1,
+                                                                                                    "columnNumber":  126984
+                                                                                                },
+                                                                                                {
+                                                                                                    "functionName":  "",
+                                                                                                    "scriptId":  "4",
+                                                                                                    "url":  "node:electron/js2c/sandbox_bundle",
+                                                                                                    "lineNumber":  1,
+                                                                                                    "columnNumber":  123159
+                                                                                                }
+                                                                                            ]
+                                                                         }
+                                                      }
+                                       }
+                                   ],
+                        "transportFailures":  [
+
+                                              ]
+                    },
+    "runtimeExceptions":  [
+
+                          ],
+    "shutdown":  {
+                     "requestedAt":  "2026-07-28T12:50:20.1029879Z",
+                     "completedAt":  "2026-07-28T12:50:20.1765081Z",
+                     "durationMs":  74,
+                     "graceful":  true,
+                     "forcedCleanupRequired":  false
+                 },
+    "cleanup":  {
+                    "remainingTestProcesses":  [
+
+                                               ],
+                    "remainingWebListeners":  [
+
+                                              ],
+                    "remainingDebugListeners":  [
+
+                                                ],
+                    "temporaryRuntimeRemoved":  true
+                },
+    "failures":  [
+
+                 ]
+}

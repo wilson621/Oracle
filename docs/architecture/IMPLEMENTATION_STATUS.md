@@ -8,7 +8,7 @@
 **Expected Stability:** Updated when verified implementation or accepted technical debt changes
 **Supersedes:** Earlier active implementation-status records
 **Superseded By:** None
-**Last Reviewed:** 26 July 2026
+**Last Reviewed:** 28 July 2026
 **Verified Branch:** `sprint-9-overlay`
 **Verified Repository Baseline:** `sprint-18-complete`
 **Sprint 14 Implementation Baseline:** `3868975`
@@ -884,8 +884,22 @@ Final closure verification passed:
 - working-tree and untracked-file inspection
 
 Focused deterministic verification scripts are registered in `package.json`.
-An interactive Electron UI smoke test remains a release-environment activity
-rather than a documentation-closure requirement.
+
+Oracle Engineering Validation Phase A5 passed on 28 July 2026 from clean
+committed revision `6113565765a95b990415b6cdf2f2f1d7ff3e83c8` on
+`sprint-9-overlay`. Canonical run `20260728T124957338Z-13d3309b`, SHA-256
+`8821e4c0d12dde6ca339d74f2d6baeb43d0b6a5fc286eff8d3c7c6780b65da64`,
+verified standalone Web startup, Electron launch, same-origin renderer load,
+the restricted preload bridge, ready and complete Platform Health, one visible
+native Oracle window owned by the launched Electron main process, a 15-second
+stability interval, graceful shutdown and zero remaining test processes or
+listeners.
+
+The result is local engineering source-health evidence only. It does not
+reopen or complete Sprint 30.5 Stage 3, qualify an installed production
+package, or authorise signing, publication, distribution, deployment or
+production use. The immutable report and sidecar are recorded in
+[Phase A5 Engineering Validation Evidence](../sprints/evidence/sprint-30-5/engineering-validation/phase-a5/README.md).
 
 Accepted technical debt remains documented in
 `DEPENDENCY_BOUNDARY_AUDIT.md`, `SPRINT_12_1_RETROSPECTIVE.md` and

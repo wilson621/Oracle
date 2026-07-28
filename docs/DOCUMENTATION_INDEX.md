@@ -8,7 +8,7 @@
 **Expected Stability:** Reviewed whenever governance or canonical documentation changes
 **Supersedes:** The incomplete documentation table in `README.md` as the canonical documentation index
 **Superseded By:** None
-**Last Reviewed:** 27 July 2026
+**Last Reviewed:** 28 July 2026
 
 ---
 
@@ -295,6 +295,7 @@ delivery authorities have been reviewed.
 | Sprint 30.5 Stage 3 provenance package | [Sprint 30.5 Stage 3 Provenance Exception Founder Approval Package](sprints/SPRINT_30_5_STAGE_3_PROVENANCE_EXCEPTION_FOUNDER_APPROVAL_PACKAGE.md) | Approved historical evidence and residual-risk package |
 | Sprint 30.5 Stage 3 reconciliation | [Sprint 30.5 Stage 3 Reconciliation](sprints/SPRINT_30_5_STAGE_3_RECONCILIATION.md) | Stage 3 historically attempted, incomplete and blocked; no current resume authority |
 | Sprint 30.5 Stage 3 reconciliation evidence | [Sprint 30.5 Stage 3 Reconciliation Evidence](sprints/evidence/sprint-30-5/stage-3-reconciliation/README.md) | Recovered phase evidence, chain of custody, unavailable dispositions and USB integrity incident |
+| Sprint 30.5 post-reconciliation Phase A5 engineering validation evidence | [Phase A5 Engineering Validation Evidence](sprints/evidence/sprint-30-5/engineering-validation/phase-a5/README.md) | Clean committed local Electron source-health qualification passed; does not reopen or complete Stage 3 |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |
 
 # Supporting Documentation
