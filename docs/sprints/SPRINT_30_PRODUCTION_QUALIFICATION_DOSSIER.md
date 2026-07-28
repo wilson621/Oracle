@@ -141,7 +141,30 @@ record SHA-256
 `9d5f0cafe2a49792c04fed34702cd63ec9962f0187623a1300a8132beeec830f`.
 
 Stage 3 is historically attempted, incomplete and blocked. No current
-authority exists to resume it. This outcome does not alter the accepted Stage
-2 source candidate, Runtime Manifest `1.7.0`, signed Release Manifest, MSIX,
-artifact hashes or frozen evidence. ASUS-specific hardware/GPU evidence
-remains valid Stage 1 history but does not transfer to the replacement host.
+authority exists to resume it. The Stage 3 reconciliation did not alter the
+then-accepted Stage 2 source candidate, Runtime Manifest `1.7.0`, signed
+Release Manifest, MSIX, artifact hashes or frozen evidence. ASUS-specific
+hardware/GPU evidence remains valid Stage 1 history but does not transfer to
+the replacement host.
+
+## Sprint 30.5 Stage 2 Requalification R1 governance activation
+
+On 28 July 2026 the Founder accepted the Stage 2 invalidation disposition.
+Historical Stage 2 remains Founder-accepted, closed and immutable. Its source
+candidate `d850743977735929f6873457fe122d2cf9697d9e`, package, manifests,
+hashes, evidence and conclusions remain historical records and are not
+rewritten.
+
+Post-freeze product-source corrections committed at
+`6113565765a95b990415b6cdf2f2f1d7ff3e83c8` mean the historical candidate no
+longer qualifies the current source revision. The permanent new cycle identity
+is `Sprint 30.5 Stage 2 Requalification R1`.
+
+Requalification R1 is Founder-authorised for governance activation but has
+not begun. No build, packaging, signing, certificate creation, installation
+or qualification execution occurred under this activation. Those operations
+remain behind a separate explicit Founder pre-execution gate.
+
+Stage 3 remains historically attempted, incomplete and blocked. Stage 4 and
+all later stages remain unauthorised. Requalification R1 does not authorise
+production signing, publication, distribution, deployment or release.

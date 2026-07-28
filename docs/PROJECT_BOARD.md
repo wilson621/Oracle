@@ -8,8 +8,8 @@
 **Expected Stability:** Updated whenever approved work changes state
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
-**Last Reviewed:** 27 July 2026
-**Version:** 8.4
+**Last Reviewed:** 28 July 2026
+**Version:** 8.5
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -116,8 +116,9 @@ remain unavailable, and none is claimed as passed. Phase 5 completes the
 integrated matrix, closes the development-tool supply-chain finding and
 produces the Production Qualification dossier. Full and production dependency
 audits report zero vulnerabilities. Sprint 30 remains qualification-incomplete
-because later mandatory environment evidence and authorised package
-reconciliation remain absent.
+because later mandatory environment evidence remains absent and current-source
+package reconciliation remains outstanding under the authorised but unstarted
+Stage 2 Requalification R1 cycle.
 
 Sprint 30.5 Stage 1 — Environment Admission is Founder-accepted and closed.
 Transfer integrity, the controlled non-pristine Windows baseline, isolated
@@ -127,10 +128,17 @@ under SHA-256
 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
 This does not satisfy the separate clean Windows requirement.
 
-Stage 2 — Candidate Freeze and Package Reconciliation is Founder-accepted and
-closed with frozen evidence. Runtime Manifest `1.7.0` mechanically reconciles
-to the local qualification MSIX and signed Release Manifest. The signer and
-trust were removed.
+Historical Stage 2 — Candidate Freeze and Package Reconciliation remains
+Founder-accepted, closed and immutable. Runtime Manifest `1.7.0` mechanically
+reconciles to its local qualification MSIX and signed Release Manifest. The
+signer and trust were removed.
+
+Post-freeze product-source corrections at
+`6113565765a95b990415b6cdf2f2f1d7ff3e83c8` invalidate historical candidate
+`d850743977735929f6873457fe122d2cf9697d9e` for qualification of current
+source. Sprint 30.5 Stage 2 Requalification R1 is Founder-authorised at the
+governance level but has not begun. Package construction and isolated
+temporary test signing remain behind its explicit pre-execution Founder gate.
 
 Stage 3 Clean Windows Qualification was Founder-authorised and attempted.
 `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, remains admitted for its
@@ -142,7 +150,8 @@ and Revision 6 is abandoned.
 
 Stage 3 is historically attempted, incomplete and blocked. No current
 execution, artifact-transfer, certificate-trust, package-installation,
-harness-repair or requalification authority exists. Gate 7 is not authorised.
+harness-repair or Stage 3 requalification authority exists. Gate 7 is not
+authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -183,6 +192,10 @@ Stage 2 implementation, qualification package and evidence are recorded in
 Stage 2 closure and the historical Stage 3 execution plan are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_2_CLOSURE.md` and
 `docs/sprints/SPRINT_30_5_STAGE_3_PLAN.md`.
+The current-source invalidation decision and authorised but unstarted
+Requalification R1 plan are recorded in
+`docs/sprints/SPRINT_30_5_STAGE_2_INVALIDATION_DECISION.md` and
+`docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_PLAN.md`.
 Replacement-host admission requirements are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION.md`.
 The Founder exception approval and machine-readable admission classification

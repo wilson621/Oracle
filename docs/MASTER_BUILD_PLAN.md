@@ -8,8 +8,8 @@
 **Expected Stability:** Reviewed whenever approved execution direction changes
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
-**Last Reviewed:** 27 July 2026
-**Version:** 4.6
+**Last Reviewed:** 28 July 2026
+**Version:** 4.7
 
 ---
 
@@ -139,10 +139,15 @@ Option A and ADR-047 are Founder-approved. Phases 1 through 5 are complete and
 locally verified. Sprint 30.5 Stage 1 Environment Admission is
 Founder-accepted and closed with frozen transfer, controlled non-pristine
 host, isolated network, standalone GPU and cleanup evidence. It does not
-satisfy clean Windows qualification. Stage 2 has constructed and mechanically
-verified a local-only package and signed Release Manifest reconciled to
-Runtime Manifest `1.7.0`; Stage 2 is Founder-accepted and closed, its evidence
-is frozen, and all temporary signing material and trust are removed.
+satisfy clean Windows qualification. Historical Stage 2 constructed and
+mechanically verified a local-only package and signed Release Manifest
+reconciled to Runtime Manifest `1.7.0`; it remains Founder-accepted, closed
+and immutable, and all temporary signing material and trust were removed.
+Post-freeze product-source corrections mean that historical candidate no
+longer qualifies the current source revision. Sprint 30.5 Stage 2
+Requalification R1 is Founder-authorised at the governance level but has not
+begun. Build, packaging, signing, certificate creation and qualification
+execution require separate explicit Founder authority.
 
 Stage 3 Clean Windows Qualification was Founder-authorised and attempted on
 `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, which remains admitted for its
@@ -157,8 +162,9 @@ acceptance, live Auth, protected rendering, installed-package qualification
 and later integrated evidence remain outstanding. No current authority exists
 to resume Stage 3, execute or repair the harness observed during
 reconciliation, create or trust a replacement certificate, reinstall the
-package or begin a new qualification revision. Accepted Stage 1 and Stage 2
-evidence remains unchanged. Production signing, publication, distribution,
+package or begin a new Stage 3 qualification revision. Accepted Stage 1 and
+historical Stage 2 evidence remains unchanged. Stage 2 Requalification R1
+does not authorise Stage 3. Production signing, publication, distribution,
 deployment and activation remain unauthorised.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns

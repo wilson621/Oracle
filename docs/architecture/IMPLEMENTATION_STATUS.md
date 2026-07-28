@@ -50,10 +50,12 @@ ADR-046; Clean-Machine Certification Deferred — Required Disposable Windows
 Environment Unavailable remains the independent programme status
 **Sprint 30:** Founder-approved and active under ADR-047; Phases 1–5
 implemented and locally verified; Sprint 30.5 Stage 1 Environment Admission
-Founder-accepted and closed; Stage 2 package/runtime reconciliation
-Founder-accepted and closed; clean Windows, live Auth,
-protected rendering and installed-package qualification remain; production
-qualification not yet complete
+Founder-accepted and closed; historical Stage 2 package/runtime reconciliation
+Founder-accepted, closed and immutable, but its candidate no longer qualifies
+the current source revision; Stage 2 Requalification R1 governance-authorised
+and not begun; clean Windows, live Auth, protected rendering and
+installed-package qualification remain; production qualification not yet
+complete
 
 ---
 
@@ -159,11 +161,14 @@ qualification path. The host is not a clean Windows environment and does not
 satisfy that later mandatory qualification. The frozen local evidence archive
 has SHA-256
 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
-Stage 2 is Founder-accepted and closed with frozen evidence. The designated
-Stage 3 host is admitted with a Founder provenance exception. Stage 3 remains
-proposed and not authorised.
+Historical Stage 2 is Founder-accepted, closed and immutable with frozen
+evidence, but its candidate no longer qualifies the current source revision
+after post-freeze product-source corrections. Sprint 30.5 Stage 2
+Requalification R1 is Founder-authorised for governance activation and has
+not begun. The designated Stage 3 host is admitted with a Founder provenance
+exception. Stage 3 is historically attempted, incomplete and blocked.
 
-## Sprint 30.5 Stage 2 — Candidate Freeze and Package Reconciliation
+## Sprint 30.5 Stage 2 — Historical Candidate Freeze and Package Reconciliation
 
 Source commit `d850743977735929f6873457fe122d2cf9697d9e` is frozen into
 local-only MSIX `0.1.1.0`. Runtime Manifest `1.7.0` mechanically equals both
@@ -179,17 +184,24 @@ reports zero certificate-store matches and no retained PFX, CER, PEM or key.
 No runtime, product, architecture, trust-boundary or migration change was
 introduced.
 
-Stage 3 must qualify the exact frozen package on a genuinely clean Windows
-state. It may not rebuild or resign the package, and it must remain separate
-from live Auth, protected rendering and installed-package
-GPU/performance/accessibility qualification.
+The historical candidate, package, manifests, hashes and evidence remain
+accepted and immutable. Post-freeze product-source corrections committed at
+`6113565765a95b990415b6cdf2f2f1d7ff3e83c8` mean that candidate no longer
+qualifies the current source revision.
 
-The proposed Stage 3 host is `Founder-QA-01`, a `MEDION ERAZER P6605
+Sprint 30.5 Stage 2 Requalification R1 is Founder-authorised for governance
+activation only and has not begun. Build, packaging, signing, certificate
+creation and qualification execution require separate explicit Founder
+authority. Requalification R1 creates no authority to resume Stage 3 or begin
+Stage 4 or any later stage.
+
+The historical Stage 3 host is `Founder-QA-01`, a `MEDION ERAZER P6605
 MD61596`. It is `admitted-with-founder-provenance-exception` for its current
 Windows installation. `installationMediaEvidencePresent` remains false; the
 Founder-approved exception is permanently bound to the immutable admission
 and compensating-control evidence. The ASUS Stage 1 hardware/GPU facts do not
-transfer, and no Stage 3 execution authority has been granted.
+transfer. Historical Stage 3 execution occurred, but no current Stage 3
+execution authority exists.
 
 ## Sprint 29 — Secure Desktop Operations and Distribution
 

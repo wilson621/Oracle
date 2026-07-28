@@ -10,8 +10,8 @@
 **Expected Stability:** Reviewed at strategic and Sprint-boundary changes
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
-**Last Reviewed:** 27 July 2026
-**Version:** 6.2
+**Last Reviewed:** 28 July 2026
+**Version:** 6.3
 
 ---
 
@@ -783,9 +783,14 @@ quality and support matrix and closes the discovered development dependency
 advisory. Sprint 30.5 Stage 1 is Founder-accepted and closed: the controlled
 non-pristine physical host, isolated Auth route, standalone hardware GPU
 admission and teardown evidence pass and are frozen. The host is not a clean
-Windows environment. Stage 2 is Founder-accepted and closed with a frozen
-local Runtime Manifest `1.7.0` MSIX, mechanically equal Release Manifest,
-SBOM, provenance, package inventory and complete signing teardown.
+Windows environment. Historical Stage 2 is Founder-accepted, closed and
+immutable with a frozen local Runtime Manifest `1.7.0` MSIX, mechanically
+equal Release Manifest, SBOM, provenance, package inventory and complete
+signing teardown. Post-freeze product-source corrections mean that candidate
+no longer qualifies the current source revision. Sprint 30.5 Stage 2
+Requalification R1 is Founder-authorised for governance activation but has
+not begun; its build, packaging, signing, certificate and qualification
+operations require separate explicit Founder authority.
 
 Stage 3 was Founder-authorised and attempted on `Founder-QA-01`, which remains
 `admitted-with-founder-provenance-exception` for its current Windows
@@ -797,9 +802,10 @@ and Revision 6 is abandoned.
 
 Sprint 30 remains qualification-incomplete. Stage 3 is historically attempted,
 incomplete and blocked, while Stages 4–7 have not started. No current authority
-exists to resume Stage 3 or to create a replacement harness, certificate,
-candidate or qualification revision. Production signing, publication,
-distribution, deployment and runtime persistence remain unauthorised.
+exists to resume Stage 3 or to create a replacement Stage 3 harness,
+certificate or qualification revision. Stage 2 Requalification R1 creates no
+Stage 3 authority. Production signing, publication, distribution, deployment
+and runtime persistence remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 
