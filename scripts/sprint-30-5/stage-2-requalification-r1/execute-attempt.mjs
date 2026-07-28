@@ -1041,7 +1041,6 @@ function performSafetyTeardown() {
         PUBLISHER,
         "-OutputPath",
         cleanupPath,
-        "-Confirm:$false",
       ]);
     }
   } catch (error) {

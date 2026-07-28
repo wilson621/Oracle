@@ -14,6 +14,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$ConfirmPreference = "None"
 Set-StrictMode -Version Latest
 
 function Assert-CreateOnlyOutputPath {

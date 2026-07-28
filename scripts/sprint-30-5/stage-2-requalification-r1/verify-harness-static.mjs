@@ -274,6 +274,7 @@ assert.doesNotMatch(
   cleanupScript,
   /Where-Object \{ \$_.Subject -eq \$ExpectedSubject \}/u
 );
+assert.match(cleanupScript, /\$ConfirmPreference = "None"/u);
 assert.match(cleanupScript, /FileMode\]::CreateNew/u);
 assert.match(
   cleanupScript,
@@ -458,6 +459,7 @@ assert.doesNotMatch(
   executorSource,
   /build-sprint-30-5-stage-2-release\.mjs|verify-sprint-30-5-stage-2\.mjs/u
 );
+assert.doesNotMatch(executorSource, /-Confirm:\$false/u);
 assert.match(executorSource, /performSafetyTeardown\(\)/u);
 assert.match(executorSource, /if \(exactThumbprint && !teardownAttempted\)/u);
 assert.match(executorSource, /Safety teardown may not be retried/u);
@@ -497,6 +499,18 @@ const exactManifestSigner = readFileSync(
 const exactSignatureVerifier = readFileSync(
   join(import.meta.dirname, "verify-exact-signatures.ps1"),
   "utf8"
+);
+assert.doesNotMatch(
+  exactSignatureVerifier,
+  /Cert:\\CurrentUser\\Root/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /Cert:\\CurrentUser\\TrustedPeople/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /location = "CurrentUser\\TrustedPeople"/u
 );
 assert.match(exactSignatureVerifier, /\$bootstrapSignature/u);
 assert.match(
@@ -572,6 +586,9 @@ console.log(
         preIdentitySigningMaterialCleanupInspection: "passed",
         zeroStoreMatchTeardownInspection: "passed",
         postTrustSignatureValidityInspection: "passed",
+        trustedPeopleOnlyTemporaryTrustInspection: "passed",
+        noExternalConfirmArgumentInspection: "passed",
+        internalShouldProcessConfirmationInspection: "passed",
         postPublicationRepositoryCheckpointInspection: "passed",
         atomicPackagePublication: "passed",
         atomicExactManifestSigning: "passed",

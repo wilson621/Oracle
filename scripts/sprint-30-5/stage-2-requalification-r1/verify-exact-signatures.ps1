@@ -125,7 +125,7 @@ finally {
 
 $temporaryTrust = Import-Certificate `
   -FilePath $temporaryCertificatePath `
-  -CertStoreLocation "Cert:\CurrentUser\Root"
+  -CertStoreLocation "Cert:\CurrentUser\TrustedPeople"
 
 if ($temporaryTrust.Thumbprint -cne $ExpectedThumbprint) {
   throw "Temporary trust imported an unexpected certificate."
@@ -187,7 +187,7 @@ if ($manifestSigner.Subject -cne $ExpectedSubject) {
   }
   temporaryTrust = [ordered]@{
     created = $true
-    location = "CurrentUser\Root"
+    location = "CurrentUser\TrustedPeople"
     thumbprint = $temporaryTrust.Thumbprint
   }
   temporaryCertificatePath = $temporaryCertificatePath
