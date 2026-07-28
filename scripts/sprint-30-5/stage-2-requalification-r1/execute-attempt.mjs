@@ -46,6 +46,7 @@ const RELEASE_ID = contract.package.releaseId;
 const PUBLISHER = contract.package.publisherSubjectPrefix;
 const HISTORICAL_STAGE2_ARCHIVE_SHA256 =
   "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876";
+const GOVERNED_COMMAND_MAX_BUFFER_BYTES = 16 * 1024 * 1024;
 const PERMANENT_LIMITATION =
   "Local test signing proves packaging and distribution mechanics only. It does not establish production trust, publication, distribution, deployment or release authority.";
 
@@ -1616,6 +1617,7 @@ function runLogged(label, command, args, redactions = [], environment = {}) {
     encoding: "utf8",
     shell: false,
     windowsHide: true,
+    maxBuffer: GOVERNED_COMMAND_MAX_BUFFER_BYTES,
   });
   const completedAt = new Date();
   const record = {
@@ -1638,7 +1640,12 @@ function runLogged(label, command, args, redactions = [], environment = {}) {
     join(directories.logs, `${String(readdirSync(directories.logs).length + 1).padStart(3, "0")}-${label}.json`),
     record
   );
-  if (result.error || result.status !== 0) {
+  if (result.error) {
+    throw new Error(
+      `${command} failed during ${label} with process error: ${result.error.message}.`
+    );
+  }
+  if (result.status !== 0) {
     throw new Error(
       `${command} failed during ${label} with exit code ${result.status}.`
     );

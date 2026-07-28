@@ -32,6 +32,7 @@ export default defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    ".artifacts/**",
     "next-env.d.ts",
 
     // Generated Electron output
