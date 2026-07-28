@@ -193,9 +193,8 @@ R1 remains accepted, closed and immutable. Its certificate expires at
 The Founder authorised Stage 2 Requalification R2 as a separate
 replacement-candidate refresh. R2 permits a maximum 30-day isolated
 local-test certificate per attempt and retains exact trust, private-material
-and evidence teardown. R2 is active but has not yet produced an accepted
-candidate. It grants no Stage 3, production-signing, publication,
-distribution, deployment or release authority.
+and evidence teardown. It grants no Stage 3, production-signing,
+publication, distribution, deployment or release authority.
 
 R2 attempt `r2-20260728T203503018Z-ec577cf4` passed from candidate and harness
 commit `11475fe01fff2ec69f0188547107f4e901c531d7`, tree
@@ -206,5 +205,8 @@ archive SHA-256
 `6a3d2a6878b6e778214c550854a06e4a410fd5ec60b911b606aef844d4225f0f`
 and MSIX SHA-256
 `6adb8d9b29585ff7de1b878ec2df2d76a82ce03661cf7269ced7eaff8aae50bc`.
-The signer expires at `2026-08-27T20:35:39Z`. R2 awaits Founder acceptance
-and formal closure; Stage 3 remains unauthorised.
+The signer expires at `2026-08-27T20:35:39Z`. The Founder accepted the result
+and R2 is formally closed. Candidate
+`11475fe01fff2ec69f0188547107f4e901c531d7` is the authoritative Stage 2
+execution candidate for any later separately authorised Stage 3 preparation.
+Stage 3 remains unauthorised.

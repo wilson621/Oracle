@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder decision on Sprint 30.5 Stage 2 Requalification R2
+**Next Review:** Founder decision on Stage 3 preparation
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1358,17 +1358,19 @@ and local-test MSIX SHA-256
 `c9c3b4b624f1b7528123a4f0c86737fef6cab8832d6b6b042ea5b44bfcb9bdbb`.
 
 R1 remains accepted and immutable. Its remaining certificate-validity window
-does not safely support the full Stage 3 preparation, review, host,
-transfer and execution sequence. Stage 2 Requalification R2 is separately
-Founder-authorised and active as a candidate refresh, with a maximum 30-day
-isolated local-test certificate validity budget. R2 is not yet accepted.
+did not safely support the full Stage 3 preparation, review, host, transfer
+and execution sequence. Stage 2 Requalification R2 was separately
+Founder-authorised as a candidate refresh, with a maximum 30-day isolated
+local-test certificate validity budget.
 
 R2 attempt `r2-20260728T203503018Z-ec577cf4` passed and was independently
 reconciled from candidate and harness commit
 `11475fe01fff2ec69f0188547107f4e901c531d7`. The final evidence manifest
 SHA-256 is
 `84660931dec8c2c4f4e409465e67e49d9606f8617824e7c1212bb2e8abf1d47d`.
-The result awaits Founder acceptance and formal closure.
+The Founder accepted the result and R2 is formally closed. Candidate
+`11475fe01fff2ec69f0188547107f4e901c531d7` is authoritative for any later
+separately authorised Stage 3 preparation decision.
 
 Stage 3 Clean Windows Qualification was subsequently Founder-authorised and
 attempted on `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, whose current

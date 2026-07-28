@@ -1,14 +1,13 @@
 # Sprint 30.5 Stage 2 Requalification R2 Evidence
 
-**Status:** Execution passed; independently reconciled; awaiting Founder
-acceptance
+**Status:** Founder-accepted, formally closed and frozen
 **Passing attempt:** `r2-20260728T203503018Z-ec577cf4`
 **Authority:** `authority-r2-20260728T203503018Z-ec577cf4`
 **Candidate and harness commit:** `11475fe01fff2ec69f0188547107f4e901c531d7`
 **Candidate and harness tree:** `1cec636603031aa8f63c8b331aea5bbcb916567d`
 **Stage 3:** Blocked and unauthorised
 
-## Passing evidence
+## Canonical accepted evidence
 
 The canonical repository evidence namespace is:
 
@@ -55,7 +54,11 @@ Every generated file beneath this attempt namespace is immutable. The
 accepted R1 evidence and all historical Stage 2 and Stage 3 records remain
 unchanged.
 
-This evidence has not yet been Founder-accepted or formally closed. It
-qualifies Candidate Freeze and Package Reconciliation only and creates no
-Stage 3, production-signing, publication, distribution, deployment or
-release authority.
+The Founder accepted this evidence on 28 July 2026 and R2 is formally closed.
+Candidate `11475fe01fff2ec69f0188547107f4e901c531d7` is the authoritative
+Stage 2 execution candidate available to any later separately authorised
+Stage 3 preparation decision.
+
+This evidence qualifies Candidate Freeze and Package Reconciliation only and
+creates no Stage 3, production-signing, publication, distribution, deployment
+or release authority.

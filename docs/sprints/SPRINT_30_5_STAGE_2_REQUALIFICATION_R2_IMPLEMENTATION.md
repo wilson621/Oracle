@@ -1,7 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R2 — Implementation
 
-**Status:** Execution passed; independently reconciled; awaiting Founder
-acceptance
+**Status:** Complete, Founder-accepted and formally closed
 **Date:** 28 July 2026
 **Passing attempt:** `r2-20260728T203503018Z-ec577cf4`
 **Candidate and harness commit:** `11475fe01fff2ec69f0188547107f4e901c531d7`
@@ -75,6 +74,6 @@ authorise Stage 3.
 
 ## Boundary
 
-The passing execution is not Founder acceptance or formal Stage 2 R2 closure.
-No package installation, production certificate, production publisher trust,
+The Founder accepted the passing execution and R2 is formally closed. No
+package installation, production certificate, production publisher trust,
 publication, distribution, deployment, release or Stage 3 action occurred.

@@ -1,13 +1,13 @@
 # Sprint 30.5 Stage 2 Requalification R2 — Founder Acceptance Required
 
-**Decision:** Required
-**Status:** Passing evidence independently reconciled; not accepted or closed
+**Decision:** Founder accepted
+**Status:** Resolved; R2 formally closed
 **Date:** 28 July 2026
 **Stage 3:** Blocked and unauthorised
 
-## Decision requested
+## Founder decision
 
-The Founder is asked to accept or reject the immutable passing evidence for:
+The Founder accepted the immutable passing evidence for:
 
 - attempt `r2-20260728T203503018Z-ec577cf4`;
 - authority `authority-r2-20260728T203503018Z-ec577cf4`;
@@ -16,8 +16,8 @@ The Founder is asked to accept or reject the immutable passing evidence for:
 - candidate and harness tree
   `1cec636603031aa8f63c8b331aea5bbcb916567d`.
 
-Engineering recommends acceptance for Stage 2 R2 Candidate Freeze and
-Package Reconciliation only.
+This is the authoritative Stage 2 R2 Candidate Freeze and Package
+Reconciliation result.
 
 ## Reconciled evidence
 
@@ -72,9 +72,17 @@ The 24-hour execution-start margin closes at
 retain this gate and fail closed if the remaining validity becomes
 insufficient.
 
+## Accepted conclusion
+
+R2 is Founder-accepted and formally closed. Candidate
+`11475fe01fff2ec69f0188547107f4e901c531d7` is the authoritative Stage 2
+execution candidate available to a later, separately authorised Stage 3
+preparation decision.
+
+R1 remains accepted, closed and immutable historical evidence.
+
 ## Decision boundary
 
-Acceptance would authorise formal R2 evidence/governance closure only if the
-Founder separately directs that closure. It would not itself authorise Stage
-3 preparation or execution, package transfer, production signing,
-publication, distribution, deployment or release.
+Acceptance and closure do not authorise Stage 3 preparation or execution,
+package transfer, production signing, publication, distribution, deployment
+or release.

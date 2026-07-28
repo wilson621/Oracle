@@ -11,7 +11,7 @@
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
 **Last Reviewed:** 28 July 2026
-**Version:** 6.6
+**Version:** 6.7
 
 ---
 
@@ -793,12 +793,14 @@ Requalification R1 is Founder-accepted and formally closed. Accepted attempt
 `cd3b7ca1a49d53d85a718a24d594267c93531994` for Candidate Freeze and Package
 Reconciliation with frozen evidence.
 
-R1 remains accepted and immutable. Stage 2 Requalification R2 is
-Founder-authorised and active solely to refresh the candidate with a
-certificate-validity budget sufficient for the remaining governed lifecycle.
+R1 remains accepted and immutable. Stage 2 Requalification R2 was
+Founder-authorised solely to refresh the candidate with a certificate-validity
+budget sufficient for the remaining governed lifecycle.
 R2 attempt `r2-20260728T203503018Z-ec577cf4` passed and was independently
 reconciled at candidate `11475fe01fff2ec69f0188547107f4e901c531d7`.
-Founder acceptance and formal closure remain outstanding.
+The Founder accepted the result and R2 is formally closed. Candidate
+`11475fe01fff2ec69f0188547107f4e901c531d7` is authoritative for any later
+separately authorised Stage 3 preparation decision.
 
 Stage 3 was Founder-authorised and attempted on `Founder-QA-01`, which remains
 `admitted-with-founder-provenance-exception` for its current Windows

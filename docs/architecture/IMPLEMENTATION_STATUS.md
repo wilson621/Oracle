@@ -54,8 +54,9 @@ Founder-accepted and closed; historical Stage 2 package/runtime reconciliation
 Founder-accepted, closed and immutable, but its candidate no longer qualifies
 the current source revision; Stage 2 Requalification R1 Founder-accepted and
 formally closed for the current source; Stage 2 Requalification R2
-execution passed and awaiting Founder acceptance; clean Windows, live Auth,
-protected rendering and installed-package qualification remain; production
+Founder-accepted and formally closed with the authoritative execution
+candidate; clean Windows, live Auth, protected rendering and
+installed-package qualification remain; production
 qualification not yet complete
 
 ---
@@ -231,7 +232,9 @@ archive SHA-256
 `6a3d2a6878b6e778214c550854a06e4a410fd5ec60b911b606aef844d4225f0f`
 and MSIX SHA-256
 `6adb8d9b29585ff7de1b878ec2df2d76a82ce03661cf7269ced7eaff8aae50bc`.
-Founder acceptance and formal R2 closure remain outstanding.
+The Founder accepted the result and R2 is formally closed. Candidate
+`11475fe01fff2ec69f0188547107f4e901c531d7` is authoritative for any later
+separately authorised Stage 3 preparation decision.
 
 The historical Stage 3 host is `Founder-QA-01`, a `MEDION ERAZER P6605
 MD61596`. It is `admitted-with-founder-provenance-exception` for its current
