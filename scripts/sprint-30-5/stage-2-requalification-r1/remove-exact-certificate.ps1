@@ -107,6 +107,134 @@ function Get-ExactCertificateMatches {
   return @($matches)
 }
 
+function Assert-ExactCertificateIdentity {
+  param(
+    [Parameter(Mandatory = $true)]
+    [object]$Match,
+
+    [Parameter(Mandatory = $true)]
+    [string]$ExpectedRawData,
+
+    [Parameter(Mandatory = $true)]
+    [bool]$RequirePrivateKey
+  )
+
+  if ($Match.Certificate.Thumbprint -cne $Thumbprint) {
+    throw "Exact certificate match has an unexpected thumbprint."
+  }
+  if ([string]$Match.Certificate.Subject -cne $ExpectedSubject) {
+    throw (
+      "Exact thumbprint exists with an unexpected subject in " +
+      "$($Match.Location)\$($Match.Store)."
+    )
+  }
+  if (
+    [Convert]::ToBase64String($Match.Certificate.RawData) -cne
+    $ExpectedRawData
+  ) {
+    throw (
+      "Exact thumbprint has unexpected certificate bytes in " +
+      "$($Match.Location)\$($Match.Store)."
+    )
+  }
+  if (
+    $RequirePrivateKey -and
+    -not [bool]$Match.Certificate.HasPrivateKey
+  ) {
+    throw "The CurrentUser\My signing certificate has no private key."
+  }
+  if (
+    -not $RequirePrivateKey -and
+    [bool]$Match.Certificate.HasPrivateKey
+  ) {
+    throw "The CurrentUser\Root trust certificate unexpectedly has a private key."
+  }
+}
+
+function Invoke-ExactRootRemoval {
+  $certUtilPath = Join-Path ([Environment]::SystemDirectory) "certutil.exe"
+  if (-not (Test-Path -LiteralPath $certUtilPath -PathType Leaf)) {
+    throw "The Windows System32 CertUtil executable is unavailable."
+  }
+
+  $certUtilArguments = @(
+    "-user",
+    "-delstore",
+    "Root",
+    $Thumbprint
+  )
+  if ($certUtilArguments -contains "-f") {
+    throw "CertUtil force behaviour is forbidden."
+  }
+
+  $startInfo = [Diagnostics.ProcessStartInfo]::new()
+  $startInfo.FileName = $certUtilPath
+  $startInfo.Arguments = (
+    $certUtilArguments |
+      ForEach-Object {
+        '"' + $_ + '"'
+      }
+  ) -join " "
+  $startInfo.UseShellExecute = $false
+  $startInfo.CreateNoWindow = $true
+  $startInfo.RedirectStandardOutput = $true
+  $startInfo.RedirectStandardError = $true
+
+  $startedAt = [DateTime]::UtcNow
+  $completedAt = $null
+  $exitCode = $null
+  $signal = $null
+  $processError = $null
+  $stdout = ""
+  $stderr = ""
+  $process = [Diagnostics.Process]::new()
+  $process.StartInfo = $startInfo
+
+  try {
+    if (-not $process.Start()) {
+      throw "CertUtil did not start."
+    }
+    $stdoutTask = $process.StandardOutput.ReadToEndAsync()
+    $stderrTask = $process.StandardError.ReadToEndAsync()
+    $process.WaitForExit()
+    $stdout = $stdoutTask.GetAwaiter().GetResult()
+    $stderr = $stderrTask.GetAwaiter().GetResult()
+    $exitCode = $process.ExitCode
+  }
+  catch {
+    $processError = $_.Exception.Message
+  }
+  finally {
+    $completedAt = [DateTime]::UtcNow
+    $process.Dispose()
+  }
+
+  $processEvidence = [ordered]@{
+    invoked = $true
+    executable = $certUtilPath
+    arguments = $certUtilArguments
+    startedAt = $startedAt.ToString("o")
+    completedAt = $completedAt.ToString("o")
+    stdout = $stdout
+    stderr = $stderr
+    exitCode = $exitCode
+    signal = $signal
+    processError = $processError
+  }
+
+  if (
+    $null -ne $processError -or
+    $null -ne $signal -or
+    $null -eq $exitCode -or
+    $exitCode -ne 0
+  ) {
+    $compactEvidence = $processEvidence | ConvertTo-Json -Compress -Depth 5
+    throw "Exact CurrentUser\Root removal failed. Evidence=$compactEvidence"
+  }
+
+  return $processEvidence
+}
+
 $resolvedOutput = Assert-CreateOnlyOutputPath -Path $OutputPath
 $matches = @(Get-ExactCertificateMatches)
 
@@ -114,28 +242,155 @@ if ($matches.Count -eq 0) {
   throw "The exact generated R1 certificate thumbprint was not found."
 }
 
-foreach ($match in $matches) {
-  if ([string]$match.Certificate.Subject -cne $ExpectedSubject) {
-    throw (
-      "Exact thumbprint exists with an unexpected subject in " +
-      "$($match.Location)\$($match.Store)."
-    )
-  }
+$myMatches = @(
+  $matches |
+    Where-Object {
+      $_.Location -ceq "CurrentUser" -and
+      $_.Store -ceq "My"
+    }
+)
+$rootMatches = @(
+  $matches |
+    Where-Object {
+      $_.Location -ceq "CurrentUser" -and
+      $_.Store -ceq "Root"
+    }
+)
+$unexpectedMatches = @(
+  $matches |
+    Where-Object {
+      -not (
+        $_.Location -ceq "CurrentUser" -and
+        ($_.Store -ceq "My" -or $_.Store -ceq "Root")
+      )
+    }
+)
+
+if ($myMatches.Count -ne 1) {
+  throw "Expected exactly one CurrentUser\My signing certificate."
+}
+if ($rootMatches.Count -gt 1) {
+  throw "More than one CurrentUser\Root trust certificate was found."
+}
+if ($unexpectedMatches.Count -ne 0) {
+  throw "The exact attempt certificate exists in an unexpected governed store."
+}
+
+$expectedRawData = [Convert]::ToBase64String(
+  $myMatches[0].Certificate.RawData
+)
+Assert-ExactCertificateIdentity `
+  -Match $myMatches[0] `
+  -ExpectedRawData $expectedRawData `
+  -RequirePrivateKey $true
+
+if ($rootMatches.Count -eq 1) {
+  Assert-ExactCertificateIdentity `
+    -Match $rootMatches[0] `
+    -ExpectedRawData $expectedRawData `
+    -RequirePrivateKey $false
 }
 
 $removed = [Collections.Generic.List[object]]::new()
-foreach ($match in $matches) {
-  $certificatePath = "Cert:\$($match.Location)\$($match.Store)\$Thumbprint"
-  if ($PSCmdlet.ShouldProcess($certificatePath, "Remove exact R1 certificate")) {
-    Remove-Item -LiteralPath $certificatePath -Force -ErrorAction Stop
+$rootRemoval = [ordered]@{
+  invoked = $false
+  executable = $null
+  arguments = @()
+  startedAt = $null
+  completedAt = $null
+  stdout = ""
+  stderr = ""
+  exitCode = $null
+  signal = $null
+  processError = $null
+}
+
+if ($rootMatches.Count -eq 1) {
+  $rootTarget = "Cert:\CurrentUser\Root\$Thumbprint"
+  if ($PSCmdlet.ShouldProcess($rootTarget, "Remove exact R1 Root trust")) {
+    $rootRemoval = Invoke-ExactRootRemoval
+    [Console]::Error.WriteLine(
+      "ORACLE_R1_ROOT_REMOVAL_PROCESS=" +
+      (
+        $rootRemoval |
+          ConvertTo-Json -Compress -Depth 5
+      )
+    )
+    $afterRootRemoval = @(Get-ExactCertificateMatches)
+    $remainingRootMatches = @(
+      $afterRootRemoval |
+        Where-Object {
+          $_.Location -ceq "CurrentUser" -and
+          $_.Store -ceq "Root"
+        }
+    )
+    $remainingMyMatches = @(
+      $afterRootRemoval |
+        Where-Object {
+          $_.Location -ceq "CurrentUser" -and
+          $_.Store -ceq "My"
+        }
+    )
+    $unexpectedAfterRootRemoval = @(
+      $afterRootRemoval |
+        Where-Object {
+          -not (
+            $_.Location -ceq "CurrentUser" -and
+            $_.Store -ceq "My"
+          )
+        }
+    )
+    if ($remainingRootMatches.Count -ne 0) {
+      throw "The exact CurrentUser\Root trust certificate remains after removal."
+    }
+    if (
+      $remainingMyMatches.Count -ne 1 -or
+      $unexpectedAfterRootRemoval.Count -ne 0
+    ) {
+      throw "Certificate-store state changed unexpectedly during Root removal."
+    }
+    Assert-ExactCertificateIdentity `
+      -Match $remainingMyMatches[0] `
+      -ExpectedRawData $expectedRawData `
+      -RequirePrivateKey $true
+
     $removed.Add([ordered]@{
-      location = $match.Location
-      store = $match.Store
+      location = "CurrentUser"
+      store = "Root"
       thumbprint = $Thumbprint
-      subject = [string]$match.Certificate.Subject
-      hadPrivateKey = [bool]$match.Certificate.HasPrivateKey
+      subject = [string]$rootMatches[0].Certificate.Subject
+      hadPrivateKey = [bool]$rootMatches[0].Certificate.HasPrivateKey
+      certificateBytesMatched = $true
     })
   }
+}
+
+$myTarget = "Cert:\CurrentUser\My\$Thumbprint"
+if ($PSCmdlet.ShouldProcess($myTarget, "Remove exact R1 signing certificate")) {
+  $myBeforeRemoval = @(
+    Get-ExactCertificateMatches |
+      Where-Object {
+        $_.Location -ceq "CurrentUser" -and
+        $_.Store -ceq "My"
+      }
+  )
+  if ($myBeforeRemoval.Count -ne 1) {
+    throw "CurrentUser\My signing-certificate state changed before removal."
+  }
+  Assert-ExactCertificateIdentity `
+    -Match $myBeforeRemoval[0] `
+    -ExpectedRawData $expectedRawData `
+    -RequirePrivateKey $true
+
+  Remove-Item -LiteralPath $myTarget -Force -ErrorAction Stop
+  $removed.Add([ordered]@{
+    location = "CurrentUser"
+    store = "My"
+    thumbprint = $Thumbprint
+    subject = [string]$myBeforeRemoval[0].Certificate.Subject
+    hadPrivateKey = [bool]$myBeforeRemoval[0].Certificate.HasPrivateKey
+    certificateBytesMatched = $true
+  })
 }
 
 $remaining = @(Get-ExactCertificateMatches)
@@ -152,6 +407,7 @@ $evidence = [ordered]@{
   expectedSubject = $ExpectedSubject
   exactThumbprint = $Thumbprint
   removed = @($removed)
+  rootRemoval = $rootRemoval
   remainingExactThumbprintMatches = 0
   subjectWideRemovalUsed = $false
   trustRemoved = $true

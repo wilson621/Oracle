@@ -282,6 +282,177 @@ assert.match(
   cleanupScript,
   /exact generated R1 certificate thumbprint was not found/u
 );
+assert.match(
+  cleanupScript,
+  /\$certUtilPath = Join-Path \(\[Environment\]::SystemDirectory\) "certutil\.exe"/u
+);
+assert.match(
+  cleanupScript,
+  /\$certUtilArguments = @\(\s*"-user",\s*"-delstore",\s*"Root",\s*\$Thumbprint\s*\)/u
+);
+const rootRemovalArgumentAssignment =
+  /\$certUtilArguments = @\(([^)]*)\)/u.exec(cleanupScript);
+assert.ok(
+  rootRemovalArgumentAssignment,
+  "The exact Root-removal CertUtil argument assignment must be explicit."
+);
+assert.doesNotMatch(rootRemovalArgumentAssignment[1], /"-f"/u);
+assert.match(cleanupScript, /\$startInfo\.FileName = \$certUtilPath/u);
+assert.match(cleanupScript, /\$startInfo\.UseShellExecute = \$false/u);
+assert.match(cleanupScript, /\$startInfo\.RedirectStandardOutput = \$true/u);
+assert.match(cleanupScript, /\$startInfo\.RedirectStandardError = \$true/u);
+assert.match(cleanupScript, /stdout = \$stdout/u);
+assert.match(cleanupScript, /stderr = \$stderr/u);
+assert.match(
+  cleanupScript,
+  /ORACLE_R1_ROOT_REMOVAL_PROCESS=[\s\S]*ConvertTo-Json -Compress -Depth 5/u
+);
+assert.match(
+  cleanupScript,
+  /\$null -ne \$processError[\s\S]*\$null -ne \$signal[\s\S]*\$null -eq \$exitCode[\s\S]*\$exitCode -ne 0/u
+);
+assert.doesNotMatch(cleanupScript, /Get-Command[\s\S]*?certutil\.exe/iu);
+assert.doesNotMatch(cleanupScript, /-Verb\s+RunAs/u);
+assert.doesNotMatch(cleanupScript, /Remove-Item -LiteralPath \$rootTarget/u);
+assert.match(
+  cleanupScript,
+  /Remove-Item -LiteralPath \$myTarget -Force -ErrorAction Stop/u
+);
+assert.ok(
+  cleanupScript.indexOf("$rootRemoval = Invoke-ExactRootRemoval") <
+    cleanupScript.indexOf("Remove-Item -LiteralPath $myTarget"),
+  "CurrentUser\\Root trust must be removed before the CurrentUser\\My signing copy."
+);
+assert.match(cleanupScript, /\$myMatches\.Count -ne 1/u);
+assert.match(cleanupScript, /\$rootMatches\.Count -gt 1/u);
+assert.match(cleanupScript, /\$unexpectedMatches\.Count -ne 0/u);
+assert.match(cleanupScript, /Certificate\.RawData/u);
+assert.match(cleanupScript, /Certificate\.HasPrivateKey/u);
+assert.match(cleanupScript, /\$remaining\.Count -ne 0/u);
+assert.doesNotMatch(cleanupScript, /Where-Object[\s\S]{0,120}-like/u);
+
+function validateSyntheticTeardownState(records) {
+  const exact = records.filter(
+    (record) => record.thumbprint === teardownFixtureThumbprint
+  );
+  const my = exact.filter(
+    (record) => record.location === "CurrentUser" && record.store === "My"
+  );
+  const root = exact.filter(
+    (record) => record.location === "CurrentUser" && record.store === "Root"
+  );
+  const unexpected = exact.filter(
+    (record) =>
+      !(
+        record.location === "CurrentUser" &&
+        (record.store === "My" || record.store === "Root")
+      )
+  );
+  assert.equal(my.length, 1, "Exactly one CurrentUser\\My certificate is required.");
+  assert.equal(my[0].subject, teardownExpectedSubject);
+  assert.equal(my[0].rawData, "fixture-raw-certificate");
+  assert.equal(my[0].hasPrivateKey, true);
+  assert.ok(root.length <= 1, "At most one CurrentUser\\Root certificate is allowed.");
+  assert.equal(unexpected.length, 0, "Unexpected governed-store matches are forbidden.");
+  if (root.length === 1) {
+    assert.equal(root[0].subject, teardownExpectedSubject);
+    assert.equal(root[0].rawData, my[0].rawData);
+    assert.equal(root[0].hasPrivateKey, false);
+  }
+  return { my, root };
+}
+
+function assertSyntheticProcessPassed(result) {
+  assert.equal(result.processError, null);
+  assert.equal(result.signal, null);
+  assert.notEqual(result.exitCode, null);
+  assert.equal(result.exitCode, 0);
+}
+
+const teardownFixtureThumbprint = "E".repeat(40);
+const teardownExpectedSubject =
+  "CN=Oracle Stage 2 Requalification R1 Local Test Signing - NOT PRODUCTION";
+const syntheticMy = {
+  location: "CurrentUser",
+  store: "My",
+  thumbprint: teardownFixtureThumbprint,
+  subject: teardownExpectedSubject,
+  rawData: "fixture-raw-certificate",
+  hasPrivateKey: true,
+};
+const syntheticRoot = {
+  ...syntheticMy,
+  store: "Root",
+  hasPrivateKey: false,
+};
+assert.doesNotThrow(() =>
+  validateSyntheticTeardownState([syntheticMy, syntheticRoot])
+);
+assert.doesNotThrow(() => validateSyntheticTeardownState([syntheticMy]));
+assert.throws(() => validateSyntheticTeardownState([syntheticRoot]));
+assert.throws(() =>
+  validateSyntheticTeardownState([syntheticMy, syntheticRoot, syntheticRoot])
+);
+assert.throws(() =>
+  validateSyntheticTeardownState([
+    syntheticMy,
+    { ...syntheticRoot, store: "TrustedPeople" },
+  ])
+);
+assert.throws(() =>
+  validateSyntheticTeardownState([
+    { ...syntheticMy, subject: "CN=Unexpected" },
+  ])
+);
+assert.throws(() =>
+  validateSyntheticTeardownState([
+    syntheticMy,
+    { ...syntheticRoot, rawData: "different-certificate" },
+  ])
+);
+assert.throws(() =>
+  validateSyntheticTeardownState([
+    { ...syntheticMy, hasPrivateKey: false },
+  ])
+);
+assert.doesNotThrow(() =>
+  assertSyntheticProcessPassed({
+    processError: null,
+    signal: null,
+    exitCode: 0,
+  })
+);
+for (const failure of [
+  { processError: "spawn failed", signal: null, exitCode: null },
+  { processError: null, signal: "SIGTERM", exitCode: null },
+  { processError: null, signal: null, exitCode: null },
+  { processError: null, signal: null, exitCode: 1 },
+]) {
+  assert.throws(() => assertSyntheticProcessPassed(failure));
+}
+const afterSyntheticRootRemoval = [syntheticMy];
+assert.doesNotThrow(() =>
+  validateSyntheticTeardownState(afterSyntheticRootRemoval)
+);
+assert.equal(
+  afterSyntheticRootRemoval.filter(
+    (record) => record.thumbprint === teardownFixtureThumbprint
+  ).length,
+  1
+);
+assert.equal(
+  afterSyntheticRootRemoval
+    .filter((record) => record.store !== "My")
+    .filter((record) => record.thumbprint === teardownFixtureThumbprint).length,
+  0
+);
+const afterSyntheticMyRemoval = [];
+assert.equal(
+  afterSyntheticMyRemoval.filter(
+    (record) => record.thumbprint === teardownFixtureThumbprint
+  ).length,
+  0
+);
 
 const harnessCore = readFileSync(
   join(import.meta.dirname, "harness-core.mjs"),
@@ -700,6 +871,10 @@ console.log(
         immutableCertificateBinding: "passed",
         finalEvidenceBinding: "passed",
         exactThumbprintCleanupInspection: "passed",
+        exactRootTeardownLifecycleFixtures: "passed",
+        teardownProcessFailureFixtures: "passed",
+        teardownCertificateIdentityFixtures: "passed",
+        teardownProcessEvidencePersistenceInspection: "passed",
         atomicNoReplacePublication: "passed",
         historicalEntryPointRetirement: "passed",
         safeEntryPointWiring: "passed",
