@@ -59,6 +59,11 @@ candidate; clean Windows, live Auth, protected rendering and
 installed-package qualification remain; production
 qualification not yet complete
 
+Stage 3 Qualification R1 preparation is Founder-authorised and bound
+exclusively to the accepted Stage 2 Requalification R2 candidate. Its
+versioned contract, transfer builder and ordered clean-host harness are
+preparation tooling only; Stage 3 execution remains blocked and unauthorised.
+
 ---
 
 # Purpose

@@ -17,6 +17,8 @@ param(
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
+throw "HISTORICAL_STAGE3_ENTRY_POINT_RETIRED: this phase-based harness is immutable history and cannot execute."
+
 $contractPath = Join-Path $PSScriptRoot "Oracle.Stage3QualificationContract.json"
 $contract = Get-Content -LiteralPath $contractPath -Raw | ConvertFrom-Json
 $transferRoot = [IO.Path]::GetFullPath($TransferRoot)

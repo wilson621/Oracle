@@ -3,6 +3,8 @@ import { createHash } from "node:crypto";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
+retireHistoricalEntryPoint();
+
 const evidenceRoot =
   "docs/sprints/evidence/sprint-30-5/stage-3-host-admission";
 const returnedEvidence = join(evidenceRoot, "returned-evidence-r2");
@@ -205,6 +207,12 @@ for (const document of documentation) {
 console.log(
   "Sprint 30.5 Stage 3 governance validation passed: host admitted with Founder provenance exception; Stage 3 remains unauthorised."
 );
+
+function retireHistoricalEntryPoint() {
+  throw new Error(
+    "HISTORICAL_STAGE3_ENTRY_POINT_RETIRED: use the Stage 3 R1 structural preparation validator."
+  );
+}
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8").replace(/^\uFEFF/u, ""));

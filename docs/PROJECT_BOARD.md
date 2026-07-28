@@ -170,6 +170,11 @@ execution, artifact-transfer, certificate-trust, package-installation,
 harness-repair or Stage 3 requalification authority exists. Gate 7 is not
 authorised.
 
+Stage 3 Qualification R1 preparation is Founder-authorised. The preparation
+system is bound exclusively to the accepted Stage 2 Requalification R2
+candidate. Stage 3 execution remains blocked and unauthorised; no clean-host,
+transfer, trust or installation action is permitted by preparation authority.
+
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
 production; the persistence foundation is established while runtime

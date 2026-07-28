@@ -184,6 +184,12 @@ Stage 2 Requalification R1 closure does not authorise Stage 3. Production
 signing, publication, distribution, deployment and activation remain
 unauthorised.
 
+Stage 3 Qualification R1 preparation is the active engineering objective. It
+is bound exclusively to the accepted Stage 2 Requalification R2 candidate and
+must produce a versioned contract, create-only transfer system, ordered
+clean-host harness and structural validation. Stage 3 execution remains
+blocked and unauthorised.
+
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own
 independently reviewable production objectives and Phases are internal

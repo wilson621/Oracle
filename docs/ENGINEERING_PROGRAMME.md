@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder decision on Stage 3 preparation
+**Next Review:** Founder decision on Stage 3 Qualification R1 execution
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1387,6 +1387,11 @@ reconciliation, create or trust a replacement certificate, reinstall the
 package, repair the harness or begin another qualification revision.
 Stage 2 Requalification R1 acceptance and closure create no Stage 3
 authority.
+
+Stage 3 Qualification R1 preparation is now Founder-authorised and binds only
+the accepted, formally closed Stage 2 Requalification R2 candidate. Stage 3
+execution remains blocked and unauthorised pending preparation validation,
+fresh host continuity, transfer-method approval and a separate Founder gate.
 
 Live Auth, protected rendering, clean Windows acceptance, installed-package
 GPU/performance/accessibility, reproducibility and final integrated

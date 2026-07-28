@@ -10,6 +10,8 @@ import {
 } from "node:fs";
 import { basename, dirname, join, relative, resolve } from "node:path";
 
+retireHistoricalEntryPoint();
+
 const root = resolve(import.meta.dirname, "..");
 const sourceArchive = join(
   root,
@@ -175,4 +177,10 @@ function normalize(path) {
 function assertWorkspacePath(path) {
   const relativePath = relative(root, path);
   assert.ok(relativePath && !relativePath.startsWith(".."));
+}
+
+function retireHistoricalEntryPoint() {
+  throw new Error(
+    "HISTORICAL_STAGE3_ENTRY_POINT_RETIRED: use the separately authorised Stage 3 R1 transfer builder."
+  );
 }

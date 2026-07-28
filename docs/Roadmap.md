@@ -810,12 +810,12 @@ NegativePathAndTrust evidence passed, but Revision 4 InstallAndStartup failed.
 Canonical Phase 03 success evidence is absent, Revision 5 remained incomplete
 and Revision 6 is abandoned.
 
-Sprint 30 remains qualification-incomplete. Stage 3 is historically attempted,
-incomplete and blocked, while Stages 4–7 have not started. No current authority
-exists to resume Stage 3 or to create a replacement Stage 3 harness,
-certificate or qualification revision. Stage 2 Requalification R1 acceptance
-and closure create no Stage 3 authority. Production signing, publication,
-distribution, deployment and runtime persistence remain unauthorised.
+Sprint 30 remains qualification-incomplete. Historical Stage 3 remains
+attempted, incomplete and immutable. Stage 3 Qualification R1 preparation is
+Founder-authorised and bound exclusively to the accepted R2 candidate; its
+execution remains blocked and unauthorised. Stages 4–7 have not started.
+Production signing, publication, distribution, deployment and runtime
+persistence remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 
