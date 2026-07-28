@@ -8,8 +8,8 @@
 **Expected Stability:** Updated only through explicit founder governance approval
 **Supersedes:** Delivery-process guidance duplicated across living planning documents
 **Superseded By:** None
-**Last Reviewed:** 24 July 2026
-**Version:** 1.2
+**Last Reviewed:** 28 July 2026
+**Version:** 1.3
 
 ---
 
@@ -19,6 +19,10 @@ This document defines how Oracle converts strategy into reviewed production
 outcomes. It governs delivery sequencing and approval. It does not override the
 Oracle Platform Constitution, accepted ADRs, the Oracle Codex or architectural
 ownership boundaries.
+
+The [Oracle Engineering Operating Model](ORACLE_ENGINEERING_OPERATING_MODEL.md)
+defines the constitutional engineering lifecycle, authority separation,
+evidence rules and fail-closed operating constraints applied here.
 
 # Governance Hierarchy
 

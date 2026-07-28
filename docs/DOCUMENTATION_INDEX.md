@@ -72,6 +72,11 @@ Principles and Architecture:
 - both remain subordinate to the Constitution and Engineering Principles
 - Architecture must reflect accepted ADRs and compliant engineering practice
 
+The [Oracle Engineering Operating Model](ORACLE_ENGINEERING_OPERATING_MODEL.md)
+is the stable constitutional engineering control beneath the Constitution and
+Engineering Principles. It governs authority separation, evidence,
+qualification lifecycle, immutable attempts and fail-closed completion.
+
 [Oracle Engineering Governance](GOVERNANCE.md) governs how approved strategy
 and architecture become Epics, Sprints, internal Phases, deployments and
 closure evidence. It is subordinate to the Constitution, accepted ADRs and the
@@ -158,24 +163,25 @@ here without being rewritten solely to add metadata.
 Continue with:
 
 5. [Oracle Engineering Principles](founding/ORACLE_ENGINEERING_PRINCIPLES.md)
-6. [Architectural Decisions](Decisions.md)
-7. [Oracle Codex](Oracle_Codex.md)
-8. [Architecture](Architecture.md)
-9. [Architecture Index](architecture/ARCHITECTURE_INDEX.md)
-10. [Implementation Status](architecture/IMPLEMENTATION_STATUS.md)
-11. [Oracle Engineering Governance](GOVERNANCE.md)
+6. [Oracle Engineering Operating Model](ORACLE_ENGINEERING_OPERATING_MODEL.md)
+7. [Architectural Decisions](Decisions.md)
+8. [Oracle Codex](Oracle_Codex.md)
+9. [Architecture](Architecture.md)
+10. [Architecture Index](architecture/ARCHITECTURE_INDEX.md)
+11. [Implementation Status](architecture/IMPLEMENTATION_STATUS.md)
+12. [Oracle Engineering Governance](GOVERNANCE.md)
 
 ## Planning and Delivery
 
 Continue with:
 
-12. [Roadmap](Roadmap.md)
-13. [Engineering Programme](ENGINEERING_PROGRAMME.md)
-14. [Master Build Plan](MASTER_BUILD_PLAN.md)
-15. [Project Board](PROJECT_BOARD.md)
-16. [Qualification Register](QUALIFICATION_REGISTER.md)
-17. [Sprint Index](sprints/SPRINT_INDEX.md)
-18. the relevant Sprint record under [`docs/sprints`](sprints/)
+13. [Roadmap](Roadmap.md)
+14. [Engineering Programme](ENGINEERING_PROGRAMME.md)
+15. [Master Build Plan](MASTER_BUILD_PLAN.md)
+16. [Project Board](PROJECT_BOARD.md)
+17. [Qualification Register](QUALIFICATION_REGISTER.md)
+18. [Sprint Index](sprints/SPRINT_INDEX.md)
+19. the relevant Sprint record under [`docs/sprints`](sprints/)
 
 Implementation begins only after the applicable governance, architecture and
 delivery authorities have been reviewed.
@@ -187,6 +193,7 @@ delivery authorities have been reviewed.
 | Institutional purpose, mission and vision | [Founding Charter](founding/ORACLE_FOUNDING_CHARTER.md) | Stable |
 | Culture, behaviour, leadership and hiring | [The Oracle Way](founding/THE_ORACLE_WAY.md) | Stable |
 | Product and architectural constraints | [Platform Constitution](ORACLE_PLATFORM_CONSTITUTION.md) | Stable |
+| Engineering authority, evidence and lifecycle model | [Oracle Engineering Operating Model](ORACLE_ENGINEERING_OPERATING_MODEL.md) | Stable |
 | Long-term strategic doctrine | [Oracle Strategy](founding/ORACLE_STRATEGY.md) | Living |
 | Durable engineering values | [Engineering Principles](founding/ORACLE_ENGINEERING_PRINCIPLES.md) | Stable |
 | Specific architectural decisions | [Decisions / ADR ledger](Decisions.md) | Historical, append-only |

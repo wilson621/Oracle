@@ -10,8 +10,8 @@
 **Expected Stability:** Continuously reviewed as engineering practice evolves
 **Supersedes:** Archived Oracle Codex versions
 **Superseded By:** None
-**Last Reviewed:** 24 July 2026
-**Version:** 3.3
+**Last Reviewed:** 28 July 2026
+**Version:** 3.4
 
 ---
 
@@ -26,6 +26,9 @@ The Oracle Way defines **how Oracle stewards behave**.
 The Constitution defines **binding product and architectural boundaries**.
 
 The Engineering Principles define **durable engineering values**.
+
+The Oracle Engineering Operating Model defines **how engineering authority,
+evidence and lifecycle states are governed**.
 
 The Codex defines **the operational standards used to build Oracle**.
 
@@ -50,6 +53,11 @@ The Codex evolves as Oracle evolves.
 The Oracle Platform Constitution is the highest product and architectural
 authority. Neither this Codex, Oracle Strategy nor Engineering Principles may
 override it.
+
+The stable
+`docs/ORACLE_ENGINEERING_OPERATING_MODEL.md` governs authority separation,
+immutable attempts, fail-closed qualification and closure. This Codex applies
+OEOM in repository workflows and may not weaken it.
 
 When conflicts occur:
 
