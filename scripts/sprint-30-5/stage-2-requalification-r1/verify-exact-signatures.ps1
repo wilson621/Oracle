@@ -25,6 +25,39 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 Add-Type -AssemblyName System.Security
 
+$governedCertificateStores = @(
+  [ordered]@{
+    location = "CurrentUser"
+    store = "My"
+    path = "Cert:\CurrentUser\My"
+  },
+  [ordered]@{
+    location = "CurrentUser"
+    store = "Root"
+    path = "Cert:\CurrentUser\Root"
+  },
+  [ordered]@{
+    location = "CurrentUser"
+    store = "TrustedPeople"
+    path = "Cert:\CurrentUser\TrustedPeople"
+  },
+  [ordered]@{
+    location = "LocalMachine"
+    store = "My"
+    path = "Cert:\LocalMachine\My"
+  },
+  [ordered]@{
+    location = "LocalMachine"
+    store = "Root"
+    path = "Cert:\LocalMachine\Root"
+  },
+  [ordered]@{
+    location = "LocalMachine"
+    store = "TrustedPeople"
+    path = "Cert:\LocalMachine\TrustedPeople"
+  }
+)
+
 $packagePath = Join-Path $ReleaseDirectory $PackageFileName
 $executablePaths = @(
   (Join-Path $UnpackedDirectory "Oracle.exe"),
@@ -44,6 +77,31 @@ foreach ($path in @($packagePath) + $executablePaths) {
   if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
     throw "Required signed artifact is missing: $path"
   }
+}
+
+function Get-ExactGovernedCertificateMatches {
+  $matches = @(
+    foreach ($store in $governedCertificateStores) {
+      if (-not (Test-Path -LiteralPath $store.path)) {
+        continue
+      }
+
+      Get-ChildItem -LiteralPath $store.path |
+        Where-Object {
+          $_.Thumbprint -ceq $ExpectedThumbprint
+        } |
+        ForEach-Object {
+          [pscustomobject]@{
+            location = $store.location
+            store = $store.store
+            path = $store.path
+            certificate = $_
+          }
+        }
+    }
+  )
+
+  return $matches
 }
 
 function Assert-ExactSigner {
@@ -123,12 +181,191 @@ finally {
   $temporaryCertificateStream.Dispose()
 }
 
-$temporaryTrust = Import-Certificate `
-  -FilePath $temporaryCertificatePath `
-  -CertStoreLocation "Cert:\CurrentUser\TrustedPeople"
+$sourceCertificate = [Security.Cryptography.X509Certificates.X509Certificate2]::new(
+  $temporaryCertificatePath
+)
+try {
+  if ($sourceCertificate.Thumbprint -cne $ExpectedThumbprint) {
+    throw "Temporary verification CER thumbprint is invalid."
+  }
+  if ($sourceCertificate.Subject -cne $ExpectedSubject) {
+    throw "Temporary verification CER subject is invalid."
+  }
+  if (
+    [Convert]::ToBase64String($sourceCertificate.RawData) -cne
+    [Convert]::ToBase64String($temporaryCertificateBytes)
+  ) {
+    throw "Temporary verification CER bytes differ from the signer certificate."
+  }
+}
+finally {
+  $sourceCertificate.Dispose()
+}
 
-if ($temporaryTrust.Thumbprint -cne $ExpectedThumbprint) {
-  throw "Temporary trust imported an unexpected certificate."
+$preImportMatches = @(Get-ExactGovernedCertificateMatches)
+$preImportSigningMatches = @(
+  $preImportMatches |
+    Where-Object {
+      $_.location -ceq "CurrentUser" -and
+      $_.store -ceq "My"
+    }
+)
+$preImportTrustMatches = @(
+  $preImportMatches |
+    Where-Object {
+      -not (
+        $_.location -ceq "CurrentUser" -and
+        $_.store -ceq "My"
+      )
+    }
+)
+if (
+  $preImportSigningMatches.Count -ne 1 -or
+  -not $preImportSigningMatches[0].certificate.HasPrivateKey -or
+  $preImportSigningMatches[0].certificate.Subject -cne $ExpectedSubject -or
+  [Convert]::ToBase64String(
+    $preImportSigningMatches[0].certificate.RawData
+  ) -cne [Convert]::ToBase64String($temporaryCertificateBytes)
+) {
+  throw "Expected exactly one matching CurrentUser\My signing certificate."
+}
+if ($preImportTrustMatches.Count -ne 0) {
+  throw "The exact attempt certificate is already present in a trust store."
+}
+
+$certUtilPath = Join-Path ([Environment]::SystemDirectory) "certutil.exe"
+if (-not (Test-Path -LiteralPath $certUtilPath -PathType Leaf)) {
+  throw "The Windows System32 CertUtil executable is unavailable."
+}
+
+if ($temporaryCertificatePath.Contains('"')) {
+  throw "Temporary verification certificate path cannot be safely quoted."
+}
+
+$certUtilArguments = @(
+  "-user",
+  "-addstore",
+  "Root",
+  $temporaryCertificatePath
+)
+if ($certUtilArguments -contains "-f") {
+  throw "CertUtil force-overwrite is forbidden."
+}
+
+$certUtilStartInfo = [Diagnostics.ProcessStartInfo]::new()
+$certUtilStartInfo.FileName = $certUtilPath
+$certUtilStartInfo.Arguments = (
+  $certUtilArguments |
+    ForEach-Object {
+      '"' + $_ + '"'
+    }
+) -join " "
+$certUtilStartInfo.UseShellExecute = $false
+$certUtilStartInfo.CreateNoWindow = $true
+$certUtilStartInfo.RedirectStandardOutput = $true
+$certUtilStartInfo.RedirectStandardError = $true
+
+$certUtilStartedAt = [DateTime]::UtcNow
+$certUtilCompletedAt = $null
+$certUtilExitCode = $null
+$certUtilSignal = $null
+$certUtilProcessError = $null
+$certUtilStdout = ""
+$certUtilStderr = ""
+$certUtilProcess = [Diagnostics.Process]::new()
+$certUtilProcess.StartInfo = $certUtilStartInfo
+
+try {
+  if (-not $certUtilProcess.Start()) {
+    throw "CertUtil did not start."
+  }
+  $certUtilStdoutTask = $certUtilProcess.StandardOutput.ReadToEndAsync()
+  $certUtilStderrTask = $certUtilProcess.StandardError.ReadToEndAsync()
+  $certUtilProcess.WaitForExit()
+  $certUtilStdout = $certUtilStdoutTask.GetAwaiter().GetResult()
+  $certUtilStderr = $certUtilStderrTask.GetAwaiter().GetResult()
+  $certUtilExitCode = $certUtilProcess.ExitCode
+}
+catch {
+  $certUtilProcessError = $_.Exception.Message
+}
+finally {
+  $certUtilCompletedAt = [DateTime]::UtcNow
+  $certUtilProcess.Dispose()
+}
+
+$certUtilEvidence = [ordered]@{
+  command = $certUtilPath
+  arguments = $certUtilArguments
+  startedAt = $certUtilStartedAt.ToString("o")
+  completedAt = $certUtilCompletedAt.ToString("o")
+  exitCode = $certUtilExitCode
+  signal = $certUtilSignal
+  processError = $certUtilProcessError
+  stdout = $certUtilStdout
+  stderr = $certUtilStderr
+}
+
+if (
+  $null -ne $certUtilProcessError -or
+  $null -ne $certUtilSignal -or
+  $null -eq $certUtilExitCode -or
+  $certUtilExitCode -ne 0
+) {
+  throw (
+    "CertUtil temporary Root trust failed. " +
+    "ProcessError=$certUtilProcessError; " +
+    "Signal=$certUtilSignal; " +
+    "ExitCode=$certUtilExitCode; " +
+    "Stdout=$certUtilStdout; " +
+    "Stderr=$certUtilStderr"
+  )
+}
+
+$postImportMatches = @(Get-ExactGovernedCertificateMatches)
+$rootMatches = @(
+  $postImportMatches |
+    Where-Object {
+      $_.location -ceq "CurrentUser" -and
+      $_.store -ceq "Root"
+    }
+)
+$postImportSigningMatches = @(
+  $postImportMatches |
+    Where-Object {
+      $_.location -ceq "CurrentUser" -and
+      $_.store -ceq "My"
+    }
+)
+$unexpectedPostImportMatches = @(
+  $postImportMatches |
+    Where-Object {
+      -not (
+        $_.location -ceq "CurrentUser" -and
+        ($_.store -ceq "My" -or $_.store -ceq "Root")
+      )
+    }
+)
+if (
+  $rootMatches.Count -ne 1 -or
+  $rootMatches[0].certificate.Thumbprint -cne $ExpectedThumbprint -or
+  $rootMatches[0].certificate.Subject -cne $ExpectedSubject -or
+  [Convert]::ToBase64String($rootMatches[0].certificate.RawData) -cne
+  [Convert]::ToBase64String($temporaryCertificateBytes)
+) {
+  throw "CurrentUser\Root does not contain exactly the expected certificate."
+}
+if (
+  $postImportSigningMatches.Count -ne 1 -or
+  -not $postImportSigningMatches[0].certificate.HasPrivateKey -or
+  $postImportSigningMatches[0].certificate.Subject -cne $ExpectedSubject -or
+  [Convert]::ToBase64String(
+    $postImportSigningMatches[0].certificate.RawData
+  ) -cne [Convert]::ToBase64String($temporaryCertificateBytes) -or
+  $unexpectedPostImportMatches.Count -ne 0 -or
+  $postImportMatches.Count -ne 2
+) {
+  throw "Unexpected exact-thumbprint certificate-store state after Root trust."
 }
 
 $executableSignatures = @(
@@ -187,8 +424,13 @@ if ($manifestSigner.Subject -cne $ExpectedSubject) {
   }
   temporaryTrust = [ordered]@{
     created = $true
-    location = "CurrentUser\TrustedPeople"
-    thumbprint = $temporaryTrust.Thumbprint
+    location = "CurrentUser\Root"
+    thumbprint = $rootMatches[0].certificate.Thumbprint
+    sourceCertificateBytesMatched = $true
+    exactCurrentUserMySigningMatches = $postImportSigningMatches.Count
+    exactCurrentUserRootTrustMatches = $rootMatches.Count
+    unexpectedGovernedStoreMatches = $unexpectedPostImportMatches.Count
+    certUtil = $certUtilEvidence
   }
   temporaryCertificatePath = $temporaryCertificatePath
   productionTrusted = $false

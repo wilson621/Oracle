@@ -547,21 +547,105 @@ const exactSignatureVerifier = readFileSync(
 );
 assert.doesNotMatch(
   exactSignatureVerifier,
-  /Cert:\\CurrentUser\\Root/u
+  /Import-Certificate/u
 );
 assert.match(
   exactSignatureVerifier,
-  /Cert:\\CurrentUser\\TrustedPeople/u
+  /\$certUtilArguments = @\(\s*"-user",\s*"-addstore",\s*"Root",\s*\$temporaryCertificatePath\s*\)/u
+);
+const certUtilArgumentAssignment =
+  /\$certUtilArguments = @\(([^)]*)\)/u.exec(exactSignatureVerifier);
+assert.ok(
+  certUtilArgumentAssignment,
+  "The temporary Root-trust CertUtil argument assignment must be explicit."
+);
+assert.doesNotMatch(certUtilArgumentAssignment[1], /"-f"/u);
+assert.match(
+  exactSignatureVerifier,
+  /\$certUtilPath = Join-Path \(\[Environment\]::SystemDirectory\) "certutil\.exe"/u
 );
 assert.match(
   exactSignatureVerifier,
-  /location = "CurrentUser\\TrustedPeople"/u
+  /Test-Path -LiteralPath \$certUtilPath -PathType Leaf/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /\$certUtilStartInfo\.FileName = \$certUtilPath/u
+);
+assert.doesNotMatch(
+  exactSignatureVerifier,
+  /Get-Command[\s\S]*?-Name "certutil\.exe"/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /\$certUtilStartInfo\.UseShellExecute = \$false/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /\$temporaryCertificatePath\.Contains\('"'?\)/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /\$certUtilStartInfo\.Arguments = \([\s\S]*?\$certUtilArguments \|[\s\S]*?'"' \+ \$_ \+ '"'[\s\S]*?\) -join " "/u
+);
+assert.doesNotMatch(exactSignatureVerifier, /cmd(?:\.exe)?\s+\/c/iu);
+assert.match(
+  exactSignatureVerifier,
+  /location = "CurrentUser\\Root"/u
 );
 assert.match(exactSignatureVerifier, /\$bootstrapSignature/u);
 assert.match(
   exactSignatureVerifier,
   /Assert-ExactSigner -Path \$path -RequireValidStatus \$true/u
 );
+assert.match(exactSignatureVerifier, /\$signature\.Status -ne "Valid"/u);
+assert.match(
+  exactSignatureVerifier,
+  /Expected exactly one matching CurrentUser\\My signing certificate/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /exact attempt certificate is already present in a trust store/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /\$rootMatches\.Count -ne 1/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /\$postImportMatches\.Count -ne 2/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /-not \$postImportSigningMatches\[0\]\.certificate\.HasPrivateKey/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /\$postImportSigningMatches\[0\]\.certificate\.Subject -cne \$ExpectedSubject/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /ToBase64String\(\s*\$postImportSigningMatches\[0\]\.certificate\.RawData\s*\)/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /ToBase64String\(\$rootMatches\[0\]\.certificate\.RawData\)/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /\$rootMatches\[0\]\.certificate\.Subject -cne \$ExpectedSubject/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /\$rootMatches\[0\]\.certificate\.Thumbprint -cne \$ExpectedThumbprint/u
+);
+assert.match(
+  exactSignatureVerifier,
+  /\$null -ne \$certUtilProcessError[\s\S]*\$null -ne \$certUtilSignal[\s\S]*\$null -eq \$certUtilExitCode[\s\S]*\$certUtilExitCode -ne 0/u
+);
+assert.match(exactSignatureVerifier, /stdout = \$certUtilStdout/u);
+assert.match(exactSignatureVerifier, /stderr = \$certUtilStderr/u);
+assert.doesNotMatch(exactSignatureVerifier, /-Verb\s+RunAs/u);
 assert.match(exactManifestSigner, /ExpectedThumbprint/u);
 assert.match(exactManifestSigner, /FileMode\]::CreateNew/u);
 assert.match(exactManifestSigner, /\[IO\.File\]::Move/u);
@@ -636,7 +720,7 @@ console.log(
         preIdentitySigningMaterialCleanupInspection: "passed",
         zeroStoreMatchTeardownInspection: "passed",
         postTrustSignatureValidityInspection: "passed",
-        trustedPeopleOnlyTemporaryTrustInspection: "passed",
+        certUtilRootTemporaryTrustInspection: "passed",
         noExternalConfirmArgumentInspection: "passed",
         internalShouldProcessConfirmationInspection: "passed",
         postPublicationRepositoryCheckpointInspection: "passed",
