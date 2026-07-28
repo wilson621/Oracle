@@ -20,8 +20,18 @@ import {
   validateFinalIdentity,
   validateMachineQualificationState,
   validateRepositorySnapshot,
+  validateToolchainVersions,
   writeJsonAtomicCreateOnly,
 } from "./harness-core.mjs";
+import {
+  FOUNDER_EXECUTION_AUTHORITY,
+  assertFounderExecutionAuthority,
+  assertSingleAttemptAuthorityAvailable,
+  claimSingleAttemptAuthority,
+  executionPhases,
+  selectExactCertificateMatches,
+  validatePhaseTransition,
+} from "./execution-core.mjs";
 
 const fixtureTimestamp = "2026-07-28T13:14:15.678Z";
 const fixtureAttemptId = "r1-20260728T131415678Z-deadbeef";
@@ -46,6 +56,15 @@ assert.throws(
     }),
   /Attempt ID must/
 );
+assert.throws(
+  () =>
+    validateToolchainVersions({
+      ...contract.toolchain,
+      node: "0.0.0",
+    }),
+  /Toolchain identity mismatch for node/
+);
+assert.doesNotThrow(() => validateToolchainVersions(contract.toolchain));
 assert.throws(
   () =>
     validateAttemptIdentity({
@@ -320,6 +339,177 @@ assert.ok(
   !packageJson.scripts["sprint-30-5:stage-2:r1:verify"],
   "No R1 qualification entry point may exist before the Founder execution gate."
 );
+assert.equal(
+  packageJson.scripts["sprint-30-5:stage-2:r1:execute"],
+  "node scripts/sprint-30-5/stage-2-requalification-r1/execute-attempt.mjs"
+);
+for (const forbiddenEntryPoint of [
+  "build",
+  "package",
+  "sign",
+  "certificate",
+  "freeze",
+  "stage3",
+]) {
+  assert.ok(
+    !packageJson.scripts[
+      `sprint-30-5:stage-2:r1:${forbiddenEntryPoint}`
+    ],
+    `Out-of-order R1 phase entry point is exposed: ${forbiddenEntryPoint}.`
+  );
+}
+
+assert.throws(
+  () => assertFounderExecutionAuthority("true"),
+  /exact single-attempt Founder/
+);
+assert.doesNotThrow(() =>
+  assertFounderExecutionAuthority(FOUNDER_EXECUTION_AUTHORITY)
+);
+assert.doesNotThrow(() => assertSingleAttemptAuthorityAvailable([]));
+assert.throws(
+  () =>
+    assertSingleAttemptAuthorityAvailable([
+      "Oracle.Stage2RequalificationR1SingleAttemptAuthority.json",
+    ]),
+  /already consumed/
+);
+assert.throws(
+  () =>
+    claimSingleAttemptAuthority({
+      authority: FOUNDER_EXECUTION_AUTHORITY,
+      attemptId: "../escape",
+      timestampUtc: fixtureTimestamp,
+      candidateCommit: fixtureCommit,
+      harnessCommit: fixtureCommit,
+      outputRoot: join(repositoryRoot, ".artifacts"),
+    }),
+  /Attempt ID must/
+);
+let lifecycleIndex = -1;
+for (const phase of executionPhases) {
+  lifecycleIndex = validatePhaseTransition(lifecycleIndex, phase);
+}
+assert.throws(
+  () => validatePhaseTransition(-1, executionPhases[1]),
+  /Invalid lifecycle transition/
+);
+assert.throws(
+  () => validatePhaseTransition(2, executionPhases[2]),
+  /Invalid lifecycle transition/
+);
+
+const exactThumbprint = "E".repeat(40);
+const otherThumbprint = "F".repeat(40);
+const expectedSubject =
+  "CN=Oracle Stage 2 Requalification R1 Local Test Signing - NOT PRODUCTION";
+const exactCertificateRecords = [
+  {
+    location: "CurrentUser",
+    store: "My",
+    thumbprint: exactThumbprint,
+    subject: expectedSubject,
+  },
+  {
+    location: "CurrentUser",
+    store: "Root",
+    thumbprint: exactThumbprint,
+    subject: expectedSubject,
+  },
+  {
+    location: "CurrentUser",
+    store: "My",
+    thumbprint: otherThumbprint,
+    subject: expectedSubject,
+  },
+];
+assert.equal(
+  selectExactCertificateMatches(
+    exactCertificateRecords,
+    exactThumbprint,
+    expectedSubject
+  ).length,
+  2
+);
+assert.throws(
+  () =>
+    selectExactCertificateMatches(
+      exactCertificateRecords,
+      "A".repeat(40),
+      expectedSubject
+    ),
+  /exact generated certificate was not found/
+);
+assert.throws(
+  () =>
+    selectExactCertificateMatches(
+      [{ ...exactCertificateRecords[0], subject: "CN=Unexpected" }],
+      exactThumbprint,
+      expectedSubject
+    ),
+  /unexpected subject/
+);
+
+const executorSource = readFileSync(
+  join(import.meta.dirname, "execute-attempt.mjs"),
+  "utf8"
+);
+assert.doesNotMatch(
+  executorSource,
+  /build-sprint-30-5-stage-2-release\.mjs|verify-sprint-30-5-stage-2\.mjs/u
+);
+assert.match(executorSource, /performSafetyTeardown\(\)/u);
+assert.match(executorSource, /if \(exactThumbprint && !teardownAttempted\)/u);
+assert.match(executorSource, /Safety teardown may not be retried/u);
+assert.match(executorSource, /complete-awaiting-founder-review/u);
+assert.match(executorSource, /recoverCertificateIdentityFromStoreDelta/u);
+assert.match(executorSource, /claimSingleAttemptAuthority/u);
+assert.match(
+  executorSource,
+  /if \(!exactThumbprint && !signingMaterialDestructionAttempted\)/u
+);
+assert.match(executorSource, /certificateStoreEntriesPresentBeforeCleanup/u);
+assert.ok(
+  executorSource.indexOf("const repositoryEvidenceTarget = publishRepositoryEvidence()") <
+    executorSource.indexOf(
+      "createFinalRepositoryCheckpoint(repositoryEvidenceTarget)"
+    ) &&
+    executorSource.indexOf(
+      "createFinalRepositoryCheckpoint(repositoryEvidenceTarget)"
+    ) < executorSource.indexOf("const finalManifest = createFinalEvidenceManifest") &&
+    executorSource.indexOf("const finalManifest = createFinalEvidenceManifest") <
+      executorSource.indexOf(
+        "publishFinalRepositoryEvidence(repositoryEvidenceTarget)"
+      ),
+  "The final repository checkpoint must follow bounded publication and precede final-manifest binding."
+);
+assert.match(executorSource, /new Set\(added\.map/u);
+assert.match(
+  executorSource,
+  /publishExistingFileCreateOnly\(temporaryPackagePath, packagePath\)/u
+);
+
+const exactManifestSigner = readFileSync(
+  join(import.meta.dirname, "sign-release-manifest-exact.ps1"),
+  "utf8"
+);
+
+const exactSignatureVerifier = readFileSync(
+  join(import.meta.dirname, "verify-exact-signatures.ps1"),
+  "utf8"
+);
+assert.match(exactSignatureVerifier, /\$bootstrapSignature/u);
+assert.match(
+  exactSignatureVerifier,
+  /Assert-ExactSigner -Path \$path -RequireValidStatus \$true/u
+);
+assert.match(exactManifestSigner, /ExpectedThumbprint/u);
+assert.match(exactManifestSigner, /FileMode\]::CreateNew/u);
+assert.match(exactManifestSigner, /\[IO\.File\]::Move/u);
+assert.doesNotMatch(
+  exactManifestSigner,
+  /Where-Object\s*\{\s*\$_\.Subject/u
+);
 
 assert.equal(contract.authority.build, "not-authorised");
 assert.equal(contract.authority.package, "not-authorised");
@@ -370,6 +560,21 @@ console.log(
         atomicNoReplacePublication: "passed",
         historicalEntryPointRetirement: "passed",
         safeEntryPointWiring: "passed",
+        singleExecutionEntryPoint: "passed",
+        founderAuthorityBoundary: "passed",
+        singleAttemptAuthorityConsumptionInspection: "passed",
+        exactToolchainBinding: "passed",
+        orderedLifecycle: "passed",
+        exactCertificateSelectionFixtures: "passed",
+        noHistoricalExecutorInvocation: "passed",
+        failureTeardownInspection: "passed",
+        partialCertificateGenerationRecoveryInspection: "passed",
+        preIdentitySigningMaterialCleanupInspection: "passed",
+        zeroStoreMatchTeardownInspection: "passed",
+        postTrustSignatureValidityInspection: "passed",
+        postPublicationRepositoryCheckpointInspection: "passed",
+        atomicPackagePublication: "passed",
+        atomicExactManifestSigning: "passed",
         authorityBoundary: "passed",
         missingToolRejection: "passed",
         governanceAncestry: "passed"

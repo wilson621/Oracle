@@ -128,10 +128,22 @@ export function validateBinding(binding) {
   if (!commitPattern.test(binding.harnessCommit)) {
     throw new Error("harnessCommit must be a lowercase full Git SHA.");
   }
-  if (binding.machineIdentity !== os.hostname()) {
+  if (
+    os.hostname().toUpperCase() !==
+      contract.executionMachine.identity.toUpperCase() ||
+    binding.machineIdentity.toUpperCase() !==
+      contract.executionMachine.identity.toUpperCase()
+  ) {
     throw new Error(
-      `Machine identity mismatch: expected ${os.hostname()}, received ${binding.machineIdentity}.`
+      `Machine identity mismatch: expected ${contract.executionMachine.identity}, received ${binding.machineIdentity}.`
     );
+  }
+  if (
+    process.platform !== contract.executionMachine.operatingSystem ||
+    os.release() !== contract.executionMachine.osRelease ||
+    process.arch !== contract.executionMachine.architecture
+  ) {
+    throw new Error("Execution operating-system or architecture identity differs.");
   }
   if (binding.packageIdentity !== contract.package.identity) {
     throw new Error("Unexpected package identity.");
@@ -212,6 +224,37 @@ export function assertRequiredTool(command, args = ["--version"]) {
   }
 }
 
+export function requiredToolVersion(command, args = ["--version"]) {
+  const executable =
+    process.platform === "win32" && command.toLowerCase().endsWith(".cmd")
+      ? process.env.ComSpec ?? "cmd.exe"
+      : command;
+  const executableArguments =
+    executable === command
+      ? args
+      : ["/d", "/s", "/c", [command, ...args].join(" ")];
+  const result = spawnSync(executable, executableArguments, {
+    cwd: repositoryRoot,
+    encoding: "utf8",
+    shell: false,
+    windowsHide: true,
+  });
+  if (result.error || result.status !== 0) {
+    throw new Error(`Required tool is unavailable: ${command}`);
+  }
+  return (result.stdout ?? "").trim();
+}
+
+export function validateToolchainVersions(versions) {
+  for (const [name, expected] of Object.entries(contract.toolchain)) {
+    if (versions[name] !== expected) {
+      throw new Error(
+        `Toolchain identity mismatch for ${name}: expected ${expected}, found ${versions[name] ?? "missing"}.`
+      );
+    }
+  }
+}
+
 export function assertRepositoryPreflight(binding) {
   validateBinding(binding);
   validateRepositorySnapshot(
@@ -279,24 +322,20 @@ export function assertRepositoryPreflight(binding) {
       "Candidate and harness commits do not bind the same governed product and packaging inputs."
     );
   }
-  for (const [tool, args] of [
-    ["git", ["--version"]],
-    ["node", ["--version"]],
-    ["npm.cmd", ["--version"]],
-    [
-      "powershell.exe",
-      [
-        "-NoProfile",
-        "-NonInteractive",
-        "-Command",
-        "$PSVersionTable.PSVersion.ToString()",
-      ],
-    ],
-    ["dotnet", ["--version"]],
-    ["tar.exe", ["--version"]],
-  ]) {
-    assertRequiredTool(tool, args);
-  }
+  const versions = {
+    git: requiredToolVersion("git", ["--version"]).replace(/^git version /u, ""),
+    node: requiredToolVersion("node", ["--version"]).replace(/^v/u, ""),
+    npm: requiredToolVersion("npm.cmd", ["--version"]),
+    powershell: requiredToolVersion("powershell.exe", [
+      "-NoProfile",
+      "-NonInteractive",
+      "-Command",
+      "$PSVersionTable.PSVersion.ToString()",
+    ]),
+    dotnet: requiredToolVersion("dotnet", ["--version"]),
+    bsdtar:
+      /^bsdtar\s+(\S+)/u.exec(requiredToolVersion("tar.exe", ["--version"]))?.[1],
+  };
   for (const requiredPath of [
     contractPath,
     join(repositoryRoot, "package.json"),
@@ -327,6 +366,19 @@ export function assertRepositoryPreflight(binding) {
   const packageJson = JSON.parse(
     readFileSync(join(repositoryRoot, "package.json"), "utf8")
   );
+  const installedVersion = (name) =>
+    JSON.parse(
+      readFileSync(join(repositoryRoot, "node_modules", name, "package.json"), "utf8")
+    ).version;
+  Object.assign(versions, {
+    electron: installedVersion("electron"),
+    electronPackager: installedVersion("@electron/packager"),
+    winAppCli: installedVersion("@microsoft/winappcli"),
+    next: installedVersion("next"),
+    esbuild: installedVersion("esbuild"),
+    typescript: installedVersion("typescript"),
+  });
+  validateToolchainVersions(versions);
   if (
     packageJson.devDependencies?.electron !== "39.8.10" ||
     packageJson.devDependencies?.["@microsoft/winappcli"] !== "0.5.0"
@@ -539,8 +591,12 @@ export function harnessFileInventory() {
   return [
     contractPath,
     import.meta.filename,
+    join(import.meta.dirname, "execution-core.mjs"),
+    join(import.meta.dirname, "execute-attempt.mjs"),
     join(import.meta.dirname, "prepare-attempt.mjs"),
     join(import.meta.dirname, "remove-exact-certificate.ps1"),
+    join(import.meta.dirname, "sign-release-manifest-exact.ps1"),
+    join(import.meta.dirname, "verify-exact-signatures.ps1"),
     join(import.meta.dirname, "verify-harness-static.mjs"),
   ]
     .map((path) => ({

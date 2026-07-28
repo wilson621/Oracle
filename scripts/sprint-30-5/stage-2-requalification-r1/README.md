@@ -3,9 +3,11 @@
 This directory contains preparation infrastructure for the permanently named
 `Sprint 30.5 Stage 2 Requalification R1` programme.
 
-The preparation does not authorise or expose an R1 build, package, signing,
-certificate-mutation or qualification entry point. Those operations remain
-behind the separate Founder pre-execution gate in the approved R1 plan.
+The preparation does not itself authorise an R1 build, package, signing,
+certificate mutation or qualification attempt. `execute-attempt.mjs` is the
+single ordered execution entry point and refuses to start unless it receives
+the exact single-attempt Founder authority token and all immutable attempt
+bindings. It exposes no independently runnable execution phases.
 
 `prepare-attempt.mjs` performs repository and identity preflight and creates one
 fresh attempt directory containing a create-only attempt record. It never
@@ -29,3 +31,12 @@ removes only that thumbprint. It must not be run during harness preparation.
 Run the authorised static validation only with:
 
 `npm.cmd run sprint-30-5:stage-2:r1:validate`
+
+After a separate Founder single-attempt decision, the complete lifecycle is
+entered only through:
+
+`npm.cmd run sprint-30-5:stage-2:r1:execute -- <governed arguments>`
+
+The executor records every phase, stops on the first failure, never retries,
+uses exact-thumbprint teardown and publishes evidence only through fresh
+attempt-scoped create-only paths.

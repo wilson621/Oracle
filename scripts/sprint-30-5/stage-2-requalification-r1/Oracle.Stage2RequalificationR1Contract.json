@@ -6,16 +6,46 @@
   "requiredBranch": "sprint-9-overlay",
   "governanceActivationCommit": "e00974807b95ff87351f611dc9e02d8b1a664f55",
   "qualifiedImplementationCommit": "6113565765a95b990415b6cdf2f2f1d7ff3e83c8",
+  "executionMachine": {
+    "identity": "DESKTOP-M3H22E4",
+    "operatingSystem": "win32",
+    "osRelease": "10.0.26200",
+    "architecture": "x64"
+  },
+  "toolchain": {
+    "git": "2.55.0.windows.2",
+    "node": "24.18.0",
+    "npm": "11.16.0",
+    "powershell": "5.1.26100.8875",
+    "dotnet": "10.0.301",
+    "bsdtar": "3.8.4",
+    "electron": "39.8.10",
+    "electronPackager": "20.0.4",
+    "winAppCli": "0.5.0",
+    "next": "16.2.11",
+    "esbuild": "0.28.1",
+    "typescript": "5.9.3"
+  },
   "package": {
     "identity": "Oracle.Platform.LocalCertification",
     "version": "0.1.1.0",
+    "semanticVersion": "0.1.1",
     "architecture": "x64",
-    "publisherSubjectPrefix": "CN=Oracle Stage 2 Requalification R1 Local Test Signing - NOT PRODUCTION"
+    "runtimeManifestVersion": "1.7.0",
+    "publisherSubjectPrefix": "CN=Oracle Stage 2 Requalification R1 Local Test Signing - NOT PRODUCTION",
+    "fileName": "Oracle_0.1.1.0_x64_STAGE2_REQUALIFICATION_R1_LOCAL_TEST_ONLY.msix",
+    "releaseId": "oracle-desktop-beta-0.1.1-stage-2-requalification-r1-local-qualification"
+  },
+  "certificate": {
+    "maximumLifetimeDays": 2,
+    "thumbprintFormat": "^[0-9A-F]{40}$",
+    "cleanupSelection": "exact-thumbprint-only"
   },
   "output": {
     "artifactBase": ".artifacts/sprint-30-5/stage-2-requalification",
     "repositoryEvidenceBase": "docs/sprints/evidence/sprint-30-5/stage-2-requalification",
-    "attemptNamespace": "<base>/<attempt-id>"
+    "attemptNamespace": "<base>/<attempt-id>",
+    "archiveFileName": "Oracle.Sprint30.5.Stage2RequalificationR1QualificationEvidence.zip"
   },
   "historicalProtectedRoots": [
     ".artifacts/sprint-30-5/stage-2",
