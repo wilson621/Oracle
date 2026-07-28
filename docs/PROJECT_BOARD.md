@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 28 July 2026
-**Version:** 8.5
+**Version:** 8.6
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -116,8 +116,8 @@ remain unavailable, and none is claimed as passed. Phase 5 completes the
 integrated matrix, closes the development-tool supply-chain finding and
 produces the Production Qualification dossier. Full and production dependency
 audits report zero vulnerabilities. Sprint 30 remains qualification-incomplete
-because later mandatory environment evidence remains absent and current-source
-package reconciliation remains outstanding under the authorised but unstarted
+because later mandatory environment evidence remains absent. Current-source
+package reconciliation is now complete under the Founder-accepted and closed
 Stage 2 Requalification R1 cycle.
 
 Sprint 30.5 Stage 1 — Environment Admission is Founder-accepted and closed.
@@ -136,9 +136,12 @@ signer and trust were removed.
 Post-freeze product-source corrections at
 `6113565765a95b990415b6cdf2f2f1d7ff3e83c8` invalidate historical candidate
 `d850743977735929f6873457fe122d2cf9697d9e` for qualification of current
-source. Sprint 30.5 Stage 2 Requalification R1 is Founder-authorised at the
-governance level but has not begun. Package construction and isolated
-temporary test signing remain behind its explicit pre-execution Founder gate.
+source. Sprint 30.5 Stage 2 Requalification R1 is Founder-accepted and
+formally closed. Accepted attempt `r1-20260728T190335052Z-d2ffe76a` binds
+candidate `cd3b7ca1a49d53d85a718a24d594267c93531994`, final evidence manifest
+SHA-256 `0903762efa6605611b7a6213b3cec157d7618030945c6068aea8c28b1ab0b36d`
+and local-test MSIX SHA-256
+`c9c3b4b624f1b7528123a4f0c86737fef6cab8832d6b6b042ea5b44bfcb9bdbb`.
 
 Stage 3 Clean Windows Qualification was Founder-authorised and attempted.
 `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, remains admitted for its
@@ -192,10 +195,16 @@ Stage 2 implementation, qualification package and evidence are recorded in
 Stage 2 closure and the historical Stage 3 execution plan are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_2_CLOSURE.md` and
 `docs/sprints/SPRINT_30_5_STAGE_3_PLAN.md`.
-The current-source invalidation decision and authorised but unstarted
-Requalification R1 plan are recorded in
+The current-source invalidation decision and Requalification R1 plan are
+recorded in
 `docs/sprints/SPRINT_30_5_STAGE_2_INVALIDATION_DECISION.md` and
 `docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_PLAN.md`.
+The accepted R1 implementation, Founder qualification package, closure and
+evidence are recorded in
+`docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R1_IMPLEMENTATION.md`,
+`docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R1_QUALIFICATION_PACKAGE.md`,
+`docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R1_CLOSURE.md` and
+`docs/sprints/evidence/sprint-30-5/stage-2-requalification/`.
 Replacement-host admission requirements are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION.md`.
 The Founder exception approval and machine-readable admission classification

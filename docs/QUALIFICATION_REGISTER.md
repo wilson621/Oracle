@@ -32,7 +32,7 @@ results.
 | Stage | Scope | Current state | Evidence or blocker | Next authority |
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
-| 2 | Candidate Freeze and Package Reconciliation | **Historical candidate accepted and immutable; current-source candidate invalidated; Requalification R1 Founder-authorised but not begun** | Historical Runtime Manifest `1.7.0` package and Release Manifest remain accepted evidence with frozen SHA-256 `8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876`; post-freeze product-source corrections at `6113565765a95b990415b6cdf2f2f1d7ff3e83c8` invalidate candidate `d850743977735929f6873457fe122d2cf9697d9e` for qualification of current source | Governance activation approved; package identity, construction and isolated temporary test signing require the Requalification R1 pre-execution Founder gate |
+| 2 | Candidate Freeze and Package Reconciliation | **Historical candidate accepted and immutable; current-source Requalification R1 Founder-accepted and closed** | Historical archive SHA-256 remains `8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876`; accepted R1 attempt `r1-20260728T190335052Z-d2ffe76a` binds candidate `cd3b7ca1a49d53d85a718a24d594267c93531994`, final manifest SHA-256 `0903762efa6605611b7a6213b3cec157d7618030945c6068aea8c28b1ab0b36d`, archive SHA-256 `4d9d8af7a1ffaa4486c88a369c7f407b7cf7dbfd4a63f14baa07dc38b27567e6` and MSIX SHA-256 `c9c3b4b624f1b7528123a4f0c86737fef6cab8832d6b6b042ea5b44bfcb9bdbb` | None for Stage 2 R1; Stage 3 remains blocked and requires a separate Founder decision |
 | 3 | Clean Windows Qualification | **Historically attempted — incomplete and blocked** | `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, remains `admitted-with-founder-provenance-exception`; `installationMediaEvidencePresent` remains false; recovered Revision 4 NegativePathAndTrust evidence passed with SHA-256 `164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2`; Revision 4 InstallAndStartup failed; canonical Phase 03 success evidence is absent; Revision 5 remained incomplete; Revision 6 is abandoned; the certificate 24-hour start gate closed at `2026-07-27T15:45:27Z` | No current authority exists to resume Stage 3; any new harness, certificate, candidate or qualification revision requires a separate Founder decision |
 | 4 | Live Authentication and Protected Rendering | **Not started** | Disposable live Supabase Email + Password and protected rendering evidence remain outstanding | Stage 3 acceptance, then separate Stage 4 authority |
 | 5 | Installed Package GPU, Performance and Accessibility | **Not started** | Must use the reconciled installed package on the replacement host; ASUS Stage 1 GPU evidence does not transfer | Stage 4 acceptance, then separate Stage 5 authority and replacement-host GPU admission |
@@ -65,11 +65,12 @@ results.
 - Post-freeze product-source corrections at
   `6113565765a95b990415b6cdf2f2f1d7ff3e83c8` invalidate the historical
   candidate for qualification of current source.
-- Sprint 30.5 Stage 2 Requalification R1 is Founder-authorised at the
-  governance level but has not begun.
-- Requalification R1 may not build, package, sign or execute qualification
-  until its package identity, construction and isolated temporary test signing
-  receive explicit Founder confirmation.
+- Sprint 30.5 Stage 2 Requalification R1 is Founder-accepted and formally
+  closed for current-source Candidate Freeze and Package Reconciliation.
+- The accepted attempt is `r1-20260728T190335052Z-d2ffe76a`, candidate and
+  harness commit `cd3b7ca1a49d53d85a718a24d594267c93531994`.
+- Requalification R1 creates no Stage 3, production-signing, publication,
+  distribution, deployment or release authority.
 - Replacement-host installed GPU evidence remains a separate Stage 5
   requirement.
 
@@ -106,7 +107,7 @@ results.
 | --- | --- | --- |
 | Sprint 29 clean-machine distribution | **Deferred** | Current-host package mechanics passed; separate clean Windows package qualification remains outstanding and is not satisfied by Sprint 30.5 Stage 1 |
 | Minecraft Java observation | **Provisionally certified** | Operational Certification Deferred — Required Test Environment Unavailable; observation disabled and no support claim authorised |
-| Production qualification | **Incomplete** | Stage 1 is Founder-accepted and closed; historical Stage 2 remains accepted evidence but its candidate is invalid for current source; Stage 2 Requalification R1 is authorised but not begun; Stage 3 was historically attempted but remains incomplete and blocked; Stages 4–7 have not started |
+| Production qualification | **Incomplete** | Stage 1 is Founder-accepted and closed; historical Stage 2 remains accepted immutable evidence; current-source Stage 2 Requalification R1 is Founder-accepted and closed; Stage 3 was historically attempted but remains incomplete, blocked and unauthorised; Stages 4–7 have not started |
 | Gate 7 | **Not authorised** | May be considered only after Production Qualification completes |
 | Beta | **Not authorised** | Requires later Founder decision after the governed qualification and Gate sequence |
 

@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-2-requalification-r1-final-evidence",
+  "programmeIdentity": "Sprint 30.5 Stage 2 Requalification R1",
+  "revision": "R1",
+  "authorityId": "authority-r1-20260728T190335052Z-d2ffe76a",
+  "attemptId": "r1-20260728T190335052Z-d2ffe76a",
+  "candidateCommit": "cd3b7ca1a49d53d85a718a24d594267c93531994",
+  "harnessCommit": "cd3b7ca1a49d53d85a718a24d594267c93531994",
+  "createdAt": "2026-07-28T19:09:49.748Z",
+  "status": "execution-passed-awaiting-founder-review",
+  "archive": {
+    "filename": "Oracle.Sprint30.5.Stage2RequalificationR1QualificationEvidence.zip",
+    "size": 216994816,
+    "sha256": "4d9d8af7a1ffaa4486c88a369c7f407b7cf7dbfd4a63f14baa07dc38b27567e6",
+    "sidecar": "Oracle.Sprint30.5.Stage2RequalificationR1QualificationEvidence.zip.sha256.txt"
+  },
+  "evidenceFiles": [
+    {
+      "path": "final-machine-checkpoint.json",
+      "size": 748,
+      "sha256": "16961b627126816617d05fc493fa3bb3bca3509e14641c5ea9ad2f8ff4059cfa"
+    },
+    {
+      "path": "final-repository-checkpoint.json",
+      "size": 2335,
+      "sha256": "a94d4dc6c0c12e1b419eaeadc1ed8e83f65c07dfc609875ed6d37bf867966b91"
+    },
+    {
+      "path": "qualification-candidate.json",
+      "size": 89661,
+      "sha256": "234c0a6e25270ef6091a2ead6b119ac24e25f00b145e5ebbf8b2f4bbab8b84ec"
+    },
+    {
+      "path": "single-attempt-authority.json",
+      "size": 589,
+      "sha256": "bfabc8529a9bf6720d8e605f01fda1aa773d0fa771bb60ba1061d1ae100f1684"
+    },
+    {
+      "path": "stage-2-requalification-r1-certification.json",
+      "size": 1872,
+      "sha256": "4dbc6bcf7f1e178ea9f7fbd464360a367a00fd1dd869997c796c44b3241da927"
+    },
+    {
+      "path": "stage-2-requalification-r1-completion.json",
+      "size": 1028,
+      "sha256": "63e12ca0101214f5d26ff511161dbd20113125ed33b960fd7d75fc73f54c2508"
+    },
+    {
+      "path": "stage-2-requalification-r1-evidence-index.json",
+      "size": 7362,
+      "sha256": "29a79c3c59cff9a43348c6c717cd3c73a3b305770bee182782708e1d1aedaa96"
+    },
+    {
+      "path": "stage-2-requalification-r1-frozen-evidence.json",
+      "size": 1102,
+      "sha256": "636e8d89e5a048e63db209f1d2d11dae047866cd356b9c2aa84879e44321aa6d"
+    }
+  ],
+  "releaseFiles": [
+    {
+      "path": "Oracle_0.1.1.0_x64_STAGE2_REQUALIFICATION_R1_LOCAL_TEST_ONLY.msix",
+      "size": 215509269,
+      "sha256": "c9c3b4b624f1b7528123a4f0c86737fef6cab8832d6b6b042ea5b44bfcb9bdbb"
+    },
+    {
+      "path": "oracle-0.1.1.cdx.json",
+      "size": 80415,
+      "sha256": "f84c760c8b9b343b23419ddc8179256d2f12c8eee77a76fef23cc223194f8098"
+    },
+    {
+      "path": "oracle-0.1.1.provenance.json",
+      "size": 1436,
+      "sha256": "8c44a275d8e45a5eeff8f7e9fbb36847dea4a8fb883b2c26dfc9f61c3754e8d2"
+    },
+    {
+      "path": "oracle-release-manifest.json",
+      "size": 1876,
+      "sha256": "9355a230e0a3eeb3bcd2627e47ff500bfbdc4d5fd6353b91cefc2c463756bfbf"
+    },
+    {
+      "path": "oracle-release-manifest.json.p7s",
+      "size": 1302,
+      "sha256": "291f477845c2b678b5f06f76e69b76a31c61579dd7201e7cce8963131865c75e"
+    },
+    {
+      "path": "package-content-inventory.json",
+      "size": 453379,
+      "sha256": "16950eb0ed5a105d2a72ef777742233090c440b7496d849c4afa423d5b8606e1"
+    },
+    {
+      "path": "release-build-summary.json",
+      "size": 1228,
+      "sha256": "b7df85df8121ccfcd737eaaecace8545a027089919883621bf3fe572af75c720"
+    },
+    {
+      "path": "signature-and-trust-verification.json",
+      "size": 3180,
+      "sha256": "313ff9f9d978b77ea22402de047fd3a9e5a9dde11762afe4d9c78374dc8ad62c"
+    },
+    {
+      "path": "signing-store-cleanup.json",
+      "size": 2582,
+      "sha256": "71c1d917b4f53cdb121dc6a6f40326a8248eec4bed18ebc5699e9e960503816e"
+    }
+  ],
+  "lifecycleFiles": [
+    {
+      "path": "001-attempt-prepared.json",
+      "size": 700,
+      "sha256": "705981218afad87076c2d029e0c2bf9cef8311561cdc3e42db83d315e25363f0"
+    },
+    {
+      "path": "002-candidate-frozen.json",
+      "size": 795,
+      "sha256": "f912126fbe8ccd99bf3de41bfa744aac6e5e60d9df15550842f665bda8b7b494"
+    },
+    {
+      "path": "003-source-baseline-passed.json",
+      "size": 613,
+      "sha256": "b0469a40020f1c7353c709ea27fcd70e0bf61deb7214cc06ae4b0e8464f42ea8"
+    },
+    {
+      "path": "004-inputs-reverified.json",
+      "size": 693,
+      "sha256": "dc6ac060cd8aaf5299ef137278c87f8f3b464d13a3ae5a34ee02b982c88d6268"
+    },
+    {
+      "path": "005-package-layout-constructed.json",
+      "size": 686,
+      "sha256": "71ad5a8eac64d9ce9ca80f1d6177a71f40f31e4e631315763d0563473adc6ea9"
+    },
+    {
+      "path": "006-certificate-bound.json",
+      "size": 805,
+      "sha256": "584b0cccc1940841c65d05406dc75afb76faf6659f327651e308b80022f3f6dc"
+    },
+    {
+      "path": "007-package-and-manifests-signed.json",
+      "size": 820,
+      "sha256": "967157dcd839c2fb99aaf44f3cdbe2959f6b42d8109b8dcfd92f3191a5c348af"
+    },
+    {
+      "path": "008-mechanical-verification-passed.json",
+      "size": 677,
+      "sha256": "5bc25b9a34682df9ad7ea067b1811c2fd86a32254c1b41078e1a492cf2ec4b1b"
+    },
+    {
+      "path": "009-safety-teardown-passed.json",
+      "size": 710,
+      "sha256": "6b76927b6912c76cd4c0a497d6f300b98f4618b9a78c4e2f6ecd9e9f092548ce"
+    },
+    {
+      "path": "010-evidence-inventoried.json",
+      "size": 590,
+      "sha256": "94d8321b47da7860810d703da8393e5defb1449190a7ce7456906794c97d99c0"
+    },
+    {
+      "path": "011-evidence-frozen.json",
+      "size": 758,
+      "sha256": "8699c973ec1c6eca743e0bf02f9c3633ab32b9ab55ba5b142b627927f1c97066"
+    }
+  ],
+  "historicalStage2ArchiveSha256": "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876",
+  "exactCertificateThumbprint": "EE8C6DE99CD4A925DFDF63E261A0796894BB75E0",
+  "teardownPassed": true,
+  "repositoryCommit": "cd3b7ca1a49d53d85a718a24d594267c93531994",
+  "repositoryTree": "e7933a866fe656ae03689a62956c44641eb16a23",
+  "stage3Executed": false,
+  "productionAuthority": false
+}

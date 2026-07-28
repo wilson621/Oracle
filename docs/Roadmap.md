@@ -11,7 +11,7 @@
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
 **Last Reviewed:** 28 July 2026
-**Version:** 6.3
+**Version:** 6.4
 
 ---
 
@@ -788,9 +788,10 @@ immutable with a frozen local Runtime Manifest `1.7.0` MSIX, mechanically
 equal Release Manifest, SBOM, provenance, package inventory and complete
 signing teardown. Post-freeze product-source corrections mean that candidate
 no longer qualifies the current source revision. Sprint 30.5 Stage 2
-Requalification R1 is Founder-authorised for governance activation but has
-not begun; its build, packaging, signing, certificate and qualification
-operations require separate explicit Founder authority.
+Requalification R1 is Founder-accepted and formally closed. Accepted attempt
+`r1-20260728T190335052Z-d2ffe76a` qualifies current-source candidate
+`cd3b7ca1a49d53d85a718a24d594267c93531994` for Candidate Freeze and Package
+Reconciliation with frozen evidence.
 
 Stage 3 was Founder-authorised and attempted on `Founder-QA-01`, which remains
 `admitted-with-founder-provenance-exception` for its current Windows
@@ -803,9 +804,9 @@ and Revision 6 is abandoned.
 Sprint 30 remains qualification-incomplete. Stage 3 is historically attempted,
 incomplete and blocked, while Stages 4–7 have not started. No current authority
 exists to resume Stage 3 or to create a replacement Stage 3 harness,
-certificate or qualification revision. Stage 2 Requalification R1 creates no
-Stage 3 authority. Production signing, publication, distribution, deployment
-and runtime persistence remain unauthorised.
+certificate or qualification revision. Stage 2 Requalification R1 acceptance
+and closure create no Stage 3 authority. Production signing, publication,
+distribution, deployment and runtime persistence remain unauthorised.
 
 ## Historical Sprint 15 — Operator Understanding Foundation
 

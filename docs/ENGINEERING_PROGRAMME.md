@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Sprint 30.5 Stage 2 Requalification R1 execution authority
+**Next Review:** Founder decision on post-Stage-2 qualification direction
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1349,10 +1349,13 @@ altering the immutable Sprint 29 package. Temporary signing material and trust
 were removed. Post-freeze product-source corrections mean that historical
 candidate no longer qualifies the current source revision.
 
-Sprint 30.5 Stage 2 Requalification R1 is Founder-authorised for governance
-activation but has not begun. No build, packaging, signing, certificate
-creation or qualification execution is authorised by that activation. Those
-operations require separate explicit Founder authority.
+Sprint 30.5 Stage 2 Requalification R1 is Founder-accepted and formally
+closed. Accepted attempt `r1-20260728T190335052Z-d2ffe76a` binds current-source
+candidate and harness commit
+`cd3b7ca1a49d53d85a718a24d594267c93531994`, final evidence manifest SHA-256
+`0903762efa6605611b7a6213b3cec157d7618030945c6068aea8c28b1ab0b36d`
+and local-test MSIX SHA-256
+`c9c3b4b624f1b7528123a4f0c86737fef6cab8832d6b6b042ea5b44bfcb9bdbb`.
 
 Stage 3 Clean Windows Qualification was subsequently Founder-authorised and
 attempted on `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, whose current
@@ -1367,7 +1370,8 @@ Stage 3 is therefore historically attempted, incomplete and blocked. No
 current authority exists to resume it, execute the harness observed during
 reconciliation, create or trust a replacement certificate, reinstall the
 package, repair the harness or begin another qualification revision.
-Stage 2 Requalification R1 creates no Stage 3 authority.
+Stage 2 Requalification R1 acceptance and closure create no Stage 3
+authority.
 
 Live Auth, protected rendering, clean Windows acceptance, installed-package
 GPU/performance/accessibility, reproducibility and final integrated

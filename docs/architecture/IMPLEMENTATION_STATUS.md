@@ -52,10 +52,10 @@ Environment Unavailable remains the independent programme status
 implemented and locally verified; Sprint 30.5 Stage 1 Environment Admission
 Founder-accepted and closed; historical Stage 2 package/runtime reconciliation
 Founder-accepted, closed and immutable, but its candidate no longer qualifies
-the current source revision; Stage 2 Requalification R1 governance-authorised
-and not begun; clean Windows, live Auth, protected rendering and
-installed-package qualification remain; production qualification not yet
-complete
+the current source revision; Stage 2 Requalification R1 Founder-accepted and
+formally closed for the current source; clean Windows, live Auth, protected
+rendering and installed-package qualification remain; production
+qualification not yet complete
 
 ---
 
@@ -164,9 +164,10 @@ has SHA-256
 Historical Stage 2 is Founder-accepted, closed and immutable with frozen
 evidence, but its candidate no longer qualifies the current source revision
 after post-freeze product-source corrections. Sprint 30.5 Stage 2
-Requalification R1 is Founder-authorised for governance activation and has
-not begun. The designated Stage 3 host is admitted with a Founder provenance
-exception. Stage 3 is historically attempted, incomplete and blocked.
+Requalification R1 is Founder-accepted and formally closed for current-source
+Candidate Freeze and Package Reconciliation. The designated Stage 3 host is
+admitted with a Founder provenance exception. Stage 3 is historically
+attempted, incomplete, blocked and unauthorised.
 
 ## Sprint 30.5 Stage 2 — Historical Candidate Freeze and Package Reconciliation
 
@@ -189,10 +190,26 @@ accepted and immutable. Post-freeze product-source corrections committed at
 `6113565765a95b990415b6cdf2f2f1d7ff3e83c8` mean that candidate no longer
 qualifies the current source revision.
 
-Sprint 30.5 Stage 2 Requalification R1 is Founder-authorised for governance
-activation only and has not begun. Build, packaging, signing, certificate
-creation and qualification execution require separate explicit Founder
-authority. Requalification R1 creates no authority to resume Stage 3 or begin
+## Sprint 30.5 Stage 2 Requalification R1 — Current-Source Reconciliation
+
+Requalification R1 is Founder-accepted and formally closed. Accepted attempt
+`r1-20260728T190335052Z-d2ffe76a` binds candidate and harness commit
+`cd3b7ca1a49d53d85a718a24d594267c93531994`, tree
+`e7933a866fe656ae03689a62956c44641eb16a23`.
+
+Runtime Manifest `1.7.0` equality, source validation, local-only MSIX
+construction, all `2201` package-content entries, strict Authenticode,
+detached Release Manifest verification, CycloneDX `1.6` SBOM, SLSA-shaped
+provenance, exact-certificate teardown and atomic evidence freeze passed. The
+accepted MSIX SHA-256 is
+`c9c3b4b624f1b7528123a4f0c86737fef6cab8832d6b6b042ea5b44bfcb9bdbb`;
+the final evidence manifest SHA-256 is
+`0903762efa6605611b7a6213b3cec157d7618030945c6068aea8c28b1ab0b36d`.
+
+No governed package, certificate trust or private signing material remains.
+The accepted evidence is indexed by
+[Sprint 30.5 Stage 2 Requalification R1 Evidence](../sprints/evidence/sprint-30-5/stage-2-requalification/README.md).
+Requalification R1 acceptance creates no authority to resume Stage 3 or begin
 Stage 4 or any later stage.
 
 The historical Stage 3 host is `Founder-QA-01`, a `MEDION ERAZER P6605

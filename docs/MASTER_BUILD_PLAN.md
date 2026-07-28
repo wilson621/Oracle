@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 28 July 2026
-**Version:** 4.7
+**Version:** 4.8
 
 ---
 
@@ -145,9 +145,10 @@ reconciled to Runtime Manifest `1.7.0`; it remains Founder-accepted, closed
 and immutable, and all temporary signing material and trust were removed.
 Post-freeze product-source corrections mean that historical candidate no
 longer qualifies the current source revision. Sprint 30.5 Stage 2
-Requalification R1 is Founder-authorised at the governance level but has not
-begun. Build, packaging, signing, certificate creation and qualification
-execution require separate explicit Founder authority.
+Requalification R1 is Founder-accepted and formally closed. Accepted attempt
+`r1-20260728T190335052Z-d2ffe76a` qualifies candidate
+`cd3b7ca1a49d53d85a718a24d594267c93531994` for current-source Candidate
+Freeze and Package Reconciliation with frozen, hash-bound evidence.
 
 Stage 3 Clean Windows Qualification was Founder-authorised and attempted on
 `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, which remains admitted for its
@@ -162,10 +163,11 @@ acceptance, live Auth, protected rendering, installed-package qualification
 and later integrated evidence remain outstanding. No current authority exists
 to resume Stage 3, execute or repair the harness observed during
 reconciliation, create or trust a replacement certificate, reinstall the
-package or begin a new Stage 3 qualification revision. Accepted Stage 1 and
-historical Stage 2 evidence remains unchanged. Stage 2 Requalification R1
-does not authorise Stage 3. Production signing, publication, distribution,
-deployment and activation remain unauthorised.
+package or begin a new Stage 3 qualification revision. Accepted Stage 1,
+historical Stage 2 and Stage 2 Requalification R1 evidence remain unchanged.
+Stage 2 Requalification R1 closure does not authorise Stage 3. Production
+signing, publication, distribution, deployment and activation remain
+unauthorised.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

@@ -147,7 +147,7 @@ Release Manifest, MSIX, artifact hashes or frozen evidence. ASUS-specific
 hardware/GPU evidence remains valid Stage 1 history but does not transfer to
 the replacement host.
 
-## Sprint 30.5 Stage 2 Requalification R1 governance activation
+## Sprint 30.5 Stage 2 Requalification R1 closure
 
 On 28 July 2026 the Founder accepted the Stage 2 invalidation disposition.
 Historical Stage 2 remains Founder-accepted, closed and immutable. Its source
@@ -160,11 +160,26 @@ Post-freeze product-source corrections committed at
 longer qualifies the current source revision. The permanent new cycle identity
 is `Sprint 30.5 Stage 2 Requalification R1`.
 
-Requalification R1 is Founder-authorised for governance activation but has
-not begun. No build, packaging, signing, certificate creation, installation
-or qualification execution occurred under this activation. Those operations
-remain behind a separate explicit Founder pre-execution gate.
+Requalification R1 is Founder-accepted and formally closed. Accepted attempt
+`r1-20260728T190335052Z-d2ffe76a` binds authority
+`authority-r1-20260728T190335052Z-d2ffe76a`, candidate and harness commit
+`cd3b7ca1a49d53d85a718a24d594267c93531994` and tree
+`e7933a866fe656ae03689a62956c44641eb16a23`.
+
+Runtime Manifest `1.7.0` equality, source validation, local-only MSIX
+construction, all `2201` package-content entries, strict Authenticode,
+detached Release Manifest verification, CycloneDX `1.6` SBOM, SLSA-shaped
+provenance, exact-certificate teardown and atomic evidence freeze passed. The
+accepted MSIX SHA-256 is
+`c9c3b4b624f1b7528123a4f0c86737fef6cab8832d6b6b042ea5b44bfcb9bdbb`.
+The final evidence manifest SHA-256 is
+`0903762efa6605611b7a6213b3cec157d7618030945c6068aea8c28b1ab0b36d`
+and the qualification archive SHA-256 is
+`4d9d8af7a1ffaa4486c88a369c7f407b7cf7dbfd4a63f14baa07dc38b27567e6`.
+Final machine evidence records zero governed certificate, package, trust and
+private-signing-material residue.
 
 Stage 3 remains historically attempted, incomplete and blocked. Stage 4 and
-all later stages remain unauthorised. Requalification R1 does not authorise
-production signing, publication, distribution, deployment or release.
+all later stages remain unauthorised. Requalification R1 acceptance and
+closure do not authorise production signing, publication, distribution,
+deployment or release.
