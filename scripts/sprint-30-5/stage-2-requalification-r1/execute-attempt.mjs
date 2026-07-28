@@ -53,6 +53,7 @@ const values = parseArguments(process.argv.slice(2));
 assertFounderExecutionAuthority(values.get("founder-authority"));
 const required = [
   "founder-authority",
+  "authority-id",
   "attempt-id",
   "timestamp-utc",
   "candidate-commit",
@@ -74,6 +75,7 @@ if (values.size !== required.length) {
 }
 
 const input = {
+  authorityId: values.get("authority-id"),
   attemptId: values.get("attempt-id"),
   timestampUtc: values.get("timestamp-utc"),
   candidateCommit: values.get("candidate-commit"),
@@ -281,6 +283,7 @@ try {
       {
         result: "EXECUTION PASS",
         programmeIdentity: contract.programmeIdentity,
+        authorityId: input.authorityId,
         attemptId: input.attemptId,
         candidateCommit: input.candidateCommit,
         harnessCommit: input.harnessCommit,
@@ -368,6 +371,7 @@ function identity() {
   return {
     programmeIdentity: contract.programmeIdentity,
     revision: contract.revision,
+    authorityId: input.authorityId,
     attemptId: input.attemptId,
     candidateCommit: input.candidateCommit,
     harnessCommit: input.harnessCommit,

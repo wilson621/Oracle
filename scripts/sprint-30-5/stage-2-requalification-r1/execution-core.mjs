@@ -59,6 +59,7 @@ export function assertFounderExecutionAuthority(value) {
 
 export function claimSingleAttemptAuthority({
   authority,
+  authorityId,
   attemptId,
   timestampUtc,
   candidateCommit,
@@ -67,6 +68,7 @@ export function claimSingleAttemptAuthority({
 }) {
   assertFounderExecutionAuthority(authority);
   validateAttemptIdentity({ attemptId, timestampUtc });
+  validateAuthorityIdentity({ authorityId, attemptId });
   const attemptRoot = assertR1ArtifactPath(outputRoot, attemptId);
   const base = dirname(attemptRoot);
   const repositoryEvidenceBase = resolve(
@@ -77,27 +79,47 @@ export function claimSingleAttemptAuthority({
   assertOutsideHistoricalRoots(repositoryEvidenceBase);
   assertNoReparseTraversal(dirname(base));
   assertNoReparseTraversal(dirname(repositoryEvidenceBase));
-  if (existsSync(repositoryEvidenceBase)) {
-    assertNoReparseTraversal(repositoryEvidenceBase);
-    assertSingleAttemptAuthorityAvailable(readdirSync(repositoryEvidenceBase));
-  }
   if (existsSync(base)) {
     assertNoReparseTraversal(base);
-    assertSingleAttemptAuthorityAvailable(readdirSync(base));
   } else {
     mkdirSync(base, { recursive: true });
     assertNoReparseTraversal(base);
   }
-  const recordPath = join(
-    base,
-    "Oracle.Stage2RequalificationR1SingleAttemptAuthority.json"
-  );
+  if (existsSync(repositoryEvidenceBase)) {
+    assertNoReparseTraversal(repositoryEvidenceBase);
+  }
+  const authorityRoot = join(base, "authorities");
+  if (existsSync(authorityRoot)) {
+    assertNoReparseTraversal(authorityRoot);
+  }
+  const existingAuthorityIds = existsSync(authorityRoot)
+    ? readdirSync(authorityRoot)
+        .filter((name) => name.endsWith(".json"))
+        .map((name) => name.slice(0, -".json".length))
+    : [];
+  assertSingleAttemptAuthorityAvailable({
+    authorityId,
+    attemptId,
+    existingAuthorityIds,
+    existingAttemptIds: [
+      ...readdirSync(base),
+      ...(existsSync(repositoryEvidenceBase)
+        ? readdirSync(repositoryEvidenceBase)
+        : []),
+    ],
+  });
+  if (!existsSync(authorityRoot)) {
+    mkdirSync(authorityRoot, { recursive: false });
+    assertNoReparseTraversal(authorityRoot);
+  }
+  const recordPath = join(authorityRoot, `${authorityId}.json`);
   writeJsonAtomicCreateOnly(recordPath, {
     schemaVersion: "1.0.0",
     contract:
       "oracle.sprint-30-5.stage-2-requalification-r1-single-attempt-authority",
     programmeIdentity: "Sprint 30.5 Stage 2 Requalification R1",
     revision: "R1",
+    authorityId,
     attemptId,
     timestampUtc,
     candidateCommit,
@@ -109,14 +131,37 @@ export function claimSingleAttemptAuthority({
   return recordPath;
 }
 
-export function assertSingleAttemptAuthorityAvailable(entries) {
-  if (!Array.isArray(entries)) {
+export function validateAuthorityIdentity({ authorityId, attemptId }) {
+  if (
+    typeof authorityId !== "string" ||
+    authorityId !== `authority-${attemptId}`
+  ) {
+    throw new Error(
+      "Authority ID must exactly equal authority-<attempt-id>."
+    );
+  }
+}
+
+export function assertSingleAttemptAuthorityAvailable({
+  authorityId,
+  attemptId,
+  existingAuthorityIds,
+  existingAttemptIds,
+}) {
+  validateAuthorityIdentity({ authorityId, attemptId });
+  if (
+    !Array.isArray(existingAuthorityIds) ||
+    !Array.isArray(existingAttemptIds)
+  ) {
     throw new Error("R1 authority-consumption state is invalid.");
   }
-  if (entries.length !== 0) {
-    throw new Error(
-      "The single-attempt Founder authority is already consumed or an R1 output exists."
-    );
+  const equals = (left, right) =>
+    String(left).toLowerCase() === String(right).toLowerCase();
+  if (existingAuthorityIds.some((value) => equals(value, authorityId))) {
+    throw new Error("The Founder authority identity is already consumed.");
+  }
+  if (existingAttemptIds.some((value) => equals(value, attemptId))) {
+    throw new Error("The immutable R1 attempt identity already exists.");
   }
 }
 

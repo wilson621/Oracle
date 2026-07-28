@@ -30,11 +30,13 @@ import {
   claimSingleAttemptAuthority,
   executionPhases,
   selectExactCertificateMatches,
+  validateAuthorityIdentity,
   validatePhaseTransition,
 } from "./execution-core.mjs";
 
 const fixtureTimestamp = "2026-07-28T13:14:15.678Z";
 const fixtureAttemptId = "r1-20260728T131415678Z-deadbeef";
+const fixtureAuthorityId = `authority-${fixtureAttemptId}`;
 const fixtureCommit = "a".repeat(40);
 const fixtureBinding = {
   candidateCommit: fixtureCommit,
@@ -367,18 +369,59 @@ assert.throws(
 assert.doesNotThrow(() =>
   assertFounderExecutionAuthority(FOUNDER_EXECUTION_AUTHORITY)
 );
-assert.doesNotThrow(() => assertSingleAttemptAuthorityAvailable([]));
+assert.doesNotThrow(() =>
+  validateAuthorityIdentity({
+    authorityId: fixtureAuthorityId,
+    attemptId: fixtureAttemptId,
+  })
+);
 assert.throws(
   () =>
-    assertSingleAttemptAuthorityAvailable([
-      "Oracle.Stage2RequalificationR1SingleAttemptAuthority.json",
-    ]),
-  /already consumed/
+    validateAuthorityIdentity({
+      authorityId: "authority-r1-other",
+      attemptId: fixtureAttemptId,
+    }),
+  /must exactly equal/
+);
+const previousAttemptId = "r1-20260728T120000000Z-01234567";
+const previousAuthorityId = `authority-${previousAttemptId}`;
+const previousAuthorityIds = [previousAuthorityId];
+const previousAttemptIds = [previousAttemptId];
+assert.doesNotThrow(() =>
+  assertSingleAttemptAuthorityAvailable({
+    authorityId: fixtureAuthorityId,
+    attemptId: fixtureAttemptId,
+    existingAuthorityIds: previousAuthorityIds,
+    existingAttemptIds: previousAttemptIds,
+  })
+);
+assert.deepEqual(previousAuthorityIds, [previousAuthorityId]);
+assert.deepEqual(previousAttemptIds, [previousAttemptId]);
+assert.throws(
+  () =>
+    assertSingleAttemptAuthorityAvailable({
+      authorityId: fixtureAuthorityId,
+      attemptId: fixtureAttemptId,
+      existingAuthorityIds: [fixtureAuthorityId],
+      existingAttemptIds: [previousAttemptId],
+    }),
+  /authority identity is already consumed/
+);
+assert.throws(
+  () =>
+    assertSingleAttemptAuthorityAvailable({
+      authorityId: fixtureAuthorityId,
+      attemptId: fixtureAttemptId,
+      existingAuthorityIds: [previousAuthorityId],
+      existingAttemptIds: [fixtureAttemptId],
+    }),
+  /attempt identity already exists/
 );
 assert.throws(
   () =>
     claimSingleAttemptAuthority({
       authority: FOUNDER_EXECUTION_AUTHORITY,
+      authorityId: "authority-../escape",
       attemptId: "../escape",
       timestampUtc: fixtureTimestamp,
       candidateCommit: fixtureCommit,
@@ -466,6 +509,8 @@ assert.match(executorSource, /Safety teardown may not be retried/u);
 assert.match(executorSource, /complete-awaiting-founder-review/u);
 assert.match(executorSource, /recoverCertificateIdentityFromStoreDelta/u);
 assert.match(executorSource, /claimSingleAttemptAuthority/u);
+assert.match(executorSource, /"authority-id"/u);
+assert.match(executorSource, /authorityId: input\.authorityId/u);
 assert.match(
   executorSource,
   /if \(!exactThumbprint && !signingMaterialDestructionAttempted\)/u
@@ -577,6 +622,11 @@ console.log(
         singleExecutionEntryPoint: "passed",
         founderAuthorityBoundary: "passed",
         singleAttemptAuthorityConsumptionInspection: "passed",
+        subsequentAttemptAuthorityIdentity: "passed",
+        consumedAuthorityImmutability: "passed",
+        failedAttemptImmutability: "passed",
+        duplicateAuthorityRejection: "passed",
+        attemptRetryRejection: "passed",
         exactToolchainBinding: "passed",
         orderedLifecycle: "passed",
         exactCertificateSelectionFixtures: "passed",
