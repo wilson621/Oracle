@@ -196,3 +196,15 @@ local-test certificate per attempt and retains exact trust, private-material
 and evidence teardown. R2 is active but has not yet produced an accepted
 candidate. It grants no Stage 3, production-signing, publication,
 distribution, deployment or release authority.
+
+R2 attempt `r2-20260728T203503018Z-ec577cf4` passed from candidate and harness
+commit `11475fe01fff2ec69f0188547107f4e901c531d7`, tree
+`1cec636603031aa8f63c8b331aea5bbcb916567d`. Independent reconciliation
+confirmed final evidence manifest SHA-256
+`84660931dec8c2c4f4e409465e67e49d9606f8617824e7c1212bb2e8abf1d47d`,
+archive SHA-256
+`6a3d2a6878b6e778214c550854a06e4a410fd5ec60b911b606aef844d4225f0f`
+and MSIX SHA-256
+`6adb8d9b29585ff7de1b878ec2df2d76a82ce03661cf7269ced7eaff8aae50bc`.
+The signer expires at `2026-08-27T20:35:39Z`. R2 awaits Founder acceptance
+and formal closure; Stage 3 remains unauthorised.

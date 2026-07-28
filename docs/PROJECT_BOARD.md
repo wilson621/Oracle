@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 28 July 2026
-**Version:** 8.7
+**Version:** 8.8
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -149,6 +149,12 @@ Stage 2 Requalification R2 is therefore Founder-authorised and active as a
 separate candidate refresh with a maximum 30-day isolated local-test
 certificate validity budget. R2 has not yet produced an accepted candidate.
 
+R2 attempt `r2-20260728T203503018Z-ec577cf4` passed from candidate and harness
+commit `11475fe01fff2ec69f0188547107f4e901c531d7`. Independent reconciliation
+confirmed final evidence manifest SHA-256
+`84660931dec8c2c4f4e409465e67e49d9606f8617824e7c1212bb2e8abf1d47d`.
+The result awaits Founder acceptance and is not formally closed.
+
 Stage 3 Clean Windows Qualification was Founder-authorised and attempted.
 `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, remains admitted for its
 current Windows installation with a Founder provenance exception, and
@@ -214,6 +220,10 @@ evidence are recorded in
 The separately authorised R2 decision and plan are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R2_DECISION.md` and
 `docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R2_PLAN.md`.
+The passing implementation, evidence and pending Founder decision are recorded
+in `docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R2_IMPLEMENTATION.md`,
+`docs/sprints/evidence/sprint-30-5/stage-2-requalification-r2/` and
+`docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R2_FOUNDER_ACCEPTANCE_REQUIRED.md`.
 Replacement-host admission requirements are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION.md`.
 The Founder exception approval and machine-readable admission classification

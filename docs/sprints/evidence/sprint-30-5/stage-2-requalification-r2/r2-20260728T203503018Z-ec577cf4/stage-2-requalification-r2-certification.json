@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-2-requalification-r2-certification",
+  "programmeIdentity": "Sprint 30.5 Stage 2 Requalification R2",
+  "revision": "R2",
+  "authorityId": "authority-r2-20260728T203503018Z-ec577cf4",
+  "attemptId": "r2-20260728T203503018Z-ec577cf4",
+  "candidateCommit": "11475fe01fff2ec69f0188547107f4e901c531d7",
+  "harnessCommit": "11475fe01fff2ec69f0188547107f4e901c531d7",
+  "verifiedAt": "2026-07-28T20:36:51.298Z",
+  "status": "execution-passed-awaiting-founder-review",
+  "sourceCommit": "11475fe01fff2ec69f0188547107f4e901c531d7",
+  "sourceTree": "1cec636603031aa8f63c8b331aea5bbcb916567d",
+  "runtimeManifest": {
+    "version": "1.7.0",
+    "webVersion": "1.7.0",
+    "electronVersion": "1.7.0",
+    "equal": true,
+    "webSourceSha256": "658e9a39808c07ca839280d99a1162da3386b1f8fd7f3280443548d51afd8718",
+    "electronSourceSha256": "b0d72009b84fcb587a161207e7e8b9792b09dc3ca9a5024f351b0e50f45d6b8a"
+  },
+  "package": {
+    "filename": "Oracle_0.1.1.0_x64_STAGE2_REQUALIFICATION_R2_LOCAL_TEST_ONLY.msix",
+    "packageVersion": "0.1.1.0",
+    "sha256": "6adb8d9b29585ff7de1b878ec2df2d76a82ce03661cf7269ced7eaff8aae50bc",
+    "size": 215508963,
+    "contentEntries": 2201,
+    "installed": false
+  },
+  "releaseManifest": {
+    "sha256": "22d11f7273c2721efe032f5fedd956fdd4a2bfb587c55e7f84fde73dad8726ad",
+    "exactThumbprint": "119937D4B90068ACE8765695C5A94321A2C40BD8",
+    "detachedSignature": "verified"
+  },
+  "sbom": "cyclonedx-1.6-verified",
+  "provenance": "slsa-shaped-verified",
+  "teardown": {
+    "exactThumbprint": "119937D4B90068ACE8765695C5A94321A2C40BD8",
+    "certificateStoreMatches": 0,
+    "trustRemoved": true,
+    "privateSigningMaterialDestroyed": true
+  },
+  "authority": {
+    "founderAcceptance": false,
+    "stage2Closed": false,
+    "stage3": false,
+    "production": false
+  }
+}

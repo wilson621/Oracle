@@ -32,7 +32,7 @@ results.
 | Stage | Scope | Current state | Evidence or blocker | Next authority |
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
-| 2 | Candidate Freeze and Package Reconciliation | **Historical candidate and R1 accepted and immutable; R2 candidate refresh Founder-authorised and active** | Accepted R1 attempt `r1-20260728T190335052Z-d2ffe76a` remains closed with final manifest SHA-256 `0903762efa6605611b7a6213b3cec157d7618030945c6068aea8c28b1ab0b36d`; R2 is separately authorised only to create a replacement candidate with a 30-day maximum isolated local-test certificate validity budget | R2 execution and evidence review; Stage 3 remains blocked and requires a separate Founder decision |
+| 2 | Candidate Freeze and Package Reconciliation | **Historical candidate and R1 accepted and immutable; R2 execution passed and awaits Founder acceptance** | R2 attempt `r2-20260728T203503018Z-ec577cf4` passed and was independently reconciled at candidate `11475fe01fff2ec69f0188547107f4e901c531d7`; final evidence manifest SHA-256 `84660931dec8c2c4f4e409465e67e49d9606f8617824e7c1212bb2e8abf1d47d`; R2 is not yet accepted or closed | Founder evidence decision; Stage 3 remains blocked and requires a separate Founder decision |
 | 3 | Clean Windows Qualification | **Historically attempted — incomplete and blocked** | `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, remains `admitted-with-founder-provenance-exception`; `installationMediaEvidencePresent` remains false; recovered Revision 4 NegativePathAndTrust evidence passed with SHA-256 `164a5df278aeca15d98b7c131e4c73cadea40f511d0831f12ed4d0d46e3215e2`; Revision 4 InstallAndStartup failed; canonical Phase 03 success evidence is absent; Revision 5 remained incomplete; Revision 6 is abandoned; the certificate 24-hour start gate closed at `2026-07-27T15:45:27Z` | No current authority exists to resume Stage 3; any new harness, certificate, candidate or qualification revision requires a separate Founder decision |
 | 4 | Live Authentication and Protected Rendering | **Not started** | Disposable live Supabase Email + Password and protected rendering evidence remain outstanding | Stage 3 acceptance, then separate Stage 4 authority |
 | 5 | Installed Package GPU, Performance and Accessibility | **Not started** | Must use the reconciled installed package on the replacement host; ASUS Stage 1 GPU evidence does not transfer | Stage 4 acceptance, then separate Stage 5 authority and replacement-host GPU admission |
@@ -73,9 +73,12 @@ results.
   distribution, deployment or release authority.
 - Sprint 30.5 Stage 2 Requalification R2 is a separately Founder-authorised
   candidate refresh necessitated only by the remaining R1 certificate window.
-  It is active but not yet qualified or accepted.
+  Its execution has passed, but it is not yet Founder-accepted or closed.
 - R2 permits a maximum 30-day isolated local-test certificate per attempt.
   Exact trust and private-material teardown remain mandatory.
+- R2 attempt `r2-20260728T203503018Z-ec577cf4` passed execution and
+  independent reconciliation. The result remains awaiting Founder acceptance
+  and is not formally closed.
 - Replacement-host installed GPU evidence remains a separate Stage 5
   requirement.
 
@@ -112,7 +115,7 @@ results.
 | --- | --- | --- |
 | Sprint 29 clean-machine distribution | **Deferred** | Current-host package mechanics passed; separate clean Windows package qualification remains outstanding and is not satisfied by Sprint 30.5 Stage 1 |
 | Minecraft Java observation | **Provisionally certified** | Operational Certification Deferred — Required Test Environment Unavailable; observation disabled and no support claim authorised |
-| Production qualification | **Incomplete** | Stage 1 and historical Stage 2 are closed; Stage 2 R1 remains accepted immutable evidence; R2 candidate refresh is active but not yet accepted; Stage 3 remains incomplete, blocked and unauthorised; Stages 4–7 have not started |
+| Production qualification | **Incomplete** | Stage 1 and historical Stage 2 are closed; Stage 2 R1 remains accepted immutable evidence; R2 execution passed but awaits Founder acceptance and closure; Stage 3 remains incomplete, blocked and unauthorised; Stages 4–7 have not started |
 | Gate 7 | **Not authorised** | May be considered only after Production Qualification completes |
 | Beta | **Not authorised** | Requires later Founder decision after the governed qualification and Gate sequence |
 

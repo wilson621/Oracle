@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 28 July 2026
-**Version:** 4.9
+**Version:** 5.0
 
 ---
 
@@ -155,6 +155,13 @@ cannot safely accommodate the complete Stage 3 preparation and execution
 lifecycle. Stage 2 Requalification R2 is Founder-authorised and active as a
 separate replacement-candidate refresh. Its isolated local-test certificate
 has a maximum 30-day validity budget and exact teardown remains mandatory.
+
+R2 attempt `r2-20260728T203503018Z-ec577cf4` passed and was independently
+reconciled at candidate and harness commit
+`11475fe01fff2ec69f0188547107f4e901c531d7`. Its final evidence manifest
+SHA-256 is
+`84660931dec8c2c4f4e409465e67e49d9606f8617824e7c1212bb2e8abf1d47d`.
+Founder acceptance and formal R2 closure remain outstanding.
 
 Stage 3 Clean Windows Qualification was Founder-authorised and attempted on
 `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, which remains admitted for its

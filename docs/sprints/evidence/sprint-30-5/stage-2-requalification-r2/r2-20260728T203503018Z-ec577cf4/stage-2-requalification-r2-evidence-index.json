@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-2-requalification-r2-evidence-index",
+  "programmeIdentity": "Sprint 30.5 Stage 2 Requalification R2",
+  "revision": "R2",
+  "authorityId": "authority-r2-20260728T203503018Z-ec577cf4",
+  "attemptId": "r2-20260728T203503018Z-ec577cf4",
+  "candidateCommit": "11475fe01fff2ec69f0188547107f4e901c531d7",
+  "harnessCommit": "11475fe01fff2ec69f0188547107f4e901c531d7",
+  "createdAt": "2026-07-28T20:36:51.564Z",
+  "status": "complete-awaiting-freeze",
+  "files": [
+    {
+      "path": "evidence/qualification-candidate.json",
+      "size": 89661,
+      "sha256": "f3e86759fd5d7bcde0e54b502da0bb8f6d0460a8f16d28bb3d211716315051ba"
+    },
+    {
+      "path": "evidence/single-attempt-authority.json",
+      "size": 589,
+      "sha256": "c2c6e98e0ccd5ee49ab5a3ab6b1eecd6bdf378cb07872ced972e05f97be12982"
+    },
+    {
+      "path": "evidence/stage-2-requalification-r2-certification.json",
+      "size": 1872,
+      "sha256": "2587264376cbf065c23314828663dd59962bdf2e87d69d67b1accb563ecbdf65"
+    },
+    {
+      "path": "lifecycle/001-attempt-prepared.json",
+      "size": 700,
+      "sha256": "6f39fe07afca83286b72d5a2ce6bc779666d244ad12d651145cbb7c3801cb989"
+    },
+    {
+      "path": "lifecycle/002-candidate-frozen.json",
+      "size": 795,
+      "sha256": "0004bb1c983d39c8ceb936f435edb3ba37dd6da26b6555a0ddf91d48be4b46a8"
+    },
+    {
+      "path": "lifecycle/003-source-baseline-passed.json",
+      "size": 613,
+      "sha256": "83d453468eafff80c6deed553b536c8da72f03a522bc0a9056295baf68f21d8f"
+    },
+    {
+      "path": "lifecycle/004-inputs-reverified.json",
+      "size": 693,
+      "sha256": "8826b872821175d6590af905f4b2b0f931c205ae78ac625006a4ab5facf9012a"
+    },
+    {
+      "path": "lifecycle/005-package-layout-constructed.json",
+      "size": 689,
+      "sha256": "cef3a1913ea86231e8b2122d8febc218ec4ca54cb52e7895c3cb703f05074a61"
+    },
+    {
+      "path": "lifecycle/006-certificate-bound.json",
+      "size": 889,
+      "sha256": "27a7b367704066a963e6d75150178a2fc8391f490baa40fa5b857f52cf94fd9a"
+    },
+    {
+      "path": "lifecycle/007-package-and-manifests-signed.json",
+      "size": 820,
+      "sha256": "5bc194e49bd68d15374700f5e7dd7c20b5f70f839b5f3eafe86c97f31959bc49"
+    },
+    {
+      "path": "lifecycle/008-mechanical-verification-passed.json",
+      "size": 677,
+      "sha256": "355eb36d3da522fc73f659f53001cff1ec2ebbbf7a418dfdc494116b1434585d"
+    },
+    {
+      "path": "lifecycle/009-safety-teardown-passed.json",
+      "size": 710,
+      "sha256": "ed26b20b2eeb2bda38b55acbaa86c655a50b02687d94cfa8eb7deba4d94a8722"
+    },
+    {
+      "path": "logs/001-typescript.json",
+      "size": 854,
+      "sha256": "b26f54fc605b82177f9e2e1372600196fe911ff40b424842b4e2b6e64f5e8663"
+    },
+    {
+      "path": "logs/002-lint.json",
+      "size": 851,
+      "sha256": "9e1e40d7175b3b65a15f1f5345ce85e7bf540ff4d59995c60325a466e58051c6"
+    },
+    {
+      "path": "logs/003-architecture.json",
+      "size": 1171,
+      "sha256": "d5cc9fbe529783b310011d647f0f4cbdc31796c6cf2f8f3acde36f48d39cd87c"
+    },
+    {
+      "path": "logs/004-web-build.json",
+      "size": 2067,
+      "sha256": "2138971a8b9dd2a75ee984abaf18d1325ec49e7e5015f584c02aeaaaab363f70"
+    },
+    {
+      "path": "logs/005-electron-and-preload-build.json",
+      "size": 1070,
+      "sha256": "90db6a7a1ec57a88e6f1364edfa594461cbfe08b74cf7a7feda84eb46f1a5ed4"
+    },
+    {
+      "path": "logs/006-native-helper-builds.json",
+      "size": 2119,
+      "sha256": "2c9cd4a4c81d55d8864426bd5652f50478837e48ca2a47583da7c93f6c657358"
+    },
+    {
+      "path": "logs/007-manifest-assets.json",
+      "size": 1720,
+      "sha256": "bf12ec25aed294aa7a322c5435f09d67571000679ca9e4f98f1b25d3783eb55c"
+    },
+    {
+      "path": "logs/008-certificate-store-before-generation.json",
+      "size": 24712,
+      "sha256": "3862f713ab66020dac8d3001ddb2ce00e975b020973822ec1e7cf9212371e9d9"
+    },
+    {
+      "path": "logs/009-certificate-generate.json",
+      "size": 2190,
+      "sha256": "f2e22f933fa7b505d4da1c156afc5e56a03fd0faf01069351c6019d5f9189c7a"
+    },
+    {
+      "path": "logs/010-certificate-identity.json",
+      "size": 1386,
+      "sha256": "88863b0500fe0a9ee45c93940f7d2bb8add202e4ba1983d9f5e0ba8544163f6d"
+    },
+    {
+      "path": "logs/011-sign-executable.json",
+      "size": 1472,
+      "sha256": "3ba7dce9b599b0f7ff6a4d4726259efbdb3f11662199488524756218fa7c3ea9"
+    },
+    {
+      "path": "logs/012-sign-executable.json",
+      "size": 1616,
+      "sha256": "2fbf04f884158f2b0b51196c54165484831ea99675c0a4e14d418f5e392aa199"
+    },
+    {
+      "path": "logs/013-sign-executable.json",
+      "size": 1613,
+      "sha256": "7925a34369db2dc57d2cff19f9ca81e2cc91e402903fa12d5595e3d846a848f1"
+    },
+    {
+      "path": "logs/014-package-msix.json",
+      "size": 1926,
+      "sha256": "db48b65397c0464469478c4a104cac864c513af6aefa2fe4f9c9784c86042deb"
+    },
+    {
+      "path": "logs/015-sign-release-manifest.json",
+      "size": 1653,
+      "sha256": "39d440f6670279ddf89f8f239c0906368d352e66042fb9229ae9478c43fe57ae"
+    },
+    {
+      "path": "logs/016-unpack-msix.json",
+      "size": 719160,
+      "sha256": "1b82520f1b0364530f8f38cbd2d88bfdc83ca4325cbe6a60ba1f1c5b59ce4d0e"
+    },
+    {
+      "path": "logs/017-verify-exact-signatures.json",
+      "size": 6811,
+      "sha256": "5e079b146996ed5ef5cb12294713e79167db3af637f4d06e03196ab1109e4f0d"
+    },
+    {
+      "path": "logs/018-certificate-store-before-teardown.json",
+      "size": 25106,
+      "sha256": "44d81db767f791fe4b08a485dab730462cbd97b0f954b51e0912bd7c965f9435"
+    },
+    {
+      "path": "logs/019-exact-certificate-teardown.json",
+      "size": 4716,
+      "sha256": "1c390d16bee44c5091d49b2f499bcd845de5c176a5a35cf310f3b7837605f5f0"
+    },
+    {
+      "path": "release/Oracle_0.1.1.0_x64_STAGE2_REQUALIFICATION_R2_LOCAL_TEST_ONLY.msix",
+      "size": 215508963,
+      "sha256": "6adb8d9b29585ff7de1b878ec2df2d76a82ce03661cf7269ced7eaff8aae50bc"
+    },
+    {
+      "path": "release/oracle-0.1.1.cdx.json",
+      "size": 80415,
+      "sha256": "f1e77af72f999a432bbfe38e3aa7b7c3d2b453bb7e8a5b3f3486e06650ecd5f1"
+    },
+    {
+      "path": "release/oracle-0.1.1.provenance.json",
+      "size": 1436,
+      "sha256": "c7a1c42c0366245d53c09647b80aa5dd573170ecd5629507b34cedfff21b63a2"
+    },
+    {
+      "path": "release/oracle-release-manifest.json",
+      "size": 1876,
+      "sha256": "22d11f7273c2721efe032f5fedd956fdd4a2bfb587c55e7f84fde73dad8726ad"
+    },
+    {
+      "path": "release/oracle-release-manifest.json.p7s",
+      "size": 1300,
+      "sha256": "5628bdfd67561e01ad0c91766e680d5205493f77688581829d2591b977bcd505"
+    },
+    {
+      "path": "release/package-content-inventory.json",
+      "size": 453379,
+      "sha256": "059ecfb9104f4d2761888bd0c02999c4892171e82416405dc0a8891294c33cd9"
+    },
+    {
+      "path": "release/release-build-summary.json",
+      "size": 1228,
+      "sha256": "e9f3abbc4ab3601a0e59cb77c74754d9694255e65755664817f00c19f716ddab"
+    },
+    {
+      "path": "release/signature-and-trust-verification.json",
+      "size": 3186,
+      "sha256": "0c965d13ac5c5fb2066251d8049e823ccd2769f9aa2fd830b95a0ad7a6e92e6c"
+    },
+    {
+      "path": "release/signing-store-cleanup.json",
+      "size": 2582,
+      "sha256": "73d1c485a4f16a463d72f9bde0315fb94b46b87550656811fb5cb83b5a13b1ef"
+    }
+  ]
+}
