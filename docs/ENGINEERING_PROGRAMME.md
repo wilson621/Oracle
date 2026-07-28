@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder decision on post-Stage-2 qualification direction
+**Next Review:** Sprint 30.5 Stage 2 Requalification R2 evidence
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1356,6 +1356,12 @@ candidate and harness commit
 `0903762efa6605611b7a6213b3cec157d7618030945c6068aea8c28b1ab0b36d`
 and local-test MSIX SHA-256
 `c9c3b4b624f1b7528123a4f0c86737fef6cab8832d6b6b042ea5b44bfcb9bdbb`.
+
+R1 remains accepted and immutable. Its remaining certificate-validity window
+does not safely support the full Stage 3 preparation, review, host,
+transfer and execution sequence. Stage 2 Requalification R2 is separately
+Founder-authorised and active as a candidate refresh, with a maximum 30-day
+isolated local-test certificate validity budget. R2 is not yet accepted.
 
 Stage 3 Clean Windows Qualification was subsequently Founder-authorised and
 attempted on `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, whose current

@@ -53,8 +53,9 @@ implemented and locally verified; Sprint 30.5 Stage 1 Environment Admission
 Founder-accepted and closed; historical Stage 2 package/runtime reconciliation
 Founder-accepted, closed and immutable, but its candidate no longer qualifies
 the current source revision; Stage 2 Requalification R1 Founder-accepted and
-formally closed for the current source; clean Windows, live Auth, protected
-rendering and installed-package qualification remain; production
+formally closed for the current source; Stage 2 Requalification R2
+candidate refresh Founder-authorised and active; clean Windows, live Auth,
+protected rendering and installed-package qualification remain; production
 qualification not yet complete
 
 ---
@@ -211,6 +212,15 @@ The accepted evidence is indexed by
 [Sprint 30.5 Stage 2 Requalification R1 Evidence](../sprints/evidence/sprint-30-5/stage-2-requalification/README.md).
 Requalification R1 acceptance creates no authority to resume Stage 3 or begin
 Stage 4 or any later stage.
+
+## Sprint 30.5 Stage 2 Requalification R2 — Candidate Refresh
+
+R1 remains accepted, closed and immutable. R2 is separately
+Founder-authorised and active because R1's remaining certificate-validity
+window cannot safely accommodate the full Stage 3 preparation and execution
+lifecycle. R2 permits a maximum 30-day isolated local-test signer per attempt,
+with exact trust and private-material teardown. No R2 candidate has yet been
+accepted, and R2 creates no Stage 3 authority.
 
 The historical Stage 3 host is `Founder-QA-01`, a `MEDION ERAZER P6605
 MD61596`. It is `admitted-with-founder-provenance-exception` for its current

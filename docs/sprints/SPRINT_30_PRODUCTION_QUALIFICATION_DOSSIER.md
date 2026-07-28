@@ -183,3 +183,16 @@ Stage 3 remains historically attempted, incomplete and blocked. Stage 4 and
 all later stages remain unauthorised. Requalification R1 acceptance and
 closure do not authorise production signing, publication, distribution,
 deployment or release.
+
+## Sprint 30.5 Stage 2 Requalification R2 activation
+
+R1 remains accepted, closed and immutable. Its certificate expires at
+`2026-07-30T19:08:37Z`, leaving insufficient governed time for complete Stage
+3 preparation and execution with the mandatory 24-hour start margin.
+
+The Founder authorised Stage 2 Requalification R2 as a separate
+replacement-candidate refresh. R2 permits a maximum 30-day isolated
+local-test certificate per attempt and retains exact trust, private-material
+and evidence teardown. R2 is active but has not yet produced an accepted
+candidate. It grants no Stage 3, production-signing, publication,
+distribution, deployment or release authority.

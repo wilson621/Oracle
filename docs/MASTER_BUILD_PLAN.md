@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 28 July 2026
-**Version:** 4.8
+**Version:** 4.9
 
 ---
 
@@ -149,6 +149,12 @@ Requalification R1 is Founder-accepted and formally closed. Accepted attempt
 `r1-20260728T190335052Z-d2ffe76a` qualifies candidate
 `cd3b7ca1a49d53d85a718a24d594267c93531994` for current-source Candidate
 Freeze and Package Reconciliation with frozen, hash-bound evidence.
+
+R1 remains accepted and immutable. Its remaining certificate-validity window
+cannot safely accommodate the complete Stage 3 preparation and execution
+lifecycle. Stage 2 Requalification R2 is Founder-authorised and active as a
+separate replacement-candidate refresh. Its isolated local-test certificate
+has a maximum 30-day validity budget and exact teardown remains mandatory.
 
 Stage 3 Clean Windows Qualification was Founder-authorised and attempted on
 `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, which remains admitted for its
