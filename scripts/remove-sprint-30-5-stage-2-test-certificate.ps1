@@ -5,6 +5,12 @@ param(
   [string]$OutputPath
 )
 
+throw (
+  "Historical Sprint 30.5 Stage 2 subject-wide certificate cleanup is " +
+  "retired and cannot be rerun. Use only the exact-thumbprint " +
+  "Requalification R1 cleanup after separate Founder authority."
+)
+
 $ErrorActionPreference = "Stop"
 $removed = [System.Collections.Generic.List[object]]::new()
 

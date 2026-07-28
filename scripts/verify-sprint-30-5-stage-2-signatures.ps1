@@ -7,6 +7,12 @@ param(
   [string]$ExpectedSubject
 )
 
+throw (
+  "Historical Sprint 30.5 Stage 2 signature verifier is retired and " +
+  "cannot be rerun. Use only a separately Founder-authorised " +
+  "Requalification R1 entry point."
+)
+
 $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName System.Security
 

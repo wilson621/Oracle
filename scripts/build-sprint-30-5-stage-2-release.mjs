@@ -14,6 +14,8 @@ import { basename, join, relative, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { packager } from "@electron/packager";
 
+refuseHistoricalExecution();
+
 const root = resolve(import.meta.dirname, "..");
 const work = join(root, ".tmp-sprint-30-5-stage-2");
 const stage = join(work, "app-source");
@@ -549,4 +551,10 @@ function assertWorkspacePath(path) {
   ) {
     throw new Error("Refusing to clear a path outside the Stage 2 workspace.");
   }
+}
+
+function refuseHistoricalExecution() {
+  throw new Error(
+    "Historical Sprint 30.5 Stage 2 builder is retired and cannot be rerun. Use only a separately Founder-authorised Requalification R1 entry point."
+  );
 }
