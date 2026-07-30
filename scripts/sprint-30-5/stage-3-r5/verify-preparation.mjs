@@ -328,6 +328,10 @@ const processPolicy = readFileSync(
   join(import.meta.dirname, "Oracle.Stage3R5ProcessPolicy.ps1"),
   "utf8"
 );
+const windowsExecutablePolicy = readFileSync(
+  join(import.meta.dirname, "Oracle.Stage3R5WindowsExecutablePolicy.ps1"),
+  "utf8"
+);
 const preAuthorityProbe = readFileSync(
   join(import.meta.dirname, "Invoke-OracleStage3R5PreAuthorityPreflight.ps1"),
   "utf8"
@@ -355,6 +359,10 @@ const optionalMemberAuditPath = join(
 const processFixturePath = join(
   import.meta.dirname,
   "Test-OracleStage3R5ProcessPolicy.ps1"
+);
+const windowsExecutableFixturePath = join(
+  import.meta.dirname,
+  "Test-OracleStage3R5WindowsExecutablePolicy.ps1"
 );
 const developmentPlatformFixturePath = join(
   import.meta.dirname,
@@ -403,6 +411,7 @@ assert.match(transferBuilder, /Oracle\.Stage3R5LifecyclePolicy\.ps1/u);
 assert.match(transferBuilder, /Oracle\.Stage3R5PackageInventoryPolicy\.ps1/u);
 assert.match(transferBuilder, /Oracle\.Stage3R5PreflightPolicy\.ps1/u);
 assert.match(transferBuilder, /Oracle\.Stage3R5ProcessPolicy\.ps1/u);
+assert.match(transferBuilder, /Oracle\.Stage3R5WindowsExecutablePolicy\.ps1/u);
 assert.match(transferBuilder, /Invoke-OracleStage3R5PreAuthorityPreflight\.ps1/u);
 assert.match(transferBuilder, /Oracle\.Stage3R5OptionalMemberAudit\.json/u);
 assert.match(transferBuilder, /Oracle\.Stage3R5PhaseAudit\.json/u);
@@ -410,6 +419,7 @@ assert.match(transferBuilder, /Oracle\.Stage3R5TransferCustody\.json/u);
 assert.match(transferBuilder, /failedR2TransferModified: false/u);
 assert.match(transferBuilder, /failedR3TransferModified: false/u);
 assert.match(transferBuilder, /failedR4TransferModified: false/u);
+assert.match(transferBuilder, /previousR5TransferModified: false/u);
 assert.match(transferBuilder, /medium-hardware-serial/u);
 assert.match(transferBuilder, /contract\.transferMedium/u);
 assert.match(transferBuilder, /expected-harness-commit/u);
@@ -438,6 +448,7 @@ for (const required of [
   "Assert-PackageContent",
   "Get-OracleStage3R5InstalledSoftwareInventory",
   "Get-OracleStage3R5PreAuthorityObservation",
+  "Get-OracleStage3R5WindowsExecutablePath",
   "Move-OracleStage3R5Lifecycle",
   "package-content-reconciliation.json",
   "Get-OracleStage3R5PackageZipInventory",
@@ -513,7 +524,7 @@ for (const required of [
 
 assert.match(
   transferBuilder,
-  /Create-only final Stage 3 R5 transfer; R1 and failed R2, R3 and R4 remain immutable/u
+  /Create-only corrected Stage 3 R5 transfer; prior R5 and historical transfers remain immutable/u
 );
 for (const required of [
   "PSObject.Properties",
@@ -557,6 +568,38 @@ assert.match(preflightPolicy, /Compress-Archive"; parameters = @\("LiteralPath"/
 assert.match(processPolicy, /Get-OracleStage3R5RequiredProcessMember/u);
 assert.match(processPolicy, /Governed process returned a null exit status/u);
 assert.match(processPolicy, /Governed process terminated by signal/u);
+assert.match(
+  windowsExecutablePolicy,
+  /\[Environment\]::GetFolderPath\(\[Environment\+SpecialFolder\]::Windows\)/u
+);
+assert.match(
+  windowsExecutablePolicy,
+  /\$Name -ceq "explorer\.exe"[\s\S]*\$WindowsDirectory/u
+);
+assert.match(
+  windowsExecutablePolicy,
+  /certutil\.exe[\s\S]*explorer\.exe[\s\S]*reagentc\.exe/u
+);
+assert.doesNotMatch(
+  preflightPolicy,
+  /Join-Path \(\[Environment\]::SystemDirectory\) "explorer\.exe"/u
+);
+assert.doesNotMatch(
+  harness,
+  /Join-Path \(\[Environment\]::SystemDirectory\) "explorer\.exe"/u
+);
+assert.match(
+  preflightPolicy,
+  /Get-OracleStage3R5WindowsExecutablePath -Name "explorer\.exe"/u
+);
+assert.equal(
+  (
+    harness.match(
+      /Get-OracleStage3R5WindowsExecutablePath -Name "explorer\.exe"/gu
+    ) ?? []
+  ).length,
+  2
+);
 assert.match(lifecyclePolicy, /Get-OracleStage3R5LifecyclePhases/u);
 assert.match(preflightPolicy, /required Windows PowerShell 5\.1|Windows PowerShell 5\.1/u);
 assert.match(preflightPolicy, /Get-OracleStage3R5InstalledSoftwareInventory/u);
@@ -663,6 +706,23 @@ assert.equal(processResult.nonzeroRejected, true);
 assert.equal(processResult.stdoutAndStderrPreserved, true);
 assert.equal(processResult.evidenceRecords, 5);
 
+const windowsExecutableResult = runPowerShellFixture(
+  windowsExecutableFixturePath
+);
+assert.equal(windowsExecutableResult.result, "passed");
+assert.equal(windowsExecutableResult.explorerUsesWindowsDirectory, true);
+assert.equal(windowsExecutableResult.systemToolsUseSystemDirectory, true);
+assert.equal(windowsExecutableResult.missingExplorerRejected, true);
+assert.equal(windowsExecutableResult.nonCanonicalNameRejected, true);
+assert.equal(
+  windowsExecutableResult.founderQa01Shape.system32ExplorerExists,
+  false
+);
+assert.equal(
+  windowsExecutableResult.founderQa01Shape.windowsExplorerExists,
+  true
+);
+
 const platformResult = runPowerShellFixture(
   developmentPlatformFixturePath,
   [
@@ -680,6 +740,11 @@ assert.equal(
   contract.stage2.certificateThumbprint
 );
 assert.equal(platformResult.hostAdmissionInferred, false);
+assert.match(platformResult.windowsExecutables.explorer, /\\explorer\.exe$/iu);
+assert.doesNotMatch(
+  platformResult.windowsExecutables.explorer,
+  /\\System32\\explorer\.exe$/iu
+);
 
 const rehearsalResult = runPowerShellFixture(developmentRehearsalPath);
 assert.equal(rehearsalResult.result, "passed");

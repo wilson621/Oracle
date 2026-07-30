@@ -10,6 +10,7 @@ $contract = Get-Content -LiteralPath (
   Join-Path $scriptRoot "Oracle.Stage3R5Contract.json"
 ) -Raw | ConvertFrom-Json
 . (Join-Path $scriptRoot "Oracle.Stage3R5IdentityPolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage3R5WindowsExecutablePolicy.ps1")
 
 function Invoke-ReadOnlyProcess([string]$Executable, [string[]]$Arguments) {
   if (-not (Test-Path -LiteralPath $Executable -PathType Leaf)) {
@@ -74,7 +75,7 @@ $activation = @(Get-CimInstance SoftwareLicensingProduct | Where-Object {
   $_.PartialProductKey -and $_.LicenseStatus -eq 1
 })
 $recovery = Invoke-ReadOnlyProcess (
-  Join-Path ([Environment]::SystemDirectory) "reagentc.exe"
+  Get-OracleStage3R5WindowsExecutablePath -Name "reagentc.exe"
 ) @("/info")
 $developmentTools = @("node", "npm", "git", "python", "docker", "dotnet", "msbuild") |
   ForEach-Object {

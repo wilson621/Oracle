@@ -49,6 +49,15 @@ used by qualification. It records executable, arguments, UTC timestamps,
 stdout, stderr, exit code, signal and process error before failing closed on
 startup errors, signals, null status or non-zero status.
 
+`Oracle.Stage3R5WindowsExecutablePolicy.ps1` is the single mapping for Windows
+platform executables used by continuity, preflight and qualification. It
+resolves `explorer.exe` from the Windows directory returned by the .NET
+Windows special-folder API, while `certutil.exe` and `reagentc.exe` remain
+explicitly System32-bound. Absolute direct-child paths, file existence and
+non-reparse identity are mandatory. This corrects the retired first R5
+transfer's System32 Explorer assumption; that transfer remains immutable and
+must not be admitted or staged.
+
 `Oracle.Stage3R5LifecyclePolicy.ps1` is shared by production lifecycle
 publication and the development rehearsal. The rehearsal exercises every
 ordered phase and injected failure before every phase without executing
@@ -88,7 +97,7 @@ npm.cmd run sprint-30-5:stage-3:r5:validate
 
 The complete operator sequence, parameter bindings, stop conditions and
 Founder gates are recorded in
-`docs/sprints/SPRINT_30_5_STAGE_3_R4_PRE_EXECUTION_GATE.md`.
+`docs/sprints/SPRINT_30_5_STAGE_3_R5_PRE_EXECUTION_GATE.md`.
 
 No command in this README grants transfer, trust, installation, qualification,
 Stage 4, production signing, publication, distribution, deployment or release

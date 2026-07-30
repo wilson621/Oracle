@@ -38,7 +38,8 @@ $bootstrapRequiredFiles = @(
   "Oracle.Stage3R5LifecyclePolicy.ps1",
   "Oracle.Stage3R5PackageInventoryPolicy.ps1",
   "Oracle.Stage3R5PreflightPolicy.ps1",
-  "Oracle.Stage3R5ProcessPolicy.ps1"
+  "Oracle.Stage3R5ProcessPolicy.ps1",
+  "Oracle.Stage3R5WindowsExecutablePolicy.ps1"
 )
 foreach ($fileName in $bootstrapRequiredFiles) {
   $relativePath = "payload/$fileName"
@@ -70,6 +71,7 @@ $contract = Get-Content -LiteralPath (
 . (Join-Path $scriptRoot "Oracle.Stage3R5LifecyclePolicy.ps1")
 . (Join-Path $scriptRoot "Oracle.Stage3R5PreflightPolicy.ps1")
 . (Join-Path $scriptRoot "Oracle.Stage3R5ProcessPolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage3R5WindowsExecutablePolicy.ps1")
 $expectedToken = "FOUNDER-AUTHORISED-STAGE3-R5-EXECUTION"
 $thumbprint = [string]$contract.stage2.certificateThumbprint
 $publisher = [string]$contract.package.publisher
@@ -95,6 +97,9 @@ $installedSoftwarePolicyPath = Join-Path $payloadRoot (
 $lifecyclePolicyPath = Join-Path $payloadRoot "Oracle.Stage3R5LifecyclePolicy.ps1"
 $preflightPolicyPath = Join-Path $payloadRoot "Oracle.Stage3R5PreflightPolicy.ps1"
 $processPolicyPath = Join-Path $payloadRoot "Oracle.Stage3R5ProcessPolicy.ps1"
+$windowsExecutablePolicyPath = Join-Path $payloadRoot (
+  "Oracle.Stage3R5WindowsExecutablePolicy.ps1"
+)
 $certificateRawBase64 = $null
 $packageFamilyName = $null
 $partialArchive = $null
@@ -273,7 +278,7 @@ function Remove-ExactRootTrust {
   if ($rootMatches.Count -eq 0) { return }
   if ($rootMatches.Count -ne 1) { throw "Unexpected Root match cardinality." }
   Assert-CertificateIdentity $rootMatches[0].Certificate $false
-  $certutil = Join-Path ([Environment]::SystemDirectory) "certutil.exe"
+  $certutil = Get-OracleStage3R5WindowsExecutablePath -Name "certutil.exe"
   [void](Invoke-GovernedProcess "exact-root-remove" $certutil @(
     "-user", "-delstore", "Root", $thumbprint
   ))
@@ -449,6 +454,7 @@ function Assert-IdentityAndTransfer {
     "Oracle.Stage3R5OptionalMemberAudit.json",
     "Oracle.Stage3R5PreflightPolicy.ps1",
     "Oracle.Stage3R5ProcessPolicy.ps1",
+    "Oracle.Stage3R5WindowsExecutablePolicy.ps1",
     "Oracle.Stage3R5PhaseAudit.json",
     "Oracle.Stage3R5PackageInventoryPolicy.ps1",
     "Oracle.WindowDiscovery.exe",
@@ -508,6 +514,9 @@ function Assert-IdentityAndTransfer {
   $runningProcessPolicyEntry = @($manifest.payload | Where-Object {
     [string]$_.path -ceq "payload/Oracle.Stage3R5ProcessPolicy.ps1"
   })
+  $runningWindowsExecutablePolicyEntry = @($manifest.payload | Where-Object {
+    [string]$_.path -ceq "payload/Oracle.Stage3R5WindowsExecutablePolicy.ps1"
+  })
   if (
     $runningHarnessEntry.Count -ne 1 -or
     $runningContractEntry.Count -ne 1 -or
@@ -517,6 +526,7 @@ function Assert-IdentityAndTransfer {
     $runningLifecyclePolicyEntry.Count -ne 1 -or
     $runningPreflightPolicyEntry.Count -ne 1 -or
     $runningProcessPolicyEntry.Count -ne 1 -or
+    $runningWindowsExecutablePolicyEntry.Count -ne 1 -or
     (Get-Sha256 $scriptPath) -cne
       [string]$runningHarnessEntry[0].sha256 -or
     (Get-Sha256 (Join-Path $scriptRoot "Oracle.Stage3R5Contract.json")) -cne
@@ -538,7 +548,10 @@ function Assert-IdentityAndTransfer {
     )) -cne [string]$runningPreflightPolicyEntry[0].sha256 -or
     (Get-Sha256 (
       Join-Path $scriptRoot "Oracle.Stage3R5ProcessPolicy.ps1"
-    )) -cne [string]$runningProcessPolicyEntry[0].sha256
+    )) -cne [string]$runningProcessPolicyEntry[0].sha256 -or
+    (Get-Sha256 (
+      Join-Path $scriptRoot "Oracle.Stage3R5WindowsExecutablePolicy.ps1"
+    )) -cne [string]$runningWindowsExecutablePolicyEntry[0].sha256
   ) {
     throw "Executing harness, contract or policy bytes differ from the transfer."
   }
@@ -941,7 +954,7 @@ try {
   $certificateRawBase64 = [Convert]::ToBase64String($certificate.RawData)
   $certificatePath = Join-Path $workRoot "attempt-public-certificate.cer"
   [IO.File]::WriteAllBytes($certificatePath, $certificate.RawData)
-  $certutil = Join-Path ([Environment]::SystemDirectory) "certutil.exe"
+  $certutil = Get-OracleStage3R5WindowsExecutablePath -Name "certutil.exe"
   [void](Invoke-GovernedProcess "exact-root-import" $certutil @(
     "-user", "-addstore", "Root", $certificatePath
   ))
@@ -1007,7 +1020,7 @@ try {
   Write-Lifecycle "package-installed" @{ packageFullName = $package[0].PackageFullName }
 
   [void](Invoke-GovernedProcess "initial-registered-launch" (
-    Join-Path ([Environment]::SystemDirectory) "explorer.exe"
+    Get-OracleStage3R5WindowsExecutablePath -Name "explorer.exe"
   ) @("shell:AppsFolder\$packageFamilyName!Oracle"))
   $initial = Invoke-NativeObservation "initial"
   Write-CreateOnlyJson (Join-Path $evidenceRoot "runtime-observation.json") $initial
@@ -1016,7 +1029,7 @@ try {
   Stop-ExactPackageProcesses
   Reset-AppxPackage -Package $package[0].PackageFullName
   [void](Invoke-GovernedProcess "repair-registered-launch" (
-    Join-Path ([Environment]::SystemDirectory) "explorer.exe"
+    Get-OracleStage3R5WindowsExecutablePath -Name "explorer.exe"
   ) @("shell:AppsFolder\$packageFamilyName!Oracle"))
   $repair = Invoke-NativeObservation "repair"
   Write-CreateOnlyJson (Join-Path $evidenceRoot "repair-observation.json") $repair

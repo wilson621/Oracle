@@ -148,6 +148,7 @@ const sources = [
   join(import.meta.dirname, "Oracle.Stage3R5PackageInventoryPolicy.ps1"),
   join(import.meta.dirname, "Oracle.Stage3R5PreflightPolicy.ps1"),
   join(import.meta.dirname, "Oracle.Stage3R5ProcessPolicy.ps1"),
+  join(import.meta.dirname, "Oracle.Stage3R5WindowsExecutablePolicy.ps1"),
   join(import.meta.dirname, "Oracle.Stage3R5PhaseAudit.json"),
   join(import.meta.dirname, "Test-OracleStage3R5OptionalMemberAudit.ps1"),
   join(import.meta.dirname, "Get-OracleStage3R5HostContinuity.ps1"),
@@ -276,7 +277,7 @@ writeJsonAtomicCreateOnly(custodyPath, {
   founder: "Lee Wilson",
   authority: "Founder-authorised Stage 3 Qualification R5 corrective preparation",
   purpose:
-    "Create-only final Stage 3 R5 transfer; R1 and failed R2, R3 and R4 remain immutable",
+    "Create-only corrected Stage 3 R5 transfer; prior R5 and historical transfers remain immutable",
   sourceRepository: {
     branch,
     harnessCommit,
@@ -296,6 +297,7 @@ writeJsonAtomicCreateOnly(custodyPath, {
     failedR2TransferModified: false,
     failedR3TransferModified: false,
     failedR4TransferModified: false,
+    previousR5TransferModified: false,
   },
 });
 const custodyHash = sha256(custodyPath);

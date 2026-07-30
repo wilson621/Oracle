@@ -14,6 +14,7 @@ $classification = @(
 . (Join-Path $PSScriptRoot "Oracle.Stage3R5IdentityPolicy.ps1")
 . (Join-Path $PSScriptRoot "Oracle.Stage3R5InstalledSoftwarePolicy.ps1")
 . (Join-Path $PSScriptRoot "Oracle.Stage3R5ProcessPolicy.ps1")
+. (Join-Path $PSScriptRoot "Oracle.Stage3R5WindowsExecutablePolicy.ps1")
 
 function Write-RehearsalJsonCreateOnly([string]$Path, $Value) {
   if (Test-Path -LiteralPath $Path) {
@@ -105,6 +106,23 @@ try {
   if (-not (Test-OracleWindowsComputerName "FOUNDER-QA-01" "Founder-QA-01")) {
     throw "Shared host-identity policy failed inside rehearsal."
   }
+  $fixtureWindows = Join-Path $root "fixture-Windows"
+  $fixtureSystem32 = Join-Path $fixtureWindows "System32"
+  [void](New-Item -ItemType Directory -Path $fixtureSystem32)
+  [IO.File]::WriteAllBytes(
+    (Join-Path $fixtureWindows "explorer.exe"),
+    [byte[]]@(77, 90)
+  )
+  $fixtureExplorer = Get-OracleStage3R5WindowsExecutablePath `
+    -Name "explorer.exe" `
+    -WindowsDirectory $fixtureWindows `
+    -SystemDirectory $fixtureSystem32
+  if (
+    $fixtureExplorer -cne [IO.Path]::GetFullPath(
+      (Join-Path $fixtureWindows "explorer.exe")
+    )
+  ) { throw "Shared Windows executable policy failed inside rehearsal." }
+  Remove-Item -LiteralPath $fixtureWindows -Recurse
   $processRoot = Join-Path $root "process"
   [void](New-Item -ItemType Directory -Path $processRoot)
   $processCounts = @{}
@@ -201,7 +219,8 @@ try {
       "Oracle.Stage3R5LifecyclePolicy.ps1",
       "Oracle.Stage3R5IdentityPolicy.ps1",
       "Oracle.Stage3R5InstalledSoftwarePolicy.ps1",
-      "Oracle.Stage3R5ProcessPolicy.ps1"
+      "Oracle.Stage3R5ProcessPolicy.ps1",
+      "Oracle.Stage3R5WindowsExecutablePolicy.ps1"
     )
     successPathPhases = @($success.state.completed)
     failureInjectionCount = $failureResults.Count

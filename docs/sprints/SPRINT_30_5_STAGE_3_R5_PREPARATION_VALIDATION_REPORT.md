@@ -23,11 +23,48 @@ preserves valid records and duplicates, sorts with `StringComparer.Ordinal`,
 reads native-machine, WOW6432-machine and current-user views, and fails closed
 on inaccessible views or null records. StrictMode remains enabled.
 
+## R5 pre-authority Explorer-path correction
+
+The first immutable R5 transfer failed closed before authority creation
+because preflight and qualification derived `explorer.exe` from
+`Environment.SystemDirectory`. Founder-QA-01 reported System32 as
+`C:\Windows\System32`, where Explorer does not exist; the valid platform path
+is `C:\Windows\explorer.exe`. No qualification, package installation,
+certificate trust or qualification evidence occurred. The retired immutable
+transfer is `transfer-stage3-r5-20260730T160251612Z-1f0e4239`, manifest
+SHA-256
+`22efb0d9b983650b804037dae8e42b64d22989561cb552aa291620a104d3716e`.
+
+`Oracle.Stage3R5WindowsExecutablePolicy.ps1` now provides the single mapping
+used by continuity, preflight and qualification. It resolves Explorer from
+the .NET Windows special folder and preserves the verified System32 mappings
+for CertUtil and ReAgentC. Absolute path, direct-child, existence and reparse
+checks fail closed. The synthetic Founder-QA-01 shape and the development
+machine's live Windows PowerShell 5.1 platform shape both pass. Direct
+System32 Explorer construction is absent from the reachable R5 harness.
+
+## R5 pre-authority Explorer-path correction
+
+The first immutable R5 transfer failed closed before authority creation
+because preflight and qualification derived `explorer.exe` from
+`Environment.SystemDirectory`. Founder-QA-01 reported System32 as
+`C:\Windows\System32`, where Explorer does not exist; the valid platform path
+is `C:\Windows\explorer.exe`. No qualification, package installation,
+certificate trust or qualification evidence occurred.
+
+`Oracle.Stage3R5WindowsExecutablePolicy.ps1` now provides the single mapping
+used by continuity, preflight and qualification. It resolves Explorer from
+the .NET Windows special folder and preserves the verified System32 mappings
+for CertUtil and ReAgentC. Absolute path, direct-child, existence and reparse
+checks fail closed. The synthetic Founder-QA-01 shape and the development
+machine's live Windows PowerShell 5.1 platform shape both pass. Direct
+System32 Explorer construction is absent from the reachable R5 harness.
+
 ## Optional-member and StrictMode audit
 
 `Test-OracleStage3R5OptionalMemberAudit.ps1` parses every reachable production
 PowerShell source and classifies each non-static member access as mandatory,
-explicitly existence-checked or unsafe. The final audit classified 792 member
+explicitly existence-checked or unsafe. The final audit classified 798 member
 accesses with zero unclassified accesses. Its machine-readable result is
 regenerated from committed operational sources during transfer construction
 and is manifest-bound in the transfer.
@@ -148,8 +185,9 @@ No accepted package or evidence file was changed.
   mismatches.
 - R2, R3 and R4 preparation regressions: passed.
 - Windows PowerShell 5.1 x64 development compatibility: passed; 11 command
-  surfaces, actual StrictMode inventory, detached CMS signer, Authenticode and
-  TCP provider exercised. This is not host admission.
+  surfaces, all three governed Windows executable mappings, actual StrictMode
+  inventory, detached CMS signer, Authenticode and TCP provider exercised.
+  This is not host admission.
 - Returned-archive fixture: inventory, final lifecycle, completion and evidence
   bindings passed; mismatched manifest rejected.
 - TypeScript semantic validation, focused/full ESLint and architecture audit:

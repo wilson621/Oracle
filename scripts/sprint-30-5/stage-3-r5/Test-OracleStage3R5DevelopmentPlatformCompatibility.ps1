@@ -6,6 +6,7 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 . (Join-Path $PSScriptRoot "Oracle.Stage3R5InstalledSoftwarePolicy.ps1")
+. (Join-Path $PSScriptRoot "Oracle.Stage3R5WindowsExecutablePolicy.ps1")
 . (Join-Path $PSScriptRoot "Oracle.Stage3R5PreflightPolicy.ps1")
 
 if (
@@ -20,6 +21,11 @@ if (-not (Test-Path -LiteralPath $AcceptedPackagePath -PathType Leaf)) {
 
 $inventory = @(Get-OracleStage3R5InstalledSoftwareInventory)
 $commands = @(Assert-OracleStage3R5CommandSurface)
+$windowsExecutables = [ordered]@{
+  certutil = Get-OracleStage3R5WindowsExecutablePath -Name "certutil.exe"
+  explorer = Get-OracleStage3R5WindowsExecutablePath -Name "explorer.exe"
+  reagentc = Get-OracleStage3R5WindowsExecutablePath -Name "reagentc.exe"
+}
 $contract = Get-Content -LiteralPath (
   Join-Path $PSScriptRoot "Oracle.Stage3R5Contract.json"
 ) -Raw | ConvertFrom-Json
@@ -64,6 +70,7 @@ foreach ($connection in $connections) {
   is64BitProcess = [Environment]::Is64BitProcess
   installedSoftwareCount = $inventory.Count
   requiredCommandCount = $commands.Count
+  windowsExecutables = $windowsExecutables
   compressArchiveLiteralPath = (
     Get-Command Compress-Archive -ErrorAction Stop
   ).Parameters.ContainsKey("LiteralPath")

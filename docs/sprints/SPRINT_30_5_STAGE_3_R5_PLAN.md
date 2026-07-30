@@ -130,6 +130,32 @@ and `DEVELOPMENT REHEARSAL`; it exercises the real shared policies, all phases,
 and injected failure before every phase without trust, installation, launch,
 authority consumption or qualification evidence.
 
+## R5 pre-authority Explorer-path correction
+
+The first immutable R5 transfer failed closed during pre-authority inspection
+before any authority or attempt identity existed. The observed Founder-QA-01
+shape was Windows directory `C:\Windows`, system directory
+`C:\Windows\System32`, no `C:\Windows\System32\explorer.exe`, and valid
+`C:\Windows\explorer.exe`. No qualification, installation, certificate trust
+or qualification evidence occurred. That transfer remains immutable and is
+retired from admission:
+
+- transfer ID:
+  `transfer-stage3-r5-20260730T160251612Z-1f0e4239`;
+- transfer manifest SHA-256:
+  `22efb0d9b983650b804037dae8e42b64d22989561cb552aa291620a104d3716e`.
+
+The corrected preparation uses one manifest-bound shared Windows executable
+policy across host continuity, pre-authority admission and qualification.
+Explorer is resolved from
+`Environment.GetFolderPath(Environment.SpecialFolder.Windows)`; CertUtil and
+ReAgentC remain System32-bound. Every resolved path must be an absolute direct
+child of its governed platform directory, exist as a file and not be a
+reparse point. The correction changes no accepted Stage 2 input, package byte,
+qualification phase, authority boundary or verification requirement. Only a
+new create-only transfer bound to the corrected commit and tree may be
+considered for admission.
+
 ## Authority and identities
 
 Transfer construction and Stage 3 execution require separate Founder

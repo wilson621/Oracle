@@ -131,6 +131,7 @@ if (
 
 . (Join-Path $scriptRoot "Oracle.Stage3R5IdentityPolicy.ps1")
 . (Join-Path $scriptRoot "Oracle.Stage3R5InstalledSoftwarePolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage3R5WindowsExecutablePolicy.ps1")
 . (Join-Path $scriptRoot "Oracle.Stage3R5PreflightPolicy.ps1")
 
 $stores = @(

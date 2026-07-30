@@ -20,6 +20,16 @@ mission permits one create-only R5 transfer on the already
 approved USB. It does not authorise certificate trust, package installation,
 Stage 3 execution or qualification evidence.
 
+The first immutable R5 transfer is retired after its read-only pre-authority
+gate proved that it derived `explorer.exe` from the System32 directory on
+Founder-QA-01. It created no authority, attempt or qualification evidence and
+performed no host mutation. It must remain preserved and must not be staged,
+admitted or executed. A replacement R5 transfer is valid only when it is
+create-only and bound to the corrected preparation commit and tree. The
+retired transfer is
+`transfer-stage3-r5-20260730T160251612Z-1f0e4239`, manifest SHA-256
+`22efb0d9b983650b804037dae8e42b64d22989561cb552aa291620a104d3716e`.
+
 R3 preserved the R2 Windows computer-name correction and fixed only the
 confirmed function-scoped `FunctionInfo.Path` defect. Failed R2 identity
 `stage3-r2-20260730T124016125Z-d0037861`, authority
@@ -93,6 +103,7 @@ contract bytes against the transfer inventory.
 | Governance | Ready | One R5 transfer is authorised; Founder must separately authorise execution |
 | Candidate | Ready | Exact R2 hashes must revalidate |
 | Harness | Ready | Founder must approve the committed preparation revision |
+| Windows executable resolution | Ready | Shared policy maps Explorer to the Windows directory and CertUtil/ReAgentC to System32; synthetic Founder-QA-01 and live development checks pass |
 | Historical protection | Ready | Historical guards and deny-lists must continue to pass |
 | Host admission | Conditional ready | Fresh continuity record must pass on `Founder-QA-01` |
 | Certificate validity | Ready at gate review | Execution must begin before the mandatory deadline |

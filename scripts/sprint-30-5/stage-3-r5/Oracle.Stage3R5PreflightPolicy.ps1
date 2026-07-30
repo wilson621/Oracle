@@ -208,19 +208,15 @@ function Get-OracleStage3R5PreAuthorityObservation {
   [void](Get-Acl -LiteralPath $EvidenceReturnRoot -ErrorAction Stop)
 
   $commands = @(Assert-OracleStage3R5CommandSurface)
-  foreach ($executable in @(
-    (Join-Path ([Environment]::SystemDirectory) "certutil.exe"),
-    (Join-Path ([Environment]::SystemDirectory) "explorer.exe"),
-    (Join-Path ([Environment]::SystemDirectory) "reagentc.exe")
-  )) {
-    if (-not (Test-Path -LiteralPath $executable -PathType Leaf)) {
-      throw "Required Windows executable is unavailable: $executable"
-    }
+  $windowsExecutables = [ordered]@{
+    certutil = Get-OracleStage3R5WindowsExecutablePath -Name "certutil.exe"
+    explorer = Get-OracleStage3R5WindowsExecutablePath -Name "explorer.exe"
+    reagentc = Get-OracleStage3R5WindowsExecutablePath -Name "reagentc.exe"
   }
   Add-Type -AssemblyName System.IO.Compression
   Add-Type -AssemblyName System.IO.Compression.FileSystem
   $recovery = Invoke-OracleStage3R5ReadOnlyProcess `
-    -Executable (Join-Path ([Environment]::SystemDirectory) "reagentc.exe") `
+    -Executable $windowsExecutables.reagentc `
     -Arguments @("/info")
   if ($recovery.stdout -notmatch '(?im)Windows RE status:\s+Enabled') {
     throw "Pre-authority Windows recovery is not enabled."
@@ -408,6 +404,7 @@ function Get-OracleStage3R5PreAuthorityObservation {
       activatedProductCount = $activation.Count
     }
     commandSurface = $commands
+    windowsExecutables = $windowsExecutables
     developmentTools = $developmentTools
     recovery = $recovery
     registryViews = @("machine-64", "machine-32", "current-user")

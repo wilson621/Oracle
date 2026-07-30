@@ -15,7 +15,8 @@ $operationalFiles = @(
   "Oracle.Stage3R5LifecyclePolicy.ps1",
   "Oracle.Stage3R5PackageInventoryPolicy.ps1",
   "Oracle.Stage3R5PreflightPolicy.ps1",
-  "Oracle.Stage3R5ProcessPolicy.ps1"
+  "Oracle.Stage3R5ProcessPolicy.ps1",
+  "Oracle.Stage3R5WindowsExecutablePolicy.ps1"
 )
 
 function Get-Classification(
@@ -123,6 +124,16 @@ function Get-Classification(
       disposition = "safe"
     }
   }
+  if ($File -ceq "Oracle.Stage3R5WindowsExecutablePolicy.ps1") {
+    return [ordered]@{
+      classification = "structurally-guaranteed-by-platform-policy"
+      dataSource = "typed .NET Windows folder APIs and policy-owned paths"
+      mandatory = $true
+      protection = "absolute direct-child mapping, existence and reparse checks"
+      testCoverage = "Test-OracleStage3R5WindowsExecutablePolicy.ps1"
+      disposition = "fail-closed-if-unavailable"
+    }
+  }
   if ($Expression -match '^\$contract(?:\.|$)') {
     return [ordered]@{
       classification = "mandatory-validated-contract-member"
@@ -183,7 +194,7 @@ function Get-Classification(
       disposition = "fail-closed-if-unavailable"
     }
   }
-  if ($Expression -match '^\$(MyInvocation|PSVersionTable|env:|phases|lifecycleState|processEvidenceCounts|actual|expected|samples|developmentTools|certificateMatches|issues|viewCalls|fixtures|allFiles|failureResults|teardownFailures|tamperedBytes|sidecarValue|custodySidecarValue|time|hostContinuityRecordedAt|deadline|stableUntil|scriptPath|attemptRoot|canonical|RawZipPath|rootMatches|actualTransferRootEntries|expectedTransferRootEntries|actualPayload|expectedPayload|actualPayloadPaths|payloadPaths|payloadEntries|runningScriptEntry|contractEntry|runningHarnessEntry|runningContractEntry|runningIdentityPolicyEntry|runningPackageInventoryPolicyEntry|runningInstalledSoftwarePolicyEntry|runningLifecyclePolicyEntry|runningPreflightPolicyEntry|runningProcessPolicyEntry|zipEntries|candidates|matches|initial|repair|inventory|preflight|packageReconciliation|operation)(?:\[.*?\])?(?:\.|$)|^@\(.+\)\.Count$|^\[DateTime\]::UtcNow\.|^\(\[DateTime\]::UtcNow\s+-') {
+  if ($Expression -match '^\$(MyInvocation|PSVersionTable|env:|phases|lifecycleState|processEvidenceCounts|actual|expected|samples|developmentTools|certificateMatches|issues|viewCalls|fixtures|allFiles|failureResults|teardownFailures|tamperedBytes|sidecarValue|custodySidecarValue|time|hostContinuityRecordedAt|deadline|stableUntil|scriptPath|attemptRoot|canonical|RawZipPath|rootMatches|actualTransferRootEntries|expectedTransferRootEntries|actualPayload|expectedPayload|actualPayloadPaths|payloadPaths|payloadEntries|runningScriptEntry|contractEntry|runningHarnessEntry|runningContractEntry|runningIdentityPolicyEntry|runningPackageInventoryPolicyEntry|runningInstalledSoftwarePolicyEntry|runningLifecyclePolicyEntry|runningPreflightPolicyEntry|runningProcessPolicyEntry|runningWindowsExecutablePolicyEntry|zipEntries|candidates|matches|initial|repair|inventory|preflight|packageReconciliation|operation)(?:\[.*?\])?(?:\.|$)|^@\(.+\)\.Count$|^\[DateTime\]::UtcNow\.|^\(\[DateTime\]::UtcNow\s+-') {
     return [ordered]@{
       classification = "structurally-guaranteed-by-language-or-construction"
       dataSource = "PowerShell automatic value, array, string, dictionary or policy-owned state"
