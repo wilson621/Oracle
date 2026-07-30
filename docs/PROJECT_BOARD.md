@@ -180,6 +180,13 @@ transfer-bound pre-authority host probe. The board remains stopped at the
 separate Founder execution gate; no clean-host, trust
 or installation action is authorised.
 
+R5 Attempt 1 then failed closed at AppX deployment with `0x800B0109` after
+successful current-user Authenticode validation under `CurrentUser\Root`.
+Stage 3 Qualification R6 is now the active bounded preparation. It preserves
+R5 as immutable history and uses elevated exact
+`LocalMachine\TrustedPeople` trust with physical/logical projection
+classification and exact teardown. No R6 transfer or execution is authorised.
+
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
 production; the persistence foundation is established while runtime
@@ -263,8 +270,8 @@ blocked
 InstallAndStartup failed; canonical Phase 03 success evidence absent; Revision
 5 incomplete; Revision 6 abandoned
 **Current authority:** None to resume or repair the historical harness.
-Separate R5 preparation and one create-only transfer are Founder-authorised;
-R5 trust, installation and qualification execution remain unauthorised
+Separate R6 preparation and validation are Founder-authorised; R6 transfer,
+trust, installation and qualification execution remain unauthorised
 **Deployment status:** Production unchanged; no production signing,
 distribution, deployment, migration, persistence or Gate authority
 

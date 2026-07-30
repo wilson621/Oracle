@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder decision on Stage 3 Qualification R5 execution
+**Next Review:** Founder review of Stage 3 Qualification R6 trust correction
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1395,10 +1395,14 @@ failed on direct access to optional uninstall `DisplayName` under StrictMode.
 Stage 3 Qualification R5 preserves every prior correction, introduces a shared
 safe deterministic installed-software policy, and binds comprehensive
 optional-member, lifecycle, failure-rehearsal and pre-authority host checks.
-R5 binds only the accepted, formally closed Stage 2
-Requalification R2 candidate. Execution remains blocked pending fresh host
-continuity, exact R5 transfer approval, a passed pre-authority probe and
-separate Founder decisions.
+R5 binds only the accepted, formally closed Stage 2 Requalification R2
+candidate. R5 Attempt 1 later failed closed at AppX deployment with
+`0x800B0109` because user-scoped `CurrentUser\Root` trust did not satisfy the
+deployment provider's machine-scoped trust requirement. The attempt remains
+immutable. Stage 3 Qualification R6 corrects only that trust scope using
+elevated exact `LocalMachine\TrustedPeople`, physical/logical projection
+validation and exact zero-residue teardown. R6 transfer and execution remain
+blocked pending separate Founder decisions.
 
 Live Auth, protected rendering, clean Windows acceptance, installed-package
 GPU/performance/accessibility, reproducibility and final integrated

@@ -190,10 +190,13 @@ optional uninstall-registry member access under StrictMode. Stage 3
 Qualification R5 preserves the accepted Stage 2 R2 bindings, all prior
 corrections and exact `[Content_Types].xml` validation. It adds a shared
 installed-software policy, optional-member/phase audits, full simulated
-failure rehearsal and a read-only pre-authority host probe. The next gate is a
-Founder decision on the exact R5
-transfer and one execution. This preparation authorises one create-only R5
-transfer, but no execution authority is implied.
+failure rehearsal and a read-only pre-authority host probe. R5 Attempt 1
+failed closed at AppX deployment with `0x800B0109` after user-context
+Authenticode passed under `CurrentUser\Root`. Stage 3 Qualification R6
+preserves that attempt as immutable history and corrects only the deployment
+trust scope: elevated exact `LocalMachine\TrustedPeople`, physical/logical
+projection validation, exact-thumbprint removal and mandatory zero residue.
+R6 transfer and execution require separate Founder decisions.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

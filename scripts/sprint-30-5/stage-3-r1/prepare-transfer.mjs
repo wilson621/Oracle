@@ -17,7 +17,15 @@ import {
   writeJsonAtomicCreateOnly,
 } from "./stage3-core.mjs";
 
+assertHistoricalEntryPointRetired();
+
 const argumentsMap = parseArguments(process.argv.slice(2));
+
+function assertHistoricalEntryPointRetired() {
+  throw new Error(
+    "STAGE3_R1_ENTRY_POINT_RETIRED: historical transfer construction is permanently disabled."
+  );
+}
 const gitExecutable = resolve(
   process.env.ProgramFiles ?? "C:\\Program Files",
   "Git",

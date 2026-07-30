@@ -12,6 +12,8 @@ param(
   [Parameter(Mandatory = $true)][string]$EvidenceReturnRoot
 )
 
+throw "STAGE3_R1_ENTRY_POINT_RETIRED: historical qualification execution is permanently disabled."
+
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 $ConfirmPreference = "None"

@@ -17,15 +17,7 @@ import {
   writeJsonAtomicCreateOnly,
 } from "./stage3-core.mjs";
 
-assertHistoricalEntryPointRetired();
-
 const argumentsMap = parseArguments(process.argv.slice(2));
-
-function assertHistoricalEntryPointRetired() {
-  throw new Error(
-    "STAGE3_R5_ENTRY_POINT_RETIRED: historical transfer construction is permanently disabled."
-  );
-}
 const gitExecutable = resolve(
   process.env.ProgramFiles ?? "C:\\Program Files",
   "Git",
@@ -50,7 +42,7 @@ for (const name of [
 ]) {
   if (!argumentsMap.has(name)) throw new Error(`Missing --${name}.`);
 }
-if (argumentsMap.get("founder-authority") !== "FOUNDER-AUTHORISED-STAGE3-R5-TRANSFER") {
+if (argumentsMap.get("founder-authority") !== "FOUNDER-AUTHORISED-STAGE3-R6-TRANSFER") {
   throw new Error("Separate Founder transfer authority is required.");
 }
 for (const [argument, field] of [
@@ -149,19 +141,21 @@ const sources = [
     "dist-native",
     "Oracle.WindowObserver.exe"
   ),
-  join(import.meta.dirname, "Oracle.Stage3R5Contract.json"),
-  join(import.meta.dirname, "Oracle.Stage3R5IdentityPolicy.ps1"),
-  join(import.meta.dirname, "Oracle.Stage3R5InstalledSoftwarePolicy.ps1"),
-  join(import.meta.dirname, "Oracle.Stage3R5LifecyclePolicy.ps1"),
-  join(import.meta.dirname, "Oracle.Stage3R5PackageInventoryPolicy.ps1"),
-  join(import.meta.dirname, "Oracle.Stage3R5PreflightPolicy.ps1"),
-  join(import.meta.dirname, "Oracle.Stage3R5ProcessPolicy.ps1"),
-  join(import.meta.dirname, "Oracle.Stage3R5WindowsExecutablePolicy.ps1"),
-  join(import.meta.dirname, "Oracle.Stage3R5PhaseAudit.json"),
-  join(import.meta.dirname, "Test-OracleStage3R5OptionalMemberAudit.ps1"),
-  join(import.meta.dirname, "Get-OracleStage3R5HostContinuity.ps1"),
-  join(import.meta.dirname, "Invoke-OracleStage3R5PreAuthorityPreflight.ps1"),
-  join(import.meta.dirname, "Invoke-OracleStage3R5Qualification.ps1"),
+  join(import.meta.dirname, "Oracle.Stage3R6Contract.json"),
+  join(import.meta.dirname, "Oracle.Stage3R6CertificateTrustPolicy.ps1"),
+  join(import.meta.dirname, "Oracle.Stage3R6IdentityPolicy.ps1"),
+  join(import.meta.dirname, "Oracle.Stage3R6InstalledSoftwarePolicy.ps1"),
+  join(import.meta.dirname, "Oracle.Stage3R6LifecyclePolicy.ps1"),
+  join(import.meta.dirname, "Oracle.Stage3R6PackageInventoryPolicy.ps1"),
+  join(import.meta.dirname, "Oracle.Stage3R6PreflightPolicy.ps1"),
+  join(import.meta.dirname, "Oracle.Stage3R6ProcessPolicy.ps1"),
+  join(import.meta.dirname, "Oracle.Stage3R6WindowsExecutablePolicy.ps1"),
+  join(import.meta.dirname, "Oracle.Stage3R6PhaseAudit.json"),
+  join(import.meta.dirname, "Test-OracleStage3R6OptionalMemberAudit.ps1"),
+  join(import.meta.dirname, "Test-OracleStage3R6CertificateTrustPolicy.ps1"),
+  join(import.meta.dirname, "Get-OracleStage3R6HostContinuity.ps1"),
+  join(import.meta.dirname, "Invoke-OracleStage3R6PreAuthorityPreflight.ps1"),
+  join(import.meta.dirname, "Invoke-OracleStage3R6Qualification.ps1"),
   join(import.meta.dirname, "README.md"),
 ];
 for (const source of sources) {
@@ -213,7 +207,7 @@ const optionalMemberAuditResult = spawnSync(
     "-ExecutionPolicy",
     "Bypass",
     "-File",
-    join(import.meta.dirname, "Test-OracleStage3R5OptionalMemberAudit.ps1"),
+    join(import.meta.dirname, "Test-OracleStage3R6OptionalMemberAudit.ps1"),
   ],
   {
     encoding: "utf8",
@@ -228,11 +222,11 @@ if (
   optionalMemberAudit.disposition !== "passed" ||
   optionalMemberAudit.unclassifiedCount !== 0
 ) {
-  throw new Error("R5 optional-member audit did not pass during transfer construction.");
+  throw new Error("R6 optional-member audit did not pass during transfer construction.");
 }
 const optionalMemberAuditPath = join(
   payloadRoot,
-  "Oracle.Stage3R5OptionalMemberAudit.json"
+  "Oracle.Stage3R6OptionalMemberAudit.json"
 );
 writeFileCreateOnly(
   optionalMemberAuditPath,
@@ -246,10 +240,10 @@ const entries = inventory(
   transferRoot,
   payloadFiles
 );
-const manifestPath = join(transferRoot, "Oracle.Stage3R5TransferManifest.json");
+const manifestPath = join(transferRoot, "Oracle.Stage3R6TransferManifest.json");
 writeJsonAtomicCreateOnly(manifestPath, {
   schemaVersion: "1.0.0",
-  contract: "oracle.sprint-30-5.stage-3-r5-transfer",
+  contract: "oracle.sprint-30-5.stage-3-r6-transfer",
   programmeIdentity: contract.programmeIdentity,
   revision: contract.revision,
   preparation: {
@@ -275,17 +269,17 @@ writeFileCreateOnly(
   `${manifestHash}  ${basename(manifestPath)}\n`,
   "ascii"
 );
-const custodyPath = join(transferRoot, "Oracle.Stage3R5TransferCustody.json");
+const custodyPath = join(transferRoot, "Oracle.Stage3R6TransferCustody.json");
 writeJsonAtomicCreateOnly(custodyPath, {
   schemaVersion: "1.0.0",
-  contract: "oracle.sprint-30-5.stage-3-r5-transfer-custody",
+  contract: "oracle.sprint-30-5.stage-3-r6-transfer-custody",
   transferId,
   recordedAtUtc: timestampUtc,
   operator: "Codex",
   founder: "Lee Wilson",
-  authority: "Founder-authorised Stage 3 Qualification R5 corrective preparation",
+  authority: "Founder-authorised Stage 3 Qualification R6 corrective preparation",
   purpose:
-    "Create-only corrected Stage 3 R5 transfer; prior R5 and historical transfers remain immutable",
+    "Create-only corrected Stage 3 R6 transfer; prior R5 and historical transfers remain immutable",
   sourceRepository: {
     branch,
     harnessCommit,
