@@ -219,7 +219,8 @@ writeJsonAtomicCreateOnly(custodyPath, {
   operator: "Codex",
   founder: "Lee Wilson",
   authority: "Founder-authorised Stage 3 Qualification R3 corrective preparation",
-  purpose: "Create-only corrective Stage 3 R3 transfer; R1 remains immutable",
+  purpose:
+    "Create-only corrective Stage 3 R3 transfer; R1 and failed R2 remain immutable",
   sourceRepository: {
     branch,
     harnessCommit,

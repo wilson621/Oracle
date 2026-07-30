@@ -312,6 +312,10 @@ for (const required of [
   );
 }
 
+assert.match(
+  transferBuilder,
+  /Create-only corrective Stage 3 R3 transfer; R1 and failed R2 remain immutable/u
+);
 assert.match(identityPolicy, /\[StringComparer\]::OrdinalIgnoreCase\.Equals/u);
 for (const source of [continuityCollector, harness]) {
   assert.match(source, /Test-OracleWindowsComputerName/u);
