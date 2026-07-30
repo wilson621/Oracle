@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder review of Stage 3 Qualification R6 trust correction
+**Next Review:** Founder review of Stage 3 Qualification R7 launch correction
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1399,9 +1399,11 @@ R5 binds only the accepted, formally closed Stage 2 Requalification R2
 candidate. R5 Attempt 1 later failed closed at AppX deployment with
 `0x800B0109` because user-scoped `CurrentUser\Root` trust did not satisfy the
 deployment provider's machine-scoped trust requirement. The attempt remains
-immutable. Stage 3 Qualification R6 corrects only that trust scope using
-elevated exact `LocalMachine\TrustedPeople`, physical/logical projection
-validation and exact zero-residue teardown. R6 transfer and execution remain
+immutable. R6 corrected that trust scope and proved machine trust, package
+installation and Windows activation/container creation, then failed because
+the Explorer shell-broker exit code was treated as authoritative activation
+evidence. Stage 3 Qualification R7 uses direct Windows application activation
+and retains exact native window proof. R7 transfer and execution remain
 blocked pending separate Founder decisions.
 
 Live Auth, protected rendering, clean Windows acceptance, installed-package

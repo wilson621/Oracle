@@ -182,10 +182,12 @@ or installation action is authorised.
 
 R5 Attempt 1 then failed closed at AppX deployment with `0x800B0109` after
 successful current-user Authenticode validation under `CurrentUser\Root`.
-Stage 3 Qualification R6 is now the active bounded preparation. It preserves
-R5 as immutable history and uses elevated exact
-`LocalMachine\TrustedPeople` trust with physical/logical projection
-classification and exact teardown. No R6 transfer or execution is authorised.
+R6 then proved machine trust, package installation and Windows activation and
+container creation, but failed because an Explorer shell-broker exit status
+was treated as authoritative launch evidence. Stage 3 Qualification R7 is the
+active bounded preparation. It preserves R6 as immutable history, uses direct
+Windows application-activation semantics and retains strict native window
+proof. No R7 transfer or execution is authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -270,7 +272,7 @@ blocked
 InstallAndStartup failed; canonical Phase 03 success evidence absent; Revision
 5 incomplete; Revision 6 abandoned
 **Current authority:** None to resume or repair the historical harness.
-Separate R6 preparation and validation are Founder-authorised; R6 transfer,
+Separate R7 preparation and validation are Founder-authorised; R7 transfer,
 trust, installation and qualification execution remain unauthorised
 **Deployment status:** Production unchanged; no production signing,
 distribution, deployment, migration, persistence or Gate authority

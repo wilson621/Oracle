@@ -192,11 +192,12 @@ corrections and exact `[Content_Types].xml` validation. It adds a shared
 installed-software policy, optional-member/phase audits, full simulated
 failure rehearsal and a read-only pre-authority host probe. R5 Attempt 1
 failed closed at AppX deployment with `0x800B0109` after user-context
-Authenticode passed under `CurrentUser\Root`. Stage 3 Qualification R6
-preserves that attempt as immutable history and corrects only the deployment
-trust scope: elevated exact `LocalMachine\TrustedPeople`, physical/logical
-projection validation, exact-thumbprint removal and mandatory zero residue.
-R6 transfer and execution require separate Founder decisions.
+Authenticode passed under `CurrentUser\Root`. R6 corrected the trust scope and
+proved machine trust, package installation and Windows activation/container
+creation. It then failed on an invalid Explorer shell-broker exit-code
+assertion. Stage 3 Qualification R7 preserves R6 as immutable history and
+uses direct Windows application activation with strict native window proof.
+R7 transfer and execution require separate Founder decisions.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own
