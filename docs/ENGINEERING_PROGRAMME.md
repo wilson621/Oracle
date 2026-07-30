@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder review of Stage 3 Qualification R7 launch correction
+**Next Review:** Founder review of Stage 3 Qualification R8 discovery and ownership correction
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1402,9 +1402,14 @@ deployment provider's machine-scoped trust requirement. The attempt remains
 immutable. R6 corrected that trust scope and proved machine trust, package
 installation and Windows activation/container creation, then failed because
 the Explorer shell-broker exit code was treated as authoritative activation
-evidence. Stage 3 Qualification R7 uses direct Windows application activation
-and retains exact native window proof. R7 transfer and execution remain
-blocked pending separate Founder decisions.
+evidence. Stage 3 Qualification R7 used direct Windows application activation
+and reached native discovery, then failed on Windows PowerShell 5.1
+top-level-array handling; its teardown also exposed a filesystem-only package
+ownership heuristic. Stage 3 Qualification R8 explicitly enumerates the
+discovery JSON array and requires exact Windows AppModel package-family
+ownership while retaining executable-path, Authenticode and native-window
+proof. R8 transfer and execution remain blocked pending separate Founder
+decisions.
 
 Live Auth, protected rendering, clean Windows acceptance, installed-package
 GPU/performance/accessibility, reproducibility and final integrated

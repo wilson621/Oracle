@@ -195,9 +195,14 @@ failed closed at AppX deployment with `0x800B0109` after user-context
 Authenticode passed under `CurrentUser\Root`. R6 corrected the trust scope and
 proved machine trust, package installation and Windows activation/container
 creation. It then failed on an invalid Explorer shell-broker exit-code
-assertion. Stage 3 Qualification R7 preserves R6 as immutable history and
-uses direct Windows application activation with strict native window proof.
-R7 transfer and execution require separate Founder decisions.
+assertion. Stage 3 Qualification R7 preserved R6 as immutable history and
+used direct Windows application activation, then failed after native discovery
+because Windows PowerShell 5.1 preserved the JSON root array as one pipeline
+object; teardown also exposed filesystem-only ownership classification. Stage
+3 Qualification R8 explicitly normalizes the discovery array and binds process
+ownership through the Windows AppModel package-family identity while retaining
+strict path, signature and native-window proof. R8 transfer and execution
+require separate Founder decisions.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

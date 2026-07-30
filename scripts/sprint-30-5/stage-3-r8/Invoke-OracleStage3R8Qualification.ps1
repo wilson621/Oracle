@@ -13,8 +13,6 @@ param(
   [Parameter(Mandatory = $true)][string]$EvidenceReturnRoot
 )
 
-throw "STAGE3_R7_ENTRY_POINT_RETIRED: historical qualification execution is permanently disabled."
-
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 $ConfirmPreference = "None"
@@ -22,7 +20,7 @@ $ConfirmPreference = "None"
 $scriptPath = $MyInvocation.MyCommand.Path
 $scriptRoot = Split-Path -Parent $scriptPath
 $bootstrapManifestPath = Join-Path $TransferRoot (
-  "Oracle.Stage3R7TransferManifest.json"
+  "Oracle.Stage3R8TransferManifest.json"
 )
 if (
   $ExpectedTransferManifestSha256 -cnotmatch '^[0-9a-f]{64}$' -or
@@ -33,17 +31,18 @@ if (
 $bootstrapManifest = Get-Content -LiteralPath $bootstrapManifestPath -Raw |
   ConvertFrom-Json
 $bootstrapRequiredFiles = @(
-  "Invoke-OracleStage3R7Qualification.ps1",
-  "Oracle.Stage3R7ActivationPolicy.ps1",
-  "Oracle.Stage3R7CertificateTrustPolicy.ps1",
-  "Oracle.Stage3R7Contract.json",
-  "Oracle.Stage3R7IdentityPolicy.ps1",
-  "Oracle.Stage3R7InstalledSoftwarePolicy.ps1",
-  "Oracle.Stage3R7LifecyclePolicy.ps1",
-  "Oracle.Stage3R7PackageInventoryPolicy.ps1",
-  "Oracle.Stage3R7PreflightPolicy.ps1",
-  "Oracle.Stage3R7ProcessPolicy.ps1",
-  "Oracle.Stage3R7WindowsExecutablePolicy.ps1"
+  "Invoke-OracleStage3R8Qualification.ps1",
+  "Oracle.Stage3R8ActivationPolicy.ps1",
+  "Oracle.Stage3R8CertificateTrustPolicy.ps1",
+  "Oracle.Stage3R8Contract.json",
+  "Oracle.Stage3R8IdentityPolicy.ps1",
+  "Oracle.Stage3R8InstalledSoftwarePolicy.ps1",
+  "Oracle.Stage3R8LifecyclePolicy.ps1",
+  "Oracle.Stage3R8PackageInventoryPolicy.ps1",
+  "Oracle.Stage3R8PreflightPolicy.ps1",
+  "Oracle.Stage3R8ProcessPolicy.ps1",
+  "Oracle.Stage3R8WindowPolicy.ps1",
+  "Oracle.Stage3R8WindowsExecutablePolicy.ps1"
 )
 foreach ($fileName in $bootstrapRequiredFiles) {
   $relativePath = "payload/$fileName"
@@ -62,25 +61,26 @@ if (
   -not [StringComparer]::OrdinalIgnoreCase.Equals(
     [IO.Path]::GetFullPath($scriptPath),
     [IO.Path]::GetFullPath((
-      Join-Path $TransferRoot "payload/Invoke-OracleStage3R7Qualification.ps1"
+      Join-Path $TransferRoot "payload/Invoke-OracleStage3R8Qualification.ps1"
     ))
   )
 ) { throw "Execution bootstrap script is outside the verified transfer." }
 $contract = Get-Content -LiteralPath (
-  Join-Path $scriptRoot "Oracle.Stage3R7Contract.json"
+  Join-Path $scriptRoot "Oracle.Stage3R8Contract.json"
 ) -Raw | ConvertFrom-Json
-. (Join-Path $scriptRoot "Oracle.Stage3R7IdentityPolicy.ps1")
-. (Join-Path $scriptRoot "Oracle.Stage3R7ActivationPolicy.ps1")
-. (Join-Path $scriptRoot "Oracle.Stage3R7CertificateTrustPolicy.ps1")
-. (Join-Path $scriptRoot "Oracle.Stage3R7PackageInventoryPolicy.ps1")
-. (Join-Path $scriptRoot "Oracle.Stage3R7InstalledSoftwarePolicy.ps1")
-. (Join-Path $scriptRoot "Oracle.Stage3R7LifecyclePolicy.ps1")
-. (Join-Path $scriptRoot "Oracle.Stage3R7PreflightPolicy.ps1")
-. (Join-Path $scriptRoot "Oracle.Stage3R7ProcessPolicy.ps1")
-. (Join-Path $scriptRoot "Oracle.Stage3R7WindowsExecutablePolicy.ps1")
-Assert-OracleStage3R7ApplicationActivationContract -Contract $contract
-Assert-OracleStage3R7CertificateTrustContract -Contract $contract
-$expectedToken = "FOUNDER-AUTHORISED-STAGE3-R7-EXECUTION"
+. (Join-Path $scriptRoot "Oracle.Stage3R8IdentityPolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage3R8ActivationPolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage3R8CertificateTrustPolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage3R8PackageInventoryPolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage3R8InstalledSoftwarePolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage3R8LifecyclePolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage3R8PreflightPolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage3R8ProcessPolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage3R8WindowPolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage3R8WindowsExecutablePolicy.ps1")
+Assert-OracleStage3R8ApplicationActivationContract -Contract $contract
+Assert-OracleStage3R8CertificateTrustContract -Contract $contract
+$expectedToken = "FOUNDER-AUTHORISED-STAGE3-R8-EXECUTION"
 $thumbprint = [string]$contract.stage2.certificateThumbprint
 $publisher = [string]$contract.package.publisher
 $attemptRoot = Join-Path $EvidenceReturnRoot $AttemptId
@@ -89,35 +89,36 @@ $evidenceRoot = Join-Path $attemptRoot "evidence"
 $lifecycleRoot = Join-Path $attemptRoot "lifecycle"
 $logsRoot = Join-Path $attemptRoot "logs"
 $workRoot = Join-Path $attemptRoot "work"
-$manifestPath = Join-Path $TransferRoot "Oracle.Stage3R7TransferManifest.json"
-$custodyPath = Join-Path $TransferRoot "Oracle.Stage3R7TransferCustody.json"
+$manifestPath = Join-Path $TransferRoot "Oracle.Stage3R8TransferManifest.json"
+$custodyPath = Join-Path $TransferRoot "Oracle.Stage3R8TransferCustody.json"
 $payloadRoot = Join-Path $TransferRoot "payload"
 $msixPath = Join-Path $payloadRoot $contract.package.fileName
 $discoveryPath = Join-Path $payloadRoot "Oracle.WindowDiscovery.exe"
 $observerPath = Join-Path $payloadRoot "Oracle.WindowObserver.exe"
-$identityPolicyPath = Join-Path $payloadRoot "Oracle.Stage3R7IdentityPolicy.ps1"
-$activationPolicyPath = Join-Path $payloadRoot "Oracle.Stage3R7ActivationPolicy.ps1"
+$identityPolicyPath = Join-Path $payloadRoot "Oracle.Stage3R8IdentityPolicy.ps1"
+$activationPolicyPath = Join-Path $payloadRoot "Oracle.Stage3R8ActivationPolicy.ps1"
 $packageInventoryPolicyPath = Join-Path $payloadRoot (
-  "Oracle.Stage3R7PackageInventoryPolicy.ps1"
+  "Oracle.Stage3R8PackageInventoryPolicy.ps1"
 )
 $installedSoftwarePolicyPath = Join-Path $payloadRoot (
-  "Oracle.Stage3R7InstalledSoftwarePolicy.ps1"
+  "Oracle.Stage3R8InstalledSoftwarePolicy.ps1"
 )
-$lifecyclePolicyPath = Join-Path $payloadRoot "Oracle.Stage3R7LifecyclePolicy.ps1"
-$preflightPolicyPath = Join-Path $payloadRoot "Oracle.Stage3R7PreflightPolicy.ps1"
-$processPolicyPath = Join-Path $payloadRoot "Oracle.Stage3R7ProcessPolicy.ps1"
+$lifecyclePolicyPath = Join-Path $payloadRoot "Oracle.Stage3R8LifecyclePolicy.ps1"
+$preflightPolicyPath = Join-Path $payloadRoot "Oracle.Stage3R8PreflightPolicy.ps1"
+$processPolicyPath = Join-Path $payloadRoot "Oracle.Stage3R8ProcessPolicy.ps1"
+$windowPolicyPath = Join-Path $payloadRoot "Oracle.Stage3R8WindowPolicy.ps1"
 $windowsExecutablePolicyPath = Join-Path $payloadRoot (
-  "Oracle.Stage3R7WindowsExecutablePolicy.ps1"
+  "Oracle.Stage3R8WindowsExecutablePolicy.ps1"
 )
 $certificateTrustPolicyPath = Join-Path $payloadRoot (
-  "Oracle.Stage3R7CertificateTrustPolicy.ps1"
+  "Oracle.Stage3R8CertificateTrustPolicy.ps1"
 )
 $certificateRawBase64 = $null
 $packageFamilyName = $null
 $partialArchive = $null
 $initialSoftwareJson = $null
 $authorityConsumed = $false
-$lifecycleState = New-OracleStage3R7LifecycleState
+$lifecycleState = New-OracleStage3R8LifecycleState
 $processEvidenceCounts = @{}
 function Get-Sha256([string]$Path) {
   (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
@@ -139,7 +140,7 @@ function Get-RequiredObjectMemberValue(
 }
 
 function Get-InstalledSoftwareInventory {
-  @(Get-OracleStage3R7InstalledSoftwareInventory)
+  @(Get-OracleStage3R8InstalledSoftwareInventory)
 }
 
 function Assert-CreateOnlyPath([string]$Path) {
@@ -219,18 +220,18 @@ function Write-CreateOnlyText([string]$Path, [string]$Value) {
 
 function Write-Lifecycle([string]$Phase, $Details) {
   $phaseIndex = [int]$lifecycleState.index
-  Assert-OracleStage3R7NextLifecyclePhase -State $lifecycleState -Phase $Phase
+  Assert-OracleStage3R8NextLifecyclePhase -State $lifecycleState -Phase $Phase
   Write-CreateOnlyJson (
     Join-Path $lifecycleRoot ("{0:D2}-{1}.json" -f ($phaseIndex + 1), $Phase)
   ) ([ordered]@{
-    contract = "oracle.sprint-30-5.stage-3-r7-lifecycle"
+    contract = "oracle.sprint-30-5.stage-3-r8-lifecycle"
     authorityId = $AuthorityId
     attemptId = $AttemptId
     phase = $Phase
     recordedAtUtc = [DateTime]::UtcNow.ToString("o")
       details = $Details
   })
-  [void](Move-OracleStage3R7Lifecycle -State $lifecycleState -Phase $Phase)
+  [void](Move-OracleStage3R8Lifecycle -State $lifecycleState -Phase $Phase)
 }
 
 function Invoke-GovernedProcess(
@@ -239,7 +240,7 @@ function Invoke-GovernedProcess(
   [string[]]$Arguments,
   [bool]$RequireZero = $true
 ) {
-  Invoke-OracleStage3R7GovernedProcess `
+  Invoke-OracleStage3R8GovernedProcess `
     -Name $Name `
     -Executable $Executable `
     -Arguments $Arguments `
@@ -250,26 +251,26 @@ function Invoke-GovernedProcess(
 }
 
 function Get-ExactCertificateMatches {
-  @(Get-OracleStage3R7LogicalCertificateViews -Thumbprint $thumbprint)
+  @(Get-OracleStage3R8LogicalCertificateViews -Thumbprint $thumbprint)
 }
 
 function Get-PhysicalExactCertificateMatches {
-  @(Get-OracleStage3R7PhysicalCertificateMatches -Thumbprint $thumbprint)
+  @(Get-OracleStage3R8PhysicalCertificateMatches -Thumbprint $thumbprint)
 }
 
 function Remove-ExactMachineTrust {
   $physicalMatches = @(Get-PhysicalExactCertificateMatches)
   $logicalViews = @(Get-ExactCertificateMatches)
   if ($physicalMatches.Count -eq 0 -and $logicalViews.Count -eq 0) { return }
-  Assert-OracleStage3R7ExactRemovalTarget `
+  Assert-OracleStage3R8ExactRemovalTarget `
     -PhysicalMatches $physicalMatches -LogicalViews $logicalViews `
     -Thumbprint $thumbprint -Subject $publisher `
     -RawBase64 $certificateRawBase64
-  $certutil = Get-OracleStage3R7WindowsExecutablePath -Name "certutil.exe"
+  $certutil = Get-OracleStage3R8WindowsExecutablePath -Name "certutil.exe"
   [void](Invoke-GovernedProcess "exact-machine-trust-remove" $certutil @(
-    Get-OracleStage3R7TrustRemovalArguments -Thumbprint $thumbprint
+    Get-OracleStage3R8TrustRemovalArguments -Thumbprint $thumbprint
   ))
-  Assert-OracleStage3R7NoCertificateResidue `
+  Assert-OracleStage3R8NoCertificateResidue `
     -PhysicalMatches @(Get-PhysicalExactCertificateMatches) `
     -LogicalViews @(Get-ExactCertificateMatches)
 }
@@ -286,14 +287,14 @@ function Stop-ExactPackageProcesses {
   $packages = @(Get-AppxPackage -Name $contract.package.identity -ErrorAction SilentlyContinue)
   if ($packages.Count -gt 1) { throw "Unexpected package cardinality during process cleanup." }
   if ($packages.Count -eq 0) { return }
+  $expectedFamilyName = [string]$packages[0].PackageFamilyName
+  if ([string]::IsNullOrWhiteSpace($expectedFamilyName)) {
+    throw "Installed package has no usable package-family identity."
+  }
   foreach ($process in @(Get-Process -Name "Oracle" -ErrorAction SilentlyContinue)) {
-    if (
-      $null -eq $process.Path -or
-      -not $process.Path.StartsWith(
-        $packages[0].InstallLocation,
-        [StringComparison]::OrdinalIgnoreCase
-      )
-    ) { throw "Oracle-named process is not owned by the governed package." }
+    [void](Assert-OracleStage3R8ProcessPackageOwnership `
+      -ProcessId ([int]$process.Id) `
+      -ExpectedPackageFamilyName $expectedFamilyName)
     Stop-Process -Id $process.Id -ErrorAction Stop
     $process.WaitForExit(10000)
     if (-not $process.HasExited) { throw "Governed Oracle process did not stop." }
@@ -304,8 +305,8 @@ function Assert-IdentityAndTransfer {
   if ($FounderAuthorityToken -cne $expectedToken) {
     throw "Separate Founder Stage 3 execution authority is required."
   }
-  $attempt = [regex]::Match($AttemptId, '^stage3-r7-(\d{8}T\d{9}Z)-([0-9a-f]{8})$')
-  $authority = [regex]::Match($AuthorityId, '^authority-stage3-r7-(\d{8}T\d{9}Z)-([0-9a-f]{8})$')
+  $attempt = [regex]::Match($AttemptId, '^stage3-r8-(\d{8}T\d{9}Z)-([0-9a-f]{8})$')
+  $authority = [regex]::Match($AuthorityId, '^authority-stage3-r8-(\d{8}T\d{9}Z)-([0-9a-f]{8})$')
   $time = [DateTime]::ParseExact(
     $TimestampUtc, "yyyy-MM-ddTHH:mm:ss.fffZ",
     [Globalization.CultureInfo]::InvariantCulture,
@@ -329,17 +330,18 @@ function Assert-IdentityAndTransfer {
     $observerPath, $identityPolicyPath, $packageInventoryPolicyPath,
     $activationPolicyPath,
     $installedSoftwarePolicyPath, $lifecyclePolicyPath, $preflightPolicyPath,
-    $processPolicyPath, $windowsExecutablePolicyPath, $certificateTrustPolicyPath
+    $processPolicyPath, $windowPolicyPath, $windowsExecutablePolicyPath,
+    $certificateTrustPolicyPath
   )) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
       throw "Required transfer file is missing: $path"
     }
   }
   $expectedTransferRootEntries = @(
-    "Oracle.Stage3R7TransferCustody.json",
-    "Oracle.Stage3R7TransferCustody.json.sha256.txt",
-    "Oracle.Stage3R7TransferManifest.json",
-    "Oracle.Stage3R7TransferManifest.json.sha256.txt",
+    "Oracle.Stage3R8TransferCustody.json",
+    "Oracle.Stage3R8TransferCustody.json.sha256.txt",
+    "Oracle.Stage3R8TransferManifest.json",
+    "Oracle.Stage3R8TransferManifest.json.sha256.txt",
     "payload"
   ) | Sort-Object
   $actualTransferRootEntries = @(
@@ -355,12 +357,12 @@ function Assert-IdentityAndTransfer {
   $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
   if (
     [string]$manifest.contract -cne
-      "oracle.sprint-30-5.stage-3-r7-transfer" -or
+      "oracle.sprint-30-5.stage-3-r8-transfer" -or
     [string]$manifest.programmeIdentity -cne
       [string]$contract.programmeIdentity -or
-    [string]$manifest.revision -cne "R7" -or
+    [string]$manifest.revision -cne "R8" -or
     $manifest.transferId -cnotmatch
-      '^transfer-stage3-r7-\d{8}T\d{9}Z-[0-9a-f]{8}$'
+      '^transfer-stage3-r8-\d{8}T\d{9}Z-[0-9a-f]{8}$'
   ) {
     throw "Transfer identity is malformed."
   }
@@ -404,7 +406,7 @@ function Assert-IdentityAndTransfer {
   if (
     $custodySidecarValue -cne (Get-Sha256 $custodyPath) -or
     [string]$custody.contract -cne
-      "oracle.sprint-30-5.stage-3-r7-transfer-custody" -or
+      "oracle.sprint-30-5.stage-3-r8-transfer-custody" -or
     [string]$custody.transferId -cne [string]$manifest.transferId -or
     [string]$custody.manifest.sha256 -cne (Get-Sha256 $manifestPath) -or
     [string]$custody.transferMedium.method -cne
@@ -437,24 +439,25 @@ function Assert-IdentityAndTransfer {
     (Get-Sha256 $msixPath) -cne $contract.stage2.msixSha256
   ) { throw "Transfer is not bound to accepted Stage 2 R2." }
   $expectedPayload = @(
-    "Get-OracleStage3R7HostContinuity.ps1",
-    "Invoke-OracleStage3R7PreAuthorityPreflight.ps1",
-    "Invoke-OracleStage3R7Qualification.ps1",
+    "Get-OracleStage3R8HostContinuity.ps1",
+    "Invoke-OracleStage3R8PreAuthorityPreflight.ps1",
+    "Invoke-OracleStage3R8Qualification.ps1",
     "Oracle.Sprint30.5.Stage2RequalificationR2QualificationEvidence.zip",
     "Oracle.Stage2RequalificationR2EvidenceManifest.json",
     "Oracle.Stage3HostAdmission.json",
-    "Oracle.Stage3R7Contract.json",
-    "Oracle.Stage3R7ActivationPolicy.ps1",
-    "Oracle.Stage3R7CertificateTrustPolicy.ps1",
-    "Oracle.Stage3R7IdentityPolicy.ps1",
-    "Oracle.Stage3R7InstalledSoftwarePolicy.ps1",
-    "Oracle.Stage3R7LifecyclePolicy.ps1",
-    "Oracle.Stage3R7OptionalMemberAudit.json",
-    "Oracle.Stage3R7PreflightPolicy.ps1",
-    "Oracle.Stage3R7ProcessPolicy.ps1",
-    "Oracle.Stage3R7WindowsExecutablePolicy.ps1",
-    "Oracle.Stage3R7PhaseAudit.json",
-    "Oracle.Stage3R7PackageInventoryPolicy.ps1",
+    "Oracle.Stage3R8Contract.json",
+    "Oracle.Stage3R8ActivationPolicy.ps1",
+    "Oracle.Stage3R8CertificateTrustPolicy.ps1",
+    "Oracle.Stage3R8IdentityPolicy.ps1",
+    "Oracle.Stage3R8InstalledSoftwarePolicy.ps1",
+    "Oracle.Stage3R8LifecyclePolicy.ps1",
+    "Oracle.Stage3R8OptionalMemberAudit.json",
+    "Oracle.Stage3R8PreflightPolicy.ps1",
+    "Oracle.Stage3R8ProcessPolicy.ps1",
+    "Oracle.Stage3R8WindowPolicy.ps1",
+    "Oracle.Stage3R8WindowsExecutablePolicy.ps1",
+    "Oracle.Stage3R8PhaseAudit.json",
+    "Oracle.Stage3R8PackageInventoryPolicy.ps1",
     "Oracle.WindowDiscovery.exe",
     "Oracle.WindowObserver.exe",
     "README.md",
@@ -465,9 +468,10 @@ function Assert-IdentityAndTransfer {
     "package-content-inventory.json",
     "qualification-candidate.json",
     "signature-and-trust-verification.json",
-    "Test-OracleStage3R7ActivationPolicy.ps1",
-    "Test-OracleStage3R7CertificateTrustPolicy.ps1",
-    "Test-OracleStage3R7OptionalMemberAudit.ps1",
+    "Test-OracleStage3R8ActivationPolicy.ps1",
+    "Test-OracleStage3R8CertificateTrustPolicy.ps1",
+    "Test-OracleStage3R8OptionalMemberAudit.ps1",
+    "Test-OracleStage3R8WindowPolicy.ps1",
     $contract.package.fileName
   ) | Sort-Object
   $actualPayload = @($manifest.payload | ForEach-Object {
@@ -491,37 +495,40 @@ function Assert-IdentityAndTransfer {
     ) { throw "Transfer payload mismatch: $($entry.path)" }
   }
   $runningHarnessEntry = @($manifest.payload | Where-Object {
-    [string]$_.path -ceq "payload/Invoke-OracleStage3R7Qualification.ps1"
+    [string]$_.path -ceq "payload/Invoke-OracleStage3R8Qualification.ps1"
   })
   $runningContractEntry = @($manifest.payload | Where-Object {
-    [string]$_.path -ceq "payload/Oracle.Stage3R7Contract.json"
+    [string]$_.path -ceq "payload/Oracle.Stage3R8Contract.json"
   })
   $runningActivationPolicyEntry = @($manifest.payload | Where-Object {
-    [string]$_.path -ceq "payload/Oracle.Stage3R7ActivationPolicy.ps1"
+    [string]$_.path -ceq "payload/Oracle.Stage3R8ActivationPolicy.ps1"
   })
   $runningCertificateTrustPolicyEntry = @($manifest.payload | Where-Object {
-    [string]$_.path -ceq "payload/Oracle.Stage3R7CertificateTrustPolicy.ps1"
+    [string]$_.path -ceq "payload/Oracle.Stage3R8CertificateTrustPolicy.ps1"
   })
   $runningIdentityPolicyEntry = @($manifest.payload | Where-Object {
-    [string]$_.path -ceq "payload/Oracle.Stage3R7IdentityPolicy.ps1"
+    [string]$_.path -ceq "payload/Oracle.Stage3R8IdentityPolicy.ps1"
   })
   $runningPackageInventoryPolicyEntry = @($manifest.payload | Where-Object {
-    [string]$_.path -ceq "payload/Oracle.Stage3R7PackageInventoryPolicy.ps1"
+    [string]$_.path -ceq "payload/Oracle.Stage3R8PackageInventoryPolicy.ps1"
   })
   $runningInstalledSoftwarePolicyEntry = @($manifest.payload | Where-Object {
-    [string]$_.path -ceq "payload/Oracle.Stage3R7InstalledSoftwarePolicy.ps1"
+    [string]$_.path -ceq "payload/Oracle.Stage3R8InstalledSoftwarePolicy.ps1"
   })
   $runningLifecyclePolicyEntry = @($manifest.payload | Where-Object {
-    [string]$_.path -ceq "payload/Oracle.Stage3R7LifecyclePolicy.ps1"
+    [string]$_.path -ceq "payload/Oracle.Stage3R8LifecyclePolicy.ps1"
   })
   $runningPreflightPolicyEntry = @($manifest.payload | Where-Object {
-    [string]$_.path -ceq "payload/Oracle.Stage3R7PreflightPolicy.ps1"
+    [string]$_.path -ceq "payload/Oracle.Stage3R8PreflightPolicy.ps1"
   })
   $runningProcessPolicyEntry = @($manifest.payload | Where-Object {
-    [string]$_.path -ceq "payload/Oracle.Stage3R7ProcessPolicy.ps1"
+    [string]$_.path -ceq "payload/Oracle.Stage3R8ProcessPolicy.ps1"
+  })
+  $runningWindowPolicyEntry = @($manifest.payload | Where-Object {
+    [string]$_.path -ceq "payload/Oracle.Stage3R8WindowPolicy.ps1"
   })
   $runningWindowsExecutablePolicyEntry = @($manifest.payload | Where-Object {
-    [string]$_.path -ceq "payload/Oracle.Stage3R7WindowsExecutablePolicy.ps1"
+    [string]$_.path -ceq "payload/Oracle.Stage3R8WindowsExecutablePolicy.ps1"
   })
   if (
     $runningHarnessEntry.Count -ne 1 -or
@@ -534,35 +541,39 @@ function Assert-IdentityAndTransfer {
     $runningLifecyclePolicyEntry.Count -ne 1 -or
     $runningPreflightPolicyEntry.Count -ne 1 -or
     $runningProcessPolicyEntry.Count -ne 1 -or
+    $runningWindowPolicyEntry.Count -ne 1 -or
     $runningWindowsExecutablePolicyEntry.Count -ne 1 -or
     (Get-Sha256 $scriptPath) -cne
       [string]$runningHarnessEntry[0].sha256 -or
-    (Get-Sha256 (Join-Path $scriptRoot "Oracle.Stage3R7Contract.json")) -cne
+    (Get-Sha256 (Join-Path $scriptRoot "Oracle.Stage3R8Contract.json")) -cne
       [string]$runningContractEntry[0].sha256 -or
     (Get-Sha256 $activationPolicyPath) -cne
       [string]$runningActivationPolicyEntry[0].sha256 -or
     (Get-Sha256 $certificateTrustPolicyPath) -cne
       [string]$runningCertificateTrustPolicyEntry[0].sha256 -or
     (Get-Sha256 (
-      Join-Path $scriptRoot "Oracle.Stage3R7IdentityPolicy.ps1"
+      Join-Path $scriptRoot "Oracle.Stage3R8IdentityPolicy.ps1"
     )) -cne [string]$runningIdentityPolicyEntry[0].sha256 -or
     (Get-Sha256 (
-      Join-Path $scriptRoot "Oracle.Stage3R7PackageInventoryPolicy.ps1"
+      Join-Path $scriptRoot "Oracle.Stage3R8PackageInventoryPolicy.ps1"
     )) -cne [string]$runningPackageInventoryPolicyEntry[0].sha256 -or
     (Get-Sha256 (
-      Join-Path $scriptRoot "Oracle.Stage3R7InstalledSoftwarePolicy.ps1"
+      Join-Path $scriptRoot "Oracle.Stage3R8InstalledSoftwarePolicy.ps1"
     )) -cne [string]$runningInstalledSoftwarePolicyEntry[0].sha256 -or
     (Get-Sha256 (
-      Join-Path $scriptRoot "Oracle.Stage3R7LifecyclePolicy.ps1"
+      Join-Path $scriptRoot "Oracle.Stage3R8LifecyclePolicy.ps1"
     )) -cne [string]$runningLifecyclePolicyEntry[0].sha256 -or
     (Get-Sha256 (
-      Join-Path $scriptRoot "Oracle.Stage3R7PreflightPolicy.ps1"
+      Join-Path $scriptRoot "Oracle.Stage3R8PreflightPolicy.ps1"
     )) -cne [string]$runningPreflightPolicyEntry[0].sha256 -or
     (Get-Sha256 (
-      Join-Path $scriptRoot "Oracle.Stage3R7ProcessPolicy.ps1"
+      Join-Path $scriptRoot "Oracle.Stage3R8ProcessPolicy.ps1"
     )) -cne [string]$runningProcessPolicyEntry[0].sha256 -or
     (Get-Sha256 (
-      Join-Path $scriptRoot "Oracle.Stage3R7WindowsExecutablePolicy.ps1"
+      Join-Path $scriptRoot "Oracle.Stage3R8WindowPolicy.ps1"
+    )) -cne [string]$runningWindowPolicyEntry[0].sha256 -or
+    (Get-Sha256 (
+      Join-Path $scriptRoot "Oracle.Stage3R8WindowsExecutablePolicy.ps1"
     )) -cne [string]$runningWindowsExecutablePolicyEntry[0].sha256
   ) {
     throw "Executing harness, contract or policy bytes differ from the transfer."
@@ -574,9 +585,9 @@ function Assert-IdentityAndTransfer {
   $provenancePath = Join-Path $payloadRoot "oracle-0.1.1.provenance.json"
   $signatureEvidencePath = Join-Path $payloadRoot "signature-and-trust-verification.json"
   $optionalMemberAuditPath = Join-Path $payloadRoot (
-    "Oracle.Stage3R7OptionalMemberAudit.json"
+    "Oracle.Stage3R8OptionalMemberAudit.json"
   )
-  $phaseAuditPath = Join-Path $payloadRoot "Oracle.Stage3R7PhaseAudit.json"
+  $phaseAuditPath = Join-Path $payloadRoot "Oracle.Stage3R8PhaseAudit.json"
   $optionalMemberAudit = Get-Content -LiteralPath $optionalMemberAuditPath -Raw |
     ConvertFrom-Json
   $phaseAudit = Get-Content -LiteralPath $phaseAuditPath -Raw | ConvertFrom-Json
@@ -590,7 +601,7 @@ function Assert-IdentityAndTransfer {
     [string]$auditDisposition -cne "passed" -or
     [int]$unclassifiedCount -ne 0 -or
     @($auditedPhases).Count -ne
-      @(Get-OracleStage3R7LifecyclePhases).Count
+      @(Get-OracleStage3R8LifecyclePhases).Count
   ) { throw "Transfer-bound optional-member or phase audit differs." }
   if ((Get-Sha256 $hostAdmissionPath) -cne $contract.host.hostAdmissionSha256) {
     throw "Historical host admission binding differs."
@@ -665,10 +676,10 @@ function Assert-PackageContent {
   )
   foreach ($entry in @($packageInventory.entries)) {
     $canonicalExpectedPath =
-      ConvertTo-OracleStage3R7CanonicalPackagePath ([string]$entry.path)
+      ConvertTo-OracleStage3R8CanonicalPackagePath ([string]$entry.path)
     if (
       $canonicalExpectedPath -cne [string]$entry.path -or
-      (Test-OracleStage3R7ReservedPackageMetadata $canonicalExpectedPath) -or
+      (Test-OracleStage3R8ReservedPackageMetadata $canonicalExpectedPath) -or
       [string]$entry.sha256 -cnotmatch '^[0-9a-f]{64}$' -or
       [int64]$entry.size -lt 0 -or
       $expected.ContainsKey($canonicalExpectedPath)
@@ -680,7 +691,7 @@ function Assert-PackageContent {
     throw "Governed package-content inventory count differs from the contract."
   }
 
-  $zipEntries = @(Get-OracleStage3R7PackageZipInventory $msixPath)
+  $zipEntries = @(Get-OracleStage3R8PackageZipInventory $msixPath)
   $actual = [Collections.Generic.Dictionary[string,object]]::new(
     [StringComparer]::Ordinal
   )
@@ -751,11 +762,11 @@ function Invoke-NativeObservation([string]$Label) {
   while ([DateTime]::UtcNow -lt $deadline -and $null -eq $selected) {
     $name = "$Label-discovery-$([DateTime]::UtcNow.Ticks)"
     $result = Invoke-GovernedProcess $name $discoveryPath @()
-    $windows = @($result.stdout | ConvertFrom-Json)
+    $windows = @(
+      ConvertFrom-OracleStage3R8WindowDiscoveryJson -Json ([string]$result.stdout)
+    )
     $candidates = @($windows | Where-Object {
-      $_.processName -ceq "Oracle" -and $_.visible -eq $true -and
-      $_.minimized -eq $false -and [int64]$_.handle -gt 0 -and
-      [int]$_.width -ge 1 -and [int]$_.height -ge 1
+      Test-OracleStage3R8QualifyingWindow $_
     })
     if ($candidates.Count -gt 1) { throw "Multiple qualifying Oracle windows." }
     if ($candidates.Count -eq 1) { $selected = $candidates[0] }
@@ -764,13 +775,15 @@ function Invoke-NativeObservation([string]$Label) {
   if ($null -eq $selected) { throw "No qualifying installed Oracle window." }
   $process = Get-Process -Id ([int]$selected.processId) -ErrorAction Stop
   $package = @(Get-AppxPackage -Name $contract.package.identity)
-  if (
-    $package.Count -ne 1 -or
-    -not $process.Path.StartsWith(
-      $package[0].InstallLocation,
-      [StringComparison]::OrdinalIgnoreCase
-    )
-  ) { throw "Selected window is not owned by the installed Oracle package." }
+  if ($package.Count -ne 1) {
+    throw "Installed package cardinality differs during native observation."
+  }
+  $ownership = Assert-OracleStage3R8ProcessPackageOwnership `
+    -ProcessId ([int]$process.Id) `
+    -ExpectedPackageFamilyName ([string]$package[0].PackageFamilyName)
+  if ([string]::IsNullOrWhiteSpace([string]$process.Path)) {
+    throw "Selected Oracle process path is unavailable."
+  }
   $processSignature = Get-AuthenticodeSignature -LiteralPath $process.Path
   if (
     $processSignature.Status -cne "Valid" -or
@@ -822,6 +835,7 @@ function Invoke-NativeObservation([string]$Label) {
   }
   [ordered]@{
     selectedWindow = $selected
+    ownerPackageIdentity = $ownership
     ownerProcessPath = $process.Path
     ownerAuthenticodeStatus = [string]$processSignature.Status
     ownerSignerThumbprint = $processSignature.SignerCertificate.Thumbprint
@@ -856,7 +870,7 @@ try {
   Assert-NoReparseTraversal $HostContinuityPath
   Assert-CreateOnlyPath $attemptRoot
   Assert-CreateOnlyPath $authorityPath
-  $preflight = Get-OracleStage3R7PreAuthorityObservation `
+  $preflight = Get-OracleStage3R8PreAuthorityObservation `
     -Contract $contract `
     -TransferRoot $TransferRoot `
     -EvidenceReturnRoot $EvidenceReturnRoot `
@@ -879,7 +893,7 @@ try {
     Join-Path $evidenceRoot $contract.host.continuityFileName
   )
   Write-CreateOnlyJson $authorityPath ([ordered]@{
-    contract = "oracle.sprint-30-5.stage-3-r7-authority"
+    contract = "oracle.sprint-30-5.stage-3-r8-authority"
     authorityId = $AuthorityId
     attemptId = $AttemptId
     timestampUtc = $TimestampUtc
@@ -951,7 +965,7 @@ try {
     authenticodeStatus = [string]$untrustedSignature.Status
   }
 
-  $certificate = Get-OracleStage3R7AcceptedPublicCertificate `
+  $certificate = Get-OracleStage3R8AcceptedPublicCertificate `
     -Contract $contract -TransferRoot $TransferRoot
   if (
     $certificate.Thumbprint -cne $thumbprint -or
@@ -966,16 +980,16 @@ try {
   $certificateRawBase64 = [Convert]::ToBase64String($certificate.RawData)
   $certificatePath = Join-Path $workRoot "attempt-public-certificate.cer"
   [IO.File]::WriteAllBytes($certificatePath, $certificate.RawData)
-  $certutil = Get-OracleStage3R7WindowsExecutablePath -Name "certutil.exe"
-  Assert-OracleStage3R7NoCertificateResidue `
+  $certutil = Get-OracleStage3R8WindowsExecutablePath -Name "certutil.exe"
+  Assert-OracleStage3R8NoCertificateResidue `
     -PhysicalMatches @(Get-PhysicalExactCertificateMatches) `
     -LogicalViews @(Get-ExactCertificateMatches)
   [void](Invoke-GovernedProcess "exact-machine-trust-import" $certutil @(
-    Get-OracleStage3R7TrustImportArguments -CertificatePath $certificatePath
+    Get-OracleStage3R8TrustImportArguments -CertificatePath $certificatePath
   ))
   $physicalMatches = @(Get-PhysicalExactCertificateMatches)
   $logicalViews = @(Get-ExactCertificateMatches)
-  Assert-OracleStage3R7TemporaryTrustState `
+  Assert-OracleStage3R8TemporaryTrustState `
     -PhysicalMatches $physicalMatches -LogicalViews $logicalViews `
     -Thumbprint $thumbprint -Subject $publisher `
     -RawBase64 $certificateRawBase64
@@ -1044,12 +1058,12 @@ try {
   Write-Lifecycle "package-installed" @{ packageFullName = $package[0].PackageFullName }
 
   $appUserModelId = "$packageFamilyName!Oracle"
-  $initialActivation = Invoke-OracleStage3R7ApplicationActivation `
+  $initialActivation = Invoke-OracleStage3R8ApplicationActivation `
     -AppUserModelId $appUserModelId
   Write-CreateOnlyJson (
     Join-Path $evidenceRoot "initial-activation.json"
   ) $initialActivation
-  Assert-OracleStage3R7ApplicationActivationSucceeded -Result $initialActivation
+  Assert-OracleStage3R8ApplicationActivationSucceeded -Result $initialActivation
   $initial = Invoke-NativeObservation "initial"
   Write-CreateOnlyJson (Join-Path $evidenceRoot "runtime-observation.json") $initial
   Write-Lifecycle "runtime-observed" @{
@@ -1061,12 +1075,12 @@ try {
 
   Stop-ExactPackageProcesses
   Reset-AppxPackage -Package $package[0].PackageFullName
-  $repairActivation = Invoke-OracleStage3R7ApplicationActivation `
+  $repairActivation = Invoke-OracleStage3R8ApplicationActivation `
     -AppUserModelId $appUserModelId
   Write-CreateOnlyJson (
     Join-Path $evidenceRoot "repair-activation.json"
   ) $repairActivation
-  Assert-OracleStage3R7ApplicationActivationSucceeded -Result $repairActivation
+  Assert-OracleStage3R8ApplicationActivationSucceeded -Result $repairActivation
   $repair = Invoke-NativeObservation "repair"
   Write-CreateOnlyJson (Join-Path $evidenceRoot "repair-observation.json") $repair
   Write-Lifecycle "repair-observed" @{
@@ -1087,7 +1101,7 @@ try {
     remainingPhysical = @(Get-PhysicalExactCertificateMatches).Count
     remainingLogical = @(Get-ExactCertificateMatches).Count
   }
-  Assert-OracleStage3R7NoCertificateResidue `
+  Assert-OracleStage3R8NoCertificateResidue `
     -PhysicalMatches @(Get-PhysicalExactCertificateMatches) `
     -LogicalViews @(Get-ExactCertificateMatches)
   if (@(Get-Process -Name "Oracle" -ErrorAction SilentlyContinue).Count -ne 0) {
@@ -1135,7 +1149,7 @@ try {
     })
   $evidenceManifestPath = Join-Path $evidenceRoot "evidence-manifest.json"
   Write-CreateOnlyJson $evidenceManifestPath ([ordered]@{
-    contract = "oracle.sprint-30-5.stage-3-r7-evidence-manifest"
+    contract = "oracle.sprint-30-5.stage-3-r8-evidence-manifest"
     authorityId = $AuthorityId
     attemptId = $AttemptId
     scope = "all attempt files created before evidence freeze"
@@ -1174,7 +1188,7 @@ try {
     "$archiveHash  $([IO.Path]::GetFileName($archivePath))`n"
   )
   Write-CreateOnlyJson "$archivePath.manifest.json" ([ordered]@{
-    contract = "oracle.sprint-30-5.stage-3-r7-archive-manifest"
+    contract = "oracle.sprint-30-5.stage-3-r8-archive-manifest"
     authorityId = $AuthorityId
     attemptId = $AttemptId
     archive = [IO.Path]::GetFileName($archivePath)
@@ -1203,7 +1217,7 @@ try {
         }
       }},
       @{ name = "verify-zero-certificate-residue"; action = {
-        Assert-OracleStage3R7NoCertificateResidue `
+        Assert-OracleStage3R8NoCertificateResidue `
           -PhysicalMatches @(Get-PhysicalExactCertificateMatches) `
           -LogicalViews @(Get-ExactCertificateMatches)
       }},

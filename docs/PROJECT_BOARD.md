@@ -184,10 +184,14 @@ R5 Attempt 1 then failed closed at AppX deployment with `0x800B0109` after
 successful current-user Authenticode validation under `CurrentUser\Root`.
 R6 then proved machine trust, package installation and Windows activation and
 container creation, but failed because an Explorer shell-broker exit status
-was treated as authoritative launch evidence. Stage 3 Qualification R7 is the
-active bounded preparation. It preserves R6 as immutable history, uses direct
-Windows application-activation semantics and retains strict native window
-proof. No R7 transfer or execution is authorised.
+was treated as authoritative launch evidence. Stage 3 Qualification R7 used
+direct Windows application activation and reached native window discovery,
+then failed on Windows PowerShell 5.1 JSON-array shape handling; teardown also
+exposed filesystem-only package ownership classification. Stage 3
+Qualification R8 is the active bounded engineering revision. It explicitly
+enumerates the discovery array and requires exact AppModel package-family
+ownership while retaining strict path, signature and native-window proof. No
+R8 transfer or execution is authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -271,8 +275,8 @@ blocked
 **Evidence:** Revision 4 NegativePathAndTrust passed; Revision 4
 InstallAndStartup failed; canonical Phase 03 success evidence absent; Revision
 5 incomplete; Revision 6 abandoned
-**Current authority:** None to resume or repair the historical harness.
-Separate R7 preparation and validation are Founder-authorised; R7 transfer,
+**Current authority:** None to resume or repair a historical harness.
+Separate R8 engineering and validation are Founder-authorised; R8 transfer,
 trust, installation and qualification execution remain unauthorised
 **Deployment status:** Production unchanged; no production signing,
 distribution, deployment, migration, persistence or Gate authority
