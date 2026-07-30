@@ -59,11 +59,12 @@ candidate; clean Windows, live Auth, protected rendering and
 installed-package qualification remain; production
 qualification not yet complete
 
-Stage 3 Qualification R1 remains immutable historical preparation. Stage 3
-Qualification R2 corrective preparation and its pre-execution gate are
-complete and bound exclusively to the accepted Stage 2 Requalification R2
-candidate. The preparation-only system provides a versioned contract, shared
-ordinal-ignore-case Windows computer-name identity policy, transfer builder,
+Stage 3 Qualification R1 and failed R2 remain immutable historical
+preparation. Stage 3 Qualification R3 preparation is bound exclusively to the
+accepted Stage 2 Requalification R2 candidate. The preparation-only system
+preserves the ordinal-ignore-case Windows computer-name policy and adds an
+exact script-scoped harness-path binding for governed `powershell.exe -File`
+execution, alongside the versioned contract, transfer builder,
 fresh host-continuity collection, exact preparation commit/tree binding,
 ordered clean-host harness, complete operator instructions and deterministic
 return verification. Stage 3 execution remains blocked and unauthorised.

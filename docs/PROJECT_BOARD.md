@@ -169,12 +169,13 @@ Stage 3 is historically attempted, incomplete and blocked. The historical
 reconciliation authorised no new harness, transfer, trust, installation or
 execution. Gate 7 remains unauthorised.
 
-Stage 3 Qualification R1 remains immutable historical preparation. Stage 3
-Qualification R2 corrective preparation and its pre-execution gate are complete
-and validated. The corrected system binds exclusively to the accepted Stage 2
-Requalification R2 candidate and preserves raw host-name evidence while using
-ordinal case-insensitive Windows identity comparison. The board remains stopped
-at the separate Founder execution gate; no clean-host, trust or installation
+Stage 3 Qualification R1 and the failed R2 preparation remain immutable.
+R2 failed closed before governed mutation because function-scoped
+`MyInvocation.MyCommand` has no `Path`. Stage 3 Qualification R3 preparation
+preserves the accepted Stage 2 R2 bindings and host-name correction while
+capturing the executing harness path once at script scope under the governed
+`powershell.exe -File` invocation. The board remains stopped at the separate
+Founder execution gate; no clean-host, trust or installation
 action is authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
