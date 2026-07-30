@@ -1,0 +1,15 @@
+{
+    "executable":  "C:\\WINDOWS\\system32\\certutil.exe",
+    "arguments":  [
+                      "-delstore",
+                      "TrustedPeople",
+                      "119937D4B90068ACE8765695C5A94321A2C40BD8"
+                  ],
+    "startedAtUtc":  "2026-07-30T22:16:53.9123149Z",
+    "completedAtUtc":  "2026-07-30T22:16:53.9556562Z",
+    "stdout":  "TrustedPeople \"Trusted People\"\r\nDeleting Certificate 0: CN=Oracle Stage 2 Requalification R2 Local Test Signing - NOT PRODUCTION:119937d4b90068ace8765695c5a94321a2c40bd8\r\nCertUtil: -delstore command completed successfully.\r\n",
+    "stderr":  "",
+    "exitCode":  0,
+    "signal":  null,
+    "processError":  null
+}

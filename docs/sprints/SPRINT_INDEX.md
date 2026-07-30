@@ -8,7 +8,7 @@
 **Expected Stability:** Updated at Sprint activation, closure or approved renumbering
 **Supersedes:** Informal Sprint numbering inferred from individual planning documents
 **Superseded By:** None
-**Last Reviewed:** 28 July 2026
+**Last Reviewed:** 30 July 2026
 
 ---
 
@@ -39,8 +39,8 @@ implementation stages and do not use fractional Sprint numbering.
 | 26 | Authoritative Companion Guidance Delivery | Complete, certified and Founder-accepted | None | [Plan](SPRINT_26_PLAN.md), [Implementation](SPRINT_26_IMPLEMENTATION.md), [Certification](SPRINT_26_CERTIFICATION.md), [Closure](SPRINT_26_CLOSURE.md), [Decision package](SPRINT_26_FOUNDER_DECISION_REQUIRED.md) |
 | 27 | Contextual Companion and Reference Integration | Complete — Founder-accepted and closed; source/synthetic certification accepted; Operational Certification Deferred; live profile provisional and observation disabled | None | [Plan](SPRINT_27_PLAN.md), [Implementation](SPRINT_27_IMPLEMENTATION.md), [Certification](SPRINT_27_CERTIFICATION.md), [Closure](SPRINT_27_CLOSURE.md), [Founder acceptance package](SPRINT_27_FOUNDER_ACCEPTANCE_REQUIRED.md), [ADRs 044–045](../Decisions.md) |
 | 28 | Unified Oracle Product Experience | Complete, locally certified, Founder-accepted and closed | None | [Decision package](SPRINT_28_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_28_PLAN.md), [Product Truth Inventory](SPRINT_28_PRODUCT_TRUTH_INVENTORY.md), [Implementation](SPRINT_28_IMPLEMENTATION.md), [Certification](SPRINT_28_CERTIFICATION.md), [Founder acceptance package](SPRINT_28_FOUNDER_ACCEPTANCE_REQUIRED.md), [Closure](SPRINT_28_CLOSURE.md) |
-| 29 | Secure Desktop Operations and Distribution | Complete, locally certified, Founder-accepted and closed; Clean-Machine Certification Deferred | None | [Decision package](SPRINT_29_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_29_PLAN.md), [Implementation](SPRINT_29_IMPLEMENTATION.md), [Certification](SPRINT_29_CERTIFICATION.md), [Founder acceptance package](SPRINT_29_FOUNDER_ACCEPTANCE_REQUIRED.md), [Closure](SPRINT_29_CLOSURE.md), [ADR-046](../Decisions.md) |
-| 30 | Production Qualification | Founder-approved and active; Phases 1–5 locally verified; Stage 1, historical Stage 2, R1 and R2 closed; Stage 2 R2 is authoritative; Stage 3 R1 and failed R2–R8 are immutable history; Stage 3 Qualification R9 engineering active; transfer and execution blocked and unauthorised; Stages 4–7 remain | None | [Decision package](SPRINT_30_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_30_PLAN.md), [Production Qualification dossier](SPRINT_30_PRODUCTION_QUALIFICATION_DOSSIER.md), [Stage 1 closure](SPRINT_30_5_STAGE_1_CLOSURE.md), [Historical Stage 2 closure](SPRINT_30_5_STAGE_2_CLOSURE.md), [R1 closure](SPRINT_30_5_STAGE_2_REQUALIFICATION_R1_CLOSURE.md), [R1 evidence](evidence/sprint-30-5/stage-2-requalification/README.md), [R2 closure](SPRINT_30_5_STAGE_2_REQUALIFICATION_R2_CLOSURE.md), [R2 evidence](evidence/sprint-30-5/stage-2-requalification-r2/README.md), [Stage 3 R1 plan](SPRINT_30_5_STAGE_3_R1_PLAN.md), [Stage 3 R2 plan](SPRINT_30_5_STAGE_3_R2_PLAN.md), [Stage 3 R3 plan](SPRINT_30_5_STAGE_3_R3_PLAN.md), [Stage 3 R4 plan](SPRINT_30_5_STAGE_3_R4_PLAN.md), [Stage 3 R5 plan](SPRINT_30_5_STAGE_3_R5_PLAN.md), [Stage 3 R6 plan](SPRINT_30_5_STAGE_3_R6_PLAN.md), [Stage 3 R7 plan](SPRINT_30_5_STAGE_3_R7_PLAN.md), [Stage 3 R8 plan](SPRINT_30_5_STAGE_3_R8_PLAN.md), [Stage 3 R9 plan](SPRINT_30_5_STAGE_3_R9_PLAN.md), [Stage 3 R9 pre-execution gate](SPRINT_30_5_STAGE_3_R9_PRE_EXECUTION_GATE.md), [Stage 3 reconciliation](SPRINT_30_5_STAGE_3_RECONCILIATION.md), [Qualification Register](../QUALIFICATION_REGISTER.md), [ADR-047](../Decisions.md) |
+| 29 | Secure Desktop Operations and Distribution | Complete, locally certified, Founder-accepted and closed; clean-machine lifecycle subsequently qualified by Stage 3 R9 | None | [Decision package](SPRINT_29_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_29_PLAN.md), [Implementation](SPRINT_29_IMPLEMENTATION.md), [Certification](SPRINT_29_CERTIFICATION.md), [Founder acceptance package](SPRINT_29_FOUNDER_ACCEPTANCE_REQUIRED.md), [Closure](SPRINT_29_CLOSURE.md), [ADR-046](../Decisions.md) |
+| 30 | Production Qualification | Founder-approved and active; Phases 1-5 locally verified; Stages 1-3 Founder-accepted and closed; Stage 3 R1 and failed R2-R8 are immutable history; R9 is the accepted passing Clean Windows Qualification; Stages 4-7 remain | None | [Decision package](SPRINT_30_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_30_PLAN.md), [Production Qualification dossier](SPRINT_30_PRODUCTION_QUALIFICATION_DOSSIER.md), [Stage 1 closure](SPRINT_30_5_STAGE_1_CLOSURE.md), [Historical Stage 2 closure](SPRINT_30_5_STAGE_2_CLOSURE.md), [R1 closure](SPRINT_30_5_STAGE_2_REQUALIFICATION_R1_CLOSURE.md), [R1 evidence](evidence/sprint-30-5/stage-2-requalification/README.md), [R2 closure](SPRINT_30_5_STAGE_2_REQUALIFICATION_R2_CLOSURE.md), [R2 evidence](evidence/sprint-30-5/stage-2-requalification-r2/README.md), [Stage 3 R9 closure](SPRINT_30_5_STAGE_3_R9_CLOSURE.md), [Stage 3 R9 evidence](evidence/sprint-30-5/stage-3-r9/README.md), [Stage 3 revision plans](SPRINT_30_5_STAGE_3_R9_PLAN.md), [Historical Stage 3 reconciliation](SPRINT_30_5_STAGE_3_RECONCILIATION.md), [Qualification Register](../QUALIFICATION_REGISTER.md), [ADR-047](../Decisions.md) |
 | 31 | Oracle Beta Certification | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 
 # Historical Integrity
@@ -74,8 +74,8 @@ Founder-accepted and closed; its operational certification remains deferred
 without creating a support, activation or deployment claim. Sprint 28 Option A
 is complete, locally certified, Founder-accepted and closed. Sprint 29 Option A
 is complete, locally certified, Founder-accepted and closed under ADR-046.
-Clean-Machine Certification Deferred — Required Disposable Windows
-Environment Unavailable remains the independent programme status. Sprint 30
+The independent clean-machine lifecycle was subsequently qualified by Stage
+3 R9 for the accepted Stage 2 R2 package. Sprint 30
 Option A and ADR-047 are Founder-approved. Phases 1–5 are complete and locally
 verified. Phase 3 integrates disabled Operational Diagnostics through exact
 manifest `1.7.0` composition, and proves failure isolation, bounded local
@@ -83,9 +83,9 @@ diagnostics, fresh recovery, backup/restore/deletion and Sprint 29 rollback
 regression. The live Supabase Auth provider transaction remains unavailable.
 The immutable Sprint 29 package remains at `1.6.0` and requires later
 candidate reconciliation. Phase 4 passes bounded current-host performance,
-public accessibility and support qualification. Live authenticated rendering,
-installed-package GPU evidence and clean Windows remain unavailable or
-deferred without a pass claim. Phase 5 completes the integrated matrix and
+public accessibility and support qualification. Live authenticated rendering
+and installed-package GPU evidence remain unavailable or deferred without a
+pass claim. Phase 5 completes the integrated matrix and
 Production Qualification dossier. Sprint 30.5 Stage 1 Environment Admission
 is Founder-accepted and closed with frozen controlled non-pristine host,
 isolated network, standalone GPU and cleanup evidence. It does not satisfy the
@@ -100,15 +100,14 @@ Package Reconciliation. Its accepted attempt is
 Founder-authorised and attempted on the host admitted with a Founder
 provenance exception. Recovered Revision 4 NegativePathAndTrust evidence
 passed, but Revision 4 InstallAndStartup failed, Revision 5 remained incomplete
-and Revision 6 is abandoned. Sprint 30 remains qualification-incomplete:
-Stage 3 is historically attempted, incomplete and blocked, and Stages 4–7
-have not started. Stage 2 Requalification R1 acceptance and closure create no
-Stage 3 authority.
-
-Stage 2 Requalification R2 was separately Founder-authorised only to refresh
-the current-source candidate with sufficient certificate validity.
-R1 remains accepted and immutable. R2 attempt
-`r2-20260728T203503018Z-ec577cf4` passed, was independently reconciled,
-Founder-accepted and formally closed. Its candidate is authoritative for any
-later separately authorised Stage 3 preparation decision, but creates no
-Stage 3 authority.
+and Revision 6 is abandoned. Sprint 30 remains qualification-incomplete because
+Stages 4-7 have not
+started. Stage 2 Requalification R2 remains the authoritative accepted package
+candidate. Stage 3 R1 and failed R2-R8 remain immutable historical records.
+Stage 3 R9 attempt `stage3-r9-20260730T221251043Z-71af9db7` passed all
+fourteen governed lifecycle phases, was Founder-accepted and is formally
+closed. Any further Stage 3 execution is unauthorised. Its final evidence manifest SHA-256 is
+`19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe` and
+its qualification archive SHA-256 is
+`5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`.
+Stage 4 has not started and requires a separate Founder planning decision.

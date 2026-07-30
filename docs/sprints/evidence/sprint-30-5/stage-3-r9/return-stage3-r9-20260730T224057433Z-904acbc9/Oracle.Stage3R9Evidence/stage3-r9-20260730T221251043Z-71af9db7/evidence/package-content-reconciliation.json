@@ -1,0 +1,17 @@
+{
+    "result":  "passed",
+    "packageSha256":  "6adb8d9b29585ff7de1b878ec2df2d76a82ce03661cf7269ced7eaff8aae50bc",
+    "canonicalPathRepresentation":  "single-percent-decoded-forward-slash-logical-package-path",
+    "expectedEntries":  2201,
+    "actualEntries":  2201,
+    "zipFileEntries":  2202,
+    "percentEncodedEntries":  70,
+    "reservedContainerMetadata":  {
+                                      "path":  "[Content_Types].xml",
+                                      "rawZipPath":  "[Content_Types].xml",
+                                      "size":  2374,
+                                      "sha256":  "3261997987ea9adb75f9e3cee463f6582c6b83f5d462129a77eea21a9d938515",
+                                      "excludedFromLogicalPayloadInventory":  true
+                                  },
+    "inventorySha256":  "059ecfb9104f4d2761888bd0c02999c4892171e82416405dc0a8891294c33cd9"
+}

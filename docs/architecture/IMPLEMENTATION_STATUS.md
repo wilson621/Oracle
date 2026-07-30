@@ -8,9 +8,9 @@
 **Expected Stability:** Updated when verified implementation or accepted technical debt changes
 **Supersedes:** Earlier active implementation-status records
 **Superseded By:** None
-**Last Reviewed:** 28 July 2026
+**Last Reviewed:** 30 July 2026
 **Verified Branch:** `sprint-9-overlay`
-**Verified Repository Baseline:** `sprint-18-complete`
+**Verified Repository Baseline:** `fc3b4775c505cf2cd3b45333bff8ee75d4cbfb3d`
 **Sprint 14 Implementation Baseline:** `3868975`
 **Sprint 15 Phase 1:** Complete and committed
 **Sprint 15 Phase 2:** Complete and committed
@@ -46,32 +46,23 @@ Product Truth Inventory, canonical product shell, truthful inactive states,
 route consolidation, production mock removal and bounded Web/Electron
 walkthrough accepted
 **Sprint 29:** Complete, locally certified, Founder-accepted and closed under
-ADR-046; Clean-Machine Certification Deferred — Required Disposable Windows
-Environment Unavailable remains the independent programme status
-**Sprint 30:** Founder-approved and active under ADR-047; Phases 1–5
-implemented and locally verified; Sprint 30.5 Stage 1 Environment Admission
-Founder-accepted and closed; historical Stage 2 package/runtime reconciliation
-Founder-accepted, closed and immutable, but its candidate no longer qualifies
-the current source revision; Stage 2 Requalification R1 Founder-accepted and
-formally closed for the current source; Stage 2 Requalification R2
-Founder-accepted and formally closed with the authoritative execution
-candidate; clean Windows, live Auth, protected rendering and
-installed-package qualification remain; production
-qualification not yet complete
+ADR-046; its deferred clean-machine package lifecycle was subsequently
+qualified by Stage 3 R9
+**Sprint 30:** Founder-approved and active under ADR-047; Phases 1-5 locally
+verified; Sprint 30.5 Stages 1, 2 and 3 Founder-accepted and closed; Stage 3 R1
+and failed R2-R8 remain immutable; R9 is the accepted passing Clean Windows
+Qualification; Stages 4-7 remain unstarted; production qualification is not
+yet complete
 
-Stage 3 Qualification R1 and failed R2, R3 and R4 remain immutable historical
-preparation. Stage 3 Qualification R5 is bound exclusively to the accepted
-Stage 2 Requalification R2 candidate. It preserves the host-name,
-script-scoped harness-path and canonical package-inventory corrections. R4
-proved package reconciliation and then exposed unsafe access to optional
-uninstall registry members. R5 preserves StrictMode, adds a shared deterministic
-installed-software policy, a complete optional-member and phase audit, a
-non-qualification development rehearsal and a transfer-bound read-only
-pre-authority probe. Decoded logical payload entries still match the Stage 2 inventory,
-while exact root OPC metadata is validated separately. The versioned
-create-only transfer, host-continuity, clean-host lifecycle and return
-verification remain intact. Stage 3 execution remains blocked and
-unauthorised.
+Stage 3 R9 attempt `stage3-r9-20260730T221251043Z-71af9db7` passed all
+fourteen lifecycle phases from preparation commit
+`fc3b4775c505cf2cd3b45333bff8ee75d4cbfb3d`. The final evidence manifest
+SHA-256 is
+`19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`,
+the qualification archive SHA-256 is
+`5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`,
+and final package, certificate, process, transfer, work and package-data
+residue is zero. Stage 4 remains unstarted and unauthorised.
 
 ---
 
@@ -177,14 +168,12 @@ qualification path. The host is not a clean Windows environment and does not
 satisfy that later mandatory qualification. The frozen local evidence archive
 has SHA-256
 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
-Historical Stage 2 is Founder-accepted, closed and immutable with frozen
-evidence, but its candidate no longer qualifies the current source revision
-after post-freeze product-source corrections. Sprint 30.5 Stage 2
-Requalification R1 is Founder-accepted and formally closed for current-source
-Candidate Freeze and Package Reconciliation. The designated Stage 3 host is
-admitted with a Founder provenance exception. Stage 3 is historically
-attempted, incomplete, blocked and unauthorised.
-
+Historical Stage 2 and Stage 2 Requalification R1 remain Founder-accepted,
+closed and immutable. Stage 2 Requalification R2 is the authoritative package
+qualified by Stage 3 R9. The designated Stage 3 host was admitted with a
+Founder provenance exception, and Stage 3 R9 is Founder-accepted and formally
+closed with immutable passing evidence. Stage 4 remains unstarted and
+unauthorised.
 ## Sprint 30.5 Stage 2 — Historical Candidate Freeze and Package Reconciliation
 
 Source commit `d850743977735929f6873457fe122d2cf9697d9e` is frozen into
@@ -249,13 +238,21 @@ The Founder accepted the result and R2 is formally closed. Candidate
 `11475fe01fff2ec69f0188547107f4e901c531d7` is authoritative for any later
 separately authorised Stage 3 preparation decision.
 
-The historical Stage 3 host is `Founder-QA-01`, a `MEDION ERAZER P6605
-MD61596`. It is `admitted-with-founder-provenance-exception` for its current
-Windows installation. `installationMediaEvidencePresent` remains false; the
-Founder-approved exception is permanently bound to the immutable admission
-and compensating-control evidence. The ASUS Stage 1 hardware/GPU facts do not
-transfer. Historical Stage 3 execution occurred, but no current Stage 3
-execution authority exists.
+## Sprint 30.5 Stage 3 R9 - Clean Windows Qualification
+
+`Founder-QA-01`, a `MEDION ERAZER P6605 MD61596`, is bound to the accepted
+R9 evidence under its Founder provenance exception. Passing attempt
+`stage3-r9-20260730T221251043Z-71af9db7` and consumed authority
+`authority-stage3-r9-20260730T221251043Z-71af9db7` completed all fourteen
+lifecycle phases. Both native-window observation periods exceeded the
+mandatory 60,000 measured milliseconds. Exact AppModel ownership,
+Authenticode, signer, installation, direct activation, repair, removal,
+machine-trust teardown and final zero-residue checks passed.
+
+The canonical evidence is indexed by
+[Sprint 30.5 Stage 3 Qualification R9 Evidence](../sprints/evidence/sprint-30-5/stage-3-r9/README.md).
+Stage 3 R1 and failed R2-R8 remain immutable. Stage 3 closure grants no Stage
+4 or production authority.
 
 ## Sprint 29 — Secure Desktop Operations and Distribution
 

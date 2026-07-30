@@ -1,0 +1,14 @@
+{
+    "executable":  "C:\\Users\\wilso\\Documents\\Codex\\2026-07-30\\files-mentioned-by-the-user-bootstrapprompt\\work\\stage3-r9-governed-staging\\transfer-stage3-r9-20260730T215658516Z-4c7ef66a\\payload\\Oracle.WindowObserver.exe",
+    "arguments":  [
+                      "observe",
+                      "3671134"
+                  ],
+    "startedAtUtc":  "2026-07-30T22:15:28.4820921Z",
+    "completedAtUtc":  "2026-07-30T22:15:28.5781683Z",
+    "stdout":  "{\"handle\":\"3671134\",\"exists\":true,\"visible\":true,\"minimized\":false,\"bounds\":{\"x\":168,\"y\":8,\"width\":1200,\"height\":800}}",
+    "stderr":  "",
+    "exitCode":  0,
+    "signal":  null,
+    "processError":  null
+}

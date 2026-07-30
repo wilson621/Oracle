@@ -10,8 +10,8 @@
 **Expected Stability:** Reviewed at strategic and Sprint-boundary changes
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
-**Last Reviewed:** 28 July 2026
-**Version:** 6.7
+**Last Reviewed:** 30 July 2026
+**Version:** 6.8
 
 ---
 
@@ -765,8 +765,8 @@ unsupported production mocks were removed and Web/Electron verification
 passed. Sprint 29 Option A is complete, locally certified, Founder-accepted and
 closed under ADR-046. Its MSIX source implementation, canonical signed Release
 Manifest equality and current-host Windows package lifecycle certification are
-accepted. Clean-Machine Certification Deferred — Required Disposable Windows
-Environment Unavailable remains the independent programme status. Sprint 30
+accepted. The independent clean-machine lifecycle was subsequently qualified
+by Stage 3 R9 for the accepted Stage 2 R2 package. Sprint 30
 Option A and ADR-047 are Founder-approved. Phases 1 through 5 are complete and
 locally verified. Operational Diagnostics remains separate from Oracle
 Intelligence and is canonically disabled through exact Web/Electron manifest
@@ -776,8 +776,8 @@ Supabase Auth provider transaction remains unavailable. The immutable Sprint
 29 package remains at manifest `1.6.0` and requires later candidate
 reconciliation. Phase 4 passes frozen current-host Web boundary, CPU, memory,
 startup, deterministic Guidance, public accessibility and support evidence.
-Protected authenticated rendering, installed-package GPU evidence and clean
-Windows remain honestly unavailable or deferred. Phase 5 completes the
+Protected authenticated rendering and installed-package GPU evidence remain
+honestly unavailable or deferred. Phase 5 completes the
 integrated source, domain, runtime, database, recovery, package-integrity,
 quality and support matrix and closes the discovered development dependency
 advisory. Sprint 30.5 Stage 1 is Founder-accepted and closed: the controlled
@@ -802,25 +802,24 @@ The Founder accepted the result and R2 is formally closed. Candidate
 `11475fe01fff2ec69f0188547107f4e901c531d7` is authoritative for any later
 separately authorised Stage 3 preparation decision.
 
-Stage 3 was Founder-authorised and attempted on `Founder-QA-01`, which remains
-`admitted-with-founder-provenance-exception` for its current Windows
-installation. The missing original-media hash remains explicitly unavailable
-and `installationMediaEvidencePresent` remains false. Recovered Revision 4
-NegativePathAndTrust evidence passed, but Revision 4 InstallAndStartup failed.
-Canonical Phase 03 success evidence is absent, Revision 5 remained incomplete
-and Revision 6 is abandoned.
+Stage 3 R1 and failed R2-R8 remain immutable historical qualification records.
+Stage 3 R9 passed on `Founder-QA-01` under consumed authority
+`authority-stage3-r9-20260730T221251043Z-71af9db7` and attempt
+`stage3-r9-20260730T221251043Z-71af9db7`. The accepted Stage 2 R2 package
+completed transfer verification, clean-host admission, negative-path checks,
+machine trust, installation, direct activation, native runtime observation,
+repair observation, removal, exact trust teardown and zero-residue cleanup.
+The final evidence manifest SHA-256 is
+`19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`
+and the qualification archive SHA-256 is
+`5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`.
+The Founder accepted the result and Stage 3 is formally closed.
 
-Sprint 30 remains qualification-incomplete. Historical Stage 3, Stage 3
-Qualification R1 and failed R2, R3 and R4 remain immutable. Stage 3
-Qualification R5 preparation is Founder-authorised and bound exclusively to
-the accepted Stage 2 R2 candidate. R4 proved package reconciliation and then
-exposed an optional uninstall-registry member defect. R5 corrects that defect
-under StrictMode and adds comprehensive optional-member, lifecycle,
-failure-path, rehearsal and pre-authority validation. Execution remains blocked and
-unauthorised. Stages 4–7 have not started.
-Production signing, publication, distribution, deployment and runtime
-persistence remain unauthorised.
-
+Sprint 30 remains qualification-incomplete because Stages 4-7 have not
+started. Stage 4 Live Authentication and Protected Rendering is the next
+sequential scope and requires a separate Founder planning decision. Production
+signing, publication, distribution, deployment and release remain
+unauthorised.
 ## Historical Sprint 15 — Operator Understanding Foundation
 
 Sprint 15 is historical. Phase 1 — Ownership Foundation, Phase 2 —

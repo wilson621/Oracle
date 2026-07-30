@@ -8,8 +8,8 @@
 **Expected Stability:** Reviewed whenever approved execution direction changes
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
-**Last Reviewed:** 28 July 2026
-**Version:** 5.1
+**Last Reviewed:** 30 July 2026
+**Version:** 5.2
 
 ---
 
@@ -133,8 +133,8 @@ Web/Electron walkthrough establish the truthful product baseline. Sprint 29
 Option A is complete, locally certified, Founder-accepted and closed under
 ADR-046. Its governed MSIX implementation, signed Release Manifest equality
 and current-host install/update/repair/rollback/uninstall certification are
-accepted. Clean-Machine Certification Deferred — Required Disposable Windows
-Environment Unavailable remains the independent programme status. Sprint 30
+accepted. The independent clean-machine lifecycle was subsequently qualified
+by Stage 3 R9 for the accepted Stage 2 R2 package. Sprint 30
 Option A and ADR-047 are Founder-approved. Phases 1 through 5 are complete and
 locally verified. Sprint 30.5 Stage 1 Environment Admission is
 Founder-accepted and closed with frozen transfer, controlled non-pristine
@@ -165,48 +165,22 @@ The Founder accepted the result and R2 is formally closed. Candidate
 `11475fe01fff2ec69f0188547107f4e901c531d7` is the authoritative Stage 2
 execution candidate for any later separately authorised Stage 3 preparation.
 
-Stage 3 Clean Windows Qualification was Founder-authorised and attempted on
-`Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, which remains admitted for its
-current Windows installation with a Founder provenance exception.
-`installationMediaEvidencePresent` remains false. Recovered Revision 4
-NegativePathAndTrust evidence passed, but Revision 4 InstallAndStartup failed.
-Canonical Phase 03 success evidence is absent, Revision 5 remained incomplete
-and Revision 6 is abandoned.
+Stage 3 Clean Windows Qualification is Founder-accepted and formally closed.
+Any further Stage 3 execution is unauthorised.
+Stage 3 R1 and failed R2-R8 remain immutable. Passing R9 attempt
+`stage3-r9-20260730T221251043Z-71af9db7` completed all fourteen governed
+lifecycle phases on `Founder-QA-01`, including clean-host admission, package
+installation, direct activation, native runtime and repair observation,
+package removal, machine-trust teardown, zero-residue cleanup and immutable
+evidence freeze. The final evidence manifest SHA-256 is
+`19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`
+and the archive SHA-256 is
+`5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`.
 
-Stage 3 is historically attempted, incomplete and blocked. Clean Windows
-acceptance, live Auth, protected rendering, installed-package qualification
-and later integrated evidence remain outstanding. At reconciliation, no
-authority existed to resume Stage 3 or repair its historical harness. That
-historical position is preserved; the later R1 preparation authority did not
-authorise execution, certificate trust or package installation. Accepted
-Stage 1, historical Stage 2 and Stage 2 Requalification R1 evidence remain
-unchanged. Production signing, publication, distribution, deployment and
-activation remain unauthorised.
-
-Stage 3 Qualification R1 and failed Stage 3 Qualification R2, Stage 3
-Qualification R3 and Stage 3 Qualification R4 remain immutable historical
-preparation. R4 proved exact package reconciliation and then failed on unsafe
-optional uninstall-registry member access under StrictMode. Stage 3
-Qualification R5 preserves the accepted Stage 2 R2 bindings, all prior
-corrections and exact `[Content_Types].xml` validation. It adds a shared
-installed-software policy, optional-member/phase audits, full simulated
-failure rehearsal and a read-only pre-authority host probe. R5 Attempt 1
-failed closed at AppX deployment with `0x800B0109` after user-context
-Authenticode passed under `CurrentUser\Root`. R6 corrected the trust scope and
-proved machine trust, package installation and Windows activation/container
-creation. It then failed on an invalid Explorer shell-broker exit-code
-assertion. Stage 3 Qualification R7 preserved R6 as immutable history and
-used direct Windows application activation, then failed after native discovery
-because Windows PowerShell 5.1 preserved the JSON root array as one pipeline
-object; teardown also exposed filesystem-only ownership classification. Stage
-3 Qualification R8 explicitly normalized the discovery array and bound process
-ownership through the Windows AppModel package-family identity. Its governed
-attempt then captured only 59.929 seconds against the mandatory 60 seconds and
-encountered a teardown process-exit race. R9 requires a final valid observation
-at or after 60,000 monotonic milliseconds from the first valid sample and
-retains fail-closed live-process ownership while safely classifying a proven
-already-exited PID. R9 transfer and execution require separate Founder
-decisions.
+Stage 4 and later stages remain unstarted and unauthorised. Stage 4 planning
+requires a separate Founder decision. Accepted Stage 1, Stage 2 and Stage 3
+evidence remains immutable. Production signing, publication, distribution,
+deployment and release remain unauthorised.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

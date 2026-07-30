@@ -8,7 +8,7 @@
 **Expected Stability:** Reviewed whenever governance or canonical documentation changes
 **Supersedes:** The incomplete documentation table in `README.md` as the canonical documentation index
 **Superseded By:** None
-**Last Reviewed:** 28 July 2026
+**Last Reviewed:** 30 July 2026
 
 ---
 
@@ -328,14 +328,16 @@ delivery authorities have been reviewed.
 | Sprint 30.5 Stage 3 Qualification R8 plan | [Sprint 30.5 Stage 3 Qualification R8 Plan](sprints/SPRINT_30_5_STAGE_3_R8_PLAN.md) | R7 failure preserved; discovery-array and AppModel ownership corrections; transfer and execution blocked |
 | Sprint 30.5 Stage 3 Qualification R8 pre-execution gate | [Sprint 30.5 Stage 3 Qualification R8 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_3_R8_PRE_EXECUTION_GATE.md) | Exact R8 transfer, fresh continuity and remaining Founder decisions |
 | Sprint 30.5 Stage 3 Qualification R8 preparation validation | [Sprint 30.5 Stage 3 Qualification R8 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_3_R8_PREPARATION_VALIDATION_REPORT.md) | PowerShell 5.1 JSON-shape regression, AppModel ownership fixtures and non-execution validation |
-| Sprint 30.5 Stage 3 Qualification R9 plan | [Sprint 30.5 Stage 3 Qualification R9 Plan](sprints/SPRINT_30_5_STAGE_3_R9_PLAN.md) | R8 failure preserved; complete-duration observation and teardown exit-race corrections; transfer and execution blocked |
+| Sprint 30.5 Stage 3 Qualification R9 plan | [Sprint 30.5 Stage 3 Qualification R9 Plan](sprints/SPRINT_30_5_STAGE_3_R9_PLAN.md) | Historical passing-revision preparation plan; R8 failure preserved and corrected |
+| Sprint 30.5 Stage 3 Qualification R9 closure | [Sprint 30.5 Stage 3 Qualification R9 Closure](sprints/SPRINT_30_5_STAGE_3_R9_CLOSURE.md) | Founder-accepted passing attempt, immutable evidence bindings, zero residue and formal Stage 3 closure |
+| Sprint 30.5 Stage 3 Qualification R9 evidence | [Sprint 30.5 Stage 3 Qualification R9 Evidence](sprints/evidence/sprint-30-5/stage-3-r9/README.md) | Canonical returned evidence, archive, manifest, authority and attempt index |
 | Sprint 30.5 Stage 3 Qualification R9 pre-execution gate | [Sprint 30.5 Stage 3 Qualification R9 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_3_R9_PRE_EXECUTION_GATE.md) | R9 review boundary and separate Founder decisions |
 | Sprint 30.5 Stage 3 Qualification R9 preparation validation | [Sprint 30.5 Stage 3 Qualification R9 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_3_R9_PREPARATION_VALIDATION_REPORT.md) | Observation-boundary, teardown-race, lifecycle rehearsal and regression evidence |
-| Sprint 30.5 Stage 3 plan | [Sprint 30.5 Stage 3 Plan](sprints/SPRINT_30_5_STAGE_3_PLAN.md) | Historical execution plan; Stage 3 was attempted but remains incomplete and blocked |
+| Sprint 30.5 Stage 3 plan | [Sprint 30.5 Stage 3 Plan](sprints/SPRINT_30_5_STAGE_3_PLAN.md) | Historical execution plan; current status is superseded by the R9 closure record |
 | Sprint 30.5 Stage 3 host admission | [Sprint 30.5 Stage 3 Host Admission](sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION.md) | Historical host-admission requirements; Founder-QA-01 remains admitted with Founder provenance exception |
 | Sprint 30.5 Stage 3 admission decision | [Sprint 30.5 Stage 3 Host Admission Decision](sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION_DECISION.md) | Founder-approved historical admission decision; admission remains distinct from current execution authority |
 | Sprint 30.5 Stage 3 provenance package | [Sprint 30.5 Stage 3 Provenance Exception Founder Approval Package](sprints/SPRINT_30_5_STAGE_3_PROVENANCE_EXCEPTION_FOUNDER_APPROVAL_PACKAGE.md) | Approved historical evidence and residual-risk package |
-| Sprint 30.5 Stage 3 reconciliation | [Sprint 30.5 Stage 3 Reconciliation](sprints/SPRINT_30_5_STAGE_3_RECONCILIATION.md) | Stage 3 historically attempted, incomplete and blocked; no current resume authority |
+| Sprint 30.5 Stage 3 reconciliation | [Sprint 30.5 Stage 3 Reconciliation](sprints/SPRINT_30_5_STAGE_3_RECONCILIATION.md) | Immutable historical reconciliation snapshot; current status is superseded by the R9 closure record |
 | Sprint 30.5 Stage 3 reconciliation evidence | [Sprint 30.5 Stage 3 Reconciliation Evidence](sprints/evidence/sprint-30-5/stage-3-reconciliation/README.md) | Recovered phase evidence, chain of custody, unavailable dispositions and USB integrity incident |
 | Sprint 30.5 post-reconciliation Phase A5 engineering validation evidence | [Phase A5 Engineering Validation Evidence](sprints/evidence/sprint-30-5/engineering-validation/phase-a5/README.md) | Clean committed local Electron source-health qualification passed; does not reopen or complete Stage 3 |
 | Operator-first amendment record | [Sprint 18 Operator-First Reconciliation](governance/SPRINT_18_OPERATOR_FIRST_RECONCILIATION_PROPOSAL.md) | Applied historical governance record |

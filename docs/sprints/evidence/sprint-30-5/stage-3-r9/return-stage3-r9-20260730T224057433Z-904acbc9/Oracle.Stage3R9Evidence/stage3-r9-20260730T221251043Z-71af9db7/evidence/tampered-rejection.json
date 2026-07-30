@@ -1,0 +1,12 @@
+{
+    "result":  "rejected",
+    "authenticodeStatus":  "UnknownError",
+    "failure":  {
+                    "exceptionType":  "System.IO.FileNotFoundException",
+                    "hresult":  "0x80070002",
+                    "message":  "Deployment failed with HRESULT: 0x80073CF0, Package could not be opened.\r\n\r\nerror 0x8007000D: Opening the package from location tampered.msix failed.\n\nNOTE: For additional information, look for [ActivityId] a549c0c7-1d3c-0002-d34d-a4a63c1ddd01 in the Event Log or use the command line Get-AppPackageLog -ActivityID a549c0c7-1d3c-0002-d34d-a4a63c1ddd01\n",
+                    "fullyQualifiedErrorId":  "DeploymentError,Microsoft.Windows.Appx.PackageManager.Commands.AddAppxPackageCommand"
+                },
+    "installedPackageCount":  0,
+    "acceptedPackageSha256":  "6adb8d9b29585ff7de1b878ec2df2d76a82ce03661cf7269ced7eaff8aae50bc"
+}

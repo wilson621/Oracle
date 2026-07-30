@@ -11,7 +11,7 @@ expiry or revocation
 **Supersedes:** Qualification status inferred across Sprint and programme
 documents
 **Superseded By:** None
-**Last Reviewed:** 28 July 2026
+**Last Reviewed:** 30 July 2026
 
 ---
 
@@ -32,9 +32,9 @@ results.
 | Stage | Scope | Current state | Evidence or blocker | Next authority |
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
-| 2 | Candidate Freeze and Package Reconciliation | **Historical candidate and R1 accepted and immutable; R2 Founder-accepted and formally closed** | Accepted R2 attempt `r2-20260728T203503018Z-ec577cf4` binds authoritative candidate `11475fe01fff2ec69f0188547107f4e901c531d7`; final evidence manifest SHA-256 `84660931dec8c2c4f4e409465e67e49d9606f8617824e7c1212bb2e8abf1d47d` | None for Stage 2 R2; Stage 3 Qualification R9 engineering is active |
-| 3 | Clean Windows Qualification | **R2-R8 failed closed; R9 engineering active; transfer and execution blocked** | R1-R8 remain immutable. R8 proved direct activation, exact AppModel ownership and 47 valid observations, then exposed a 59.929-second evidence span against the mandatory 60 seconds and a teardown OpenProcess exit race. R9 requires at least 60,000 monotonic milliseconds between captured valid samples and treats only a typed OpenProcess failure followed by an absent PID as a safe exit race. All live ownership checks and final residue checks remain fail-closed. | Founder review of validated R9 engineering, then separately authorised commit, transfer and execution operations |
-| 4 | Live Authentication and Protected Rendering | **Not started** | Disposable live Supabase Email + Password and protected rendering evidence remain outstanding | Stage 3 acceptance, then separate Stage 4 authority |
+| 2 | Candidate Freeze and Package Reconciliation | **Historical candidate and R1 accepted and immutable; R2 Founder-accepted and formally closed** | Accepted R2 attempt `r2-20260728T203503018Z-ec577cf4` binds authoritative candidate `11475fe01fff2ec69f0188547107f4e901c531d7`; final evidence manifest SHA-256 `84660931dec8c2c4f4e409465e67e49d9606f8617824e7c1212bb2e8abf1d47d` | None for Stage 2 R2; history is closed |
+| 3 | Clean Windows Qualification | **Founder-accepted and formally closed at R9** | Passing attempt `stage3-r9-20260730T221251043Z-71af9db7` under authority `authority-stage3-r9-20260730T221251043Z-71af9db7`; final evidence manifest SHA-256 `19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`; archive SHA-256 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`; zero final residue | None for Stage 3; history is closed and any further Stage 3 execution is unauthorised |
+| 4 | Live Authentication and Protected Rendering | **Not started** | Disposable live Supabase Email + Password and protected rendering evidence remain outstanding | Separate Founder Stage 4 planning and execution authority |
 | 5 | Installed Package GPU, Performance and Accessibility | **Not started** | Must use the reconciled installed package on the replacement host; ASUS Stage 1 GPU evidence does not transfer | Stage 4 acceptance, then separate Stage 5 authority and replacement-host GPU admission |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
 | 7 | Final Integrated Qualification and Sprint 30 Closure Package | **Not started** | Requires complete immutable evidence from Stages 1–6 | Stage 6 acceptance, then separate Stage 7 authority |
@@ -47,8 +47,9 @@ results.
 - Installed Node.js, npm, Python, .NET and Visual Studio Build Tools did not
   participate in the qualification execution path and need not be removed
   solely for Stage 1.
-- A separate clean Windows qualification remains mandatory before production
-  certification.
+- The separate clean Windows qualification requirement was fulfilled by the
+  accepted Stage 3 R9 result; production certification still requires Stages
+  4-7.
 - Stage 1 may be reopened only when new evidence demonstrates a genuine
   qualification defect.
 - The ASUS remains the accepted historical Stage 1 host but is not the Stage 3
@@ -77,8 +78,8 @@ results.
   Exact trust and private-material teardown remain mandatory.
 - R2 attempt `r2-20260728T203503018Z-ec577cf4` passed execution and
   independent reconciliation, was Founder-accepted and is formally closed.
-  Its candidate is authoritative for any later separately authorised Stage 3
-  preparation decision.
+  Its candidate was the authoritative input to the accepted Stage 3 R9
+  qualification and remains unchanged.
 - Replacement-host installed GPU evidence remains a separate Stage 5
   requirement.
 
@@ -102,20 +103,39 @@ results.
 - Admission is invalidated by reinstall, reset, system-disk replacement,
   system-image restoration, Secure Boot or TPM changes, contamination,
   unexplained software or failed integrity controls.
-- Host admission grants no Stage 3 execution, certificate trust, artifact
-  transfer, package installation, deployment or security-boundary authority.
-- Stage 3 was historically Founder-authorised and attempted. It remains
-  incomplete and blocked. Host admission remains valid for the admitted
-  installation, but it creates no current execution, certificate-trust,
-  artifact-transfer, package-installation or requalification authority.
+- Host admission supplied one prerequisite to the separately authorised R9
+  execution; it did not itself grant certificate trust, artifact transfer,
+  package installation, deployment or security-boundary authority.
+- Stage 3 R9 passed and is formally closed. Host admission remains an
+  immutable qualification binding for that attempt and creates no continuing
+  execution, certificate-trust, artifact-transfer, package-installation or
+  requalification authority.
+
+# Stage 3 Permanent Qualification Position
+
+- Stage 3 R1 and failed R2-R8 remain immutable historical records.
+- Stage 3 R9 attempt `stage3-r9-20260730T221251043Z-71af9db7` passed all
+  fourteen governed lifecycle phases and was Founder-accepted.
+- Qualification commit `fc3b4775c505cf2cd3b45333bff8ee75d4cbfb3d`,
+  tree `2172155e15cfc777def43b4f89778dab3fd91d4a`, is bound through transfer
+  manifest SHA-256
+  `4915a08336718a92f299833cb24d8c03916b5246559425b920cfa423e8d11416`.
+- Initial and repair observations each contain more than `60000` measured
+  milliseconds of valid evidence.
+- Final cleanup records zero governed package, certificate, process,
+  transfer, work and package-data residue.
+- The canonical evidence is indexed by
+  [Sprint 30.5 Stage 3 Qualification R9 Evidence](sprints/evidence/sprint-30-5/stage-3-r9/README.md).
+- Stage 3 closure grants no Stage 4, production-signing, publication,
+  distribution, deployment or release authority.
 
 # Independent Carried Qualification States
 
 | Capability | State | Binding limitation |
 | --- | --- | --- |
-| Sprint 29 clean-machine distribution | **Deferred** | Current-host package mechanics passed; separate clean Windows package qualification remains outstanding and is not satisfied by Sprint 30.5 Stage 1 |
+| Sprint 29 clean-machine distribution | **Qualified by Stage 3 R9** | The accepted Stage 2 R2 MSIX completed governed installation, activation, runtime, repair, removal and zero-residue validation on Founder-QA-01; this does not grant production release authority |
 | Minecraft Java observation | **Provisionally certified** | Operational Certification Deferred — Required Test Environment Unavailable; observation disabled and no support claim authorised |
-| Production qualification | **Incomplete** | Stage 1, historical Stage 2, Stage 2 R1 and R2 are closed; Stage 3 R1 and failed R2-R8 remain immutable; Stage 3 Qualification R9 engineering is active while transfer and execution remain blocked and unauthorised; Stages 4-7 have not started |
+| Production qualification | **Incomplete** | Stages 1-3 are closed; Stage 3 R1 and failed R2-R8 remain immutable and R9 is the accepted passing result; Stages 4-7 have not started |
 | Gate 7 | **Not authorised** | May be considered only after Production Qualification completes |
 | Beta | **Not authorised** | Requires later Founder decision after the governed qualification and Gate sequence |
 

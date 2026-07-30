@@ -1,0 +1,11 @@
+{
+    "result":  "rejected",
+    "authenticodeStatus":  "UnknownError",
+    "failure":  {
+                    "exceptionType":  "System.Exception",
+                    "hresult":  "0x80131500",
+                    "message":  "Deployment failed with HRESULT: 0x800B0109, A certificate chain processed, but terminated in a root certificate which is not trusted by the trust provider.\r\n\r\nerror 0x800B0109: The root certificate of the signature in the app package or bundle must be trusted.\n\nNOTE: For additional information, look for [ActivityId] a549c0c7-1d3c-0002-024b-a4a63c1ddd01 in the Event Log or use the command line Get-AppPackageLog -ActivityID a549c0c7-1d3c-0002-024b-a4a63c1ddd01\n",
+                    "fullyQualifiedErrorId":  "DeploymentError,Microsoft.Windows.Appx.PackageManager.Commands.AddAppxPackageCommand"
+                },
+    "installedPackageCount":  0
+}

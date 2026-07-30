@@ -1,0 +1,14 @@
+{
+    "api":  "IApplicationActivationManager.ActivateApplication",
+    "classId":  "45BA127D-10A8-46EA-8AB7-56EA9078943C",
+    "interfaceId":  "2E941141-7F97-4756-BA1D-9DECDE894A3D",
+    "classContext":  "CLSCTX_LOCAL_SERVER",
+    "appUserModelId":  "Oracle.Platform.LocalCertification_4qy9sryj0gp6y!Oracle",
+    "arguments":  "",
+    "activateOptions":  "AO_NOERRORUI",
+    "startedAtUtc":  "2026-07-30T22:15:47.5435674Z",
+    "completedAtUtc":  "2026-07-30T22:15:48.0085442Z",
+    "hresult":  "0x00000000",
+    "processId":  13652,
+    "error":  null
+}

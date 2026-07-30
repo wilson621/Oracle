@@ -8,8 +8,8 @@
 **Expected Stability:** Updated whenever approved work changes state
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
-**Last Reviewed:** 28 July 2026
-**Version:** 8.9
+**Last Reviewed:** 30 July 2026
+**Version:** 9.0
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -157,45 +157,21 @@ The Founder accepted the result and R2 is formally closed. Candidate
 `11475fe01fff2ec69f0188547107f4e901c531d7` is authoritative for any later
 separately authorised Stage 3 preparation decision.
 
-Stage 3 Clean Windows Qualification was Founder-authorised and attempted.
-`Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, remains admitted for its
-current Windows installation with a Founder provenance exception, and
-`installationMediaEvidencePresent` remains false. Recovered Revision 4
-NegativePathAndTrust evidence passed. Revision 4 InstallAndStartup failed,
-canonical Phase 03 success evidence is absent, Revision 5 remained incomplete
-and Revision 6 is abandoned.
+Stage 3 Clean Windows Qualification is Founder-accepted and formally closed.
+Any further Stage 3 execution is unauthorised.
+Stage 3 R1 and failed R2-R8 remain immutable historical records. Passing R9
+attempt `stage3-r9-20260730T221251043Z-71af9db7` completed all fourteen
+governed lifecycle phases on `Founder-QA-01`, including two observation
+periods exceeding 60,000 measured milliseconds and final zero-residue cleanup.
+The final evidence manifest SHA-256 is
+`19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`
+and the archive SHA-256 is
+`5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`.
 
-Stage 3 is historically attempted, incomplete and blocked. The historical
-reconciliation authorised no new harness, transfer, trust, installation or
-execution. Gate 7 remains unauthorised.
-
-Stage 3 Qualification R1 and failed Stage 3 Qualification R2, Stage 3
-Qualification R3 and Stage 3 Qualification R4 remain immutable. R4 proved
-the earlier self-path and package-reconciliation corrections, then failed
-closed after transfer verification because optional uninstall `DisplayName`
-was accessed directly under StrictMode. Stage 3 Qualification R5 preserves the
-accepted Stage 2 R2 package, uses one safe deterministic installed-software
-policy, and adds a full optional-member audit, phase/failure rehearsal and
-transfer-bound pre-authority host probe. The board remains stopped at the
-separate Founder execution gate; no clean-host, trust
-or installation action is authorised.
-
-R5 Attempt 1 then failed closed at AppX deployment with `0x800B0109` after
-successful current-user Authenticode validation under `CurrentUser\Root`.
-R6 then proved machine trust, package installation and Windows activation and
-container creation, but failed because an Explorer shell-broker exit status
-was treated as authoritative launch evidence. Stage 3 Qualification R7 used
-direct Windows application activation and reached native window discovery,
-then failed on Windows PowerShell 5.1 JSON-array shape handling; teardown also
-exposed filesystem-only package ownership classification. Stage 3
-Qualification R8 retained those corrections and progressed through 47 valid
-native observations, but its evidence span was 59.929 seconds against the
-mandatory 60 seconds; teardown also encountered a process-exit/OpenProcess
-race. Stage 3 Qualification R9 is the active bounded engineering revision. It
-requires 60,000 measured monotonic milliseconds between valid captured
-observations and classifies only a typed OpenProcess failure followed by an
-absent PID as a safe exit race. No R9 transfer or execution is authorised.
-
+The board is stopped before Stage 4. Live Authentication and Protected
+Rendering has not started and requires a separate Founder planning decision.
+Gate 7, production signing, publication, distribution, deployment and release
+remain unauthorised.
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
 production; the persistence foundation is established while runtime
@@ -270,17 +246,16 @@ reconciliation are recorded in
 
 ## Sprint 30.5 Stage 3 — Clean Windows Qualification
 
-**Status:** Historically Founder-authorised and attempted; incomplete and
-blocked
-**Host:** `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`;
-`admitted-with-founder-provenance-exception`
-**Installation-media evidence:** `installationMediaEvidencePresent: false`
-**Evidence:** Revision 4 NegativePathAndTrust passed; Revision 4
-InstallAndStartup failed; canonical Phase 03 success evidence absent; Revision
-5 incomplete; Revision 6 abandoned
-**Current authority:** None to resume or repair a historical harness.
-Separate R9 engineering and validation are Founder-authorised; R9 transfer,
-trust, installation and qualification execution remain unauthorised
+**Status:** Founder-accepted and formally closed at passing Revision R9
+**Host:** `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`
+**Authority:** `authority-stage3-r9-20260730T221251043Z-71af9db7` (consumed)
+**Attempt:** `stage3-r9-20260730T221251043Z-71af9db7` (immutable)
+**Evidence:** All fourteen lifecycle phases passed; final evidence manifest
+SHA-256 `19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`;
+qualification archive SHA-256
+`5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`
+**Current authority:** None. Stage 3 is closed; Stage 4 remains unstarted and
+requires a separate Founder planning decision
 **Deployment status:** Production unchanged; no production signing,
 distribution, deployment, migration, persistence or Gate authority
 
@@ -292,14 +267,14 @@ distribution, deployment, migration, persistence or Gate authority
 **Closure report:** `docs/sprints/SPRINT_29_CLOSURE.md`
 **Deployment status:** Undeployed and inactive; no production signing,
 publication, distribution, migration or activation
-**Certification limitation:** Clean-Machine Certification Deferred — Required
-Disposable Windows Environment Unavailable
+**Clean-machine status:** Subsequently qualified by Stage 3 R9 for the
+accepted Stage 2 R2 package
 
 Sprint 29 delivered ADR-046, Windows-native MSIX packaging, the canonical
 signed Release Manifest and accepted current-host install, update, repair,
-rollback and uninstall evidence. The independent clean-machine milestone
-remains unavailable and must not be represented as passed, production trusted
-or release ready.
+rollback and uninstall evidence. The independent clean-machine lifecycle is proven by the accepted Stage 3 R9
+evidence. This does not grant production trust, publication, distribution,
+deployment or release authority.
 
 ## Previous Closed Sprint — Sprint 28 — Unified Oracle Product Experience
 

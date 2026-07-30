@@ -1,0 +1,15 @@
+{
+    "executable":  "C:\\WINDOWS\\system32\\certutil.exe",
+    "arguments":  [
+                      "-addstore",
+                      "TrustedPeople",
+                      "C:\\Users\\wilso\\Documents\\Codex\\2026-07-30\\files-mentioned-by-the-user-bootstrapprompt\\outputs\\Oracle.Stage3R9Evidence\\stage3-r9-20260730T221251043Z-71af9db7\\work\\attempt-public-certificate.cer"
+                  ],
+    "startedAtUtc":  "2026-07-30T22:13:49.8373618Z",
+    "completedAtUtc":  "2026-07-30T22:13:49.9020058Z",
+    "stdout":  "TrustedPeople \"Trusted People\"\r\nSignature matches Public Key\r\nCertificate \"Oracle Stage 2 Requalification R2 Local Test Signing - NOT PRODUCTION\" added to store.\r\nCertUtil: -addstore command completed successfully.\r\n",
+    "stderr":  "",
+    "exitCode":  0,
+    "signal":  null,
+    "processError":  null
+}

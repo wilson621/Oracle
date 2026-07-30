@@ -35,8 +35,6 @@ report zero vulnerabilities after the Phase 5 lint-toolchain correction.
 - a live Supabase Auth/GoTrue Email + Password transaction;
 - rendered protected journeys behind live authentication;
 - installed-package Electron GPU performance;
-- disposable clean-Windows installation and qualification;
-- an integrated signed package containing Runtime Manifest `1.7.0`;
 - production operation, deployment, persistence or migration;
 - production signing, publisher trust, publication or distribution; or
 - Gate C or Gate 7 readiness.
@@ -50,12 +48,9 @@ of its dependency path and zero-audit verification.
 The remaining entries are mandatory evidence or authority blockers, not
 software defects. They cannot be closed by inference:
 
-1. Clean-Machine Certification Deferred — Required Disposable Windows
-   Environment Unavailable.
-2. Live Auth and protected authenticated rendering unavailable.
-3. Installed Electron GPU evidence unavailable.
-4. Package/runtime reconciliation requires separate Founder authority.
-5. The branch remains local and ahead of remote; push is not authorised.
+1. Live Auth and protected authenticated rendering remain unavailable.
+2. Installed Electron GPU evidence remains unavailable.
+3. Stages 4-7 and their separate Founder gates remain outstanding.
 
 ## Architectural integrity
 
@@ -93,8 +88,8 @@ gap. It does not prove:
 
 The frozen Stage 1 evidence archive SHA-256 is
 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d`.
-Sprint 30 remains qualification-incomplete while Sprint 30.5 Stage 3 remains
-incomplete and Stages 4–7 remain outstanding.
+At Stage 1 closure, Sprint 30 remained qualification-incomplete because
+Stages 2-7 were then outstanding.
 
 ## Sprint 30.5 Stage 2 evidence extension
 
@@ -140,7 +135,7 @@ was recorded in commit
 record SHA-256
 `9d5f0cafe2a49792c04fed34702cd63ec9962f0187623a1300a8132beeec830f`.
 
-Stage 3 is historically attempted, incomplete and blocked. No current
+At that reconciliation point, Stage 3 was historically attempted, incomplete and blocked. No current
 authority exists to resume it. The Stage 3 reconciliation did not alter the
 then-accepted Stage 2 source candidate, Runtime Manifest `1.7.0`, signed
 Release Manifest, MSIX, artifact hashes or frozen evidence. ASUS-specific
@@ -179,10 +174,9 @@ and the qualification archive SHA-256 is
 Final machine evidence records zero governed certificate, package, trust and
 private-signing-material residue.
 
-Stage 3 remains historically attempted, incomplete and blocked. Stage 4 and
-all later stages remain unauthorised. Requalification R1 acceptance and
-closure do not authorise production signing, publication, distribution,
-deployment or release.
+At R1 closure, Stage 3 remained historically attempted, incomplete and
+blocked. R1 closure did not authorise production signing, publication,
+distribution, deployment or release.
 
 ## Sprint 30.5 Stage 2 Requalification R2 activation
 
@@ -209,15 +203,27 @@ The signer expires at `2026-08-27T20:35:39Z`. The Founder accepted the result
 and R2 is formally closed. Candidate
 `11475fe01fff2ec69f0188547107f4e901c531d7` is the authoritative Stage 2
 execution candidate for any later separately authorised Stage 3 preparation.
-Stage 3 Qualification R1 and failed R2, R3 and R4 remain immutable historical
-preparation. R2 exposed the function-scoped self-path defect; R3 corrected it
-and subsequently failed closed during package inventory reconciliation. R4
-proved exact logical/ZIP reconciliation and then failed because optional
-uninstall `DisplayName` was accessed directly under StrictMode. Stage 3
-Qualification R5 preserves the accepted Stage 2 R2 candidate and package
-bytes, every prior correction and exact `[Content_Types].xml` validation. It
-adds a shared installed-software policy, optional-member and phase audits,
-full development rehearsal and a transfer-bound pre-authority host probe.
-Stage 3 execution remains
-blocked pending a separate Founder decision. No Stage 3 execution authority
-exists.
+Stage 3 Qualification R1 and failed R2-R8 remain immutable historical records.
+Each failure was preserved and corrected only in a later governed revision.
+
+## Sprint 30.5 Stage 3 Qualification R9 closure
+
+Passing R9 attempt `stage3-r9-20260730T221251043Z-71af9db7`, under consumed
+authority `authority-stage3-r9-20260730T221251043Z-71af9db7`, completed all
+fourteen lifecycle phases on `Founder-QA-01`. It used preparation commit
+`fc3b4775c505cf2cd3b45333bff8ee75d4cbfb3d`, tree
+`2172155e15cfc777def43b4f89778dab3fd91d4a`, and the unchanged accepted Stage
+2 R2 MSIX SHA-256
+`6adb8d9b29585ff7de1b878ec2df2d76a82ce03661cf7269ced7eaff8aae50bc`.
+
+The final evidence manifest SHA-256 is
+`19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`.
+The qualification archive is `161684` bytes with SHA-256
+`5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`.
+Final cleanup records zero package, certificate, process, transfer, work and
+package-data residue. The Founder accepted the result and Stage 3 is formally
+closed.
+
+Stage 4 and later stages remain unstarted and unauthorised. Production
+signing, publication, distribution, deployment and release remain
+unauthorised.

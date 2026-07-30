@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Focused review of Stage 3 Qualification R9 observation and teardown correction
+**Next Review:** Founder decision on Stage 4 planning
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -119,10 +119,9 @@ observation remains disabled. Sprint 28 Option A is complete, locally
 certified, Founder-accepted and closed. Its Product Truth Inventory, canonical
 journey, Web/Electron verification and Founder Beta walkthrough establish the
 truthful product baseline. Sprint 29 Option A is complete, locally certified,
-Founder-accepted and closed under ADR-046. Clean-Machine Certification
-Deferred — Required Disposable Windows Environment Unavailable remains the
-independent programme status because the Windows Home workstation has no
-Windows Sandbox or configured disposable Windows VM. Sprint 30 Option A and
+Founder-accepted and closed under ADR-046. Its independent clean-machine
+lifecycle was subsequently qualified by Stage 3 R9 for the accepted Stage 2
+R2 package. Sprint 30 Option A and
 ADR-047 are Founder-approved. Phases 1 through 3 are complete and locally
 verified. Phase 3 integrates canonically disabled Operational Diagnostics
 through manifest `1.7.0` and proves renderer-safe health, bounded local
@@ -1247,10 +1246,9 @@ certification are complete. The signed
 Release Manifest mechanically matches package identity, native helpers, SBOM,
 provenance and runtime manifest `1.6.0`.
 
-The clean-machine portion of the Definition of Done remains untested because
-no disposable Windows Sandbox or VM is available. **Clean-Machine
-Certification Deferred — Required Disposable Windows Environment
-Unavailable** is the accepted independent programme status. No production
+The clean-machine portion of the Definition of Done was subsequently qualified
+by accepted Stage 3 R9 evidence for the accepted Stage 2 R2 package. No
+production
 publisher identity, hosting, publication, external distribution, deployment
 or Sprint 30 implementation is authorised.
 
@@ -1372,53 +1370,23 @@ The Founder accepted the result and R2 is formally closed. Candidate
 `11475fe01fff2ec69f0188547107f4e901c531d7` is authoritative for any later
 separately authorised Stage 3 preparation decision.
 
-Stage 3 Clean Windows Qualification was subsequently Founder-authorised and
-attempted on `Founder-QA-01`, `MEDION ERAZER P6605 MD61596`, whose current
-Windows installation remains `admitted-with-founder-provenance-exception`.
-`installationMediaEvidencePresent` remains false. Recovered Revision 4
-NegativePathAndTrust evidence passed, but Revision 4 InstallAndStartup failed
-and no canonical Phase 03 success evidence was created. Revision 5 remained
-incomplete, Revision 6 is abandoned, and the certificate 24-hour start gate
-has closed.
-
-Stage 3 is therefore historically attempted, incomplete and blocked. No
-current authority exists to resume it, execute the harness observed during
-reconciliation, create or trust a replacement certificate, reinstall the
-package, repair the harness or begin another qualification revision.
-Stage 2 Requalification R1 acceptance and closure create no Stage 3
-authority.
-
-Stage 3 Qualification R1 and failed Stage 3 Qualification R2, Stage 3
-Qualification R3 and Stage 3 Qualification R4 remain immutable historical
-preparation. R4 proved the deterministic package inventory correction and then
-failed on direct access to optional uninstall `DisplayName` under StrictMode.
-Stage 3 Qualification R5 preserves every prior correction, introduces a shared
-safe deterministic installed-software policy, and binds comprehensive
-optional-member, lifecycle, failure-rehearsal and pre-authority host checks.
-R5 binds only the accepted, formally closed Stage 2 Requalification R2
-candidate. R5 Attempt 1 later failed closed at AppX deployment with
-`0x800B0109` because user-scoped `CurrentUser\Root` trust did not satisfy the
-deployment provider's machine-scoped trust requirement. The attempt remains
-immutable. R6 corrected that trust scope and proved machine trust, package
-installation and Windows activation/container creation, then failed because
-the Explorer shell-broker exit code was treated as authoritative activation
-evidence. Stage 3 Qualification R7 used direct Windows application activation
-and reached native discovery, then failed on Windows PowerShell 5.1
-top-level-array handling; its teardown also exposed a filesystem-only package
-ownership heuristic. Stage 3 Qualification R8 explicitly enumerates the
-discovery JSON array and requires exact Windows AppModel package-family
-ownership while retaining executable-path, Authenticode and native-window
-proof. R8 then captured a 59.929-second observation span against the mandatory
-60 seconds and exposed a teardown process-exit/OpenProcess race. Stage 3
-Qualification R9 measures at least 60,000 monotonic milliseconds between valid
-captured samples and safely classifies only a typed OpenProcess failure for a
-PID immediately proven absent. Live ownership and final residue verification
-remain fail-closed. R9 transfer and execution remain blocked pending separate
-Founder decisions.
-
-Live Auth, protected rendering, clean Windows acceptance, installed-package
-GPU/performance/accessibility, reproducibility and final integrated
-qualification remain outstanding in later sequential stages. No production
+Stage 3 Clean Windows Qualification is Founder-accepted and formally closed.
+Any further Stage 3 execution is unauthorised.
+Stage 3 R1 and failed R2-R8 remain immutable historical records. The passing
+R9 attempt `stage3-r9-20260730T221251043Z-71af9db7`, under consumed authority
+`authority-stage3-r9-20260730T221251043Z-71af9db7`, is bound to preparation
+commit `fc3b4775c505cf2cd3b45333bff8ee75d4cbfb3d`, tree
+`2172155e15cfc777def43b4f89778dab3fd91d4a`, and the accepted Stage 2 R2
+package. All fourteen lifecycle phases passed, both native observation periods
+exceeded 60,000 measured milliseconds, and final cleanup recorded zero
+package, certificate, process, transfer, work and package-data residue. The
+final evidence manifest SHA-256 is
+`19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`;
+the qualification archive SHA-256 is
+`5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`.
+Live Auth, protected rendering, installed-package GPU/performance/accessibility
+and later integrated qualification remain outstanding in Stages 4-7. No
+production
 deployment, persistence, telemetry, migration, external provider, remote push
 or Gate 7 activity is authorised.
 
