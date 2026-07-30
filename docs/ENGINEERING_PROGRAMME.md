@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder decision on Stage 3 Qualification R3 execution
+**Next Review:** Founder decision on Stage 3 Qualification R4 execution
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1388,13 +1388,13 @@ package, repair the harness or begin another qualification revision.
 Stage 2 Requalification R1 acceptance and closure create no Stage 3
 authority.
 
-Stage 3 Qualification R1 and failed R2 remain immutable historical
-preparation. Stage 3 Qualification R3 preparation corrects the deterministic
-R2 function-scoped self-path defect under OEOM v1.0 and binds only the
-accepted, formally closed Stage 2 Requalification R2 candidate. Execution
-remains blocked pending fresh host continuity, exact R3 transfer approval and
-separate
-Founder decisions.
+Stage 3 Qualification R1, failed R2 and failed R3 remain immutable historical
+preparation. Stage 3 Qualification R4 corrects only the deterministic package
+inventory semantic mismatch: percent-decoded logical payload paths remain
+fully reconciled while the exact root OPC metadata part is separately
+validated. R4 binds only the accepted, formally closed Stage 2
+Requalification R2 candidate. Execution remains blocked pending fresh host
+continuity, exact R4 transfer approval and separate Founder decisions.
 
 Live Auth, protected rendering, clean Windows acceptance, installed-package
 GPU/performance/accessibility, reproducibility and final integrated

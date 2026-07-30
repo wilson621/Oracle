@@ -169,14 +169,14 @@ Stage 3 is historically attempted, incomplete and blocked. The historical
 reconciliation authorised no new harness, transfer, trust, installation or
 execution. Gate 7 remains unauthorised.
 
-Stage 3 Qualification R1 and the failed R2 preparation remain immutable.
-R2 failed closed before governed mutation because function-scoped
-`MyInvocation.MyCommand` has no `Path`. Stage 3 Qualification R3 preparation
-preserves the accepted Stage 2 R2 bindings and host-name correction while
-capturing the executing harness path once at script scope under the governed
-`powershell.exe -File` invocation. The board remains stopped at the separate
-Founder execution gate; no clean-host, trust or installation
-action is authorised.
+Stage 3 Qualification R1, failed R2 and failed R3 remain immutable. R3 passed
+the earlier self-path correction and failed closed during package-content
+inventory reconciliation because ZIP container metadata and the governed
+logical payload inventory used different enumeration semantics. Stage 3
+Qualification R4 preserves the accepted Stage 2 R2 package and validates
+decoded logical paths plus exact root OPC metadata separately. The board
+remains stopped at the separate Founder execution gate; no clean-host, trust
+or installation action is authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in

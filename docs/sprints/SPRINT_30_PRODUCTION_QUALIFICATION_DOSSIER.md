@@ -209,10 +209,11 @@ The signer expires at `2026-08-27T20:35:39Z`. The Founder accepted the result
 and R2 is formally closed. Candidate
 `11475fe01fff2ec69f0188547107f4e901c531d7` is the authoritative Stage 2
 execution candidate for any later separately authorised Stage 3 preparation.
-Stage 3 Qualification R1 and failed R2 remain immutable historical
-preparation. R2 failed closed before governed mutation because function-scoped
-`MyInvocation.MyCommand` has no `Path`. Stage 3 Qualification R3 preparation
-preserves the accepted Stage 2 R2 candidate and host-name correction, captures
-the exact executing harness path at script scope and retains strict self-hash
-validation. Stage 3 execution remains blocked pending a separate Founder
-decision. No Stage 3 execution authority exists.
+Stage 3 Qualification R1, failed R2 and failed R3 remain immutable historical
+preparation. R2 exposed the function-scoped self-path defect; R3 corrected it
+and subsequently failed closed during package inventory reconciliation. Stage
+3 Qualification R4 preserves the accepted Stage 2 R2 candidate and package
+bytes, reconciles percent-decoded logical payload paths, and separately
+requires exact `[Content_Types].xml` size and hash. Stage 3 execution remains
+blocked pending a separate Founder decision. No Stage 3 execution authority
+exists.

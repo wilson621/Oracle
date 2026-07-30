@@ -811,11 +811,11 @@ Canonical Phase 03 success evidence is absent, Revision 5 remained incomplete
 and Revision 6 is abandoned.
 
 Sprint 30 remains qualification-incomplete. Historical Stage 3, Stage 3
-Qualification R1 and failed R2 preparation remain immutable. Stage 3
-Qualification R3 preparation is Founder-authorised and bound exclusively to
-the accepted Stage 2 R2 candidate. It corrects only the R2 function-scoped
-self-path defect. Execution remains blocked and unauthorised. Stages 4–7 have
-not started.
+Qualification R1, failed R2 and failed R3 remain immutable. Stage 3
+Qualification R4 preparation is Founder-authorised and bound exclusively to
+the accepted Stage 2 R2 candidate. It corrects only the deterministic
+package-inventory representation mismatch. Execution remains blocked and
+unauthorised. Stages 4–7 have not started.
 Production signing, publication, distribution, deployment and runtime
 persistence remain unauthorised.
 

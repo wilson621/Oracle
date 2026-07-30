@@ -183,12 +183,12 @@ Stage 1, historical Stage 2 and Stage 2 Requalification R1 evidence remain
 unchanged. Production signing, publication, distribution, deployment and
 activation remain unauthorised.
 
-Stage 3 Qualification R1 and failed R2 remain immutable historical
-preparation. Stage 3 Qualification R3 preparation corrects the R2
-function-scoped self-path defect under OEOM v1.0 while preserving the accepted
-Stage 2 R2 bindings, create-only transfer system, ordinal-ignore-case Windows
-computer-name policy and ordered clean-host lifecycle. The next gate is a
-Founder decision on the exact R3 transfer and one execution; no
+Stage 3 Qualification R1, failed R2 and failed R3 remain immutable historical
+preparation. Stage 3 Qualification R4 preserves the accepted Stage 2 R2
+bindings and corrects only package-inventory normalization: decoded logical
+payload entries remain exact while `[Content_Types].xml` is separately bound
+by exact size and hash. The next gate is a Founder decision on the exact R4
+transfer and one execution; no
 transfer or execution authority is implied.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
