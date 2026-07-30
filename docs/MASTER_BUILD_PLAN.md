@@ -183,10 +183,12 @@ Stage 1, historical Stage 2 and Stage 2 Requalification R1 evidence remain
 unchanged. Production signing, publication, distribution, deployment and
 activation remain unauthorised.
 
-Stage 3 Qualification R1 preparation and its pre-execution gate are complete
-under OEOM v1.0. The R2-bound result includes a versioned contract, create-only
-transfer system, ordered clean-host harness and structural validation. The
-next gate is a Founder decision on one transfer method and one execution; no
+Stage 3 Qualification R1 remains immutable historical preparation. Stage 3
+Qualification R2 corrective preparation and its pre-execution gate are complete
+under OEOM v1.0. The accepted-R2-bound result includes a versioned contract,
+create-only transfer system, shared ordinal-ignore-case Windows computer-name
+policy, ordered clean-host harness and structural validation. The next gate is
+a Founder decision on the exact R2 transfer and one execution; no
 transfer or execution authority is implied.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
