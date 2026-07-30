@@ -199,10 +199,14 @@ assertion. Stage 3 Qualification R7 preserved R6 as immutable history and
 used direct Windows application activation, then failed after native discovery
 because Windows PowerShell 5.1 preserved the JSON root array as one pipeline
 object; teardown also exposed filesystem-only ownership classification. Stage
-3 Qualification R8 explicitly normalizes the discovery array and binds process
-ownership through the Windows AppModel package-family identity while retaining
-strict path, signature and native-window proof. R8 transfer and execution
-require separate Founder decisions.
+3 Qualification R8 explicitly normalized the discovery array and bound process
+ownership through the Windows AppModel package-family identity. Its governed
+attempt then captured only 59.929 seconds against the mandatory 60 seconds and
+encountered a teardown process-exit race. R9 requires a final valid observation
+at or after 60,000 monotonic milliseconds from the first valid sample and
+retains fail-closed live-process ownership while safely classifying a proven
+already-exited PID. R9 transfer and execution require separate Founder
+decisions.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

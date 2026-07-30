@@ -188,10 +188,13 @@ was treated as authoritative launch evidence. Stage 3 Qualification R7 used
 direct Windows application activation and reached native window discovery,
 then failed on Windows PowerShell 5.1 JSON-array shape handling; teardown also
 exposed filesystem-only package ownership classification. Stage 3
-Qualification R8 is the active bounded engineering revision. It explicitly
-enumerates the discovery array and requires exact AppModel package-family
-ownership while retaining strict path, signature and native-window proof. No
-R8 transfer or execution is authorised.
+Qualification R8 retained those corrections and progressed through 47 valid
+native observations, but its evidence span was 59.929 seconds against the
+mandatory 60 seconds; teardown also encountered a process-exit/OpenProcess
+race. Stage 3 Qualification R9 is the active bounded engineering revision. It
+requires 60,000 measured monotonic milliseconds between valid captured
+observations and classifies only a typed OpenProcess failure followed by an
+absent PID as a safe exit race. No R9 transfer or execution is authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
@@ -276,7 +279,7 @@ blocked
 InstallAndStartup failed; canonical Phase 03 success evidence absent; Revision
 5 incomplete; Revision 6 abandoned
 **Current authority:** None to resume or repair a historical harness.
-Separate R8 engineering and validation are Founder-authorised; R8 transfer,
+Separate R9 engineering and validation are Founder-authorised; R9 transfer,
 trust, installation and qualification execution remain unauthorised
 **Deployment status:** Production unchanged; no production signing,
 distribution, deployment, migration, persistence or Gate authority

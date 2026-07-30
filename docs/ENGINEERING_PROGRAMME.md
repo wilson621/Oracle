@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder review of Stage 3 Qualification R8 discovery and ownership correction
+**Next Review:** Focused review of Stage 3 Qualification R9 observation and teardown correction
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1408,8 +1408,13 @@ top-level-array handling; its teardown also exposed a filesystem-only package
 ownership heuristic. Stage 3 Qualification R8 explicitly enumerates the
 discovery JSON array and requires exact Windows AppModel package-family
 ownership while retaining executable-path, Authenticode and native-window
-proof. R8 transfer and execution remain blocked pending separate Founder
-decisions.
+proof. R8 then captured a 59.929-second observation span against the mandatory
+60 seconds and exposed a teardown process-exit/OpenProcess race. Stage 3
+Qualification R9 measures at least 60,000 monotonic milliseconds between valid
+captured samples and safely classifies only a typed OpenProcess failure for a
+PID immediately proven absent. Live ownership and final residue verification
+remain fail-closed. R9 transfer and execution remain blocked pending separate
+Founder decisions.
 
 Live Auth, protected rendering, clean Windows acceptance, installed-package
 GPU/performance/accessibility, reproducibility and final integrated
