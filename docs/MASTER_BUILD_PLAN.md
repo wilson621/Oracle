@@ -183,13 +183,17 @@ Stage 1, historical Stage 2 and Stage 2 Requalification R1 evidence remain
 unchanged. Production signing, publication, distribution, deployment and
 activation remain unauthorised.
 
-Stage 3 Qualification R1, failed R2 and failed R3 remain immutable historical
-preparation. Stage 3 Qualification R4 preserves the accepted Stage 2 R2
-bindings and corrects only package-inventory normalization: decoded logical
-payload entries remain exact while `[Content_Types].xml` is separately bound
-by exact size and hash. The next gate is a Founder decision on the exact R4
-transfer and one execution; no
-transfer or execution authority is implied.
+Stage 3 Qualification R1 and failed Stage 3 Qualification R2, Stage 3
+Qualification R3 and Stage 3 Qualification R4 remain immutable historical
+preparation. R4 proved exact package reconciliation and then failed on unsafe
+optional uninstall-registry member access under StrictMode. Stage 3
+Qualification R5 preserves the accepted Stage 2 R2 bindings, all prior
+corrections and exact `[Content_Types].xml` validation. It adds a shared
+installed-software policy, optional-member/phase audits, full simulated
+failure rehearsal and a read-only pre-authority host probe. The next gate is a
+Founder decision on the exact R5
+transfer and one execution. This preparation authorises one create-only R5
+transfer, but no execution authority is implied.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

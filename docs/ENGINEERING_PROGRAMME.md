@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder decision on Stage 3 Qualification R4 execution
+**Next Review:** Founder decision on Stage 3 Qualification R5 execution
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1388,13 +1388,17 @@ package, repair the harness or begin another qualification revision.
 Stage 2 Requalification R1 acceptance and closure create no Stage 3
 authority.
 
-Stage 3 Qualification R1, failed R2 and failed R3 remain immutable historical
-preparation. Stage 3 Qualification R4 corrects only the deterministic package
-inventory semantic mismatch: percent-decoded logical payload paths remain
-fully reconciled while the exact root OPC metadata part is separately
-validated. R4 binds only the accepted, formally closed Stage 2
+Stage 3 Qualification R1 and failed Stage 3 Qualification R2, Stage 3
+Qualification R3 and Stage 3 Qualification R4 remain immutable historical
+preparation. R4 proved the deterministic package inventory correction and then
+failed on direct access to optional uninstall `DisplayName` under StrictMode.
+Stage 3 Qualification R5 preserves every prior correction, introduces a shared
+safe deterministic installed-software policy, and binds comprehensive
+optional-member, lifecycle, failure-rehearsal and pre-authority host checks.
+R5 binds only the accepted, formally closed Stage 2
 Requalification R2 candidate. Execution remains blocked pending fresh host
-continuity, exact R4 transfer approval and separate Founder decisions.
+continuity, exact R5 transfer approval, a passed pre-authority probe and
+separate Founder decisions.
 
 Live Auth, protected rendering, clean Windows acceptance, installed-package
 GPU/performance/accessibility, reproducibility and final integrated

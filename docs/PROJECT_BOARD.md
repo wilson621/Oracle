@@ -169,13 +169,15 @@ Stage 3 is historically attempted, incomplete and blocked. The historical
 reconciliation authorised no new harness, transfer, trust, installation or
 execution. Gate 7 remains unauthorised.
 
-Stage 3 Qualification R1, failed R2 and failed R3 remain immutable. R3 passed
-the earlier self-path correction and failed closed during package-content
-inventory reconciliation because ZIP container metadata and the governed
-logical payload inventory used different enumeration semantics. Stage 3
-Qualification R4 preserves the accepted Stage 2 R2 package and validates
-decoded logical paths plus exact root OPC metadata separately. The board
-remains stopped at the separate Founder execution gate; no clean-host, trust
+Stage 3 Qualification R1 and failed Stage 3 Qualification R2, Stage 3
+Qualification R3 and Stage 3 Qualification R4 remain immutable. R4 proved
+the earlier self-path and package-reconciliation corrections, then failed
+closed after transfer verification because optional uninstall `DisplayName`
+was accessed directly under StrictMode. Stage 3 Qualification R5 preserves the
+accepted Stage 2 R2 package, uses one safe deterministic installed-software
+policy, and adds a full optional-member audit, phase/failure rehearsal and
+transfer-bound pre-authority host probe. The board remains stopped at the
+separate Founder execution gate; no clean-host, trust
 or installation action is authorised.
 
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
@@ -260,9 +262,9 @@ blocked
 **Evidence:** Revision 4 NegativePathAndTrust passed; Revision 4
 InstallAndStartup failed; canonical Phase 03 success evidence absent; Revision
 5 incomplete; Revision 6 abandoned
-**Current authority:** None to resume Stage 3, repair or execute the observed
-harness, create or trust a replacement certificate, reinstall the package or
-begin a new qualification revision
+**Current authority:** None to resume or repair the historical harness.
+Separate R5 preparation and one create-only transfer are Founder-authorised;
+R5 trust, installation and qualification execution remain unauthorised
 **Deployment status:** Production unchanged; no production signing,
 distribution, deployment, migration, persistence or Gate authority
 

@@ -59,11 +59,15 @@ candidate; clean Windows, live Auth, protected rendering and
 installed-package qualification remain; production
 qualification not yet complete
 
-Stage 3 Qualification R1, failed R2 and failed R3 remain immutable historical
-preparation. Stage 3 Qualification R4 is bound exclusively to the accepted
-Stage 2 Requalification R2 candidate. It preserves the host-name and
-script-scoped harness-path corrections and adds one canonical package
-inventory policy: decoded logical payload entries match the Stage 2 inventory,
+Stage 3 Qualification R1 and failed R2, R3 and R4 remain immutable historical
+preparation. Stage 3 Qualification R5 is bound exclusively to the accepted
+Stage 2 Requalification R2 candidate. It preserves the host-name,
+script-scoped harness-path and canonical package-inventory corrections. R4
+proved package reconciliation and then exposed unsafe access to optional
+uninstall registry members. R5 preserves StrictMode, adds a shared deterministic
+installed-software policy, a complete optional-member and phase audit, a
+non-qualification development rehearsal and a transfer-bound read-only
+pre-authority probe. Decoded logical payload entries still match the Stage 2 inventory,
 while exact root OPC metadata is validated separately. The versioned
 create-only transfer, host-continuity, clean-host lifecycle and return
 verification remain intact. Stage 3 execution remains blocked and

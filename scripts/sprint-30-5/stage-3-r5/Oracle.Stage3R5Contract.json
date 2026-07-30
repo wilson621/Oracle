@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-3-r5",
+  "programmeIdentity": "Sprint 30.5 Stage 3 Qualification R5",
+  "revision": "R5",
+  "requiredBranch": "sprint-9-overlay",
+  "stage2": {
+    "attemptId": "r2-20260728T203503018Z-ec577cf4",
+    "authorityId": "authority-r2-20260728T203503018Z-ec577cf4",
+    "candidateCommit": "11475fe01fff2ec69f0188547107f4e901c531d7",
+    "candidateTree": "1cec636603031aa8f63c8b331aea5bbcb916567d",
+    "finalEvidenceManifestSha256": "84660931dec8c2c4f4e409465e67e49d9606f8617824e7c1212bb2e8abf1d47d",
+    "archiveSha256": "6a3d2a6878b6e778214c550854a06e4a410fd5ec60b911b606aef844d4225f0f",
+    "msixSha256": "6adb8d9b29585ff7de1b878ec2df2d76a82ce03661cf7269ced7eaff8aae50bc",
+    "releaseManifestSha256": "22d11f7273c2721efe032f5fedd956fdd4a2bfb587c55e7f84fde73dad8726ad",
+    "certificateThumbprint": "119937D4B90068ACE8765695C5A94321A2C40BD8",
+    "certificateNotAfterUtc": "2026-08-27T20:35:39.000Z",
+    "latestExecutionStartUtc": "2026-08-26T20:35:39.000Z"
+  },
+  "package": {
+    "identity": "Oracle.Platform.LocalCertification",
+    "version": "0.1.1.0",
+    "architecture": "x64",
+    "publisher": "CN=Oracle Stage 2 Requalification R2 Local Test Signing - NOT PRODUCTION",
+    "fileName": "Oracle_0.1.1.0_x64_STAGE2_REQUALIFICATION_R2_LOCAL_TEST_ONLY.msix",
+    "releaseManifestFileName": "oracle-release-manifest.json",
+    "runtimeManifestVersion": "1.7.0"
+  },
+  "packageInventory": {
+    "canonicalPathRepresentation": "single-percent-decoded-forward-slash-logical-package-path",
+    "governedEntryCount": 2201,
+    "zipFileEntryCount": 2202,
+    "percentEncodedEntryCount": 70,
+    "reservedContainerMetadata": {
+      "path": "[Content_Types].xml",
+      "rawZipPath": "[Content_Types].xml",
+      "treatment": "validated-exactly-and-excluded-from-logical-payload-inventory",
+      "size": 2374,
+      "sha256": "3261997987ea9adb75f9e3cee463f6582c6b83f5d462129a77eea21a9d938515"
+    }
+  },
+  "host": {
+    "deviceName": "Founder-QA-01",
+    "computerNameComparison": "ordinal-ignore-case",
+    "manufacturer": "MEDION",
+    "model": "ERAZER P6605 MD61596",
+    "admissionState": "admitted-with-founder-provenance-exception",
+    "hostAdmissionSha256": "6dfaa176ed2d43595511d44401612536c6c0f1955f94527469d0f22af09c3b0e",
+    "hostAdmissionFileName": "Oracle.Stage3HostAdmission.json",
+    "continuityFileName": "Oracle.Stage3R5HostContinuity.json",
+    "continuityMaximumAgeMinutes": 60,
+    "installationMediaEvidencePresent": false
+  },
+  "preAuthority": {
+    "classification": "read-only-non-qualification-non-authority-non-evidence",
+    "requiredPowerShellEdition": "Desktop",
+    "requiredPowerShellVersion": "5.1",
+    "requiredProcessArchitecture": "x64",
+    "installedSoftwareRegistryViews": [
+      "machine-64",
+      "machine-32",
+      "current-user"
+    ],
+    "authorityCreationRequiresPass": true,
+    "hostMutationPermitted": false
+  },
+  "observation": {
+    "discoveryTimeoutSeconds": 60,
+    "stabilitySeconds": 60,
+    "minimumWidth": 1,
+    "minimumHeight": 1
+  },
+  "transferMedium": {
+    "method": "founder-approved-existing-usb-create-only-sibling",
+    "device": "Sony Storage Media",
+    "hardwareSerial": "5F10110403558",
+    "filesystem": "NTFS",
+    "label": "ORACLE-S3R1",
+    "volumeSerial": "783A-2CD4"
+  },
+  "output": {
+    "transferBase": ".artifacts/sprint-30-5/stage-3-r5/transfers",
+    "authorityBase": ".artifacts/sprint-30-5/stage-3-r5/authorities",
+    "attemptBase": ".artifacts/sprint-30-5/stage-3-r5/attempts",
+    "repositoryEvidenceBase": "docs/sprints/evidence/sprint-30-5/stage-3-r5"
+  },
+  "historicalProtectedRoots": [
+    ".artifacts/sprint-30-5/stage-2",
+    ".artifacts/sprint-30-5/stage-2-requalification",
+    ".artifacts/sprint-30-5/stage-2-requalification-r2",
+    ".artifacts/sprint-30-5/stage-3",
+    ".artifacts/sprint-30-5/stage-3-r1",
+    ".artifacts/sprint-30-5/stage-3-r2",
+    ".artifacts/sprint-30-5/stage-3-r3",
+    ".artifacts/sprint-30-5/stage-3-r4",
+    "docs/sprints/evidence/sprint-30-5/stage-2",
+    "docs/sprints/evidence/sprint-30-5/stage-2-requalification",
+    "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r2",
+    "docs/sprints/evidence/sprint-30-5/stage-3-host-admission",
+    "docs/sprints/evidence/sprint-30-5/stage-3-r1",
+    "docs/sprints/evidence/sprint-30-5/stage-3-r2",
+    "docs/sprints/evidence/sprint-30-5/stage-3-r3",
+    "docs/sprints/evidence/sprint-30-5/stage-3-r4",
+    "docs/sprints/evidence/sprint-30-5/stage-3-reconciliation",
+    "docs/sprints/evidence/sprint-30-5/stage-3-revision-history",
+    "docs/sprints/evidence/sprint-30-5/stage-3-revision-6-abandoned-design"
+  ],
+  "authority": {
+    "preparation": "founder-authorised",
+    "transfer": "founder-authorised-one-create-only-transfer",
+    "execution": "not-authorised",
+    "stage4": "not-authorised",
+    "production": "not-authorised",
+    "publication": "not-authorised",
+    "deployment": "not-authorised"
+  }
+}
