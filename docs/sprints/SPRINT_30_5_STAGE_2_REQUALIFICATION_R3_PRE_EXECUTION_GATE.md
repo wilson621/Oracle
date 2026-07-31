@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R3 — Pre-Execution Gate
 
-**Status:** Preparation complete and validated; execution blocked pending commit and separate Founder authority
+**Status:** First attempt consumed and failed; corrected harness requires review, commit and separate new Founder authority
 **Gate owner:** Founder
 **Required candidate:** `a7fc67f207d9c95407c70812828fa66bd487285d`
 **Required tree:** `356f6d52f1bf70065692e892af8bf916acc8727a`
@@ -41,13 +41,15 @@ A later Founder prompt must bind:
 
 - one committed R3 harness commit and tree;
 - the exact candidate commit and tree above;
-- one canonical UTC timestamp;
-- one unique `r3-...` attempt ID;
-- its exact `authority-r3-...` authority ID;
+- authority for the governed wrapper to generate one canonical UTC timestamp
+  and one cryptographically random identity;
+- one unique generated `r3-...` attempt ID and its exact matching
+  `authority-r3-...` authority ID;
 - the required machine, package, output root and authority token; and
 - authority for exactly one governed execution.
 
-Only the single executor may consume that decision. A failed gate must stop
+Only `invoke-attempt.ps1` may translate that decision into one internal
+executor invocation. A failed gate must stop
 before authority or attempt creation. A failed execution must preserve its
 attempt and stop after governed safety teardown. No retry is implied.
 

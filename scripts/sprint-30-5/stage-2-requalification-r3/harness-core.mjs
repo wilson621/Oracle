@@ -8,14 +8,17 @@ import {
   mkdirSync,
   openSync,
   readFileSync,
+  realpathSync,
   unlinkSync,
   writeFileSync,
 } from "node:fs";
 import os from "node:os";
-import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
+import { basename, dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { spawnSync } from "node:child_process";
 
 export const repositoryRoot = resolve(import.meta.dirname, "..", "..", "..");
+export const R3_GOVERNED_WRAPPER_PROTOCOL =
+  "oracle-stage2-r3-governed-wrapper-v1";
 export const contractPath = join(
   import.meta.dirname,
   "Oracle.Stage2RequalificationR3Contract.json"
@@ -89,6 +92,22 @@ export function assertNoReparseTraversal(
   }
 }
 
+export function validateGovernedWrapperInvocation({ observed, parentProcessId }) {
+  if (!Number.isInteger(parentProcessId) || parentProcessId <= 0) {
+    throw new Error("The governed wrapper parent process ID is invalid.");
+  }
+  const expected = `${R3_GOVERNED_WRAPPER_PROTOCOL}:${parentProcessId}`;
+  if (observed !== expected) {
+    throw new Error(
+      "The R3 executor must be invoked by the governed invoke-attempt.ps1 wrapper."
+    );
+  }
+  return Object.freeze({
+    protocol: R3_GOVERNED_WRAPPER_PROTOCOL,
+    parentProcessId,
+  });
+}
+
 export function validateAttemptIdentity({ attemptId, timestampUtc }) {
   if (typeof attemptId !== "string" || typeof timestampUtc !== "string") {
     throw new Error("Attempt ID and UTC timestamp are mandatory.");
@@ -96,6 +115,9 @@ export function validateAttemptIdentity({ attemptId, timestampUtc }) {
   const match = attemptPattern.exec(attemptId);
   if (!match) {
     throw new Error("Attempt ID must use r3-YYYYMMDDTHHMMSSmmmZ-xxxxxxxx.");
+  }
+  if (match[2] === "00000000") {
+    throw new Error("Attempt ID uses the prohibited all-zero suffix.");
   }
   const parsed = new Date(timestampUtc);
   if (Number.isNaN(parsed.valueOf()) || parsed.toISOString() !== timestampUtc) {
@@ -227,6 +249,59 @@ export function assertRequiredTool(command, args = ["--version"]) {
   }
 }
 
+export function resolveApprovedNpmSurface({
+  nodeExecutable = process.execPath,
+  filesystem = { existsSync, lstatSync, readFileSync, realpathSync },
+} = {}) {
+  const resolvedNode = resolve(nodeExecutable);
+  if (basename(resolvedNode).toLowerCase() !== "node.exe") {
+    throw new Error("The approved Node executable must be node.exe.");
+  }
+  const nodeRoot = dirname(resolvedNode);
+  const npmPackageRoot = join(nodeRoot, "node_modules", "npm");
+  const packageJsonPath = join(npmPackageRoot, "package.json");
+  const npmCli = join(npmPackageRoot, "bin", "npm-cli.js");
+  const npxCli = join(npmPackageRoot, "bin", "npx-cli.js");
+  for (const path of [resolvedNode, packageJsonPath, npmCli, npxCli]) {
+    if (!filesystem.existsSync(path) || !filesystem.lstatSync(path).isFile()) {
+      throw new Error(`Approved npm surface is missing: ${path}`);
+    }
+    if (filesystem.realpathSync(path).toLowerCase() !== resolve(path).toLowerCase()) {
+      throw new Error(`Approved npm surface traverses a reparse path: ${path}`);
+    }
+  }
+  if (
+    !isSameOrDescendant(packageJsonPath, npmPackageRoot) ||
+    !isSameOrDescendant(npmCli, npmPackageRoot) ||
+    !isSameOrDescendant(npxCli, npmPackageRoot)
+  ) {
+    throw new Error("Approved npm surface escaped its Node installation root.");
+  }
+  let packageIdentity;
+  try {
+    packageIdentity = JSON.parse(filesystem.readFileSync(packageJsonPath, "utf8"));
+  } catch (error) {
+    throw new Error(`Approved npm package identity is unreadable: ${error.message}`, { cause: error });
+  }
+  if (
+    packageIdentity.name !== "npm" ||
+    packageIdentity.version !== contract.toolchain.npm
+  ) {
+    throw new Error(
+      `Approved npm package identity mismatch: expected npm ${contract.toolchain.npm}.`
+    );
+  }
+  return Object.freeze({
+    nodeExecutable: resolvedNode,
+    nodeRoot,
+    npmPackageRoot,
+    packageJsonPath,
+    npmCli,
+    npxCli,
+    npmVersion: packageIdentity.version,
+  });
+}
+
 export function requiredToolVersion(command, args = ["--version"]) {
   const executable =
     process.platform === "win32" && command.toLowerCase().endsWith(".cmd")
@@ -329,10 +404,11 @@ export function assertRepositoryPreflight(binding) {
       "Candidate and harness commits do not bind the same governed product and packaging inputs."
     );
   }
+  const npmSurface = resolveApprovedNpmSurface();
   const versions = {
     git: requiredToolVersion("git", ["--version"]).replace(/^git version /u, ""),
-    node: requiredToolVersion("node", ["--version"]).replace(/^v/u, ""),
-    npm: requiredToolVersion("npm.cmd", ["--version"]),
+    node: requiredToolVersion(npmSurface.nodeExecutable, ["--version"]).replace(/^v/u, ""),
+    npm: requiredToolVersion(npmSurface.nodeExecutable, [npmSurface.npmCli, "--version"]),
     powershell: requiredToolVersion("powershell.exe", [
       "-NoProfile",
       "-NonInteractive",
@@ -421,7 +497,7 @@ export function assertGitAncestor(ancestor, descendant, label) {
   }
 }
 
-export function assertCleanMachineQualificationState() {
+export function readMachineQualificationState() {
   const command = [
     "$ErrorActionPreference = 'Stop'",
     `$packageName = '${contract.package.identity}'`,
@@ -441,7 +517,7 @@ export function assertCleanMachineQualificationState() {
     ")",
     "[pscustomobject]@{ packages=@($packages).Count; certificates=@($certificates) } | ConvertTo-Json -Compress -Depth 5",
   ].join("\n");
-  const result = JSON.parse(
+  return JSON.parse(
     runReadOnly("powershell.exe", [
       "-NoProfile",
       "-NonInteractive",
@@ -449,7 +525,10 @@ export function assertCleanMachineQualificationState() {
       command,
     ])
   );
-  validateMachineQualificationState(result);
+}
+
+export function assertCleanMachineQualificationState() {
+  validateMachineQualificationState(readMachineQualificationState());
 }
 
 export function validateMachineQualificationState(result) {
@@ -493,6 +572,11 @@ export function createAttemptRecord(input) {
       architecture: process.arch,
       osRelease: os.release(),
     },
+    invocation: {
+      surface: "invoke-attempt.ps1",
+      protocol: input.wrapperProtocol,
+      wrapperProcessId: input.wrapperProcessId,
+    },
     package: {
       identity: input.packageIdentity,
       version: input.packageVersion,
@@ -504,18 +588,24 @@ export function createAttemptRecord(input) {
     },
     outputRoot: relative(repositoryRoot, outputRoot).replaceAll("\\", "/"),
     lifecycle: {
-      state: "prepared",
-      stopReason: null,
+      recordType: "immutable-attempt-creation-state",
+      initialState: "prepared",
+      eventLedger: "lifecycle/",
+      terminalStateRecordedSeparately: true,
     },
     evidence: {
-      manifest: null,
-      finalEvidenceHash: null,
+      initialManifest: null,
+      initialFinalEvidenceHash: null,
+      terminalOutcomeRecordedSeparately: true,
     },
     authority: {
-      build: "not-authorised-by-preparation",
-      package: "not-authorised-by-preparation",
-      signing: "not-authorised-by-preparation",
-      qualificationExecution: "not-authorised-by-preparation",
+      authorityId: input.authorityId,
+      claimState: "consumed-for-this-attempt",
+      attemptsAuthorised: 1,
+      build: "founder-authorised-for-this-attempt",
+      package: "founder-authorised-for-this-attempt",
+      signing: "founder-authorised-local-test-only-for-this-attempt",
+      qualificationExecution: "founder-authorised-for-this-attempt",
       stage3: "not-authorised",
       stage4: "not-authorised",
       productionRelease: "not-authorised",
@@ -600,9 +690,12 @@ export function harnessFileInventory() {
     import.meta.filename,
     join(import.meta.dirname, "execution-core.mjs"),
     join(import.meta.dirname, "execute-attempt.mjs"),
+    join(import.meta.dirname, "execution-identity-core.ps1"),
+    join(import.meta.dirname, "invoke-attempt.ps1"),
     join(import.meta.dirname, "remove-exact-certificate.ps1"),
     join(import.meta.dirname, "sign-release-manifest-exact.ps1"),
     join(import.meta.dirname, "verify-exact-signatures.ps1"),
+    join(import.meta.dirname, "verify-execution-identity.ps1"),
     join(import.meta.dirname, "verify-harness-static.mjs"),
   ]
     .map((path) => ({

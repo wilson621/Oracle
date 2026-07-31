@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { mkdtempSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import os from "node:os";
 import { join } from "node:path";
+import { spawnSync } from "node:child_process";
 import {
   assertAttemptOutputAvailable,
   assertGitAncestor,
@@ -11,15 +12,19 @@ import {
   assertR3ArtifactPath,
   bindCertificate,
   contract,
+  createAttemptRecord,
   git,
   harnessFileInventory,
   isSameOrDescendant,
   repositoryRoot,
+  resolveApprovedNpmSurface,
+  requiredToolVersion,
   sha256File,
   validateAttemptIdentity,
   validateBinding,
   validateCertificateThumbprint,
   validateFinalIdentity,
+  validateGovernedWrapperInvocation,
   validateMachineQualificationState,
   validateRepositorySnapshot,
   validateToolchainVersions,
@@ -46,12 +51,44 @@ const fixtureBinding = {
   machineIdentity: os.hostname(),
   packageIdentity: contract.package.identity,
   packageVersion: contract.package.version,
+  wrapperProtocol: "oracle-stage2-r3-governed-wrapper-v1",
+  wrapperProcessId: 4242,
 };
 
 validateAttemptIdentity({
   attemptId: fixtureAttemptId,
   timestampUtc: fixtureTimestamp,
 });
+assert.deepEqual(
+  validateGovernedWrapperInvocation({
+    observed: "oracle-stage2-r3-governed-wrapper-v1:4242",
+    parentProcessId: 4242,
+  }),
+  {
+    protocol: "oracle-stage2-r3-governed-wrapper-v1",
+    parentProcessId: 4242,
+  }
+);
+assert.throws(
+  () => validateGovernedWrapperInvocation({ observed: null, parentProcessId: 4242 }),
+  /must be invoked by the governed/
+);
+assert.throws(
+  () =>
+    validateGovernedWrapperInvocation({
+      observed: "oracle-stage2-r3-governed-wrapper-v1:4243",
+      parentProcessId: 4242,
+    }),
+  /must be invoked by the governed/
+);
+assert.throws(
+  () =>
+    validateGovernedWrapperInvocation({
+      observed: "oracle-stage2-r3-governed-wrapper-v1:0",
+      parentProcessId: 0,
+    }),
+  /parent process ID is invalid/
+);
 assert.throws(
   () =>
     validateAttemptIdentity({
@@ -59,6 +96,14 @@ assert.throws(
       timestampUtc: fixtureTimestamp,
     }),
   /Attempt ID must/
+);
+assert.throws(
+  () =>
+    validateAttemptIdentity({
+      attemptId: "r3-20260728T131415678Z-00000000",
+      timestampUtc: fixtureTimestamp,
+    }),
+  /prohibited all-zero suffix/
 );
 assert.throws(
   () =>
@@ -107,15 +152,86 @@ const expectedHarnessFiles = [
   "Oracle.Stage2RequalificationR3Contract.json",
   "execute-attempt.mjs",
   "execution-core.mjs",
+  "execution-identity-core.ps1",
   "harness-core.mjs",
+  "invoke-attempt.ps1",
   "remove-exact-certificate.ps1",
   "sign-release-manifest-exact.ps1",
   "verify-exact-signatures.ps1",
+  "verify-execution-identity.ps1",
   "verify-harness-static.mjs",
 ].map((name) => `scripts/sprint-30-5/stage-2-requalification-r3/${name}`).sort();
 assert.deepEqual(
   harnessFileInventory().map((entry) => entry.path),
   expectedHarnessFiles
+);
+const npmSurface = resolveApprovedNpmSurface();
+assert.equal(npmSurface.nodeExecutable.toLowerCase(), process.execPath.toLowerCase());
+assert.equal(npmSurface.npmVersion, contract.toolchain.npm);
+assert.equal(
+  requiredToolVersion(npmSurface.nodeExecutable, [npmSurface.npmCli, "--version"]),
+  contract.toolchain.npm
+);
+assert.match(npmSurface.npmCli, /node_modules[\\/]npm[\\/]bin[\\/]npm-cli\.js$/iu);
+assert.match(npmSurface.npxCli, /node_modules[\\/]npm[\\/]bin[\\/]npx-cli\.js$/iu);
+const syntheticNpmFilesystem = {
+  existsSync: () => true,
+  lstatSync: () => ({ isFile: () => true }),
+  realpathSync: (path) => path,
+  readFileSync: () => JSON.stringify({ name: "npm", version: contract.toolchain.npm }),
+};
+assert.doesNotThrow(() =>
+  resolveApprovedNpmSurface({
+    nodeExecutable: join(repositoryRoot, "synthetic-node", "node.exe"),
+    filesystem: syntheticNpmFilesystem,
+  })
+);
+assert.throws(
+  () => resolveApprovedNpmSurface({
+    nodeExecutable: join(repositoryRoot, "synthetic-node", "node.exe"),
+    filesystem: { ...syntheticNpmFilesystem, existsSync: () => false },
+  }),
+  /Approved npm surface is missing/
+);
+assert.throws(
+  () => resolveApprovedNpmSurface({
+    nodeExecutable: join(repositoryRoot, "synthetic-node", "node.exe"),
+    filesystem: {
+      ...syntheticNpmFilesystem,
+      readFileSync: () => JSON.stringify({ name: "npm", version: "0.0.0" }),
+    },
+  }),
+  /Approved npm package identity mismatch/
+);
+assert.throws(
+  () => resolveApprovedNpmSurface({
+    nodeExecutable: join(repositoryRoot, "synthetic-node", "node.exe"),
+    filesystem: {
+      ...syntheticNpmFilesystem,
+      realpathSync: (path) => `${path}-redirected`,
+    },
+  }),
+  /traverses a reparse path/
+);
+const attemptCreationRecord = createAttemptRecord({
+  ...fixtureBinding,
+  authorityId: fixtureAuthorityId,
+  attemptId: fixtureAttemptId,
+  timestampUtc: fixtureTimestamp,
+  outputRoot: join(".artifacts", "sprint-30-5", "stage-2-requalification-r3", fixtureAttemptId),
+});
+assert.equal(attemptCreationRecord.lifecycle.initialState, "prepared");
+assert.equal(attemptCreationRecord.lifecycle.terminalStateRecordedSeparately, true);
+assert.equal(attemptCreationRecord.authority.authorityId, fixtureAuthorityId);
+assert.equal(attemptCreationRecord.authority.claimState, "consumed-for-this-attempt");
+assert.deepEqual(attemptCreationRecord.invocation, {
+  surface: "invoke-attempt.ps1",
+  protocol: "oracle-stage2-r3-governed-wrapper-v1",
+  wrapperProcessId: 4242,
+});
+assert.equal(
+  attemptCreationRecord.authority.qualificationExecution,
+  "founder-authorised-for-this-attempt"
 );
 const r2ValidatorSource = readFileSync(
   join(import.meta.dirname, "..", "stage-2-requalification-r2", "verify-harness-static.mjs"),
@@ -748,6 +864,14 @@ assert.match(executorSource, /"authority-id"/u);
 assert.match(executorSource, /authorityId: input\.authorityId/u);
 assert.match(executorSource, /sourceCommit: input\.candidateCommit/u);
 assert.match(executorSource, /sourceTree: contract\.candidate\.tree/u);
+assert.match(executorSource, /resolveApprovedNpmSurface\(\)\.npmCli/u);
+assert.match(executorSource, /resolveApprovedNpmSurface\(\)\.npxCli/u);
+assert.doesNotMatch(executorSource, /process\.env\.npm_execpath/u);
+assert.doesNotMatch(executorSource, /npm\.cmd|corepack/iu);
+assert.match(executorSource, /stage-2-requalification-r3-failure-outcome\.json/u);
+assert.match(executorSource, /attemptCreationRecordSha256/u);
+assert.match(executorSource, /lifecycleFailureRecordSha256/u);
+assert.match(executorSource, /residualStateRequiresFounderAction/u);
 assert.match(executorSource, /contract\.historicalEvidenceBindings/u);
 assert.match(executorSource, /Immutable historical evidence binding failed/u);
 assert.match(executorSource, /Historical evidence binding contains traversal/u);
@@ -781,6 +905,63 @@ assert.match(executorSource, /new Set\(added\.map/u);
 assert.match(
   executorSource,
   /publishExistingFileCreateOnly\(temporaryPackagePath, packagePath\)/u
+);
+
+const identityCore = readFileSync(
+  join(import.meta.dirname, "execution-identity-core.ps1"),
+  "utf8"
+);
+const governedInvoker = readFileSync(
+  join(import.meta.dirname, "invoke-attempt.ps1"),
+  "utf8"
+);
+const identityVerifier = readFileSync(
+  join(import.meta.dirname, "verify-execution-identity.ps1"),
+  "utf8"
+);
+assert.match(identityCore, /RandomNumberGenerator\]::Create\(\)/u);
+assert.match(identityCore, /\.GetBytes\(\$entropy\)/u);
+assert.doesNotMatch(identityCore, /RandomNumberGenerator\]::Fill/u);
+assert.match(identityCore, /prohibited all-zero suffix/u);
+assert.match(identityCore, /Secure entropy generation failed/u);
+assert.doesNotMatch(identityCore, /00000000[^\r\n]*fallback/iu);
+assert.match(governedInvoker, /\$ErrorActionPreference = "Stop"/u);
+assert.match(governedInvoker, /New-OracleStage2R3ExecutionIdentity/u);
+assert.match(governedInvoker, /if \(\$identity\.suffix -eq "00000000"\)/u);
+assert.match(governedInvoker, /& \$nodePath @arguments/u);
+assert.match(
+  governedInvoker,
+  /oracle-stage2-r3-governed-wrapper-v1:\$PID/u
+);
+assert.match(governedInvoker, /previousWrapperMarker/u);
+assert.match(executorSource, /assertGovernedWrapperInvocation\(\)/u);
+assert.match(
+  harnessCore,
+  /The R3 executor must be invoked by the governed invoke-attempt\.ps1 wrapper/u
+);
+assert.doesNotMatch(governedInvoker, /-EntropyProvider|-UtcNowProvider/u);
+assert.match(identityVerifier, /fixture entropy failure/u);
+assert.match(identityVerifier, /prohibited all-zero/u);
+
+const directInvocationEnvironment = { ...process.env };
+delete directInvocationEnvironment.ORACLE_STAGE2_R3_GOVERNED_WRAPPER;
+const directInvocation = spawnSync(
+  process.execPath,
+  [join(import.meta.dirname, "execute-attempt.mjs")],
+  {
+    cwd: repositoryRoot,
+    env: directInvocationEnvironment,
+    encoding: "utf8",
+    shell: false,
+    windowsHide: true,
+  }
+);
+assert.equal(directInvocation.error, undefined);
+assert.equal(directInvocation.signal, null);
+assert.notEqual(directInvocation.status, 0);
+assert.match(
+  directInvocation.stderr,
+  /must be invoked by the governed invoke-attempt\.ps1 wrapper/u
 );
 
 const exactManifestSigner = readFileSync(
@@ -945,6 +1126,12 @@ console.log(
         correctedMigrationHashBinding: "passed",
         runtimeMigrationHashEnforcement: "passed",
         completeHarnessInventoryBinding: "passed",
+        deterministicNpmSurfaceResolution: "passed",
+        npmMissingVersionAndReparseRejection: "passed",
+        powershell51IdentityGenerationInspection: "passed",
+        entropyFailureAndAllZeroRejectionInspection: "passed",
+        attemptCreationStateConsistency: "passed",
+        terminalFailureOutcomeInspection: "passed",
         inheritedR2FixtureParity: "passed",
         historicalEvidenceHashBinding: "passed",
         historicalRootRejection: "passed",

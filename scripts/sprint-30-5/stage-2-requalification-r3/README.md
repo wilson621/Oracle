@@ -12,8 +12,13 @@ rejects any candidate-to-harness change in governed product or packaging
 inputs.
 
 Preparation does not authorise build, package construction, signing,
-certificate mutation or qualification execution. `execute-attempt.mjs` is the
-only operational R3 entry point. It cannot run without the exact token
+certificate mutation or qualification execution. `invoke-attempt.ps1` is the
+only Founder-facing operational R3 entry point. It creates one matching
+authority/attempt identity using the Windows PowerShell 5.1-compatible
+`RandomNumberGenerator.Create().GetBytes(byte[])` surface and invokes the
+internal `execute-attempt.mjs` executor exactly once. The internal executor
+rejects invocation unless its parent-bound wrapper protocol is present, and
+removes the marker before launching governed child processes. It cannot run without the exact token
 `FOUNDER-AUTHORISED-STAGE-2-R3-SINGLE-ATTEMPT` plus one unique authority ID,
 attempt ID and complete immutable binding set. No standalone attempt,
 build, package, signing, certificate, freeze or verification phase is exposed.
@@ -43,9 +48,13 @@ Run preparation validation only with:
 
 After a separate Founder single-attempt execution decision, invoke only:
 
-`node scripts/sprint-30-5/stage-2-requalification-r3/execute-attempt.mjs <governed arguments>`
+`powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/sprint-30-5/stage-2-requalification-r3/invoke-attempt.ps1 -FounderAuthority <exact-token> -HarnessCommit <commit> -HarnessTree <tree>`
 
-The executor records each ordered phase, stops on the first failure, never
+The wrapper rejects a dirty or incorrectly bound repository before identity
+generation. The executor resolves npm and npx only through the exact
+contract-versioned npm package installed beside `process.execPath`; it does not
+depend on `PATH`, `npm.cmd`, Corepack or the npm-only `npm_execpath`
+environment variable. The executor records each ordered phase, stops on the first failure, never
 retries, permits only bounded safety teardown after certificate mutation, and
 publishes evidence only through fresh create-only destinations. A passing
 attempt stops at `complete-awaiting-founder-review`; it does not accept or close

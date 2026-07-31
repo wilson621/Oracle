@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R3 — Preparation Implementation
 
-**Status:** Preparation complete and validated; awaiting commit authorisation
+**Status:** First attempt failed; bounded correction implemented and awaiting review
 **Execution:** Not authorised
 
 ## Implementation
@@ -22,6 +22,29 @@ R3-specific controls add:
 - no standalone attempt-preparation entry point; and
 - no R3 `package.json` script, preserving byte identity of the candidate
   product inputs.
+
+## Failed-attempt correction
+
+The immutable first attempt
+`r3-20260731T163246422Z-00000000` exposed two harness defects. Direct Node
+invocation did not populate npm's `npm_execpath`, so candidate freeze could
+not resolve npm despite the approved installation being intact. The executor
+now binds npm and npx to the exact contract-versioned npm package installed
+beside the exact Node executable, and invokes each CLI as an argument to that
+Node executable.
+
+The original external identity command used the .NET Core static
+`RandomNumberGenerator.Fill` surface, which Windows PowerShell 5.1 does not
+provide. Its non-terminating method error left a zero-initialised byte array
+and produced the prohibited suffix `00000000`. The governed
+`invoke-attempt.ps1` wrapper now uses the Windows PowerShell 5.1-compatible
+instance `GetBytes` API under terminating-error semantics, rejects null,
+wrong-length and all-zero entropy, and generates a matching authority/attempt
+pair only after repository preflight. The internal executor now rejects direct
+invocation unless the parent-bound governed-wrapper protocol is present and
+records that invocation surface in the initial attempt record. Future failed
+executions also publish a create-only terminal failure outcome binding the creation, authority and
+lifecycle records and recording residue verification.
 
 ## Stage 4 draft isolation
 

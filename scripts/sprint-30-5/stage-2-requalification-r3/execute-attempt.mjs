@@ -23,7 +23,10 @@ import {
   createAttemptRecord,
   git,
   harnessFileInventory,
+  readMachineQualificationState,
   repositoryRoot,
+  resolveApprovedNpmSurface,
+  validateGovernedWrapperInvocation,
   sha256File,
   validateFinalIdentity,
 } from "./harness-core.mjs";
@@ -49,6 +52,7 @@ const HISTORICAL_STAGE2_ARCHIVE_SHA256 =
 const GOVERNED_COMMAND_MAX_BUFFER_BYTES = 16 * 1024 * 1024;
 const PERMANENT_LIMITATION =
   "Local test signing proves packaging and distribution mechanics only. It does not establish production trust, publication, distribution, deployment or release authority.";
+const wrapperInvocation = assertGovernedWrapperInvocation();
 
 const values = parseArguments(process.argv.slice(2));
 assertFounderExecutionAuthority(values.get("founder-authority"));
@@ -85,6 +89,8 @@ const input = {
   packageIdentity: values.get("package-identity"),
   packageVersion: values.get("package-version"),
   outputRoot: resolve(repositoryRoot, values.get("output-root")),
+  wrapperProtocol: wrapperInvocation.protocol,
+  wrapperProcessId: wrapperInvocation.parentProcessId,
 };
 
 let attemptRoot = null;
@@ -103,6 +109,7 @@ let teardownAttempted = false;
 let teardownPassed = false;
 let signingMaterialDestructionAttempted = false;
 let currentCommand = null;
+let lifecycleFailureRecord = null;
 
 try {
   assertExecutionContract();
@@ -336,7 +343,7 @@ try {
   }
   if (lifecycle && !lifecycle.isTerminal) {
     try {
-      lifecycle.fail(error, {
+      lifecycleFailureRecord = lifecycle.fail(error, {
         command: currentCommand,
         exactThumbprint,
         teardownAttempted,
@@ -350,12 +357,123 @@ try {
       );
     }
   }
+  if (attemptRoot && directories) {
+    try {
+      publishFailureOutcome(error, lifecycleFailureRecord, teardownError);
+    } catch (outcomeError) {
+      process.stderr.write(
+        `Failure outcome publication also failed: ${outcomeError.message}\n`
+      );
+    }
+  }
   if (teardownError) {
     process.stderr.write(`Safety teardown failed: ${teardownError.message}\n`);
   }
   throw error;
 } finally {
   password = null;
+}
+
+function assertGovernedWrapperInvocation() {
+  const environmentName = "ORACLE_STAGE2_R3_GOVERNED_WRAPPER";
+  const observed = process.env[environmentName];
+  delete process.env[environmentName];
+  return validateGovernedWrapperInvocation({
+    observed,
+    parentProcessId: process.ppid,
+  });
+}
+
+function publishFailureOutcome(error, failureRecord, teardownError) {
+  const attemptRecordPath = join(
+    attemptRoot,
+    "Oracle.Stage2RequalificationR3Attempt.json"
+  );
+  const authorityEvidencePath = join(
+    directories.evidence,
+    "single-attempt-authority.json"
+  );
+  const failureRecordPath = join(attemptRoot, "lifecycle", "999-failed.json");
+  let machineState = null;
+  let residueCheckError = null;
+  try {
+    machineState = readMachineQualificationState();
+  } catch (caught) {
+    residueCheckError = caught instanceof Error ? caught.message : String(caught);
+  }
+  const privateMaterial = findFiles(attemptRoot).filter((path) =>
+    /(?:password|\.(?:cer|key|pem|pfx|p12)$)/iu.test(path)
+  );
+  const repositoryStatus = git([
+    "status",
+    "--porcelain=v1",
+    "--untracked-files=all",
+  ]);
+  const packagesRemaining = machineState?.packages ?? null;
+  const certificatesRemaining = Array.isArray(machineState?.certificates)
+    ? machineState.certificates
+    : null;
+  const residueShapeValid =
+    Number.isInteger(packagesRemaining) &&
+    packagesRemaining >= 0 &&
+    certificatesRemaining !== null;
+  if (residueCheckError === null && !residueShapeValid) {
+    residueCheckError = "Machine residue verification returned an invalid shape.";
+  }
+  const residuePassed =
+    residueCheckError === null &&
+    packagesRemaining === 0 &&
+    certificatesRemaining?.length === 0 &&
+    privateMaterial.length === 0;
+  writeJsonAtomicCreateOnly(
+    join(directories.evidence, "stage-2-requalification-r3-failure-outcome.json"),
+    {
+      schemaVersion: "1.0.0",
+      contract:
+        "oracle.sprint-30-5.stage-2-requalification-r3-failure-outcome",
+      ...identity(),
+      recordedAt: new Date().toISOString(),
+      status: "failed",
+      failedPhase: failureRecord?.phase ?? lifecycle?.currentPhase ?? "unknown",
+      stopReason: error instanceof Error ? error.message : String(error),
+      command: currentCommand,
+      authorityConsumed: true,
+      attemptCreationRecordSha256: existsSync(attemptRecordPath)
+        ? sha256File(attemptRecordPath)
+        : null,
+      authorityRecordSha256: existsSync(authorityEvidencePath)
+        ? sha256File(authorityEvidencePath)
+        : null,
+      lifecycleFailureRecordSha256:
+        failureRecord && existsSync(failureRecordPath)
+          ? sha256File(failureRecordPath)
+          : null,
+      certificate: {
+        exactThumbprint,
+        created: exactThumbprint !== null,
+      },
+      teardown: {
+        required: exactThumbprint !== null,
+        attempted: teardownAttempted,
+        passed: teardownPassed,
+        error: teardownError instanceof Error ? teardownError.message : null,
+        signingMaterialDestructionAttempted,
+      },
+      residue: {
+        verification: residueCheckError === null ? "completed" : "failed",
+        verificationError: residueCheckError,
+        packagesRemaining,
+        certificatesRemaining,
+        privateMaterial,
+        passed: residuePassed,
+      },
+      repository: {
+        status: repositoryStatus === "" ? [] : repositoryStatus.split(/\r?\n/u),
+        indexClean: git(["diff", "--cached", "--name-only"]) === "",
+      },
+      residualStateRequiresFounderAction: !residuePassed,
+    }
+  );
 }
 
 function assertExecutionContract() {
@@ -1638,18 +1756,18 @@ function runNpxLogged(label, args, redactions = [], environment = {}) {
   return runLogged(
     label,
     process.execPath,
-    [npmCliPath().replace(/npm-cli\.js$/iu, "npx-cli.js"), ...args],
+    [npxCliPath(), ...args],
     redactions,
     environment
   );
 }
 
 function npmCliPath() {
-  const path = process.env.npm_execpath;
-  if (!path || !path.toLowerCase().endsWith("npm-cli.js")) {
-    throw new Error("npm CLI entry point is unavailable.");
-  }
-  return path;
+  return resolveApprovedNpmSurface().npmCli;
+}
+
+function npxCliPath() {
+  return resolveApprovedNpmSurface().npxCli;
 }
 
 function runLogged(label, command, args, redactions = [], environment = {}) {
