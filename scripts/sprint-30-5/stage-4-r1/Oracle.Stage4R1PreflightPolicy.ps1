@@ -32,6 +32,10 @@ function Invoke-OracleStage4R1NativeProcess([string]$Executable,[string[]]$Argum
   if($null -ne $failureMessage){$exception=New-Object -TypeName System.InvalidOperationException -ArgumentList $failureMessage;$exception.Data['OracleStage4R1ProcessRecord']=$record;throw $exception}
   $record
 }
+function ConvertTo-OracleStage4R1ProcessEvidenceArray([Collections.Generic.List[object]]$Evidence) {
+  if($null -eq $Evidence){throw 'Process evidence collection is absent.'}
+  ,$Evidence.ToArray()
+}
 function Assert-OracleStage4R1NoReparseTraversal([string]$Path,[string]$Boundary) {
   $full=[IO.Path]::GetFullPath($Path);$boundaryFull=[IO.Path]::GetFullPath($Boundary);$root=$boundaryFull.TrimEnd('\')
   if(-not($full -eq $root -or $full.StartsWith($root+'\',[StringComparison]::OrdinalIgnoreCase))){throw 'Path escapes its governed boundary.'}
@@ -83,5 +87,6 @@ function Resolve-OracleStage4R1BoundTool([object]$Specification,[string]$Name) {
   $defaultRoutes=@(Get-NetRoute -ErrorAction Stop|Where-Object{$_.DestinationPrefix -in @('0.0.0.0/0','::/0') -and $_.State -eq 'Alive' -and $_.RouteMetric -lt 4294967295})
   if($defaultRoutes.Count -ne 0){throw 'Stage 4 qualification requires host network isolation: an active IPv4 or IPv6 default route remains.'}
   foreach($probe in @(@('ps','-a','--filter','name=oracle-stage4-r1-disposable','--format','{{.ID}}'),@('volume','ls','--filter','name=oracle-stage4-r1-disposable','--format','{{.Name}}'),@('network','ls','--filter','name=oracle-stage4-r1-disposable','--format','{{.Name}}'))){$record=Invoke-OracleStage4R1NativeProcess $docker $probe $rootFull;$processEvidence.Add($record);if(-not[string]::IsNullOrWhiteSpace($record.stdout)){throw 'Pre-existing Stage 4 provider state detected.'}}
-  [pscustomobject][ordered]@{branch=$branch;preparationCommit=$head;preparationTree=$tree;acceptedCandidateCommit=$Contract.repository.acceptedCandidateCommit;acceptedCandidateTree=$Contract.repository.acceptedCandidateTree;productDrift=@($productDrift);tools=[ordered]@{git=$git;node=$node;npmCli=$npmCli;supabaseCli=$supabaseCli;docker=$docker;powershell=$powershell;taskkill=$taskkill};toolIdentities=$toolIdentities;versions=$versions;docker=[ordered]@{client=$dockerInfo.Client.Version;server=$dockerInfo.Server.Version};historicalBindingsVerified=$Contract.historicalEvidenceBindings.Count;providerImagesVerified=$true;portsAvailable=$true;networkIsolated=$true;providerResidue=0;processEvidence=@($processEvidence)}
+  $processEvidenceArray=ConvertTo-OracleStage4R1ProcessEvidenceArray $processEvidence
+  [pscustomobject][ordered]@{branch=$branch;preparationCommit=$head;preparationTree=$tree;acceptedCandidateCommit=$Contract.repository.acceptedCandidateCommit;acceptedCandidateTree=$Contract.repository.acceptedCandidateTree;productDrift=@($productDrift);tools=[ordered]@{git=$git;node=$node;npmCli=$npmCli;supabaseCli=$supabaseCli;docker=$docker;powershell=$powershell;taskkill=$taskkill};toolIdentities=$toolIdentities;versions=$versions;docker=[ordered]@{client=$dockerInfo.Client.Version;server=$dockerInfo.Server.Version};historicalBindingsVerified=$Contract.historicalEvidenceBindings.Count;providerImagesVerified=$true;portsAvailable=$true;networkIsolated=$true;providerResidue=0;processEvidence=$processEvidenceArray}
 }
