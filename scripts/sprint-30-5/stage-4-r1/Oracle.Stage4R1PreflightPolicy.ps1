@@ -11,10 +11,11 @@ function ConvertTo-OracleStage4R1WindowsArgument([string]$Value) {
   }
   if($slashes){[void]$builder.Append(('\' * ($slashes * 2)))};[void]$builder.Append('"');$builder.ToString()
 }
-function Invoke-OracleStage4R1NativeProcess([string]$Executable,[string[]]$Arguments,[string]$WorkingDirectory) {
-  $started=(Get-Date).ToUniversalTime();$processError=$null;$exitCode=$null;$stdout='';$stderr=''
+function Invoke-OracleStage4R1NativeProcess([string]$Executable,[string[]]$Arguments,[string]$WorkingDirectory,[Collections.IDictionary]$EnvironmentOverrides=$null) {
+  $started=(Get-Date).ToUniversalTime();$processError=$null;$exitCode=$null;$stdout='';$stderr='';$environmentEvidence=[ordered]@{}
   try{
     $info=New-Object Diagnostics.ProcessStartInfo
+    if($null-ne$EnvironmentOverrides){foreach($key in $EnvironmentOverrides.Keys){$name=[string]$key;$value=[string]$EnvironmentOverrides[$key];if([string]::IsNullOrWhiteSpace($name) -or [string]::IsNullOrWhiteSpace($value)){throw 'Process environment override is malformed.'};$info.EnvironmentVariables[$name]=$value;$environmentEvidence[$name]=$value}}
     $info.FileName=$Executable
     $quotedArguments=@()
     foreach($argument in @($Arguments)){$quotedArguments+=ConvertTo-OracleStage4R1WindowsArgument ([string]$argument)}
@@ -24,7 +25,7 @@ function Invoke-OracleStage4R1NativeProcess([string]$Executable,[string[]]$Argum
     if(-not $process.Start()){throw 'Process.Start returned false.'}
     $stdout=$process.StandardOutput.ReadToEnd();$stderr=$process.StandardError.ReadToEnd();$process.WaitForExit();$exitCode=$process.ExitCode;$process.Dispose()
   }catch{$processError=$_.Exception.Message}
-  $record=[pscustomobject][ordered]@{executable=$Executable;arguments=@($Arguments);startedAtUtc=$started.ToString('o');completedAtUtc=(Get-Date).ToUniversalTime().ToString('o');stdout=$stdout;stderr=$stderr;exitCode=$exitCode;signal=$null;processError=$processError}
+  $record=[pscustomobject][ordered]@{executable=$Executable;arguments=@($Arguments);environmentOverrides=$environmentEvidence;startedAtUtc=$started.ToString('o');completedAtUtc=(Get-Date).ToUniversalTime().ToString('o');stdout=$stdout;stderr=$stderr;exitCode=$exitCode;signal=$null;processError=$processError}
   $failureMessage=$null
   if($null -ne $processError){$failureMessage="Process startup or execution failed: $processError"}
   elseif($null -eq $exitCode){$failureMessage='Process exit status is null or undefined.'}
@@ -35,6 +36,15 @@ function Invoke-OracleStage4R1NativeProcess([string]$Executable,[string[]]$Argum
 function ConvertTo-OracleStage4R1ProcessEvidenceArray([Collections.Generic.List[object]]$Evidence) {
   if($null -eq $Evidence){throw 'Process evidence collection is absent.'}
   ,$Evidence.ToArray()
+}
+function Get-OracleStage4R1SupabaseOfflineEnvironment([object]$Contract,[string]$SupabaseBinary) {
+  $policy=$Contract.toolchain.supabaseOfflineTelemetry
+  foreach($member in @('environmentVariable','value','nativeBinaryEnvironmentVariable','commands','networkAccessPermitted','nonZeroExitAccepted','policySource')){if($null-eq$policy -or $null-eq$policy.PSObject.Properties[$member]){throw "Supabase offline policy is incomplete: $member"}}
+  if([string]$policy.environmentVariable-cne'SUPABASE_TELEMETRY_DISABLED' -or [string]$policy.value-cne'1' -or [string]$policy.nativeBinaryEnvironmentVariable-cne'SUPABASE_CLI_BINARY_OVERRIDE'){throw 'Supabase offline environment policy mismatch.'}
+  if((@($policy.commands)-join'|')-cne'--version|init|start|status|stop' -or [bool]$policy.networkAccessPermitted -or [bool]$policy.nonZeroExitAccepted){throw 'Supabase offline command policy mismatch.'}
+  if([string]$policy.policySource-cne'https://supabase.com/docs/guides/local-development/cli/getting-started#telemetry'){throw 'Supabase offline policy source mismatch.'}
+  if([string]::IsNullOrWhiteSpace($SupabaseBinary)){throw 'Supabase native binary binding is absent.'}
+  [ordered]@{SUPABASE_TELEMETRY_DISABLED='1';SUPABASE_CLI_BINARY_OVERRIDE=$SupabaseBinary}
 }
 function Assert-OracleStage4R1NoReparseTraversal([string]$Path,[string]$Boundary) {
   $full=[IO.Path]::GetFullPath($Path);$boundaryFull=[IO.Path]::GetFullPath($Boundary);$root=$boundaryFull.TrimEnd('\')
@@ -63,8 +73,8 @@ function Resolve-OracleStage4R1BoundTool([object]$Specification,[string]$Name) {
   $rootFull=[IO.Path]::GetFullPath($Root);$processEvidence=New-Object Collections.Generic.List[object]
   if($PSVersionTable.PSEdition -cne [string]$Contract.toolchain.powershellEdition -or $PSVersionTable.PSVersion.Major -ne [int]$Contract.toolchain.powershellMajor -or -not[Environment]::Is64BitProcess){throw 'Windows PowerShell 5.1 x64 is required.'}
   $approved=$Contract.toolchain.approvedTools;$toolIdentities=[ordered]@{}
-  foreach($name in @('git','node','npmCli','supabaseCli','docker','powershell','taskkill')){$toolIdentities[$name]=Resolve-OracleStage4R1BoundTool $approved.$name $name}
-  $git=$toolIdentities.git.path;$node=$toolIdentities.node.path;$npmCli=$toolIdentities.npmCli.path;$supabaseCli=$toolIdentities.supabaseCli.path;$docker=$toolIdentities.docker.path;$powershell=$toolIdentities.powershell.path;$taskkill=$toolIdentities.taskkill.path
+  foreach($name in @('git','node','npmCli','supabaseCli','supabaseBinary','docker','powershell','taskkill')){$toolIdentities[$name]=Resolve-OracleStage4R1BoundTool $approved.$name $name}
+  $git=$toolIdentities.git.path;$node=$toolIdentities.node.path;$npmCli=$toolIdentities.npmCli.path;$supabaseCli=$toolIdentities.supabaseCli.path;$supabaseBinary=$toolIdentities.supabaseBinary.path;$docker=$toolIdentities.docker.path;$powershell=$toolIdentities.powershell.path;$taskkill=$toolIdentities.taskkill.path;$supabaseEnvironment=Get-OracleStage4R1SupabaseOfflineEnvironment $Contract $supabaseBinary
   $currentPowerShell=[IO.Path]::GetFullPath([Diagnostics.Process]::GetCurrentProcess().MainModule.FileName)
   if(-not$currentPowerShell.Equals($powershell,[StringComparison]::OrdinalIgnoreCase)){throw 'Pre-authority gate is not running under the approved PowerShell executable.'}
   $branchRecord=Invoke-OracleStage4R1NativeProcess $git @('-C',$rootFull,'branch','--show-current') $rootFull;$processEvidence.Add($branchRecord);$branch=$branchRecord.stdout.Trim()
@@ -79,7 +89,10 @@ function Resolve-OracleStage4R1BoundTool([object]$Specification,[string]$Name) {
   foreach($binding in @($Contract.historicalEvidenceBindings)){ $bindingPath=Join-Path $rootFull ([string]$binding.path);if(-not(Test-Path -LiteralPath $bindingPath -PathType Leaf)){throw "Historical binding is absent: $($binding.path)"};$hash=(Get-FileHash -LiteralPath $bindingPath -Algorithm SHA256).Hash.ToLowerInvariant();if($hash -cne [string]$binding.sha256){throw "Historical binding mismatch: $($binding.path)"} }
   $versions=[ordered]@{}
   $gitVersion=Invoke-OracleStage4R1NativeProcess $git @('--version') $rootFull;$processEvidence.Add($gitVersion);if($gitVersion.stdout.Trim() -cne [string]$approved.git.commandVersion){throw 'Git command version mismatch.'};$versions.git=$gitVersion.stdout.Trim()
-  foreach($spec in @(@('node',$node,@('--version'),[string]$Contract.toolchain.node),@('npm',$node,@($npmCli,'--version'),[string]$Contract.toolchain.npm),@('supabaseCli',$node,@($supabaseCli,'--version'),[string]$Contract.toolchain.supabaseCli))){$record=Invoke-OracleStage4R1NativeProcess ([string]$spec[1]) @($spec[2]) $rootFull;$processEvidence.Add($record);$observed=$record.stdout.Trim().TrimStart('v');if($observed -cne [string]$spec[3]){throw "Tool version mismatch: $($spec[0]) $observed"};$versions[$spec[0]]=$observed}
+  foreach($spec in @(@('node',$node,@('--version'),[string]$Contract.toolchain.node),@('npm',$node,@($npmCli,'--version'),[string]$Contract.toolchain.npm),@('supabaseCli',$node,@($supabaseCli,'--version'),[string]$Contract.toolchain.supabaseCli))){
+    $environmentOverrides=if([string]$spec[0]-ceq'supabaseCli'){$supabaseEnvironment}else{$null}
+$record=Invoke-OracleStage4R1NativeProcess ([string]$spec[1]) @($spec[2]) $rootFull $environmentOverrides;$processEvidence.Add($record);$observed=$record.stdout.Trim().TrimStart('v');if($observed -cne [string]$spec[3]){throw "Tool version mismatch: $($spec[0]) $observed"};$versions[$spec[0]]=$observed
+  }
   $dockerVersion=Invoke-OracleStage4R1NativeProcess $docker @('version','--format','{{json .}}') $rootFull;$processEvidence.Add($dockerVersion);$dockerInfo=$dockerVersion.stdout|ConvertFrom-Json
   if([string]$dockerInfo.Client.Version -cne [string]$Contract.toolchain.dockerClient -or [string]$dockerInfo.Server.Version -cne [string]$Contract.toolchain.dockerServer){throw 'Docker client/server version mismatch.'}
   foreach($service in $Contract.provider.services.PSObject.Properties.Value){$record=Invoke-OracleStage4R1NativeProcess $docker @('image','inspect','--format','{{json .RepoDigests}}',[string]$service.image) $rootFull;$processEvidence.Add($record);$parsedDigests=$record.stdout|ConvertFrom-Json;$digests=@();foreach($digest in $parsedDigests){$digests+=[string]$digest};$repository=([string]$service.image)-replace ':[^/:]+$','';if($digests -cnotcontains "$repository@$($service.digest)"){throw "Provider image digest mismatch: $($service.image)"}}
@@ -88,5 +101,5 @@ function Resolve-OracleStage4R1BoundTool([object]$Specification,[string]$Name) {
   if($defaultRoutes.Count -ne 0){throw 'Stage 4 qualification requires host network isolation: an active IPv4 or IPv6 default route remains.'}
   foreach($probe in @(@('ps','-a','--filter','name=oracle-stage4-r1-disposable','--format','{{.ID}}'),@('volume','ls','--filter','name=oracle-stage4-r1-disposable','--format','{{.Name}}'),@('network','ls','--filter','name=oracle-stage4-r1-disposable','--format','{{.Name}}'))){$record=Invoke-OracleStage4R1NativeProcess $docker $probe $rootFull;$processEvidence.Add($record);if(-not[string]::IsNullOrWhiteSpace($record.stdout)){throw 'Pre-existing Stage 4 provider state detected.'}}
   $processEvidenceArray=ConvertTo-OracleStage4R1ProcessEvidenceArray $processEvidence
-  [pscustomobject][ordered]@{branch=$branch;preparationCommit=$head;preparationTree=$tree;acceptedCandidateCommit=$Contract.repository.acceptedCandidateCommit;acceptedCandidateTree=$Contract.repository.acceptedCandidateTree;productDrift=@($productDrift);tools=[ordered]@{git=$git;node=$node;npmCli=$npmCli;supabaseCli=$supabaseCli;docker=$docker;powershell=$powershell;taskkill=$taskkill};toolIdentities=$toolIdentities;versions=$versions;docker=[ordered]@{client=$dockerInfo.Client.Version;server=$dockerInfo.Server.Version};historicalBindingsVerified=$Contract.historicalEvidenceBindings.Count;providerImagesVerified=$true;portsAvailable=$true;networkIsolated=$true;providerResidue=0;processEvidence=$processEvidenceArray}
+  [pscustomobject][ordered]@{branch=$branch;preparationCommit=$head;preparationTree=$tree;acceptedCandidateCommit=$Contract.repository.acceptedCandidateCommit;acceptedCandidateTree=$Contract.repository.acceptedCandidateTree;productDrift=@($productDrift);tools=[ordered]@{git=$git;node=$node;npmCli=$npmCli;supabaseCli=$supabaseCli;supabaseBinary=$supabaseBinary;docker=$docker;powershell=$powershell;taskkill=$taskkill};toolIdentities=$toolIdentities;versions=$versions;docker=[ordered]@{client=$dockerInfo.Client.Version;server=$dockerInfo.Server.Version};historicalBindingsVerified=$Contract.historicalEvidenceBindings.Count;providerImagesVerified=$true;portsAvailable=$true;networkIsolated=$true;providerResidue=0;supabaseOfflineTelemetry=$Contract.toolchain.supabaseOfflineTelemetry;processEvidence=$processEvidenceArray}
 }

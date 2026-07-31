@@ -3,7 +3,7 @@ import { createHash, randomBytes } from "node:crypto";
 import { spawn, spawnSync } from "node:child_process";
 import { constants, copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { basename, dirname, join, resolve } from "node:path";
-import { assertNoLinkTraversal, contract, redactEvidence, repositoryRoot, validateApprovedTool, validateProcessEnvelope, writeJsonAtomicCreateOnly } from "./stage4-core.mjs";
+import { assertNoLinkTraversal, assertSupabaseOfflineEnvironment, contract, createGovernedEnvironment, redactEvidence, repositoryRoot, validateApprovedTool, validateProcessEnvelope, validateSupabaseOfflinePolicy, writeJsonAtomicCreateOnly } from "./stage4-core.mjs";
 
 const teardownOnly = process.argv.length === 3 && process.argv[2] === "--teardown-only";
 if (process.argv.length > (teardownOnly ? 3 : 2)) throw new Error("Unexpected live-environment arguments.");
@@ -28,8 +28,10 @@ const providerRoot = join(attemptRoot, "provider");
 const logsRoot = join(attemptRoot, "logs");
 if (!teardownOnly) { mkdirSync(providerRoot, { recursive: false }); mkdirSync(logsRoot, { recursive: false }); }
 else if (!existsSync(logsRoot)) mkdirSync(logsRoot, { recursive: true });
-const approvedTools = Object.fromEntries(["git", "node", "npmCli", "supabaseCli", "docker", "powershell", "taskkill"].map(name => [name, validateApprovedTool(name)]));
+const approvedTools = Object.fromEntries(["git", "node", "npmCli", "supabaseCli", "supabaseBinary", "docker", "powershell", "taskkill"].map(name => [name, validateApprovedTool(name)]));
+const supabaseOfflinePolicy = validateSupabaseOfflinePolicy();
 const supabaseCli = approvedTools.supabaseCli.path;
+const supabaseBinary = approvedTools.supabaseBinary.path;
 const docker = process.env.ORACLE_STAGE4_DOCKER_PATH;
 const npmCli = process.env.ORACLE_STAGE4_NPM_CLI_PATH;
 const node = process.env.ORACLE_STAGE4_NODE_PATH;
@@ -40,7 +42,7 @@ for (const [name, path] of Object.entries({ supabaseCli, docker, npmCli, node, p
 }
 if (resolve(node).toLowerCase() !== resolve(process.execPath).toLowerCase()) throw new Error("Controller Node executable differs from the contract-bound Node executable.");
 const governedPath = [...new Set(Object.values(approvedTools).map(tool => dirname(tool.path).toLowerCase()))].join(";");
-const governedEnvironment = Object.fromEntries(Object.entries(process.env).filter(([key]) => key.toLowerCase() !== "path")); governedEnvironment.Path = governedPath;
+const governedEnvironment = createGovernedEnvironment(process.env, governedPath, supabaseBinary);
 const exclude = "edge-runtime,imgproxy,logflare,postgres-meta,realtime,storage-api,studio,supavisor,vector";
 let server;
 let serverText = "";
@@ -125,6 +127,10 @@ async function performCleanup() {
   if (cleanupFailures.length === 0) mark("zero-residue-verified");
 }
 function run(label, executable, args, sensitive = false, env = governedEnvironment, cwd = repositoryRoot) {
+  if (executable === node && args[0] === supabaseCli) {
+    assert.ok(supabaseOfflinePolicy.commands.includes(args[1]), `Uncontracted Supabase CLI command: ${args[1]}`);
+    assertSupabaseOfflineEnvironment(env, supabaseBinary);
+  }
   const startedAtUtc = new Date().toISOString(); const result = spawnSync(executable, args, { cwd, env, encoding: "utf8", shell: false, maxBuffer: 64 * 1024 * 1024 }); result.startedAtUtc = startedAtUtc; result.completedAtUtc = new Date().toISOString();
   if (!sensitive) records.push(envelope(label, executable, args, result));
   else records.push({ ...envelope(label, executable, args, result), stdout: sensitiveDigest(result.stdout), stderr: sensitiveDigest(result.stderr) });

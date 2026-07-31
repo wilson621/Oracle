@@ -1,5 +1,5 @@
 {
-    "schemaVersion":  "1.2.0",
+    "schemaVersion":  "1.3.0",
     "contract":  "oracle.sprint-30-5.stage-4-r1-qualification",
     "programme":  "Sprint 30.5 Stage 4 Live Authentication and Protected Rendering",
     "revision":  "R1",
@@ -159,6 +159,21 @@
                       "architecture":  "x64",
                       "dockerClient":  "29.6.2",
                       "dockerServer":  "29.6.2",
+                      "supabaseOfflineTelemetry":  {
+                                                          "environmentVariable":  "SUPABASE_TELEMETRY_DISABLED",
+                                                          "value":  "1",
+                                                          "nativeBinaryEnvironmentVariable":  "SUPABASE_CLI_BINARY_OVERRIDE",
+                                                          "commands":  [
+                                                                           "--version",
+                                                                           "init",
+                                                                           "start",
+                                                                           "status",
+                                                                           "stop"
+                                                                       ],
+                                                          "networkAccessPermitted":  false,
+                                                          "nonZeroExitAccepted":  false,
+                                                          "policySource":  "https://supabase.com/docs/guides/local-development/cli/getting-started#telemetry"
+                                                      },
                       "approvedTools":  {
                                             "git":  {
                                                         "path":  "C:\\Program Files\\Git\\cmd\\git.exe",
@@ -186,6 +201,13 @@
                                                                 "sha256":  "253caa8c31ee5976322d04a8bd7752622c0915e7943de3f74e2b73395c54a240",
                                                                 "commandVersion":  "2.109.1"
                                                             },
+                                            "supabaseBinary":  {
+                                                                   "path":  "C:\\Dev\\project-meta\\node_modules\\@supabase\\cli-windows-x64\\bin\\supabase.exe",
+                                                                   "realPath":  "C:\\Dev\\project-meta\\node_modules\\@supabase\\cli-windows-x64\\bin\\supabase.exe",
+                                                                   "sha256":  "22c0f28f013411c7a7b880116cd33636edb955a64278914692eea010bcc98dc7",
+                                                                   "fileVersion":  "1.3.13",
+                                                                   "commandVersion":  "2.109.1"
+                                                               },
                                             "docker":  {
                                                            "path":  "C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe",
                                                            "realPath":  "C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe",

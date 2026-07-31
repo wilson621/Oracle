@@ -35,6 +35,38 @@ export function validateAcceptedBindings() {
   assert.equal(contract.stage2.msixSha256, "c2dc7c68bcc9b6dd8c3a8e39d6db5f1d5b8230b64906524e9a4c01cf25aa65d1");
   assert.equal(contract.stage3.evidenceManifestSha256, "19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe");
 }
+export function validateSupabaseOfflinePolicy() {
+  const policy = contract.toolchain?.supabaseOfflineTelemetry;
+  if (!policy || typeof policy !== "object") throw new Error("Supabase offline telemetry policy is absent.");
+  assert.equal(policy.environmentVariable, "SUPABASE_TELEMETRY_DISABLED");
+  assert.equal(policy.value, "1");
+  assert.equal(policy.nativeBinaryEnvironmentVariable, "SUPABASE_CLI_BINARY_OVERRIDE");
+  assert.deepEqual(policy.commands, ["--version", "init", "start", "status", "stop"]);
+  assert.equal(policy.networkAccessPermitted, false);
+  assert.equal(policy.nonZeroExitAccepted, false);
+  assert.equal(policy.policySource, "https://supabase.com/docs/guides/local-development/cli/getting-started#telemetry");
+  return Object.freeze({ ...policy, commands: Object.freeze([...policy.commands]) });
+}
+export function createGovernedEnvironment(baseEnvironment, governedPath, supabaseBinaryPath) {
+  if (!baseEnvironment || typeof baseEnvironment !== "object" || Array.isArray(baseEnvironment)) throw new Error("Base process environment is invalid.");
+  if (typeof governedPath !== "string" || !governedPath || typeof supabaseBinaryPath !== "string" || !supabaseBinaryPath) throw new Error("Governed tool environment binding is incomplete.");
+  const policy = validateSupabaseOfflinePolicy();
+  const replaced = new Set(["path", policy.environmentVariable.toLowerCase(), policy.nativeBinaryEnvironmentVariable.toLowerCase()]);
+  const environment = Object.fromEntries(Object.entries(baseEnvironment).filter(([key]) => !replaced.has(key.toLowerCase())));
+  environment.Path = governedPath;
+  environment[policy.environmentVariable] = policy.value;
+  environment[policy.nativeBinaryEnvironmentVariable] = supabaseBinaryPath;
+  assertSupabaseOfflineEnvironment(environment, supabaseBinaryPath);
+  return environment;
+}
+export function assertSupabaseOfflineEnvironment(environment, supabaseBinaryPath) {
+  const policy = validateSupabaseOfflinePolicy();
+  for (const [name, value] of [[policy.environmentVariable, policy.value], [policy.nativeBinaryEnvironmentVariable, supabaseBinaryPath]]) {
+    const matches = Object.keys(environment ?? {}).filter(key => key.toLowerCase() === name.toLowerCase());
+    if (matches.length !== 1 || matches[0] !== name || environment[name] !== value) throw new Error(`Governed Supabase environment mismatch: ${name}`);
+  }
+  return true;
+}
 export function isSameOrDescendant(path, root) {
   const relation = relative(resolve(root), resolve(path));
   return relation === "" || (!relation.startsWith(`..${sep}`) && relation !== ".." && !isAbsolute(relation));
