@@ -1,0 +1,212 @@
+{
+    "schemaVersion":  "1.1.0",
+    "contract":  "oracle.sprint-30-5.stage-4-r1-qualification",
+    "programme":  "Sprint 30.5 Stage 4 Live Authentication and Protected Rendering",
+    "revision":  "R1",
+    "status":  "ready-for-founder-execution-decision",
+    "executionSurface":  "frozen-web-application",
+    "founderAuthorityToken":  "FOUNDER-AUTHORISED-STAGE-4-R1-SINGLE-EXECUTION",
+    "repository":  {
+                       "branch":  "sprint-9-overlay",
+                       "acceptedCandidateCommit":  "a7fc67f207d9c95407c70812828fa66bd487285d",
+                       "acceptedCandidateTree":  "356f6d52f1bf70065692e892af8bf916acc8727a",
+                       "productPaths":  [
+                                            "app",
+                                            "components",
+                                            "database",
+                                            "desktop",
+                                            "lib",
+                                            "native",
+                                            "packaging",
+                                            "public",
+                                            "proxy.ts",
+                                            "next.config.ts",
+                                            "package.json",
+                                            "package-lock.json",
+                                            "scripts/build-desktop-preload.mjs",
+                                            "tsconfig.json",
+                                            "tsconfig.desktop.json"
+                                        ]
+                   },
+    "stage2":  {
+                   "revision":  "R3",
+                   "authorityId":  "authority-r3-20260731T171651908Z-9a8a2532",
+                   "attemptId":  "r3-20260731T171651908Z-9a8a2532",
+                   "candidateCommit":  "a7fc67f207d9c95407c70812828fa66bd487285d",
+                   "candidateTree":  "356f6d52f1bf70065692e892af8bf916acc8727a",
+                   "harnessCommit":  "a25c7a2cfafd43cf80339cf4d0fbeeb77d760912",
+                   "harnessTree":  "11042dedd8c49db88b30724e1b718f7cad91ae84",
+                   "finalEvidenceManifestSha256":  "79ae9b219f24c8f61c48b6e3a0094d1730f72fe29a932e02ff1e92f7b07c1229",
+                   "archiveSha256":  "82ad4a46721c2ab0e7103c57f192394887844fd4c311ec3fcea92d2ba05e0688",
+                   "msixSha256":  "c2dc7c68bcc9b6dd8c3a8e39d6db5f1d5b8230b64906524e9a4c01cf25aa65d1",
+                   "releaseManifestSha256":  "6a06135a98545bbb37ebc1ae4c7359c9ff79657af34cd9a188c7a54636d969f6",
+                   "signerThumbprint":  "1B042317DD60F9BB5684689BF78AC1ED2F1C52D0",
+                   "signerExpiresAtUtc":  "2026-08-30T17:17:29Z",
+                   "certificateAdmission":  "not-applicable-web-source-qualification-no-package-install-or-trust"
+               },
+    "stage3":  {
+                   "closureCommit":  "0aaced51ac8503866a27f49f8399e4df8299a2ec",
+                   "qualificationCommit":  "fc3b4775c505cf2cd3b45333bff8ee75d4cbfb3d",
+                   "qualificationTree":  "2172155e15cfc777def43b4f89778dab3fd91d4a",
+                   "authorityId":  "authority-stage3-r9-20260730T221251043Z-71af9db7",
+                   "attemptId":  "stage3-r9-20260730T221251043Z-71af9db7",
+                   "evidenceManifestSha256":  "19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe",
+                   "archiveSha256":  "5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e",
+                   "returnInventorySha256":  "48042829b9564d02968b9172e7623deeaddce98f3ef39a5d59cdab3be9d3d101"
+               },
+    "provider":  {
+                     "classification":  "disposable-local-non-production",
+                     "supabaseCli":  "2.109.1",
+                     "services":  {
+                                      "postgres":  {
+                                                       "image":  "public.ecr.aws/supabase/postgres:17.6.1.143",
+                                                       "digest":  "sha256:80d7b27c3e8d77cfa7226eee9508671796da214781ff15a35b3670d7ad5ee453",
+                                                       "port":  54322
+                                                   },
+                                      "gotrue":  {
+                                                     "image":  "public.ecr.aws/supabase/gotrue:v2.192.0",
+                                                     "digest":  "sha256:b252efb680be37d4a8bf77c210cf0439c19b63a4b51929233a65dd101d25bdab"
+                                                 },
+                                      "kong":  {
+                                                   "image":  "public.ecr.aws/supabase/kong:2.8.1",
+                                                   "digest":  "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d",
+                                                   "port":  54321
+                                               },
+                                      "mailpit":  {
+                                                      "image":  "public.ecr.aws/supabase/mailpit:v1.30.2",
+                                                      "digest":  "sha256:37a38e48e9338cd7e89dfeb487f37b02ebfcd9cb23111bed2d345e79d37d6dd6",
+                                                      "port":  54324
+                                                  },
+                                      "postgrest":  {
+                                                        "image":  "public.ecr.aws/supabase/postgrest:v14.14",
+                                                        "digest":  "sha256:d2009b5c9deffc210c8a5592698472fede14fd9f6ca89823c8474ca54d58c012"
+                                                    }
+                                  },
+                     "externalEmail":  false,
+                     "productionEndpoint":  false,
+                     "requiredMigrations":  [
+                                                "001_initial_schema.sql",
+                                                "007_operator_achievements.sql",
+                                                "008_operator_ownership.sql",
+                                                "009_operator_intelligence_persistence.sql",
+                                                "010_operator_trust_control_persistence.sql",
+                                                "011_operator_account_provisioning.sql",
+                                                "012_operator_identity_lifecycle.sql",
+                                                "013_authoritative_session_lifecycle.sql",
+                                                "014_operator_development_lifecycle.sql"
+                                            ],
+                     "requiredLoopbackPorts":  [
+                                                   4314,
+                                                   54321,
+                                                   54322,
+                                                   54323,
+                                                   54324
+                                               ],
+                     "qualificationHostNetworkAdmission":  "no-active-ipv4-or-ipv6-default-route"
+                 },
+    "identity":  {
+                     "authorityPattern":  "^authority-stage4-r1-\\d{8}T\\d{9}Z-[0-9a-f]{8}$",
+                     "attemptPattern":  "^stage4-r1-\\d{8}T\\d{9}Z-[0-9a-f]{8}$",
+                     "founderGrantPattern":  "^founder-stage4-r1-grant-\\d{8}T\\d{9}Z-[0-9a-f]{8}$"
+                 },
+    "paths":  {
+                  "artifactRoot":  ".artifacts/sprint-30-5/stage-4-r1",
+                  "evidenceRoot":  "docs/sprints/evidence/sprint-30-5/stage-4-r1",
+                  "preflightRoot":  ".artifacts/sprint-30-5/stage-4-r1/preflight",
+                  "rehearsalRoot":  ".artifacts/sprint-30-5/stage-4-r1-development-rehearsal"
+              },
+    "historicalProtectedRoots":  [
+                                     "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r1",
+                                     "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r2",
+                                     "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r3",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-r9",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-revision-history",
+                                     ".artifacts/sprint-30-5/stage-2-requalification-r1",
+                                     ".artifacts/sprint-30-5/stage-2-requalification-r2",
+                                     ".artifacts/sprint-30-5/stage-2-requalification-r3"
+                                 ],
+    "requiredJourneys":  [
+                             "anonymous-protected-route-rejected",
+                             "account-created-without-session",
+                             "confirmation-mail-captured-locally",
+                             "email-verified",
+                             "verified-password-sign-in-passed",
+                             "unverified-account-rejected",
+                             "protected-route-rendered",
+                             "protected-api-authorised",
+                             "cross-account-isolation-passed",
+                             "sign-out-invalidates-session"
+                         ],
+    "prohibitions":  [
+                         "production-provider",
+                         "production-data",
+                         "production-email",
+                         "product-change",
+                         "msix-installation",
+                         "certificate-trust",
+                         "stage3-execution",
+                         "stage5",
+                         "publication",
+                         "deployment",
+                         "release"
+                     ],
+    "toolchain":  {
+                      "node":  "24.18.0",
+                      "npm":  "11.16.0",
+                      "supabaseCli":  "2.109.1",
+                      "powershellEdition":  "Desktop",
+                      "powershellMajor":  5,
+                      "architecture":  "x64",
+                      "dockerClient":  "29.6.2",
+                      "dockerServer":  "29.6.2"
+                  },
+    "historicalEvidenceBindings":  [
+                                       {
+                                           "path":  "docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R3_CLOSURE.md",
+                                           "sha256":  "f9855cc23598ab1c18f2538470170dd2a2d2511fea31fcc6b590ae56b3d03a0e"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r3/r3-20260731T171651908Z-9a8a2532/Oracle.Stage2RequalificationR3EvidenceManifest.json",
+                                           "sha256":  "79ae9b219f24c8f61c48b6e3a0094d1730f72fe29a932e02ff1e92f7b07c1229"
+                                       },
+                                       {
+                                           "path":  ".artifacts/sprint-30-5/stage-2-requalification-r3/r3-20260731T171651908Z-9a8a2532/Oracle.Sprint30.5.Stage2RequalificationR3QualificationEvidence.zip",
+                                           "sha256":  "82ad4a46721c2ab0e7103c57f192394887844fd4c311ec3fcea92d2ba05e0688"
+                                       },
+                                       {
+                                           "path":  ".artifacts/sprint-30-5/stage-2-requalification-r3/r3-20260731T171651908Z-9a8a2532/release/Oracle_0.1.1.0_x64_STAGE2_REQUALIFICATION_R3_LOCAL_TEST_ONLY.msix",
+                                           "sha256":  "c2dc7c68bcc9b6dd8c3a8e39d6db5f1d5b8230b64906524e9a4c01cf25aa65d1"
+                                       },
+                                       {
+                                           "path":  ".artifacts/sprint-30-5/stage-2-requalification-r3/r3-20260731T171651908Z-9a8a2532/release/oracle-release-manifest.json",
+                                           "sha256":  "6a06135a98545bbb37ebc1ae4c7359c9ff79657af34cd9a188c7a54636d969f6"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/SPRINT_30_5_STAGE_3_R9_CLOSURE.md",
+                                           "sha256":  "9bebd3629f80a2a354ca3161516784b51d27140d170230b6b56c78480d6622b5"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-3-r9/return-stage3-r9-20260730T224057433Z-904acbc9/Oracle.Stage3R9Evidence/stage3-r9-20260730T221251043Z-71af9db7.zip",
+                                           "sha256":  "5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-3-r9/return-stage3-r9-20260730T224057433Z-904acbc9/Oracle.Stage3R9Evidence/stage3-r9-20260730T221251043Z-71af9db7/evidence/evidence-manifest.json",
+                                           "sha256":  "19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe"
+                                       }
+                                   ],
+    "preflight":  {
+                      "maximumAgeMinutes":  15,
+                      "classification":  [
+                                             "NON-QUALIFICATION",
+                                             "NON-AUTHORITY",
+                                             "NON-EVIDENCE",
+                                             "READ-ONLY"
+                                         ]
+                  },
+    "resolvedPrerequisite":  {
+                                 "code":  "PGCRYPTO-SCHEMA-DEPENDENCIES-CORRECTED-AND-REQUALIFIED",
+                                 "migration011Sha256":  "dff827ce532a062fdc3aa93df08eba4628e004b46e9233005325f443e8429928",
+                                 "migration012Sha256":  "e64213123ff2b75b12c293d79380cc43dc9028dd56f503330aac9f5d97442c73",
+                                 "qualificationRevision":  "Stage 2 Requalification R3"
+                             }
+}

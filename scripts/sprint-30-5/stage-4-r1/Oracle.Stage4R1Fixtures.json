@@ -1,0 +1,73 @@
+{
+    "schemaVersion":  "1.0.0",
+    "contract":  "oracle.sprint-30-5.stage-4-r1-fixtures",
+    "validJourney":  {
+                         "contract":  "oracle.sprint-30-5.stage-4-r1-journey",
+                         "result":  "passed",
+                         "classification":  "GOVERNED-STAGE-4-R1-QUALIFICATION",
+                         "provider":  {
+                                          "classification":  "disposable-local-non-production",
+                                          "productionEndpoint":  false,
+                                          "externalEmail":  false
+                                      },
+                         "journeys":  [
+                                          {
+                                              "id":  "anonymous-protected-route-rejected",
+                                              "result":  "passed"
+                                          },
+                                          {
+                                              "id":  "account-created-without-session",
+                                              "result":  "passed"
+                                          },
+                                          {
+                                              "id":  "confirmation-mail-captured-locally",
+                                              "result":  "passed"
+                                          },
+                                          {
+                                              "id":  "email-verified",
+                                              "result":  "passed"
+                                          },
+                                          {
+                                              "id":  "verified-password-sign-in-passed",
+                                              "result":  "passed"
+                                          },
+                                          {
+                                              "id":  "unverified-account-rejected",
+                                              "result":  "passed"
+                                          },
+                                          {
+                                              "id":  "protected-route-rendered",
+                                              "result":  "passed"
+                                          },
+                                          {
+                                              "id":  "protected-api-authorised",
+                                              "result":  "passed"
+                                          },
+                                          {
+                                              "id":  "cross-account-isolation-passed",
+                                              "result":  "passed"
+                                          },
+                                          {
+                                              "id":  "sign-out-invalidates-session",
+                                              "result":  "passed"
+                                          }
+                                      ],
+                         "rendering":  {
+                                           "mainLandmarks":  1,
+                                           "levelOneHeadings":  1,
+                                           "protectedStatus":  200,
+                                           "method":  "authenticated-production-server-render"
+                                       },
+                         "isolation":  {
+                                           "accountCount":  2,
+                                           "crossAccountLeaks":  0,
+                                           "distinctAuthenticatedPrincipals":  true,
+                                           "distinctOperators":  true,
+                                           "rlsBindingsPerPrincipal":  [
+                                                                           1,
+                                                                           1
+                                                                       ]
+                                       },
+                         "secretsRetained":  false
+                     }
+}
