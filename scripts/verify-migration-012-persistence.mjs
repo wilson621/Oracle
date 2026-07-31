@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import crypto from "node:crypto";
 import fs from "node:fs";
+import path from "node:path";
 import { spawn } from "node:child_process";
 
 const psql = process.env.SPRINT19_PSQL;
@@ -35,6 +36,9 @@ const migrations = Object.fromEntries(
   migrationPaths.map((path) => [path, fs.readFileSync(path, "utf8")])
 );
 const migration012 = migrations[migrationPaths[3]];
+const evidencePath =
+  process.env.ORACLE_CERTIFICATION_EVIDENCE_PATH ??
+  "docs/sprints/evidence/sprint-19/generated/migration-012-certification.json";
 
 const catalogSql = `
 with inventory as (
@@ -78,8 +82,17 @@ async function main() {
   assert.match(migration012, /^begin;/i);
   assert.match(migration012, /commit;\s*$/i);
 
+  const providerPgcryptoSchema = await verifySupabasePgcryptoPlacement();
+
   await resetDatabase();
   await applyFoundation();
+  const cleanPgcryptoSchema = (await query(databaseUrl, `
+    select namespace.nspname
+    from pg_extension extension
+    join pg_namespace namespace on namespace.oid = extension.extnamespace
+    where extension.extname = 'pgcrypto';
+  `)).trim();
+  assert.equal(cleanPgcryptoSchema, "public");
   for (const path of migrationPaths.slice(0, -1)) {
     await execute(databaseUrl, migrations[path]);
   }
@@ -133,6 +146,10 @@ async function main() {
     migration011Sha256: sha256(migrations[migrationPaths[2]]),
     migration012Sha256: sha256(migration012),
     chain: "009 -> 010 -> 011 -> 012",
+    pgcryptoSchemasVerified: [
+      cleanPgcryptoSchema,
+      providerPgcryptoSchema,
+    ].sort(),
     rollbackCatalogSha256Before: sha256(before),
     rollbackCatalogSha256After: sha256(after),
     catalogIdentical: true,
@@ -142,11 +159,11 @@ async function main() {
     result: "pass",
   };
 
-  fs.mkdirSync("docs/sprints/evidence/sprint-19/generated", {
+  fs.mkdirSync(path.dirname(evidencePath), {
     recursive: true,
   });
   fs.writeFileSync(
-    "docs/sprints/evidence/sprint-19/generated/migration-012-certification.json",
+    evidencePath,
     `${JSON.stringify(evidence, null, 2)}\n`,
     "utf8"
   );
@@ -156,6 +173,35 @@ async function main() {
   );
 }
 
+async function verifySupabasePgcryptoPlacement() {
+  await resetDatabase();
+  await execute(databaseUrl, `
+    create schema extensions;
+    create extension pgcrypto with schema extensions;
+  `);
+  await applyFoundation();
+  assert.equal(
+    (await query(databaseUrl, `
+      select namespace.nspname
+      from pg_extension extension
+      join pg_namespace namespace on namespace.oid = extension.extnamespace
+      where extension.extname = 'pgcrypto';
+    `)).trim(),
+    "extensions",
+    "Supabase provider fixture did not preserve pgcrypto in extensions"
+  );
+  for (const migrationPath of migrationPaths) {
+    await execute(databaseUrl, migrations[migrationPath]);
+  }
+  const generatedOutput = await query(databaseUrl, `
+    set request.jwt.claim.role = 'service_role';
+    select public.generate_available_operator_callsign();
+  `);
+  const generated = generatedOutput.trim().split(/\r?\n/u).at(-1);
+  assert.ok(generated);
+  assert.match(generated, /^Vanguard-[0-9A-F]{6}$/u);
+  return "extensions";
+}
 async function verifyCatalog() {
   assert.equal(
     (await query(databaseUrl, `

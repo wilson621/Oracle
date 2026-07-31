@@ -292,15 +292,41 @@ set search_path = pg_catalog
 as $$
 declare
     candidate text;
+    candidate_bytes bytea;
+    pgcrypto_schema name;
 begin
     if coalesce(auth.role(), '') <> 'service_role' then
         raise exception 'Trusted Operator identity authority is required.'
             using errcode = '42501';
     end if;
 
+    select namespace.nspname
+    into pgcrypto_schema
+    from pg_catalog.pg_extension extension
+    join pg_catalog.pg_namespace namespace
+        on namespace.oid = extension.extnamespace
+    where extension.extname = 'pgcrypto';
+
+    if pgcrypto_schema is null then
+        raise exception 'Required pgcrypto extension is unavailable.'
+            using errcode = '55000';
+    end if;
+
     loop
+        execute format(
+            'select %I.gen_random_bytes($1)',
+            pgcrypto_schema
+        )
+        into candidate_bytes
+        using 4;
+
+        if candidate_bytes is null then
+            raise exception 'Operator callsign entropy is unavailable.'
+                using errcode = '55000';
+        end if;
+
         candidate := 'Vanguard-' || upper(
-            substring(encode(public.gen_random_bytes(4), 'hex') from 1 for 6)
+            substring(encode(candidate_bytes, 'hex') from 1 for 6)
         );
         begin
             perform public.assert_operator_callsign_available(candidate);

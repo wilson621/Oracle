@@ -15,7 +15,7 @@ const migration011 = fs.readFileSync(
   "utf8"
 );
 const migration011Sha256 =
-  "5be24f86228d018dc2d5aacbf3f186c9414432c18c2b573a7a3a1e340496d505";
+  "dff827ce532a062fdc3aa93df08eba4628e004b46e9233005325f443e8429928";
 
 assert.equal(
   sha256(migration009),
@@ -34,6 +34,21 @@ assert.equal(
 );
 assert.match(migration011, /^begin;\s/i);
 assert.match(migration011, /commit;\s*$/i);
+assert.match(
+  migration011,
+  /from pg_catalog\.pg_extension extension\s+join pg_catalog\.pg_namespace namespace/i
+);
+assert.match(migration011, /where extension\.extname = 'pgcrypto'/i);
+assert.match(
+  migration011,
+  /execute format\(\s*'select %I\.digest\(\$1, \$2\)',\s*pgcrypto_schema\s*\)/i
+);
+assert.match(
+  migration011,
+  /using convert_to\(p_command::text, 'UTF8'\), 'sha256'/i
+);
+assert.match(migration011, /Required pgcrypto extension is unavailable/i);
+assert.doesNotMatch(migration011, /(?:public|extensions)\.digest\s*\(/i);
 
 for (const table of [
   "operator_designation_allocator",

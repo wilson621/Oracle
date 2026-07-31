@@ -27,7 +27,7 @@ assert.equal(
 );
 assert.equal(
   sha256(migrations[11]),
-  "5be24f86228d018dc2d5aacbf3f186c9414432c18c2b573a7a3a1e340496d505",
+  "dff827ce532a062fdc3aa93df08eba4628e004b46e9233005325f443e8429928",
   "Migration 011 changed"
 );
 
@@ -45,6 +45,21 @@ assert.match(migration, /interval '6 months'/i);
 assert.match(migration, /interval '12 months'/i);
 assert.match(migration, /change_operator_callsign/i);
 assert.match(migration, /generate_available_operator_callsign/i);
+assert.match(
+  migration,
+  /from pg_catalog\.pg_extension extension\s+join pg_catalog\.pg_namespace namespace/i
+);
+assert.match(migration, /where extension\.extname = 'pgcrypto'/i);
+assert.match(
+  migration,
+  /execute format\(\s*'select %I\.gen_random_bytes\(\$1\)',\s*pgcrypto_schema\s*\)/i
+);
+assert.match(migration, /using 4/i);
+assert.match(migration, /Required pgcrypto extension is unavailable/i);
+assert.doesNotMatch(
+  migration,
+  /(?:public|extensions)\.gen_random_bytes\s*\(/i
+);
 assert.match(migration, /update_operator_display_name/i);
 assert.match(
   migration,

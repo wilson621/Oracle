@@ -70,6 +70,8 @@ declare
     policy_id_value text;
     policy_version_value text;
     request_digest_value text;
+    request_digest_bytes bytea;
+    pgcrypto_schema name;
     designation_number bigint;
     designation_value text;
     result_value jsonb;
@@ -105,13 +107,32 @@ begin
             using errcode = '22023';
     end if;
 
-    request_digest_value := 'sha256:' || encode(
-        public.digest(
-            convert_to(p_command::text, 'UTF8'),
-            'sha256'
-        ),
-        'hex'
-    );
+    select namespace.nspname
+    into pgcrypto_schema
+    from pg_catalog.pg_extension extension
+    join pg_catalog.pg_namespace namespace
+        on namespace.oid = extension.extnamespace
+    where extension.extname = 'pgcrypto';
+
+    if pgcrypto_schema is null then
+        raise exception 'Required pgcrypto extension is unavailable.'
+            using errcode = '55000';
+    end if;
+
+    execute format(
+        'select %I.digest($1, $2)',
+        pgcrypto_schema
+    )
+    into request_digest_bytes
+    using convert_to(p_command::text, 'UTF8'), 'sha256';
+
+    if request_digest_bytes is null then
+        raise exception 'Operator provisioning digest is unavailable.'
+            using errcode = '55000';
+    end if;
+
+    request_digest_value :=
+        'sha256:' || encode(request_digest_bytes, 'hex');
 
     perform 1
     from auth.users account

@@ -48,6 +48,17 @@ const chains = [
   },
 ];
 
+const foundationModes = [
+  {
+    name: "clean-install",
+    pgcryptoPreinstalled: false,
+  },
+  {
+    name: "supabase-preinstalled-pgcrypto",
+    pgcryptoPreinstalled: true,
+  },
+];
+
 const catalogSql = `
 with inventory as (
   select 'relation' kind, n.nspname schema_name, c.relname object_name,
@@ -91,9 +102,17 @@ async function main() {
   assert.match(migration011, /commit;\s*$/i);
 
   const results = [];
-  for (const chain of chains) {
-    results.push(await verifyChain(chain));
+  for (const foundationMode of foundationModes) {
+    for (const chain of chains) {
+      results.push(await verifyChain(chain, foundationMode));
+    }
   }
+
+  assert.equal(
+    new Set(results.map((result) => result.requestDigest)).size,
+    1,
+    "pgcrypto schema placement changed the canonical request digest"
+  );
 
   const evidence = {
     schemaVersion: 1,
@@ -114,9 +133,25 @@ async function main() {
   );
 }
 
-async function verifyChain(chain) {
+async function verifyChain(chain, foundationMode) {
   await resetDatabase();
+  if (foundationMode.pgcryptoPreinstalled) {
+    await execute(databaseUrl, `
+      create schema extensions;
+      create extension pgcrypto with schema extensions;
+    `);
+  }
   await applyFoundation();
+  assert.equal(
+    (await query(databaseUrl, `
+      select namespace.nspname
+      from pg_extension extension
+      join pg_namespace namespace on namespace.oid = extension.extnamespace
+      where extension.extname = 'pgcrypto';
+    `)).trim(),
+    foundationMode.pgcryptoPreinstalled ? "extensions" : "public",
+    `${foundationMode.name}: pgcrypto schema is incorrect`
+  );
   for (const file of chain.files.slice(0, -1)) {
     await execute(databaseUrl, fs.readFileSync(file, "utf8"));
   }
@@ -159,10 +194,12 @@ async function verifyChain(chain) {
 
   await execute(databaseUrl, migration011);
   await verifyCatalog(chain.name);
-  await verifyProvisioning(chain.name);
+  const requestDigest = await verifyProvisioning(chain.name);
 
   return {
+    foundation: foundationMode.name,
     chain: chain.name,
+    requestDigest,
     rollbackCatalogSha256Before: sha256(before),
     rollbackCatalogSha256After: sha256(after),
     catalogIdentical: true,
@@ -364,6 +401,14 @@ async function verifyProvisioning(chainName) {
     `)).trim(),
     '{"operators" : 2, "bindings" : 2, "receipts" : 2}'
   );
+
+  const requestDigest = (await query(databaseUrl, `
+    select request_digest
+    from public.operator_provisioning_receipts
+    where account_id = '${accountOne}';
+  `)).trim();
+  assert.match(requestDigest, /^sha256:[0-9a-f]{64}$/u);
+  return requestDigest;
 }
 
 function command(commandId, callsign) {
