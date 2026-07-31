@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-2-requalification-r3",
+  "programmeIdentity": "Sprint 30.5 Stage 2 Requalification R3",
+  "revision": "R3",
+  "requiredBranch": "sprint-9-overlay",
+  "governanceActivationCommit": "b0aefe2423e89ac8882c36cc806f391d13e369be",
+  "qualifiedImplementationCommit": "6113565765a95b990415b6cdf2f2f1d7ff3e83c8",
+  "candidate": {
+    "commit": "a7fc67f207d9c95407c70812828fa66bd487285d",
+    "tree": "356f6d52f1bf70065692e892af8bf916acc8727a",
+    "migration011Sha256": "dff827ce532a062fdc3aa93df08eba4628e004b46e9233005325f443e8429928",
+    "migration012Sha256": "e64213123ff2b75b12c293d79380cc43dc9028dd56f503330aac9f5d97442c73"
+  },
+  "executionMachine": {
+    "identity": "DESKTOP-M3H22E4",
+    "operatingSystem": "win32",
+    "osRelease": "10.0.26200",
+    "architecture": "x64"
+  },
+  "toolchain": {
+    "git": "2.55.0.windows.2",
+    "node": "24.18.0",
+    "npm": "11.16.0",
+    "powershell": "5.1.26100.8875",
+    "dotnet": "10.0.301",
+    "bsdtar": "3.8.4",
+    "electron": "39.8.10",
+    "electronPackager": "20.0.4",
+    "winAppCli": "0.5.0",
+    "next": "16.2.11",
+    "esbuild": "0.28.1",
+    "typescript": "5.9.3"
+  },
+  "package": {
+    "identity": "Oracle.Platform.LocalCertification",
+    "version": "0.1.1.0",
+    "semanticVersion": "0.1.1",
+    "architecture": "x64",
+    "runtimeManifestVersion": "1.7.0",
+    "publisherSubjectPrefix": "CN=Oracle Stage 2 Requalification R3 Local Test Signing - NOT PRODUCTION",
+    "fileName": "Oracle_0.1.1.0_x64_STAGE2_REQUALIFICATION_R3_LOCAL_TEST_ONLY.msix",
+    "releaseId": "oracle-desktop-beta-0.1.1-stage-2-requalification-r3-local-qualification"
+  },
+  "certificate": {
+    "requestedLifetimeDays": 30,
+    "minimumRemainingLifetimeDaysAtCreation": 29,
+    "maximumLifetimeDays": 30,
+    "thumbprintFormat": "^[0-9A-F]{40}$",
+    "cleanupSelection": "exact-thumbprint-only"
+  },
+  "output": {
+    "artifactBase": ".artifacts/sprint-30-5/stage-2-requalification-r3",
+    "repositoryEvidenceBase": "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r3",
+    "attemptNamespace": "<base>/<attempt-id>",
+    "archiveFileName": "Oracle.Sprint30.5.Stage2RequalificationR3QualificationEvidence.zip"
+  },
+  "historicalProtectedRoots": [
+    ".artifacts/sprint-30-5/stage-2",
+    ".artifacts/sprint-30-5/stage-2-requalification",
+    ".artifacts/sprint-30-5/stage-2-requalification-r2",
+    ".artifacts/sprint-30-5/stage-3",
+    "docs/sprints/evidence/sprint-30-5/stage-2",
+    "docs/sprints/evidence/sprint-30-5/stage-2-requalification",
+    "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r2",
+    "docs/sprints/evidence/sprint-30-5/stage-3-host-admission",
+    "docs/sprints/evidence/sprint-30-5/stage-3-reconciliation",
+    "docs/sprints/evidence/sprint-30-5/stage-3-revision-history",
+    "docs/sprints/evidence/sprint-30-5/stage-3-revision-6-abandoned-design",
+    "docs/sprints/evidence/sprint-30-5/stage-3-r9"
+  ],
+  "historicalEvidenceBindings": [
+    {
+      "path": ".artifacts/sprint-30-5/stage-2-requalification-r2/r2-20260728T203503018Z-ec577cf4/Oracle.Sprint30.5.Stage2RequalificationR2QualificationEvidence.zip",
+      "sha256": "6a3d2a6878b6e778214c550854a06e4a410fd5ec60b911b606aef844d4225f0f"
+    },
+    {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r2/r2-20260728T203503018Z-ec577cf4/Oracle.Stage2RequalificationR2EvidenceManifest.json",
+      "sha256": "84660931dec8c2c4f4e409465e67e49d9606f8617824e7c1212bb2e8abf1d47d"
+    },
+    {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-3-r9/return-stage3-r9-20260730T224057433Z-904acbc9/Oracle.Stage3R9Evidence/stage3-r9-20260730T221251043Z-71af9db7.zip",
+      "sha256": "5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e"
+    },
+    {
+      "path": "docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R2_CLOSURE.md",
+      "sha256": "1646e5935b57d67fc5da44efc520b14c7126532c8c86a10055e2aabec51d0770"
+    },
+    {
+      "path": "docs/sprints/SPRINT_30_5_STAGE_3_R9_CLOSURE.md",
+      "sha256": "9bebd3629f80a2a354ca3161516784b51d27140d170230b6b56c78480d6622b5"
+    }
+  ],
+  "authority": {
+    "governanceActivation": "authorised",
+    "harnessPreparation": "authorised",
+    "build": "founder-authority-required-per-attempt",
+    "package": "founder-authority-required-per-attempt",
+    "signing": "founder-authority-required-per-attempt-local-test-only",
+    "certificateMutation": "founder-authority-required-per-attempt-exact-certificate-only",
+    "qualificationExecution": "founder-authority-required-per-attempt",
+    "stage3": "closed-not-authorised-by-r3",
+    "stage4": "not-authorised-by-r3",
+    "productionRelease": "not-authorised"
+  }
+}

@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder decision on Stage 4 planning
+**Next Review:** Founder decision on Stage 2 Requalification R3 preparation
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1370,6 +1370,15 @@ The Founder accepted the result and R2 is formally closed. Candidate
 `11475fe01fff2ec69f0188547107f4e901c531d7` is authoritative for any later
 separately authorised Stage 3 preparation decision.
 
+Migration 011 and Migration 012 were subsequently corrected to resolve
+pgcrypto functions through the installed extension schema without changing
+product semantics. Commit `a7fc67f207d9c95407c70812828fa66bd487285d`, tree
+`356f6d52f1bf70065692e892af8bf916acc8727a`, is therefore a new product
+baseline. Under the permanent product-drift rule, R2 remains accepted and
+closed historical evidence but cannot qualify this corrected source. Stage 2
+Requalification R3 preparation is complete, validated and exactly bound to the
+corrected commit and tree. Qualification execution remains unauthorised and no
+R3 authority or attempt exists.
 Stage 3 Clean Windows Qualification is Founder-accepted and formally closed.
 Any further Stage 3 execution is unauthorised.
 Stage 3 R1 and failed R2-R8 remain immutable historical records. The passing

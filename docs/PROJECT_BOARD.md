@@ -8,8 +8,8 @@
 **Expected Stability:** Updated whenever approved work changes state
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
-**Last Reviewed:** 30 July 2026
-**Version:** 9.0
+**Last Reviewed:** 31 July 2026
+**Version:** 9.1
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -168,10 +168,16 @@ The final evidence manifest SHA-256 is
 and the archive SHA-256 is
 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`.
 
-The board is stopped before Stage 4. Live Authentication and Protected
-Rendering has not started and requires a separate Founder planning decision.
-Gate 7, production signing, publication, distribution, deployment and release
-remain unauthorised.
+Stage 4 execution remains unstarted and unauthorised. Its non-qualification
+preparation rehearsal identified concrete Migration 011 and Migration 012
+pgcrypto schema dependencies. The bounded corrections are committed at
+`a7fc67f207d9c95407c70812828fa66bd487285d`, tree
+`356f6d52f1bf70065692e892af8bf916acc8727a`, so the permanent product-drift
+rule returns qualification to Stage 2. Stage 2 Requalification R3 preparation
+is complete and validated; execution still requires a separate Founder single-attempt
+decision. R2 and Stage 3 R9 remain accepted, closed and immutable. Gate 7,
+production signing, publication, distribution, deployment and release remain
+unauthorised.
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
 production; the persistence foundation is established while runtime
@@ -230,6 +236,10 @@ in `docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R2_IMPLEMENTATION.md`,
 `docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R2_FOUNDER_ACCEPTANCE_REQUIRED.md`.
 Formal closure is recorded in
 `docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R2_CLOSURE.md`.
+The current R3 plan, implementation and pre-execution gate are recorded in
+`docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R3_PLAN.md`,
+`docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R3_IMPLEMENTATION.md` and
+`docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R3_PRE_EXECUTION_GATE.md`.
 Replacement-host admission requirements are recorded in
 `docs/sprints/SPRINT_30_5_STAGE_3_HOST_ADMISSION.md`.
 The Founder exception approval and machine-readable admission classification
@@ -254,8 +264,8 @@ reconciliation are recorded in
 SHA-256 `19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`;
 qualification archive SHA-256
 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`
-**Current authority:** None. Stage 3 is closed; Stage 4 remains unstarted and
-requires a separate Founder planning decision
+**Current Stage 3 authority:** None. Stage 3 is closed. Stage 4 execution is
+unauthorised and preparation cannot resume before governed R3 completion
 **Deployment status:** Production unchanged; no production signing,
 distribution, deployment, migration, persistence or Gate authority
 

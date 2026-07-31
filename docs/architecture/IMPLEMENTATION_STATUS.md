@@ -62,7 +62,7 @@ SHA-256 is
 the qualification archive SHA-256 is
 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`,
 and final package, certificate, process, transfer, work and package-data
-residue is zero. Stage 4 remains unstarted and unauthorised.
+residue is zero. Stage 4 execution remains unstarted and unauthorised.
 
 ---
 
@@ -172,7 +172,7 @@ Historical Stage 2 and Stage 2 Requalification R1 remain Founder-accepted,
 closed and immutable. Stage 2 Requalification R2 is the authoritative package
 qualified by Stage 3 R9. The designated Stage 3 host was admitted with a
 Founder provenance exception, and Stage 3 R9 is Founder-accepted and formally
-closed with immutable passing evidence. Stage 4 remains unstarted and
+closed with immutable passing evidence. Stage 4 execution remains unstarted and
 unauthorised.
 ## Sprint 30.5 Stage 2 — Historical Candidate Freeze and Package Reconciliation
 
@@ -237,6 +237,20 @@ and MSIX SHA-256
 The Founder accepted the result and R2 is formally closed. Candidate
 `11475fe01fff2ec69f0188547107f4e901c531d7` is authoritative for any later
 separately authorised Stage 3 preparation decision.
+
+## Sprint 30.5 Stage 2 Requalification R3 - Corrected Baseline Preparation
+
+Migration 011 and Migration 012 pgcrypto schema dependencies are corrected at
+commit `a7fc67f207d9c95407c70812828fa66bd487285d`, tree
+`356f6d52f1bf70065692e892af8bf916acc8727a`. This post-R2 product-source change
+activates the permanent Stage 2 invalidation rule without changing R2 or Stage
+3 R9 historical acceptance.
+
+R3 preparation is complete and validated and binds the exact candidate, corrected
+migration hashes, a separate future harness HEAD, R3-only authority/attempt,
+package, certificate, artifact and evidence namespaces, and immutable R2/R9
+historical hashes. R3 qualification execution is not authorised and no R3
+authority, attempt, package or qualification evidence exists.
 
 ## Sprint 30.5 Stage 3 R9 - Clean Windows Qualification
 
