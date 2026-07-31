@@ -33,24 +33,36 @@ function Invoke-OracleStage4R1NativeProcess([string]$Executable,[string[]]$Argum
   $record
 }
 function Assert-OracleStage4R1NoReparseTraversal([string]$Path,[string]$Boundary) {
-  $full=[IO.Path]::GetFullPath($Path);$root=[IO.Path]::GetFullPath($Boundary).TrimEnd('\')
+  $full=[IO.Path]::GetFullPath($Path);$boundaryFull=[IO.Path]::GetFullPath($Boundary);$root=$boundaryFull.TrimEnd('\')
   if(-not($full -eq $root -or $full.StartsWith($root+'\',[StringComparison]::OrdinalIgnoreCase))){throw 'Path escapes its governed boundary.'}
-  $current=$root;if(Test-Path -LiteralPath $current){if((Get-Item -LiteralPath $current -Force).Attributes -band [IO.FileAttributes]::ReparsePoint){throw "Governed path traverses a reparse point: $current"}}
+  $current=$boundaryFull;if(Test-Path -LiteralPath $current){if((Get-Item -LiteralPath $current -Force).Attributes -band [IO.FileAttributes]::ReparsePoint){throw "Governed path traverses a reparse point: $current"}}
   $relative=$full.Substring($root.Length).TrimStart('\');foreach($part in @($relative.Split('\')|Where-Object{$_})){ $current=Join-Path $current $part;if(Test-Path -LiteralPath $current){if((Get-Item -LiteralPath $current -Force).Attributes -band [IO.FileAttributes]::ReparsePoint){throw "Governed path traverses a reparse point: $current"}}}
   $full
 }
-function Resolve-OracleStage4R1Tool([string]$Name) {
-  $commands=@(Get-Command $Name -CommandType Application -ErrorAction SilentlyContinue)
-  if($commands.Count -ne 1){throw "Required tool did not resolve uniquely: $Name"}
-  $path=[IO.Path]::GetFullPath([string]$commands[0].Source);if(-not(Test-Path -LiteralPath $path -PathType Leaf)){throw "Resolved tool is absent: $Name"}
-  $path
-}
-function Invoke-OracleStage4R1PreAuthorityChecks([string]$Root,[object]$Contract,[string]$PreparationCommit,[string]$PreparationTree) {
+function Resolve-OracleStage4R1BoundTool([object]$Specification,[string]$Name) {
+  foreach($member in @('path','realPath','sha256')){if($null-eq$Specification.PSObject.Properties[$member] -or [string]::IsNullOrWhiteSpace([string]$Specification.$member)){throw "Approved tool identity is incomplete: $Name.$member"}}
+  $path=[IO.Path]::GetFullPath([string]$Specification.path)
+  if(-not $path.Equals([string]$Specification.path,[StringComparison]::OrdinalIgnoreCase)){throw "Approved tool path is not canonical: $Name"}
+  [void](Assert-OracleStage4R1NoReparseTraversal $path ([IO.Path]::GetPathRoot($path)))
+  if(-not(Test-Path -LiteralPath $path -PathType Leaf)){throw "Approved tool is absent or not a regular file: $Name"}
+  $item=Get-Item -LiteralPath $path -Force
+  if($item.PSIsContainer -or (($item.Attributes-band[IO.FileAttributes]::Directory)-ne 0) -or (($item.Attributes-band[IO.FileAttributes]::ReparsePoint)-ne 0)){throw "Approved tool is not a non-reparse regular file: $Name"}
+  $realPath=[IO.Path]::GetFullPath([string]$item.FullName)
+  if(-not $realPath.Equals([string]$Specification.realPath,[StringComparison]::OrdinalIgnoreCase)){throw "Approved tool real-path mismatch: $Name"}
+  $hash=(Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant()
+  if($hash -cne [string]$Specification.sha256){throw "Approved tool SHA-256 mismatch: $Name"}
+  $expectedFileVersion=if($null-ne$Specification.PSObject.Properties['fileVersion']){[string]$Specification.fileVersion}else{$null}
+  $observedFileVersion=[string]$item.VersionInfo.FileVersion
+  if(-not[string]::IsNullOrWhiteSpace($expectedFileVersion) -and $observedFileVersion -cne $expectedFileVersion){throw "Approved tool file-version mismatch: $Name"}
+  [pscustomobject][ordered]@{name=$Name;path=$path;realPath=$realPath;sha256=$hash;fileVersion=$observedFileVersion;regularFile=$true;reparsePoint=$false;ancestryReparseFree=$true}
+}function Invoke-OracleStage4R1PreAuthorityChecks([string]$Root,[object]$Contract,[string]$PreparationCommit,[string]$PreparationTree) {
   $rootFull=[IO.Path]::GetFullPath($Root);$processEvidence=New-Object Collections.Generic.List[object]
   if($PSVersionTable.PSEdition -cne [string]$Contract.toolchain.powershellEdition -or $PSVersionTable.PSVersion.Major -ne [int]$Contract.toolchain.powershellMajor -or -not[Environment]::Is64BitProcess){throw 'Windows PowerShell 5.1 x64 is required.'}
-  $git=Resolve-OracleStage4R1Tool 'git.exe';$node=Resolve-OracleStage4R1Tool 'node.exe';$npm=Resolve-OracleStage4R1Tool 'npm.cmd';$docker=Resolve-OracleStage4R1Tool 'docker.exe';$powershell=Resolve-OracleStage4R1Tool 'powershell.exe'
-  $npmCli=Join-Path (Split-Path -Parent $npm) 'node_modules\npm\bin\npm-cli.js';if(-not(Test-Path -LiteralPath $npmCli -PathType Leaf)){throw 'Shell-free npm CLI is absent.'}
-  $supabaseCli=Join-Path $rootFull 'node_modules\supabase\dist\supabase.js';if(-not(Test-Path -LiteralPath $supabaseCli -PathType Leaf)){throw 'Repository-locked Supabase CLI is absent.'}
+  $approved=$Contract.toolchain.approvedTools;$toolIdentities=[ordered]@{}
+  foreach($name in @('git','node','npmCli','supabaseCli','docker','powershell','taskkill')){$toolIdentities[$name]=Resolve-OracleStage4R1BoundTool $approved.$name $name}
+  $git=$toolIdentities.git.path;$node=$toolIdentities.node.path;$npmCli=$toolIdentities.npmCli.path;$supabaseCli=$toolIdentities.supabaseCli.path;$docker=$toolIdentities.docker.path;$powershell=$toolIdentities.powershell.path;$taskkill=$toolIdentities.taskkill.path
+  $currentPowerShell=[IO.Path]::GetFullPath([Diagnostics.Process]::GetCurrentProcess().MainModule.FileName)
+  if(-not$currentPowerShell.Equals($powershell,[StringComparison]::OrdinalIgnoreCase)){throw 'Pre-authority gate is not running under the approved PowerShell executable.'}
   $branchRecord=Invoke-OracleStage4R1NativeProcess $git @('-C',$rootFull,'branch','--show-current') $rootFull;$processEvidence.Add($branchRecord);$branch=$branchRecord.stdout.Trim()
   $headRecord=Invoke-OracleStage4R1NativeProcess $git @('-C',$rootFull,'rev-parse','HEAD') $rootFull;$processEvidence.Add($headRecord);$head=$headRecord.stdout.Trim()
   $treeRecord=Invoke-OracleStage4R1NativeProcess $git @('-C',$rootFull,'show','-s','--format=%T','HEAD') $rootFull;$processEvidence.Add($treeRecord);$tree=$treeRecord.stdout.Trim()
@@ -62,6 +74,7 @@ function Invoke-OracleStage4R1PreAuthorityChecks([string]$Root,[object]$Contract
   if(Test-Path -LiteralPath (Join-Path $rootFull '.next')){throw 'Pre-existing Web build output is prohibited.'}
   foreach($binding in @($Contract.historicalEvidenceBindings)){ $bindingPath=Join-Path $rootFull ([string]$binding.path);if(-not(Test-Path -LiteralPath $bindingPath -PathType Leaf)){throw "Historical binding is absent: $($binding.path)"};$hash=(Get-FileHash -LiteralPath $bindingPath -Algorithm SHA256).Hash.ToLowerInvariant();if($hash -cne [string]$binding.sha256){throw "Historical binding mismatch: $($binding.path)"} }
   $versions=[ordered]@{}
+  $gitVersion=Invoke-OracleStage4R1NativeProcess $git @('--version') $rootFull;$processEvidence.Add($gitVersion);if($gitVersion.stdout.Trim() -cne [string]$approved.git.commandVersion){throw 'Git command version mismatch.'};$versions.git=$gitVersion.stdout.Trim()
   foreach($spec in @(@('node',$node,@('--version'),[string]$Contract.toolchain.node),@('npm',$node,@($npmCli,'--version'),[string]$Contract.toolchain.npm),@('supabaseCli',$node,@($supabaseCli,'--version'),[string]$Contract.toolchain.supabaseCli))){$record=Invoke-OracleStage4R1NativeProcess ([string]$spec[1]) @($spec[2]) $rootFull;$processEvidence.Add($record);$observed=$record.stdout.Trim().TrimStart('v');if($observed -cne [string]$spec[3]){throw "Tool version mismatch: $($spec[0]) $observed"};$versions[$spec[0]]=$observed}
   $dockerVersion=Invoke-OracleStage4R1NativeProcess $docker @('version','--format','{{json .}}') $rootFull;$processEvidence.Add($dockerVersion);$dockerInfo=$dockerVersion.stdout|ConvertFrom-Json
   if([string]$dockerInfo.Client.Version -cne [string]$Contract.toolchain.dockerClient -or [string]$dockerInfo.Server.Version -cne [string]$Contract.toolchain.dockerServer){throw 'Docker client/server version mismatch.'}
@@ -70,5 +83,5 @@ function Invoke-OracleStage4R1PreAuthorityChecks([string]$Root,[object]$Contract
   $defaultRoutes=@(Get-NetRoute -ErrorAction Stop|Where-Object{$_.DestinationPrefix -in @('0.0.0.0/0','::/0') -and $_.State -eq 'Alive' -and $_.RouteMetric -lt 4294967295})
   if($defaultRoutes.Count -ne 0){throw 'Stage 4 qualification requires host network isolation: an active IPv4 or IPv6 default route remains.'}
   foreach($probe in @(@('ps','-a','--filter','name=oracle-stage4-r1-disposable','--format','{{.ID}}'),@('volume','ls','--filter','name=oracle-stage4-r1-disposable','--format','{{.Name}}'),@('network','ls','--filter','name=oracle-stage4-r1-disposable','--format','{{.Name}}'))){$record=Invoke-OracleStage4R1NativeProcess $docker $probe $rootFull;$processEvidence.Add($record);if(-not[string]::IsNullOrWhiteSpace($record.stdout)){throw 'Pre-existing Stage 4 provider state detected.'}}
-  [pscustomobject][ordered]@{branch=$branch;preparationCommit=$head;preparationTree=$tree;acceptedCandidateCommit=$Contract.repository.acceptedCandidateCommit;acceptedCandidateTree=$Contract.repository.acceptedCandidateTree;productDrift=@($productDrift);tools=[ordered]@{git=$git;node=$node;npm=$npm;npmCli=$npmCli;supabaseCli=$supabaseCli;docker=$docker;powershell=$powershell};versions=$versions;docker=[ordered]@{client=$dockerInfo.Client.Version;server=$dockerInfo.Server.Version};historicalBindingsVerified=$Contract.historicalEvidenceBindings.Count;providerImagesVerified=$true;portsAvailable=$true;networkIsolated=$true;providerResidue=0;processEvidence=@($processEvidence)}
+  [pscustomobject][ordered]@{branch=$branch;preparationCommit=$head;preparationTree=$tree;acceptedCandidateCommit=$Contract.repository.acceptedCandidateCommit;acceptedCandidateTree=$Contract.repository.acceptedCandidateTree;productDrift=@($productDrift);tools=[ordered]@{git=$git;node=$node;npmCli=$npmCli;supabaseCli=$supabaseCli;docker=$docker;powershell=$powershell;taskkill=$taskkill};toolIdentities=$toolIdentities;versions=$versions;docker=[ordered]@{client=$dockerInfo.Client.Version;server=$dockerInfo.Server.Version};historicalBindingsVerified=$Contract.historicalEvidenceBindings.Count;providerImagesVerified=$true;portsAvailable=$true;networkIsolated=$true;providerResidue=0;processEvidence=@($processEvidence)}
 }

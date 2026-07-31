@@ -1,5 +1,5 @@
 {
-    "schemaVersion":  "1.1.0",
+    "schemaVersion":  "1.2.0",
     "contract":  "oracle.sprint-30-5.stage-4-r1-qualification",
     "programme":  "Sprint 30.5 Stage 4 Live Authentication and Protected Rendering",
     "revision":  "R1",
@@ -158,7 +158,55 @@
                       "powershellMajor":  5,
                       "architecture":  "x64",
                       "dockerClient":  "29.6.2",
-                      "dockerServer":  "29.6.2"
+                      "dockerServer":  "29.6.2",
+                      "approvedTools":  {
+                                            "git":  {
+                                                        "path":  "C:\\Program Files\\Git\\cmd\\git.exe",
+                                                        "realPath":  "C:\\Program Files\\Git\\cmd\\git.exe",
+                                                        "sha256":  "22fead8244ef3a7225fb800099a4e43eca8bcec0466774917669599c2f19a05a",
+                                                        "fileVersion":  "2.55.0.windows.2",
+                                                        "commandVersion":  "git version 2.55.0.windows.2"
+                                                    },
+                                            "node":  {
+                                                         "path":  "C:\\Program Files\\nodejs\\node.exe",
+                                                         "realPath":  "C:\\Program Files\\nodejs\\node.exe",
+                                                         "sha256":  "9a4eb5f1c29c6a2e93852ead46b999e284a6a5ca8bab4d4e241d587d025a52de",
+                                                         "fileVersion":  "24.18.0",
+                                                         "commandVersion":  "24.18.0"
+                                                     },
+                                            "npmCli":  {
+                                                           "path":  "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+                                                           "realPath":  "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+                                                           "sha256":  "3ce7cba6f5128dd5f54c98b6a5036b0f850496878cc2e21044b675fe3c594e3e",
+                                                           "commandVersion":  "11.16.0"
+                                                       },
+                                            "supabaseCli":  {
+                                                                "path":  "C:\\Dev\\project-meta\\node_modules\\supabase\\dist\\supabase.js",
+                                                                "realPath":  "C:\\Dev\\project-meta\\node_modules\\supabase\\dist\\supabase.js",
+                                                                "sha256":  "253caa8c31ee5976322d04a8bd7752622c0915e7943de3f74e2b73395c54a240",
+                                                                "commandVersion":  "2.109.1"
+                                                            },
+                                            "docker":  {
+                                                           "path":  "C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe",
+                                                           "realPath":  "C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe",
+                                                           "sha256":  "8985cd8ac002c3240b5aa48fe401fcb55dca5d849b537e3c835564e8e8c49a70",
+                                                           "fileVersion":  "29.6.2",
+                                                           "commandVersion":  "29.6.2"
+                                                       },
+                                            "powershell":  {
+                                                               "path":  "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                                                               "realPath":  "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                                                               "sha256":  "7600ffe12da441fe89d035b13801e8e91d064bc544a27b19a5cf49f6ab8b18f5",
+                                                               "fileVersion":  "10.0.26100.8875 (WinBuild.160101.0800)",
+                                                               "commandVersion":  "5.1.26100.8875"
+                                                           },
+                                            "taskkill":  {
+                                                             "path":  "C:\\Windows\\System32\\taskkill.exe",
+                                                             "realPath":  "C:\\Windows\\System32\\taskkill.exe",
+                                                             "sha256":  "1249717315fc8f4d2df17d5db9da0444795fdb9fb83dfb1f763c3f39282244f7",
+                                                             "fileVersion":  "10.0.26100.8457 (WinBuild.160101.0800)"
+                                                         }
+                                        }
                   },
     "historicalEvidenceBindings":  [
                                        {

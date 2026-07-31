@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import { createHash, randomBytes } from "node:crypto";
 import { spawn, spawnSync } from "node:child_process";
 import { constants, copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
-import { basename, join, resolve } from "node:path";
-import { assertNoLinkTraversal, contract, redactEvidence, repositoryRoot, validateProcessEnvelope, writeJsonAtomicCreateOnly } from "./stage4-core.mjs";
+import { basename, dirname, join, resolve } from "node:path";
+import { assertNoLinkTraversal, contract, redactEvidence, repositoryRoot, validateApprovedTool, validateProcessEnvelope, writeJsonAtomicCreateOnly } from "./stage4-core.mjs";
 
 const teardownOnly = process.argv.length === 3 && process.argv[2] === "--teardown-only";
 if (process.argv.length > (teardownOnly ? 3 : 2)) throw new Error("Unexpected live-environment arguments.");
@@ -28,12 +28,19 @@ const providerRoot = join(attemptRoot, "provider");
 const logsRoot = join(attemptRoot, "logs");
 if (!teardownOnly) { mkdirSync(providerRoot, { recursive: false }); mkdirSync(logsRoot, { recursive: false }); }
 else if (!existsSync(logsRoot)) mkdirSync(logsRoot, { recursive: true });
-const supabaseCli = join(repositoryRoot, "node_modules", "supabase", "dist", "supabase.js");
+const approvedTools = Object.fromEntries(["git", "node", "npmCli", "supabaseCli", "docker", "powershell", "taskkill"].map(name => [name, validateApprovedTool(name)]));
+const supabaseCli = approvedTools.supabaseCli.path;
 const docker = process.env.ORACLE_STAGE4_DOCKER_PATH;
 const npmCli = process.env.ORACLE_STAGE4_NPM_CLI_PATH;
 const node = process.env.ORACLE_STAGE4_NODE_PATH;
-for (const [name, path] of Object.entries({ supabaseCli, docker, npmCli, node })) if (!path || !existsSync(path)) throw new Error(`Bound ${name} executable or script is absent.`);
-if (resolve(node) !== resolve(process.execPath)) throw new Error("Controller Node executable differs from the preflight-bound Node executable.");
+const powershell = process.env.ORACLE_STAGE4_POWERSHELL_PATH;
+const taskkill = process.env.ORACLE_STAGE4_TASKKILL_PATH;
+for (const [name, path] of Object.entries({ supabaseCli, docker, npmCli, node, powershell, taskkill })) {
+  if (!path || !existsSync(path) || resolve(path).toLowerCase() !== resolve(approvedTools[name].path).toLowerCase()) throw new Error(`Bound ${name} identity differs from the contract-approved tool.`);
+}
+if (resolve(node).toLowerCase() !== resolve(process.execPath).toLowerCase()) throw new Error("Controller Node executable differs from the contract-bound Node executable.");
+const governedPath = [...new Set(Object.values(approvedTools).map(tool => dirname(tool.path).toLowerCase()))].join(";");
+const governedEnvironment = Object.fromEntries(Object.entries(process.env).filter(([key]) => key.toLowerCase() !== "path")); governedEnvironment.Path = governedPath;
 const exclude = "edge-runtime,imgproxy,logflare,postgres-meta,realtime,storage-api,studio,supavisor,vector";
 let server;
 let serverText = "";
@@ -74,7 +81,7 @@ try {
     for (const [name, value] of Object.entries({ api, anon, service, mail })) if (typeof value !== "string" || !value) throw new Error(`Supabase status omitted ${name}.`);
     secrets = [...new Set([...secrets, anon, service])];
     const webSessionSecret = randomBytes(48).toString("hex"); secrets.push(webSessionSecret);
-    const env = { ...process.env, NEXT_PUBLIC_SUPABASE_URL: api, NEXT_PUBLIC_SUPABASE_ANON_KEY: anon, SUPABASE_SECRET_KEY: service, ORACLE_WEB_SESSION_SECRET: webSessionSecret, NODE_ENV: "production" };
+    const env = { ...governedEnvironment, NEXT_PUBLIC_SUPABASE_URL: api, NEXT_PUBLIC_SUPABASE_ANON_KEY: anon, SUPABASE_SECRET_KEY: service, ORACLE_WEB_SESSION_SECRET: webSessionSecret, NODE_ENV: "production" };
     run("web-build", node, [npmCli, "run", "build"], false, env, repositoryRoot); mark("source-built");
     const standalone = join(repositoryRoot, ".next", "standalone");
     cpSync(join(repositoryRoot, ".next", "static"), join(standalone, ".next", "static"), { recursive: true, errorOnExist: true, force: false });
@@ -117,7 +124,7 @@ async function performCleanup() {
   try { if (existsSync(providerRoot)) rmSync(providerRoot, { recursive: true, force: false }); if (existsSync(join(repositoryRoot, ".next"))) rmSync(join(repositoryRoot, ".next"), { recursive: true, force: false }); } catch (error) { cleanupFailures.push(`work-root-cleanup: ${error.message}`); }
   if (cleanupFailures.length === 0) mark("zero-residue-verified");
 }
-function run(label, executable, args, sensitive = false, env = process.env, cwd = repositoryRoot) {
+function run(label, executable, args, sensitive = false, env = governedEnvironment, cwd = repositoryRoot) {
   const startedAtUtc = new Date().toISOString(); const result = spawnSync(executable, args, { cwd, env, encoding: "utf8", shell: false, maxBuffer: 64 * 1024 * 1024 }); result.startedAtUtc = startedAtUtc; result.completedAtUtc = new Date().toISOString();
   if (!sensitive) records.push(envelope(label, executable, args, result));
   else records.push({ ...envelope(label, executable, args, result), stdout: sensitiveDigest(result.stdout), stderr: sensitiveDigest(result.stderr) });
@@ -148,14 +155,13 @@ function verifyProviderImagesAndRoute() {
 async function stopWebServer(child) { child.kill("SIGTERM"); let deadline = Date.now() + 3000; while (child.exitCode === null && Date.now() < deadline) await new Promise(resolvePromise => setTimeout(resolvePromise, 50)); if (child.exitCode !== null) { mark("web-server-stopped", { pid: child.pid }); return; } await forceStopPid(child.pid); }
 async function stopRecordedWebServer() { const recordPath = join(logsRoot, "web-server-process.json"); if (!existsSync(recordPath)) return; const record = JSON.parse(readFileSync(recordPath, "utf8")); if (!Number.isInteger(record.pid) || resolve(record.executable) !== resolve(node)) throw new Error("Recorded Web server identity is invalid."); const query = queryProcess(record.pid); if (query === null) return; if (resolve(query.ExecutablePath) !== resolve(node) || !String(query.CommandLine).includes(join(repositoryRoot, ".next", "standalone", "server.js"))) throw new Error("Recorded PID is live but no longer owned by the governed Web server."); await forceStopPid(record.pid); }
 function queryProcess(pid) {
-  const powershell = join(process.env.SystemRoot ?? "C:\\Windows", "System32", "WindowsPowerShell", "v1.0", "powershell.exe");
   const args = ["-NoLogo", "-NoProfile", "-NonInteractive", "-Command", `$p=Get-CimInstance Win32_Process -Filter 'ProcessId=${pid}' -ErrorAction Stop;if($null -eq $p){exit 3};$p|Select-Object ProcessId,ExecutablePath,CommandLine|ConvertTo-Json -Compress`];
   const result = spawnSync(powershell, args, { cwd: repositoryRoot, encoding: "utf8", shell: false, maxBuffer: 1024 * 1024 }); records.push(envelope("web-server-ownership-query", powershell, args, result));
   if (result.error) throw new Error(`Process query startup failed: ${result.error.message}`); if (result.signal) throw new Error(`Process query terminated by signal ${result.signal}.`); if (!Number.isInteger(result.status)) throw new Error("Process query status is null or undefined.");
   if (result.status === 3 && !result.stdout.trim()) return null; if (result.status !== 0) throw new Error(`Process query failed with status ${result.status}: ${result.stderr}`); return JSON.parse(result.stdout);
 }
 async function forceStopPid(pid) {
-  const taskkill = join(process.env.SystemRoot ?? "C:\\Windows", "System32", "taskkill.exe"); const args = ["/PID", String(pid), "/T", "/F"];
+  const args = ["/PID", String(pid), "/T", "/F"];
   const stopped = spawnSync(taskkill, args, { cwd: repositoryRoot, encoding: "utf8", shell: false, maxBuffer: 1024 * 1024 }); records.push(envelope("web-server-taskkill", taskkill, args, stopped));
   if (stopped.error) throw new Error(`taskkill startup failed: ${stopped.error.message}`); if (stopped.signal) throw new Error(`taskkill terminated by signal ${stopped.signal}.`); if (!Number.isInteger(stopped.status)) throw new Error("taskkill status is null or undefined.");
   if (stopped.status !== 0) { const observed = queryProcess(pid); if (observed === null) { mark("web-server-stopped", { pid, classification: "exited-before-taskkill" }); return; } throw new Error(`taskkill failed for a live governed process with status ${stopped.status}: ${stopped.stderr}`); }

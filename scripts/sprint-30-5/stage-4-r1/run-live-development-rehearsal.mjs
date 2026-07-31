@@ -2,18 +2,17 @@ import assert from "node:assert/strict";
 import { randomBytes } from "node:crypto";
 import { spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, rmSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
-import { assertSafeCreateOnly, contract, repositoryRoot, validateProcessEnvelope } from "./stage4-core.mjs";
+import { join, resolve } from "node:path";
+import { assertSafeCreateOnly, contract, repositoryRoot, validateApprovedTool, validateProcessEnvelope } from "./stage4-core.mjs";
 
 const rehearsalBoundary = resolve(repositoryRoot, contract.paths.rehearsalRoot);
 const root = join(rehearsalBoundary, `rehearsal-${randomBytes(8).toString("hex")}`);
 assertSafeCreateOnly(root, rehearsalBoundary); mkdirSync(root, { recursive: true });
 const output = join(root, "evidence", "live-journey.json");
-const dockerLookup = spawnSync("where.exe", ["docker.exe"], { encoding: "utf8", shell: false, maxBuffer: 1024 * 1024 });
-validateProcessEnvelope(dockerLookup); const dockerPaths = dockerLookup.stdout.split(/\r?\n/u).filter(Boolean); assert.equal(dockerPaths.length, 1, "Docker executable did not resolve uniquely.");
-const npmCli = join(dirname(process.execPath), "node_modules", "npm", "bin", "npm-cli.js"); assert.ok(existsSync(npmCli), "Repository-approved npm CLI is absent beside Node.");
+const tools = Object.fromEntries(["node", "npmCli", "docker", "powershell", "taskkill"].map(name => [name, validateApprovedTool(name)]));
+assert.equal(resolve(process.execPath).toLowerCase(), resolve(tools.node.path).toLowerCase(), "Rehearsal was not launched by the contract-approved Node executable.");
 const args = [join(import.meta.dirname, "execute-live-environment.mjs")];
-const result = spawnSync(process.execPath, args, { cwd: repositoryRoot, encoding: "utf8", shell: false, maxBuffer: 64 * 1024 * 1024, env: { ...process.env, ORACLE_STAGE4_EXECUTION_MODE: "development-rehearsal", ORACLE_STAGE4_ATTEMPT_ROOT: root, ORACLE_STAGE4_JOURNEY_OUTPUT: output, ORACLE_STAGE4_DOCKER_PATH: dockerPaths[0], ORACLE_STAGE4_NPM_CLI_PATH: npmCli, ORACLE_STAGE4_NODE_PATH: process.execPath, ORACLE_STAGE4_DEVELOPMENT_REHEARSAL: "1" } });
+const result = spawnSync(process.execPath, args, { cwd: repositoryRoot, encoding: "utf8", shell: false, maxBuffer: 64 * 1024 * 1024, env: { ...process.env, ORACLE_STAGE4_EXECUTION_MODE: "development-rehearsal", ORACLE_STAGE4_ATTEMPT_ROOT: root, ORACLE_STAGE4_JOURNEY_OUTPUT: output, ORACLE_STAGE4_DOCKER_PATH: tools.docker.path, ORACLE_STAGE4_NPM_CLI_PATH: tools.npmCli.path, ORACLE_STAGE4_NODE_PATH: tools.node.path, ORACLE_STAGE4_POWERSHELL_PATH: tools.powershell.path, ORACLE_STAGE4_TASKKILL_PATH: tools.taskkill.path, ORACLE_STAGE4_DEVELOPMENT_REHEARSAL: "1" } });
 try {
   validateProcessEnvelope(result);
   const journey = JSON.parse(readFileSync(output, "utf8")); assert.deepEqual(journey.classification, ["NON-QUALIFICATION", "NON-AUTHORITY", "NON-EVIDENCE", "DEVELOPMENT REHEARSAL"]);

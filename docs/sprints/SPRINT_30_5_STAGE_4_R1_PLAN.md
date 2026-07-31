@@ -34,6 +34,6 @@ Every required journey must have exactly one affirmative record. Two distinct pr
 
 ## R3 reconciliation and protection
 
-The recovered draft blocker was resolved by bounded Migration 011/012 corrections and accepted Stage 2 R3. Exact corrected migration and R3 evidence hashes are contract-bound. Product drift, stale preflight, identity/hash mismatch, reparse traversal, unapproved tool/image, non-loopback publication, invalid journey, leak, process failure, residue or evidence inconsistency fails closed.
+The recovered draft blocker was resolved by bounded Migration 011/012 corrections and accepted Stage 2 R3. Exact corrected migration and R3 evidence hashes are contract-bound. PATH order is not trusted: every external tool is admitted only by its contract-bound path, real path, hash, regular-file state, reparse-free ancestry and version. Product drift, stale preflight, identity/hash mismatch, reparse traversal, unapproved tool/image, non-loopback publication, invalid journey, leak, process failure, residue or evidence inconsistency fails closed.
 
 Stage 2 R1/R2/R3 and Stage 3 evidence roots are deny-listed and rehashed, never rewritten. Stage 4 does not install/re-sign MSIX, create trust, deploy production persistence, publish, distribute, release, or begin Stage 5.

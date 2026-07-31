@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { closeSync, constants, existsSync, linkSync, lstatSync, mkdirSync, openSync, readFileSync, statSync, unlinkSync, writeFileSync } from "node:fs";
-import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
+import { closeSync, constants, existsSync, linkSync, lstatSync, mkdirSync, openSync, readFileSync, realpathSync, statSync, unlinkSync, writeFileSync } from "node:fs";
+import { dirname, isAbsolute, join, parse, relative, resolve, sep } from "node:path";
 
 export const repositoryRoot = resolve(import.meta.dirname, "..", "..", "..");
 export const contractPath = join(import.meta.dirname, "Oracle.Stage4R1Contract.json");
@@ -50,7 +50,20 @@ export function assertNoLinkTraversal(path, boundary) {
   }
   return target;
 }
-export function assertSafeCreateOnly(path, boundary) {
+export function validateApprovedTool(name) {
+  const specification = contract.toolchain?.approvedTools?.[name];
+  if (!specification || typeof specification.path !== "string" || typeof specification.realPath !== "string" || typeof specification.sha256 !== "string") throw new Error(`Approved tool identity is incomplete: ${name}`);
+  const target = resolve(specification.path);
+  if (target.toLowerCase() !== specification.path.toLowerCase()) throw new Error(`Approved tool path is not canonical: ${name}`);
+  assertNoLinkTraversal(target, parse(target).root);
+  const metadata = lstatSync(target);
+  if (!metadata.isFile() || metadata.isSymbolicLink()) throw new Error(`Approved tool is not a non-reparse regular file: ${name}`);
+  const realPath = realpathSync.native(target);
+  if (realPath.toLowerCase() !== specification.realPath.toLowerCase()) throw new Error(`Approved tool real-path mismatch: ${name}`);
+  const hash = sha256(target);
+  if (hash !== specification.sha256) throw new Error(`Approved tool SHA-256 mismatch: ${name}`);
+  return Object.freeze({ name, path: target, realPath, sha256: hash, regularFile: true, reparsePoint: false, ancestryReparseFree: true });
+}export function assertSafeCreateOnly(path, boundary) {
   const target = assertNoLinkTraversal(path, boundary);
   for (const protectedRoot of contract.historicalProtectedRoots) {
     if (isSameOrDescendant(target, resolve(repositoryRoot, protectedRoot))) throw new Error("Historical evidence is immutable.");

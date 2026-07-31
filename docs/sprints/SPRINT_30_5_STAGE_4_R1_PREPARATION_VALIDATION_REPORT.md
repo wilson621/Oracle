@@ -50,3 +50,8 @@ Review challenged candidate drift, historical writes, phase bypass, duplicate/mi
 ## Deferred execution-time fact
 
 The actual execution host must be deliberately network-isolated before the fresh pre-authority gate. The gate fails closed while any active IPv4 or IPv6 default route exists. This is a Founder-controlled host-state prerequisite, not preparation authority and not qualification evidence.
+
+
+## Deterministic tool-resolution correction
+
+A Founder-authorised pre-authority gate failed before authority because two Git installations were visible on PATH. The correction removes PATH selection from all reachable Stage 4 external-process paths. Git, Node, npm CLI, Supabase CLI, Docker, PowerShell and taskkill are now bound by exact path, real path, SHA-256, regular-file status, reparse-free ancestry and applicable versions. Regression fixtures prove rejection of the alternate Git path, a wrong hash and a junction/reparse ancestor. The live controller and development validator/rehearsal consume the same bindings.

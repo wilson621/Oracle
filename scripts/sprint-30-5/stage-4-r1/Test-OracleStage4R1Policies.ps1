@@ -4,7 +4,15 @@ $ErrorActionPreference='Stop'
 . (Join-Path $PSScriptRoot 'Oracle.Stage4R1LifecyclePolicy.ps1')
 . (Join-Path $PSScriptRoot 'Oracle.Stage4R1JourneyPolicy.ps1')
 . (Join-Path $PSScriptRoot 'Oracle.Stage4R1PreflightPolicy.ps1')
-$fixture=(Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'Oracle.Stage4R1Fixtures.json')|ConvertFrom-Json).validJourney
+$contract=Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'Oracle.Stage4R1Contract.json')|ConvertFrom-Json
+$approvedGit=Resolve-OracleStage4R1BoundTool $contract.toolchain.approvedTools.git 'git'
+if(-not$approvedGit.regularFile -or $approvedGit.reparsePoint -or -not$approvedGit.ancestryReparseFree -or $approvedGit.path -cne 'C:\Program Files\Git\cmd\git.exe'){throw 'Approved Git identity was not proven.'}
+function Assert-ToolIdentityRejected([object]$Specification,[string]$Fixture){try{[void](Resolve-OracleStage4R1BoundTool $Specification $Fixture);throw "Tool fixture accepted: $Fixture"}catch{if($_.Exception.Message -eq "Tool fixture accepted: $Fixture"){throw}}}
+$wrongPath=$contract.toolchain.approvedTools.git|ConvertTo-Json -Depth 5|ConvertFrom-Json;$wrongPath.path='C:\Users\wilso.DESKTOP-M3H22E4\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe';Assert-ToolIdentityRejected $wrongPath 'wrong-path'
+$wrongHash=$contract.toolchain.approvedTools.git|ConvertTo-Json -Depth 5|ConvertFrom-Json;$wrongHash.sha256='0000000000000000000000000000000000000000000000000000000000000000';Assert-ToolIdentityRejected $wrongHash 'wrong-hash'
+$fixtureRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\..\.tmp-stage4-r1-tool-reparse-fixture'));if(-not$fixtureRoot.StartsWith([IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\..')),[StringComparison]::OrdinalIgnoreCase)){throw 'Tool fixture root escaped the repository.'};New-Item -ItemType Directory -Path $fixtureRoot -ErrorAction Stop|Out-Null
+$junction=Join-Path $fixtureRoot 'redirect'
+try{New-Item -ItemType Junction -Path $junction -Target 'C:\Program Files\Git\cmd' -ErrorAction Stop|Out-Null;$reparse=$contract.toolchain.approvedTools.git|ConvertTo-Json -Depth 5|ConvertFrom-Json;$reparse.path=Join-Path $junction 'git.exe';Assert-ToolIdentityRejected $reparse 'reparse-ancestry'}finally{if(Test-Path -LiteralPath $junction){[IO.Directory]::Delete($junction)};if(Test-Path -LiteralPath $fixtureRoot){[IO.Directory]::Delete($fixtureRoot)}}$fixture=(Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'Oracle.Stage4R1Fixtures.json')|ConvertFrom-Json).validJourney
 [void](Assert-OracleStage4R1JourneyRecord $fixture)
 foreach($mutation in @('missing','duplicate','unexpected','failed','production','external-email','leak','rendering','secret','missing-nested')){
   $copy=$fixture|ConvertTo-Json -Depth 20|ConvertFrom-Json
