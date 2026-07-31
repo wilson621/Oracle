@@ -5,6 +5,7 @@ $ErrorActionPreference='Stop'
 . (Join-Path $PSScriptRoot 'Oracle.Stage4R1JourneyPolicy.ps1')
 . (Join-Path $PSScriptRoot 'Oracle.Stage4R1PreflightPolicy.ps1')
 $contract=Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'Oracle.Stage4R1Contract.json')|ConvertFrom-Json
+$jsonArray='["repository@sha256:abc"]';$parsedArray=$jsonArray|ConvertFrom-Json;$flattened=@();foreach($entry in $parsedArray){$flattened+=[string]$entry};if($flattened.Count-ne1 -or $flattened[0]-cne'repository@sha256:abc'){throw 'PowerShell 5.1 JSON array normalization failed.'}
 $approvedGit=Resolve-OracleStage4R1BoundTool $contract.toolchain.approvedTools.git 'git'
 if(-not$approvedGit.regularFile -or $approvedGit.reparsePoint -or -not$approvedGit.ancestryReparseFree -or $approvedGit.path -cne 'C:\Program Files\Git\cmd\git.exe'){throw 'Approved Git identity was not proven.'}
 function Assert-ToolIdentityRejected([object]$Specification,[string]$Fixture){try{[void](Resolve-OracleStage4R1BoundTool $Specification $Fixture);throw "Tool fixture accepted: $Fixture"}catch{if($_.Exception.Message -eq "Tool fixture accepted: $Fixture"){throw}}}

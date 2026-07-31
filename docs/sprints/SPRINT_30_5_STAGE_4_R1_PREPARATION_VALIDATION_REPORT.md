@@ -55,3 +55,5 @@ The actual execution host must be deliberately network-isolated before the fresh
 ## Deterministic tool-resolution correction
 
 A Founder-authorised pre-authority gate failed before authority because two Git installations were visible on PATH. The correction removes PATH selection from all reachable Stage 4 external-process paths. Git, Node, npm CLI, Supabase CLI, Docker, PowerShell and taskkill are now bound by exact path, real path, SHA-256, regular-file status, reparse-free ancestry and applicable versions. Regression fixtures prove rejection of the alternate Git path, a wrong hash and a junction/reparse ancestor. The live controller and development validator/rehearsal consume the same bindings.
+
+A post-commit engineering gate probe then reached provider provenance and exposed Windows PowerShell 5.1 preserving the Docker RepoDigests JSON array as a nested `System.Object[]`. The parser now explicitly enumerates and string-normalises each digest. A PowerShell 5.1 regression fixture proves the governed one-entry shape. The probe created no preflight record, authority or attempt.
