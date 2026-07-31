@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder decision on Stage 2 Requalification R3 preparation
+**Next Review:** Founder decision on resuming Stage 4 preparation from the R3-qualified baseline
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1367,18 +1367,25 @@ reconciled from candidate and harness commit
 SHA-256 is
 `84660931dec8c2c4f4e409465e67e49d9606f8617824e7c1212bb2e8abf1d47d`.
 The Founder accepted the result and R2 is formally closed. Candidate
-`11475fe01fff2ec69f0188547107f4e901c531d7` is authoritative for any later
-separately authorised Stage 3 preparation decision.
+`11475fe01fff2ec69f0188547107f4e901c531d7` remains the historical package
+baseline qualified by Stage 3 R9.
 
 Migration 011 and Migration 012 were subsequently corrected to resolve
 pgcrypto functions through the installed extension schema without changing
 product semantics. Commit `a7fc67f207d9c95407c70812828fa66bd487285d`, tree
 `356f6d52f1bf70065692e892af8bf916acc8727a`, is therefore a new product
 baseline. Under the permanent product-drift rule, R2 remains accepted and
-closed historical evidence but cannot qualify this corrected source. Stage 2
-Requalification R3 preparation is complete, validated and exactly bound to the
-corrected commit and tree. Qualification execution remains unauthorised and no
-R3 authority or attempt exists.
+closed historical evidence but cannot qualify this corrected source. Stage 2 Requalification R3 passed all twelve governed lifecycle phases under
+attempt `r3-20260731T171651908Z-9a8a2532` and authority
+`authority-r3-20260731T171651908Z-9a8a2532`. The Founder accepted and formally
+closed R3. Its final evidence manifest SHA-256 is
+`79ae9b219f24c8f61c48b6e3a0094d1730f72fe29a932e02ff1e92f7b07c1229`,
+archive SHA-256 is
+`82ad4a46721c2ab0e7103c57f192394887844fd4c311ec3fcea92d2ba05e0688`,
+and MSIX SHA-256 is
+`c2dc7c68bcc9b6dd8c3a8e39d6db5f1d5b8230b64906524e9a4c01cf25aa65d1`.
+The corrected candidate is the accepted Stage 2 baseline for a later,
+separately authorised Stage 4 preparation decision.
 Stage 3 Clean Windows Qualification is Founder-accepted and formally closed.
 Any further Stage 3 execution is unauthorised.
 Stage 3 R1 and failed R2-R8 remain immutable historical records. The passing

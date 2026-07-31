@@ -32,9 +32,9 @@ results.
 | Stage | Scope | Current state | Evidence or blocker | Next authority |
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
-| 2 | Candidate Freeze and Package Reconciliation | **R2 remains accepted and closed; R3 preparation complete for corrected product baseline** | R3 contract binds candidate `a7fc67f207d9c95407c70812828fa66bd487285d`, tree `356f6d52f1bf70065692e892af8bf916acc8727a`; no R3 attempt exists and R2 evidence remains immutable | Founder review of R3 preparation, then separate single-attempt execution authority |
+| 2 | Candidate Freeze and Package Reconciliation | **R3 Founder-accepted and formally closed for the corrected product baseline** | Passing attempt `r3-20260731T171651908Z-9a8a2532`; final evidence manifest SHA-256 `79ae9b219f24c8f61c48b6e3a0094d1730f72fe29a932e02ff1e92f7b07c1229`; archive SHA-256 `82ad4a46721c2ab0e7103c57f192394887844fd4c311ec3fcea92d2ba05e0688`; R1 and R2 remain immutable | None for R3; history is closed |
 | 3 | Clean Windows Qualification | **Founder-accepted and formally closed at R9** | Passing attempt `stage3-r9-20260730T221251043Z-71af9db7` under authority `authority-stage3-r9-20260730T221251043Z-71af9db7`; final evidence manifest SHA-256 `19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`; archive SHA-256 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`; zero final residue | None for Stage 3; history is closed and any further Stage 3 execution is unauthorised |
-| 4 | Live Authentication and Protected Rendering | **Preparation suspended before execution** | Live rehearsal exposed Migration 011/012 pgcrypto schema dependencies; bounded corrections are committed and require Stage 2 R3 requalification before Stage 4 preparation may resume | Accepted and closed R3 evidence, then separate Founder Stage 4 preparation decision |
+| 4 | Live Authentication and Protected Rendering | **Preparation suspended; prerequisite correction now qualified** | Migration 011/012 pgcrypto corrections are qualified by accepted Stage 2 R3 evidence; prior Stage 4 draft remains isolated and execution remains unauthorised | Separate Founder decision to resume or replace Stage 4 preparation; execution requires its own later authority |
 | 5 | Installed Package GPU, Performance and Accessibility | **Not started** | Must use the reconciled installed package on the replacement host; ASUS Stage 1 GPU evidence does not transfer | Stage 4 acceptance, then separate Stage 5 authority and replacement-host GPU admission |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
 | 7 | Final Integrated Qualification and Sprint 30 Closure Package | **Not started** | Requires complete immutable evidence from Stages 1–6 | Stage 6 acceptance, then separate Stage 7 authority |
@@ -84,9 +84,21 @@ results.
   `a7fc67f207d9c95407c70812828fa66bd487285d` changed product source after the
   R2 freeze. Under the permanent invalidation rule, R2 remains accepted
   historical evidence but does not qualify this corrected baseline.
-- Stage 2 Requalification R3 preparation is Founder-authorised and binds exact
-  candidate tree `356f6d52f1bf70065692e892af8bf916acc8727a`. R3 execution remains
-  unauthorised; no R3 authority or attempt exists.
+- Stage 2 Requalification R3 attempt `r3-20260731T171651908Z-9a8a2532`, under
+  authority `authority-r3-20260731T171651908Z-9a8a2532`, passed all twelve
+  governed lifecycle phases and was Founder-accepted and formally closed.
+- R3 binds candidate commit `a7fc67f207d9c95407c70812828fa66bd487285d`,
+  tree `356f6d52f1bf70065692e892af8bf916acc8727a`, and harness commit
+  `a25c7a2cfafd43cf80339cf4d0fbeeb77d760912`, tree
+  `11042dedd8c49db88b30724e1b718f7cad91ae84`.
+- R3 final evidence manifest SHA-256 is
+  `79ae9b219f24c8f61c48b6e3a0094d1730f72fe29a932e02ff1e92f7b07c1229`;
+  archive SHA-256 is
+  `82ad4a46721c2ab0e7103c57f192394887844fd4c311ec3fcea92d2ba05e0688`;
+  MSIX SHA-256 is
+  `c2dc7c68bcc9b6dd8c3a8e39d6db5f1d5b8230b64906524e9a4c01cf25aa65d1`.
+- Exact certificate, trust, package and private-material residue is zero. R3
+  grants no Stage 4 execution or production authority.
 - Replacement-host installed GPU evidence remains a separate Stage 5
   requirement.
 

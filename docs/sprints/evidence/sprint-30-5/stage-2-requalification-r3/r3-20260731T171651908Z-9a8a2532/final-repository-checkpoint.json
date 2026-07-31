@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-2-requalification-r3-repository-checkpoint",
+  "programmeIdentity": "Sprint 30.5 Stage 2 Requalification R3",
+  "revision": "R3",
+  "authorityId": "authority-r3-20260731T171651908Z-9a8a2532",
+  "attemptId": "r3-20260731T171651908Z-9a8a2532",
+  "candidateCommit": "a7fc67f207d9c95407c70812828fa66bd487285d",
+  "harnessCommit": "a25c7a2cfafd43cf80339cf4d0fbeeb77d760912",
+  "recordedAt": "2026-07-31T17:19:11.940Z",
+  "branch": "sprint-9-overlay",
+  "head": "a25c7a2cfafd43cf80339cf4d0fbeeb77d760912",
+  "tree": "11042dedd8c49db88b30724e1b718f7cad91ae84",
+  "trackedFilesModified": false,
+  "indexClean": true,
+  "repositoryVisibleEvidenceOnly": true,
+  "repositoryEvidencePublicationPending": false,
+  "repositoryEvidenceNamespace": "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r3/r3-20260731T171651908Z-9a8a2532",
+  "publishedFiles": [
+    {
+      "path": "Oracle.Sprint30.5.Stage2RequalificationR3QualificationEvidence.zip.sha256.txt",
+      "size": 133,
+      "sha256": "47042a771763fd30d4d1bf8982722ea4c15ce75e002a942bcee7c0e6a116ee42"
+    },
+    {
+      "path": "final-machine-checkpoint.json",
+      "size": 748,
+      "sha256": "96e1cc80d2b574325f3d62ae8b161dd4b6cee67dc1fa82c97de99bbdbd039bd9"
+    },
+    {
+      "path": "qualification-candidate.json",
+      "size": 90054,
+      "sha256": "49c85fd1f3b6fd4a0b9fc2dc39ba81e5dee3017ed1ff2947e9a1003d9a5dd7a8"
+    },
+    {
+      "path": "single-attempt-authority.json",
+      "size": 589,
+      "sha256": "628a1634056f05733d6ae360f8527b4dce5652d58103c981fd7382b9f0b6d359"
+    },
+    {
+      "path": "stage-2-requalification-r3-certification.json",
+      "size": 1872,
+      "sha256": "b76edc98a5683b2e2d350ce4b998bb4cfb8d02756e7c96139ff5b12085a236d8"
+    },
+    {
+      "path": "stage-2-requalification-r3-completion.json",
+      "size": 1028,
+      "sha256": "84d3931114ec3bf216764c4c9c9ea0203531342121daa99d7cf633507fd1ffce"
+    },
+    {
+      "path": "stage-2-requalification-r3-evidence-index.json",
+      "size": 7362,
+      "sha256": "c39e7d598d2de239980da061be690c4559fbc64db210438eeab3094d642c7c94"
+    },
+    {
+      "path": "stage-2-requalification-r3-frozen-evidence.json",
+      "size": 1102,
+      "sha256": "9357b800ce04f3eeedd87a491c6ef4836d4de491bfdda7dfa92859613fb8d3d0"
+    }
+  ]
+}

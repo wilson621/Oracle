@@ -162,8 +162,19 @@ reconciled at candidate and harness commit
 SHA-256 is
 `84660931dec8c2c4f4e409465e67e49d9606f8617824e7c1212bb2e8abf1d47d`.
 The Founder accepted the result and R2 is formally closed. Candidate
-`11475fe01fff2ec69f0188547107f4e901c531d7` is the authoritative Stage 2
-execution candidate for any later separately authorised Stage 3 preparation.
+`11475fe01fff2ec69f0188547107f4e901c531d7` remains the package historically
+qualified by Stage 3 R9.
+
+Migration 011/012 corrections created candidate
+`a7fc67f207d9c95407c70812828fa66bd487285d`, tree
+`356f6d52f1bf70065692e892af8bf916acc8727a`. Stage 2 Requalification R3
+attempt `r3-20260731T171651908Z-9a8a2532` passed, was Founder-accepted and is
+formally closed with final evidence manifest SHA-256
+`79ae9b219f24c8f61c48b6e3a0094d1730f72fe29a932e02ff1e92f7b07c1229` and
+archive SHA-256
+`82ad4a46721c2ab0e7103c57f192394887844fd4c311ec3fcea92d2ba05e0688`.
+The corrected candidate is the accepted Stage 2 baseline for a later,
+separately authorised Stage 4 preparation decision.
 
 Stage 3 Clean Windows Qualification is Founder-accepted and formally closed.
 Any further Stage 3 execution is unauthorised.

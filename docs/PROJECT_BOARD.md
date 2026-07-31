@@ -154,8 +154,8 @@ commit `11475fe01fff2ec69f0188547107f4e901c531d7`. Independent reconciliation
 confirmed final evidence manifest SHA-256
 `84660931dec8c2c4f4e409465e67e49d9606f8617824e7c1212bb2e8abf1d47d`.
 The Founder accepted the result and R2 is formally closed. Candidate
-`11475fe01fff2ec69f0188547107f4e901c531d7` is authoritative for any later
-separately authorised Stage 3 preparation decision.
+`11475fe01fff2ec69f0188547107f4e901c531d7` remains the historical package
+baseline qualified by Stage 3 R9.
 
 Stage 3 Clean Windows Qualification is Founder-accepted and formally closed.
 Any further Stage 3 execution is unauthorised.
@@ -170,14 +170,14 @@ and the archive SHA-256 is
 
 Stage 4 execution remains unstarted and unauthorised. Its non-qualification
 preparation rehearsal identified concrete Migration 011 and Migration 012
-pgcrypto schema dependencies. The bounded corrections are committed at
+pgcrypto schema dependencies. The bounded corrections at
 `a7fc67f207d9c95407c70812828fa66bd487285d`, tree
-`356f6d52f1bf70065692e892af8bf916acc8727a`, so the permanent product-drift
-rule returns qualification to Stage 2. Stage 2 Requalification R3 preparation
-is complete and validated; execution still requires a separate Founder single-attempt
-decision. R2 and Stage 3 R9 remain accepted, closed and immutable. Gate 7,
-production signing, publication, distribution, deployment and release remain
-unauthorised.
+`356f6d52f1bf70065692e892af8bf916acc8727a`, are now qualified by the
+Founder-accepted and formally closed Stage 2 Requalification R3 attempt
+`r3-20260731T171651908Z-9a8a2532`. R1, R2 and Stage 3 R9 remain accepted,
+closed and immutable. Resuming Stage 4 preparation requires a separate Founder
+decision; Stage 4 execution, Gate 7, production signing, publication,
+distribution, deployment and release remain unauthorised.
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
 production; the persistence foundation is established while runtime

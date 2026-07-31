@@ -235,22 +235,24 @@ archive SHA-256
 and MSIX SHA-256
 `6adb8d9b29585ff7de1b878ec2df2d76a82ce03661cf7269ced7eaff8aae50bc`.
 The Founder accepted the result and R2 is formally closed. Candidate
-`11475fe01fff2ec69f0188547107f4e901c531d7` is authoritative for any later
-separately authorised Stage 3 preparation decision.
+`11475fe01fff2ec69f0188547107f4e901c531d7` remains the historical package
+baseline qualified by Stage 3 R9.
 
-## Sprint 30.5 Stage 2 Requalification R3 - Corrected Baseline Preparation
+## Sprint 30.5 Stage 2 Requalification R3 - Corrected Baseline Qualification
 
 Migration 011 and Migration 012 pgcrypto schema dependencies are corrected at
 commit `a7fc67f207d9c95407c70812828fa66bd487285d`, tree
 `356f6d52f1bf70065692e892af8bf916acc8727a`. This post-R2 product-source change
-activates the permanent Stage 2 invalidation rule without changing R2 or Stage
+activated the permanent Stage 2 invalidation rule without changing R2 or Stage
 3 R9 historical acceptance.
 
-R3 preparation is complete and validated and binds the exact candidate, corrected
-migration hashes, a separate future harness HEAD, R3-only authority/attempt,
-package, certificate, artifact and evidence namespaces, and immutable R2/R9
-historical hashes. R3 qualification execution is not authorised and no R3
-authority, attempt, package or qualification evidence exists.
+Passing R3 attempt `r3-20260731T171651908Z-9a8a2532`, under authority
+`authority-r3-20260731T171651908Z-9a8a2532`, completed all twelve governed
+phases. The local-test MSIX, exact Runtime Manifest `1.7.0`, Release Manifest,
+SBOM, provenance and 2,201 package entries reconciled. Strict Authenticode and
+detached-manifest verification passed. Exact trust and signing copies were
+removed and final package, certificate, trust and private-material residue is
+zero. The Founder accepted the evidence and R3 is formally closed.
 
 ## Sprint 30.5 Stage 3 R9 - Clean Windows Qualification
 

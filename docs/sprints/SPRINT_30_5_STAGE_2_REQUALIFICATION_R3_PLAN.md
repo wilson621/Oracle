@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R3 — Preparation Plan
 
-**Status:** Preparation complete and validated; qualification execution unauthorised
+**Status:** Historical plan; qualification passed, Founder-accepted and formally closed
 **Identity:** `Sprint 30.5 Stage 2 Requalification R3`
 **Scope:** Corrected current-source candidate freeze and package reconciliation
 **Candidate:** `a7fc67f207d9c95407c70812828fa66bd487285d`

@@ -201,10 +201,31 @@ and MSIX SHA-256
 `6adb8d9b29585ff7de1b878ec2df2d76a82ce03661cf7269ced7eaff8aae50bc`.
 The signer expires at `2026-08-27T20:35:39Z`. The Founder accepted the result
 and R2 is formally closed. Candidate
-`11475fe01fff2ec69f0188547107f4e901c531d7` is the authoritative Stage 2
-execution candidate for any later separately authorised Stage 3 preparation.
+`11475fe01fff2ec69f0188547107f4e901c531d7` remains the historical package
+baseline qualified by Stage 3 R9.
 Stage 3 Qualification R1 and failed R2-R8 remain immutable historical records.
 Each failure was preserved and corrected only in a later governed revision.
+
+## Sprint 30.5 Stage 2 Requalification R3 closure
+
+Migration 011 and Migration 012 corrections produced candidate commit
+`a7fc67f207d9c95407c70812828fa66bd487285d`, tree
+`356f6d52f1bf70065692e892af8bf916acc8727a`, after the R2 freeze. R3 attempt
+`r3-20260731T171651908Z-9a8a2532`, under authority
+`authority-r3-20260731T171651908Z-9a8a2532`, passed all twelve governed
+lifecycle phases using harness commit
+`a25c7a2cfafd43cf80339cf4d0fbeeb77d760912`, tree
+`11042dedd8c49db88b30724e1b718f7cad91ae84`.
+
+The final evidence manifest SHA-256 is
+`79ae9b219f24c8f61c48b6e3a0094d1730f72fe29a932e02ff1e92f7b07c1229`,
+the qualification archive SHA-256 is
+`82ad4a46721c2ab0e7103c57f192394887844fd4c311ec3fcea92d2ba05e0688`,
+and the MSIX SHA-256 is
+`c2dc7c68bcc9b6dd8c3a8e39d6db5f1d5b8230b64906524e9a4c01cf25aa65d1`.
+The Founder accepted the evidence and R3 is formally closed with zero package,
+certificate, trust and private-signing-material residue. R3 grants no Stage 4
+execution or production authority.
 
 ## Sprint 30.5 Stage 3 Qualification R9 closure
 

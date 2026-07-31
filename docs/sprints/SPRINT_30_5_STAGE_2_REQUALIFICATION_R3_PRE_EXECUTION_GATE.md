@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R3 — Pre-Execution Gate
 
-**Status:** First attempt consumed and failed; corrected harness requires review, commit and separate new Founder authority
+**Status:** Historical gate; consumed by accepted passing attempt and formally closed
 **Gate owner:** Founder
 **Required candidate:** `a7fc67f207d9c95407c70812828fa66bd487285d`
 **Required tree:** `356f6d52f1bf70065692e892af8bf916acc8727a`

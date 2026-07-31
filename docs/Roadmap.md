@@ -799,8 +799,8 @@ budget sufficient for the remaining governed lifecycle.
 R2 attempt `r2-20260728T203503018Z-ec577cf4` passed and was independently
 reconciled at candidate `11475fe01fff2ec69f0188547107f4e901c531d7`.
 The Founder accepted the result and R2 is formally closed. Candidate
-`11475fe01fff2ec69f0188547107f4e901c531d7` is authoritative for any later
-separately authorised Stage 3 preparation decision.
+`11475fe01fff2ec69f0188547107f4e901c531d7` remains the historical package
+baseline qualified by Stage 3 R9.
 
 Migration 011 and Migration 012 were subsequently corrected to resolve
 pgcrypto functions through the installed extension schema without changing
@@ -808,9 +808,12 @@ product semantics. Commit `a7fc67f207d9c95407c70812828fa66bd487285d`, tree
 `356f6d52f1bf70065692e892af8bf916acc8727a`, is therefore a new product
 baseline. Under the permanent product-drift rule, R2 remains accepted and
 closed historical evidence but cannot qualify this corrected source. Stage 2
-Requalification R3 preparation is complete, validated and exactly bound to the
-corrected commit and tree. Qualification execution remains unauthorised and no
-R3 authority or attempt exists.
+Requalification R3 attempt `r3-20260731T171651908Z-9a8a2532` passed all twelve
+phases, was Founder-accepted and is formally closed. Its final evidence
+manifest SHA-256 is
+`79ae9b219f24c8f61c48b6e3a0094d1730f72fe29a932e02ff1e92f7b07c1229` and
+archive SHA-256 is
+`82ad4a46721c2ab0e7103c57f192394887844fd4c311ec3fcea92d2ba05e0688`.
 Stage 3 R1 and failed R2-R8 remain immutable historical qualification records.
 Stage 3 R9 passed on `Founder-QA-01` under consumed authority
 `authority-stage3-r9-20260730T221251043Z-71af9db7` and attempt

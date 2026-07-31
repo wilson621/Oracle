@@ -101,9 +101,11 @@ Founder-authorised and attempted on the host admitted with a Founder
 provenance exception. Recovered Revision 4 NegativePathAndTrust evidence
 passed, but Revision 4 InstallAndStartup failed, Revision 5 remained incomplete
 and Revision 6 is abandoned. Sprint 30 remains qualification-incomplete because
-Stages 4-7 have not
-started. Stage 2 Requalification R2 remains the authoritative accepted package
-candidate. Stage 3 R1 and failed R2-R8 remain immutable historical records.
+Stage 4 execution and Stages 5-7 have not started. Stage 2 Requalification R2 remains the package
+historically qualified by Stage 3 R9. Stage 2 Requalification R3 attempt
+`r3-20260731T171651908Z-9a8a2532` qualifies the corrected Migration 011/012
+baseline, is Founder-accepted and formally closed. Stage 3 R1 and failed R2-R8
+remain immutable historical records.
 Stage 3 R9 attempt `stage3-r9-20260730T221251043Z-71af9db7` passed all
 fourteen governed lifecycle phases, was Founder-accepted and is formally
 closed. Any further Stage 3 execution is unauthorised. Its final evidence manifest SHA-256 is
