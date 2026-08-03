@@ -153,3 +153,7 @@ The continuing Founder mission authorises these gates sequentially; it does not 
 ## Stage 3 Requalification R12 Engineering Correction
 
 R11 is immutable failed qualification evidence. R12 engineering correction and non-qualification validation are complete without transfer or qualification authority. R9 remains the accepted passing Stage 3 history; any R12 qualification requires a new explicit Founder mission.
+
+## Stage 3 Requalification R12 Authorised Mission
+
+The Founder accepted the completed R12 engineering baseline and authorised one governed Stage 3 R12 qualification mission. Transfer and execution are sequentially authorised; the single authority may be created and consumed only after independent transfer verification, fresh host continuity and elevated pre-authority admission pass. Stage 4, production, publication and deployment remain not authorised.

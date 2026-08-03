@@ -492,6 +492,7 @@ to adopt a later formatting standard.
 | Record | Location | Purpose |
 | --- | --- | --- |
 | Stage 3 Requalification R12 plan | [Sprint 30.5 Stage 3 Requalification R12 Plan](sprints/SPRINT_30_5_STAGE_3_R12_PLAN.md) | R11-derived engineering scope and immutable R6/R11 bindings |
+| Stage 3 Requalification R12 mission | [Sprint 30.5 Stage 3 Requalification R12 Qualification Mission](sprints/SPRINT_30_5_STAGE_3_R12_QUALIFICATION_MISSION.md) | Founder-authorised sequential transfer, pre-authority and single-attempt mission |
 | Stage 3 Requalification R12 correction | [Sprint 30.5 Stage 3 Requalification R12 Engineering Correction](sprints/SPRINT_30_5_STAGE_3_R12_ENGINEERING_CORRECTION.md) | Evidence-led asynchronous reset lifecycle correction |
 | Stage 3 Requalification R12 validation | [Sprint 30.5 Stage 3 Requalification R12 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_3_R12_PREPARATION_VALIDATION_REPORT.md) | Engineering, regression and real Windows integration results |
 | Stage 3 Requalification R12 pre-execution gate | [Sprint 30.5 Stage 3 Requalification R12 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_3_R12_PRE_EXECUTION_GATE.md) | No-transfer and no-execution authority boundary |

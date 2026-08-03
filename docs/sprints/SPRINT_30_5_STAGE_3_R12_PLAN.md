@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 3 Requalification R12 Plan
 
-**Status:** Engineering correction complete - qualification not authorised
+**Status:** Engineering baseline accepted - governed qualification mission authorised
 **Operating model:** OEOM v1.0
 **Programme:** `Sprint 30.5 Stage 3 Requalification R12`
 

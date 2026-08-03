@@ -20,7 +20,7 @@
     "revisionLineage":  {
                             "currentLineage":  "attempt-scoped-stage-3-requalification",
                             "historicalQualifiedRevision":  "R9",
-                            "relationship":  "R9 remains accepted immutable history; R11 is immutable failed qualification; R12 is engineering-only successor preparation"
+                            "relationship":  "R9 remains accepted immutable history; R11 is immutable failed qualification; R12 engineering baseline is accepted and one governed qualification mission is authorised"
                         },
     "correctionBasis":  {
                             "basis":  "stage-3-r11-post-reset-package-data-lifecycle-defect",
@@ -176,7 +176,7 @@
                            "filesystem":  "NTFS",
                            "label":  "ORACLE-S3R1",
                            "volumeSerial":  "783A-2CD4",
-                           "approvalState":  "not-authorised-engineering-preparation-only"
+                           "approvalState":  "founder-authorised-current-r12-mission"
                        },
     "output":  {
                    "transferBase":  ".artifacts/sprint-30-5/stage-3-r12/transfers",
@@ -227,9 +227,9 @@
                                      "docs/sprints/evidence/sprint-30-5/stage-3-r11"
                                  ],
     "authority":  {
-                      "preparation":  "founder-authorised-engineering-only",
-                      "transfer":  "not-authorised",
-                      "execution":  "not-authorised",
+                      "preparation":  "founder-accepted-engineering-baseline",
+                      "transfer":  "founder-authorised",
+                      "execution":  "founder-authorised",
                       "stage4":  "not-authorised",
                       "production":  "not-authorised",
                       "publication":  "not-authorised",

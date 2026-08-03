@@ -175,6 +175,7 @@ const sources = [
     "Oracle.WindowObserver.exe"
   ),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_PLAN.md"),
+  join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_QUALIFICATION_MISSION.md"),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_ENGINEERING_CORRECTION.md"),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_PREPARATION_VALIDATION_REPORT.md"),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_PRE_EXECUTION_GATE.md"),

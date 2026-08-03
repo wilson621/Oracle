@@ -1071,3 +1071,7 @@ The continuing Founder mission authorises these gates sequentially; it does not 
 ## Stage 3 Requalification R11 Failed Evidence
 
 R11 passed transfer, host admission, negative package tests, trust, installation, direct activation and 60.448 seconds of runtime observation before failing closed at post-reset configuration creation. R12 now implements bounded asynchronous registration stabilization and exact managed `LocalState` resolution; real integration and non-qualification validation pass with zero residue. No qualification authority exists.
+
+## Stage 3 Requalification R12 Authorised Mission
+
+The Founder accepted the completed R12 engineering baseline and authorised one governed Stage 3 R12 qualification mission. Transfer and execution are sequentially authorised; the single authority may be created and consumed only after independent transfer verification, fresh host continuity and elevated pre-authority admission pass. Stage 4, production, publication and deployment remain not authorised.

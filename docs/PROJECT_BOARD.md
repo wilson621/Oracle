@@ -922,3 +922,7 @@ The continuing Founder mission authorises these gates sequentially; it does not 
 ## Stage 3 R11 Failure and Engineering Investigation
 
 R11 remains Founder-accepted immutable failed qualification evidence. R12 engineering correction and non-qualification validation are complete, including real post-reset Windows integration and zero-residue reconciliation. No transfer, authority, attempt, Stage 4, publication or deployment authority exists; qualification awaits a new explicit Founder mission.
+
+## Stage 3 Requalification R12 Authorised Mission
+
+The Founder accepted the completed R12 engineering baseline and authorised one governed Stage 3 R12 qualification mission. Transfer and execution are sequentially authorised; the single authority may be created and consumed only after independent transfer verification, fresh host continuity and elevated pre-authority admission pass. Stage 4, production, publication and deployment remain not authorised.

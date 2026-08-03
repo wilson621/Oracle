@@ -274,3 +274,7 @@ R11 failed closed after eight of fourteen phases because `Reset-AppxPackage` rem
 ## Stage 3 Requalification R12 Engineering Status
 
 R12 engineering correction and non-qualification validation are complete. The asynchronous post-reset registration lifecycle is now bounded and the exact `LocalState` is resolved through the Windows management API. No transfer, authority, attempt or qualification evidence was created; a new explicit Founder mission is required for any qualification.
+
+## Stage 3 Requalification R12 Founder-Authorised Mission
+
+The Founder accepted the completed R12 engineering baseline and authorised one governed Stage 3 R12 qualification mission. Transfer and execution are sequentially authorised; the single authority may be created and consumed only after independent transfer verification, fresh host continuity and elevated pre-authority admission pass. Stage 4, production, publication and deployment remain not authorised.

@@ -865,3 +865,7 @@ The continuing Founder mission authorises these gates sequentially; it does not 
 ## Stage 3 R11 Failure Correction
 
 R11 remains immutable failed evidence. R12 engineering preparation is complete: it bounds asynchronous package-registration stabilization, resolves the exact `LocalState` through the Windows management API and passes non-qualification validation. No R12 transfer or execution is authorised; qualification awaits a new explicit Founder mission.
+
+## Stage 3 Requalification R12 Authorised Mission
+
+The Founder accepted the completed R12 engineering baseline and authorised one governed Stage 3 R12 qualification mission. Transfer and execution are sequentially authorised; the single authority may be created and consumed only after independent transfer verification, fresh host continuity and elevated pre-authority admission pass. Stage 4, production, publication and deployment remain not authorised.

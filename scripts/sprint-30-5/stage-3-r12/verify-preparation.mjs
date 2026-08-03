@@ -196,17 +196,20 @@ for (const rejectedTransfer of [
     /invalid Stage 3 R12 format/u
   );
 }
-for (const unavailableAuthority of [
+for (const invalidAuthority of [
   undefined,
   "",
-  "FOUNDER-AUTHORISED-STAGE3-R12-TRANSFER",
   "FOUNDER-AUTHORISED-STAGE3-R12-EXECUTION",
 ]) {
   assert.throws(
-    () => validateTransferConstructionAuthority(unavailableAuthority),
-    /transfer construction is not authorised/u
+    () => validateTransferConstructionAuthority(invalidAuthority),
+    /Separate Founder transfer authority is required/u
   );
 }
+assert.equal(
+  validateTransferConstructionAuthority("FOUNDER-AUTHORISED-STAGE3-R12-TRANSFER"),
+  "FOUNDER-AUTHORISED-STAGE3-R12-TRANSFER"
+);
 
 validateCertificateWindow("2026-07-28T22:30:45.123Z");
 assert.throws(
@@ -586,6 +589,9 @@ const engineeringCorrection = readFileSync(
 const engineeringClosure = readFileSync(
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_ENGINEERING_CLOSURE.md"),
   "utf8"
+);const qualificationMission = readFileSync(
+  join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_QUALIFICATION_MISSION.md"),
+  "utf8"
 );const packageScripts = JSON.parse(
   readFileSync(join(repositoryRoot, "package.json"), "utf8")
 ).scripts;
@@ -600,6 +606,7 @@ for (const governedDocument of [
   preparationValidationReport,
   engineeringCorrection,
   engineeringClosure,
+  qualificationMission,
 ]) {
   assert.ok(governedDocument.includes(canonicalProgrammeIdentity));
 }
@@ -777,12 +784,21 @@ for (const required of [
 }
 for (const required of [
   "SPRINT_30_5_STAGE_3_R12_PLAN.md",
+  "SPRINT_30_5_STAGE_3_R12_QUALIFICATION_MISSION.md",
   "SPRINT_30_5_STAGE_3_R12_ENGINEERING_CORRECTION.md",
   "SPRINT_30_5_STAGE_3_R12_PREPARATION_VALIDATION_REPORT.md",
   "SPRINT_30_5_STAGE_3_R12_PRE_EXECUTION_GATE.md",
   "SPRINT_30_5_STAGE_3_R12_ENGINEERING_CLOSURE.md",
 ]) {
   assert.ok(transferBuilder.includes(required), `Future transfer source list is missing: ${required}`);
+}
+for (const required of [
+  "Founder-authorised",
+  "mission is authorised.",
+  "creation and immediate consumption of one attempt authority only after every",
+  "does not authorise Stage 4, production, publication or deployment",
+]) {
+  assert.ok(qualificationMission.includes(required), `Qualification mission is missing: ${required}`);
 }assert.equal(packageScripts["sprint-30-5:stage-3:r12:validate"], "node scripts/sprint-30-5/stage-3-r12/verify-preparation.mjs");
 assert.equal(packageScripts["sprint-30-5:stage-3:r12:rehearse"], "powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/sprint-30-5/stage-3-r12/Invoke-OracleStage3R12DevelopmentRehearsal.ps1");
 for (const operation of ["prepare-transfer", "verify-return", "execute"]) {
@@ -820,8 +836,8 @@ for (const forbidden of [
 }
 for (const required of [
   "Stage 3 Requalification R12 Pre-Execution Gate",
-  "Execution:** Not authorised",
-  "Transfer construction:** Not authorised",
+  "Execution:** Founder-authorised after all pre-authority gates pass",
+  "Transfer construction:** Founder-authorised",
   "ExpectedHarnessCommit",
   "ExpectedTransferManifestSha256",
   "ExpectedTransferCustodySha256",
@@ -1420,12 +1436,12 @@ assert.deepEqual(contract.rejectedTransfers, [
     disposition: "immutable-rejected-programme-identity-contradiction",
   },
 ]);
-assert.equal(contract.authority.preparation, "founder-authorised-engineering-only");
-assert.equal(contract.authority.transfer, "not-authorised");
-assert.equal(contract.authority.execution, "not-authorised");
+assert.equal(contract.authority.preparation, "founder-accepted-engineering-baseline");
+assert.equal(contract.authority.transfer, "founder-authorised");
+assert.equal(contract.authority.execution, "founder-authorised");
 assert.equal(contract.authority.stage4, "not-authorised");
-assert.equal(contract.transferMedium.approvalState, "not-authorised-engineering-preparation-only");
-assert.equal(contract.revisionLineage.relationship, "R9 remains accepted immutable history; R11 is immutable failed qualification; R12 is engineering-only successor preparation");
+assert.equal(contract.transferMedium.approvalState, "founder-authorised-current-r12-mission");
+assert.equal(contract.revisionLineage.relationship, "R9 remains accepted immutable history; R11 is immutable failed qualification; R12 engineering baseline is accepted and one governed qualification mission is authorised");
 assert.equal(contract.correctionBasis.basis, "stage-3-r11-post-reset-package-data-lifecycle-defect");
 assert.equal(contract.correctionBasis.failedStage3Revision, "R11");
 assert.equal(contract.correctionBasis.failedStage3Attempt, "stage3-r11-20260803T175715661Z-84bf486c");

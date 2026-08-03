@@ -1,34 +1,38 @@
 # Sprint 30.5 Stage 3 Requalification R12 Pre-Execution Gate
 
-**Status:** Engineering correction complete - awaiting explicit qualification mission
-**Transfer construction:** Not authorised
-**Execution:** Not authorised
-**Qualification attempt:** Not authorised
+**Status:** Founder-authorised mission active
+**Transfer construction:** Founder-authorised
+**Execution:** Founder-authorised after all pre-authority gates pass
+**Qualification attempt:** One create-only attempt authorised
 
 ## Current boundary
 
-The current Founder authority permits investigation, implementation, validation,
-regression testing and evidence preparation only. It does not authorise transfer
-construction, continuity collection, pre-authority admission, authority creation
-or qualification execution.
+The Founder accepted the completed R12 engineering baseline and authorised one
+governed qualification mission. Transfer construction may proceed on the exact
+approved medium. Execution may proceed only after independent transfer
+verification, fresh `Founder-QA-01` continuity, elevated read-only pre-authority
+admission and zero-state checks all pass.
 
-Consequently, `package.json` exposes R12 validation and rehearsal only. It exposes
-no R12 `prepare-transfer`, `verify-return` or `execute` command. The transfer
-builder and qualification harness also check the contract authority state and
-fail before construction or attempt creation.
+The qualification harness creates and immediately consumes the one authority
+record only after those gates pass. Any earlier non-zero result creates no
+authority and no attempt. `package.json` continues to expose validation and
+rehearsal only; governed transfer and execution use the token-gated scripts
+directly from their approved source and verified transfer locations.
 
-## Future governed bindings
+## Governed bindings
 
-If a later explicit Founder mission authorises qualification, it must separately
-bind `ExpectedHarnessCommit`, `ExpectedTransferManifestSha256`,
-`ExpectedTransferCustodySha256` and `ExpectedHostContinuitySha256`, plus one new
-transfer, grant, authority and attempt identity. No R11 identity may be reused.
+The mission must bind `ExpectedHarnessCommit`,
+`ExpectedTransferManifestSha256`, `ExpectedTransferCustodySha256` and
+`ExpectedHostContinuitySha256`, plus one new transfer, grant, authority and
+attempt identity. No R10 or R11 identity may be reused.
 
 The immutable product binding remains candidate
 `ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff` and MSIX
 `492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430`.
 The certificate margin closes at `2026-09-01T17:11:50Z`.
 
-Any future physical transfer would require separately approved medium hardware
-serial `5F10110403558` and volume serial `783A-2CD4`. Recording these governed
-identities here grants no transfer authority.
+The approved physical medium is hardware serial `5F10110403558`, NTFS label
+`ORACLE-S3R1`, and volume serial `783A-2CD4`. R12 output must be a new
+create-only sibling and all historical transfers remain immutable.
+
+Stage 4, production, publication and deployment remain not authorised.
