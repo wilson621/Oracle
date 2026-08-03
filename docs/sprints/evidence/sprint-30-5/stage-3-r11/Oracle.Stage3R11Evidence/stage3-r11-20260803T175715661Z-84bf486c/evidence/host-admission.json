@@ -1,0 +1,208 @@
+{
+    "result":  "passed",
+    "deviceName":  "FOUNDER-QA-01",
+    "preAuthorityClassification":  [
+                                       "NON-QUALIFICATION",
+                                       "NON-AUTHORITY",
+                                       "NON-EVIDENCE",
+                                       "READ-ONLY PRE-AUTHORITY PREFLIGHT"
+                                   ],
+    "preAuthorityObservedAtUtc":  "2026-08-03T17:57:55.5945468Z",
+    "powershell":  {
+                       "edition":  "Desktop",
+                       "version":  "5.1.26100.8894",
+                       "is64BitProcess":  true,
+                       "elevated":  true
+                   },
+    "commandSurface":  [
+                           {
+                               "name":  "Add-AppxPackage",
+                               "commandType":  "Cmdlet",
+                               "module":  "Appx",
+                               "requiredParameters":  [
+                                                          "Path",
+                                                          "ErrorAction"
+                                                      ]
+                           },
+                           {
+                               "name":  "Get-AppxPackage",
+                               "commandType":  "Cmdlet",
+                               "module":  "Appx",
+                               "requiredParameters":  [
+                                                          "Name",
+                                                          "ErrorAction"
+                                                      ]
+                           },
+                           {
+                               "name":  "Remove-AppxPackage",
+                               "commandType":  "Cmdlet",
+                               "module":  "Appx",
+                               "requiredParameters":  [
+                                                          "Package",
+                                                          "Confirm"
+                                                      ]
+                           },
+                           {
+                               "name":  "Reset-AppxPackage",
+                               "commandType":  "Cmdlet",
+                               "module":  "Appx",
+                               "requiredParameters":  [
+                                                          "Package"
+                                                      ]
+                           },
+                           {
+                               "name":  "Get-AuthenticodeSignature",
+                               "commandType":  "Cmdlet",
+                               "module":  "Microsoft.PowerShell.Security",
+                               "requiredParameters":  [
+                                                          "LiteralPath"
+                                                      ]
+                           },
+                           {
+                               "name":  "Get-CimInstance",
+                               "commandType":  "Cmdlet",
+                               "module":  "CimCmdlets",
+                               "requiredParameters":  [
+                                                          "ClassName",
+                                                          "Filter"
+                                                      ]
+                           },
+                           {
+                               "name":  "Get-NetTCPConnection",
+                               "commandType":  "Function",
+                               "module":  "NetTCPIP",
+                               "requiredParameters":  [
+                                                          "OwningProcess"
+                                                      ]
+                           },
+                           {
+                               "name":  "Confirm-SecureBootUEFI",
+                               "commandType":  "Cmdlet",
+                               "module":  "SecureBoot",
+                               "requiredParameters":  [
+
+                                                      ]
+                           },
+                           {
+                               "name":  "Get-Tpm",
+                               "commandType":  "Cmdlet",
+                               "module":  "TrustedPlatformModule",
+                               "requiredParameters":  [
+
+                                                      ]
+                           },
+                           {
+                               "name":  "Get-MpComputerStatus",
+                               "commandType":  "Function",
+                               "module":  "ConfigDefender",
+                               "requiredParameters":  [
+
+                                                      ]
+                           },
+                           {
+                               "name":  "Compress-Archive",
+                               "commandType":  "Function",
+                               "module":  "Microsoft.PowerShell.Archive",
+                               "requiredParameters":  [
+                                                          "LiteralPath",
+                                                          "DestinationPath"
+                                                      ]
+                           }
+                       ],
+    "platformProbe":  {
+                          "untrustedAuthenticodeStatus":  "UnknownError",
+                          "signerThumbprint":  "8C24858C147873EF46A9D61018FA2702B6222EA2",
+                          "signerSubject":  "CN=Oracle Stage 2 Requalification R6 Local Test Signing - NOT PRODUCTION",
+                          "tcpConnectionCount":  81
+                      },
+    "tools":  [
+                  {
+                      "name":  "node",
+                      "available":  false
+                  },
+                  {
+                      "name":  "npm",
+                      "available":  false
+                  },
+                  {
+                      "name":  "git",
+                      "available":  false
+                  },
+                  {
+                      "name":  "python",
+                      "available":  false
+                  },
+                  {
+                      "name":  "docker",
+                      "available":  false
+                  },
+                  {
+                      "name":  "dotnet",
+                      "available":  false
+                  },
+                  {
+                      "name":  "msbuild",
+                      "available":  false
+                  }
+              ],
+    "manufacturer":  "MEDION",
+    "model":  "ERAZER P6605 MD61596",
+    "secureBoot":  true,
+    "tpmPresent":  true,
+    "tpmReady":  true,
+    "defenderAntivirusEnabled":  true,
+    "defenderRealTimeProtectionEnabled":  true,
+    "activatedProductCount":  1,
+    "recovery":  {
+                     "executable":  "C:\\WINDOWS\\system32\\reagentc.exe",
+                     "arguments":  [
+                                       "/info"
+                                   ],
+                     "startedAtUtc":  "2026-08-03T17:57:47.2772022Z",
+                     "completedAtUtc":  "2026-08-03T17:57:47.3841389Z",
+                     "stdout":  "Windows Recovery Environment (Windows RE) and system reset configuration\r\nInformation:\r\n\r\n    Windows RE status:         Enabled\r\n    Windows RE location:       \\\\?\\GLOBALROOT\\device\\harddisk0\\partition4\\Recovery\\WindowsRE\r\n    Boot Configuration Data (BCD) identifier: dfa9a6d0-8927-11f1-805a-f6f12e6c9d80\r\n    Recovery image location:   \r\n    Recovery image index:      0\r\n    Custom image location:     \r\n    Custom image index:        0\r\n    Windows RE Version:        10.0.26100.8875\r\n\r\nREAGENTC.EXE: Operation Successful.\r\n    \r\n",
+                     "stderr":  "",
+                     "exitCode":  0,
+                     "signal":  null,
+                     "processError":  null
+                 },
+    "installedSoftware":  [
+                              {
+                                  "DisplayName":  "Copilot",
+                                  "DisplayVersion":  "150.0.4078.96",
+                                  "Publisher":  "Microsoft Corporation"
+                              },
+                              {
+                                  "DisplayName":  "Microsoft Edge",
+                                  "DisplayVersion":  "151.0.4129.59",
+                                  "Publisher":  "Microsoft Corporation"
+                              },
+                              {
+                                  "DisplayName":  "Microsoft Edge WebView2 Runtime",
+                                  "DisplayVersion":  "150.0.4078.105",
+                                  "Publisher":  "Microsoft Corporation"
+                              },
+                              {
+                                  "DisplayName":  "NVIDIA Graphics Driver 582.66",
+                                  "DisplayVersion":  "582.66",
+                                  "Publisher":  "NVIDIA Corporation"
+                              },
+                              {
+                                  "DisplayName":  "NVIDIA HD Audio Driver 1.4.5.7",
+                                  "DisplayVersion":  "1.4.5.7",
+                                  "Publisher":  "NVIDIA Corporation"
+                              },
+                              {
+                                  "DisplayName":  "NVIDIA Install Application",
+                                  "DisplayVersion":  "2.1002.438.0",
+                                  "Publisher":  "NVIDIA Corporation"
+                              },
+                              {
+                                  "DisplayName":  "NVIDIA PhysX System Software 9.23.1019",
+                                  "DisplayVersion":  "9.23.1019",
+                                  "Publisher":  "NVIDIA Corporation"
+                              }
+                          ],
+    "historicalAdmissionSha256":  "6dfaa176ed2d43595511d44401612536c6c0f1955f94527469d0f22af09c3b0e",
+    "installationMediaEvidencePresent":  false
+}

@@ -1,0 +1,13 @@
+{
+    "executable":  "C:\\Users\\wilso\\Documents\\Codex\\2026-07-30\\files-mentioned-by-the-user-bootstrapprompt\\work\\stage3-r11-governed-staging\\transfer-stage3-r11-20260803T173458659Z-a1a8ad21\\payload\\Oracle.WindowDiscovery.exe",
+    "arguments":  [
+
+                  ],
+    "startedAtUtc":  "2026-08-03T17:58:56.6860507Z",
+    "completedAtUtc":  "2026-08-03T17:59:04.6660939Z",
+    "stdout":  "[{\"handle\":\"2491274\",\"title\":\"Administrator: Windows PowerShell\",\"processId\":16252,\"processName\":\"powershell\",\"visible\":true,\"minimized\":false,\"x\":179,\"y\":179,\"width\":895,\"height\":518},{\"handle\":\"1377138\",\"title\":\"ChatGPT\",\"processId\":6120,\"processName\":\"ChatGPT\",\"visible\":true,\"minimized\":false,\"x\":768,\"y\":0,\"width\":768,\"height\":816},{\"handle\":\"328432\",\"title\":\"Founder Programme Companion - Profile 1 - Microsoft\\u200B Edge\",\"processId\":12576,\"processName\":\"msedge\",\"visible\":true,\"minimized\":false,\"x\":-6,\"y\":0,\"width\":782,\"height\":823},{\"handle\":\"5374220\",\"title\":\"Oracle\",\"processId\":13436,\"processName\":\"Oracle\",\"visible\":true,\"minimized\":false,\"x\":168,\"y\":8,\"width\":1200,\"height\":800},{\"handle\":\"65788\",\"title\":\"Program Manager\",\"processId\":13336,\"processName\":\"explorer\",\"visible\":true,\"minimized\":false,\"x\":0,\"y\":0,\"width\":1536,\"height\":864}]",
+    "stderr":  "{\"contract\":\"oracle.window-discovery-diagnostic\",\"contractVersion\":1,\"classification\":\"completed-with-records\",\"message\":\"EnumWindows completed with eligible records.\",\"enumWindowsReturned\":true,\"win32Error\":null,\"callbackInvoked\":true,\"topLevelWindowsVisited\":133,\"eligibleRecordsProduced\":5,\"callbackTerminationRequested\":false,\"callbackException\":null,\"executionContext\":{\"operatingSystem\":\"Microsoft Windows 10.0.26200\",\"processId\":9444,\"sessionId\":4,\"userInteractive\":true,\"is64BitProcess\":true,\"windowStation\":\"WinSta0\",\"threadDesktop\":\"Default\",\"inputDesktop\":\"Default\",\"compatible\":true,\"incompatibilityReason\":null}}",
+    "exitCode":  0,
+    "signal":  null,
+    "processError":  null
+}

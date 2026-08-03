@@ -1,0 +1,413 @@
+{
+    "schemaVersion":  "1.0.0",
+    "contract":  "oracle.sprint-30-5.stage-3-r11-failed-evidence-index",
+    "programmeIdentity":  "Sprint 30.5 Stage 3 Requalification R11",
+    "disposition":  "immutable-failed-qualification",
+    "authorityId":  "authority-stage3-r11-20260803T175715661Z-84bf486c",
+    "attemptId":  "stage3-r11-20260803T175715661Z-84bf486c",
+    "attemptFileCount":  77,
+    "attemptBytes":  123519,
+    "preservedFileCount":  78,
+    "preservedBytes":  123974,
+    "finalEvidenceManifestProduced":  false,
+    "completionRecordProduced":  false,
+    "archiveProduced":  false,
+    "keyBindings":  {
+                        "failureSha256":  "2e6cf6fb9d131c66376e247c94d5198db5e6ff4f8e740868b6f85194d004a489",
+                        "authoritySha256":  "ffcb0ed83c936bd614c753d6ce76c2ad0867e981dbfe4d3f07048e0133879f6f",
+                        "runtimeObservationSha256":  "33d5be4a89f7e30c4520a4f9381eb74627faf381948ac1a83c30012bae1e2afe",
+                        "continuitySha256":  "d8fd0187aaefb98cf6c5a7addbfbe26635376ce80a11a211035417baa30e30b0"
+                    },
+    "files":  [
+                  {
+                      "path":  "authorities/authority-stage3-r11-20260803T175715661Z-84bf486c.json",
+                      "size":  455,
+                      "sha256":  "ffcb0ed83c936bd614c753d6ce76c2ad0867e981dbfe4d3f07048e0133879f6f"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/evidence/failure.json",
+                      "size":  4596,
+                      "sha256":  "2e6cf6fb9d131c66376e247c94d5198db5e6ff4f8e740868b6f85194d004a489"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/evidence/host-admission.json",
+                      "size":  10545,
+                      "sha256":  "5d4246e5b50c9097200602bf2a168a274c2f9ea9a03245cee29141cf0d4b5bdb"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/evidence/initial-activation.json",
+                      "size":  907,
+                      "sha256":  "ee5ccaac4970046aa61acf2513085420d7716cc5d2a613ef701a9b5a8373df3d"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/evidence/initial-runtime-configuration-admission.json",
+                      "size":  681,
+                      "sha256":  "227607f642c9bade2667a1dfe16f4c99ed6f55e499f2ce87cee277569ef81794"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/evidence/initial-runtime-configuration-consumption.json",
+                      "size":  266,
+                      "sha256":  "8110ab65a5b92d2c83388bd9774356c869957f22606a5c14da400114e5d45e98"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/evidence/Oracle.Stage3R11HostContinuity.json",
+                      "size":  3624,
+                      "sha256":  "d8fd0187aaefb98cf6c5a7addbfbe26635376ce80a11a211035417baa30e30b0"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/evidence/package-content-reconciliation.json",
+                      "size":  916,
+                      "sha256":  "659de6d03bfbc33530c01888b622afa7f78459b3ee610d1c0eee797e9a9cb12e"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/evidence/runtime-observation.json",
+                      "size":  50926,
+                      "sha256":  "33d5be4a89f7e30c4520a4f9381eb74627faf381948ac1a83c30012bae1e2afe"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/evidence/tampered-rejection.json",
+                      "size":  899,
+                      "sha256":  "3c6baa79b9587ec24882591d48c57e4bb50f7ed40c6d20bb67904de683c9d41d"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/evidence/untrusted-rejection.json",
+                      "size":  896,
+                      "sha256":  "d3551a1f8ad889692657e6f7af8236c95cb5a383328ab2eb8287479774303695"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/lifecycle/01-authority-consumed.json",
+                      "size":  726,
+                      "sha256":  "7ceaafe460304a9188b0b16add582ddb12493f6a1f4a2c445ef6ef0f433e7be2"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/lifecycle/02-transfer-verified.json",
+                      "size":  671,
+                      "sha256":  "ddb520b6d402bfa3bd7e68413ac17d912a4b4f1ec9f2d52f02dc34524a9af13f"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/lifecycle/03-host-admitted.json",
+                      "size":  731,
+                      "sha256":  "d698ce8659647158dad31b8372e4f04f1aba6d2ba0ad7e44629f2c17fdb87e59"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/lifecycle/04-untrusted-rejection-passed.json",
+                      "size":  632,
+                      "sha256":  "96265e7a2785d3bd5a76308212cc80e7c4089804fa142f4f11f3d28f467aa014"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/lifecycle/05-trust-established.json",
+                      "size":  929,
+                      "sha256":  "37e4f16c695a09414ab3318f98af482a4bfe8e4e058e2dbf56d0772b98790902"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/lifecycle/06-negative-path-passed.json",
+                      "size":  625,
+                      "sha256":  "d00366885a03d288c291cf845a46d57cb495c36c04ab7d1495aae474ca43195f"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/lifecycle/07-package-installed.json",
+                      "size":  613,
+                      "sha256":  "7651f04f6f065a1ffd956364698eeb99827cb252b2c5493f178257dea8c53da6"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/lifecycle/08-runtime-observed.json",
+                      "size":  750,
+                      "sha256":  "6016258f6bb7dcf89befe82296d66fd0c2fa6305411c4c7f8d7d9c84bb285239"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/exact-machine-trust-import.json",
+                      "size":  862,
+                      "sha256":  "85bcbfebb2d7c3fbefdcbd6d3c0077e197fcc6a143c78334b73b7f8521563b02"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/exact-machine-trust-remove.json",
+                      "size":  701,
+                      "sha256":  "72ced57f632f48176d219794736c72f60e68f548842977ed2ccf800478bad3a7"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-discovery-639213767366783005.json",
+                      "size":  2174,
+                      "sha256":  "14ef94c11687f50d245d0e4d54b062b0275292316390b18b34462b8bda433242"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767481114531.json",
+                      "size":  709,
+                      "sha256":  "536b92f6a0aaed6c8beedff4270fd9424eb8c69bc2b08ca3b7a032519584243c"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767570116166.json",
+                      "size":  709,
+                      "sha256":  "4715f3d2acc0ecc60af311e57db0111e9d6bde982fc20cf02cd3ac32975c7df9"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767581241603.json",
+                      "size":  709,
+                      "sha256":  "3e960a43a85271e437abcf4348e85c49828b1b8f53840fee9548094e6447b98d"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767592343281.json",
+                      "size":  709,
+                      "sha256":  "e4f2db616f9322fbb6c0ee0bde4a09573e89ca727892261b327ce590f8e6e9a9"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767603675983.json",
+                      "size":  709,
+                      "sha256":  "f98162e49c0efe56d61699c6c73896c508aefebca7c04412e6150d88f1daab46"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767614838426.json",
+                      "size":  709,
+                      "sha256":  "3581f25a8938cb6220e107c650a8abf7e53ae333f5d85cafb148c29827d224a0"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767625841165.json",
+                      "size":  709,
+                      "sha256":  "fb2e47506f6e12c06743a3d6fb485977b091a73f152dada352665439f26c24ce"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767636984096.json",
+                      "size":  709,
+                      "sha256":  "d048ffdd8510a917c5943e6baaeaded2614781d6f523681bc853040585b9914e"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767648327724.json",
+                      "size":  709,
+                      "sha256":  "8805f93966b89924ccc6274b188ffcc70db9577c5b234409490a5170be8e54b0"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767659537678.json",
+                      "size":  709,
+                      "sha256":  "415cc0e8633feea471c8b8b3d0b165e78003362d4d078374232ec687c936f830"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767670817151.json",
+                      "size":  709,
+                      "sha256":  "cf1be64ae01abdd8f9f21bfe6309ddcc1ee6be32c911fb7dbf238f0c1cec9460"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767682110769.json",
+                      "size":  709,
+                      "sha256":  "04218f8a36432a3c20bb727ca8fe543de0b3b5b98f434057ad7b7f565c5781c6"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767693306382.json",
+                      "size":  709,
+                      "sha256":  "71b966800c95e8968f56ca0bcfeedfb0303838a8fe467108b9e1c9985cc0fd08"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767704639924.json",
+                      "size":  709,
+                      "sha256":  "e047f58595c5b33f2ce562df0ee295cab8ec5f94803fadf07f3fe45d044ade1e"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767715963983.json",
+                      "size":  709,
+                      "sha256":  "d26a18d2cc35d1c5d1bfc266ba547e54c89008446287787d315b829ab111c9bb"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767726947338.json",
+                      "size":  709,
+                      "sha256":  "789a2881c28a0280cfd3e6a47e1cb325e14f79b5eb8cb512cebbba46d148aae2"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767737948205.json",
+                      "size":  709,
+                      "sha256":  "eaa30aea4fa03ac3d664a569a0bf66d338cdf9bb40e8f99ed128d1c62534d4f2"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767749216359.json",
+                      "size":  709,
+                      "sha256":  "fe627ecb767b8dd079fd335f264a6eb32e1e974e0c382152d02638bdd260f037"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767760226613.json",
+                      "size":  709,
+                      "sha256":  "c808cac3b9c9fb872966ca6693da8935f44e0769fd464267819bddaeb9773467"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767771450867.json",
+                      "size":  709,
+                      "sha256":  "3b1837722b1f0e0e01b0337b3ca804b0f9e2a7c75e66c87ad0ce7aef789cc9f0"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767782591897.json",
+                      "size":  709,
+                      "sha256":  "c4df226269eb67a05dd9bee559ef3595f59a85de74a5e2f7d5234f534c4f8e98"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767793922756.json",
+                      "size":  709,
+                      "sha256":  "46f88881e9168ac32d6733ce341e0b60e992725db11de9a82fd31a48482a6672"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767805268674.json",
+                      "size":  709,
+                      "sha256":  "6ffe3aecb0c1c3dde782e2bee430338c88573195c98153abda4f09f1856e1757"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767816604912.json",
+                      "size":  709,
+                      "sha256":  "297429d05f698d31a8f530a0b4e8fd1c8abc814750032c52ed6a2d7c594c0f81"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767827930539.json",
+                      "size":  709,
+                      "sha256":  "48de4b77024683da3a2ffd0e2d5ce04b3b97f8bef4815089d61645e3e3ed765f"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767839085291.json",
+                      "size":  709,
+                      "sha256":  "677dc0614326e9c56a15ce88f432e0115129684ab8d3d2bbfaf9526d64204bb6"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767850072087.json",
+                      "size":  709,
+                      "sha256":  "68561b55f9568b36b67a3e28ec852a2167dd3700f116d3a7dc6a92250f244e18"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767861043960.json",
+                      "size":  709,
+                      "sha256":  "926eaa05a6850e8ef9950220526c03eff068eceb383b76e91cab54bad3ff0cde"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767872253707.json",
+                      "size":  709,
+                      "sha256":  "df78f07d36937773fc00cf22c9ae3b066aa6eb6e49a7b25393ee5c92260e1a78"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767883417255.json",
+                      "size":  709,
+                      "sha256":  "2360d261ea8e8efd7d2fb15652371cd974212bb8ed6b6fedc35ac9288389181a"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767894739317.json",
+                      "size":  709,
+                      "sha256":  "58f3d0aca57f04621b5ad742035e675becbd856a0b3d4800d474684c63da675a"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767906053197.json",
+                      "size":  709,
+                      "sha256":  "f754e68343739fd0ff035341c93ac8bfb3079795b1ce56d27339490658a56028"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767917211614.json",
+                      "size":  709,
+                      "sha256":  "cb656b170deb1fe3394dd05e12b0bade9302a31db09ff74bd743e0c9e1f48438"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767928550396.json",
+                      "size":  709,
+                      "sha256":  "9891d9481861541a1efc01faeddb806e07e9146ddcfc0b6342b1514659e9db22"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767939709222.json",
+                      "size":  709,
+                      "sha256":  "73df7fdfb45624e58d766cb057aa6ae9e66bbdffc40d014bcd46cdf86609f233"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767950687920.json",
+                      "size":  709,
+                      "sha256":  "edc524ae0c831c94b4fe5a824de65897628060c969d0bdd88bbb4c2d92c41249"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767961668628.json",
+                      "size":  709,
+                      "sha256":  "ff494dc923a38d58e050a4c2bca65b5849d935d90bcdd4274bba93719498b1bf"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767972810654.json",
+                      "size":  709,
+                      "sha256":  "b56020635c2211070089f1c10ceac3c33374e9afd54a8b01842d637e7489860e"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767984050558.json",
+                      "size":  709,
+                      "sha256":  "3932b207c92de8d37856dbdf61ba7a3415233a53b57b412eb89fda5101f52dde"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213767995209915.json",
+                      "size":  709,
+                      "sha256":  "f8657bc917168c83fa2e69d483137d2d00b7a560744d465a6180147426d52c0f"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768006496126.json",
+                      "size":  709,
+                      "sha256":  "c674a71aa56597fe154a32d6d49d69b07965b14de64a19d3d80f13b806a2f4a5"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768017979501.json",
+                      "size":  709,
+                      "sha256":  "244a03ec2d1a572e625f63d3e41d92009820153d80644ca1690cfca8a74415e5"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768029382318.json",
+                      "size":  709,
+                      "sha256":  "678e133d4bb8d28a85fcd37b343b65a85752969bd4a7a435365271305d74ca8c"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768040519222.json",
+                      "size":  709,
+                      "sha256":  "f94c41c2d8b4d26fb70e05c6ea675ef40a43a256d235ad7fdc3e4d9efe151dab"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768051694104.json",
+                      "size":  709,
+                      "sha256":  "57a6045456529ca76f550c559e398c3b2ea63283a7c4f2c5d237f6e23be3bf5a"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768062986249.json",
+                      "size":  709,
+                      "sha256":  "100930dc44c1f205f4c9337e1a0c1cbb677e3bb097251adb90e02a9b521efdbd"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768074023786.json",
+                      "size":  709,
+                      "sha256":  "97cb0da5223140df9b9762c8a1b9a2f2ea151e43a46d970ca5b8a51eed4e9649"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768085024708.json",
+                      "size":  709,
+                      "sha256":  "cb013f73751b537ff6c5828f784e35a8b826fb975774d34c26b202b1858b5d54"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768096174873.json",
+                      "size":  709,
+                      "sha256":  "fda2465ff186cd7ef41941d04ae22cf34d6eb83f22335595833784d1d9c7fb8b"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768107423595.json",
+                      "size":  709,
+                      "sha256":  "e10b4e739af0bbf3203c87458c39204c027dc7e08686488e84b3fce8692993a3"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768118434707.json",
+                      "size":  709,
+                      "sha256":  "6f29065dd4004df70f31bc394d1508f65a252917f7cd3ded28925d6b45fcdf97"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768129652855.json",
+                      "size":  709,
+                      "sha256":  "5cba4bcb2195b398d7d5b1205c182bfc8ba2df1c1e2b78f30e0dad4f2fdcc4c8"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768140830387.json",
+                      "size":  709,
+                      "sha256":  "6d4c5412dc4db80afb9ee72bb59f0bef75a5a5c51068d8bea1d37686b9954cf6"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768151989945.json",
+                      "size":  709,
+                      "sha256":  "6498e1a779c1d71a807684045526dd3793ae96bb87133cf1324fa242a8459688"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/logs/initial-observer-639213768163145672.json",
+                      "size":  709,
+                      "sha256":  "cf130287f1293ae7f47a327435b1d79060eb60b6c06d18a4551904d4e487bc20"
+                  },
+                  {
+                      "path":  "stage3-r11-20260803T175715661Z-84bf486c/work/attempt-public-certificate.cer",
+                      "size":  854,
+                      "sha256":  "f606378d0b23bbe4fe6200b3a121dae91fc0d3a6d124bff46b54b90f24b9dd51"
+                  }
+              ]
+}

@@ -1,0 +1,81 @@
+{
+    "programmeIdentity":  "Sprint 30.5 Stage 3 Requalification R11",
+    "revision":  "R11",
+    "result":  "failed",
+    "authorityConsumed":  true,
+    "completedLifecyclePhases":  [
+                                     "authority-consumed",
+                                     "transfer-verified",
+                                     "host-admitted",
+                                     "untrusted-rejection-passed",
+                                     "trust-established",
+                                     "negative-path-passed",
+                                     "package-installed",
+                                     "runtime-observed"
+                                 ],
+    "failure":  "Installed runtime configuration package root is absent.",
+    "teardownFailure":  null,
+    "teardownProcessEvents":  [
+                                  {
+                                      "recordedAtUtc":  "2026-08-03T18:00:16.5157188Z",
+                                      "processId":  9916,
+                                      "classification":  "owned-live-process",
+                                      "safeToStop":  true
+                                  },
+                                  {
+                                      "recordedAtUtc":  "2026-08-03T18:00:16.5624071Z",
+                                      "processId":  9916,
+                                      "classification":  "stopped-governed-process",
+                                      "safeToStop":  true
+                                  },
+                                  {
+                                      "recordedAtUtc":  "2026-08-03T18:00:16.5624071Z",
+                                      "processId":  13128,
+                                      "classification":  "owned-live-process",
+                                      "safeToStop":  true
+                                  },
+                                  {
+                                      "recordedAtUtc":  "2026-08-03T18:00:16.5885748Z",
+                                      "processId":  13128,
+                                      "classification":  "stopped-governed-process",
+                                      "safeToStop":  true
+                                  },
+                                  {
+                                      "recordedAtUtc":  "2026-08-03T18:00:16.5885748Z",
+                                      "processId":  13436,
+                                      "classification":  "owned-live-process",
+                                      "safeToStop":  true
+                                  },
+                                  {
+                                      "recordedAtUtc":  "2026-08-03T18:00:16.6398188Z",
+                                      "processId":  13436,
+                                      "classification":  "stopped-governed-process",
+                                      "safeToStop":  true
+                                  },
+                                  {
+                                      "recordedAtUtc":  "2026-08-03T18:00:16.6398188Z",
+                                      "processId":  13664,
+                                      "classification":  "owned-live-process",
+                                      "safeToStop":  true
+                                  },
+                                  {
+                                      "recordedAtUtc":  "2026-08-03T18:00:16.6485864Z",
+                                      "processId":  13664,
+                                      "classification":  "stopped-governed-process",
+                                      "safeToStop":  true
+                                  },
+                                  {
+                                      "recordedAtUtc":  "2026-08-03T18:00:16.6485864Z",
+                                      "processId":  14284,
+                                      "classification":  "owned-live-process",
+                                      "safeToStop":  true
+                                  },
+                                  {
+                                      "recordedAtUtc":  "2026-08-03T18:00:16.6635910Z",
+                                      "processId":  14284,
+                                      "classification":  "stopped-governed-process",
+                                      "safeToStop":  true
+                                  }
+                              ],
+    "recordedAtUtc":  "2026-08-03T18:00:18.0421447Z"
+}

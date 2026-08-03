@@ -483,3 +483,6 @@ to adopt a later formatting standard.
 | Stage 3 Requalification R11 plan | [Sprint 30.5 Stage 3 Requalification R11 Plan](sprints/SPRINT_30_5_STAGE_3_R11_PLAN.md) | R6-bound clean-host lifecycle and sequential authority model |
 | Stage 3 Requalification R11 pre-execution gate | [Sprint 30.5 Stage 3 Requalification R11 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_3_R11_PRE_EXECUTION_GATE.md) | Transfer, continuity, admission and execution boundaries |
 | Stage 3 Requalification R11 validation | [Sprint 30.5 Stage 3 Requalification R11 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_3_R11_PREPARATION_VALIDATION_REPORT.md) | Preparation validation, rehearsal, limitations and exact R6 rehash |
+| Stage 3 Requalification R11 failure closure | [Sprint 30.5 Stage 3 Requalification R11 Failure Closure](sprints/SPRINT_30_5_STAGE_3_R11_FAILURE_CLOSURE.md) | Immutable failure and no-retry boundary |
+| Stage 3 Requalification R11 failed analysis | [Sprint 30.5 Stage 3 Requalification R11 Failed Attempt Analysis](sprints/SPRINT_30_5_STAGE_3_R11_FAILED_ATTEMPT_ANALYSIS.md) | Evidence-led root cause |
+| Stage 3 Requalification R11 failed evidence | [R11 Failed Evidence](sprints/evidence/sprint-30-5/stage-3-r11/README.md) | Byte-for-byte evidence and index |

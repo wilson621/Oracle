@@ -918,3 +918,7 @@ R5 remains immutable failed history. Stage 3 R10 remains R4-bound and barred. A 
 R11 is the current clean-host preparation revision for accepted Stage 2 R6 MSIX SHA-256 `492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430`. Stage 3 R9 remains accepted immutable history; R10 remains barred with two immutable rejected transfers. R11 execution is blocked until create-only transfer verification, fresh host continuity and elevated pre-authority admission all pass.
 
 The continuing Founder mission authorises these gates sequentially; it does not authorise R10, namespace reuse, production or release.
+
+## Stage 3 R11 Failure and Engineering Investigation
+
+R11 is Founder-accepted immutable failed qualification evidence. Its authority is consumed and no retry is authorised. Engineering is active on an R12 successor correction without qualification, Stage 4, publication or deployment authority.
