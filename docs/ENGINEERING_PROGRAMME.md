@@ -2324,3 +2324,7 @@ Stage 3 execution is blocked and unauthorised. Qualification authority creation 
 ## Stage 3 R12 Corrected Preparation Complete
 
 The corrected engineering baseline and fresh create-only replacement transfer are complete. Transfer `transfer-stage3-r12-20260803T201110346Z-3cf28c94` binds commit `68a304d6caad3caaf84d3a6b4f63802ab4b6fe83` and passed independent full-payload verification. Stage 3 execution remains blocked and unauthorised; authority and attempt counts are zero.
+
+## Stage 3 R12 Fresh Execution Authority
+
+Engineering owns the fresh execution-enabled baseline, adversarial validation, create-only transfer, independent verification, fresh continuity, elevated admission and one governed R12 attempt. Authority may be created and consumed only after every gate passes. Historical transfers, identities and evidence remain immutable.

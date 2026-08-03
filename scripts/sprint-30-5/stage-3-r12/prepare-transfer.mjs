@@ -92,7 +92,9 @@ if (!existsSync(approvedRoot)) {
   throw new Error("Approved transfer root must already exist.");
 }
 
-verifyImmutablePreAuthorityFailure(approvedRoot);
+verifyImmutableHistoricalTransfer(approvedRoot, contract.preAuthorityEngineeringFailure);
+verifyImmutableHistoricalTransfer(approvedRoot, contract.immutableReplacementOnlyTransfer);
+verifyImmutableFailedContinuity(approvedRoot);
 
 const stage2AttemptRoot = join(
   repositoryRoot,
@@ -181,6 +183,9 @@ const sources = [
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_PRE_AUTHORITY_FAILURE_CLOSURE.md"),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_TRANSFER_INVENTORY_CORRECTION.md"),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_REPLACEMENT_TRANSFER_VALIDATION_REPORT.md"),
+  join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_REPLACEMENT_TRANSFER_COMPLETION.md"),
+  join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_EXECUTION_ENABLED_MISSION.md"),
+  join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_EXECUTION_ENABLED_VALIDATION_REPORT.md"),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_ENGINEERING_CORRECTION.md"),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_PREPARATION_VALIDATION_REPORT.md"),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_PRE_EXECUTION_GATE.md"),
@@ -364,6 +369,7 @@ writeJsonAtomicCreateOnly(manifestPath, {
   acceptedStage2: contract.stage2,
   immutableFailedQualification: contract.immutableFailedQualification,
   immutablePreAuthorityEngineeringFailure: contract.preAuthorityEngineeringFailure,
+  immutableReplacementOnlyTransfer: contract.immutableReplacementOnlyTransfer,
   destinationHost: contract.host,
   privateKeyIncluded: false,
   productionCredentialIncluded: false,
@@ -409,6 +415,7 @@ writeJsonAtomicCreateOnly(custodyPath, {
     failedR3TransferModified: false,
     rejectedR10TransfersModified: false,
     previousR12PreAuthorityFailureModified: false,
+    previousR12ReplacementOnlyTransferModified: false,
     previousR5TransferModified: false,
     previousR6TransferModified: false,
     previousR7TransferModified: false,
@@ -429,8 +436,7 @@ console.log(JSON.stringify({
   custodyHash,
 }, null, 2));
 
-function verifyImmutablePreAuthorityFailure(approvedRoot) {
-  const failure = contract.preAuthorityEngineeringFailure;
+function verifyImmutableHistoricalTransfer(approvedRoot, failure) {
   const failureRoot = join(approvedRoot, failure.transferId);
   const manifestPath = join(failureRoot, "Oracle.Stage3R12TransferManifest.json");
   const custodyPath = join(failureRoot, "Oracle.Stage3R12TransferCustody.json");
@@ -440,7 +446,7 @@ function verifyImmutablePreAuthorityFailure(approvedRoot) {
     sha256(manifestPath) !== failure.manifestSha256 ||
     sha256(custodyPath) !== failure.custodySha256
   ) {
-    throw new Error("Immutable first R12 transfer binding differs.");
+    throw new Error("Immutable historical R12 transfer binding differs.");
   }
 
   const expectedRootNames = [
@@ -452,7 +458,7 @@ function verifyImmutablePreAuthorityFailure(approvedRoot) {
   ];
   const actualRootNames = readdirSync(failureRoot).sort();
   if (JSON.stringify(actualRootNames) !== JSON.stringify(expectedRootNames)) {
-    throw new Error("Immutable first R12 transfer root shape differs.");
+    throw new Error("Immutable historical R12 transfer root shape differs.");
   }
   if (
     readFileSync(`${manifestPath}.sha256.txt`, "ascii") !==
@@ -460,7 +466,7 @@ function verifyImmutablePreAuthorityFailure(approvedRoot) {
     readFileSync(`${custodyPath}.sha256.txt`, "ascii") !==
       `${failure.custodySha256}  Oracle.Stage3R12TransferCustody.json\n`
   ) {
-    throw new Error("Immutable first R12 transfer hash sidecar differs.");
+    throw new Error("Immutable historical R12 transfer hash sidecar differs.");
   }
 
   const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
@@ -468,13 +474,19 @@ function verifyImmutablePreAuthorityFailure(approvedRoot) {
   if (
     manifest.transferId !== failure.transferId ||
     custody.transferId !== failure.transferId ||
+    manifest.preparation.harnessCommit !== failure.harnessCommit ||
+    custody.sourceRepository.harnessCommit !== failure.harnessCommit ||
+    (failure.harnessTree &&
+      (manifest.preparation.harnessTree !== failure.harnessTree ||
+        custody.sourceRepository.harnessTree !== failure.harnessTree)) ||
     !Array.isArray(manifest.payload) ||
     manifest.payload.length === 0
   ) {
-    throw new Error("Immutable first R12 transfer identity differs.");
+    throw new Error("Immutable historical R12 transfer identity differs.");
   }
   const expectedPayloadNames = [];
   const payloadNameSet = new Set();
+  let payloadBytes = 0;
   for (const entry of manifest.payload) {
     if (
       typeof entry.path !== "string" ||
@@ -484,15 +496,16 @@ function verifyImmutablePreAuthorityFailure(approvedRoot) {
       !Number.isSafeInteger(entry.size) ||
       entry.size < 0
     ) {
-      throw new Error("Immutable first R12 manifest payload entry is malformed.");
+      throw new Error("Immutable historical R12 manifest payload entry is malformed.");
     }
     const name = basename(entry.path);
     const canonicalName = name.toLocaleLowerCase("en-US");
     if (payloadNameSet.has(canonicalName)) {
-      throw new Error("Immutable first R12 manifest payload is duplicated.");
+      throw new Error("Immutable historical R12 manifest payload is duplicated.");
     }
     payloadNameSet.add(canonicalName);
     expectedPayloadNames.push(name);
+    payloadBytes += entry.size;
     const path = join(failureRoot, "payload", name);
     const item = lstatSync(path);
     if (
@@ -501,15 +514,27 @@ function verifyImmutablePreAuthorityFailure(approvedRoot) {
       item.size !== entry.size ||
       sha256(path) !== entry.sha256
     ) {
-      throw new Error(`Immutable first R12 payload differs: ${entry.path}`);
+      throw new Error(`Immutable historical R12 payload differs: ${entry.path}`);
     }
   }
   expectedPayloadNames.sort();
   const actualPayloadNames = readdirSync(join(failureRoot, "payload")).sort();
   if (JSON.stringify(actualPayloadNames) !== JSON.stringify(expectedPayloadNames)) {
-    throw new Error("Immutable first R12 payload directory differs from its manifest.");
+    throw new Error("Immutable historical R12 payload directory differs from its manifest.");
+  }
+  if (
+    (Number.isSafeInteger(failure.payloadFiles) &&
+      expectedPayloadNames.length !== failure.payloadFiles) ||
+    (Number.isSafeInteger(failure.payloadBytes) &&
+      payloadBytes !== failure.payloadBytes)
+  ) {
+    throw new Error("Immutable historical R12 payload totals differ.");
   }
 
+}
+
+function verifyImmutableFailedContinuity(approvedRoot) {
+  const failure = contract.preAuthorityEngineeringFailure;
   const continuityRoot = join(approvedRoot, "Oracle.Stage3R12Evidence");
   const continuityName = "Oracle.Stage3R12HostContinuity.json";
   if (

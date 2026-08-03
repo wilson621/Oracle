@@ -288,3 +288,7 @@ The payload-inventory correction and one fresh create-only replacement transfer 
 ## Stage 3 Requalification R12 Replacement Transfer Completion
 
 Corrected baseline `68a304d6caad3caaf84d3a6b4f63802ab4b6fe83` and replacement transfer `transfer-stage3-r12-20260803T201110346Z-3cf28c94` are prepared and independently verified. Manifest SHA-256 is `603b86c649463e4871a9a0ba2e43a9d231f1ec755c0c01fdf79428cafc55f66a`; custody SHA-256 is `681ea3eeb092d2be4ec66ab3603c499782d0757ed8c8c7094273e4829674904e`. Stage 3 execution remains blocked and unauthorised. Authority and attempt counts remain zero.
+
+## Stage 3 Requalification R12 Execution-Enabled Mission
+
+The replacement-only transfer transfer-stage3-r12-20260803T201110346Z-3cf28c94 is immutable execution-barred history. The Founder authorised one fresh execution-enabled R12 baseline, create-only transfer and governed attempt. Execution is authorised only after complete transfer verification, fresh continuity, elevated pre-authority admission, exact zero state, security/trust and create-only return-root gates pass. No historical identity or namespace may be reused.

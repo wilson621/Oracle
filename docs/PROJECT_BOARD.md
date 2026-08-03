@@ -936,3 +936,7 @@ Stage 3 execution is blocked and unauthorised. No qualification authority, attem
 ## Stage 3 R12 Replacement Transfer Complete
 
 Corrected baseline `68a304d6caad3caaf84d3a6b4f63802ab4b6fe83` and create-only replacement transfer `transfer-stage3-r12-20260803T201110346Z-3cf28c94` passed independent byte-level verification. The immutable failed package and continuity record were rehashed unchanged. Stage 3 execution remains blocked and unauthorised; no qualification authority or attempt exists.
+
+## Stage 3 R12 Execution-Enabled Mission
+
+The verified replacement-only R12 transfer remains immutable execution-barred history. One fresh execution-enabled baseline and transfer are authorised, followed by one governed attempt only after every pre-authority gate passes. Stage 4, production, publication and deployment remain unauthorised.

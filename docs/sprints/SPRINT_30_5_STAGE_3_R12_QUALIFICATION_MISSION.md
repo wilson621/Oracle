@@ -41,3 +41,12 @@ record and expired identities remain unchanged and barred from reuse. Current
 authority is limited to correcting and independently verifying one fresh
 replacement transfer. Qualification authority creation and attempt execution are
 not authorised.
+
+## Execution-enabled successor authority
+
+The Founder accepted the replacement-only contract contradiction and preserved
+that transfer as immutable history. A fresh execution-enabled R12 baseline,
+create-only transfer and one governed qualification attempt are authorised under
+SPRINT_30_5_STAGE_3_R12_EXECUTION_ENABLED_MISSION.md. Authority may be created
+and consumed only after every fresh transfer, continuity, elevated
+pre-authority, zero-state, security, trust and return-root gate passes.

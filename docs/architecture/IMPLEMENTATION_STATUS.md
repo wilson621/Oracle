@@ -1085,3 +1085,7 @@ One fresh create-only replacement transfer may be prepared and independently ver
 ## Stage 3 Requalification R12 Corrected Baseline
 
 The manifest-authoritative payload correction is implemented and frozen at `68a304d6caad3caaf84d3a6b4f63802ab4b6fe83`. The 57-file replacement transfer passed exact directory, mandatory-subset, size and SHA-256 verification. The executable harness rejects qualification while contract execution authority is absent.
+
+## Stage 3 R12 Execution-Enabled Baseline
+
+The R12 contract now binds the replacement-only package as immutable history and records Founder-authorised qualification execution for a fresh transfer. The builder fully rehashes both immutable R12 historical transfers and the failed continuity record before constructing a new sibling. The harness retains its explicit contract-authority gate.

@@ -503,3 +503,7 @@ to adopt a later formatting standard.
 | Sprint 30.5 Stage 3 R12 replacement transfer validation | [Sprint 30.5 Stage 3 R12 Replacement Transfer Validation Report](sprints/SPRINT_30_5_STAGE_3_R12_REPLACEMENT_TRANSFER_VALIDATION_REPORT.md) | Corrected engineering and independent replacement-transfer verification record |
 
 | Sprint 30.5 Stage 3 R12 replacement transfer completion | [Sprint 30.5 Stage 3 R12 Replacement Transfer Completion](sprints/SPRINT_30_5_STAGE_3_R12_REPLACEMENT_TRANSFER_COMPLETION.md) | Immutable corrected commit, fresh transfer bindings, independent verification and no-authority boundary |
+
+| Sprint 30.5 Stage 3 R12 execution-enabled mission | [Sprint 30.5 Stage 3 R12 Execution-Enabled Mission](sprints/SPRINT_30_5_STAGE_3_R12_EXECUTION_ENABLED_MISSION.md) | Fresh contract-authorised baseline, transfer, pre-authority sequence and one-attempt boundary |
+
+| Sprint 30.5 Stage 3 R12 execution-enabled validation | [Sprint 30.5 Stage 3 R12 Execution-Enabled Validation Report](sprints/SPRINT_30_5_STAGE_3_R12_EXECUTION_ENABLED_VALIDATION_REPORT.md) | Passed non-qualification gates and immutable-history preservation checks |

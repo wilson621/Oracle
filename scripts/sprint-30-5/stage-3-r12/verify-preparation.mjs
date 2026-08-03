@@ -672,6 +672,9 @@ assert.match(transferInventoryPolicy, /actualDirectoryMustMatchManifest/u);
 assert.match(transferInventoryPolicy, /requiredSubsetMustBePresent/u);
 assert.match(transferBuilder, /plannedPayloadNameSet/u);
 assert.match(transferBuilder, /contract\.transferPayload\.requiredFileNames/u);
+assert.match(transferBuilder, /SPRINT_30_5_STAGE_3_R12_REPLACEMENT_TRANSFER_COMPLETION\.md/u);
+assert.match(transferBuilder, /SPRINT_30_5_STAGE_3_R12_EXECUTION_ENABLED_MISSION\.md/u);
+assert.match(transferBuilder, /SPRINT_30_5_STAGE_3_R12_EXECUTION_ENABLED_VALIDATION_REPORT\.md/u);
 assert.match(transferBuilder, /Oracle\.Stage3R12WindowPolicy\.ps1/u);
 assert.match(transferBuilder, /Test-OracleStage3R12WindowPolicy\.ps1/u);
 assert.match(harness, /Oracle\.Stage3R12WindowPolicy\.ps1/u);
@@ -703,9 +706,13 @@ assert.match(transferBuilder, /failedR2TransferModified: false/u);
 assert.match(transferBuilder, /failedR3TransferModified: false/u);
 assert.match(transferBuilder, /rejectedR10TransfersModified: false/u);
 assert.match(transferBuilder, /previousR12PreAuthorityFailureModified: false/u);
-assert.match(transferBuilder, /verifyImmutablePreAuthorityFailure\(approvedRoot\)/u);
+assert.match(transferBuilder, /previousR12ReplacementOnlyTransferModified: false/u);
+assert.match(transferBuilder, /verifyImmutableHistoricalTransfer\(approvedRoot, contract\.preAuthorityEngineeringFailure\)/u);
+assert.match(transferBuilder, /verifyImmutableHistoricalTransfer\(approvedRoot, contract\.immutableReplacementOnlyTransfer\)/u);
 assert.match(transferBuilder, /Immutable first R12 failed continuity record differs/u);
 assert.match(transferBuilder, /immutablePreAuthorityEngineeringFailure:\s*contract\.preAuthorityEngineeringFailure/u);
+assert.match(transferBuilder, /immutableReplacementOnlyTransfer:\s*contract\.immutableReplacementOnlyTransfer/u);
+assert.match(transferBuilder, /Immutable historical R12 payload totals differ/u);
 assert.match(transferBuilder, /previousR5TransferModified: false/u);
 assert.match(transferBuilder, /previousR6TransferModified: false/u);
 assert.match(transferBuilder, /previousR7TransferModified: false/u);
@@ -862,8 +869,8 @@ for (const forbidden of [
 }
 for (const required of [
   "Stage 3 Requalification R12 Pre-Execution Gate",
-  "Execution:** Not authorised",
-  "Replacement transfer construction:** Founder-authorised",
+  "Execution:** Founder-authorised after every pre-authority gate passes",
+  "Fresh transfer construction:** Founder-authorised",
   "ExpectedHarnessCommit",
   "ExpectedTransferManifestSha256",
   "ExpectedTransferCustodySha256",
@@ -1475,13 +1482,19 @@ assert.deepEqual(contract.rejectedTransfers, [
     custodySha256: "b31cde2f075b3b1ac34d168c6bbdd3a671bb9a447426388272a50a1de7b42115",
     disposition: "immutable-pre-authority-engineering-failure",
   },
+  {
+    transferId: "transfer-stage3-r12-20260803T201110346Z-3cf28c94",
+    manifestSha256: "603b86c649463e4871a9a0ba2e43a9d231f1ec755c0c01fdf79428cafc55f66a",
+    custodySha256: "681ea3eeb092d2be4ec66ab3603c499782d0757ed8c8c7094273e4829674904e",
+    disposition: "immutable-replacement-only-execution-barred",
+  },
 ]);
 assert.equal(contract.authority.preparation, "founder-accepted-engineering-baseline");
 assert.equal(contract.authority.transfer, "founder-authorised");
-assert.equal(contract.authority.execution, "not-authorised-replacement-transfer-only");
+assert.equal(contract.authority.execution, "founder-authorised");
 assert.equal(contract.authority.stage4, "not-authorised");
-assert.equal(contract.transferMedium.approvalState, "founder-authorised-replacement-transfer-only");
-assert.equal(contract.revisionLineage.relationship, "R9 remains accepted immutable history; R11 is immutable failed qualification; the first R12 package is an immutable pre-authority engineering failure; replacement transfer preparation only is authorised");
+assert.equal(contract.transferMedium.approvalState, "founder-authorised-execution-enabled-mission");
+assert.equal(contract.revisionLineage.relationship, "R9 remains accepted immutable history; R11 is immutable failed qualification; the first R12 package is immutable pre-authority failure; the replacement-only R12 transfer is immutable execution-barred history; one fresh execution-enabled R12 mission is Founder-authorised");
 assert.equal(contract.correctionBasis.basis, "stage-3-r11-post-reset-package-data-lifecycle-defect");
 assert.equal(contract.correctionBasis.failedStage3Revision, "R11");
 assert.equal(contract.correctionBasis.failedStage3Attempt, "stage3-r11-20260803T175715661Z-84bf486c");
@@ -1497,6 +1510,21 @@ assert.deepEqual(contract.preAuthorityEngineeringFailure, {
   attemptCreated: false,
   qualificationExecuted: false,
   identityDisposition: "expired-never-reuse",
+});
+assert.deepEqual(contract.immutableReplacementOnlyTransfer, {
+  transferId: "transfer-stage3-r12-20260803T201110346Z-3cf28c94",
+  harnessCommit: "68a304d6caad3caaf84d3a6b4f63802ab4b6fe83",
+  harnessTree: "5925665667932cb049789003512b1071a56de528",
+  closureHead: "9fd90463b89eda92a082a4724957549b189d4b71",
+  manifestSha256: "603b86c649463e4871a9a0ba2e43a9d231f1ec755c0c01fdf79428cafc55f66a",
+  custodySha256: "681ea3eeb092d2be4ec66ab3603c499782d0757ed8c8c7094273e4829674904e",
+  payloadFiles: 57,
+  payloadBytes: 580675315,
+  disposition: "immutable-replacement-only-execution-barred",
+  identityDisposition: "expired-never-reuse",
+  authorityCreated: false,
+  attemptCreated: false,
+  qualificationExecuted: false,
 });
 assert.equal(contract.transferPayload.inventoryAuthority, "founder-bound-transfer-manifest");
 assert.equal(contract.transferPayload.actualDirectoryMustMatchManifest, true);

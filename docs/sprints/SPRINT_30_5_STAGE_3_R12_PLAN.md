@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 3 Requalification R12 Plan
 
-**Status:** Replacement-transfer engineering correction authorised; execution barred
+**Status:** Execution-enabled mission Founder-authorised; fresh transfer pending
 **Operating model:** OEOM v1.0
 **Programme:** `Sprint 30.5 Stage 3 Requalification R12`
 
@@ -58,3 +58,12 @@ reparse points and tampering.
 Completion permits one new create-only, independently verified replacement
 transfer with fresh transfer identity. It creates no qualification authority,
 attempt or qualification evidence.
+
+## Execution-enabled mission
+
+The replacement-only transfer
+transfer-stage3-r12-20260803T201110346Z-3cf28c94 remains immutable
+execution-barred history. The Founder authorised a fresh baseline whose
+manifest-bound contract records qualification execution as authorised, followed
+by one new create-only transfer and one governed attempt only after all
+pre-authority gates pass. No historical identity or namespace may be reused.

@@ -165,3 +165,7 @@ The first R12 package is closed as immutable pre-authority engineering failure `
 ## Stage 3 Requalification R12 Replacement Transfer Complete
 
 Corrected commit `68a304d6caad3caaf84d3a6b4f63802ab4b6fe83` and replacement transfer `transfer-stage3-r12-20260803T201110346Z-3cf28c94` are complete and independently verified. The first R12 failure package and failed continuity remain immutable and unchanged. Stage 3 execution is blocked and unauthorised; no qualification authority or attempt exists.
+
+## Stage 3 Requalification R12 Execution-Enabled Mission
+
+The replacement-only transfer is preserved as immutable execution-barred history. A fresh execution-enabled baseline, new create-only transfer and one governed R12 attempt are Founder-authorised in sequence. Authority creation remains barred until complete transfer, continuity, elevated pre-authority, zero-state, security, trust and return-root admission passes.
