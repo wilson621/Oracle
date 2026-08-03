@@ -1,0 +1,233 @@
+{
+    "schemaVersion":  "1.0.0",
+    "contract":  "oracle.sprint-30-5.stage-3-r10",
+    "programmeIdentity":  "Sprint 30.5 Stage 3 Requalification R10",
+    "revision":  "R10",
+    "revisionLineage":  {
+                            "currentLineage":  "attempt-scoped-stage-3-requalification",
+                            "historicalQualifiedRevision":  "R9",
+                            "relationship":  "R9 remains immutable historical qualification; R10 requalifies only the accepted Stage 2 R4 candidate"
+                        },
+    "correctionBasis":  {
+                            "basis":  "accepted-stage-2-r4-product-baseline-change",
+                            "historicalStage3Revision":  "R9",
+                            "historicalStage3Status":  "founder-accepted-formally-closed-immutable",
+                            "requiredSemantics":  "repeat the complete clean Windows package lifecycle against the accepted ADR-048 R4 MSIX, including attempt-scoped runtime configuration for initial and post-reset activation"
+                        },
+    "requiredBranch":  "sprint-9-overlay",
+    "stage2":  {
+                   "attemptId":  "r4-20260803T115002258Z-31ab0bf6",
+                   "authorityId":  "authority-r4-20260803T115002258Z-31ab0bf6",
+                   "candidateCommit":  "f7203f9b602b182a2bd006bc3cff3113b839be8e",
+                   "candidateTree":  "5d7eca4c012874df0b839533dfab283b54778661",
+                   "harnessCommit":  "a31c2897dd063e8e995e558cd83ecd188b8392ff",
+                   "harnessTree":  "ec0dc354553b6be38daaee4cd2383e325bd94837",
+                   "finalEvidenceManifestSha256":  "876be1c0342c7dc9f70965faa3daffe0c9c1d8d7a3e2c41b144155350557784d",
+                   "archiveSha256":  "3f1f11dd04ddbc3b4eb51db344f71c12252cc7e41e8ae072950d3a74c1452495",
+                   "msixSha256":  "8679138e78827d41e20cf3f0c452e3c28120afad846ef4e20329eeff1f9aebd5",
+                   "releaseManifestSha256":  "be26608410c26af2ef1d784949d2fa7c2af874de41ab1e13968da85c3372e7e7",
+                   "releaseManifestSignatureSha256":  "3f4c1aab2eb0a5ab22e7455347ff9d59af523fd6424e59a638399383fdb19bf0",
+                   "sbomSha256":  "0b3627e41b252a3065a7199593fcc20a08f073bb9aa466b4feded16d3fc5a1b3",
+                   "provenanceSha256":  "3a29a893780b569b39fdaa0e355ebde2514e6465eb6f62b040e84ebb820e5392",
+                   "certificateThumbprint":  "03BEFBF303751D3DC14DF3FA224EB6BC5A6E4222",
+                   "certificateNotAfterUtc":  "2026-09-02T11:50:55.000Z",
+                   "latestExecutionStartUtc":  "2026-09-01T11:50:55.000Z",
+                   "closureCommit":  "9a180ad7452df3e800f09615283587e3679e83c0",
+                   "closureTree":  "00e38d83769a46571ce659e002a0f4b8a22da147",
+                   "acceptedEvidenceIndexSha256":  "a8231570ff07337df16d84a1b5398072c308b2b29dba273a2b872df17263fd91"
+               },
+    "package":  {
+                    "identity":  "Oracle.Platform.LocalCertification",
+                    "version":  "0.1.2.0",
+                    "architecture":  "x64",
+                    "publisher":  "CN=Oracle Stage 2 Requalification R4 Local Test Signing - NOT PRODUCTION",
+                    "fileName":  "Oracle_0.1.2.0_x64_STAGE2_REQUALIFICATION_R4_LOCAL_TEST_ONLY.msix",
+                    "releaseManifestFileName":  "oracle-release-manifest.json",
+                    "runtimeManifestVersion":  "1.7.0"
+                },
+    "packageInventory":  {
+                             "canonicalPathRepresentation":  "single-percent-decoded-forward-slash-logical-package-path",
+                             "governedEntryCount":  2026,
+                             "zipFileEntryCount":  2027,
+                             "percentEncodedEntryCount":  70,
+                             "reservedContainerMetadata":  {
+                                                               "path":  "[Content_Types].xml",
+                                                               "rawZipPath":  "[Content_Types].xml",
+                                                               "treatment":  "validated-exactly-and-excluded-from-logical-payload-inventory",
+                                                               "size":  2374,
+                                                               "sha256":  "3261997987ea9adb75f9e3cee463f6582c6b83f5d462129a77eea21a9d938515"
+                                                           }
+                         },
+    "host":  {
+                 "deviceName":  "Founder-QA-01",
+                 "computerNameComparison":  "ordinal-ignore-case",
+                 "manufacturer":  "MEDION",
+                 "model":  "ERAZER P6605 MD61596",
+                 "admissionState":  "admitted-with-founder-provenance-exception",
+                 "hostAdmissionSha256":  "6dfaa176ed2d43595511d44401612536c6c0f1955f94527469d0f22af09c3b0e",
+                 "hostAdmissionFileName":  "Oracle.Stage3HostAdmission.json",
+                 "continuityFileName":  "Oracle.Stage3R10HostContinuity.json",
+                 "continuityMaximumAgeMinutes":  60,
+                 "installationMediaEvidencePresent":  false
+             },
+    "preAuthority":  {
+                         "classification":  "read-only-non-qualification-non-authority-non-evidence",
+                         "requiredPowerShellEdition":  "Desktop",
+                         "requiredPowerShellVersion":  "5.1",
+                         "requiredProcessArchitecture":  "x64",
+                         "requiredElevation":  "administrator",
+                         "installedSoftwareRegistryViews":  [
+                                                                "machine-64",
+                                                                "machine-32",
+                                                                "current-user"
+                                                            ],
+                         "authorityCreationRequiresPass":  true,
+                         "hostMutationPermitted":  false
+                     },
+    "temporaryTrust":  {
+                           "physicalLocation":  "LocalMachine",
+                           "store":  "TrustedPeople",
+                           "importExecutable":  "certutil.exe",
+                           "importArguments":  [
+                                                   "-addstore",
+                                                   "TrustedPeople",
+                                                   "\u003cattempt-certificate.cer\u003e"
+                                               ],
+                           "removalArguments":  [
+                                                    "-delstore",
+                                                    "TrustedPeople",
+                                                    "\u003cexact-uppercase-sha1-thumbprint\u003e"
+                                                ],
+                           "forbiddenArguments":  [
+                                                      "-user",
+                                                      "-f"
+                                                  ],
+                           "requiresElevation":  true,
+                           "requiresExactSubject":  true,
+                           "requiresExactThumbprint":  true,
+                           "requiresExactRawBytes":  true,
+                           "requiresNoPrivateKeyInTrustStore":  true,
+                           "requiresFinalZeroPhysicalAndLogicalResidue":  true
+                       },
+    "applicationActivation":  {
+                                  "api":  "IApplicationActivationManager.ActivateApplication",
+                                  "classId":  "45BA127D-10A8-46EA-8AB7-56EA9078943C",
+                                  "interfaceId":  "2E941141-7F97-4756-BA1D-9DECDE894A3D",
+                                  "classContext":  "CLSCTX_LOCAL_SERVER",
+                                  "activateOptions":  "AO_NOERRORUI",
+                                  "successHresult":  "0x00000000",
+                                  "requiresNonzeroProcessId":  true,
+                                  "runtimeProof":  [
+                                                       "Oracle.WindowDiscovery",
+                                                       "Oracle.WindowObserver"
+                                                   ],
+                                  "explorerExitCodeIsQualificationEvidence":  false
+                              },
+    "observation":  {
+                        "discoveryTimeoutSeconds":  60,
+                        "stabilitySeconds":  60,
+                        "minimumMeasuredMilliseconds":  60000,
+                        "durationClock":  "monotonic-stopwatch",
+                        "durationStart":  "first-valid-captured-sample",
+                        "durationCompletion":  "final-valid-captured-sample-at-or-after-minimum",
+                        "sampleCountIsDurationProof":  false,
+                        "minimumWidth":  1,
+                        "minimumHeight":  1
+                    },
+    "windowDiscovery":  {
+                            "jsonRoot":  "array",
+                            "arrayNormalization":  "explicit-windows-powershell-5.1-top-level-array-enumeration",
+                            "mandatoryScalarMembers":  [
+                                                           "handle",
+                                                           "title",
+                                                           "processId",
+                                                           "processName",
+                                                           "visible",
+                                                           "minimized",
+                                                           "x",
+                                                           "y",
+                                                           "width",
+                                                           "height"
+                                                       ],
+                            "processOwnershipAuthority":  "GetPackageFamilyName",
+                            "packageFamilyComparison":  "ordinal-ignore-case",
+                            "pathAndAuthenticodeRemainMandatory":  true
+                        },
+    "transferMedium":  {
+                           "method":  "proposed-existing-usb-create-only-sibling",
+                           "device":  "Sony Storage Media",
+                           "hardwareSerial":  "5F10110403558",
+                           "filesystem":  "NTFS",
+                           "label":  "ORACLE-S3R1",
+                           "volumeSerial":  "783A-2CD4",
+                           "approvalState":  "requires-separate-founder-transfer-decision"
+                       },
+    "output":  {
+                   "transferBase":  ".artifacts/sprint-30-5/stage-3-r10/transfers",
+                   "authorityBase":  ".artifacts/sprint-30-5/stage-3-r10/authorities",
+                   "attemptBase":  ".artifacts/sprint-30-5/stage-3-r10/attempts",
+                   "repositoryEvidenceBase":  "docs/sprints/evidence/sprint-30-5/stage-3-r10"
+               },
+    "historicalProtectedRoots":  [
+                                     ".artifacts/sprint-30-5/stage-2",
+                                     ".artifacts/sprint-30-5/stage-2-requalification",
+                                     ".artifacts/sprint-30-5/stage-2-requalification-r4",
+                                     ".artifacts/sprint-30-5/stage-3",
+                                     ".artifacts/sprint-30-5/stage-3-r1",
+                                     ".artifacts/sprint-30-5/stage-3-r2",
+                                     ".artifacts/sprint-30-5/stage-3-r3",
+                                     ".artifacts/sprint-30-5/stage-3-r4",
+                                     ".artifacts/sprint-30-5/stage-3-r5",
+                                     ".artifacts/sprint-30-5/stage-3-r6",
+                                     ".artifacts/sprint-30-5/stage-3-r7",
+                                     ".artifacts/sprint-30-5/stage-3-r8",
+                                     "docs/sprints/evidence/sprint-30-5/stage-2",
+                                     "docs/sprints/evidence/sprint-30-5/stage-2-requalification",
+                                     "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r4",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-host-admission",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-r1",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-r2",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-r3",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-r4",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-r5",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-r6",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-r7",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-r8",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-reconciliation",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-revision-history",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-revision-6-abandoned-design",
+                                     ".artifacts/sprint-30-5/stage-2-requalification-r3",
+                                     "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r3",
+                                     ".artifacts/sprint-30-5/stage-2-requalification-r2",
+                                     ".artifacts/sprint-30-5/stage-3-r9",
+                                     "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r2",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-r9"
+                                 ],
+    "authority":  {
+                      "preparation":  "founder-authorised",
+                      "transfer":  "not-authorised",
+                      "execution":  "not-authorised",
+                      "stage4":  "not-authorised",
+                      "production":  "not-authorised",
+                      "publication":  "not-authorised",
+                      "deployment":  "not-authorised"
+                  },
+    "runtimeConfiguration":  {
+                                 "contract":  "oracle.installed-runtime-configuration",
+                                 "version":  1,
+                                 "maximumLifetimeSeconds":  900,
+                                 "providerOrigin":  "http://127.0.0.1:54321",
+                                 "founderGrantPattern":  "founder-stage3-r10-grant-\u003ctimestamp\u003e-\u003csuffix\u003e",
+                                 "createBeforeEachActivation":  true,
+                                 "initialAndPostResetRequired":  true,
+                                 "activationArgumentsContainOnlyPathAndSha256":  true,
+                                 "secretsOutsidePackageAndEvidence":  true,
+                                 "secretGeneration":  "Windows PowerShell 5.1 compatible RandomNumberGenerator.GetBytes",
+                                 "configurationConsumedAtomically":  true,
+                                 "teardownBeforeResetAndRemoval":  true,
+                                 "finalZeroResidueRequired":  true,
+                                 "providerConnectivityClaimed":  false,
+                                 "authenticationClaimed":  false,
+                                 "downstreamInstalledAuthenticationRequalificationRequired":  true
+                             }
+}

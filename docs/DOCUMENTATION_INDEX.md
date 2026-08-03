@@ -450,3 +450,10 @@ to adopt a later formatting standard.
 - Preserve historical records and use Git for immutable history.
 - Verify relative links and authority terminology before governance changes are
   accepted.
+## Stage 3 Requalification R10 preparation
+
+| Record | Location | Purpose |
+| --- | --- | --- |
+| Stage 3 Requalification R10 plan | [Sprint 30.5 Stage 3 Requalification R10 Plan](sprints/SPRINT_30_5_STAGE_3_R10_PLAN.md) | R4-bound lifecycle, identity, trust, runtime, repair and teardown contract |
+| Stage 3 Requalification R10 pre-execution gate | [Sprint 30.5 Stage 3 Requalification R10 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_3_R10_PRE_EXECUTION_GATE.md) | Separate transfer and execution authority boundaries |
+| Stage 3 Requalification R10 validation | [Sprint 30.5 Stage 3 Requalification R10 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_3_R10_PREPARATION_VALIDATION_REPORT.md) | Executed preparation validation, rehearsal, limitations and immutable rehash results |
