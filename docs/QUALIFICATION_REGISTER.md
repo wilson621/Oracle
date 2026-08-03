@@ -270,3 +270,7 @@ The continuing Founder mission authorises those gates sequentially. It does not 
 ## Stage 3 Requalification R11 Immutable Failure
 
 R11 failed closed after eight of fourteen phases because `Reset-AppxPackage` removed the package-data root before the second runtime configuration. The Founder accepted the evidence as immutable failed qualification. The authority is consumed, no retry is authorised, and only successor engineering is active. R9 remains accepted passing history.
+
+## Stage 3 Requalification R12 Engineering Status
+
+R12 engineering correction and non-qualification validation are complete. The asynchronous post-reset registration lifecycle is now bounded and the exact `LocalState` is resolved through the Windows management API. No transfer, authority, attempt or qualification evidence was created; a new explicit Founder mission is required for any qualification.

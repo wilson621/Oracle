@@ -864,4 +864,4 @@ The continuing Founder mission authorises these gates sequentially; it does not 
 
 ## Stage 3 R11 Failure Correction
 
-R11 is immutable failed evidence. The active objective is an R12 preparation correcting the post-reset package-data lifecycle assumption and passing non-qualification validation. No R12 transfer or execution is authorised.
+R11 remains immutable failed evidence. R12 engineering preparation is complete: it bounds asynchronous package-registration stabilization, resolves the exact `LocalState` through the Windows management API and passes non-qualification validation. No R12 transfer or execution is authorised; qualification awaits a new explicit Founder mission.

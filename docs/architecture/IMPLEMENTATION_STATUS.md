@@ -1070,4 +1070,4 @@ The continuing Founder mission authorises these gates sequentially; it does not 
 
 ## Stage 3 Requalification R11 Failed Evidence
 
-R11 passed transfer, host admission, negative package tests, trust, installation, direct activation and 60.448 seconds of runtime observation before failing closed at post-reset configuration creation. R12 correction work is active without qualification authority.
+R11 passed transfer, host admission, negative package tests, trust, installation, direct activation and 60.448 seconds of runtime observation before failing closed at post-reset configuration creation. R12 now implements bounded asynchronous registration stabilization and exact managed `LocalState` resolution; real integration and non-qualification validation pass with zero residue. No qualification authority exists.

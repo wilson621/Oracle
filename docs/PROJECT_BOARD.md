@@ -921,4 +921,4 @@ The continuing Founder mission authorises these gates sequentially; it does not 
 
 ## Stage 3 R11 Failure and Engineering Investigation
 
-R11 is Founder-accepted immutable failed qualification evidence. Its authority is consumed and no retry is authorised. Engineering is active on an R12 successor correction without qualification, Stage 4, publication or deployment authority.
+R11 remains Founder-accepted immutable failed qualification evidence. R12 engineering correction and non-qualification validation are complete, including real post-reset Windows integration and zero-residue reconciliation. No transfer, authority, attempt, Stage 4, publication or deployment authority exists; qualification awaits a new explicit Founder mission.

@@ -486,3 +486,13 @@ to adopt a later formatting standard.
 | Stage 3 Requalification R11 failure closure | [Sprint 30.5 Stage 3 Requalification R11 Failure Closure](sprints/SPRINT_30_5_STAGE_3_R11_FAILURE_CLOSURE.md) | Immutable failure and no-retry boundary |
 | Stage 3 Requalification R11 failed analysis | [Sprint 30.5 Stage 3 Requalification R11 Failed Attempt Analysis](sprints/SPRINT_30_5_STAGE_3_R11_FAILED_ATTEMPT_ANALYSIS.md) | Evidence-led root cause |
 | Stage 3 Requalification R11 failed evidence | [R11 Failed Evidence](sprints/evidence/sprint-30-5/stage-3-r11/README.md) | Byte-for-byte evidence and index |
+
+## Stage 3 Requalification R12 engineering correction
+
+| Record | Location | Purpose |
+| --- | --- | --- |
+| Stage 3 Requalification R12 plan | [Sprint 30.5 Stage 3 Requalification R12 Plan](sprints/SPRINT_30_5_STAGE_3_R12_PLAN.md) | R11-derived engineering scope and immutable R6/R11 bindings |
+| Stage 3 Requalification R12 correction | [Sprint 30.5 Stage 3 Requalification R12 Engineering Correction](sprints/SPRINT_30_5_STAGE_3_R12_ENGINEERING_CORRECTION.md) | Evidence-led asynchronous reset lifecycle correction |
+| Stage 3 Requalification R12 validation | [Sprint 30.5 Stage 3 Requalification R12 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_3_R12_PREPARATION_VALIDATION_REPORT.md) | Engineering, regression and real Windows integration results |
+| Stage 3 Requalification R12 pre-execution gate | [Sprint 30.5 Stage 3 Requalification R12 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_3_R12_PRE_EXECUTION_GATE.md) | No-transfer and no-execution authority boundary |
+| Stage 3 Requalification R12 closure | [Sprint 30.5 Stage 3 Requalification R12 Engineering Closure](sprints/SPRINT_30_5_STAGE_3_R12_ENGINEERING_CLOSURE.md) | Completed engineering mission and next-authority boundary |
