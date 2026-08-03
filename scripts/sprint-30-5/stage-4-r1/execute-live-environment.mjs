@@ -3,7 +3,7 @@ import { createHash, randomBytes } from "node:crypto";
 import { spawn, spawnSync } from "node:child_process";
 import { constants, copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { basename, dirname, join, resolve } from "node:path";
-import { assertNoLinkTraversal, assertSupabaseOfflineEnvironment, contract, createGovernedEnvironment, redactEvidence, repositoryRoot, validateApprovedTool, validateProcessEnvelope, validateSupabaseOfflinePolicy, writeJsonAtomicCreateOnly } from "./stage4-core.mjs";
+import { assertNoLinkTraversal, assertSupabaseOfflineEnvironment, buildSupabaseJsonArguments, contract, createGovernedEnvironment, parseSupabaseJsonObject, redactEvidence, repositoryRoot, validateApprovedTool, validateProcessEnvelope, validateSupabaseOfflinePolicy, writeJsonAtomicCreateOnly } from "./stage4-core.mjs";
 
 const teardownOnly = process.argv.length === 3 && process.argv[2] === "--teardown-only";
 if (process.argv.length > (teardownOnly ? 3 : 2)) throw new Error("Unexpected live-environment arguments.");
@@ -75,11 +75,13 @@ try {
     assert.deepEqual(migrationNames, contract.provider.requiredMigrations, "Accepted migration chain differs from the contract.");
     migrationNames.forEach((name, index) => copyFileSync(join(repositoryRoot, "database", name), join(migrations, `20260731${String(index + 1).padStart(6, "0")}_${name}`), constants.COPYFILE_EXCL));
     mark("migration-chain-frozen", { files: migrationNames });
-    const started = run("provider-start", node, [supabaseCli, "start", "--workdir", providerRoot, "--exclude", exclude], true); providerStarted = true;
-    const bootstrap = JSON.parse(started.stdout); secrets = [...new Set(Object.values(bootstrap).filter(value => typeof value === "string" && value.length > 0))]; mark("provider-started");
+    const startArguments = buildSupabaseJsonArguments("start", ["--workdir", providerRoot, "--exclude", exclude]);
+    const started = run("provider-start", node, [supabaseCli, ...startArguments], true); providerStarted = true;
+    const bootstrap = parseSupabaseJsonObject(started.stdout, "Supabase start"); secrets = [...new Set(Object.values(bootstrap).filter(value => typeof value === "string" && value.length > 0))]; mark("provider-started");
     const route = verifyProviderImagesAndRoute(); mark("provider-route-admitted", route);
-    const status = run("provider-status", node, [supabaseCli, "status", "--workdir", providerRoot, "--output", "json"], true);
-    const provider = JSON.parse(status.stdout); const api = provider.API_URL ?? provider.apiUrl; const anon = provider.ANON_KEY ?? provider.anonKey; const service = provider.SERVICE_ROLE_KEY ?? provider.serviceRoleKey; const mail = provider.INBUCKET_URL ?? provider.inbucketUrl;
+    const statusArguments = buildSupabaseJsonArguments("status", ["--workdir", providerRoot]);
+    const status = run("provider-status", node, [supabaseCli, ...statusArguments], true);
+    const provider = parseSupabaseJsonObject(status.stdout, "Supabase status"); const api = provider.API_URL ?? provider.apiUrl; const anon = provider.ANON_KEY ?? provider.anonKey; const service = provider.SERVICE_ROLE_KEY ?? provider.serviceRoleKey; const mail = provider.INBUCKET_URL ?? provider.inbucketUrl;
     for (const [name, value] of Object.entries({ api, anon, service, mail })) if (typeof value !== "string" || !value) throw new Error(`Supabase status omitted ${name}.`);
     secrets = [...new Set([...secrets, anon, service])];
     const webSessionSecret = randomBytes(48).toString("hex"); secrets.push(webSessionSecret);

@@ -47,6 +47,34 @@ export function validateSupabaseOfflinePolicy() {
   assert.equal(policy.policySource, "https://supabase.com/docs/guides/local-development/cli/getting-started#telemetry");
   return Object.freeze({ ...policy, commands: Object.freeze([...policy.commands]) });
 }
+export function validateSupabaseMachineReadableOutputPolicy() {
+  const policy = contract.toolchain?.supabaseMachineReadableOutput;
+  if (!policy || typeof policy !== "object" || Array.isArray(policy)) throw new Error("Supabase machine-readable output policy is absent.");
+  assert.equal(policy.argument, "--output");
+  assert.equal(policy.value, "json");
+  assert.deepEqual(policy.commands, ["start", "status"]);
+  assert.equal(policy.topLevelType, "object");
+  assert.equal(policy.emptyOutputAccepted, false);
+  assert.equal(policy.humanReadableOutputAccepted, false);
+  return Object.freeze({ ...policy, commands: Object.freeze([...policy.commands]) });
+}
+export function buildSupabaseJsonArguments(command, commandArguments = []) {
+  const policy = validateSupabaseMachineReadableOutputPolicy();
+  if (typeof command !== "string" || !policy.commands.includes(command)) throw new Error(`Supabase command is not approved for JSON output: ${command}`);
+  if (!Array.isArray(commandArguments) || commandArguments.some(argument => typeof argument !== "string")) throw new Error("Supabase command arguments are invalid.");
+  if (commandArguments.some(argument => argument === policy.argument || argument === "-o" || argument.startsWith(`${policy.argument}=`))) throw new Error("Supabase output format may only be supplied by the governed policy.");
+  return [command, ...commandArguments, policy.argument, policy.value];
+}
+export function parseSupabaseJsonObject(stdout, label) {
+  if (typeof label !== "string" || !label) throw new Error("Supabase JSON output label is absent.");
+  if (typeof stdout !== "string" || !stdout.trim()) throw new Error(`${label} emitted empty output instead of JSON.`);
+  const text = stdout.trim();
+  if (!text.startsWith("{")) throw new Error(`${label} emitted human-readable or non-object output instead of JSON.`);
+  let value;
+  try { value = JSON.parse(text); } catch (error) { throw new Error(`${label} emitted malformed JSON.`, { cause: error }); }
+  if (value === null || typeof value !== "object" || Array.isArray(value)) throw new Error(`${label} JSON must be one object.`);
+  return value;
+}
 export function createGovernedEnvironment(baseEnvironment, governedPath, supabaseBinaryPath) {
   if (!baseEnvironment || typeof baseEnvironment !== "object" || Array.isArray(baseEnvironment)) throw new Error("Base process environment is invalid.");
   if (typeof governedPath !== "string" || !governedPath || typeof supabaseBinaryPath !== "string" || !supabaseBinaryPath) throw new Error("Governed tool environment binding is incomplete.");

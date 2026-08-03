@@ -18,6 +18,12 @@ try {
   const journey = JSON.parse(readFileSync(output, "utf8")); assert.deepEqual(journey.classification, ["NON-QUALIFICATION", "NON-AUTHORITY", "NON-EVIDENCE", "DEVELOPMENT REHEARSAL"]);
   const ids = journey.journeys.map(item => item.id); assert.deepEqual([...ids].sort(codePointCompare), [...contract.requiredJourneys].sort(codePointCompare)); assert.ok(journey.journeys.every(item => item.result === "passed"));
   const environment = JSON.parse(readFileSync(join(root, "logs", "environment-result.json"), "utf8")); assert.equal(environment.mode, "development-rehearsal"); assert.equal(environment.result, "passed"); assert.equal(environment.zeroResidue, true); assert.equal(environment.cleanupFailures.length, 0);
+  const processSummary = JSON.parse(readFileSync(join(root, "logs", "process-summary.json"), "utf8"));
+  for (const label of ["provider-start", "provider-status"]) {
+    const matches = processSummary.filter(record => record.label === label);
+    assert.equal(matches.length, 1, "Expected one " + label + " process record.");
+    assert.deepEqual(matches[0].arguments.slice(-2), ["--output", "json"], label + " did not use the governed JSON output contract.");
+  }
   assert.equal(existsSync(join(repositoryRoot, ".next")), false, "Web build residue remains.");
   console.log(JSON.stringify({ result: "passed", classification: journey.classification, authorityCreated: false, attemptCreated: false, qualificationEvidence: false, liveProviderExercised: true, requiredJourneys: journey.journeys.length, operationalPhases: environment.phaseEvents.map(item => item.phase), zeroResidue: true }, null, 2));
   rmSync(root, { recursive: true, force: false });
