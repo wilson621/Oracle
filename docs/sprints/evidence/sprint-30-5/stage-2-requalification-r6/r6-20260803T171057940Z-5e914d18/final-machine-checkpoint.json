@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-2-requalification-r6-machine-checkpoint",
+  "programmeIdentity": "Sprint 30.5 Stage 2 Requalification R6",
+  "revision": "R6",
+  "authorityId": "authority-r6-20260803T171057940Z-5e914d18",
+  "attemptId": "r6-20260803T171057940Z-5e914d18",
+  "candidateCommit": "ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff",
+  "harnessCommit": "0b10f074d86ac9256462602c0e7bda528b8fba57",
+  "recordedAt": "2026-08-03T17:13:02.318Z",
+  "machineIdentity": "DESKTOP-M3H22E4",
+  "platform": "win32",
+  "architecture": "x64",
+  "osRelease": "10.0.26200",
+  "governedPackageInstalled": false,
+  "exactCertificateMatches": 0,
+  "temporaryTrustRemaining": false,
+  "privateSigningMaterialRemaining": false
+}

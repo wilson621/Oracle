@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-2-requalification-r6-frozen-evidence",
+  "programmeIdentity": "Sprint 30.5 Stage 2 Requalification R6",
+  "revision": "R6",
+  "authorityId": "authority-r6-20260803T171057940Z-5e914d18",
+  "attemptId": "r6-20260803T171057940Z-5e914d18",
+  "candidateCommit": "ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff",
+  "harnessCommit": "0b10f074d86ac9256462602c0e7bda528b8fba57",
+  "frozenAt": "2026-08-03T17:13:01.076Z",
+  "status": "complete-awaiting-founder-review",
+  "archive": {
+    "filename": "Oracle.Sprint30.5.Stage2RequalificationR6QualificationEvidence.zip",
+    "sha256": "7884c93b222cd5f16f51dd5ba1b56c51af5008e1f6c999dcff92a8c1a26ac690",
+    "size": 216700416,
+    "storage": "workspace-local-ignored-attempt-artifact"
+  },
+  "releaseManifestSha256": "bd3dde2a3b37d75ccdcfecd8fa49bda2a493d340ead7283fddd2dd11a6e59bd3",
+  "packageSha256": "492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430",
+  "indexedFiles": 42,
+  "privateSigningMaterialDestroyed": true,
+  "certificateTrustRemoved": true,
+  "stage3Started": false
+}

@@ -1,0 +1,2579 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-2-requalification-r6-qualification-candidate",
+  "programmeIdentity": "Sprint 30.5 Stage 2 Requalification R6",
+  "revision": "R6",
+  "authorityId": "authority-r6-20260803T171057940Z-5e914d18",
+  "attemptId": "r6-20260803T171057940Z-5e914d18",
+  "candidateCommit": "ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff",
+  "harnessCommit": "0b10f074d86ac9256462602c0e7bda528b8fba57",
+  "frozenAt": "2026-08-03T17:11:00.325Z",
+  "sourceCommit": "ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff",
+  "sourceTree": "8455a05780989a9d5f6c6d527f7d427d94526b04",
+  "branch": "sprint-9-overlay",
+  "productSourceSha256": "1290fb123ce0d12120e020800211949d48714231ee39cfe2956f4f055b080655",
+  "productFiles": [
+    {
+      "path": "app/account/security/page.tsx",
+      "size": 3684,
+      "sha256": "21cca012b341708d49a620c4680556cf817ae5701731ea8bb7072a282d91b440"
+    },
+    {
+      "path": "app/achievements/page.tsx",
+      "size": 117,
+      "sha256": "b8118735abb4087c033b0abfa80ec7c956608db8e0cefd527b8f795bc7750d0e"
+    },
+    {
+      "path": "app/api/oracle/analyze/route.ts",
+      "size": 977,
+      "sha256": "3a45b2d31d34b3ac52b116638c029e5de0921fc245f3b899f9d5d9273557f29b"
+    },
+    {
+      "path": "app/api/oracle/conversation/route.ts",
+      "size": 1435,
+      "sha256": "423e42be7f8156163c641fd6cad22121165f6243016a03d61ea660d67e354052"
+    },
+    {
+      "path": "app/auth/callback/route.ts",
+      "size": 881,
+      "sha256": "c7c62f3f2f195889b06f14665f6dcf612f06688f258c4c257ee586a7a6fc97dc"
+    },
+    {
+      "path": "app/auth/page.tsx",
+      "size": 9631,
+      "sha256": "4088e86f8b159e3c19169a326c2d29cf6a466a261fa89b6a266f6362966d5c1e"
+    },
+    {
+      "path": "app/auth/verify-email/page.tsx",
+      "size": 1244,
+      "sha256": "ef92eecee4007cb2cf390c051871a1029a00764872a7946ba5dde56b0a735143"
+    },
+    {
+      "path": "app/career/page.tsx",
+      "size": 111,
+      "sha256": "c2f25f87c720cbd770f0d37785f404c133b4cf2f1b51fc734583d6c838b6b2ef"
+    },
+    {
+      "path": "app/coach/page.tsx",
+      "size": 1613,
+      "sha256": "d4b7cc0151aea677afe7fc4bd661334e706812d5c69531477475ad2e3e3a5818"
+    },
+    {
+      "path": "app/companion/companion-page-state.ts",
+      "size": 497,
+      "sha256": "93ef60f8194499cca4fd1c4d35cdcc8d5e32454e77518b4eef6fcce8a7697cd5"
+    },
+    {
+      "path": "app/companion/page.tsx",
+      "size": 963,
+      "sha256": "a700899df56eb03e3e50d36ab4e69e91150bbd2ffb204b2b0576613bfd5363d4"
+    },
+    {
+      "path": "app/dna/page.tsx",
+      "size": 112,
+      "sha256": "5bf5a2155b7b9ba4231c4fc9c6f99e302a67766b78266c1284f5d9c95acff2be"
+    },
+    {
+      "path": "app/favicon.ico",
+      "size": 25931,
+      "sha256": "2b8ad2d33455a8f736fc3a8ebf8f0bdea8848ad4c0db48a2833bd0f9cd775932"
+    },
+    {
+      "path": "app/global-error.tsx",
+      "size": 1291,
+      "sha256": "b38fb7f733d0d027f28b35495462d61ebc7726aaeea28d575f348f20e26ea8c1"
+    },
+    {
+      "path": "app/globals.css",
+      "size": 9858,
+      "sha256": "7d037f7b87a32d7db2300adc2b439e4c9949c97a8ec4308e322b195dab92ccdf"
+    },
+    {
+      "path": "app/intelligence/page.tsx",
+      "size": 1617,
+      "sha256": "aa1db5dc5dca0dd5443d727368203ce02648f47b62db6f185ac349c5ad79a425"
+    },
+    {
+      "path": "app/layout.tsx",
+      "size": 1058,
+      "sha256": "f588408714667f0657f7f909fc7465223d403980866dba09397eb77c3c744f49"
+    },
+    {
+      "path": "app/loadouts/page.tsx",
+      "size": 1559,
+      "sha256": "ec278e54aa7d7c2f104b251d11aa2019fddf78b2689e0eadf37dfef40ac51ee3"
+    },
+    {
+      "path": "app/memory/page.tsx",
+      "size": 115,
+      "sha256": "c4a68cb97b5636ffcfc4d6ae17eb61d0c90fad651a4824c2678aed3538dc4cb6"
+    },
+    {
+      "path": "app/not-found.tsx",
+      "size": 907,
+      "sha256": "919f11beb4ff658795cdb614326fe20f39cdd4b47f60e67495df7d6194c177be"
+    },
+    {
+      "path": "app/onboarding/actions.ts",
+      "size": 1204,
+      "sha256": "35c5a6f2fc5c144e8ba04f5adb2e632157d25aebf972fd177efbafe9a930e8a2"
+    },
+    {
+      "path": "app/onboarding/page.tsx",
+      "size": 886,
+      "sha256": "492cd99020005c5ddb7ffaa05925fac16131d95270a29d09f601f48d2758a291"
+    },
+    {
+      "path": "app/operator/page.tsx",
+      "size": 113,
+      "sha256": "52452d95d3e79342175df4c10da8fe5b61fed280ba3d2ce8d48293c91c37f62b"
+    },
+    {
+      "path": "app/oracle/page.tsx",
+      "size": 6886,
+      "sha256": "db7fde2a6774192ee9e6476915664cae3abda33a66856a4ddb7494983fdb6675"
+    },
+    {
+      "path": "app/page.tsx",
+      "size": 106,
+      "sha256": "66039c9c2e27ffd39f2d05c734dcb75a41c4415e655ebbd7ead4a17efad9bcdb"
+    },
+    {
+      "path": "app/planner/page.tsx",
+      "size": 109,
+      "sha256": "5536896a6e90d8940cd4df203b9cd884a5bf4ec9388e83922f6e19bb5cc70cd5"
+    },
+    {
+      "path": "app/profile/actions.ts",
+      "size": 1779,
+      "sha256": "eb7bfbcb9636206a5e4e9ac7ebb96ec19471260c5a9f42cc3dd04d11f3d421ec"
+    },
+    {
+      "path": "app/profile/page.tsx",
+      "size": 1488,
+      "sha256": "e4bfcde3346d224eabc97d72fa00efae9cc854891a4040824ad7f11a1f2bd040"
+    },
+    {
+      "path": "app/progress/page.tsx",
+      "size": 1505,
+      "sha256": "f484577273615134fbe429fb66def9171e284d0028a96790ebff4c8bd0815915"
+    },
+    {
+      "path": "app/reports/page.tsx",
+      "size": 1554,
+      "sha256": "c4524734b3a43ada06e456edcb70a2f476955a7dea43cac974411fdb9503f2d4"
+    },
+    {
+      "path": "app/sessions/page.tsx",
+      "size": 1599,
+      "sha256": "aebb853e39833f666bbbd2568134b45e17231a19b7848f5182fe7d3d93f637af"
+    },
+    {
+      "path": "app/settings/page.tsx",
+      "size": 3387,
+      "sha256": "8094deb860881a23edd949a4dbd74330c245691655f5cb5815e4484cfa160485"
+    },
+    {
+      "path": "components/OracleCard.tsx",
+      "size": 375,
+      "sha256": "a6fb24f81d2c42004e88f58ee5058697af69d11a3c02f5e9e813760ae0559889"
+    },
+    {
+      "path": "components/ScoreBar.tsx",
+      "size": 587,
+      "sha256": "738fbd34d3b844db15dc34c37ebe61593179e1692fc18cd95c291f9870a018ed"
+    },
+    {
+      "path": "components/StatCard.tsx",
+      "size": 427,
+      "sha256": "53067e9932fa0be1e7f00be72a32cec35b8ed9fcca5ab95a742b9721e78f51ef"
+    },
+    {
+      "path": "components/achievements/AchievementPopup.tsx",
+      "size": 1068,
+      "sha256": "43806df1b737a32f2c040b0d07bb9733f00839a9d3961937aa9bf0a0081b1a87"
+    },
+    {
+      "path": "components/career/CareerHeader.tsx",
+      "size": 371,
+      "sha256": "053c0c2a3aae799763cbdb5da511f9e7300bb5a736f2370e96e575b4d569b379"
+    },
+    {
+      "path": "components/career/RankBadge.tsx",
+      "size": 1088,
+      "sha256": "c03d25e93b7a1cd4a1897c357420f4eeba4817911d5f5dec44d0e4b5baa03502"
+    },
+    {
+      "path": "components/career/StatCard.tsx",
+      "size": 829,
+      "sha256": "9ce2997d5e69a572cb39a3e53709de59378d367efd7ded707d8ffaf80c33d06c"
+    },
+    {
+      "path": "components/career/XPBar.tsx",
+      "size": 746,
+      "sha256": "98cf941cb64bf67307a6ae0338bed0d415b59a7c70a994b0a102c8b0f8f602ed"
+    },
+    {
+      "path": "components/coach/CoachHero.tsx",
+      "size": 864,
+      "sha256": "a5c0febb625ae1ea58d74352f449ee0c3fad3b85cb6a156036a643e49d9a8e6b"
+    },
+    {
+      "path": "components/coach/FocusCard.tsx",
+      "size": 1179,
+      "sha256": "9e0b25406cfc2b3995dac6a56b8213719ee1127d7f69899a64d3185fcba5caa1"
+    },
+    {
+      "path": "components/coach/MissionCard.tsx",
+      "size": 875,
+      "sha256": "d2959daa637fdcd07dfe59a32b59baf0f33d7256db6243e3056a6b8c50cca640"
+    },
+    {
+      "path": "components/coach/MissionReadiness.tsx",
+      "size": 7877,
+      "sha256": "7413ae9031bb381fae769939c3efe637c11fc8a7d37348d80cb11e67ce7c1afb"
+    },
+    {
+      "path": "components/coach/PredictionCard.tsx",
+      "size": 1379,
+      "sha256": "7f8c37a847c38bd749e711201d9a0917f541de51021cb29000c677c76f9a8b03"
+    },
+    {
+      "path": "components/companion/CompanionTitleBar.tsx",
+      "size": 12259,
+      "sha256": "41bccbb801d818d689514caaaccb27ac5fc9e9d2637f228927e92bb53c12d24f"
+    },
+    {
+      "path": "components/companion/DesktopDiagnosticsPanel.tsx",
+      "size": 12048,
+      "sha256": "3f9c9e319feb3b010a6608d62d5488d07d47de274007ed7bf43f0e336dec34d2"
+    },
+    {
+      "path": "components/companion/guidance/CompanionGuidanceCard.tsx",
+      "size": 5453,
+      "sha256": "236d9fe8a6b4cccbab93bead6fcbe5f756847f91ade7aeae21952b5568233411"
+    },
+    {
+      "path": "components/companion/guidance/CompanionGuidanceDashboard.tsx",
+      "size": 3904,
+      "sha256": "8d36cd6dc793faf61cc815d97614a63a6628363b184c7635e7b925d0765aa66c"
+    },
+    {
+      "path": "components/companion/guidance/CompanionGuidanceDiagnostics.tsx",
+      "size": 1051,
+      "sha256": "8ea2e3248d19586d1bc9262e286293bb346eaa4f5525fd1b0501f99b987ca1a9"
+    },
+    {
+      "path": "components/companion/guidance/CompanionGuidanceLive.tsx",
+      "size": 5946,
+      "sha256": "df3a790e685dcd798e99ebc06383ce22e5da901d04ce7efefac8b62824581641"
+    },
+    {
+      "path": "components/companion/guidance/CompanionGuidanceStatePanel.tsx",
+      "size": 2157,
+      "sha256": "cf690c13e5bd20a82b2ff3a841c8d90969befe74d603de336e8d6458279881b5"
+    },
+    {
+      "path": "components/companion/guidance/companion-guidance.module.css",
+      "size": 8966,
+      "sha256": "d2533258f1300d7a626e8092397c4de086afddff4a35921172b5a271c25d7dae"
+    },
+    {
+      "path": "components/layout/AppLayout.tsx",
+      "size": 1130,
+      "sha256": "fe77801b5914c5ba0b8b83ae85cae85e9e266e6d70662ecc4ba7f1b5fe81d8d3"
+    },
+    {
+      "path": "components/loadouts/LoadoutIntelligenceCard.tsx",
+      "size": 6520,
+      "sha256": "31682be54306f3ef25b58dc9eb1ff2782c34d47206403b9aca561f80bd79f2f9"
+    },
+    {
+      "path": "components/navigation/Sidebar.tsx",
+      "size": 3606,
+      "sha256": "3733d8a63f537253122f99429da1d2e5119cf7a979e9e08e17729b1278532651"
+    },
+    {
+      "path": "components/onboarding/CommissioningWizard.tsx",
+      "size": 3735,
+      "sha256": "ac3c7169685f5c6db40bb2ddd891df18fe533f64e2a29bfc59b2b9d239a19922"
+    },
+    {
+      "path": "components/operator/CombatRatingBadge.tsx",
+      "size": 1569,
+      "sha256": "1038eb44d275912a3669b2070773adcd87485510d4a83f1f6bd5a1deb0f08377"
+    },
+    {
+      "path": "components/operator/DossierField.tsx",
+      "size": 1983,
+      "sha256": "ed45c7ca90a93d358cc50e5a15246a16fa5ec53df88e416313c08e2fdb1a7a6a"
+    },
+    {
+      "path": "components/operator/OperatorIntelligence.tsx",
+      "size": 4765,
+      "sha256": "625193c159d704354c02dccdb0e7b34f73d243611275cfe3a53b32d405a3df6a"
+    },
+    {
+      "path": "components/operator/SkillBar.tsx",
+      "size": 1792,
+      "sha256": "c4eab2d35c9c32e90e5323dfdb10601b5a2f2c96f2fd7ad63ffcd5b9645de426"
+    },
+    {
+      "path": "components/oracle/ClipUpload.tsx",
+      "size": 1396,
+      "sha256": "044f8376e453751c32e8bd81597adc33fd92725eb5453eef3c23dbbd0e661670"
+    },
+    {
+      "path": "components/oracle/OracleBrainCard.tsx",
+      "size": 9428,
+      "sha256": "fa940140beab67e4e4cbdada627e9c14c308fa799a099245457d98d6e80825b4"
+    },
+    {
+      "path": "components/oracle/OracleHero.tsx",
+      "size": 1152,
+      "sha256": "7bec3e40124f3241dd1baad8aeb2e450ff78ea349a72ad9c11b60d3ffdb8b56e"
+    },
+    {
+      "path": "components/oracle/OracleInput.tsx",
+      "size": 1583,
+      "sha256": "26e1bff8ccaba99cf99b18b2cd71e91b00fc6e75de166ca647a51b59051e8fcc"
+    },
+    {
+      "path": "components/oracle/OracleLoading.tsx",
+      "size": 2343,
+      "sha256": "b49d32d6741593ef386a1e3d5d0506ff0e21508359dd4e60b8a02fc6cd03ebf6"
+    },
+    {
+      "path": "components/oracle/OracleReport.tsx",
+      "size": 1936,
+      "sha256": "02ed7e26d38a36a823bc1b3014f77674947f7baa76709413119aca98f27c6be8"
+    },
+    {
+      "path": "components/oracle/OracleStats.tsx",
+      "size": 852,
+      "sha256": "ca313ff95271c7e820c7189ce76c48706d649df27cf19a658171c6575db1fb12"
+    },
+    {
+      "path": "components/oracle/coach/MissionBrief.tsx",
+      "size": 3590,
+      "sha256": "e0eb9c5509e437688a1c15512beadc6595cefb8474ad3dab818450d4a5be8a10"
+    },
+    {
+      "path": "components/oracle/dashboard/BehaviourPanel.tsx",
+      "size": 4602,
+      "sha256": "928ecc0984e8d7c8be5a4f2387faadb802926d4383d0fff0aae87709fcdec45a"
+    },
+    {
+      "path": "components/oracle/dashboard/ConfidencePanel.tsx",
+      "size": 2864,
+      "sha256": "1b8f20177512197d92d03823ad37e2dc4b0ac2f67df3bb31249d7e06e74bb570"
+    },
+    {
+      "path": "components/oracle/dashboard/IntelligenceGrid.tsx",
+      "size": 1272,
+      "sha256": "4102040b5b906f63d5014065ce7e350cfddce79650ed95e4d639f3837dd12645"
+    },
+    {
+      "path": "components/oracle/dashboard/OracleAssessmentPanel.tsx",
+      "size": 3389,
+      "sha256": "feff0279f4f0803d9a5d1ad6e615682937c0520580660489fcbfa4d8bea2f2f1"
+    },
+    {
+      "path": "components/oracle/dashboard/OracleBrainCard.tsx",
+      "size": 1146,
+      "sha256": "a43ea12e9b24e03ddff8133158097e4e00240e76a4551ca7a0ab8b259509f440"
+    },
+    {
+      "path": "components/oracle/dashboard/OracleContextualIntelligenceCard.tsx",
+      "size": 5102,
+      "sha256": "62582fb00aab1455f9c6c6d516a081379acb31e6b20c4c331e240a262ebc739e"
+    },
+    {
+      "path": "components/oracle/dashboard/OracleDecisionCard.tsx",
+      "size": 6884,
+      "sha256": "65d5a91ccb828e59aea8894fc887740718f7296762dca626a006c36f1228e642"
+    },
+    {
+      "path": "components/oracle/dashboard/OracleExplainabilityCard.tsx",
+      "size": 1095,
+      "sha256": "3a3e49a8119b382dac94b0b5f1b156023b7eddf2247cafc88a23bb65af0b2ab4"
+    },
+    {
+      "path": "components/oracle/dashboard/OraclePlannerCard.tsx",
+      "size": 1317,
+      "sha256": "c6f3f2e05eabaf1172118ab516ca402dbd6cda116f4b946d6f306d4f94e69bec"
+    },
+    {
+      "path": "components/oracle/dashboard/OracleSignalFeed.tsx",
+      "size": 2067,
+      "sha256": "c7a3ff7ee7eb90dc15a913c90caebbaddedf19d44bca3b00d9857f82d33e55a9"
+    },
+    {
+      "path": "components/oracle/dashboard/OracleTimelineCard.tsx",
+      "size": 1330,
+      "sha256": "98853e19b46da137975d1c5315f7a4dc75f3cfb5920b96a0d1a0bcd0093d9939"
+    },
+    {
+      "path": "components/oracle/dashboard/PredictionPanel.tsx",
+      "size": 7171,
+      "sha256": "728dca8b0ed7d97b0dfdfc0248a78c39b1de95e79288bdf29ba72d0806c34f85"
+    },
+    {
+      "path": "components/oracle/dashboard/RiskPanel.tsx",
+      "size": 6764,
+      "sha256": "52e0347acb428508f644104422a77a646372242f29dfab449541cbcc69bd1d5c"
+    },
+    {
+      "path": "components/oracle/dashboard/TrendPanel.tsx",
+      "size": 5735,
+      "sha256": "99c8a1a735eefc660c9fab6348ad0aa77019258373294eacd205f9f247be6501"
+    },
+    {
+      "path": "components/profile/OperatorIdentitySettings.tsx",
+      "size": 3853,
+      "sha256": "f37399402382860ca8849a00afbb5b52fb40e0f7b3f8d9bef460a11a4756109a"
+    },
+    {
+      "path": "components/progression/XPPopup.tsx",
+      "size": 1138,
+      "sha256": "8e3056d614b166ea19b909c7a90a20f7092d422ce590d41eaf24531f41ddc606"
+    },
+    {
+      "path": "components/ui/AnimatedNumber.tsx",
+      "size": 945,
+      "sha256": "6f452c9f94b7cfab18e47069ad116a262f7bfb627b7d1023119d679825c3786e"
+    },
+    {
+      "path": "components/ui/Badge.tsx",
+      "size": 305,
+      "sha256": "7ae230185a8082425ae1ba0a1091125abbcd817bc0a108f456d98a20554edd22"
+    },
+    {
+      "path": "components/ui/BriefingSection.tsx",
+      "size": 457,
+      "sha256": "79b36a327cf593764cb31de704711ae1b50ec9440328394163905a15da59187a"
+    },
+    {
+      "path": "components/ui/Button.tsx",
+      "size": 944,
+      "sha256": "89382ab687fec2de25907d6520466ed1315613bd6a94dece5b574fd00db804ae"
+    },
+    {
+      "path": "components/ui/CapabilityNotice.tsx",
+      "size": 2569,
+      "sha256": "9d832f43c4a0820f7edefeac982f77a3bf6ac46e3d5ab299f47e4087317e8139"
+    },
+    {
+      "path": "components/ui/Card.tsx",
+      "size": 575,
+      "sha256": "9872e235b2f0f03be4f156867b70c1e8e306bca75250043f86c7278e4ac0e126"
+    },
+    {
+      "path": "components/ui/ConfidenceRing.tsx",
+      "size": 2375,
+      "sha256": "dfea9d0a74db30967f0173e6f34e12cd9b0b09aaee19a1207b6c418afb884c5e"
+    },
+    {
+      "path": "components/ui/EmptyState.tsx",
+      "size": 617,
+      "sha256": "701c1eb82b5ef496e73bd97dc24c826486d54d24491326e6c7a066f997877042"
+    },
+    {
+      "path": "components/ui/EvidenceBoundary.tsx",
+      "size": 890,
+      "sha256": "617f81ec5dd0b5e319a66e14c8b9791e6243a3a00c2329cb5ff2d3ed265c6c8f"
+    },
+    {
+      "path": "components/ui/FadeIn.tsx",
+      "size": 615,
+      "sha256": "e0ff4da8e249b28152ceee6d9f1f0224459af7685e20e03ece26ca974feb9495"
+    },
+    {
+      "path": "components/ui/JourneyCard.tsx",
+      "size": 1419,
+      "sha256": "c50d8978d4274e7e695527f1af1e00632a7f9d37f9b51f76d161378df5db1a7b"
+    },
+    {
+      "path": "components/ui/MetricCard.tsx",
+      "size": 838,
+      "sha256": "f9731c71d2ebaca17b70434e12dd1cde04f98e5dee334e508504b01bb59adadc"
+    },
+    {
+      "path": "components/ui/PageHeader.tsx",
+      "size": 842,
+      "sha256": "03c14e5f6514a3bb7a5380880a630a7146458ab4bf5c2487dc983a84569fb947"
+    },
+    {
+      "path": "components/ui/Panel.tsx",
+      "size": 468,
+      "sha256": "f3b12a3bcc93690764b47246c856316a66fe164a7d1f030bdf091fa13c98ab3d"
+    },
+    {
+      "path": "components/ui/ProgressBar.tsx",
+      "size": 1040,
+      "sha256": "960fd2284f8292a68870ac436262419e92a08f53cd9e54d6def7feca1a61931b"
+    },
+    {
+      "path": "components/ui/Stagger.tsx",
+      "size": 1089,
+      "sha256": "bb86d68c798cd1b2e4d71c2d427a6176735cad7f3080194afe40db11b3035c84"
+    },
+    {
+      "path": "components/ui/StatusBadge.tsx",
+      "size": 994,
+      "sha256": "7aa3eb85f90232faa761b2525049834106eecb8f0a0e383edef2c147bdedf54c"
+    },
+    {
+      "path": "components/ui/StatusCard.tsx",
+      "size": 1596,
+      "sha256": "0461c318fdbe399729905d068dd5efc62fa160800b99d18699cb64010371f625"
+    },
+    {
+      "path": "components/ui/StatusPill.tsx",
+      "size": 1252,
+      "sha256": "8f2fa91a0b886b71274c9a4735193d64b2fd78c81716f3ecbba6b02b02dc7f1d"
+    },
+    {
+      "path": "database/001_initial_schema.sql",
+      "size": 909,
+      "sha256": "46db8cfbb9f9c28e56be8c4d90cbd43b5a3ac8b8ea7b49c043c8167c9edea578"
+    },
+    {
+      "path": "database/007_operator_achievements.sql",
+      "size": 290,
+      "sha256": "7fc9c753657091c41dafd09d4e651c568a4a99a58726536c06e3d9ae5314e06b"
+    },
+    {
+      "path": "database/008_operator_ownership.sql",
+      "size": 6281,
+      "sha256": "5eefb5732c1126d3983e1a8856d291b6ebcfededef867f855dcf70b3b7e620fe"
+    },
+    {
+      "path": "database/009_operator_intelligence_persistence.sql",
+      "size": 101496,
+      "sha256": "fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f"
+    },
+    {
+      "path": "database/010_operator_trust_control_persistence.sql",
+      "size": 68078,
+      "sha256": "7c46a1c9a3a0ff7e8f5c2348a3179c98934ad34ec9e66a2c2632830b65c7d715"
+    },
+    {
+      "path": "database/011_operator_account_provisioning.sql",
+      "size": 8485,
+      "sha256": "dff827ce532a062fdc3aa93df08eba4628e004b46e9233005325f443e8429928"
+    },
+    {
+      "path": "database/012_operator_identity_lifecycle.sql",
+      "size": 15257,
+      "sha256": "e64213123ff2b75b12c293d79380cc43dc9028dd56f503330aac9f5d97442c73"
+    },
+    {
+      "path": "database/013_authoritative_session_lifecycle.sql",
+      "size": 17271,
+      "sha256": "7228c0384caed59f2a042e17eb6b2ea935bfed6b72e6372649d93f0874c5f68a"
+    },
+    {
+      "path": "database/014_operator_development_lifecycle.sql",
+      "size": 8494,
+      "sha256": "25682a9331102e51d6742988600697f9d23d94a53f09cd23bc585ed0a161d831"
+    },
+    {
+      "path": "desktop-native/Oracle.WindowDiscovery/Oracle.WindowDiscovery.csproj",
+      "size": 656,
+      "sha256": "404ecb9e6cff70d80d4e06f712edd19e4c059ddda3f25cf69ccf59b1323f503d"
+    },
+    {
+      "path": "desktop-native/Oracle.WindowDiscovery/Program.cs",
+      "size": 21609,
+      "sha256": "95a2915d1a8bb43661d22e7967302a0ba8c0f9733dec7cf426d8fd20d14e35cf"
+    },
+    {
+      "path": "desktop-native/Oracle.WindowObserver/Oracle.WindowObserver.csproj",
+      "size": 603,
+      "sha256": "80d9276cc4be2e1de562b822b951f1a6385af8ab32670449b960640a461e665a"
+    },
+    {
+      "path": "desktop-native/Oracle.WindowObserver/Program.cs",
+      "size": 9667,
+      "sha256": "c88787701a4285953a4f5b92443182cc5a1a9c66ff4c77233098128db7d151bc"
+    },
+    {
+      "path": "desktop/auth/desktop-auth-contract.ts",
+      "size": 1660,
+      "sha256": "4b38ba9ee1b422147c281677150a362ac05f04b72872e535d76585f3a872f5ad"
+    },
+    {
+      "path": "desktop/auth/desktop-auth-service.ts",
+      "size": 3184,
+      "sha256": "90c0dd567c267ca82d9e286a09937c87598227211499d0bc3ca6b9481c7bc697"
+    },
+    {
+      "path": "desktop/auth/desktop-auth-vault.ts",
+      "size": 3829,
+      "sha256": "3f8ed01011cf67acd5b102f0a8cc6bffeb2387ece25606ddad593140d17eea5c"
+    },
+    {
+      "path": "desktop/companion/companion-context.ts",
+      "size": 6753,
+      "sha256": "49427916a9fd3acbf7f0a46c9da058fa3b55a44d3d3652ab8e3440b558de5a6e"
+    },
+    {
+      "path": "desktop/companion/companion-guidance-delivery-contract.ts",
+      "size": 1664,
+      "sha256": "1cddad2a6252f87cee7cd4f23317c25e46f5a3dbdee5918e927c043f4ca62a28"
+    },
+    {
+      "path": "desktop/companion/companion-guidance-delivery-coordinator.ts",
+      "size": 4930,
+      "sha256": "9dbc3107a3aec30eb6562abc92ca86ffbb7265aa695a35bcd9d75b065506e46a"
+    },
+    {
+      "path": "desktop/companion/companion-presentation-state.ts",
+      "size": 4839,
+      "sha256": "e83f5bcf195f731160003825026bb6d9d98edf5ee363930d688ca931452c46bb"
+    },
+    {
+      "path": "desktop/companion/companion-screen-observation-contract.ts",
+      "size": 7509,
+      "sha256": "45b2d3630ddd476d9998453fe68421da518ae4e7e58f7ca4e5affaed27f34340"
+    },
+    {
+      "path": "desktop/companion/companion-screen-observation-coordinator.ts",
+      "size": 10980,
+      "sha256": "928acea2a2ff69fa17d68b0f3cb28370e94588cd01c3761dd5f2e84dc53a91e9"
+    },
+    {
+      "path": "desktop/companion/companion-session-manager.ts",
+      "size": 6656,
+      "sha256": "7030462607799b4ac4a89d49566964ce3ded0e9b005b823e58958c0e2df6dbb2"
+    },
+    {
+      "path": "desktop/companion/companion-session.ts",
+      "size": 6186,
+      "sha256": "5dff9ef51265d42629ec071d008035bde366c4263b7c096450eff80361354b87"
+    },
+    {
+      "path": "desktop/companion/electron-local-window-capture.ts",
+      "size": 2328,
+      "sha256": "527691af43269492f93d1e871b146d59ae09dfae6b25ee69b7cc1da932f168f0"
+    },
+    {
+      "path": "desktop/companion/game-integration-coordinator.ts",
+      "size": 6345,
+      "sha256": "6571af36737833dd180f995d9503e421de60fac28b4ec3c6af989dba09a0e10e"
+    },
+    {
+      "path": "desktop/contracts.ts",
+      "size": 5138,
+      "sha256": "887b43d81316d642782e6edd1d418076b859d0476e04c262b12234b2a8a05072"
+    },
+    {
+      "path": "desktop/host-state.ts",
+      "size": 7781,
+      "sha256": "eaec7b8cbb375bf598c1878e10526c7eac785be1482539e397d700d77fe75bc0"
+    },
+    {
+      "path": "desktop/main.ts",
+      "size": 10331,
+      "sha256": "911a43cb7df5bc7fb1af11eb3d184d9f33883dbd9634fcbe632c4a0a9fa6fd8f"
+    },
+    {
+      "path": "desktop/native/native-errors.ts",
+      "size": 815,
+      "sha256": "a5fbf26e2e84c0c11afc77162123ddb69dc64b16f508cf1f5e578905cfd0b2f1"
+    },
+    {
+      "path": "desktop/native/native-helper.ts",
+      "size": 6828,
+      "sha256": "ebf2bbd46f1485d7c1714fae11f041b0f8dd50ab6122f95ba46d2067f0d09e9c"
+    },
+    {
+      "path": "desktop/overlay-window.ts",
+      "size": 35199,
+      "sha256": "00324eb7c2f8e799501f3e05fb387e2f7783f78c35d38066683c0a6b2fa96e0c"
+    },
+    {
+      "path": "desktop/overlay/attachment-controller.ts",
+      "size": 10440,
+      "sha256": "f58885771e474eb59b5a0456af36dcb7fc2c0ee6033a4f7d58518533238e91bb"
+    },
+    {
+      "path": "desktop/overlay/attachment-state.ts",
+      "size": 2179,
+      "sha256": "cc42173382756291abab7360aa0e4b0eb19e7dccb6092768c9abcf2f5a46f419"
+    },
+    {
+      "path": "desktop/overlay/window-observer.ts",
+      "size": 6175,
+      "sha256": "39c38ec9c9b95bd4db4139b2c6f81690b0ab1273e6998594971bac5b9d390acb"
+    },
+    {
+      "path": "desktop/platform/API_COMPATIBILITY.md",
+      "size": 2591,
+      "sha256": "5c9d23b0b29b04e939d4af43be8dc8bbf29c1bc1a8c7be2d068f482fb4e05a47"
+    },
+    {
+      "path": "desktop/platform/desktop-composition-root.ts",
+      "size": 3960,
+      "sha256": "b0d72009b84fcb587a161207e7e8b9792b09dc3ca9a5024f351b0e50f45d6b8a"
+    },
+    {
+      "path": "desktop/platform/desktop-diagnostic.ts",
+      "size": 2004,
+      "sha256": "46008200d369f00a68b7c1732967acf6ccdd6dbe07bf64e91c9036cda3395715"
+    },
+    {
+      "path": "desktop/platform/desktop-diagnostics.ts",
+      "size": 12997,
+      "sha256": "003f538c013bdc812e32a283c648f38f57fadb0a2663bab2ff7b3eadfb6b0f2d"
+    },
+    {
+      "path": "desktop/platform/desktop-host-event-stream.ts",
+      "size": 3556,
+      "sha256": "c13458a58e3665544646897bd755a88bdb60978cf0fccd92d34dfbfb77c3adda"
+    },
+    {
+      "path": "desktop/platform/desktop-host-event.ts",
+      "size": 1405,
+      "sha256": "c7822e6535b855f973a19a65d382479078c7c31e11ac2ab9e403623df6f3dbfe"
+    },
+    {
+      "path": "desktop/platform/desktop-host-snapshot-builder.ts",
+      "size": 1530,
+      "sha256": "6de1db76dea994bde1d6c32762b1ae459ef24fa782a931085eff012d904842cb"
+    },
+    {
+      "path": "desktop/platform/desktop-host-snapshot-coordinator.ts",
+      "size": 2266,
+      "sha256": "c402ecb273bf88ed365b9d7afb7d272ed39f5d7b2179fcf39fd48a4554d0a710"
+    },
+    {
+      "path": "desktop/platform/desktop-host-snapshot.ts",
+      "size": 1634,
+      "sha256": "83ea10af78b5370a77dbbefcb45bbd9bc4fdc9be286cd7f1d3c94792483f283f"
+    },
+    {
+      "path": "desktop/platform/desktop-platform-api.ts",
+      "size": 2708,
+      "sha256": "7de52e79641c6b0aee1466867dc24ccbb367979661854e5b75937631b17c876c"
+    },
+    {
+      "path": "desktop/platform/desktop-recovery-service.ts",
+      "size": 9707,
+      "sha256": "6a9656af171575c2d2e5371ee4013fdadf478a9d92d9540c20fae74f29ca70d6"
+    },
+    {
+      "path": "desktop/platform/desktop-recovery.ts",
+      "size": 2049,
+      "sha256": "40bed468fde42b21096eeb13280f12933f5f666828b9c76e6d60d9a46d0408bf"
+    },
+    {
+      "path": "desktop/platform/desktop-telemetry-service.ts",
+      "size": 8451,
+      "sha256": "cb6befebc4d34a41522fce8c25917a309e071ad243700340944a662652ab2829"
+    },
+    {
+      "path": "desktop/platform/desktop-telemetry.ts",
+      "size": 2339,
+      "sha256": "9ee05ffe33fa12d444fc12647ab0b0ea6cf17319cfa2a90b0245b7ead415e31c"
+    },
+    {
+      "path": "desktop/platform/desktop-timeline-service.ts",
+      "size": 4973,
+      "sha256": "16cdf11e9c142787c1be13b0ba7a4b914f47782928220328cee3b83ab5704a10"
+    },
+    {
+      "path": "desktop/platform/desktop-timeline.ts",
+      "size": 2232,
+      "sha256": "00a52cea85690cdfc3c3ce7804eba97a134c7fa2b852701ca275520916bdc122"
+    },
+    {
+      "path": "desktop/platform/index.ts",
+      "size": 2223,
+      "sha256": "acebcece1621ee33decac29aab54afcdda1b147af70f2cd6b10b797138a0d595"
+    },
+    {
+      "path": "desktop/preload.ts",
+      "size": 8369,
+      "sha256": "8b4f85eb9cce88af25ddfa150ef4d962d7e7e114d1ccf43b6b923a538f773188"
+    },
+    {
+      "path": "desktop/release/desktop-release-contract.ts",
+      "size": 2675,
+      "sha256": "9b17506146ea9bd17735723369207362faf68da2f46aab29870c9d1437fde566"
+    },
+    {
+      "path": "desktop/release/desktop-update-coordinator.ts",
+      "size": 5494,
+      "sha256": "88ace858e638b997ce870ed0171639c5b402e0c8e033338221499917953cad6e"
+    },
+    {
+      "path": "desktop/release/release-manifest-contract.ts",
+      "size": 8851,
+      "sha256": "509a1ffa987c7c00abef4134016bf9a5e376a0d4d0ae3c1350d1b6f457616a7f"
+    },
+    {
+      "path": "desktop/runtime/installed-runtime-configuration.ts",
+      "size": 12059,
+      "sha256": "07fc8fd6a95648eb47e8d2ec3bf9e91ced49082ace812959885fabf08ffbb1fa"
+    },
+    {
+      "path": "desktop/runtime/packaged-next-server.ts",
+      "size": 3015,
+      "sha256": "7ffa6bfa39867ed9199197954a7b8d67fb9c37513ae7e74e4f7ee0e8f133a70a"
+    },
+    {
+      "path": "desktop/runtime/packaged-request-origins.ts",
+      "size": 1339,
+      "sha256": "943e91936291d094ccf10ee525ceb21e1333389b6e1e45cc2c40ac749e8c3e2e"
+    },
+    {
+      "path": "desktop/runtime/packaged-server-environment.ts",
+      "size": 2966,
+      "sha256": "f751c5d77fcf20d7e40fa1069e9b70d9cf21a6e5d8ea54b67f3e2a737510cebf"
+    },
+    {
+      "path": "desktop/targeting/index.ts",
+      "size": 1062,
+      "sha256": "0798d6d6e6d8e4fca0f99011d619e425ffd06ffe27f4d0fdbe855018d6832cc0"
+    },
+    {
+      "path": "desktop/targeting/target-candidate.ts",
+      "size": 1904,
+      "sha256": "010b73a7a6cef6f446aa2cc1809e88a367b7a9ac9a8d950e88b9d2de81e3bf2e"
+    },
+    {
+      "path": "desktop/targeting/target-decision.ts",
+      "size": 9659,
+      "sha256": "831cd531c1c54b15a9a7aabe9509ce01ac5733b3dd37dedd20c11a95d5f52561"
+    },
+    {
+      "path": "desktop/targeting/target-evidence.ts",
+      "size": 3631,
+      "sha256": "b630c21adb4baef799d957e95cc9b2e7808373c7a50416f1db5956445d88df82"
+    },
+    {
+      "path": "desktop/targeting/target-score.ts",
+      "size": 6183,
+      "sha256": "c3b4ab0200c7b625565402c5066d13187b1e4cba0c7e83ed9a6b180a49749955"
+    },
+    {
+      "path": "desktop/targeting/target-selector.ts",
+      "size": 4041,
+      "sha256": "5c42786ac1e1f5e5735a46d86d40b585f80eed7829d79727628b29dc6b8d60d4"
+    },
+    {
+      "path": "desktop/window-discovery.ts",
+      "size": 6705,
+      "sha256": "018c3a0cc02f021019725958266ffb53f5f015f2ce17d09d5f79e40fdfec9144"
+    },
+    {
+      "path": "lib/achievements/getAchievements.ts",
+      "size": 1616,
+      "sha256": "4ee7ec414f23acad36909faed04c128e0fa1dbeb185ad83c18256927f0e06716"
+    },
+    {
+      "path": "lib/achievements/unlockAchievements.ts",
+      "size": 654,
+      "sha256": "daeb532acd68bcdf82b1e2154c5350ece9a700772f6685fd05eb7b295c5744df"
+    },
+    {
+      "path": "lib/coach/getCoachReport.ts",
+      "size": 3971,
+      "sha256": "4d2ca67fe9688f56b3ae3daaf3b94b40e0f6858925345f46144a7459479716f5"
+    },
+    {
+      "path": "lib/companion/capabilities/capability-graph.ts",
+      "size": 3523,
+      "sha256": "7a9e4d923d8b5b4ee5949602dfef8c46b38b3fad997bcdb6ac6a3022baba2ae1"
+    },
+    {
+      "path": "lib/companion/capabilities/capability-types.ts",
+      "size": 1137,
+      "sha256": "f9c376b70ffc3866063e37224513f285d72af4761bc349fc4792e67bd22993c0"
+    },
+    {
+      "path": "lib/companion/capabilities/index.ts",
+      "size": 72,
+      "sha256": "5d0d3ac3300bfd7fbe139b9a52a2ad57b21d329e0c1ed05b6d1789b452f58107"
+    },
+    {
+      "path": "lib/companion/companion-events.ts",
+      "size": 1322,
+      "sha256": "1f80f2ce2fddaec5698bba66e3e86a63d3109fb46cd798401fe0f96484e08412"
+    },
+    {
+      "path": "lib/companion/companion-runtime.ts",
+      "size": 11613,
+      "sha256": "59986ad6795b0616c87587bef74c822a19adb92f9a29de5acb038e1165c79774"
+    },
+    {
+      "path": "lib/companion/companion-state.ts",
+      "size": 1697,
+      "sha256": "2ee06bb5c9bf00d3ea00f01b0e147b4773ba2699356208da3bf66e86d2781c3e"
+    },
+    {
+      "path": "lib/companion/companion-types.ts",
+      "size": 2611,
+      "sha256": "79f286170cc6f75af6c3adf48ee70580191a2631e7ea1b0f935eb8d8f33347cb"
+    },
+    {
+      "path": "lib/companion/connectors/create-game-connector.ts",
+      "size": 4221,
+      "sha256": "5fb9055f54aadbfe5f6c7d46dc06104ad768ca04631ed4f60a22cad50e2054a5"
+    },
+    {
+      "path": "lib/companion/connectors/game-connector-manifest.ts",
+      "size": 1327,
+      "sha256": "1a62fcb0cf31923d706f61836d3fa91fe52cf77da3fd17438d4fad7259c83f42"
+    },
+    {
+      "path": "lib/companion/connectors/game-connector-registry.ts",
+      "size": 975,
+      "sha256": "01bbf3d6b96657f161c21f3fdb2df2b1145a465d32025d10cb554ebba69d64fd"
+    },
+    {
+      "path": "lib/companion/connectors/game-connector-types.ts",
+      "size": 1849,
+      "sha256": "99d7853f824927b682c8f4cc23f4ef6589cbbf861a47cfef4ade5e8258045c2a"
+    },
+    {
+      "path": "lib/companion/connectors/index.ts",
+      "size": 169,
+      "sha256": "1f19cc3db6ba5e79e6ce734052242f4507d70bfaef4a1e14fb641dffc030b658"
+    },
+    {
+      "path": "lib/companion/extensions/extension-resolver-types.ts",
+      "size": 465,
+      "sha256": "3df449662a68690ee102aa340f5e2dbbd939c358e9cd3b81f1cdf97561d90932"
+    },
+    {
+      "path": "lib/companion/extensions/extension-resolver.ts",
+      "size": 1769,
+      "sha256": "06d80ad87a96fda5e1a1c05680eb6effdcace6fba248fa22338a419df9b8da0a"
+    },
+    {
+      "path": "lib/companion/extensions/extension-runtime-state.ts",
+      "size": 640,
+      "sha256": "9979182513647eafef4e905290127ff6fbc0f56c75374e4af6f8ca38230bb4af"
+    },
+    {
+      "path": "lib/companion/extensions/extension-runtime.ts",
+      "size": 1365,
+      "sha256": "67dae8b59f3f1e9976148e2deef5225972df3a4eccc29c7fe1dce8eaa26725ed"
+    },
+    {
+      "path": "lib/companion/extensions/extension-types.ts",
+      "size": 1774,
+      "sha256": "8890ba5138449ccd930da709d6815ba6f90d39bb9c1bb2115cf6393d2daea784"
+    },
+    {
+      "path": "lib/companion/extensions/index.ts",
+      "size": 241,
+      "sha256": "85e5423e2d70c480e12858774dc76a1778869df7b63ecd065f23bc029200d04c"
+    },
+    {
+      "path": "lib/companion/extensions/oracle-extension.ts",
+      "size": 338,
+      "sha256": "3713e297d66ce8a2e185c6237bd9a5079cae441784a1ebf2ca17294b375eee01"
+    },
+    {
+      "path": "lib/companion/guidance/companion-guidance-contract.ts",
+      "size": 11008,
+      "sha256": "96a575d0ac24734115bec153d96841a75f95b5c10780bcab0b9a5788b07425a3"
+    },
+    {
+      "path": "lib/companion/guidance/companion-guidance-provider.ts",
+      "size": 2454,
+      "sha256": "342060d680e4b0d0f78f36b997004b49ca77b9b678d12d5920a222aea40e0c76"
+    },
+    {
+      "path": "lib/companion/guidance/companion-guidance-session-contract.ts",
+      "size": 5620,
+      "sha256": "8b13c14b77aca4154498ad55aa14c05c62966cfbfa6b44c1aa80bcc7253e7afd"
+    },
+    {
+      "path": "lib/companion/guidance/companion-guidance-types.ts",
+      "size": 5909,
+      "sha256": "b94c02f8688fb61c64e00d04e1d35bae3ba0ca26d0d0364378bd6ce7362fded8"
+    },
+    {
+      "path": "lib/companion/guidance/companion-guidance-validation.ts",
+      "size": 7642,
+      "sha256": "5310b469dae7c13297c759418b4db994dfc07b293a9ebfa94529ca20e4b69817"
+    },
+    {
+      "path": "lib/companion/guidance/index.ts",
+      "size": 193,
+      "sha256": "70027935e765ee1dfe8692b10a6547f1bb71dd95519a2f4c0e76efbc4edea28a"
+    },
+    {
+      "path": "lib/companion/index",
+      "size": 271,
+      "sha256": "1df00ccc1b4de81579f842ce947f9a5a46024900fdb1173cb315aaa40f29ede9"
+    },
+    {
+      "path": "lib/operator/completeOperatorCommissioning.ts",
+      "size": 249,
+      "sha256": "6bee8c324439ed53cb30e97aa672d5f1a5edd52ac1b46636a5cf1e54546a8cb1"
+    },
+    {
+      "path": "lib/operator/generateOperatorDesignation.ts",
+      "size": 347,
+      "sha256": "9558bc0cbd3ac0955836070d3a9d2cdcb8e2385f5b7b9496e609dcbccdf900f6"
+    },
+    {
+      "path": "lib/operator/getCurrentOperator.ts",
+      "size": 248,
+      "sha256": "677b8d90daea33a6582136929c701b70aedbf606a440247a44d360eea417ceae"
+    },
+    {
+      "path": "lib/operator/getOperatorStatus.ts",
+      "size": 398,
+      "sha256": "2285101eb7ba22af9231a07d769017ae86f24456d9572389ba71e219698669f5"
+    },
+    {
+      "path": "lib/operator/isOperatorCommissioned.ts",
+      "size": 280,
+      "sha256": "3cc80cd7a9638cc43faded1515d1465c9c5ea9a94bb4fd688bcf747b55551c29"
+    },
+    {
+      "path": "lib/oracle/OracleBrain.ts",
+      "size": 1296,
+      "sha256": "3af7c893d45dc1f6ba842349d81f28859dfd80468ca6eec8864e5bfd8fcc67c0"
+    },
+    {
+      "path": "lib/oracle/applications/application-registry.ts",
+      "size": 978,
+      "sha256": "f07e02ac4e7bafbd52d7c02f5ea0b961e4e294183b848bfcc7f6d0fe94eea6e0"
+    },
+    {
+      "path": "lib/oracle/applications/application-types.ts",
+      "size": 555,
+      "sha256": "3d7381b1f42266ab6e543ece62d9a43fc380a607aa9f892e1dcd93aa85edcba0"
+    },
+    {
+      "path": "lib/oracle/applications/companion/companion-guidance-application-state.ts",
+      "size": 10111,
+      "sha256": "e0ac114faf821f885cfc0bdbb995f72ddb520c4b313aa963445c8e777e5f8d7e"
+    },
+    {
+      "path": "lib/oracle/applications/companion/companion-guidance-application-types.ts",
+      "size": 2473,
+      "sha256": "25438a0a03f303115b22355bd8dc5fca704d39a6639770ce253f3b3f6e27e067"
+    },
+    {
+      "path": "lib/oracle/applications/companion/index.ts",
+      "size": 279,
+      "sha256": "0e098b3cc740d5775b76a59a2f7d27fb79dad61717d15c4aa7599f69612ac97d"
+    },
+    {
+      "path": "lib/oracle/applications/conversation/index.ts",
+      "size": 51,
+      "sha256": "a0ab73e0c072103b738a623af9f5022913b8f6438f595ee8bfb7c62a34dac1cb"
+    },
+    {
+      "path": "lib/oracle/applications/conversation/oracle-conversation-application.ts",
+      "size": 741,
+      "sha256": "7ee191945f09152ef6b7a13c50ef57e5b0241ace6a1de1dfb4b4e51ebaa5055b"
+    },
+    {
+      "path": "lib/oracle/applications/conversation/server-conversation-authority.ts",
+      "size": 299,
+      "sha256": "5c6804d185e926f7c33530bdc330fcc5242a8f793d4716ca473b1aec276281b8"
+    },
+    {
+      "path": "lib/oracle/applications/index.ts",
+      "size": 278,
+      "sha256": "e9c9fa4fe9e2f2c983554f8404593ba18be663971f1493cecf47f612f670c78c"
+    },
+    {
+      "path": "lib/oracle/applications/register-core-applications.ts",
+      "size": 3141,
+      "sha256": "d1e8fc573123afc110c2965fa1f70080a37e6647d6fd695d60231cd2b92d1a78"
+    },
+    {
+      "path": "lib/oracle/applications/sessions/index.ts",
+      "size": 47,
+      "sha256": "2c844aa000753ec9bb1b92c5c3688aca01fca99ad83f1f8f62580bfe4b35a625"
+    },
+    {
+      "path": "lib/oracle/applications/sessions/session-history-application.ts",
+      "size": 2158,
+      "sha256": "6bce63bfc265301bd4c250c38a45e96048fcceeb8a580f6ae8771b147996d0ad"
+    },
+    {
+      "path": "lib/oracle/behaviour/behaviour-analysis.ts",
+      "size": 4062,
+      "sha256": "1df3c2629110a59eb3914350f5eeab9b22656eff567073f4e788d6ffeb5a5eae"
+    },
+    {
+      "path": "lib/oracle/behaviour/behaviour-engine.ts",
+      "size": 3424,
+      "sha256": "f33e1e75a7aa53c40bf13928a85c80e2240d4e6b66c8374b845f0faf5350ad4a"
+    },
+    {
+      "path": "lib/oracle/behaviour/behaviour-types.ts",
+      "size": 666,
+      "sha256": "d4f6b575768676db6400510d28c09b5a15ade4e5dedc0fced5057befdaef44b7"
+    },
+    {
+      "path": "lib/oracle/brain/brain-graph-reasoning.ts",
+      "size": 4287,
+      "sha256": "629a1b90e0a0b98135dc05bbc088070f9713506221e83b018324b1cd04ddfeb9"
+    },
+    {
+      "path": "lib/oracle/brain/brain-graph-report.ts",
+      "size": 1244,
+      "sha256": "47d8afb943e698f39dee0fd4cd844e6480423417f062df463929d2c289a3fcc1"
+    },
+    {
+      "path": "lib/oracle/brain/brain-graph-types.ts",
+      "size": 394,
+      "sha256": "b7782efde960aeb638a5fc5e9197a7fb152ed7e7550d605e9872b00468b69844"
+    },
+    {
+      "path": "lib/oracle/brain/index.ts",
+      "size": 189,
+      "sha256": "ef2bab575f2c0b657f4872a00a08e683a9b379e27c08293ee2e8ce46672b937a"
+    },
+    {
+      "path": "lib/oracle/brain/oracle-brain-types.ts",
+      "size": 1594,
+      "sha256": "34bf2738f30da291047f5d9d4096f5f8f1638dc126e5024128aed22bc4266665"
+    },
+    {
+      "path": "lib/oracle/brain/oracle-brain.ts",
+      "size": 12750,
+      "sha256": "eb929cca3b7f95042918f5a9735ee8a66cfa010448b9f1db72785b33c7b87c31"
+    },
+    {
+      "path": "lib/oracle/bus/index.ts",
+      "size": 78,
+      "sha256": "7e59165e17ea8be920a5f3e9ad0e82a5fe09bd740ae3e8d165e6941a7b24e539"
+    },
+    {
+      "path": "lib/oracle/bus/intelligence-bus-types.ts",
+      "size": 1548,
+      "sha256": "e26703e65119dc893c4cc44a066af56bcbb10608d006863f9c7d3fb0a41275cd"
+    },
+    {
+      "path": "lib/oracle/bus/intelligence-bus.ts",
+      "size": 7702,
+      "sha256": "045307563736447d737b1364d63018aefaea493005a6d5de8b643db779957ff6"
+    },
+    {
+      "path": "lib/oracle/coaching/adaptive-coaching-engine.ts",
+      "size": 2982,
+      "sha256": "1f485c52395694fa5fe05ec5e4e804b6383adcae762678cf03aa31a4a9e2c95a"
+    },
+    {
+      "path": "lib/oracle/coaching/adaptive-coaching-plan.ts",
+      "size": 1403,
+      "sha256": "7a5418d0f6d59f0ff972f2bf56022a1350139946ff6c57eb4b9343ed85eed983"
+    },
+    {
+      "path": "lib/oracle/coaching/adaptive-coaching-priority.ts",
+      "size": 306,
+      "sha256": "30eed005a0c64ab23554f8838983e8ead0634390a0ed8ccd2a5e7c35fc41de04"
+    },
+    {
+      "path": "lib/oracle/coaching/adaptive-coaching-signals.ts",
+      "size": 578,
+      "sha256": "d7cbde83cacb1079d1eafaad1736412f4acf0820763f636d29e737af0c856b4d"
+    },
+    {
+      "path": "lib/oracle/coaching/adaptive-coaching-summary.ts",
+      "size": 422,
+      "sha256": "22d54e3748305ea8af56693a2e864b1a638d634eff07222c369f1b9778d3f934"
+    },
+    {
+      "path": "lib/oracle/coaching/adaptive-coaching-types.ts",
+      "size": 583,
+      "sha256": "f0b49e79585e07b684c293ab1fdead669d2671361abd6e5376170a5c003a5e9b"
+    },
+    {
+      "path": "lib/oracle/coaching/index.ts",
+      "size": 269,
+      "sha256": "337d094d0fd2bf7ea0ce68e1f86dbae1316edf267f63dcdb96b3443881c64e7e"
+    },
+    {
+      "path": "lib/oracle/composition/core-platform-composition.ts",
+      "size": 2190,
+      "sha256": "8a52da847043b1211da29d707e5440aa0ec7591753b05311785c7fff2012a869"
+    },
+    {
+      "path": "lib/oracle/composition/web-composition-root.ts",
+      "size": 2784,
+      "sha256": "658e9a39808c07ca839280d99a1162da3386b1f8fd7f3280443548d51afd8718"
+    },
+    {
+      "path": "lib/oracle/context/buildOracleContext.ts",
+      "size": 1210,
+      "sha256": "f78cd3803f0b3053aee0576c42ee6c08d708e1a5385bbc47bcf7355c4efd922a"
+    },
+    {
+      "path": "lib/oracle/context/index.ts",
+      "size": 72,
+      "sha256": "54c8df29eb05e16c34beba2bdbb18f08bb1169dbb931e2dd4bf71c066b826192"
+    },
+    {
+      "path": "lib/oracle/context/oracle-context.ts",
+      "size": 1715,
+      "sha256": "05013fd38ccaf1047d185808f07cd15b9b9e8a4b4f23fc6249f83207f232fa45"
+    },
+    {
+      "path": "lib/oracle/contextual/contextual-intelligence-engine.ts",
+      "size": 4317,
+      "sha256": "4d60b9abddd89ac1a84bc729baf29e00121acacee17415c0bc420bc04c07e4bd"
+    },
+    {
+      "path": "lib/oracle/contextual/index.ts",
+      "size": 121,
+      "sha256": "56a461b7d8ead8474ffea97e832a439ee07324a5af287e5b93c1c99a85f2dbb7"
+    },
+    {
+      "path": "lib/oracle/contextual/intent-provider.ts",
+      "size": 487,
+      "sha256": "ea127d276424ad987a1ded31a340ef1cd344125defb16b6c4205485a6a178c72"
+    },
+    {
+      "path": "lib/oracle/contextual/intent-resolver.ts",
+      "size": 1736,
+      "sha256": "f456712998d67e8e1a257eefa06f646ad385ab9fe3df72e723ac1346b93b8979"
+    },
+    {
+      "path": "lib/oracle/contextual/providers/active-game-provider.ts",
+      "size": 599,
+      "sha256": "7f721ab9da9aa801c4ad9f140bc01271ac0570bc32489a9b10e1e7e80df060c0"
+    },
+    {
+      "path": "lib/oracle/contextual/providers/explicit-context-provider.ts",
+      "size": 620,
+      "sha256": "68ec4d561633400f41c92310ddb2838e66d5492588755ec2d020aa3098838e2a"
+    },
+    {
+      "path": "lib/oracle/contextual/providers/index.ts",
+      "size": 170,
+      "sha256": "54835154f08011314eb2c80a255a3d1121c6dccc9222721e020afbbe89b06851"
+    },
+    {
+      "path": "lib/oracle/contextual/providers/opportunity-provider.ts",
+      "size": 607,
+      "sha256": "0b6eab3bae4753a5ed47b6177e52b4ab22c23247e07c702c532c7405d1a05108"
+    },
+    {
+      "path": "lib/oracle/contextual/providers/recent-session-provider.ts",
+      "size": 609,
+      "sha256": "012d14cadc4a026134e97b25fc5afbcc0b81b13c0af7bc974a5ed5b41fce8e8d"
+    },
+    {
+      "path": "lib/oracle/controls/index.ts",
+      "size": 176,
+      "sha256": "a581624d2a492eb2388c3d8c9035c71e00670e178f165d66a5ce9dffddc3cb6a"
+    },
+    {
+      "path": "lib/oracle/controls/operator-control-contract.ts",
+      "size": 36334,
+      "sha256": "22b24fb43fe39934ea5680e763e4380edfd65164c0f331c1b365b836518a33e4"
+    },
+    {
+      "path": "lib/oracle/controls/operator-control-lifecycle.ts",
+      "size": 2863,
+      "sha256": "5166be48b6699fac89057ab6a0e28a769c7e5a2dff987d42d55755660adb9eb6"
+    },
+    {
+      "path": "lib/oracle/controls/operator-control-policy.ts",
+      "size": 21635,
+      "sha256": "2294d7e59444ff3556d7423132fd9b32e9afff4bb574154c1840d9017b4a3fa6"
+    },
+    {
+      "path": "lib/oracle/controls/operator-control-types.ts",
+      "size": 14058,
+      "sha256": "52a3d3520713b9bfbefaf12a04e1656255f154e7060e70a41a8584b2688f054e"
+    },
+    {
+      "path": "lib/oracle/conversation/conversation-contract.ts",
+      "size": 3592,
+      "sha256": "50964af305db1317b6b49f0c813b9e5122697c58a20944685a200fee4d099d16"
+    },
+    {
+      "path": "lib/oracle/conversation/conversation-policy.ts",
+      "size": 1860,
+      "sha256": "8109721e6d7dcd5731a03d7c3c271c1566aa6da1371bfc0a30bd9885cfbe186b"
+    },
+    {
+      "path": "lib/oracle/conversation/index.ts",
+      "size": 80,
+      "sha256": "fa187dc82966af6f0bfa4794866a6bf28e9c7196f8202bb21206f3a19460bb21"
+    },
+    {
+      "path": "lib/oracle/development/index.ts",
+      "size": 95,
+      "sha256": "e25a0771a0ff9383109dcfc548a0c75ecc915d9babc1c937e40ef7071a260aa0"
+    },
+    {
+      "path": "lib/oracle/development/operator-development-contract.ts",
+      "size": 1892,
+      "sha256": "236b347fc7cd9887e684e69c60493031504f1ff72907491cb35ec4b5d4ced484"
+    },
+    {
+      "path": "lib/oracle/development/operator-development-types.ts",
+      "size": 2569,
+      "sha256": "e38c8b5bda86f3ce685b20c255fd625874e186f886c8535f983720cd021159d6"
+    },
+    {
+      "path": "lib/oracle/engines/build-engine-result.ts",
+      "size": 1130,
+      "sha256": "6126ecafa79f06db4147e4df917e68a37a3dde7e843f4ec1f8fe7ccdc65a2e76"
+    },
+    {
+      "path": "lib/oracle/engines/context-summary-engine.ts",
+      "size": 1868,
+      "sha256": "a68616428066f88faa302a4725d2b0aaddf475d7e103d012507259de63867fa9"
+    },
+    {
+      "path": "lib/oracle/engines/health/health-evaluator.ts",
+      "size": 1723,
+      "sha256": "13fc244c5b44f5c52e6daa59a4cbb1e3e21aef930d5ce2705cb4120e2b663eb9"
+    },
+    {
+      "path": "lib/oracle/engines/health/health-types.ts",
+      "size": 295,
+      "sha256": "ebf3941c48f11ff3ef3d26b25dc3a74e66ef8c7c59f49f50c8a777393db0865a"
+    },
+    {
+      "path": "lib/oracle/engines/index.ts",
+      "size": 385,
+      "sha256": "5e46ac41f7925b2ecefa6971a51a948f2844190c6faf25ba131707178af3a931"
+    },
+    {
+      "path": "lib/oracle/engines/oracle-engine-runtime.ts",
+      "size": 1914,
+      "sha256": "2424289923c7f7504534496decc05efffe56cfd775e881f84e70b4afec2ff563"
+    },
+    {
+      "path": "lib/oracle/engines/oracle-engine.ts",
+      "size": 1508,
+      "sha256": "35222fb02dcf7b34dc2237ead0c49467958ac0524bb45fac26a235239b4c7b60"
+    },
+    {
+      "path": "lib/oracle/engines/register-core-engines.ts",
+      "size": 1504,
+      "sha256": "9b289ad5654bfbf4f1d720dbaf53154056de6a36764de4ae40c2112a8e3ba396"
+    },
+    {
+      "path": "lib/oracle/engines/registry/engine-registry.ts",
+      "size": 764,
+      "sha256": "318c5855f07cf8966f72ee986cac32cb0be92b4898b3a40f33a2957a925b18d1"
+    },
+    {
+      "path": "lib/oracle/engines/validation/engine-runtime-validation.ts",
+      "size": 3857,
+      "sha256": "75654eaf3cb2bb0b44d537b979d471b4c691e9d1483b9e9e6a645a03a3c37a48"
+    },
+    {
+      "path": "lib/oracle/evolution/evolution-confidence.ts",
+      "size": 208,
+      "sha256": "c2b57e83c1ab57f055def9310f1dba3d350d93274b5b9b816e7eeed5f03d7930"
+    },
+    {
+      "path": "lib/oracle/evolution/evolution-engine.ts",
+      "size": 4296,
+      "sha256": "55c09d386010b5648339719758dda4da68c30930ee304393da3e1c5a477c69bd"
+    },
+    {
+      "path": "lib/oracle/evolution/evolution-patterns.ts",
+      "size": 2093,
+      "sha256": "71c664ad6e8a76fcb8afd3038d47febf4031f0581ae884d8c1497ca9535d5834"
+    },
+    {
+      "path": "lib/oracle/evolution/evolution-signals.ts",
+      "size": 2044,
+      "sha256": "b0358f721961a14743c93d696fd68c9c679a05245470b0fa3029bb9731cb5909"
+    },
+    {
+      "path": "lib/oracle/evolution/evolution-types.ts",
+      "size": 894,
+      "sha256": "f9e4b82b4316cbe08146d7778436f1b372e1ddbd51a759405af2d98224c0ef6f"
+    },
+    {
+      "path": "lib/oracle/evolution/index.ts",
+      "size": 189,
+      "sha256": "d7b1c4c33f5e3da1b569a88e68f73fb064ff770dc0f9c0f7baa751bcda904731"
+    },
+    {
+      "path": "lib/oracle/explainability/explainability-builder.ts",
+      "size": 4417,
+      "sha256": "9f3554f15f956964a018f55bea92866b52d447ba0975deeeac4f67cdec47e382"
+    },
+    {
+      "path": "lib/oracle/explainability/explainability-strength.ts",
+      "size": 288,
+      "sha256": "2c1aab916a24c3aa56e4aa8514c99f1d1fb9593437f958a315db4d7c4acddaa2"
+    },
+    {
+      "path": "lib/oracle/explainability/explainability-summary.ts",
+      "size": 539,
+      "sha256": "4bcf4e486810aacf967d0cfb99180219e3f3349f1fa2e608258c418805b1e360"
+    },
+    {
+      "path": "lib/oracle/explainability/explainability-types.ts",
+      "size": 635,
+      "sha256": "36bfb9525bae6f145741e7edf8b0fd13f84ba77bc87451aa93804f7cb78a0ce5"
+    },
+    {
+      "path": "lib/oracle/explainability/index.ts",
+      "size": 169,
+      "sha256": "a5af517c263f8e2af559f3bb37410fd4b1952bef5006b8af9a985b707e2667a3"
+    },
+    {
+      "path": "lib/oracle/game-integrations/call-of-duty/call-of-duty-detection-profile.ts",
+      "size": 1202,
+      "sha256": "ff9fe7d2aa825f8c760bb3babed2364a28e6f8f5f6e58c54adb52cedc4cc21b9"
+    },
+    {
+      "path": "lib/oracle/game-integrations/call-of-duty/call-of-duty-integration.ts",
+      "size": 5232,
+      "sha256": "907bce7dfc53f93b9ff805abd9770d4d05d02cd783f03fcdcf092a8300bd2d9a"
+    },
+    {
+      "path": "lib/oracle/game-integrations/call-of-duty/guidance/call-of-duty-curated-guidance-catalogue.ts",
+      "size": 7836,
+      "sha256": "4b5b0e07347419721710fca5ef96dafcd7a8409b2bbd67d71bc92eef38392989"
+    },
+    {
+      "path": "lib/oracle/game-integrations/call-of-duty/guidance/call-of-duty-curated-guidance-provider.ts",
+      "size": 5707,
+      "sha256": "02ef1d395579ec0cbe10bf3cb3d072171caee2888bcacded5315d8ad49e4717b"
+    },
+    {
+      "path": "lib/oracle/game-integrations/call-of-duty/guidance/index.ts",
+      "size": 364,
+      "sha256": "dc890d2b104bbc1f6ac3592d8e3ff50534e8dc08ef10ebc0bdd38bcd574986fa"
+    },
+    {
+      "path": "lib/oracle/game-integrations/call-of-duty/index.ts",
+      "size": 187,
+      "sha256": "a4dae8d871581e78c5b602d508fddab0beceb1ece9eb9131da276d37f5ae9eac"
+    },
+    {
+      "path": "lib/oracle/game-integrations/compatibility/game-integration-compatibility-certificate.ts",
+      "size": 16360,
+      "sha256": "14b44086b8b6dda66f0dc48b8a328b03dc9a510283db0536d4d1f55e33eca378"
+    },
+    {
+      "path": "lib/oracle/game-integrations/compatibility/index.ts",
+      "size": 742,
+      "sha256": "5072c85f6f04575bedeedf5abbb31f1ac5cd01c06733c84bc2ecba5fd49f5615"
+    },
+    {
+      "path": "lib/oracle/game-integrations/detection/executable-game-detection-types.ts",
+      "size": 2119,
+      "sha256": "fb180f4b90567c9e03724d1ca9a3ca22662aa4167e950983997e98cab4a5ca69"
+    },
+    {
+      "path": "lib/oracle/game-integrations/detection/executable-game-matcher.ts",
+      "size": 4824,
+      "sha256": "69df6894069214ada045b783bcb93488cfb335d1c201d70f0da4e8c4c1fc6222"
+    },
+    {
+      "path": "lib/oracle/game-integrations/game-context.ts",
+      "size": 448,
+      "sha256": "8c4014f90265f6ea89a21deb2429bd9809938bf06f981807f96a3da6b0204862"
+    },
+    {
+      "path": "lib/oracle/game-integrations/game-detection-input.ts",
+      "size": 241,
+      "sha256": "c683c0c5fb1ddc74629d52936238d01bbc7349a2f315f92be447abcdbe727475"
+    },
+    {
+      "path": "lib/oracle/game-integrations/game-detection.ts",
+      "size": 1382,
+      "sha256": "b5b494e7f3bccd1ee05c793ddb6fce7a9a45124659337e5b6000f8ca310f5c84"
+    },
+    {
+      "path": "lib/oracle/game-integrations/game-integration-evaluator.ts",
+      "size": 3108,
+      "sha256": "dc61cc4294c58c37b007e53f1cc5bb07fd3b2cfc85d5b16aa7682d2f668d2e4f"
+    },
+    {
+      "path": "lib/oracle/game-integrations/game-integration-registry.ts",
+      "size": 1086,
+      "sha256": "2f2ad7e9479bf89bc7da46c16298aa55b9d4e2f71d8099560829aab9fea18263"
+    },
+    {
+      "path": "lib/oracle/game-integrations/game-integration.ts",
+      "size": 884,
+      "sha256": "656cb4bd534381e452b24496bbb48a01e72481b403d6811fbafa132d9982f7ac"
+    },
+    {
+      "path": "lib/oracle/game-integrations/index.ts",
+      "size": 2093,
+      "sha256": "8f91b3be908140caa25dd2b2ae51366557e117cf05372dcb8c06c158385188bf"
+    },
+    {
+      "path": "lib/oracle/game-integrations/minecraft-java/guidance/index.ts",
+      "size": 260,
+      "sha256": "18766c70fd89201f787daf24d0554ec322659fb529509813c8fcf6f69c8093ff"
+    },
+    {
+      "path": "lib/oracle/game-integrations/minecraft-java/guidance/minecraft-java-diamond-guidance-provider.ts",
+      "size": 6481,
+      "sha256": "61d47ce3e7dc9e084b8d1af4388780ad8491a14a06ff4e5a6a223c77af97b713"
+    },
+    {
+      "path": "lib/oracle/game-integrations/minecraft-java/index.ts",
+      "size": 396,
+      "sha256": "2108e8023a594219901f7d796d0acf86d41249b5c10ef19721604513d1fc20e5"
+    },
+    {
+      "path": "lib/oracle/game-integrations/minecraft-java/minecraft-java-compatibility-certificate.ts",
+      "size": 2355,
+      "sha256": "4157bcb7b77c9066cef66487e587c442030a5b31b2c48babc23a1568ac24798d"
+    },
+    {
+      "path": "lib/oracle/game-integrations/minecraft-java/minecraft-java-integration.ts",
+      "size": 2608,
+      "sha256": "7e8d6bde2e30b9bcd8cc26f2e0dca0b7b854dc87f09562c2e81ca60667338d7c"
+    },
+    {
+      "path": "lib/oracle/game-integrations/oracle-game-integration-registry.ts",
+      "size": 545,
+      "sha256": "c9e2333c9fe4925620342d76d0497924d715e40b3bd2d87104385d0372c55c87"
+    },
+    {
+      "path": "lib/oracle/getOperatorProfile.ts",
+      "size": 183,
+      "sha256": "2e6e92aa558f5eedff5a01c396ab36b6d3acbddfef3b1e9f7340ffeb204cfa7d"
+    },
+    {
+      "path": "lib/oracle/getOperatorStats.ts",
+      "size": 1108,
+      "sha256": "ffa39f7e36fd77659762b84dbecf2109a4a357e83624008ea82d09b8dcea3f59"
+    },
+    {
+      "path": "lib/oracle/getOracleDNA.ts",
+      "size": 2940,
+      "sha256": "aa5d2f08c71479f244d555dd20206b56ad5c8008bda38df5095fc4d2a6b8cf2d"
+    },
+    {
+      "path": "lib/oracle/getOracleIntelligence.ts",
+      "size": 2786,
+      "sha256": "b49b9d75368845211525aae483d3fa4e35d358137b9b2a49341d4dfe62d6b213"
+    },
+    {
+      "path": "lib/oracle/getOracleMemory.ts",
+      "size": 1999,
+      "sha256": "1f9f4e146b3bac4549e2ec0923ba0b3dad2cbd6919972107f197657972b4644a"
+    },
+    {
+      "path": "lib/oracle/graph/index.ts",
+      "size": 96,
+      "sha256": "bef7bd51b640faad22905983487e840798a995d734145accf5520da601eb6dad"
+    },
+    {
+      "path": "lib/oracle/graph/oracle-intelligence-graph-types.ts",
+      "size": 514,
+      "sha256": "f331c8dc403a9ca286a5c6cc14fd610f7fc878731e855735e5a88a1a2a484711"
+    },
+    {
+      "path": "lib/oracle/graph/oracle-intelligence-graph.ts",
+      "size": 470,
+      "sha256": "ccfd637cbeaaa2972ad9309baf1c103223a3e6c80b0d0a23d12afb2fe0598e81"
+    },
+    {
+      "path": "lib/oracle/index.ts",
+      "size": 170,
+      "sha256": "19940f169277f85a2293a6e6c88ad2001c7f57f53a0be2f32fe83afa2fd4cdbf"
+    },
+    {
+      "path": "lib/oracle/intelligence/confidence-engine.ts",
+      "size": 627,
+      "sha256": "4ace67fe8d36adb58b7b50cafada92ad51e07d39e9ad1bf4823da3027a4fb5e0"
+    },
+    {
+      "path": "lib/oracle/intelligence/decision-engine.ts",
+      "size": 1515,
+      "sha256": "dab9cc94527404cd5f56f0daccb80a814853045bb454f0aee43b05330c32e28e"
+    },
+    {
+      "path": "lib/oracle/intelligence/decision-profile.ts",
+      "size": 490,
+      "sha256": "5e8b4cff7fe80f6a6d58659ec038173f5b11a6b334ff8a591801ca2eca995352"
+    },
+    {
+      "path": "lib/oracle/intelligence/decision-selection.ts",
+      "size": 1892,
+      "sha256": "4a66ed36bf248a098552d5caafaf0d84955f5d181660ac50dd60c92b975a9f7c"
+    },
+    {
+      "path": "lib/oracle/intelligence/decision-types.ts",
+      "size": 662,
+      "sha256": "f829dae793382ce6794ad92502cfb4478df945fc83fe5fad8013a23796bbe7df"
+    },
+    {
+      "path": "lib/oracle/intelligence/evidence-engine.ts",
+      "size": 722,
+      "sha256": "3dffe5b7477ae7001fb5633d063a3ea694180095b069762d9f39ee5264141f21"
+    },
+    {
+      "path": "lib/oracle/intelligence/oracle-intelligence.ts",
+      "size": 1074,
+      "sha256": "f0542904fde32122bba18dd0ae8a641f595016461ae18a49540871ab31ce06e6"
+    },
+    {
+      "path": "lib/oracle/lifecycle/default-lifecycle.ts",
+      "size": 1875,
+      "sha256": "ddf1e30f8f1720f1752168444736e541955af1220aa6cc52d5acd3103a8d577f"
+    },
+    {
+      "path": "lib/oracle/lifecycle/index.ts",
+      "size": 109,
+      "sha256": "aaeef9525822f75bc52b5fd8dc91b29e91fad3746b4ac73920cf22845b19b346"
+    },
+    {
+      "path": "lib/oracle/lifecycle/lifecycle-engine.ts",
+      "size": 607,
+      "sha256": "023dc4d372db59a3d810d8f37d0ced8be0f9ae15169f6007cbbee79c5486b470"
+    },
+    {
+      "path": "lib/oracle/lifecycle/lifecycle-types.ts",
+      "size": 466,
+      "sha256": "a497325399b123b08b97f095831bde0a11370a129395030f7ace3135a0a27779"
+    },
+    {
+      "path": "lib/oracle/loadouts/loadout-engine.ts",
+      "size": 1079,
+      "sha256": "b63f65677bf23eeef7b99285b3393ad053ca5999e25186829bb44c02f35ece2d"
+    },
+    {
+      "path": "lib/oracle/loadouts/loadout-types.ts",
+      "size": 817,
+      "sha256": "a077cb4c55f8b09fd6ea03806a4f2bca3de139413557467ce69b15b0239eab44"
+    },
+    {
+      "path": "lib/oracle/loadouts/oracle-decision-engine.ts",
+      "size": 3390,
+      "sha256": "903eb32ba654e31f06dfad2bb1398b92393ab2701a8da7302e08d5da656aa077"
+    },
+    {
+      "path": "lib/oracle/loadouts/weapon-recommendations.ts",
+      "size": 2029,
+      "sha256": "7739eb541feb45607e4ea77a85ac3df28c009fb7551cb44374148675de2ef556"
+    },
+    {
+      "path": "lib/oracle/memory/index.ts",
+      "size": 350,
+      "sha256": "0c4bd05ff167bdc6345506a81bc4aeba1670586f649b53af26e4555cb841e9a7"
+    },
+    {
+      "path": "lib/oracle/memory/memory-confidence.ts",
+      "size": 207,
+      "sha256": "c564776349a1137c264054242ec4d3f501e90b8609cc8131836d1850fad09de4"
+    },
+    {
+      "path": "lib/oracle/memory/memory-engine.ts",
+      "size": 2537,
+      "sha256": "5e03e0c9dcb27f176af75d4bcaf40729f7cec91563bbad89efeaf0c8b21c63fb"
+    },
+    {
+      "path": "lib/oracle/memory/memory-patterns.ts",
+      "size": 734,
+      "sha256": "3c67f67225af97f7f31cca0090d810d5db25097261303ad5200ec3599b74e492"
+    },
+    {
+      "path": "lib/oracle/memory/memory-signals.ts",
+      "size": 1803,
+      "sha256": "6f5796810cf70d3688bcb3ace156f59950b72020ff35047150c415ad16f54038"
+    },
+    {
+      "path": "lib/oracle/memory/memory-skills.ts",
+      "size": 645,
+      "sha256": "3c63dd6153e0bfb21ba68b7f5b56ee3437a9ebbf909deb09153ff960e7e67136"
+    },
+    {
+      "path": "lib/oracle/memory/memory-status.ts",
+      "size": 312,
+      "sha256": "77eacc343bb227c13f7b1c620f630ae05b958f1247117c9e472cb9509e3262be"
+    },
+    {
+      "path": "lib/oracle/memory/memory-strengths.ts",
+      "size": 936,
+      "sha256": "e911de9b47cd22038c99065daf0e1a1bf87771b91d18a24145a86667d2bb7cc9"
+    },
+    {
+      "path": "lib/oracle/memory/memory-types.ts",
+      "size": 831,
+      "sha256": "56e3331a70ff0e557e6f0a1f58c3a4e2d1de9631fa390730fe7cca73dca9869b"
+    },
+    {
+      "path": "lib/oracle/memory/memory-utils.ts",
+      "size": 202,
+      "sha256": "dd5fa88b205e1ce7d208f7be4ed8268ff70b7918eeac074cec16510fa3449de7"
+    },
+    {
+      "path": "lib/oracle/memory/memory-weaknesses.ts",
+      "size": 932,
+      "sha256": "44959acdc0b6ee4d578b01b4f741012b5757ba5f4902e99cf5050ea0e147c908"
+    },
+    {
+      "path": "lib/oracle/missions/index.ts",
+      "size": 185,
+      "sha256": "39eee00c63452d2884e219dd03fd1ee394e2c6319e0b395bcee79c74c17e71d3"
+    },
+    {
+      "path": "lib/oracle/missions/mission-analysis.ts",
+      "size": 1181,
+      "sha256": "1603e2935c1f4796450c33e8e20f18357f2917bc0b9cfab03c1f45cfefe58f98"
+    },
+    {
+      "path": "lib/oracle/missions/mission-classification.ts",
+      "size": 1168,
+      "sha256": "92d45d941d1291c6aad56a511b31e0bd917a1583c1f801f25c6a7ec961596ace"
+    },
+    {
+      "path": "lib/oracle/missions/mission-engine.ts",
+      "size": 5890,
+      "sha256": "72e5dac2f407d55c034cdb571a86c8a59a859139da30dd0feaedde6031f88336"
+    },
+    {
+      "path": "lib/oracle/missions/mission-generator.ts",
+      "size": 2951,
+      "sha256": "6479064cf3d1c24ef6fb864332a516b2409eac9ee7c4ffa14b3b3ad43c3b6d3d"
+    },
+    {
+      "path": "lib/oracle/missions/mission-status.ts",
+      "size": 1112,
+      "sha256": "3839fc7588f626770aeb353317df5fe935f5fac21cad8d7735c3ce5da67d51c6"
+    },
+    {
+      "path": "lib/oracle/missions/mission-types.ts",
+      "size": 882,
+      "sha256": "5083bb83899f4c1408a5c324c3a1c7e9ea6044ed93b28b6a6c770a156d11c1e2"
+    },
+    {
+      "path": "lib/oracle/operator-profile/index.ts",
+      "size": 364,
+      "sha256": "4d654a3bc6fd3938223f5bd22f06652318c3bef61fd6a866753173ea2261f07a"
+    },
+    {
+      "path": "lib/oracle/operator-profile/operator-profile-confidence.ts",
+      "size": 217,
+      "sha256": "03e02aadda2c157dd312c812b86e1b60525203d826e97c2a66e469644fdfdb5d"
+    },
+    {
+      "path": "lib/oracle/operator-profile/operator-profile-engine.ts",
+      "size": 3650,
+      "sha256": "bb80a2380cb07e583929ca1b69dbec58d40f52ad71b38e28215cfea54d5fd4d5"
+    },
+    {
+      "path": "lib/oracle/operator-profile/operator-profile-identity.ts",
+      "size": 880,
+      "sha256": "5ee3280b95875ce8eb4e8cd70718f2e2607def4f61bdfe20f3b81069915dc5ab"
+    },
+    {
+      "path": "lib/oracle/operator-profile/operator-profile-learning-style.ts",
+      "size": 422,
+      "sha256": "675795f6c619ddd4d9712e52ffc8200c646b8a302d12fbff70314c58ea218279"
+    },
+    {
+      "path": "lib/oracle/operator-profile/operator-profile-signals.ts",
+      "size": 556,
+      "sha256": "11af9506c3ba67c4ecc48a7c65ed0d829cd70ed0e9c1cfd66d75ae74ad126430"
+    },
+    {
+      "path": "lib/oracle/operator-profile/operator-profile-summary.ts",
+      "size": 911,
+      "sha256": "5724dad7c1d466909e5b3ec204d37e5dbf0deccac3a3d39a19f414fe1aff9e84"
+    },
+    {
+      "path": "lib/oracle/operator-profile/operator-profile-types.ts",
+      "size": 824,
+      "sha256": "84db3d714c5817fc40be46d935c85953f3a248698987dad0b701f04250f2d4fd"
+    },
+    {
+      "path": "lib/oracle/operator-profile/operator-profile-utils.ts",
+      "size": 529,
+      "sha256": "84d7447ad98128dab5ad5e4d1ff0fcb1be2f51eaa1fb1a0d95d7a518e3fcd82e"
+    },
+    {
+      "path": "lib/oracle/operator/operator-insights.ts",
+      "size": 786,
+      "sha256": "25c7bdedaaf1f3e6380f87c6149ea281989152a1124828f80956ff89f3e92db6"
+    },
+    {
+      "path": "lib/oracle/operator/operator-profile-engine.ts",
+      "size": 3536,
+      "sha256": "4e58e31a26c76a7dcb8d1dc6ec936cc6a75bba2c080076c9b09c764320848683"
+    },
+    {
+      "path": "lib/oracle/operator/operator-profile-types.ts",
+      "size": 1023,
+      "sha256": "5036bce7fa76373c4751c6beb46ba03e087b4f9e62c65fd518d93f1cf35518e4"
+    },
+    {
+      "path": "lib/oracle/operator/operator-profile.ts",
+      "size": 278,
+      "sha256": "f68a4b25e4375ea8a0163c8f444689dd04f198ad1eb8dabfcdfd082016a03697"
+    },
+    {
+      "path": "lib/oracle/oracle-brain-types.ts",
+      "size": 43,
+      "sha256": "716c8e978cf23b4edce5e4f78676140240afca1fbcc325322143a689c67e3843"
+    },
+    {
+      "path": "lib/oracle/oracle-brain.ts",
+      "size": 37,
+      "sha256": "25c176f64f4dd4c851ac809a1af68c09fef10ff99134d0460e95d2d3e29fa01b"
+    },
+    {
+      "path": "lib/oracle/oracleThinkingSteps.ts",
+      "size": 110,
+      "sha256": "2a8f9b5a9ca6975aecf19ec7d7b8f2c2238b5e3932a85d17b8efa288a05c1718"
+    },
+    {
+      "path": "lib/oracle/pipeline/intelligence-pipeline.ts",
+      "size": 2203,
+      "sha256": "5f1b7838427e1667058822794772799d86728292832a0a1a98f8ff29f92a2b62"
+    },
+    {
+      "path": "lib/oracle/pipeline/pipeline-summary.ts",
+      "size": 556,
+      "sha256": "b0633257604a18b2d0b8c14d5d6012eb2b5325a9ddd2287b7cf02bddffa001f4"
+    },
+    {
+      "path": "lib/oracle/pipeline/pipeline-types.ts",
+      "size": 1053,
+      "sha256": "d6a909b2fcbc13c691e5c96f4decccd4eacb13913d3ccc25da435f139200e81f"
+    },
+    {
+      "path": "lib/oracle/planner/index.ts",
+      "size": 289,
+      "sha256": "457ba5fae2d53fffeefe48a80fe6e1ecf55d851829a3b307b5e897b6419135f7"
+    },
+    {
+      "path": "lib/oracle/planner/planner-engine.ts",
+      "size": 2364,
+      "sha256": "b3b071dbe5787e29279625a09524725787d3a27541fe8963dd36e449ba797099"
+    },
+    {
+      "path": "lib/oracle/planner/planner-intelligence.ts",
+      "size": 3655,
+      "sha256": "24907588f5f564c992ac578fd6845cd5722b9ba4b041fe21addf749429e0448d"
+    },
+    {
+      "path": "lib/oracle/planner/planner-priority.ts",
+      "size": 596,
+      "sha256": "afbb88589c3888ba0b9add06a3e71e8c342ec9fc7839fbad267609f29497db54"
+    },
+    {
+      "path": "lib/oracle/planner/planner-profile.ts",
+      "size": 1433,
+      "sha256": "6260558d31614568aeb387bf9e973ee9ba8c64e812f6aa375fb8f7effcf458e5"
+    },
+    {
+      "path": "lib/oracle/planner/planner-runtime.ts",
+      "size": 1285,
+      "sha256": "15fda7d1b3b7495e5ef43afc33d23b90f28c1675c41fa4c72629ecf446e2b24b"
+    },
+    {
+      "path": "lib/oracle/planner/planner-signals.ts",
+      "size": 769,
+      "sha256": "6333a84ce75493860671d415b87d2072efc5fee5efae40b631d74f187bf9f996"
+    },
+    {
+      "path": "lib/oracle/planner/planner-summary.ts",
+      "size": 737,
+      "sha256": "bd19ec4c5101dfa236463b9f608436512fbfc37ec5fceb122c70ac5f8723819f"
+    },
+    {
+      "path": "lib/oracle/planner/planner-types.ts",
+      "size": 1275,
+      "sha256": "0402b54742efa7376822f5f50368301977401ee9eb692ebd4ee7e37960ab63ae"
+    },
+    {
+      "path": "lib/oracle/platform/index.ts",
+      "size": 300,
+      "sha256": "2169ad2d6e790fa06c560c80ebab3a16c3e4bfa67fb7e12320994a1ccb58b1ef"
+    },
+    {
+      "path": "lib/oracle/platform/operational-diagnostics/index.ts",
+      "size": 255,
+      "sha256": "ca0795e65f806c00bf1ba9e86641b633b5e81f880306c1ad770d023e0a8f8f9f"
+    },
+    {
+      "path": "lib/oracle/platform/operational-diagnostics/local-operational-diagnostic-sink.ts",
+      "size": 1292,
+      "sha256": "1279b62991d5647ab5ea803a30443422eea5b73d5469c7a14c0bd8ec77619923"
+    },
+    {
+      "path": "lib/oracle/platform/operational-diagnostics/operational-diagnostic-contract.ts",
+      "size": 3544,
+      "sha256": "f9347f6428107999d39906550a2e154e21910406a0c6d9712149dab7bfb81023"
+    },
+    {
+      "path": "lib/oracle/platform/operational-diagnostics/operational-diagnostic-policy.ts",
+      "size": 5458,
+      "sha256": "74eabdbdffae0975953e76a89022dad345358df236cc5d443e5e0c44f437a111"
+    },
+    {
+      "path": "lib/oracle/platform/operational-diagnostics/operational-diagnostics-service.ts",
+      "size": 6747,
+      "sha256": "b848a70853c2ecde9d0b3e23d9e17a658160690801bc6a7e727b0a8448f24f8b"
+    },
+    {
+      "path": "lib/oracle/platform/operational-diagnostics/runtime-operational-diagnostics.ts",
+      "size": 3443,
+      "sha256": "8dd3cb9ed5f6f73021b352f0d0e3de49f904f91f2439a1ecf033fc75beb20433"
+    },
+    {
+      "path": "lib/oracle/platform/platform-bootstrap.ts",
+      "size": 714,
+      "sha256": "1e069420bec4dddd5b983bc836afd298b07691103d4f1ee996dee76581dfcd08"
+    },
+    {
+      "path": "lib/oracle/platform/platform-composition-root.ts",
+      "size": 2543,
+      "sha256": "5870bb51b3ff3cd87fcbc38f25eb4b98dbb7766ed9de78196673f4749b67cc7d"
+    },
+    {
+      "path": "lib/oracle/platform/platform-composition.ts",
+      "size": 10114,
+      "sha256": "1be594b18a8f06b8ea0dcd8cc49094e9e312339443aa7563c546866ad667c69e"
+    },
+    {
+      "path": "lib/oracle/platform/platform-health.ts",
+      "size": 6588,
+      "sha256": "4a958f538235d24c3d38a0cf960262b477196e4be968def608e4ffa416c52fd0"
+    },
+    {
+      "path": "lib/oracle/platform/platform-runtime.ts",
+      "size": 19863,
+      "sha256": "b07b242524167a71de91f3c18df9c0bb9e599ec01a37ff9fb4a566b94e5f1f1a"
+    },
+    {
+      "path": "lib/oracle/platform/platform-types.ts",
+      "size": 2230,
+      "sha256": "d68d56ea8d54039cc4112a241d8f4e563c967f986b620130ca2ebcdb26704ccc"
+    },
+    {
+      "path": "lib/oracle/prediction/prediction-analysis.ts",
+      "size": 6477,
+      "sha256": "56b1f209dc854191ab4f6c9c0f3d826e916997e7b9cf12a75d97b29494745ce2"
+    },
+    {
+      "path": "lib/oracle/prediction/prediction-engine.ts",
+      "size": 3491,
+      "sha256": "49e3565e3cdaac1ba3d718164f46f267fe11037537f5b4f83754dead58ac27e0"
+    },
+    {
+      "path": "lib/oracle/prediction/prediction-types.ts",
+      "size": 592,
+      "sha256": "31b7cf03135c69c427f57054fdee282e9888bb8a98467b516d96c0d8927ef2f1"
+    },
+    {
+      "path": "lib/oracle/reports/index.ts",
+      "size": 125,
+      "sha256": "4a46454dd21c55fa8902e77c54d44a248ad5aada296a35b61d579c29b083c4aa"
+    },
+    {
+      "path": "lib/oracle/reports/session-report-contract.ts",
+      "size": 5101,
+      "sha256": "4953a2ad33a9d45e9229de5587b239f7be3c4f30b2fce11bbe99d39a41434437"
+    },
+    {
+      "path": "lib/oracle/reports/session-report-runtime.ts",
+      "size": 12090,
+      "sha256": "f350560ace6b836de299a3ab1f38640c360e847be9e88faf44c7d8bcc17bb996"
+    },
+    {
+      "path": "lib/oracle/reports/session-report-types.ts",
+      "size": 3656,
+      "sha256": "705de3f6104c711e66c006098ebbeba4a57a0e26420eb16e90fdf5fadfa8bfdd"
+    },
+    {
+      "path": "lib/oracle/repositories/operator-control-repository.ts",
+      "size": 7883,
+      "sha256": "d6a4306f0505b86b72bfcfc1edffeb6cbeac96bdf93b395085951db693d17d2f"
+    },
+    {
+      "path": "lib/oracle/repositories/operator-development-repository.ts",
+      "size": 1591,
+      "sha256": "bc407e72391c3a33596e98dd1e61056b0b6164cdaad1cd66c30059ce3c2d4dbc"
+    },
+    {
+      "path": "lib/oracle/repositories/operator-intelligence-pagination.ts",
+      "size": 5191,
+      "sha256": "d0129fc049dc2275ba56dd8f0ef0c1fa775a26dda5814e2e94d0ae82cf6864e6"
+    },
+    {
+      "path": "lib/oracle/repositories/operator-intelligence-repository.ts",
+      "size": 31525,
+      "sha256": "76b8aa83252f898ce445d3dfbe849e1893fd1cccd3b410f288a165a979599ef3"
+    },
+    {
+      "path": "lib/oracle/repositories/operator-repository.ts",
+      "size": 10585,
+      "sha256": "04b74c3d2e4908ff211d26b62773d9e5d5c2318280c627721b77f896f5ffe2bc"
+    },
+    {
+      "path": "lib/oracle/repositories/session-lifecycle-repository.ts",
+      "size": 5915,
+      "sha256": "5d19e59215438cccf3baffdc7eef12739dc0aca8579bed133aa29aa7e222928b"
+    },
+    {
+      "path": "lib/oracle/repositories/session-report-repository.ts",
+      "size": 2574,
+      "sha256": "72c84a296283c896af039d70875f7ef698f55e3bfbae46c444a64bd92082c3d2"
+    },
+    {
+      "path": "lib/oracle/repositories/session-repository.ts",
+      "size": 2718,
+      "sha256": "609195a0c2f37885ee0744386e7a4854c1d9e74abd958956de4811e9c46faab5"
+    },
+    {
+      "path": "lib/oracle/repositories/supabase-session-lifecycle-repository.ts",
+      "size": 5155,
+      "sha256": "ae0abd9d1a1e4643aa705c69ef5f681c7b7a810597bbf171ee2cb719805a8ed2"
+    },
+    {
+      "path": "lib/oracle/runtime/browser-runtime-configuration.ts",
+      "size": 921,
+      "sha256": "1983d47b8973e9aa961c91032397c035d20307b11a6730e60d44b3b416500c8a"
+    },
+    {
+      "path": "lib/oracle/runtime/public-runtime-configuration.ts",
+      "size": 1330,
+      "sha256": "18635b5c85f88d6d35ec1db482fbc614c73c56176f0cb7ce88483f627790f953"
+    },
+    {
+      "path": "lib/oracle/runtime/runtime-environment-policy.ts",
+      "size": 1462,
+      "sha256": "e7ea70384759e2b97ac505c4c5f6a1b2e9a7db207a9d5f4920dac94ff82fc688"
+    },
+    {
+      "path": "lib/oracle/runtime/server-runtime-configuration.ts",
+      "size": 224,
+      "sha256": "a178aa6b1d894137bc437d0b18183b306d938b8d767fc6754029a101cdf4f5b6"
+    },
+    {
+      "path": "lib/oracle/services/auth/auth-policy.ts",
+      "size": 1899,
+      "sha256": "68cb8e337c34ef5db94b7f46fdf9f73c37c424edd6cd251b6d21ee9a0e8c13ab"
+    },
+    {
+      "path": "lib/oracle/services/auth/browser-auth-service.ts",
+      "size": 558,
+      "sha256": "a2257954d0ee4ab70df0d9c562a1a68a485b98ac245ef22c2936e3f9739ce286"
+    },
+    {
+      "path": "lib/oracle/services/auth/server-auth-service.ts",
+      "size": 225,
+      "sha256": "48907af3ee3ed406df8377105fdaf759fbfcfa817cfd62db8d38dc736b01e837"
+    },
+    {
+      "path": "lib/oracle/services/auth/web-session-policy.ts",
+      "size": 2854,
+      "sha256": "6dfecdf38c87860bfce95cffae7207e1c93a9dcc9c3dde9854b6cbf89233f879"
+    },
+    {
+      "path": "lib/oracle/services/companion-guidance/companion-guidance-provider-service.ts",
+      "size": 14512,
+      "sha256": "f640d957942078d7a7493fc5875069a7e6eae405fd65cc5393ea70db9c9c1d86"
+    },
+    {
+      "path": "lib/oracle/services/companion-guidance/companion-guidance-service-types.ts",
+      "size": 1536,
+      "sha256": "650b5dc6929185cfa0c2dbebda2ddaeabfb7309d50165845c6b95a599a9c8e89"
+    },
+    {
+      "path": "lib/oracle/services/companion-guidance/index.ts",
+      "size": 107,
+      "sha256": "d440d9a6bb250f8b55652ab3b8a524afa58a2ce69b7f5e92775a58b9fbffd7b4"
+    },
+    {
+      "path": "lib/oracle/services/conversation/index.ts",
+      "size": 47,
+      "sha256": "0388369ef7ef33f2c05e44a98c241aeea75efebfcdc3323dc1b95dfec5138673"
+    },
+    {
+      "path": "lib/oracle/services/conversation/oracle-conversation-service.ts",
+      "size": 8088,
+      "sha256": "1e1932909cce618430be635e6412ce4ccbebc0b19fbcfe077846d5c344edf056"
+    },
+    {
+      "path": "lib/oracle/services/index.ts",
+      "size": 497,
+      "sha256": "8267371dd3f9bd03d5cdff5d57c594692ca31c2f5ea4ed2744905948a4e52f73"
+    },
+    {
+      "path": "lib/oracle/services/operator-development/index.ts",
+      "size": 49,
+      "sha256": "1a7fc5227d7fce29cf86f82f2ab94e5e62ca2c1bcd648b9ee96c69a9a63926e7"
+    },
+    {
+      "path": "lib/oracle/services/operator-development/operator-development-services.ts",
+      "size": 9904,
+      "sha256": "ced59011df9b4d9fe5af0edfdb3188635f7e1fec1c71cb3cf47ad73d95b45ae8"
+    },
+    {
+      "path": "lib/oracle/services/operator-intelligence/index.ts",
+      "size": 104,
+      "sha256": "a338ca6214cd7a31c5195426d80d064027b062b6f05ed37c0f17dc666eb131d8"
+    },
+    {
+      "path": "lib/oracle/services/operator-intelligence/operator-intelligence-service-types.ts",
+      "size": 2727,
+      "sha256": "60ad35ed7c321d39401d9b03e1a7b9999f7f5baf7a7a4100e142c0182b29e14d"
+    },
+    {
+      "path": "lib/oracle/services/operator-intelligence/operator-intelligence-service.ts",
+      "size": 8040,
+      "sha256": "15e64b78a39c056163277f4050b740d54ba4a974a9ede1538489bb20363d3ec4"
+    },
+    {
+      "path": "lib/oracle/services/operator-intelligence/server-operator-intelligence-service.ts",
+      "size": 1140,
+      "sha256": "d94fb4010c34d36833c55a46f6c107c9a791523fd0b47e5b2f241d79844ebf19"
+    },
+    {
+      "path": "lib/oracle/services/operator-understanding/index.ts",
+      "size": 106,
+      "sha256": "614298bab348db625aa4c9d4ed8985cc2438d52b46dbe4a0925390808d1f84de"
+    },
+    {
+      "path": "lib/oracle/services/operator-understanding/operator-understanding-service-types.ts",
+      "size": 1844,
+      "sha256": "ec52357e1ac97ccace52c3fbe5dce7d69f6de46d701fcfdf798fde30eb02bd53"
+    },
+    {
+      "path": "lib/oracle/services/operator-understanding/operator-understanding-service.ts",
+      "size": 2409,
+      "sha256": "e7fad90481e52491ea7de318ed7fc7427e02de2d36780ec7aff1cbcf8f96164c"
+    },
+    {
+      "path": "lib/oracle/services/operator/browser-operator-service.ts",
+      "size": 525,
+      "sha256": "03dce908775fa0850563fe55942074f61f0fb1c73f4e8125cd7b6f6eff4cd12a"
+    },
+    {
+      "path": "lib/oracle/services/operator/index.ts",
+      "size": 223,
+      "sha256": "2f0aa5dc56e0d3dc703e886de711aeb1aa872f98c2c06d32b6ea164e23fb3fcc"
+    },
+    {
+      "path": "lib/oracle/services/operator/operator-declaration-service-types.ts",
+      "size": 633,
+      "sha256": "f11d3c5c85089de548736b12cd29070bc1605f76766ef733ecb9c98af712f63f"
+    },
+    {
+      "path": "lib/oracle/services/operator/operator-identity-policy.ts",
+      "size": 1213,
+      "sha256": "f19630b134f0ebc70050a109e4ce768d772b94f7e8dbcaad475191b4c50ebbfc"
+    },
+    {
+      "path": "lib/oracle/services/operator/operator-provisioning-types.ts",
+      "size": 9438,
+      "sha256": "22097c0075960a3c0cca2f94ada14ed8bbb670e5dfe9c272f7b9a82d69dd0d4e"
+    },
+    {
+      "path": "lib/oracle/services/operator/operator-service-types.ts",
+      "size": 1835,
+      "sha256": "e388b79553c3e5d6bfe561c08717b9785790d5df904483b379070bbeca21ca50"
+    },
+    {
+      "path": "lib/oracle/services/operator/operator-service.ts",
+      "size": 2140,
+      "sha256": "ffae5f325a846a24e7226d35741c4624fea307537f71a49cb715962be3125ab4"
+    },
+    {
+      "path": "lib/oracle/services/operator/server-operator-identity-service.ts",
+      "size": 6059,
+      "sha256": "3cf3cb0771001dd6edf3a1710fed264e956a07969f9840cf58bf07e7c7524b90"
+    },
+    {
+      "path": "lib/oracle/services/operator/server-operator-service.ts",
+      "size": 543,
+      "sha256": "1f037547adeb5bfc58770138a5850c2bce5a72c4f0c220b0601903212679bdd8"
+    },
+    {
+      "path": "lib/oracle/services/register-core-services.ts",
+      "size": 3088,
+      "sha256": "35c19b9653c14fe0bf3fd3071d3e6d2882d2281c1f38fd90428c80c7dd037b45"
+    },
+    {
+      "path": "lib/oracle/services/runtime-configuration/index.ts",
+      "size": 277,
+      "sha256": "1e7d5272572e430e65fc7f570b5ed34f40c7b3cf47f0937ba1e43e6deea946e4"
+    },
+    {
+      "path": "lib/oracle/services/service-registry.ts",
+      "size": 866,
+      "sha256": "9e76e24dc0d4ce3ed5660db9b69cbcbc2569e3474d83bc6247c09da532250176"
+    },
+    {
+      "path": "lib/oracle/services/service-runtime.ts",
+      "size": 1570,
+      "sha256": "f40235f876f9befdf68ed11f2ed7ad350f0e2ea2db2eb677dff6c92b17cf1f12"
+    },
+    {
+      "path": "lib/oracle/services/service-types.ts",
+      "size": 528,
+      "sha256": "1b182d44b7d52454f871e7b469315b622880d09b3b4b0c3b7a9d5ec667fa4251"
+    },
+    {
+      "path": "lib/oracle/services/session-reports/index.ts",
+      "size": 49,
+      "sha256": "5b3272adf97b3a0d45a6c6620a35b3c914962960da41aa95c4de49ba75ca103f"
+    },
+    {
+      "path": "lib/oracle/services/session-reports/oracle-session-report-service.ts",
+      "size": 12258,
+      "sha256": "1b31c48bbf800164dec807d22d72518aaba28222d102cf9e4bf621fd0d003497"
+    },
+    {
+      "path": "lib/oracle/services/sessions/index.ts",
+      "size": 42,
+      "sha256": "a7cbaa9d7dfeef9575d90895b878da95ab6126549e4a35cf3a9d8649eaaa759a"
+    },
+    {
+      "path": "lib/oracle/services/sessions/oracle-session-service.ts",
+      "size": 9077,
+      "sha256": "112bceafa065e54d8a4a2c4747a06f76b88abb7b88e1503ba9b2bcdc7c0297e0"
+    },
+    {
+      "path": "lib/oracle/sessions/index.ts",
+      "size": 69,
+      "sha256": "ce9a4be7c098fd92a79803465235d8fd27ba6a0d097272e5e7ef78d31181c4ec"
+    },
+    {
+      "path": "lib/oracle/sessions/session-contract.ts",
+      "size": 7597,
+      "sha256": "af50f916f0f3eaf3b718f8d702910f1e0695e88db24561b9f87b96257a9f5195"
+    },
+    {
+      "path": "lib/oracle/sessions/session-types.ts",
+      "size": 4671,
+      "sha256": "f55f040e47bf0837734f3d1012c29ed3e4e3cd31706817b38f69fec003d5397a"
+    },
+    {
+      "path": "lib/oracle/signals/signal-engine.ts",
+      "size": 846,
+      "sha256": "f4e99c3dac953806dad0072dc031600e9ded19ebec1b8d1b82c90c58ebbe2bb8"
+    },
+    {
+      "path": "lib/oracle/signals/signal-priority.ts",
+      "size": 656,
+      "sha256": "1d8cce6e50d30c98c53e538fcfe98830081eb221aef71de3c7875e821a7a2e9a"
+    },
+    {
+      "path": "lib/oracle/signals/signal-summary.ts",
+      "size": 537,
+      "sha256": "7869413d3b0e13f648c97fa06e1e9c696870fa1a2bb4a533c7467c825485789b"
+    },
+    {
+      "path": "lib/oracle/signals/signal-types.ts",
+      "size": 595,
+      "sha256": "2e594d0eaf661a2382847d72f0b3f60bd9e82641094a8416936f529f006f024e"
+    },
+    {
+      "path": "lib/oracle/state/buildOracleIntelligenceState.ts",
+      "size": 1691,
+      "sha256": "5c6a66082f8178fefe2d100f23f66a619787e6039ab875cfeefee2f79776cbd1"
+    },
+    {
+      "path": "lib/oracle/state/index.ts",
+      "size": 99,
+      "sha256": "5584135adca4efe6981d216b963a263766060b32726580de17b5999e8fa90822"
+    },
+    {
+      "path": "lib/oracle/state/oracle-intelligence-state-types.ts",
+      "size": 1265,
+      "sha256": "649e95d63142387dff2d0376d4b35b256a26c9d6edc81e072ebb7954a55df8d2"
+    },
+    {
+      "path": "lib/oracle/timeline/index.ts",
+      "size": 107,
+      "sha256": "b24b7d2a2687dda8de790e2980964579f3c7cc5578dee36d168687422a8d448c"
+    },
+    {
+      "path": "lib/oracle/timeline/timeline-builder.ts",
+      "size": 1633,
+      "sha256": "84641237a15d5936b7f2df2c5bd1cc026460f11b5f3c057812980806dd1e491c"
+    },
+    {
+      "path": "lib/oracle/timeline/timeline-summary.ts",
+      "size": 681,
+      "sha256": "722215e4103d1e38230bd3302df98dba38528dc927e7ff9509a0e70071253433"
+    },
+    {
+      "path": "lib/oracle/timeline/timeline-types.ts",
+      "size": 643,
+      "sha256": "ddf607dffe5dc270839a762b9244cddfb1ba4d44b2ae5e2b662f9e630b613f63"
+    },
+    {
+      "path": "lib/oracle/trend/trend-analysis.ts",
+      "size": 6590,
+      "sha256": "af9fe39111803939edcb22ef9ea35a5a24070a44bed2892a4a1692e149d3d8a3"
+    },
+    {
+      "path": "lib/oracle/trend/trend-engine.ts",
+      "size": 3350,
+      "sha256": "75d0720f1f2a303983d30ede602171da3a6cc39978b4da64924ebfdc52ea040f"
+    },
+    {
+      "path": "lib/oracle/trend/trend-types.ts",
+      "size": 960,
+      "sha256": "a8a3677b841ab2f4f4acdbd545b110b372d7b2af88844c0ba6ac580e9b7d059c"
+    },
+    {
+      "path": "lib/oracle/understanding/index.ts",
+      "size": 357,
+      "sha256": "9d9c45d724b6f5eaefe803ab2e6a952e7d6eff9823ec537f1745d1a390171d62"
+    },
+    {
+      "path": "lib/oracle/understanding/operator-intelligence-page.ts",
+      "size": 3975,
+      "sha256": "846da62b41c6cf39483e1a1764e954caae828f45fb7f555d0c4dfedb0d8556b9"
+    },
+    {
+      "path": "lib/oracle/understanding/operator-intelligence-trust-contract.ts",
+      "size": 22468,
+      "sha256": "6ac1a0bd61702db77a0f068d610a72be490b0906430014f4a6fd391e1e28effd"
+    },
+    {
+      "path": "lib/oracle/understanding/operator-intelligence-trust-types.ts",
+      "size": 4184,
+      "sha256": "1ab5ff07f55a94fbcfae63aa93316381f0e84d9a8fc93b2d774ff5a3156e8ca9"
+    },
+    {
+      "path": "lib/oracle/understanding/operator-understanding-accumulation.ts",
+      "size": 20007,
+      "sha256": "2458c703b4a5a4ab5eba0351686daf9278caaa60f72d019941659c418abbb063"
+    },
+    {
+      "path": "lib/oracle/understanding/operator-understanding-contract.ts",
+      "size": 37654,
+      "sha256": "b169b2845b14ed62da1dac8345bfd1ae486ab1d5df1c671be8e30d4cdbf8c380"
+    },
+    {
+      "path": "lib/oracle/understanding/operator-understanding-lifecycle.ts",
+      "size": 4343,
+      "sha256": "20bdbfcc8ba9f2039e75b8a293982a7acfa256392b261685bde3a1f405283312"
+    },
+    {
+      "path": "lib/oracle/understanding/operator-understanding-snapshot.ts",
+      "size": 9701,
+      "sha256": "f4f0411e31de8b5549bfddb593594a240c29c8ed40f768dfe427fc562e817eb2"
+    },
+    {
+      "path": "lib/oracle/understanding/operator-understanding-types.ts",
+      "size": 10361,
+      "sha256": "6116aa5baa20591e705a882e123511232c40b7ede402ab1b7f214b2094066241"
+    },
+    {
+      "path": "lib/oracle/understanding/operator-understanding-validation.ts",
+      "size": 7823,
+      "sha256": "bd99c14df100d1ea65f5b41c18024a329144c6206a91bffa86286b8ba646b1dd"
+    },
+    {
+      "path": "lib/oraclePrompt.ts",
+      "size": 1073,
+      "sha256": "061f1a6f741af5fc58070dfa80081abd77ecc6d6cc87806bd81a1d214ad86c1f"
+    },
+    {
+      "path": "lib/progression/getOperatorProgression.ts",
+      "size": 1955,
+      "sha256": "f9c372bffe61febfc6b93261b7d403c92548fb49315e5a6e0d9f392050bb297a"
+    },
+    {
+      "path": "lib/supabase-client.ts",
+      "size": 563,
+      "sha256": "3ac06b70f54c66d1eaecd7a4fa1d9cbec7da4671e0dcc8ec84b3f060c0afa568"
+    },
+    {
+      "path": "lib/supabase-middleware.ts",
+      "size": 3001,
+      "sha256": "6dfaeab8dc9872ece7e3e8ea66a3d087c807a711ba30de2d1f9386ac9f5552d9"
+    },
+    {
+      "path": "lib/supabase-server.ts",
+      "size": 727,
+      "sha256": "7b97c1615352b0cec711864035ad1345e1e70c83f92ceba9f1d968e9410a2676"
+    },
+    {
+      "path": "lib/supabase-trusted-server.ts",
+      "size": 1044,
+      "sha256": "cfe410d6883afc76993dcb29bee59de87bd61770c37ad32109f4a74ae04fe9d6"
+    },
+    {
+      "path": "lib/supabase.ts",
+      "size": 281,
+      "sha256": "b3811ec7df45982e31aba90007cc149f779b32fa8726b0e59455b9be6dd5fb30"
+    },
+    {
+      "path": "lib/xp/awardXp.ts",
+      "size": 1127,
+      "sha256": "8b90054ea67aa68118bf1698a525dd827d7e2cfeff244835eafc5fa860ef5716"
+    },
+    {
+      "path": "next.config.ts",
+      "size": 155,
+      "sha256": "565a60f2990dd8b0ef1bc9b90e2cae5e1adff7f08376e0038d5e7f6ecd896f44"
+    },
+    {
+      "path": "package-lock.json",
+      "size": 233406,
+      "sha256": "ce49d65c5fab06d53e06543eebd06a0eec3f89bececac60f1f238c1a0c5251a9"
+    },
+    {
+      "path": "package.json",
+      "size": 14818,
+      "sha256": "c72ef9250735faa1327fc172a22d080defd6d5451401406fabda764b13fe2e51"
+    },
+    {
+      "path": "packaging/windows/Package.appxmanifest.template",
+      "size": 1739,
+      "sha256": "86eddb4eab987121baf8bf26cc1db8c598b47bb455643e7f0368acdf992999f3"
+    },
+    {
+      "path": "public/file.svg",
+      "size": 391,
+      "sha256": "2b67812c325c199a02536cdbeea0c593a72f707d323b72ee3e08dbab06753bd4"
+    },
+    {
+      "path": "public/globe.svg",
+      "size": 1035,
+      "sha256": "b614b9bf183925957661ac851498fe1d8029fd43a62fbfed86f9e2624a57e7cf"
+    },
+    {
+      "path": "public/images/oracle-eye.png",
+      "size": 2336705,
+      "sha256": "27999ee34dc72cbf8e0d0f03a3de9b6278550b673c93a343dcf07e04b1cf25dc"
+    },
+    {
+      "path": "public/next.svg",
+      "size": 1375,
+      "sha256": "55995dfad6ecb4945a1e856ddca03c5e16aa5bf13fd21b4df6a74ae79357bcfc"
+    },
+    {
+      "path": "public/vercel.svg",
+      "size": 128,
+      "sha256": "f081337b2fee635b455b63275406a3e7f39d6a014e25ad90dab5a67e62a12ac4"
+    },
+    {
+      "path": "public/window.svg",
+      "size": 385,
+      "sha256": "644768c4aaeb4767bce293344eeb0c125fb804a94d801440424072202d85e3a1"
+    },
+    {
+      "path": "scripts/build-desktop-preload.mjs",
+      "size": 968,
+      "sha256": "dea34d0d10061a8ab39fedb557f23039184781e36b253d997ec3ffd6ade0a50f"
+    },
+    {
+      "path": "tsconfig.desktop.json",
+      "size": 554,
+      "sha256": "1cd839aea2f437cd7f1555936d219217dc7aa4af760488719a5970779e25710d"
+    }
+  ],
+  "runtimeManifest": {
+    "version": "1.7.0",
+    "webVersion": "1.7.0",
+    "electronVersion": "1.7.0",
+    "equal": true,
+    "webSourceSha256": "658e9a39808c07ca839280d99a1162da3386b1f8fd7f3280443548d51afd8718",
+    "electronSourceSha256": "b0d72009b84fcb587a161207e7e8b9792b09dc3ca9a5024f351b0e50f45d6b8a"
+  },
+  "dependencies": {
+    "packageLockSha256": "ce49d65c5fab06d53e06543eebd06a0eec3f89bececac60f1f238c1a0c5251a9",
+    "node": "v24.18.0",
+    "npm": "11.16.0",
+    "next": "16.2.11",
+    "electron": "39.8.10",
+    "winAppCli": "0.5.0",
+    "esbuild": "0.28.1"
+  },
+  "packaging": {
+    "templateSha256": "86eddb4eab987121baf8bf26cc1db8c598b47bb455643e7f0368acdf992999f3",
+    "executorSha256": "a989313e5f490052bc5d4e457bdfd233640517c078a5ebd1b44f02bafe0a7303",
+    "harnessFiles": [
+      {
+        "path": "scripts/sprint-30-5/stage-2-requalification-r6/Oracle.Stage2RequalificationR6Contract.json",
+        "sha256": "c90f826310858818789a4fdc977965ceb6421d49b2f0fedb0b8800b9025069fc"
+      },
+      {
+        "path": "scripts/sprint-30-5/stage-2-requalification-r6/execute-attempt.mjs",
+        "sha256": "a989313e5f490052bc5d4e457bdfd233640517c078a5ebd1b44f02bafe0a7303"
+      },
+      {
+        "path": "scripts/sprint-30-5/stage-2-requalification-r6/execution-core.mjs",
+        "sha256": "ad0b5ba1ba8b6d954744e3ed8e9c8b2c0133011689ad637bc46bfca413895cc3"
+      },
+      {
+        "path": "scripts/sprint-30-5/stage-2-requalification-r6/execution-identity-core.ps1",
+        "sha256": "cadb613c3605df393d015919e124dd1e9cbc249d9a25cf055203f45daf96747b"
+      },
+      {
+        "path": "scripts/sprint-30-5/stage-2-requalification-r6/harness-core.mjs",
+        "sha256": "b4c3eb32c934f56c60b63a86be84e67fbf2c371fed3d18e28477d4bddf80e769"
+      },
+      {
+        "path": "scripts/sprint-30-5/stage-2-requalification-r6/invoke-attempt.ps1",
+        "sha256": "89d65dc3fcfb05ee1d2ae356046b8bf01dbb66530b342a60d2e5936f22052f2a"
+      },
+      {
+        "path": "scripts/sprint-30-5/stage-2-requalification-r6/remove-exact-certificate.ps1",
+        "sha256": "43bc217e26b202ba7b88739e567ca87f0edd4ce3758d962639fcd7e53213602b"
+      },
+      {
+        "path": "scripts/sprint-30-5/stage-2-requalification-r6/runtime-configuration-custody.mjs",
+        "sha256": "d5761bad92038d82c302c2c75e50133551ef0e450e794a097c8b0d0bb92d63f1"
+      },
+      {
+        "path": "scripts/sprint-30-5/stage-2-requalification-r6/sign-release-manifest-exact.ps1",
+        "sha256": "5d3d5585d83a3bde942dd16ee83e94e0265911a0145642783c696067e8fd967f"
+      },
+      {
+        "path": "scripts/sprint-30-5/stage-2-requalification-r6/verify-exact-signatures.ps1",
+        "sha256": "f5b6413edc8023dfa363f86e685827a5df69759dc233a8d2713e41a0f23b3436"
+      },
+      {
+        "path": "scripts/sprint-30-5/stage-2-requalification-r6/verify-execution-identity.ps1",
+        "sha256": "99ad6ed68a576ca1b9f9bb5d09fffa8655029642443c10cf0ad12005c03d61fd"
+      },
+      {
+        "path": "scripts/sprint-30-5/stage-2-requalification-r6/verify-harness-static.mjs",
+        "sha256": "31f9b67a63dfa20a70eb18bc794f03c74e2a7b1366eaa6027b38019a2ba7170a"
+      },
+      {
+        "path": "scripts/sprint-30-5/stage-2-requalification-r6/verify-runtime-configuration-custody.mjs",
+        "sha256": "3db6a9e51187ffbb4f486f6eeef53943caf02cb0968934ecb4ebd68239c59a36"
+      }
+    ],
+    "packageFile": "Oracle_0.1.4.0_x64_STAGE2_REQUALIFICATION_R6_LOCAL_TEST_ONLY.msix",
+    "releaseId": "oracle-desktop-beta-0.1.4-stage-2-requalification-r6-local-qualification",
+    "publisher": "CN=Oracle Stage 2 Requalification R6 Local Test Signing - NOT PRODUCTION",
+    "architecture": "x64",
+    "packageVersion": "0.1.4.0",
+    "signingClassification": "isolated-local-test-only"
+  },
+  "migrations": {
+    "database/009_operator_intelligence_persistence.sql": "fecbba028df14f581be05d36e7f2eb329f27f8cfe90c8638a6d94d17e00a652f",
+    "database/010_operator_trust_control_persistence.sql": "7c46a1c9a3a0ff7e8f5c2348a3179c98934ad34ec9e66a2c2632830b65c7d715",
+    "database/011_operator_account_provisioning.sql": "dff827ce532a062fdc3aa93df08eba4628e004b46e9233005325f443e8429928",
+    "database/012_operator_identity_lifecycle.sql": "e64213123ff2b75b12c293d79380cc43dc9028dd56f503330aac9f5d97442c73",
+    "database/013_authoritative_session_lifecycle.sql": "7228c0384caed59f2a042e17eb6b2ea935bfed6b72e6372649d93f0874c5f68a",
+    "database/014_operator_development_lifecycle.sql": "25682a9331102e51d6742988600697f9d23d94a53f09cd23bc585ed0a161d831"
+  },
+  "authority": {
+    "singleAttempt": true,
+    "productionTrusted": false,
+    "publication": false,
+    "distribution": false,
+    "deployment": false,
+    "stage3": false
+  }
+}

@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R6 Implementation
 
-Status: **PREPARATION IMPLEMENTED — QUALIFICATION NOT YET EXECUTED**
+Status: **FOUNDER-ACCEPTED AND FORMALLY CLOSED**
 
 R6 is a versioned derivation of R5. It preserves the complete wrapper-only, single-authority, deterministic build, package-secrecy, exact-signature, exact-certificate teardown, create-only evidence and fail-closed lifecycle model.
 

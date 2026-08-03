@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-2-requalification-r6-execution-completion",
+  "programmeIdentity": "Sprint 30.5 Stage 2 Requalification R6",
+  "revision": "R6",
+  "authorityId": "authority-r6-20260803T171057940Z-5e914d18",
+  "attemptId": "r6-20260803T171057940Z-5e914d18",
+  "candidateCommit": "ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff",
+  "harnessCommit": "0b10f074d86ac9256462602c0e7bda528b8fba57",
+  "completedAt": "2026-08-03T17:13:02.320Z",
+  "status": "execution-passed-awaiting-founder-review",
+  "archive": {
+    "filename": "Oracle.Sprint30.5.Stage2RequalificationR6QualificationEvidence.zip",
+    "size": 216700416,
+    "sha256": "7884c93b222cd5f16f51dd5ba1b56c51af5008e1f6c999dcff92a8c1a26ac690"
+  },
+  "exactCertificateThumbprint": "8C24858C147873EF46A9D61018FA2702B6222EA2",
+  "certificateTeardownPassed": true,
+  "repositoryEvidencePublicationPending": true,
+  "founderAcceptance": false,
+  "stage2Closed": false,
+  "stage3Authorised": false,
+  "productionAuthority": false
+}
