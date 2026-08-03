@@ -32,7 +32,7 @@ results.
 | Stage | Scope | Current state | Evidence or blocker | Next authority |
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
-| 2 | Candidate Freeze and Package Reconciliation | **R4 accepted history; current source requires a new Stage 2 candidate** | R4 attempt r4-20260803T115002258Z-31ab0bf6 and its evidence remain immutable; the later packaged-server environment correction invalidates R4 as qualification of current source | Founder authority only when the next Stage 2 qualification is requested |
+| 2 | Candidate Freeze and Package Reconciliation | **R5 prepared; one governed attempt authorised and unconsumed** | R4 remains immutable accepted history; R5 binds corrected commit `ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff`, tree `8455a05780989a9d5f6c6d527f7d427d94526b04`, package version `0.1.3.0` | Execute only the exact R5 governed wrapper; reconcile and accept evidence before downstream preparation |
 | 3 | Clean Windows Qualification | **Founder-accepted and formally closed at R9** | Passing attempt `stage3-r9-20260730T221251043Z-71af9db7` under authority `authority-stage3-r9-20260730T221251043Z-71af9db7`; final evidence manifest SHA-256 `19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`; archive SHA-256 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`; zero final residue | None for Stage 3; history is closed and any further Stage 3 execution is unauthorised |
 | 4 | Live Authentication and Protected Rendering | **R1 Founder-accepted and formally closed** | Passing attempt `stage4-r1-20260803T093803115Z-7fc6b185`; manifest SHA-256 `1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d`; archive SHA-256 `91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15`; ten journeys and zero-residue teardown passed | None for Stage 4; history is closed and further Stage 4 execution is unauthorised |
 | 5 | Installed Package GPU, Performance and Accessibility | **Blocked pending a newly qualified corrected package and downstream requalification** | R4 qualifies only its immutable historical package; corrected current source has no accepted Stage 2 package, clean-host result or installed-authentication result | Stage 2 qualification authority when requested, followed by separately governed downstream authority |
@@ -242,3 +242,9 @@ must not be transferred or executed as qualification of the corrected source.
 A new Stage 2 candidate must be accepted before newly bound clean-host and
 installed-authentication requalification can proceed. Stage 5 remains blocked.
 No qualification authority, attempt, package or evidence was created.
+
+## Stage 2 Requalification R5 Preparation
+
+R5 is prepared for corrected commit `ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff`, tree `8455a05780989a9d5f6c6d527f7d427d94526b04`, and package version `0.1.3.0`. Static, custody, identity, source, architecture, build, desktop/native and standalone rehearsal gates pass. No R5 authority or attempt has yet been consumed.
+
+The Founder has authorised the governed requalification mission beginning at Stage 2. Exactly one R5 attempt may be created through its wrapper. R4 and all earlier accepted evidence remain immutable. Stage 3 R10 remains R4-bound and barred; a newly bound downstream revision may be prepared only after an accepted R5 result.

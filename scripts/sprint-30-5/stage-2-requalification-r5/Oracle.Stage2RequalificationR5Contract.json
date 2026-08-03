@@ -1,0 +1,193 @@
+{
+    "schemaVersion":  "1.0.0",
+    "contract":  "oracle.sprint-30-5.stage-2-requalification-r5",
+    "programmeIdentity":  "Sprint 30.5 Stage 2 Requalification R5",
+    "revision":  "R5",
+    "requiredBranch":  "sprint-9-overlay",
+    "governanceActivationCommit":  "ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff",
+    "qualifiedImplementationCommit":  "ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff",
+    "candidate":  {
+                      "commit":  "ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff",
+                      "tree":  "8455a05780989a9d5f6c6d527f7d427d94526b04",
+                      "migration011Sha256":  "dff827ce532a062fdc3aa93df08eba4628e004b46e9233005325f443e8429928",
+                      "migration012Sha256":  "e64213123ff2b75b12c293d79380cc43dc9028dd56f503330aac9f5d97442c73"
+                  },
+    "executionMachine":  {
+                             "identity":  "DESKTOP-M3H22E4",
+                             "operatingSystem":  "win32",
+                             "osRelease":  "10.0.26200",
+                             "architecture":  "x64"
+                         },
+    "toolchain":  {
+                      "git":  "2.55.0.windows.2",
+                      "node":  "24.18.0",
+                      "npm":  "11.16.0",
+                      "powershell":  "5.1.26100.8875",
+                      "dotnet":  "10.0.301",
+                      "bsdtar":  "3.8.4",
+                      "electron":  "39.8.10",
+                      "electronPackager":  "20.0.4",
+                      "winAppCli":  "0.5.0",
+                      "next":  "16.2.11",
+                      "esbuild":  "0.28.1",
+                      "typescript":  "5.9.3"
+                  },
+    "package":  {
+                    "identity":  "Oracle.Platform.LocalCertification",
+                    "version":  "0.1.3.0",
+                    "semanticVersion":  "0.1.3",
+                    "architecture":  "x64",
+                    "runtimeManifestVersion":  "1.7.0",
+                    "publisherSubjectPrefix":  "CN=Oracle Stage 2 Requalification R5 Local Test Signing - NOT PRODUCTION",
+                    "fileName":  "Oracle_0.1.3.0_x64_STAGE2_REQUALIFICATION_R5_LOCAL_TEST_ONLY.msix",
+                    "releaseId":  "oracle-desktop-beta-0.1.3-stage-2-requalification-r5-local-qualification"
+                },
+    "certificate":  {
+                        "requestedLifetimeDays":  30,
+                        "minimumRemainingLifetimeDaysAtCreation":  29,
+                        "maximumLifetimeDays":  30,
+                        "thumbprintFormat":  "^[0-9A-F]{40}$",
+                        "cleanupSelection":  "exact-thumbprint-only"
+                    },
+    "output":  {
+                   "artifactBase":  ".artifacts/sprint-30-5/stage-2-requalification-r5",
+                   "repositoryEvidenceBase":  "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r5",
+                   "attemptNamespace":  "\u003cbase\u003e/\u003cattempt-id\u003e",
+                   "archiveFileName":  "Oracle.Sprint30.5.Stage2RequalificationR5QualificationEvidence.zip"
+               },
+    "historicalProtectedRoots":  [
+                                     ".artifacts/sprint-30-5/stage-2",
+                                     ".artifacts/sprint-30-5/stage-2-requalification",
+                                     ".artifacts/sprint-30-5/stage-2-requalification-r2",
+                                     ".artifacts/sprint-30-5/stage-3",
+                                     "docs/sprints/evidence/sprint-30-5/stage-2",
+                                     "docs/sprints/evidence/sprint-30-5/stage-2-requalification",
+                                     "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r2",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-host-admission",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-reconciliation",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-revision-history",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-revision-6-abandoned-design",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-r9",
+                                     ".artifacts/sprint-30-5/stage-2-requalification-r3",
+                                     ".artifacts/sprint-30-5/stage-4-r1",
+                                     "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r3",
+                                     "docs/sprints/evidence/sprint-30-5/stage-4-r1",
+                                     ".artifacts/sprint-30-5/stage-2-requalification-r4",
+                                     "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r4"
+                                 ],
+    "historicalEvidenceBindings":  [
+                                       {
+                                           "path":  ".artifacts/sprint-30-5/stage-2-requalification-r2/r2-20260728T203503018Z-ec577cf4/Oracle.Sprint30.5.Stage2RequalificationR2QualificationEvidence.zip",
+                                           "sha256":  "6a3d2a6878b6e778214c550854a06e4a410fd5ec60b911b606aef844d4225f0f"
+                                       },
+                                       {
+                                           "path":  ".artifacts/sprint-30-5/stage-2-requalification-r3/r3-20260731T171651908Z-9a8a2532/Oracle.Sprint30.5.Stage2RequalificationR3QualificationEvidence.zip",
+                                           "sha256":  "82ad4a46721c2ab0e7103c57f192394887844fd4c311ec3fcea92d2ba05e0688"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r3/r3-20260731T171651908Z-9a8a2532/Oracle.Stage2RequalificationR3EvidenceManifest.json",
+                                           "sha256":  "79ae9b219f24c8f61c48b6e3a0094d1730f72fe29a932e02ff1e92f7b07c1229"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-3-r9/return-stage3-r9-20260730T224057433Z-904acbc9/Oracle.Stage3R9Evidence/stage3-r9-20260730T221251043Z-71af9db7.zip",
+                                           "sha256":  "5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r1/stage4-r1-20260803T093803115Z-7fc6b185/Oracle.Sprint30.5.Stage4R1QualificationEvidence.zip",
+                                           "sha256":  "91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R3_CLOSURE.md",
+                                           "sha256":  "f9855cc23598ab1c18f2538470170dd2a2d2511fea31fcc6b590ae56b3d03a0e"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/SPRINT_30_5_STAGE_3_R9_CLOSURE.md",
+                                           "sha256":  "9bebd3629f80a2a354ca3161516784b51d27140d170230b6b56c78480d6622b5"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/SPRINT_30_5_STAGE_4_R1_CLOSURE.md",
+                                           "sha256":  "bb54b94e8fc0314c063680cbe72e9e16fbb3715d1c6433b059aef58aa2d4fc0e"
+                                       },
+                                       {
+                                           "path":  ".artifacts/sprint-30-5/stage-2-requalification-r4/r4-20260803T115002258Z-31ab0bf6/Oracle.Sprint30.5.Stage2RequalificationR4QualificationEvidence.zip",
+                                           "sha256":  "3f1f11dd04ddbc3b4eb51db344f71c12252cc7e41e8ae072950d3a74c1452495"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r4/r4-20260803T115002258Z-31ab0bf6/Oracle.Stage2RequalificationR4EvidenceManifest.json",
+                                           "sha256":  "876be1c0342c7dc9f70965faa3daffe0c9c1d8d7a3e2c41b144155350557784d"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r4/r4-20260803T115002258Z-31ab0bf6/Oracle.Stage2RequalificationR4FinalEvidenceHash.sha256.txt",
+                                           "sha256":  "f4980f3c6c7d67ef746e6156c82285cdaac5151cc3d1a4fe9d71e5267012b403"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R4_CLOSURE.md",
+                                           "sha256":  "c01bd34e33f50e8657860bed24920c54330aac2540df77e0b1a145387c94ba93"
+                                       }
+                                   ],
+    "authority":  {
+                      "governanceActivation":  "authorised",
+                      "harnessPreparation":  "authorised",
+                      "build":  "founder-authority-required-per-attempt",
+                      "package":  "founder-authority-required-per-attempt",
+                      "signing":  "founder-authority-required-per-attempt-local-test-only",
+                      "certificateMutation":  "founder-authority-required-per-attempt-exact-certificate-only",
+                      "qualificationExecution":  "founder-authority-required-per-attempt",
+                      "stage3":  "closed-not-authorised-by-r5",
+                      "stage4":  "closed-not-authorised-by-r5",
+                      "productionRelease":  "not-authorised"
+                  },
+    "runtimeConfiguration":  {
+                                 "contract":  "oracle.installed-runtime-configuration",
+                                 "version":  1,
+                                 "maximumLifetimeSeconds":  900,
+                                 "custody":  "attempt-scoped-localstate-create-only",
+                                 "packageBytesMustExcludeCredentials":  true,
+                                 "ambientBuildConfiguration":  "prohibited",
+                                 "productBindings":  [
+                                                         {
+                                                             "path":  "desktop/runtime/installed-runtime-configuration.ts",
+                                                             "sha256":  "07fc8fd6a95648eb47e8d2ec3bf9e91ced49082ace812959885fabf08ffbb1fa"
+                                                         },
+                                                         {
+                                                             "path":  "desktop/runtime/packaged-next-server.ts",
+                                                             "sha256":  "7ffa6bfa39867ed9199197954a7b8d67fb9c37513ae7e74e4f7ee0e8f133a70a"
+                                                         },
+                                                         {
+                                                             "path":  "desktop/runtime/packaged-server-environment.ts",
+                                                             "sha256":  "f751c5d77fcf20d7e40fa1069e9b70d9cf21a6e5d8ea54b67f3e2a737510cebf"
+                                                         },
+                                                         {
+                                                             "path":  "desktop/main.ts",
+                                                             "sha256":  "911a43cb7df5bc7fb1af11eb3d184d9f33883dbd9634fcbe632c4a0a9fa6fd8f"
+                                                         },
+                                                         {
+                                                             "path":  "scripts/qualification/Oracle.InstalledRuntimeConfigurationPolicy.ps1",
+                                                             "sha256":  "0dc524adb6e6bc4a77a0c5bcc5f89a6c6b7423520769059b305cdc8f232b6d6f"
+                                                         },
+                                                         {
+                                                             "path":  "scripts/qualification/Test-OracleInstalledRuntimeConfigurationPolicy.ps1",
+                                                             "sha256":  "451c8904beafc56435d2b2fe86209d5f262e76325421c4d8b8a2de2cf072a4a9"
+                                                         },
+                                                         {
+                                                             "path":  "scripts/verify-installed-runtime-configuration.ts",
+                                                             "sha256":  "571ca2cda4412ca2d60a3ed98fe45ce80f07b96e30dd7207f1cb4c9efcc5a979"
+                                                         },
+                                                         {
+                                                             "path":  "scripts/rehearse-installed-runtime-server.mjs",
+                                                             "sha256":  "1dace8f70ab1726ae04b7fcbb343655385511f834ae5cde85346b7c1bd26f7e1"
+                                                         }
+                                                     ],
+                                 "requiredValidation":  [
+                                                            "npm run installed-runtime-config:verify",
+                                                            "npm run installed-runtime-config:rehearse"
+                                                        ]
+                             },
+    "toolchainExecutables":  {
+                                 "node":  "C:/Program Files/nodejs/node.exe",
+                                 "git":  "C:/Program Files/Git/cmd/git.exe",
+                                 "powershell":  "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe",
+                                 "dotnet":  "C:/Program Files/dotnet/dotnet.exe",
+                                 "bsdtar":  "C:/Windows/System32/tar.exe"
+                             }
+}

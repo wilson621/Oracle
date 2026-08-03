@@ -8,7 +8,7 @@
 **Expected Stability:** Reviewed whenever governance or canonical documentation changes
 **Supersedes:** The incomplete documentation table in `README.md` as the canonical documentation index
 **Superseded By:** None
-**Last Reviewed:** 30 July 2026
+**Last Reviewed:** 3 August 2026
 
 ---
 
@@ -322,6 +322,10 @@ delivery authorities have been reviewed.
 | Sprint 30.5 Stage 2 Requalification R4 preparation validation | [Sprint 30.5 Stage 2 Requalification R4 Preparation Validation](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R4_PREPARATION_VALIDATION_REPORT.md) | Passing non-qualification validation and review record |
 | Sprint 30.5 Stage 2 Requalification R4 closure | [Sprint 30.5 Stage 2 Requalification R4 Closure](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R4_CLOSURE.md) | Founder-accepted and formally closed ADR-048 baseline |
 | Sprint 30.5 Stage 2 Requalification R4 evidence | [Sprint 30.5 Stage 2 Requalification R4 Evidence](sprints/evidence/sprint-30-5/stage-2-requalification-r4/README.md) | Canonical accepted evidence and immutable hash bindings |
+| Sprint 30.5 Stage 2 Requalification R5 plan | [Sprint 30.5 Stage 2 Requalification R5 Plan](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R5_PLAN.md) | Corrected candidate, lifecycle and downstream authority boundaries |
+| Sprint 30.5 Stage 2 Requalification R5 implementation | [Sprint 30.5 Stage 2 Requalification R5 Implementation](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R5_IMPLEMENTATION.md) | Versioned R4-derived harness with exact correction and historical bindings |
+| Sprint 30.5 Stage 2 Requalification R5 pre-execution gate | [Sprint 30.5 Stage 2 Requalification R5 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R5_PRE_EXECUTION_GATE.md) | Passing preparation gate and one-attempt authority boundary |
+| Sprint 30.5 Stage 2 Requalification R5 preparation validation | [Sprint 30.5 Stage 2 Requalification R5 Preparation Validation](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R5_PREPARATION_VALIDATION_REPORT.md) | Passing non-qualification validation and adversarial review |
 | Sprint 30.5 Stage 3 Qualification R1 plan | [Sprint 30.5 Stage 3 Qualification R1 Plan](sprints/SPRINT_30_5_STAGE_3_R1_PLAN.md) | Preparation Founder-authorised and R2-bound; execution blocked and unauthorised |
 | Sprint 30.5 Stage 3 Qualification R1 pre-execution gate | [Sprint 30.5 Stage 3 Qualification R1 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_3_R1_PRE_EXECUTION_GATE.md) | Preparation complete; exact remaining Founder transfer and execution decisions recorded |
 | Sprint 30.5 Stage 3 Qualification R2 plan | [Sprint 30.5 Stage 3 Qualification R2 Plan](sprints/SPRINT_30_5_STAGE_3_R2_PLAN.md) | Corrective preparation Founder-authorised and accepted-R2-bound; R1 preserved; execution blocked |
