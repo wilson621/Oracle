@@ -33,6 +33,8 @@ const authorityPattern = new RegExp(
   "u"
 );
 const transferPattern = new RegExp(`^transfer-stage3-r10-${compactTime}-${suffix}$`, "u");
+export const canonicalProgrammeIdentity =
+  "Sprint 30.5 Stage 3 Requalification R10";
 export const transferConstructionAuthority =
   "FOUNDER-AUTHORISED-STAGE3-R10-TRANSFER";
 
@@ -81,8 +83,18 @@ export function validateExecutionIdentity({
   }
 }
 
+export function validateProgrammeIdentity(value) {
+  if (value !== canonicalProgrammeIdentity) {
+    throw new Error("Stage 3 R10 programme identity differs.");
+  }
+  return value;
+}
+
 export function validateTransferIdentity({ transferId, timestampUtc }) {
   validateScopedId(transferId, timestampUtc, transferPattern, "Transfer ID");
+  if (contract.rejectedTransfers.some((entry) => entry.transferId === transferId)) {
+    throw new Error("Rejected Stage 3 R10 transfer identity cannot be reused.");
+  }
 }
 
 export function validateTransferConstructionAuthority(value) {

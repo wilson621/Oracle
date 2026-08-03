@@ -14,6 +14,7 @@ import {
   validateTransferConstructionAuthority,
   validateTransferIdentity,
   validateProcessEnvelope,
+  validateProgrammeIdentity,
   writeFileCreateOnly,
   writeJsonAtomicCreateOnly,
 } from "./stage3-core.mjs";
@@ -43,6 +44,7 @@ for (const name of [
 ]) {
   if (!argumentsMap.has(name)) throw new Error(`Missing --${name}.`);
 }
+validateProgrammeIdentity(contract.programmeIdentity);
 const founderAuthority = validateTransferConstructionAuthority(
   argumentsMap.get("founder-authority")
 );
@@ -305,6 +307,8 @@ const custodyPath = join(transferRoot, "Oracle.Stage3R10TransferCustody.json");
 writeJsonAtomicCreateOnly(custodyPath, {
   schemaVersion: "1.0.0",
   contract: "oracle.sprint-30-5.stage-3-r10-transfer-custody",
+  programmeIdentity: contract.programmeIdentity,
+  revision: contract.revision,
   transferId,
   recordedAtUtc: timestampUtc,
   operator: "Codex",

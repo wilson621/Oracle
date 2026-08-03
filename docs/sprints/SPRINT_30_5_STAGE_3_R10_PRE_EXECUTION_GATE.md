@@ -1,9 +1,18 @@
 # Sprint 30.5 Stage 3 Requalification R10 Pre-Execution Gate
 
-**Status:** Prepared; no transfer authority exists
+**Status:** Governance-identity correction prepared; execution remains unauthorised
 **Execution:** Blocked and unauthorised
 **Required host:** `Founder-QA-01`, elevated 64-bit Windows PowerShell 5.1
 **Candidate:** accepted Stage 2 R4 MSIX SHA-256 `8679138e78827d41e20cf3f0c452e3c28120afad846ef4e20329eeff1f9aebd5`
+
+## Retired transfer prohibition
+
+The canonical identity is exactly `Sprint 30.5 Stage 3 Requalification R10`. The following transfer IDs are immutable rejected history and are prohibited from admission, continuity reuse, authority creation and execution:
+
+- `transfer-stage3-r10-20260803T130243096Z-7a48bde6`; and
+- `transfer-stage3-r10-20260803T133216036Z-9dc6f3f1`.
+
+The latter failed read-only admission because its manifest recorded the canonical Requalification identity while its transferred preflight required the noncanonical Qualification identity. No authority, attempt, trust, package installation or qualification occurred. A replacement must be generated create-only from the corrected published preparation with a new transfer ID.
 
 ## Gate sequence
 

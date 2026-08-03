@@ -5,6 +5,17 @@
 **Purpose:** Clean Windows requalification of the Founder-accepted Stage 2 R4 ADR-048 package
 **Historical position:** Stage 3 R9 remains Founder-accepted, formally closed, and immutable
 
+## Canonical programme identity
+
+The single exact R10 programme identity is `Sprint 30.5 Stage 3 Requalification R10`. This follows from R10's purpose: the already-qualified and closed Stage 3 lifecycle is being repeated against the accepted Stage 2 R4 product baseline. `Sprint 30.5 Stage 3 Qualification R10` is a rejected historical preparation identity and must never be accepted as an alias. Comparisons remain ordinal and exact.
+
+Two constructed transfers are immutable and prohibited from admission, continuity reuse, authority creation or execution:
+
+- `transfer-stage3-r10-20260803T130243096Z-7a48bde6`, rejected for inaccurate custody-authority recording; and
+- `transfer-stage3-r10-20260803T133216036Z-9dc6f3f1`, rejected after pre-authority admission exposed the Qualification/Requalification programme-identity contradiction.
+
+Their manifests, custody records, sidecars, continuity artefacts and admission findings remain historical records. Replacement construction must use a new transfer identity and the contract's rejected-transfer registry fails closed on either prior identity.
+
 ## Exact accepted input
 
 R10 consumes only Stage 2 R4 attempt `r4-20260803T115002258Z-31ab0bf6` under authority `authority-r4-20260803T115002258Z-31ab0bf6`.

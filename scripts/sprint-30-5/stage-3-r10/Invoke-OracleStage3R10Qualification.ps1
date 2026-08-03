@@ -323,6 +323,8 @@ function Write-Lifecycle([string]$Phase, $Details) {
     Join-Path $lifecycleRoot ("{0:D2}-{1}.json" -f ($phaseIndex + 1), $Phase)
   ) ([ordered]@{
     contract = "oracle.sprint-30-5.stage-3-r10-lifecycle"
+    programmeIdentity = [string]$contract.programmeIdentity
+    revision = [string]$contract.revision
     founderGrantId = $FounderGrantId
     authorityId = $AuthorityId
     attemptId = $AttemptId
@@ -489,13 +491,20 @@ function Assert-IdentityAndTransfer {
   ) { throw "Transfer root contains missing or unexpected entries." }
   $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
   if (
+    [string]$contract.programmeIdentity -cne
+      "Sprint 30.5 Stage 3 Requalification R10" -or
+    [string]$contract.revision -cne "R10" -or
     [string]$manifest.contract -cne
       "oracle.sprint-30-5.stage-3-r10-transfer" -or
     [string]$manifest.programmeIdentity -cne
       [string]$contract.programmeIdentity -or
-    [string]$manifest.revision -cne "R10" -or
+    [string]$manifest.revision -cne [string]$contract.revision -or
     $manifest.transferId -cnotmatch
-      '^transfer-stage3-r10-\d{8}T\d{9}Z-[0-9a-f]{8}$'
+      '^transfer-stage3-r10-\d{8}T\d{9}Z-[0-9a-f]{8}$' -or
+    @($contract.rejectedTransfers | Where-Object {
+      [string]($_ | Select-Object -ExpandProperty transferId -ErrorAction Stop) -ceq
+      [string]$manifest.transferId
+    }).Count -ne 0
   ) {
     throw "Transfer identity is malformed."
   }
@@ -540,6 +549,9 @@ function Assert-IdentityAndTransfer {
     $custodySidecarValue -cne (Get-Sha256 $custodyPath) -or
     [string]$custody.contract -cne
       "oracle.sprint-30-5.stage-3-r10-transfer-custody" -or
+    [string]$custody.programmeIdentity -cne
+      [string]$contract.programmeIdentity -or
+    [string]$custody.revision -cne [string]$contract.revision -or
     [string]$custody.authority -cne
       "FOUNDER-AUTHORISED-STAGE3-R10-TRANSFER" -or
     [string]$custody.transferId -cne [string]$manifest.transferId -or
@@ -1064,6 +1076,8 @@ try {
   )
   Write-CreateOnlyJson $authorityPath ([ordered]@{
     contract = "oracle.sprint-30-5.stage-3-r10-authority"
+    programmeIdentity = [string]$contract.programmeIdentity
+    revision = [string]$contract.revision
     founderGrantId = $FounderGrantId
     authorityId = $AuthorityId
     attemptId = $AttemptId
@@ -1362,6 +1376,8 @@ try {
   $evidenceManifestPath = Join-Path $evidenceRoot "evidence-manifest.json"
   Write-CreateOnlyJson $evidenceManifestPath ([ordered]@{
     contract = "oracle.sprint-30-5.stage-3-r10-evidence-manifest"
+    programmeIdentity = [string]$contract.programmeIdentity
+    revision = [string]$contract.revision
     founderGrantId = $FounderGrantId
     authorityId = $AuthorityId
     attemptId = $AttemptId
@@ -1384,6 +1400,8 @@ try {
     evidenceManifestSha256 = $evidenceManifestHash
   }
   Write-CreateOnlyJson (Join-Path $evidenceRoot "completion.json") ([ordered]@{
+    programmeIdentity = [string]$contract.programmeIdentity
+    revision = [string]$contract.revision
     result = "passed"
     founderGrantId = $FounderGrantId
     authorityId = $AuthorityId
@@ -1403,6 +1421,8 @@ try {
   )
   Write-CreateOnlyJson "$archivePath.manifest.json" ([ordered]@{
     contract = "oracle.sprint-30-5.stage-3-r10-archive-manifest"
+    programmeIdentity = [string]$contract.programmeIdentity
+    revision = [string]$contract.revision
     founderGrantId = $FounderGrantId
     authorityId = $AuthorityId
     attemptId = $AttemptId
@@ -1466,6 +1486,8 @@ try {
   if (Test-Path -LiteralPath $attemptRoot) {
     try {
       Write-CreateOnlyJson (Join-Path $evidenceRoot "failure.json") ([ordered]@{
+        programmeIdentity = [string]$contract.programmeIdentity
+        revision = [string]$contract.revision
         result = "failed"
         authorityConsumed = $authorityConsumed
         completedLifecyclePhases = @($lifecycleState.completed)

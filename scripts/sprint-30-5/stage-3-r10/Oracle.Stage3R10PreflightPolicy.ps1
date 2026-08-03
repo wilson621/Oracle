@@ -409,6 +409,8 @@ function Get-OracleStage3R10PreAuthorityObservation {
   }
 
   [pscustomobject][ordered]@{
+    programmeIdentity = [string]$Contract.programmeIdentity
+    revision = [string]$Contract.revision
     result = "passed"
     classification = @(
       "NON-QUALIFICATION",

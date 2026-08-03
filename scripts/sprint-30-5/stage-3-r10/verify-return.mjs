@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 import yauzl from "yauzl";
-import { sha256 } from "./stage3-core.mjs";
+import { canonicalProgrammeIdentity, sha256, validateProgrammeIdentity } from "./stage3-core.mjs";
 
 const values = new Map();
 for (let index = 2; index < process.argv.length; index += 2) {
@@ -29,6 +29,8 @@ assert.equal(manifest.archive, archive.split(/[\\/]/u).at(-1));
 assert.equal(manifest.size, statSync(archive).size);
 assert.equal(manifest.sha256, archiveHash);
 assert.equal(manifest.contract, "oracle.sprint-30-5.stage-3-r10-archive-manifest");
+assert.equal(validateProgrammeIdentity(manifest.programmeIdentity), canonicalProgrammeIdentity);
+assert.equal(manifest.revision, "R10");
 assert.match(manifest.attemptId, /^stage3-r10-\d{8}T\d{9}Z-[0-9a-f]{8}$/u);
 assert.equal(
   manifest.authorityId,
@@ -56,6 +58,8 @@ assert.equal(
   evidenceManifest.contract,
   "oracle.sprint-30-5.stage-3-r10-evidence-manifest"
 );
+assert.equal(evidenceManifest.programmeIdentity, canonicalProgrammeIdentity);
+assert.equal(evidenceManifest.revision, "R10");
 assert.equal(evidenceManifest.authorityId, manifest.authorityId);
 assert.equal(evidenceManifest.attemptId, manifest.attemptId);
 assert.equal(
@@ -73,6 +77,8 @@ for (const expected of evidenceManifest.files) {
 const completion = JSON.parse(
   uniqueSuffix(archiveEntries, "evidence/completion.json").data.toString("utf8")
 );
+assert.equal(completion.programmeIdentity, canonicalProgrammeIdentity);
+assert.equal(completion.revision, "R10");
 assert.equal(completion.result, "passed");
 assert.equal(completion.authorityId, manifest.authorityId);
 assert.equal(completion.attemptId, manifest.attemptId);
@@ -87,6 +93,8 @@ const finalLifecycle = JSON.parse(
     "lifecycle/14-evidence-frozen.json"
   ).data.toString("utf8")
 );
+assert.equal(finalLifecycle.programmeIdentity, canonicalProgrammeIdentity);
+assert.equal(finalLifecycle.revision, "R10");
 assert.equal(finalLifecycle.phase, "evidence-frozen");
 assert.equal(finalLifecycle.authorityId, manifest.authorityId);
 assert.equal(finalLifecycle.attemptId, manifest.attemptId);

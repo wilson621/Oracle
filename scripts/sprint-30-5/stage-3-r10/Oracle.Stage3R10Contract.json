@@ -3,6 +3,20 @@
     "contract":  "oracle.sprint-30-5.stage-3-r10",
     "programmeIdentity":  "Sprint 30.5 Stage 3 Requalification R10",
     "revision":  "R10",
+    "rejectedTransfers":  [
+                              {
+                                  "transferId":  "transfer-stage3-r10-20260803T130243096Z-7a48bde6",
+                                  "manifestSha256":  "105d3004aa7c91f43eb440bced6d9806a963676ea0a9b2e661b8b32d7684aaed",
+                                  "custodySha256":  "fe57b149fda7192e473755149b2a202276b3abb6da826f542d5bf563b63ec5d2",
+                                  "disposition":  "immutable-rejected-custody-authority-mismatch"
+                              },
+                              {
+                                  "transferId":  "transfer-stage3-r10-20260803T133216036Z-9dc6f3f1",
+                                  "manifestSha256":  "3caaeb29b432acca0aaccb43da45fc294f564e76d103cc274428ee83ad365e1e",
+                                  "custodySha256":  "7972737c6ec8b9884cf26816d316b809ffb6e01c22efb45ca88ef1b204e62317",
+                                  "disposition":  "immutable-rejected-programme-identity-contradiction"
+                              }
+                          ],
     "revisionLineage":  {
                             "currentLineage":  "attempt-scoped-stage-3-requalification",
                             "historicalQualifiedRevision":  "R9",

@@ -14,6 +14,7 @@ import {
 import { join } from "node:path";
 import {
   assertCreateOnlyDestination,
+  canonicalProgrammeIdentity,
   assertNoLinkTraversal,
   assertOutsideHistoricalRoots,
   contract,
@@ -23,6 +24,7 @@ import {
   validateCertificateWindow,
   validateExecutionIdentity,
   validateProcessEnvelope,
+  validateProgrammeIdentity,
   validateTransferConstructionAuthority,
   validateTransferIdentity,
   writeJsonAtomicCreateOnly,
@@ -136,6 +138,38 @@ validateTransferIdentity({
   timestampUtc,
 });
 assert.equal(
+  validateProgrammeIdentity(contract.programmeIdentity),
+  canonicalProgrammeIdentity
+);
+for (const invalidProgrammeIdentity of [
+  "Sprint 30.5 Stage 3 Qualification R10",
+  "sprint 30.5 Stage 3 Requalification R10",
+  "Sprint 30.5  Stage 3 Requalification R10",
+  "Sprint 30.5 Stage-3 Requalification R10",
+  "Sprint 30.5 Stage 4 Requalification R10",
+  "Sprint 30.5 Stage 3 Requalification R9",
+]) {
+  assert.throws(
+    () => validateProgrammeIdentity(invalidProgrammeIdentity),
+    /programme identity differs/u
+  );
+}
+for (const rejectedTransfer of [
+  {
+    transferId: "transfer-stage3-r10-20260803T130243096Z-7a48bde6",
+    timestampUtc: "2026-08-03T13:02:43.096Z",
+  },
+  {
+    transferId: "transfer-stage3-r10-20260803T133216036Z-9dc6f3f1",
+    timestampUtc: "2026-08-03T13:32:16.036Z",
+  },
+]) {
+  assert.throws(
+    () => validateTransferIdentity(rejectedTransfer),
+    /Rejected Stage 3 R10 transfer identity cannot be reused/u
+  );
+}
+assert.equal(
   validateTransferConstructionAuthority("FOUNDER-AUTHORISED-STAGE3-R10-TRANSFER"),
   "FOUNDER-AUTHORISED-STAGE3-R10-TRANSFER"
 );
@@ -207,6 +241,8 @@ try {
     fixtureEvidenceManifest,
     `${JSON.stringify({
       contract: "oracle.sprint-30-5.stage-3-r10-evidence-manifest",
+      programmeIdentity: canonicalProgrammeIdentity,
+      revision: "R10",
       authorityId: fixtureAuthorityId,
       attemptId: fixtureAttemptId,
       scope: "fixture",
@@ -218,6 +254,8 @@ try {
   writeFileSync(
     join(fixtureEvidenceRoot, "completion.json"),
     `${JSON.stringify({
+      programmeIdentity: canonicalProgrammeIdentity,
+      revision: "R10",
       result: "passed",
       authorityId: fixtureAuthorityId,
       attemptId: fixtureAttemptId,
@@ -229,6 +267,8 @@ try {
     join(fixtureLifecycleRoot, "14-evidence-frozen.json"),
     `${JSON.stringify({
       contract: "oracle.sprint-30-5.stage-3-r10-lifecycle",
+      programmeIdentity: canonicalProgrammeIdentity,
+      revision: "R10",
       authorityId: fixtureAuthorityId,
       attemptId: fixtureAttemptId,
       phase: "evidence-frozen",
@@ -276,6 +316,8 @@ try {
     returnedManifest,
     `${JSON.stringify({
       contract: "oracle.sprint-30-5.stage-3-r10-archive-manifest",
+      programmeIdentity: canonicalProgrammeIdentity,
+      revision: "R10",
       authorityId: fixtureAuthorityId,
       attemptId: fixtureAttemptId,
       archive: `${fixtureAttemptId}.zip`,
@@ -321,6 +363,28 @@ try {
     { encoding: "utf8", shell: false }
   );
   assert.notEqual(mismatchedReturn.status, 0);
+  const rejectedIdentityManifest = `${returnedArchive}.rejected-identity.manifest.json`;
+  writeFileSync(
+    rejectedIdentityManifest,
+    readFileSync(returnedManifest, "utf8").replace(
+      canonicalProgrammeIdentity,
+      "Sprint 30.5 Stage 3 Qualification R10"
+    )
+  );
+  const rejectedIdentityReturn = spawnSync(
+    process.execPath,
+    [
+      join(import.meta.dirname, "verify-return.mjs"),
+      "--archive",
+      returnedArchive,
+      "--sidecar",
+      returnedSidecar,
+      "--manifest",
+      rejectedIdentityManifest,
+    ],
+    { encoding: "utf8", shell: false }
+  );
+  assert.notEqual(rejectedIdentityReturn.status, 0);
 
   const link = join(temporaryRoot, "link");
   try {
@@ -458,6 +522,14 @@ const developmentPlatformFixturePath = join(
 const phaseAudit = JSON.parse(
   readFileSync(join(import.meta.dirname, "Oracle.Stage3R10PhaseAudit.json"), "utf8")
 );
+const hostShapeFixtures = JSON.parse(
+  readFileSync(join(import.meta.dirname, "Oracle.Stage3R10HostShapeFixtures.json"), "utf8")
+);
+const harnessReadme = readFileSync(join(import.meta.dirname, "README.md"), "utf8");
+const stage3R10Plan = readFileSync(
+  join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R10_PLAN.md"),
+  "utf8"
+);
 const packageInventoryFixturePath = join(
   import.meta.dirname,
   "Test-OracleStage3R10PackageInventoryPolicy.ps1"
@@ -487,6 +559,48 @@ const preparationValidationReport = readFileSync(
 const packageScripts = JSON.parse(
   readFileSync(join(repositoryRoot, "package.json"), "utf8")
 ).scripts;
+assert.equal(contract.programmeIdentity, canonicalProgrammeIdentity);
+assert.equal(contract.revision, "R10");
+assert.equal(phaseAudit.programmeIdentity, canonicalProgrammeIdentity);
+assert.equal(hostShapeFixtures.continuity.normal.programmeIdentity, canonicalProgrammeIdentity);
+for (const governedDocument of [
+  harnessReadme,
+  stage3R10Plan,
+  preExecutionGate,
+  preparationValidationReport,
+]) {
+  assert.ok(governedDocument.includes(canonicalProgrammeIdentity));
+}
+for (const operationalSource of [
+  transferBuilder,
+  continuityCollector,
+  preAuthorityPreflight,
+  preflightPolicy,
+  harness,
+]) {
+  assert.ok(
+    !operationalSource.includes("Sprint 30.5 Stage 3 Qualification R10"),
+    "Reachable R10 source retains the rejected programme identity."
+  );
+}
+assert.match(transferBuilder, /programmeIdentity:\s*contract\.programmeIdentity/u);
+assert.match(continuityCollector, /programmeIdentity = \$contract\.programmeIdentity/u);
+assert.match(
+  preAuthorityPreflight,
+  /\[string\]\$manifest\.programmeIdentity[ \t]+-cne[ \t]*\r?\n[ \t]+\[string\]\$contract\.programmeIdentity/u
+);
+assert.match(
+  preAuthorityPreflight,
+  /\[string\]\$custody\.programmeIdentity[ \t]+-cne[ \t]*\r?\n[ \t]+\[string\]\$contract\.programmeIdentity/u
+);
+assert.match(
+  harness,
+  /\[string\]\$manifest\.programmeIdentity[ \t]+-cne[ \t]*\r?\n[ \t]+\[string\]\$contract\.programmeIdentity/u
+);
+assert.match(
+  harness,
+  /\[string\]\$custody\.programmeIdentity[ \t]+-cne[ \t]*\r?\n[ \t]+\[string\]\$contract\.programmeIdentity/u
+);
 assert.match(transferBuilder, /candidate\.candidateCommit/u);
 assert.match(transferBuilder, /candidate\.sourceTree/u);
 assert.doesNotMatch(transferBuilder, /candidate\.repository/u);
@@ -1236,6 +1350,20 @@ for (const text of governance) {
   assert.match(text, /Stage 3[\s\S]{0,600}(?:blocked|unauthorised)/iu);
 }
 
+assert.deepEqual(contract.rejectedTransfers, [
+  {
+    transferId: "transfer-stage3-r10-20260803T130243096Z-7a48bde6",
+    manifestSha256: "105d3004aa7c91f43eb440bced6d9806a963676ea0a9b2e661b8b32d7684aaed",
+    custodySha256: "fe57b149fda7192e473755149b2a202276b3abb6da826f542d5bf563b63ec5d2",
+    disposition: "immutable-rejected-custody-authority-mismatch",
+  },
+  {
+    transferId: "transfer-stage3-r10-20260803T133216036Z-9dc6f3f1",
+    manifestSha256: "3caaeb29b432acca0aaccb43da45fc294f564e76d103cc274428ee83ad365e1e",
+    custodySha256: "7972737c6ec8b9884cf26816d316b809ffb6e01c22efb45ca88ef1b204e62317",
+    disposition: "immutable-rejected-programme-identity-contradiction",
+  },
+]);
 assert.equal(contract.authority.preparation, "founder-authorised");
 assert.equal(contract.authority.transfer, "not-authorised");
 assert.equal(contract.authority.execution, "not-authorised");

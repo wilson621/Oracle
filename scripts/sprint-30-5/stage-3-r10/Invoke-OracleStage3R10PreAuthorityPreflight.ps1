@@ -46,8 +46,7 @@ if (
   $custodySidecarHash -cne $ExpectedTransferCustodySha256 -or
   [string]$manifest.contract -cne
     "oracle.sprint-30-5.stage-3-r10-transfer" -or
-  [string]$manifest.programmeIdentity -cne
-    "Sprint 30.5 Stage 3 Qualification R10" -or
+
   [string]$manifest.revision -cne "R10" -or
   [string]$manifest.preparation.harnessCommit -cne $ExpectedHarnessCommit -or
   [string]$manifest.preparation.harnessTree -cnotmatch '^[0-9a-f]{40}$' -or
@@ -124,6 +123,21 @@ if ((Get-Sha256 $contractPath) -cne [string]$contractEntry[0].sha256) {
   throw "Pre-authority contract bytes differ from the transfer manifest."
 }
 $contract = Get-Content -LiteralPath $contractPath -Raw | ConvertFrom-Json
+if (
+  [string]$contract.programmeIdentity -cne
+    "Sprint 30.5 Stage 3 Requalification R10" -or
+  [string]$contract.revision -cne "R10" -or
+  [string]$manifest.programmeIdentity -cne
+    [string]$contract.programmeIdentity -or
+  [string]$manifest.revision -cne [string]$contract.revision -or
+  [string]$custody.programmeIdentity -cne
+    [string]$contract.programmeIdentity -or
+  [string]$custody.revision -cne [string]$contract.revision -or
+  @($contract.rejectedTransfers | Where-Object {
+    [string]($_ | Select-Object -ExpandProperty transferId -ErrorAction Stop) -ceq
+      [string]$manifest.transferId
+  }).Count -ne 0
+) { throw "Pre-authority canonical R10 identity differs or is retired." }
 if (
   [string]$manifest.acceptedStage2.msixSha256 -cne
     [string]$contract.stage2.msixSha256 -or
