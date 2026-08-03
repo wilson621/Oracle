@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-2-requalification-r4-final-evidence",
+  "programmeIdentity": "Sprint 30.5 Stage 2 Requalification R4",
+  "revision": "R4",
+  "authorityId": "authority-r4-20260803T115002258Z-31ab0bf6",
+  "attemptId": "r4-20260803T115002258Z-31ab0bf6",
+  "candidateCommit": "f7203f9b602b182a2bd006bc3cff3113b839be8e",
+  "harnessCommit": "a31c2897dd063e8e995e558cd83ecd188b8392ff",
+  "createdAt": "2026-08-03T11:52:07.179Z",
+  "status": "execution-passed-awaiting-founder-review",
+  "archive": {
+    "filename": "Oracle.Sprint30.5.Stage2RequalificationR4QualificationEvidence.zip",
+    "size": 216696320,
+    "sha256": "3f1f11dd04ddbc3b4eb51db344f71c12252cc7e41e8ae072950d3a74c1452495",
+    "sidecar": "Oracle.Sprint30.5.Stage2RequalificationR4QualificationEvidence.zip.sha256.txt"
+  },
+  "evidenceFiles": [
+    {
+      "path": "final-machine-checkpoint.json",
+      "size": 748,
+      "sha256": "eaf3190ccf8e074c149ad845893bca69a200deb965d0ac8f5ff8dbbbbfcd56b0"
+    },
+    {
+      "path": "final-repository-checkpoint.json",
+      "size": 2338,
+      "sha256": "d9aea84c422d5ff45fc7fcf6bfd0523198a66fc30c8eeeed2672b81eca6c17bd"
+    },
+    {
+      "path": "qualification-candidate.json",
+      "size": 91746,
+      "sha256": "0e57a4fc6d998d7bfe7ec84de97915b3a2be140650df07d44578458ffabc8640"
+    },
+    {
+      "path": "runtime-configuration-build-secrecy.json",
+      "size": 1654,
+      "sha256": "5ee0c60de8bf7bb89aa8b68ffcf4fb0b5ef42c078e0efac9bff314c91b12758a"
+    },
+    {
+      "path": "single-attempt-authority.json",
+      "size": 589,
+      "sha256": "7c4732c3665c295ec5b2aab90fe6703655ec2c16f9c830bad5c06a5461ea2d3f"
+    },
+    {
+      "path": "stage-2-requalification-r4-certification.json",
+      "size": 1872,
+      "sha256": "a196267f08d61cfb321f444158823fca2d8121ba8e7fc2052574c578166ef946"
+    },
+    {
+      "path": "stage-2-requalification-r4-completion.json",
+      "size": 1028,
+      "sha256": "3a3c15d45b6c91a3074884a8354a32332902664600af84d86a796664fd60c093"
+    },
+    {
+      "path": "stage-2-requalification-r4-evidence-index.json",
+      "size": 7731,
+      "sha256": "b4351edb91159e308033126187485caf8ca7d20a62330cebc780468205b1d607"
+    },
+    {
+      "path": "stage-2-requalification-r4-frozen-evidence.json",
+      "size": 1102,
+      "sha256": "2b8fef54ba7c5254d4bba0eef6b73652239d682b6e0fb1f4e93d6095bcaeff04"
+    }
+  ],
+  "releaseFiles": [
+    {
+      "path": "Oracle_0.1.2.0_x64_STAGE2_REQUALIFICATION_R4_LOCAL_TEST_ONLY.msix",
+      "size": 215285837,
+      "sha256": "8679138e78827d41e20cf3f0c452e3c28120afad846ef4e20329eeff1f9aebd5"
+    },
+    {
+      "path": "oracle-0.1.2.cdx.json",
+      "size": 80415,
+      "sha256": "0b3627e41b252a3065a7199593fcc20a08f073bb9aa466b4feded16d3fc5a1b3"
+    },
+    {
+      "path": "oracle-0.1.2.provenance.json",
+      "size": 1436,
+      "sha256": "3a29a893780b569b39fdaa0e355ebde2514e6465eb6f62b040e84ebb820e5392"
+    },
+    {
+      "path": "oracle-release-manifest.json",
+      "size": 1876,
+      "sha256": "be26608410c26af2ef1d784949d2fa7c2af874de41ab1e13968da85c3372e7e7"
+    },
+    {
+      "path": "oracle-release-manifest.json.p7s",
+      "size": 1302,
+      "sha256": "3f4c1aab2eb0a5ab22e7455347ff9d59af523fd6424e59a638399383fdb19bf0"
+    },
+    {
+      "path": "package-content-inventory.json",
+      "size": 418544,
+      "sha256": "344e40d60cf15c65f3d324a616bdcdabc1edce8f167c034a7444fd443a5d1203"
+    },
+    {
+      "path": "release-build-summary.json",
+      "size": 1228,
+      "sha256": "0fe1a5e9e8129598a0754889b46becd7c77486a6565b5070d9b2746e102f1a1d"
+    },
+    {
+      "path": "signature-and-trust-verification.json",
+      "size": 3286,
+      "sha256": "e8e22094b0c21340239c7f3742a0c65acbb58ca895b09c2acf2953543fb28f9f"
+    },
+    {
+      "path": "signing-store-cleanup.json",
+      "size": 2582,
+      "sha256": "2eab7c148e42490b4ab8096dd983c6d06c0cc951672a18e8cf40180ef63a00ae"
+    }
+  ],
+  "lifecycleFiles": [
+    {
+      "path": "001-attempt-prepared.json",
+      "size": 700,
+      "sha256": "8e55304bab0afaed401bdcfc1544824d1af2a752bdfbbaee3d8a1ec3122bf720"
+    },
+    {
+      "path": "002-candidate-frozen.json",
+      "size": 795,
+      "sha256": "ea4e1cfb7877c573bd9ee0dac49bd37eedd203f3e2029e3b06b40e1433ca2e2d"
+    },
+    {
+      "path": "003-source-baseline-passed.json",
+      "size": 613,
+      "sha256": "aef0bbdbdd605c9a38e53c28d2f5da1a11417acc52294dd55bdc50b0f6633bf6"
+    },
+    {
+      "path": "004-inputs-reverified.json",
+      "size": 693,
+      "sha256": "be71618f47154c624c369c25dcd564fa9d0f0cf5e5fd711a1efa382690341f40"
+    },
+    {
+      "path": "005-package-layout-constructed.json",
+      "size": 689,
+      "sha256": "88402bab81608d0da6d6315c3af34d02d64609e034e79336665bf37114e2a877"
+    },
+    {
+      "path": "006-certificate-bound.json",
+      "size": 889,
+      "sha256": "d9107051103036e32ed2c8d6c778e08e46e112e2ef0dea017654f675b3c6d8b7"
+    },
+    {
+      "path": "007-package-and-manifests-signed.json",
+      "size": 820,
+      "sha256": "3b8ea7aaf30ce99e027eb85e4bff69c69a8aa6b866403e5e60305143fa364f3b"
+    },
+    {
+      "path": "008-mechanical-verification-passed.json",
+      "size": 677,
+      "sha256": "e154710975dfb9279cf87398d7b09e8810e55407dc2a9003bd55ecea420b94d6"
+    },
+    {
+      "path": "009-safety-teardown-passed.json",
+      "size": 710,
+      "sha256": "8f270c773ea73b5c511215af5bcd2dd0aceb402a3edcc0834d07d07283dc9484"
+    },
+    {
+      "path": "010-evidence-inventoried.json",
+      "size": 590,
+      "sha256": "b8f0343f2719b7f1b1421804e04f6d95671eb10769b5c8c48f8e7fea6f159fc4"
+    },
+    {
+      "path": "011-evidence-frozen.json",
+      "size": 758,
+      "sha256": "0d5cabae613c441e53d788995f448885663a3e9a4bf8ad576b9b1f3ba6c36461"
+    }
+  ],
+  "historicalStage2ArchiveSha256": "8c20f6da7f0262ed4ef9a3a59c6a027ba3d64cb66c4e646b1f5d075da369f876",
+  "exactCertificateThumbprint": "03BEFBF303751D3DC14DF3FA224EB6BC5A6E4222",
+  "teardownPassed": true,
+  "repositoryCommit": "a31c2897dd063e8e995e558cd83ecd188b8392ff",
+  "repositoryTree": "ec0dc354553b6be38daaee4cd2383e325bd94837",
+  "stage3Executed": false,
+  "productionAuthority": false
+}

@@ -245,6 +245,14 @@ Final cleanup records zero package, certificate, process, transfer, work and
 package-data residue. The Founder accepted the result and Stage 3 is formally
 closed.
 
-Stage 4 and later stages remain unstarted and unauthorised. Production
-signing, publication, distribution, deployment and release remain
-unauthorised.
+Stage 4 R1 subsequently passed, was Founder-accepted and is formally closed.
+Stage 2 Requalification R4 now qualifies the ADR-048 product baseline under
+attempt `r4-20260803T115002258Z-31ab0bf6`; final manifest SHA-256 is
+`876be1c0342c7dc9f70965faa3daffe0c9c1d8d7a3e2c41b144155350557784d`,
+archive SHA-256 is
+`3f1f11dd04ddbc3b4eb51db344f71c12252cc7e41e8ae072950d3a74c1452495`,
+and MSIX SHA-256 is
+`8679138e78827d41e20cf3f0c452e3c28120afad846ef4e20329eeff1f9aebd5`.
+R4 is Founder-accepted and formally closed. Stage 5 and later stages remain
+unstarted and unauthorised. Production signing, publication, distribution,
+deployment and release remain unauthorised.

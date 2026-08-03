@@ -112,12 +112,13 @@ closed. Any further Stage 3 execution is unauthorised. Its final evidence manife
 `19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe` and
 its qualification archive SHA-256 is
 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`.
-Stage 4 has not started and requires a separate Founder planning decision.
+Stage 4 R1 subsequently passed, was Founder-accepted and is formally closed.
 
 ## Sprint 30.5 Stage 2 Requalification R4
 
-R4 preparation binds the installed-runtime-configuration product baseline at
-commit `f7203f9b602b182a2bd006bc3cff3113b839be8e`, tree
-`5d7eca4c012874df0b839533dfab283b54778661`. The plan, implementation,
-pre-execution gate and validation report are versioned under `docs/sprints/`.
-R4 execution is not authorised. R3, Stage 3 R9 and Stage 4 R1 remain immutable.
+R4 attempt `r4-20260803T115002258Z-31ab0bf6` passed against the installed-
+runtime-configuration product baseline at commit
+`f7203f9b602b182a2bd006bc3cff3113b839be8e`, tree
+`5d7eca4c012874df0b839533dfab283b54778661`. The Founder accepted the
+immutable evidence and R4 is formally closed. R1-R3, Stage 3 R9 and Stage 4 R1
+remain immutable; downstream execution remains separately authorised.

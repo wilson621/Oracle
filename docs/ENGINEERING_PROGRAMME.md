@@ -8,16 +8,15 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder decision on one Stage 2 Requalification R4 execution attempt
+**Next Review:** Founder decision on downstream requalification planning against accepted Stage 2 R4
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
 **Classification:** Living
-**Current qualification consequence:** ADR-048 is implemented after the
-accepted Stage 2 R3 freeze. Stage 2 Requalification R4 preparation now binds
-that exact product baseline; execution remains separately Founder-authorised.
-Stage 5 remains blocked pending accepted R4 and applicable Stage 3/4
-requalification of the installed authenticated runtime.
+**Current qualification consequence:** Stage 2 Requalification R4 is
+Founder-accepted and formally closed for the ADR-048 product baseline. Stage 5
+remains blocked pending separately authorised clean-host and installed-
+authentication requalification of the accepted R4 MSIX.
 
 **Approved:** 22 July 2026
 

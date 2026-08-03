@@ -1218,11 +1218,11 @@ Everything else builds upon those principles.
 
 **The Oracle has spoken.**
 
-## Current Stage 2 R4 Requalification Gate
+## Current Stage 2 R4 Requalification Position
 
-Stage 2 Requalification R4 preparation binds the post-ADR-048 product commit
-`f7203f9b602b182a2bd006bc3cff3113b839be8e` and tree
-`5d7eca4c012874df0b839533dfab283b54778661`. No R4 execution is authorised.
-Stage 5 remains blocked until R4 and the separately governed downstream
-requalification sequence are accepted. Historical Stage 2 R3, Stage 3 R9 and
-Stage 4 R1 evidence remains immutable.
+Stage 2 Requalification R4 passed, was Founder-accepted and is formally closed
+for post-ADR-048 product commit `f7203f9b602b182a2bd006bc3cff3113b839be8e`,
+tree `5d7eca4c012874df0b839533dfab283b54778661`. Stage 5 remains blocked
+pending separately governed downstream clean-host and installed-authentication
+requalification. Historical Stage 2 R1-R3, Stage 3 R9 and Stage 4 R1 evidence
+remains immutable.

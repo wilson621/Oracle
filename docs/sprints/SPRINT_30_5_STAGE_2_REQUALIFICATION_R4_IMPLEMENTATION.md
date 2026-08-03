@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R4 Implementation
 
-Status: **IMPLEMENTED AND NON-QUALIFICATION VALIDATED**
+Status: **FOUNDER-ACCEPTED AND FORMALLY CLOSED**
 
 R4 is a versioned derivation of the accepted R3 harness. It preserves wrapper-only invocation, Windows PowerShell 5.1 cryptographic identity creation, deterministic npm/npx resolution, exact signer verification, CertUtil trust and teardown, create-only lifecycle/evidence publication, archive verification, failure outcomes, and final machine/repository checkpoints.
 

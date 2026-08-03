@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R4 Pre-Execution Gate
 
-Status: **READY FOR A SEPARATE FOUNDER EXECUTION DECISION**
+Status: **HISTORICAL GATE — CONSUMED BY ACCEPTED PASSING ATTEMPT**
 
 ## Required repository state
 

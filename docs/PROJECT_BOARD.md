@@ -176,14 +176,15 @@ archive SHA-256 is
 `91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15`;
 and teardown proved zero residue. Earlier accepted and historical records
 remain immutable. Stage 5, Gate 7 and production activity remain unauthorised.
-A Founder-approved bounded product correction now implements ADR-048's
-attempt-scoped installed-package runtime configuration boundary. Stage 2
-Requalification R4 preparation binds exact commit
-`f7203f9b602b182a2bd006bc3cff3113b839be8e` and tree
-`5d7eca4c012874df0b839533dfab283b54778661`; execution remains unauthorised.
-Stage 5 remains blocked pending accepted R4 and separately governed clean-host
-and installed-authentication requalification. Accepted Stage 2 R3, Stage 3 R9
-and Stage 4 R1 evidence remains immutable.
+Stage 2 Requalification R4 is Founder-accepted and formally closed for the
+ADR-048 runtime-configuration baseline at commit
+`f7203f9b602b182a2bd006bc3cff3113b839be8e`, tree
+`5d7eca4c012874df0b839533dfab283b54778661`. Passing attempt
+`r4-20260803T115002258Z-31ab0bf6` produced accepted MSIX SHA-256
+`8679138e78827d41e20cf3f0c452e3c28120afad846ef4e20329eeff1f9aebd5`.
+Stage 5 remains blocked pending separately governed clean-host and installed-
+authentication requalification. Stage 2 R1-R3, Stage 3 R9 and Stage 4 R1
+remain immutable historical results.
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
 production; the persistence foundation is established while runtime

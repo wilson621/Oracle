@@ -32,10 +32,10 @@ results.
 | Stage | Scope | Current state | Evidence or blocker | Next authority |
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
-| 2 | Candidate Freeze and Package Reconciliation | **R4 prepared; execution not authorised; R3 remains Founder-accepted history** | R4 binds product commit `f7203f9b602b182a2bd006bc3cff3113b839be8e`, tree `5d7eca4c012874df0b839533dfab283b54778661`; accepted R3 attempt and evidence remain immutable | Founder authority for exactly one R4 attempt |
+| 2 | Candidate Freeze and Package Reconciliation | **R4 Founder-accepted and formally closed** | Passing attempt `r4-20260803T115002258Z-31ab0bf6`; final evidence manifest SHA-256 `876be1c0342c7dc9f70965faa3daffe0c9c1d8d7a3e2c41b144155350557784d`; archive SHA-256 `3f1f11dd04ddbc3b4eb51db344f71c12252cc7e41e8ae072950d3a74c1452495`; R1-R3 remain immutable | None for R4; downstream requalification requires separate Founder authority |
 | 3 | Clean Windows Qualification | **Founder-accepted and formally closed at R9** | Passing attempt `stage3-r9-20260730T221251043Z-71af9db7` under authority `authority-stage3-r9-20260730T221251043Z-71af9db7`; final evidence manifest SHA-256 `19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`; archive SHA-256 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`; zero final residue | None for Stage 3; history is closed and any further Stage 3 execution is unauthorised |
 | 4 | Live Authentication and Protected Rendering | **R1 Founder-accepted and formally closed** | Passing attempt `stage4-r1-20260803T093803115Z-7fc6b185`; manifest SHA-256 `1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d`; archive SHA-256 `91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15`; ten journeys and zero-residue teardown passed | None for Stage 4; history is closed and further Stage 4 execution is unauthorised |
-| 5 | Installed Package GPU, Performance and Accessibility | **Blocked pending R4 and downstream requalification** | The R4 preparation binds the installed-package runtime configuration boundary, but no R4 attempt or later clean-host/installed-authentication requalification has occurred | Founder authority for one R4 attempt; later Stage 3/4 decisions remain separate |
+| 5 | Installed Package GPU, Performance and Accessibility | **Blocked pending downstream requalification** | Stage 2 R4 now qualifies the installed-package runtime configuration baseline; clean-host and installed-authentication evidence for that exact MSIX remain outstanding | Founder decision on the separately governed downstream requalification sequence |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
 | 7 | Final Integrated Qualification and Sprint 30 Closure Package | **Not started** | Requires complete immutable evidence from Stages 1–6 | Stage 6 acceptance, then separate Stage 7 authority |
 
@@ -99,6 +99,21 @@ results.
   `c2dc7c68bcc9b6dd8c3a8e39d6db5f1d5b8230b64906524e9a4c01cf25aa65d1`.
 - Exact certificate, trust, package and private-material residue is zero. R3
   grants no Stage 4 execution or production authority.
+- Stage 2 Requalification R4 attempt `r4-20260803T115002258Z-31ab0bf6`,
+  under authority `authority-r4-20260803T115002258Z-31ab0bf6`, passed all
+  twelve phases and was Founder-accepted and formally closed.
+- R4 binds candidate commit `f7203f9b602b182a2bd006bc3cff3113b839be8e`,
+  tree `5d7eca4c012874df0b839533dfab283b54778661`, and harness commit
+  `a31c2897dd063e8e995e558cd83ecd188b8392ff`, tree
+  `ec0dc354553b6be38daaee4cd2383e325bd94837`.
+- R4 final evidence manifest SHA-256 is
+  `876be1c0342c7dc9f70965faa3daffe0c9c1d8d7a3e2c41b144155350557784d`;
+  archive SHA-256 is
+  `3f1f11dd04ddbc3b4eb51db344f71c12252cc7e41e8ae072950d3a74c1452495`;
+  MSIX SHA-256 is
+  `8679138e78827d41e20cf3f0c452e3c28120afad846ef4e20329eeff1f9aebd5`.
+- R4 package, exact certificate, trust and private-material residue is zero.
+  Downstream Stage 3, Stage 4 and Stage 5 activity remains separately authorised.
 - Replacement-host installed GPU evidence remains a separate Stage 5
   requirement.
 
