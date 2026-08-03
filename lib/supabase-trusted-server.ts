@@ -1,6 +1,9 @@
 import "server-only";
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import {
+  getServerPublicRuntimeConfiguration,
+} from "@/lib/oracle/runtime/server-runtime-configuration";
 
 let trustedClient: SupabaseClient | null = null;
 
@@ -15,10 +18,10 @@ export function getTrustedSupabaseClient(): SupabaseClient {
     return trustedClient;
   }
 
-  const projectUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const projectUrl = getServerPublicRuntimeConfiguration().supabaseUrl;
   const secretKey = process.env.SUPABASE_SECRET_KEY;
 
-  if (!projectUrl || !secretKey) {
+  if (!secretKey) {
     throw new Error(
       "Trusted Supabase server configuration is unavailable."
     );

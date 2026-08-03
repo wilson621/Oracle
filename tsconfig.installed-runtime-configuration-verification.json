@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "types": ["node"],
+    "rootDir": ".",
+    "outDir": "./.tmp-installed-runtime-configuration-verification",
+    "noEmit": false,
+    "isolatedModules": false,
+    "incremental": false,
+    "sourceMap": false
+  },
+  "include": [
+    "desktop/runtime/installed-runtime-configuration.ts",
+    "desktop/runtime/packaged-request-origins.ts",
+    "lib/oracle/runtime/public-runtime-configuration.ts",
+    "lib/oracle/runtime/runtime-environment-policy.ts",
+    "lib/oracle/runtime/browser-runtime-configuration.ts",
+    "scripts/verify-installed-runtime-configuration.ts"
+  ],
+  "exclude": ["node_modules"]
+}

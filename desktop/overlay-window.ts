@@ -7,6 +7,10 @@ import {
 } from "electron";
 import { join } from "node:path";
 import {
+  createPackagedRequestOrigins,
+  isAllowedPackagedRequestUrl,
+} from "./runtime/packaged-request-origins.js";
+import {
   DESKTOP_CHANNELS,
   ORACLE_DESKTOP_RECOVERY_SHORTCUT,
   type OracleDesktopAttachmentState,
@@ -94,6 +98,7 @@ export type CompanionHostWindowOptions = {
   companionUrl: string;
   gameIntegrationRegistry: OracleGameIntegrationRegistryContract;
   guidanceService: OracleCompanionGuidanceProviderService;
+  providerOrigin?: string;
 };
 
 const DEVELOPMENT_WINDOW_WIDTH = 1200;
@@ -1248,7 +1253,8 @@ private restoreDevelopmentBounds(): void {
     if (app.isPackaged) {
       const allowedRequestOrigins =
         createPackagedRequestOrigins(
-          allowedOrigin
+          allowedOrigin,
+          this.options.providerOrigin
         );
       window.webContents.session
         .webRequest
@@ -1264,7 +1270,7 @@ private restoreDevelopmentBounds(): void {
           (details, callback) => {
             callback({
               cancel:
-                !isAllowedRequestUrl(
+                !isAllowedPackagedRequestUrl(
                   details.url,
                   allowedRequestOrigins
                 ),
@@ -1833,50 +1839,4 @@ function normaliseScaleFactor(
   return Number(
     scaleFactor.toFixed(3)
   );
-}
-
-function createPackagedRequestOrigins(
-  rendererOrigin: string
-): ReadonlySet<string> {
-  const origins =
-    new Set<string>([
-      rendererOrigin,
-    ]);
-  const configuredService =
-    process.env
-      .NEXT_PUBLIC_SUPABASE_URL;
-  if (configuredService) {
-    try {
-      const url =
-        new URL(
-          configuredService
-        );
-      if (url.protocol === "https:") {
-        origins.add(url.origin);
-        const websocket =
-          new URL(url.origin);
-        websocket.protocol = "wss:";
-        origins.add(
-          websocket.origin
-        );
-      }
-    } catch {
-      // Invalid optional configuration stays absent from the allowlist.
-    }
-  }
-  return origins;
-}
-
-function isAllowedRequestUrl(
-  requestUrl: string,
-  allowedOrigins:
-    ReadonlySet<string>
-): boolean {
-  try {
-    return allowedOrigins.has(
-      new URL(requestUrl).origin
-    );
-  } catch {
-    return false;
-  }
 }

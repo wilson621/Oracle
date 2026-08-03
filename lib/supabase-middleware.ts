@@ -5,19 +5,23 @@ import {
   safeRelativeReturnPath,
 } from "@/lib/oracle/services/auth/auth-policy";
 import { applyWebIdlePolicy } from "@/lib/oracle/services/auth/web-session-policy";
+import {
+  getServerPublicRuntimeConfiguration,
+} from "@/lib/oracle/runtime/server-runtime-configuration";
 
 const PUBLIC_PATHS = [
   "/auth",
 ] as const;
 
 export async function updateSession(request: NextRequest) {
+  const runtime = getServerPublicRuntimeConfiguration();
   let response = NextResponse.next({
     request,
   });
 
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    runtime.supabaseUrl,
+    runtime.supabaseAnonKey,
     {
       cookies: {
         getAll() {

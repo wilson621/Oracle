@@ -25,6 +25,9 @@ import {
 import {
   OraclePackagedNextServer,
 } from "./runtime/packaged-next-server.js";
+import {
+  consumeInstalledRuntimeConfiguration,
+} from "./runtime/installed-runtime-configuration.js";
 
 const DEFAULT_COMPANION_URL =
   "http://localhost:3000/companion";
@@ -36,6 +39,8 @@ let hostWindowController:
   | null = null;
 let companionUrl =
   DEFAULT_COMPANION_URL;
+let packagedProviderOrigin:
+  string | undefined;
 
 const packagedNextServer =
   new OraclePackagedNextServer();
@@ -152,14 +157,26 @@ function createHostWindowController(): CompanionHostWindowController {
       getOracleDesktopGameIntegrationRegistry(),
     guidanceService:
       getOracleDesktopGuidanceProviderService(),
+    providerOrigin:
+      packagedProviderOrigin,
   });
 }
 
 async function resolveCompanionUrl():
   Promise<string> {
   if (app.isPackaged) {
+    const runtimeConfiguration =
+      consumeInstalledRuntimeConfiguration(
+        process.argv
+      );
+    packagedProviderOrigin =
+      new URL(
+        runtimeConfiguration.environment
+          .ORACLE_SUPABASE_URL
+      ).origin;
     return await packagedNextServer.start(
-      process.resourcesPath
+      process.resourcesPath,
+      runtimeConfiguration.environment
     );
   }
 

@@ -3404,3 +3404,81 @@ The goal is to preserve Oracle's architectural reasoning for future developers.
 When uncertainty exists...
 
 Read the Decision Records before introducing architectural change.
+
+---
+
+# ADR-048
+
+## Title
+
+Attempt-Scoped Installed-Package Runtime Configuration for Local Qualification
+
+## Decision
+
+Oracle's registered local-qualification MSIX consumes provider runtime
+configuration through one attempt-scoped, create-only file in the exact
+package-family LocalState namespace. Direct AppX activation carries only the
+file path and SHA-256. The Electron main process atomically consumes, strictly
+validates and deletes the file before starting the packaged Next.js server.
+
+The configuration is bound to one Founder grant, authority, attempt, package
+family, candidate commit, candidate tree, MSIX hash and fifteen-minute
+validity window. Local qualification accepts only an exact
+`http://127.0.0.1:<port>` disposable-provider origin.
+
+Provider service credentials and the web-session integrity secret remain
+server-only and outside package bytes. Only the provider URL and public
+anonymous key may enter renderer-visible runtime metadata. Missing, malformed,
+stale, ambiguous, redirected or mismatched configuration fails startup closed.
+The historical unauthenticated certification fallback is not an admissible
+product state.
+
+## Reason
+
+AppX registered activation does not provide a governed caller-environment
+inheritance contract. The accepted package therefore launched its fallback
+page when installed, even while the canonical source could authenticate
+against the disposable Stage 4 provider.
+
+Embedding a mutable provider endpoint or credential in MSIX bytes would bind a
+single qualification environment into the immutable product and violate
+credential custody. A machine-global file or environment value would be
+ambient, reusable and ambiguous. Passing credentials on the activation command
+line would expose them to process and activation evidence.
+
+An attempt-scoped LocalState handoff uses the package's existing per-user
+storage boundary, keeps activation registered, supports deterministic
+create-only setup and exact teardown, and lets the main process project only
+the minimum values to each trust domain.
+
+## Consequences
+
+- Product package bytes remain credential-free.
+- AppX activation remains the qualified direct activation mechanism.
+- Stage qualification owns setup, admission and zero-residue teardown.
+- The packaged server receives public provider values, server authority and
+  session integrity in process-local environment only.
+- The renderer receives only public provider metadata.
+- The accepted Stage 2 R3 package is historically valid but a new candidate is
+  mandatory for this product change.
+- Stage 3 and Stage 4 must be repeated against the new exact package before
+  Stage 5 execution may begin.
+
+## Reversibility
+
+The versioned contract and consumer can be replaced by a later
+Founder-approved boundary. Existing package and qualification evidence remains
+immutable. Weakening attempt identity, expiry, package/candidate binding,
+server-only custody, create-only behavior or zero-residue teardown requires a
+superseding Founder decision.
+
+## Authority Boundary
+
+This ADR records the Founder-approved bounded correction and its required
+requalification impact. It does not authorise qualification execution,
+production endpoints or credentials, publication, deployment, release,
+Stage 5 execution, Stage 6, Stage 7, Gate 7 or Beta.
+
+## Status
+
+Accepted - Founder-approved 3 August 2026.

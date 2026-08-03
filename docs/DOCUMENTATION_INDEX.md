@@ -201,6 +201,7 @@ delivery authorities have been reviewed.
 | Current designed architecture | [Architecture](Architecture.md) | Living |
 | Subsystem ownership and boundaries | [Architecture Index](architecture/ARCHITECTURE_INDEX.md) | Living |
 | Verified repository capability | [Implementation Status](architecture/IMPLEMENTATION_STATUS.md) | Living |
+| Installed-package qualification runtime boundary | [Installed Package Runtime Configuration](architecture/INSTALLED_PACKAGE_RUNTIME_CONFIGURATION.md) | Living |
 | Authoritative post-Migration 009 platform state | [Oracle Platform v0.9 Baseline](ORACLE_PLATFORM_V0.9_BASELINE.md) | Point-in-time baseline |
 | Engineering delivery governance and approval gates | [Oracle Engineering Governance](GOVERNANCE.md) | Living |
 | Strategic delivery sequence | [Roadmap](Roadmap.md) | Living |

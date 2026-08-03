@@ -910,6 +910,39 @@ Accepted integration debt
 - production exercise of ready and partial-success Companion presentation paths
 - measured legacy web Application boundary exceptions
 
+## Installed Package Runtime Configuration
+
+Locations
+
+- `desktop/runtime/installed-runtime-configuration.ts`
+- `lib/oracle/runtime/`
+- `scripts/qualification/Oracle.InstalledRuntimeConfigurationPolicy.ps1`
+
+Owns
+
+- one-time admission of attempt-scoped local-qualification configuration;
+- exact activation path and byte-hash binding;
+- package LocalState path, identity, freshness and provider validation;
+- server-only service-credential and session-secret projection; and
+- public provider metadata projection to the browser.
+
+Must Never
+
+- embed mutable provider credentials in package bytes;
+- accept machine-global ambient configuration;
+- expose the service credential or session secret to renderer code, IPC,
+  diagnostics or evidence;
+- accept non-loopback local-qualification providers;
+- reuse a consumed configuration namespace; or
+- substitute an unauthenticated fallback for canonical product behavior.
+
+The detailed lifecycle and threat model are recorded in
+`INSTALLED_PACKAGE_RUNTIME_CONFIGURATION.md` and ADR-048. The implementation
+is not qualified and requires a new Stage 2 candidate plus applicable Stage
+3/4 requalification before Stage 5.
+
+---
+
 ## Desktop Distribution Contract
 
 ADR-046 establishes:

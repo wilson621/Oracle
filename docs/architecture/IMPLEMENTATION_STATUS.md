@@ -62,6 +62,18 @@ the qualification archive SHA-256 is
 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`,
 and final package, certificate, process, transfer, work and package-data
 residue is zero. Stage 4 R1 subsequently passed and is formally closed.
+ADR-048 is now implemented as an unqualified post-Stage 4 product-baseline
+change. Registered AppX activation can carry a non-secret path and hash for one
+attempt-scoped, create-only package-LocalState configuration. The main process
+atomically validates and deletes that file, the packaged server receives
+server-only provider and session credentials, and the renderer receives only
+validated public provider metadata. Missing or invalid configuration fails
+startup closed; the former certification fallback is removed.
+
+This implementation changes product and package bytes after the accepted Stage
+2 R3 freeze. It has passed development validation but is not qualified,
+deployed, activated or released. A new Stage 2 candidate and applicable Stage
+3/4 requalification are mandatory before Stage 5 may resume.
 
 ---
 

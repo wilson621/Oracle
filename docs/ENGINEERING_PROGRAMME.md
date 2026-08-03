@@ -8,11 +8,15 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder decision on Stage 5 planning and readiness
+**Next Review:** Founder decision on post-ADR-048 Stage 2 candidate preparation
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
 **Classification:** Living
+**Current qualification consequence:** ADR-048 is implemented after the
+accepted Stage 2 R3 freeze. Stage 5 remains blocked pending a new Stage 2
+candidate and applicable Stage 3/4 requalification of the installed
+authenticated runtime.
 
 **Approved:** 22 July 2026
 
