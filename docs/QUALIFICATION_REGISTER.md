@@ -32,10 +32,10 @@ results.
 | Stage | Scope | Current state | Evidence or blocker | Next authority |
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
-| 2 | Candidate Freeze and Package Reconciliation | **R6 Founder-accepted and formally closed** | Passing attempt `r6-20260803T171057940Z-5e914d18`; final manifest `a637a7fdf49f6b2a957738c89cb02015b6384d227c2c72f77a2aabdd721bf288`; archive `7884c93b222cd5f16f51dd5ba1b56c51af5008e1f6c999dcff92a8c1a26ac690`; MSIX `492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430`; zero residue | Prepare a newly R6-bound clean-host revision; R10 remains barred |
-| 3 | Clean Windows Qualification | **R9 accepted history; R11 immutable failed qualification; engineering investigation active** | R11 authority is consumed and attempt `stage3-r11-20260803T175715661Z-84bf486c` is permanently closed | Complete and validate a successor correction; no transfer or qualification attempt is authorised |
-| 4 | Live Authentication and Protected Rendering | **R1 Founder-accepted and formally closed** | Passing attempt `stage4-r1-20260803T093803115Z-7fc6b185`; manifest SHA-256 `1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d`; archive SHA-256 `91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15`; ten journeys and zero-residue teardown passed | None for Stage 4; history is closed and further Stage 4 execution is unauthorised |
-| 5 | Installed Package GPU, Performance and Accessibility | **Blocked pending a newly qualified corrected package and downstream requalification** | R4 qualifies only its immutable historical package; corrected current source has no accepted Stage 2 package, clean-host result or installed-authentication result | Stage 2 qualification authority when requested, followed by separately governed downstream authority |
+| 2 | Candidate Freeze and Package Reconciliation | **R6 Founder-accepted and formally closed** | Passing attempt `r6-20260803T171057940Z-5e914d18`; final manifest `a637a7fdf49f6b2a957738c89cb02015b6384d227c2c72f77a2aabdd721bf288`; archive `7884c93b222cd5f16f51dd5ba1b56c51af5008e1f6c999dcff92a8c1a26ac690`; MSIX `492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430`; zero residue | None for R6; downstream work requires separate authority |
+| 3 | Clean Windows Qualification | **R12 independently verified and formally closed** | Passing attempt `stage3-r12-20260803T204415402Z-b886be44`; evidence manifest `d0238d0859a871d2589f66cbddc5f337b33638b32a02375b71f39fc2dac461d0`; archive `1e583ef3a67755a40ec2d4ec50e0535e38ee3e2eab9b65767d48a3a17f8f5055`; zero residue | None for R12; consumed authority permits no retry |
+| 4 | Live Authentication and Protected Rendering | **R1 accepted immutable history; R6/R12 impact not decided** | Historical R1 attempt passed against its earlier baseline; no Stage 4 work was performed under the R12 mission | Separate Founder programme-state and qualification-impact decision |
+| 5 | Installed Package GPU, Performance and Accessibility | **Blocked pending Stage 4 baseline decision and separately governed downstream authority** | Stage 2 R6 and Stage 3 R12 qualify the corrected package through the clean-host lifecycle; installed-authentication applicability remains a Founder decision | Founder Stage 4 impact decision, then separately governed downstream authority |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
 | 7 | Final Integrated Qualification and Sprint 30 Closure Package | **Not started** | Requires complete immutable evidence from Stages 1–6 | Stage 6 acceptance, then separate Stage 7 authority |
 
@@ -296,3 +296,18 @@ The replacement-only transfer transfer-stage3-r12-20260803T201110346Z-3cf28c94 i
 ## Stage 3 R12 Execution Transfer Verified — Physical Handoff Pending
 
 Execution-enabled transfer transfer-stage3-r12-20260803T203230543Z-6c8c1069 passed independent full-payload verification at manifest SHA-256 cf4a0dfadecd49cef3163f37dd33089ab91db9edb41892e3573da4c58c1309c8 and custody SHA-256 334043da4a341fbc7b49b23221c544ce1b6e41f2a711ef798cc1c1a9bb6f163d. Execution is pending physical connection to exact host Founder-QA-01. No fresh continuity, authority or attempt exists.
+
+## Stage 3 Requalification R12 Independent Verification and Closure
+
+R12 attempt `stage3-r12-20260803T204415402Z-b886be44` passed all fourteen
+governed lifecycle phases on `Founder-QA-01`. Independent source-workstation
+verification proved the archive, sidecars, final manifest, `148/148` archive
+entries, `153/153` returned-to-repository files, consumed single authority,
+passing completion and zero final residue. The evidence manifest SHA-256 is
+`d0238d0859a871d2589f66cbddc5f337b33638b32a02375b71f39fc2dac461d0`;
+the archive SHA-256 is
+`1e583ef3a67755a40ec2d4ec50e0535e38ee3e2eab9b65767d48a3a17f8f5055`.
+
+Stage 3 R12 is formally closed for the accepted R6 package. No Stage 4 or new
+programme work is authorised. The next Founder-level mission is a separate
+Stage 4 programme-state and qualification-impact decision.

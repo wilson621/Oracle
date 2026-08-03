@@ -1,0 +1,916 @@
+{
+    "selectedWindow":  {
+                           "handle":  "10814410",
+                           "title":  "Oracle",
+                           "processId":  6084,
+                           "processName":  "Oracle",
+                           "visible":  true,
+                           "minimized":  false,
+                           "x":  168,
+                           "y":  8,
+                           "width":  1200,
+                           "height":  800
+                       },
+    "ownerPackageIdentity":  {
+                                 "processId":  6084,
+                                 "expectedPackageFamilyName":  "Oracle.Platform.LocalCertification_3yksyxackaf0t",
+                                 "observedPackageFamilyName":  "Oracle.Platform.LocalCertification_3yksyxackaf0t",
+                                 "comparison":  "ordinal-ignore-case",
+                                 "matched":  true
+                             },
+    "ownerProcessPath":  "C:\\Program Files\\WindowsApps\\Oracle.Platform.LocalCertification_0.1.4.0_x64__3yksyxackaf0t\\Oracle.exe",
+    "ownerAuthenticodeStatus":  "Valid",
+    "ownerSignerThumbprint":  "8C24858C147873EF46A9D61018FA2702B6222EA2",
+    "ownerCommandLine":  "\"C:\\Program Files\\WindowsApps\\Oracle.Platform.LocalCertification_0.1.4.0_x64__3yksyxackaf0t\\Oracle.exe\" \"--oracle-runtime-configuration=C:\\Users\\wilso\\AppData\\Local\\Packages\\Oracle.Platform.LocalCertification_3yksyxackaf0t\\LocalState\\Oracle\\QualificationRuntime\\runtime-stage3-r12-20260803T204415402Z-b886be44\\runtime.json\" \"--oracle-runtime-configuration-sha256=6c8477032d633a9a3bc2fe05e6b202846ef40757b6d52205dfc85a21f285adfd\" ",
+    "networkConnections":  [
+
+                           ],
+    "requiredDurationSeconds":  60,
+    "measuredDurationMilliseconds":  60428.843400000005,
+    "measuredDurationSeconds":  60.428843400000005,
+    "firstValidSampleAtUtc":  "2026-08-03T20:46:34.9046344Z",
+    "finalValidSampleAtUtc":  "2026-08-03T20:47:35.3180821Z",
+    "completedSeconds":  60.428843400000005,
+    "samples":  [
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:34.9046344Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  0,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:36.0541831Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  1158.7110000000002,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:37.1812205Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  2290.8298999999997,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:38.2980417Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  3398.7033,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:39.4151882Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  4513.9865,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:40.5401285Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  5638.4926000000005,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:41.6687349Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  6767.0273000000007,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:42.7863520Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  7886.8553999999995,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:43.9157449Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  9014.7380000000012,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:45.0312922Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  10130.516899999999,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:46.1531804Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  11250.9996,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:47.2813769Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  12380.3616,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:48.3946551Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  13502.350700000003,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:49.4929284Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  14605.2481,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:50.6165554Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  15714.9454,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:51.7330077Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  16837.431500000002,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:52.8502172Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  17948.911600000003,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:53.9664446Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  19071.321,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:55.0889731Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  20191.1558,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:56.2158511Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  21316.2642,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:57.3276248Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  22428.7026,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:58.4512493Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  23549.127800000002,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:46:59.5801112Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  24681.612100000002,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:00.6904029Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  25789.158700000004,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:01.8079577Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  26906.725400000003,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:02.9235985Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  28022.3552,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:04.0356800Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  29134.9096,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:05.1516355Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  30250.4141,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:06.2784153Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  31380.3704,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:07.3934036Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  32501.7405,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:08.5047472Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  33613.1843,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:09.6266367Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  34727.7882,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:10.7433052Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  35842.9127,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:11.8544405Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  36953.292400000006,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:12.9736754Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  38072.365000000005,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:14.0852635Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  39185.493200000004,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:15.2046231Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  40303.3591,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:16.3166707Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  41415.3847,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:17.4333131Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  42531.706000000006,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:18.5403448Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  43650.022600000004,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:19.6707613Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  44769.712400000004,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:20.7885666Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  45890.571500000005,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:21.9057839Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  47004.8032,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:23.0265545Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  48125.265600000006,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:24.1534830Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  49254.4078,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:25.2651541Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  50363.747,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:26.3798937Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  51478.611000000004,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:27.4963852Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  52597.4751,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:28.6023779Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  53715.5212,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:29.7317544Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  54830.4538,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:30.8493156Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  55955.6828,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:31.9622160Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  57065.619000000006,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:33.0816137Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  58180.3773,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:34.2019733Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  59300.66,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    },
+                    {
+                        "recordedAtUtc":  "2026-08-03T20:47:35.3180821Z",
+                        "elapsedFromFirstValidSampleMilliseconds":  60428.843400000005,
+                        "value":  {
+                                      "handle":  "10814410",
+                                      "exists":  true,
+                                      "visible":  true,
+                                      "minimized":  false,
+                                      "bounds":  {
+                                                     "x":  168,
+                                                     "y":  8,
+                                                     "width":  1200,
+                                                     "height":  800
+                                                 }
+                                  }
+                    }
+                ]
+}

@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
 **Last Reviewed:** 3 August 2026
-**Version:** 9.2
+**Version:** 9.3
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -944,3 +944,16 @@ The verified replacement-only R12 transfer remains immutable execution-barred hi
 ## Stage 3 R12 Physical Handoff Required
 
 The fresh execution-enabled transfer is independently verified. Current host DESKTOP-M3H22E4 fails the exact Founder-QA-01 identity gate and exposes prohibited development tools. The USB must move to Founder-QA-01 before fresh continuity. Authority and attempt counts remain zero.
+
+## Stage 3 R12 Qualification Closed
+
+The fresh mission completed on `Founder-QA-01`. Attempt
+`stage3-r12-20260803T204415402Z-b886be44` passed all fourteen phases under its
+single consumed authority. Independent return verification and byte
+reconciliation passed; canonical evidence is frozen under
+`docs/sprints/evidence/sprint-30-5/stage-3-r12/`, and all final residue counters
+are zero.
+
+R12 is formally closed for the accepted Stage 2 R6 package. R9, failed R11 and
+both earlier R12 transfers remain immutable history. Stage 4 and all new work
+remain unauthorised pending a separate Founder mission.

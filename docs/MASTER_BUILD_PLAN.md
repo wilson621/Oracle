@@ -9,7 +9,7 @@
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
 **Last Reviewed:** 3 August 2026
-**Version:** 5.3
+**Version:** 5.4
 
 ---
 
@@ -887,3 +887,14 @@ The Founder authorised one fresh R12 baseline whose manifest-bound contract expl
 ## Stage 3 R12 Execution Transfer Handoff
 
 Fresh transfer transfer-stage3-r12-20260803T203230543Z-6c8c1069 is complete and independently verified. The next mandatory gate is physical attachment to exact clean host Founder-QA-01. No continuity, authority or attempt was created on the construction host.
+
+## Stage 3 R12 Qualification Closure
+
+The authorised R12 attempt passed all fourteen lifecycle phases on
+`Founder-QA-01`; its single authority is consumed. The returned archive,
+manifest, expanded namespace and repository copy passed independent hash and
+inventory reconciliation, and teardown finished with zero governed residue.
+
+The R6-bound Clean Windows objective is complete and R12 is formally closed.
+This plan starts no Stage 4 or later work. Further execution direction requires
+a separate Founder programme-state and Stage 4 impact decision.

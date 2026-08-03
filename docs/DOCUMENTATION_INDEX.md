@@ -509,3 +509,7 @@ to adopt a later formatting standard.
 | Sprint 30.5 Stage 3 R12 execution-enabled validation | [Sprint 30.5 Stage 3 R12 Execution-Enabled Validation Report](sprints/SPRINT_30_5_STAGE_3_R12_EXECUTION_ENABLED_VALIDATION_REPORT.md) | Passed non-qualification gates and immutable-history preservation checks |
 
 | Sprint 30.5 Stage 3 R12 execution transfer handoff | [Sprint 30.5 Stage 3 R12 Execution Transfer Handoff](sprints/SPRINT_30_5_STAGE_3_R12_EXECUTION_TRANSFER_HANDOFF.md) | Verified fresh transfer, exact physical-host blocker, and zero-authority handoff state |
+
+| Sprint 30.5 Stage 3 R12 qualification closure | [Sprint 30.5 Stage 3 R12 Qualification Closure](sprints/SPRINT_30_5_STAGE_3_R12_QUALIFICATION_CLOSURE.md) | Independently verified passing attempt, consumed authority, immutable bindings and formal R12 closure |
+
+| Sprint 30.5 Stage 3 R12 accepted evidence | [Sprint 30.5 Stage 3 R12 Evidence](sprints/evidence/sprint-30-5/stage-3-r12/README.md) | Canonical returned evidence, archive, manifest, authority, attempt and accepted index |

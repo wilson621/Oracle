@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-3-r12-accepted-evidence-index",
+  "programmeIdentity": "Sprint 30.5 Stage 3 Requalification R12",
+  "status": "independently-verified-formally-closed",
+  "verifiedAtUtc": "2026-08-03",
+  "founderGrantId": "founder-stage3-r12-grant-20260803T204415402Z-b886be44",
+  "authorityId": "authority-stage3-r12-20260803T204415402Z-b886be44",
+  "attemptId": "stage3-r12-20260803T204415402Z-b886be44",
+  "executionBaseline": {
+    "commit": "3aa68ac8f08fafaea2963517e7aa7ba3b011d931",
+    "tree": "36d11511d81e5d10919449fca7aa3fbb066af66b"
+  },
+  "transfer": {
+    "id": "transfer-stage3-r12-20260803T203230543Z-6c8c1069",
+    "manifestSha256": "cf4a0dfadecd49cef3163f37dd33089ab91db9edb41892e3573da4c58c1309c8",
+    "custodySha256": "334043da4a341fbc7b49b23221c544ce1b6e41f2a711ef798cc1c1a9bb6f163d"
+  },
+  "stage2": {
+    "revision": "R6",
+    "attemptId": "r6-20260803T171057940Z-5e914d18",
+    "candidateCommit": "ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff",
+    "candidateTree": "8455a05780989a9d5f6c6d527f7d427d94526b04",
+    "msixSha256": "492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430"
+  },
+  "repositoryEvidenceRoot": "Oracle.Stage3R12Evidence",
+  "preservedRoot": {
+    "fileCount": 153,
+    "bytes": 358848,
+    "attemptFileCount": 148,
+    "attemptBytes": 253640
+  },
+  "archive": {
+    "path": "Oracle.Stage3R12Evidence/stage3-r12-20260803T204415402Z-b886be44.zip",
+    "size": 100364,
+    "sha256": "1e583ef3a67755a40ec2d4ec50e0535e38ee3e2eab9b65767d48a3a17f8f5055",
+    "entryCount": 148
+  },
+  "finalEvidenceManifest": {
+    "path": "Oracle.Stage3R12Evidence/stage3-r12-20260803T204415402Z-b886be44/evidence/evidence-manifest.json",
+    "size": 38301,
+    "sha256": "d0238d0859a871d2589f66cbddc5f337b33638b32a02375b71f39fc2dac461d0",
+    "inventoryCount": 144
+  },
+  "keyBindings": {
+    "authoritySha256": "6fe75a5459a4d6462227eeedaecb825ccb3e8a4b2b676a5a6b3891a82f4a4c7d",
+    "continuitySha256": "f6646d292d45b0d284c51facc3c999bde4192e1eb161373a84216c7c8a4c7dca",
+    "archiveManifestSha256": "63b8d8846e4128d0d44d18b47a02afca093760b13118817b2ce4d651dbdc0f32",
+    "completionSha256": "d56941ef26762f3ec6b60dcbf5915420577cf66907a5e1069ca73e36781bb943",
+    "runtimeObservationSha256": "9df06a13f636ee41fc83b66ff4d7ecd8d5b9aa9fd830b0f2076c14ac2f41ee30",
+    "repairObservationSha256": "f79841b18254b9a05b491b2ad89666e129b24e6f097c70332d4b70422df94ded",
+    "postResetInitializationSha256": "6c77624cc33ba2c93e167ecd881f248eee6703220bbe7c42f70fc03e612b715b",
+    "cleanupSha256": "9ae6db98e2b81406c0fc11162e291c2a6b8a9314a4e155eae09a5465325cb8e3",
+    "finalLifecycleSha256": "f625a23bc4ecc93f958439a79cdb068263c27435804354defaed495bfc5c9506"
+  },
+  "verification": {
+    "archiveManifestAndSidecars": "passed",
+    "archiveInventoryAndHashes": "passed",
+    "expandedArchiveParity": "passed-148-of-148",
+    "usbToRepositoryParity": "passed-153-of-153",
+    "authorityAndIdentityContinuity": "passed",
+    "fourteenPhaseLifecycle": "passed",
+    "completion": "passed",
+    "finalResidue": "zero",
+    "stage4Started": false
+  },
+  "immutability": {
+    "historicalEvidenceModified": false,
+    "historicalTransfersModified": false,
+    "failedAttemptsModified": false,
+    "returnedEvidenceModified": false
+  }
+}

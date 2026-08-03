@@ -1,0 +1,13 @@
+{
+    "executable":  "F:\\transfer-stage3-r12-20260803T203230543Z-6c8c1069\\payload\\Oracle.WindowDiscovery.exe",
+    "arguments":  [
+
+                  ],
+    "startedAtUtc":  "2026-08-03T20:47:37.6868376Z",
+    "completedAtUtc":  "2026-08-03T20:47:37.8315816Z",
+    "stdout":  "[{\"handle\":\"1376320\",\"title\":\"Administrator: Windows PowerShell\",\"processId\":15616,\"processName\":\"powershell\",\"visible\":true,\"minimized\":false,\"x\":102,\"y\":102,\"width\":895,\"height\":518},{\"handle\":\"1377138\",\"title\":\"ChatGPT\",\"processId\":6120,\"processName\":\"ChatGPT\",\"visible\":true,\"minimized\":false,\"x\":768,\"y\":0,\"width\":768,\"height\":816},{\"handle\":\"328432\",\"title\":\"Founder Programme Companion - Profile 1 - Microsoft\\u200B Edge\",\"processId\":12576,\"processName\":\"msedge\",\"visible\":true,\"minimized\":false,\"x\":-6,\"y\":0,\"width\":782,\"height\":823},{\"handle\":\"65788\",\"title\":\"Program Manager\",\"processId\":13336,\"processName\":\"explorer\",\"visible\":true,\"minimized\":false,\"x\":0,\"y\":0,\"width\":1536,\"height\":864}]",
+    "stderr":  "{\"contract\":\"oracle.window-discovery-diagnostic\",\"contractVersion\":1,\"classification\":\"completed-with-records\",\"message\":\"EnumWindows completed with eligible records.\",\"enumWindowsReturned\":true,\"win32Error\":null,\"callbackInvoked\":true,\"topLevelWindowsVisited\":132,\"eligibleRecordsProduced\":4,\"callbackTerminationRequested\":false,\"callbackException\":null,\"executionContext\":{\"operatingSystem\":\"Microsoft Windows 10.0.26200\",\"processId\":8312,\"sessionId\":4,\"userInteractive\":true,\"is64BitProcess\":true,\"windowStation\":\"WinSta0\",\"threadDesktop\":\"Default\",\"inputDesktop\":\"Default\",\"compatible\":true,\"incompatibilityReason\":null}}",
+    "exitCode":  0,
+    "signal":  null,
+    "processError":  null
+}

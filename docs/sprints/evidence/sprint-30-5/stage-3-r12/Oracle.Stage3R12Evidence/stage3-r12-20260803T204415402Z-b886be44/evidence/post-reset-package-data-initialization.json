@@ -1,0 +1,15 @@
+{
+    "contract":  "oracle.stage3.post-reset-package-data-initialization",
+    "contractVersion":  1,
+    "api":  "Windows.Management.Core.ApplicationDataManager.CreateForPackageFamily",
+    "packageIdentity":  "Oracle.Platform.LocalCertification",
+    "packageFamilyName":  "Oracle.Platform.LocalCertification_3yksyxackaf0t",
+    "packageFullName":  "Oracle.Platform.LocalCertification_0.1.4.0_x64__3yksyxackaf0t",
+    "packageRootAbsentBefore":  false,
+    "registrationPolls":  5,
+    "registrationPollMilliseconds":  250,
+    "packageRootPresentAfter":  true,
+    "localStatePathMatched":  true,
+    "reparseTraversalRejected":  true,
+    "containsSecretValues":  false
+}

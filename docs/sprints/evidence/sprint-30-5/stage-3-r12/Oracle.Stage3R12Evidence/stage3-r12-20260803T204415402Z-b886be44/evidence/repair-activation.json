@@ -1,0 +1,14 @@
+{
+    "api":  "IApplicationActivationManager.ActivateApplication",
+    "classId":  "45BA127D-10A8-46EA-8AB7-56EA9078943C",
+    "interfaceId":  "2E941141-7F97-4756-BA1D-9DECDE894A3D",
+    "classContext":  "CLSCTX_LOCAL_SERVER",
+    "appUserModelId":  "Oracle.Platform.LocalCertification_3yksyxackaf0t!Oracle",
+    "arguments":  "\"--oracle-runtime-configuration=C:\\Users\\wilso\\AppData\\Local\\Packages\\Oracle.Platform.LocalCertification_3yksyxackaf0t\\LocalState\\Oracle\\QualificationRuntime\\runtime-stage3-r12-20260803T204415402Z-b886be44\\runtime.json\" \"--oracle-runtime-configuration-sha256=60a3fe8ba67ac81db27398ada642bfbe89af8141be2e4e83df74ba9ab2c2875a\"",
+    "activateOptions":  "AO_NOERRORUI",
+    "startedAtUtc":  "2026-08-03T20:47:37.4961669Z",
+    "completedAtUtc":  "2026-08-03T20:47:37.6717904Z",
+    "hresult":  "0x00000000",
+    "processId":  2984,
+    "error":  null
+}

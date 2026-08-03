@@ -2332,3 +2332,15 @@ Engineering owns the fresh execution-enabled baseline, adversarial validation, c
 ## Stage 3 R12 Execution Transfer Ready
 
 The execution-enabled transfer is verified and immutable. Mission execution is paused only for physical USB handoff from DESKTOP-M3H22E4 to Founder-QA-01. Exact host identity and clean-host development-tool admission prohibit continuity or execution on the construction host.
+
+## Stage 3 R12 Qualification and Programme Closure
+
+Attempt `stage3-r12-20260803T204415402Z-b886be44` passed the complete governed
+lifecycle on `Founder-QA-01` under one consumed authority. Independent return
+verification reconciled the final evidence manifest, archive, `148` archive
+entries, `153` returned files, lifecycle, completion and zero-residue teardown.
+The R11 post-reset defect is qualified as corrected for the accepted R6 MSIX.
+
+Stage 3 R12 is formally closed. This closure creates no Stage 4, Stage 5,
+production, publication, deployment or release authority. The next programme
+step is reserved for a separate Founder-level Stage 4 impact decision.

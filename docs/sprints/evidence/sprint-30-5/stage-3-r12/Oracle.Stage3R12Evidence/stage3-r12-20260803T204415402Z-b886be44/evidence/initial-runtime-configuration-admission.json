@@ -1,0 +1,12 @@
+{
+    "contract":  "oracle.installed-runtime-configuration-admission",
+    "contractVersion":  1,
+    "configurationId":  "runtime-stage3-r12-20260803T204415402Z-b886be44",
+    "configurationPath":  "C:\\Users\\wilso\\AppData\\Local\\Packages\\Oracle.Platform.LocalCertification_3yksyxackaf0t\\LocalState\\Oracle\\QualificationRuntime\\runtime-stage3-r12-20260803T204415402Z-b886be44\\runtime.json",
+    "sha256":  "6c8477032d633a9a3bc2fe05e6b202846ef40757b6d52205dfc85a21f285adfd",
+    "issuedAtUtc":  "2026-08-03T20:46:15.891Z",
+    "expiresAtUtc":  "2026-08-03T21:01:15.891Z",
+    "containsSecretValues":  false,
+    "createOnly":  true,
+    "restrictedAcl":  true
+}

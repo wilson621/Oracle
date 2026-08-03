@@ -49,9 +49,10 @@ walkthrough accepted
 ADR-046; its deferred clean-machine package lifecycle was subsequently
 qualified by Stage 3 R9
 **Sprint 30:** Founder-approved and active under ADR-047; Phases 1-5 locally
-verified; Sprint 30.5 Stages 1-4 Founder-accepted and closed; Stage 3 R1 and
-failed R2-R8 remain immutable; Stage 3 R9 and Stage 4 R1 are accepted passing
-results; Stages 5-7 remain unstarted; production qualification is incomplete
+verified; Stage 2 R6 and Stage 3 R12 independently verified and closed for the
+corrected package; R11 remains immutable failed evidence; historical Stage 4
+R1 applicability requires a separate Founder decision; Stages 5-7 remain
+unstarted; production qualification is incomplete
 
 Stage 3 R9 attempt `stage3-r9-20260730T221251043Z-71af9db7` passed all
 fourteen lifecycle phases from preparation commit
@@ -1089,3 +1090,14 @@ The manifest-authoritative payload correction is implemented and frozen at `68a3
 ## Stage 3 R12 Execution-Enabled Baseline
 
 The R12 contract now binds the replacement-only package as immutable history and records Founder-authorised qualification execution for a fresh transfer. The builder fully rehashes both immutable R12 historical transfers and the failed continuity record before constructing a new sibling. The harness retains its explicit contract-authority gate.
+
+## Stage 3 R12 Qualification Closure
+
+The execution-enabled baseline was qualified on `Founder-QA-01`. Attempt
+`stage3-r12-20260803T204415402Z-b886be44` passed all fourteen lifecycle phases,
+including the corrected post-reset package-data initialization and second
+runtime-configuration path. Independent return verification proved exact
+archive and expanded-tree parity, passing completion and zero final residue.
+
+R12 is closed for the R6 package. No product implementation changed during
+post-qualification closure, and no Stage 4 work was started or authorised.

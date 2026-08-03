@@ -1,0 +1,72 @@
+{
+    "schemaVersion":  "1.0.0",
+    "contract":  "oracle.sprint-30-5.stage-3-r12-host-continuity",
+    "programmeIdentity":  "Sprint 30.5 Stage 3 Requalification R12",
+    "recordedAtUtc":  "2026-08-03T20:42:15.7086101Z",
+    "result":  "passed",
+    "issues":  [
+
+               ],
+    "host":  {
+                 "deviceName":  "FOUNDER-QA-01",
+                 "manufacturer":  "MEDION",
+                 "model":  "ERAZER P6605 MD61596",
+                 "systemUuid":  "6C5BFA80-48BF-0000-0000-000000000000",
+                 "windowsCaption":  "Microsoft Windows 11 Home",
+                 "windowsVersion":  "10.0.26200",
+                 "windowsBuild":  "26200"
+             },
+    "security":  {
+                     "secureBoot":  true,
+                     "tpmPresent":  true,
+                     "tpmReady":  true,
+                     "defenderAntivirusEnabled":  true,
+                     "defenderRealTimeProtectionEnabled":  true,
+                     "activatedProductCount":  1,
+                     "recovery":  {
+                                      "executable":  "C:\\WINDOWS\\system32\\reagentc.exe",
+                                      "arguments":  [
+                                                        "/info"
+                                                    ],
+                                      "stdout":  "Windows Recovery Environment (Windows RE) and system reset configuration\r\nInformation:\r\n\r\n    Windows RE status:         Enabled\r\n    Windows RE location:       \\\\?\\GLOBALROOT\\device\\harddisk0\\partition4\\Recovery\\WindowsRE\r\n    Boot Configuration Data (BCD) identifier: dfa9a6d0-8927-11f1-805a-f6f12e6c9d80\r\n    Recovery image location:   \r\n    Recovery image index:      0\r\n    Custom image location:     \r\n    Custom image index:        0\r\n    Windows RE Version:        10.0.26100.8875\r\n\r\nREAGENTC.EXE: Operation Successful.\r\n    \r\n",
+                                      "stderr":  "",
+                                      "exitCode":  0
+                                  }
+                 },
+    "developmentTools":  [
+                             {
+                                 "name":  "node",
+                                 "available":  false
+                             },
+                             {
+                                 "name":  "npm",
+                                 "available":  false
+                             },
+                             {
+                                 "name":  "git",
+                                 "available":  false
+                             },
+                             {
+                                 "name":  "python",
+                                 "available":  false
+                             },
+                             {
+                                 "name":  "docker",
+                                 "available":  false
+                             },
+                             {
+                                 "name":  "dotnet",
+                                 "available":  false
+                             },
+                             {
+                                 "name":  "msbuild",
+                                 "available":  false
+                             }
+                         ],
+    "oraclePackageCount":  0,
+    "certificateMatches":  [
+
+                           ],
+    "historicalAdmissionSha256":  "6dfaa176ed2d43595511d44401612536c6c0f1955f94527469d0f22af09c3b0e",
+    "installationMediaEvidencePresent":  false
+}
