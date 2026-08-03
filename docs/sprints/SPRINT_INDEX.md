@@ -131,3 +131,9 @@ R10 preparation defines the complete clean-Windows lifecycle, including the ADR-
 ## Sprint 30.5 Stage 2 Requalification R5
 
 R5 is the current prepared revision for corrected commit `ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff`, tree `8455a05780989a9d5f6c6d527f7d427d94526b04`, and package version `0.1.3.0`. Its governed one-attempt execution is Founder-authorised but not yet consumed. R4 remains immutable accepted history. Stage 3 R10 remains R4-bound and barred; downstream qualification requires an accepted R5 result and a newly bound revision.
+
+## Stage 2 R5 Terminal Result and R6 Preparation
+
+R5 attempt `r5-20260803T170318060Z-658ee6f0` stopped non-zero on a stale harness-only manifest-version assertion after package construction and signing. Exact certificate teardown and zero-residue reconciliation passed. Its consumed authority and artifact root are immutable.
+
+R6 is prepared for the unchanged corrected product candidate with unique package version `0.1.4.0`, exact R5 failure bindings and regression coverage that requires the current manifest version and prohibits the stale assertion. One R6 attempt is Founder-authorised. Stage 3 R10 remains R4-bound and barred.
