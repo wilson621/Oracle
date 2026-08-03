@@ -14,6 +14,9 @@ import {
   consumeInstalledRuntimeConfiguration,
 } from "../desktop/runtime/installed-runtime-configuration";
 import {
+  createPackagedServerEnvironment,
+} from "../desktop/runtime/packaged-server-environment";
+import {
   createPackagedRequestOrigins,
   isAllowedPackagedRequestUrl,
 } from "../desktop/runtime/packaged-request-origins";
@@ -58,6 +61,93 @@ try {
   assert.equal(consumed.environment.ORACLE_WEB_SESSION_SECRET, "s".repeat(48));
   assert.equal(consumed.environment.SUPABASE_SECRET_KEY, "k".repeat(96));
   assert.equal(existsSync(configurationPath), false);
+  const systemRoot = process.env.SystemRoot;
+  if (!systemRoot) {
+    throw new Error("Verification host SystemRoot is unavailable.");
+  }
+  const packagedEnvironment = createPackagedServerEnvironment(
+    consumed.environment,
+    43_214,
+    {
+      platform: "win32",
+      platformEnvironment: {
+        SystemRoot: systemRoot,
+        PATH: "C:\\hostile-path",
+        NEXT_PUBLIC_SUPABASE_URL: "https://hostile.example",
+        ORACLE_STAGE4_OUTPUT: "C:\\hostile-output",
+      },
+    }
+  );
+  assert.deepEqual(packagedEnvironment, {
+    ORACLE_SUPABASE_URL: "http://127.0.0.1:54321",
+    ORACLE_SUPABASE_ANON_KEY: "a".repeat(96),
+    ORACLE_WEB_SESSION_SECRET: "s".repeat(48),
+    SUPABASE_SECRET_KEY: "k".repeat(96),
+    SystemRoot: systemRoot,
+    NODE_ENV: "production",
+    HOSTNAME: "127.0.0.1",
+    PORT: "43214",
+  });
+  assert.equal(Object.isFrozen(packagedEnvironment), true);
+  assert.deepEqual(Object.keys(packagedEnvironment).sort(), [
+    "HOSTNAME",
+    "NODE_ENV",
+    "ORACLE_SUPABASE_ANON_KEY",
+    "ORACLE_SUPABASE_URL",
+    "ORACLE_WEB_SESSION_SECRET",
+    "PORT",
+    "SUPABASE_SECRET_KEY",
+    "SystemRoot",
+  ]);
+  assert.throws(
+    () => createPackagedServerEnvironment(
+      {
+        ...consumed.environment,
+        PATH: "C:\\hostile-path",
+      } as typeof consumed.environment,
+      43_214,
+      { platform: "win32", platformEnvironment: { SystemRoot: systemRoot } }
+    ),
+    /runtime environment is invalid/u
+  );
+  assert.throws(
+    () => createPackagedServerEnvironment(
+      consumed.environment,
+      0,
+      { platform: "win32", platformEnvironment: { SystemRoot: systemRoot } }
+    ),
+    /platform or port is invalid/u
+  );
+  assert.throws(
+    () => createPackagedServerEnvironment(
+      consumed.environment,
+      43_214,
+      { platform: "linux", platformEnvironment: { SystemRoot: systemRoot } }
+    ),
+    /platform or port is invalid/u
+  );
+  assert.throws(
+    () => createPackagedServerEnvironment(
+      consumed.environment,
+      43_214,
+      { platform: "win32", platformEnvironment: {} }
+    ),
+    /SystemRoot is unavailable/u
+  );
+  const falseSystemRoot = join(localAppData, "FalseWindowsRoot");
+  mkdirSync(join(falseSystemRoot, "System32"), { recursive: true });
+  writeFileSync(join(falseSystemRoot, "System32", "bcrypt.dll"), "fixture");
+  assert.throws(
+    () => createPackagedServerEnvironment(
+      consumed.environment,
+      43_214,
+      {
+        platform: "win32",
+        platformEnvironment: { SystemRoot: falseSystemRoot },
+      }
+    ),
+    /SystemRoot identity is invalid/u
+  );
 
   expectRejected([], "activation-arguments-invalid");
   expectRejected([
@@ -293,6 +383,10 @@ try {
     "desktop/runtime/packaged-next-server.ts",
     "utf8"
   );
+  const packagedEnvironmentPolicy = readFileSync(
+    "desktop/runtime/packaged-server-environment.ts",
+    "utf8"
+  );
   const browserClient = readFileSync("lib/supabase-client.ts", "utf8");
   const layout = readFileSync("app/layout.tsx", "utf8");
   const serverRuntime = readFileSync(
@@ -304,10 +398,16 @@ try {
     "utf8"
   );
   assert.doesNotMatch(packagedServer, /startUnavailableServer|fallbackServer/u);
-  assert.match(packagedServer, /\.\.\.environment/u);
+  assert.match(
+    packagedServer,
+    /createPackagedServerEnvironment\(environment, port\)/u
+  );
+  assert.doesNotMatch(packagedServer, /\.\.\.process\.env/u);
+  assert.match(packagedEnvironmentPolicy, /SystemRoot/u);
+  assert.doesNotMatch(packagedEnvironmentPolicy, /PATH|NEXT_PUBLIC_SUPABASE/u);
   assert.doesNotMatch(browserClient, /SUPABASE_SECRET_KEY|ORACLE_WEB_SESSION_SECRET/u);
   assert.doesNotMatch(layout, /SUPABASE_SECRET_KEY|ORACLE_WEB_SESSION_SECRET/u);
-  assert.match(packagedServer, /ORACLE_WEB_SESSION_SECRET|\.\.\.environment/u);
+  assert.match(packagedEnvironmentPolicy, /ORACLE_WEB_SESSION_SECRET/u);
   assert.doesNotMatch(browserClient, /process\.env/u);
   assert.match(layout, /oracle\/services\/runtime-configuration/u);
   assert.match(serverRuntime, /resolvePublicRuntimeConfiguration\(process\.env\)/u);
@@ -322,6 +422,7 @@ try {
     oneTimeDeletion: "pass",
     negativeCases,
     publicProjection: "url-and-anon-key-only",
+    packagedServerEnvironment: "strict-runtime-and-system-root-allowlist",
     privilegedProviderCredentialInPackageBytes: false,
     result: "pass",
   }, null, 2) + "\n");

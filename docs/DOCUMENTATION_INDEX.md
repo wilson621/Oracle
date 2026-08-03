@@ -458,3 +458,9 @@ to adopt a later formatting standard.
 | Stage 3 Requalification R10 pre-execution gate | [Sprint 30.5 Stage 3 Requalification R10 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_3_R10_PRE_EXECUTION_GATE.md) | Separate transfer and execution authority boundaries |
 | Stage 3 Requalification R10 validation | [Sprint 30.5 Stage 3 Requalification R10 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_3_R10_PREPARATION_VALIDATION_REPORT.md) | Executed preparation validation, rehearsal, limitations and immutable rehash results |
 | Stage 3 Requalification R10 governance-contradiction recovery | [Sprint 30.5 Stage 3 Requalification R10 Governance-Contradiction Recovery](sprints/SPRINT_30_5_STAGE_3_R10_GOVERNANCE_CONTRADICTION_RECOVERY.md) | Canonical programme identity, immutable rejected transfers and fail-closed correction |
+
+## Post-R4 packaged server environment correction
+
+| Record | Location | Purpose |
+| --- | --- | --- |
+| Packaged server environment correction | [Sprint 30.5 Packaged Server Environment Correction](sprints/SPRINT_30_5_PACKAGED_SERVER_ENVIRONMENT_CORRECTION.md) | Strict Windows child-environment allowlist, engineering validation and qualification invalidation consequence |

@@ -185,6 +185,13 @@ ADR-048 runtime-configuration baseline at commit
 Stage 5 remains blocked pending separately governed clean-host and installed-
 authentication requalification. Stage 2 R1-R3, Stage 3 R9 and Stage 4 R1
 remain immutable historical results.
+
+A later packaged-server environment correction adds the physically validated
+Windows SystemRoot required by the strict utility-child environment while
+continuing to exclude ambient parent-process values. This product-source change
+does not alter R4 evidence, but returns current-source qualification to Stage 2.
+The R4-bound R10 preparation must not be transferred or executed for the
+corrected source.
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
 production; the persistence foundation is established while runtime
@@ -868,3 +875,22 @@ authoritative transient Guidance delivery. See
 Stage 3 R9 remains Founder-accepted, formally closed and immutable for the historical Stage 2 R2 candidate. Stage 3 Requalification R10 is the current preparation revision and is bound exclusively to the accepted Stage 2 R4 candidate commit `f7203f9b602b182a2bd006bc3cff3113b839be8e`, tree `5d7eca4c012874df0b839533dfab283b54778661`, and MSIX SHA-256 `8679138e78827d41e20cf3f0c452e3c28120afad846ef4e20329eeff1f9aebd5`.
 
 R10 preparation defines the complete clean-Windows lifecycle, including the ADR-048 attempt-scoped installed runtime-configuration boundary. Preparation creates no transfer, execution, certificate-trust, installation, Stage 4, Stage 5, production or release authority. A separate Founder decision is required for transfer construction; execution requires a later separate Founder decision after transfer and admission review. Stage 5 remains blocked pending accepted downstream requalification.
+
+## Post-R4 Packaged Server Environment Correction
+
+The packaged-server environment correction is engineering-complete and
+non-qualification validation passes. The privileged Next.js utility child now
+receives exactly the four ADR-048 runtime values, fixed production/loopback
+values and a physically validated Windows SystemRoot. It does not inherit the
+ambient parent-process environment.
+
+Stage 2 R4 remains Founder-accepted, formally closed and immutable for its
+exact package. Because this is a later product-source change, that R4 package
+no longer qualifies the current source baseline. The permanent invalidation
+rule returns current qualification to Stage 2.
+
+Stage 3 Requalification R10 remains bound only to the accepted R4 package and
+must not be transferred or executed as qualification of the corrected source.
+A new Stage 2 candidate must be accepted before newly bound clean-host and
+installed-authentication requalification can proceed. Stage 5 remains blocked.
+No qualification authority, attempt, package or evidence was created.

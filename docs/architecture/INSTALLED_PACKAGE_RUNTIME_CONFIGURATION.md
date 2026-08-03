@@ -152,3 +152,21 @@ Before Stage 5 execution, governance requires:
 4. a refreshed Stage 5 preparation binding only to the newly accepted results.
 
 No qualification or later-stage authority is created by this implementation.
+
+# Packaged server environment allowlist
+
+The Electron utility-process child does not inherit the ambient parent-process
+environment. Its frozen environment contains only the four validated ADR-048
+runtime values, NODE_ENV, HOSTNAME, PORT and SystemRoot.
+
+SystemRoot is the sole admitted operating-system dependency. The product
+requires Windows, an absolute root, a regular unredirected root directory, a
+regular unredirected System32\bcrypt.dll and matching physical real paths.
+Missing, redirected or invalid identity fails startup closed. PATH, TEMP, TMP,
+NEXT_PUBLIC provider values, qualification state and every other ambient value
+remain excluded.
+
+This policy was added after accepted Stage 2 R4. R4 remains immutable accepted
+history for its exact package, but does not qualify the corrected current
+source. The R4-bound Stage 3 R10 preparation must not be transferred or
+executed for the corrected source; qualification returns to Stage 2.

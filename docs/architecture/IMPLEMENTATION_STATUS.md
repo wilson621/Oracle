@@ -62,18 +62,24 @@ the qualification archive SHA-256 is
 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`,
 and final package, certificate, process, transfer, work and package-data
 residue is zero. Stage 4 R1 subsequently passed and is formally closed.
-ADR-048 is implemented and qualified by Founder-accepted Stage 2
-Requalification R4. Registered AppX activation can carry a non-secret path and
-hash for one attempt-scoped, create-only package-LocalState configuration. The
-main process atomically validates and deletes that file, the packaged server
-receives server-only provider and session credentials, and the renderer
+ADR-048 is implemented. Registered AppX activation can carry a non-secret path
+and hash for one attempt-scoped, create-only package-LocalState configuration.
+The main process atomically validates and deletes that file, the packaged
+server receives server-only provider and session credentials, and the renderer
 receives only validated public provider metadata. Missing or invalid
 configuration fails startup closed; the former certification fallback is
 removed.
 
-The exact accepted R4 MSIX still requires separately governed clean-host and
-installed-authentication requalification before Stage 5 may resume. It is not
-deployed, activated for production or released.
+The packaged Next.js utility child now receives a frozen exact environment:
+the four admitted runtime values, production loopback values and a physically
+validated Windows SystemRoot. Ambient parent-process values are excluded.
+
+Stage 2 R4 remains Founder-accepted and immutable for its exact MSIX, but this
+later product-source correction means R4 no longer qualifies current source.
+The R4-bound Stage 3 R10 preparation must not be transferred or executed for
+the corrected source. A newly accepted Stage 2 package plus newly bound
+clean-host and installed-authentication requalification are required before
+Stage 5. Nothing is deployed, activated for production or released.
 
 ---
 
@@ -1018,3 +1024,22 @@ Accepted technical debt remains documented in
 Stage 3 R9 remains Founder-accepted, formally closed and immutable for the historical Stage 2 R2 candidate. Stage 3 Requalification R10 is the current preparation revision and is bound exclusively to the accepted Stage 2 R4 candidate commit `f7203f9b602b182a2bd006bc3cff3113b839be8e`, tree `5d7eca4c012874df0b839533dfab283b54778661`, and MSIX SHA-256 `8679138e78827d41e20cf3f0c452e3c28120afad846ef4e20329eeff1f9aebd5`.
 
 R10 preparation defines the complete clean-Windows lifecycle, including the ADR-048 attempt-scoped installed runtime-configuration boundary. Preparation creates no transfer, execution, certificate-trust, installation, Stage 4, Stage 5, production or release authority. A separate Founder decision is required for transfer construction; execution requires a later separate Founder decision after transfer and admission review. Stage 5 remains blocked pending accepted downstream requalification.
+
+## Post-R4 Packaged Server Environment Correction
+
+The packaged-server environment correction is engineering-complete and
+non-qualification validation passes. The privileged Next.js utility child now
+receives exactly the four ADR-048 runtime values, fixed production/loopback
+values and a physically validated Windows SystemRoot. It does not inherit the
+ambient parent-process environment.
+
+Stage 2 R4 remains Founder-accepted, formally closed and immutable for its
+exact package. Because this is a later product-source change, that R4 package
+no longer qualifies the current source baseline. The permanent invalidation
+rule returns current qualification to Stage 2.
+
+Stage 3 Requalification R10 remains bound only to the accepted R4 package and
+must not be transferred or executed as qualification of the corrected source.
+A new Stage 2 candidate must be accepted before newly bound clean-host and
+installed-authentication requalification can proceed. Stage 5 remains blocked.
+No qualification authority, attempt, package or evidence was created.

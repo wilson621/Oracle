@@ -15,6 +15,7 @@
   },
   "include": [
     "desktop/runtime/installed-runtime-configuration.ts",
+    "desktop/runtime/packaged-server-environment.ts",
     "desktop/runtime/packaged-request-origins.ts",
     "lib/oracle/runtime/public-runtime-configuration.ts",
     "lib/oracle/runtime/runtime-environment-policy.ts",

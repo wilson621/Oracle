@@ -10,6 +10,9 @@ import { join } from "node:path";
 import type {
   InstalledRuntimeEnvironment,
 } from "./installed-runtime-configuration.js";
+import {
+  createPackagedServerEnvironment,
+} from "./packaged-server-environment.js";
 
 const LOOPBACK_HOST = "127.0.0.1";
 const STARTUP_TIMEOUT_MS = 15_000;
@@ -29,12 +32,7 @@ export class OraclePackagedNextServer {
     const serverPath = join(resourcesPath, "app", "next", "server.js");
     const child = utilityProcess.fork(serverPath, [], {
       serviceName: "Oracle Packaged Renderer",
-      env: {
-        ...environment,
-        NODE_ENV: "production",
-        HOSTNAME: LOOPBACK_HOST,
-        PORT: String(port),
-      },
+      env: createPackagedServerEnvironment(environment, port),
       stdio: "pipe",
     });
     this.process = child;

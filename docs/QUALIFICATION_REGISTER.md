@@ -32,10 +32,10 @@ results.
 | Stage | Scope | Current state | Evidence or blocker | Next authority |
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
-| 2 | Candidate Freeze and Package Reconciliation | **R4 Founder-accepted and formally closed** | Passing attempt `r4-20260803T115002258Z-31ab0bf6`; final evidence manifest SHA-256 `876be1c0342c7dc9f70965faa3daffe0c9c1d8d7a3e2c41b144155350557784d`; archive SHA-256 `3f1f11dd04ddbc3b4eb51db344f71c12252cc7e41e8ae072950d3a74c1452495`; R1-R3 remain immutable | None for R4; downstream requalification requires separate Founder authority |
+| 2 | Candidate Freeze and Package Reconciliation | **R4 accepted history; current source requires a new Stage 2 candidate** | R4 attempt r4-20260803T115002258Z-31ab0bf6 and its evidence remain immutable; the later packaged-server environment correction invalidates R4 as qualification of current source | Founder authority only when the next Stage 2 qualification is requested |
 | 3 | Clean Windows Qualification | **Founder-accepted and formally closed at R9** | Passing attempt `stage3-r9-20260730T221251043Z-71af9db7` under authority `authority-stage3-r9-20260730T221251043Z-71af9db7`; final evidence manifest SHA-256 `19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`; archive SHA-256 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`; zero final residue | None for Stage 3; history is closed and any further Stage 3 execution is unauthorised |
 | 4 | Live Authentication and Protected Rendering | **R1 Founder-accepted and formally closed** | Passing attempt `stage4-r1-20260803T093803115Z-7fc6b185`; manifest SHA-256 `1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d`; archive SHA-256 `91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15`; ten journeys and zero-residue teardown passed | None for Stage 4; history is closed and further Stage 4 execution is unauthorised |
-| 5 | Installed Package GPU, Performance and Accessibility | **Blocked pending downstream requalification** | Stage 2 R4 now qualifies the installed-package runtime configuration baseline; clean-host and installed-authentication evidence for that exact MSIX remain outstanding | Founder decision on the separately governed downstream requalification sequence |
+| 5 | Installed Package GPU, Performance and Accessibility | **Blocked pending a newly qualified corrected package and downstream requalification** | R4 qualifies only its immutable historical package; corrected current source has no accepted Stage 2 package, clean-host result or installed-authentication result | Stage 2 qualification authority when requested, followed by separately governed downstream authority |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
 | 7 | Final Integrated Qualification and Sprint 30 Closure Package | **Not started** | Requires complete immutable evidence from Stages 1–6 | Stage 6 acceptance, then separate Stage 7 authority |
 
@@ -223,3 +223,22 @@ results.
 Stage 3 R9 remains Founder-accepted, formally closed and immutable for the historical Stage 2 R2 candidate. Stage 3 Requalification R10 is the current preparation revision and is bound exclusively to the accepted Stage 2 R4 candidate commit `f7203f9b602b182a2bd006bc3cff3113b839be8e`, tree `5d7eca4c012874df0b839533dfab283b54778661`, and MSIX SHA-256 `8679138e78827d41e20cf3f0c452e3c28120afad846ef4e20329eeff1f9aebd5`.
 
 R10 preparation defines the complete clean-Windows lifecycle, including the ADR-048 attempt-scoped installed runtime-configuration boundary. Preparation creates no transfer, execution, certificate-trust, installation, Stage 4, Stage 5, production or release authority. A separate Founder decision is required for transfer construction; execution requires a later separate Founder decision after transfer and admission review. Stage 5 remains blocked pending accepted downstream requalification.
+
+## Post-R4 Packaged Server Environment Correction
+
+The packaged-server environment correction is engineering-complete and
+non-qualification validation passes. The privileged Next.js utility child now
+receives exactly the four ADR-048 runtime values, fixed production/loopback
+values and a physically validated Windows SystemRoot. It does not inherit the
+ambient parent-process environment.
+
+Stage 2 R4 remains Founder-accepted, formally closed and immutable for its
+exact package. Because this is a later product-source change, that R4 package
+no longer qualifies the current source baseline. The permanent invalidation
+rule returns current qualification to Stage 2.
+
+Stage 3 Requalification R10 remains bound only to the accepted R4 package and
+must not be transferred or executed as qualification of the corrected source.
+A new Stage 2 candidate must be accepted before newly bound clean-host and
+installed-authentication requalification can proceed. Stage 5 remains blocked.
+No qualification authority, attempt, package or evidence was created.
