@@ -1081,3 +1081,7 @@ The Founder accepted the completed R12 engineering baseline and authorised one g
 The first R12 package is immutable pre-authority engineering failure. The qualification harness now derives complete payload inventory from the exact Founder-bound transfer manifest, requires a contract-defined mandatory subset, rehashes every manifested byte and rejects any physical-directory difference. Adversarial coverage rejects unmanifested files, omissions, duplicates, case aliases, reparse points and tampering.
 
 One fresh create-only replacement transfer may be prepared and independently verified. Stage 3 execution is blocked and unauthorised; no qualification authority or attempt is authorised.
+
+## Stage 3 Requalification R12 Corrected Baseline
+
+The manifest-authoritative payload correction is implemented and frozen at `68a304d6caad3caaf84d3a6b4f63802ab4b6fe83`. The 57-file replacement transfer passed exact directory, mandatory-subset, size and SHA-256 verification. The executable harness rejects qualification while contract execution authority is absent.

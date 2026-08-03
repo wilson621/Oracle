@@ -875,3 +875,7 @@ The Founder accepted the completed R12 engineering baseline and authorised one g
 The first R12 package is closed as immutable pre-authority engineering failure. The correction makes the exact Founder-bound manifest authoritative for complete payload inventory while retaining a mandatory contract subset and exact physical-directory and byte verification. One create-only replacement transfer with fresh identity may be prepared and independently verified.
 
 Stage 3 execution is blocked and unauthorised. No qualification authority or attempt may be created by this work.
+
+## Stage 3 R12 Replacement Transfer Complete
+
+The manifest-authoritative R12 correction is frozen at `68a304d6caad3caaf84d3a6b4f63802ab4b6fe83`. Replacement transfer `transfer-stage3-r12-20260803T201110346Z-3cf28c94` is complete and independently verified. Stage 3 execution remains blocked and unauthorised; no qualification authority or attempt exists.

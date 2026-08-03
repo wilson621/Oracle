@@ -42,3 +42,5 @@ transfer identity, manifest hash, custody hash, payload count and payload bytes
 are then recorded by its create-only manifest and custody record and independently
 verified from the physical medium. This report does not predeclare those fresh
 identities.
+
+The completed transfer identities and independent verification result are recorded in `SPRINT_30_5_STAGE_3_R12_REPLACEMENT_TRANSFER_COMPLETION.md`.

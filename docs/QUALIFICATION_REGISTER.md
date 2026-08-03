@@ -284,3 +284,7 @@ The Founder accepted the completed R12 engineering baseline and authorised one g
 The first R12 execution package, `transfer-stage3-r12-20260803T190836740Z-2b8363bb`, is closed as immutable pre-authority engineering failure. Its manifest SHA-256 is `81e05a570cfffb886af7f65e60ab8658d1fdb92d6d9b1d21ae23981b36b830f0`, custody SHA-256 is `b31cde2f075b3b1ac34d168c6bbdd3a671bb9a447426388272a50a1de7b42115`, and failed host-continuity SHA-256 is `a71d06ee38b2568384aa46c84bd23af5a7cfbfcb988fad9c676b127fec9622d8`. No authority or attempt was created; its expired identities are barred from reuse.
 
 The payload-inventory correction and one fresh create-only replacement transfer are authorised. Stage 3 execution is blocked and unauthorised; no qualification authority or attempt may be created under this preparation authority.
+
+## Stage 3 Requalification R12 Replacement Transfer Completion
+
+Corrected baseline `68a304d6caad3caaf84d3a6b4f63802ab4b6fe83` and replacement transfer `transfer-stage3-r12-20260803T201110346Z-3cf28c94` are prepared and independently verified. Manifest SHA-256 is `603b86c649463e4871a9a0ba2e43a9d231f1ec755c0c01fdf79428cafc55f66a`; custody SHA-256 is `681ea3eeb092d2be4ec66ab3603c499782d0757ed8c8c7094273e4829674904e`. Stage 3 execution remains blocked and unauthorised. Authority and attempt counts remain zero.
