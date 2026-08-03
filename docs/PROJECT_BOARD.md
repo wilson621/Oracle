@@ -177,12 +177,13 @@ archive SHA-256 is
 and teardown proved zero residue. Earlier accepted and historical records
 remain immutable. Stage 5, Gate 7 and production activity remain unauthorised.
 A Founder-approved bounded product correction now implements ADR-048's
-attempt-scoped installed-package runtime configuration boundary. The change is
-not qualified: it changes package bytes after the accepted Stage 2 R3 freeze.
-Stage 5 remains blocked. The next programme gate is a separately authorised
-new Stage 2 candidate preparation, followed by applicable clean-host and
-installed-authentication requalification. Accepted Stage 2 R3, Stage 3 R9 and
-Stage 4 R1 evidence remains immutable.
+attempt-scoped installed-package runtime configuration boundary. Stage 2
+Requalification R4 preparation binds exact commit
+`f7203f9b602b182a2bd006bc3cff3113b839be8e` and tree
+`5d7eca4c012874df0b839533dfab283b54778661`; execution remains unauthorised.
+Stage 5 remains blocked pending accepted R4 and separately governed clean-host
+and installed-authentication requalification. Accepted Stage 2 R3, Stage 3 R9
+and Stage 4 R1 evidence remains immutable.
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
 production; the persistence foundation is established while runtime

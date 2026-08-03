@@ -802,3 +802,11 @@ Everything Oracle becomes will be built upon those four layers.
 ---
 
 **The Oracle has spoken.**
+
+## Stage 2 Requalification R4 Preparation
+
+The ADR-048 runtime-configuration product baseline at commit
+`f7203f9b602b182a2bd006bc3cff3113b839be8e`, tree
+`5d7eca4c012874df0b839533dfab283b54778661`, is bound by the versioned R4
+preparation. R4 execution, acceptance and closure remain separate Founder
+gates. R3, Stage 3 R9 and Stage 4 R1 remain immutable historical results.
