@@ -1,0 +1,11 @@
+{
+    "contract":  "oracle.sprint-30-5.stage-4-r1-lifecycle",
+    "authorityId":  "authority-stage4-r1-20260803T093803115Z-7fc6b185",
+    "attemptId":  "stage4-r1-20260803T093803115Z-7fc6b185",
+    "phase":  "source-built",
+    "recordedAtUtc":  "2026-08-03T09:42:44.6824371Z",
+    "details":  {
+                    "candidateCommit":  "a7fc67f207d9c95407c70812828fa66bd487285d",
+                    "candidateTree":  "356f6d52f1bf70065692e892af8bf916acc8727a"
+                }
+}

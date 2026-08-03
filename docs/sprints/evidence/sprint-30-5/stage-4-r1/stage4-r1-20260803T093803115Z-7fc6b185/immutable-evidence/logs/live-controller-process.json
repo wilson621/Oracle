@@ -1,0 +1,16 @@
+{
+    "executable":  "C:\\Program Files\\nodejs\\node.exe",
+    "arguments":  [
+                      "C:\\Dev\\project-meta\\scripts\\sprint-30-5\\stage-4-r1\\execute-live-environment.mjs"
+                  ],
+    "environmentOverrides":  {
+
+                             },
+    "startedAtUtc":  "2026-08-03T09:41:42.0007685Z",
+    "completedAtUtc":  "2026-08-03T09:42:44.6152933Z",
+    "stdout":  "",
+    "stderr":  "",
+    "exitCode":  0,
+    "signal":  null,
+    "processError":  null
+}

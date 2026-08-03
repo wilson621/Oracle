@@ -1,0 +1,92 @@
+{
+    "contract":  "oracle.sprint-30-5.stage-4-r1-payload-manifest",
+    "authorityId":  "authority-stage4-r1-20260803T093803115Z-7fc6b185",
+    "attemptId":  "stage4-r1-20260803T093803115Z-7fc6b185",
+    "files":  [
+                  {
+                      "path":  "evidence/live-journey.json",
+                      "size":  1550,
+                      "sha256":  "401d27eadbfbe6f1a394683169cd687655c3a12d85107f4cd5757d62c8b05abe"
+                  },
+                  {
+                      "path":  "lifecycle/001-authority-consumed.json",
+                      "size":  514,
+                      "sha256":  "ec886bbdd31919ad5da213ba85e841c0ce0a0c020841dd9189c5ebe90099d31d"
+                  },
+                  {
+                      "path":  "lifecycle/002-baseline-verified.json",
+                      "size":  771,
+                      "sha256":  "dc7048d655beb7c5c6701bbcffba7c793639e85a79244039204ddae56a4ab84a"
+                  },
+                  {
+                      "path":  "lifecycle/003-provider-admitted.json",
+                      "size":  476,
+                      "sha256":  "229d63ece38f4ce60b16c1ba3d5beae5f052b8197567c86755bb56da539d784e"
+                  },
+                  {
+                      "path":  "lifecycle/004-source-built.json",
+                      "size":  491,
+                      "sha256":  "5904962ca0f4a5949f39a35eefacc73df35ced33ab1aafa1a4c26e70c3d56934"
+                  },
+                  {
+                      "path":  "lifecycle/005-anonymous-boundaries-passed.json",
+                      "size":  341,
+                      "sha256":  "33f4be8ed2da5011ba3a989d8f4409475910cd10b8a26f91e26b494cb98988f1"
+                  },
+                  {
+                      "path":  "lifecycle/006-account-created-unverified.json",
+                      "size":  378,
+                      "sha256":  "111d09df15e0a7d7bdb08e620d550c2d642c241d9165fb2400cb4ec1ef575008"
+                  },
+                  {
+                      "path":  "lifecycle/007-email-verified.json",
+                      "size":  328,
+                      "sha256":  "75cc44ce9bf935bdda1e73224af628a9cfb594c2c3ede4082575304b464196d9"
+                  },
+                  {
+                      "path":  "lifecycle/008-authenticated-rendering-passed.json",
+                      "size":  548,
+                      "sha256":  "1db6db69a62e4d8f0c92b975a09f61b3c9fb967c7a52225520fc308cef90c4a6"
+                  },
+                  {
+                      "path":  "lifecycle/009-isolation-passed.json",
+                      "size":  740,
+                      "sha256":  "2624abf75d1964fb46dbe9502df55a0b792e24372240ac741950b8c114eab588"
+                  },
+                  {
+                      "path":  "lifecycle/010-session-invalidated.json",
+                      "size":  333,
+                      "sha256":  "c389a1bbfbd59448316d55e5c46843f724c94a39c993744e7353ff0396c3da4d"
+                  },
+                  {
+                      "path":  "lifecycle/011-provider-torn-down.json",
+                      "size":  382,
+                      "sha256":  "6b27b9cbbdf67cb2f6d4b54c9a393ae715e4fd786aea74fdecaec3f2dee7ef4d"
+                  },
+                  {
+                      "path":  "lifecycle/012-cleanup-passed.json",
+                      "size":  368,
+                      "sha256":  "069339ddf27f80bede390d0b1470e4e19ab7b7cd6d20dcae3f736ee07e3a26d9"
+                  },
+                  {
+                      "path":  "logs/environment-result.json",
+                      "size":  1871,
+                      "sha256":  "a3db6147bbf1fa2403398761f657b468686595d1be36cc76cede4ac9aa630d0a"
+                  },
+                  {
+                      "path":  "logs/live-controller-process.json",
+                      "size":  505,
+                      "sha256":  "cbf2c28c2bde01dfc66bdf49a73ea7ef1d84c54e9fb5e133a3b777d2b0f83c76"
+                  },
+                  {
+                      "path":  "logs/process-summary.json",
+                      "size":  112514,
+                      "sha256":  "8292a1292bb3ec6a752d80b9a00a08bb0470e2f792952ebc8565f6c01c2f2e6a"
+                  },
+                  {
+                      "path":  "logs/web-server-process.json",
+                      "size":  200,
+                      "sha256":  "123929894c4c286bbe713fec7379eb3488cb6042bee6dca2ecdb686dc0bdcbba"
+                  }
+              ]
+}

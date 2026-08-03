@@ -1,0 +1,8 @@
+{
+    "result":  "passed-awaiting-founder-review",
+    "authorityId":  "authority-stage4-r1-20260803T093803115Z-7fc6b185",
+    "attemptId":  "stage4-r1-20260803T093803115Z-7fc6b185",
+    "archiveSha256":  "91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15",
+    "stage5Started":  false,
+    "productionChanged":  false
+}

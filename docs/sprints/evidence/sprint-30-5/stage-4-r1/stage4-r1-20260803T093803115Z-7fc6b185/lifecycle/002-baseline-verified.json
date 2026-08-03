@@ -1,0 +1,14 @@
+{
+    "contract":  "oracle.sprint-30-5.stage-4-r1-lifecycle",
+    "authorityId":  "authority-stage4-r1-20260803T093803115Z-7fc6b185",
+    "attemptId":  "stage4-r1-20260803T093803115Z-7fc6b185",
+    "phase":  "baseline-verified",
+    "recordedAtUtc":  "2026-08-03T09:41:41.9987678Z",
+    "details":  {
+                    "acceptedCandidateCommit":  "a7fc67f207d9c95407c70812828fa66bd487285d",
+                    "tree":  "6062c99988c4251b824b39f05d414b8155743506",
+                    "commit":  "3994d483a4a7fc8dfe91a7d21c7c54d1d10a72c3",
+                    "acceptedCandidateTree":  "356f6d52f1bf70065692e892af8bf916acc8727a",
+                    "preflightSha256":  "42ef3a9e3d7bbaea4c3cfb030188943db0cf822dae34ea3e5b1455fdbcb62142"
+                }
+}

@@ -8,8 +8,8 @@
 **Expected Stability:** Reviewed whenever approved execution direction changes
 **Supersedes:** Earlier active Master Build Plan versions
 **Superseded By:** None
-**Last Reviewed:** 30 July 2026
-**Version:** 5.2
+**Last Reviewed:** 3 August 2026
+**Version:** 5.3
 
 ---
 
@@ -188,10 +188,19 @@ evidence freeze. The final evidence manifest SHA-256 is
 and the archive SHA-256 is
 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`.
 
-Stage 4 and later stages remain unstarted and unauthorised. Stage 4 planning
-requires a separate Founder decision. Accepted Stage 1, Stage 2 and Stage 3
-evidence remains immutable. Production signing, publication, distribution,
-deployment and release remain unauthorised.
+Stage 4 R1 is Founder-accepted and formally closed. Passing attempt
+`stage4-r1-20260803T093803115Z-7fc6b185` completed all thirteen phases and
+ten journeys from preparation commit
+`3994d483a4a7fc8dfe91a7d21c7c54d1d10a72c3`. Final manifest SHA-256 is
+`1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d`,
+archive SHA-256 is
+`91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15`,
+and final residue is zero.
+
+Stages 5-7 remain unstarted and unauthorised. Stage 5 planning requires a
+separate Founder decision. Accepted Stage 1-4 evidence remains immutable.
+Production signing, publication, distribution, deployment and release remain
+unauthorised.
 
 The delivery hierarchy is governed by `docs/GOVERNANCE.md`: the Roadmap owns
 vision and strategic direction, Epics own major capabilities, Sprints own

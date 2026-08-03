@@ -1,0 +1,72 @@
+{
+  "mode": "qualification",
+  "result": "passed",
+  "primaryFailure": null,
+  "cleanupFailures": [],
+  "providerStarted": true,
+  "phaseEvents": [
+    {
+      "phase": "provider-initialized",
+      "observedAtUtc": "2026-08-03T09:41:42.493Z",
+      "details": {}
+    },
+    {
+      "phase": "migration-chain-frozen",
+      "observedAtUtc": "2026-08-03T09:41:42.499Z",
+      "details": {
+        "files": [
+          "001_initial_schema.sql",
+          "007_operator_achievements.sql",
+          "008_operator_ownership.sql",
+          "009_operator_intelligence_persistence.sql",
+          "010_operator_trust_control_persistence.sql",
+          "011_operator_account_provisioning.sql",
+          "012_operator_identity_lifecycle.sql",
+          "013_authoritative_session_lifecycle.sql",
+          "014_operator_development_lifecycle.sql"
+        ]
+      }
+    },
+    {
+      "phase": "provider-started",
+      "observedAtUtc": "2026-08-03T09:42:15.835Z",
+      "details": {}
+    },
+    {
+      "phase": "provider-route-admitted",
+      "observedAtUtc": "2026-08-03T09:42:16.417Z",
+      "details": {}
+    },
+    {
+      "phase": "source-built",
+      "observedAtUtc": "2026-08-03T09:42:27.777Z",
+      "details": {}
+    },
+    {
+      "phase": "web-server-ready",
+      "observedAtUtc": "2026-08-03T09:42:28.473Z",
+      "details": {
+        "endpoint": "http://127.0.0.1:4314"
+      }
+    },
+    {
+      "phase": "live-journey-passed",
+      "observedAtUtc": "2026-08-03T09:42:29.379Z",
+      "details": {}
+    },
+    {
+      "phase": "web-server-stopped",
+      "observedAtUtc": "2026-08-03T09:42:32.801Z",
+      "details": {
+        "pid": 45040,
+        "classification": "exited-before-taskkill"
+      }
+    },
+    {
+      "phase": "zero-residue-verified",
+      "observedAtUtc": "2026-08-03T09:42:44.602Z",
+      "details": {}
+    }
+  ],
+  "zeroResidue": true
+}

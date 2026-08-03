@@ -8,7 +8,7 @@
 
 **Authority:** Oracle Engineering Programme
 
-**Next Review:** Founder decision on resuming Stage 4 preparation from the R3-qualified baseline
+**Next Review:** Founder decision on Stage 5 planning and readiness
 
 **Scope:** Oracle engineering delivery from Sprint 17 through Oracle Beta
 
@@ -1400,11 +1400,19 @@ final evidence manifest SHA-256 is
 `19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`;
 the qualification archive SHA-256 is
 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`.
-Live Auth, protected rendering, installed-package GPU/performance/accessibility
-and later integrated qualification remain outstanding in Stages 4-7. No
-production
-deployment, persistence, telemetry, migration, external provider, remote push
-or Gate 7 activity is authorised.
+Stage 4 Live Authentication and Protected Rendering is Founder-accepted and
+formally closed. Attempt `stage4-r1-20260803T093803115Z-7fc6b185` completed
+all thirteen lifecycle phases and all ten journeys from preparation commit
+`3994d483a4a7fc8dfe91a7d21c7c54d1d10a72c3`. Final manifest SHA-256 is
+`1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d`;
+archive SHA-256 is
+`91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15`;
+and final residue is zero.
+
+Installed-package GPU, performance and accessibility and later integrated
+qualification remain outstanding in Stages 5-7. No production deployment,
+persistence, telemetry, migration, external provider, remote push or Gate 7
+activity is authorised.
 
 # FOUNDER BETA READINESS REVIEW
 

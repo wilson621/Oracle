@@ -8,9 +8,9 @@
 **Expected Stability:** Updated when verified implementation or accepted technical debt changes
 **Supersedes:** Earlier active implementation-status records
 **Superseded By:** None
-**Last Reviewed:** 30 July 2026
+**Last Reviewed:** 3 August 2026
 **Verified Branch:** `sprint-9-overlay`
-**Verified Repository Baseline:** `fc3b4775c505cf2cd3b45333bff8ee75d4cbfb3d`
+**Verified Repository Baseline:** `3994d483a4a7fc8dfe91a7d21c7c54d1d10a72c3`
 **Sprint 14 Implementation Baseline:** `3868975`
 **Sprint 15 Phase 1:** Complete and committed
 **Sprint 15 Phase 2:** Complete and committed
@@ -49,10 +49,9 @@ walkthrough accepted
 ADR-046; its deferred clean-machine package lifecycle was subsequently
 qualified by Stage 3 R9
 **Sprint 30:** Founder-approved and active under ADR-047; Phases 1-5 locally
-verified; Sprint 30.5 Stages 1, 2 and 3 Founder-accepted and closed; Stage 3 R1
-and failed R2-R8 remain immutable; R9 is the accepted passing Clean Windows
-Qualification; Stages 4-7 remain unstarted; production qualification is not
-yet complete
+verified; Sprint 30.5 Stages 1-4 Founder-accepted and closed; Stage 3 R1 and
+failed R2-R8 remain immutable; Stage 3 R9 and Stage 4 R1 are accepted passing
+results; Stages 5-7 remain unstarted; production qualification is incomplete
 
 Stage 3 R9 attempt `stage3-r9-20260730T221251043Z-71af9db7` passed all
 fourteen lifecycle phases from preparation commit
@@ -62,7 +61,7 @@ SHA-256 is
 the qualification archive SHA-256 is
 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`,
 and final package, certificate, process, transfer, work and package-data
-residue is zero. Stage 4 execution remains unstarted and unauthorised.
+residue is zero. Stage 4 R1 subsequently passed and is formally closed.
 
 ---
 
@@ -172,8 +171,8 @@ Historical Stage 2 and Stage 2 Requalification R1 remain Founder-accepted,
 closed and immutable. Stage 2 Requalification R2 is the authoritative package
 qualified by Stage 3 R9. The designated Stage 3 host was admitted with a
 Founder provenance exception, and Stage 3 R9 is Founder-accepted and formally
-closed with immutable passing evidence. Stage 4 execution remains unstarted and
-unauthorised.
+closed with immutable passing evidence. Stage 4 R1 is also Founder-accepted and
+formally closed.
 ## Sprint 30.5 Stage 2 — Historical Candidate Freeze and Package Reconciliation
 
 Source commit `d850743977735929f6873457fe122d2cf9697d9e` is frozen into
@@ -267,8 +266,27 @@ machine-trust teardown and final zero-residue checks passed.
 
 The canonical evidence is indexed by
 [Sprint 30.5 Stage 3 Qualification R9 Evidence](../sprints/evidence/sprint-30-5/stage-3-r9/README.md).
-Stage 3 R1 and failed R2-R8 remain immutable. Stage 3 closure grants no Stage
-4 or production authority.
+Stage 3 R1 and failed R2-R8 remain immutable. Stage 3 closure granted no Stage
+4 or production authority; Stage 4 later proceeded under separate authority.
+
+## Sprint 30.5 Stage 4 R1 - Live Authentication and Protected Rendering
+
+Attempt `stage4-r1-20260803T093803115Z-7fc6b185`, under consumed authority
+`authority-stage4-r1-20260803T093803115Z-7fc6b185`, completed all thirteen
+lifecycle phases and ten journeys from preparation commit
+`3994d483a4a7fc8dfe91a7d21c7c54d1d10a72c3`, tree
+`6062c99988c4251b824b39f05d414b8155743506`.
+
+Protected rendering, protected API authorisation, two-principal Operator
+isolation and session invalidation passed. Final residue is zero. Final
+manifest SHA-256 is
+`1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d`
+and archive SHA-256 is
+`91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15`.
+
+The canonical evidence is indexed by
+[Sprint 30.5 Stage 4 R1 Evidence](../sprints/evidence/sprint-30-5/stage-4-r1/README.md).
+Stage 4 is formally closed. Stage 5 remains unstarted and unauthorised.
 
 ## Sprint 29 — Secure Desktop Operations and Distribution
 

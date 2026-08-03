@@ -8,8 +8,8 @@
 **Expected Stability:** Updated whenever approved work changes state
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
-**Last Reviewed:** 31 July 2026
-**Version:** 9.1
+**Last Reviewed:** 3 August 2026
+**Version:** 9.2
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
 
@@ -168,16 +168,14 @@ The final evidence manifest SHA-256 is
 and the archive SHA-256 is
 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`.
 
-Stage 4 execution remains unstarted and unauthorised. Its non-qualification
-preparation rehearsal identified concrete Migration 011 and Migration 012
-pgcrypto schema dependencies. The bounded corrections at
-`a7fc67f207d9c95407c70812828fa66bd487285d`, tree
-`356f6d52f1bf70065692e892af8bf916acc8727a`, are now qualified by the
-Founder-accepted and formally closed Stage 2 Requalification R3 attempt
-`r3-20260731T171651908Z-9a8a2532`. R1, R2 and Stage 3 R9 remain accepted,
-closed and immutable. Resuming Stage 4 preparation requires a separate Founder
-decision; Stage 4 execution, Gate 7, production signing, publication,
-distribution, deployment and release remain unauthorised.
+Stage 4 R1 Live Authentication and Protected Rendering is Founder-accepted and
+formally closed. Attempt `stage4-r1-20260803T093803115Z-7fc6b185` passed all
+thirteen phases and ten journeys. Final manifest SHA-256 is
+`1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d`;
+archive SHA-256 is
+`91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15`;
+and teardown proved zero residue. Earlier accepted and historical records
+remain immutable. Stage 5, Gate 7 and production activity remain unauthorised.
 Sprint 17 — Scale-Safe Trust Data Plane is fully complete, and all approved
 success criteria are satisfied. Migration 009 is deployed and verified in
 production; the persistence foundation is established while runtime
@@ -264,10 +262,22 @@ reconciliation are recorded in
 SHA-256 `19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`;
 qualification archive SHA-256
 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`
-**Current Stage 3 authority:** None. Stage 3 is closed. Stage 4 execution is
-unauthorised and preparation cannot resume before governed R3 completion
+**Current Stage 3 authority:** None. Stage 3 is closed. Stage 4 is also
+Founder-accepted and formally closed
 **Deployment status:** Production unchanged; no production signing,
 distribution, deployment, migration, persistence or Gate authority
+
+## Sprint 30.5 Stage 4 R1 - Live Authentication and Protected Rendering
+
+**Status:** Founder-accepted and formally closed
+**Authority:** `authority-stage4-r1-20260803T093803115Z-7fc6b185` (consumed)
+**Attempt:** `stage4-r1-20260803T093803115Z-7fc6b185` (immutable)
+**Evidence:** Thirteen lifecycle phases and ten journeys passed; manifest
+SHA-256 `1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d`;
+archive SHA-256 `91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15`;
+zero final residue
+**Current Stage 4 authority:** None. Further execution is unauthorised
+**Next stage:** Stage 5 requires a separate Founder planning/readiness decision
 
 # Latest Closed Sprint
 

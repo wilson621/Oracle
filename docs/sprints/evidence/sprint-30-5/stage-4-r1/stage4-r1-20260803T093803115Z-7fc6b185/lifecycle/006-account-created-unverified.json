@@ -1,0 +1,10 @@
+{
+    "contract":  "oracle.sprint-30-5.stage-4-r1-lifecycle",
+    "authorityId":  "authority-stage4-r1-20260803T093803115Z-7fc6b185",
+    "attemptId":  "stage4-r1-20260803T093803115Z-7fc6b185",
+    "phase":  "account-created-unverified",
+    "recordedAtUtc":  "2026-08-03T09:42:44.6884372Z",
+    "details":  {
+                    "accountCount":  2
+                }
+}

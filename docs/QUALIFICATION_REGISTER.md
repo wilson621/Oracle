@@ -11,7 +11,7 @@ expiry or revocation
 **Supersedes:** Qualification status inferred across Sprint and programme
 documents
 **Superseded By:** None
-**Last Reviewed:** 31 July 2026
+**Last Reviewed:** 3 August 2026
 
 ---
 
@@ -34,8 +34,8 @@ results.
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
 | 2 | Candidate Freeze and Package Reconciliation | **R3 Founder-accepted and formally closed for the corrected product baseline** | Passing attempt `r3-20260731T171651908Z-9a8a2532`; final evidence manifest SHA-256 `79ae9b219f24c8f61c48b6e3a0094d1730f72fe29a932e02ff1e92f7b07c1229`; archive SHA-256 `82ad4a46721c2ab0e7103c57f192394887844fd4c311ec3fcea92d2ba05e0688`; R1 and R2 remain immutable | None for R3; history is closed |
 | 3 | Clean Windows Qualification | **Founder-accepted and formally closed at R9** | Passing attempt `stage3-r9-20260730T221251043Z-71af9db7` under authority `authority-stage3-r9-20260730T221251043Z-71af9db7`; final evidence manifest SHA-256 `19a8248a06b37d5fac73b42d35ac96049d3ede09249360b064d9dd692d07defe`; archive SHA-256 `5eadd80469edcafbe62cd461404c9a2bd782eb1393e542b78969784925e2f41e`; zero final residue | None for Stage 3; history is closed and any further Stage 3 execution is unauthorised |
-| 4 | Live Authentication and Protected Rendering | **Preparation suspended; prerequisite correction now qualified** | Migration 011/012 pgcrypto corrections are qualified by accepted Stage 2 R3 evidence; prior Stage 4 draft remains isolated and execution remains unauthorised | Separate Founder decision to resume or replace Stage 4 preparation; execution requires its own later authority |
-| 5 | Installed Package GPU, Performance and Accessibility | **Not started** | Must use the reconciled installed package on the replacement host; ASUS Stage 1 GPU evidence does not transfer | Stage 4 acceptance, then separate Stage 5 authority and replacement-host GPU admission |
+| 4 | Live Authentication and Protected Rendering | **R1 Founder-accepted and formally closed** | Passing attempt `stage4-r1-20260803T093803115Z-7fc6b185`; manifest SHA-256 `1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d`; archive SHA-256 `91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15`; ten journeys and zero-residue teardown passed | None for Stage 4; history is closed and further Stage 4 execution is unauthorised |
+| 5 | Installed Package GPU, Performance and Accessibility | **Not started** | Stage 4 is accepted and closed; replacement-host GPU, performance and accessibility admission remains unperformed | Separate Founder Stage 5 planning/readiness decision, then later explicit execution authority |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
 | 7 | Final Integrated Qualification and Sprint 30 Closure Package | **Not started** | Requires complete immutable evidence from Stages 1–6 | Stage 6 acceptance, then separate Stage 7 authority |
 
@@ -148,13 +148,32 @@ results.
 - Stage 3 closure grants no Stage 4, production-signing, publication,
   distribution, deployment or release authority.
 
+# Stage 4 Permanent Qualification Position
+
+- Stage 4 R1 attempt `stage4-r1-20260803T093803115Z-7fc6b185`, under consumed
+  authority `authority-stage4-r1-20260803T093803115Z-7fc6b185`, passed all
+  thirteen lifecycle phases and all ten authentication and isolation journeys.
+- Preparation commit `3994d483a4a7fc8dfe91a7d21c7c54d1d10a72c3`, tree
+  `6062c99988c4251b824b39f05d414b8155743506`, remained bound to Stage 2 R3
+  candidate `a7fc67f207d9c95407c70812828fa66bd487285d`.
+- Final manifest SHA-256 is
+  `1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d`;
+  archive SHA-256 is
+  `91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15`.
+- Protected rendering, protected API authorisation, two-principal isolation,
+  local email verification and session invalidation passed. Final residue is
+  zero.
+- The canonical evidence is indexed by
+  [Sprint 30.5 Stage 4 R1 Evidence](sprints/evidence/sprint-30-5/stage-4-r1/README.md).
+- Stage 4 is formally closed and grants no Stage 5 or production authority.
+
 # Independent Carried Qualification States
 
 | Capability | State | Binding limitation |
 | --- | --- | --- |
 | Sprint 29 clean-machine distribution | **Qualified by Stage 3 R9** | The accepted Stage 2 R2 MSIX completed governed installation, activation, runtime, repair, removal and zero-residue validation on Founder-QA-01; this does not grant production release authority |
 | Minecraft Java observation | **Provisionally certified** | Operational Certification Deferred — Required Test Environment Unavailable; observation disabled and no support claim authorised |
-| Production qualification | **Incomplete** | Stages 1-3 are closed; Stage 3 R1 and failed R2-R8 remain immutable and R9 is the accepted passing result; Stage 4 execution has not started and Stages 5-7 have not started |
+| Production qualification | **Incomplete** | Stages 1-4 are Founder-accepted and closed; Stage 4 R1 is the accepted passing result; Stages 5-7 have not started |
 | Gate 7 | **Not authorised** | May be considered only after Production Qualification completes |
 | Beta | **Not authorised** | Requires later Founder decision after the governed qualification and Gate sequence |
 
