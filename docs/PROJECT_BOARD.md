@@ -940,3 +940,7 @@ Corrected baseline `68a304d6caad3caaf84d3a6b4f63802ab4b6fe83` and create-only re
 ## Stage 3 R12 Execution-Enabled Mission
 
 The verified replacement-only R12 transfer remains immutable execution-barred history. One fresh execution-enabled baseline and transfer are authorised, followed by one governed attempt only after every pre-authority gate passes. Stage 4, production, publication and deployment remain unauthorised.
+
+## Stage 3 R12 Physical Handoff Required
+
+The fresh execution-enabled transfer is independently verified. Current host DESKTOP-M3H22E4 fails the exact Founder-QA-01 identity gate and exposes prohibited development tools. The USB must move to Founder-QA-01 before fresh continuity. Authority and attempt counts remain zero.

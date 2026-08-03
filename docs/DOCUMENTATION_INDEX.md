@@ -507,3 +507,5 @@ to adopt a later formatting standard.
 | Sprint 30.5 Stage 3 R12 execution-enabled mission | [Sprint 30.5 Stage 3 R12 Execution-Enabled Mission](sprints/SPRINT_30_5_STAGE_3_R12_EXECUTION_ENABLED_MISSION.md) | Fresh contract-authorised baseline, transfer, pre-authority sequence and one-attempt boundary |
 
 | Sprint 30.5 Stage 3 R12 execution-enabled validation | [Sprint 30.5 Stage 3 R12 Execution-Enabled Validation Report](sprints/SPRINT_30_5_STAGE_3_R12_EXECUTION_ENABLED_VALIDATION_REPORT.md) | Passed non-qualification gates and immutable-history preservation checks |
+
+| Sprint 30.5 Stage 3 R12 execution transfer handoff | [Sprint 30.5 Stage 3 R12 Execution Transfer Handoff](sprints/SPRINT_30_5_STAGE_3_R12_EXECUTION_TRANSFER_HANDOFF.md) | Verified fresh transfer, exact physical-host blocker, and zero-authority handoff state |
