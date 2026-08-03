@@ -44,6 +44,7 @@ $bootstrapRequiredFiles = @(
   "Oracle.Stage3R12PackageInventoryPolicy.ps1",
   "Oracle.Stage3R12PreflightPolicy.ps1",
   "Oracle.Stage3R12ProcessPolicy.ps1",
+  "Oracle.Stage3R12TransferInventoryPolicy.ps1",
   "Oracle.Stage3R12WindowPolicy.ps1",
   "Oracle.Stage3R12WindowsExecutablePolicy.ps1"
 )
@@ -81,10 +82,14 @@ $contract = Get-Content -LiteralPath (
 . (Join-Path $scriptRoot "Oracle.Stage3R12ObservationPolicy.ps1")
 . (Join-Path $scriptRoot "Oracle.Stage3R12PreflightPolicy.ps1")
 . (Join-Path $scriptRoot "Oracle.Stage3R12ProcessPolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage3R12TransferInventoryPolicy.ps1")
 . (Join-Path $scriptRoot "Oracle.Stage3R12WindowPolicy.ps1")
 . (Join-Path $scriptRoot "Oracle.Stage3R12WindowsExecutablePolicy.ps1")
 Assert-OracleStage3R12ApplicationActivationContract -Contract $contract
 Assert-OracleStage3R12CertificateTrustContract -Contract $contract
+if ([string]$contract.authority.execution -cne "founder-authorised") {
+  throw "Stage 3 R12 qualification execution is not authorised by the contract."
+}
 $expectedToken = "FOUNDER-AUTHORISED-STAGE3-R12-EXECUTION"
 $thumbprint = [string]$contract.stage2.certificateThumbprint
 $publisher = [string]$contract.package.publisher
@@ -599,69 +604,11 @@ function Assert-IdentityAndTransfer {
       $contract.stage2.certificateThumbprint -or
     (Get-Sha256 $msixPath) -cne $contract.stage2.msixSha256
   ) { throw "Transfer is not bound to accepted Stage 2 R6." }
-  $expectedPayload = @(
-    "Get-OracleStage3R12HostContinuity.ps1",
-    "Invoke-OracleStage3R12PreAuthorityPreflight.ps1",
-    "Invoke-OracleStage3R12Qualification.ps1",
-    "Oracle.Sprint30.5.Stage2RequalificationR6QualificationEvidence.zip",
-    "Oracle.Stage2RequalificationR6AcceptedEvidenceIndex.json",
-    "Oracle.Stage2RequalificationR6EvidenceManifest.json",
-    "SPRINT_30_5_STAGE_2_REQUALIFICATION_R6_CLOSURE.md",
-    "Oracle.Stage3HostAdmission.json",
-    "Oracle.Stage3R12Contract.json",
-    "Oracle.Stage3R12ActivationPolicy.ps1",
-    "Oracle.Stage3R12CertificateTrustPolicy.ps1",
-    "Oracle.Stage3R12IdentityPolicy.ps1",
-    "Oracle.Stage3R12InstalledSoftwarePolicy.ps1",
-    "Oracle.Stage3R12InstalledRuntimeConfigurationPolicy.ps1",
-    "Oracle.Stage3R12LifecyclePolicy.ps1",
-    "Oracle.Stage3R12ObservationPolicy.ps1",
-    "Oracle.Stage3R12OptionalMemberAudit.json",
-    "Oracle.Stage3R12PreflightPolicy.ps1",
-    "Oracle.Stage3R12ProcessPolicy.ps1",
-    "Oracle.Stage3R12WindowPolicy.ps1",
-    "Oracle.Stage3R12WindowsExecutablePolicy.ps1",
-    "Oracle.Stage3R12PhaseAudit.json",
-    "Oracle.Stage3R12PackageInventoryPolicy.ps1",
-    "Oracle.WindowDiscovery.exe",
-    "Oracle.WindowObserver.exe",
-    "README.md",
-    "oracle-0.1.4.cdx.json",
-    "oracle-0.1.4.provenance.json",
-    "oracle-release-manifest.json",
-    "oracle-release-manifest.json.p7s",
-    "package-content-inventory.json",
-    "qualification-candidate.json",
-    "runtime-configuration-build-secrecy.json",
-    "signature-and-trust-verification.json",
-    "Test-OracleStage3R12ActivationPolicy.ps1",
-    "Test-OracleStage3R12CertificateTrustPolicy.ps1",
-    "Test-OracleStage3R12InstalledRuntimeConfigurationPolicy.ps1",
-    "Test-OracleStage3R12OptionalMemberAudit.ps1",
-    "Test-OracleStage3R12ObservationPolicy.ps1",
-    "Test-OracleStage3R12WindowPolicy.ps1",
-    $contract.package.fileName
-  ) | Sort-Object
-  $actualPayload = @($manifest.payload | ForEach-Object {
-    if (
-      [string]$_.path -cnotmatch '^payload/[^/\\]+$' -or
-      [string]$_.sha256 -cnotmatch '^[0-9a-f]{64}$' -or
-      [int64]$_.size -lt 0
-    ) { throw "Transfer payload entry is malformed or can escape." }
-    [IO.Path]::GetFileName([string]$_.path)
-  } | Sort-Object)
-  if (
-    $actualPayload.Count -ne $expectedPayload.Count -or
-    @(Compare-Object $actualPayload $expectedPayload).Count -ne 0
-  ) { throw "Transfer payload inventory is missing, duplicate or unexpected." }
-  foreach ($entry in @($manifest.payload)) {
-    $path = Join-Path $TransferRoot $entry.path
-    if (
-      -not (Test-Path -LiteralPath $path -PathType Leaf) -or
-      (Get-Sha256 $path) -cne $entry.sha256 -or
-      (Get-Item -LiteralPath $path).Length -ne $entry.size
-    ) { throw "Transfer payload mismatch: $($entry.path)" }
-  }
+  $transferPayloadInventory = Assert-OracleStage3R12TransferPayloadInventory `
+    -Manifest $manifest `
+    -Contract $contract `
+    -TransferRoot $TransferRoot `
+    -GetSha256 ${function:Get-Sha256}
   $runningHarnessEntry = @($manifest.payload | Where-Object {
     [string]$_.path -ceq "payload/Invoke-OracleStage3R12Qualification.ps1"
   })

@@ -15,12 +15,18 @@
                                   "manifestSha256":  "3caaeb29b432acca0aaccb43da45fc294f564e76d103cc274428ee83ad365e1e",
                                   "custodySha256":  "7972737c6ec8b9884cf26816d316b809ffb6e01c22efb45ca88ef1b204e62317",
                                   "disposition":  "immutable-rejected-programme-identity-contradiction"
+                              },
+                              {
+                                  "transferId":  "transfer-stage3-r12-20260803T190836740Z-2b8363bb",
+                                  "manifestSha256":  "81e05a570cfffb886af7f65e60ab8658d1fdb92d6d9b1d21ae23981b36b830f0",
+                                  "custodySha256":  "b31cde2f075b3b1ac34d168c6bbdd3a671bb9a447426388272a50a1de7b42115",
+                                  "disposition":  "immutable-pre-authority-engineering-failure"
                               }
                           ],
     "revisionLineage":  {
                             "currentLineage":  "attempt-scoped-stage-3-requalification",
                             "historicalQualifiedRevision":  "R9",
-                            "relationship":  "R9 remains accepted immutable history; R11 is immutable failed qualification; R12 engineering baseline is accepted and one governed qualification mission is authorised"
+                            "relationship":  "R9 remains accepted immutable history; R11 is immutable failed qualification; the first R12 package is an immutable pre-authority engineering failure; replacement transfer preparation only is authorised"
                         },
     "correctionBasis":  {
                             "basis":  "stage-3-r11-post-reset-package-data-lifecycle-defect",
@@ -30,6 +36,19 @@
                             "failedStage3Revision":  "R11",
                             "failedStage3Attempt":  "stage3-r11-20260803T175715661Z-84bf486c"
                         },
+    "preAuthorityEngineeringFailure":  {
+                                            "transferId":  "transfer-stage3-r12-20260803T190836740Z-2b8363bb",
+                                            "harnessCommit":  "955238054ec18dd8ba4cabac6da15b24d84dedf3",
+                                            "manifestSha256":  "81e05a570cfffb886af7f65e60ab8658d1fdb92d6d9b1d21ae23981b36b830f0",
+                                            "custodySha256":  "b31cde2f075b3b1ac34d168c6bbdd3a671bb9a447426388272a50a1de7b42115",
+                                            "continuitySha256":  "a71d06ee38b2568384aa46c84bd23af5a7cfbfcb988fad9c676b127fec9622d8",
+                                            "continuityResult":  "failed",
+                                            "continuityIssue":  "oracle-package",
+                                            "authorityCreated":  false,
+                                            "attemptCreated":  false,
+                                            "qualificationExecuted":  false,
+                                            "identityDisposition":  "expired-never-reuse"
+                                        },
     "requiredBranch":  "sprint-9-overlay",
     "stage2":  {
                    "attemptId":  "r6-20260803T171057940Z-5e914d18",
@@ -61,6 +80,56 @@
                     "releaseManifestFileName":  "oracle-release-manifest.json",
                     "runtimeManifestVersion":  "1.7.0"
                 },
+    "transferPayload":  {
+                             "inventoryAuthority":  "founder-bound-transfer-manifest",
+                             "actualDirectoryMustMatchManifest":  true,
+                             "requiredSubsetMustBePresent":  true,
+                             "requiredFileNames":  [
+                                                       "Get-OracleStage3R12HostContinuity.ps1",
+                                                       "Invoke-OracleStage3R12PreAuthorityPreflight.ps1",
+                                                       "Invoke-OracleStage3R12Qualification.ps1",
+                                                       "Oracle.Sprint30.5.Stage2RequalificationR6QualificationEvidence.zip",
+                                                       "Oracle.Stage2RequalificationR6AcceptedEvidenceIndex.json",
+                                                       "Oracle.Stage2RequalificationR6EvidenceManifest.json",
+                                                       "SPRINT_30_5_STAGE_2_REQUALIFICATION_R6_CLOSURE.md",
+                                                       "Oracle.Stage3HostAdmission.json",
+                                                       "Oracle.Stage3R12Contract.json",
+                                                       "Oracle.Stage3R12ActivationPolicy.ps1",
+                                                       "Oracle.Stage3R12CertificateTrustPolicy.ps1",
+                                                       "Oracle.Stage3R12IdentityPolicy.ps1",
+                                                       "Oracle.Stage3R12InstalledSoftwarePolicy.ps1",
+                                                       "Oracle.Stage3R12InstalledRuntimeConfigurationPolicy.ps1",
+                                                       "Oracle.Stage3R12LifecyclePolicy.ps1",
+                                                       "Oracle.Stage3R12ObservationPolicy.ps1",
+                                                       "Oracle.Stage3R12OptionalMemberAudit.json",
+                                                       "Oracle.Stage3R12PackageInventoryPolicy.ps1",
+                                                       "Oracle.Stage3R12PreflightPolicy.ps1",
+                                                       "Oracle.Stage3R12ProcessPolicy.ps1",
+                                                       "Oracle.Stage3R12TransferInventoryPolicy.ps1",
+                                                       "Oracle.Stage3R12WindowPolicy.ps1",
+                                                       "Oracle.Stage3R12WindowsExecutablePolicy.ps1",
+                                                       "Oracle.Stage3R12PhaseAudit.json",
+                                                       "Oracle.WindowDiscovery.exe",
+                                                       "Oracle.WindowObserver.exe",
+                                                       "README.md",
+                                                       "oracle-0.1.4.cdx.json",
+                                                       "oracle-0.1.4.provenance.json",
+                                                       "oracle-release-manifest.json",
+                                                       "oracle-release-manifest.json.p7s",
+                                                       "package-content-inventory.json",
+                                                       "qualification-candidate.json",
+                                                       "runtime-configuration-build-secrecy.json",
+                                                       "signature-and-trust-verification.json",
+                                                       "Test-OracleStage3R12ActivationPolicy.ps1",
+                                                       "Test-OracleStage3R12CertificateTrustPolicy.ps1",
+                                                       "Test-OracleStage3R12InstalledRuntimeConfigurationPolicy.ps1",
+                                                       "Test-OracleStage3R12ObservationPolicy.ps1",
+                                                       "Test-OracleStage3R12OptionalMemberAudit.ps1",
+                                                       "Test-OracleStage3R12TransferInventoryPolicy.ps1",
+                                                       "Test-OracleStage3R12WindowPolicy.ps1",
+                                                       "Oracle_0.1.4.0_x64_STAGE2_REQUALIFICATION_R6_LOCAL_TEST_ONLY.msix"
+                                                   ]
+                         },
     "packageInventory":  {
                              "canonicalPathRepresentation":  "single-percent-decoded-forward-slash-logical-package-path",
                              "governedEntryCount":  2028,
@@ -176,7 +245,7 @@
                            "filesystem":  "NTFS",
                            "label":  "ORACLE-S3R1",
                            "volumeSerial":  "783A-2CD4",
-                           "approvalState":  "founder-authorised-current-r12-mission"
+                           "approvalState":  "founder-authorised-replacement-transfer-only"
                        },
     "output":  {
                    "transferBase":  ".artifacts/sprint-30-5/stage-3-r12/transfers",
@@ -229,7 +298,7 @@
     "authority":  {
                       "preparation":  "founder-accepted-engineering-baseline",
                       "transfer":  "founder-authorised",
-                      "execution":  "founder-authorised",
+                      "execution":  "not-authorised-replacement-transfer-only",
                       "stage4":  "not-authorised",
                       "production":  "not-authorised",
                       "publication":  "not-authorised",

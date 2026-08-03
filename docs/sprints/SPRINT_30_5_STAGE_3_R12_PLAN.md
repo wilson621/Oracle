@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 3 Requalification R12 Plan
 
-**Status:** Engineering baseline accepted - governed qualification mission authorised
+**Status:** Replacement-transfer engineering correction authorised; execution barred
 **Operating model:** OEOM v1.0
 **Programme:** `Sprint 30.5 Stage 3 Requalification R12`
 
@@ -44,5 +44,17 @@ rehash, the ADR-048 installed runtime-configuration lifecycle fixture,
 adversarial post-reset initialization tests, optional-member/StrictMode audit,
 all-phase development rehearsal, lint, type checking and architecture audit.
 
-Completion prepares engineering evidence only. It creates no transfer,
-authority, attempt or qualification evidence.
+The first R12 transfer is immutable pre-authority engineering failure
+`transfer-stage3-r12-20260803T190836740Z-2b8363bb`. Its manifest, custody,
+continuity and expired identities are preserved and barred from reuse.
+
+The evidence-led inventory correction makes the exact Founder-bound manifest
+authoritative for the complete payload while retaining a contract-defined
+mandatory subset. The physical directory must equal the manifest exactly and
+every manifested byte must pass size and SHA-256 verification. Adversarial
+validation rejects unmanifested files, omissions, duplicates, case aliases,
+reparse points and tampering.
+
+Completion permits one new create-only, independently verified replacement
+transfer with fresh transfer identity. It creates no qualification authority,
+attempt or qualification evidence.

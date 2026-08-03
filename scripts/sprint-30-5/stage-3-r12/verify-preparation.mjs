@@ -481,6 +481,10 @@ const processPolicy = readFileSync(
   join(import.meta.dirname, "Oracle.Stage3R12ProcessPolicy.ps1"),
   "utf8"
 );
+const transferInventoryPolicy = readFileSync(
+  join(import.meta.dirname, "Oracle.Stage3R12TransferInventoryPolicy.ps1"),
+  "utf8"
+);
 const windowPolicy = readFileSync(
   join(import.meta.dirname, "Oracle.Stage3R12WindowPolicy.ps1"),
   "utf8"
@@ -520,6 +524,10 @@ const optionalMemberAuditPath = join(
 const processFixturePath = join(
   import.meta.dirname,
   "Test-OracleStage3R12ProcessPolicy.ps1"
+);
+const transferInventoryFixturePath = join(
+  import.meta.dirname,
+  "Test-OracleStage3R12TransferInventoryPolicy.ps1"
 );
 const windowFixturePath = join(
   import.meta.dirname,
@@ -655,6 +663,15 @@ assert.match(transferBuilder, /Test-OracleStage3R12ObservationPolicy\.ps1/u);
 assert.match(transferBuilder, /Oracle\.Stage3R12PackageInventoryPolicy\.ps1/u);
 assert.match(transferBuilder, /Oracle\.Stage3R12PreflightPolicy\.ps1/u);
 assert.match(transferBuilder, /Oracle\.Stage3R12ProcessPolicy\.ps1/u);
+assert.match(transferBuilder, /Oracle\.Stage3R12TransferInventoryPolicy\.ps1/u);
+assert.match(transferBuilder, /Test-OracleStage3R12TransferInventoryPolicy\.ps1/u);
+assert.match(harness, /Assert-OracleStage3R12TransferPayloadInventory/u);
+assert.doesNotMatch(harness, /\$expectedPayload\s*=\s*@\(/u);
+assert.match(transferInventoryPolicy, /founder-bound-transfer-manifest/u);
+assert.match(transferInventoryPolicy, /actualDirectoryMustMatchManifest/u);
+assert.match(transferInventoryPolicy, /requiredSubsetMustBePresent/u);
+assert.match(transferBuilder, /plannedPayloadNameSet/u);
+assert.match(transferBuilder, /contract\.transferPayload\.requiredFileNames/u);
 assert.match(transferBuilder, /Oracle\.Stage3R12WindowPolicy\.ps1/u);
 assert.match(transferBuilder, /Test-OracleStage3R12WindowPolicy\.ps1/u);
 assert.match(harness, /Oracle\.Stage3R12WindowPolicy\.ps1/u);
@@ -668,7 +685,7 @@ assert.match(transferBuilder, /Oracle\.Stage3R12WindowsExecutablePolicy\.ps1/u);
 assert.match(transferBuilder, /Invoke-OracleStage3R12PreAuthorityPreflight\.ps1/u);
 assert.match(transferBuilder, /Oracle\.Stage3R12OptionalMemberAudit\.json/u);
 assert.match(transferBuilder, /Test-OracleStage3R12ActivationPolicy\.ps1/u);
-assert.match(harness, /"Test-OracleStage3R12ActivationPolicy\.ps1"/u);
+assert.ok(contract.transferPayload.requiredFileNames.includes("Test-OracleStage3R12ActivationPolicy.ps1"));
 assert.match(transferBuilder, /Oracle\.Stage3R12PhaseAudit\.json/u);
 assert.match(transferBuilder, /Oracle\.Stage3R12TransferCustody\.json/u);
 assert.match(transferBuilder, /authority:\s*founderAuthority,/u);
@@ -685,6 +702,10 @@ assert.doesNotMatch(
 assert.match(transferBuilder, /failedR2TransferModified: false/u);
 assert.match(transferBuilder, /failedR3TransferModified: false/u);
 assert.match(transferBuilder, /rejectedR10TransfersModified: false/u);
+assert.match(transferBuilder, /previousR12PreAuthorityFailureModified: false/u);
+assert.match(transferBuilder, /verifyImmutablePreAuthorityFailure\(approvedRoot\)/u);
+assert.match(transferBuilder, /Immutable first R12 failed continuity record differs/u);
+assert.match(transferBuilder, /immutablePreAuthorityEngineeringFailure:\s*contract\.preAuthorityEngineeringFailure/u);
 assert.match(transferBuilder, /previousR5TransferModified: false/u);
 assert.match(transferBuilder, /previousR6TransferModified: false/u);
 assert.match(transferBuilder, /previousR7TransferModified: false/u);
@@ -742,6 +763,11 @@ for (const required of [
 ]) {
   assert.ok(harness.includes(required), `Harness contract missing: ${required}`);
 }
+assert.match(
+  harness,
+  /\[string\]\$contract\.authority\.execution\s+-cne\s+"founder-authorised"/u
+);
+assert.match(harness, /qualification execution is not authorised by the contract/u);
 assert.match(windowPolicy, /GetPackageFamilyName/u);
 assert.match(windowPolicy, /ProcessQueryLimitedInformation/u);
 assert.match(windowPolicy, /NativeErrorCode\s+-ne\s+87/u);
@@ -836,12 +862,11 @@ for (const forbidden of [
 }
 for (const required of [
   "Stage 3 Requalification R12 Pre-Execution Gate",
-  "Execution:** Founder-authorised after all pre-authority gates pass",
-  "Transfer construction:** Founder-authorised",
+  "Execution:** Not authorised",
+  "Replacement transfer construction:** Founder-authorised",
   "ExpectedHarnessCommit",
   "ExpectedTransferManifestSha256",
   "ExpectedTransferCustodySha256",
-  "ExpectedHostContinuitySha256",
   contract.stage2.candidateCommit,
   contract.stage2.msixSha256,
   contract.stage2.latestExecutionStartUtc.replace(".000Z", "Z"),
@@ -856,7 +881,7 @@ for (const required of [
 
 assert.match(
   transferBuilder,
-  /Create-only Stage 3 Requalification R12 transfer; R1-R11 and all historical transfers remain immutable/u
+  /Create-only replacement Stage 3 Requalification R12 transfer; the first R12 package and all historical transfers remain immutable/u
 );
 for (const required of [
   "PSObject.Properties",
@@ -1030,6 +1055,15 @@ assert.equal(processResult.nullStatusRejected, true);
 assert.equal(processResult.nonzeroRejected, true);
 assert.equal(processResult.stdoutAndStderrPreserved, true);
 assert.equal(processResult.evidenceRecords, 5);
+
+const transferInventoryResult = runPowerShellFixture(transferInventoryFixturePath);
+assert.equal(transferInventoryResult.result, "pass");
+assert.equal(transferInventoryResult.governedAdditionalManifestEntryAccepted, true);
+assert.equal(transferInventoryResult.unmanifestedFileRejected, true);
+assert.equal(transferInventoryResult.missingRequiredFileRejected, true);
+assert.equal(transferInventoryResult.duplicateManifestEntryRejected, true);
+assert.equal(transferInventoryResult.caseAliasDuplicateRejected, true);
+assert.equal(transferInventoryResult.tamperedPayloadRejected, true);
 
 const certificateTrustResult = runPowerShellFixture(
   certificateTrustFixturePath
@@ -1259,7 +1293,7 @@ assert.doesNotMatch(harness, /Reset-AppxPackage[\s\S]{0,900}Invoke-OracleStage3R
 assert.match(preflightPolicy, /ambientVariableMatches = 0/u);
 assert.match(harness, /CycloneDX/u);
 assert.match(harness, /CheckSignature\(\$true\)/u);
-assert.match(harness, /Transfer payload inventory is missing, duplicate or unexpected/u);
+assert.match(transferInventoryPolicy, /Transfer payload directory differs from the governed manifest/u);
 assert.match(harness, /Transfer root contains missing or unexpected entries/u);
 assert.match(
   harness,
@@ -1435,16 +1469,40 @@ assert.deepEqual(contract.rejectedTransfers, [
     custodySha256: "7972737c6ec8b9884cf26816d316b809ffb6e01c22efb45ca88ef1b204e62317",
     disposition: "immutable-rejected-programme-identity-contradiction",
   },
+  {
+    transferId: "transfer-stage3-r12-20260803T190836740Z-2b8363bb",
+    manifestSha256: "81e05a570cfffb886af7f65e60ab8658d1fdb92d6d9b1d21ae23981b36b830f0",
+    custodySha256: "b31cde2f075b3b1ac34d168c6bbdd3a671bb9a447426388272a50a1de7b42115",
+    disposition: "immutable-pre-authority-engineering-failure",
+  },
 ]);
 assert.equal(contract.authority.preparation, "founder-accepted-engineering-baseline");
 assert.equal(contract.authority.transfer, "founder-authorised");
-assert.equal(contract.authority.execution, "founder-authorised");
+assert.equal(contract.authority.execution, "not-authorised-replacement-transfer-only");
 assert.equal(contract.authority.stage4, "not-authorised");
-assert.equal(contract.transferMedium.approvalState, "founder-authorised-current-r12-mission");
-assert.equal(contract.revisionLineage.relationship, "R9 remains accepted immutable history; R11 is immutable failed qualification; R12 engineering baseline is accepted and one governed qualification mission is authorised");
+assert.equal(contract.transferMedium.approvalState, "founder-authorised-replacement-transfer-only");
+assert.equal(contract.revisionLineage.relationship, "R9 remains accepted immutable history; R11 is immutable failed qualification; the first R12 package is an immutable pre-authority engineering failure; replacement transfer preparation only is authorised");
 assert.equal(contract.correctionBasis.basis, "stage-3-r11-post-reset-package-data-lifecycle-defect");
 assert.equal(contract.correctionBasis.failedStage3Revision, "R11");
 assert.equal(contract.correctionBasis.failedStage3Attempt, "stage3-r11-20260803T175715661Z-84bf486c");
+assert.deepEqual(contract.preAuthorityEngineeringFailure, {
+  transferId: "transfer-stage3-r12-20260803T190836740Z-2b8363bb",
+  harnessCommit: "955238054ec18dd8ba4cabac6da15b24d84dedf3",
+  manifestSha256: "81e05a570cfffb886af7f65e60ab8658d1fdb92d6d9b1d21ae23981b36b830f0",
+  custodySha256: "b31cde2f075b3b1ac34d168c6bbdd3a671bb9a447426388272a50a1de7b42115",
+  continuitySha256: "a71d06ee38b2568384aa46c84bd23af5a7cfbfcb988fad9c676b127fec9622d8",
+  continuityResult: "failed",
+  continuityIssue: "oracle-package",
+  authorityCreated: false,
+  attemptCreated: false,
+  qualificationExecuted: false,
+  identityDisposition: "expired-never-reuse",
+});
+assert.equal(contract.transferPayload.inventoryAuthority, "founder-bound-transfer-manifest");
+assert.equal(contract.transferPayload.actualDirectoryMustMatchManifest, true);
+assert.equal(contract.transferPayload.requiredSubsetMustBePresent, true);
+assert.ok(contract.transferPayload.requiredFileNames.includes("Oracle.Stage3R12TransferInventoryPolicy.ps1"));
+assert.ok(contract.transferPayload.requiredFileNames.includes("Test-OracleStage3R12TransferInventoryPolicy.ps1"));
 assert.equal(contract.immutableFailedQualification.failedEvidenceIndexSha256, "2e43a590d1dab0bdfb8707dfaa1de625008766c3a8590c91c201640cca43168f");
 assert.equal(contract.immutableFailedQualification.failureSha256, "2e6cf6fb9d131c66376e247c94d5198db5e6ff4f8e740868b6f85194d004a489");
 assert.equal(contract.immutableFailedQualification.authorityConsumed, true);

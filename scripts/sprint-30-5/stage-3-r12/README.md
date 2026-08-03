@@ -11,4 +11,6 @@ npm.cmd run sprint-30-5:stage-3:r12:validate
 npm.cmd run sprint-30-5:stage-3:r12:rehearse
 ```
 
-No R12 transfer, return or execution package entry point exists. The contract and operational entry points also fail closed because transfer construction and qualification execution are not authorised. A later qualification requires a new explicit Founder mission.
+The first R12 transfer is immutable pre-authority engineering failure `transfer-stage3-r12-20260803T190836740Z-2b8363bb`. The replacement preparation uses the exact Founder-bound manifest as the complete payload inventory authority and a contract-defined mandatory subset as a fail-closed floor. The physical payload directory must equal the manifest and every manifested file is size/hash verified.
+
+No R12 transfer, return or execution entry point is exposed through `package.json`. Direct token-gated construction of one fresh, create-only replacement transfer is authorised. Qualification authority creation and execution are not authorised and remain fail closed.

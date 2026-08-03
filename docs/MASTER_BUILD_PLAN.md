@@ -869,3 +869,9 @@ R11 remains immutable failed evidence. R12 engineering preparation is complete: 
 ## Stage 3 Requalification R12 Authorised Mission
 
 The Founder accepted the completed R12 engineering baseline and authorised one governed Stage 3 R12 qualification mission. Transfer and execution are sequentially authorised; the single authority may be created and consumed only after independent transfer verification, fresh host continuity and elevated pre-authority admission pass. Stage 4, production, publication and deployment remain not authorised.
+
+## Stage 3 R12 Pre-Authority Failure and Replacement Transfer
+
+The first R12 package is closed as immutable pre-authority engineering failure. The correction makes the exact Founder-bound manifest authoritative for complete payload inventory while retaining a mandatory contract subset and exact physical-directory and byte verification. One create-only replacement transfer with fresh identity may be prepared and independently verified.
+
+Stage 3 execution is blocked and unauthorised. No qualification authority or attempt may be created by this work.

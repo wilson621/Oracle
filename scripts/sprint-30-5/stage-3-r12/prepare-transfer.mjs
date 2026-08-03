@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync } from "node:fs";
+import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { basename, join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import {
@@ -92,6 +92,8 @@ if (!existsSync(approvedRoot)) {
   throw new Error("Approved transfer root must already exist.");
 }
 
+verifyImmutablePreAuthorityFailure(approvedRoot);
+
 const stage2AttemptRoot = join(
   repositoryRoot,
   ".artifacts",
@@ -176,6 +178,9 @@ const sources = [
   ),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_PLAN.md"),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_QUALIFICATION_MISSION.md"),
+  join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_PRE_AUTHORITY_FAILURE_CLOSURE.md"),
+  join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_TRANSFER_INVENTORY_CORRECTION.md"),
+  join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_REPLACEMENT_TRANSFER_VALIDATION_REPORT.md"),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_ENGINEERING_CORRECTION.md"),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_PREPARATION_VALIDATION_REPORT.md"),
   join(repositoryRoot, "docs", "sprints", "SPRINT_30_5_STAGE_3_R12_PRE_EXECUTION_GATE.md"),
@@ -190,12 +195,14 @@ const sources = [
   join(import.meta.dirname, "Oracle.Stage3R12PackageInventoryPolicy.ps1"),
   join(import.meta.dirname, "Oracle.Stage3R12PreflightPolicy.ps1"),
   join(import.meta.dirname, "Oracle.Stage3R12ProcessPolicy.ps1"),
+  join(import.meta.dirname, "Oracle.Stage3R12TransferInventoryPolicy.ps1"),
   join(import.meta.dirname, "Oracle.Stage3R12WindowPolicy.ps1"),
   join(import.meta.dirname, "Oracle.Stage3R12WindowsExecutablePolicy.ps1"),
   join(import.meta.dirname, "Oracle.Stage3R12PhaseAudit.json"),
   join(import.meta.dirname, "Test-OracleStage3R12OptionalMemberAudit.ps1"),
   join(import.meta.dirname, "Test-OracleStage3R12InstalledRuntimeConfigurationPolicy.ps1"),
   join(import.meta.dirname, "Test-OracleStage3R12ObservationPolicy.ps1"),
+  join(import.meta.dirname, "Test-OracleStage3R12TransferInventoryPolicy.ps1"),
   join(import.meta.dirname, "Test-OracleStage3R12ActivationPolicy.ps1"),
   join(import.meta.dirname, "Test-OracleStage3R12CertificateTrustPolicy.ps1"),
   join(import.meta.dirname, "Test-OracleStage3R12WindowPolicy.ps1"),
@@ -206,6 +213,21 @@ const sources = [
 ];
 for (const source of sources) {
   if (!existsSync(source)) throw new Error(`Required R12 transfer source is missing: ${source}`);
+}
+const plannedPayloadNames = [
+  ...sources.map((source) => basename(source)),
+  "Oracle.Stage3R12OptionalMemberAudit.json",
+];
+const plannedPayloadNameSet = new Set(
+  plannedPayloadNames.map((name) => name.toLocaleLowerCase("en-US"))
+);
+if (plannedPayloadNameSet.size !== plannedPayloadNames.length) {
+  throw new Error("Planned R12 transfer payload contains duplicate file names.");
+}
+for (const requiredFileName of contract.transferPayload.requiredFileNames) {
+  if (!plannedPayloadNameSet.has(requiredFileName.toLocaleLowerCase("en-US"))) {
+    throw new Error(`Planned R12 transfer omits required payload: ${requiredFileName}`);
+  }
 }
 
 const failedEvidenceRoot = join(
@@ -341,6 +363,7 @@ writeJsonAtomicCreateOnly(manifestPath, {
   transferMedium: contract.transferMedium,
   acceptedStage2: contract.stage2,
   immutableFailedQualification: contract.immutableFailedQualification,
+  immutablePreAuthorityEngineeringFailure: contract.preAuthorityEngineeringFailure,
   destinationHost: contract.host,
   privateKeyIncluded: false,
   productionCredentialIncluded: false,
@@ -365,7 +388,7 @@ writeJsonAtomicCreateOnly(custodyPath, {
   founder: "Lee Wilson",
   authority: founderAuthority,
   purpose:
-    "Create-only Stage 3 Requalification R12 transfer; R1-R11 and all historical transfers remain immutable",
+    "Create-only replacement Stage 3 Requalification R12 transfer; the first R12 package and all historical transfers remain immutable",
   sourceRepository: {
     branch,
     harnessCommit,
@@ -385,6 +408,7 @@ writeJsonAtomicCreateOnly(custodyPath, {
     failedR2TransferModified: false,
     failedR3TransferModified: false,
     rejectedR10TransfersModified: false,
+    previousR12PreAuthorityFailureModified: false,
     previousR5TransferModified: false,
     previousR6TransferModified: false,
     previousR7TransferModified: false,
@@ -405,6 +429,97 @@ console.log(JSON.stringify({
   custodyHash,
 }, null, 2));
 
+function verifyImmutablePreAuthorityFailure(approvedRoot) {
+  const failure = contract.preAuthorityEngineeringFailure;
+  const failureRoot = join(approvedRoot, failure.transferId);
+  const manifestPath = join(failureRoot, "Oracle.Stage3R12TransferManifest.json");
+  const custodyPath = join(failureRoot, "Oracle.Stage3R12TransferCustody.json");
+  if (
+    !existsSync(manifestPath) ||
+    !existsSync(custodyPath) ||
+    sha256(manifestPath) !== failure.manifestSha256 ||
+    sha256(custodyPath) !== failure.custodySha256
+  ) {
+    throw new Error("Immutable first R12 transfer binding differs.");
+  }
+
+  const expectedRootNames = [
+    "Oracle.Stage3R12TransferCustody.json",
+    "Oracle.Stage3R12TransferCustody.json.sha256.txt",
+    "Oracle.Stage3R12TransferManifest.json",
+    "Oracle.Stage3R12TransferManifest.json.sha256.txt",
+    "payload",
+  ];
+  const actualRootNames = readdirSync(failureRoot).sort();
+  if (JSON.stringify(actualRootNames) !== JSON.stringify(expectedRootNames)) {
+    throw new Error("Immutable first R12 transfer root shape differs.");
+  }
+  if (
+    readFileSync(`${manifestPath}.sha256.txt`, "ascii") !==
+      `${failure.manifestSha256}  Oracle.Stage3R12TransferManifest.json\n` ||
+    readFileSync(`${custodyPath}.sha256.txt`, "ascii") !==
+      `${failure.custodySha256}  Oracle.Stage3R12TransferCustody.json\n`
+  ) {
+    throw new Error("Immutable first R12 transfer hash sidecar differs.");
+  }
+
+  const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+  const custody = JSON.parse(readFileSync(custodyPath, "utf8"));
+  if (
+    manifest.transferId !== failure.transferId ||
+    custody.transferId !== failure.transferId ||
+    !Array.isArray(manifest.payload) ||
+    manifest.payload.length === 0
+  ) {
+    throw new Error("Immutable first R12 transfer identity differs.");
+  }
+  const expectedPayloadNames = [];
+  const payloadNameSet = new Set();
+  for (const entry of manifest.payload) {
+    if (
+      typeof entry.path !== "string" ||
+      !/^payload\/[^/\\]+$/u.test(entry.path) ||
+      typeof entry.sha256 !== "string" ||
+      !/^[0-9a-f]{64}$/u.test(entry.sha256) ||
+      !Number.isSafeInteger(entry.size) ||
+      entry.size < 0
+    ) {
+      throw new Error("Immutable first R12 manifest payload entry is malformed.");
+    }
+    const name = basename(entry.path);
+    const canonicalName = name.toLocaleLowerCase("en-US");
+    if (payloadNameSet.has(canonicalName)) {
+      throw new Error("Immutable first R12 manifest payload is duplicated.");
+    }
+    payloadNameSet.add(canonicalName);
+    expectedPayloadNames.push(name);
+    const path = join(failureRoot, "payload", name);
+    const item = lstatSync(path);
+    if (
+      !item.isFile() ||
+      item.isSymbolicLink() ||
+      item.size !== entry.size ||
+      sha256(path) !== entry.sha256
+    ) {
+      throw new Error(`Immutable first R12 payload differs: ${entry.path}`);
+    }
+  }
+  expectedPayloadNames.sort();
+  const actualPayloadNames = readdirSync(join(failureRoot, "payload")).sort();
+  if (JSON.stringify(actualPayloadNames) !== JSON.stringify(expectedPayloadNames)) {
+    throw new Error("Immutable first R12 payload directory differs from its manifest.");
+  }
+
+  const continuityRoot = join(approvedRoot, "Oracle.Stage3R12Evidence");
+  const continuityName = "Oracle.Stage3R12HostContinuity.json";
+  if (
+    JSON.stringify(readdirSync(continuityRoot).sort()) !==
+      JSON.stringify([continuityName]) ||
+    sha256(join(continuityRoot, continuityName)) !== failure.continuitySha256
+  ) {
+    throw new Error("Immutable first R12 failed continuity record differs.");
+  }
+}
 function parseArguments(args) {
   const parsed = new Map();
   for (let index = 0; index < args.length; index += 2) {

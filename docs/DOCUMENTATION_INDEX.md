@@ -497,3 +497,7 @@ to adopt a later formatting standard.
 | Stage 3 Requalification R12 validation | [Sprint 30.5 Stage 3 Requalification R12 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_3_R12_PREPARATION_VALIDATION_REPORT.md) | Engineering, regression and real Windows integration results |
 | Stage 3 Requalification R12 pre-execution gate | [Sprint 30.5 Stage 3 Requalification R12 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_3_R12_PRE_EXECUTION_GATE.md) | No-transfer and no-execution authority boundary |
 | Stage 3 Requalification R12 closure | [Sprint 30.5 Stage 3 Requalification R12 Engineering Closure](sprints/SPRINT_30_5_STAGE_3_R12_ENGINEERING_CLOSURE.md) | Completed engineering mission and next-authority boundary |
+
+| Sprint 30.5 Stage 3 R12 pre-authority failure closure | [Sprint 30.5 Stage 3 R12 Pre-Authority Failure Closure](sprints/SPRINT_30_5_STAGE_3_R12_PRE_AUTHORITY_FAILURE_CLOSURE.md) | First R12 package immutably closed before authority or attempt creation |
+| Sprint 30.5 Stage 3 R12 transfer inventory correction | [Sprint 30.5 Stage 3 R12 Transfer Inventory Correction](sprints/SPRINT_30_5_STAGE_3_R12_TRANSFER_INVENTORY_CORRECTION.md) | Manifest-authoritative correction and fail-closed adversarial requirements |
+| Sprint 30.5 Stage 3 R12 replacement transfer validation | [Sprint 30.5 Stage 3 R12 Replacement Transfer Validation Report](sprints/SPRINT_30_5_STAGE_3_R12_REPLACEMENT_TRANSFER_VALIDATION_REPORT.md) | Corrected engineering and independent replacement-transfer verification record |

@@ -32,3 +32,12 @@ be reused.
 
 This mission does not authorise Stage 4, production, publication or deployment.
 Those remain separately governed after an accepted Stage 3 result.
+
+## Superseding disposition
+
+The original mission package closed before authority creation as immutable
+pre-authority engineering failure. Its transfer, custody, failed continuity
+record and expired identities remain unchanged and barred from reuse. Current
+authority is limited to correcting and independently verifying one fresh
+replacement transfer. Qualification authority creation and attempt execution are
+not authorised.
