@@ -475,3 +475,11 @@ to adopt a later formatting standard.
 | Record | Location | Purpose |
 | --- | --- | --- |
 | Packaged server environment correction | [Sprint 30.5 Packaged Server Environment Correction](sprints/SPRINT_30_5_PACKAGED_SERVER_ENVIRONMENT_CORRECTION.md) | Strict Windows child-environment allowlist, engineering validation and qualification invalidation consequence |
+
+## Stage 3 Requalification R11 preparation
+
+| Record | Location | Purpose |
+| --- | --- | --- |
+| Stage 3 Requalification R11 plan | [Sprint 30.5 Stage 3 Requalification R11 Plan](sprints/SPRINT_30_5_STAGE_3_R11_PLAN.md) | R6-bound clean-host lifecycle and sequential authority model |
+| Stage 3 Requalification R11 pre-execution gate | [Sprint 30.5 Stage 3 Requalification R11 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_3_R11_PRE_EXECUTION_GATE.md) | Transfer, continuity, admission and execution boundaries |
+| Stage 3 Requalification R11 validation | [Sprint 30.5 Stage 3 Requalification R11 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_3_R11_PREPARATION_VALIDATION_REPORT.md) | Preparation validation, rehearsal, limitations and exact R6 rehash |
