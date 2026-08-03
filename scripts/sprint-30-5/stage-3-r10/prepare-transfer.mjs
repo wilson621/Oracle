@@ -11,6 +11,7 @@ import {
   sha256,
   validateAcceptedBindings,
   validateCertificateWindow,
+  validateTransferConstructionAuthority,
   validateTransferIdentity,
   validateProcessEnvelope,
   writeFileCreateOnly,
@@ -42,9 +43,9 @@ for (const name of [
 ]) {
   if (!argumentsMap.has(name)) throw new Error(`Missing --${name}.`);
 }
-if (argumentsMap.get("founder-authority") !== "FOUNDER-AUTHORISED-STAGE3-R10-TRANSFER") {
-  throw new Error("Separate Founder transfer authority is required.");
-}
+const founderAuthority = validateTransferConstructionAuthority(
+  argumentsMap.get("founder-authority")
+);
 for (const [argument, field] of [
   ["method", "method"],
   ["medium-device", "device"],
@@ -308,7 +309,7 @@ writeJsonAtomicCreateOnly(custodyPath, {
   recordedAtUtc: timestampUtc,
   operator: "Codex",
   founder: "Lee Wilson",
-  authority: "Founder-authorised Stage 3 Qualification R10 corrective preparation",
+  authority: founderAuthority,
   purpose:
     "Create-only Stage 3 Requalification R10 transfer; R1-R9 and all historical transfers remain immutable",
   sourceRepository: {

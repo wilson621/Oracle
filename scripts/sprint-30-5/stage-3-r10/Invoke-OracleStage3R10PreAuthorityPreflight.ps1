@@ -53,6 +53,8 @@ if (
   [string]$manifest.preparation.harnessTree -cnotmatch '^[0-9a-f]{40}$' -or
   [string]$custody.contract -cne
     "oracle.sprint-30-5.stage-3-r10-transfer-custody" -or
+  [string]$custody.authority -cne
+    "FOUNDER-AUTHORISED-STAGE3-R10-TRANSFER" -or
   [string]$custody.transferId -cne [string]$manifest.transferId -or
   [string]$custody.manifest.sha256 -cne $ExpectedTransferManifestSha256
 ) { throw "Pre-authority transfer identity differs." }

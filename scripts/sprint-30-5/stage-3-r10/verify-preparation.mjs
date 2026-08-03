@@ -23,6 +23,7 @@ import {
   validateCertificateWindow,
   validateExecutionIdentity,
   validateProcessEnvelope,
+  validateTransferConstructionAuthority,
   validateTransferIdentity,
   writeJsonAtomicCreateOnly,
 } from "./stage3-core.mjs";
@@ -134,6 +135,21 @@ validateTransferIdentity({
   transferId: "transfer-stage3-r10-20260728T223045123Z-a1b2c3d4",
   timestampUtc,
 });
+assert.equal(
+  validateTransferConstructionAuthority("FOUNDER-AUTHORISED-STAGE3-R10-TRANSFER"),
+  "FOUNDER-AUTHORISED-STAGE3-R10-TRANSFER"
+);
+for (const invalidAuthority of [
+  undefined,
+  "",
+  "Founder-authorised Stage 3 Qualification R10 corrective preparation",
+  "FOUNDER-AUTHORISED-STAGE3-R10-EXECUTION",
+]) {
+  assert.throws(
+    () => validateTransferConstructionAuthority(invalidAuthority),
+    /Separate Founder transfer authority is required/u
+  );
+}
 
 validateCertificateWindow("2026-07-28T22:30:45.123Z");
 assert.throws(
@@ -323,6 +339,10 @@ const harness = readFileSync(
   join(import.meta.dirname, "Invoke-OracleStage3R10Qualification.ps1"),
   "utf8"
 );
+const preAuthorityPreflight = readFileSync(
+  join(import.meta.dirname, "Invoke-OracleStage3R10PreAuthorityPreflight.ps1"),
+  "utf8"
+);
 const transferBuilder = readFileSync(
   join(import.meta.dirname, "prepare-transfer.mjs"),
   "utf8"
@@ -498,6 +518,17 @@ assert.match(transferBuilder, /Test-OracleStage3R10ActivationPolicy\.ps1/u);
 assert.match(harness, /"Test-OracleStage3R10ActivationPolicy\.ps1"/u);
 assert.match(transferBuilder, /Oracle\.Stage3R10PhaseAudit\.json/u);
 assert.match(transferBuilder, /Oracle\.Stage3R10TransferCustody\.json/u);
+assert.match(transferBuilder, /authority:\s*founderAuthority,/u);
+for (const admissionSource of [preAuthorityPreflight, harness]) {
+  assert.match(
+    admissionSource,
+    /\[string\]\$custody\.authority[ \t]+-cne[ \t]*\r?\n[ \t]+"FOUNDER-AUTHORISED-STAGE3-R10-TRANSFER"/u
+  );
+}
+assert.doesNotMatch(
+  transferBuilder,
+  /authority:\s*["']Founder-authorised Stage 3 Qualification R10 corrective preparation["']/u
+);
 assert.match(transferBuilder, /failedR2TransferModified: false/u);
 assert.match(transferBuilder, /failedR3TransferModified: false/u);
 assert.match(transferBuilder, /failedR4TransferModified: false/u);
@@ -554,6 +585,7 @@ for (const required of [
   "ExpectedTransferCustodySha256",
   "oracle.sprint-30-5.stage-3-r10-transfer-custody",
   "contract.transferMedium.hardwareSerial",
+  "FOUNDER-AUTHORISED-STAGE3-R10-TRANSFER",
 ]) {
   assert.ok(harness.includes(required), `Harness contract missing: ${required}`);
 }

@@ -33,6 +33,8 @@ const authorityPattern = new RegExp(
   "u"
 );
 const transferPattern = new RegExp(`^transfer-stage3-r10-${compactTime}-${suffix}$`, "u");
+export const transferConstructionAuthority =
+  "FOUNDER-AUTHORISED-STAGE3-R10-TRANSFER";
 
 export function sha256(path) {
   return createHash("sha256").update(readFileSync(path)).digest("hex");
@@ -81,6 +83,13 @@ export function validateExecutionIdentity({
 
 export function validateTransferIdentity({ transferId, timestampUtc }) {
   validateScopedId(transferId, timestampUtc, transferPattern, "Transfer ID");
+}
+
+export function validateTransferConstructionAuthority(value) {
+  if (value !== transferConstructionAuthority) {
+    throw new Error("Separate Founder transfer authority is required.");
+  }
+  return value;
 }
 
 export function isSameOrDescendant(path, root) {

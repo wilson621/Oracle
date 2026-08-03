@@ -540,6 +540,8 @@ function Assert-IdentityAndTransfer {
     $custodySidecarValue -cne (Get-Sha256 $custodyPath) -or
     [string]$custody.contract -cne
       "oracle.sprint-30-5.stage-3-r10-transfer-custody" -or
+    [string]$custody.authority -cne
+      "FOUNDER-AUTHORISED-STAGE3-R10-TRANSFER" -or
     [string]$custody.transferId -cne [string]$manifest.transferId -or
     [string]$custody.manifest.sha256 -cne (Get-Sha256 $manifestPath) -or
     [string]$custody.transferMedium.method -cne
