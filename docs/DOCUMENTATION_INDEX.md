@@ -545,3 +545,13 @@ to adopt a later formatting standard.
 | Stage 4 R3 pre-execution gate | [Sprint 30.5 Stage 4 R3 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_4_R3_PRE_EXECUTION_GATE.md) | Mandatory transfer, host, isolation and pre-authority gates |
 
 | Stage 4 R3 execution-enabled mission | [Sprint 30.5 Stage 4 R3 Execution-Enabled Mission](sprints/SPRINT_30_5_STAGE_4_R3_EXECUTION_ENABLED_MISSION.md) | Accepted preparation binding, single-transfer and one-attempt execution boundary |
+
+## Stage 4 R3 failed qualification and engineering correction
+
+| Document | Link | Purpose |
+| --- | --- | --- |
+| Stage 4 R3 failure closure | [Sprint 30.5 Stage 4 R3 Failure Closure](sprints/SPRINT_30_5_STAGE_4_R3_FAILURE_CLOSURE.md) | Consumed authority, exact failure, teardown and permanent no-retry disposition |
+| Stage 4 R3 process-teardown correction | [Sprint 30.5 Stage 4 R3 Process-Teardown Correction](sprints/SPRINT_30_5_STAGE_4_R3_PROCESS_TEARDOWN_CORRECTION.md) | Ownership-verified race reconciliation and fail-closed boundaries |
+| Stage 4 R3 correction validation | [Sprint 30.5 Stage 4 R3 Correction Validation Report](sprints/SPRINT_30_5_STAGE_4_R3_CORRECTION_VALIDATION_REPORT.md) | Static, adversarial and live installed-package validation |
+| Stage 4 R3 engineering correction closure | [Sprint 30.5 Stage 4 R3 Engineering Correction Closure](sprints/SPRINT_30_5_STAGE_4_R3_ENGINEERING_CORRECTION_CLOSURE.md) | Barred corrected baseline and recommended fresh mission |
+| Stage 4 R3 accepted failed-evidence index | [Stage 4 R3 Accepted Failed Evidence Index](sprints/evidence/sprint-30-5/stage-4-r3/Oracle.Stage4R3AcceptedFailedEvidenceIndex.json) | Hash inventory for 21 immutable failure-chain records |

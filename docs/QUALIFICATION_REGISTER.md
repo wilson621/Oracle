@@ -410,3 +410,22 @@ identity or evidence namespace may be reused.
 - Transfer preparation: permitted once under the Founder-authorised mission.
 - Maximum governed attempts: one.
 - Transfer, authority and attempt identities created at registration: none.
+
+## Stage 4 Requalification R3 permanent disposition
+
+- Founder grant: founder-stage4-r3-grant-20260804T123436312Z-03b9cd2d.
+- Authority: authority-stage4-r3-20260804T123436312Z-03b9cd2d — consumed.
+- Attempt: stage4-r3-20260804T123436312Z-03b9cd2d — permanently failed.
+- Failure SHA-256:
+  0c981997b0e62368331acc2532c2d55621487194c2870d934dcb1b25858931a6.
+- Accepted failed-evidence index SHA-256:
+  14264450be92dee9af007d25dbfc6c5d6fa3037935a7e024d7f48df9c6d8f9a6.
+- Inner result: exact R6 installation, activation, runtime configuration and all ten
+  journeys passed; cleanup rejected a naturally exited ownership-verified PID.
+- Teardown: governed zero residue and passing safety teardown.
+- Retry: prohibited.
+- Engineering correction: complete and qualification-barred.
+- Corrected manifest SHA-256:
+  648ae4d856c954b2a61af90b8b08272252d95acff71a0e9b70c0ac42245248df.
+- Current transfer/authority/attempt permissions: false/false/false; maximum
+  attempts zero.

@@ -15,6 +15,7 @@ $contract = Get-Content -Raw -LiteralPath $contractPath | ConvertFrom-Json
 $developmentRehearsal = [Environment]::GetEnvironmentVariable("ORACLE_STAGE4_INSTALLED_DEVELOPMENT_REHEARSAL", "Process") -ceq "1"
 . (Join-Path $scriptRoot "Oracle.Stage4R3ActivationPolicy.ps1")
 . (Join-Path $scriptRoot "Oracle.Stage4R3InstalledRuntimeConfigurationPolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage4R3ProcessTeardownPolicy.ps1")
 
 function Require-Environment([string]$Name) {
   $value = [Environment]::GetEnvironmentVariable($Name, "Process")
@@ -163,7 +164,9 @@ function Find-InstalledWebOrigin(
 }
 
 function Stop-PackageProcesses([string]$InstallLocation) {
-  if ([string]::IsNullOrWhiteSpace($InstallLocation)) { return 0 }
+  if ([string]::IsNullOrWhiteSpace($InstallLocation)) {
+    return [pscustomobject][ordered]@{ observed = 0; stopRequested = 0; alreadyExited = 0 }
+  }
   $snapshot = Get-ProcessSnapshot
   $owned = @($snapshot | Where-Object {
     -not [string]::IsNullOrWhiteSpace([string]$_.ExecutablePath) -and
@@ -172,9 +175,22 @@ function Stop-PackageProcesses([string]$InstallLocation) {
       [StringComparison]::OrdinalIgnoreCase
     )
   })
+  $outcomes = @()
   foreach ($process in @($owned | Sort-Object ProcessId -Descending)) {
-    Assert-PackageOwnedProcess $process $InstallLocation
-    Stop-Process -Id ([int]$process.ProcessId) -Force -ErrorAction Stop
+    $outcomes += Invoke-OracleStage4R3OwnedProcessStop `
+      -ObservedProcess $process `
+      -OwnershipValidator {
+        param($candidate)
+        Assert-PackageOwnedProcess $candidate $InstallLocation
+      } `
+      -StopAction {
+        param($processId)
+        Stop-Process -Id $processId -Force -ErrorAction Stop
+      } `
+      -CurrentLookup {
+        param($processId)
+        @(Get-ProcessSnapshot | Where-Object { [int]$_.ProcessId -eq $processId })
+      }
   }
   $deadline = [DateTime]::UtcNow.AddSeconds(10)
   do {
@@ -185,7 +201,13 @@ function Stop-PackageProcesses([string]$InstallLocation) {
         [StringComparison]::OrdinalIgnoreCase
       )
     })
-    if ($remaining.Count -eq 0) { return $owned.Count }
+    if ($remaining.Count -eq 0) {
+      return [pscustomobject][ordered]@{
+        observed = $owned.Count
+        stopRequested = @($outcomes | Where-Object { $_.outcome -ceq "stop-requested" }).Count
+        alreadyExited = @($outcomes | Where-Object { $_.outcome -ceq "already-exited-after-verified-observation" }).Count
+      }
+    }
     Start-Sleep -Milliseconds 100
   } while ([DateTime]::UtcNow -lt $deadline)
   throw "Package-owned Oracle processes remain after bounded teardown."
@@ -413,8 +435,14 @@ try {
   $primaryFailure = $_.Exception
 } finally {
   try {
-    $stopped = Stop-PackageProcesses $installLocation
-    if ($stopped -gt 0) { & $mark "package-processes-stopped" @{ count = $stopped } }
+    $processTeardown = Stop-PackageProcesses $installLocation
+    if ([int]$processTeardown.observed -gt 0) {
+      & $mark "package-processes-reconciled" @{
+        observed = [int]$processTeardown.observed
+        stopRequested = [int]$processTeardown.stopRequested
+        alreadyExited = [int]$processTeardown.alreadyExited
+      }
+    }
   } catch { $cleanupFailures.Add("process-stop: $($_.Exception.Message)") }
   try {
     if ($null -ne $configurationPath -and (Test-Path -LiteralPath $configurationPath)) {

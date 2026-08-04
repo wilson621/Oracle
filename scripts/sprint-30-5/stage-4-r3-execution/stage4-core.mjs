@@ -43,14 +43,14 @@ export function validateAcceptedBindings() {
   assert.equal(contract.stage3.providerConnectivityClaimed, false);
   assert.equal(contract.stage3.authenticationClaimed, false);
   assert.equal(contract.historicalStage4.revision, "R1");
-  assert.equal(contract.status, "founder-authorised-execution-enabled");
-  assert.equal(contract.executionAuthority.founderAuthorisedQualificationExecution, true);
-  assert.equal(contract.executionAuthority.authorityCreationPermitted, true);
-  assert.equal(contract.executionAuthority.qualificationAttemptPermitted, true);
-  assert.equal(contract.executionAuthority.requiredFutureToken, "FOUNDER-AUTHORISED-STAGE-4-R3-SINGLE-EXECUTION-1fb53a0141b24426b5f6bf3bf25d35eb");
-  assert.equal(contract.executionAuthority.maximumAttempts, 1);
+  assert.equal(contract.status, "engineering-correction-qualification-barred");
+  assert.equal(contract.executionAuthority.founderAuthorisedQualificationExecution, false);
+  assert.equal(contract.executionAuthority.authorityCreationPermitted, false);
+  assert.equal(contract.executionAuthority.qualificationAttemptPermitted, false);
+  assert.equal(contract.executionAuthority.requiredFutureToken, null);
+  assert.equal(contract.executionAuthority.maximumAttempts, 0);
   assert.equal(contract.executionAuthority.retryAfterConsumedAuthorityPermitted, false);
-  assert.equal(contract.transfer.executionAuthorised, true);
+  assert.equal(contract.transfer.executionAuthorised, false);
   assert.equal(contract.historicalStage4R2Failure.result, "failed");
   assert.equal(contract.historicalStage4R2Failure.disposition, "accepted-immutable-failed-qualification");
   assert.equal(contract.historicalStage4R2Failure.failureSha256, "eff42158ed5fdf9a25c4bd4535762f09e624061939835789850bf69481298538");
@@ -67,6 +67,17 @@ export function validateAcceptedBindings() {
   assert.equal(contract.acceptedPreparation.tree, "23f0099959ed51fdb4c83914d257b7aebc6b9607");
   assert.equal(contract.acceptedPreparation.preparationManifestSha256, "a855ed1244025abfbe788c09822a6c3f8797091cb6111e2eb77ff57b711eacac");
   assert.equal(contract.acceptedPreparation.engineeringClosureSha256, "279732b2cc2e6afdd4c5d1a43dcb008e0e401a64e855d302b4df2c92582b3ae2");
+  assert.equal(contract.historicalStage4R3Failure.result, "failed");
+  assert.equal(contract.historicalStage4R3Failure.disposition, "accepted-immutable-failed-qualification");
+  assert.equal(contract.historicalStage4R3Failure.failureSha256, "0c981997b0e62368331acc2532c2d55621487194c2870d934dcb1b25858931a6");
+  assert.equal(contract.historicalStage4R3Failure.acceptedFailedEvidenceIndexSha256, "14264450be92dee9af007d25dbfc6c5d6fa3037935a7e024d7f48df9c6d8f9a6");
+  assert.equal(contract.historicalStage4R3Failure.innerJourneysPassed, 10);
+  assert.equal(contract.historicalStage4R3Failure.governedZeroResidueVerified, true);
+  assert.equal(contract.historicalStage4R3Failure.retryProhibited, true);
+  assert.equal(contract.historicalStage4R3Failure.failureClosureSha256, "7eb04d948278f881a2f76e4dda5af86a624d9b1f9c56459162a3f831b07451fe");
+  assert.equal(contract.historicalStage4R3Failure.processTeardownCorrectionSha256, "e1df8386c228e00b60131a755040d80c1cf911862dc13639608f965a48188ae3");
+  assert.equal(contract.historicalStage4R3Failure.correctionValidationSha256, "ef88046b6e93f102a52a633a906e350b31801ff69ac3675b13678a18657f499b");
+  assert.equal(contract.historicalStage4R3Failure.engineeringCorrectionClosureSha256, "ae281347cb3b5161b3eeeba3cca1760a666b712fb293390971134fa72f88b7a8");
 
 }
 export function validateSupabaseOfflinePolicy() {

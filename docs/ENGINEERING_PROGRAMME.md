@@ -2444,3 +2444,23 @@ bindings passed fail-closed validation. Transfer preparation is enabled for one
 fresh create-only transfer and the maximum attempt count is one. No authority or
 attempt has been created. Fresh independent transfer verification and every host
 pre-authority gate remain mandatory.
+
+## Sprint 30.5 Stage 4 R3 failed qualification and correction
+
+R3 attempt stage4-r3-20260804T123436312Z-03b9cd2d consumed its single
+authority and is accepted immutable failed qualification evidence. All ten installed
+R6 journeys passed, but cleanup failed closed when ownership-verified PID 1324
+exited between discovery and Stop-Process. Governed teardown and safety teardown
+proved zero residue. Retry is prohibited.
+
+The engineering correction accepts only a missing PID after prior ownership
+verification. Surviving, reused, ambiguous and unowned identities remain rejected.
+The accepted index rehashes 21 immutable records. Deterministic adversarial tests,
+the full source-equivalent rehearsal and the elevated exact-R6 installed rehearsal
+passed, including all ten journeys and zero residue.
+
+The corrected 32-file manifest SHA-256 is
+648ae4d856c954b2a61af90b8b08272252d95acff71a0e9b70c0ac42245248df.
+The contract is qualification-barred, transfer preparation is false, maximum
+attempts are zero, and no correction authority or attempt exists. Stage 4 remains
+incomplete and Stage 5 remains blocked.

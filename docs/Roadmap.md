@@ -1341,3 +1341,15 @@ preparation commit and tree. One fresh create-only transfer and one governed att
 are permitted, but no authority exists. The next roadmap gates are independent
 transfer verification, approved-host continuity, physical network isolation and
 fresh elevated pre-authority admission. Stage 5 remains blocked.
+
+## Stage 4 R3 failed qualification and correction
+
+R3 is permanently failed after consuming its authority. The exact R6 package and all
+ten Stage 4 journeys passed; an ownership-verified process exited before the cleanup
+stop request and the harness correctly failed closed. Zero residue was proven.
+
+The process-teardown correction is complete and validated through deterministic
+adversarial coverage plus source-equivalent and elevated installed-package
+rehearsals. The corrected baseline is qualification-barred and creates no new
+identity. Stage 4 remains incomplete. A fresh Founder-authorised Stage 4 revision is
+the only permissible next qualification mission; Stage 5 remains blocked.

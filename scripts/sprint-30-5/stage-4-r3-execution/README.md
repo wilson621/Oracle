@@ -1,4 +1,4 @@
-# Stage 4 R3 execution-enabled harness
+# Stage 4 R3 engineering-correction harness
 
 This harness qualifies the exact accepted Stage 2 R6 installed MSIX against the
 ten Stage 4 R1 live authentication and protected-rendering journeys. It binds the
@@ -12,8 +12,8 @@ Direct engineering entry points:
 - future pre-authority only: `Invoke-OracleStage4R3PreAuthorityPreflight.ps1 <bound-arguments>`
 - future governed execution only: `Invoke-OracleStage4R3Qualification.ps1 <Founder-bound-arguments>`
 
-The committed overlay records the Founder-authorised single R3 execution token.
-Validation and development rehearsal still cannot create an authority, attempt or
+The corrected contract records every qualification-execution flag as false.
+Validation and development rehearsal cannot create an authority, attempt or
 qualification evidence. The installed rehearsal uses the exact R6 MSIX but remains
 explicitly NON-QUALIFICATION / NON-AUTHORITY / NON-EVIDENCE and requires complete
 package, trust, runtime-configuration and provider teardown.

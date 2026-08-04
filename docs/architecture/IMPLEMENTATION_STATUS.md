@@ -1196,3 +1196,17 @@ preparation commit/tree, contains 29 exact files, rehashes 22 protected historic
 records and permits one fresh transfer plus at most one attempt. Negative admission
 with the exact token stops before authority when transfer and preflight are absent.
 No authority, attempt or qualification evidence currently exists.
+
+## Sprint 30.5 Stage 4 R3 process-teardown correction
+
+The consumed R3 attempt is immutable permanent failed evidence. The implementation
+now separates ownership verification from race reconciliation: a failed stop is
+accepted only when the previously verified PID is currently absent. A current owned
+PID retains the stop failure, a reused PID fails ownership, ambiguity fails closed,
+and an initially unowned PID cannot reach the stop action.
+
+The accepted failure verifier rehashes 21 records. The corrected harness contains 32
+manifest-bound files and rehashes 27 historical programme bindings. Static,
+PowerShell 5.1 adversarial, source-equivalent and elevated exact-package validation
+passed with ten journeys and zero residue. Execution, transfer and authority flags
+are false and maximum attempts are zero.

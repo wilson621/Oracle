@@ -12,14 +12,14 @@ import {
 } from "./stage4-core.mjs";
 
 validateAcceptedBindings();
-assert.equal(contract.status, "founder-authorised-execution-enabled");
-assert.equal(contract.executionAuthority.founderAuthorisedQualificationExecution, true);
-assert.equal(contract.executionAuthority.authorityCreationPermitted, true);
-assert.equal(contract.executionAuthority.qualificationAttemptPermitted, true);
-assert.equal(contract.executionAuthority.maximumAttempts, 1);
+assert.equal(contract.status, "engineering-correction-qualification-barred");
+assert.equal(contract.executionAuthority.founderAuthorisedQualificationExecution, false);
+assert.equal(contract.executionAuthority.authorityCreationPermitted, false);
+assert.equal(contract.executionAuthority.qualificationAttemptPermitted, false);
+assert.equal(contract.executionAuthority.maximumAttempts, 0);
 assert.equal(contract.executionAuthority.retryAfterConsumedAuthorityPermitted, false);
 assert.equal(contract.transfer.required, true);
-assert.equal(contract.transfer.executionAuthorised, true);
+assert.equal(contract.transfer.executionAuthorised, false);
 assert.equal(contract.transfer.independentVerificationRequired, true);
 assert.equal(contract.acceptedPreparation.commit, "c3accf832d23f395560c643ae3268c868c27f020");
 assert.equal(contract.acceptedPreparation.tree, "23f0099959ed51fdb4c83914d257b7aebc6b9607");
@@ -51,7 +51,7 @@ for (const binding of contract.historicalEvidenceBindings) {
   assert.equal(statSync(path).isFile(), true, `Historical binding is not a file: ${binding.path}`);
   assert.equal(sha256(path), binding.sha256, `Historical binding differs: ${binding.path}`);
 }
-assert.equal(contract.historicalEvidenceBindings.length, 22);
+assert.equal(contract.historicalEvidenceBindings.length, 27);
 
 const harnessRoot = import.meta.dirname;
 assert.equal(readFileSync(join(harnessRoot, "prepare-transfer.mjs"), "utf8").includes('fs.mkdirSync(approvedRoot, { recursive: true });'), true);
@@ -59,9 +59,9 @@ const executionManifest = JSON.parse(readFileSync(join(harnessRoot, "Oracle.Stag
 assert.equal(executionManifest.contract, "oracle.sprint-30-5.stage-4-r3-execution-manifest");
 assert.equal(executionManifest.acceptedPreparationCommit, contract.acceptedPreparation.commit);
 assert.equal(executionManifest.acceptedPreparationTree, contract.acceptedPreparation.tree);
-assert.equal(executionManifest.transferPreparationPermitted, true);
-assert.equal(executionManifest.founderAuthorisedQualificationExecution, true);
-assert.equal(executionManifest.maximumAttempts, 1);
+assert.equal(executionManifest.transferPreparationPermitted, false);
+assert.equal(executionManifest.founderAuthorisedQualificationExecution, false);
+assert.equal(executionManifest.maximumAttempts, 0);
 assert.equal(executionManifest.retryAfterConsumedAuthorityPermitted, false);
 const inventory = readdirSync(harnessRoot)
   .filter(name => name !== "Oracle.Stage4R3ExecutionManifest.json")
@@ -79,13 +79,18 @@ for (const name of readdirSync(harnessRoot).filter(name => name.endsWith(".ps1")
   const path = join(harnessRoot, name).replaceAll("'", "''");
   run(approvedTools.powershell.path, ["-NoLogo", "-NoProfile", "-NonInteractive", "-Command", `$e=$null;$t=$null;[Management.Automation.Language.Parser]::ParseFile('${path}',[ref]$t,[ref]$e)|Out-Null;if($e.Count){$e|ForEach-Object{Write-Error $_.Message};exit 1}`]);
 }
-for (const name of ["Test-OracleStage4R3Policies.ps1", "Test-OracleStage4R3ActivationPolicy.ps1", "Test-OracleStage4R3InstalledRuntimeConfigurationPolicy.ps1"]) {
+for (const name of ["Test-OracleStage4R3Policies.ps1", "Test-OracleStage4R3ActivationPolicy.ps1", "Test-OracleStage4R3InstalledRuntimeConfigurationPolicy.ps1", "Test-OracleStage4R3ProcessTeardownPolicy.ps1"]) {
   run(approvedTools.powershell.path, ["-NoLogo", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", join(harnessRoot, name)]);
 }
 const acceptedFailure = JSON.parse(run(approvedTools.node.path, [join(harnessRoot, "verify-accepted-r2-failure.mjs")]).stdout);
 assert.equal(acceptedFailure.result, "passed");
 assert.equal(acceptedFailure.authorityConsumed, true);
 assert.equal(acceptedFailure.retryProhibited, true);
+const acceptedR3Failure = JSON.parse(run(approvedTools.node.path, [join(harnessRoot, "verify-accepted-r3-failure.mjs")]).stdout);
+assert.equal(acceptedR3Failure.result, "passed");
+assert.equal(acceptedR3Failure.authorityConsumed, true);
+assert.equal(acceptedR3Failure.retryProhibited, true);
+assert.equal(acceptedR3Failure.tenJourneysPassedBeforeCleanupFailure, true);
 const ownership = JSON.parse(run(approvedTools.node.path, [join(harnessRoot, "verify-attempt-directory-ownership.mjs")]).stdout);
 assert.equal(ownership.result, "passed");
 assert.equal(ownership.authorityCreated, false);
@@ -96,16 +101,19 @@ assert.equal(rehearsal.authorityCreated, false);
 assert.equal(rehearsal.attemptCreated, false);
 
 const artifactRoot = join(repositoryRoot, contract.paths.artifactRoot);
+const transferPreparation = spawnSync(approvedTools.node.path, [join(harnessRoot, "prepare-transfer.mjs")], { cwd: repositoryRoot, encoding: "utf8", shell: false, maxBuffer: 4 * 1024 * 1024 });
+assert.notEqual(transferPreparation.status, 0, "Qualification-barred R3 correction prepared a transfer.");
+assert.match(`${transferPreparation.stdout}${transferPreparation.stderr}`, /transfer preparation is not Founder-authorised by the bound contract/u);
 const qualification = spawnSync(approvedTools.powershell.path, [
   "-NoLogo", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", join(harnessRoot, "Invoke-OracleStage4R3Qualification.ps1"),
-  "-FounderAuthorityToken", contract.executionAuthority.requiredFutureToken,
+  "-FounderAuthorityToken", "UNAUTHORISED",
   "-FounderGrantId", "founder-stage4-r3-grant-20260804T120000123Z-a1b2c3d4",
   "-PreparationCommit", "0".repeat(40), "-PreparationTree", "0".repeat(40),
   "-PreflightRecord", join(artifactRoot, "absent.json"), "-PreflightSha256", "0".repeat(64),
   "-TransferRoot", join(artifactRoot, "transfers/absent"),
   "-TransferManifestSha256", "0".repeat(64), "-TransferCustodySha256", "0".repeat(64), "-TransferVerificationSha256", "0".repeat(64),
 ], { cwd: repositoryRoot, encoding: "utf8", shell: false, maxBuffer: 4 * 1024 * 1024 });
-assert.notEqual(qualification.status, 0, "Missing transfer and preflight admitted R3 qualification.");
+assert.notEqual(qualification.status, 0, "Qualification-barred R3 correction admitted qualification.");
 assert.equal(existsSync(join(artifactRoot, "authorities", "authority-stage4-r3-20260804T120000123Z-a1b2c3d4.json")), false);
 assert.equal(existsSync(join(artifactRoot, "stage4-r3-20260804T120000123Z-a1b2c3d4")), false);
 
@@ -137,15 +145,15 @@ const liveControllerIndex = qualificationHarness.indexOf("execute-live-environme
 assert.ok(logsCreationIndex >= 0 && transferAdmissionIndex > logsCreationIndex && liveControllerIndex > transferAdmissionIndex, "Qualification directory ownership ordering is not fail-closed.");
 console.log(JSON.stringify({
   result: "passed",
-  classification: "STAGE-4-R3-EXECUTION-BASELINE-VALIDATION",
-  founderAuthorisedQualificationExecution: true,
+  classification: "STAGE-4-R3-ENGINEERING-CORRECTION-VALIDATION",
+  founderAuthorisedQualificationExecution: false,
   acceptedR2CorrectionPreserved: true,
   historicalArtifactsRehashed: contract.historicalEvidenceBindings.length,
   executionFilesVerified: executionManifest.files.length,
   transferRequired: true,
-  transferPreparationPermitted: true,
+  transferPreparationPermitted: false,
   independentTransferVerificationRequired: true,
-  maximumAttempts: 1,
+  maximumAttempts: 0,
   authorityCreated: false,
   attemptCreated: false,
 }, null, 2));

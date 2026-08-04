@@ -990,3 +990,16 @@ historical records and one single-use execution token. It permits one fresh
 create-only transfer and at most one attempt. It has created no authority or attempt.
 Transfer verification, isolated-host admission and fresh elevated pre-authority
 remain the next mandatory gates.
+
+## Stage 4 R3 permanent failure and corrected baseline
+
+The R3 authority is consumed and its attempt permanently failed after all ten
+installed journeys passed. The failure was an ownership-verified process-exit race
+during cleanup; zero residue was nevertheless proven. Twenty-one immutable records
+are hash-indexed.
+
+The corrected teardown reconciles only an absent, previously verified PID and
+rejects every surviving, reused, ambiguous or unowned identity. Static, adversarial,
+source-equivalent and exact installed-package validation passed. The corrected
+contract permits no transfer, authority or attempt. Any future Stage 4 qualification
+requires a fresh Founder-authorised revision and identities.

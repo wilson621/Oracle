@@ -1049,3 +1049,15 @@ commit/tree. Status: ready to commit, push, create one fresh transfer and perfor
 independent full-inventory verification. Authority and attempt counts remain zero.
 The board prohibits authority creation until every fresh host and pre-authority gate
 passes.
+
+## Stage 4 R3 correction complete
+
+R3 is accepted immutable failed qualification evidence; its authority is consumed
+and retry is prohibited. Root cause: PID 1324 exited after ownership verification
+but before Stop-Process, creating a false cleanup failure after ten passing journeys.
+
+The race-tolerant correction and adversarial coverage are complete. Both live
+non-qualification rehearsals passed ten journeys with zero residue. Current state:
+engineering corrected, qualification barred, transfers disabled, maximum attempts
+zero. Next board action requires a Founder-authorised fresh Stage 4 revision. Stage
+5 remains unauthorised.
