@@ -1294,3 +1294,30 @@ execution-enabled baseline, one create-only governed transfer and at most one St
 verification, fresh elevated host admission, zero state and network isolation are
 mandatory before authority. A consumed authority or permanent failed attempt cannot
 be retried. Stage 5 and later work remain unauthorised.
+## Stage 4 R2 Failure Accepted and Engineering Correction Complete
+
+Stage 4 R2 attempt `stage4-r2-20260804T112122028Z-609ab6f0` is accepted immutable
+failed qualification evidence. Its single authority is consumed and retry is
+prohibited. The attempt failed after `baseline-verified` because the qualification
+harness and live controller both claimed creation ownership of `logs/`; safety
+teardown and independent verification proved zero residue.
+
+The evidence-led correction is complete at commit
+`8fc782df9869bc3c0e85a0d6d01ee7ef0d866175`, tree
+`911684539ef85f88e2092daacb896795097e0dd8`. `logs/` is now launcher-owned and
+shared only through create-only files; ephemeral `provider/` remains exclusively
+controller-owned. Exact qualification and rehearsal inventories reject missing,
+linked, file-backed, unexpected and pre-existing controller layouts before provider
+mutation.
+
+The accepted failure index rehashes nineteen immutable records. Static, adversarial,
+full source-equivalent and elevated exact-R6 installed rehearsals passed; both live
+rehearsals completed all ten journeys with zero residue. The corrected R2 contract
+is qualification-barred, transfer preparation is prohibited, remaining R2 attempts
+are zero, and this engineering mission created no transfer, authority or attempt.
+
+Stage 4 remains incomplete for R6/R12 and Stage 5 remains blocked. The recommended
+next Founder mission is a fresh Stage 4 Requalification R3 execution-enabled
+baseline, create-only transfer and one governed attempt using new identities and
+namespaces, with authority creation only after every fresh gate passes. No R2
+identity or evidence namespace may be reused.
