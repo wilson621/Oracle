@@ -1,0 +1,54 @@
+{
+    "schemaVersion":  "1.1.0",
+    "contract":  "oracle.sprint-30-5.stage-4-r3-provider-topology",
+    "classification":  [
+                           "DISPOSABLE",
+                           "LOCAL-HOST",
+                           "NON-PRODUCTION",
+                           "STAGE-4-R3-ONLY"
+                       ],
+    "execution":  {
+                      "host":  "authoritative-development-host",
+                      "client":  "governed Node HTTP client",
+                      "webServer":  "Next.js production standalone server",
+                      "applicationEndpoint":  "127.0.0.1",
+                      "separateBrowserHost":  false
+                  },
+    "route":  {
+                  "supabaseHostPortsPublishedByCli":  true,
+                  "networkIsolationRequiredBeforeExecution":  true,
+                  "networkIsolationImplementationStatus":  "pre-authority-no-default-route-required",
+                  "requiredLoopbackPorts":  [
+                                                4314,
+                                                54321,
+                                                54322,
+                                                54323,
+                                                54324
+                                            ],
+                  "postgresRemoteAccessProhibited":  true,
+                  "mailpitRemoteAccessProhibited":  true,
+                  "productionEndpointAccess":  false,
+                  "qualificationHostNetworkAdmission":  "no-active-ipv4-or-ipv6-default-route"
+              },
+    "email":  {
+                  "capture":  "Mailpit local API",
+                  "externalDelivery":  false,
+                  "syntheticDomain":  "example.invalid"
+              },
+    "credentials":  {
+                        "anonymousKeyMayReachClient":  true,
+                        "serviceRoleServerOnly":  true,
+                        "rawValuesProhibitedInEvidence":  true
+                    },
+    "teardown":  [
+                     "identities",
+                     "sessions",
+                     "messages",
+                     "database-volume",
+                     "containers",
+                     "networks",
+                     "temporary-configuration",
+                     "web-build-output",
+                     "provider-work-root"
+                 ]
+}

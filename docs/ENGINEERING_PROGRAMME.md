@@ -2434,3 +2434,13 @@ bound to the preparation commit/tree, followed by one fresh create-only transfer
 independent verification and fresh host pre-authority admission. Authority may exist
 only after every gate passes. No retry is permitted after consumption or permanent
 failure. Stage 5 and later work remain unauthorised.
+
+## Sprint 30.5 Stage 4 R3 execution-enabled baseline
+
+A separate R3 execution overlay now binds preparation commit
+c3accf832d23f395560c643ae3268c868c27f020 and tree
+23f0099959ed51fdb4c83914d257b7aebc6b9607. Its 29-file inventory and 22 historical
+bindings passed fail-closed validation. Transfer preparation is enabled for one
+fresh create-only transfer and the maximum attempt count is one. No authority or
+attempt has been created. Fresh independent transfer verification and every host
+pre-authority gate remain mandatory.

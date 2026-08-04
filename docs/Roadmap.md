@@ -1333,3 +1333,11 @@ The current preparation is execution-barred. The authorised programme sequence i
 separate execution-enabled baseline, one create-only fresh transfer, independent
 verification, fresh isolated-host pre-authority admission and at most one governed
 R3 attempt. Stage 5 and later roadmap activity remain blocked.
+
+## Stage 4 R3 execution-enabled transition
+
+The separate R3 execution overlay has passed and is bound to the accepted
+preparation commit and tree. One fresh create-only transfer and one governed attempt
+are permitted, but no authority exists. The next roadmap gates are independent
+transfer verification, approved-host continuity, physical network isolation and
+fresh elevated pre-authority admission. Stage 5 remains blocked.

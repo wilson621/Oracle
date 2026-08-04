@@ -543,3 +543,5 @@ to adopt a later formatting standard.
 | Stage 4 R3 preparation validation | [Sprint 30.5 Stage 4 R3 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_4_R3_PREPARATION_VALIDATION_REPORT.md) | Historical rehash, regression, adversarial and two live rehearsal results |
 | Stage 4 R3 engineering preparation closure | [Sprint 30.5 Stage 4 R3 Engineering Preparation Closure](sprints/SPRINT_30_5_STAGE_4_R3_ENGINEERING_PREPARATION_CLOSURE.md) | Completed preparation baseline and execution-overlay boundary |
 | Stage 4 R3 pre-execution gate | [Sprint 30.5 Stage 4 R3 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_4_R3_PRE_EXECUTION_GATE.md) | Mandatory transfer, host, isolation and pre-authority gates |
+
+| Stage 4 R3 execution-enabled mission | [Sprint 30.5 Stage 4 R3 Execution-Enabled Mission](sprints/SPRINT_30_5_STAGE_4_R3_EXECUTION_ENABLED_MISSION.md) | Accepted preparation binding, single-transfer and one-attempt execution boundary |

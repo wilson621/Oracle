@@ -1041,3 +1041,11 @@ Next within the authorised R3 mission: commit and push the preparation baseline;
 create and independently verify a separately bound execution-enabled overlay and
 fresh transfer; then run fresh host and pre-authority gates. Authority creation is
 prohibited before those gates. Stage 5 and later work are not authorised.
+
+## Stage 4 R3 execution baseline ready
+
+The execution-enabled R3 overlay is validated and bound to the immutable preparation
+commit/tree. Status: ready to commit, push, create one fresh transfer and perform
+independent full-inventory verification. Authority and attempt counts remain zero.
+The board prohibits authority creation until every fresh host and pre-authority gate
+passes.

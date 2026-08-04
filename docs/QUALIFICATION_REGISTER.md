@@ -399,3 +399,14 @@ identity or evidence namespace may be reused.
   reuse.
 - Maximum attempts in the preparation baseline: zero. A later execution-enabled
   overlay may permit one only after all fresh pre-authority gates pass.
+
+## Stage 4 Requalification R3 execution baseline registration
+
+- Accepted preparation commit: c3accf832d23f395560c643ae3268c868c27f020.
+- Accepted preparation tree: 23f0099959ed51fdb4c83914d257b7aebc6b9607.
+- Execution manifest SHA-256:
+  3fbf42ee37588744ef9bfbcd9f5a9d70d03609d7cd0dddfe39b84c848f6d4ad2.
+- Exact execution files: 29; historical bindings reverified: 22.
+- Transfer preparation: permitted once under the Founder-authorised mission.
+- Maximum governed attempts: one.
+- Transfer, authority and attempt identities created at registration: none.

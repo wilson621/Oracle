@@ -982,3 +982,11 @@ The committed preparation contract cannot create a transfer, authority or attemp
 The current Founder mission permits a separate execution-enabled overlay and one
 fresh governed attempt only after complete transfer, host, network-isolation and
 pre-authority admission. Stage 5 remains blocked.
+
+## Stage 4 R3 execution overlay
+
+The separately bound execution overlay passed with 29 exact files, 22 rehashed
+historical records and one single-use execution token. It permits one fresh
+create-only transfer and at most one attempt. It has created no authority or attempt.
+Transfer verification, isolated-host admission and fresh elevated pre-authority
+remain the next mandatory gates.

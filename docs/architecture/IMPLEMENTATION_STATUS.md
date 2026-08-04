@@ -1188,3 +1188,11 @@ The preparation contract is intentionally barred. A separately bound
 execution-enabled overlay, fresh transfer, independent verification and all
 pre-authority gates are required before the single authorised qualification attempt.
 Stage 5 and later implementation are unauthorised.
+
+## Sprint 30.5 Stage 4 R3 execution overlay
+
+The R3 execution-enabled overlay is implemented and validated. It binds the accepted
+preparation commit/tree, contains 29 exact files, rehashes 22 protected historical
+records and permits one fresh transfer plus at most one attempt. Negative admission
+with the exact token stops before authority when transfer and preflight are absent.
+No authority, attempt or qualification evidence currently exists.
