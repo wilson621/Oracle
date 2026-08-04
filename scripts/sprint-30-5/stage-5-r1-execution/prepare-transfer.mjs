@@ -45,7 +45,7 @@ copyFile(path.join(repositoryRoot, contract.package.publicCertificatePath), cert
 const files = inventory(payloadRoot);
 const executionManifestPath = path.join(harnessRoot, "Oracle.Stage5R1ExecutionManifest.json");
 const manifest = {
-  contract: "oracle.sprint-30-5.stage-4-r4-transfer-manifest",
+  contract: "oracle.sprint-30-5.stage-5-r1-transfer-manifest",
   schemaVersion: "1.0.0",
   transferId,
   createdAtUtc: timestampUtc,
@@ -64,7 +64,7 @@ writeCreateOnly(manifestPath, manifest);
 const manifestSha256 = sha256(manifestPath);
 writeTextCreateOnly(`${manifestPath}.sha256.txt`, `${manifestSha256}  ${path.basename(manifestPath)}\n`);
 const custody = {
-  contract: "oracle.sprint-30-5.stage-4-r4-transfer-custody",
+  contract: "oracle.sprint-30-5.stage-5-r1-transfer-custody",
   schemaVersion: "1.0.0",
   transferId,
   createdAtUtc: timestampUtc,

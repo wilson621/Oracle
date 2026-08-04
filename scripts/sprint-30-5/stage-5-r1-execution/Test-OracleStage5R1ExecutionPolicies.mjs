@@ -44,6 +44,7 @@ for (const required of ["cod.exe", '"attach"', '"detach"', '"degradation"', '"re
 assert.ok(!transitions.includes("Add-Type -TypeDefinition"));
 assert.ok(source("Oracle.Stage5GameWindowFixture.cs").includes("Call of Duty: Warzone"));
 assert.equal(contract.host.companionFixture.qualificationHostCompilationPermitted, false);
+for (const transferSource of [source("prepare-transfer.mjs"), source("verify-transfer.mjs"), source("Oracle.Stage5R1TransferPolicy.ps1")]) assert.ok(!transferSource.includes("stage-4-r4-transfer"));
 const transfer = source("prepare-transfer.mjs");
 assert.ok(transfer.includes("COPYFILE_EXCL")); assert.ok(transfer.includes('flag: "wx"'));
 console.log(JSON.stringify({ result: "passed", classification: "STAGE-5-R1-EXECUTION-ADVERSARIAL-STATIC", authorityCreated: false, attemptCreated: false, transferCreated: false }, null, 2));

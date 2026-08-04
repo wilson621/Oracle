@@ -39,7 +39,7 @@ assert.equal(custody.files, physical.length);
 assert.equal(custody.bytes, physical.reduce((sum, item) => sum + item.bytes, 0));
 assert.equal(fs.readFileSync(`${manifestPath}.sha256.txt`, "utf8").trim(), `${sha256(manifestPath)}  ${path.basename(manifestPath)}`);
 assert.equal(fs.readFileSync(`${custodyPath}.sha256.txt`, "utf8").trim(), `${sha256(custodyPath)}  ${path.basename(custodyPath)}`);
-const verification = { contract: "oracle.sprint-30-5.stage-4-r4-transfer-verification", schemaVersion: "1.0.0", result: "passed", classification: "INDEPENDENT-TRANSFER-VERIFICATION", verifiedAtUtc: new Date().toISOString(), transferId: manifest.transferId, manifestSha256: sha256(manifestPath), custodySha256: sha256(custodyPath), executionCommit: manifest.executionCommit, executionTree: manifest.executionTree, files: physical.length, bytes: custody.bytes, authorityCreated: false, attemptCreated: false };
+const verification = { contract: "oracle.sprint-30-5.stage-5-r1-transfer-verification", schemaVersion: "1.0.0", result: "passed", classification: "INDEPENDENT-TRANSFER-VERIFICATION", verifiedAtUtc: new Date().toISOString(), transferId: manifest.transferId, manifestSha256: sha256(manifestPath), custodySha256: sha256(custodyPath), executionCommit: manifest.executionCommit, executionTree: manifest.executionTree, files: physical.length, bytes: custody.bytes, authorityCreated: false, attemptCreated: false };
 fs.writeFileSync(verificationPath, `${JSON.stringify(verification, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
 const verificationSha256 = sha256(verificationPath);
 fs.writeFileSync(`${verificationPath}.sha256.txt`, `${verificationSha256}  ${path.basename(verificationPath)}\n`, { encoding: "utf8", flag: "wx" });

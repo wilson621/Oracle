@@ -111,7 +111,7 @@
                   {
                       "path":  "Oracle.Stage5R1TransferPolicy.ps1",
                       "bytes":  6976,
-                      "sha256":  "264599c5ce6e06b5055fb684dcb2fbf10a9b7dcd1974fa9666fe12b96ee5d6fd"
+                      "sha256":  "35e43b99b4d9d0224062fc7d56173576ed1ee5718175ce78c876f2515546546f"
                   },
                   {
                       "path":  "README.md",
@@ -135,8 +135,8 @@
                   },
                   {
                       "path":  "Test-OracleStage5R1ExecutionPolicies.mjs",
-                      "bytes":  4053,
-                      "sha256":  "6594e85779dbecb6148d657e53d73fcf977ae0fe6c7553252d9d5858b903fb6a"
+                      "bytes":  4253,
+                      "sha256":  "36516689bf85fdd1f359a344dd7dd17e573cd24a14d763d0fcec45d263327ef4"
                   },
                   {
                       "path":  "Test-OracleStage5R1Policies.mjs",
@@ -161,7 +161,7 @@
                   {
                       "path":  "prepare-transfer.mjs",
                       "bytes":  6766,
-                      "sha256":  "3262136101b31009d1c0df3be6394e4ad4812085095ca0c95f5c44f6213d3d1b"
+                      "sha256":  "12408bba01e9a74f450f04b0c02918d7ce22b2640ed178a2bfb80fb19a28870e"
                   },
                   {
                       "path":  "run-live-journey.mjs",
@@ -206,7 +206,7 @@
                   {
                       "path":  "verify-transfer.mjs",
                       "bytes":  4416,
-                      "sha256":  "8fba4df8478c650529daf7689398a1c09c8b2b2133852a72d7cd4b24bbb2ae60"
+                      "sha256":  "b22606c0c8668ae04798ffddbd0e74849e672e8390570d27c1305a6473c41019"
                   }
               ]
 }

@@ -38,7 +38,7 @@ function Assert-OracleStage5R1Transfer {
   $custody = Get-Content -Raw -LiteralPath $custodyPath | ConvertFrom-Json
   $verification = Get-Content -Raw -LiteralPath $verificationPath | ConvertFrom-Json
   if (
-    [string]$manifest.contract -cne "oracle.sprint-30-5.stage-4-r4-transfer-manifest" -or
+    [string]$manifest.contract -cne "oracle.sprint-30-5.stage-5-r1-transfer-manifest" -or
     [string]$manifest.transferId -cnotmatch [string]$Contract.identity.transferPattern -or
     [string]$manifest.executionCommit -cne $ExecutionCommit -or
     [string]$manifest.executionTree -cne $ExecutionTree -or
@@ -48,14 +48,14 @@ function Assert-OracleStage5R1Transfer {
     -not [bool]$manifest.singleAttemptOnly
   ) { throw "Transfer manifest authority or baseline binding differs." }
   if (
-    [string]$custody.contract -cne "oracle.sprint-30-5.stage-4-r4-transfer-custody" -or
+    [string]$custody.contract -cne "oracle.sprint-30-5.stage-5-r1-transfer-custody" -or
     [string]$custody.transferId -cne [string]$manifest.transferId -or
     [string]$custody.manifestSha256 -cne $manifestHash -or
     -not [bool]$custody.createOnly -or
     -not [bool]$custody.independentVerificationRequired -or
     [int]$custody.files -ne @($manifest.files).Count
   ) { throw "Transfer custody binding differs." }
-  if ([string]$verification.contract -cne 'oracle.sprint-30-5.stage-4-r4-transfer-verification' -or [string]$verification.result -cne 'passed' -or [string]$verification.transferId -cne [string]$manifest.transferId -or [string]$verification.manifestSha256 -cne $manifestHash -or [string]$verification.custodySha256 -cne $custodyHash -or [string]$verification.executionCommit -cne $ExecutionCommit -or [string]$verification.executionTree -cne $ExecutionTree -or [bool]$verification.authorityCreated -or [bool]$verification.attemptCreated) { throw 'Transfer independent-verification binding differs.' }
+  if ([string]$verification.contract -cne 'oracle.sprint-30-5.stage-5-r1-transfer-verification' -or [string]$verification.result -cne 'passed' -or [string]$verification.transferId -cne [string]$manifest.transferId -or [string]$verification.manifestSha256 -cne $manifestHash -or [string]$verification.custodySha256 -cne $custodyHash -or [string]$verification.executionCommit -cne $ExecutionCommit -or [string]$verification.executionTree -cne $ExecutionTree -or [bool]$verification.authorityCreated -or [bool]$verification.attemptCreated) { throw 'Transfer independent-verification binding differs.' }
   $payloadRoot = Join-Path $transfer ([string]$Contract.transfer.payloadDirectory)
   [void](Assert-OracleStage4R4NoReparseTraversal $payloadRoot $transfer)
   $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
