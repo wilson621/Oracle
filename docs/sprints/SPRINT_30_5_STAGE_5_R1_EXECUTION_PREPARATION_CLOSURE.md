@@ -3,8 +3,8 @@
 **Status:** Execution-enabled engineering baseline complete
 **Qualification status:** Not started
 **Authority/attempt/transfer at closure:** None
-**Execution baseline commit:** `df443e6af3c1223e3cbf46950b4a0ada35cfb15b`
-**Execution baseline tree:** `f4f3250b496e4d25dba24ab86cc1df031c2364a0`
+**Execution baseline commit:** `be7da0ef58d898bc948c8ffd7c2f88f7fa9d392d`
+**Execution baseline tree:** `41f876290d851d18dc029e7d2854cffa76cf51e1`
 **Last Reviewed:** 4 August 2026
 
 The Founder-authorised execution-enabled Stage 5 R1 engineering baseline is
