@@ -563,3 +563,6 @@ to adopt a later formatting standard.
 - `docs/sprints/SPRINT_30_5_STAGE_4_R4_PREPARATION_VALIDATION_REPORT.md`
 - `docs/sprints/SPRINT_30_5_STAGE_4_R4_ENGINEERING_PREPARATION_CLOSURE.md`
 - `scripts/sprint-30-5/stage-4-r4/Oracle.Stage4R4PreparationManifest.json`
+
+- `docs/sprints/SPRINT_30_5_STAGE_4_R4_EXECUTION_ENABLED_MISSION.md`
+- `scripts/sprint-30-5/stage-4-r4-execution/Oracle.Stage4R4ExecutionManifest.json`

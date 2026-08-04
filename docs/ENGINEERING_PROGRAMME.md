@@ -2468,3 +2468,7 @@ incomplete and Stage 5 remains blocked.
 ## Sprint 30.5 Stage 4 Requalification R4 preparation
 
 The Founder-authorised R4 engineering preparation is complete. It carries forward the corrected attempt-directory ownership and race-tolerant process teardown boundaries, binds the exact accepted R6 package and R12 closure, and preserves all Stage 4 history. Deterministic and live validation passed without creating a transfer, authority, attempt or qualification evidence. Execution requires a separately committed overlay and every fresh pre-authority gate.
+
+## Sprint 30.5 Stage 4 R4 execution overlay
+
+The separately committed R4 execution overlay binds preparation commit `48ddf5f` and tree `8d67dcb`, rehashes 31 historical records and permits one fresh transfer and at most one attempt. Its negative admission gate stopped before authority. Fresh transfer verification and every host pre-authority gate remain mandatory.

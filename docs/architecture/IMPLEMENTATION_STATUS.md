@@ -1214,3 +1214,7 @@ are false and maximum attempts are zero.
 ## Sprint 30.5 Stage 4 R4 preparation
 
 R4 carries the accepted R3 process-teardown correction into a fresh revision. The installed controller accepts only a previously ownership-verified PID that is freshly absent after a failed stop; surviving, reused, ambiguous and unowned PIDs remain fail-closed. The 32-file preparation harness passed deterministic, source-equivalent and elevated exact-package validation with zero residue. It is qualification-barred and created no transfer, authority or attempt.
+
+## Sprint 30.5 Stage 4 R4 execution overlay
+
+The 32-file R4 execution overlay is bound to the committed preparation and retains the corrected process-teardown policy. It permits one create-only transfer and one attempt but has created neither. Thirty-one historical bindings rehash cleanly.

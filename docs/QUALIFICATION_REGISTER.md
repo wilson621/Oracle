@@ -433,3 +433,7 @@ identity or evidence namespace may be reused.
 ## Sprint 30.5 Stage 4 R4 preparation
 
 Status: engineering preparation passed; qualification not executed. No R4 transfer, authority, attempt or qualification evidence exists. R1 is accepted historical evidence; R2 and R3 are accepted immutable failed evidence. R4 execution requires new identities and all fresh pre-authority gates.
+
+## Sprint 30.5 Stage 4 R4 execution-enabled state
+
+The execution overlay is prepared and validated. No transfer, authority or attempt exists yet. One attempt is permitted only after a fresh transfer and every pre-authority gate pass; retry after consumed authority remains prohibited.
