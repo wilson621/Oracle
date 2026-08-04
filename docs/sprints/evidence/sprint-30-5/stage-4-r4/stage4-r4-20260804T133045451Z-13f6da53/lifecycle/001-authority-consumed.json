@@ -1,0 +1,11 @@
+{
+    "contract":  "oracle.sprint-30-5.stage-4-r4-lifecycle",
+    "authorityId":  "authority-stage4-r4-20260804T133045451Z-13f6da53",
+    "attemptId":  "stage4-r4-20260804T133045451Z-13f6da53",
+    "phase":  "authority-consumed",
+    "recordedAtUtc":  "2026-08-04T13:30:56.2197452Z",
+    "details":  {
+                    "founderGrantId":  "founder-stage4-r4-grant-20260804T133045451Z-13f6da53",
+                    "authorityId":  "authority-stage4-r4-20260804T133045451Z-13f6da53"
+                }
+}

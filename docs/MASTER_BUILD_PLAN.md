@@ -1007,3 +1007,7 @@ requires a fresh Founder-authorised revision and identities.
 ## Stage 4 R4 preparation gate
 
 R4 preparation is complete and qualification-barred. Before qualification, freeze the preparation commit/tree, create and validate a separately execution-enabled overlay, create one fresh manifest-bound transfer, independently verify it, and pass fresh elevated/network-isolated host admission. Stage 5 remains unavailable.
+
+## Stage 4 R4 qualification complete
+
+R4 is closed for the accepted R6/R12 baseline after independent evidence and zero-residue verification. No further Stage 4 attempt is authorised. Stage 5 and later activity require a separate Founder-level mission.

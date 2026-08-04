@@ -437,3 +437,7 @@ Status: engineering preparation passed; qualification not executed. No R4 transf
 ## Sprint 30.5 Stage 4 R4 execution-enabled state
 
 The execution overlay is prepared and validated. No transfer, authority or attempt exists yet. One attempt is permitted only after a fresh transfer and every pre-authority gate pass; retry after consumed authority remains prohibited.
+
+## Sprint 30.5 Stage 4 R4 qualification closure
+
+R4 attempt `stage4-r4-20260804T133045451Z-13f6da53` passed all twenty lifecycle phases and ten journeys. Independent reconciliation proved exact returned evidence, archive parity, zero non-zero processes and zero residue. R4 is closed as the current Stage 4 qualification baseline for R6/R12. Stage 5 was not started.

@@ -1,0 +1,11 @@
+{
+    "contract":  "oracle.sprint-30-5.stage-4-r4-lifecycle",
+    "authorityId":  "authority-stage4-r4-20260804T133045451Z-13f6da53",
+    "attemptId":  "stage4-r4-20260804T133045451Z-13f6da53",
+    "phase":  "provider-admitted",
+    "recordedAtUtc":  "2026-08-04T13:31:54.1225679Z",
+    "details":  {
+                    "classification":  "disposable-local-non-production",
+                    "route":  "network-isolated-host-runtime-verified"
+                }
+}

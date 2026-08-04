@@ -1065,3 +1065,7 @@ zero. Next board action requires a Founder-authorised fresh Stage 4 revision. St
 ## Sprint 30.5 Stage 4 Requalification R4 preparation
 
 R4 engineering preparation is complete for accepted R6/R12 and the accepted R3 process-teardown correction. The 32-file harness rehashes 29 historical bindings; source-equivalent and elevated installed rehearsals passed ten journeys with zero residue. The preparation is qualification-barred. A separate execution overlay, fresh transfer and all pre-authority gates remain required. Stage 5 is blocked.
+
+## Sprint 30.5 Stage 4 R4 closed
+
+Stage 4 R4 passed and is independently reconciled for the accepted R6/R12 chain. R1 remains historical accepted evidence and R2/R3 remain immutable failed evidence. Stage 5 remains unauthorised pending a separate Founder mission.

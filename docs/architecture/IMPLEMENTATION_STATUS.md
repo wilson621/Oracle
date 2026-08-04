@@ -1218,3 +1218,7 @@ R4 carries the accepted R3 process-teardown correction into a fresh revision. Th
 ## Sprint 30.5 Stage 4 R4 execution overlay
 
 The 32-file R4 execution overlay is bound to the committed preparation and retains the corrected process-teardown policy. It permits one create-only transfer and one attempt but has created neither. Thirty-one historical bindings rehash cleanly.
+
+## Sprint 30.5 Stage 4 R4 qualification closure
+
+The accepted R6 installed package has passed the complete R4 authentication and protected-rendering qualification lifecycle. The corrected ownership and process teardown boundaries executed successfully, all ten journeys passed and final residue was zero. R4 is the current Stage 4 baseline; Stage 5 was not started.

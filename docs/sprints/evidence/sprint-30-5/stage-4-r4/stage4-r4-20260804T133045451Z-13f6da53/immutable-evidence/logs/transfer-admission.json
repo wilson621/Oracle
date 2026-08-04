@@ -1,0 +1,12 @@
+{
+    "transferId":  "transfer-stage4-r4-20260804T132801436Z-75ac221c",
+    "transferRoot":  "C:\\Dev\\project-meta\\.artifacts\\sprint-30-5\\stage-4-r4\\transfers\\transfer-stage4-r4-20260804T132801436Z-75ac221c",
+    "manifestSha256":  "20fe8ef0b445253c35b3055b800898f214d9f26d615fb20639fcae7b64569e1c",
+    "custodySha256":  "583f1366bb082d36da3c2660e7aa689a4e847462094a7e20cda8efc4a00e9d7c",
+    "verificationSha256":  "fdc6cdf12c9ba7947b5cf2af28810b6b3abf3b2fc71e7ffa56afe401c7fc2b54",
+    "executionCommit":  "af1366e545c077f8a181495ddee950d4632187b8",
+    "executionTree":  "1662e5ffb4329846ebdeab0d6a666b8fb506d1d4",
+    "files":  44,
+    "bytes":  215823784,
+    "independentlyVerified":  true
+}

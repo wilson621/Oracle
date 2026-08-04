@@ -1357,3 +1357,7 @@ the only permissible next qualification mission; Stage 5 remains blocked.
 ## Sprint 30.5 Stage 4 R4 preparation
 
 Stage 4 remains incomplete for R6/R12. R4 preparation and installed-package rehearsal passed, but the preparation baseline cannot execute qualification. The next in-scope milestone is its separately bound execution overlay, fresh transfer and one governed attempt. Stage 5 remains blocked and unauthorised.
+
+## Sprint 30.5 Stage 4 R4 closure
+
+Stage 4 qualification is complete for R6/R12 through accepted R4 evidence. The next possible programme boundary is a Founder-authorised Stage 5 assessment or mission; no Stage 5 work is authorised by this closure.

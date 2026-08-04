@@ -1,0 +1,54 @@
+{
+  "mode": "qualification",
+  "result": "passed",
+  "primaryFailure": null,
+  "cleanupFailures": [],
+  "providerStarted": true,
+  "phaseEvents": [
+    {
+      "phase": "provider-initialized",
+      "observedAtUtc": "2026-08-04T13:30:56.762Z",
+      "details": {}
+    },
+    {
+      "phase": "migration-chain-frozen",
+      "observedAtUtc": "2026-08-04T13:30:56.768Z",
+      "details": {
+        "files": [
+          "001_initial_schema.sql",
+          "007_operator_achievements.sql",
+          "008_operator_ownership.sql",
+          "009_operator_intelligence_persistence.sql",
+          "010_operator_trust_control_persistence.sql",
+          "011_operator_account_provisioning.sql",
+          "012_operator_identity_lifecycle.sql",
+          "013_authoritative_session_lifecycle.sql",
+          "014_operator_development_lifecycle.sql"
+        ]
+      }
+    },
+    {
+      "phase": "provider-started",
+      "observedAtUtc": "2026-08-04T13:31:30.467Z",
+      "details": {}
+    },
+    {
+      "phase": "provider-route-admitted",
+      "observedAtUtc": "2026-08-04T13:31:31.045Z",
+      "details": {}
+    },
+    {
+      "phase": "installed-package-journey-passed",
+      "observedAtUtc": "2026-08-04T13:31:42.513Z",
+      "details": {
+        "packageSha256": "492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430"
+      }
+    },
+    {
+      "phase": "zero-residue-verified",
+      "observedAtUtc": "2026-08-04T13:31:54.026Z",
+      "details": {}
+    }
+  ],
+  "zeroResidue": true
+}

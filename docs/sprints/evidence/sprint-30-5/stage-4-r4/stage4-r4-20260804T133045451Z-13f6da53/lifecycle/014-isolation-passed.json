@@ -1,0 +1,17 @@
+{
+    "contract":  "oracle.sprint-30-5.stage-4-r4-lifecycle",
+    "authorityId":  "authority-stage4-r4-20260804T133045451Z-13f6da53",
+    "attemptId":  "stage4-r4-20260804T133045451Z-13f6da53",
+    "phase":  "isolation-passed",
+    "recordedAtUtc":  "2026-08-04T13:31:54.1605880Z",
+    "details":  {
+                    "accountCount":  2,
+                    "crossAccountLeaks":  0,
+                    "distinctAuthenticatedPrincipals":  true,
+                    "distinctOperators":  true,
+                    "rlsBindingsPerPrincipal":  [
+                                                    1,
+                                                    1
+                                                ]
+                }
+}

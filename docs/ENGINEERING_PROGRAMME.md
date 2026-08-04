@@ -2472,3 +2472,7 @@ The Founder-authorised R4 engineering preparation is complete. It carries forwar
 ## Sprint 30.5 Stage 4 R4 execution overlay
 
 The separately committed R4 execution overlay binds preparation commit `48ddf5f` and tree `8d67dcb`, rehashes 31 historical records and permits one fresh transfer and at most one attempt. Its negative admission gate stopped before authority. Fresh transfer verification and every host pre-authority gate remain mandatory.
+
+## Sprint 30.5 Stage 4 R4 qualification closure
+
+The single R4 authority was consumed and the attempt passed all twenty lifecycle phases and ten installed authentication journeys. The 58-file returned evidence, 57-entry final manifest and 27-entry archive were independently reconciled with zero residue. R4 is the current Stage 4 baseline for R6/R12. No Stage 5 work began.

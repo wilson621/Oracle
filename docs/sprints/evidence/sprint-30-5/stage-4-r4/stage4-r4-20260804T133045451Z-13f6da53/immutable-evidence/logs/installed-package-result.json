@@ -1,0 +1,99 @@
+{
+    "contract":  "oracle.sprint-30-5.stage-4-r4-installed-package-result",
+    "classification":  [
+                           "STAGE-4-R4-INSTALLED-PACKAGE-CONTROLLER",
+                           "SECRET-BEARING-NON-EVIDENCE-CONTROLLER"
+                       ],
+    "result":  "passed",
+    "primaryFailure":  null,
+    "cleanupFailures":  [
+
+                        ],
+    "phases":  [
+                   {
+                       "phase":  "zero-state-verified",
+                       "observedAtUtc":  "2026-08-04T13:31:32.1093260Z",
+                       "details":  {
+                                       "certificates":  0,
+                                       "packages":  0
+                                   }
+                   },
+                   {
+                       "phase":  "trust-established",
+                       "observedAtUtc":  "2026-08-04T13:31:32.1173257Z",
+                       "details":  {
+                                       "thumbprint":  "8C24858C147873EF46A9D61018FA2702B6222EA2"
+                                   }
+                   },
+                   {
+                       "phase":  "package-installed",
+                       "observedAtUtc":  "2026-08-04T13:31:35.4692244Z",
+                       "details":  {
+                                       "familyName":  "Oracle.Platform.LocalCertification_3yksyxackaf0t",
+                                       "packageFullName":  "Oracle.Platform.LocalCertification_0.1.4.0_x64__3yksyxackaf0t"
+                                   }
+                   },
+                   {
+                       "phase":  "runtime-configuration-created",
+                       "observedAtUtc":  "2026-08-04T13:31:35.6097960Z",
+                       "details":  {
+                                       "containsSecretValues":  false,
+                                       "sha256":  "41f3e42ef08e7b3d77449fc6a24967bda86c99d0ee2c1acd6f3694b704256e5c",
+                                       "configurationId":  "runtime-stage4-r4-20260804T133045451Z-13f6da53"
+                                   }
+                   },
+                   {
+                       "phase":  "package-activated",
+                       "observedAtUtc":  "2026-08-04T13:31:35.8879587Z",
+                       "details":  {
+                                       "processId":  27020,
+                                       "configurationConsumedAtActivationReturn":  false,
+                                       "hresult":  "0x00000000"
+                                   }
+                   },
+                   {
+                       "phase":  "installed-server-admitted",
+                       "observedAtUtc":  "2026-08-04T13:31:40.8258554Z",
+                       "details":  {
+                                       "runtimeConfigurationConsumed":  true,
+                                       "ownership":  "exact-installed-package-process-tree",
+                                       "runtimeConfigurationNamespaceRemaining":  0,
+                                       "origin":  "http://127.0.0.1:51293",
+                                       "owningProcessId":  46936
+                                   }
+                   },
+                   {
+                       "phase":  "live-journey-passed",
+                       "observedAtUtc":  "2026-08-04T13:31:41.8499671Z",
+                       "details":  {
+                                       "outputCreated":  true
+                                   }
+                   },
+                   {
+                       "phase":  "package-processes-reconciled",
+                       "observedAtUtc":  "2026-08-04T13:31:42.1043292Z",
+                       "details":  {
+                                       "observed":  5,
+                                       "alreadyExited":  0,
+                                       "stopRequested":  5
+                                   }
+                   },
+                   {
+                       "phase":  "package-removed",
+                       "observedAtUtc":  "2026-08-04T13:31:42.4555185Z",
+                       "details":  {
+                                       "remaining":  0
+                                   }
+                   },
+                   {
+                       "phase":  "trust-removed",
+                       "observedAtUtc":  "2026-08-04T13:31:42.4635162Z",
+                       "details":  {
+                                       "remaining":  0
+                                   }
+                   }
+               ],
+    "packageSha256":  "492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430",
+    "secretValuesRecorded":  false,
+    "zeroResidue":  true
+}

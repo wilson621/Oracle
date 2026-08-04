@@ -1,0 +1,14 @@
+{
+    "origin":  "http://127.0.0.1:51293",
+    "port":  51293,
+    "owningProcessId":  46936,
+    "rootProcessId":  27020,
+    "processIds":  [
+                       2100,
+                       4528,
+                       27020,
+                       41948,
+                       46936
+                   ],
+    "ownership":  "exact-installed-package-process-tree"
+}

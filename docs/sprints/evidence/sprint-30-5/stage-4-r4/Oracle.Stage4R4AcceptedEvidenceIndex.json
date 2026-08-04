@@ -1,0 +1,359 @@
+{
+    "schemaVersion":  "1.0.0",
+    "contract":  "oracle.sprint-30-5.stage-4-r4-accepted-qualification-evidence-index",
+    "programme":  "Sprint 30.5 Stage 4 Live Authentication and Protected Rendering",
+    "revision":  "R4",
+    "result":  "passed",
+    "disposition":  "independently-verified-and-closed",
+    "founderGrantId":  "founder-stage4-r4-grant-20260804T133045451Z-13f6da53",
+    "authorityId":  "authority-stage4-r4-20260804T133045451Z-13f6da53",
+    "attemptId":  "stage4-r4-20260804T133045451Z-13f6da53",
+    "transferId":  "transfer-stage4-r4-20260804T132801436Z-75ac221c",
+    "executionCommit":  "af1366e545c077f8a181495ddee950d4632187b8",
+    "executionTree":  "1662e5ffb4329846ebdeab0d6a666b8fb506d1d4",
+    "preflightSha256":  "cfd160c23ef6b21eeab7333625870e1a26d1e04fe0272d6c4187ea7189fb305e",
+    "transferManifestSha256":  "20fe8ef0b445253c35b3055b800898f214d9f26d615fb20639fcae7b64569e1c",
+    "transferCustodySha256":  "583f1366bb082d36da3c2660e7aa689a4e847462094a7e20cda8efc4a00e9d7c",
+    "transferVerificationSha256":  "fdc6cdf12c9ba7947b5cf2af28810b6b3abf3b2fc71e7ffa56afe401c7fc2b54",
+    "archiveSha256":  "7f01fe4fcf5bee2b32b220a26660ea163a92e98450c093d1e7dc4c6752c7598c",
+    "finalEvidenceManifestSha256":  "0b740dfc12e2334a63807d3097e302f864b9adaa1caf58b2b8757b3c57752b46",
+    "attemptFiles":  58,
+    "attemptBytes":  316119,
+    "manifestEntries":  57,
+    "archiveEntries":  27,
+    "lifecyclePhases":  20,
+    "requiredJourneys":  10,
+    "zeroResidue":  true,
+    "stage5Started":  false,
+    "productionChanged":  false,
+    "controlRecords":  [
+                           {
+                               "role":  "authority",
+                               "path":  ".artifacts/sprint-30-5/stage-4-r4/authorities/authority-stage4-r4-20260804T133045451Z-13f6da53.json",
+                               "bytes":  964,
+                               "sha256":  "9ccdd468851a6600722f2c5b5b4c115f68c87ffe942d1dc81427e3f20adeb7ee"
+                           },
+                           {
+                               "role":  "preflight",
+                               "path":  ".artifacts/sprint-30-5/stage-4-r4/preflight/preflight-stage4-r4-20260804T133045451Z-13f6da53.json",
+                               "bytes":  33493,
+                               "sha256":  "cfd160c23ef6b21eeab7333625870e1a26d1e04fe0272d6c4187ea7189fb305e"
+                           },
+                           {
+                               "role":  "runnerResult",
+                               "path":  ".artifacts/sprint-30-5/stage-4-r4/mission-launch/result-manual-af1366e-01.json",
+                               "bytes":  1509,
+                               "sha256":  "3ab9869c08631582f4af6604a1661bd6b0d7eba00ab246fea9b9ba1026cfda09"
+                           },
+                           {
+                               "role":  "transferManifest",
+                               "path":  ".artifacts/sprint-30-5/stage-4-r4/transfers/transfer-stage4-r4-20260804T132801436Z-75ac221c/Oracle.Stage4R4TransferManifest.json",
+                               "bytes":  8756,
+                               "sha256":  "20fe8ef0b445253c35b3055b800898f214d9f26d615fb20639fcae7b64569e1c"
+                           },
+                           {
+                               "role":  "transferCustody",
+                               "path":  ".artifacts/sprint-30-5/stage-4-r4/transfers/transfer-stage4-r4-20260804T132801436Z-75ac221c/Oracle.Stage4R4TransferCustody.json",
+                               "bytes":  632,
+                               "sha256":  "583f1366bb082d36da3c2660e7aa689a4e847462094a7e20cda8efc4a00e9d7c"
+                           },
+                           {
+                               "role":  "transferVerification",
+                               "path":  ".artifacts/sprint-30-5/stage-4-r4/transfers/transfer-stage4-r4-20260804T132801436Z-75ac221c/Oracle.Stage4R4TransferVerification.json",
+                               "bytes":  689,
+                               "sha256":  "fdc6cdf12c9ba7947b5cf2af28810b6b3abf3b2fc71e7ffa56afe401c7fc2b54"
+                           }
+                       ],
+    "files":  [
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/007-runtime-configuration-created.json",
+                      "bytes":  469,
+                      "sha256":  "c45a46dba55ca4e224c7558853b886df5ac30a25b6943a7b033802ffef45f8aa"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/006-package-installed.json",
+                      "bytes":  538,
+                      "sha256":  "83bfd82f559160e3787314593e71bb89502cb007c3fbf49f0e26738cb9c51f43"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/005-trust-established.json",
+                      "bytes":  408,
+                      "sha256":  "a4d279a7ee465dee222c6d1330b9a1cc6bd50f6ff76e342e5c56536219661e56"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/008-package-activated.json",
+                      "bytes":  410,
+                      "sha256":  "ad1142710b3b4b959cd95cc444c23ddbeb83d35703c7d64762e43c62868051f6"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/011-account-created-unverified.json",
+                      "bytes":  378,
+                      "sha256":  "94513f5a9b4cdd73ad13ae65bdc3be0597ca24365616a508da7a6ed8752165b0"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/010-anonymous-boundaries-passed.json",
+                      "bytes":  341,
+                      "sha256":  "5b0ed6b1e04ec9473e33bab0ed46cbcebb17beaf31b48a2ce452f503ce59603d"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/009-installed-server-admitted.json",
+                      "bytes":  427,
+                      "sha256":  "716523b17dec71077eb3104c295a863ac20901d2d67ad84c2804d9207471d2a7"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/logs/transfer-admission.json",
+                      "bytes":  716,
+                      "sha256":  "45d7d42060f5559663688f365ae033e352206cf60a8618ce25e921c4e65b692b"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/logs/process-summary.json",
+                      "bytes":  110502,
+                      "sha256":  "d2cb9d14acd56e614728c282f275ba67c703659c555f2b0d6859d87be6bfcfde"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/logs/live-controller-process.json",
+                      "bytes":  515,
+                      "sha256":  "0adbf54df61bf9fbc8200765cd90af16b99ec6d56d0023f2c8213ed153e5218b"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/001-authority-consumed.json",
+                      "bytes":  514,
+                      "sha256":  "8d11189b612f11d21ed064132d1f66fdd25680e76c7a5be2ac4957d730f276b9"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/004-provider-admitted.json",
+                      "bytes":  476,
+                      "sha256":  "fbfb13f3092809b786f83f864a7ba3126cb3c5fee26deb2fce28d3858415a27b"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/003-zero-state-verified.json",
+                      "bytes":  458,
+                      "sha256":  "103fb93231caf241b5f3f238e4b148cf7b2948ecf8b8e7905f7f202e3b3dbb71"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/002-baseline-verified.json",
+                      "bytes":  1209,
+                      "sha256":  "b0a5c1fd9a20d1a56c2efb64d7a6ccd8a1c2dc5c1fac84e5b2df1b64c0ded91a"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/012-email-verified.json",
+                      "bytes":  328,
+                      "sha256":  "217c347baa6c7ee662283c5653a689165e1b5fbf5ed2b4ba6396f358bcb75f7a"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/logs/installed-package-result.json",
+                      "bytes":  4821,
+                      "sha256":  "d5f6624a961ad40f407060f8604d948d40d58ab5ef52a67cb767130578f03f0b"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/logs/environment-result.json",
+                      "bytes":  1497,
+                      "sha256":  "f709a755ab8bf79cfa4ea9822e5aacce469b300beaa5c6070ddf4f7841505c76"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/020-evidence-frozen.json",
+                      "bytes":  563,
+                      "sha256":  "18d33e0ccc9f947b4b8fd9a4b580486f48eb97a43ad632fe28f45d81b827c93f"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/logs/installed-server-admission.json",
+                      "bytes":  385,
+                      "sha256":  "7bd21b6da52335e37b9bd1feaa47f993d1a4d5efa94dc8e0bd96de9ed674c591"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/logs/transfer-admission.json",
+                      "bytes":  716,
+                      "sha256":  "45d7d42060f5559663688f365ae033e352206cf60a8618ce25e921c4e65b692b"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/logs/process-summary.json",
+                      "bytes":  110502,
+                      "sha256":  "d2cb9d14acd56e614728c282f275ba67c703659c555f2b0d6859d87be6bfcfde"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/logs/live-controller-process.json",
+                      "bytes":  515,
+                      "sha256":  "0adbf54df61bf9fbc8200765cd90af16b99ec6d56d0023f2c8213ed153e5218b"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/015-session-invalidated.json",
+                      "bytes":  333,
+                      "sha256":  "53c5c5d187c52335fe38a0729ca84691f1f76b06832584ce17c89c020a99b374"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/014-isolation-passed.json",
+                      "bytes":  740,
+                      "sha256":  "0ce4ec4094a54f10fce7459589b55efd2991114e0eb4e4f8f384efa0c009c2f6"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/013-authenticated-rendering-passed.json",
+                      "bytes":  548,
+                      "sha256":  "beb26c00c7b60f2259f9c90fa761313bb075c15ad0636338faab979dfde40994"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/016-package-removed.json",
+                      "bytes":  364,
+                      "sha256":  "dc9698df2e0678baf7f93b6e204eb96f2a567f24707489bb445ff868ce164a6e"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/019-cleanup-passed.json",
+                      "bytes":  368,
+                      "sha256":  "8158322e3456536d26eb3a254f5e16b74604b0162a788c562a82c69d7ed21018"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/018-provider-torn-down.json",
+                      "bytes":  382,
+                      "sha256":  "256c327e6ff9ebee88fa47322e33b9d5d4c13283b9000fd1a70827a1451b57bc"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/lifecycle/017-trust-removed.json",
+                      "bytes":  362,
+                      "sha256":  "d4a54fe9c0c138612a7841c0970c4f6adf2df727257197987a8d5db47330b771"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/003-zero-state-verified.json",
+                      "bytes":  458,
+                      "sha256":  "103fb93231caf241b5f3f238e4b148cf7b2948ecf8b8e7905f7f202e3b3dbb71"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/002-baseline-verified.json",
+                      "bytes":  1209,
+                      "sha256":  "b0a5c1fd9a20d1a56c2efb64d7a6ccd8a1c2dc5c1fac84e5b2df1b64c0ded91a"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/001-authority-consumed.json",
+                      "bytes":  514,
+                      "sha256":  "8d11189b612f11d21ed064132d1f66fdd25680e76c7a5be2ac4957d730f276b9"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/004-provider-admitted.json",
+                      "bytes":  476,
+                      "sha256":  "fbfb13f3092809b786f83f864a7ba3126cb3c5fee26deb2fce28d3858415a27b"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/007-runtime-configuration-created.json",
+                      "bytes":  469,
+                      "sha256":  "c45a46dba55ca4e224c7558853b886df5ac30a25b6943a7b033802ffef45f8aa"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/006-package-installed.json",
+                      "bytes":  538,
+                      "sha256":  "83bfd82f559160e3787314593e71bb89502cb007c3fbf49f0e26738cb9c51f43"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/005-trust-established.json",
+                      "bytes":  408,
+                      "sha256":  "a4d279a7ee465dee222c6d1330b9a1cc6bd50f6ff76e342e5c56536219661e56"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/Oracle.Sprint30.5.Stage4R4QualificationEvidence.zip",
+                      "bytes":  34932,
+                      "sha256":  "7f01fe4fcf5bee2b32b220a26660ea163a92e98450c093d1e7dc4c6752c7598c"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/final-evidence-manifest.json",
+                      "bytes":  15257,
+                      "sha256":  "0b740dfc12e2334a63807d3097e302f864b9adaa1caf58b2b8757b3c57752b46"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/completion.json",
+                      "bytes":  343,
+                      "sha256":  "33294e8d0c5f9234a99bbc03c335d209b0243990b3cd5144a9bb4319db5c63fa"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/Oracle.Sprint30.5.Stage4R4QualificationEvidence.zip.sha256.txt",
+                      "bytes":  118,
+                      "sha256":  "77419bf3430d9536aeacbe55da412ad8b114a1d85e28ac29770b2b076af7816f"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/evidence/live-journey.json",
+                      "bytes":  1550,
+                      "sha256":  "e320e4bf6e8e1c6690a17f99e7d62c81b58d2af5606b8c27b15c8a424cd41951"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/payload-manifest.json",
+                      "bytes":  6828,
+                      "sha256":  "0b63edbadeeb8b6e86ce6bccb32f455a76e7048fb059b85a3315d91cc3d2ddfe"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/evidence/live-journey.json",
+                      "bytes":  1550,
+                      "sha256":  "e320e4bf6e8e1c6690a17f99e7d62c81b58d2af5606b8c27b15c8a424cd41951"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/008-package-activated.json",
+                      "bytes":  410,
+                      "sha256":  "ad1142710b3b4b959cd95cc444c23ddbeb83d35703c7d64762e43c62868051f6"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/018-provider-torn-down.json",
+                      "bytes":  382,
+                      "sha256":  "256c327e6ff9ebee88fa47322e33b9d5d4c13283b9000fd1a70827a1451b57bc"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/017-trust-removed.json",
+                      "bytes":  362,
+                      "sha256":  "d4a54fe9c0c138612a7841c0970c4f6adf2df727257197987a8d5db47330b771"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/016-package-removed.json",
+                      "bytes":  364,
+                      "sha256":  "dc9698df2e0678baf7f93b6e204eb96f2a567f24707489bb445ff868ce164a6e"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/019-cleanup-passed.json",
+                      "bytes":  368,
+                      "sha256":  "8158322e3456536d26eb3a254f5e16b74604b0162a788c562a82c69d7ed21018"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/logs/installed-server-admission.json",
+                      "bytes":  385,
+                      "sha256":  "7bd21b6da52335e37b9bd1feaa47f993d1a4d5efa94dc8e0bd96de9ed674c591"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/logs/installed-package-result.json",
+                      "bytes":  4821,
+                      "sha256":  "d5f6624a961ad40f407060f8604d948d40d58ab5ef52a67cb767130578f03f0b"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/logs/environment-result.json",
+                      "bytes":  1497,
+                      "sha256":  "f709a755ab8bf79cfa4ea9822e5aacce469b300beaa5c6070ddf4f7841505c76"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/011-account-created-unverified.json",
+                      "bytes":  378,
+                      "sha256":  "94513f5a9b4cdd73ad13ae65bdc3be0597ca24365616a508da7a6ed8752165b0"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/010-anonymous-boundaries-passed.json",
+                      "bytes":  341,
+                      "sha256":  "5b0ed6b1e04ec9473e33bab0ed46cbcebb17beaf31b48a2ce452f503ce59603d"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/009-installed-server-admitted.json",
+                      "bytes":  427,
+                      "sha256":  "716523b17dec71077eb3104c295a863ac20901d2d67ad84c2804d9207471d2a7"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/012-email-verified.json",
+                      "bytes":  328,
+                      "sha256":  "217c347baa6c7ee662283c5653a689165e1b5fbf5ed2b4ba6396f358bcb75f7a"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/015-session-invalidated.json",
+                      "bytes":  333,
+                      "sha256":  "53c5c5d187c52335fe38a0729ca84691f1f76b06832584ce17c89c020a99b374"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/014-isolation-passed.json",
+                      "bytes":  740,
+                      "sha256":  "0ce4ec4094a54f10fce7459589b55efd2991114e0eb4e4f8f384efa0c009c2f6"
+                  },
+                  {
+                      "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r4/stage4-r4-20260804T133045451Z-13f6da53/immutable-evidence/lifecycle/013-authenticated-rendering-passed.json",
+                      "bytes":  548,
+                      "sha256":  "beb26c00c7b60f2259f9c90fa761313bb075c15ad0636338faab979dfde40994"
+                  }
+              ]
+}

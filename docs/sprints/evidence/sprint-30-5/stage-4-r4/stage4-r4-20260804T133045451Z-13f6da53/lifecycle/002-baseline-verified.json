@@ -1,0 +1,18 @@
+{
+    "contract":  "oracle.sprint-30-5.stage-4-r4-lifecycle",
+    "authorityId":  "authority-stage4-r4-20260804T133045451Z-13f6da53",
+    "attemptId":  "stage4-r4-20260804T133045451Z-13f6da53",
+    "phase":  "baseline-verified",
+    "recordedAtUtc":  "2026-08-04T13:30:56.2297457Z",
+    "details":  {
+                    "transferManifestSha256":  "20fe8ef0b445253c35b3055b800898f214d9f26d615fb20639fcae7b64569e1c",
+                    "acceptedCandidateCommit":  "ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff",
+                    "transferCustodySha256":  "583f1366bb082d36da3c2660e7aa689a4e847462094a7e20cda8efc4a00e9d7c",
+                    "preflightSha256":  "cfd160c23ef6b21eeab7333625870e1a26d1e04fe0272d6c4187ea7189fb305e",
+                    "tree":  "1662e5ffb4329846ebdeab0d6a666b8fb506d1d4",
+                    "commit":  "af1366e545c077f8a181495ddee950d4632187b8",
+                    "transferId":  "transfer-stage4-r4-20260804T132801436Z-75ac221c",
+                    "acceptedCandidateTree":  "8455a05780989a9d5f6c6d527f7d427d94526b04",
+                    "transferVerificationSha256":  "fdc6cdf12c9ba7947b5cf2af28810b6b3abf3b2fc71e7ffa56afe401c7fc2b54"
+                }
+}
