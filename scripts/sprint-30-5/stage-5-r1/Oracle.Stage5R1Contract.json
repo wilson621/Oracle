@@ -233,7 +233,7 @@
     "rehearsalRoot": ".artifacts/sprint-30-5/stage-5-r1-development-rehearsal"
   },
   "acceptedEngineeringBaseline": {
-    "commit": "PENDING_IMPLEMENTATION_COMMIT",
-    "tree": "PENDING_IMPLEMENTATION_TREE"
+    "commit": "849296320f3e5da6d8833ba9629d044f0b6d2f37",
+    "tree": "3ecf6ec4ace9cf1206314c536932d700a75027a6"
   }
 }
