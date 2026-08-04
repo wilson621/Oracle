@@ -29,6 +29,8 @@ assert.ok(mission.indexOf("Write-CreateOnlyJson $authorityPath") > mission.index
 assert.ok(mission.indexOf("Write-CreateOnlyJson $authorityPath") > mission.indexOf("Host or browser state differs from preflight"));
 
 const preflight = source("Invoke-OracleStage5R1PreAuthorityPreflight.ps1");
+assert.ok(preflight.includes("oracle.sprint-30-5.stage-5-r1-pre-authority-preflight"));
+assert.ok(!preflight.includes("oracle.sprint-30-5.stage-4-r4-pre-authority-preflight"));
 for (const required of ["contract.host.requiredIdentity", "Win32_ComputerSystem", "Win32_VideoController", "Microsoft Basic Render", "GPU Engine", "LogPixels", "hostAdmission", "authorityCreated=$false", "attemptCreated=$false"]) {
   assert.ok(preflight.includes(required), `Preflight is missing ${required}.`);
 }

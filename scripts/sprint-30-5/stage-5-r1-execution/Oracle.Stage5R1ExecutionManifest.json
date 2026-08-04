@@ -31,7 +31,7 @@
                   {
                       "path":  "Invoke-OracleStage5R1PreAuthorityPreflight.ps1",
                       "bytes":  7030,
-                      "sha256":  "2ef4c2106357c42ee1117e5fe906bbf249dc933e175fd8b7e6c9cfaffc929575"
+                      "sha256":  "4339b1f9969f0b433647bb19a76b3423d4c17a568e9aa4ff67306c9b24609840"
                   },
                   {
                       "path":  "Invoke-OracleStage5R1QualificationMission.ps1",
@@ -135,8 +135,8 @@
                   },
                   {
                       "path":  "Test-OracleStage5R1ExecutionPolicies.mjs",
-                      "bytes":  4253,
-                      "sha256":  "36516689bf85fdd1f359a344dd7dd17e573cd24a14d763d0fcec45d263327ef4"
+                      "bytes":  4432,
+                      "sha256":  "d18ce3242a62af3a7c4c4573d64bf93ddf7d5875f7b06affd9e98edb87427a23"
                   },
                   {
                       "path":  "Test-OracleStage5R1Policies.mjs",
