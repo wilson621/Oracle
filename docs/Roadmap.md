@@ -1361,3 +1361,12 @@ Stage 4 remains incomplete for R6/R12. R4 preparation and installed-package rehe
 ## Sprint 30.5 Stage 4 R4 closure
 
 Stage 4 qualification is complete for R6/R12 through accepted R4 evidence. The next possible programme boundary is a Founder-authorised Stage 5 assessment or mission; no Stage 5 work is authorised by this closure.
+
+## Sprint 30.5 Stage 5 qualification-impact decision
+
+Stage 5 is now the next possible stage and can extend the accepted chain if it
+tests the exact R6 package unchanged on `Founder-QA-01`. Before engineering, the
+programme must freeze its proposed installed-GPU thresholds and installed
+accessibility pass/fail contract under a Founder-authorised R1 preparation mission.
+If Stage 5 requires a product correction, the corrected candidate must return to
+Stage 2 and repeat Stages 3 and 4 before a new Stage 5 attempt.

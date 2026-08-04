@@ -570,3 +570,9 @@ to adopt a later formatting standard.
 - `docs/sprints/SPRINT_30_5_STAGE_4_R4_EVIDENCE_RECONCILIATION.md`
 - `docs/sprints/SPRINT_30_5_STAGE_4_R4_QUALIFICATION_CLOSURE.md`
 - `docs/sprints/evidence/sprint-30-5/stage-4-r4/Oracle.Stage4R4AcceptedEvidenceIndex.json`
+
+## Stage 5 R6/R12/R4 qualification-impact assessment
+
+| Document | Link | Purpose |
+| --- | --- | --- |
+| Stage 5 R6/R12/R4 qualification-impact assessment | [Sprint 30.5 Stage 5 R6/R12/R4 Qualification Impact Assessment](sprints/SPRINT_30_5_STAGE_5_R6_R12_R4_QUALIFICATION_IMPACT_ASSESSMENT.md) | Chain-preservation decision, criteria-freeze dependency and mandatory requalification path for any product correction |

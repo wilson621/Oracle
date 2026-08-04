@@ -2476,3 +2476,13 @@ The separately committed R4 execution overlay binds preparation commit `48ddf5f`
 ## Sprint 30.5 Stage 4 R4 qualification closure
 
 The single R4 authority was consumed and the attempt passed all twenty lifecycle phases and ten installed authentication journeys. The 58-file returned evidence, 57-entry final manifest and 27-entry archive were independently reconciled with zero residue. R4 is the current Stage 4 baseline for R6/R12. No Stage 5 work began.
+
+## Sprint 30.5 Stage 5 R6/R12/R4 impact assessment
+
+The exact unchanged R6 package can proceed to Stage 5 without invalidating the
+accepted R6/R12/R4 chain. Stage 5 must be package-bound, use fresh identities and
+keep its harness outside qualified product paths. Before engineering, a
+Founder-authorised R1 preparation mission must freeze installed GPU, performance
+and accessibility acceptance criteria; the existing GPU protocol remains proposed.
+If any product correction is required, the corrected candidate must repeat Stages
+2, 3 and 4 before Stage 5. Assessment created no engineering or execution state.

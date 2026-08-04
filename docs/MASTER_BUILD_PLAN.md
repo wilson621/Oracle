@@ -1011,3 +1011,12 @@ R4 preparation is complete and qualification-barred. Before qualification, freez
 ## Stage 4 R4 qualification complete
 
 R4 is closed for the accepted R6/R12 baseline after independent evidence and zero-residue verification. No further Stage 4 attempt is authorised. Stage 5 and later activity require a separate Founder-level mission.
+
+## Stage 5 qualification-impact gate
+
+Stage 5 can preserve R6/R12/R4 by qualifying the exact R6 MSIX unchanged on the
+admitted replacement host. Before engineering, a Founder-authorised R1 preparation
+mission must freeze the proposed GPU thresholds and the installed accessibility
+contract. That preparation must be non-product and qualification-barred. Any
+necessary product correction resets the corrected candidate to Stage 2, followed
+by new Stage 3, Stage 4 and Stage 5 qualification.

@@ -1069,3 +1069,12 @@ R4 engineering preparation is complete for accepted R6/R12 and the accepted R3 p
 ## Sprint 30.5 Stage 4 R4 closed
 
 Stage 4 R4 passed and is independently reconciled for the accepted R6/R12 chain. R1 remains historical accepted evidence and R2/R3 remain immutable failed evidence. Stage 5 remains unauthorised pending a separate Founder mission.
+
+## Sprint 30.5 Stage 5 impact assessment complete
+
+Stage 5 may extend R6/R12/R4 without invalidation only against the exact unchanged
+R6 MSIX on `Founder-QA-01`. The current blocker is governance, not an identified
+product defect: the proposed GPU thresholds and installed accessibility contract
+must be frozen through a Founder-authorised Stage 5 R1 preparation mission. Any
+product correction would require new Stage 2, Stage 3 and Stage 4 qualification
+before Stage 5. No Stage 5 engineering or execution has begun.

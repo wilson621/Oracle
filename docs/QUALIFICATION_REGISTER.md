@@ -34,8 +34,8 @@ results.
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
 | 2 | Candidate Freeze and Package Reconciliation | **R6 Founder-accepted and formally closed** | Passing attempt `r6-20260803T171057940Z-5e914d18`; final manifest `a637a7fdf49f6b2a957738c89cb02015b6384d227c2c72f77a2aabdd721bf288`; archive `7884c93b222cd5f16f51dd5ba1b56c51af5008e1f6c999dcff92a8c1a26ac690`; MSIX `492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430`; zero residue | None for R6; downstream work requires separate authority |
 | 3 | Clean Windows Qualification | **R12 independently verified and formally closed** | Passing attempt `stage3-r12-20260803T204415402Z-b886be44`; evidence manifest `d0238d0859a871d2589f66cbddc5f337b33638b32a02375b71f39fc2dac461d0`; archive `1e583ef3a67755a40ec2d4ec50e0535e38ee3e2eab9b65767d48a3a17f8f5055`; zero residue | None for R12; consumed authority permits no retry |
-| 4 | Live Authentication and Protected Rendering | **R2 engineering preparation complete; qualification unauthorised** | Exact R6 installed-package harness passed ten-journey non-qualification rehearsal with zero residue; R1 remains immutable history | Founder acceptance and separate authority for one execution-enabled R2 mission |
-| 5 | Installed Package GPU, Performance and Accessibility | **Blocked pending accepted R6/R12-bound Stage 4 result and separately governed downstream authority** | Stage 2 R6 and Stage 3 R12 qualify the corrected package through the clean-host lifecycle; installed authentication and protected rendering remain unqualified | Accepted Stage 4 successor result, then separate Stage 5 authority |
+| 4 | Live Authentication and Protected Rendering | **R4 Founder-accepted and formally closed** | Passing attempt `stage4-r4-20260804T133045451Z-13f6da53`; final manifest `0b740dfc12e2334a63807d3097e302f864b9adaa1caf58b2b8757b3c57752b46`; archive `7f01fe4fcf5bee2b32b220a26660ea163a92e98450c093d1e7dc4c6752c7598c`; zero residue | None for R4; consumed authority permits no retry |
+| 5 | Installed Package GPU, Performance and Accessibility | **Impact-assessed; engineering and qualification unauthorised** | R6/R12/R4 chain can be preserved by qualifying the exact R6 MSIX unchanged; proposed GPU thresholds and installed accessibility contract are not yet frozen | Founder authority for bounded R1 engineering preparation and acceptance-contract freeze |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
 | 7 | Final Integrated Qualification and Sprint 30 Closure Package | **Not started** | Requires complete immutable evidence from Stages 1–6 | Stage 6 acceptance, then separate Stage 7 authority |
 
@@ -441,3 +441,16 @@ The execution overlay is prepared and validated. No transfer, authority or attem
 ## Sprint 30.5 Stage 4 R4 qualification closure
 
 R4 attempt `stage4-r4-20260804T133045451Z-13f6da53` passed all twenty lifecycle phases and ten journeys. Independent reconciliation proved exact returned evidence, archive parity, zero non-zero processes and zero residue. R4 is closed as the current Stage 4 qualification baseline for R6/R12. Stage 5 was not started.
+
+## Stage 5 R6/R12/R4 qualification-impact assessment
+
+Stage 5 can extend the accepted chain without invalidating it only by qualifying
+the exact R6 MSIX unchanged on `Founder-QA-01`. Its acceptance criteria are not
+yet frozen: the GPU protocol remains proposed and installed protected-route
+accessibility requires an authoritative contract. The next permissible mission is
+bounded Stage 5 R1 engineering preparation plus Founder acceptance of that
+contract. No Stage 5 engineering, transfer, authority or attempt is authorised.
+
+Any product or package correction discovered by Stage 5 returns the corrected
+candidate to a new Stage 2 revision followed by new Stage 3, Stage 4 and Stage 5
+qualification. Accepted R6/R12/R4 evidence remains immutable history.
