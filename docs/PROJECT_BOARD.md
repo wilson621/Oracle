@@ -972,3 +972,23 @@ blocked. The recommended next Founder mission is bounded Stage 4 R2
 engineering preparation for the exact R6 MSIX and installed runtime path. No
 Stage 4 engineering, authority, attempt or qualification evidence was created
 by the assessment.
+
+## Stage 4 Requalification R2 Engineering Preparation Complete
+
+The Founder-authorised bounded R2 engineering preparation is complete for the
+accepted R6/R12 baseline. The harness binds the exact R6 candidate, tree, MSIX and
+temporary public certificate, accepted R12 closure and immutable R1 history. It
+retains all ten R1 journeys and executes them through the installed R6 package,
+attempt-scoped LocalState configuration, ownership-verified packaged loopback
+server and disposable local provider.
+
+Static, regression, adversarial, source-equivalent and elevated installed-package
+development validation passed. The exact-package rehearsal completed ten journeys
+with zero package, certificate, runtime-configuration and provider residue. It
+created no authority, attempt or qualification evidence.
+
+The preparation contract remains execution-barred. Stage 4 is incomplete for the
+R6/R12 chain and Stage 5 remains blocked. The next Founder-level mission is to
+accept the preparation baseline and separately authorise one execution-enabled R2
+baseline and one governed attempt, with authority creation only after fresh
+pre-authority admission.

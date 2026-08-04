@@ -519,3 +519,12 @@ to adopt a later formatting standard.
 | Record | Location | Purpose |
 | --- | --- | --- |
 | Stage 4 R6/R12 qualification-impact assessment | [Sprint 30.5 Stage 4 R6/R12 Qualification Impact Assessment](sprints/SPRINT_30_5_STAGE_4_R6_R12_QUALIFICATION_IMPACT_ASSESSMENT.md) | Candidate-delta analysis, current programme state, qualification gap and bounded next-mission recommendation |
+
+## Stage 4 Requalification R2 engineering preparation
+
+| Document | Link | Purpose |
+| --- | --- | --- |
+| Stage 4 R2 plan | [Sprint 30.5 Stage 4 R2 Plan](sprints/SPRINT_30_5_STAGE_4_R2_PLAN.md) | Exact R6 installed-package architecture, lifecycle and authority boundary |
+| Stage 4 R2 pre-execution gate | [Sprint 30.5 Stage 4 R2 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_4_R2_PRE_EXECUTION_GATE.md) | Future pre-authority requirements and execution prohibition |
+| Stage 4 R2 preparation validation | [Sprint 30.5 Stage 4 R2 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_4_R2_PREPARATION_VALIDATION_REPORT.md) | Regression, adversarial and live installed-package validation |
+| Stage 4 R2 engineering closure | [Sprint 30.5 Stage 4 R2 Engineering Closure](sprints/SPRINT_30_5_STAGE_4_R2_ENGINEERING_CLOSURE.md) | Completed bounded mission and next Founder authority boundary |

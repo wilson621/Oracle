@@ -1,0 +1,397 @@
+{
+    "schemaVersion":  "2.0.0",
+    "contract":  "oracle.sprint-30-5.stage-4-r2-engineering-preparation",
+    "programme":  "Sprint 30.5 Stage 4 Live Authentication and Protected Rendering",
+    "revision":  "R2",
+    "status":  "engineering-preparation-complete-pending-founder-execution-authority",
+    "executionSurface":  "accepted-r6-installed-msix",
+    "executionAuthority":  {
+                               "founderAuthorisedQualificationExecution":  false,
+                               "authorityCreationPermitted":  false,
+                               "qualificationAttemptPermitted":  false,
+                               "requiredFutureToken":  "FOUNDER-AUTHORISED-STAGE-4-R2-SINGLE-EXECUTION",
+                               "preparationMayMintToken":  false,
+                               "failClosedWithoutFutureContractBinding":  true
+                           },
+    "repository":  {
+                       "branch":  "sprint-9-overlay",
+                       "acceptedCandidateCommit":  "ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff",
+                       "acceptedCandidateTree":  "8455a05780989a9d5f6c6d527f7d427d94526b04",
+                       "productPaths":  [
+                                            "app",
+                                            "components",
+                                            "database",
+                                            "desktop",
+                                            "lib",
+                                            "native",
+                                            "packaging",
+                                            "public",
+                                            "proxy.ts",
+                                            "next.config.ts",
+                                            "package.json",
+                                            "package-lock.json",
+                                            "scripts/build-desktop-preload.mjs",
+                                            "tsconfig.json",
+                                            "tsconfig.desktop.json"
+                                        ]
+                   },
+    "stage2":  {
+                   "revision":  "R6",
+                   "authorityId":  "authority-r6-20260803T171057940Z-5e914d18",
+                   "attemptId":  "r6-20260803T171057940Z-5e914d18",
+                   "candidateCommit":  "ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff",
+                   "candidateTree":  "8455a05780989a9d5f6c6d527f7d427d94526b04",
+                   "harnessCommit":  "0b10f074d86ac9256462602c0e7bda528b8fba57",
+                   "harnessTree":  "b32db4b2c7ebaf8ff6c1d2070e0056b6b7557f80",
+                   "finalEvidenceManifestSha256":  "a637a7fdf49f6b2a957738c89cb02015b6384d227c2c72f77a2aabdd721bf288",
+                   "archiveSha256":  "7884c93b222cd5f16f51dd5ba1b56c51af5008e1f6c999dcff92a8c1a26ac690",
+                   "msixSha256":  "492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430",
+                   "releaseManifestSha256":  "bd3dde2a3b37d75ccdcfecd8fa49bda2a493d340ead7283fddd2dd11a6e59bd3",
+                   "releaseManifestSignatureSha256":  "4c8ec3b09f4bb03d5475398963e22a67657b9f4f4e5475fa03f512eae1cc97ac",
+                   "sbomSha256":  "ccefd235db62c007613d0280b6c35051999c3c757ce78a93581d9fcea626de22",
+                   "provenanceSha256":  "64c829eea43eed7b53af25712be38cda53f827b13844d544380f1776921e3920",
+                   "certificateThumbprint":  "8C24858C147873EF46A9D61018FA2702B6222EA2",
+                   "certificateNotAfterUtc":  "2026-09-02T17:11:50.000Z"
+               },
+    "stage3":  {
+                   "revision":  "R12",
+                   "qualificationBaseline":  "3aa68ac8f08fafaea2963517e7aa7ba3b011d931",
+                   "authorityId":  "authority-stage3-r12-20260803T204415402Z-b886be44",
+                   "attemptId":  "stage3-r12-20260803T204415402Z-b886be44",
+                   "evidenceManifestSha256":  "d0238d0859a871d2589f66cbddc5f337b33638b32a02375b71f39fc2dac461d0",
+                   "archiveSha256":  "1e583ef3a67755a40ec2d4ec50e0535e38ee3e2eab9b65767d48a3a17f8f5055",
+                   "acceptedEvidenceIndexSha256":  "e02f94d8231c6ae683c3fecef372c077d36e1fc5db84327e2af5c7947f624a1f",
+                   "providerConnectivityClaimed":  false,
+                   "authenticationClaimed":  false
+               },
+    "historicalStage4":  {
+                             "revision":  "R1",
+                             "candidateCommit":  "a7fc67f207d9c95407c70812828fa66bd487285d",
+                             "candidateTree":  "356f6d52f1bf70065692e892af8bf916acc8727a",
+                             "authorityId":  "authority-stage4-r1-20260803T093803115Z-7fc6b185",
+                             "attemptId":  "stage4-r1-20260803T093803115Z-7fc6b185",
+                             "evidenceManifestSha256":  "1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d",
+                             "archiveSha256":  "91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15",
+                             "disposition":  "accepted-immutable-history-not-applicable-to-r6-r12"
+                         },
+    "package":  {
+                    "identity":  "Oracle.Platform.LocalCertification",
+                    "version":  "0.1.4.0",
+                    "architecture":  "x64",
+                    "publisher":  "CN=Oracle Stage 2 Requalification R6 Local Test Signing - NOT PRODUCTION",
+                    "fileName":  "Oracle_0.1.4.0_x64_STAGE2_REQUALIFICATION_R6_LOCAL_TEST_ONLY.msix",
+                    "appId":  "Oracle",
+                    "artifactPath":  ".artifacts/sprint-30-5/stage-2-requalification-r6/r6-20260803T171057940Z-5e914d18/release/Oracle_0.1.4.0_x64_STAGE2_REQUALIFICATION_R6_LOCAL_TEST_ONLY.msix",
+                    "publicCertificatePath":  "docs/sprints/evidence/sprint-30-5/stage-3-r11/Oracle.Stage3R11Evidence/stage3-r11-20260803T175715661Z-84bf486c/work/attempt-public-certificate.cer",
+                    "trustStore":  "Cert:\\LocalMachine\\TrustedPeople",
+                    "trustScope":  "temporary-exact-certificate",
+                    "installationRequired":  true,
+                    "removalRequired":  true,
+                    "publicCertificateSha256":  "f606378d0b23bbe4fe6200b3a121dae91fc0d3a6d124bff46b54b90f24b9dd51",
+                    "familyName":  "Oracle.Platform.LocalCertification_3yksyxackaf0t",
+                    "fullName":  "Oracle.Platform.LocalCertification_0.1.4.0_x64__3yksyxackaf0t"
+                },
+    "installedRuntime":  {
+                             "configurationContract":  "oracle.installed-runtime-configuration",
+                             "configurationVersion":  1,
+                             "maximumLifetimeSeconds":  900,
+                             "providerOrigin":  "http://127.0.0.1:54321",
+                             "createOnly":  true,
+                             "consumedAtomically":  true,
+                             "localStateOnly":  true,
+                             "activationArgumentsContainOnlyPathAndSha256":  true,
+                             "strictPackagedServerEnvironmentRequired":  true,
+                             "sourceRuntimeVariablesForbiddenInPackagedChild":  true,
+                             "privilegedValuesProhibitedFromRendererAndEvidence":  true,
+                             "loopbackServerDiscovery":  "ownership-verified-package-process-tree-and-listener"
+                         },
+    "applicationActivation":  {
+                                  "api":  "IApplicationActivationManager.ActivateApplication",
+                                  "classId":  "45BA127D-10A8-46EA-8AB7-56EA9078943C",
+                                  "interfaceId":  "2E941141-7F97-4756-BA1D-9DECDE894A3D",
+                                  "classContext":  "CLSCTX_LOCAL_SERVER",
+                                  "activateOptions":  "AO_NOERRORUI",
+                                  "successHresult":  "0x00000000",
+                                  "requiresNonzeroProcessId":  true,
+                                  "runtimeProof":  [
+                                                       "ownership-verified-installed-process-tree",
+                                                       "package-owned-loopback-listener",
+                                                       "ten-live-authentication-journeys"
+                                                   ],
+                                  "explorerExitCodeIsQualificationEvidence":  false
+                              },
+    "provider":  {
+                     "classification":  "disposable-local-non-production",
+                     "supabaseCli":  "2.109.1",
+                     "services":  {
+                                      "postgres":  {
+                                                       "image":  "public.ecr.aws/supabase/postgres:17.6.1.143",
+                                                       "digest":  "sha256:80d7b27c3e8d77cfa7226eee9508671796da214781ff15a35b3670d7ad5ee453",
+                                                       "port":  54322
+                                                   },
+                                      "gotrue":  {
+                                                     "image":  "public.ecr.aws/supabase/gotrue:v2.192.0",
+                                                     "digest":  "sha256:b252efb680be37d4a8bf77c210cf0439c19b63a4b51929233a65dd101d25bdab"
+                                                 },
+                                      "kong":  {
+                                                   "image":  "public.ecr.aws/supabase/kong:2.8.1",
+                                                   "digest":  "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d",
+                                                   "port":  54321
+                                               },
+                                      "mailpit":  {
+                                                      "image":  "public.ecr.aws/supabase/mailpit:v1.30.2",
+                                                      "digest":  "sha256:37a38e48e9338cd7e89dfeb487f37b02ebfcd9cb23111bed2d345e79d37d6dd6",
+                                                      "port":  54324
+                                                  },
+                                      "postgrest":  {
+                                                        "image":  "public.ecr.aws/supabase/postgrest:v14.14",
+                                                        "digest":  "sha256:d2009b5c9deffc210c8a5592698472fede14fd9f6ca89823c8474ca54d58c012"
+                                                    }
+                                  },
+                     "externalEmail":  false,
+                     "productionEndpoint":  false,
+                     "requiredMigrations":  [
+                                                "001_initial_schema.sql",
+                                                "007_operator_achievements.sql",
+                                                "008_operator_ownership.sql",
+                                                "009_operator_intelligence_persistence.sql",
+                                                "010_operator_trust_control_persistence.sql",
+                                                "011_operator_account_provisioning.sql",
+                                                "012_operator_identity_lifecycle.sql",
+                                                "013_authoritative_session_lifecycle.sql",
+                                                "014_operator_development_lifecycle.sql"
+                                            ],
+                     "requiredLoopbackPorts":  [
+                                                   4314,
+                                                   54321,
+                                                   54322,
+                                                   54323,
+                                                   54324
+                                               ],
+                     "qualificationHostNetworkAdmission":  "no-active-ipv4-or-ipv6-default-route"
+                 },
+    "identity":  {
+                     "authorityPattern":  "^authority-stage4-r2-\\d{8}T\\d{9}Z-[0-9a-f]{8}$",
+                     "attemptPattern":  "^stage4-r2-\\d{8}T\\d{9}Z-[0-9a-f]{8}$",
+                     "founderGrantPattern":  "^founder-stage4-r2-grant-\\d{8}T\\d{9}Z-[0-9a-f]{8}$"
+                 },
+    "paths":  {
+                  "artifactRoot":  ".artifacts/sprint-30-5/stage-4-r2",
+                  "evidenceRoot":  "docs/sprints/evidence/sprint-30-5/stage-4-r2",
+                  "preflightRoot":  ".artifacts/sprint-30-5/stage-4-r2/preflight",
+                  "rehearsalRoot":  ".artifacts/sprint-30-5/stage-4-r2-development-rehearsal"
+              },
+    "historicalProtectedRoots":  [
+                                     "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r6",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-r11",
+                                     "docs/sprints/evidence/sprint-30-5/stage-3-r12",
+                                     "docs/sprints/evidence/sprint-30-5/stage-4-r1",
+                                     ".artifacts/sprint-30-5/stage-2-requalification-r6",
+                                     ".artifacts/sprint-30-5/stage-3-r12",
+                                     ".artifacts/sprint-30-5/stage-4-r1"
+                                 ],
+    "requiredJourneys":  [
+                             "anonymous-protected-route-rejected",
+                             "account-created-without-session",
+                             "confirmation-mail-captured-locally",
+                             "email-verified",
+                             "verified-password-sign-in-passed",
+                             "unverified-account-rejected",
+                             "protected-route-rendered",
+                             "protected-api-authorised",
+                             "cross-account-isolation-passed",
+                             "sign-out-invalidates-session"
+                         ],
+    "requiredLifecycle":  [
+                              "authority-consumed",
+                              "baseline-verified",
+                              "zero-state-verified",
+                              "provider-admitted",
+                              "trust-established",
+                              "package-installed",
+                              "runtime-configuration-created",
+                              "package-activated",
+                              "installed-server-admitted",
+                              "anonymous-boundaries-passed",
+                              "account-created-unverified",
+                              "email-verified",
+                              "authenticated-rendering-passed",
+                              "isolation-passed",
+                              "session-invalidated",
+                              "package-removed",
+                              "trust-removed",
+                              "provider-torn-down",
+                              "cleanup-passed",
+                              "evidence-frozen"
+                          ],
+    "historicalEvidenceBindings":  [
+                                       {
+                                           "path":  "docs/sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R6_CLOSURE.md",
+                                           "sha256":  "cb8a7f81bbbadaa4248734b20c9b9e05e1aee84128730f1b51edad5f35525281"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r6/Oracle.Stage2RequalificationR6AcceptedEvidenceIndex.json",
+                                           "sha256":  "3ef36e908803528853c1bd16a1ee555a520b40648e64e6f0e2f1ed643ea46863"
+                                       },
+                                       {
+                                           "path":  ".artifacts/sprint-30-5/stage-2-requalification-r6/r6-20260803T171057940Z-5e914d18/Oracle.Sprint30.5.Stage2RequalificationR6QualificationEvidence.zip",
+                                           "sha256":  "7884c93b222cd5f16f51dd5ba1b56c51af5008e1f6c999dcff92a8c1a26ac690"
+                                       },
+                                       {
+                                           "path":  ".artifacts/sprint-30-5/stage-2-requalification-r6/r6-20260803T171057940Z-5e914d18/release/Oracle_0.1.4.0_x64_STAGE2_REQUALIFICATION_R6_LOCAL_TEST_ONLY.msix",
+                                           "sha256":  "492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430"
+                                       },
+                                       {
+                                           "path":  ".artifacts/sprint-30-5/stage-2-requalification-r6/r6-20260803T171057940Z-5e914d18/release/oracle-release-manifest.json",
+                                           "sha256":  "bd3dde2a3b37d75ccdcfecd8fa49bda2a493d340ead7283fddd2dd11a6e59bd3"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/SPRINT_30_5_STAGE_3_R12_QUALIFICATION_CLOSURE.md",
+                                           "sha256":  "742400b518cb5f70229410ec176bcc6e2f4086168f33b77879c40c091ed1c10b"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-3-r12/Oracle.Stage3R12AcceptedEvidenceIndex.json",
+                                           "sha256":  "e02f94d8231c6ae683c3fecef372c077d36e1fc5db84327e2af5c7947f624a1f"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-3-r12/Oracle.Stage3R12Evidence/stage3-r12-20260803T204415402Z-b886be44.zip",
+                                           "sha256":  "1e583ef3a67755a40ec2d4ec50e0535e38ee3e2eab9b65767d48a3a17f8f5055"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-3-r12/Oracle.Stage3R12Evidence/stage3-r12-20260803T204415402Z-b886be44/evidence/evidence-manifest.json",
+                                           "sha256":  "d0238d0859a871d2589f66cbddc5f337b33638b32a02375b71f39fc2dac461d0"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/SPRINT_30_5_STAGE_4_R1_CLOSURE.md",
+                                           "sha256":  "bb54b94e8fc0314c063680cbe72e9e16fbb3715d1c6433b059aef58aa2d4fc0e"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r1/stage4-r1-20260803T093803115Z-7fc6b185/final-evidence-manifest.json",
+                                           "sha256":  "1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d"
+                                       },
+                                       {
+                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-4-r1/stage4-r1-20260803T093803115Z-7fc6b185/Oracle.Sprint30.5.Stage4R1QualificationEvidence.zip",
+                                           "sha256":  "91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15"
+                                       }
+                                   ],
+    "prohibitions":  [
+                         "production-provider",
+                         "production-data",
+                         "production-email",
+                         "product-change",
+                         "package-resigning",
+                         "historical-evidence-mutation",
+                         "qualification-authority-without-separate-founder-authorisation",
+                         "qualification-execution-without-separate-founder-authorisation",
+                         "identity-reuse",
+                         "stage5",
+                         "publication",
+                         "deployment",
+                         "release"
+                     ],
+    "toolchain":  {
+                      "node":  "24.18.0",
+                      "npm":  "11.16.0",
+                      "supabaseCli":  "2.109.1",
+                      "powershellEdition":  "Desktop",
+                      "powershellMajor":  5,
+                      "architecture":  "x64",
+                      "dockerClient":  "29.6.2",
+                      "dockerServer":  "29.6.2",
+                      "supabaseOfflineTelemetry":  {
+                                                       "environmentVariable":  "SUPABASE_TELEMETRY_DISABLED",
+                                                       "value":  "1",
+                                                       "nativeBinaryEnvironmentVariable":  "SUPABASE_CLI_BINARY_OVERRIDE",
+                                                       "commands":  [
+                                                                        "--version",
+                                                                        "init",
+                                                                        "start",
+                                                                        "status",
+                                                                        "stop"
+                                                                    ],
+                                                       "networkAccessPermitted":  false,
+                                                       "nonZeroExitAccepted":  false,
+                                                       "policySource":  "https://supabase.com/docs/guides/local-development/cli/getting-started#telemetry"
+                                                   },
+                      "supabaseMachineReadableOutput":  {
+                                                            "argument":  "--output",
+                                                            "value":  "json",
+                                                            "commands":  [
+                                                                             "start",
+                                                                             "status"
+                                                                         ],
+                                                            "topLevelType":  "object",
+                                                            "emptyOutputAccepted":  false,
+                                                            "humanReadableOutputAccepted":  false
+                                                        },
+                      "approvedTools":  {
+                                            "git":  {
+                                                        "path":  "C:\\Program Files\\Git\\cmd\\git.exe",
+                                                        "realPath":  "C:\\Program Files\\Git\\cmd\\git.exe",
+                                                        "sha256":  "22fead8244ef3a7225fb800099a4e43eca8bcec0466774917669599c2f19a05a",
+                                                        "fileVersion":  "2.55.0.windows.2",
+                                                        "commandVersion":  "git version 2.55.0.windows.2"
+                                                    },
+                                            "node":  {
+                                                         "path":  "C:\\Program Files\\nodejs\\node.exe",
+                                                         "realPath":  "C:\\Program Files\\nodejs\\node.exe",
+                                                         "sha256":  "9a4eb5f1c29c6a2e93852ead46b999e284a6a5ca8bab4d4e241d587d025a52de",
+                                                         "fileVersion":  "24.18.0",
+                                                         "commandVersion":  "24.18.0"
+                                                     },
+                                            "npmCli":  {
+                                                           "path":  "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+                                                           "realPath":  "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+                                                           "sha256":  "3ce7cba6f5128dd5f54c98b6a5036b0f850496878cc2e21044b675fe3c594e3e",
+                                                           "commandVersion":  "11.16.0"
+                                                       },
+                                            "supabaseCli":  {
+                                                                "path":  "C:\\Dev\\project-meta\\node_modules\\supabase\\dist\\supabase.js",
+                                                                "realPath":  "C:\\Dev\\project-meta\\node_modules\\supabase\\dist\\supabase.js",
+                                                                "sha256":  "253caa8c31ee5976322d04a8bd7752622c0915e7943de3f74e2b73395c54a240",
+                                                                "commandVersion":  "2.109.1"
+                                                            },
+                                            "supabaseBinary":  {
+                                                                   "path":  "C:\\Dev\\project-meta\\node_modules\\@supabase\\cli-windows-x64\\bin\\supabase.exe",
+                                                                   "realPath":  "C:\\Dev\\project-meta\\node_modules\\@supabase\\cli-windows-x64\\bin\\supabase.exe",
+                                                                   "sha256":  "22c0f28f013411c7a7b880116cd33636edb955a64278914692eea010bcc98dc7",
+                                                                   "fileVersion":  "1.3.13",
+                                                                   "commandVersion":  "2.109.1"
+                                                               },
+                                            "docker":  {
+                                                           "path":  "C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe",
+                                                           "realPath":  "C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe",
+                                                           "sha256":  "8985cd8ac002c3240b5aa48fe401fcb55dca5d849b537e3c835564e8e8c49a70",
+                                                           "fileVersion":  "29.6.2",
+                                                           "commandVersion":  "29.6.2"
+                                                       },
+                                            "powershell":  {
+                                                               "path":  "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                                                               "realPath":  "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                                                               "sha256":  "7600ffe12da441fe89d035b13801e8e91d064bc544a27b19a5cf49f6ab8b18f5",
+                                                               "fileVersion":  "10.0.26100.8875 (WinBuild.160101.0800)",
+                                                               "commandVersion":  "5.1.26100.8875"
+                                                           },
+                                            "taskkill":  {
+                                                             "path":  "C:\\Windows\\System32\\taskkill.exe",
+                                                             "realPath":  "C:\\Windows\\System32\\taskkill.exe",
+                                                             "sha256":  "1249717315fc8f4d2df17d5db9da0444795fdb9fb83dfb1f763c3f39282244f7",
+                                                             "fileVersion":  "10.0.26100.8457 (WinBuild.160101.0800)"
+                                                         }
+                                        }
+                  },
+    "preflight":  {
+                      "maximumAgeMinutes":  15,
+                      "classification":  [
+                                             "NON-QUALIFICATION",
+                                             "NON-AUTHORITY",
+                                             "NON-EVIDENCE",
+                                             "READ-ONLY"
+                                         ]
+                  },
+    "resolvedPrerequisite":  {
+                                 "databaseMigrationsUnchangedFromR3":  true,
+                                 "dependencyLockfileUnchangedFromR3":  true,
+                                 "impactAssessment":  "docs/sprints/SPRINT_30_5_STAGE_4_R6_R12_QUALIFICATION_IMPACT_ASSESSMENT.md"
+                             }
+}

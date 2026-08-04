@@ -34,7 +34,7 @@ results.
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
 | 2 | Candidate Freeze and Package Reconciliation | **R6 Founder-accepted and formally closed** | Passing attempt `r6-20260803T171057940Z-5e914d18`; final manifest `a637a7fdf49f6b2a957738c89cb02015b6384d227c2c72f77a2aabdd721bf288`; archive `7884c93b222cd5f16f51dd5ba1b56c51af5008e1f6c999dcff92a8c1a26ac690`; MSIX `492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430`; zero residue | None for R6; downstream work requires separate authority |
 | 3 | Clean Windows Qualification | **R12 independently verified and formally closed** | Passing attempt `stage3-r12-20260803T204415402Z-b886be44`; evidence manifest `d0238d0859a871d2589f66cbddc5f337b33638b32a02375b71f39fc2dac461d0`; archive `1e583ef3a67755a40ec2d4ec50e0535e38ee3e2eab9b65767d48a3a17f8f5055`; zero residue | None for R12; consumed authority permits no retry |
-| 4 | Live Authentication and Protected Rendering | **R1 accepted immutable history; R6/R12 requalification required** | R1 is R3-bound; 17 R1 contract product paths changed by R6, while R12 expressly claims neither provider connectivity nor authentication | Separate Founder authority for Stage 4 R2 engineering preparation |
+| 4 | Live Authentication and Protected Rendering | **R2 engineering preparation complete; qualification unauthorised** | Exact R6 installed-package harness passed ten-journey non-qualification rehearsal with zero residue; R1 remains immutable history | Founder acceptance and separate authority for one execution-enabled R2 mission |
 | 5 | Installed Package GPU, Performance and Accessibility | **Blocked pending accepted R6/R12-bound Stage 4 result and separately governed downstream authority** | Stage 2 R6 and Stage 3 R12 qualify the corrected package through the clean-host lifecycle; installed authentication and protected rendering remain unqualified | Accepted Stage 4 successor result, then separate Stage 5 authority |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
 | 7 | Final Integrated Qualification and Sprint 30 Closure Package | **Not started** | Requires complete immutable evidence from Stages 1–6 | Stage 6 acceptance, then separate Stage 7 authority |
@@ -328,3 +328,23 @@ blocked. The recommended next Founder mission is bounded Stage 4 R2
 engineering preparation for the exact R6 MSIX and installed runtime path,
 without qualification authority or execution. This assessment created no
 Stage 4 implementation, transfer, authority, attempt or evidence namespace.
+
+## Stage 4 Requalification R2 Engineering Preparation Complete
+
+The Founder-authorised bounded R2 engineering preparation is complete for the
+accepted R6/R12 baseline. The harness binds the exact R6 candidate, tree, MSIX and
+temporary public certificate, accepted R12 closure and immutable R1 history. It
+retains all ten R1 journeys and executes them through the installed R6 package,
+attempt-scoped LocalState configuration, ownership-verified packaged loopback
+server and disposable local provider.
+
+Static, regression, adversarial, source-equivalent and elevated installed-package
+development validation passed. The exact-package rehearsal completed ten journeys
+with zero package, certificate, runtime-configuration and provider residue. It
+created no authority, attempt or qualification evidence.
+
+The preparation contract remains execution-barred. Stage 4 is incomplete for the
+R6/R12 chain and Stage 5 remains blocked. The next Founder-level mission is to
+accept the preparation baseline and separately authorise one execution-enabled R2
+baseline and one governed attempt, with authority creation only after fresh
+pre-authority admission.
