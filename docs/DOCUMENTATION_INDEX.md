@@ -585,3 +585,6 @@ to adopt a later formatting standard.
 
 | Sprint 30.5 Stage 5 R1 execution validation | [Sprint 30.5 Stage 5 R1 Execution Validation](sprints/SPRINT_30_5_STAGE_5_R1_EXECUTION_VALIDATION_REPORT.md) | Execution overlay inventory, regression and adversarial validation |
 | Sprint 30.5 Stage 5 R1 execution preparation closure | [Sprint 30.5 Stage 5 R1 Execution Preparation Closure](sprints/SPRINT_30_5_STAGE_5_R1_EXECUTION_PREPARATION_CLOSURE.md) | One-transfer/one-attempt boundary and laptop pre-authority handoff |
+
+| Stage 5 R1 pre-authority transfer failure | [Sprint 30.5 Stage 5 R1 Pre-Authority Transfer Failure](sprints/SPRINT_30_5_STAGE_5_R1_PRE_AUTHORITY_TRANSFER_FAILURE.md) | Immutable unusable transfer, exact defect and zero authority/attempt state |
+| Stage 5 R1 pre-authority correction closure | [Sprint 30.5 Stage 5 R1 Pre-Authority Correction Closure](sprints/SPRINT_30_5_STAGE_5_R1_PRE_AUTHORITY_CORRECTION_CLOSURE.md) | Corrected validated baseline and replacement-transfer governance boundary |

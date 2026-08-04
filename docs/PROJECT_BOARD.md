@@ -1092,3 +1092,10 @@ created. A separately authorised execution-enabled Stage 5 mission is required.
 The authorised execution overlay is complete and validated with 39 exact files,
 51 qualification adversarial cases and unchanged accepted product and evidence.
 Board state: transfer pending; authority zero; attempt zero; Stage 6 barred.
+
+## Sprint 30.5 Stage 5 R1 blocked before authority
+
+The first create-only transfer is an immutable pre-authority engineering failure.
+The evidence-contract correction is complete and validated, but the mission's
+single-transfer allowance is used. Board state: replacement Founder authority
+required; authority zero; attempt zero; qualification not started.

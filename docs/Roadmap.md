@@ -1384,3 +1384,11 @@ unchanged R6 package and accepted R6/R12/R4 chain. It permits one create-only
 transfer and at most one authority and attempt, without retry. Qualification has
 not started. The next milestone is an independently verified fresh transfer and
 all `Founder-QA-01` pre-authority gates. Stage 6 remains unavailable.
+
+## Sprint 30.5 Stage 5 R1 pre-authority transfer failure
+
+The single R1 transfer is preserved as an immutable pre-authority engineering
+failure because its Stage 5 preflight would emit a stale Stage 4 record contract.
+The source correction is complete and validated. No authority, attempt or
+qualification evidence exists. A fresh replacement transfer requires a new
+Founder decision; Stage 6 remains unavailable.

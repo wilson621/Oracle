@@ -1250,3 +1250,10 @@ Companion transition evidence, fail-closed teardown and immutable return. The
 disposable Companion fixture is precompiled and hash-bound; no development
 compiler participates on the qualification host. Product implementation remains
 the exact accepted R6 package.
+
+## Sprint 30.5 Stage 5 R1 preflight contract correction
+
+The Stage 5 host-admission record now carries the Stage 5 R1 pre-authority
+contract, with a static regression rejecting the stale Stage 4 label. The
+correction changes only the non-product harness. The already-created transfer
+retains its prior bytes and is unusable. No authority or attempt exists.

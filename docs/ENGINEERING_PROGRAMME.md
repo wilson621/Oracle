@@ -2503,3 +2503,11 @@ Qualification-host compilation was removed: the disposable Companion fixture is
 engineering-compiled and hash-bound. No transfer, authority or attempt existed
 at execution-preparation closure. One fresh transfer and every laptop
 pre-authority gate remain mandatory.
+
+## Sprint 30.5 Stage 5 R1 pre-authority correction
+
+Transfer `transfer-stage5-r1-20260804T174913211Z-e7b00bae` is immutable and
+unusable after discovery of a stale Stage 4 preflight evidence contract. The
+source correction is complete at `39f67217f7c609f331b21b0a72731a697b084c78`
+and regression validation passed. Transfer count is one; authority and attempt
+counts are zero. Replacement transfer creation is not authorised.

@@ -1,8 +1,8 @@
 # Sprint 30.5 Stage 5 R1 Pre-Execution Gate
 
-**Status:** Execution-enabled overlay prepared; transfer and host gates pending
-**Current authority:** One bounded execution-enabled Stage 5 R1 mission
-**Transfer, authority and attempt counts:** Zero
+**Status:** Blocked by immutable transfer failure; corrected baseline awaits replacement authority
+**Current authority:** Engineering correction complete; replacement transfer not authorised
+**Transfer, authority and attempt counts:** One / zero / zero
 **Last Reviewed:** 4 August 2026
 
 The qualification-barred R1 preparation baseline remains immutable. The
