@@ -2511,3 +2511,11 @@ unusable after discovery of a stale Stage 4 preflight evidence contract. The
 source correction is complete at `39f67217f7c609f331b21b0a72731a697b084c78`
 and regression validation passed. Transfer count is one; authority and attempt
 counts are zero. Replacement transfer creation is not authorised.
+
+## Sprint 30.5 Stage 5 R1 replacement-transfer overlay
+
+The Founder-authorised overlay for exactly one replacement transfer is complete.
+It rehashes and rejects the immutable failed transfer, binds corrected engineering
+commit `39f67217f7c609f331b21b0a72731a697b084c78`, and keeps one admissible
+transfer, one authority and one attempt with no retry. Replacement transfer
+creation and independent verification are next.

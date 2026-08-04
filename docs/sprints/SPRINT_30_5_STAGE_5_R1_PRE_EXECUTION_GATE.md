@@ -1,8 +1,8 @@
 # Sprint 30.5 Stage 5 R1 Pre-Execution Gate
 
-**Status:** Blocked by immutable transfer failure; corrected baseline awaits replacement authority
-**Current authority:** Engineering correction complete; replacement transfer not authorised
-**Transfer, authority and attempt counts:** One / zero / zero
+**Status:** Replacement-authority overlay complete; fresh transfer pending
+**Current authority:** Exactly one fresh replacement transfer and one governed mission
+**Transfer, authority and attempt counts:** One immutable failed / zero replacement / zero / zero
 **Last Reviewed:** 4 August 2026
 
 The qualification-barred R1 preparation baseline remains immutable. The

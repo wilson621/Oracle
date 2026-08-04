@@ -1099,3 +1099,10 @@ The first create-only transfer is an immutable pre-authority engineering failure
 The evidence-contract correction is complete and validated, but the mission's
 single-transfer allowance is used. Board state: replacement Founder authority
 required; authority zero; attempt zero; qualification not started.
+
+## Sprint 30.5 Stage 5 R1 replacement transfer authorised
+
+The replacement-authority overlay is complete and validated. State: one immutable
+failed transfer, zero replacement transfers, zero authorities and zero attempts.
+The next action is one fresh create-only replacement bound to the clean pushed
+closure HEAD.

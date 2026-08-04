@@ -588,3 +588,5 @@ to adopt a later formatting standard.
 
 | Stage 5 R1 pre-authority transfer failure | [Sprint 30.5 Stage 5 R1 Pre-Authority Transfer Failure](sprints/SPRINT_30_5_STAGE_5_R1_PRE_AUTHORITY_TRANSFER_FAILURE.md) | Immutable unusable transfer, exact defect and zero authority/attempt state |
 | Stage 5 R1 pre-authority correction closure | [Sprint 30.5 Stage 5 R1 Pre-Authority Correction Closure](sprints/SPRINT_30_5_STAGE_5_R1_PRE_AUTHORITY_CORRECTION_CLOSURE.md) | Corrected validated baseline and replacement-transfer governance boundary |
+
+| Stage 5 R1 replacement transfer preparation | [Sprint 30.5 Stage 5 R1 Replacement Transfer Preparation](sprints/SPRINT_30_5_STAGE_5_R1_REPLACEMENT_TRANSFER_PREPARATION.md) | Failed-transfer rehash, fresh replacement boundary and zero authority/attempt state |
