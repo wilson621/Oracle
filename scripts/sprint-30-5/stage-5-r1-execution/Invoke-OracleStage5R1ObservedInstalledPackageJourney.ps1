@@ -1,0 +1,566 @@
+[CmdletBinding()]
+param([switch]$TeardownOnly)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
+
+$classification = @(
+  "STAGE-4-R4-INSTALLED-PACKAGE-CONTROLLER",
+  "SECRET-BEARING-NON-EVIDENCE-CONTROLLER"
+)
+$scriptRoot = $PSScriptRoot
+$stage4Root = $scriptRoot
+$repositoryRoot = [IO.Path]::GetFullPath((Join-Path $scriptRoot "..\..\.."))
+$contractPath = Join-Path $scriptRoot "Oracle.Stage5R1Contract.json"
+$contract = Get-Content -Raw -LiteralPath $contractPath | ConvertFrom-Json
+$developmentRehearsal = [Environment]::GetEnvironmentVariable("ORACLE_STAGE4_INSTALLED_DEVELOPMENT_REHEARSAL", "Process") -ceq "1"
+$qualificationCycle = [Environment]::GetEnvironmentVariable("ORACLE_STAGE5_QUALIFICATION_CYCLE", "Process") -ceq "1"
+. (Join-Path $stage4Root "Oracle.Stage4R4ActivationPolicy.ps1")
+. (Join-Path $stage4Root "Oracle.Stage4R4InstalledRuntimeConfigurationPolicy.ps1")
+. (Join-Path $stage4Root "Oracle.Stage4R4ProcessTeardownPolicy.ps1")
+
+function Require-Environment([string]$Name) {
+  $value = [Environment]::GetEnvironmentVariable($Name, "Process")
+  if ([string]::IsNullOrWhiteSpace($value)) {
+    throw "Required installed-package setting is absent: $Name"
+  }
+  $value
+}
+
+function Write-CreateOnlyJson([string]$Path, $Value) {
+  $parent = Split-Path -Parent $Path
+  [IO.Directory]::CreateDirectory($parent) | Out-Null
+  $bytes = [Text.UTF8Encoding]::new($false).GetBytes(
+    (($Value | ConvertTo-Json -Depth 12) + "`n")
+  )
+  $stream = [IO.FileStream]::new(
+    $Path,
+    [IO.FileMode]::CreateNew,
+    [IO.FileAccess]::Write,
+    [IO.FileShare]::None
+  )
+  try {
+    $stream.Write($bytes, 0, $bytes.Length)
+    $stream.Flush($true)
+  } finally {
+    $stream.Dispose()
+  }
+}
+
+function Assert-Administrator {
+  $principal = [Security.Principal.WindowsPrincipal]::new(
+    [Security.Principal.WindowsIdentity]::GetCurrent()
+  )
+  if (-not $principal.IsInRole(
+    [Security.Principal.WindowsBuiltInRole]::Administrator
+  )) {
+    throw "Installed Stage 4 R4 execution requires elevated Windows PowerShell."
+  }
+}
+
+function Get-ExactCertificate {
+  @(
+    Get-ChildItem -LiteralPath ([string]$contract.package.trustStore) -ErrorAction Stop |
+      Where-Object {
+        $_.Thumbprint -ceq [string]$contract.stage2.certificateThumbprint
+      }
+  )
+}
+
+function Get-OraclePackages {
+  @(Get-AppxPackage -Name ([string]$contract.package.identity) -ErrorAction SilentlyContinue)
+}
+
+function Get-ProcessSnapshot {
+  @(Get-CimInstance Win32_Process -ErrorAction Stop)
+}
+
+function Get-DescendantProcessIds([uint32]$RootProcessId, $Snapshot) {
+  $ids = [Collections.Generic.HashSet[uint32]]::new()
+  [void]$ids.Add($RootProcessId)
+  do {
+    $changed = $false
+    foreach ($process in $Snapshot) {
+      $pidValue = [uint32]$process.ProcessId
+      if (
+        -not $ids.Contains($pidValue) -and
+        $ids.Contains([uint32]$process.ParentProcessId)
+      ) {
+        [void]$ids.Add($pidValue)
+        $changed = $true
+      }
+    }
+  } while ($changed)
+  @($ids | ForEach-Object { [uint32]$_ })
+}
+
+function Assert-PackageOwnedProcess(
+  $Process,
+  [string]$InstallLocation
+) {
+  if ([string]::IsNullOrWhiteSpace([string]$Process.ExecutablePath)) {
+    throw "Oracle process executable path is unavailable."
+  }
+  $path = [IO.Path]::GetFullPath([string]$Process.ExecutablePath)
+  $root = [IO.Path]::GetFullPath($InstallLocation).TrimEnd('\') + '\'
+  if (-not $path.StartsWith($root, [StringComparison]::OrdinalIgnoreCase)) {
+    throw "Oracle process is not owned by the installed R6 package."
+  }
+}
+
+function Find-InstalledWebOrigin(
+  [uint32]$RootProcessId,
+  [string]$InstallLocation
+) {
+  $deadline = [DateTime]::UtcNow.AddSeconds(30)
+  do {
+    $snapshot = Get-ProcessSnapshot
+    $ids = @(Get-DescendantProcessIds $RootProcessId $snapshot)
+    foreach ($id in $ids) {
+      $process = @($snapshot | Where-Object { [uint32]$_.ProcessId -eq $id })
+      if ($process.Count -eq 1) {
+        Assert-PackageOwnedProcess $process[0] $InstallLocation
+      }
+    }
+    $listeners = @(
+      Get-NetTCPConnection -State Listen -ErrorAction Stop |
+        Where-Object {
+          $_.LocalAddress -in @("127.0.0.1", "::1") -and
+          [uint32]$_.OwningProcess -in $ids
+        }
+    )
+    $admitted = @()
+    foreach ($listener in $listeners) {
+      $origin = "http://127.0.0.1:$([int]$listener.LocalPort)"
+      try {
+        $response = Invoke-WebRequest -Uri "$origin/auth" -UseBasicParsing `
+          -MaximumRedirection 0 -TimeoutSec 2 -ErrorAction Stop
+        if ([int]$response.StatusCode -eq 200) {
+          $admitted += [pscustomobject]@{
+            origin = $origin
+            port = [int]$listener.LocalPort
+            owningProcessId = [uint32]$listener.OwningProcess
+          }
+        }
+      } catch {
+        # A listener is admitted only by an affirmative Oracle HTTP response.
+      }
+    }
+    $unique = @($admitted | Sort-Object origin -Unique)
+    if ($unique.Count -eq 1) {
+      return [pscustomobject][ordered]@{
+        origin = [string]$unique[0].origin
+        port = [int]$unique[0].port
+        owningProcessId = [uint32]$unique[0].owningProcessId
+        rootProcessId = $RootProcessId
+        processIds = @($ids | Sort-Object)
+        ownership = "exact-installed-package-process-tree"
+      }
+    }
+    if ($unique.Count -gt 1) {
+      throw "Multiple package-owned Oracle HTTP listeners were admitted."
+    }
+    Start-Sleep -Milliseconds 200
+  } while ([DateTime]::UtcNow -lt $deadline)
+  throw "The package-owned Oracle HTTP listener was not admitted within 30 seconds."
+}
+
+function Stop-PackageProcesses([string]$InstallLocation) {
+  if ([string]::IsNullOrWhiteSpace($InstallLocation)) {
+    return [pscustomobject][ordered]@{ observed = 0; stopRequested = 0; alreadyExited = 0 }
+  }
+  $snapshot = Get-ProcessSnapshot
+  $owned = @($snapshot | Where-Object {
+    -not [string]::IsNullOrWhiteSpace([string]$_.ExecutablePath) -and
+    [IO.Path]::GetFullPath([string]$_.ExecutablePath).StartsWith(
+      [IO.Path]::GetFullPath($InstallLocation).TrimEnd('\') + '\',
+      [StringComparison]::OrdinalIgnoreCase
+    )
+  })
+  $outcomes = @()
+  foreach ($process in @($owned | Sort-Object ProcessId -Descending)) {
+    $outcomes += Invoke-OracleStage4R4OwnedProcessStop `
+      -ObservedProcess $process `
+      -OwnershipValidator {
+        param($candidate)
+        Assert-PackageOwnedProcess $candidate $InstallLocation
+      } `
+      -StopAction {
+        param($processId)
+        Stop-Process -Id $processId -Force -ErrorAction Stop
+      } `
+      -CurrentLookup {
+        param($processId)
+        @(Get-ProcessSnapshot | Where-Object { [int]$_.ProcessId -eq $processId })
+      }
+  }
+  $deadline = [DateTime]::UtcNow.AddSeconds(10)
+  do {
+    $remaining = @(Get-ProcessSnapshot | Where-Object {
+      -not [string]::IsNullOrWhiteSpace([string]$_.ExecutablePath) -and
+      [IO.Path]::GetFullPath([string]$_.ExecutablePath).StartsWith(
+        [IO.Path]::GetFullPath($InstallLocation).TrimEnd('\') + '\',
+        [StringComparison]::OrdinalIgnoreCase
+      )
+    })
+    if ($remaining.Count -eq 0) {
+      return [pscustomobject][ordered]@{
+        observed = $owned.Count
+        stopRequested = @($outcomes | Where-Object { $_.outcome -ceq "stop-requested" }).Count
+        alreadyExited = @($outcomes | Where-Object { $_.outcome -ceq "already-exited-after-verified-observation" }).Count
+      }
+    }
+    Start-Sleep -Milliseconds 100
+  } while ([DateTime]::UtcNow -lt $deadline)
+  throw "Package-owned Oracle processes remain after bounded teardown."
+}
+
+Assert-Administrator
+if ([string]$contract.executionSurface -cne "accepted-r6-installed-msix") {
+  throw "R3 execution surface differs."
+}
+
+$attemptRoot = [IO.Path]::GetFullPath((Require-Environment "ORACLE_STAGE4_ATTEMPT_ROOT"))
+$logsRoot = Join-Path $attemptRoot "logs"
+$evidenceRoot = Join-Path $attemptRoot "evidence"
+$journeyOutput = [IO.Path]::GetFullPath((Require-Environment "ORACLE_STAGE4_JOURNEY_OUTPUT"))
+$transferRootSetting = [Environment]::GetEnvironmentVariable('ORACLE_STAGE4_TRANSFER_ROOT', 'Process')
+if ($developmentRehearsal) {
+  $msixPath = [IO.Path]::GetFullPath((Join-Path $repositoryRoot ([string]$contract.package.artifactPath)))
+  $certificatePath = [IO.Path]::GetFullPath((Join-Path $repositoryRoot ([string]$contract.package.publicCertificatePath)))
+} else {
+  if ([string]::IsNullOrWhiteSpace($transferRootSetting)) { throw 'Governed transfer root is absent.' }
+  $transferRootFull = [IO.Path]::GetFullPath($transferRootSetting)
+  $approvedTransferRoot = [IO.Path]::GetFullPath((Join-Path $repositoryRoot ([string]$contract.paths.transferRoot))).TrimEnd('\') + '\'
+  if (-not $transferRootFull.StartsWith($approvedTransferRoot, [StringComparison]::OrdinalIgnoreCase)) { throw 'Governed transfer root escapes its approved boundary.' }
+  $msixPath = [IO.Path]::GetFullPath((Join-Path $transferRootFull ([string]$contract.transfer.msixRelativePath)))
+  $certificatePath = [IO.Path]::GetFullPath((Join-Path $transferRootFull ([string]$contract.transfer.certificateRelativePath)))
+}
+$configurationPath = $null
+$configurationHash = $null
+$packageFamilyName = $null
+$packageFullName = $null
+$installLocation = $null
+$packageRoot = $null
+$trustEstablished = $false
+$packageInstalled = $false
+$primaryFailure = $null
+$cleanupFailures = [Collections.Generic.List[string]]::new()
+$redactionValues = [Collections.Generic.List[string]]::new()
+foreach ($name in @("ORACLE_STAGE4_ANON_KEY", "SUPABASE_SECRET_KEY", "ORACLE_WEB_SESSION_SECRET")) {
+  $value = [Environment]::GetEnvironmentVariable($name, "Process")
+  if (-not [string]::IsNullOrEmpty($value)) { $redactionValues.Add($value) }
+}
+$phases = [Collections.Generic.List[object]]::new()
+$mark = {
+  param([string]$Phase, $Details)
+  $phases.Add([pscustomobject][ordered]@{
+    phase = $Phase
+    observedAtUtc = [DateTime]::UtcNow.ToString("o")
+    details = $Details
+  })
+}
+
+try {
+  if ($TeardownOnly) {
+    $existingPackages = @(Get-OraclePackages)
+    if ($existingPackages.Count -gt 1) { throw "Multiple Oracle packages prevent bounded safety teardown." }
+    if ($existingPackages.Count -eq 1) {
+      $packageInstalled = $true
+      $packageFamilyName = [string]$existingPackages[0].PackageFamilyName
+      $packageFullName = [string]$existingPackages[0].PackageFullName
+      $installLocation = [string]$existingPackages[0].InstallLocation
+      $packageRoot = Join-Path $env:LOCALAPPDATA "Packages\$packageFamilyName"
+      if ($packageFamilyName -cne [string]$contract.package.familyName -or $packageFullName -cne [string]$contract.package.fullName) {
+        throw "Safety teardown package identity differs."
+      }
+    } else {
+      $packageRoot = Join-Path $env:LOCALAPPDATA "Packages\$([string]$contract.package.familyName)"
+    }
+    $trustEstablished = @(Get-ExactCertificate).Count -eq 1
+  } else {
+    if ($developmentRehearsal) {
+      if ([Environment]::GetEnvironmentVariable("ORACLE_STAGE4_EXECUTION_MODE", "Process") -cne "development-rehearsal") {
+        throw "Installed rehearsal mode is mismatched."
+      }
+      $attemptId = Require-Environment "ORACLE_STAGE4_R3_REHEARSAL_IDENTITY"
+      if ($attemptId -cnotmatch [string]$contract.identity.attemptPattern) {
+        throw "Installed rehearsal identity is malformed."
+      }
+      $authorityId = "authority-$attemptId"
+      $founderGrantId = $attemptId -replace '^stage4-r4-', 'founder-stage4-r4-grant-'
+    } else {
+      if (
+        [string]$contract.executionAuthority.founderAuthorisedQualificationExecution -ne "True" -or
+        [string]$contract.executionAuthority.authorityCreationPermitted -ne "True" -or
+        [string]$contract.executionAuthority.qualificationAttemptPermitted -ne "True"
+      ) {
+        throw "R3 contract does not authorise qualification execution."
+      }
+      $authorityPath = [IO.Path]::GetFullPath((Require-Environment "ORACLE_STAGE4_AUTHORITY_RECORD"))
+      $authority = Get-Content -Raw -LiteralPath $authorityPath | ConvertFrom-Json
+      if ($authority.consumed -ne $true) {
+        throw "Installed controller authority is not consumed."
+      }
+      $founderGrantId = [string]$authority.founderGrantId
+      $authorityId = [string]$authority.authorityId
+      $attemptId = [string]$authority.attemptId
+      $authorityAttemptRoot = [IO.Path]::GetFullPath((Join-Path ([IO.Path]::GetFullPath((Join-Path $repositoryRoot ([string]$contract.paths.artifactRoot)))) $attemptId))
+      $expectedAttemptRoot = if ($qualificationCycle) { [IO.Path]::GetFullPath((Join-Path $authorityAttemptRoot ("cycles\cycle-" + (Require-Environment "ORACLE_STAGE5_QUALIFICATION_CYCLE_INDEX")))) } else { $authorityAttemptRoot }
+      if ($attemptRoot -cne $expectedAttemptRoot) {
+        throw "Installed controller attempt root is mismatched."
+      }
+    }
+
+    if (@(Get-OraclePackages).Count -ne 0 -or @(Get-ExactCertificate).Count -ne 0) {
+      throw "Installed R3 requires zero package and certificate pre-state."
+    }
+    if ((Get-FileHash -LiteralPath $msixPath -Algorithm SHA256).Hash.ToLowerInvariant() -cne [string]$contract.stage2.msixSha256) {
+      throw "Accepted R6 MSIX hash differs."
+    }
+    if ((Get-FileHash -LiteralPath $certificatePath -Algorithm SHA256).Hash.ToLowerInvariant() -cne [string]$contract.package.publicCertificateSha256) {
+      throw "Accepted R6 public certificate hash differs."
+    }
+    $certificate = [Security.Cryptography.X509Certificates.X509Certificate2]::new($certificatePath)
+    if (
+      $certificate.Thumbprint -cne [string]$contract.stage2.certificateThumbprint -or
+      $certificate.HasPrivateKey -or
+      $certificate.Subject -cne [string]$contract.package.publisher
+    ) {
+      throw "Accepted R6 public certificate identity differs."
+    }
+    & $mark "zero-state-verified" @{ packages = 0; certificates = 0 }
+
+    $import = Import-Certificate -FilePath $certificatePath `
+      -CertStoreLocation ([string]$contract.package.trustStore) -ErrorAction Stop
+    $trustEstablished = $true
+    if ($import.Thumbprint -cne [string]$contract.stage2.certificateThumbprint) {
+      throw "Exact R6 trust import differs."
+    }
+    & $mark "trust-established" @{ thumbprint = $import.Thumbprint }
+
+    Add-AppxPackage -Path $msixPath -ErrorAction Stop
+    $packageInstalled = $true
+    $packages = @(Get-OraclePackages)
+    if ($packages.Count -ne 1 -or [string]$packages[0].Version -cne [string]$contract.package.version) {
+      throw "Exact R6 package registration differs."
+    }
+    $packageFamilyName = [string]$packages[0].PackageFamilyName
+    $packageFullName = [string]$packages[0].PackageFullName
+    $installLocation = [string]$packages[0].InstallLocation
+    $packageRoot = Join-Path $env:LOCALAPPDATA "Packages\$packageFamilyName"
+    $applicationData = [Windows.Management.Core.ApplicationDataManager, Windows.Management.Core, ContentType=WindowsRuntime]::CreateForPackageFamily($packageFamilyName)
+    if ($null -eq $applicationData -or [IO.Path]::GetFullPath([string]$applicationData.LocalFolder.Path) -cne [IO.Path]::GetFullPath((Join-Path $packageRoot "LocalState"))) {
+      throw "Installed R3 package data initialization differs."
+    }
+    & $mark "package-installed" @{ packageFullName = $packageFullName; familyName = $packageFamilyName }
+
+    $providerUrl = Require-Environment "ORACLE_STAGE4_PROVIDER_URL"
+    $anonKey = Require-Environment "ORACLE_STAGE4_ANON_KEY"
+    $serviceKey = Require-Environment "SUPABASE_SECRET_KEY"
+    $sessionSecret = Require-Environment "ORACLE_WEB_SESSION_SECRET"
+    $serviceSecure = ConvertTo-SecureString $serviceKey -AsPlainText -Force
+    $sessionSecure = ConvertTo-SecureString $sessionSecret -AsPlainText -Force
+    $configurationId = "runtime-$attemptId"
+    $configuration = New-OracleInstalledRuntimeConfiguration `
+      -PackageFamilyName $packageFamilyName `
+      -ExpectedPackageFamilyName $packageFamilyName `
+      -ConfigurationId $configurationId `
+      -FounderGrantId $founderGrantId `
+      -AuthorityId $authorityId `
+      -AttemptId $attemptId `
+      -CandidateCommit ([string]$contract.stage2.candidateCommit) `
+      -CandidateTree ([string]$contract.stage2.candidateTree) `
+      -MsixSha256 ([string]$contract.stage2.msixSha256) `
+      -ExpectedCandidateCommit ([string]$contract.stage2.candidateCommit) `
+      -ExpectedCandidateTree ([string]$contract.stage2.candidateTree) `
+      -ExpectedMsixSha256 ([string]$contract.stage2.msixSha256) `
+      -ProviderUrl $providerUrl `
+      -ProviderAnonKey $anonKey `
+      -ProviderServiceKey $serviceSecure `
+      -SessionSecret $sessionSecure `
+      -LocalAppDataRoot $env:LOCALAPPDATA
+    $configurationPath = [string]$configuration.configurationPath
+    $configurationHash = [string]$configuration.sha256
+    & $mark "runtime-configuration-created" @{
+      configurationId = $configurationId
+      sha256 = $configurationHash
+      containsSecretValues = $false
+    }
+
+    $appUserModelId = "$packageFamilyName!$([string]$contract.package.appId)"
+    $arguments = Get-OracleInstalledRuntimeActivationArguments `
+      -ConfigurationPath $configurationPath -Sha256 $configurationHash
+    $activation = Invoke-OracleStage4R4ApplicationActivation `
+      -AppUserModelId $appUserModelId -Arguments $arguments
+    Assert-OracleStage4R4ApplicationActivationSucceeded $activation
+    & $mark "package-activated" @{
+      hresult = $activation.hresult
+      processId = $activation.processId
+      configurationConsumedAtActivationReturn = -not (Test-Path -LiteralPath $configurationPath)
+    }
+
+    $server = Find-InstalledWebOrigin `
+      -RootProcessId ([uint32]$activation.processId) `
+      -InstallLocation $installLocation
+    Write-CreateOnlyJson (Join-Path $logsRoot "installed-server-admission.json") $server
+    if (Test-Path -LiteralPath $configurationPath) {
+      throw "Installed runtime configuration remained after server admission."
+    }
+    $configurationDirectory = Split-Path -Parent $configurationPath
+    if (@(Get-ChildItem -LiteralPath $configurationDirectory -Force -ErrorAction Stop).Count -ne 0) {
+      throw "Installed runtime configuration consumption residue remains."
+    }
+    $runtimeNamespaceResult = Remove-OracleInstalledRuntimeConfiguration `
+      -ConfigurationPath $configurationPath -ExpectedSha256 $configurationHash `
+      -LocalAppDataRoot $env:LOCALAPPDATA
+    $configurationPath = $null
+    & $mark "installed-server-admitted" @{
+      origin = $server.origin
+      owningProcessId = $server.owningProcessId
+      ownership = $server.ownership
+      runtimeConfigurationConsumed = $true
+      runtimeConfigurationNamespaceRemaining = [int]$runtimeNamespaceResult.remaining
+    }
+
+    $observer = Join-Path $scriptRoot "Measure-OracleStage5R1InstalledPackage.ps1"
+    $observationPath = Join-Path $logsRoot "stage5-observation.json"
+    $nodePath = [IO.Path]::GetFullPath((Require-Environment "ORACLE_STAGE4_NODE_PATH"))
+    $workloadProcess = $null
+    $transitionProcess = $null
+    $guidanceProcess = $null
+    if ($qualificationCycle) {
+      $edgePath = [IO.Path]::GetFullPath((Require-Environment "ORACLE_STAGE5_EDGE_PATH"))
+      $edgeSha256 = Require-Environment "ORACLE_STAGE5_EDGE_SHA256"
+      if ((Get-FileHash -LiteralPath $edgePath -Algorithm SHA256).Hash.ToLowerInvariant() -cne $edgeSha256.ToLowerInvariant()) { throw "Pre-authority browser identity changed." }
+      $workloadOutput = Join-Path $evidenceRoot "stage5-qualified-workload.json"
+      $transitionOutput = Join-Path $evidenceRoot "stage5-companion-transitions.json"
+      $guidanceOutput = Join-Path $evidenceRoot "stage5-guidance-latency.json"
+      $env:ORACLE_STAGE5_WORKLOAD_OUTPUT = $workloadOutput
+      $env:ORACLE_STAGE5_TRANSITION_EVIDENCE = $transitionOutput
+      $env:ORACLE_STAGE5_GUIDANCE_OUTPUT = $guidanceOutput
+      $env:ORACLE_STAGE5_BROWSER_PROFILE = Join-Path $logsRoot "edge-profile"
+      $env:ORACLE_STAGE4_WEB_ORIGIN = [string]$server.origin
+      $transitionArguments = @("-NoLogo", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", (Join-Path $scriptRoot "Invoke-OracleStage5R1CompanionTransitions.ps1"), "-OracleRootProcessId", [string]$activation.processId, "-InstallLocation", $installLocation, "-OutputPath", $transitionOutput)
+      $transitionProcess = Start-Process -FilePath ([string]$contract.toolchain.approvedTools.powershell.path) -ArgumentList $transitionArguments -WorkingDirectory $repositoryRoot -NoNewWindow -PassThru -RedirectStandardOutput (Join-Path $logsRoot "transition.stdout.log") -RedirectStandardError (Join-Path $logsRoot "transition.stderr.log")
+      $workloadProcess = Start-Process -FilePath $nodePath -ArgumentList @((Join-Path $scriptRoot "run-qualified-workload.mjs")) -WorkingDirectory $repositoryRoot -NoNewWindow -PassThru -RedirectStandardOutput (Join-Path $logsRoot "workload.stdout.log") -RedirectStandardError (Join-Path $logsRoot "workload.stderr.log")
+      $guidanceProcess = Start-Process -FilePath $nodePath -ArgumentList @((Join-Path $scriptRoot "stage5-guidance-benchmark.bundle.mjs")) -WorkingDirectory $repositoryRoot -NoNewWindow -PassThru -RedirectStandardOutput (Join-Path $logsRoot "guidance.stdout.log") -RedirectStandardError (Join-Path $logsRoot "guidance.stderr.log")
+    }
+    & $observer -RootProcessId ([uint32]$activation.processId) -InstallLocation $installLocation -OutputPath $observationPath
+    if (-not (Test-Path -LiteralPath $observationPath -PathType Leaf)) {
+      throw "Stage 5 installed observation failed."
+    }
+    $observation = Get-Content -Raw -LiteralPath $observationPath | ConvertFrom-Json
+    if ([string]$observation.result -cne "passed") {
+      throw "Stage 5 installed observation did not pass."
+    }
+    & $mark "stage5-observation-passed" @{
+      samples = @($observation.samples).Count
+      gpuProcessId = [int]$observation.gpuProcessId
+      windowRoots = [int]$observation.accessibility.installedWindowRoots
+    }
+
+    $env:ORACLE_STAGE4_WEB_ORIGIN = [string]$server.origin
+    if ($qualificationCycle) {
+      foreach ($child in @($transitionProcess, $workloadProcess, $guidanceProcess)) { if ($null -ne $child) { $child.WaitForExit() } }
+      if ($transitionProcess.ExitCode -ne 0 -or $workloadProcess.ExitCode -ne 0 -or $guidanceProcess.ExitCode -ne 0) { throw "Stage 5 active workload or Companion transition controller failed." }
+      if (-not (Test-Path -LiteralPath $workloadOutput -PathType Leaf) -or -not (Test-Path -LiteralPath $transitionOutput -PathType Leaf) -or -not (Test-Path -LiteralPath $guidanceOutput -PathType Leaf)) { throw "Stage 5 qualification workload evidence is absent." }
+      Copy-Item -LiteralPath $workloadOutput -Destination $journeyOutput -ErrorAction Stop
+    } else {
+      $journeyScript = Join-Path $stage4Root "run-live-journey.mjs"
+      $process = Start-Process -FilePath $nodePath -ArgumentList @($journeyScript) -WorkingDirectory $repositoryRoot -NoNewWindow -Wait -PassThru
+      if ($process.ExitCode -ne 0 -or -not (Test-Path -LiteralPath $journeyOutput -PathType Leaf)) { throw "Installed live journey failed with exit code $($process.ExitCode)." }
+    }
+    & $mark "live-journey-passed" @{ outputCreated = $true; qualificationCycle = $qualificationCycle }
+  }
+} catch {
+  $primaryFailure = $_.Exception
+} finally {
+  try {
+    $processTeardown = Stop-PackageProcesses $installLocation
+    if ([int]$processTeardown.observed -gt 0) {
+      & $mark "package-processes-reconciled" @{
+        observed = [int]$processTeardown.observed
+        stopRequested = [int]$processTeardown.stopRequested
+        alreadyExited = [int]$processTeardown.alreadyExited
+      }
+    }
+  } catch { $cleanupFailures.Add("process-stop: $($_.Exception.Message)") }
+  try {
+    if ($null -ne $configurationPath -and (Test-Path -LiteralPath $configurationPath)) {
+      Remove-OracleInstalledRuntimeConfiguration -ConfigurationPath $configurationPath `
+        -ExpectedSha256 $configurationHash -LocalAppDataRoot $env:LOCALAPPDATA | Out-Null
+    }
+  } catch { $cleanupFailures.Add("runtime-configuration: $($_.Exception.Message)") }
+  try {
+    if ($packageInstalled -and [string]::IsNullOrWhiteSpace($packageFullName)) {
+      $cleanupPackages = @(Get-OraclePackages)
+      if ($cleanupPackages.Count -ne 1) { throw "Partially installed Oracle package identity is unavailable for teardown." }
+      $packageFullName = [string]$cleanupPackages[0].PackageFullName
+      $packageFamilyName = [string]$cleanupPackages[0].PackageFamilyName
+      $installLocation = [string]$cleanupPackages[0].InstallLocation
+      $packageRoot = Join-Path $env:LOCALAPPDATA "Packages\$packageFamilyName"
+    }
+    if ($packageInstalled -and -not [string]::IsNullOrWhiteSpace($packageFullName)) {
+      Remove-AppxPackage -Package $packageFullName -ErrorAction Stop
+    }
+    if (@(Get-OraclePackages).Count -ne 0) { throw "Oracle package residue remains." }
+    if ($null -ne $packageRoot -and (Test-Path -LiteralPath $packageRoot)) {
+      Assert-OracleRuntimePath -Path $packageRoot -RequiredRoot (Join-Path $env:LOCALAPPDATA "Packages")
+      Remove-Item -LiteralPath $packageRoot -Recurse -Force -ErrorAction Stop
+    }
+    & $mark "package-removed" @{ remaining = 0 }
+  } catch { $cleanupFailures.Add("package-remove: $($_.Exception.Message)") }
+  try {
+    if ($trustEstablished) {
+      $certificateStorePath = "Cert:\LocalMachine\TrustedPeople\$([string]$contract.stage2.certificateThumbprint)"
+      if (Test-Path -LiteralPath $certificateStorePath) {
+        Remove-Item -LiteralPath $certificateStorePath -Force -ErrorAction Stop
+      }
+    }
+    if (@(Get-ExactCertificate).Count -ne 0) { throw "Exact R6 trust residue remains." }
+    & $mark "trust-removed" @{ remaining = 0 }
+  } catch { $cleanupFailures.Add("trust-remove: $($_.Exception.Message)") }
+  foreach ($name in @(
+    "ORACLE_STAGE4_PROVIDER_URL", "ORACLE_STAGE4_ANON_KEY",
+    "SUPABASE_SECRET_KEY", "ORACLE_WEB_SESSION_SECRET",
+    "ORACLE_STAGE4_WEB_ORIGIN", "ORACLE_STAGE5_WORKLOAD_OUTPUT", "ORACLE_STAGE5_TRANSITION_EVIDENCE", "ORACLE_STAGE5_BROWSER_PROFILE", "ORACLE_STAGE5_GUIDANCE_OUTPUT"
+  )) { [Environment]::SetEnvironmentVariable($name, $null, "Process") }
+}
+
+function Remove-InstalledSecrets([string]$Text) {
+  $safe = [string]$Text
+  foreach ($secret in $redactionValues) {
+    $safe = $safe.Replace($secret, "[REDACTED]")
+  }
+  $safe
+}
+
+$safePrimaryFailure = if ($null -eq $primaryFailure) { $null } else { Remove-InstalledSecrets $primaryFailure.Message }
+$safeCleanupFailures = @($cleanupFailures | ForEach-Object { Remove-InstalledSecrets $_ })
+$resultClassification = if ($developmentRehearsal) { @("NON-QUALIFICATION", "NON-AUTHORITY", "NON-EVIDENCE", "INSTALLED DEVELOPMENT REHEARSAL") } else { $classification }
+$resultStatus = if ($null -eq $primaryFailure -and $cleanupFailures.Count -eq 0) { "passed" } else { "failed" }
+$result = [pscustomobject][ordered]@{
+  contract = "oracle.sprint-30-5.stage-4-r4-installed-package-result"
+  classification = $resultClassification
+  result = $resultStatus
+  primaryFailure = $safePrimaryFailure
+  cleanupFailures = $safeCleanupFailures
+  phases = @($phases)
+  packageSha256 = [string]$contract.stage2.msixSha256
+  secretValuesRecorded = $false
+  zeroResidue = (
+    @(Get-OraclePackages).Count -eq 0 -and
+    @(Get-ExactCertificate).Count -eq 0 -and
+    ($null -eq $packageRoot -or -not (Test-Path -LiteralPath $packageRoot))
+  )
+}
+$resultFileName = if ($TeardownOnly) { "installed-safety-teardown.json" } else { "installed-package-result.json" }
+$resultPath = Join-Path $logsRoot $resultFileName
+if (-not (Test-Path -LiteralPath $resultPath)) {
+  Write-CreateOnlyJson $resultPath $result
+}
+if ($result.result -cne "passed" -or -not $result.zeroResidue) {
+  throw "Installed Stage 4 R4 controller failed; teardown result was preserved."
+}
+$result | ConvertTo-Json -Depth 12
