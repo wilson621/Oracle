@@ -933,3 +933,12 @@ R6/R12 chain and Stage 5 remains blocked. The next Founder-level mission is to
 accept the preparation baseline and separately authorise one execution-enabled R2
 baseline and one governed attempt, with authority creation only after fresh
 pre-authority admission.
+
+## Stage 4 R2 Execution-Enabled Mission
+
+The Founder accepted the R2 engineering preparation and authorised one separate
+execution-enabled baseline, one create-only governed transfer and at most one Stage
+4 R2 qualification attempt. Transfer manifest/custody, independent full-inventory
+verification, fresh elevated host admission, zero state and network isolation are
+mandatory before authority. A consumed authority or permanent failed attempt cannot
+be retried. Stage 5 and later work remain unauthorised.

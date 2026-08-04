@@ -528,3 +528,4 @@ to adopt a later formatting standard.
 | Stage 4 R2 pre-execution gate | [Sprint 30.5 Stage 4 R2 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_4_R2_PRE_EXECUTION_GATE.md) | Future pre-authority requirements and execution prohibition |
 | Stage 4 R2 preparation validation | [Sprint 30.5 Stage 4 R2 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_4_R2_PREPARATION_VALIDATION_REPORT.md) | Regression, adversarial and live installed-package validation |
 | Stage 4 R2 engineering closure | [Sprint 30.5 Stage 4 R2 Engineering Closure](sprints/SPRINT_30_5_STAGE_4_R2_ENGINEERING_CLOSURE.md) | Completed bounded mission and next Founder authority boundary |
+| Stage 4 R2 execution-enabled mission | [Sprint 30.5 Stage 4 R2 Execution-Enabled Mission](sprints/SPRINT_30_5_STAGE_4_R2_EXECUTION_ENABLED_MISSION.md) | Founder-authorised transfer, pre-authority and one-attempt boundary |

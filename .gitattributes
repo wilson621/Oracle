@@ -20,3 +20,6 @@ docs/sprints/evidence/sprint-30-5/stage-3-r12/Oracle.Stage3R12Evidence/** -text
 
 # Preserve byte-for-byte Stage 4 R2 hash-bound preparation files.
 scripts/sprint-30-5/stage-4-r2/** -text
+
+# Preserve byte-for-byte Stage 4 R2 execution and transfer harness files.
+scripts/sprint-30-5/stage-4-r2-execution/** -text
