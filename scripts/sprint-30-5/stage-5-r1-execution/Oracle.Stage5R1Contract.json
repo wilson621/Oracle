@@ -596,7 +596,17 @@
                      "migrationsRelativePath":  "payload/database/migrations",
                      "harnessRelativePath":  "payload/harness",
                      "removalAfterQualificationPermitted":  false,
-                     "verificationFile":  "Oracle.Stage5R1TransferVerification.json"
+                     "verificationFile":  "Oracle.Stage5R1TransferVerification.json",
+                     "replacementTransferAuthorised":  true,
+                     "historicalFailedTransfer":  {
+                                                      "transferId":  "transfer-stage5-r1-20260804T174913211Z-e7b00bae",
+                                                      "manifestSha256":  "3af250895c9d450ec7f933dbc777916fa08019d6f52408ccbc4f57311fb74ffb",
+                                                      "custodySha256":  "e4235914fe2b72c9e235599bb103fc0098a8ac620119be717c396206a32709e0",
+                                                      "verificationSha256":  "e8cc9a5ded1db7264a8bba3e24e61e6447e500de3fe21438c8679129796e2cb5",
+                                                      "admissionProhibited":  true,
+                                                      "executionProhibited":  true,
+                                                      "immutable":  true
+                                                  }
                  },
     "acceptedR2Correction":  {
                                  "correctionCommit":  "8fc782df9869bc3c0e85a0d6d01ee7ef0d866175",
@@ -660,11 +670,13 @@
                               "authorityCreationPermitted":  true,
                               "qualificationAttemptPermitted":  true,
                               "qualificationExecutionPermitted":  true,
-                              "maximumTransfers":  1,
+                              "maximumTransfers":  2,
                               "maximumAuthorities":  1,
                               "maximumAttempts":  1,
                               "retryPermitted":  false,
-                              "futureQualificationRequiresSeparateFounderAuthority":  false
+                              "futureQualificationRequiresSeparateFounderAuthority":  false,
+                              "maximumReplacementTransfers":  1,
+                              "maximumAdmissibleTransfers":  1
                           },
     "host":  {
                  "requiredIdentity":  "Founder-QA-01",
@@ -843,5 +855,12 @@
                                         "webglFeatureProofRequired":  false,
                                         "accessibilityCoverage":  "windows-uia-instrumentation-smoke-plus-frozen-source-contract",
                                         "stage4InstalledLifecycleReuse":  "scripts/sprint-30-5/stage-5-r1/run-observed-installed-development-rehearsal.mjs"
-                                    }
+                                    },
+    "acceptedPreAuthorityCorrection":  {
+                                           "engineeringCommit":  "39f67217f7c609f331b21b0a72731a697b084c78",
+                                           "engineeringTree":  "b3ed9cc65b2ffc674617f7f131a1d9e8d200939c",
+                                           "closureHead":  "a051fb2509314bff979acfb0fe61c5aad8829350",
+                                           "closureTree":  "f1ffa6a044684503e386f6de5dd7f722a732ce24",
+                                           "replacementTransferAuthorised":  true
+                                       }
 }

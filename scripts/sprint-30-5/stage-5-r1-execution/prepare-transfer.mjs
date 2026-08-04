@@ -25,6 +25,23 @@ assert.equal(git(["status", "--porcelain=v1"]), "");
 assert.equal(git(["branch", "--show-current"]), contract.repository.branch);
 
 const approvedRoot = path.resolve(repositoryRoot, contract.paths.transferRoot);
+const failed = contract.transfer.historicalFailedTransfer;
+assert.equal(contract.transfer.replacementTransferAuthorised, true);
+assert.equal(contract.authorityBoundary.maximumTransfers, 2);
+assert.equal(contract.authorityBoundary.maximumReplacementTransfers, 1);
+assert.equal(contract.authorityBoundary.maximumAdmissibleTransfers, 1);
+const existingTransfers = fs.existsSync(approvedRoot)
+  ? fs.readdirSync(approvedRoot, { withFileTypes: true }).filter(entry => entry.isDirectory()).map(entry => entry.name).sort()
+  : [];
+assert.deepEqual(existingTransfers, [failed.transferId]);
+const failedRoot = path.join(approvedRoot, failed.transferId);
+assert.equal(sha256(path.join(failedRoot, contract.transfer.manifestFile)), failed.manifestSha256);
+assert.equal(sha256(path.join(failedRoot, contract.transfer.custodyFile)), failed.custodySha256);
+assert.equal(sha256(path.join(failedRoot, contract.transfer.verificationFile)), failed.verificationSha256);
+assert.equal(failed.admissionProhibited, true);
+assert.equal(failed.executionProhibited, true);
+assert.equal(failed.immutable, true);
+assert.notEqual(transferId, failed.transferId);
 const transferRoot = path.join(approvedRoot, transferId);
 assertWithin(transferRoot, approvedRoot);
 if (fs.existsSync(transferRoot)) throw new Error("Create-only transfer identity already exists.");
@@ -57,6 +74,13 @@ const manifest = {
   executionManifestSha256: sha256(executionManifestPath),
   founderAuthorisedQualificationExecution: contract.executionAuthority.founderAuthorisedQualificationExecution,
   singleAttemptOnly: true,
+  replacementTransfer: true,
+  replacesFailedTransferId: failed.transferId,
+  failedTransferManifestSha256: failed.manifestSha256,
+  failedTransferCustodySha256: failed.custodySha256,
+  failedTransferVerificationSha256: failed.verificationSha256,
+  acceptedCorrectedEngineeringCommit: contract.acceptedPreAuthorityCorrection.engineeringCommit,
+  acceptedCorrectionClosureHead: contract.acceptedPreAuthorityCorrection.closureHead,
   files,
 };
 const manifestPath = path.join(transferRoot, contract.transfer.manifestFile);
@@ -73,6 +97,9 @@ const custody = {
   executionTree,
   createOnly: true,
   independentVerificationRequired: true,
+  replacementTransfer: true,
+  replacesFailedTransferId: failed.transferId,
+  failedTransferAdmissionProhibited: true,
   files: files.length,
   bytes: files.reduce((sum, item) => sum + item.bytes, 0),
   source: "accepted-stage5-r1-execution-baseline",

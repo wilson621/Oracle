@@ -37,9 +37,19 @@ function Assert-OracleStage5R1Transfer {
   $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
   $custody = Get-Content -Raw -LiteralPath $custodyPath | ConvertFrom-Json
   $verification = Get-Content -Raw -LiteralPath $verificationPath | ConvertFrom-Json
+  $failed = $Contract.transfer.historicalFailedTransfer
+  if ((Split-Path -Leaf $transfer) -ceq [string]$failed.transferId) { throw "Immutable failed transfer admission is prohibited." }
+  if (-not [bool]$Contract.transfer.replacementTransferAuthorised -or -not [bool]$failed.admissionProhibited -or -not [bool]$failed.executionProhibited -or -not [bool]$failed.immutable) { throw "Replacement-transfer authority binding differs." }
   if (
     [string]$manifest.contract -cne "oracle.sprint-30-5.stage-5-r1-transfer-manifest" -or
     [string]$manifest.transferId -cnotmatch [string]$Contract.identity.transferPattern -or
+    -not [bool]$manifest.replacementTransfer -or
+    [string]$manifest.replacesFailedTransferId -cne [string]$failed.transferId -or
+    [string]$manifest.failedTransferManifestSha256 -cne [string]$failed.manifestSha256 -or
+    [string]$manifest.failedTransferCustodySha256 -cne [string]$failed.custodySha256 -or
+    [string]$manifest.failedTransferVerificationSha256 -cne [string]$failed.verificationSha256 -or
+    [string]$manifest.acceptedCorrectedEngineeringCommit -cne [string]$Contract.acceptedPreAuthorityCorrection.engineeringCommit -or
+    [string]$manifest.acceptedCorrectionClosureHead -cne [string]$Contract.acceptedPreAuthorityCorrection.closureHead -or
     [string]$manifest.executionCommit -cne $ExecutionCommit -or
     [string]$manifest.executionTree -cne $ExecutionTree -or
     [string]$manifest.acceptedPreparationCommit -cne [string]$Contract.acceptedPreparation.commit -or
@@ -53,9 +63,12 @@ function Assert-OracleStage5R1Transfer {
     [string]$custody.manifestSha256 -cne $manifestHash -or
     -not [bool]$custody.createOnly -or
     -not [bool]$custody.independentVerificationRequired -or
+    -not [bool]$custody.replacementTransfer -or
+    [string]$custody.replacesFailedTransferId -cne [string]$failed.transferId -or
+    -not [bool]$custody.failedTransferAdmissionProhibited -or
     [int]$custody.files -ne @($manifest.files).Count
   ) { throw "Transfer custody binding differs." }
-  if ([string]$verification.contract -cne 'oracle.sprint-30-5.stage-5-r1-transfer-verification' -or [string]$verification.result -cne 'passed' -or [string]$verification.transferId -cne [string]$manifest.transferId -or [string]$verification.manifestSha256 -cne $manifestHash -or [string]$verification.custodySha256 -cne $custodyHash -or [string]$verification.executionCommit -cne $ExecutionCommit -or [string]$verification.executionTree -cne $ExecutionTree -or [bool]$verification.authorityCreated -or [bool]$verification.attemptCreated) { throw 'Transfer independent-verification binding differs.' }
+  if ([string]$verification.contract -cne 'oracle.sprint-30-5.stage-5-r1-transfer-verification' -or [string]$verification.result -cne 'passed' -or [string]$verification.transferId -cne [string]$manifest.transferId -or [string]$verification.manifestSha256 -cne $manifestHash -or [string]$verification.custodySha256 -cne $custodyHash -or [string]$verification.executionCommit -cne $ExecutionCommit -or [string]$verification.executionTree -cne $ExecutionTree -or -not [bool]$verification.replacementTransfer -or [string]$verification.replacesFailedTransferId -cne [string]$failed.transferId -or -not [bool]$verification.failedTransferAdmissionProhibited -or [bool]$verification.authorityCreated -or [bool]$verification.attemptCreated) { throw 'Transfer independent-verification binding differs.' }
   $payloadRoot = Join-Path $transfer ([string]$Contract.transfer.payloadDirectory)
   [void](Assert-OracleStage4R4NoReparseTraversal $payloadRoot $transfer)
   $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)

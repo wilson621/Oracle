@@ -10,7 +10,13 @@ assert.equal(contract.acceptedPreparation.commit, "6ba1c68f5330ac03b7359b0a6b03b
 assert.equal(contract.acceptedPreparation.tree, "dcca4b752faea044f31cc5ca4fa6d7922a2ccd6c");
 assert.equal(contract.acceptedPreparation.preparationManifestSha256, "a193209552d9e75e43ee34da49368cc95b00ddcc99e938ade6f54c42167d763a");
 assert.equal(contract.executionAuthority.founderAuthorisedQualificationExecution, true);
-assert.equal(contract.authorityBoundary.maximumTransfers, 1);
+assert.equal(contract.authorityBoundary.maximumTransfers, 2);
+assert.equal(contract.authorityBoundary.maximumReplacementTransfers, 1);
+assert.equal(contract.authorityBoundary.maximumAdmissibleTransfers, 1);
+assert.equal(contract.transfer.historicalFailedTransfer.transferId, "transfer-stage5-r1-20260804T174913211Z-e7b00bae");
+assert.equal(contract.transfer.historicalFailedTransfer.admissionProhibited, true);
+assert.equal(contract.acceptedPreAuthorityCorrection.engineeringCommit, "39f67217f7c609f331b21b0a72731a697b084c78");
+assert.equal(contract.acceptedPreAuthorityCorrection.closureHead, "a051fb2509314bff979acfb0fe61c5aad8829350");
 assert.equal(contract.authorityBoundary.maximumAuthorities, 1);
 assert.equal(contract.authorityBoundary.maximumAttempts, 1);
 assert.equal(contract.authorityBoundary.retryPermitted, false);
@@ -27,7 +33,7 @@ assert.equal(manifest.acceptedPreparationCommit, contract.acceptedPreparation.co
 assert.equal(manifest.acceptedPreparationTree, contract.acceptedPreparation.tree);
 assert.equal(manifest.acceptedPreparationManifestSha256, contract.acceptedPreparation.preparationManifestSha256);
 assert.equal(manifest.founderAuthorisedQualificationExecution, true);
-assert.equal(manifest.maximumTransfers, 1); assert.equal(manifest.maximumAuthorities, 1); assert.equal(manifest.maximumAttempts, 1);
+assert.equal(manifest.maximumTransfers, 2); assert.equal(manifest.maximumReplacementTransfers, 1); assert.equal(manifest.maximumAdmissibleTransfers, 1); assert.equal(manifest.maximumAuthorities, 1); assert.equal(manifest.maximumAttempts, 1);
 assert.equal(manifest.retryPermitted, false); assert.equal(manifest.productModified, false);
 const physical = readdirSync(harnessRoot).filter(name => name !== "Oracle.Stage5R1ExecutionManifest.json").filter(name => statSync(join(harnessRoot, name)).isFile()).sort(codePointCompare);
 assert.deepEqual(manifest.files.map(item => item.path), physical);

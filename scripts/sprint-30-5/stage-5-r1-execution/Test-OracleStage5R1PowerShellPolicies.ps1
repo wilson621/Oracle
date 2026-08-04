@@ -21,7 +21,8 @@ foreach ($property in @(
     throw "Authorised execution flag is disabled: $property"
   }
 }
-if ([int]$contract.authorityBoundary.maximumTransfers -ne 1 -or [int]$contract.authorityBoundary.maximumAuthorities -ne 1 -or [int]$contract.authorityBoundary.maximumAttempts -ne 1 -or [bool]$contract.authorityBoundary.retryPermitted) { throw "Execution cardinality boundary differs." }
+if ([int]$contract.authorityBoundary.maximumTransfers -ne 2 -or [int]$contract.authorityBoundary.maximumReplacementTransfers -ne 1 -or [int]$contract.authorityBoundary.maximumAdmissibleTransfers -ne 1 -or [int]$contract.authorityBoundary.maximumAuthorities -ne 1 -or [int]$contract.authorityBoundary.maximumAttempts -ne 1 -or [bool]$contract.authorityBoundary.retryPermitted) { throw "Execution cardinality boundary differs." }
+if ([string]$contract.transfer.historicalFailedTransfer.transferId -cne "transfer-stage5-r1-20260804T174913211Z-e7b00bae" -or -not [bool]$contract.transfer.historicalFailedTransfer.admissionProhibited -or -not [bool]$contract.transfer.historicalFailedTransfer.executionProhibited) { throw "Immutable failed-transfer boundary differs." }
 if ([int]$contract.developmentRehearsalProfile.heldObservationMinimumSeconds -lt 30) {
   throw "Held observation minimum-duration policy is weaker than 30 seconds."
 }

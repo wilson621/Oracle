@@ -35,7 +35,9 @@ export function validateAuthorityBoundary() {
   assert.equal(boundary.authorityCreationPermitted, true);
   assert.equal(boundary.qualificationAttemptPermitted, true);
   assert.equal(boundary.qualificationExecutionPermitted, true);
-  assert.equal(boundary.maximumTransfers, 1);
+  assert.equal(boundary.maximumTransfers, 2);
+  assert.equal(boundary.maximumReplacementTransfers, 1);
+  assert.equal(boundary.maximumAdmissibleTransfers, 1);
   assert.equal(boundary.maximumAuthorities, 1);
   assert.equal(boundary.maximumAttempts, 1);
   assert.equal(boundary.retryPermitted, false);

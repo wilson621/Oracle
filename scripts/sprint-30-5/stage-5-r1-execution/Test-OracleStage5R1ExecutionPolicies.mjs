@@ -8,7 +8,11 @@ assert.deepEqual(validateProductBoundary(), contract.repository.permittedPostCan
 const boundary = contract.authorityBoundary;
 assert.equal(contract.status, "founder-authorised-execution-enabled");
 assert.equal(boundary.transferCreationPermitted, true);
-assert.equal(boundary.maximumTransfers, 1);
+assert.equal(boundary.maximumTransfers, 2);
+assert.equal(boundary.maximumReplacementTransfers, 1);
+assert.equal(boundary.maximumAdmissibleTransfers, 1);
+assert.equal(contract.transfer.historicalFailedTransfer.admissionProhibited, true);
+assert.equal(contract.transfer.historicalFailedTransfer.executionProhibited, true);
 assert.equal(boundary.maximumAuthorities, 1);
 assert.equal(boundary.maximumAttempts, 1);
 assert.equal(boundary.retryPermitted, false);
@@ -48,6 +52,8 @@ assert.ok(source("Oracle.Stage5GameWindowFixture.cs").includes("Call of Duty: Wa
 assert.equal(contract.host.companionFixture.qualificationHostCompilationPermitted, false);
 for (const transferSource of [source("prepare-transfer.mjs"), source("verify-transfer.mjs"), source("Oracle.Stage5R1TransferPolicy.ps1")]) assert.ok(!transferSource.includes("stage-4-r4-transfer"));
 const transfer = source("prepare-transfer.mjs");
+assert.ok(transfer.includes("historicalFailedTransfer")); assert.ok(transfer.includes("existingTransfers")); assert.ok(transfer.includes("replacesFailedTransferId"));
+assert.ok(source("Oracle.Stage5R1TransferPolicy.ps1").includes("Immutable failed transfer admission is prohibited."));
 assert.ok(transfer.includes("COPYFILE_EXCL")); assert.ok(transfer.includes('flag: "wx"'));
 console.log(JSON.stringify({ result: "passed", classification: "STAGE-5-R1-EXECUTION-ADVERSARIAL-STATIC", authorityCreated: false, attemptCreated: false, transferCreated: false }, null, 2));
 

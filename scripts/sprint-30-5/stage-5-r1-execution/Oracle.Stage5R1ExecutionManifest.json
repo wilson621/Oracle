@@ -7,7 +7,7 @@
     "acceptedR6MsixSha256":  "492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430",
     "founderAuthorisedQualificationExecution":  true,
     "transferPreparationPermitted":  true,
-    "maximumTransfers":  1,
+    "maximumTransfers":  2,
     "maximumAuthorities":  1,
     "maximumAttempts":  1,
     "retryPermitted":  false,
@@ -95,8 +95,8 @@
                   },
                   {
                       "path":  "Oracle.Stage5R1Contract.json",
-                      "bytes":  67061,
-                      "sha256":  "a5aadc0531ccec2240fe8132bcd935e3aa4cfce59109d1f3aea312e877013b4b"
+                      "bytes":  68749,
+                      "sha256":  "47e1d65ec8a4a1132da3282be594c625f54a0448d039332bc8a0339670ad9415"
                   },
                   {
                       "path":  "Oracle.Stage5R1ObservationOwnershipPolicy.ps1",
@@ -110,8 +110,8 @@
                   },
                   {
                       "path":  "Oracle.Stage5R1TransferPolicy.ps1",
-                      "bytes":  6976,
-                      "sha256":  "35e43b99b4d9d0224062fc7d56173576ed1ee5718175ce78c876f2515546546f"
+                      "bytes":  8475,
+                      "sha256":  "25b3b27846741893c24de417e51d6235e8691959a8ea1ed08899c1bcbe07a0ce"
                   },
                   {
                       "path":  "README.md",
@@ -135,8 +135,8 @@
                   },
                   {
                       "path":  "Test-OracleStage5R1ExecutionPolicies.mjs",
-                      "bytes":  4432,
-                      "sha256":  "d18ce3242a62af3a7c4c4573d64bf93ddf7d5875f7b06affd9e98edb87427a23"
+                      "bytes":  5001,
+                      "sha256":  "57a84d7d1504bce354ab5d59af1fc64b590da83be1cdce2118d30015fbaf56ea"
                   },
                   {
                       "path":  "Test-OracleStage5R1Policies.mjs",
@@ -145,8 +145,8 @@
                   },
                   {
                       "path":  "Test-OracleStage5R1PowerShellPolicies.ps1",
-                      "bytes":  13918,
-                      "sha256":  "6a78f096f76560579339859d70ae5cf2f5911f9229f27edd55d3960f0ebc30fb"
+                      "bytes":  14397,
+                      "sha256":  "4822b02cf95800e6bd46fd90486993e8f4a2a44c632fd0586dc11ef4fd0bfb52"
                   },
                   {
                       "path":  "evaluate-qualified-mission.mjs",
@@ -160,8 +160,8 @@
                   },
                   {
                       "path":  "prepare-transfer.mjs",
-                      "bytes":  6766,
-                      "sha256":  "12408bba01e9a74f450f04b0c02918d7ce22b2640ed178a2bfb80fb19a28870e"
+                      "bytes":  8448,
+                      "sha256":  "f4ee914dcaea9499163cb0c10d3848ddfb4b607669f7ccb96d9341e7129cf527"
                   },
                   {
                       "path":  "run-live-journey.mjs",
@@ -185,8 +185,8 @@
                   },
                   {
                       "path":  "stage5-core.mjs",
-                      "bytes":  11754,
-                      "sha256":  "ca0dbfb747fa83700332d4770803aad92649334d2fa07cae7c1ae5ddd782e874"
+                      "bytes":  11869,
+                      "sha256":  "1c75612dbde54d5c2ef3c0a4dcc32374ad488515ab60dd0ef10e083352e46a1d"
                   },
                   {
                       "path":  "stage5-guidance-benchmark.bundle.mjs",
@@ -200,13 +200,19 @@
                   },
                   {
                       "path":  "verify-execution-baseline.mjs",
-                      "bytes":  3575,
-                      "sha256":  "50df527b63c6d8aaffbf28f63f06a3d4b32535adaa85ea0bbf902ba158fb04cf"
+                      "bytes":  4267,
+                      "sha256":  "1388c68e65a99ec546b9840b0c52ea1ed57c9d53543c1c68976927293175ac24"
                   },
                   {
                       "path":  "verify-transfer.mjs",
-                      "bytes":  4416,
-                      "sha256":  "b22606c0c8668ae04798ffddbd0e74849e672e8390570d27c1305a6473c41019"
+                      "bytes":  5404,
+                      "sha256":  "fb3d70626c3bed8ee3b559df1fd94bdfa1c58b8a7d61103d043981f80746f556"
                   }
-              ]
+              ],
+    "maximumReplacementTransfers":  1,
+    "maximumAdmissibleTransfers":  1,
+    "replacementTransferPreparationPermitted":  true,
+    "historicalFailedTransferId":  "transfer-stage5-r1-20260804T174913211Z-e7b00bae",
+    "acceptedCorrectedEngineeringCommit":  "39f67217f7c609f331b21b0a72731a697b084c78",
+    "acceptedCorrectionClosureHead":  "a051fb2509314bff979acfb0fe61c5aad8829350"
 }
