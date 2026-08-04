@@ -39,6 +39,7 @@ for (const binding of contract.historicalEvidenceBindings) {
 assert.equal(contract.historicalEvidenceBindings.length, 14);
 
 const harnessRoot = import.meta.dirname;
+assert.equal(readFileSync(join(harnessRoot, "prepare-transfer.mjs"), "utf8").includes('fs.mkdirSync(approvedRoot, { recursive: true });'), true);
 const executionManifest = JSON.parse(readFileSync(join(harnessRoot, "Oracle.Stage4R2ExecutionManifest.json"), "utf8"));
 assert.equal(executionManifest.contract, "oracle.sprint-30-5.stage-4-r2-execution-manifest");
 assert.equal(executionManifest.founderAuthorisedQualificationExecution, true);

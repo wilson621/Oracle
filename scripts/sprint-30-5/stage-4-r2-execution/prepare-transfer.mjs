@@ -25,6 +25,7 @@ const approvedRoot = path.resolve(repositoryRoot, contract.paths.transferRoot);
 const transferRoot = path.join(approvedRoot, transferId);
 assertWithin(transferRoot, approvedRoot);
 if (fs.existsSync(transferRoot)) throw new Error("Create-only transfer identity already exists.");
+fs.mkdirSync(approvedRoot, { recursive: true });
 fs.mkdirSync(transferRoot, { recursive: false });
 const payloadRoot = path.join(transferRoot, contract.transfer.payloadDirectory);
 fs.mkdirSync(payloadRoot);

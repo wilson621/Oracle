@@ -104,8 +104,8 @@
     },
     {
       "path": "prepare-transfer.mjs",
-      "bytes": 6209,
-      "sha256": "6ebe06625d96546338aaa4d1c170999441019e8201a65e76cf1e37e35d2e1c4f"
+      "bytes": 6258,
+      "sha256": "919ba6a28d774ba8afb3b35c5518b25bd6b6243fd53d5c0de0fc0f3b97361695"
     },
     {
       "path": "run-live-development-rehearsal.mjs",
@@ -129,8 +129,8 @@
     },
     {
       "path": "verify-execution-baseline.mjs",
-      "bytes": 6855,
-      "sha256": "efff9a19c40bedf7cf6f85a467eb770fc230bf739b9e3afa026c2ca087f73a6c"
+      "bytes": 7001,
+      "sha256": "e71db9c97d067cfe25878469cf25fc4dbe24fe540df1ba4affd3a8d73f219298"
     },
     {
       "path": "verify-provider-output-contract.mjs",
