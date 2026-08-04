@@ -1240,3 +1240,13 @@ the exact unchanged accepted R6 MSIX. The elevated installed rehearsal passed
 all ten journeys with stable exact-package GPU identity, named UI Automation
 coverage and zero residue. No Stage 5 transfer, authority, attempt or
 qualification implementation is authorised or present.
+
+## Sprint 30.5 Stage 5 R1 execution implementation
+
+The non-product execution harness is implemented and validated. It controls two
+fresh 90-minute installed cycles, exact transfer and host admission, one-second
+GPU/performance observation, browser semantic/accessibility inspection,
+Companion transition evidence, fail-closed teardown and immutable return. The
+disposable Companion fixture is precompiled and hash-bound; no development
+compiler participates on the qualification host. Product implementation remains
+the exact accepted R6 package.

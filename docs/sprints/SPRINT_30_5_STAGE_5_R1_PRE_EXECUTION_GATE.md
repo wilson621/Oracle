@@ -1,13 +1,14 @@
 # Sprint 30.5 Stage 5 R1 Pre-Execution Gate
 
-**Status:** Future gate definition; execution unavailable
-**Current authority:** Engineering preparation only
+**Status:** Execution-enabled overlay prepared; transfer and host gates pending
+**Current authority:** One bounded execution-enabled Stage 5 R1 mission
 **Transfer, authority and attempt counts:** Zero
 **Last Reviewed:** 4 August 2026
 
-No Stage 5 qualification execution is possible from the R1 preparation
-baseline. Before any future authority may be created, all of the following must
-pass under a separately authorised execution-enabled mission.
+The qualification-barred R1 preparation baseline remains immutable. The
+separately authorised execution-enabled overlay is now prepared and validated.
+Before any authority may be created, all of the following must pass in the
+current bounded mission.
 
 ## Baseline and transfer
 

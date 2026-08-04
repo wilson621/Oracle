@@ -582,3 +582,6 @@ to adopt a later formatting standard.
 | Sprint 30.5 Stage 5 R1 rehearsal investigation | [Sprint 30.5 Stage 5 R1 Development Rehearsal Investigation](sprints/SPRINT_30_5_STAGE_5_R1_DEVELOPMENT_REHEARSAL_INVESTIGATION.md) | Root causes corrected; installed validation passed |
 | Sprint 30.5 Stage 5 R1 preparation validation | [Sprint 30.5 Stage 5 R1 Preparation Validation](sprints/SPRINT_30_5_STAGE_5_R1_PREPARATION_VALIDATION_REPORT.md) | Passed; no qualification state created |
 | Sprint 30.5 Stage 5 R1 engineering closure | [Sprint 30.5 Stage 5 R1 Engineering Closure](sprints/SPRINT_30_5_STAGE_5_R1_ENGINEERING_CLOSURE.md) | Preparation and contract freeze complete |
+
+| Sprint 30.5 Stage 5 R1 execution validation | [Sprint 30.5 Stage 5 R1 Execution Validation](sprints/SPRINT_30_5_STAGE_5_R1_EXECUTION_VALIDATION_REPORT.md) | Execution overlay inventory, regression and adversarial validation |
+| Sprint 30.5 Stage 5 R1 execution preparation closure | [Sprint 30.5 Stage 5 R1 Execution Preparation Closure](sprints/SPRINT_30_5_STAGE_5_R1_EXECUTION_PREPARATION_CLOSURE.md) | One-transfer/one-attempt boundary and laptop pre-authority handoff |

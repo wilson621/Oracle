@@ -1376,3 +1376,11 @@ The unchanged R6 MSIX has completed bounded Stage 5 R1 engineering preparation
 without invalidating the accepted R6/R12/R4 chain. The next Founder-level
 choice is whether to authorise a separately bound execution-enabled Stage 5 R1
 qualification mission. Stage 6 and later activity remains unavailable.
+
+## Sprint 30.5 Stage 5 R1 execution preparation
+
+The execution-enabled R1 overlay is complete and validated for the exact
+unchanged R6 package and accepted R6/R12/R4 chain. It permits one create-only
+transfer and at most one authority and attempt, without retry. Qualification has
+not started. The next milestone is an independently verified fresh transfer and
+all `Founder-QA-01` pre-authority gates. Stage 6 remains unavailable.

@@ -2494,3 +2494,12 @@ qualification-barred harness passed deterministic, regression, adversarial and
 elevated installed-package validation without product change. The next possible
 mission is a separately authorised execution-enabled Stage 5 baseline and fresh
 governed transfer; Stage 6 and later work remain unauthorised.
+
+## Sprint 30.5 Stage 5 R1 execution-enabled baseline
+
+The 39-file execution overlay is validated and binds preparation commit
+`6ba1c68f5330ac03b7359b0a6b03b2f8fb179df3` without changing the R6 MSIX.
+Qualification-host compilation was removed: the disposable Companion fixture is
+engineering-compiled and hash-bound. No transfer, authority or attempt existed
+at execution-preparation closure. One fresh transfer and every laptop
+pre-authority gate remain mandatory.
