@@ -75,7 +75,7 @@ const custody = {
   independentVerificationRequired: true,
   files: files.length,
   bytes: files.reduce((sum, item) => sum + item.bytes, 0),
-  source: "accepted-r2-execution-baseline",
+  source: "accepted-r3-execution-baseline",
   destination: "local-qualification-host-admission-root",
 };
 const custodyPath = path.join(transferRoot, contract.transfer.custodyFile);

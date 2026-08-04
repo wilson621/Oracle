@@ -31,6 +31,7 @@ assert.equal(custody.transferId, manifest.transferId);
 assert.equal(custody.manifestSha256, sha256(manifestPath));
 assert.equal(custody.createOnly, true);
 assert.equal(custody.independentVerificationRequired, true);
+assert.equal(custody.source, "accepted-r3-execution-baseline");
 const payloadRoot = path.join(transferRoot, contract.transfer.payloadDirectory);
 const physical = inventory(payloadRoot);
 assert.deepEqual(physical, manifest.files);

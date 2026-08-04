@@ -108,7 +108,7 @@
                   {
                       "path":  "prepare-transfer.mjs",
                       "bytes":  6759,
-                      "sha256":  "103c496de5b33ab5a70fbe6a7495b800cd6c1a4180e3cfb6d69acc7fa7f67ba5"
+                      "sha256":  "65520253b5ba014de4a140833faf35174cef15dd11e102681e0369eb09ffd846"
                   },
                   {
                       "path":  "run-live-development-rehearsal.mjs",
@@ -152,8 +152,8 @@
                   },
                   {
                       "path":  "verify-transfer.mjs",
-                      "bytes":  4344,
-                      "sha256":  "9214078179d2faab9e61354bd9b396a1e3e6d130cf0101b821ef6877491b1720"
+                      "bytes":  4409,
+                      "sha256":  "ea1f7f16e422f3bf4d81e3385c6089b1238f9da4dea7069afa26d6f051ecd585"
                   }
               ],
     "acceptedPreparationCommit":  "c3accf832d23f395560c643ae3268c868c27f020",
