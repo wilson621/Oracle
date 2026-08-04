@@ -15,21 +15,14 @@ if (Test-Path -LiteralPath $output) { throw "Transition evidence is create-only.
 $workRoot = Split-Path -Parent $output
 [IO.Directory]::CreateDirectory($workRoot) | Out-Null
 $fixture = Join-Path $workRoot "cod.exe"
-$source = @"
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-public static class OracleStage5GameWindowFixture {
-  [STAThread] public static void Main() {
-    Application.EnableVisualStyles();
-    var form = new Form { Text = "Call of Duty: Warzone - Oracle Stage 5 disposable fixture", Width = 1280, Height = 720, StartPosition = FormStartPosition.CenterScreen };
-    form.Controls.Add(new Label { Text = "NON-PRODUCTION ORACLE STAGE 5 WINDOW-DISCOVERY FIXTURE", AutoSize = true, Font = new Font("Segoe UI", 16), Left = 40, Top = 40 });
-    Application.Run(form);
-  }
-}
-"@
-Add-Type -TypeDefinition $source -ReferencedAssemblies @("System.Windows.Forms", "System.Drawing") -OutputAssembly $fixture -OutputType WindowsApplication
+$fixtureTemplate = Join-Path $PSScriptRoot "Oracle.Stage5GameWindowFixture.exe"
+$contract = Get-Content -LiteralPath (Join-Path $PSScriptRoot "Oracle.Stage5R1Contract.json") -Raw | ConvertFrom-Json
+if (-not (Test-Path -LiteralPath $fixtureTemplate -PathType Leaf)) { throw "Bound companion fixture is absent." }
+$templateHash = (Get-FileHash -LiteralPath $fixtureTemplate -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($templateHash -cne [string]$contract.host.companionFixture.sha256) { throw "Bound companion fixture hash mismatch." }
+[IO.File]::Copy($fixtureTemplate, $fixture, $false)
 $fixtureHash = (Get-FileHash -LiteralPath $fixture -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($fixtureHash -cne $templateHash) { throw "Copied companion fixture hash mismatch." }
 $records = [Collections.Generic.List[object]]::new()
 $fixtureProcess = $null
 

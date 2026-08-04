@@ -692,7 +692,15 @@
                                            "identityMustRemainStableThroughAttempt":  true,
                                            "networkFeaturesDisabled":  true,
                                            "remoteDebuggingLoopbackPort":  4315
-                                       }
+                                       },
+                 "companionFixture":  {
+                                          "classification":  "DISPOSABLE-NON-PRODUCTION-WINDOW-DISCOVERY-FIXTURE",
+                                          "engineeringCompiled":  true,
+                                          "qualificationHostCompilationPermitted":  false,
+                                          "source":  "Oracle.Stage5GameWindowFixture.cs",
+                                          "executable":  "Oracle.Stage5GameWindowFixture.exe",
+                                          "sha256":  "af344bcbc331868fd6dbddc77e5576e7523150d8f6e068eb53090eaa40969230"
+                                      }
              },
     "qualificationProtocol":  {
                                   "independentCycles":  2,

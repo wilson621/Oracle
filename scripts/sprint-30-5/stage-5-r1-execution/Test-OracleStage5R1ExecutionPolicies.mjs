@@ -40,7 +40,10 @@ for (const required of ["ORACLE_STAGE5_QUALIFICATION_CYCLE", "activeJourneySecon
 const workload = source("run-qualified-workload.mjs");
 for (const required of ["Network.setCookie", "Accessibility.getFullAXTree", "prefers-reduced-motion", "contrastViolations", "horizontalOverflowAt200PercentPixels", "activeJourneySecondsPerCycle", "companionTransitions"]) assert.ok(workload.includes(required));
 const transitions = source("Invoke-OracleStage5R1CompanionTransitions.ps1");
-for (const required of ["cod.exe", "Call of Duty: Warzone", '"attach"', '"detach"', '"degradation"', '"recovery"', "installed-uia-owned-process-tree"]) assert.ok(transitions.includes(required));
+for (const required of ["cod.exe", '"attach"', '"detach"', '"degradation"', '"recovery"', "installed-uia-owned-process-tree", "Oracle.Stage5GameWindowFixture.exe", "companionFixture.sha256"]) assert.ok(transitions.includes(required));
+assert.ok(!transitions.includes("Add-Type -TypeDefinition"));
+assert.ok(source("Oracle.Stage5GameWindowFixture.cs").includes("Call of Duty: Warzone"));
+assert.equal(contract.host.companionFixture.qualificationHostCompilationPermitted, false);
 const transfer = source("prepare-transfer.mjs");
 assert.ok(transfer.includes("COPYFILE_EXCL")); assert.ok(transfer.includes('flag: "wx"'));
 console.log(JSON.stringify({ result: "passed", classification: "STAGE-5-R1-EXECUTION-ADVERSARIAL-STATIC", authorityCreated: false, attemptCreated: false, transferCreated: false }, null, 2));
