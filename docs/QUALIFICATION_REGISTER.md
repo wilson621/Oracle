@@ -429,3 +429,7 @@ identity or evidence namespace may be reused.
   648ae4d856c954b2a61af90b8b08272252d95acff71a0e9b70c0ac42245248df.
 - Current transfer/authority/attempt permissions: false/false/false; maximum
   attempts zero.
+
+## Sprint 30.5 Stage 4 R4 preparation
+
+Status: engineering preparation passed; qualification not executed. No R4 transfer, authority, attempt or qualification evidence exists. R1 is accepted historical evidence; R2 and R3 are accepted immutable failed evidence. R4 execution requires new identities and all fresh pre-authority gates.

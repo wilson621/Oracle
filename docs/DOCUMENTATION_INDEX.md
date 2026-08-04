@@ -555,3 +555,11 @@ to adopt a later formatting standard.
 | Stage 4 R3 correction validation | [Sprint 30.5 Stage 4 R3 Correction Validation Report](sprints/SPRINT_30_5_STAGE_4_R3_CORRECTION_VALIDATION_REPORT.md) | Static, adversarial and live installed-package validation |
 | Stage 4 R3 engineering correction closure | [Sprint 30.5 Stage 4 R3 Engineering Correction Closure](sprints/SPRINT_30_5_STAGE_4_R3_ENGINEERING_CORRECTION_CLOSURE.md) | Barred corrected baseline and recommended fresh mission |
 | Stage 4 R3 accepted failed-evidence index | [Stage 4 R3 Accepted Failed Evidence Index](sprints/evidence/sprint-30-5/stage-4-r3/Oracle.Stage4R3AcceptedFailedEvidenceIndex.json) | Hash inventory for 21 immutable failure-chain records |
+
+## Sprint 30.5 Stage 4 R4 preparation records
+
+- `docs/sprints/SPRINT_30_5_STAGE_4_R4_PLAN.md`
+- `docs/sprints/SPRINT_30_5_STAGE_4_R4_PRE_EXECUTION_GATE.md`
+- `docs/sprints/SPRINT_30_5_STAGE_4_R4_PREPARATION_VALIDATION_REPORT.md`
+- `docs/sprints/SPRINT_30_5_STAGE_4_R4_ENGINEERING_PREPARATION_CLOSURE.md`
+- `scripts/sprint-30-5/stage-4-r4/Oracle.Stage4R4PreparationManifest.json`

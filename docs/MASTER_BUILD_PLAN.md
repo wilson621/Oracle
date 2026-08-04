@@ -1003,3 +1003,7 @@ rejects every surviving, reused, ambiguous or unowned identity. Static, adversar
 source-equivalent and exact installed-package validation passed. The corrected
 contract permits no transfer, authority or attempt. Any future Stage 4 qualification
 requires a fresh Founder-authorised revision and identities.
+
+## Stage 4 R4 preparation gate
+
+R4 preparation is complete and qualification-barred. Before qualification, freeze the preparation commit/tree, create and validate a separately execution-enabled overlay, create one fresh manifest-bound transfer, independently verify it, and pass fresh elevated/network-isolated host admission. Stage 5 remains unavailable.

@@ -1061,3 +1061,7 @@ non-qualification rehearsals passed ten journeys with zero residue. Current stat
 engineering corrected, qualification barred, transfers disabled, maximum attempts
 zero. Next board action requires a Founder-authorised fresh Stage 4 revision. Stage
 5 remains unauthorised.
+
+## Sprint 30.5 Stage 4 Requalification R4 preparation
+
+R4 engineering preparation is complete for accepted R6/R12 and the accepted R3 process-teardown correction. The 32-file harness rehashes 29 historical bindings; source-equivalent and elevated installed rehearsals passed ten journeys with zero residue. The preparation is qualification-barred. A separate execution overlay, fresh transfer and all pre-authority gates remain required. Stage 5 is blocked.

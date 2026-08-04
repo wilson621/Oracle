@@ -1353,3 +1353,7 @@ adversarial coverage plus source-equivalent and elevated installed-package
 rehearsals. The corrected baseline is qualification-barred and creates no new
 identity. Stage 4 remains incomplete. A fresh Founder-authorised Stage 4 revision is
 the only permissible next qualification mission; Stage 5 remains blocked.
+
+## Sprint 30.5 Stage 4 R4 preparation
+
+Stage 4 remains incomplete for R6/R12. R4 preparation and installed-package rehearsal passed, but the preparation baseline cannot execute qualification. The next in-scope milestone is its separately bound execution overlay, fresh transfer and one governed attempt. Stage 5 remains blocked and unauthorised.

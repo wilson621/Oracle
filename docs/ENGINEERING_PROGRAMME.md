@@ -2464,3 +2464,7 @@ The corrected 32-file manifest SHA-256 is
 The contract is qualification-barred, transfer preparation is false, maximum
 attempts are zero, and no correction authority or attempt exists. Stage 4 remains
 incomplete and Stage 5 remains blocked.
+
+## Sprint 30.5 Stage 4 Requalification R4 preparation
+
+The Founder-authorised R4 engineering preparation is complete. It carries forward the corrected attempt-directory ownership and race-tolerant process teardown boundaries, binds the exact accepted R6 package and R12 closure, and preserves all Stage 4 history. Deterministic and live validation passed without creating a transfer, authority, attempt or qualification evidence. Execution requires a separately committed overlay and every fresh pre-authority gate.

@@ -1,0 +1,172 @@
+{
+    "contract":  "oracle.sprint-30-5.stage-4-r4-preparation-manifest",
+    "schemaVersion":  "1.0.0",
+    "acceptedPreparationCommit":  "7905f8a4f6d469eaa48ba179deadcce408499e19",
+    "acceptedPreparationTree":  "69424ed208d6bbb6d549e9fab47cb9fe775ebd9c",
+    "transferPreparationPermitted":  false,
+    "founderAuthorisedQualificationExecution":  false,
+    "maximumAttempts":  0,
+    "retryAfterConsumedAuthorityPermitted":  false,
+    "files":  [
+                  {
+                      "path":  "Invoke-OracleStage4R4DevelopmentRehearsal.ps1",
+                      "bytes":  2534,
+                      "sha256":  "4df03029a4126cbcbcbfb3223363137680289ee313a99a7bac6555517f75c727"
+                  },
+                  {
+                      "path":  "Invoke-OracleStage4R4InstalledDevelopmentRehearsal.ps1",
+                      "bytes":  2305,
+                      "sha256":  "7d0717c5ea27c32cf1d2697f958d47aaea2f26963516056e91ae3477fef4f610"
+                  },
+                  {
+                      "path":  "Invoke-OracleStage4R4InstalledPackageJourney.ps1",
+                      "bytes":  23310,
+                      "sha256":  "a6863ee15bcf10475ee60d600af25aae8fde764ab377cbca9232fc32388f4624"
+                  },
+                  {
+                      "path":  "Invoke-OracleStage4R4PreAuthorityPreflight.ps1",
+                      "bytes":  4040,
+                      "sha256":  "e4b739d78685503f306cff06babae62faf2267a701a549ee26d84711265503bf"
+                  },
+                  {
+                      "path":  "Invoke-OracleStage4R4Qualification.ps1",
+                      "bytes":  19380,
+                      "sha256":  "6f9163c6f6a32f68ffaf146e53a68130f67fdc2515a126d8c48f93842e3b4eb6"
+                  },
+                  {
+                      "path":  "Oracle.Stage4R4ActivationPolicy.ps1",
+                      "bytes":  10442,
+                      "sha256":  "e68b265004ccc91c47ab4c65d0e5f5bf2528da4407c3143fb24335ae325e5c32"
+                  },
+                  {
+                      "path":  "Oracle.Stage4R4Contract.json",
+                      "bytes":  47798,
+                      "sha256":  "53033e5b79cc96fc9fcc58cb663f4623b67b44873613e5ecaa5fe60065de995d"
+                  },
+                  {
+                      "path":  "Oracle.Stage4R4Fixtures.json",
+                      "bytes":  4238,
+                      "sha256":  "f886d87d326757ebb41fff6a2879c0423924df33e0d886f767eb560a1e0f0406"
+                  },
+                  {
+                      "path":  "Oracle.Stage4R4InstalledRuntimeConfigurationPolicy.ps1",
+                      "bytes":  22050,
+                      "sha256":  "bb76e8a06b5269888cb27669e98b4898fe28a96ea0f3e6104f26478b95a583e3"
+                  },
+                  {
+                      "path":  "Oracle.Stage4R4JourneyPolicy.ps1",
+                      "bytes":  4549,
+                      "sha256":  "2d5b2d4e75711b0c0cf710e32ae0d6269072c8e8dee381c608afb257422125fe"
+                  },
+                  {
+                      "path":  "Oracle.Stage4R4LifecyclePolicy.ps1",
+                      "bytes":  2265,
+                      "sha256":  "ab0a3b128f8612549062f6cbfd6ea0b8eda094e3ccab825d6e1d203d39a971ea"
+                  },
+                  {
+                      "path":  "Oracle.Stage4R4PreflightPolicy.ps1",
+                      "bytes":  16859,
+                      "sha256":  "0fc5efa1d86931ed41bb99d25edcecdd5939bd569a19a9990d96010434f9c120"
+                  },
+                  {
+                      "path":  "Oracle.Stage4R4ProcessTeardownPolicy.ps1",
+                      "bytes":  1447,
+                      "sha256":  "c2eb300f0f10d8acbf66f0b867d1c4807bfd1f84b949e739cc82ddde44e891d6"
+                  },
+                  {
+                      "path":  "Oracle.Stage4R4ProviderTopology.json",
+                      "bytes":  2365,
+                      "sha256":  "4aacd29bcde29094da5d0e70cfa9c15fc4b71dbabca820d1e543ec72f20966f6"
+                  },
+                  {
+                      "path":  "Oracle.Stage4R4TransferPolicy.ps1",
+                      "bytes":  6968,
+                      "sha256":  "6a4e416e8fef112151029047fdef4bd6c4e45f7187195590999d0bb82384ebd3"
+                  },
+                  {
+                      "path":  "README.md",
+                      "bytes":  1890,
+                      "sha256":  "e8d8142d431c2c8b4ca8c5044df912cdca45b7d05b7d25f4012aabdb641557bb"
+                  },
+                  {
+                      "path":  "Test-OracleStage4R4ActivationPolicy.ps1",
+                      "bytes":  3826,
+                      "sha256":  "7f27ccc7db752d5e5aec08f4afe72ba1f45afc25cb82ce4e50580b3d81a9a898"
+                  },
+                  {
+                      "path":  "Test-OracleStage4R4InstalledRuntimeConfigurationPolicy.ps1",
+                      "bytes":  12450,
+                      "sha256":  "d60a5abf023e8a97cea9332f5d262dbddf4e2d1597f3f05d4b85ae5e65d054a4"
+                  },
+                  {
+                      "path":  "Test-OracleStage4R4Policies.ps1",
+                      "bytes":  8137,
+                      "sha256":  "4d7ab18ba226f64f341e76141270b1b68b9047fa5a2c2292a1eb0f09aa9c9b41"
+                  },
+                  {
+                      "path":  "Test-OracleStage4R4ProcessTeardownPolicy.ps1",
+                      "bytes":  4297,
+                      "sha256":  "2a5e567224cdc52e3d1fedeef5ee222513cc040233daaf4b0b687a4040349678"
+                  },
+                  {
+                      "path":  "execute-live-environment.mjs",
+                      "bytes":  22766,
+                      "sha256":  "cce9db50db7ce14620f5ef7c88644932e26e0a14314a4b5310eafbe98d8abd5a"
+                  },
+                  {
+                      "path":  "prepare-transfer.mjs",
+                      "bytes":  6759,
+                      "sha256":  "5f2eed17e7b7f04c32655eadfe730a90969ab2a80f90e6b7f4290565544df622"
+                  },
+                  {
+                      "path":  "run-live-development-rehearsal.mjs",
+                      "bytes":  3805,
+                      "sha256":  "ba7ca6173637216c6b01e423fa2370eda92609692038f6a6637d62bf5e806db8"
+                  },
+                  {
+                      "path":  "run-live-installed-development-rehearsal.mjs",
+                      "bytes":  4348,
+                      "sha256":  "6af0574ffffa21e5c5a622ea45d29c11ac14ffc34c0e78d151f06d9e80c97897"
+                  },
+                  {
+                      "path":  "run-live-journey.mjs",
+                      "bytes":  8633,
+                      "sha256":  "a3cf0c530db88a06166af25ccaeda93f4259e36326110556a26ca734595ae0e0"
+                  },
+                  {
+                      "path":  "stage4-core.mjs",
+                      "bytes":  18005,
+                      "sha256":  "1233451a1f630d1a4fb3dfb91e786afd94e7de0c69eb8e8ac73e3b7314e1c324"
+                  },
+                  {
+                      "path":  "verify-accepted-r2-failure.mjs",
+                      "bytes":  5356,
+                      "sha256":  "dd1039b0190a457c37724988d9f5b0926868b93a218ea983c53ac81e57cb8da7"
+                  },
+                  {
+                      "path":  "verify-accepted-r3-failure.mjs",
+                      "bytes":  4608,
+                      "sha256":  "d573987094c53ced3b362b7540bbf831d4a0267f4a571e119bf47341280e914e"
+                  },
+                  {
+                      "path":  "verify-attempt-directory-ownership.mjs",
+                      "bytes":  4731,
+                      "sha256":  "989911d4f0d461d484ccd18a5420c44048f96c0e3afe63e48fbf6807cd2da3c1"
+                  },
+                  {
+                      "path":  "verify-preparation.mjs",
+                      "bytes":  10826,
+                      "sha256":  "52bc1b3acc6c468cd70d246f9b6c765cfc534066144edbd2233f3e3c54f5087a"
+                  },
+                  {
+                      "path":  "verify-provider-output-contract.mjs",
+                      "bytes":  3407,
+                      "sha256":  "949a9d145fbfdcc6a3e0905a1ef1f594a9ce87c960d7787df708779d26077ed6"
+                  },
+                  {
+                      "path":  "verify-transfer.mjs",
+                      "bytes":  4409,
+                      "sha256":  "da1c7bc4485347651e8fdb24bf924c11763e3a3183fd46cf48f94dec282223dd"
+                  }
+              ]
+}
