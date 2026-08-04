@@ -8,7 +8,7 @@
 **Expected Stability:** Updated when verified implementation or accepted technical debt changes
 **Supersedes:** Earlier active implementation-status records
 **Superseded By:** None
-**Last Reviewed:** 3 August 2026
+**Last Reviewed:** 4 August 2026
 **Verified Branch:** `sprint-9-overlay`
 **Verified Repository Baseline:** `3994d483a4a7fc8dfe91a7d21c7c54d1d10a72c3`
 **Sprint 14 Implementation Baseline:** `3868975`
@@ -1101,3 +1101,18 @@ archive and expanded-tree parity, passing completion and zero final residue.
 
 R12 is closed for the R6 package. No product implementation changed during
 post-qualification closure, and no Stage 4 work was started or authorised.
+
+## Stage 4 R6/R12 Qualification Impact Decision
+
+The Stage 4 impact assessment is complete. Historical R1 remains accepted and
+immutable for its exact R3 candidate, but it is not applicable qualification
+for the accepted R6/R12 chain. R6 changes 17 paths in R1's product contract,
+including root rendering, all Supabase adapters and the installed runtime
+credential boundary. R12 expressly makes no provider-connectivity or
+authentication claim.
+
+Stage 4 is therefore incomplete for the current baseline and Stage 5 remains
+blocked. The recommended next Founder mission is bounded Stage 4 R2
+engineering preparation for the exact R6 MSIX and installed runtime path. No
+Stage 4 engineering, authority, attempt or qualification evidence was created
+by the assessment.

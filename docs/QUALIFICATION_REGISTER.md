@@ -11,7 +11,7 @@ expiry or revocation
 **Supersedes:** Qualification status inferred across Sprint and programme
 documents
 **Superseded By:** None
-**Last Reviewed:** 3 August 2026
+**Last Reviewed:** 4 August 2026
 
 ---
 
@@ -34,8 +34,8 @@ results.
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
 | 2 | Candidate Freeze and Package Reconciliation | **R6 Founder-accepted and formally closed** | Passing attempt `r6-20260803T171057940Z-5e914d18`; final manifest `a637a7fdf49f6b2a957738c89cb02015b6384d227c2c72f77a2aabdd721bf288`; archive `7884c93b222cd5f16f51dd5ba1b56c51af5008e1f6c999dcff92a8c1a26ac690`; MSIX `492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430`; zero residue | None for R6; downstream work requires separate authority |
 | 3 | Clean Windows Qualification | **R12 independently verified and formally closed** | Passing attempt `stage3-r12-20260803T204415402Z-b886be44`; evidence manifest `d0238d0859a871d2589f66cbddc5f337b33638b32a02375b71f39fc2dac461d0`; archive `1e583ef3a67755a40ec2d4ec50e0535e38ee3e2eab9b65767d48a3a17f8f5055`; zero residue | None for R12; consumed authority permits no retry |
-| 4 | Live Authentication and Protected Rendering | **R1 accepted immutable history; R6/R12 impact not decided** | Historical R1 attempt passed against its earlier baseline; no Stage 4 work was performed under the R12 mission | Separate Founder programme-state and qualification-impact decision |
-| 5 | Installed Package GPU, Performance and Accessibility | **Blocked pending Stage 4 baseline decision and separately governed downstream authority** | Stage 2 R6 and Stage 3 R12 qualify the corrected package through the clean-host lifecycle; installed-authentication applicability remains a Founder decision | Founder Stage 4 impact decision, then separately governed downstream authority |
+| 4 | Live Authentication and Protected Rendering | **R1 accepted immutable history; R6/R12 requalification required** | R1 is R3-bound; 17 R1 contract product paths changed by R6, while R12 expressly claims neither provider connectivity nor authentication | Separate Founder authority for Stage 4 R2 engineering preparation |
+| 5 | Installed Package GPU, Performance and Accessibility | **Blocked pending accepted R6/R12-bound Stage 4 result and separately governed downstream authority** | Stage 2 R6 and Stage 3 R12 qualify the corrected package through the clean-host lifecycle; installed authentication and protected rendering remain unqualified | Accepted Stage 4 successor result, then separate Stage 5 authority |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
 | 7 | Final Integrated Qualification and Sprint 30 Closure Package | **Not started** | Requires complete immutable evidence from Stages 1–6 | Stage 6 acceptance, then separate Stage 7 authority |
 
@@ -180,7 +180,8 @@ results.
   zero.
 - The canonical evidence is indexed by
   [Sprint 30.5 Stage 4 R1 Evidence](sprints/evidence/sprint-30-5/stage-4-r1/README.md).
-- Stage 4 is formally closed and grants no Stage 5 or production authority.
+- Stage 4 R1 is formally closed for its exact R3 candidate and grants no Stage
+  5 or production authority. It is not the current R6/R12 Stage 4 baseline.
 # Post-Stage 4 Product-Baseline Position
 
 - ADR-048 implements an attempt-scoped installed-package runtime configuration
@@ -203,7 +204,7 @@ results.
 | --- | --- | --- |
 | Sprint 29 clean-machine distribution | **Qualified by Stage 3 R9** | The accepted Stage 2 R2 MSIX completed governed installation, activation, runtime, repair, removal and zero-residue validation on Founder-QA-01; this does not grant production release authority |
 | Minecraft Java observation | **Provisionally certified** | Operational Certification Deferred — Required Test Environment Unavailable; observation disabled and no support claim authorised |
-| Production qualification | **Incomplete** | Stages 1-4 are Founder-accepted and closed; Stage 4 R1 is the accepted passing result; Stages 5-7 have not started |
+| Production qualification | **Incomplete** | Stages 1-3 are accepted and closed for the current R6/R12 chain; Stage 4 R1 remains accepted history but a newly R6/R12-bound Stage 4 result is required; Stages 5-7 have not started |
 | Gate 7 | **Not authorised** | May be considered only after Production Qualification completes |
 | Beta | **Not authorised** | Requires later Founder decision after the governed qualification and Gate sequence |
 
@@ -311,3 +312,19 @@ the archive SHA-256 is
 Stage 3 R12 is formally closed for the accepted R6 package. No Stage 4 or new
 programme work is authorised. The next Founder-level mission is a separate
 Stage 4 programme-state and qualification-impact decision.
+
+## Stage 4 R6/R12 Qualification Impact Assessment
+
+The Founder-authorised assessment is complete. Stage 4 R1 remains accepted,
+closed and immutable for Stage 2 R3 candidate
+`a7fc67f207d9c95407c70812828fa66bd487285d`; it does not qualify the accepted
+R6/R12 baseline. The R3-to-R6 delta changes 17 paths inside R1's exact product
+contract, including root rendering, all Supabase adapters and the installed
+runtime and packaged-server configuration boundary. R12 expressly claims
+neither provider connectivity nor authentication.
+
+Current Stage 4 qualification is therefore incomplete. Stage 5 remains
+blocked. The recommended next Founder mission is bounded Stage 4 R2
+engineering preparation for the exact R6 MSIX and installed runtime path,
+without qualification authority or execution. This assessment created no
+Stage 4 implementation, transfer, authority, attempt or evidence namespace.

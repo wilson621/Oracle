@@ -8,7 +8,7 @@
 **Expected Stability:** Updated whenever approved work changes state
 **Supersedes:** Earlier active Project Board versions
 **Superseded By:** None
-**Last Reviewed:** 3 August 2026
+**Last Reviewed:** 4 August 2026
 **Version:** 9.3
 **Branch:** `sprint-9-overlay`
 **Governance v2 baseline:** `0423aad`
@@ -957,3 +957,18 @@ are zero.
 R12 is formally closed for the accepted Stage 2 R6 package. R9, failed R11 and
 both earlier R12 transfers remain immutable history. Stage 4 and all new work
 remain unauthorised pending a separate Founder mission.
+
+## Stage 4 R6/R12 Qualification Impact Decision
+
+The Stage 4 impact assessment is complete. Historical R1 remains accepted and
+immutable for its exact R3 candidate, but it is not applicable qualification
+for the accepted R6/R12 chain. R6 changes 17 paths in R1's product contract,
+including root rendering, all Supabase adapters and the installed runtime
+credential boundary. R12 expressly makes no provider-connectivity or
+authentication claim.
+
+Stage 4 is therefore incomplete for the current baseline and Stage 5 remains
+blocked. The recommended next Founder mission is bounded Stage 4 R2
+engineering preparation for the exact R6 MSIX and installed runtime path. No
+Stage 4 engineering, authority, attempt or qualification evidence was created
+by the assessment.

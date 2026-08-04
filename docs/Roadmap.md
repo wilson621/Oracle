@@ -10,7 +10,7 @@
 **Expected Stability:** Reviewed at strategic and Sprint-boundary changes
 **Supersedes:** Earlier active Roadmap versions
 **Superseded By:** None
-**Last Reviewed:** 30 July 2026
+**Last Reviewed:** 4 August 2026
 **Version:** 6.8
 
 ---
@@ -1250,3 +1250,18 @@ must not be transferred or executed as qualification of the corrected source.
 A new Stage 2 candidate must be accepted before newly bound clean-host and
 installed-authentication requalification can proceed. Stage 5 remains blocked.
 No qualification authority, attempt, package or evidence was created.
+
+## Stage 4 R6/R12 Qualification Impact Decision
+
+The Stage 4 impact assessment is complete. Historical R1 remains accepted and
+immutable for its exact R3 candidate, but it is not applicable qualification
+for the accepted R6/R12 chain. R6 changes 17 paths in R1's product contract,
+including root rendering, all Supabase adapters and the installed runtime
+credential boundary. R12 expressly makes no provider-connectivity or
+authentication claim.
+
+Stage 4 is therefore incomplete for the current baseline and Stage 5 remains
+blocked. The recommended next Founder mission is bounded Stage 4 R2
+engineering preparation for the exact R6 MSIX and installed runtime path. No
+Stage 4 engineering, authority, attempt or qualification evidence was created
+by the assessment.

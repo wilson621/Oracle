@@ -8,7 +8,7 @@
 **Expected Stability:** Reviewed whenever governance or canonical documentation changes
 **Supersedes:** The incomplete documentation table in `README.md` as the canonical documentation index
 **Superseded By:** None
-**Last Reviewed:** 3 August 2026
+**Last Reviewed:** 4 August 2026
 
 ---
 
@@ -513,3 +513,9 @@ to adopt a later formatting standard.
 | Sprint 30.5 Stage 3 R12 qualification closure | [Sprint 30.5 Stage 3 R12 Qualification Closure](sprints/SPRINT_30_5_STAGE_3_R12_QUALIFICATION_CLOSURE.md) | Independently verified passing attempt, consumed authority, immutable bindings and formal R12 closure |
 
 | Sprint 30.5 Stage 3 R12 accepted evidence | [Sprint 30.5 Stage 3 R12 Evidence](sprints/evidence/sprint-30-5/stage-3-r12/README.md) | Canonical returned evidence, archive, manifest, authority, attempt and accepted index |
+
+## Stage 4 R6/R12 qualification-impact assessment
+
+| Record | Location | Purpose |
+| --- | --- | --- |
+| Stage 4 R6/R12 qualification-impact assessment | [Sprint 30.5 Stage 4 R6/R12 Qualification Impact Assessment](sprints/SPRINT_30_5_STAGE_4_R6_R12_QUALIFICATION_IMPACT_ASSESSMENT.md) | Candidate-delta analysis, current programme state, qualification gap and bounded next-mission recommendation |
