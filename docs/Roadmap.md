@@ -1392,3 +1392,12 @@ failure because its Stage 5 preflight would emit a stale Stage 4 record contract
 The source correction is complete and validated. No authority, attempt or
 qualification evidence exists. A fresh replacement transfer requires a new
 Founder decision; Stage 6 remains unavailable.
+
+## Sprint 30.5 Stage 5 R1 clean-host architecture blocker
+
+R1 is blocked before host admission. Both transfers remain immutable engineering
+failures and no authority or attempt exists. The current harness requires a
+repository plus Git, Node, npm, Supabase and Docker on intentionally clean
+`Founder-QA-01`. A Founder decision must define a self-contained qualification
+appliance or revise the clean-host Stage 5 test surface before new engineering
+and transfer authority. Stage 6 remains unavailable.

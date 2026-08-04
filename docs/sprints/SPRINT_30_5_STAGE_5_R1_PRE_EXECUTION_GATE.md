@@ -1,8 +1,8 @@
 # Sprint 30.5 Stage 5 R1 Pre-Execution Gate
 
-**Status:** Replacement-authority overlay complete; fresh transfer pending
-**Current authority:** Exactly one fresh replacement transfer and one governed mission
-**Transfer, authority and attempt counts:** One immutable failed / zero replacement / zero / zero
+**Status:** Blocked by clean-host qualification architecture contradiction
+**Current authority:** Investigation complete; Founder architecture decision required
+**Transfer, authority and attempt counts:** Two immutable failed / zero / zero
 **Last Reviewed:** 4 August 2026
 
 The qualification-barred R1 preparation baseline remains immutable. The

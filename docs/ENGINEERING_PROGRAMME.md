@@ -2519,3 +2519,12 @@ It rehashes and rejects the immutable failed transfer, binds corrected engineeri
 commit `39f67217f7c609f331b21b0a72731a697b084c78`, and keeps one admissible
 transfer, one authority and one attempt with no retry. Replacement transfer
 creation and independent verification are next.
+
+## Sprint 30.5 Stage 5 R1 clean-host bootstrap blocker
+
+The returned replacement transfer rehashes unchanged and was never copied or
+admitted on `Founder-QA-01`. Dependency tracing proved that removing the Git
+bootstrap check is insufficient: pre-authority and execution bind the main-PC
+repository and Git/Node/npm/Supabase/Docker identities. Installing that stack on
+the clean qualification host is prohibited. A new Founder-authorised protocol
+architecture is required; authority and attempt counts remain zero.

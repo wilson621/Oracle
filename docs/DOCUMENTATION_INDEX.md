@@ -590,3 +590,5 @@ to adopt a later formatting standard.
 | Stage 5 R1 pre-authority correction closure | [Sprint 30.5 Stage 5 R1 Pre-Authority Correction Closure](sprints/SPRINT_30_5_STAGE_5_R1_PRE_AUTHORITY_CORRECTION_CLOSURE.md) | Corrected validated baseline and replacement-transfer governance boundary |
 
 | Stage 5 R1 replacement transfer preparation | [Sprint 30.5 Stage 5 R1 Replacement Transfer Preparation](sprints/SPRINT_30_5_STAGE_5_R1_REPLACEMENT_TRANSFER_PREPARATION.md) | Failed-transfer rehash, fresh replacement boundary and zero authority/attempt state |
+
+| Stage 5 R1 clean-host bootstrap blocker | [Sprint 30.5 Stage 5 R1 Clean-Host Bootstrap Blocker](sprints/SPRINT_30_5_STAGE_5_R1_CLEAN_HOST_BOOTSTRAP_BLOCKER.md) | Returned immutable transfer, developer-tool dependency contradiction and required Founder architecture decision |

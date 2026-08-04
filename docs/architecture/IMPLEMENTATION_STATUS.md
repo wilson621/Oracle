@@ -1257,3 +1257,11 @@ The Stage 5 host-admission record now carries the Stage 5 R1 pre-authority
 contract, with a static regression rejecting the stale Stage 4 label. The
 correction changes only the non-product harness. The already-created transfer
 retains its prior bytes and is unusable. No authority or attempt exists.
+
+## Sprint 30.5 Stage 5 R1 clean-host execution conflict
+
+The current R1 harness is not clean-host executable. Its bootstrap, pre-authority
+checks, provider lifecycle and workload depend on a repository and bound
+Git/Node/npm/Supabase/Docker tools. The accepted product remains unchanged, but
+the non-product qualification architecture requires a new Founder-approved
+design before another transfer can be prepared.

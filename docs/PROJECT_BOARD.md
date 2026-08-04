@@ -1106,3 +1106,11 @@ The replacement-authority overlay is complete and validated. State: one immutabl
 failed transfer, zero replacement transfers, zero authorities and zero attempts.
 The next action is one fresh create-only replacement bound to the clean pushed
 closure HEAD.
+
+## Sprint 30.5 Stage 5 R1 clean-host decision required
+
+The replacement handoff failed closed before local copy or admission. Root cause
+is a frozen protocol that requires development-workstation tooling on the clean
+qualification laptop. State: two immutable unusable transfers, no preflight, no
+authority and no attempt. Next action is a Founder choice between an equivalent
+self-contained qualification appliance and a revised clean-host Stage 5 surface.
