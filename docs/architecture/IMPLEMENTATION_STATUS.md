@@ -1172,3 +1172,19 @@ next Founder mission is a fresh Stage 4 Requalification R3 execution-enabled
 baseline, create-only transfer and one governed attempt using new identities and
 namespaces, with authority creation only after every fresh gate passes. No R2
 identity or evidence namespace may be reused.
+
+## Sprint 30.5 Stage 4 Requalification R3 preparation
+
+R3 preparation is implemented and validated against accepted Stage 2 R6, Stage 3
+R12 and the accepted Stage 4 R2 ownership correction. The R3-only harness contains
+29 manifest-bound files and rehashes twenty immutable historical records.
+
+The source-equivalent and elevated installed-package development rehearsals each
+passed all ten journeys and ended at zero package, certificate,
+runtime-configuration, provider and process residue. No transfer, authority,
+attempt or qualification evidence exists for R3 at this state.
+
+The preparation contract is intentionally barred. A separately bound
+execution-enabled overlay, fresh transfer, independent verification and all
+pre-authority gates are required before the single authorised qualification attempt.
+Stage 5 and later implementation are unauthorised.

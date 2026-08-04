@@ -534,3 +534,12 @@ to adopt a later formatting standard.
 | Stage 4 R2 correction validation | [Sprint 30.5 Stage 4 R2 Correction Validation Report](sprints/SPRINT_30_5_STAGE_4_R2_CORRECTION_VALIDATION_REPORT.md) | Adversarial, source-equivalent and exact installed-package regression evidence |
 | Stage 4 R2 correction closure | [Sprint 30.5 Stage 4 R2 Engineering Correction Closure](sprints/SPRINT_30_5_STAGE_4_R2_ENGINEERING_CORRECTION_CLOSURE.md) | Corrected commit/tree, barred state and recommended fresh R3 mission |
 | Stage 4 R2 accepted failed-evidence index | [Stage 4 R2 Accepted Failed Evidence Index](sprints/evidence/sprint-30-5/stage-4-r2/Oracle.Stage4R2AcceptedFailedEvidenceIndex.json) | Hash and inventory bindings for nineteen immutable qualification records |
+
+## Stage 4 Requalification R3
+
+| Document | Link | Purpose |
+| --- | --- | --- |
+| Stage 4 R3 plan | [Sprint 30.5 Stage 4 R3 Plan](sprints/SPRINT_30_5_STAGE_4_R3_PLAN.md) | Fresh R3 identities, corrected installed-package lifecycle and authority boundary |
+| Stage 4 R3 preparation validation | [Sprint 30.5 Stage 4 R3 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_4_R3_PREPARATION_VALIDATION_REPORT.md) | Historical rehash, regression, adversarial and two live rehearsal results |
+| Stage 4 R3 engineering preparation closure | [Sprint 30.5 Stage 4 R3 Engineering Preparation Closure](sprints/SPRINT_30_5_STAGE_4_R3_ENGINEERING_PREPARATION_CLOSURE.md) | Completed preparation baseline and execution-overlay boundary |
+| Stage 4 R3 pre-execution gate | [Sprint 30.5 Stage 4 R3 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_4_R3_PRE_EXECUTION_GATE.md) | Mandatory transfer, host, isolation and pre-authority gates |

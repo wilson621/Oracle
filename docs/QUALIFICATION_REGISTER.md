@@ -384,3 +384,18 @@ next Founder mission is a fresh Stage 4 Requalification R3 execution-enabled
 baseline, create-only transfer and one governed attempt using new identities and
 namespaces, with authority creation only after every fresh gate passes. No R2
 identity or evidence namespace may be reused.
+
+## Stage 4 Requalification R3 preparation registration
+
+- Founder-authorised mission: one fresh Stage 4 R3 qualification lifecycle.
+- Preparation result: passed; qualification not yet executed.
+- Preparation manifest SHA-256:
+  A855ED1244025ABFBE788C09822A6C3F8797091CB6111E2EB77FF57B711EACAC.
+- Installed non-qualification rehearsal result SHA-256:
+  C7BFCE696A56BC2997CDBC7DA0D1DF9492178867CB47E366B491C428A8297D3A.
+- Historical bindings reverified: 20.
+- R3 transfer, grant, authority, attempt and evidence identities: none created.
+- R2 failed attempt and all historical evidence remain immutable and ineligible for
+  reuse.
+- Maximum attempts in the preparation baseline: zero. A later execution-enabled
+  overlay may permit one only after all fresh pre-authority gates pass.

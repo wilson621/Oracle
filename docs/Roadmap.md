@@ -1321,3 +1321,15 @@ next Founder mission is a fresh Stage 4 Requalification R3 execution-enabled
 baseline, create-only transfer and one governed attempt using new identities and
 namespaces, with authority creation only after every fresh gate passes. No R2
 identity or evidence namespace may be reused.
+
+## Stage 4 Requalification R3 preparation
+
+The R3 engineering-preparation gate has passed for the accepted R6/R12 baseline.
+The corrected installed-package lifecycle completed all ten required journeys in
+both source-equivalent and elevated exact-package rehearsals with zero residue.
+Twenty historical records and 29 R3 harness files are hash-bound.
+
+The current preparation is execution-barred. The authorised programme sequence is a
+separate execution-enabled baseline, one create-only fresh transfer, independent
+verification, fresh isolated-host pre-authority admission and at most one governed
+R3 attempt. Stage 5 and later roadmap activity remain blocked.

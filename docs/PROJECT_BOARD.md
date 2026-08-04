@@ -1028,3 +1028,16 @@ next Founder mission is a fresh Stage 4 Requalification R3 execution-enabled
 baseline, create-only transfer and one governed attempt using new identities and
 namespaces, with authority creation only after every fresh gate passes. No R2
 identity or evidence namespace may be reused.
+
+## Stage 4 Requalification R3
+
+R3 engineering preparation is complete and awaiting execution-overlay freeze. The
+new namespace binds the accepted R2 correction, verifies 29 harness files and twenty
+immutable historical records, and passes static, adversarial, source-equivalent and
+exact installed-package validation. Both live rehearsals completed ten journeys
+with zero residue and created no governed identity.
+
+Next within the authorised R3 mission: commit and push the preparation baseline;
+create and independently verify a separately bound execution-enabled overlay and
+fresh transfer; then run fresh host and pre-authority gates. Authority creation is
+prohibited before those gates. Stage 5 and later work are not authorised.

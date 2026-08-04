@@ -969,3 +969,16 @@ next Founder mission is a fresh Stage 4 Requalification R3 execution-enabled
 baseline, create-only transfer and one governed attempt using new identities and
 namespaces, with authority creation only after every fresh gate passes. No R2
 identity or evidence namespace may be reused.
+
+## Stage 4 Requalification R3 preparation state
+
+R3 preparation for the accepted Stage 2 R6 / Stage 3 R12 baseline has passed. The
+29-file harness preserves the accepted R2 failed attempt and correction, assigns
+single ownership to every attempt-root directory, and rehashes twenty historical
+records. Source-equivalent and exact installed-package rehearsals passed all ten
+journeys with zero residue.
+
+The committed preparation contract cannot create a transfer, authority or attempt.
+The current Founder mission permits a separate execution-enabled overlay and one
+fresh governed attempt only after complete transfer, host, network-isolation and
+pre-authority admission. Stage 5 remains blocked.
