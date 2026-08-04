@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-5-r2-clean-host-engineering-preparation",
+  "programme": "Sprint 30.5 Stage 5 clean-host installed GPU, performance and accessibility",
+  "revision": "R2",
+  "status": "engineering-preparation-qualification-barred",
+  "classification": ["NON-QUALIFICATION", "NON-AUTHORITY", "NON-EVIDENCE", "ENGINEERING PREPARATION"],
+  "acceptedChain": {
+    "stage2": {"revision": "R6", "attemptId": "r6-20260803T171057940Z-5e914d18", "acceptedEvidenceIndexSha256": "3ef36e908803528853c1bd16a1ee555a520b40648e64e6f0e2f1ed643ea46863"},
+    "stage3": {"revision": "R12", "attemptId": "stage3-r12-20260803T204415402Z-b886be44", "acceptedEvidenceIndexSha256": "e02f94d8231c6ae683c3fecef372c077d36e1fc5db84327e2af5c7947f624a1f"},
+    "stage4": {"revision": "R4", "attemptId": "stage4-r4-20260804T133045451Z-13f6da53", "acceptedEvidenceIndexSha256": "f54bb660578bcd2dadf8ad4412f1d58738441df4688816eabc64ea3f7cdeeac8"}
+  },
+  "package": {
+    "identity": "Oracle.Platform.LocalCertification",
+    "version": "0.1.4.0",
+    "architecture": "x64",
+    "familyName": "Oracle.Platform.LocalCertification_3yksyxackaf0t",
+    "fullName": "Oracle.Platform.LocalCertification_0.1.4.0_x64__3yksyxackaf0t",
+    "fileName": "Oracle_0.1.4.0_x64_STAGE2_REQUALIFICATION_R6_LOCAL_TEST_ONLY.msix",
+    "sha256": "492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430",
+    "artifactPath": ".artifacts/sprint-30-5/stage-2-requalification-r6/r6-20260803T171057940Z-5e914d18/release/Oracle_0.1.4.0_x64_STAGE2_REQUALIFICATION_R6_LOCAL_TEST_ONLY.msix",
+    "publicCertificatePath": "docs/sprints/evidence/sprint-30-5/stage-3-r11/Oracle.Stage3R11Evidence/stage3-r11-20260803T175715661Z-84bf486c/work/attempt-public-certificate.cer",
+    "publicCertificateSha256": "f606378d0b23bbe4fe6200b3a121dae91fc0d3a6d124bff46b54b90f24b9dd51",
+    "certificateThumbprint": "8C24858C147873EF46A9D61018FA2702B6222EA2",
+    "publisher": "CN=Oracle Stage 2 Requalification R6 Local Test Signing - NOT PRODUCTION",
+    "trustStore": "Cert:\\LocalMachine\\TrustedPeople",
+    "appId": "Oracle",
+    "candidateCommit": "ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff",
+    "candidateTree": "8455a05780989a9d5f6c6d527f7d427d94526b04"
+  },
+  "applicationActivation": {"api":"IApplicationActivationManager.ActivateApplication","classId":"45BA127D-10A8-46EA-8AB7-56EA9078943C","interfaceId":"2E941141-7F97-4756-BA1D-9DECDE894A3D","classContext":"CLSCTX_LOCAL_SERVER","activateOptions":"AO_NOERRORUI","successHresult":"0x00000000","requiresNonzeroProcessId":true,"runtimeProof":["ownership-verified-installed-process-tree","package-owned-loopback-listener","ten-live-authentication-journeys"],"explorerExitCodeIsQualificationEvidence":false},
+  "authorityBoundary": {
+    "engineeringCorrectionAuthorised": true,
+    "productModificationPermitted": false,
+    "transferPreparationPermitted": false,
+    "transferCreationPermitted": false,
+    "authorityCreationPermitted": false,
+    "qualificationAttemptPermitted": false,
+    "qualificationExecutionPermitted": false,
+    "maximumTransfers": 0,
+    "maximumAuthorities": 0,
+    "maximumAttempts": 0,
+    "futureExecutionRequiresSeparateFounderAuthority": true
+  },
+  "host": {
+    "requiredIdentity": "Founder-QA-01",
+    "model": "MEDION ERAZER P6605 MD61596",
+    "requiredOs": "Windows 11 x64",
+    "minimumDisplay": {"width": 1440, "height": 900},
+    "permittedScalingPercent": [100, 125],
+    "requiredAbsentDevelopmentTools": ["git", "node", "npm", "supabase", "docker"],
+    "repositoryPermitted": false,
+    "developmentToolInstallationPermitted": false,
+    "executionRoot": "fresh-local-copy-of-independently-verified-create-only-transfer",
+    "permittedRuntimeDependencies": [
+      "Windows PowerShell 5.1",
+      "Windows built-in APIs and services",
+      "installed Microsoft Edge system browser",
+      "manifest-bound precompiled qualification fixtures"
+    ],
+    "companionFixture": {"executable": "Oracle.Stage5GameWindowFixture.exe", "sha256": "af344bcbc331868fd6dbddc77e5576e7523150d8f6e068eb53090eaa40969230"}
+  },
+  "claimPartition": {
+    "acceptedStage4R4SoleClaims": [
+      "real-provider identity and authentication",
+      "email verification",
+      "protected API authorisation",
+      "row-level security",
+      "two-principal isolation",
+      "session invalidation"
+    ],
+    "stage5R2Claims": [
+      "unchanged installed R6 package rendering",
+      "package-owned GPU process and Windows GPU-engine activity",
+      "installed route performance and resource use",
+      "protected-route rendered accessibility",
+      "Companion attach, detach, degradation and recovery",
+      "complete teardown and zero residue"
+    ],
+    "fixtureEquivalenceClaimed": false,
+    "fixtureSecurityQualificationClaimed": false,
+    "fixturePurpose": "deterministic confirmed-user session and non-production empty data responses solely to admit protected installed rendering"
+  },
+  "cleanHostFixture": {
+    "source": "Oracle.Stage5CleanHostFixtureProvider.cs",
+    "executable": "Oracle.Stage5CleanHostFixtureProvider.exe",
+    "sha256": "4ec157ee67957116e9bb7d9acbb0ccdc4e6da35dc6b3fea48a722c10d3e5eeba",
+    "loopbackOnly": true,
+    "productionEndpointsPermitted": false,
+    "productionCredentialsPermitted": false,
+    "networkDefaultRoutePermittedDuringQualification": false,
+    "port": 54321,
+    "healthPath": "/health",
+    "fixtureEmail": "oracle-stage5-clean-host@example.invalid",
+    "fixturePassword": "Oracle-Stage5-CleanHost-Only!",
+    "anonymousKey": "oracle-stage5-clean-host-anon-key-not-a-secret",
+    "unsupportedEndpointDisposition": "failed-closed-404"
+  },
+  "qualificationProtocol": {
+    "independentCycles": 2,
+    "freshPackageAndTrustLifecyclePerCycle": true,
+    "activeJourneySecondsPerCycle": 1800,
+    "soakSecondsPerCycle": 3600,
+    "sampleCadenceMilliseconds": 1000,
+    "minimumSampleCompleteness": 0.99,
+    "requiredRoutes": ["/oracle", "/companion", "/sessions", "/reports", "/intelligence", "/coach", "/progress", "/settings"],
+    "companionTransitions": ["attach", "detach", "degradation", "recovery"],
+    "unavailableMeasurementDisposition": "failed",
+    "unexplainedWarningDisposition": "failed",
+    "nonzeroExitDisposition": "failed",
+    "residueDisposition": "failed"
+  },
+  "thresholds": {
+    "startupMillisecondsMaximum": 15000,
+    "routeP95MillisecondsMaximum": 250,
+    "routeP99MillisecondsMaximum": 500,
+    "apiP95MillisecondsMaximum": 250,
+    "htmlResponseBytesMaximum": 524288,
+    "measuredActiveWorkloadCpuSecondsMaximum": 15,
+    "soakProcessTreeCpuPercentP95Maximum": 15,
+    "totalProcessTreePeakWorkingSetMiBMaximum": 768,
+    "gpuPrivateWorkingSetMiBP95Maximum": 256,
+    "gpuPrivateWorkingSetMiBPeakMaximum": 384,
+    "gpuProcessCrashesMaximum": 0,
+    "gpuProcessUnexplainedRestartsMaximum": 0,
+    "rendererHangsMaximum": 0,
+    "mainOrRendererCrashesMaximum": 0,
+    "softwareFallbackEventsMaximum": 0,
+    "minimumHardwareGpuEnginePositiveSamplesPerCycle": 1
+  },
+  "gpuAcceptance": {
+    "prohibitedIndicators": ["swiftshader", "llvmpipe", "software rasterizer", "microsoft basic render", "--disable-gpu", "--disable-gpu-compositing", "--use-angle=swiftshader"]
+  },
+  "accessibilityAcceptance": {
+    "documentLanguage": "en",
+    "mainLandmarksMinimumPerRoute": 1,
+    "levelOneHeadingsMinimumPerRoute": 1,
+    "unnamedEnabledFocusablesMaximum": 0,
+    "positiveTabIndexMaximum": 0,
+    "keyboardTrapsMaximum": 0,
+    "focusIndicatorRequired": true,
+    "naturalKeyboardOrderRequired": true,
+    "screenReaderSemanticSnapshotRequired": true,
+    "liveRegionStatusAndAlertSemanticsRequired": true,
+    "wcagNormalTextContrastMinimum": 4.5,
+    "wcagLargeTextAndUiContrastMinimum": 3,
+    "horizontalOverflowAt200PercentMaximumPixels": 0,
+    "reducedMotionRenderedVerificationRequired": true,
+    "externalAssistiveTechnologyCertificationClaimed": false
+  },
+  "developmentRehearsalProfile": {
+    "heldObservationMinimumSeconds": 30,
+    "heldObservationPollStartMaximumSeconds": 180,
+    "heldObservationCompletionMaximumSeconds": 240,
+    "minimumHeldObservationSamples": 5,
+    "ownedWindowRenderStimulusRequired": true,
+    "ownedWindowRenderStimulus": "concurrent-owned-window-foreground-reflow-focus-navigation-with-bounds-restoration",
+    "processExitRaceDisposition": "discard-poll-after-current-gpu-identity-revalidation",
+    "sampleCadenceMilliseconds": 500
+  },
+  "historicalTransfers": [
+    {"transferId": "transfer-stage5-r1-20260804T174913211Z-e7b00bae", "disposition": "immutable-pre-authority-engineering-failure-prohibited"},
+    {"transferId": "transfer-stage5-r1-20260804T180558891Z-a3943eac", "disposition": "immutable-pre-authority-engineering-failure-prohibited"}
+  ]
+}

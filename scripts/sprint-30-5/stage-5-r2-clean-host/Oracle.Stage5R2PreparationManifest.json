@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-5-r2-clean-host-preparation-manifest",
+  "status": "engineering-preparation-qualification-barred",
+  "maximumTransfers": 0,
+  "maximumAuthorities": 0,
+  "maximumAttempts": 0,
+  "qualificationHostDeveloperToolCount": 0,
+  "fixtureEquivalenceClaimed": false,
+  "files": [
+    {
+      "path": "Oracle.Stage5R2CleanHostContract.json",
+      "sha256": "176062cbaac4ea408bef65d8de474a091aeb6106acf238160cccfb80bd4ee426"
+    },
+    {
+      "path": "Oracle.Stage5R2CleanHostContinuityPolicy.ps1",
+      "sha256": "774e14395987e42680de9c3920a52d6e4ec38805471803537f7bf3def6982d3d"
+    },
+    {
+      "path": "Oracle.Stage5CleanHostFixtureProvider.cs",
+      "sha256": "a3015c46d3f085ccbcef7838042b15b65143bff12e18246be88271bf89dda7db"
+    },
+    {
+      "path": "Oracle.Stage5CleanHostFixtureProvider.exe",
+      "sha256": "4ec157ee67957116e9bb7d9acbb0ccdc4e6da35dc6b3fea48a722c10d3e5eeba"
+    },
+    {
+      "path": "Invoke-OracleStage5R2EdgeSemanticProbe.ps1",
+      "sha256": "0be6b5d227f78661c9f43f4f7f93bb57efcc838cda3c16356abecd26bbfc154d"
+    },
+    {
+      "path": "Measure-OracleStage5R2InstalledPackage.ps1",
+      "sha256": "2f8da9a64ca350c3d313d9bc47b5c94ef0fdeeb4250d3ca8f67f76435d030907"
+    },
+    {
+      "path": "Oracle.Stage5R2ObservationOwnershipPolicy.ps1",
+      "sha256": "719a5f1d46b10254f6bb3150eb499a032ea0c5107b684838cc29ae7f9106f01c"
+    },
+    {
+      "path": "Invoke-OracleStage5R2CompanionTransitions.ps1",
+      "sha256": "b25d6277126ff9375d1e4cad16e9552fa4713d8765e0f749a84c4b429aff21f4"
+    },
+    {
+      "path": "Oracle.Stage5GameWindowFixture.cs",
+      "sha256": "1efb72c160e4193277c6a0faa021dbb52f34603c9b372fdb5e64651d558af2e9"
+    },
+    {
+      "path": "Oracle.Stage5GameWindowFixture.exe",
+      "sha256": "af344bcbc331868fd6dbddc77e5576e7523150d8f6e068eb53090eaa40969230"
+    },
+    {
+      "path": "Oracle.Stage5R2ActivationPolicy.ps1",
+      "sha256": "e68b265004ccc91c47ab4c65d0e5f5bf2528da4407c3143fb24335ae325e5c32"
+    },
+    {
+      "path": "Oracle.Stage5R2InstalledRuntimeConfigurationPolicy.ps1",
+      "sha256": "bb76e8a06b5269888cb27669e98b4898fe28a96ea0f3e6104f26478b95a583e3"
+    },
+    {
+      "path": "Oracle.Stage5R2ProcessTeardownPolicy.ps1",
+      "sha256": "c2eb300f0f10d8acbf66f0b867d1c4807bfd1f84b949e739cc82ddde44e891d6"
+    },
+    {
+      "path": "Invoke-OracleStage5R2InstalledDevelopmentRehearsal.ps1",
+      "sha256": "c3a3b9d389053846e6fe4858cbf09d7009b719e5543e87660c6fd4524cb45f71"
+    },
+    {
+      "path": "stage5-r2-core.mjs",
+      "sha256": "5b3f9c51d7418439fdc086a47b5f574f449079413cf511a3d77d7f51b3f5c259"
+    }
+  ]
+}
