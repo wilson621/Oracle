@@ -29,3 +29,25 @@ the exact transferred R6 package. It must preserve failure evidence, perform bou
 teardown, prove zero residue, freeze and reconcile returned evidence, and stop at
 Stage 4 closure. No Stage 5, production, publication, deployment or release activity
 is authorised.
+
+## Pre-authority engineering correction
+
+The first execution controller reached and passed the fresh elevated pre-authority
+record `preflight-stage4-r2-20260804T111151420Z-2e376761.json` (SHA-256
+`1bbf23460ba05d38504462e62fc84bd1ff43ddc542c33bb7def8875ce417266e`) against
+transfer `transfer-stage4-r2-20260804T105750831Z-b5b1ceec`. It then stopped
+fail-closed before authority creation because the qualification harness's second
+transfer-admission call did not forward the mandatory independently verified
+transfer hash. No authority, attempt, host mutation or qualification evidence was
+created.
+
+The immutable controller result is
+`result-33a8e879a1694f31bff42f5a4840e38f.json` (SHA-256
+`006c1cf69b79974a31ca255f06fdc48ddf1c3689957527d522aabe2993489805`). The passed
+preflight, failed controller result and original transfer remain unchanged as
+historical pre-authority engineering records. The corrected harness binds
+`TransferVerificationSha256` at both transfer-admission checks, and baseline
+validation now adversarially requires both bindings. Because the harness and
+execution manifest changed, the prior transfer cannot be reused; qualification may
+proceed only from a fresh execution commit/tree, new create-only transfer identity,
+independent verification and fresh pre-authority record.

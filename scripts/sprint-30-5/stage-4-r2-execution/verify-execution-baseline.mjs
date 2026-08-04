@@ -91,6 +91,18 @@ for (const [file, patterns] of [
   for (const pattern of patterns) assert.match(text, pattern);
 }
 
+const qualificationHarness = readFileSync(join(harnessRoot, "Invoke-OracleStage4R2Qualification.ps1"), "utf8");
+const transferAdmissionCalls = qualificationHarness
+  .split(/\r?\n/u)
+  .filter((line) => line.includes("Assert-OracleStage4R2Transfer"));
+assert.equal(transferAdmissionCalls.length, 2, "Qualification must perform exactly two transfer-admission checks.");
+for (const call of transferAdmissionCalls) {
+  assert.match(
+    call,
+    /-ExpectedVerificationSha256\s+\$TransferVerificationSha256/u,
+    "Every qualification transfer-admission check must bind the independently verified transfer hash.",
+  );
+}
 console.log(JSON.stringify({
   result: "passed",
   classification: "STAGE-4-R2-EXECUTION-BASELINE-VALIDATION",

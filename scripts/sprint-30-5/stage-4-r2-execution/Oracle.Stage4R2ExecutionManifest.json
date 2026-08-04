@@ -29,8 +29,8 @@
     },
     {
       "path": "Invoke-OracleStage4R2Qualification.ps1",
-      "bytes": 19230,
-      "sha256": "0e91111c05fca4e8d2d15a775c6213a4b134595c2ab32f8ac49cba92e5654f5c"
+      "bytes": 19286,
+      "sha256": "45db8baa843c549dfcc89d56a4c69e95e1fe869bc9992abb53a7464eb7ea7f2d"
     },
     {
       "path": "Oracle.Stage4R2ActivationPolicy.ps1",
@@ -129,8 +129,8 @@
     },
     {
       "path": "verify-execution-baseline.mjs",
-      "bytes": 7001,
-      "sha256": "e71db9c97d067cfe25878469cf25fc4dbe24fe540df1ba4affd3a8d73f219298"
+      "bytes": 7619,
+      "sha256": "77990dfc2df4d5b961b2537e9026cce1f86ff80e2bf28c0fdf3ffb60feb74de1"
     },
     {
       "path": "verify-provider-output-contract.mjs",
