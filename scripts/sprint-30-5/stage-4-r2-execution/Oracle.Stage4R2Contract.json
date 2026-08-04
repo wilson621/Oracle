@@ -1,18 +1,18 @@
 {
   "schemaVersion": "3.0.0",
-  "contract": "oracle.sprint-30-5.stage-4-r2-execution-enabled",
+  "contract": "oracle.sprint-30-5.stage-4-r2-engineering-correction",
   "programme": "Sprint 30.5 Stage 4 Live Authentication and Protected Rendering",
   "revision": "R2",
-  "status": "founder-authorised-execution-enabled",
+  "status": "engineering-correction-qualification-barred",
   "executionSurface": "accepted-r6-installed-msix",
   "executionAuthority": {
-    "founderAuthorisedQualificationExecution": true,
-    "authorityCreationPermitted": true,
-    "qualificationAttemptPermitted": true,
-    "requiredFutureToken": "FOUNDER-AUTHORISED-STAGE-4-R2-SINGLE-EXECUTION-e999435136fef9cb9b06d7be059bbf2c",
+    "founderAuthorisedQualificationExecution": false,
+    "authorityCreationPermitted": false,
+    "qualificationAttemptPermitted": false,
+    "requiredFutureToken": null,
     "preparationMayMintToken": false,
     "failClosedWithoutFutureContractBinding": true,
-    "maximumAttempts": 1,
+    "maximumAttempts": 0,
     "retryAfterConsumedAuthorityPermitted": false
   },
   "repository": {
@@ -75,6 +75,19 @@
     "evidenceManifestSha256": "1f516e1f7d1b30d88c8e9fbd22774068bd9c7071935cc415b1d1243b7b5d4c9d",
     "archiveSha256": "91116098c123c960ba736114176c08876f7a4f66b0b777efbcb2bda1e53d2a15",
     "disposition": "accepted-immutable-history-not-applicable-to-r6-r12"
+  },
+  "historicalStage4R2Failure": {
+    "revision": "R2",
+    "result": "failed",
+    "disposition": "accepted-immutable-failed-qualification",
+    "authorityId": "authority-stage4-r2-20260804T112122028Z-609ab6f0",
+    "attemptId": "stage4-r2-20260804T112122028Z-609ab6f0",
+    "executionCommit": "7a59616dab437829156638290c691f6a8d54771e",
+    "executionTree": "983313f3e2563ecd9ef7e783542d2cca642ed36b",
+    "failureSha256": "eff42158ed5fdf9a25c4bd4535762f09e624061939835789850bf69481298538",
+    "failureClosureSha256": "deb9a5c53a4be5bebbad5d21de0563036069e2aa7f19fb8f3b264280dbf0da86",
+    "acceptedFailedEvidenceIndexSha256": "1473cc282818567ea6f76ab240ea833a4689bf0f3ca6193843667247a0b75fde",
+    "retryProhibited": true
   },
   "package": {
     "identity": "Oracle.Platform.LocalCertification",
@@ -185,6 +198,21 @@
     "rehearsalRoot": ".artifacts/sprint-30-5/stage-4-r2-development-rehearsal",
     "transferRoot": ".artifacts/sprint-30-5/stage-4-r2/transfers"
   },
+  "attemptDirectoryOwnership": {
+    "attemptRoot": "qualification-or-rehearsal-launcher-create-only",
+    "logs": "launcher-owned-shared-create-only-records",
+    "lifecycle": "qualification-harness-create-only-records",
+    "evidence": "journey-controller-create-only-records",
+    "provider": "live-environment-controller-exclusive-ephemeral",
+    "qualificationControllerAdmission": {
+      "rootEntries": ["lifecycle", "logs"],
+      "logFiles": ["transfer-admission.json"]
+    },
+    "rehearsalControllerAdmission": {
+      "rootEntries": ["logs"],
+      "logFiles": []
+    }
+  },
   "historicalProtectedRoots": [
     "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r6",
     "docs/sprints/evidence/sprint-30-5/stage-3-r11",
@@ -192,7 +220,18 @@
     "docs/sprints/evidence/sprint-30-5/stage-4-r1",
     ".artifacts/sprint-30-5/stage-2-requalification-r6",
     ".artifacts/sprint-30-5/stage-3-r12",
-    ".artifacts/sprint-30-5/stage-4-r1"
+    ".artifacts/sprint-30-5/stage-4-r1",
+    "docs/sprints/SPRINT_30_5_STAGE_4_R2_FAILURE_CLOSURE.md",
+    "docs/sprints/evidence/sprint-30-5/stage-4-r2/Oracle.Stage4R2AcceptedFailedEvidenceIndex.json",
+    ".artifacts/sprint-30-5/stage-4-r2/stage4-r2-20260804T112122028Z-609ab6f0",
+    ".artifacts/sprint-30-5/stage-4-r2/authorities/authority-stage4-r2-20260804T112122028Z-609ab6f0.json",
+    ".artifacts/sprint-30-5/stage-4-r2/preflight/preflight-stage4-r2-20260804T112115475Z-84e3fff4.json",
+    ".artifacts/sprint-30-5/stage-4-r2/preflight/preflight-stage4-r2-20260804T112115475Z-84e3fff4.json.sha256.txt",
+    ".artifacts/sprint-30-5/stage-4-r2/mission-launch/result-manual-f38f67c791514c0e8300815ef9edfd8c.json",
+    ".artifacts/sprint-30-5/stage-4-r2/transfers/transfer-stage4-r2-20260804T111859351Z-54dade09",
+    ".artifacts/sprint-30-5/stage-4-r2/preflight/preflight-stage4-r2-20260804T111151420Z-2e376761.json",
+    ".artifacts/sprint-30-5/stage-4-r2/mission-launch/result-33a8e879a1694f31bff42f5a4840e38f.json",
+    ".artifacts/sprint-30-5/stage-4-r2/transfers/transfer-stage4-r2-20260804T105750831Z-b5b1ceec"
   ],
   "requiredJourneys": [
     "anonymous-protected-route-rejected",
@@ -284,6 +323,14 @@
     {
       "path": "scripts/sprint-30-5/stage-4-r2/Oracle.Stage4R2PreparationManifest.json",
       "sha256": "75ba28ed74aff10b43e2b5ef980b0d4b7de1ed2d343e87a5a5feec22c4db9ef1"
+    },
+    {
+      "path": "docs/sprints/evidence/sprint-30-5/stage-4-r2/Oracle.Stage4R2AcceptedFailedEvidenceIndex.json",
+      "sha256": "1473cc282818567ea6f76ab240ea833a4689bf0f3ca6193843667247a0b75fde"
+    },
+    {
+      "path": "docs/sprints/SPRINT_30_5_STAGE_4_R2_FAILURE_CLOSURE.md",
+      "sha256": "deb9a5c53a4be5bebbad5d21de0563036069e2aa7f19fb8f3b264280dbf0da86"
     }
   ],
   "prohibitions": [
@@ -414,7 +461,7 @@
   },
   "transfer": {
     "required": true,
-    "executionAuthorised": true,
+    "executionAuthorised": false,
     "createOnly": true,
     "independentVerificationRequired": true,
     "manifestFile": "Oracle.Stage4R2TransferManifest.json",

@@ -3,7 +3,7 @@ import { createHash, randomBytes } from "node:crypto";
 import { spawn, spawnSync } from "node:child_process";
 import { constants, copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { basename, dirname, join, resolve } from "node:path";
-import { assertNoLinkTraversal, assertSupabaseOfflineEnvironment, buildSupabaseJsonArguments, contract, createGovernedEnvironment, parseSupabaseJsonObject, redactEvidence, repositoryRoot, validateApprovedTool, validateProcessEnvelope, validateSupabaseOfflinePolicy, writeJsonAtomicCreateOnly } from "./stage4-core.mjs";
+import { admitAttemptDirectoryLayout, assertNoLinkTraversal, assertSupabaseOfflineEnvironment, buildSupabaseJsonArguments, contract, createGovernedEnvironment, parseSupabaseJsonObject, redactEvidence, repositoryRoot, validateApprovedTool, validateProcessEnvelope, validateSupabaseOfflinePolicy, writeJsonAtomicCreateOnly } from "./stage4-core.mjs";
 
 const teardownOnly = process.argv.length === 3 && process.argv[2] === "--teardown-only";
 if (process.argv.length > (teardownOnly ? 3 : 2)) throw new Error("Unexpected live-environment arguments.");
@@ -28,10 +28,16 @@ if (mode === "qualification") {
 }
 const expectedOutput = join(attemptRoot, "evidence", "live-journey.json");
 if (output !== expectedOutput || (!teardownOnly && existsSync(output))) throw new Error("Attempt-scoped live-environment output is invalid.");
-const providerRoot = join(attemptRoot, "provider");
-const logsRoot = join(attemptRoot, "logs");
-if (!teardownOnly) { mkdirSync(providerRoot, { recursive: false }); mkdirSync(logsRoot, { recursive: false }); }
-else if (!existsSync(logsRoot)) mkdirSync(logsRoot, { recursive: true });
+const admission = mode === "qualification"
+  ? contract.attemptDirectoryOwnership.qualificationControllerAdmission
+  : contract.attemptDirectoryOwnership.rehearsalControllerAdmission;
+const { providerRoot, logsRoot } = admitAttemptDirectoryLayout({
+  attemptRoot,
+  artifactBoundary,
+  teardownOnly,
+  expectedRootEntries: admission.rootEntries,
+  expectedLogFiles: admission.logFiles,
+});
 const approvedTools = Object.fromEntries(["git", "node", "npmCli", "supabaseCli", "supabaseBinary", "docker", "powershell", "taskkill"].map(name => [name, validateApprovedTool(name)]));
 const supabaseOfflinePolicy = validateSupabaseOfflinePolicy();
 const supabaseCli = approvedTools.supabaseCli.path;

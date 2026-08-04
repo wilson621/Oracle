@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { closeSync, constants, existsSync, linkSync, lstatSync, mkdirSync, openSync, readFileSync, realpathSync, statSync, unlinkSync, writeFileSync } from "node:fs";
+import { closeSync, constants, existsSync, linkSync, lstatSync, mkdirSync, openSync, readFileSync, readdirSync, realpathSync, statSync, unlinkSync, writeFileSync } from "node:fs";
 import { dirname, isAbsolute, join, parse, relative, resolve, sep } from "node:path";
 
 export const repositoryRoot = resolve(import.meta.dirname, "..", "..", "..");
@@ -43,9 +43,21 @@ export function validateAcceptedBindings() {
   assert.equal(contract.stage3.providerConnectivityClaimed, false);
   assert.equal(contract.stage3.authenticationClaimed, false);
   assert.equal(contract.historicalStage4.revision, "R1");
-  assert.equal(contract.executionAuthority.founderAuthorisedQualificationExecution, true);
-  assert.equal(contract.executionAuthority.authorityCreationPermitted, true);
-  assert.equal(contract.executionAuthority.qualificationAttemptPermitted, true);
+  assert.equal(contract.status, "engineering-correction-qualification-barred");
+  assert.equal(contract.executionAuthority.founderAuthorisedQualificationExecution, false);
+  assert.equal(contract.executionAuthority.authorityCreationPermitted, false);
+  assert.equal(contract.executionAuthority.qualificationAttemptPermitted, false);
+  assert.equal(contract.executionAuthority.requiredFutureToken, null);
+  assert.equal(contract.executionAuthority.maximumAttempts, 0);
+  assert.equal(contract.executionAuthority.retryAfterConsumedAuthorityPermitted, false);
+  assert.equal(contract.transfer.executionAuthorised, false);
+  assert.equal(contract.historicalStage4R2Failure.result, "failed");
+  assert.equal(contract.historicalStage4R2Failure.disposition, "accepted-immutable-failed-qualification");
+  assert.equal(contract.historicalStage4R2Failure.failureSha256, "eff42158ed5fdf9a25c4bd4535762f09e624061939835789850bf69481298538");
+  assert.equal(contract.historicalStage4R2Failure.failureClosureSha256, "deb9a5c53a4be5bebbad5d21de0563036069e2aa7f19fb8f3b264280dbf0da86");
+  assert.equal(contract.historicalStage4R2Failure.acceptedFailedEvidenceIndexSha256, "1473cc282818567ea6f76ab240ea833a4689bf0f3ca6193843667247a0b75fde");
+  assert.equal(contract.historicalStage4R2Failure.retryProhibited, true);
+
 }
 export function validateSupabaseOfflinePolicy() {
   const policy = contract.toolchain?.supabaseOfflineTelemetry;
@@ -121,6 +133,27 @@ export function assertNoLinkTraversal(path, boundary) {
     if (existsSync(current) && lstatSync(current).isSymbolicLink()) throw new Error("Link traversal rejected.");
   }
   return target;
+}
+export function admitAttemptDirectoryLayout({ attemptRoot, artifactBoundary, teardownOnly = false, expectedRootEntries = [], expectedLogFiles = [] }) {
+  const root = assertNoLinkTraversal(attemptRoot, artifactBoundary);
+  if (!existsSync(root) || !lstatSync(root).isDirectory() || lstatSync(root).isSymbolicLink()) throw new Error("Attempt root must be a caller-owned non-link directory.");
+  const logsRoot = assertNoLinkTraversal(join(root, "logs"), root);
+  if (!existsSync(logsRoot) || !lstatSync(logsRoot).isDirectory() || lstatSync(logsRoot).isSymbolicLink()) throw new Error("Caller-owned attempt logs directory is absent or invalid.");
+  const providerRoot = assertNoLinkTraversal(join(root, "provider"), root);
+  if (teardownOnly) {
+    if (existsSync(providerRoot) && (!lstatSync(providerRoot).isDirectory() || lstatSync(providerRoot).isSymbolicLink())) throw new Error("Provider teardown root is not a non-link directory.");
+  } else {
+    if (!Array.isArray(expectedRootEntries) || !Array.isArray(expectedLogFiles)) throw new Error("Attempt directory admission inventory is absent.");
+    if (existsSync(providerRoot)) throw new Error("Live-controller-owned provider directory already exists.");
+    const rootEntries = readdirSync(root, { withFileTypes: true });
+    if (rootEntries.some(entry => entry.isSymbolicLink())) throw new Error("Attempt root contains a linked entry.");
+    assert.deepEqual(rootEntries.map(entry => entry.name).sort(), [...expectedRootEntries].sort(), "Attempt root inventory differs from the mode-bound ownership contract.");
+    const logEntries = readdirSync(logsRoot, { withFileTypes: true });
+    if (logEntries.some(entry => !entry.isFile() || entry.isSymbolicLink())) throw new Error("Caller-owned logs contain a non-regular entry.");
+    assert.deepEqual(logEntries.map(entry => entry.name).sort(), [...expectedLogFiles].sort(), "Caller-owned log inventory differs from the mode-bound ownership contract.");
+    mkdirSync(providerRoot, { recursive: false });
+  }
+  return Object.freeze({ root, logsRoot, providerRoot, logsOwnership: "caller-shared-create-only", providerOwnership: "live-controller-exclusive-ephemeral" });
 }
 export function validateApprovedTool(name) {
   const specification = contract.toolchain?.approvedTools?.[name];

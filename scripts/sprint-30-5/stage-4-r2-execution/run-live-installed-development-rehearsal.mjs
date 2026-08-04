@@ -28,6 +28,7 @@ assert.match(rehearsalIdentity, new RegExp(contract.identity.attemptPattern, "u"
 const root = join(rehearsalBoundary, `installed-rehearsal-${identitySuffix}`);
 assertSafeCreateOnly(root, rehearsalBoundary);
 mkdirSync(root, { recursive: true });
+mkdirSync(join(root, "logs"), { recursive: false });
 const output = join(root, "evidence", "live-journey.json");
 const tools = Object.fromEntries(
   ["node", "npmCli", "docker", "powershell", "taskkill"]

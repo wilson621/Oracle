@@ -8,6 +8,7 @@ import { assertSafeCreateOnly, contract, repositoryRoot, validateApprovedTool, v
 const rehearsalBoundary = resolve(repositoryRoot, contract.paths.rehearsalRoot);
 const root = join(rehearsalBoundary, `rehearsal-${randomBytes(8).toString("hex")}`);
 assertSafeCreateOnly(root, rehearsalBoundary); mkdirSync(root, { recursive: true });
+mkdirSync(join(root, "logs"), { recursive: false });
 const output = join(root, "evidence", "live-journey.json");
 const tools = Object.fromEntries(["node", "npmCli", "docker", "powershell", "taskkill"].map(name => [name, validateApprovedTool(name)]));
 assert.equal(resolve(process.execPath).toLowerCase(), resolve(tools.node.path).toLowerCase(), "Rehearsal was not launched by the contract-approved Node executable.");

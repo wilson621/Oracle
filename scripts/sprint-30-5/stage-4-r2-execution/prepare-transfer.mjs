@@ -7,6 +7,9 @@ import { spawnSync } from "node:child_process";
 const harnessRoot = import.meta.dirname;
 const repositoryRoot = path.resolve(harnessRoot, "../../..");
 const contract = JSON.parse(fs.readFileSync(path.join(harnessRoot, "Oracle.Stage4R2Contract.json"), "utf8"));
+if (contract.status !== "founder-authorised-execution-enabled" || contract.transfer.executionAuthorised !== true || contract.executionAuthority.founderAuthorisedQualificationExecution !== true || contract.executionAuthority.authorityCreationPermitted !== true || contract.executionAuthority.qualificationAttemptPermitted !== true) {
+  throw new Error("Stage 4 R2 transfer preparation is not Founder-authorised by the bound contract.");
+}
 const args = new Map();
 for (let i = 2; i < process.argv.length; i += 2) args.set(process.argv[i].replace(/^--/u, ""), process.argv[i + 1]);
 const transferId = required("transfer-id");
@@ -52,7 +55,7 @@ const manifest = {
   acceptedPreparationTree: contract.acceptedPreparation.tree,
   acceptedPreparationManifestSha256: contract.acceptedPreparation.preparationManifestSha256,
   executionManifestSha256: sha256(executionManifestPath),
-  founderAuthorisedQualificationExecution: true,
+  founderAuthorisedQualificationExecution: contract.executionAuthority.founderAuthorisedQualificationExecution,
   singleAttemptOnly: true,
   files,
 };

@@ -1,0 +1,125 @@
+{
+    "contract":  "oracle.sprint-30-5.stage-4-r2-accepted-failed-qualification-evidence-index",
+    "schemaVersion":  "1.0.0",
+    "result":  "failed",
+    "acceptedAsImmutableHistory":  true,
+    "retryProhibited":  true,
+    "attemptId":  "stage4-r2-20260804T112122028Z-609ab6f0",
+    "authorityId":  "authority-stage4-r2-20260804T112122028Z-609ab6f0",
+    "founderGrantId":  "founder-stage4-r2-grant-20260804T112122028Z-609ab6f0",
+    "executionCommit":  "7a59616dab437829156638290c691f6a8d54771e",
+    "executionTree":  "983313f3e2563ecd9ef7e783542d2cca642ed36b",
+    "transferId":  "transfer-stage4-r2-20260804T111859351Z-54dade09",
+    "preflightSha256":  "728496a9a18be409c8d41aaea69e8ed57deacbb0e37e9c1c4b5d7c114037d3f4",
+    "failureSha256":  "eff42158ed5fdf9a25c4bd4535762f09e624061939835789850bf69481298538",
+    "authoritySha256":  "d7886066e4fc709e867fe5cb80c465be2fa1ce04adcda054ff004ae577cc2b06",
+    "controllerResultSha256":  "1d3b8f49c959a3954607c41c27e036a867d2cf311cb196e9c2ff7389964c2c4f",
+    "completedLifecyclePhases":  [
+                                     "authority-consumed",
+                                     "baseline-verified"
+                                 ],
+    "attemptFiles":  9,
+    "attemptBytes":  10770,
+    "qualificationArchiveProduced":  false,
+    "finalEvidenceManifestProduced":  false,
+    "repositoryQualificationEvidenceProduced":  false,
+    "safetyTeardownPassed":  true,
+    "zeroResidueIndependentlyVerified":  true,
+    "files":  [
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/authorities/authority-stage4-r2-20260804T112122028Z-609ab6f0.json",
+                      "bytes":  964,
+                      "sha256":  "d7886066e4fc709e867fe5cb80c465be2fa1ce04adcda054ff004ae577cc2b06"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/mission-launch/result-manual-f38f67c791514c0e8300815ef9edfd8c.json",
+                      "bytes":  41178,
+                      "sha256":  "1d3b8f49c959a3954607c41c27e036a867d2cf311cb196e9c2ff7389964c2c4f"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/preflight/preflight-stage4-r2-20260804T112115475Z-84e3fff4.json",
+                      "bytes":  33493,
+                      "sha256":  "728496a9a18be409c8d41aaea69e8ed57deacbb0e37e9c1c4b5d7c114037d3f4"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/preflight/preflight-stage4-r2-20260804T112115475Z-84e3fff4.json.sha256.txt",
+                      "bytes":  120,
+                      "sha256":  "64d3b1409ef842678284e0eb4423cc41a972b6ae5f6c7146dee19b52d6eaab7f"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/stage4-r2-20260804T112122028Z-609ab6f0/failure.json",
+                      "bytes":  1896,
+                      "sha256":  "eff42158ed5fdf9a25c4bd4535762f09e624061939835789850bf69481298538"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/stage4-r2-20260804T112122028Z-609ab6f0/lifecycle/001-authority-consumed.json",
+                      "bytes":  514,
+                      "sha256":  "d5a4bbb9c3125ce4c961a34310f69e94df5384af9000df5860bb99b9bf7080c0"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/stage4-r2-20260804T112122028Z-609ab6f0/lifecycle/002-baseline-verified.json",
+                      "bytes":  1209,
+                      "sha256":  "e2c596acea655039d8e0e28a3b7544e58f1c6b6c1363fdf2aa8ab8d946a7cd51"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/stage4-r2-20260804T112122028Z-609ab6f0/logs/installed-safety-teardown.json",
+                      "bytes":  1183,
+                      "sha256":  "4efbcdca0df74f2e4803b4f6133791bbade59e2a2ce33da55d7b2326ba06a901"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/stage4-r2-20260804T112122028Z-609ab6f0/logs/live-controller-process.json",
+                      "bytes":  1383,
+                      "sha256":  "ee859a470a50b24e7e5fe96e0236410ead1ea0370624b79388b153d4dc115899"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/stage4-r2-20260804T112122028Z-609ab6f0/logs/safety-controller-process.json",
+                      "bytes":  557,
+                      "sha256":  "44237e123661c9fa33bb53f2c2ae816fcd36e279e1958f53883d6260527c7c27"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/stage4-r2-20260804T112122028Z-609ab6f0/logs/safety-teardown-process-summary.json",
+                      "bytes":  3011,
+                      "sha256":  "544c025df738ec63b517c5c4e5aafb6f4a4ed2e4f5713506555d4ce79c7a0027"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/stage4-r2-20260804T112122028Z-609ab6f0/logs/safety-teardown-result.json",
+                      "bytes":  301,
+                      "sha256":  "59275f7223e3d6851fd71bc93a23f3d13022b4be57f5ee418c749863337fe27e"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/stage4-r2-20260804T112122028Z-609ab6f0/logs/transfer-admission.json",
+                      "bytes":  716,
+                      "sha256":  "cd61cdfea69233281ce0003a126ba96f1c495899c84641b03f9654fa77e1e44b"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/transfers/transfer-stage4-r2-20260804T111859351Z-54dade09/Oracle.Stage4R2TransferCustody.json",
+                      "bytes":  632,
+                      "sha256":  "cbe500256d913f6c55eba998e2e2e162151bbab0ef19c2522c5637f143c0ab82"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/transfers/transfer-stage4-r2-20260804T111859351Z-54dade09/Oracle.Stage4R2TransferCustody.json.sha256.txt",
+                      "bytes":  102,
+                      "sha256":  "0e4936522d0ee8112a145a4866dc736d91de3ce6a738e42ff193e02f07a90537"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/transfers/transfer-stage4-r2-20260804T111859351Z-54dade09/Oracle.Stage4R2TransferManifest.json",
+                      "bytes":  7858,
+                      "sha256":  "2df5f5ea599d91d6db38f193944c1196201978c234f13159e151d66a3fc76f6f"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/transfers/transfer-stage4-r2-20260804T111859351Z-54dade09/Oracle.Stage4R2TransferManifest.json.sha256.txt",
+                      "bytes":  103,
+                      "sha256":  "d18327ac323edd088421f93724357ee5541ea68a18a25b780cb0c4bf5dfa0fcd"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/transfers/transfer-stage4-r2-20260804T111859351Z-54dade09/Oracle.Stage4R2TransferVerification.json",
+                      "bytes":  689,
+                      "sha256":  "c1dd79eb1c93ab7f8f5a73b8b83684bee7775f6515ccf2c5836112b06d3cfbc6"
+                  },
+                  {
+                      "path":  ".artifacts/sprint-30-5/stage-4-r2/transfers/transfer-stage4-r2-20260804T111859351Z-54dade09/Oracle.Stage4R2TransferVerification.json.sha256.txt",
+                      "bytes":  107,
+                      "sha256":  "28d42889743439c26a1ed81563a1658c197b41b519a74eaf4e98411606dab511"
+                  }
+              ]
+}

@@ -48,6 +48,7 @@ function Get-Inventory([string]$Base,[string[]]$Excluded=@()){$baseFull=[IO.Path
 $timestamp=(Get-Date).ToUniversalTime().ToString('o')
 Write-CreateOnlyJson $authorityPath ([ordered]@{contract='oracle.sprint-30-5.stage-4-r2-authority';founderGrantId=$FounderGrantId;authorityId=$authorityId;attemptId=$attemptId;timestampUtc=$timestamp;preflightSha256=$observedPreflight;preparationCommit=$PreparationCommit;preparationTree=$PreparationTree;transferId=$transferAdmission.transferId;transferManifestSha256=$transferAdmission.manifestSha256;transferCustodySha256=$transferAdmission.custodySha256;transferVerificationSha256=$transferAdmission.verificationSha256;consumed=$true})
 New-Item -ItemType Directory -Path $attemptRoot -ErrorAction Stop|Out-Null
+New-Item -ItemType Directory -Path (Join-Path $attemptRoot 'logs') -ErrorAction Stop|Out-Null
 $state=New-OracleStage4R2LifecycleState;$failure=$null;$index=0
 function Publish-Lifecycle([string]$Phase,$Details){$script:index++;Write-CreateOnlyJson (Join-Path $attemptRoot ("lifecycle\{0:d3}-{1}.json" -f $script:index,$Phase)) ([ordered]@{contract='oracle.sprint-30-5.stage-4-r2-lifecycle';authorityId=$authorityId;attemptId=$attemptId;phase=$Phase;recordedAtUtc=(Get-Date).ToUniversalTime().ToString('o');details=$Details});[void](Move-OracleStage4R2Lifecycle $state $Phase)}
 $journeyPath=Join-Path $attemptRoot 'evidence\live-journey.json';$controllerLog=Join-Path $attemptRoot 'logs\live-controller-process.json'

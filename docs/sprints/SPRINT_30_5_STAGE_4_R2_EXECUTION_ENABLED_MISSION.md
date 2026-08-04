@@ -51,3 +51,24 @@ validation now adversarially requires both bindings. Because the harness and
 execution manifest changed, the prior transfer cannot be reused; qualification may
 proceed only from a fresh execution commit/tree, new create-only transfer identity,
 independent verification and fresh pre-authority record.
+## Qualification disposition and correction
+
+The fresh R2 attempt `stage4-r2-20260804T112122028Z-609ab6f0` consumed its single
+authority and failed permanently after `baseline-verified`. The live controller
+rejected an ownership conflict because the qualification harness had created the
+shared `logs/` directory before the controller attempted exclusive directory
+creation. Safety teardown and independent zero-residue verification passed. The
+Founder accepted the attempt as immutable failed qualification evidence; retry is
+prohibited.
+
+The evidence-led correction assigns `logs/` to the launcher as a shared create-only
+record namespace and `provider/` exclusively to the live controller. Exact
+mode-bound inventories reject missing, linked, file-backed or unexpected layouts
+before provider mutation. Full source-equivalent and exact installed-package
+non-qualification rehearsals passed all ten journeys with zero residue.
+
+The corrected R2 engineering contract is qualification-barred: transfer preparation,
+authority creation and qualification execution are false, remaining attempts are
+zero, and the consumed R2 identity cannot be reused. Any future qualification
+requires a separate Founder-authorised fresh revision. Stage 4 remains incomplete
+for R6/R12 and Stage 5 remains blocked.
