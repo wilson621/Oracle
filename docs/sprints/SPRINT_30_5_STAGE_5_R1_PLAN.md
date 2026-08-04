@@ -35,8 +35,12 @@ convenience scripts and Stage 5 does not extend it.
 3. Validate current product-path drift against the accepted R6 commit.
 4. Implement deterministic positive, regression and adversarial evaluators.
 5. Rehearse accepted-candidate source accessibility contracts.
-6. Run one elevated installed-package development rehearsal on
-   Founder-QA-01 through the accepted Stage 4 R4 lifecycle.
+6. Run one elevated installed-package development rehearsal on the bound main
+   engineering workstation, DESKTOP-M3H22E4, through the accepted Stage 4 R4
+   lifecycle. A held observation runs for at least 30 seconds and continues
+   until it has at least five complete Windows GPU-counter and UI Automation
+   samples. New polls stop by 180 seconds and completion fails closed beyond
+   240 seconds. The laptop remains reserved for governed qualification.
 7. Independently evaluate the installed rehearsal record and prove zero
    package, process and certificate residue.
 8. Freeze a complete preparation inventory, independently validate it, and

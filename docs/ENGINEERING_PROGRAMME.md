@@ -2486,3 +2486,11 @@ Founder-authorised R1 preparation mission must freeze installed GPU, performance
 and accessibility acceptance criteria; the existing GPU protocol remains proposed.
 If any product correction is required, the corrected candidate must repeat Stages
 2, 3 and 4 before Stage 5. Assessment created no engineering or execution state.
+## Sprint 30.5 Stage 5 R1 engineering preparation closure
+
+The Founder-authorised R1 preparation and acceptance-contract freeze are
+complete for the exact unchanged R6 package and accepted R6/R12/R4 chain. The
+qualification-barred harness passed deterministic, regression, adversarial and
+elevated installed-package validation without product change. The next possible
+mission is a separately authorised execution-enabled Stage 5 baseline and fresh
+governed transfer; Stage 6 and later work remain unauthorised.

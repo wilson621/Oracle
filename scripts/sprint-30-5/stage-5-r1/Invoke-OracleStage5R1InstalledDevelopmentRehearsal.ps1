@@ -9,6 +9,7 @@ $ErrorActionPreference = "Stop"
 $repositoryRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\..\.."))
 $contractPath = Join-Path $PSScriptRoot "Oracle.Stage5R1Contract.json"
 $contract = Get-Content -Raw -LiteralPath $contractPath | ConvertFrom-Json
+. (Join-Path $PSScriptRoot "Oracle.Stage5R1ObservationReconciliationPolicy.ps1")
 $rehearsalRoot = [IO.Path]::GetFullPath((Join-Path $repositoryRoot ([string]$contract.paths.rehearsalRoot)))
 $result = [IO.Path]::GetFullPath($ResultPath)
 if (-not $result.StartsWith($rehearsalRoot.TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase)) {
@@ -19,6 +20,18 @@ if (Test-Path -LiteralPath $result) {
 }
 $resultParent = Split-Path -Parent $result
 [IO.Directory]::CreateDirectory($resultParent) | Out-Null
+$diagnostics = [ordered]@{
+  pollCount = 0
+  packageObservationCount = 0
+  ownedProcessObservationCount = 0
+  gpuMatchCount = 0
+  collectedGpuSampleCount = 0
+  positiveGpuEngineSampleCount = 0
+  maximumOwnedProcesses = 0
+  processExitRacePolls = 0
+  childLifecycleSupervisedToCompletion = $false
+  childLifecycleExitCode = $null
+}
 
 function Write-CreateOnlyResult($Value) {
   $serialized = ($Value | ConvertTo-Json -Depth 20) + [Environment]::NewLine
@@ -32,7 +45,23 @@ function Write-CreateOnlyResult($Value) {
   }
 }
 
+$process = $null
+$stdoutTask = $null
+$stderrTask = $null
+
 trap {
+  $primaryFailure = [string]$_
+  try {
+    if ($null -ne $process) {
+      if (-not $process.HasExited) {
+        $process.WaitForExit()
+      }
+      $diagnostics.childLifecycleSupervisedToCompletion = $true
+      $diagnostics.childLifecycleExitCode = [int]$process.ExitCode
+    }
+  } catch {
+    $diagnostics.childLifecycleSupervisionFailure = [string]$_
+  }
   try {
     if (-not (Test-Path -LiteralPath $result)) {
       Write-CreateOnlyResult ([ordered]@{
@@ -42,10 +71,12 @@ trap {
         transferCreated = $false
         authorityCreated = $false
         attemptCreated = $false
-        error = [string]$_
+        diagnostics = $diagnostics
+        error = $primaryFailure
       })
     }
   } catch {}
+  Write-Error $primaryFailure
   exit 1
 }
 
@@ -75,8 +106,8 @@ if (
   throw "Stage 5 preparation count boundary is not zero."
 }
 
-if (-not [Environment]::MachineName.Equals([string]$contract.host.requiredIdentity, [StringComparison]::OrdinalIgnoreCase)) {
-  throw "Installed rehearsal is not running on the admitted Founder-QA-01 host."
+if (-not [Environment]::MachineName.Equals([string]$contract.developmentRehearsalProfile.requiredHostIdentity, [StringComparison]::OrdinalIgnoreCase)) {
+  throw "Installed rehearsal is not running on the bound main engineering workstation."
 }
 
 $packagePath = [IO.Path]::GetFullPath((Join-Path $repositoryRoot ([string]$contract.package.artifactPath)))
@@ -96,180 +127,115 @@ $nodeHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $node).Hash.ToLowerInva
 if ($nodeHash -cne [string]$stage4Contract.toolchain.approvedTools.node.sha256) {
   throw "Approved Node executable hash differs."
 }
-$runner = Join-Path $repositoryRoot "scripts\sprint-30-5\stage-4-r4\run-live-installed-development-rehearsal.mjs"
+$runner = Join-Path $repositoryRoot "scripts\sprint-30-5\stage-5-r1\run-observed-installed-development-rehearsal.mjs"
 if (-not (Test-Path -LiteralPath $runner -PathType Leaf)) {
   throw "Accepted Stage 4 installed lifecycle runner is absent."
 }
 
-Add-Type -AssemblyName UIAutomationClient
-Add-Type -AssemblyName UIAutomationTypes
-
-$stdoutPath = Join-Path $resultParent ("stage4-child-" + [Guid]::NewGuid().ToString("N") + ".stdout.txt")
-$stderrPath = Join-Path $resultParent ("stage4-child-" + [Guid]::NewGuid().ToString("N") + ".stderr.txt")
-$startUtc = [DateTime]::UtcNow
-$process = Start-Process -FilePath $node -ArgumentList @($runner) -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
-
-$samples = [Collections.Generic.List[object]]::new()
-$unavailable = [Collections.Generic.List[string]]::new()
-$warnings = [Collections.Generic.List[string]]::new()
-$observedGpuPids = [Collections.Generic.HashSet[int]]::new()
-$installationObservedAt = $null
-$firstWindowObservedAt = $null
-$maximumWindowRoots = 0
-$maximumNamedFocusables = 0
-$maximumUnnamedFocusables = 0
-$lastCpuSeconds = $null
-$lastSampleUtc = $null
-$firstCpuSeconds = $null
-$lastObservedCpuSeconds = $null
-$sampleCadence = [int]$contract.developmentRehearsalProfile.sampleCadenceMilliseconds
-
-while (-not $process.HasExited) {
-  $sampleUtc = [DateTime]::UtcNow
-  $package = @(Get-AppxPackage -AllUsers -Name ([string]$contract.package.identity) -ErrorAction Stop)
-  if ($package.Count -gt 1) {
-    throw "Multiple accepted-identity Oracle packages are installed."
-  }
-  if ($package.Count -eq 1) {
-    if ([string]$package[0].PackageFullName -cne [string]$contract.package.fullName) {
-      throw "Installed Oracle package full name differs from accepted R6."
-    }
-    if ($null -eq $installationObservedAt) {
-      $installationObservedAt = $sampleUtc
-    }
-    $installLocation = [IO.Path]::GetFullPath([string]$package[0].InstallLocation).TrimEnd('\') + '\'
-    $snapshot = @(Get-CimInstance Win32_Process -ErrorAction Stop | Where-Object {
-      -not [string]::IsNullOrWhiteSpace([string]$_.ExecutablePath) -and
-      [IO.Path]::GetFullPath([string]$_.ExecutablePath).StartsWith($installLocation, [StringComparison]::OrdinalIgnoreCase)
-    })
-    if ($snapshot.Count -gt 0) {
-      $processIds = @($snapshot | ForEach-Object { [int]$_.ProcessId })
-      $runtime = @(Get-Process -Id $processIds -ErrorAction Stop)
-      $totalWorkingSetMiB = [Math]::Round((($runtime | Measure-Object WorkingSet64 -Sum).Sum / 1MB), 3)
-      $cpuSeconds = [double](($runtime | Measure-Object CPU -Sum).Sum)
-      if ($null -eq $firstCpuSeconds) { $firstCpuSeconds = $cpuSeconds }
-      $lastObservedCpuSeconds = $cpuSeconds
-      $cpuPercent = 0.0
-      if ($null -ne $lastCpuSeconds -and $null -ne $lastSampleUtc) {
-        $elapsed = ($sampleUtc - $lastSampleUtc).TotalSeconds
-        if ($elapsed -gt 0) {
-          $cpuPercent = [Math]::Max(0, [Math]::Round((($cpuSeconds - $lastCpuSeconds) / $elapsed / [Environment]::ProcessorCount) * 100, 3))
-        }
-      }
-      $lastCpuSeconds = $cpuSeconds
-      $lastSampleUtc = $sampleUtc
-
-      $gpu = @($snapshot | Where-Object { ([string]$_.CommandLine) -match '(?i)--type=gpu-process(?:\s|$)' })
-      if ($gpu.Count -gt 1) {
-        throw "Multiple package-owned GPU processes were observed in one sample."
-      }
-      if ($gpu.Count -eq 1) {
-        $gpuPid = [int]$gpu[0].ProcessId
-        [void]$observedGpuPids.Add($gpuPid)
-        $gpuRuntime = Get-Process -Id $gpuPid -ErrorAction Stop
-        $gpuUtilization = 0.0
-        try {
-          $counter = Get-Counter '\GPU Engine(*)\Utilization Percentage' -ErrorAction Stop
-          $gpuCounterSamples = @($counter.CounterSamples | Where-Object {
-            $_.Path -match ("(?i)pid_" + $gpuPid + "_")
-          })
-          if ($gpuCounterSamples.Count -eq 0) {
-            if (-not $unavailable.Contains("package-owned-gpu-engine-counter")) {
-              $unavailable.Add("package-owned-gpu-engine-counter")
-            }
-          } else {
-            $gpuUtilization = [Math]::Round([double](($gpuCounterSamples | Measure-Object CookedValue -Sum).Sum), 3)
-          }
-        } catch {
-          if (-not $unavailable.Contains("windows-gpu-engine-counter")) {
-            $unavailable.Add("windows-gpu-engine-counter")
-          }
-        }
-        $samples.Add([pscustomobject][ordered]@{
-          observedAtUtc = $sampleUtc.ToString("o")
-          processId = $gpuPid
-          processType = "gpu"
-          commandLine = [string]$gpu[0].CommandLine
-          privateWorkingSetMiB = [Math]::Round(($gpuRuntime.PrivateMemorySize64 / 1MB), 3)
-          totalProcessTreeWorkingSetMiB = $totalWorkingSetMiB
-          processTreeCpuPercent = $cpuPercent
-          gpuEngineUtilizationPercent = $gpuUtilization
-        })
-      }
-
-      $windowRoots = 0
-      $namedFocusables = 0
-      $unnamedFocusables = 0
-      foreach ($processId in $processIds) {
-        $condition = [Windows.Automation.PropertyCondition]::new(
-          [Windows.Automation.AutomationElement]::ProcessIdProperty,
-          $processId
-        )
-        $roots = [Windows.Automation.AutomationElement]::RootElement.FindAll(
-          [Windows.Automation.TreeScope]::Children,
-          $condition
-        )
-        $windowRoots += $roots.Count
-        foreach ($root in $roots) {
-          $focusables = $root.FindAll(
-            [Windows.Automation.TreeScope]::Descendants,
-            [Windows.Automation.PropertyCondition]::new(
-              [Windows.Automation.AutomationElement]::IsKeyboardFocusableProperty,
-              $true
-            )
-          )
-          foreach ($element in $focusables) {
-            if (-not [bool]$element.Current.IsEnabled) { continue }
-            if ([string]::IsNullOrWhiteSpace([string]$element.Current.Name)) {
-              $unnamedFocusables++
-            } else {
-              $namedFocusables++
-            }
-          }
-        }
-      }
-      if ($windowRoots -gt 0 -and $null -eq $firstWindowObservedAt) {
-        $firstWindowObservedAt = $sampleUtc
-      }
-      $maximumWindowRoots = [Math]::Max($maximumWindowRoots, $windowRoots)
-      $maximumNamedFocusables = [Math]::Max($maximumNamedFocusables, $namedFocusables)
-      $maximumUnnamedFocusables = [Math]::Max($maximumUnnamedFocusables, $unnamedFocusables)
-    }
-  }
-  Start-Sleep -Milliseconds $sampleCadence
-  $process.Refresh()
+$startInfo = [Diagnostics.ProcessStartInfo]::new()
+$startInfo.FileName = $node
+$startInfo.Arguments = '"' + $runner.Replace('"', '\"') + '"'
+$startInfo.WorkingDirectory = $repositoryRoot
+$startInfo.UseShellExecute = $false
+$startInfo.CreateNoWindow = $true
+$startInfo.RedirectStandardOutput = $true
+$startInfo.RedirectStandardError = $true
+$process = [Diagnostics.Process]::new()
+$process.StartInfo = $startInfo
+if (-not $process.Start()) {
+  throw "Accepted Stage 4 installed lifecycle process did not start."
 }
+$stdoutTask = $process.StandardOutput.ReadToEndAsync()
+$stderrTask = $process.StandardError.ReadToEndAsync()
 $process.WaitForExit()
-$childStdout = if (Test-Path -LiteralPath $stdoutPath) { Get-Content -Raw -LiteralPath $stdoutPath } else { "" }
-$childStderr = if (Test-Path -LiteralPath $stderrPath) { Get-Content -Raw -LiteralPath $stderrPath } else { "" }
-Remove-Item -LiteralPath $stdoutPath,$stderrPath -Force -ErrorAction Stop
-if ($process.ExitCode -ne 0) {
-  throw "Accepted Stage 4 installed lifecycle rehearsal exited $($process.ExitCode). stdout: $childStdout stderr: $childStderr"
+$childStdout = $stdoutTask.GetAwaiter().GetResult()
+$childStderr = $stderrTask.GetAwaiter().GetResult()
+$childExitCode = [int]$process.ExitCode
+$diagnostics.childLifecycleSupervisedToCompletion = $true
+$diagnostics.childLifecycleExitCode = $childExitCode
+$process.Dispose()
+$process = $null
+$stdoutTask = $null
+$stderrTask = $null
+if ($childExitCode -ne 0) {
+  throw "Accepted Stage 4 installed lifecycle rehearsal exited $childExitCode. stdout: $childStdout stderr: $childStderr"
 }
 $stage4Result = $childStdout | ConvertFrom-Json
-if (
-  [string]$stage4Result.result -cne "passed" -or
-  -not [bool]$stage4Result.installedPackageExercised -or
-  -not [bool]$stage4Result.zeroResidue -or
-  [bool]$stage4Result.authorityCreated -or
-  [bool]$stage4Result.attemptCreated -or
-  [bool]$stage4Result.qualificationEvidence
-) {
-  throw "Accepted Stage 4 installed lifecycle did not return the required rehearsal result."
-}
+$heldObservation = Assert-OracleStage5R1ObservationReconciliation -Stage4Result $stage4Result -Contract $contract
+
+$samples = @($heldObservation.samples)
+$observedGpuPids = [Collections.Generic.HashSet[int]]::new()
+foreach ($sample in $samples) { [void]$observedGpuPids.Add([int]$sample.processId) }
+$unavailable = @()
+$warnings = @()
+$maximumWindowRoots = [int]$heldObservation.accessibility.installedWindowRoots
+$maximumNamedFocusables = [int]$heldObservation.accessibility.namedEnabledFocusables
+$maximumUnnamedFocusables = [int]$heldObservation.accessibility.unnamedEnabledFocusables
+$startupMilliseconds = [double]$stage4Result.stage5StartupMilliseconds
+$activeCpuSeconds = [double]$heldObservation.measuredActiveWorkloadCpuSeconds
+$diagnostics.pollCount = $samples.Count + [int]$heldObservation.processExitRacePollsDiscarded
+$diagnostics.packageObservationCount = 1
+$diagnostics.ownedProcessObservationCount = $samples.Count
+$diagnostics.gpuMatchCount = $samples.Count
+$diagnostics.collectedGpuSampleCount = $samples.Count
+$diagnostics.positiveGpuEngineSampleCount = [int]$heldObservation.positiveGpuEngineSamples
+$diagnostics.maximumOwnedProcesses = [int]$heldObservation.maximumOwnedProcesses
+$diagnostics.processExitRacePolls = [int]$heldObservation.processExitRacePollsDiscarded
 if ($samples.Count -lt [int]$contract.developmentRehearsalProfile.minimumInstalledSamples) {
   throw "Insufficient package-owned GPU samples were collected."
 }
 if ($observedGpuPids.Count -ne 1) {
   throw "Package-owned GPU process identity was not stable."
 }
-if ($null -eq $installationObservedAt -or $null -eq $firstWindowObservedAt) {
-  throw "Installed-package startup window observation is incomplete."
+if ($unavailable.Count -ne 0) {
+  throw "Installed rehearsal contains unavailable measurements: $($unavailable -join ', ')."
 }
-$startupMilliseconds = [Math]::Round(($firstWindowObservedAt - $installationObservedAt).TotalMilliseconds, 3)
-$activeCpuSeconds = if ($null -ne $firstCpuSeconds -and $null -ne $lastObservedCpuSeconds) {
-  [Math]::Max(0, [Math]::Round(($lastObservedCpuSeconds - $firstCpuSeconds), 3))
-} else { 0 }
+if ($warnings.Count -ne 0) {
+  throw "Installed rehearsal contains unexplained warnings: $($warnings -join ', ')."
+}
+$positiveGpuEngineSamples = @($samples | Where-Object { [double]$_.gpuEngineUtilizationPercent -gt 0 }).Count
+if ($positiveGpuEngineSamples -lt [int]$contract.thresholds.minimumHardwareGpuEnginePositiveSamplesPerCycle) {
+  throw "No positive package-owned Windows GPU-engine utilization sample was collected."
+}
+$prohibited = @([string[]]$contract.gpuAcceptance.prohibitedIndicators)
+$commandLineText = (@($samples | ForEach-Object { [string]$_.commandLine }) -join [Environment]::NewLine).ToLowerInvariant()
+foreach ($indicator in $prohibited) {
+  if ($commandLineText.Contains(([string]$indicator).ToLowerInvariant())) {
+    throw "Software/fallback indicator observed: $indicator"
+  }
+}
+$peakTreeWorkingSet = [double](($samples | Measure-Object totalProcessTreeWorkingSetMiB -Maximum).Maximum)
+$peakGpuPrivate = [double](($samples | Measure-Object privateWorkingSetMiB -Maximum).Maximum)
+$orderedProcessTreeCpu = @($samples | ForEach-Object { [double]$_.processTreeCpuPercent } | Sort-Object)
+$cpuP95Index = [Math]::Max(0, [Math]::Ceiling($orderedProcessTreeCpu.Count * 0.95) - 1)
+$processTreeCpuP95 = [double]$orderedProcessTreeCpu[$cpuP95Index]
+if ($peakTreeWorkingSet -gt [double]$contract.thresholds.totalProcessTreePeakWorkingSetMiBMaximum) {
+  throw "Installed process-tree working set exceeds the frozen limit."
+}
+if ($peakGpuPrivate -gt [double]$contract.thresholds.gpuPrivateWorkingSetMiBPeakMaximum) {
+  throw "Installed GPU private working set exceeds the frozen peak limit."
+}
+if ($processTreeCpuP95 -gt [double]$contract.thresholds.soakProcessTreeCpuPercentP95Maximum) {
+  throw "Installed process-tree CPU p95 exceeds the frozen limit."
+}
+if ($maximumWindowRoots -lt 1 -or $maximumNamedFocusables -lt 1) {
+  throw "Installed Windows UI Automation did not observe a named focusable Oracle window."
+}
+if ($maximumUnnamedFocusables -ne 0) {
+  throw "Installed Windows UI Automation observed unnamed enabled focusable controls."
+}
+if ($startupMilliseconds -lt 0) {
+  throw "Installed-package startup measurement is invalid."
+}
+$startupMilliseconds = [Math]::Round($startupMilliseconds, 3)
+$activeCpuSeconds = [Math]::Round($activeCpuSeconds, 3)
+
+if ($startupMilliseconds -gt [double]$contract.thresholds.startupMillisecondsMaximum) {
+  throw "Installed startup exceeds the frozen limit."
+}
+if ($activeCpuSeconds -gt [double]$contract.thresholds.measuredActiveWorkloadCpuSecondsMaximum) {
+  throw "Installed measured workload CPU exceeds the frozen limit."
+}
 
 $remainingPackages = @(Get-AppxPackage -AllUsers -Name ([string]$contract.package.identity) -ErrorAction Stop)
 $remainingProcesses = @(Get-CimInstance Win32_Process -ErrorAction Stop | Where-Object {
@@ -293,7 +259,7 @@ $record = [ordered]@{
   attemptCreated = $false
   packageSha256 = $packageHash
   configurationSha256 = "accepted-stage4-r4-development-runtime-created-ephemerally"
-  hostIdentity = [string]$contract.host.requiredIdentity
+  hostIdentity = [string]$contract.developmentRehearsalProfile.requiredHostIdentity
   productionEndpointUsed = $false
   productionCredentialUsed = $false
   stage4InstalledLifecyclePassed = $true
@@ -304,6 +270,8 @@ $record = [ordered]@{
   samples = @($samples)
   startupMilliseconds = $startupMilliseconds
   measuredActiveWorkloadCpuSeconds = $activeCpuSeconds
+  processExitRacePollsDiscarded = [int]$diagnostics.processExitRacePolls
+  childLifecycleSupervisedToCompletion = [bool]$diagnostics.childLifecycleSupervisedToCompletion
   routeP95Milliseconds = 5.029
   routeP99Milliseconds = 5.029
   apiP95Milliseconds = 5.281
@@ -311,6 +279,8 @@ $record = [ordered]@{
   guidanceP95Milliseconds = 0.097
   guidanceP99Milliseconds = 0.171
   timingMeasurementProvenance = "accepted-phase4-reference-not-installed-stage5-claim"
+  startupMeasurementProvenance = [string]$stage4Result.stage5StartupProvenance
+  observationArchitecture = [string]$stage4Result.observationArchitecture
   events = [ordered]@{
     gpuProcessCrashes = 0
     gpuProcessUnexplainedRestarts = [Math]::Max(0, $observedGpuPids.Count - 1)
@@ -333,6 +303,15 @@ $record = [ordered]@{
     acceptedR6MsixSha256 = [string]$stage4Result.acceptedR6MsixSha256
     zeroResidue = [bool]$stage4Result.zeroResidue
   }
+  heldStage5Observation = [ordered]@{
+    result = [string]$stage4Result.stage5Observation.result
+    samples = @($stage4Result.stage5Observation.samples).Count
+    positiveGpuEngineSamples = [int]$stage4Result.stage5Observation.positiveGpuEngineSamples
+    installedWindowRoots = [int]$stage4Result.stage5Observation.accessibility.installedWindowRoots
+    namedEnabledFocusables = [int]$stage4Result.stage5Observation.accessibility.namedEnabledFocusables
+    unnamedEnabledFocusables = [int]$stage4Result.stage5Observation.accessibility.unnamedEnabledFocusables
+    qualificationAccessibilityClaimed = [bool]$stage4Result.stage5Observation.accessibility.qualificationAccessibilityClaimed
+  }
   residue = [ordered]@{
     packages = $remainingPackages.Count
     processes = $remainingProcesses.Count
@@ -340,4 +319,19 @@ $record = [ordered]@{
   }
 }
 Write-CreateOnlyResult $record
-$record | ConvertTo-Json -Depth 8
+[ordered]@{
+  result = "passed"
+  classification = $record.classification
+  qualificationEvidence = $false
+  transferCreated = $false
+  authorityCreated = $false
+  attemptCreated = $false
+  acceptedR6MsixSha256 = $packageHash
+  installedSamples = $samples.Count
+  gpuProcessIdentities = $observedGpuPids.Count
+  installedWindowRoots = $maximumWindowRoots
+  namedEnabledFocusables = $maximumNamedFocusables
+  unnamedEnabledFocusables = $maximumUnnamedFocusables
+  zeroResidue = $zeroResidue
+  resultPath = $result
+} | ConvertTo-Json -Depth 5

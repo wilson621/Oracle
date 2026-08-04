@@ -101,7 +101,10 @@ export function validateProcessEnvelope(result, label = "governed process") {
 export function evaluateRun(run, profile = "qualification") {
   assert.ok(profile === "qualification" || profile === "development-rehearsal");
   assert.equal(run.packageSha256, contract.package.sha256);
-  assert.equal(run.hostIdentity, contract.host.requiredIdentity);
+const expectedHost = profile === "qualification"
+    ? contract.host.requiredIdentity
+    : contract.developmentRehearsalProfile.requiredHostIdentity;
+  assert.equal(run.hostIdentity, expectedHost);
   assert.equal(run.productionEndpointUsed, false);
   assert.equal(run.productionCredentialUsed, false);
   assert.equal(run.stage4InstalledLifecyclePassed, true);

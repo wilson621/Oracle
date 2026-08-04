@@ -58,6 +58,7 @@ const requiredDocuments = [
   "docs/sprints/SPRINT_30_5_STAGE_5_R1_PLAN.md",
   "docs/sprints/SPRINT_30_5_STAGE_5_R1_ACCEPTANCE_CONTRACT.md",
   "docs/sprints/SPRINT_30_5_STAGE_5_R1_PRE_EXECUTION_GATE.md",
+  "docs/sprints/SPRINT_30_5_STAGE_5_R1_DEVELOPMENT_REHEARSAL_INVESTIGATION.md",
   "docs/sprints/SPRINT_30_5_STAGE_5_R1_PREPARATION_VALIDATION_REPORT.md",
   "docs/sprints/SPRINT_30_5_STAGE_5_R1_ENGINEERING_CLOSURE.md",
 ];
@@ -79,6 +80,11 @@ for (const name of inventory.filter(name => name.endsWith(".ps1"))) {
 const policies = JSON.parse(run(node.path, [join(harnessRoot, "Test-OracleStage5R1Policies.mjs")]).stdout);
 assert.equal(policies.result, "passed");
 assert.ok(policies.qualificationAdversarialCases >= 50);
+const powershellPolicies = JSON.parse(run(powershell.path, [
+  "-NoLogo", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File",
+  join(harnessRoot, "Test-OracleStage5R1PowerShellPolicies.ps1"),
+]).stdout);
+assert.equal(powershellPolicies.result, "passed");
 const rehearsal = JSON.parse(run(node.path, [join(harnessRoot, "run-development-rehearsal.mjs")]).stdout);
 assert.equal(rehearsal.result, "passed");
 assert.equal(rehearsal.qualificationEvidence, false);
@@ -94,12 +100,25 @@ for (const pattern of [
   /maximumTransfers/u,
   /maximumAuthorities/u,
   /maximumAttempts/u,
-  /Get-Counter '\\GPU Engine/u,
-  /UIAutomationClient/u,
-  /run-live-installed-development-rehearsal\.mjs/u,
+  /run-observed-installed-development-rehearsal\.mjs/u,
+  /stage5Observation/u,
+  /childLifecycleSupervisedToCompletion/u,
   /zeroResidue/u,
 ]) {
   assert.match(installedWrapper, pattern);
+}
+for (const pattern of [/UIAutomationClient/u, /Get-Counter/u, /while \(-not \$process\.HasExited\)/u]) {
+  assert.doesNotMatch(installedWrapper, pattern);
+}
+const installedObserver = readFileSync(join(harnessRoot, "Measure-OracleStage5R1InstalledPackage.ps1"), "utf8");
+for (const pattern of [
+  /Get-Counter '\\GPU Engine/u,
+  /UIAutomationClient/u,
+  /Select-OracleStage5R1OwnedDescendants/u,
+  /processExitRacePollsDiscarded/u,
+  /renderStimulusOperations/u,
+]) {
+  assert.match(installedObserver, pattern);
 }
 
 console.log(JSON.stringify({

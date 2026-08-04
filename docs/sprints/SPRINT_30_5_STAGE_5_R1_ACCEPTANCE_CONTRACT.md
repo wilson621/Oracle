@@ -104,11 +104,29 @@ outside Stage 5.
 
 ## Rehearsal versus qualification
 
-The installed development rehearsal is intentionally shorter. It validates
+The installed development rehearsal is intentionally shorter and runs on the
+bound main engineering workstation, not the qualification laptop. It validates
 exact-package lifecycle reuse, package-owned GPU sampling, Windows GPU-engine
 counter availability, Windows UI Automation discovery, accepted source
-contracts and zero residue. It may use accepted Phase 4 timings only as
-explicit references and makes no installed Stage 5 timing or accessibility
+contracts and zero residue. Its held observation requires both at least 30
+seconds elapsed and at least five complete samples; new polls stop by 180
+seconds and completion fails closed beyond 240 seconds. During that pre-journey observation, the ownership-verified installed-package
+window is foregrounded and receives concurrent one-pixel reflow, redraw and
+non-activating Tab focus-navigation messages across two one-second GPU-counter
+samples. The original rectangle is restored in a finally path so exact Chromium
+renderer activity, rather than Windows/DWM-only or idle-window activity, is
+measured. Cross-process restoration of the previously foreground window is not
+an evidence gate; Oracle remains foreground until governed teardown closes it.
+No GPU or product feature flag is injected. Process metrics come from one
+ownership snapshot and are accumulated by PID plus creation identity. A GPU
+process that exits between snapshot and revalidation discards that poll; it
+cannot create a sample, satisfy completeness or evade the stable-identity gate.
+Only the held observer measures the installed package. The outer layer
+supervises teardown, reconciles the returned observation and independently
+rechecks zero residue; it performs no concurrent sampling.
+These rehearsal controls do not relax the full qualification's one-second
+cadence or 99-percent completeness.
+It may use accepted Phase 4 timings only as explicit references and makes no installed Stage 5 timing or accessibility
 qualification claim.
 
 Only a separately authorised full-duration governed attempt may produce Stage

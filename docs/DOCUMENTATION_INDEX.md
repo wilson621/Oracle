@@ -576,3 +576,9 @@ to adopt a later formatting standard.
 | Document | Link | Purpose |
 | --- | --- | --- |
 | Stage 5 R6/R12/R4 qualification-impact assessment | [Sprint 30.5 Stage 5 R6/R12/R4 Qualification Impact Assessment](sprints/SPRINT_30_5_STAGE_5_R6_R12_R4_QUALIFICATION_IMPACT_ASSESSMENT.md) | Chain-preservation decision, criteria-freeze dependency and mandatory requalification path for any product correction |
+| Sprint 30.5 Stage 5 R1 plan | [Sprint 30.5 Stage 5 R1 Plan](sprints/SPRINT_30_5_STAGE_5_R1_PLAN.md) | Engineering preparation complete; qualification barred |
+| Sprint 30.5 Stage 5 R1 acceptance contract | [Sprint 30.5 Stage 5 R1 Acceptance Contract](sprints/SPRINT_30_5_STAGE_5_R1_ACCEPTANCE_CONTRACT.md) | Frozen against exact unchanged R6 MSIX |
+| Sprint 30.5 Stage 5 R1 pre-execution gate | [Sprint 30.5 Stage 5 R1 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_5_R1_PRE_EXECUTION_GATE.md) | Future separately authorised mission only |
+| Sprint 30.5 Stage 5 R1 rehearsal investigation | [Sprint 30.5 Stage 5 R1 Development Rehearsal Investigation](sprints/SPRINT_30_5_STAGE_5_R1_DEVELOPMENT_REHEARSAL_INVESTIGATION.md) | Root causes corrected; installed validation passed |
+| Sprint 30.5 Stage 5 R1 preparation validation | [Sprint 30.5 Stage 5 R1 Preparation Validation](sprints/SPRINT_30_5_STAGE_5_R1_PREPARATION_VALIDATION_REPORT.md) | Passed; no qualification state created |
+| Sprint 30.5 Stage 5 R1 engineering closure | [Sprint 30.5 Stage 5 R1 Engineering Closure](sprints/SPRINT_30_5_STAGE_5_R1_ENGINEERING_CLOSURE.md) | Preparation and contract freeze complete |

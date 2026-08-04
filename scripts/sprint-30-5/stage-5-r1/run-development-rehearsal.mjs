@@ -46,7 +46,7 @@ const samples = Array.from({ length: 8 }, (_, index) => ({
 const evaluation = evaluateRun({
   packageSha256: contract.package.sha256,
   configurationSha256: "b".repeat(64),
-  hostIdentity: contract.host.requiredIdentity,
+  hostIdentity: contract.developmentRehearsalProfile.requiredHostIdentity,
   productionEndpointUsed: false,
   productionCredentialUsed: false,
   stage4InstalledLifecyclePassed: true,

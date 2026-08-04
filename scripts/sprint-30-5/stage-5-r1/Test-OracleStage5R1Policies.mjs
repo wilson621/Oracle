@@ -143,7 +143,7 @@ function makeRun(profile) {
   return {
     packageSha256: contract.package.sha256,
     configurationSha256: "a".repeat(64),
-    hostIdentity: contract.host.requiredIdentity,
+    hostIdentity: profile === "qualification" ? contract.host.requiredIdentity : contract.developmentRehearsalProfile.requiredHostIdentity,
     productionEndpointUsed: false,
     productionCredentialUsed: false,
     stage4InstalledLifecyclePassed: true,

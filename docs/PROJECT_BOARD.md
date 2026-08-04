@@ -1078,3 +1078,11 @@ product defect: the proposed GPU thresholds and installed accessibility contract
 must be frozen through a Founder-authorised Stage 5 R1 preparation mission. Any
 product correction would require new Stage 2, Stage 3 and Stage 4 qualification
 before Stage 5. No Stage 5 engineering or execution has begun.
+## Sprint 30.5 Stage 5 R1 engineering preparation closed
+
+Stage 5 R1 engineering preparation and acceptance-contract freeze are complete
+against the exact unchanged R6 MSIX and accepted R6/R12/R4 chain. Deterministic,
+adversarial and elevated installed validation passed, including ten installed
+journeys, stable package-owned GPU activity, complete named UI Automation smoke
+and zero residue. No transfer, authority, attempt or qualification evidence was
+created. A separately authorised execution-enabled Stage 5 mission is required.

@@ -1232,3 +1232,11 @@ is Founder acceptance of an authoritative installed GPU, performance and
 accessibility contract; the existing GPU protocol remains proposed. A product or
 package correction would require a new Stage 2 candidate and new Stage 3 and Stage
 4 results before Stage 5.
+## Sprint 30.5 Stage 5 R1 preparation status
+
+The qualification-barred Stage 5 R1 harness and frozen installed GPU,
+performance and accessibility contract are implemented and validated against
+the exact unchanged accepted R6 MSIX. The elevated installed rehearsal passed
+all ten journeys with stable exact-package GPU identity, named UI Automation
+coverage and zero residue. No Stage 5 transfer, authority, attempt or
+qualification implementation is authorised or present.

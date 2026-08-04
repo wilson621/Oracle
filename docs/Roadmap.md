@@ -1370,3 +1370,9 @@ programme must freeze its proposed installed-GPU thresholds and installed
 accessibility pass/fail contract under a Founder-authorised R1 preparation mission.
 If Stage 5 requires a product correction, the corrected candidate must return to
 Stage 2 and repeat Stages 3 and 4 before a new Stage 5 attempt.
+## Sprint 30.5 Stage 5 R1 preparation complete
+
+The unchanged R6 MSIX has completed bounded Stage 5 R1 engineering preparation
+without invalidating the accepted R6/R12/R4 chain. The next Founder-level
+choice is whether to authorise a separately bound execution-enabled Stage 5 R1
+qualification mission. Stage 6 and later activity remains unavailable.

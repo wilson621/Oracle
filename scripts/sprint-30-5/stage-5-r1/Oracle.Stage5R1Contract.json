@@ -184,13 +184,24 @@
   },
   "developmentRehearsalProfile": {
     "qualificationEvidence": false,
+    "requiredHostIdentity": "DESKTOP-M3H22E4",
+    "requiredHostModel": "Amd Am5 Liquid",
+    "hostRole": "main-engineering-workstation",
     "independentCycles": 1,
-    "minimumInstalledSamples": 5,
+    "minimumInstalledSamples": 1,
+    "heldObservationMinimumSeconds": 30,
+    "heldObservationPollStartMaximumSeconds": 180,
+    "heldObservationCompletionMaximumSeconds": 240,
+    "minimumHeldObservationSamples": 5,
+    "ownedWindowRenderStimulusRequired": true,
+    "ownedWindowRenderStimulus": "concurrent-owned-window-foreground-reflow-focus-navigation-with-bounds-restoration",
+    "processExitRaceDisposition": "discard-poll-after-current-gpu-identity-revalidation",
+    "observationArchitecture": "single-held-observer-with-supervised-outer-reconciliation",
     "sampleCadenceMilliseconds": 500,
     "fullDurationRequired": false,
     "webglFeatureProofRequired": false,
     "accessibilityCoverage": "windows-uia-instrumentation-smoke-plus-frozen-source-contract",
-    "stage4InstalledLifecycleReuse": "scripts/sprint-30-5/stage-4-r4/run-live-installed-development-rehearsal.mjs"
+    "stage4InstalledLifecycleReuse": "scripts/sprint-30-5/stage-5-r1/run-observed-installed-development-rehearsal.mjs"
   },
   "historicalBindings": [
     {

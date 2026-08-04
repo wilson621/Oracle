@@ -1020,3 +1020,10 @@ mission must freeze the proposed GPU thresholds and the installed accessibility
 contract. That preparation must be non-product and qualification-barred. Any
 necessary product correction resets the corrected candidate to Stage 2, followed
 by new Stage 3, Stage 4 and Stage 5 qualification.
+## Sprint 30.5 Stage 5 R1 preparation checkpoint
+
+Stage 5 R1 engineering preparation is complete against the unchanged accepted
+R6 MSIX. The GPU, performance and accessibility acceptance contract is frozen;
+all development and installed rehearsals passed with zero residue. Execution is
+not authorised. A fresh execution-enabled baseline, transfer and pre-authority
+gates require a separate Founder mission.
