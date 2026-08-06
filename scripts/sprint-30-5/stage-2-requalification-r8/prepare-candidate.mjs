@@ -10,7 +10,7 @@ import {
   statSync,
 } from "node:fs";
 import os from "node:os";
-import { basename, dirname, join, relative, resolve } from "node:path";
+import { basename, join, relative, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { packager } from "@electron/packager";
 import {
@@ -18,24 +18,15 @@ import {
   assertCleanMachineQualificationState,
   assertNoReparseTraversal,
   assertOutsideHistoricalRoots,
-  assertRepositoryPreflight,
   contract,
-  createAttemptDirectory,
-  createAttemptRecord,
   git,
   harnessFileInventory,
   readMachineQualificationState,
   repositoryRoot,
   resolveApprovedNpmSurface,
-  validateGovernedWrapperInvocation,
   sha256File,
-  validateFinalIdentity,
 } from "./harness-core.mjs";
 import {
-  assertFounderExecutionAuthority,
-  claimSingleAttemptAuthority,
-  createAttemptDirectories,
-  createLifecycle,
   publishExistingFileCreateOnly,
   readJson,
   writeFileAtomicCreateOnly,
@@ -49,7 +40,6 @@ import {
 } from "./runtime-configuration-custody.mjs";
 
 const PACKAGE_FILE = contract.package.fileName;
-const ARCHIVE_FILE = contract.output.archiveFileName;
 const SEMANTIC_VERSION = contract.package.semanticVersion;
 const RUNTIME_MANIFEST_VERSION = contract.package.runtimeManifestVersion;
 const RELEASE_ID = contract.package.releaseId;
@@ -90,7 +80,6 @@ const input = {
   outputRoot: preparationRoot,
 };
 let attemptRoot = preparationRoot;
-let lifecycle = null;
 let directories = Object.fromEntries(["logs", "work", "release", "signing", "verification"].map(function(name) { const value = join(preparationRoot, name); mkdirSync(value, { recursive: false }); return [name, value]; }));
 let exactThumbprint = null;
 let certificateSubject;
@@ -99,19 +88,15 @@ let password = null;
 let pfxPath = null;
 let generatedCerPath = null;
 let verificationCerPath = null;
-let certificateStoreBaseline = [];
-let certificateStoreBaselineCaptured = false;
 let teardownAttempted = false;
-let teardownPassed = false;
 let signingMaterialDestructionAttempted = false;
-let currentCommand = null;
-let lifecycleFailureRecord = null;
 try {
   assert.equal(contract.status, "engineering-preparation-transfer-barred");
   assert.equal(contract.authority.transferCreationPermitted, false);
   assert.equal(contract.authority.authorityCreationPermitted, false);
   assert.equal(contract.authority.attemptCreationPermitted, false);
   assert.equal(contract.package.version, "0.1.6.0");
+  assertExecutionContract();
   assertHistoricalEvidence();
   assertNoAmbientRuntimeConfiguration(repositoryRoot);
   assertCleanMachineQualificationState(readMachineQualificationState());
@@ -140,7 +125,7 @@ try {
     classification: ["NON-QUALIFICATION", "NON-AUTHORITY", "NON-ATTEMPT", "ENGINEERING CANDIDATE FREEZE"],
     preparationId, timestampUtc, candidateCommit: contract.candidate.commit, candidateTree: contract.candidate.tree, harnessCommit,
     package: { fileName: contract.package.fileName, sha256: sha256File(release.packagePath), bytes: statSync(release.packagePath).size },
-    publicCertificate: { fileName: basename(publicCertificatePath), sha256: sha256File(publicCertificatePath), thumbprint: exactThumbprint, subject: certificateSubject },
+    publicCertificate: { fileName: basename(publicCertificatePath), sha256: sha256File(publicCertificatePath), thumbprint: exactThumbprint, subject: certificateSubject, notAfter: certificateNotAfter },
     releaseFiles, privateSigningMaterialDestroyed: true, certificateResidue: 0, transferCreated: false, authorityCreated: false, attemptCreated: false, qualificationEvidence: false
   };
   const freezePath = join(preparationRoot, "Oracle.Stage2R8EngineeringCandidateFreeze.json");
@@ -155,8 +140,8 @@ try {
     }
   } catch (failure) { cleanupError = failure; }
   const failure = { schemaVersion: "1.0.0", contract: "oracle.sprint-30-5.stage-2-r8-engineering-candidate-freeze-failure", result: "failed", preparationId, error: error.message, cleanupError: cleanupError ? cleanupError.message : null, transferCreated: false, authorityCreated: false, attemptCreated: false };
-  try { writeJsonAtomicCreateOnly(join(preparationRoot, "Oracle.Stage2R8EngineeringCandidateFreezeFailure.json"), failure); } catch {}
-  throw new AggregateError(cleanupError ? [error, cleanupError] : [error], "R8 engineering candidate freeze failed closed.");
+  try { writeJsonAtomicCreateOnly(join(preparationRoot, "Oracle.Stage2R8EngineeringCandidateFreezeFailure.json"), failure); } catch (writeFailure) { failure.failureRecordWriteError = writeFailure.message; }
+  throw new AggregateError(cleanupError ? [error, cleanupError] : [error], "R8 engineering candidate freeze failed closed.", { cause: error });
 }
 
 function assertExecutionContract() {
@@ -467,7 +452,6 @@ async function constructPackageLayout() {
     private: true,
     main: "dist-electron/desktop/main.js",
   });
-  currentCommand = "@electron/packager";
   const paths = await packager({
     dir: stage,
     out: electronOut,
@@ -508,10 +492,6 @@ async function constructPackageLayout() {
 function createTemporaryCertificate(layout) {
   pfxPath = join(directories.signing, "r8-local-test-signing.pfx");
   password = randomBytes(32).toString("base64url");
-  certificateStoreBaseline = readCertificateStoreSnapshot(
-    "certificate-store-before-generation"
-  );
-  certificateStoreBaselineCaptured = true;
   runWinApp(
     "certificate-generate",
     [
@@ -596,34 +576,6 @@ function readCertificateStoreSnapshot(label) {
   return Array.isArray(parsed) ? parsed : [parsed];
 }
 
-function recoverCertificateIdentityFromStoreDelta() {
-  const after = readCertificateStoreSnapshot(
-    "certificate-store-after-generation-failure"
-  );
-  const existing = new Set(
-    certificateStoreBaseline.map(
-      (record) => `${record.location}/${record.store}/${record.thumbprint}`
-    )
-  );
-  const added = after.filter(
-    (record) =>
-      !existing.has(`${record.location}/${record.store}/${record.thumbprint}`)
-  );
-  const thumbprints = [...new Set(added.map((record) => record.thumbprint))];
-  if (thumbprints.length !== 1) {
-    throw new Error(
-      `Certificate generation produced ${thumbprints.length} unambiguous new thumbprints.`
-    );
-  }
-  if (
-    !/^[0-9A-F]{40}$/u.test(thumbprints[0]) ||
-    added.some((record) => record.subject !== PUBLISHER)
-  ) {
-    throw new Error("New certificate-store entries do not match the R8 identity.");
-  }
-  exactThumbprint = thumbprints[0];
-  certificateSubject = PUBLISHER;
-}
 
 function recoverCertificateIdentity() {
   const script = [
@@ -973,7 +925,6 @@ function performSafetyTeardown() {
   if (residue.length !== 0) {
     throw new Error(`Signing material remains: ${residue.join(", ")}`);
   }
-  teardownPassed = true;
 }
 
 function destroySigningMaterial() {
@@ -995,318 +946,14 @@ function destroySigningMaterial() {
   }
 }
 
-function createCertification(release, candidate, verification) {
-  return {
-    schemaVersion: "1.0.0",
-    contract: "oracle.sprint-30-5.stage-2-requalification-r8-certification",
-    ...identity(),
-    verifiedAt: new Date().toISOString(),
-    status: "execution-passed-awaiting-founder-review",
-    sourceCommit: candidate.sourceCommit,
-    sourceTree: candidate.sourceTree,
-    runtimeManifest: candidate.runtimeManifest,
-    package: {
-      filename: PACKAGE_FILE,
-      packageVersion: contract.package.version,
-      sha256: sha256File(release.packagePath),
-      size: statSync(release.packagePath).size,
-      contentEntries: verification.packageContentEntries,
-      installed: false,
-    },
-    releaseManifest: {
-      sha256: sha256File(release.releaseManifestPath),
-      exactThumbprint,
-      detachedSignature: "verified",
-    },
-    sbom: "cyclonedx-1.6-verified",
-    provenance: "slsa-shaped-verified",
-    teardown: {
-      exactThumbprint,
-      certificateStoreMatches: 0,
-      trustRemoved: true,
-      privateSigningMaterialDestroyed: true,
-    },
-    authority: {
-      founderAcceptance: false,
-      stage2Closed: false,
-      stage3: false,
-      production: false,
-    },
-  };
-}
 
-function createEvidenceIndex() {
-  const files = [
-    ...inventory(directories.release).map((entry) => ({
-      ...entry,
-      path: `release/${entry.path}`,
-    })),
-    ...inventory(directories.evidence).map((entry) => ({
-      ...entry,
-      path: `evidence/${entry.path}`,
-    })),
-    ...inventory(directories.logs).map((entry) => ({
-      ...entry,
-      path: `logs/${entry.path}`,
-    })),
-    ...inventory(join(attemptRoot, "lifecycle")).map((entry) => ({
-      ...entry,
-      path: `lifecycle/${entry.path}`,
-    })),
-  ].sort((left, right) =>
-    left.path < right.path ? -1 : left.path > right.path ? 1 : 0
-  );
-  return {
-    schemaVersion: "1.0.0",
-    contract: "oracle.sprint-30-5.stage-2-requalification-r8-evidence-index",
-    ...identity(),
-    createdAt: new Date().toISOString(),
-    status: "complete-awaiting-freeze",
-    files: files.filter(
-      (entry) => !entry.path.endsWith("stage-2-requalification-r8-evidence-index.json")
-    ),
-  };
-}
 
-function freezeEvidence(release, certification, evidenceIndex) {
-  const temporaryArchive = join(
-    attemptRoot,
-    `.${ARCHIVE_FILE}.tmp-${process.pid}-${Date.now()}`
-  );
-  const archivePath = join(attemptRoot, ARCHIVE_FILE);
-  runLogged("evidence-archive", approvedExecutable("bsdtar"), [
-    "-a",
-    "-c",
-    "-f",
-    temporaryArchive,
-    "-C",
-    attemptRoot,
-    "release",
-    "evidence",
-    "lifecycle",
-    "logs",
-  ]);
-  publishExistingFileCreateOnly(temporaryArchive, archivePath);
-  const archive = {
-    path: archivePath,
-    filename: ARCHIVE_FILE,
-    sha256: sha256File(archivePath),
-    size: statSync(archivePath).size,
-  };
-  writeFileAtomicCreateOnly(
-    `${archivePath}.sha256.txt`,
-    `${archive.sha256} *${ARCHIVE_FILE}\n`
-  );
-  const sidecarHash = readFileSync(`${archivePath}.sha256.txt`, "utf8")
-    .trim()
-    .split(/\s+/u)[0];
-  if (sidecarHash !== archive.sha256) {
-    throw new Error("Evidence archive sidecar verification failed.");
-  }
-  writeJsonAtomicCreateOnly(
-    join(directories.evidence, "stage-2-requalification-r8-frozen-evidence.json"),
-    {
-      schemaVersion: "1.0.0",
-      contract: "oracle.sprint-30-5.stage-2-requalification-r8-frozen-evidence",
-      ...identity(),
-      frozenAt: new Date().toISOString(),
-      status: "complete-awaiting-founder-review",
-      archive: {
-        filename: ARCHIVE_FILE,
-        sha256: archive.sha256,
-        size: archive.size,
-        storage: "workspace-local-ignored-attempt-artifact",
-      },
-      releaseManifestSha256: certification.releaseManifest.sha256,
-      packageSha256: certification.package.sha256,
-      indexedFiles: evidenceIndex.files.length,
-      privateSigningMaterialDestroyed: true,
-      certificateTrustRemoved: true,
-      stage3Started: false,
-    }
-  );
-  return archive;
-}
 
-function createFinalEvidenceManifest(archive) {
-  return {
-    schemaVersion: "1.0.0",
-    contract: "oracle.sprint-30-5.stage-2-requalification-r8-final-evidence",
-    ...identity(),
-    createdAt: new Date().toISOString(),
-    status: "execution-passed-awaiting-founder-review",
-    archive: {
-      filename: archive.filename,
-      size: archive.size,
-      sha256: archive.sha256,
-      sidecar: `${archive.filename}.sha256.txt`,
-    },
-    evidenceFiles: inventory(directories.evidence),
-    releaseFiles: inventory(directories.release),
-    lifecycleFiles: inventory(join(attemptRoot, "lifecycle")),
-    historicalStage2ArchiveSha256: HISTORICAL_STAGE2_ARCHIVE_SHA256,
-    exactCertificateThumbprint: exactThumbprint,
-    teardownPassed,
-    repositoryCommit: input.harnessCommit,
-    repositoryTree: git(["rev-parse", "HEAD^{tree}"]),
-    stage3Executed: false,
-    productionAuthority: false,
-  };
-}
 
-function publishRepositoryEvidence() {
-  const base = assertOutsideHistoricalRoots(
-    join(
-      repositoryRoot,
-      contract.output.repositoryEvidenceBase
-    )
-  );
-  const target = join(base, input.attemptId);
-  assertNoReparseTraversal(dirname(base));
-  if (existsSync(base)) {
-    assertNoReparseTraversal(base);
-  } else {
-    mkdirSync(base, { recursive: false });
-  }
-  if (existsSync(target)) {
-    throw new Error("Repository evidence attempt namespace already exists.");
-  }
-  mkdirSync(target, { recursive: false });
-  assertNoReparseTraversal(target);
-  for (const name of [
-    "qualification-candidate.json",
-    "single-attempt-authority.json",
-    "stage-2-requalification-r8-certification.json",
-    "stage-2-requalification-r8-evidence-index.json",
-    "stage-2-requalification-r8-frozen-evidence.json",
-    "stage-2-requalification-r8-completion.json",
-    "final-machine-checkpoint.json",
-  ]) {
-    const source = join(directories.evidence, name);
-    const destination = join(target, name);
-    writeFileAtomicCreateOnly(destination, readFileSync(source));
-  }
-  writeFileAtomicCreateOnly(
-    join(target, `${ARCHIVE_FILE}.sha256.txt`),
-    readFileSync(join(attemptRoot, `${ARCHIVE_FILE}.sha256.txt`))
-  );
-  return target;
-}
 
-function publishFinalRepositoryEvidence(target) {
-  for (const name of [
-    "final-repository-checkpoint.json",
-    "Oracle.Stage2RequalificationR8EvidenceManifest.json",
-    "Oracle.Stage2RequalificationR8FinalEvidenceHash.sha256.txt",
-  ]) {
-    writeFileAtomicCreateOnly(
-      join(target, name),
-      readFileSync(join(directories.evidence, name))
-    );
-  }
-}
 
-function createFinalMachineCheckpoint() {
-  assertCleanMachineQualificationState();
-  assertHistoricalEvidence();
-  const status = git([
-    "status",
-    "--porcelain=v1",
-    "--untracked-files=all",
-  ]);
-  if (status !== "") {
-    throw new Error("Repository changed before evidence publication.");
-  }
-  if (git(["diff", "--cached", "--name-only"]) !== "") {
-    throw new Error("The repository index changed during R8 execution.");
-  }
-  const machineCheckpoint = {
-    schemaVersion: "1.0.0",
-    contract:
-      "oracle.sprint-30-5.stage-2-requalification-r8-machine-checkpoint",
-    ...identity(),
-    recordedAt: new Date().toISOString(),
-    machineIdentity: os.hostname(),
-    platform: process.platform,
-    architecture: process.arch,
-    osRelease: os.release(),
-    governedPackageInstalled: false,
-    exactCertificateMatches: 0,
-    temporaryTrustRemaining: false,
-    privateSigningMaterialRemaining: false,
-  };
-  writeJsonAtomicCreateOnly(
-    join(directories.evidence, "final-machine-checkpoint.json"),
-    machineCheckpoint
-  );
-}
 
-function createFinalRepositoryCheckpoint(repositoryEvidenceTarget) {
-  const repositoryEvidenceRelative = relative(
-    repositoryRoot,
-    repositoryEvidenceTarget
-  ).replaceAll("\\", "/");
-  const status = git([
-    "status",
-    "--porcelain=v1",
-    "--untracked-files=all",
-  ]);
-  const statusLines = status === "" ? [] : status.split(/\r?\n/u);
-  const unexpected = statusLines.filter(
-    (line) => !line.startsWith(`?? ${repositoryEvidenceRelative}/`)
-  );
-  if (unexpected.length !== 0 || statusLines.length === 0) {
-    throw new Error(
-      `Unexpected repository state after bounded evidence publication: ${unexpected.join(", ")}`
-    );
-  }
-  if (git(["diff", "--cached", "--name-only"]) !== "") {
-    throw new Error("The repository index changed during R8 execution.");
-  }
-  writeJsonAtomicCreateOnly(
-    join(directories.evidence, "final-repository-checkpoint.json"),
-    {
-      schemaVersion: "1.0.0",
-      contract:
-        "oracle.sprint-30-5.stage-2-requalification-r8-repository-checkpoint",
-      ...identity(),
-      recordedAt: new Date().toISOString(),
-      branch: git(["branch", "--show-current"]),
-      head: git(["rev-parse", "HEAD"]),
-      tree: git(["rev-parse", "HEAD^{tree}"]),
-      trackedFilesModified: false,
-      indexClean: true,
-      repositoryVisibleEvidenceOnly: true,
-      repositoryEvidencePublicationPending: false,
-      repositoryEvidenceNamespace: repositoryEvidenceRelative,
-      publishedFiles: inventory(repositoryEvidenceTarget),
-    }
-  );
-}
 
-function assertFinalRepositoryState() {
-  const repositoryEvidenceRelative = relative(
-    repositoryRoot,
-    join(repositoryRoot, contract.output.repositoryEvidenceBase, input.attemptId)
-  ).replaceAll("\\", "/");
-  const status = git([
-    "status",
-    "--porcelain=v1",
-    "--untracked-files=all",
-  ]);
-  const statusLines = status === "" ? [] : status.split(/\r?\n/u);
-  const unexpected = statusLines.filter(
-    (line) => !line.startsWith(`?? ${repositoryEvidenceRelative}/`)
-  );
-  if (unexpected.length !== 0 || statusLines.length === 0) {
-    throw new Error(
-      `Unexpected final repository state: ${unexpected.join(", ")}`
-    );
-  }
-  if (git(["diff", "--cached", "--name-only"]) !== "") {
-    throw new Error("The repository index changed during R8 execution.");
-  }
-}
 
 function createSbom() {
   const lock = readJson(join(repositoryRoot, "package-lock.json"));
@@ -1503,7 +1150,6 @@ function npxCliPath() {
 }
 
 function runLogged(label, command, args, redactions = [], environment = {}) {
-  currentCommand = `${command} ${args.map((value) => redact(value, redactions)).join(" ")}`;
   const startedAt = new Date();
   const result = spawnSync(command, args, {
     cwd: repositoryRoot,
