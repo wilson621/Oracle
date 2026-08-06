@@ -2,9 +2,11 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
-import { assertContract, contract, sha256, validateProcess } from "./stage4r5-core.mjs";
+import { assertContract, assertNoReparseTraversal, contract, sha256, validateProcess } from "./stage4r5-core.mjs";
 
 assertContract();
+assert.equal(assertNoReparseTraversal("E:\\admitted-child","E:\\"),"E:\\admitted-child");
+assert.throws(()=>assertNoReparseTraversal("C:\\escape","E:\\"),/Path escapes governed root/u);
 assert.equal(contract.acceptedPreparation.commit,"39c8b130ca4e1c4e037293d7ade646e3c2b25dce");assert.equal(contract.acceptedChain.stage2.revision,"R8");assert.equal(contract.acceptedChain.stage3.revision,"R13");assert.equal(contract.package.sha256,"97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490");
 assert.equal(contract.executionAuthority.maximumTransfers,1);assert.equal(contract.executionAuthority.maximumAuthorities,1);assert.equal(contract.executionAuthority.maximumAttempts,1);assert.equal(contract.executionAuthority.retryAfterConsumedAuthorityPermitted,false);
 assert.equal(contract.hosts.provider.qualificationExecutionPermitted,false);assert.equal(contract.hosts.provider.packageInstallationPermitted,false);assert.equal(contract.hosts.qualification.repositoryPermitted,false);assert.equal(contract.hosts.qualification.developmentToolsPermitted,false);assert.deepEqual(contract.network.providerPublications,[54321,54324]);assert.equal(contract.network.postgresRemoteAccessPermitted,false);

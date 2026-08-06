@@ -14,7 +14,8 @@ export function sha256(path) {
 export function assertNoReparseTraversal(path, root) {
   const boundary = resolve(root);
   const target = resolve(path);
-  if (target !== boundary && !target.startsWith(`${boundary}${sep}`)) throw new Error(`Path escapes governed root: ${target}`);
+  const prefix = boundary.endsWith(sep) ? boundary : `${boundary}${sep}`;
+  if (target !== boundary && !target.startsWith(prefix)) throw new Error(`Path escapes governed root: ${target}`);
   let current = target;
   while (current.length >= boundary.length) {
     if (existsSync(current) && lstatSync(current).isSymbolicLink()) throw new Error(`Link traversal is prohibited: ${current}`);
