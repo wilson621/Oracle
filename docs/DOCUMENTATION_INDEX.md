@@ -614,3 +614,9 @@ to adopt a later formatting standard.
 | Stage 2 R8 execution mission | [Sprint 30.5 Stage 2 Requalification R8 Execution Mission](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R8_EXECUTION_MISSION.md) | Exact Founder grant, single-use transfer identity and clean-host authority boundary |
 | Stage 2 R8 qualification closure | [Sprint 30.5 Stage 2 Requalification R8 Closure](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R8_CLOSURE.md) | Founder acceptance, independent return verification, immutable bindings and downstream boundary |
 | Stage 2 R8 accepted evidence | [Sprint 30.5 Stage 2 Requalification R8 Evidence](sprints/evidence/sprint-30-5/stage-2-requalification-r8/README.md) | Canonical compact evidence, accepted index and full-attempt custody binding |
+
+## Stage 3 assessment against the accepted R8 baseline
+
+| Document | Link | Purpose |
+| --- | --- | --- |
+| Stage 3 R8-baseline qualification-impact assessment | [Sprint 30.5 Stage 3 R8-Baseline Qualification-Impact Assessment](sprints/SPRINT_30_5_STAGE_3_R8_BASELINE_QUALIFICATION_IMPACT_ASSESSMENT.md) | Exact package-binding decision, reusable R12 protocol boundary, downstream impact and recommended R13 preparation mission |

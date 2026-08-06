@@ -2546,3 +2546,16 @@ Stage 2 R8 attempt `stage2-r8-20260806T134157536Z-a0bf3986` passed on clean qual
 The Founder accepted R8 for candidate `4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d`, tree `1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a`, package version `0.1.6.0`, SHA-256 `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`. R8 is formally closed and is the current Stage 2 qualification baseline.
 
 Accepted R6/R12/R4 evidence remains unchanged and authoritative history for the prior R6 MSIX only. It does not qualify the R8 package. Stage 3, Stage 4, Stage 5, production, publication and deployment remain unauthorised. The next Founder-level mission is a separate Stage 3 programme-state and qualification-impact assessment against R8.
+
+## Stage 3 R8-baseline qualification-impact assessment - 6 August 2026
+
+The assessment is complete. Stage 3 R12 remains accepted immutable history for
+R6, but its exact package, version and signer bindings do not qualify the R8
+MSIX. R12's fourteen-phase lifecycle and corrected post-reset policy remain
+reusable engineering inputs; all execution identities, evidence and host gates
+must be fresh.
+
+Stage 3 is incomplete for R8, and Stages 4-5 remain blocked for the current
+baseline. The recommended next Founder mission is bounded, execution-barred
+Stage 3 Requalification R13 engineering preparation. No Stage 3 engineering,
+transfer, authority or attempt was created by this assessment.
