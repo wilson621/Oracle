@@ -43,6 +43,20 @@ function Assert-OracleStage4R5ProviderPublicRecordSecretFree {
   if ($Text -match '(?i)"(anonKey|serviceKey|service_role|access_token|refresh_token)"\s*:') { throw "Credential field appears in a public provider record." }
 }
 
+function ConvertFrom-OracleStage4R5UtcTimestamp {
+  param([Parameter(Mandatory = $true)][string]$Value, [string]$Context = "UTC timestamp")
+  if ($Value -cnotmatch '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3,7}Z$') { throw "$Context is not canonical cross-runtime UTC." }
+  $parsed = [DateTimeOffset]::MinValue
+  if (-not [DateTimeOffset]::TryParseExact(
+    $Value,
+    "yyyy-MM-dd'T'HH:mm:ss.FFFFFFF'Z'",
+    [Globalization.CultureInfo]::InvariantCulture,
+    [Globalization.DateTimeStyles]::AssumeUniversal -bor [Globalization.DateTimeStyles]::AdjustToUniversal,
+    [ref]$parsed
+  )) { throw "$Context is not a valid UTC instant." }
+  $parsed.UtcDateTime
+}
+
 function Assert-OracleStage4R5SecretHandoffShape {
   param([Parameter(Mandatory = $true)]$Record, [Parameter(Mandatory = $true)][string]$ExpectedProviderIdentity)
   foreach ($name in @("contract", "providerIdentity", "providerUrl", "mailpitUrl", "anonymousKey", "serviceKey", "expiresAtUtc")) { [void](Get-OracleStage4R5ProviderMandatoryMember $Record $name "Provider secret handoff") }
@@ -50,7 +64,7 @@ function Assert-OracleStage4R5SecretHandoffShape {
   if ([string]$Record.providerIdentity -cne $ExpectedProviderIdentity) { throw "Provider secret handoff identity differs." }
   if ([string]$Record.providerUrl -cne "http://127.0.0.1:54321" -or [string]$Record.mailpitUrl -cne "http://127.0.0.1:54324") { throw "Provider secret handoff origins differ." }
   if ([string]::IsNullOrWhiteSpace([string]$Record.anonymousKey) -or [string]::IsNullOrWhiteSpace([string]$Record.serviceKey)) { throw "Provider secret handoff credentials are absent." }
-  $expiry = [DateTime]::ParseExact([string]$Record.expiresAtUtc, "o", [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::RoundtripKind).ToUniversalTime()
+  $expiry = ConvertFrom-OracleStage4R5UtcTimestamp ([string]$Record.expiresAtUtc) "Provider secret handoff expiry"
   if ($expiry -le [DateTime]::UtcNow) { throw "Provider secret handoff is expired." }
   [pscustomobject][ordered]@{ result = "passed"; providerIdentity = $ExpectedProviderIdentity; expiresAtUtc = $expiry.ToString("o") }
 }

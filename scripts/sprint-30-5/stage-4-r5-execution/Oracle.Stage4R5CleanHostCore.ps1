@@ -97,6 +97,46 @@ function Invoke-OracleStage4R5PrivateLinkAddressReconciliation {
   if($final.Count-ne1){throw 'Exact private-link address reconciliation failed.'}
   [pscustomobject][ordered]@{result='passed';interfaceIndex=$InterfaceIndex;address=$TargetAddress;prefixLength=$TargetPrefixLength;exactAddressCount=1}
 }
+
+function Restore-OracleStage4R5PrivateLinkAddresses {
+  param(
+    [Parameter(Mandatory=$true)][int]$InterfaceIndex,
+    [Parameter(Mandatory=$true)][string]$TargetAddress,
+    [Parameter(Mandatory=$true)][ValidateSet('Enabled','Disabled')][string]$PriorDhcp,
+    [object[]]$PriorAddresses=@()
+  )
+  @(Get-NetIPAddress -InterfaceIndex $InterfaceIndex -AddressFamily IPv4 -IPAddress $TargetAddress -ErrorAction SilentlyContinue)|Remove-NetIPAddress -Confirm:$false -ErrorAction Stop
+  if($PriorDhcp-ceq'Enabled'){
+    Set-NetIPInterface -InterfaceIndex $InterfaceIndex -AddressFamily IPv4 -Dhcp Enabled -ErrorAction Stop
+    $targetResidue=@(Get-NetIPAddress -InterfaceIndex $InterfaceIndex -AddressFamily IPv4 -IPAddress $TargetAddress -ErrorAction SilentlyContinue)
+    if($targetResidue.Count-ne0){throw 'Private-link target address remains after DHCP restoration.'}
+    return [pscustomobject][ordered]@{result='restored';dhcp='Enabled';staticAddresses=0}
+  }
+  Set-NetIPInterface -InterfaceIndex $InterfaceIndex -AddressFamily IPv4 -Dhcp Disabled -ErrorAction Stop
+  $desired=[Collections.Generic.Dictionary[string,object]]::new([StringComparer]::Ordinal)
+  foreach($address in @($PriorAddresses)){
+    if([string]$address.ipAddress-cmatch'^169\.254\.'){continue}
+    $key="$([string]$address.ipAddress)/$([int]$address.prefixLength)"
+    if($desired.ContainsKey($key)){throw 'Prior private-link address snapshot is ambiguous.'}
+    $desired.Add($key,$address)
+  }
+  $current=@(Get-NetIPAddress -InterfaceIndex $InterfaceIndex -AddressFamily IPv4 -ErrorAction SilentlyContinue)
+  @($current|Where-Object{[string]$_.IPAddress-cnotmatch'^169\.254\.'-and-not$desired.ContainsKey("$([string]$_.IPAddress)/$([int]$_.PrefixLength)")})|Remove-NetIPAddress -Confirm:$false -ErrorAction Stop
+  foreach($entry in $desired.GetEnumerator()){
+    $address=$entry.Value
+    $exact=@(Get-NetIPAddress -InterfaceIndex $InterfaceIndex -AddressFamily IPv4 -IPAddress ([string]$address.ipAddress) -ErrorAction SilentlyContinue|Where-Object{[int]$_.PrefixLength-eq[int]$address.prefixLength})
+    if($exact.Count-gt1){throw 'Restored private-link address is ambiguous.'}
+    if($exact.Count-eq0){
+      try{New-NetIPAddress -InterfaceIndex $InterfaceIndex -IPAddress ([string]$address.ipAddress) -PrefixLength ([int]$address.prefixLength) -AddressFamily IPv4 -Type Unicast -ErrorAction Stop|Out-Null}
+      catch{$creationFailure=$_;$exact=@(Get-NetIPAddress -InterfaceIndex $InterfaceIndex -AddressFamily IPv4 -IPAddress ([string]$address.ipAddress) -ErrorAction SilentlyContinue|Where-Object{[int]$_.PrefixLength-eq[int]$address.prefixLength});if($exact.Count-ne1){throw $creationFailure}}
+    }
+  }
+  $final=@(Get-NetIPAddress -InterfaceIndex $InterfaceIndex -AddressFamily IPv4 -ErrorAction SilentlyContinue|Where-Object{[string]$_.IPAddress-cnotmatch'^169\.254\.'})
+  $finalKeys=@($final|ForEach-Object{"$([string]$_.IPAddress)/$([int]$_.PrefixLength)"}|Sort-Object)
+  $desiredKeys=@($desired.Keys|Sort-Object)
+  if(($finalKeys-join"`n")-cne($desiredKeys-join"`n")){throw 'Private-link static address restoration differs from the captured state.'}
+  [pscustomobject][ordered]@{result='restored';dhcp='Disabled';staticAddresses=$desired.Count}
+}
 function Get-OracleStage4R5DefaultRoutes {
   @(
     Get-NetRoute -ErrorAction Stop|Where-Object{$_.DestinationPrefix-in@('0.0.0.0/0','::/0')-and[string]$_.State-cne'Unreachable'}|ForEach-Object{

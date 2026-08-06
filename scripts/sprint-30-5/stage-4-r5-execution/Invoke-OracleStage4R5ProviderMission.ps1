@@ -31,9 +31,11 @@ if($Mode-ceq'Start'){
 }else{
   $terminalPath=Join-Path $return 'qualification-terminal.json';if(-not(Test-Path -LiteralPath $terminalPath -PathType Leaf)){throw 'Qualification terminal record is absent; provider teardown is not admitted.'}
   $terminal=Get-Content -Raw -LiteralPath $terminalPath|ConvertFrom-Json;$terminalIdentity=if($isRehearsal){[string]$terminal.rehearsalId}else{[string]$terminal.attemptId};$requestIdentity=if($isRehearsal){[string]$request.rehearsalId}else{[string]$request.attemptId};if($terminalIdentity-cne$requestIdentity-or[string]$terminal.result-cnotin@('passed-awaiting-provider-teardown','failed-awaiting-provider-teardown')){throw 'Provider terminal record differs.'}
+  if($isRehearsal-and([string]$terminal.contract-cne'oracle.sprint-30-5.stage-4-r5-rehearsal-terminal'-or[string]$terminal.transferId-cne[string]$transfer.transferId-or[string]$terminal.providerIdentity-cne[string]$request.providerIdentity-or[bool]$terminal.authorityCreated-or[bool]$terminal.attemptCreated)){throw 'Provider rehearsal terminal binding differs.'}
   if(Test-Path -LiteralPath (Join-Path $return 'provider-teardown.json')){throw 'Create-only provider teardown output already exists.'}
 }
 $node=[string]$contract.toolchain.node.path;$controller=Join-Path $PSScriptRoot 'provider-controller.mjs'
 $arguments=@($controller,'--mode',$Mode.ToLowerInvariant(),'--request',$requestPath,'--return-root',$return,'--expected-authority-sha256',$authorityHash,'--transfer-root',[IO.Path]::GetFullPath($TransferRoot))
 & $node @arguments
 if($LASTEXITCODE-ne0){throw "Stage 4 R5 provider $Mode controller exited $LASTEXITCODE."}
+if($Mode-ceq'Stop'){$handoffPath=Join-Path $return 'provider-secret-handoff.json';if(Test-Path -LiteralPath $handoffPath){Remove-Item -LiteralPath $handoffPath -Force};if(Test-Path -LiteralPath $handoffPath){throw 'Provider secret handoff residue remains after teardown.'}}
