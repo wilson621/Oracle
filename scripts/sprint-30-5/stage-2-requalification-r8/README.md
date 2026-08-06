@@ -1,0 +1,31 @@
+# Sprint 30.5 Stage 2 Requalification R8
+
+R8 restores the established split-host qualification architecture for corrected product candidate `4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d` (tree `1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a`).
+
+## Host boundary
+
+- `DESKTOP-M3H22E4` is the engineering workstation. It validates the source, builds and locally signs package version `0.1.6.0`, verifies the release, destroys private signing material, and freezes an immutable candidate before any transfer exists.
+- `Founder-QA-01` is the clean qualification host. It must not contain the development repository or require Git, Node, npm, Supabase CLI, or Docker. A future transfer carries the frozen release plus a Windows PowerShell 5.1 qualification harness.
+
+## Current authority boundary
+
+The current baseline permits protocol design and an engineering candidate freeze only. It prohibits transfer creation, qualification authority creation, attempt creation, and qualification execution. `prepare-transfer.mjs` and `Invoke-OracleStage2R8Qualification.ps1` fail closed until a separate Founder-authorised execution overlay binds the exact accepted freeze and exact execution baseline.
+
+No current script may turn this preparation authority into qualification authority.
+
+## Engineering entry points
+
+- `node verify-preparation.mjs`
+- `node prepare-candidate.mjs --preparation-id <fresh-id> --timestamp-utc <utc> --harness-commit <exact-clean-head>`
+- `Invoke-OracleStage2R8EngineeringRehearsal.ps1 -ResultPath <fresh-path>` after the contract is bound to the accepted freeze
+
+## Future clean-host order
+
+1. create and independently verify one create-only transfer on the engineering workstation;
+2. physically transfer it to Founder-QA-01 and copy it to a fresh local create-only root;
+3. verify the manifest, custody, independent-verification record, and exact payload inventory;
+4. pass host admission and continuity with zero Oracle package/certificate state and no development tooling;
+5. only under separate Founder authority, create and consume one authority and one attempt;
+6. verify the frozen package and detached release signature, reject pre-trusted or tampered state, scan package bytes for runtime-configuration canaries, remove exact temporary trust, produce evidence, and return it create-only.
+
+A permanent failure is not retryable. Passing qualification stops awaiting Founder review and does not authorise Stage 3 or later work.
