@@ -219,3 +219,12 @@ The Founder accepted Stage 3 Requalification R13 as the current Stage 3 baseline
 The returned archive SHA-256 is `4e7fb5b75b036e7edf78438117950f4be78c74ad26bc0d102e77dc6658da3c7a`; final evidence-manifest SHA-256 is `ee12f0307d5c55dc05027c50dcba4860923ff36544c432055417005cee3e19f8`. All 144 frozen inventory entries, 148 attempt files, 154 preserved return files and fourteen lifecycle phases verified exactly. Pre-authority purity, clean-host admission, both runtime observations, reset/repair, post-reset managed LocalState initialization and final zero residue passed.
 
 Canonical evidence is frozen under `docs/sprints/evidence/sprint-30-5/stage-3-r13/`. All historical evidence remains unchanged. Stage 4 is not started and not authorised; the next Founder-level mission is a separate Stage 4 programme-state and qualification-impact assessment against the accepted R8/R13 baseline.
+
+## Stage 4 R8/R13 qualification-impact assessment - 6 August 2026
+
+The Founder-authorised assessment is complete. R4 remains accepted immutable
+history for R6/R12 but cannot qualify R8/R13. Its ten-journey acceptance
+semantics remain reusable, while its repository and developer-tool-dependent
+execution design conflicts with clean `Founder-QA-01`. Stage 4 is incomplete,
+Stage 5 remains blocked, and the recommended next mission is bounded,
+execution-barred Stage 4 R5 engineering preparation.

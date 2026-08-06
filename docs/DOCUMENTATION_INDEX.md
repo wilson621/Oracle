@@ -633,3 +633,9 @@ to adopt a later formatting standard.
 | R13 execution mission | [Sprint 30.5 Stage 3 R13 Execution Mission](sprints/SPRINT_30_5_STAGE_3_R13_EXECUTION_MISSION.md) | Exact Founder grant, single transfer/authority/attempt limits and clean-host pre-authority boundary |
 | R13 accepted evidence index | [Stage 3 R13 Accepted Evidence Index](sprints/evidence/sprint-30-5/stage-3-r13/Oracle.Stage3R13AcceptedEvidenceIndex.json) | Immutable transfer, authority, attempt, archive, lifecycle and preservation bindings |
 | R13 qualification closure | [Sprint 30.5 Stage 3 R13 Qualification Closure](sprints/SPRINT_30_5_STAGE_3_R13_QUALIFICATION_CLOSURE.md) | Founder acceptance, independent verification and formal R8-bound Stage 3 closure |
+
+## Stage 4 assessment against the accepted R8/R13 baseline
+
+| Document | Link | Purpose |
+| --- | --- | --- |
+| Stage 4 R8/R13 qualification-impact assessment | [Sprint 30.5 Stage 4 R8/R13 Qualification-Impact Assessment](sprints/SPRINT_30_5_STAGE_4_R8_R13_QUALIFICATION_IMPACT_ASSESSMENT.md) | Exact-artifact impact, R4 reuse boundary, clean-host architecture dependency and recommended R5 preparation mission |
