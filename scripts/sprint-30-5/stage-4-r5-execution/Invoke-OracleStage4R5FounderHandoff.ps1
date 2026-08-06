@@ -36,7 +36,7 @@ if([string]$rehearsal.contract-cne'oracle.sprint-30-5.stage-4-r5-two-host-rehear
 $collected=[DateTime]::ParseExact([string]$provider.collectedAtUtc,'o',[Globalization.CultureInfo]::InvariantCulture,[Globalization.DateTimeStyles]::RoundtripKind).ToUniversalTime();$age=[DateTime]::UtcNow-$collected
 if($age.TotalSeconds-lt-5-or$age.TotalMinutes-gt15){throw 'Provider-host pre-authority record is stale or future-dated.'}
 
-$host=Get-OracleStage4R5CleanHostAdmission $contract
+$hostAdmission=Get-OracleStage4R5CleanHostAdmission $contract
 $localTransferRoot=Copy-OracleStage4R5TransferCreateOnly $sourceTransferRoot ([IO.Path]::GetFullPath($LocalTransferParent))
 $local=Assert-OracleStage4R5Transfer $localTransferRoot $ExpectedManifestSha256 $ExpectedCustodySha256 $ExpectedVerificationSha256
 if([string]$local.transferId-cne[string]$source.transferId){throw 'Local transfer admission differs.'}
@@ -53,7 +53,7 @@ $authorityPath=Join-Path $LocalAuthorityParent ($authorityId+'.json');$attemptRo
 if((Test-Path -LiteralPath $authorityPath) -or (Test-Path -LiteralPath $attemptRoot)){throw 'R5 authority or attempt identity was already used.'}
 [IO.Directory]::CreateDirectory($attemptRoot)|Out-Null
 foreach($name in @('evidence','lifecycle','logs')){[IO.Directory]::CreateDirectory((Join-Path $attemptRoot $name))|Out-Null}
-$continuity=[ordered]@{contract='oracle.sprint-30-5.stage-4-r5-host-continuity';result='passed';transferId=[string]$source.transferId;founderGrantId=$grant;providerPreflightSha256=Get-OracleStage4R5Sha256 $providerPath;twoHostRehearsalCompletionSha256=$rehearsalSha;sourceManifestSha256=[string]$source.manifestSha256;localManifestSha256=[string]$local.manifestSha256;sourceAndLocalParity=$true;host=$host;authorityCreated=$false;attemptCreated=$false;collectedAtUtc=[DateTime]::UtcNow.ToString('o')}
+$continuity=[ordered]@{contract='oracle.sprint-30-5.stage-4-r5-host-continuity';result='passed';transferId=[string]$source.transferId;founderGrantId=$grant;providerPreflightSha256=Get-OracleStage4R5Sha256 $providerPath;twoHostRehearsalCompletionSha256=$rehearsalSha;sourceManifestSha256=[string]$source.manifestSha256;localManifestSha256=[string]$local.manifestSha256;sourceAndLocalParity=$true;host=$hostAdmission;authorityCreated=$false;attemptCreated=$false;collectedAtUtc=[DateTime]::UtcNow.ToString('o')}
 $continuityPath=Join-Path $attemptRoot 'logs\host-continuity.json';Write-OracleStage4R5CreateOnlyJson $continuityPath $continuity;$continuitySha=Get-OracleStage4R5Sha256 $continuityPath
 $preflight=[ordered]@{contract='oracle.sprint-30-5.stage-4-r5-pre-authority';result='passed';transferId=[string]$source.transferId;founderGrantId=$grant;executionCommit=[string]$source.manifest.preparation.executionCommit;providerPreflightSha256=Get-OracleStage4R5Sha256 $providerPath;twoHostRehearsalCompletionSha256=$rehearsalSha;twoHostRehearsalGatePassed=$true;hostContinuitySha256=$continuitySha;allTransferGatesPassed=$true;continuityGatePassed=$true;hostAdmissionGatePassed=$true;providerHostGatePassed=$true;networkIsolationGatePassed=$true;zeroStateGatePassed=$true;returnRootGatePassed=$true;authorityCreated=$false;attemptCreated=$false;collectedAtUtc=[DateTime]::UtcNow.ToString('o')}
 $preflightPath=Join-Path $attemptRoot 'logs\pre-authority.json';Write-OracleStage4R5CreateOnlyJson $preflightPath $preflight;$preflightSha=Get-OracleStage4R5Sha256 $preflightPath
