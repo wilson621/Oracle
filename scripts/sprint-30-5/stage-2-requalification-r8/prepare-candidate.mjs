@@ -403,7 +403,7 @@ function runSourceBaseline() {
     ])
   );
   writeJsonAtomicCreateOnly(
-    join(directories.evidence, "runtime-configuration-build-secrecy.json"),
+    join(directories.verification, "runtime-configuration-build-secrecy.json"),
     {
       schemaVersion: "1.0.0",
       contract: "oracle.sprint-30-5.stage-2-requalification-r8-build-secrecy",
