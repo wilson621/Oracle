@@ -96,11 +96,18 @@ function Assert-OracleStage2R8Transfer {
   if ([int]$manifest.maximumAuthorities -ne 1 -or [int]$manifest.maximumAttempts -ne 1) { throw "Transfer single-use limits differ." }
   if ([string]$custody.transferId -cne [string]$manifest.transferId -or [string]$custody.founderGrantId -cne [string]$manifest.founderGrantId -or [string]$custody.manifestSha256 -cne (Get-OracleStage2R8Sha256 $manifestPath) -or -not [bool]$custody.createOnly -or -not [bool]$custody.independentVerificationRequired) { throw "Transfer custody differs." }
   if ([string]$verification.result -cne 'passed' -or [string]$verification.transferId -cne [string]$manifest.transferId -or [string]$verification.founderGrantId -cne [string]$manifest.founderGrantId -or [string]$verification.manifestSha256 -cne (Get-OracleStage2R8Sha256 $manifestPath) -or [string]$verification.custodySha256 -cne (Get-OracleStage2R8Sha256 $custodyPath) -or [bool]$verification.authorityCreated -or [bool]$verification.attemptCreated) { throw "Independent transfer verification differs." }
-  $manifestHasPredecessor = $manifest.PSObject.Properties.Name -ccontains 'replacesTransferId'
-  $custodyHasPredecessor = $custody.PSObject.Properties.Name -ccontains 'replacesTransferId'
-  $verificationHasPredecessor = $verification.PSObject.Properties.Name -ccontains 'replacesTransferId'
-  if ($manifestHasPredecessor -ne $custodyHasPredecessor -or $manifestHasPredecessor -ne $verificationHasPredecessor) { throw "Transfer predecessor lineage shape differs." }
-  if ($manifestHasPredecessor -and ([string]$custody.replacesTransferId -cne [string]$manifest.replacesTransferId -or [string]$verification.replacesTransferId -cne [string]$manifest.replacesTransferId)) { throw "Transfer predecessor lineage differs." }
+  foreach ($lineageField in @('replacesTransferId','preservesOriginalTransferId')) {
+    $manifestHasLineage = $manifest.PSObject.Properties.Name -ccontains $lineageField
+    $custodyHasLineage = $custody.PSObject.Properties.Name -ccontains $lineageField
+    $verificationHasLineage = $verification.PSObject.Properties.Name -ccontains $lineageField
+    if ($manifestHasLineage -ne $custodyHasLineage -or $manifestHasLineage -ne $verificationHasLineage) { throw "Transfer lineage shape differs: $lineageField" }
+    if ($manifestHasLineage) {
+      $manifestLineage = [string]$manifest.PSObject.Properties[$lineageField].Value
+      $custodyLineage = [string]$custody.PSObject.Properties[$lineageField].Value
+      $verificationLineage = [string]$verification.PSObject.Properties[$lineageField].Value
+      if ($custodyLineage -cne $manifestLineage -or $verificationLineage -cne $manifestLineage) { throw "Transfer lineage differs: $lineageField" }
+    }
+  }
   $payloadRoot = Join-Path $root 'payload'
   [void](Assert-OracleStage2R8NoReparseTraversal -Path $payloadRoot -Root $root)
   $actual = @(Get-OracleStage2R8PayloadInventory -PayloadRoot $payloadRoot)

@@ -32,7 +32,7 @@ foreach ($relativePath in @(
 . (Join-Path $PSScriptRoot 'Oracle.Stage2R8CleanHostCore.ps1')
 $sourceAdmission = Assert-OracleStage2R8Transfer -TransferRoot $sourceTransferRoot -ExpectedManifestSha256 $ExpectedManifestSha256 -ExpectedCustodySha256 $ExpectedCustodySha256 -ExpectedVerificationSha256 $ExpectedVerificationSha256
 $sourceContract = Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'Oracle.Stage2RequalificationR8Contract.json') | ConvertFrom-Json
-if ([string]$sourceContract.replacementMission.transferId -cne [string]$sourceAdmission.transferId -or [string]$sourceContract.replacementMission.founderGrantId -cne $FounderGrantId -or [string]$sourceAdmission.manifest.replacesTransferId -cne [string]$sourceContract.replacementMission.replacesTransferId) { throw 'R8 source contract mission binding differs.' }
+if ([string]$sourceContract.correctedMission.transferId -cne [string]$sourceAdmission.transferId -or [string]$sourceContract.correctedMission.founderGrantId -cne $FounderGrantId -or [string]$sourceAdmission.manifest.replacesTransferId -cne [string]$sourceContract.correctedMission.replacesTransferId -or [string]$sourceAdmission.manifest.preservesOriginalTransferId -cne [string]$sourceContract.correctedMission.preservesOriginalTransferId) { throw 'R8 source contract mission binding differs.' }
 
 $localTransferParentPath = [IO.Path]::GetFullPath($LocalTransferParent)
 $localExecutionParentPath = [IO.Path]::GetFullPath($LocalExecutionParent)

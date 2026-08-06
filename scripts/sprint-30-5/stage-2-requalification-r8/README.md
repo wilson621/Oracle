@@ -9,9 +9,9 @@ R8 restores the established split-host qualification architecture for corrected 
 
 ## Current authority boundary
 
-Both `transfer-stage2-r8-20260806T123612020Z-338a5276` and replacement `transfer-stage2-r8-replacement-20260806T125821770Z-cc9e03ce` are immutable pre-authority engineering failures and prohibited from admission or execution. The replacement passed transfer admission but exposed a case-sensitive Windows hostname comparison before continuity, authority or attempt creation.
+The first two transfers are immutable pre-authority engineering failures and prohibited from admission or execution. Their source, USB and clean-host copies remain historical.
 
-The repository hostname comparison is corrected and adversarially validated. No further transfer, authority, attempt, qualification execution, Stage 3 or later work is authorised.
+A separately bound hostname-corrected mission authorises exactly one fresh transfer, `transfer-stage2-r8-corrected-20260806T132233022Z-d77af006`, under grant `founder-stage2-r8-corrected-grant-20260806T132233022Z-d77af006`. The transfer must bind both predecessor identities. Authority and attempt creation remain impossible until all transfer, clean-host, continuity and pre-authority gates pass. Retry and Stage 3 or later work remain unauthorised.
 ## Engineering entry points
 
 - `node verify-preparation.mjs`

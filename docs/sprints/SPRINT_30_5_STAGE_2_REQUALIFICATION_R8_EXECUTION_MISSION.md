@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R8 Execution Mission
 
-Status: REPLACEMENT PRE-AUTHORITY HOST-IDENTITY FAILURE - FURTHER TRANSFER NOT AUTHORISED
+Status: HOSTNAME-CORRECTED TRANSFER AUTHORISED - PRE-TRANSFER
 Date: 6 August 2026
 
 ## Exact authority
@@ -94,6 +94,17 @@ The repository now compares actual and expected computer names with `StringCompa
 
 All transfer, authority, attempt and qualification permissions are fail-closed. No further transfer is authorised.
 
-## Required Founder decision
+## Hostname-corrected mission
 
-Accept the replacement transfer as immutable pre-authority engineering failure evidence, accept the corrected hostname baseline, and authorise one new create-only corrected transfer with fresh identities.
+The Founder accepted the replacement failure and hostname correction baseline `6d86173a4090190e3e5b4c548d47c1e503b3651d`, then authorised one fresh mission:
+
+- grant: `founder-stage2-r8-corrected-grant-20260806T132233022Z-d77af006`
+- transfer: `transfer-stage2-r8-corrected-20260806T132233022Z-d77af006`
+- immediate predecessor: `transfer-stage2-r8-replacement-20260806T125821770Z-cc9e03ce`
+- preserved original predecessor: `transfer-stage2-r8-20260806T123612020Z-338a5276`
+- maximum transfers, authorities and attempts: one each
+- authority creation: only after every transfer, continuity, clean-host and pre-authority gate
+- retry after consumed authority or permanent failure: prohibited
+- Stage 3 and later work: not authorised
+
+Pre-transfer validation hash-bound and read-only admitted both failed predecessors, validated complete two-generation lineage, and passed the inventory and hostname adversarial suites. No corrected transfer, authority or attempt exists.

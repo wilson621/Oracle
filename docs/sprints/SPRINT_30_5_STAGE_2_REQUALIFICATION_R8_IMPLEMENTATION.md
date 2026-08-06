@@ -47,3 +47,8 @@ The one corrected replacement transfer was built from committed baseline e9c0cb0
 ## Host-identity correction
 
 The sealed replacement transfer passed USB and local transfer admission but failed before continuity because the harness compared the uppercase Windows computer name with the mixed-case governed spelling case-sensitively. The corrected helper uses ordinal case-insensitive equality, matching Windows computer-name semantics while rejecting every non-case identity difference. No further transfer or qualification activity is authorised.
+
+
+## Hostname-corrected mission binding
+
+The fresh corrected mission is separately bound to baseline 6d86173a4090190e3e5b4c548d47c1e503b3651d and carries both failed predecessor identities through manifest, custody, independent verification and any future qualification records. Both historical transfer and failure-record hashes are mandatory pre-creation gates.

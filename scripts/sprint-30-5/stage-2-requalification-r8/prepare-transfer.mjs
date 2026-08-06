@@ -8,7 +8,7 @@ const harnessRoot = import.meta.dirname;
 const repositoryRoot = path.resolve(harnessRoot, "../../..");
 const contractPath = path.join(harnessRoot, "Oracle.Stage2RequalificationR8Contract.json");
 const contract = JSON.parse(fs.readFileSync(contractPath, "utf8"));
-if (contract.status !== "founder-authorised-replacement-execution-enabled" || contract.futureTransfer.creationPermitted !== true || contract.authority.qualificationExecutionPermitted !== true || contract.replacementMission.state !== "founder-authorised-pre-transfer") {
+if (contract.status !== "founder-authorised-corrected-execution-enabled" || contract.futureTransfer.creationPermitted !== true || contract.authority.qualificationExecutionPermitted !== true || contract.correctedMission.state !== "founder-authorised-pre-transfer") {
   throw new Error("R8 transfer creation is not authorised by this preparation baseline.");
 }
 const args = new Map();
@@ -18,16 +18,21 @@ const timestampUtc=required("timestamp-utc");
 const executionCommit=required("execution-commit");
 const executionTree=required("execution-tree");
 assert.equal(args.size,4,"Exactly four transfer arguments are required.");
-assert.equal(transferId,contract.replacementMission.transferId,"Transfer identity differs from the single authorised identity.");
-assert.match(transferId,/^transfer-stage2-r8-replacement-\d{8}T\d{9}Z-[0-9a-f]{8}$/u);
+assert.equal(transferId,contract.correctedMission.transferId,"Transfer identity differs from the single authorised identity.");
+assert.match(transferId,/^transfer-stage2-r8-corrected-\d{8}T\d{9}Z-[0-9a-f]{8}$/u);
 assert.equal(git(["rev-parse","HEAD"]),executionCommit);
 assert.equal(git(["rev-parse","HEAD^{tree}"]),executionTree);
-git(["merge-base","--is-ancestor",contract.replacementMission.acceptedCorrectionBaseline,executionCommit]);
+git(["merge-base","--is-ancestor",contract.correctedMission.acceptedCorrectionBaseline,executionCommit]);
 assert.equal(sha256(path.resolve(repositoryRoot,contract.executionMission.failureRecord.path)),contract.executionMission.failureRecord.sha256,"Historical failed-transfer record differs.");
 const failedTransferRoot=path.resolve(repositoryRoot,contract.futureTransfer.artifactBase,contract.executionMission.transferId);
 assert.equal(sha256(path.join(failedTransferRoot,"Oracle.Stage2R8TransferManifest.json")),contract.executionMission.failureRecord.manifestSha256,"Historical failed transfer manifest differs.");
 assert.equal(sha256(path.join(failedTransferRoot,"Oracle.Stage2R8TransferCustody.json")),contract.executionMission.failureRecord.custodySha256,"Historical failed transfer custody differs.");
 assert.equal(sha256(path.join(failedTransferRoot,"Oracle.Stage2R8TransferVerification.json")),contract.executionMission.failureRecord.verificationSha256,"Historical failed transfer verification differs.");
+assert.equal(sha256(path.resolve(repositoryRoot,contract.replacementMission.failureRecord.path)),contract.replacementMission.failureRecord.sha256,"Historical replacement failure record differs.");
+const failedReplacementRoot=path.resolve(repositoryRoot,contract.futureTransfer.artifactBase,contract.replacementMission.transferId);
+assert.equal(sha256(path.join(failedReplacementRoot,"Oracle.Stage2R8TransferManifest.json")),contract.replacementMission.sealedTransfer.manifestSha256,"Historical replacement manifest differs.");
+assert.equal(sha256(path.join(failedReplacementRoot,"Oracle.Stage2R8TransferCustody.json")),contract.replacementMission.sealedTransfer.custodySha256,"Historical replacement custody differs.");
+assert.equal(sha256(path.join(failedReplacementRoot,"Oracle.Stage2R8TransferVerification.json")),contract.replacementMission.sealedTransfer.verificationSha256,"Historical replacement verification differs.");
 assert.equal(git(["status","--porcelain=v1"]),"");
 assert.equal(git(["branch","--show-current"]),contract.requiredBranch);
 assert.equal(contract.engineeringFreeze.accepted,true);
@@ -50,14 +55,14 @@ for(const name of ["Oracle.Stage2RequalificationR8Contract.json","Oracle.Stage2R
 copyDirectoryCreateOnly(path.join(freezeRoot,"release"),path.join(payloadRoot,"release"));
 copyCreateOnly(freezePath,path.join(payloadRoot,path.basename(freezePath)));
 const files=inventory(payloadRoot);
-const manifest={schemaVersion:"1.0.0",contract:"oracle.sprint-30-5.stage-2-r8-transfer-manifest",transferId,founderGrantId:contract.replacementMission.founderGrantId,createdAtUtc:timestampUtc,executionCommit,executionTree,executionContractSha256:sha256(contractPath),founderAuthorisedQualificationExecution:true,singleAttemptOnly:true,maximumAuthorities:1,maximumAttempts:1,engineeringFreezeSha256:contract.engineeringFreeze.freezeSha256,packageSha256:contract.engineeringFreeze.packageSha256,publicCertificateSha256:contract.engineeringFreeze.publicCertificateSha256,replacesTransferId:contract.replacementMission.replacesTransferId,files};
+const manifest={schemaVersion:"1.0.0",contract:"oracle.sprint-30-5.stage-2-r8-transfer-manifest",transferId,founderGrantId:contract.correctedMission.founderGrantId,createdAtUtc:timestampUtc,executionCommit,executionTree,executionContractSha256:sha256(contractPath),founderAuthorisedQualificationExecution:true,singleAttemptOnly:true,maximumAuthorities:1,maximumAttempts:1,engineeringFreezeSha256:contract.engineeringFreeze.freezeSha256,packageSha256:contract.engineeringFreeze.packageSha256,publicCertificateSha256:contract.engineeringFreeze.publicCertificateSha256,replacesTransferId:contract.correctedMission.replacesTransferId,preservesOriginalTransferId:contract.correctedMission.preservesOriginalTransferId,files};
 const manifestPath=path.join(transferRoot,"Oracle.Stage2R8TransferManifest.json");
 writeCreateOnly(manifestPath,manifest);
 const manifestSha256=sha256(manifestPath);
-const custody={schemaVersion:"1.0.0",contract:"oracle.sprint-30-5.stage-2-r8-transfer-custody",transferId,founderGrantId:contract.replacementMission.founderGrantId,createdAtUtc:timestampUtc,manifestSha256,createOnly:true,independentVerificationRequired:true,source:"accepted-r8-engineering-freeze",destination:"Founder-QA-01 local create-only copy",replacesTransferId:contract.replacementMission.replacesTransferId,files:files.length,bytes:files.reduce((sum,item)=>sum+item.bytes,0)};
+const custody={schemaVersion:"1.0.0",contract:"oracle.sprint-30-5.stage-2-r8-transfer-custody",transferId,founderGrantId:contract.correctedMission.founderGrantId,createdAtUtc:timestampUtc,manifestSha256,createOnly:true,independentVerificationRequired:true,source:"accepted-r8-engineering-freeze",destination:"Founder-QA-01 local create-only copy",replacesTransferId:contract.correctedMission.replacesTransferId,preservesOriginalTransferId:contract.correctedMission.preservesOriginalTransferId,files:files.length,bytes:files.reduce((sum,item)=>sum+item.bytes,0)};
 const custodyPath=path.join(transferRoot,"Oracle.Stage2R8TransferCustody.json");
 writeCreateOnly(custodyPath,custody);
-console.log(JSON.stringify({transferId,founderGrantId:contract.replacementMission.founderGrantId,transferRoot,manifestSha256,custodySha256:sha256(custodyPath),files:files.length,bytes:custody.bytes},null,2));
+console.log(JSON.stringify({transferId,founderGrantId:contract.correctedMission.founderGrantId,transferRoot,manifestSha256,custodySha256:sha256(custodyPath),files:files.length,bytes:custody.bytes},null,2));
 
 function required(name){const value=args.get(name);if(!value)throw new Error("Required argument is absent: --"+name);return value;}
 function git(arguments_){const result=spawnSync(contract.toolchainExecutables.git,arguments_,{cwd:repositoryRoot,encoding:"utf8",shell:false,windowsHide:true});if(result.status!==0)throw new Error(result.stderr);return result.stdout.trim();}
