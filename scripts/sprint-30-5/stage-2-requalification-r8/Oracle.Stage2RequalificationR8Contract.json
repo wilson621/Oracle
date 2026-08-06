@@ -273,7 +273,7 @@
                                  "dotnet":  "C:/Program Files/dotnet/dotnet.exe",
                                  "bsdtar":  "C:/Windows/System32/tar.exe"
                              },
-    "status":  "engineering-preparation-transfer-barred",
+    "status":  "engineering-freeze-accepted-transfer-barred",
     "preparation":  {
                         "artifactBase":  ".artifacts/sprint-30-5/stage-2-r8-engineering-freeze",
                         "createOnly":  true,
@@ -312,10 +312,15 @@
                            "artifactBase":  ".artifacts/sprint-30-5/stage-2-r8-transfer"
                        },
     "engineeringFreeze":  {
-                              "accepted":  false,
-                              "root":  null,
-                              "freezeSha256":  null,
-                              "packageSha256":  null,
-                              "publicCertificateSha256":  null
+                              "accepted":  true,
+                              "root":  ".artifacts/sprint-30-5/stage-2-r8-engineering-freeze/candidate-r8-20260806T120629088Z-f79fe50d",
+                              "freezeSha256":  "f8c7ec7d020ba717efb9f036350c189221debe53a58a45374aa5c252af695361",
+                              "packageSha256":  "97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490",
+                              "publicCertificateSha256":  "78eb64dc769a87cbe82620a8d7bb6da655bdc2d38fe87f58b5c90f3c672492b2",
+                              "preparationId":  "candidate-r8-20260806T120629088Z-f79fe50d",
+                              "harnessCommit":  "06b2ec412515640fd49e66c175637b84546146d6",
+                              "releaseFiles":  10,
+                              "privateSigningMaterialDestroyed":  true,
+                              "certificateResidue":  0
                           }
 }

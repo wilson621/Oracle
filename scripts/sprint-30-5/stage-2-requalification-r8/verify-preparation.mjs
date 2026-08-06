@@ -77,6 +77,10 @@ assert.match(core,/MSIX Authenticode verification failed/u);
 assert.match(core,/Detached release-manifest signer differs/u);
 assert.match(core,/Runtime-configuration canary leaked into the package/u);
 assert.match(core,/Exact temporary trust remains after verification/u);
+assert.match(core,/Test-OracleStage2R8FileContainsCanary/u);
+assert.match(core,/\$chunkBytes = 1MB/u);
+assert.match(core,/\[Buffer\]::BlockCopy/u);
+assert.doesNotMatch(core,/Test-OracleStage2R8BytesContain/u);
 
 const transferBuilder=source("prepare-transfer.mjs");
 assert.match(transferBuilder,/R8 transfer creation is not authorised by this preparation baseline/u);
@@ -91,6 +95,10 @@ const blockedQualification=spawnSync(powershell,["-NoLogo","-NoProfile","-Execut
 assert.notEqual(blockedQualification.status,0);
 assert.match(blockedQualification.stderr,/qualification execution is not authorised/u);
 
+const scannerFixture=spawnSync(powershell,["-NoLogo","-NoProfile","-ExecutionPolicy","Bypass","-File",path.join(root,"Test-OracleStage2R8CanaryScanner.ps1")],{cwd:repository,encoding:"utf8",shell:false,windowsHide:true});
+assert.equal(scannerFixture.status,0,scannerFixture.stderr);
+const scannerResult=JSON.parse(scannerFixture.stdout);
+assert.deepEqual({result:scannerResult.result,absentRejected:scannerResult.absentRejected,utf8ChunkBoundaryDetected:scannerResult.utf8ChunkBoundaryDetected,utf16LeDetected:scannerResult.utf16LeDetected},{result:"passed",absentRejected:true,utf8ChunkBoundaryDetected:true,utf16LeDetected:true});
 console.log(JSON.stringify({result:"passed",contract:contract.contract,status:contract.status,historicalBindings:contract.historicalEvidenceBindings.length,cleanHostRuntime:"powershell-only",transferCreated:false,authorityCreated:false,attemptCreated:false,fixtures:{syntax:"passed",historicalIntegrity:"passed",candidateFreezeBoundary:"passed",transferGate:"passed",qualificationGate:"passed",gateOrdering:"passed",cleanHostTooling:"passed",signatureVerification:"passed",canaryRejection:"passed",teardown:"passed"}},null,2));
 
 function source(name){return fs.readFileSync(path.join(root,name),"utf8");}

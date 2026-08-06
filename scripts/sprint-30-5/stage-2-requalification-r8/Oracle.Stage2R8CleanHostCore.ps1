@@ -127,19 +127,45 @@ function New-OracleStage2R8AuthorityIdentity {
   [pscustomobject][ordered]@{ authorityId="authority-stage2-r8-$stamp-$suffix"; attemptId="stage2-r8-$stamp-$suffix"; timestampUtc=[DateTime]::UtcNow.ToString('o') }
 }
 
-function Test-OracleStage2R8BytesContain {
-  param([Parameter(Mandatory = $true)][byte[]]$Bytes, [Parameter(Mandatory = $true)][string]$Value)
-  $utf8 = [Text.Encoding]::UTF8.GetBytes($Value)
-  $unicode = [Text.Encoding]::Unicode.GetBytes($Value)
-  foreach ($needle in @($utf8,$unicode)) {
-    for ($i=0; $i -le $Bytes.Length-$needle.Length; $i++) {
-      $match=$true
-      for ($j=0; $j -lt $needle.Length; $j++) { if ($Bytes[$i+$j] -ne $needle[$j]) { $match=$false; break } }
-      if ($match) { return $true }
+function Test-OracleStage2R8FileContainsCanary {
+  param(
+    [Parameter(Mandatory = $true)][string]$Path,
+    [Parameter(Mandatory = $true)][string[]]$Values
+  )
+  $encoding = [Text.Encoding]::GetEncoding(28591)
+  $needles = @(
+    foreach ($value in $Values) {
+      $encoding.GetString([Text.Encoding]::UTF8.GetBytes($value))
+      $encoding.GetString([Text.Encoding]::Unicode.GetBytes($value))
     }
+  )
+  $maximumNeedleBytes = ($needles | ForEach-Object { $_.Length } | Measure-Object -Maximum).Maximum
+  $overlap = [Math]::Max(0, [int]$maximumNeedleBytes - 1)
+  $chunkBytes = 1MB
+  $buffer = [byte[]]::new($chunkBytes + $overlap)
+  $stream = [IO.File]::Open($Path, [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
+  try {
+    $carried = 0
+    while ($true) {
+      $read = $stream.Read($buffer, $carried, $chunkBytes)
+      $available = $carried + $read
+      if ($available -eq 0) { break }
+      $haystack = $encoding.GetString($buffer, 0, $available)
+      foreach ($needle in $needles) {
+        if ($haystack.IndexOf($needle, [StringComparison]::Ordinal) -ge 0) { return $true }
+      }
+      if ($read -eq 0) { break }
+      $carried = [Math]::Min($overlap, $available)
+      if ($carried -gt 0) {
+        [Buffer]::BlockCopy($buffer, $available - $carried, $buffer, 0, $carried)
+      }
+    }
+    $false
+  } finally {
+    $stream.Dispose()
   }
-  $false
 }
+
 
 function Invoke-OracleStage2R8CandidateVerification {
   param([Parameter(Mandatory = $true)]$Contract, [Parameter(Mandatory = $true)][string]$PayloadRoot, [Parameter(Mandatory = $true)][string]$WorkRoot)
@@ -173,11 +199,9 @@ function Invoke-OracleStage2R8CandidateVerification {
     Expand-Archive -LiteralPath $zipPath -DestinationPath $unpacked -Force
     $appx = [xml](Get-Content -Raw -LiteralPath (Join-Path $unpacked 'AppxManifest.xml'))
     if ([string]$appx.Package.Identity.Version -cne [string]$Contract.package.version -or [string]$appx.Package.Identity.Publisher -cne [string]$Contract.package.publisherSubjectPrefix) { throw "Unpacked package identity differs." }
+    $canaries = @('r8-build-canary.invalid','oracle-r8-anon-canary-not-a-secret','oracle-r8-service-canary-not-a-secret','oracle-r8-session-canary-not-a-secret-32-bytes')
     foreach ($file in Get-ChildItem -LiteralPath $unpacked -Recurse -File -Force) {
-      $bytes = [IO.File]::ReadAllBytes($file.FullName)
-      foreach ($canary in @('r8-build-canary.invalid','oracle-r8-anon-canary-not-a-secret','oracle-r8-service-canary-not-a-secret','oracle-r8-session-canary-not-a-secret-32-bytes')) {
-        if (Test-OracleStage2R8BytesContain -Bytes $bytes -Value $canary) { throw "Runtime-configuration canary leaked into the package." }
-      }
+      if (Test-OracleStage2R8FileContainsCanary -Path $file.FullName -Values $canaries) { throw "Runtime-configuration canary leaked into the package." }
     }
     [pscustomobject][ordered]@{ result='passed'; packageSha256=(Get-OracleStage2R8Sha256 $packagePath); certificateSha256=(Get-OracleStage2R8Sha256 $certificatePath); certificateThumbprint=$thumbprint; authenticode='Valid'; detachedManifestSignature='Valid'; packageVersion=[string]$appx.Package.Identity.Version; runtimeCanariesFound=0 }
   } finally {
