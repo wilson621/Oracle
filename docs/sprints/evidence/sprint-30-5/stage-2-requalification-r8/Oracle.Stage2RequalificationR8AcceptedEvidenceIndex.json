@@ -1,0 +1,106 @@
+{
+    "schemaVersion":  "1.0.0",
+    "contract":  "oracle.sprint-30-5.stage-2-requalification-r8-accepted-evidence-index",
+    "status":  "founder-accepted-formally-closed",
+    "acceptedAtUtc":  "2026-08-06",
+    "authorityId":  "authority-stage2-r8-20260806T134157536Z-a0bf3986",
+    "attemptId":  "stage2-r8-20260806T134157536Z-a0bf3986",
+    "candidate":  {
+                      "commit":  "4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d",
+                      "tree":  "1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a"
+                  },
+    "executionBaseline":  {
+                              "commit":  "f163a246fc40a202cc1e1a0adbc4be23ec9d2fbc",
+                              "tree":  "55efd946b0abb0f39618e12f91bcf372d28c5d75",
+                              "executionContractSha256":  "04731755fb83ca5e62abafd0448e5655713d07e08008c5d2f31058132a356d55"
+                          },
+    "transfer":  {
+                     "transferId":  "transfer-stage2-r8-corrected-20260806T132233022Z-d77af006",
+                     "replacesTransferId":  "transfer-stage2-r8-replacement-20260806T125821770Z-cc9e03ce",
+                     "preservesOriginalTransferId":  "transfer-stage2-r8-20260806T123612020Z-338a5276",
+                     "manifestSha256":  "2d72d30d005caf0a4b1fbb38cb1fd16a7d07442b53fa7a4ba6ee6f29f1bf75e2",
+                     "custodySha256":  "c9c52b5059f0ead02ab3d9b69ff5ef0bb51a0a4cbb6b86921148b6c02673de3c",
+                     "verificationSha256":  "053ceffe040e5fad8b937fd145254289466f72dc859e52e16cb2a3169c722c12"
+                 },
+    "finalEvidenceManifest":  {
+                                  "path":  "stage2-r8-20260806T134157536Z-a0bf3986/final-evidence-manifest.json",
+                                  "sha256":  "37571fcb3bd1ec3b5565119a2a4ab3dc0656d6bd47eecfbb85ed21d4d951a733",
+                                  "manifestedFiles":  4
+                              },
+    "qualificationOutcome":  {
+                                 "path":  "stage2-r8-20260806T134157536Z-a0bf3986/evidence/qualification-outcome.json",
+                                 "sha256":  "dab6eed0cab7b5f0bac025fa9b79ee3a65c8292eb2c364f2a20296b2c7ed8460",
+                                 "result":  "passed-awaiting-founder-review",
+                                 "zeroResidue":  true,
+                                 "retryAuthorised":  false
+                             },
+    "package":  {
+                    "version":  "0.1.6.0",
+                    "sha256":  "97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490",
+                    "publicCertificateSha256":  "78eb64dc769a87cbe82620a8d7bb6da655bdc2d38fe87f58b5c90f3c672492b2",
+                    "certificateThumbprint":  "A01F08EB5A07308FEAB3812692516C667D50EA56"
+                },
+    "fullAttemptPreservation":  {
+                                    "workspacePath":  ".artifacts/sprint-30-5/stage-2-requalification-r8/stage2-r8-20260806T134157536Z-a0bf3986",
+                                    "files":  2038,
+                                    "bytes":  730632820,
+                                    "byteComparedToUsbReturn":  true,
+                                    "archiveRequiredByExecutionContract":  false,
+                                    "archiveProduced":  false
+                                },
+    "files":  [
+                  {
+                      "path":  "stage2-r8-20260806T134157536Z-a0bf3986/evidence/host-continuity.json",
+                      "size":  1271,
+                      "sha256":  "54b91a02b7d238b2b1a5e2e94dfad3d2b0202eab1748d5dcd77a53e1973e4059"
+                  },
+                  {
+                      "path":  "stage2-r8-20260806T134157536Z-a0bf3986/evidence/execution-contract.json",
+                      "size":  31575,
+                      "sha256":  "04731755fb83ca5e62abafd0448e5655713d07e08008c5d2f31058132a356d55"
+                  },
+                  {
+                      "path":  "stage2-r8-20260806T134157536Z-a0bf3986/evidence/single-attempt-authority.json",
+                      "size":  812,
+                      "sha256":  "0e49bd8270afd2c445087eced33a173b8ff8ec4db71a5ceead02e335e1c28ee0"
+                  },
+                  {
+                      "path":  "stage2-r8-20260806T134157536Z-a0bf3986/evidence/qualification-outcome.json",
+                      "size":  2186,
+                      "sha256":  "dab6eed0cab7b5f0bac025fa9b79ee3a65c8292eb2c364f2a20296b2c7ed8460"
+                  },
+                  {
+                      "path":  "stage2-r8-20260806T134157536Z-a0bf3986/single-attempt-authority.json",
+                      "size":  812,
+                      "sha256":  "0e49bd8270afd2c445087eced33a173b8ff8ec4db71a5ceead02e335e1c28ee0"
+                  },
+                  {
+                      "path":  "stage2-r8-20260806T134157536Z-a0bf3986/attempt-completion.json",
+                      "size":  667,
+                      "sha256":  "7e8dbdcfb4cb5313cd9762f63eafb17a40717aefd443368c9cf3e0ac3095c892"
+                  },
+                  {
+                      "path":  "Oracle.Stage2R8HostContinuity-transfer-stage2-r8-corrected-20260806T132233022Z-d77af006.json",
+                      "size":  1271,
+                      "sha256":  "54b91a02b7d238b2b1a5e2e94dfad3d2b0202eab1748d5dcd77a53e1973e4059"
+                  },
+                  {
+                      "path":  "stage2-r8-20260806T134157536Z-a0bf3986/final-evidence-manifest.json",
+                      "size":  1564,
+                      "sha256":  "37571fcb3bd1ec3b5565119a2a4ab3dc0656d6bd47eecfbb85ed21d4d951a733"
+                  },
+                  {
+                      "path":  "stage2-r8-20260806T134157536Z-a0bf3986/attempt.json",
+                      "size":  570,
+                      "sha256":  "627d704f856c02b1fa9022f8faa5eadd7952b015340a1e5bb05093b1ba84cc27"
+                  }
+              ],
+    "immutability":  {
+                         "admittedFiles":  9,
+                         "byteComparedToImmutableOriginals":  true,
+                         "usbReturnModified":  false,
+                         "historicalEvidenceModified":  false,
+                         "priorTransfersModified":  false,
+                         "acceptedR6R12R4EvidenceModified":  false
+                     }
+}

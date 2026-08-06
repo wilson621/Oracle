@@ -10,7 +10,7 @@ const repository=path.resolve(root,"../../..");
 const contractPath=path.join(root,"Oracle.Stage2RequalificationR8Contract.json");
 const contract=JSON.parse(fs.readFileSync(contractPath,"utf8"));
 assert.equal(contract.contract,"oracle.sprint-30-5.stage-2-requalification-r8");
-assert.equal(contract.status,"corrected-transfer-sealed-awaiting-clean-host");
+assert.equal(contract.status,"founder-accepted-formally-closed");
 assert.equal(contract.candidate.commit,"4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d");
 assert.equal(contract.candidate.tree,"1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a");
 assert.equal(contract.package.version,"0.1.6.0");
@@ -20,9 +20,9 @@ assert.equal(contract.qualificationHost.developmentToolInstallationPermitted,fal
 assert.deepEqual(contract.qualificationHost.prohibitedDependencies,["git","node","npm","supabase","docker"]);
 assert.equal(contract.futureTransfer.creationPermitted,false);
 assert.equal(contract.authority.transferCreationPermitted,false);
-assert.equal(contract.authority.authorityCreationPermitted,true);
-assert.equal(contract.authority.attemptCreationPermitted,true);
-assert.equal(contract.authority.qualificationExecutionPermitted,true);
+assert.equal(contract.authority.authorityCreationPermitted,false);
+assert.equal(contract.authority.attemptCreationPermitted,false);
+assert.equal(contract.authority.qualificationExecutionPermitted,false);
 assert.match(contract.executionMission.founderGrantId,/^founder-stage2-r8-grant-\d{8}T\d{9}Z-[0-9a-f]{8}$/u);
 assert.match(contract.executionMission.transferId,/^transfer-stage2-r8-\d{8}T\d{9}Z-[0-9a-f]{8}$/u);
 assert.equal(contract.executionMission.maximumTransfers,1);
@@ -61,7 +61,7 @@ assert.equal(contract.correctedMission.maximumAttempts,1);
 assert.equal(contract.correctedMission.createAuthorityOnlyAfterAllPreAuthorityGates,true);
 assert.equal(contract.correctedMission.retryAfterConsumedAuthority,false);
 assert.equal(contract.correctedMission.stage3Authorised,false);
-assert.equal(contract.correctedMission.state,"transfer-sealed-awaiting-physical-handoff");
+assert.equal(contract.correctedMission.state,"founder-accepted-formally-closed");
 assert.equal(contract.correctedMission.transferCreationConsumed,true);
 assert.equal(contract.correctedMission.sealedTransfer.manifestSha256,"2d72d30d005caf0a4b1fbb38cb1fd16a7d07442b53fa7a4ba6ee6f29f1bf75e2");
 assert.equal(contract.correctedMission.sealedTransfer.custodySha256,"c9c52b5059f0ead02ab3d9b69ff5ef0bb51a0a4cbb6b86921148b6c02673de3c");
@@ -75,6 +75,20 @@ assert.equal(contract.correctedMission.sealedTransfer.usbFullTransferFiles,18);
 assert.equal(contract.correctedMission.sealedTransfer.usbFullTransferBytes,215870639);
 assert.equal(contract.correctedMission.sealedTransfer.usbContext,"context-stage2-r8-corrected-d77af006");
 assert.equal(contract.correctedMission.sealedTransfer.usbReturnRoot,"return-stage2-r8-corrected-d77af006");
+assert.equal(contract.correctedMission.acceptedQualification.authorityId,"authority-stage2-r8-20260806T134157536Z-a0bf3986");
+assert.equal(contract.correctedMission.acceptedQualification.attemptId,"stage2-r8-20260806T134157536Z-a0bf3986");
+assert.equal(contract.correctedMission.acceptedQualification.result,"founder-accepted-formally-closed");
+assert.equal(contract.correctedMission.acceptedQualification.finalEvidenceManifestSha256,"37571fcb3bd1ec3b5565119a2a4ab3dc0656d6bd47eecfbb85ed21d4d951a733");
+assert.equal(contract.correctedMission.acceptedQualification.qualificationOutcomeSha256,"dab6eed0cab7b5f0bac025fa9b79ee3a65c8292eb2c364f2a20296b2c7ed8460");
+assert.equal(contract.correctedMission.acceptedQualification.authoritySha256,"0e49bd8270afd2c445087eced33a173b8ff8ec4db71a5ceead02e335e1c28ee0");
+assert.equal(contract.correctedMission.acceptedQualification.continuitySha256,"54b91a02b7d238b2b1a5e2e94dfad3d2b0202eab1748d5dcd77a53e1973e4059");
+assert.equal(contract.correctedMission.acceptedQualification.acceptedEvidenceIndex.sha256,"16bf586a3c9f6ac6e164a05b70c14fa7381607dddb42d230819d599c3dc9dd8b");
+assert.equal(contract.correctedMission.acceptedQualification.fullAttemptPreservation.files,2038);
+assert.equal(contract.correctedMission.acceptedQualification.fullAttemptPreservation.bytes,730632820);
+assert.equal(contract.correctedMission.acceptedQualification.fullAttemptPreservation.byteComparedToUsbReturn,true);
+assert.equal(contract.correctedMission.acceptedQualification.zeroResidue,true);
+assert.equal(contract.correctedMission.acceptedQualification.retryAuthorised,false);
+assert.equal(contract.correctedMission.acceptedQualification.stage3Authorised,false);
 const failedTransferRoot=path.resolve(repository,contract.futureTransfer.artifactBase,contract.executionMission.transferId);
 assert.equal(fs.existsSync(failedTransferRoot),true);
 assert.equal(sha256(path.join(failedTransferRoot,"Oracle.Stage2R8TransferManifest.json")),contract.executionMission.failureRecord.manifestSha256);
@@ -91,8 +105,33 @@ assert.equal(fs.existsSync(correctedTransferRoot),true);
 assert.equal(sha256(path.join(correctedTransferRoot,"Oracle.Stage2R8TransferManifest.json")),contract.correctedMission.sealedTransfer.manifestSha256);
 assert.equal(sha256(path.join(correctedTransferRoot,"Oracle.Stage2R8TransferCustody.json")),contract.correctedMission.sealedTransfer.custodySha256);
 assert.equal(sha256(path.join(correctedTransferRoot,"Oracle.Stage2R8TransferVerification.json")),contract.correctedMission.sealedTransfer.verificationSha256);
-assert.equal(fs.existsSync(path.resolve(repository,contract.output.artifactBase)),false);
-assert.equal(fs.existsSync(path.resolve(repository,contract.output.repositoryEvidenceBase)),false);
+const preservedArtifactBase=path.resolve(repository,contract.output.artifactBase);
+const preservedAttemptRoot=path.join(preservedArtifactBase,contract.correctedMission.acceptedQualification.attemptId);
+assert.equal(fs.existsSync(preservedAttemptRoot),true);
+const preservedAttemptFiles=walkFiles(preservedAttemptRoot);
+assert.equal(preservedAttemptFiles.length,contract.correctedMission.acceptedQualification.fullAttemptPreservation.files);
+assert.equal(preservedAttemptFiles.reduce((sum,file)=>sum+fs.statSync(file).size,0),contract.correctedMission.acceptedQualification.fullAttemptPreservation.bytes);
+const repositoryEvidenceBase=path.resolve(repository,contract.output.repositoryEvidenceBase);
+assert.equal(fs.existsSync(repositoryEvidenceBase),true);
+const acceptedIndexPath=path.resolve(repository,contract.correctedMission.acceptedQualification.acceptedEvidenceIndex.path);
+assert.equal(sha256(acceptedIndexPath),contract.correctedMission.acceptedQualification.acceptedEvidenceIndex.sha256);
+const acceptedIndex=JSON.parse(fs.readFileSync(acceptedIndexPath,"utf8"));
+assert.equal(acceptedIndex.status,"founder-accepted-formally-closed");
+assert.equal(acceptedIndex.authorityId,contract.correctedMission.acceptedQualification.authorityId);
+assert.equal(acceptedIndex.attemptId,contract.correctedMission.acceptedQualification.attemptId);
+assert.equal(acceptedIndex.transfer.transferId,contract.correctedMission.transferId);
+assert.equal(acceptedIndex.transfer.replacesTransferId,contract.correctedMission.replacesTransferId);
+assert.equal(acceptedIndex.transfer.preservesOriginalTransferId,contract.correctedMission.preservesOriginalTransferId);
+assert.equal(acceptedIndex.finalEvidenceManifest.sha256,contract.correctedMission.acceptedQualification.finalEvidenceManifestSha256);
+assert.equal(acceptedIndex.qualificationOutcome.sha256,contract.correctedMission.acceptedQualification.qualificationOutcomeSha256);
+assert.equal(acceptedIndex.qualificationOutcome.zeroResidue,true);
+assert.equal(acceptedIndex.qualificationOutcome.retryAuthorised,false);
+assert.equal(acceptedIndex.files.length,9);
+for(const item of acceptedIndex.files){
+  const file=path.resolve(repositoryEvidenceBase,...item.path.split("/"));
+  assert.equal(fs.statSync(file).size,item.size,"Accepted evidence size differs: "+item.path);
+  assert.equal(sha256(file),item.sha256,"Accepted evidence hash differs: "+item.path);
+}
 
 for(const binding of contract.historicalEvidenceBindings){
   const file=path.resolve(repository,...binding.path.split("/"));
@@ -184,6 +223,7 @@ const scannerFixture=spawnSync(powershell,["-NoLogo","-NoProfile","-ExecutionPol
 assert.equal(scannerFixture.status,0,scannerFixture.stderr);
 const scannerResult=JSON.parse(scannerFixture.stdout);
 assert.deepEqual({result:scannerResult.result,absentRejected:scannerResult.absentRejected,utf8ChunkBoundaryDetected:scannerResult.utf8ChunkBoundaryDetected,utf16LeDetected:scannerResult.utf16LeDetected},{result:"passed",absentRejected:true,utf8ChunkBoundaryDetected:true,utf16LeDetected:true});
-console.log(JSON.stringify({result:"passed",contract:contract.contract,status:contract.status,founderGrantId:contract.correctedMission.founderGrantId,transferId:contract.correctedMission.transferId,historicalBindings:contract.historicalEvidenceBindings.length,cleanHostRuntime:"powershell-only",firstFailedTransferPreserved:true,secondFailedTransferPreserved:true,correctedTransferCreated:true,hostnameCorrection:"OrdinalIgnoreCase",furtherTransferAuthorised:false,authorityCreated:false,attemptCreated:false,fixtures:{syntax:"passed",historicalIntegrity:"passed",freshCorrectedIdentity:"passed",completeLineageBinding:"passed",ordinalInventoryCorrection:"passed",hostIdentityCorrection:"passed",preAuthorityOrdering:"passed",cleanHostTooling:"passed",transferAdmission:"passed",signatureVerification:"passed",canaryRejection:"passed",failClosedBeforeAuthority:"passed"}},null,2));
+console.log(JSON.stringify({result:"passed",contract:contract.contract,status:contract.status,founderGrantId:contract.correctedMission.founderGrantId,transferId:contract.correctedMission.transferId,historicalBindings:contract.historicalEvidenceBindings.length,cleanHostRuntime:"powershell-only",firstFailedTransferPreserved:true,secondFailedTransferPreserved:true,correctedTransferCreated:true,hostnameCorrection:"OrdinalIgnoreCase",furtherTransferAuthorised:false,qualificationAccepted:true,acceptedAuthorityConsumed:true,acceptedAttemptCompleted:true,additionalAuthorityCreated:false,additionalAttemptCreated:false,fixtures:{syntax:"passed",historicalIntegrity:"passed",freshCorrectedIdentity:"passed",completeLineageBinding:"passed",ordinalInventoryCorrection:"passed",hostIdentityCorrection:"passed",preAuthorityOrdering:"passed",cleanHostTooling:"passed",transferAdmission:"passed",signatureVerification:"passed",canaryRejection:"passed",failClosedBeforeAuthority:"passed"}},null,2));
 function source(name){return fs.readFileSync(path.join(root,name),"utf8");}
 function sha256(file){return crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");}
+function walkFiles(root_){return fs.readdirSync(root_,{withFileTypes:true}).flatMap(entry=>{const item=path.join(root_,entry.name);return entry.isDirectory()?walkFiles(item):entry.isFile()?[item]:[];});}

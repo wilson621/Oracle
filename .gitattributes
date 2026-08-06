@@ -23,3 +23,5 @@ scripts/sprint-30-5/stage-4-r2/** -text
 
 # Preserve byte-for-byte Stage 4 R2 execution and transfer harness files.
 scripts/sprint-30-5/stage-4-r2-execution/** -text
+# Preserve byte-for-byte Stage 2 Requalification R8 returned qualification evidence.
+docs/sprints/evidence/sprint-30-5/stage-2-requalification-r8/** -text -diff

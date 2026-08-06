@@ -211,10 +211,10 @@
                       "engineeringPreparation":  "founder-authorised",
                       "candidateBuild":  "founder-authorised-engineering-freeze-only",
                       "candidateSigning":  "founder-authorised-local-test-engineering-freeze-only",
-                      "transferCreationPermitted":  false,
-                      "authorityCreationPermitted":  false,
-                      "attemptCreationPermitted":  false,
-                      "qualificationExecutionPermitted":  false,
+                      "transferCreationPermitted":  true,
+                      "authorityCreationPermitted":  true,
+                      "attemptCreationPermitted":  true,
+                      "qualificationExecutionPermitted":  true,
                       "stage3":  "not-authorised",
                       "stage4":  "not-authorised",
                       "stage5":  "not-authorised",
@@ -273,7 +273,7 @@
                                  "dotnet":  "C:/Program Files/dotnet/dotnet.exe",
                                  "bsdtar":  "C:/Windows/System32/tar.exe"
                              },
-    "status":  "founder-accepted-formally-closed",
+    "status":  "founder-authorised-corrected-execution-enabled",
     "preparation":  {
                         "artifactBase":  ".artifacts/sprint-30-5/stage-2-r8-engineering-freeze",
                         "createOnly":  true,
@@ -303,7 +303,7 @@
                               "preAuthorityAdmissionRequired":  true
                           },
     "futureTransfer":  {
-                           "creationPermitted":  false,
+                           "creationPermitted":  true,
                            "createOnly":  true,
                            "independentVerificationRequired":  true,
                            "payloadRuntime":  "Windows PowerShell 5.1 only",
@@ -395,44 +395,6 @@
                                "retryAfterConsumedAuthority":  false,
                                "stage3Authorised":  false,
                                "authorisedAtUtc":  "2026-08-06T13:22:33.0242898Z",
-                               "state":  "founder-accepted-formally-closed",
-                               "transferCreationConsumed":  true,
-                               "sealedTransfer":  {
-                                                      "manifestSha256":  "2d72d30d005caf0a4b1fbb38cb1fd16a7d07442b53fa7a4ba6ee6f29f1bf75e2",
-                                                      "custodySha256":  "c9c52b5059f0ead02ab3d9b69ff5ef0bb51a0a4cbb6b86921148b6c02673de3c",
-                                                      "verificationSha256":  "053ceffe040e5fad8b937fd145254289466f72dc859e52e16cb2a3169c722c12",
-                                                      "executionContractSha256":  "04731755fb83ca5e62abafd0448e5655713d07e08008c5d2f31058132a356d55",
-                                                      "executionCommit":  "f163a246fc40a202cc1e1a0adbc4be23ec9d2fbc",
-                                                      "executionTree":  "55efd946b0abb0f39618e12f91bcf372d28c5d75",
-                                                      "payloadFiles":  15,
-                                                      "payloadBytes":  215865015,
-                                                      "usbFullTransferFiles":  18,
-                                                      "usbFullTransferBytes":  215870639,
-                                                      "usbContext":  "context-stage2-r8-corrected-d77af006",
-                                                      "usbReturnRoot":  "return-stage2-r8-corrected-d77af006"
-                                                  },
-                               "acceptedQualification":  {
-                                                             "acceptedAtUtc":  "2026-08-06",
-                                                             "authorityId":  "authority-stage2-r8-20260806T134157536Z-a0bf3986",
-                                                             "attemptId":  "stage2-r8-20260806T134157536Z-a0bf3986",
-                                                             "result":  "founder-accepted-formally-closed",
-                                                             "finalEvidenceManifestSha256":  "37571fcb3bd1ec3b5565119a2a4ab3dc0656d6bd47eecfbb85ed21d4d951a733",
-                                                             "qualificationOutcomeSha256":  "dab6eed0cab7b5f0bac025fa9b79ee3a65c8292eb2c364f2a20296b2c7ed8460",
-                                                             "authoritySha256":  "0e49bd8270afd2c445087eced33a173b8ff8ec4db71a5ceead02e335e1c28ee0",
-                                                             "continuitySha256":  "54b91a02b7d238b2b1a5e2e94dfad3d2b0202eab1748d5dcd77a53e1973e4059",
-                                                             "acceptedEvidenceIndex":  {
-                                                                                           "path":  "docs/sprints/evidence/sprint-30-5/stage-2-requalification-r8/Oracle.Stage2RequalificationR8AcceptedEvidenceIndex.json",
-                                                                                           "sha256":  "16bf586a3c9f6ac6e164a05b70c14fa7381607dddb42d230819d599c3dc9dd8b"
-                                                                                       },
-                                                             "fullAttemptPreservation":  {
-                                                                                             "path":  ".artifacts/sprint-30-5/stage-2-requalification-r8/stage2-r8-20260806T134157536Z-a0bf3986",
-                                                                                             "files":  2038,
-                                                                                             "bytes":  730632820,
-                                                                                             "byteComparedToUsbReturn":  true
-                                                                                         },
-                                                             "zeroResidue":  true,
-                                                             "retryAuthorised":  false,
-                                                             "stage3Authorised":  false
-                                                         }
+                               "state":  "founder-authorised-pre-transfer"
                            }
 }

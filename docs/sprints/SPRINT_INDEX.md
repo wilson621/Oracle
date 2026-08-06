@@ -8,7 +8,7 @@
 **Expected Stability:** Updated at Sprint activation, closure or approved renumbering
 **Supersedes:** Informal Sprint numbering inferred from individual planning documents
 **Superseded By:** None
-**Last Reviewed:** 30 July 2026
+**Last Reviewed:** 6 August 2026
 
 ---
 
@@ -40,7 +40,7 @@ implementation stages and do not use fractional Sprint numbering.
 | 27 | Contextual Companion and Reference Integration | Complete — Founder-accepted and closed; source/synthetic certification accepted; Operational Certification Deferred; live profile provisional and observation disabled | None | [Plan](SPRINT_27_PLAN.md), [Implementation](SPRINT_27_IMPLEMENTATION.md), [Certification](SPRINT_27_CERTIFICATION.md), [Closure](SPRINT_27_CLOSURE.md), [Founder acceptance package](SPRINT_27_FOUNDER_ACCEPTANCE_REQUIRED.md), [ADRs 044–045](../Decisions.md) |
 | 28 | Unified Oracle Product Experience | Complete, locally certified, Founder-accepted and closed | None | [Decision package](SPRINT_28_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_28_PLAN.md), [Product Truth Inventory](SPRINT_28_PRODUCT_TRUTH_INVENTORY.md), [Implementation](SPRINT_28_IMPLEMENTATION.md), [Certification](SPRINT_28_CERTIFICATION.md), [Founder acceptance package](SPRINT_28_FOUNDER_ACCEPTANCE_REQUIRED.md), [Closure](SPRINT_28_CLOSURE.md) |
 | 29 | Secure Desktop Operations and Distribution | Complete, locally certified, Founder-accepted and closed; clean-machine lifecycle subsequently qualified by Stage 3 R9 | None | [Decision package](SPRINT_29_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_29_PLAN.md), [Implementation](SPRINT_29_IMPLEMENTATION.md), [Certification](SPRINT_29_CERTIFICATION.md), [Founder acceptance package](SPRINT_29_FOUNDER_ACCEPTANCE_REQUIRED.md), [Closure](SPRINT_29_CLOSURE.md), [ADR-046](../Decisions.md) |
-| 30 | Production Qualification | Founder-approved and active; Phases 1-5 locally verified; Stage 2 R6 and Stage 3 R12 independently verified and closed for the corrected package; R11 is immutable failed history; historical Stage 4 R1 applicability awaits a separate Founder impact decision; Stages 5-7 remain | None | [Decision package](SPRINT_30_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_30_PLAN.md), [Production Qualification dossier](SPRINT_30_PRODUCTION_QUALIFICATION_DOSSIER.md), [Stage 1 closure](SPRINT_30_5_STAGE_1_CLOSURE.md), [Stage 2 R6 closure](SPRINT_30_5_STAGE_2_REQUALIFICATION_R6_CLOSURE.md), [Stage 3 R12 closure](SPRINT_30_5_STAGE_3_R12_QUALIFICATION_CLOSURE.md), [Stage 3 R12 evidence](evidence/sprint-30-5/stage-3-r12/README.md), [Historical Stage 3 R9 closure](SPRINT_30_5_STAGE_3_R9_CLOSURE.md), [Qualification Register](../QUALIFICATION_REGISTER.md), [ADR-047](../Decisions.md) |
+| 30 | Production Qualification | Founder-approved and active; Stage 2 R8 is Founder-accepted and closed as the current package baseline; R6/R12/R4 remain immutable history for the prior package; Stages 3-5 require new R8-bound decisions; Stages 6-7 remain | None | [Decision package](SPRINT_30_FOUNDER_DECISION_REQUIRED.md), [Plan](SPRINT_30_PLAN.md), [Production Qualification dossier](SPRINT_30_PRODUCTION_QUALIFICATION_DOSSIER.md), [Stage 1 closure](SPRINT_30_5_STAGE_1_CLOSURE.md), [Stage 2 R8 closure](SPRINT_30_5_STAGE_2_REQUALIFICATION_R8_CLOSURE.md), [Stage 2 R8 evidence](evidence/sprint-30-5/stage-2-requalification-r8/README.md), [Historical Stage 2 R6 closure](SPRINT_30_5_STAGE_2_REQUALIFICATION_R6_CLOSURE.md), [Historical Stage 3 R12 closure](SPRINT_30_5_STAGE_3_R12_QUALIFICATION_CLOSURE.md), [Qualification Register](../QUALIFICATION_REGISTER.md), [ADR-047](../Decisions.md) |
 | 31 | Oracle Beta Certification | Approved Programme; not activated | None | [Engineering Programme](../ENGINEERING_PROGRAMME.md) |
 
 # Historical Integrity
@@ -181,3 +181,11 @@ Attempt `stage3-r12-20260803T204415402Z-b886be44` passed all fourteen phases on
 expanded-tree and repository-copy reconciliation, and final governed residue
 is zero. R12 is formally closed for Stage 2 R6. Stage 4 remains outside this
 closure and requires a separate Founder-level programme-state decision.
+
+## Stage 2 R8 qualification acceptance and closure - 6 August 2026
+
+Stage 2 R8 attempt `stage2-r8-20260806T134157536Z-a0bf3986` passed on clean qualification host `Founder-QA-01` under consumed authority `authority-stage2-r8-20260806T134157536Z-a0bf3986`. Independent source-workstation reconciliation verified the exact transfer and lineage, all four final-manifest records, all nine canonical compact evidence records, the complete 2,038-file returned attempt, valid package and detached-manifest signatures, zero runtime canaries and zero final residue.
+
+The Founder accepted R8 for candidate `4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d`, tree `1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a`, package version `0.1.6.0`, SHA-256 `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`. R8 is formally closed and is the current Stage 2 qualification baseline.
+
+Accepted R6/R12/R4 evidence remains unchanged and authoritative history for the prior R6 MSIX only. It does not qualify the R8 package. Stage 3, Stage 4, Stage 5, production, publication and deployment remain unauthorised. The next Founder-level mission is a separate Stage 3 programme-state and qualification-impact assessment against R8.

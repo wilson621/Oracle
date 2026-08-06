@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R8 Execution Mission
 
-Status: HOSTNAME-CORRECTED TRANSFER SEALED - PHYSICAL CLEAN-HOST HANDOFF REQUIRED
+Status: FOUNDER-ACCEPTED AND FORMALLY CLOSED
 Date: 6 August 2026
 
 ## Exact authority
@@ -123,3 +123,9 @@ The single authorised hostname-corrected transfer was created from execution com
 The embedded PowerShell core admitted both the source transfer and the create-only USB copy. Full relative-path, byte-count and SHA-256 parity passed under USB context `context-stage2-r8-corrected-d77af006`; the governed return root is `return-stage2-r8-corrected-d77af006`.
 
 Transfer creation is consumed and closed. No continuity, authority, attempt or qualification evidence exists. The next action is the physical move of the USB to `Founder-QA-01` and execution of the exact clean-host handoff command.
+
+## Founder acceptance and formal closure
+
+The Founder-authorised transfer and clean-host lifecycle completed under consumed authority `authority-stage2-r8-20260806T134157536Z-a0bf3986`. Passing attempt `stage2-r8-20260806T134157536Z-a0bf3986` was independently verified and Founder-accepted. Stage 2 R8 is formally closed for candidate `4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d`, package SHA-256 `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`.
+
+Canonical closure is recorded in `SPRINT_30_5_STAGE_2_REQUALIFICATION_R8_CLOSURE.md` and `evidence/sprint-30-5/stage-2-requalification-r8/`. No Stage 3 or later authority is granted.

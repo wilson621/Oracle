@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R8 Implementation
 
-Status: COMPLETE - QUALIFICATION-READY PREPARATION ONLY
+Status: COMPLETE - QUALIFIED AND FORMALLY CLOSED
 Date: 6 August 2026
 
 ## Engineering freeze
@@ -57,3 +57,9 @@ The fresh corrected mission is separately bound to baseline 6d86173a4090190e3e5b
 ## Hostname-corrected transfer seal
 
 The single authorised transfer was built from committed baseline f163a246fc40a202cc1e1a0adbc4be23ec9d2fbc, independently verified, admitted by its embedded PowerShell core and copied create-only to the fresh governed USB namespace. The USB copy passed full 18-file hash parity. Transfer creation is consumed and closed; qualification state remains absent pending physical clean-host handoff.
+
+## Qualification closure
+
+The Founder-authorised transfer and clean-host lifecycle completed under consumed authority `authority-stage2-r8-20260806T134157536Z-a0bf3986`. Passing attempt `stage2-r8-20260806T134157536Z-a0bf3986` was independently verified and Founder-accepted. Stage 2 R8 is formally closed for candidate `4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d`, package SHA-256 `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`.
+
+Canonical closure is recorded in `SPRINT_30_5_STAGE_2_REQUALIFICATION_R8_CLOSURE.md` and `evidence/sprint-30-5/stage-2-requalification-r8/`. No Stage 3 or later authority is granted.

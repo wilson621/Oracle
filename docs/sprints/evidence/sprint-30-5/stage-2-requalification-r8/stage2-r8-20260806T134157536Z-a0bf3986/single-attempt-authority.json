@@ -1,0 +1,15 @@
+{
+    "schemaVersion":  "1.0.0",
+    "contract":  "oracle.sprint-30-5.stage-2-r8-single-attempt-authority",
+    "founderGrantId":  "founder-stage2-r8-corrected-grant-20260806T132233022Z-d77af006",
+    "authorityId":  "authority-stage2-r8-20260806T134157536Z-a0bf3986",
+    "attemptId":  "stage2-r8-20260806T134157536Z-a0bf3986",
+    "transferId":  "transfer-stage2-r8-corrected-20260806T132233022Z-d77af006",
+    "replacesTransferId":  "transfer-stage2-r8-replacement-20260806T125821770Z-cc9e03ce",
+    "preservesOriginalTransferId":  "transfer-stage2-r8-20260806T123612020Z-338a5276",
+    "state":  "consumed",
+    "attemptsAuthorised":  1,
+    "attemptsConsumed":  1,
+    "createdAfterTransferContinuityHostAndPreAuthorityAdmission":  true,
+    "createdAtUtc":  "2026-08-06T13:41:57.5365457Z"
+}

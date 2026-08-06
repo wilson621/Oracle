@@ -2538,3 +2538,11 @@ Corrected candidate commit 4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d, tree 1bdc84
 Stage 2 Requalification R7 engineering preparation is complete for future package version 0.1.5.0. Its new namespace binds the exact corrected candidate, requires the accessibility gate in the governed source matrix, and hash-binds accepted R6/R12/R4 indexes and closures. Accepted R6/R12/R4 evidence remains unchanged and authoritative history for the exact R6 MSIX, but it does not qualify the corrected candidate.
 
 No transfer, authority, attempt, certificate, package, or qualification evidence was created. Stage 3, Stage 4, and Stage 5 are blocked for the current candidate pending a newly accepted Stage 2 baseline and separately authorised downstream missions. The next Founder-level decision is whether to accept the committed R7 preparation baseline and authorise exactly one governed Stage 2 R7 qualification attempt.
+
+## Stage 2 R8 qualification acceptance and closure - 6 August 2026
+
+Stage 2 R8 attempt `stage2-r8-20260806T134157536Z-a0bf3986` passed on clean qualification host `Founder-QA-01` under consumed authority `authority-stage2-r8-20260806T134157536Z-a0bf3986`. Independent source-workstation reconciliation verified the exact transfer and lineage, all four final-manifest records, all nine canonical compact evidence records, the complete 2,038-file returned attempt, valid package and detached-manifest signatures, zero runtime canaries and zero final residue.
+
+The Founder accepted R8 for candidate `4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d`, tree `1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a`, package version `0.1.6.0`, SHA-256 `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`. R8 is formally closed and is the current Stage 2 qualification baseline.
+
+Accepted R6/R12/R4 evidence remains unchanged and authoritative history for the prior R6 MSIX only. It does not qualify the R8 package. Stage 3, Stage 4, Stage 5, production, publication and deployment remain unauthorised. The next Founder-level mission is a separate Stage 3 programme-state and qualification-impact assessment against R8.

@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R8 Plan
 
-Status: ENGINEERING PREPARATION COMPLETE - TRANSFER AND QUALIFICATION BARRED
+Status: FOUNDER-ACCEPTED AND FORMALLY CLOSED
 Date: 6 August 2026
 
 ## Purpose
@@ -25,3 +25,9 @@ R8 restores the established split-host Stage 2 architecture after the Founder re
 ## Current authority boundary
 
 This preparation authorises no transfer, authority, attempt or qualification execution. The contract and both future entry points fail closed while those flags remain false. Stages 3-5 and production activity remain unauthorised.
+
+## Qualification closure
+
+The Founder-authorised transfer and clean-host lifecycle completed under consumed authority `authority-stage2-r8-20260806T134157536Z-a0bf3986`. Passing attempt `stage2-r8-20260806T134157536Z-a0bf3986` was independently verified and Founder-accepted. Stage 2 R8 is formally closed for candidate `4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d`, package SHA-256 `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`.
+
+Canonical closure is recorded in `SPRINT_30_5_STAGE_2_REQUALIFICATION_R8_CLOSURE.md` and `evidence/sprint-30-5/stage-2-requalification-r8/`. No Stage 3 or later authority is granted.

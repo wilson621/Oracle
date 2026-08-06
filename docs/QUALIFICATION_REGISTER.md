@@ -32,10 +32,10 @@ results.
 | Stage | Scope | Current state | Evidence or blocker | Next authority |
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
-| 2 | Candidate Freeze and Package Reconciliation | **R8 engineering freeze complete; qualification not executed** | Corrected candidate `4d22b3b`; package `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`; freeze `f8c7ec7d020ba717efb9f036350c189221debe53a58a45374aa5c252af695361`; clean-host protocol rehearsed; zero residue | Founder acceptance and separate one-transfer/one-attempt R8 mission |
-| 3 | Clean Windows Qualification | **R12 accepted immutable history for R6; blocked for R8** | R12 remains valid only for accepted R6 MSIX | Accepted Stage 2 R8, then separate Stage 3 requalification authority |
-| 4 | Live Authentication and Protected Rendering | **R4 accepted immutable history for R6; blocked for R8** | R4 remains valid only for accepted R6 MSIX | Accepted Stage 3 for R8, then separate Stage 4 authority |
-| 5 | Installed Package GPU, Performance and Accessibility | **R2 engineering investigation found product defect; blocked for R8** | Accessibility correction is in R8 candidate; historical Stage 5 preparation does not qualify it | Accepted Stages 2-4 for R8, then separate Stage 5 authority |
+| 2 | Candidate Freeze and Package Reconciliation | **R8 Founder-accepted and formally closed - current baseline** | Attempt `stage2-r8-20260806T134157536Z-a0bf3986`; package `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`; clean-host verification and zero residue passed | None for Stage 2; separate Stage 3 assessment/authority required |
+| 3 | Clean Windows Qualification | **R12 accepted immutable history for R6; not qualified for R8** | R12 remains valid only for the R6 MSIX; R8 is now the accepted Stage 2 baseline | Separate Founder-authorised Stage 3 impact assessment and requalification mission |
+| 4 | Live Authentication and Protected Rendering | **R4 accepted immutable history for R6; not qualified for R8** | R4 remains valid only for the R6/R12 chain | Accepted R8-bound Stage 3, then separate Stage 4 authority |
+| 5 | Installed Package GPU, Performance and Accessibility | **Accessibility correction included in accepted R8; Stage 5 not qualified** | Historical Stage 5 preparation and R6 evidence do not qualify the R8 package | Accepted R8-bound Stages 3-4, then separate Stage 5 authority |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
 | 7 | Final Integrated Qualification and Sprint 30 Closure Package | **Not started** | Requires complete immutable evidence from Stages 1–6 | Stage 6 acceptance, then separate Stage 7 authority |
 
@@ -480,3 +480,11 @@ The Founder rejected the R7 main-PC qualification exception and authorised a fre
 The exact corrected product remains commit `4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d`, tree `1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a`. Passing engineering freeze `candidate-r8-20260806T120629088Z-f79fe50d` produced package SHA-256 `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`, public-certificate SHA-256 `78eb64dc769a87cbe82620a8d7bb6da655bdc2d38fe87f58b5c90f3c672492b2`, and freeze SHA-256 `f8c7ec7d020ba717efb9f036350c189221debe53a58a45374aa5c252af695361`. Private signing material and certificate-store residue are zero.
 
 The PowerShell-only clean-host path passed static/adversarial validation and a 28.4-second non-qualification rehearsal. All engineering failures and the timed-out first rehearsal remain immutable non-qualification records. No transfer, authority, attempt or qualification evidence exists. Stage 2 R8 qualification and Stages 3-5 remain unauthorised.
+
+## Stage 2 R8 qualification acceptance and closure - 6 August 2026
+
+Stage 2 R8 attempt `stage2-r8-20260806T134157536Z-a0bf3986` passed on clean qualification host `Founder-QA-01` under consumed authority `authority-stage2-r8-20260806T134157536Z-a0bf3986`. Independent source-workstation reconciliation verified the exact transfer and lineage, all four final-manifest records, all nine canonical compact evidence records, the complete 2,038-file returned attempt, valid package and detached-manifest signatures, zero runtime canaries and zero final residue.
+
+The Founder accepted R8 for candidate `4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d`, tree `1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a`, package version `0.1.6.0`, SHA-256 `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`. R8 is formally closed and is the current Stage 2 qualification baseline.
+
+Accepted R6/R12/R4 evidence remains unchanged and authoritative history for the prior R6 MSIX only. It does not qualify the R8 package. Stage 3, Stage 4, Stage 5, production, publication and deployment remain unauthorised. The next Founder-level mission is a separate Stage 3 programme-state and qualification-impact assessment against R8.
