@@ -62,3 +62,12 @@ built-in `$Host` object unchanged.
 The correction changes no accepted product artifact, R8/R13 evidence,
 provider topology, lifecycle phase, journey claim, authority boundary or
 single-attempt rule.
+## Correction freeze
+
+The corrected engineering baseline is commit
+`f78c8981a032c4274b1e586d1a1ed0baffdd5929`. The execution overlay binds that
+exact commit while retaining the original accepted preparation-contract
+SHA-256 and binds every new transfer manifest and custody record to immutable
+failed transfer `transfer-stage4-r5-20260806T204257450Z-90944363`. Exactly one
+fresh create-only replacement transfer is permitted under the current Founder
+authority.

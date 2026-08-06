@@ -4,7 +4,7 @@
   "programme": "Sprint 30.5 Stage 4 live authentication and protected rendering",
   "revision": "R5",
   "status": "founder-authorised-execution-enabled",
-  "replacesTransferId": "transfer-stage4-r5-20260806T200338718Z-3af1860e",
+  "replacesTransferId": "transfer-stage4-r5-20260806T204257450Z-90944363",
   "executionSurface": "accepted-r8-installed-msix",
   "requiredBranch": "sprint-9-overlay",
   "executionAuthority": {
@@ -29,7 +29,7 @@
     "rehearsalPattern": "^rehearsal-stage4-r5-[0-9]{8}T[0-9]{9}Z-[a-f0-9]{8}$"
   },
   "acceptedPreparation": {
-    "commit": "b9db274e0f1112eb8e9149cc0d73fcb9f6e68324",
+    "commit": "f78c8981a032c4274b1e586d1a1ed0baffdd5929",
     "preparationContractSha256": "bc633c3ba8eafe786980b38d753734bda7985a77d1373cb53c76bfc393824a2d",
     "requiredJourneys": 10,
     "requiredLifecyclePhases": 20
