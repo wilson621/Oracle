@@ -35,23 +35,34 @@ function Assert-CreateOnlyOutputPath {
   }
   $relative = $resolved.Substring($repositoryPrefix.Length).Replace("\", "/")
 
+  $namespace = $null
+  $identityPattern = $null
+  foreach ($candidate in @(
+    [pscustomobject]@{
+      prefix = ".artifacts/sprint-30-5/stage-2-r8-engineering-freeze/"
+      identity = "^candidate-r8-\d{8}T\d{9}Z-[0-9a-f]{8}$"
+    },
+    [pscustomobject]@{
+      prefix = ".artifacts/sprint-30-5/stage-2-requalification-r8/"
+      identity = "^stage2-r8-\d{8}T\d{9}Z-[0-9a-f]{8}$"
+    }
+  )) {
+    if ($relative.StartsWith([string]$candidate.prefix, [StringComparison]::OrdinalIgnoreCase)) {
+      $namespace = [string]$candidate.prefix
+      $identityPattern = [string]$candidate.identity
+      break
+    }
+  }
   if (
-    -not $relative.StartsWith(
-      ".artifacts/sprint-30-5/stage-2-requalification-r8/",
-      [StringComparison]::OrdinalIgnoreCase
-    ) -or
+    $null -eq $namespace -or
     $relative.Contains("/../") -or
     $relative.EndsWith("/..", [StringComparison]::Ordinal)
   ) {
-    throw "Cleanup evidence must be inside an R8 attempt artifact root."
+    throw "Cleanup evidence must be inside an admitted R8 engineering-freeze or attempt root."
   }
-
-  $attemptRelative = $relative.Substring(
-    ".artifacts/sprint-30-5/stage-2-requalification-r8/".Length
-  )
-  $attemptId = $attemptRelative.Split("/")[0]
-  if ($attemptId -notmatch "^r8-\d{8}T\d{9}Z-[0-9a-f]{8}$") {
-    throw "Cleanup evidence does not identify a valid immutable R8 attempt."
+  $identity = $relative.Substring($namespace.Length).Split("/")[0]
+  if ($identity -notmatch $identityPattern) {
+    throw "Cleanup evidence does not identify a valid immutable R8 lifecycle root."
   }
 
   $cursor = $repositoryRoot

@@ -770,7 +770,7 @@ function verifyRelease(release, candidate) {
   const packageSecrecy = assertBuildCanariesAbsent(unpacked);
   const manifestXml = readFileSync(join(unpacked, "AppxManifest.xml"), "utf8");
   assert.match(manifestXml, /Name="Oracle\.Platform\.LocalCertification"/u);
-  assert.match(manifestXml, /Version="0\.1\.4\.0"/u);
+  assert.ok(manifestXml.includes(`Version="${contract.package.version}"`));
   assert.match(manifestXml, /ProcessorArchitecture="x64"/u);
   assert.ok(
     manifestXml.includes(`Publisher="${PUBLISHER.replaceAll("&", "&amp;")}"`)

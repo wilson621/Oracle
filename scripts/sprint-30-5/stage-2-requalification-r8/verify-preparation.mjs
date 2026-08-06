@@ -42,6 +42,8 @@ assert.match(prepare,/authorityCreated:\s*false/u);
 assert.match(prepare,/attemptCreated:\s*false/u);
 assert.match(prepare,/performSafetyTeardown\(\)/u);
 assert.match(prepare,/Oracle\.Stage2R8PublicCertificate\.cer/u);
+assert.match(prepare,/contract\.package\.version/u);
+assert.equal(prepare.includes('Version="0\\.1\\.4\\.0"'),false);
 assert.doesNotMatch(prepare,/claimSingleAttemptAuthority\(/u);
 assert.doesNotMatch(prepare,/createAttemptRecord\(/u);
 assert.doesNotMatch(prepare,/createAttemptDirectory\(/u);
@@ -56,6 +58,12 @@ assert.ok(authorityGate>=0&&authorityGate<transferGate&&transferGate<hostGate&&h
 assert.doesNotMatch(qualification,/\bgit(?:\.exe)?\b|\bnode(?:\.exe)?\b|\bnpm(?:\.cmd)?\b|\bsupabase\b|\bdocker\b/iu);
 assert.match(qualification,/createdAfterTransferContinuityHostAndPreAuthorityAdmission=\$true/u);
 assert.match(qualification,/retryAuthorised=\$false/u);
+
+const cleanup=source("remove-exact-certificate.ps1");
+assert.match(cleanup,/stage-2-r8-engineering-freeze/u);
+assert.match(cleanup,/stage-2-requalification-r8/u);
+assert.match(cleanup,/candidate-r8-/u);
+assert.match(cleanup,/stage2-r8-/u);
 
 const core=source("Oracle.Stage2R8CleanHostCore.ps1");
 assert.match(core,/Development repository is prohibited on the qualification host/u);
