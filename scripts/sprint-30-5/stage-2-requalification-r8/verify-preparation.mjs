@@ -1,14 +1,16 @@
 import assert from "node:assert/strict";
 import crypto from "node:crypto";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 
 const root=import.meta.dirname;
 const repository=path.resolve(root,"../../..");
-const contract=JSON.parse(fs.readFileSync(path.join(root,"Oracle.Stage2RequalificationR8Contract.json"),"utf8"));
+const contractPath=path.join(root,"Oracle.Stage2RequalificationR8Contract.json");
+const contract=JSON.parse(fs.readFileSync(contractPath,"utf8"));
 assert.equal(contract.contract,"oracle.sprint-30-5.stage-2-requalification-r8");
-assert.equal(contract.status==="engineering-preparation-transfer-barred"||contract.status==="engineering-freeze-accepted-transfer-barred",true);
+assert.equal(contract.status,"founder-authorised-execution-enabled");
 assert.equal(contract.candidate.commit,"4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d");
 assert.equal(contract.candidate.tree,"1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a");
 assert.equal(contract.package.version,"0.1.6.0");
@@ -16,10 +18,18 @@ assert.equal(contract.qualificationHost.identity,"Founder-QA-01");
 assert.equal(contract.qualificationHost.repositoryPermitted,false);
 assert.equal(contract.qualificationHost.developmentToolInstallationPermitted,false);
 assert.deepEqual(contract.qualificationHost.prohibitedDependencies,["git","node","npm","supabase","docker"]);
-assert.equal(contract.futureTransfer.creationPermitted,false);
-assert.equal(contract.authority.authorityCreationPermitted,false);
-assert.equal(contract.authority.attemptCreationPermitted,false);
-assert.equal(contract.authority.qualificationExecutionPermitted,false);
+assert.equal(contract.futureTransfer.creationPermitted,true);
+assert.equal(contract.authority.authorityCreationPermitted,true);
+assert.equal(contract.authority.attemptCreationPermitted,true);
+assert.equal(contract.authority.qualificationExecutionPermitted,true);
+assert.match(contract.executionMission.founderGrantId,/^founder-stage2-r8-grant-\d{8}T\d{9}Z-[0-9a-f]{8}$/u);
+assert.match(contract.executionMission.transferId,/^transfer-stage2-r8-\d{8}T\d{9}Z-[0-9a-f]{8}$/u);
+assert.equal(contract.executionMission.maximumTransfers,1);
+assert.equal(contract.executionMission.maximumAuthorities,1);
+assert.equal(contract.executionMission.maximumAttempts,1);
+assert.equal(contract.executionMission.createAuthorityOnlyAfterAllPreAuthorityGates,true);
+assert.equal(contract.executionMission.retryAfterConsumedAuthority,false);
+assert.equal(contract.executionMission.stage3Authorised,false);
 assert.equal(fs.existsSync(path.resolve(repository,contract.futureTransfer.artifactBase)),false);
 assert.equal(fs.existsSync(path.resolve(repository,contract.output.artifactBase)),false);
 assert.equal(fs.existsSync(path.resolve(repository,contract.output.repositoryEvidenceBase)),false);
@@ -35,71 +45,62 @@ for(const name of fs.readdirSync(root)){
     assert.equal(check.status,0,check.stderr);
   }
 }
-const prepare=source("prepare-candidate.mjs");
-assert.match(prepare,/NO-AUTHORITY-ENGINEERING-PREPARATION/u);
-assert.match(prepare,/transferCreated:\s*false/u);
-assert.match(prepare,/authorityCreated:\s*false/u);
-assert.match(prepare,/attemptCreated:\s*false/u);
-assert.match(prepare,/performSafetyTeardown\(\)/u);
-assert.match(prepare,/Oracle\.Stage2R8PublicCertificate\.cer/u);
-assert.match(prepare,/"-PackageFileName",\s*PACKAGE_FILE,\s*"-ExpectedThumbprint"/u);
-assert.match(prepare,/admittedPublicCertificate/u);
-assert.match(prepare,/contract\.package\.publicCertificateFileName/u);
-assert.match(prepare,/contract\.package\.version/u);
-assert.equal(prepare.includes('Version="0\\.1\\.4\\.0"'),false);
-assert.doesNotMatch(prepare,/claimSingleAttemptAuthority\(/u);
-assert.doesNotMatch(prepare,/createAttemptRecord\(/u);
-assert.doesNotMatch(prepare,/createAttemptDirectory\(/u);
+const powershell=contract.toolchainExecutables.powershell;
+const parseScript=`$errors=$null; Get-ChildItem -LiteralPath '${root.replaceAll("'","''")}' -Filter '*.ps1' | ForEach-Object { [void][Management.Automation.Language.Parser]::ParseFile($_.FullName,[ref]$null,[ref]$errors); if($errors.Count){$errors|Out-String|Write-Error; exit 1} }`;
+const parse=spawnSync(powershell,["-NoLogo","-NoProfile","-ExecutionPolicy","Bypass","-Command",parseScript],{cwd:repository,encoding:"utf8",shell:false,windowsHide:true});
+assert.equal(parse.status,0,parse.stderr);
 
 const qualification=source("Invoke-OracleStage2R8Qualification.ps1");
 const authorityGate=qualification.indexOf("R8 qualification execution is not authorised");
 const transferGate=qualification.indexOf("Assert-OracleStage2R8Transfer");
+const missionBinding=qualification.indexOf("R8 admitted transfer mission binding differs");
 const hostGate=qualification.indexOf("Get-OracleStage2R8HostAdmission");
+const continuityWrite=qualification.indexOf("Write-OracleStage2R8CreateOnlyJson -Path $continuityPath");
 const authorityCreation=qualification.indexOf("New-OracleStage2R8AuthorityIdentity");
 const candidateVerification=qualification.indexOf("Invoke-OracleStage2R8CandidateVerification");
-assert.ok(authorityGate>=0&&authorityGate<transferGate&&transferGate<hostGate&&hostGate<authorityCreation&&authorityCreation<candidateVerification);
+assert.ok(authorityGate>=0&&authorityGate<transferGate&&transferGate<missionBinding&&missionBinding<hostGate&&hostGate<continuityWrite&&continuityWrite<authorityCreation&&authorityCreation<candidateVerification);
 assert.doesNotMatch(qualification,/\bgit(?:\.exe)?\b|\bnode(?:\.exe)?\b|\bnpm(?:\.cmd)?\b|\bsupabase\b|\bdocker\b/iu);
 assert.match(qualification,/createdAfterTransferContinuityHostAndPreAuthorityAdmission=\$true/u);
 assert.match(qualification,/retryAuthorised=\$false/u);
-
-const cleanup=source("remove-exact-certificate.ps1");
-assert.match(cleanup,/stage-2-r8-engineering-freeze/u);
-assert.match(cleanup,/stage-2-requalification-r8/u);
-assert.match(cleanup,/candidate-r8-/u);
-assert.match(cleanup,/stage2-r8-/u);
+assert.match(qualification,/attempt-completion\.json/u);
+assert.match(qualification,/failed-permanently/u);
 
 const core=source("Oracle.Stage2R8CleanHostCore.ps1");
-assert.match(core,/Development repository is prohibited on the qualification host/u);
-assert.match(core,/Development tooling is prohibited on the qualification host/u);
-assert.match(core,/Pre-authority package or certificate state is not zero/u);
-assert.match(core,/Transferred package was unexpectedly trusted before the attempt/u);
-assert.match(core,/MSIX Authenticode verification failed/u);
-assert.match(core,/Detached release-manifest signer differs/u);
-assert.match(core,/Runtime-configuration canary leaked into the package/u);
-assert.match(core,/Exact temporary trust remains after verification/u);
+for(const phrase of ["Development repository is prohibited on the qualification host","Development tooling is prohibited on the qualification host","Pre-authority package or certificate state is not zero","Transferred package was unexpectedly trusted before the attempt","MSIX Authenticode verification failed","Detached release-manifest signer differs","Runtime-configuration canary leaked into the package","Exact temporary trust remains after verification","Execution contract binding differs","Transfer single-use limits differ"]){assert.match(core,new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/gu,"\\$&"),"u"));}
 assert.match(core,/Test-OracleStage2R8FileContainsCanary/u);
 assert.match(core,/\$chunkBytes = 1MB/u);
 assert.match(core,/\[Buffer\]::BlockCopy/u);
-assert.doesNotMatch(core,/Test-OracleStage2R8BytesContain/u);
 
 const transferBuilder=source("prepare-transfer.mjs");
-assert.match(transferBuilder,/R8 transfer creation is not authorised by this preparation baseline/u);
-assert.match(transferBuilder,/founderAuthorisedQualificationExecution:true/u);
-assert.match(transferBuilder,/singleAttemptOnly:true/u);
-const blockedTransfer=spawnSync(process.execPath,[path.join(root,"prepare-transfer.mjs")],{cwd:repository,encoding:"utf8",shell:false,windowsHide:true});
-assert.notEqual(blockedTransfer.status,0);
-assert.match(blockedTransfer.stderr,/transfer creation is not authorised/u);
+assert.match(transferBuilder,/Exactly four transfer arguments are required/u);
+assert.match(transferBuilder,/Transfer identity differs from the single authorised identity/u);
+assert.match(transferBuilder,/founderGrantId:contract\.executionMission\.founderGrantId/u);
+assert.match(transferBuilder,/maximumAuthorities:1/u);
+assert.match(transferBuilder,/maximumAttempts:1/u);
+assert.match(transferBuilder,/Invoke-OracleStage2R8FounderHandoff\.ps1/u);
+const transferVerifier=source("verify-transfer.mjs");
+assert.match(transferVerifier,/manifest\.transferId,contract\.executionMission\.transferId/u);
+assert.match(transferVerifier,/manifest\.founderGrantId,contract\.executionMission\.founderGrantId/u);
+assert.match(transferVerifier,/executionContractSha256/u);
+const handoff=source("Invoke-OracleStage2R8FounderHandoff.ps1");
+assert.doesNotMatch(handoff,/\bgit(?:\.exe)?\b|\bnode(?:\.exe)?\b|\bnpm(?:\.cmd)?\b|\bsupabase\b|\bdocker\b/iu);
+assert.match(handoff,/Create-only local R8 transfer root already exists/u);
+assert.match(handoff,/Assert-OracleStage2R8Transfer/u);
+assert.match(handoff,/R8 source contract mission binding differs/u);
 
-const powershell=contract.toolchainExecutables.powershell;
-const blockedQualification=spawnSync(powershell,["-NoLogo","-NoProfile","-ExecutionPolicy","Bypass","-File",path.join(root,"Invoke-OracleStage2R8Qualification.ps1"),"-TransferRoot","C:\\absent","-ExpectedManifestSha256","0".repeat(64),"-ExpectedCustodySha256","0".repeat(64),"-ExpectedVerificationSha256","0".repeat(64),"-FounderGrantId","blocked-fixture","-LocalExecutionParent","C:\\absent","-ReturnRoot","C:\\absent"],{cwd:repository,encoding:"utf8",shell:false,windowsHide:true});
-assert.notEqual(blockedQualification.status,0);
-assert.match(blockedQualification.stderr,/qualification execution is not authorised/u);
-
+const temporary=fs.mkdtempSync(path.join(os.tmpdir(),"oracle-stage2-r8-preauthority-"));
+try{
+  const local=path.join(temporary,"local"); const returned=path.join(temporary,"return"); fs.mkdirSync(local); fs.mkdirSync(returned);
+  const blocked=spawnSync(powershell,["-NoLogo","-NoProfile","-ExecutionPolicy","Bypass","-File",path.join(root,"Invoke-OracleStage2R8Qualification.ps1"),"-TransferRoot",path.join(temporary,"absent-transfer"),"-ExpectedManifestSha256","0".repeat(64),"-ExpectedCustodySha256","0".repeat(64),"-ExpectedVerificationSha256","0".repeat(64),"-FounderGrantId",contract.executionMission.founderGrantId,"-LocalExecutionParent",local,"-ReturnRoot",returned],{cwd:repository,encoding:"utf8",shell:false,windowsHide:true});
+  assert.notEqual(blocked.status,0);
+  assert.match(blocked.stderr,/absent|cannot find|does not exist/iu);
+  assert.deepEqual(fs.readdirSync(local),[]);
+  assert.deepEqual(fs.readdirSync(returned),[]);
+}finally{fs.rmSync(temporary,{recursive:true,force:true});}
 const scannerFixture=spawnSync(powershell,["-NoLogo","-NoProfile","-ExecutionPolicy","Bypass","-File",path.join(root,"Test-OracleStage2R8CanaryScanner.ps1")],{cwd:repository,encoding:"utf8",shell:false,windowsHide:true});
 assert.equal(scannerFixture.status,0,scannerFixture.stderr);
 const scannerResult=JSON.parse(scannerFixture.stdout);
 assert.deepEqual({result:scannerResult.result,absentRejected:scannerResult.absentRejected,utf8ChunkBoundaryDetected:scannerResult.utf8ChunkBoundaryDetected,utf16LeDetected:scannerResult.utf16LeDetected},{result:"passed",absentRejected:true,utf8ChunkBoundaryDetected:true,utf16LeDetected:true});
-console.log(JSON.stringify({result:"passed",contract:contract.contract,status:contract.status,historicalBindings:contract.historicalEvidenceBindings.length,cleanHostRuntime:"powershell-only",transferCreated:false,authorityCreated:false,attemptCreated:false,fixtures:{syntax:"passed",historicalIntegrity:"passed",candidateFreezeBoundary:"passed",transferGate:"passed",qualificationGate:"passed",gateOrdering:"passed",cleanHostTooling:"passed",signatureVerification:"passed",canaryRejection:"passed",teardown:"passed"}},null,2));
-
+console.log(JSON.stringify({result:"passed",contract:contract.contract,status:contract.status,founderGrantId:contract.executionMission.founderGrantId,transferId:contract.executionMission.transferId,historicalBindings:contract.historicalEvidenceBindings.length,cleanHostRuntime:"powershell-only",transferCreated:false,authorityCreated:false,attemptCreated:false,fixtures:{syntax:"passed",historicalIntegrity:"passed",exactMissionBinding:"passed",preAuthorityOrdering:"passed",cleanHostTooling:"passed",transferAdmission:"passed",signatureVerification:"passed",canaryRejection:"passed",failClosedBeforeAuthority:"passed"}},null,2));
 function source(name){return fs.readFileSync(path.join(root,name),"utf8");}
 function sha256(file){return crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");}

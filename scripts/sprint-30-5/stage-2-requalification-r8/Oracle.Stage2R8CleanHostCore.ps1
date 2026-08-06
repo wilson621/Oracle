@@ -72,8 +72,9 @@ function Assert-OracleStage2R8Transfer {
   $custody = Get-Content -Raw -LiteralPath $custodyPath | ConvertFrom-Json
   $verification = Get-Content -Raw -LiteralPath $verificationPath | ConvertFrom-Json
   if ([string]$manifest.contract -cne 'oracle.sprint-30-5.stage-2-r8-transfer-manifest' -or -not [bool]$manifest.founderAuthorisedQualificationExecution -or -not [bool]$manifest.singleAttemptOnly) { throw "Transfer authority contract differs." }
-  if ([string]$custody.transferId -cne [string]$manifest.transferId -or -not [bool]$custody.createOnly -or -not [bool]$custody.independentVerificationRequired) { throw "Transfer custody differs." }
-  if ([string]$verification.result -cne 'passed' -or [string]$verification.transferId -cne [string]$manifest.transferId -or [bool]$verification.authorityCreated -or [bool]$verification.attemptCreated) { throw "Independent transfer verification differs." }
+  if ([int]$manifest.maximumAuthorities -ne 1 -or [int]$manifest.maximumAttempts -ne 1) { throw "Transfer single-use limits differ." }
+  if ([string]$custody.transferId -cne [string]$manifest.transferId -or [string]$custody.founderGrantId -cne [string]$manifest.founderGrantId -or [string]$custody.manifestSha256 -cne (Get-OracleStage2R8Sha256 $manifestPath) -or -not [bool]$custody.createOnly -or -not [bool]$custody.independentVerificationRequired) { throw "Transfer custody differs." }
+  if ([string]$verification.result -cne 'passed' -or [string]$verification.transferId -cne [string]$manifest.transferId -or [string]$verification.founderGrantId -cne [string]$manifest.founderGrantId -or [string]$verification.manifestSha256 -cne (Get-OracleStage2R8Sha256 $manifestPath) -or [string]$verification.custodySha256 -cne (Get-OracleStage2R8Sha256 $custodyPath) -or [bool]$verification.authorityCreated -or [bool]$verification.attemptCreated) { throw "Independent transfer verification differs." }
   $payloadRoot = Join-Path $root 'payload'
   [void](Assert-OracleStage2R8NoReparseTraversal -Path $payloadRoot -Root $root)
   $actual = @(Get-OracleStage2R8PayloadInventory -PayloadRoot $payloadRoot)
@@ -82,6 +83,8 @@ function Assert-OracleStage2R8Transfer {
   for ($index = 0; $index -lt $actual.Count; $index++) {
     if ([string]$actual[$index].path -cne [string]$expected[$index].path -or [int64]$actual[$index].bytes -ne [int64]$expected[$index].bytes -or [string]$actual[$index].sha256 -cne [string]$expected[$index].sha256) { throw "Transfer payload inventory differs." }
   }
+  $executionContractPath = Join-Path $payloadRoot 'harness\Oracle.Stage2RequalificationR8Contract.json'
+  if ((Get-OracleStage2R8Sha256 $executionContractPath) -cne [string]$manifest.executionContractSha256 -or [string]$verification.executionContractSha256 -cne [string]$manifest.executionContractSha256) { throw "Execution contract binding differs." }
   [pscustomobject][ordered]@{ transferId=[string]$manifest.transferId; payloadRoot=$payloadRoot; manifest=$manifest; independentlyVerified=$true }
 }
 

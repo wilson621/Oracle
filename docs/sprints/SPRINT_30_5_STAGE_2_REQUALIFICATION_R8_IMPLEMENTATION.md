@@ -20,10 +20,10 @@ Accepted freeze:
 
 ## Clean-host runtime
 
-The transferred runtime surface is three files: the R8 contract, `Oracle.Stage2R8CleanHostCore.ps1`, and `Invoke-OracleStage2R8Qualification.ps1`. It has no development-tool dependency. The core verifies transfer custody and exact payload parity, rejects repository/tooling or non-zero Oracle state, verifies signatures and identity, and guarantees exact trust removal.
+The transferred runtime surface is four files: the R8 contract, `Oracle.Stage2R8CleanHostCore.ps1`, `Invoke-OracleStage2R8FounderHandoff.ps1`, and `Invoke-OracleStage2R8Qualification.ps1`. It has no development-tool dependency. The core verifies transfer custody and exact payload parity, rejects repository/tooling or non-zero Oracle state, verifies signatures and identity, and guarantees exact trust removal.
 
 The package canary scan uses a bounded 1 MiB streaming window with overlap equal to the longest admitted encoding minus one byte. It detects UTF-8, UTF-16LE and chunk-boundary values without loading every unpacked file or executing a byte-by-byte PowerShell nested loop.
 
 ## Authority controls
 
-`prepare-transfer.mjs` rejects the current contract. The qualification script rejects the current contract before transfer admission or identity creation. The accepted freeze does not itself create execution authority.
+The accepted freeze did not itself create execution authority. The later execution overlay binds one exact Founder grant and transfer identity. `prepare-transfer.mjs` rejects every other identity, while the clean-host qualification script rejects mismatched grant, contract, transfer, custody or independent-verification records before authority creation.
