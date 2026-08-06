@@ -63,3 +63,11 @@ idempotent exact state, concurrent exact creation, duplicate exact-address
 rejection and unverified creation-failure rejection. Existing R5 execution and
 hostile policy suites remain mandatory. Validation creates no provider,
 transfer, authority, attempt or qualification evidence.
+## Correction freeze
+
+The corrected engineering baseline is commit
+`b9db274e0f1112eb8e9149cc0d73fcb9f6e68324`. The execution overlay binds that
+commit while preserving the original accepted preparation-contract SHA-256 and
+binds any new manifest and custody record to failed transfer
+`transfer-stage4-r5-20260806T200338718Z-3af1860e`. Exactly one create-only fresh
+replacement transfer is permitted under the current Founder authority.
