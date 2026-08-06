@@ -620,3 +620,13 @@ to adopt a later formatting standard.
 | Document | Link | Purpose |
 | --- | --- | --- |
 | Stage 3 R8-baseline qualification-impact assessment | [Sprint 30.5 Stage 3 R8-Baseline Qualification-Impact Assessment](sprints/SPRINT_30_5_STAGE_3_R8_BASELINE_QUALIFICATION_IMPACT_ASSESSMENT.md) | Exact package-binding decision, reusable R12 protocol boundary, downstream impact and recommended R13 preparation mission |
+
+## Stage 3 Requalification R13 engineering preparation
+
+| Document | Link | Purpose |
+| --- | --- | --- |
+| R13 plan | [Sprint 30.5 Stage 3 R13 Plan](sprints/SPRINT_30_5_STAGE_3_R13_PLAN.md) | Exact R8 binding, reused R12 lifecycle, clean-host architecture and authority boundary |
+| R13 implementation | [Sprint 30.5 Stage 3 R13 Implementation](sprints/SPRINT_30_5_STAGE_3_R13_IMPLEMENTATION.md) | Minimal R8 and clean-host harness delta |
+| R13 validation | [Sprint 30.5 Stage 3 R13 Preparation Validation](sprints/SPRINT_30_5_STAGE_3_R13_PREPARATION_VALIDATION_REPORT.md) | Static, regression, adversarial, simulated and elevated integration results |
+| R13 pre-execution gate | [Sprint 30.5 Stage 3 R13 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_3_R13_PRE_EXECUTION_GATE.md) | Zero current transfer, authority and attempt state |
+| R13 engineering closure | [Sprint 30.5 Stage 3 R13 Engineering Closure](sprints/SPRINT_30_5_STAGE_3_R13_ENGINEERING_CLOSURE.md) | Qualification-ready baseline and recommended next mission |

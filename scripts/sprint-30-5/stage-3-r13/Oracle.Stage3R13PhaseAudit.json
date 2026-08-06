@@ -1,0 +1,543 @@
+{
+    "schemaVersion":  "1.0.0",
+    "contract":  "oracle.sprint-30-5.stage-3-r13-phase-audit",
+    "programmeIdentity":  "Sprint 30.5 Stage 3 Requalification R13",
+    "retryPolicy":  "prohibited",
+    "phases":  [
+                   {
+                       "phase":  "authority-consumed",
+                       "preconditions":  [
+                                             "all read-only pre-authority checks passed",
+                                             "elevated 64-bit Windows PowerShell 5.1 process",
+                                             "unique authority and attempt identities",
+                                             "create-only roots absent"
+                                         ],
+                       "expectedHostState":  "clean; package and governed certificate absent",
+                       "filesRead":  [
+                                         "R13 transfer",
+                                         "R13 contract",
+                                         "fresh host continuity"
+                                     ],
+                       "filesCreated":  [
+                                            "authority record",
+                                            "attempt roots",
+                                            "host-continuity copy",
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "read-only preflight completed",
+                       "packageOperations":  [
+
+                                             ],
+                       "certificateOperations":  [
+
+                                                 ],
+                       "externalCommands":  [
+
+                                            ],
+                       "success":  "authority is consumed exactly once",
+                       "failure":  "no authority record is published unless all pre-authority checks pass",
+                       "teardown":  "zero-residue verification only",
+                       "evidence":  [
+                                        "authority record",
+                                        "01-authority-consumed.json"
+                                    ],
+                       "retry":  "prohibited",
+                       "next":  "transfer-verified"
+                   },
+                   {
+                       "phase":  "transfer-verified",
+                       "preconditions":  [
+                                             "authority-consumed",
+                                             "manifest/custody/payload hashes exact"
+                                         ],
+                       "expectedHostState":  "clean and unmodified",
+                       "filesRead":  [
+                                         "MSIX",
+                                         "inventory",
+                                         "manifest",
+                                         "custody",
+                                         "Release Manifest",
+                                         "SBOM",
+                                         "provenance",
+                                         "policies"
+                                     ],
+                       "filesCreated":  [
+                                            "package-content-reconciliation.json",
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "none",
+                       "packageOperations":  [
+
+                                             ],
+                       "certificateOperations":  [
+
+                                                 ],
+                       "externalCommands":  [
+
+                                            ],
+                       "success":  "all transfer and package bytes reconcile",
+                       "failure":  "stop before host mutation",
+                       "teardown":  "zero-residue verification only",
+                       "evidence":  [
+                                        "package-content-reconciliation.json",
+                                        "02-transfer-verified.json"
+                                    ],
+                       "retry":  "prohibited",
+                       "next":  "host-admitted"
+                   },
+                   {
+                       "phase":  "host-admitted",
+                       "preconditions":  [
+                                             "transfer-verified",
+                                             "fresh continuity exact and within 60 minutes",
+                                             "pre-authority platform probe passed"
+                                         ],
+                       "expectedHostState":  "admitted Founder-QA-01; no development tools, Oracle package or governed certificate",
+                       "filesRead":  [
+                                         "host continuity",
+                                         "host admission"
+                                     ],
+                       "filesCreated":  [
+                                            "host-admission.json",
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "64-bit, 32-bit and current-user uninstall views read fail-closed",
+                       "packageOperations":  [
+                                                 "Get-AppxPackage only"
+                                             ],
+                       "certificateOperations":  [
+                                                     "read governed stores only"
+                                                 ],
+                       "externalCommands":  [
+                                                "reagentc.exe /info"
+                                            ],
+                       "success":  "clean host baseline frozen",
+                       "failure":  "stop before trust or installation",
+                       "teardown":  "zero-residue verification only",
+                       "evidence":  [
+                                        "host-admission.json",
+                                        "03-host-admitted.json"
+                                    ],
+                       "retry":  "prohibited",
+                       "next":  "untrusted-rejection-passed"
+                   },
+                   {
+                       "phase":  "untrusted-rejection-passed",
+                       "preconditions":  [
+                                             "host-admitted",
+                                             "certificate trust absent"
+                                         ],
+                       "expectedHostState":  "package absent and signer untrusted",
+                       "filesRead":  [
+                                         "accepted MSIX"
+                                     ],
+                       "filesCreated":  [
+                                            "untrusted-rejection.json",
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "none",
+                       "packageOperations":  [
+                                                 "Add-AppxPackage must fail",
+                                                 "Get-AppxPackage proves absence"
+                                             ],
+                       "certificateOperations":  [
+                                                     "Get-AuthenticodeSignature"
+                                                 ],
+                       "externalCommands":  [
+
+                                            ],
+                       "success":  "untrusted package rejection is affirmatively evidenced",
+                       "failure":  "stop; remove exact package only if unexpectedly present",
+                       "teardown":  "exact package cleanup and zero-residue checks",
+                       "evidence":  [
+                                        "untrusted-rejection.json",
+                                        "04-untrusted-rejection-passed.json"
+                                    ],
+                       "retry":  "prohibited",
+                       "next":  "trust-established"
+                   },
+                   {
+                       "phase":  "trust-established",
+                       "preconditions":  [
+                                             "untrusted-rejection-passed",
+                                             "exact certificate absent from all governed stores"
+                                         ],
+                       "expectedHostState":  "package absent",
+                       "filesRead":  [
+                                         "accepted MSIX signer certificate"
+                                     ],
+                       "filesCreated":  [
+                                            "temporary CER in attempt work root",
+                                            "process envelope",
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "certificate stores read",
+                       "packageOperations":  [
+
+                                             ],
+                       "certificateOperations":  [
+                                                     "certutil.exe -addstore TrustedPeople exact CER in elevated process",
+                                                     "physical LocalMachine TrustedPeople verification",
+                                                     "logical projection classification",
+                                                     "exact bytes/subject/thumbprint/private-key verification"
+                                                 ],
+                       "externalCommands":  [
+                                                "certutil.exe"
+                                            ],
+                       "success":  "exact physical LocalMachine TrustedPeople trust exists, only permitted logical projections exist and Authenticode is Valid",
+                       "failure":  "stop and remove only exact thumbprint if created",
+                       "teardown":  "exact machine TrustedPeople removal and zero physical/logical residue verification",
+                       "evidence":  [
+                                        "certutil process evidence",
+                                        "05-trust-established.json"
+                                    ],
+                       "retry":  "prohibited",
+                       "next":  "negative-path-passed"
+                   },
+                   {
+                       "phase":  "negative-path-passed",
+                       "preconditions":  [
+                                             "trust-established"
+                                         ],
+                       "expectedHostState":  "exact trust present; governed package absent",
+                       "filesRead":  [
+                                         "accepted MSIX"
+                                     ],
+                       "filesCreated":  [
+                                            "temporary tampered copy in work root",
+                                            "tampered-rejection.json",
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "none",
+                       "packageOperations":  [
+                                                 "Add-AppxPackage tampered copy must fail"
+                                             ],
+                       "certificateOperations":  [
+                                                     "Authenticode verification"
+                                                 ],
+                       "externalCommands":  [
+
+                                            ],
+                       "success":  "tampered package rejected and accepted MSIX unchanged",
+                       "failure":  "stop and exact trust teardown",
+                       "teardown":  "delete temporary copy; exact trust removal; package and certificate zero residue",
+                       "evidence":  [
+                                        "tampered-rejection.json",
+                                        "06-negative-path-passed.json"
+                                    ],
+                       "retry":  "prohibited",
+                       "next":  "package-installed"
+                   },
+                   {
+                       "phase":  "package-installed",
+                       "preconditions":  [
+                                             "negative-path-passed",
+                                             "exact trust present",
+                                             "package absent"
+                                         ],
+                       "expectedHostState":  "clean apart from exact temporary trust",
+                       "filesRead":  [
+                                         "accepted MSIX"
+                                     ],
+                       "filesCreated":  [
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "AppX registration only through governed cmdlet",
+                       "packageOperations":  [
+                                                 "Add-AppxPackage exact MSIX",
+                                                 "identity/version/publisher cardinality verification"
+                                             ],
+                       "certificateOperations":  [
+
+                                                 ],
+                       "externalCommands":  [
+
+                                            ],
+                       "success":  "exactly one governed package installed",
+                       "failure":  "stop and remove exact package/trust",
+                       "teardown":  "stop exact package processes; remove exact package; remove exact trust",
+                       "evidence":  [
+                                        "07-package-installed.json"
+                                    ],
+                       "retry":  "prohibited",
+                       "next":  "runtime-observed"
+                   },
+                   {
+                       "phase":  "runtime-observed",
+                       "preconditions":  [
+                                             "package-installed",
+                                             "exact runtime configuration created with CreateNew and restricted ACL",
+                                             "Founder grant/authority/attempt/candidate/package bindings exact",
+                                             "transient secrets generated by cryptographic RNG"
+                                         ],
+                       "expectedHostState":  "exact package installed and trusted; one attempt-bound LocalState runtime configuration admitted",
+                       "filesRead":  [
+                                         "WindowDiscovery",
+                                         "WindowObserver",
+                                         "installed executable",
+                                         "runtime configuration policy"
+                                     ],
+                       "filesCreated":  [
+                                            "secret-free runtime-configuration admission evidence",
+                                            "initial activation evidence",
+                                            "process envelopes",
+                                            "runtime observation",
+                                            "consumption evidence",
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "none",
+                       "packageOperations":  [
+                                                 "create attempt-bound LocalState runtime configuration",
+                                                 "IApplicationActivationManager ActivateApplication exact AUMID with path and SHA-256 only",
+                                                 "prove atomic consumption",
+                                                 "remove empty configuration namespace"
+                                             ],
+                       "certificateOperations":  [
+                                                     "installed executable Authenticode read"
+                                                 ],
+                       "externalCommands":  [
+                                                "Oracle.WindowDiscovery.exe",
+                                                "Oracle.WindowObserver.exe"
+                                            ],
+                       "success":  "direct activation returns S_OK and nonzero PID; configuration is consumed; secrets remain outside evidence; one owned signed visible Oracle window passes all assertions for at least 60000 monotonic milliseconds",
+                       "failure":  "stop processes and remove exact package/trust",
+                       "teardown":  "stop exact AppModel-owned processes; remove exact configuration namespace; remove exact package/trust; prove zero residue",
+                       "evidence":  [
+                                        "initial-runtime-configuration-admission.json",
+                                        "initial-runtime-configuration-consumption.json",
+                                        "initial-activation.json",
+                                        "runtime-observation.json",
+                                        "process logs",
+                                        "08-runtime-observed.json"
+                                    ],
+                       "retry":  "prohibited",
+                       "next":  "repair-observed"
+                   },
+                   {
+                       "phase":  "repair-observed",
+                       "preconditions":  [
+                                             "runtime-observed",
+                                             "first Oracle processes stopped exactly",
+                                             "initial configuration consumed and namespace removed",
+                                             "Windows-managed package-data root absent after reset"
+                                         ],
+                       "expectedHostState":  "package installed; Oracle process absent; package reset completed",
+                       "filesRead":  [
+                                         "installed package",
+                                         "window helpers",
+                                         "ApplicationDataManager returned LocalFolder"
+                                     ],
+                       "filesCreated":  [
+                                            "post-reset package-data initialization evidence",
+                                            "secret-free repair runtime-configuration admission evidence",
+                                            "repair activation evidence",
+                                            "repair observation",
+                                            "consumption evidence",
+                                            "process envelopes",
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "none",
+                       "packageOperations":  [
+                                                 "Reset-AppxPackage exact PackageFullName",
+                                                 "verify exact package registration",
+                                                 "ApplicationDataManager.CreateForPackageFamily exact PackageFamilyName",
+                                                 "require exact LocalState path and no reparse traversal",
+                                                 "create fresh attempt-bound LocalState configuration with CreateNew",
+                                                 "IApplicationActivationManager ActivateApplication exact AUMID with path and SHA-256 only",
+                                                 "prove atomic consumption",
+                                                 "remove empty configuration namespace"
+                                             ],
+                       "certificateOperations":  [
+                                                     "installed executable Authenticode read"
+                                                 ],
+                       "externalCommands":  [
+                                                "Oracle.WindowDiscovery.exe",
+                                                "Oracle.WindowObserver.exe"
+                                            ],
+                       "success":  "supported package-data initialization recreates exact LocalState; post-reset configuration is consumed and direct activation/runtime/window assertions repeat without secret evidence",
+                       "failure":  "stop processes and remove exact package/trust",
+                       "teardown":  "stop exact owned processes; remove exact configuration namespace, package and trust; prove zero residue",
+                       "evidence":  [
+                                        "post-reset-package-data-initialization.json",
+                                        "repair-runtime-configuration-admission.json",
+                                        "repair-runtime-configuration-consumption.json",
+                                        "repair-activation.json",
+                                        "repair-observation.json",
+                                        "09-repair-observed.json"
+                                    ],
+                       "retry":  "prohibited",
+                       "next":  "package-removed"
+                   },
+                   {
+                       "phase":  "package-removed",
+                       "preconditions":  [
+                                             "repair-observed",
+                                             "Oracle processes stopped exactly"
+                                         ],
+                       "expectedHostState":  "package installed and trusted; processes absent",
+                       "filesRead":  [
+
+                                     ],
+                       "filesCreated":  [
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "AppX registration through governed cmdlet",
+                       "packageOperations":  [
+                                                 "Remove-AppxPackage exact PackageFullName",
+                                                 "zero package verification"
+                                             ],
+                       "certificateOperations":  [
+
+                                                 ],
+                       "externalCommands":  [
+
+                                            ],
+                       "success":  "governed package absent",
+                       "failure":  "repeat is prohibited; bounded teardown may retry exact removal only as safety cleanup",
+                       "teardown":  "exact package cleanup and trust removal",
+                       "evidence":  [
+                                        "10-package-removed.json"
+                                    ],
+                       "retry":  "qualification retry prohibited",
+                       "next":  "trust-removed"
+                   },
+                   {
+                       "phase":  "trust-removed",
+                       "preconditions":  [
+                                             "package-removed"
+                                         ],
+                       "expectedHostState":  "package and processes absent; exact LocalMachine TrustedPeople trust present",
+                       "filesRead":  [
+                                         "certificate stores"
+                                     ],
+                       "filesCreated":  [
+                                            "certutil process evidence",
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "certificate stores read",
+                       "packageOperations":  [
+
+                                             ],
+                       "certificateOperations":  [
+                                                     "certutil.exe -delstore TrustedPeople exact thumbprint in elevated process",
+                                                     "zero physical and logical exact matches across governed stores"
+                                                 ],
+                       "externalCommands":  [
+                                                "certutil.exe"
+                                            ],
+                       "success":  "exact temporary trust absent everywhere",
+                       "failure":  "stop with residual-state report; no broad cleanup",
+                       "teardown":  "same exact-thumbprint safety removal only",
+                       "evidence":  [
+                                        "certutil process evidence",
+                                        "11-trust-removed.json"
+                                    ],
+                       "retry":  "qualification retry prohibited",
+                       "next":  "transfer-removed"
+                   },
+                   {
+                       "phase":  "transfer-removed",
+                       "preconditions":  [
+                                             "trust-removed",
+                                             "package/process/certificate residue zero"
+                                         ],
+                       "expectedHostState":  "clean",
+                       "filesRead":  [
+                                         "transfer root attributes"
+                                     ],
+                       "filesCreated":  [
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "none",
+                       "packageOperations":  [
+
+                                             ],
+                       "certificateOperations":  [
+
+                                                 ],
+                       "externalCommands":  [
+
+                                            ],
+                       "success":  "exact verified transfer root removed from host return medium/work location",
+                       "failure":  "stop and report transfer residue",
+                       "teardown":  "no broadened deletion",
+                       "evidence":  [
+                                        "12-transfer-removed.json"
+                                    ],
+                       "retry":  "prohibited",
+                       "next":  "cleanup-passed"
+                   },
+                   {
+                       "phase":  "cleanup-passed",
+                       "preconditions":  [
+                                             "transfer-removed"
+                                         ],
+                       "expectedHostState":  "package, process, certificate, package data, runtime configuration, transfer and work residue zero",
+                       "filesRead":  [
+                                         "installed software registry views",
+                                         "filesystem and machine state"
+                                     ],
+                       "filesCreated":  [
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "initial/final installed-software comparison",
+                       "packageOperations":  [
+                                                 "zero package query"
+                                             ],
+                       "certificateOperations":  [
+                                                     "zero governed-store query"
+                                                 ],
+                       "externalCommands":  [
+
+                                            ],
+                       "success":  "machine invariance, secret-free evidence and zero residue proved",
+                       "failure":  "failed with residual state; Founder intervention required",
+                       "teardown":  "no further broadening permitted",
+                       "evidence":  [
+                                        "13-cleanup-passed.json"
+                                    ],
+                       "retry":  "prohibited",
+                       "next":  "evidence-frozen"
+                   },
+                   {
+                       "phase":  "evidence-frozen",
+                       "preconditions":  [
+                                             "cleanup-passed",
+                                             "complete create-only inventory"
+                                         ],
+                       "expectedHostState":  "clean and invariant",
+                       "filesRead":  [
+                                         "all attempt evidence and lifecycle records"
+                                     ],
+                       "filesCreated":  [
+                                            "evidence manifest",
+                                            "immutable archive",
+                                            "sidecar",
+                                            "archive manifest",
+                                            "lifecycle record"
+                                        ],
+                       "registryAccess":  "none",
+                       "packageOperations":  [
+
+                                             ],
+                       "certificateOperations":  [
+
+                                                 ],
+                       "externalCommands":  [
+                                                "Compress-Archive"
+                                            ],
+                       "success":  "archive and sidecar atomically published and reverified",
+                       "failure":  "attempt remains failed; no archive replacement or retry",
+                       "teardown":  "remove only unpublished partial archive",
+                       "evidence":  [
+                                        "evidence-manifest.json",
+                                        "qualification archive",
+                                        "SHA-256 sidecar",
+                                        "archive manifest",
+                                        "14-evidence-frozen.json"
+                                    ],
+                       "retry":  "prohibited",
+                       "next":  "Founder evidence review"
+                   }
+               ]
+}

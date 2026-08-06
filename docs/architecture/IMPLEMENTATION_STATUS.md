@@ -1299,3 +1299,11 @@ binding: R12 targets the R6 MSIX, version and signer, while R8 is a different
 accepted package. The R12 lifecycle implementation is a reusable design input,
 but fresh R8-bound engineering preparation and later qualification are required.
 No Stage 3 implementation or execution state was created.
+
+## Stage 3 R13 engineering preparation complete - 6 August 2026
+
+The R13 preparation is complete against accepted Stage 2 R8 package SHA-256 97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490. It reuses the accepted R12 fourteen-phase lifecycle and post-reset correction while restoring the R8 clean-host split.
+
+Exact immutable bindings, 35 PowerShell parses, 15 policy and compatibility tests, all fourteen lifecycle phases, fourteen injected failures, optional-member audit and the elevated R8 post-reset integration passed. Managed LocalState was recreated through ApplicationDataManager without unconfigured activation; final package, trust and work residue was zero.
+
+No transfer, authority, attempt or qualification evidence was created. Stage 3 remains unqualified for R8, and Stage 4 and later work remain blocked. The next Founder-level decision is whether to accept R13 preparation and authorise exactly one governed R13 mission.
