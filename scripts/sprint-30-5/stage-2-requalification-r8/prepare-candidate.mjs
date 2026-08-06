@@ -1013,6 +1013,7 @@ function deterministicUuid(value) {
 function assertExpectedReleaseFiles() {
   const expected = [
     PACKAGE_FILE,
+    contract.package.publicCertificateFileName,
     "oracle-0.1.6.cdx.json",
     "oracle-0.1.6.provenance.json",
     "oracle-release-manifest.json",

@@ -44,6 +44,7 @@ assert.match(prepare,/performSafetyTeardown\(\)/u);
 assert.match(prepare,/Oracle\.Stage2R8PublicCertificate\.cer/u);
 assert.match(prepare,/"-PackageFileName",\s*PACKAGE_FILE,\s*"-ExpectedThumbprint"/u);
 assert.match(prepare,/admittedPublicCertificate/u);
+assert.match(prepare,/contract\.package\.publicCertificateFileName/u);
 assert.match(prepare,/contract\.package\.version/u);
 assert.equal(prepare.includes('Version="0\\.1\\.4\\.0"'),false);
 assert.doesNotMatch(prepare,/claimSingleAttemptAuthority\(/u);
