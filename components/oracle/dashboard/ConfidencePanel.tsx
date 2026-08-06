@@ -50,7 +50,7 @@ export default function ConfidencePanel({
 
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-slate-500">
+              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-slate-400">
                 Assessment Scope
               </p>
 
@@ -60,7 +60,7 @@ export default function ConfidencePanel({
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-slate-500">
+              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-slate-400">
                 Intelligence State
               </p>
 

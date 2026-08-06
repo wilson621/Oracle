@@ -241,7 +241,7 @@ function AuthForm() {
             </div>
           )}
 
-          <p className="mt-6 text-xs leading-5 text-slate-500">
+          <p className="mt-6 text-xs leading-5 text-slate-400">
             Email + Password is Oracle&apos;s canonical authentication method.
             Magic Links and Passkeys are optional methods for verified Accounts.
           </p>
@@ -290,7 +290,7 @@ function AuthField({
         minLength={minimumLength}
         className="mt-2 w-full rounded-xl border border-slate-700 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-cyan-300"
       />
-      {helper && <span className="mt-2 block text-xs text-slate-500">{helper}</span>}
+      {helper && <span className="mt-2 block text-xs text-slate-400">{helper}</span>}
     </label>
   );
 }

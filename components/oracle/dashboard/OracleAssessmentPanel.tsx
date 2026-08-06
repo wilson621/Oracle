@@ -43,7 +43,7 @@ export default function OracleAssessmentPanel({
 
       <div className="grid gap-4 border-b border-white/10 py-6 md:grid-cols-3">
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-          <p className="text-xs uppercase tracking-wide text-slate-500">
+          <p className="text-xs uppercase tracking-wide text-slate-400">
             Classification
           </p>
 
@@ -53,7 +53,7 @@ export default function OracleAssessmentPanel({
         </div>
 
         <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4">
-          <p className="text-xs uppercase tracking-wide text-slate-500">
+          <p className="text-xs uppercase tracking-wide text-slate-400">
             Operational Outlook
           </p>
 
@@ -63,7 +63,7 @@ export default function OracleAssessmentPanel({
         </div>
 
         <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-4">
-          <p className="text-xs uppercase tracking-wide text-slate-500">
+          <p className="text-xs uppercase tracking-wide text-slate-400">
             Authority
           </p>
 

@@ -54,7 +54,7 @@ export default function MissionReadiness({
             status
           )}`}
         >
-          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-400">
             Mission Status
           </p>
 
@@ -68,7 +68,7 @@ export default function MissionReadiness({
 
           <div className="mx-auto mt-4 h-px w-20 bg-white/10" />
 
-          <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.28em] leading-5 text-slate-500">
+          <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.28em] leading-5 text-slate-400">
             Mission
             <br />
             Classification
@@ -100,7 +100,7 @@ export default function MissionReadiness({
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Difficulty
           </p>
 
@@ -112,7 +112,7 @@ export default function MissionReadiness({
 
       <div className="mt-7 grid gap-4 md:grid-cols-2">
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Primary Focus
           </p>
 
@@ -122,7 +122,7 @@ export default function MissionReadiness({
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Current Strength
           </p>
 
@@ -134,7 +134,7 @@ export default function MissionReadiness({
 
       <div className="mt-4 grid gap-4 md:grid-cols-3">
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Combat Rating
           </p>
 
@@ -148,7 +148,7 @@ export default function MissionReadiness({
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Prediction Confidence
           </p>
 
@@ -158,7 +158,7 @@ export default function MissionReadiness({
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Estimated Sessions
           </p>
 
@@ -175,7 +175,7 @@ export default function MissionReadiness({
               Mission Completion
             </p>
 
-            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
               Objectives Complete
             </p>
           </div>
@@ -208,7 +208,7 @@ export default function MissionReadiness({
 
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Mission Reward
           </p>
 

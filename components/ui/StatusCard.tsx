@@ -49,7 +49,7 @@ export default function RiskBadge({ label, risk }: RiskBadgeProps) {
       <div className="flex items-center gap-2">
         <span className={`h-2.5 w-2.5 rounded-full ${styles.dot}`} />
 
-        <p className="text-xs uppercase tracking-wide text-slate-500">
+        <p className="text-xs uppercase tracking-wide text-slate-400">
           {label}
         </p>
       </div>

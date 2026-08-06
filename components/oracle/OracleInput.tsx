@@ -25,7 +25,7 @@ export default function OracleInput({
         id="oracle-question"
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
-        className="min-h-44 w-full resize-none rounded-2xl bg-slate-900 p-5 text-white outline-none placeholder:text-slate-500"
+        className="min-h-44 w-full resize-none rounded-2xl bg-slate-900 p-5 text-white outline-none placeholder:text-slate-400"
         placeholder="Ask about a Session, report, pattern, coaching focus, Mission or progress..."
       />
 
@@ -39,7 +39,7 @@ export default function OracleInput({
           {isAnalysing ? "Grounding..." : "Ask Oracle"}
         </button>
       </div>
-      <p className="mt-3 text-xs leading-5 text-slate-500">
+      <p className="mt-3 text-xs leading-5 text-slate-400">
         Conversation is transient and cannot create evidence, mutate Oracle
         state or replace an authoritative Service.
       </p>

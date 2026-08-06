@@ -220,7 +220,7 @@
 
 .stateDetail {
   margin: 6px 0 0;
-  color: rgb(100 116 139);
+  color: rgb(148 163 184);
   font-size: 0.82rem;
 }
 
@@ -357,7 +357,7 @@
 }
 
 .metric dt {
-  color: rgb(100 116 139);
+  color: rgb(148 163 184);
   font-size: 0.66rem;
   font-weight: 680;
   letter-spacing: 0.08em;
@@ -493,7 +493,7 @@
 .sourceLink small {
   display: block;
   margin-top: 2px;
-  color: rgb(100 116 139);
+  color: rgb(148 163 184);
   font-size: 0.68rem;
 }
 
@@ -501,7 +501,7 @@
   display: grid;
   gap: 8px;
   margin-top: 18px;
-  color: rgb(100 116 139);
+  color: rgb(148 163 184);
   font-size: 0.7rem;
   line-height: 1.5;
 }

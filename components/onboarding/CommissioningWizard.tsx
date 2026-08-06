@@ -54,7 +54,7 @@ export default function CommissioningWizard({
             className="mt-4 w-full rounded-2xl border border-cyan-500/20 bg-black/40 px-6 py-5 text-2xl font-bold text-white outline-none transition focus:border-cyan-400"
             placeholder="Ghost Hunter"
           />
-          <p className="mt-4 text-sm leading-6 text-slate-500">
+          <p className="mt-4 text-sm leading-6 text-slate-400">
             3–32 ASCII letters or numbers, with spaces, hyphens and
             underscores inside. Callsigns are globally unique without regard
             to capitalisation. Oracle preserves your selected capitalisation.

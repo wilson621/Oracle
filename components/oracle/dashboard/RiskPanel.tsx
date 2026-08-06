@@ -95,7 +95,7 @@ export default function RiskPanel({ report }: RiskPanelProps) {
 
           <div className="flex-1">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-xs uppercase tracking-wide text-slate-500">
+              <p className="text-xs uppercase tracking-wide text-slate-400">
                 Primary Threat
               </p>
 
@@ -127,7 +127,7 @@ export default function RiskPanel({ report }: RiskPanelProps) {
 />
 
         <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4">
-          <p className="text-xs uppercase tracking-wide text-slate-500">
+          <p className="text-xs uppercase tracking-wide text-slate-400">
             Assessment Confidence
           </p>
 
@@ -146,7 +146,7 @@ export default function RiskPanel({ report }: RiskPanelProps) {
           <div className="flex items-center gap-3">
             <Target className="text-amber-300" size={20} />
 
-            <p className="text-xs uppercase tracking-wide text-slate-500">
+            <p className="text-xs uppercase tracking-wide text-slate-400">
               Skill Exposure
             </p>
           </div>
@@ -170,7 +170,7 @@ export default function RiskPanel({ report }: RiskPanelProps) {
           <div className="flex items-center gap-3">
             <Activity className="text-cyan-300" size={20} />
 
-            <p className="text-xs uppercase tracking-wide text-slate-500">
+            <p className="text-xs uppercase tracking-wide text-slate-400">
               Recommended Response
             </p>
           </div>

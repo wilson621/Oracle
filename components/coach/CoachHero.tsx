@@ -27,7 +27,7 @@ export default function CoachHero({
   ORACLE AI COACH
 </p>
 
-<p className="mt-2 text-sm text-slate-500">
+<p className="mt-2 text-sm text-slate-400">
         Based on your last {sessionsAnalysed} Oracle Sessions.
       </p>
     </Card>

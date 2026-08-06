@@ -37,7 +37,7 @@ export default function JourneyCard({
       </p>
       <h2 className="mt-2 text-xl font-black text-white">{title}</h2>
       <p className="mt-3 text-sm leading-6 text-slate-400">{description}</p>
-      <p className="mt-5 text-xs font-semibold text-slate-500">{status}</p>
+      <p className="mt-5 text-xs font-semibold text-slate-400">{status}</p>
     </Link>
   );
 }

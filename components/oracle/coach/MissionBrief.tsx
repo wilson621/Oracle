@@ -33,7 +33,7 @@ export default function MissionBrief({
 
       <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             {title}
           </p>
 
@@ -48,7 +48,7 @@ export default function MissionBrief({
 
         <div className="grid min-w-[280px] gap-3">
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500">
+            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">
               Estimated Combat Gain
             </p>
 
@@ -59,7 +59,7 @@ export default function MissionBrief({
 
           <div className="grid grid-cols-2 gap-3">
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-              <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500">
+              <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">
                 Difficulty
               </p>
 
@@ -69,7 +69,7 @@ export default function MissionBrief({
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-              <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500">
+              <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">
                 Sessions
               </p>
 

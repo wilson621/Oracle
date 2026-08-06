@@ -23,7 +23,7 @@ export default function SkillBar({ label, value }: Props) {
     <div className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4 transition-all duration-300 hover:border-cyan-400/20 hover:bg-slate-950">
       <div className="flex items-center justify-between gap-6">
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-slate-500">
+          <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-slate-400">
             {label}
           </p>
 
@@ -37,7 +37,7 @@ export default function SkillBar({ label, value }: Props) {
             {value}
           </div>
 
-          <div className="mt-1 text-[10px] uppercase tracking-[0.25em] text-slate-500">
+          <div className="mt-1 text-[10px] uppercase tracking-[0.25em] text-slate-400">
             Operational Rating
           </div>
         </div>

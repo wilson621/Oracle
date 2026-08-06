@@ -30,7 +30,7 @@ export default function MetricCard({
       </h2>
 
       {subtitle && (
-        <p className="mt-2 text-xs text-slate-500">{subtitle}</p>
+        <p className="mt-2 text-xs text-slate-400">{subtitle}</p>
       )}
     </Card>
   );

@@ -42,7 +42,7 @@ export default function DossierField({
           <Icon size={18} />
         </div>
 
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
           {label}
         </p>
       </div>

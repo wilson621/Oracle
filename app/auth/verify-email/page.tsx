@@ -13,7 +13,7 @@ export default function VerifyEmailPage() {
           exists, but Operator commissioning and protected access remain
           unavailable until that link is confirmed.
         </p>
-        <p className="mt-4 text-sm leading-6 text-slate-500">
+        <p className="mt-4 text-sm leading-6 text-slate-400">
           Verification preserves one permanent Operator identity while
           credentials and presentation can change over time.
         </p>

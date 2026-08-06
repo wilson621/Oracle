@@ -57,7 +57,7 @@ export default function OracleDecisionCard({
   if (!decision) {
     return (
       <section className="mt-10 rounded-3xl border border-white/10 bg-slate-950/70 p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-400">
           Oracle Decision
         </p>
         <h2 className="mt-4 text-3xl font-black text-white">
@@ -95,7 +95,7 @@ export default function OracleDecisionCard({
         </div>
 
         <div className="rounded-2xl border border-cyan-400/20 bg-slate-950/70 px-5 py-4">
-          <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+          <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
             Priority
           </p>
           <p className="mt-2 text-2xl font-black text-cyan-300">
@@ -108,7 +108,7 @@ export default function OracleDecisionCard({
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
           <div className="flex items-center gap-3">
             <BrainCircuit className="text-cyan-300" size={20} />
-            <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Confidence
             </p>
           </div>
@@ -120,7 +120,7 @@ export default function OracleDecisionCard({
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
           <div className="flex items-center gap-3">
             <Target className="text-cyan-300" size={20} />
-            <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Expected Outcome
             </p>
           </div>
@@ -132,7 +132,7 @@ export default function OracleDecisionCard({
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
           <div className="flex items-center gap-3">
             <TimerReset className="text-cyan-300" size={20} />
-            <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Reassessment
             </p>
           </div>
@@ -146,7 +146,7 @@ export default function OracleDecisionCard({
         <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5">
           <div className="flex items-center gap-3">
             <CheckCircle2 className="text-cyan-300" size={20} />
-            <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Why Oracle chose this
             </p>
           </div>
@@ -163,7 +163,7 @@ export default function OracleDecisionCard({
         <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5">
           <div className="flex items-center gap-3">
             <ListChecks className="text-cyan-300" size={20} />
-            <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Evidence Considered
             </p>
           </div>
@@ -182,7 +182,7 @@ export default function OracleDecisionCard({
                     {formatEvidenceValue(evidence)}
                   </p>
                   {evidence.detail ? (
-                    <p className="mt-1 text-xs text-slate-500">
+                    <p className="mt-1 text-xs text-slate-400">
                       {evidence.detail}
                     </p>
                   ) : null}

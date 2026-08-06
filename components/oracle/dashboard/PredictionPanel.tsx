@@ -70,7 +70,7 @@ export default function PredictionPanel({
         </div>
 
         <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/5 px-5 py-4 text-right">
-          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-400">
             Prediction Confidence
           </p>
 
@@ -86,7 +86,7 @@ export default function PredictionPanel({
 
       <div className="mt-7 grid gap-4 md:grid-cols-3">
         <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
             Projected Combat Rating
           </p>
 
@@ -96,7 +96,7 @@ export default function PredictionPanel({
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
             Projected Success Rate
           </p>
 
@@ -106,7 +106,7 @@ export default function PredictionPanel({
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
             Sessions To Next Tier
           </p>
 
@@ -139,7 +139,7 @@ export default function PredictionPanel({
               </p>
             </>
           ) : (
-            <p className="mt-3 text-sm text-slate-500">
+            <p className="mt-3 text-sm text-slate-400">
               Insufficient prediction history.
             </p>
           )}
@@ -167,7 +167,7 @@ export default function PredictionPanel({
               </p>
             </>
           ) : (
-            <p className="mt-3 text-sm text-slate-500">
+            <p className="mt-3 text-sm text-slate-400">
               Insufficient prediction history.
             </p>
           )}
@@ -176,7 +176,7 @@ export default function PredictionPanel({
 
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
             Burnout Risk
           </p>
 
@@ -190,7 +190,7 @@ export default function PredictionPanel({
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
             Plateau Risk
           </p>
 

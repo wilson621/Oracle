@@ -127,28 +127,28 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
 
           <div className="mt-5 grid gap-3">
             <div className="rounded-xl border border-white/10 bg-black/30 p-4">
-              <p className="text-xs text-slate-500">Performance Trend</p>
+              <p className="text-xs text-slate-400">Performance Trend</p>
               <p className="mt-1 font-semibold text-white">
                 {formatLabel(trend.performanceTrend)}
               </p>
             </div>
 
             <div className="rounded-xl border border-white/10 bg-black/30 p-4">
-              <p className="text-xs text-slate-500">Confidence Trend</p>
+              <p className="text-xs text-slate-400">Confidence Trend</p>
               <p className="mt-1 font-semibold text-white">
                 {formatLabel(trend.confidenceTrend)}
               </p>
             </div>
 
             <div className="rounded-xl border border-white/10 bg-black/30 p-4">
-              <p className="text-xs text-slate-500">Consistency Trend</p>
+              <p className="text-xs text-slate-400">Consistency Trend</p>
               <p className="mt-1 font-semibold text-white">
                 {formatLabel(trend.consistencyTrend)}
               </p>
             </div>
 
             <div className="rounded-xl border border-white/10 bg-black/30 p-4">
-              <p className="text-xs text-slate-500">Trend Sample</p>
+              <p className="text-xs text-slate-400">Trend Sample</p>
               <p className="mt-1 font-semibold text-white">
                 {trend.sampleSize} sessions
               </p>
@@ -171,7 +171,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
                 </p>
               ))
             ) : (
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-slate-400">
                 No dominant strengths detected yet.
               </p>
             )}
@@ -191,7 +191,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
                 </p>
               ))
             ) : (
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-slate-400">
                 No major weaknesses detected yet.
               </p>
             )}
@@ -211,7 +211,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
                 key={skillTrend.skill}
                 className="rounded-xl border border-white/10 bg-black/30 p-4"
               >
-                <p className="text-xs text-slate-500">{skillTrend.skill}</p>
+                <p className="text-xs text-slate-400">{skillTrend.skill}</p>
                 <p className="mt-1 text-lg font-bold text-white">
                   {skillTrend.change > 0 ? "+" : ""}
                   {skillTrend.change}
@@ -222,7 +222,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
               </div>
             ))
           ) : (
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-slate-400">
               Complete at least two Oracle Sessions to unlock skill trend intelligence.
             </p>
           )}
@@ -255,7 +255,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
       </div>
 
       <div className="mt-6 rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-5">
-        <p className="text-xs uppercase tracking-wide text-slate-500">
+        <p className="text-xs uppercase tracking-wide text-slate-400">
           Next Focus
         </p>
         <p className="mt-2 text-base font-semibold text-cyan-100">

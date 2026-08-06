@@ -55,7 +55,7 @@ export default function TrendPanel({ trend }: TrendPanelProps) {
         </div>
 
         <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/5 px-5 py-4 text-right">
-          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-400">
             Momentum Score
           </p>
 
@@ -75,7 +75,7 @@ export default function TrendPanel({ trend }: TrendPanelProps) {
       key={item.label}
       className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/30 px-4 py-3"
     >
-      <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
+      <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
         {item.label}
       </p>
 
@@ -105,7 +105,7 @@ export default function TrendPanel({ trend }: TrendPanelProps) {
               </p>
             </>
           ) : (
-            <p className="mt-3 text-sm leading-6 text-slate-500">
+            <p className="mt-3 text-sm leading-6 text-slate-400">
               No improvement signal detected yet.
             </p>
           )}
@@ -127,7 +127,7 @@ export default function TrendPanel({ trend }: TrendPanelProps) {
               </p>
             </>
           ) : (
-            <p className="mt-3 text-sm leading-6 text-slate-500">
+            <p className="mt-3 text-sm leading-6 text-slate-400">
               No decline signal detected yet.
             </p>
           )}
@@ -135,7 +135,7 @@ export default function TrendPanel({ trend }: TrendPanelProps) {
       </div>
 
       <div className="mt-5">
-        <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+        <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
           Skill Movement
         </p>
 
@@ -162,7 +162,7 @@ export default function TrendPanel({ trend }: TrendPanelProps) {
             ))
           ) : (
             <div className="rounded-xl border border-white/10 bg-black/30 px-4 py-3">
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-slate-400">
                 Complete at least two Oracle Sessions to unlock trend
                 intelligence.
               </p>

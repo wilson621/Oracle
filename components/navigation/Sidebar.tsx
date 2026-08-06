@@ -53,7 +53,7 @@ export default function Sidebar({
       <p className="text-xs font-bold tracking-[0.35em] text-cyan-300">
         ORACLE
       </p>
-      <p className="mt-2 text-xs leading-5 text-slate-500">
+      <p className="mt-2 text-xs leading-5 text-slate-400">
         Evidence-led player intelligence
       </p>
 
@@ -74,7 +74,7 @@ export default function Sidebar({
             }
           >
             <p
-              className={`mb-3 text-[10px] font-bold tracking-[0.3em] text-slate-500 ${
+              className={`mb-3 text-[10px] font-bold tracking-[0.3em] text-slate-400 ${
                 compactOnSmallScreens
                   ? "sr-only lg:not-sr-only"
                   : ""

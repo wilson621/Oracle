@@ -29,7 +29,7 @@ export default function StatCard({
       </h2>
 
       {subtitle && (
-        <p className="mt-2 text-xs text-slate-500">
+        <p className="mt-2 text-xs text-slate-400">
           {subtitle}
         </p>
       )}

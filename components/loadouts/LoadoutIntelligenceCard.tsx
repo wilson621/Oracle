@@ -23,7 +23,7 @@ export default function LoadoutIntelligenceCard({ report }: Props) {
 
       <div className="mt-5 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
         <div className="max-w-3xl">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Oracle Decision
           </p>
 
@@ -38,7 +38,7 @@ export default function LoadoutIntelligenceCard({ report }: Props) {
 
         <div className="grid min-w-[260px] gap-3">
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500">
+            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">
               Decision Confidence
             </p>
 
@@ -48,7 +48,7 @@ export default function LoadoutIntelligenceCard({ report }: Props) {
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500">
+            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">
               Operator Compatibility
             </p>
 
@@ -58,7 +58,7 @@ export default function LoadoutIntelligenceCard({ report }: Props) {
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500">
+            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">
               Weapon Role
             </p>
 
@@ -71,7 +71,7 @@ export default function LoadoutIntelligenceCard({ report }: Props) {
 
       <div className="mt-7 grid gap-4 md:grid-cols-2">
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Public Meta
           </p>
 
@@ -115,7 +115,7 @@ export default function LoadoutIntelligenceCard({ report }: Props) {
 
         <div className="mt-5 grid gap-4 md:grid-cols-3">
           <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
               Follow Oracle
             </p>
 
@@ -129,7 +129,7 @@ export default function LoadoutIntelligenceCard({ report }: Props) {
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
               Follow Meta
             </p>
 

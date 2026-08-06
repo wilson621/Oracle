@@ -47,5 +47,9 @@ export default defineConfig([
     ".tmp-sprint-29-verification/**",
     ".tmp-sprint-30-5-stage-2/**",
     ".tmp-tools/**",
+
+    // Immutable retired qualification harness; integrity is enforced by its
+    // historical manifest and it must not be rewritten by later lint cleanup.
+    "scripts/sprint-30-5/stage-5-r1-execution/**",
   ]),
 ]);

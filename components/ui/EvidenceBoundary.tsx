@@ -21,7 +21,7 @@ export default function EvidenceBoundary({
         ["Limitation", limitation],
       ].map(([label, value]) => (
         <div key={label} className="rounded-2xl bg-white/[0.03] p-4">
-          <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-500">
+          <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">
             {label}
           </p>
           <p className="mt-2 text-sm leading-6 text-slate-200">{value}</p>

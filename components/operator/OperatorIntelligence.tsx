@@ -50,7 +50,7 @@ export default function OperatorIntelligence({ profile }: Props) {
         </div>
 
         <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 px-6 py-5">
-          <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-slate-400">
             Confidence Level
           </p>
 
@@ -64,7 +64,7 @@ export default function OperatorIntelligence({ profile }: Props) {
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
           <Brain className="text-cyan-300" size={20} />
 
-          <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Learning Style
           </p>
 
@@ -76,7 +76,7 @@ export default function OperatorIntelligence({ profile }: Props) {
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
           <Shield className="text-cyan-300" size={20} />
 
-          <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Primary Strength
           </p>
 
@@ -88,7 +88,7 @@ export default function OperatorIntelligence({ profile }: Props) {
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
           <Target className="text-cyan-300" size={20} />
 
-          <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Highest Priority
           </p>
 
@@ -100,7 +100,7 @@ export default function OperatorIntelligence({ profile }: Props) {
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
           <TrendingUp className="text-cyan-300" size={20} />
 
-          <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Behaviour Status
           </p>
 

@@ -40,7 +40,7 @@ export default function OracleContextualIntelligenceCard({
   if (!state) {
     return (
       <section className="rounded-3xl border border-white/10 bg-slate-950/70 p-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
           Contextual Intelligence
         </p>
         <h2 className="mt-3 text-2xl font-black text-white">
@@ -93,7 +93,7 @@ export default function OracleContextualIntelligenceCard({
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
           <div className="flex items-center gap-3">
             <Radar className="text-cyan-300" size={18} />
-            <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Confidence
             </p>
           </div>
@@ -107,7 +107,7 @@ export default function OracleContextualIntelligenceCard({
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
           <div className="flex items-center gap-3">
             <Lightbulb className="text-cyan-300" size={18} />
-            <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Opportunities
             </p>
           </div>
@@ -119,7 +119,7 @@ export default function OracleContextualIntelligenceCard({
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
           <div className="flex items-center gap-3">
             <Layers3 className="text-cyan-300" size={18} />
-            <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Priorities
             </p>
           </div>
@@ -130,7 +130,7 @@ export default function OracleContextualIntelligenceCard({
       </div>
 
       <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-        <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+        <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
           Contextual Recommendation
         </p>
 
