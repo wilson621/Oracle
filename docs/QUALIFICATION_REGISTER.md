@@ -33,7 +33,7 @@ results.
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
 | 2 | Candidate Freeze and Package Reconciliation | **R8 Founder-accepted and formally closed - current baseline** | Attempt `stage2-r8-20260806T134157536Z-a0bf3986`; package `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`; clean-host verification and zero residue passed | None for Stage 2; separate Stage 3 assessment/authority required |
-| 3 | Clean Windows Qualification | **Exactly-one R13 mission authorised; pre-transfer** | Execution-enabled R8-bound baseline; one fresh transfer permitted; authority and attempt remain gated and absent | Create and independently verify the single transfer, then clean-host admission and pre-authority gates |
+| 3 | Clean Windows Qualification | **R13 Founder-accepted and formally closed - current baseline** | Attempt `stage3-r13-20260806T162253957Z-b0cb2a17`; R8 package, clean-host lifecycle, reset/repair and zero residue independently verified | None for Stage 3; separate Stage 4 assessment/authority required |
 | 4 | Live Authentication and Protected Rendering | **R4 accepted immutable history for R6; not qualified for R8** | R4 remains valid only for the R6/R12 chain | Accepted R8-bound Stage 3, then separate Stage 4 authority |
 | 5 | Installed Package GPU, Performance and Accessibility | **Accessibility correction included in accepted R8; Stage 5 not qualified** | Historical Stage 5 preparation and R6 evidence do not qualify the R8 package | Accepted R8-bound Stages 3-4, then separate Stage 5 authority |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
@@ -515,3 +515,11 @@ No transfer, authority, attempt or qualification evidence was created. Stage 3 r
 Mission mission-stage3-r13-20260806T160537355Z-aed09e3b authorises exactly one fresh create-only R13 transfer, one authority and one attempt against accepted R8. Authority and attempt creation remain barred until independent transfer verification, clean-host admission, fresh continuity and every elevated pre-authority gate pass.
 
 No retry is authorised after a consumed authority or permanent failed attempt. Stage 4 and later work remain unauthorised.
+
+## Stage 3 R13 Founder-accepted and formally closed - 6 August 2026
+
+The Founder accepted Stage 3 Requalification R13 as the current Stage 3 baseline for the accepted R8 package. Independent source-workstation verification passed for attempt `stage3-r13-20260806T162253957Z-b0cb2a17`; its sole authority `authority-stage3-r13-20260806T162253957Z-b0cb2a17` is consumed and no retry is authorised.
+
+The returned archive SHA-256 is `4e7fb5b75b036e7edf78438117950f4be78c74ad26bc0d102e77dc6658da3c7a`; final evidence-manifest SHA-256 is `ee12f0307d5c55dc05027c50dcba4860923ff36544c432055417005cee3e19f8`. All 144 frozen inventory entries, 148 attempt files, 154 preserved return files and fourteen lifecycle phases verified exactly. Pre-authority purity, clean-host admission, both runtime observations, reset/repair, post-reset managed LocalState initialization and final zero residue passed.
+
+Canonical evidence is frozen under `docs/sprints/evidence/sprint-30-5/stage-3-r13/`. All historical evidence remains unchanged. Stage 4 is not started and not authorised; the next Founder-level mission is a separate Stage 4 programme-state and qualification-impact assessment against the accepted R8/R13 baseline.

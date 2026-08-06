@@ -1,0 +1,14 @@
+{
+    "executable":  "C:\\OracleQualification\\Stage3R13\\Transfers\\transfer-stage3-r13-20260806T161016133Z-f50852f5\\payload\\Oracle.WindowObserver.exe",
+    "arguments":  [
+                      "observe",
+                      "918772"
+                  ],
+    "startedAtUtc":  "2026-08-06T16:25:39.1472227Z",
+    "completedAtUtc":  "2026-08-06T16:25:39.2466296Z",
+    "stdout":  "{\"handle\":\"918772\",\"exists\":true,\"visible\":true,\"minimized\":false,\"bounds\":{\"x\":168,\"y\":8,\"width\":1200,\"height\":800}}",
+    "stderr":  "",
+    "exitCode":  0,
+    "signal":  null,
+    "processError":  null
+}

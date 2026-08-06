@@ -1,0 +1,261 @@
+{
+    "programmeIdentity":  "Sprint 30.5 Stage 3 Requalification R13",
+    "revision":  "R13",
+    "result":  "passed",
+    "classification":  [
+                           "NON-QUALIFICATION",
+                           "NON-AUTHORITY",
+                           "NON-EVIDENCE",
+                           "READ-ONLY PRE-AUTHORITY PREFLIGHT"
+                       ],
+    "observedAtUtc":  "2026-08-06T16:22:53.3230676Z",
+    "powershell":  {
+                       "edition":  "Desktop",
+                       "version":  "5.1.26100.8894",
+                       "is64BitProcess":  true,
+                       "elevated":  true
+                   },
+    "host":  {
+                 "deviceName":  "FOUNDER-QA-01",
+                 "manufacturer":  "MEDION",
+                 "model":  "ERAZER P6605 MD61596"
+             },
+    "security":  {
+                     "secureBoot":  true,
+                     "tpmPresent":  true,
+                     "tpmReady":  true,
+                     "defenderAntivirusEnabled":  true,
+                     "defenderRealTimeProtectionEnabled":  true,
+                     "activatedProductCount":  1
+                 },
+    "commandSurface":  [
+                           {
+                               "name":  "Add-AppxPackage",
+                               "commandType":  "Cmdlet",
+                               "module":  "Appx",
+                               "requiredParameters":  [
+                                                          "Path",
+                                                          "ErrorAction"
+                                                      ]
+                           },
+                           {
+                               "name":  "Get-AppxPackage",
+                               "commandType":  "Cmdlet",
+                               "module":  "Appx",
+                               "requiredParameters":  [
+                                                          "Name",
+                                                          "ErrorAction"
+                                                      ]
+                           },
+                           {
+                               "name":  "Remove-AppxPackage",
+                               "commandType":  "Cmdlet",
+                               "module":  "Appx",
+                               "requiredParameters":  [
+                                                          "Package",
+                                                          "Confirm"
+                                                      ]
+                           },
+                           {
+                               "name":  "Reset-AppxPackage",
+                               "commandType":  "Cmdlet",
+                               "module":  "Appx",
+                               "requiredParameters":  [
+                                                          "Package"
+                                                      ]
+                           },
+                           {
+                               "name":  "Get-AuthenticodeSignature",
+                               "commandType":  "Cmdlet",
+                               "module":  "Microsoft.PowerShell.Security",
+                               "requiredParameters":  [
+                                                          "LiteralPath"
+                                                      ]
+                           },
+                           {
+                               "name":  "Get-CimInstance",
+                               "commandType":  "Cmdlet",
+                               "module":  "CimCmdlets",
+                               "requiredParameters":  [
+                                                          "ClassName",
+                                                          "Filter"
+                                                      ]
+                           },
+                           {
+                               "name":  "Get-NetTCPConnection",
+                               "commandType":  "Function",
+                               "module":  "NetTCPIP",
+                               "requiredParameters":  [
+                                                          "OwningProcess"
+                                                      ]
+                           },
+                           {
+                               "name":  "Confirm-SecureBootUEFI",
+                               "commandType":  "Cmdlet",
+                               "module":  "SecureBoot",
+                               "requiredParameters":  [
+
+                                                      ]
+                           },
+                           {
+                               "name":  "Get-Tpm",
+                               "commandType":  "Cmdlet",
+                               "module":  "TrustedPlatformModule",
+                               "requiredParameters":  [
+
+                                                      ]
+                           },
+                           {
+                               "name":  "Get-MpComputerStatus",
+                               "commandType":  "Function",
+                               "module":  "ConfigDefender",
+                               "requiredParameters":  [
+
+                                                      ]
+                           },
+                           {
+                               "name":  "Compress-Archive",
+                               "commandType":  "Function",
+                               "module":  "Microsoft.PowerShell.Archive",
+                               "requiredParameters":  [
+                                                          "LiteralPath",
+                                                          "DestinationPath"
+                                                      ]
+                           }
+                       ],
+    "windowsExecutables":  {
+                               "certutil":  "C:\\WINDOWS\\system32\\certutil.exe",
+                               "reagentc":  "C:\\WINDOWS\\system32\\reagentc.exe"
+                           },
+    "applicationActivation":  {
+                                  "api":  "IApplicationActivationManager",
+                                  "classId":  "45BA127D-10A8-46EA-8AB7-56EA9078943C",
+                                  "interfaceId":  "2E941141-7F97-4756-BA1D-9DECDE894A3D",
+                                  "classContext":  "CLSCTX_LOCAL_SERVER",
+                                  "startedAtUtc":  "2026-08-06T16:22:44.8971413Z",
+                                  "completedAtUtc":  "2026-08-06T16:22:45.0711795Z",
+                                  "hresult":  "0x00000000",
+                                  "error":  null,
+                                  "available":  true
+                              },
+    "developmentTools":  [
+                             {
+                                 "name":  "git",
+                                 "available":  false
+                             },
+                             {
+                                 "name":  "node",
+                                 "available":  false
+                             },
+                             {
+                                 "name":  "npm",
+                                 "available":  false
+                             },
+                             {
+                                 "name":  "supabase",
+                                 "available":  false
+                             },
+                             {
+                                 "name":  "docker",
+                                 "available":  false
+                             },
+                             {
+                                 "name":  "python",
+                                 "available":  false
+                             },
+                             {
+                                 "name":  "dotnet",
+                                 "available":  false
+                             },
+                             {
+                                 "name":  "msbuild",
+                                 "available":  false
+                             }
+                         ],
+    "repositoryPaths":  [
+                            {
+                                "path":  "C:\\Dev\\project-meta",
+                                "present":  false
+                            }
+                        ],
+    "repositoryPresent":  false,
+    "recovery":  {
+                     "executable":  "C:\\WINDOWS\\system32\\reagentc.exe",
+                     "arguments":  [
+                                       "/info"
+                                   ],
+                     "startedAtUtc":  "2026-08-06T16:22:45.0995202Z",
+                     "completedAtUtc":  "2026-08-06T16:22:45.2200833Z",
+                     "stdout":  "Windows Recovery Environment (Windows RE) and system reset configuration\r\nInformation:\r\n\r\n    Windows RE status:         Enabled\r\n    Windows RE location:       \\\\?\\GLOBALROOT\\device\\harddisk0\\partition4\\Recovery\\WindowsRE\r\n    Boot Configuration Data (BCD) identifier: dfa9a6d0-8927-11f1-805a-f6f12e6c9d80\r\n    Recovery image location:   \r\n    Recovery image index:      0\r\n    Custom image location:     \r\n    Custom image index:        0\r\n    Windows RE Version:        10.0.26100.8875\r\n\r\nREAGENTC.EXE: Operation Successful.\r\n    \r\n",
+                     "stderr":  "",
+                     "exitCode":  0,
+                     "signal":  null,
+                     "processError":  null
+                 },
+    "registryViews":  [
+                          "machine-64",
+                          "machine-32",
+                          "current-user"
+                      ],
+    "installedSoftware":  [
+                              {
+                                  "DisplayName":  "Copilot",
+                                  "DisplayVersion":  "150.0.4078.96",
+                                  "Publisher":  "Microsoft Corporation"
+                              },
+                              {
+                                  "DisplayName":  "Microsoft Edge",
+                                  "DisplayVersion":  "151.0.4129.59",
+                                  "Publisher":  "Microsoft Corporation"
+                              },
+                              {
+                                  "DisplayName":  "Microsoft Edge WebView2 Runtime",
+                                  "DisplayVersion":  "151.0.4129.59",
+                                  "Publisher":  "Microsoft Corporation"
+                              },
+                              {
+                                  "DisplayName":  "NVIDIA Graphics Driver 582.66",
+                                  "DisplayVersion":  "582.66",
+                                  "Publisher":  "NVIDIA Corporation"
+                              },
+                              {
+                                  "DisplayName":  "NVIDIA HD Audio Driver 1.4.5.7",
+                                  "DisplayVersion":  "1.4.5.7",
+                                  "Publisher":  "NVIDIA Corporation"
+                              },
+                              {
+                                  "DisplayName":  "NVIDIA Install Application",
+                                  "DisplayVersion":  "2.1002.438.0",
+                                  "Publisher":  "NVIDIA Corporation"
+                              },
+                              {
+                                  "DisplayName":  "NVIDIA PhysX System Software 9.23.1019",
+                                  "DisplayVersion":  "9.23.1019",
+                                  "Publisher":  "NVIDIA Corporation"
+                              }
+                          ],
+    "installedSoftwareCount":  7,
+    "runtimeConfiguration":  {
+                                 "contract":  "oracle.installed-runtime-configuration",
+                                 "ambientVariableMatches":  0,
+                                 "providerOrigin":  "http://127.0.0.1:54321",
+                                 "maximumLifetimeSeconds":  900,
+                                 "authorityCreated":  false,
+                                 "hostMutation":  false
+                             },
+    "packageCount":  0,
+    "certificateMatchCount":  0,
+    "platformProbe":  {
+                          "untrustedAuthenticodeStatus":  "UnknownError",
+                          "signerThumbprint":  "A01F08EB5A07308FEAB3812692516C667D50EA56",
+                          "signerSubject":  "CN=Oracle Stage 2 Requalification R8 Local Test Signing - NOT PRODUCTION",
+                          "tcpConnectionCount":  34
+                      },
+    "continuitySha256":  "f90afb2ddb89253fd27fe80bbea42d632847a9d81502a4b93e4ab9aa5df16cde",
+    "continuityRecordedAtUtc":  "2026-08-06T16:22:42.0454328Z",
+    "transferRoot":  "C:\\OracleQualification\\Stage3R13\\Transfers\\transfer-stage3-r13-20260806T161016133Z-f50852f5",
+    "evidenceReturnRoot":  "F:\\return-stage3-r13-f50852f5",
+    "authorityCreated":  false,
+    "attemptCreated":  false,
+    "hostMutation":  false
+}

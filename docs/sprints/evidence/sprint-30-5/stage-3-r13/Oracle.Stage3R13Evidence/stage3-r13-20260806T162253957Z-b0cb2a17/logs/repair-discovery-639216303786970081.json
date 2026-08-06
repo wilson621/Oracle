@@ -1,0 +1,13 @@
+{
+    "executable":  "C:\\OracleQualification\\Stage3R13\\Transfers\\transfer-stage3-r13-20260806T161016133Z-f50852f5\\payload\\Oracle.WindowDiscovery.exe",
+    "arguments":  [
+
+                  ],
+    "startedAtUtc":  "2026-08-06T16:26:18.6977585Z",
+    "completedAtUtc":  "2026-08-06T16:26:18.8661221Z",
+    "stdout":  "[{\"handle\":\"1507466\",\"title\":\"Administrator: Windows PowerShell\",\"processId\":3264,\"processName\":\"powershell\",\"visible\":true,\"minimized\":false,\"x\":154,\"y\":154,\"width\":895,\"height\":518},{\"handle\":\"131244\",\"title\":\"ChatGPT\",\"processId\":10940,\"processName\":\"ChatGPT\",\"visible\":true,\"minimized\":false,\"x\":768,\"y\":0,\"width\":768,\"height\":816},{\"handle\":\"655414\",\"title\":\"Network Connections\",\"processId\":14200,\"processName\":\"explorer\",\"visible\":true,\"minimized\":false,\"x\":427,\"y\":226,\"width\":1139,\"height\":600},{\"handle\":\"262188\",\"title\":\"Program Manager\",\"processId\":16040,\"processName\":\"explorer\",\"visible\":true,\"minimized\":false,\"x\":0,\"y\":0,\"width\":1536,\"height\":864},{\"handle\":\"394030\",\"title\":\"Project-Meta - Project File Sharing Options - Profile 1 - Microsoft\\u200B Edge\",\"processId\":15088,\"processName\":\"msedge\",\"visible\":true,\"minimized\":false,\"x\":-6,\"y\":0,\"width\":784,\"height\":824}]",
+    "stderr":  "{\"contract\":\"oracle.window-discovery-diagnostic\",\"contractVersion\":1,\"classification\":\"completed-with-records\",\"message\":\"EnumWindows completed with eligible records.\",\"enumWindowsReturned\":true,\"win32Error\":null,\"callbackInvoked\":true,\"topLevelWindowsVisited\":136,\"eligibleRecordsProduced\":5,\"callbackTerminationRequested\":false,\"callbackException\":null,\"executionContext\":{\"operatingSystem\":\"Microsoft Windows 10.0.26200\",\"processId\":16136,\"sessionId\":6,\"userInteractive\":true,\"is64BitProcess\":true,\"windowStation\":\"WinSta0\",\"threadDesktop\":\"Default\",\"inputDesktop\":\"Default\",\"compatible\":true,\"incompatibilityReason\":null}}",
+    "exitCode":  0,
+    "signal":  null,
+    "processError":  null
+}

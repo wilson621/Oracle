@@ -621,7 +621,7 @@ to adopt a later formatting standard.
 | --- | --- | --- |
 | Stage 3 R8-baseline qualification-impact assessment | [Sprint 30.5 Stage 3 R8-Baseline Qualification-Impact Assessment](sprints/SPRINT_30_5_STAGE_3_R8_BASELINE_QUALIFICATION_IMPACT_ASSESSMENT.md) | Exact package-binding decision, reusable R12 protocol boundary, downstream impact and recommended R13 preparation mission |
 
-## Stage 3 Requalification R13 engineering preparation
+## Stage 3 Requalification R13
 
 | Document | Link | Purpose |
 | --- | --- | --- |
@@ -631,3 +631,5 @@ to adopt a later formatting standard.
 | R13 pre-execution gate | [Sprint 30.5 Stage 3 R13 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_3_R13_PRE_EXECUTION_GATE.md) | Zero current transfer, authority and attempt state |
 | R13 engineering closure | [Sprint 30.5 Stage 3 R13 Engineering Closure](sprints/SPRINT_30_5_STAGE_3_R13_ENGINEERING_CLOSURE.md) | Qualification-ready baseline and recommended next mission |
 | R13 execution mission | [Sprint 30.5 Stage 3 R13 Execution Mission](sprints/SPRINT_30_5_STAGE_3_R13_EXECUTION_MISSION.md) | Exact Founder grant, single transfer/authority/attempt limits and clean-host pre-authority boundary |
+| R13 accepted evidence index | [Stage 3 R13 Accepted Evidence Index](sprints/evidence/sprint-30-5/stage-3-r13/Oracle.Stage3R13AcceptedEvidenceIndex.json) | Immutable transfer, authority, attempt, archive, lifecycle and preservation bindings |
+| R13 qualification closure | [Sprint 30.5 Stage 3 R13 Qualification Closure](sprints/SPRINT_30_5_STAGE_3_R13_QUALIFICATION_CLOSURE.md) | Founder acceptance, independent verification and formal R8-bound Stage 3 closure |

@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-3-r13-accepted-evidence-index",
+  "programmeIdentity": "Sprint 30.5 Stage 3 Requalification R13",
+  "status": "founder-accepted-independently-verified-formally-closed",
+  "verifiedAtUtc": "2026-08-06T16:32:27.3622475Z",
+  "founderGrantId": "founder-stage3-r13-grant-20260806T162253957Z-b0cb2a17",
+  "authorityId": "authority-stage3-r13-20260806T162253957Z-b0cb2a17",
+  "attemptId": "stage3-r13-20260806T162253957Z-b0cb2a17",
+  "executionBaseline": {
+    "commit": "e1dd2a77ab2f3fc6269d5a404e0f16fe52f1a6e3",
+    "tree": "c0da1d823c641b43e7784aeff92daca09222bd7d"
+  },
+  "transfer": {
+    "id": "transfer-stage3-r13-20260806T161016133Z-f50852f5",
+    "manifestSha256": "d803bc3ac2d48d834200aaa9072a4acc3f07964ac53cb42af607b6595ab272e3",
+    "custodySha256": "2d0cbf11288b5bdda7e670c63626f7135bcf8bd10269c97091ebe255d068c5fb",
+    "sourceVerificationSha256": "d0d8c80ac8cacd15269689bdafc1c6463e32ff26fc659bee215927ebc562268f"
+  },
+  "stage2": {
+    "revision": "R8",
+    "attemptId": "stage2-r8-20260806T134157536Z-a0bf3986",
+    "candidateCommit": "4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d",
+    "candidateTree": "1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a",
+    "msixSha256": "97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490"
+  },
+  "repositoryEvidenceRoot": "Oracle.Stage3R13Evidence",
+  "preservedRoot": {
+    "fileCount": 154,
+    "bytes": 379987,
+    "attemptFileCount": 148,
+    "attemptBytes": 260629
+  },
+  "archive": {
+    "path": "Oracle.Stage3R13Evidence/stage3-r13-20260806T162253957Z-b0cb2a17.zip",
+    "size": 103242,
+    "sha256": "4e7fb5b75b036e7edf78438117950f4be78c74ad26bc0d102e77dc6658da3c7a",
+    "entryCount": 148
+  },
+  "finalEvidenceManifest": {
+    "path": "Oracle.Stage3R13Evidence/stage3-r13-20260806T162253957Z-b0cb2a17/evidence/evidence-manifest.json",
+    "size": 38301,
+    "sha256": "ee12f0307d5c55dc05027c50dcba4860923ff36544c432055417005cee3e19f8",
+    "inventoryCount": 144
+  },
+  "keyBindings": {
+    "authoritySha256": "20115cda0c02ab448a72c6b01f0ca0a9325df55e6a596b934b314f3991657639",
+    "continuitySha256": "f90afb2ddb89253fd27fe80bbea42d632847a9d81502a4b93e4ab9aa5df16cde",
+    "preflightSha256": "d8a31790108347eff5ad71186bc6c3d0f9f9dd046138c4494b213832d4594043",
+    "missionResultSha256": "6afc5411de9ff15f85b8b57b1a46cc1745ec7c44cef32cde3a01540d251ed977",
+    "archiveManifestSha256": "fb769a69388b96b705486f13dbc42ec72e0c24da21c6baa284407ffbd9b0a0a8",
+    "completionSha256": "0b2cb0e0c0596a12b6f1368e9336d7ee21c7a1fdbb73ad0e0158cc105854fe12",
+    "runtimeObservationSha256": "81514dda4b62bcc88e9059034910a45018aa95572c12677600ef59b52298f25e",
+    "repairObservationSha256": "4383d00a76a72b2e23a2b8c82d2a26887a06de44d3dbf771f5668f2a80c1b771",
+    "postResetInitializationSha256": "f11efaeeb087e4b0e914fd546c1b464712f4e6bc9df3af45173e58a561792d18",
+    "cleanupSha256": "baddd93e711ee11d90625706ab30b80b7ff4a142bdecb193b8a93350d8414992",
+    "finalLifecycleSha256": "421e662dc0791ec1bd2937b819417c342213f69469af22405aa613648711913a"
+  },
+  "observations": {
+    "initialActivationHresult": "0x00000000",
+    "initialActivationProcessId": 7840,
+    "initialSamples": 55,
+    "initialMeasuredSeconds": 60.9553497,
+    "repairActivationHresult": "0x00000000",
+    "repairActivationProcessId": 14100,
+    "repairSamples": 55,
+    "repairMeasuredSeconds": 60.8206095,
+    "networkConnections": 0,
+    "packageFamilyOwnership": "passed"
+  },
+  "verification": {
+    "archiveManifestAndSidecars": "passed",
+    "archiveInventoryAndHashes": "passed-144-of-144",
+    "expandedArchiveParity": "passed-148-of-148",
+    "usbToRepositoryParity": "passed-154-of-154",
+    "authorityAndIdentityContinuity": "passed",
+    "preAuthorityPurity": "passed",
+    "fourteenPhaseLifecycle": "passed",
+    "completion": "passed",
+    "finalResidue": "zero",
+    "stage4Started": false
+  },
+  "immutability": {
+    "historicalEvidenceModified": false,
+    "historicalTransfersModified": false,
+    "failedAttemptsModified": false,
+    "returnedEvidenceModified": false
+  }
+}

@@ -1,0 +1,12 @@
+{
+    "contract":  "oracle.sprint-30-5.stage-3-r13-archive-manifest",
+    "programmeIdentity":  "Sprint 30.5 Stage 3 Requalification R13",
+    "revision":  "R13",
+    "founderGrantId":  "founder-stage3-r13-grant-20260806T162253957Z-b0cb2a17",
+    "authorityId":  "authority-stage3-r13-20260806T162253957Z-b0cb2a17",
+    "attemptId":  "stage3-r13-20260806T162253957Z-b0cb2a17",
+    "archive":  "stage3-r13-20260806T162253957Z-b0cb2a17.zip",
+    "size":  103242,
+    "sha256":  "4e7fb5b75b036e7edf78438117950f4be78c74ad26bc0d102e77dc6658da3c7a",
+    "evidenceManifestSha256":  "ee12f0307d5c55dc05027c50dcba4860923ff36544c432055417005cee3e19f8"
+}

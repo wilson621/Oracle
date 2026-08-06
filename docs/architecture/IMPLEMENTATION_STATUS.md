@@ -1313,3 +1313,11 @@ No transfer, authority, attempt or qualification evidence was created. Stage 3 r
 Mission mission-stage3-r13-20260806T160537355Z-aed09e3b authorises exactly one fresh create-only R13 transfer, one authority and one attempt against accepted R8. Authority and attempt creation remain barred until independent transfer verification, clean-host admission, fresh continuity and every elevated pre-authority gate pass.
 
 No retry is authorised after a consumed authority or permanent failed attempt. Stage 4 and later work remain unauthorised.
+
+## Stage 3 R13 Founder-accepted and formally closed - 6 August 2026
+
+The Founder accepted Stage 3 Requalification R13 as the current Stage 3 baseline for the accepted R8 package. Independent source-workstation verification passed for attempt `stage3-r13-20260806T162253957Z-b0cb2a17`; its sole authority `authority-stage3-r13-20260806T162253957Z-b0cb2a17` is consumed and no retry is authorised.
+
+The returned archive SHA-256 is `4e7fb5b75b036e7edf78438117950f4be78c74ad26bc0d102e77dc6658da3c7a`; final evidence-manifest SHA-256 is `ee12f0307d5c55dc05027c50dcba4860923ff36544c432055417005cee3e19f8`. All 144 frozen inventory entries, 148 attempt files, 154 preserved return files and fourteen lifecycle phases verified exactly. Pre-authority purity, clean-host admission, both runtime observations, reset/repair, post-reset managed LocalState initialization and final zero residue passed.
+
+Canonical evidence is frozen under `docs/sprints/evidence/sprint-30-5/stage-3-r13/`. All historical evidence remains unchanged. Stage 4 is not started and not authorised; the next Founder-level mission is a separate Stage 4 programme-state and qualification-impact assessment against the accepted R8/R13 baseline.

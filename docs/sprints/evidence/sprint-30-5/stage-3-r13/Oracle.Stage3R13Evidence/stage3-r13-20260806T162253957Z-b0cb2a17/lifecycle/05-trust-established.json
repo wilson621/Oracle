@@ -1,0 +1,19 @@
+{
+    "contract":  "oracle.sprint-30-5.stage-3-r13-lifecycle",
+    "programmeIdentity":  "Sprint 30.5 Stage 3 Requalification R13",
+    "revision":  "R13",
+    "founderGrantId":  "founder-stage3-r13-grant-20260806T162253957Z-b0cb2a17",
+    "authorityId":  "authority-stage3-r13-20260806T162253957Z-b0cb2a17",
+    "attemptId":  "stage3-r13-20260806T162253957Z-b0cb2a17",
+    "phase":  "trust-established",
+    "recordedAtUtc":  "2026-08-06T16:23:25.9574964Z",
+    "details":  {
+                    "thumbprint":  "A01F08EB5A07308FEAB3812692516C667D50EA56",
+                    "physicalStore":  "LocalMachine\\TrustedPeople",
+                    "physicalMatchCount":  1,
+                    "logicalViews":  [
+                                         "CurrentUser\\TrustedPeople",
+                                         "LocalMachine\\TrustedPeople"
+                                     ]
+                }
+}
