@@ -1,0 +1,41 @@
+[CmdletBinding()]
+param(
+  [Parameter(Mandatory=$true)][string]$TransferRoot,
+  [Parameter(Mandatory=$true)][string]$ExpectedManifestSha256,
+  [Parameter(Mandatory=$true)][string]$ExpectedCustodySha256,
+  [Parameter(Mandatory=$true)][string]$ExpectedVerificationSha256,
+  [Parameter(Mandatory=$true)][string]$RehearsalRoot
+)
+Set-StrictMode -Version Latest
+$ErrorActionPreference='Stop'
+. (Join-Path $PSScriptRoot 'Oracle.Stage4R5CleanHostCore.ps1')
+. (Join-Path $PSScriptRoot 'Oracle.Stage4R5JourneyPolicy.ps1')
+. (Join-Path $PSScriptRoot 'Oracle.Stage4R5ProviderHostPolicy.ps1')
+$contract=Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'Oracle.Stage4R5ExecutionContract.json')|ConvertFrom-Json
+$transfer=Assert-OracleStage4R5Transfer $TransferRoot $ExpectedManifestSha256 $ExpectedCustodySha256 $ExpectedVerificationSha256
+$root=[IO.Path]::GetFullPath($RehearsalRoot);$requestPath=Join-Path $root 'provider-start-request.json';$admissionPath=Join-Path $root 'provider-admission.json';$handoffPath=Join-Path $root 'provider-secret-handoff.json'
+foreach($path in @($requestPath,$admissionPath,$handoffPath)){if(-not(Test-Path -LiteralPath $path -PathType Leaf)){throw "Two-host rehearsal input is absent: $path"}}
+$request=Get-Content -Raw -LiteralPath $requestPath|ConvertFrom-Json;if([string]$request.contract-cne'oracle.sprint-30-5.stage-4-r5-provider-rehearsal-request'-or[string]$request.transferId-cne[string]$transfer.transferId-or[bool]$request.authorityCreated-or[bool]$request.attemptCreated){throw 'Two-host rehearsal request differs.'}
+$host=Get-OracleStage4R5CleanHostAdmission $contract;$admission=Get-Content -Raw -LiteralPath $admissionPath|ConvertFrom-Json;[void](Assert-OracleStage4R5ProviderAdmission $admission $contract);if([string]$admission.providerIdentity-cne[string]$request.providerIdentity-or[string]$admission.transferId-cne[string]$transfer.transferId){throw 'Rehearsal provider admission differs.'}
+$handoff=Get-Content -Raw -LiteralPath $handoffPath|ConvertFrom-Json;[void](Assert-OracleStage4R5SecretHandoffShape $handoff ([string]$request.providerIdentity));if($handoff.PSObject.Properties.Name-cnotcontains'webSessionSecret'){throw 'Rehearsal Web-session secret is absent.'}
+$rehearsalParent=[IO.Path]::GetFullPath([string]$contract.paths.qualificationRehearsalRoot);if(-not(Test-Path -LiteralPath $rehearsalParent -PathType Container)){[IO.Directory]::CreateDirectory($rehearsalParent)|Out-Null};$localRoot=Join-Path $rehearsalParent ([string]$request.rehearsalId);if(Test-Path -LiteralPath $localRoot){throw 'Create-only local two-host rehearsal root exists.'};[IO.Directory]::CreateDirectory($localRoot)|Out-Null;foreach($name in @('evidence','logs')){[IO.Directory]::CreateDirectory((Join-Path $localRoot $name))|Out-Null}
+$journeyPath=Join-Path $localRoot 'evidence\live-journey.json';$primary=$null;$cleanup=[Collections.Generic.List[string]]::new();$relayCreated=$false
+try{
+  $netsh=Join-Path $env:SystemRoot 'System32\netsh.exe';foreach($relay in @($contract.network.qualificationRelays)){&$netsh interface portproxy add v4tov4 "listenaddress=$([string]$relay.listenAddress)" "listenport=$([int]$relay.listenPort)" "connectaddress=$([string]$relay.connectAddress)" "connectport=$([int]$relay.connectPort)";if($LASTEXITCODE-ne0){throw "Rehearsal relay creation failed: $($relay.listenPort)"}};$relayCreated=$true
+  $env:ORACLE_STAGE4_INSTALLED_DEVELOPMENT_REHEARSAL='1';$env:ORACLE_STAGE4_EXECUTION_MODE='development-rehearsal';$env:ORACLE_STAGE4_R5_REHEARSAL_IDENTITY=[string]$request.rehearsalId;$env:ORACLE_STAGE4_ATTEMPT_ROOT=$localRoot;$env:ORACLE_STAGE4_JOURNEY_OUTPUT=$journeyPath;$env:ORACLE_STAGE4_TRANSFER_ROOT=[IO.Path]::GetFullPath($TransferRoot);$env:ORACLE_STAGE4_PROVIDER_URL='http://127.0.0.1:54321';$env:ORACLE_STAGE4_MAILPIT_URL='http://127.0.0.1:54324';$env:ORACLE_STAGE4_ANON_KEY=[string]$handoff.anonymousKey;$env:SUPABASE_SECRET_KEY=[string]$handoff.serviceKey;$env:ORACLE_WEB_SESSION_SECRET=[string]$handoff.webSessionSecret
+  $api=Invoke-WebRequest -Uri 'http://127.0.0.1:54321/auth/v1/health' -UseBasicParsing -TimeoutSec 10 -ErrorAction Stop;if([int]$api.StatusCode-ne200){throw 'Rehearsal provider health failed.'}
+  & (Join-Path $PSScriptRoot 'Invoke-OracleStage4R5InstalledPackageJourney.ps1');if($LASTEXITCODE-ne0){throw "Rehearsal installed controller exited $LASTEXITCODE."}
+  $installedPath=Join-Path $localRoot 'logs\installed-package-result.json';$installed=Get-Content -Raw -LiteralPath $installedPath|ConvertFrom-Json;if([string]$installed.result-cne'passed'-or-not[bool]$installed.zeroResidue){throw 'Two-host installed rehearsal did not pass with zero residue.'}
+  $journey=Get-Content -Raw -LiteralPath $journeyPath|ConvertFrom-Json;[void](Assert-OracleStage4R5JourneyRecord $journey -DevelopmentRehearsal)
+  Write-OracleStage4R5CreateOnlyJson (Join-Path $localRoot 'completion.json') ([ordered]@{result='passed-awaiting-provider-teardown';classification=@('NON-QUALIFICATION','NON-AUTHORITY','NON-EVIDENCE','TWO-HOST DEVELOPMENT REHEARSAL');transferId=[string]$transfer.transferId;rehearsalId=[string]$request.rehearsalId;providerIdentity=[string]$request.providerIdentity;journeySha256=Get-OracleStage4R5Sha256 $journeyPath;installedResultSha256=Get-OracleStage4R5Sha256 $installedPath;packageResidue=0;trustResidue=0;authorityCreated=$false;attemptCreated=$false;completedAtUtc=[DateTime]::UtcNow.ToString('o')})
+}catch{$primary=$_}
+finally{
+  foreach($name in @('ORACLE_STAGE4_INSTALLED_DEVELOPMENT_REHEARSAL','ORACLE_STAGE4_EXECUTION_MODE','ORACLE_STAGE4_R5_REHEARSAL_IDENTITY','ORACLE_STAGE4_ATTEMPT_ROOT','ORACLE_STAGE4_JOURNEY_OUTPUT','ORACLE_STAGE4_TRANSFER_ROOT','ORACLE_STAGE4_PROVIDER_URL','ORACLE_STAGE4_MAILPIT_URL','ORACLE_STAGE4_ANON_KEY','SUPABASE_SECRET_KEY','ORACLE_WEB_SESSION_SECRET','ORACLE_STAGE4_WEB_ORIGIN')){[Environment]::SetEnvironmentVariable($name,$null,'Process')}
+  if($relayCreated){foreach($relay in @($contract.network.qualificationRelays)){try{&(Join-Path $env:SystemRoot 'System32\netsh.exe') interface portproxy delete v4tov4 "listenaddress=$([string]$relay.listenAddress)" "listenport=$([int]$relay.listenPort)"|Out-Null;if($LASTEXITCODE-ne0){throw "netsh exited $LASTEXITCODE"}}catch{$cleanup.Add($_.Exception.Message)}}}
+  try{if(Test-Path -LiteralPath $handoffPath){Remove-Item -LiteralPath $handoffPath -Force};if(Test-Path -LiteralPath $handoffPath){throw 'Rehearsal secret handoff residue remains.'}}catch{$cleanup.Add($_.Exception.Message)}
+}
+if($null-ne$primary-or$cleanup.Count-ne0){$message=if($null-ne$primary){$primary.Exception.Message}else{'Rehearsal cleanup failed.'};Write-OracleStage4R5CreateOnlyJson (Join-Path $localRoot 'failure.json') ([ordered]@{result='failed';primaryFailure=$message;cleanupFailures=@($cleanup);authorityCreated=$false;attemptCreated=$false;recordedAtUtc=[DateTime]::UtcNow.ToString('o')})}
+$returned=Join-Path $root 'qualification-host-rehearsal';[void](Copy-OracleStage4R5DirectoryCreateOnly $localRoot $returned);$files=@(Get-OracleStage4R5Inventory $returned);Write-OracleStage4R5CreateOnlyJson (Join-Path $root 'qualification-host-rehearsal-manifest.json') ([ordered]@{result=if($null-eq$primary-and$cleanup.Count-eq0){'passed-awaiting-provider-teardown'}else{'failed-awaiting-provider-teardown'};rehearsalId=[string]$request.rehearsalId;files=$files;authorityCreated=$false;attemptCreated=$false;recordedAtUtc=[DateTime]::UtcNow.ToString('o')})
+$terminalResult=if($null-eq$primary-and$cleanup.Count-eq0){'passed-awaiting-provider-teardown'}else{'failed-awaiting-provider-teardown'};Write-OracleStage4R5CreateOnlyJson (Join-Path $root 'qualification-terminal.json') ([ordered]@{result=$terminalResult;rehearsalId=[string]$request.rehearsalId;authorityCreated=$false;attemptCreated=$false;recordedAtUtc=[DateTime]::UtcNow.ToString('o')})
+if($terminalResult-cne'passed-awaiting-provider-teardown'){throw 'Two-host rehearsal failed; preserved diagnostics require engineering review.'}
+[pscustomobject][ordered]@{result='passed-awaiting-provider-teardown';rehearsalId=[string]$request.rehearsalId;providerIdentity=[string]$request.providerIdentity;authorityCreated=$false;attemptCreated=$false}|ConvertTo-Json -Depth 6

@@ -2612,3 +2612,7 @@ passed. No provider, relay, transfer, authority, attempt or qualification state
 was created. The next Founder decision is whether to authorise a separate
 execution-enabled R5 mission, beginning with fresh tool binding and two-host
 rehearsal while authority remains barred.
+
+## Stage 4 R5 execution-enabled mission - 6 August 2026
+
+The accepted R5 preparation is now implemented as a split-host execution overlay bound to R8/R13. The main PC provides the disposable backend; Founder-QA-01 remains the clean qualification host. One create-only transfer is permitted. One two-host rehearsal, zero-residue teardown and a fresh hash-bound post-rehearsal gate are mandatory before the single authority can be created and consumed.

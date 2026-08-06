@@ -1193,3 +1193,7 @@ Stage 4 remains incomplete and Stage 5 remains blocked. Next action requires a
 separate Founder-authorised execution-enabled R5 mission for fresh tool binding,
 two-host rehearsal and later transfer preparation; qualification authority
 remains barred.
+
+## Stage 4 R5 execution-enabled mission authorised - 6 August 2026
+
+The single governed R5 mission is in execution-enabled preparation. Exactly one fresh immutable transfer is permitted. A mandatory two-host, non-authority rehearsal and complete teardown must pass before the fresh provider pre-authority record and any authority may exist. Stage 5 remains barred.

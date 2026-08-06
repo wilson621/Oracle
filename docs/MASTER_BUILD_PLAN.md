@@ -1109,3 +1109,7 @@ unqualified and Stage 5 remains blocked. A separate Founder-authorised
 execution-enabled R5 mission must bind current provider-host tools, rehearse the
 exact two-host cell and prepare any future transfer before authority can be
 considered.
+
+## Stage 4 R5 execution-enabled gate - 6 August 2026
+
+Proceed through one immutable transfer, isolated two-host rehearsal, bilateral zero-residue verification, fresh post-rehearsal pre-authority admission and only then one governed R5 attempt. No retry is permitted after authority consumption or permanent failure. Stage 5 remains unauthorised.

@@ -1345,3 +1345,7 @@ Provider and relay execution are deliberately barred. The next implementation
 step requires separate authority to bind the live provider-host toolchain and
 validate the actual isolated two-host link. Stage 4 and Stage 5 remain
 unqualified.
+
+## Stage 4 R5 execution overlay prepared - 6 August 2026
+
+The execution overlay preserves the clean-host split: provider-only main PC and qualification-only Founder-QA-01. It packages the exact R8 candidate and R13 lifecycle, implements the ten clean-host journeys, isolated two-port link, race-tolerant provider teardown, one mandatory two-host rehearsal, hash-bound post-rehearsal pre-authority admission and single-attempt evidence closure. Static and adversarial validation passes with no governed state created.

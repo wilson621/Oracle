@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-4-r5-execution-enabled",
+  "programme": "Sprint 30.5 Stage 4 live authentication and protected rendering",
+  "revision": "R5",
+  "status": "founder-authorised-execution-enabled",
+  "executionSurface": "accepted-r8-installed-msix",
+  "requiredBranch": "sprint-9-overlay",
+  "executionAuthority": {
+    "founderAuthorisedQualificationExecution": true,
+    "transferCreationPermitted": true,
+    "twoHostDevelopmentRehearsalPermitted": true,
+    "maximumTwoHostRehearsals": 1,
+    "authorityCreationPermittedAfterAllPreAuthorityGates": true,
+    "qualificationAttemptPermitted": true,
+    "maximumTransfers": 1,
+    "maximumAuthorities": 1,
+    "maximumAttempts": 1,
+    "retryAfterConsumedAuthorityPermitted": false,
+    "requiredFounderToken": "FOUNDER-AUTHORISED-STAGE4-R5-EXECUTION"
+  },
+  "identity": {
+    "transferPattern": "^transfer-stage4-r5-[0-9]{8}T[0-9]{9}Z-[a-f0-9]{8}$",
+    "founderGrantPattern": "^founder-stage4-r5-grant-[0-9]{8}T[0-9]{9}Z-[a-f0-9]{8}$",
+    "authorityPattern": "^authority-stage4-r5-[0-9]{8}T[0-9]{9}Z-[a-f0-9]{8}$",
+    "attemptPattern": "^stage4-r5-[0-9]{8}T[0-9]{9}Z-[a-f0-9]{8}$",
+    "providerPattern": "^provider-stage4-r5-[0-9]{8}T[0-9]{9}Z-[a-f0-9]{8}$",
+    "rehearsalPattern": "^rehearsal-stage4-r5-[0-9]{8}T[0-9]{9}Z-[a-f0-9]{8}$"
+  },
+  "acceptedPreparation": {
+    "commit": "39c8b130ca4e1c4e037293d7ade646e3c2b25dce",
+    "preparationContractSha256": "bc633c3ba8eafe786980b38d753734bda7985a77d1373cb53c76bfc393824a2d",
+    "requiredJourneys": 10,
+    "requiredLifecyclePhases": 20
+  },
+  "acceptedChain": {
+    "stage2": {
+      "revision": "R8",
+      "attemptId": "stage2-r8-20260806T134157536Z-a0bf3986",
+      "candidateCommit": "4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d",
+      "candidateTree": "1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a",
+      "acceptedEvidenceIndexSha256": "16bf586a3c9f6ac6e164a05b70c14fa7381607dddb42d230819d599c3dc9dd8b"
+    },
+    "stage3": {
+      "revision": "R13",
+      "attemptId": "stage3-r13-20260806T162253957Z-b0cb2a17",
+      "acceptedEvidenceIndexSha256": "830a3dd59c493de17bfb7c51da49e882f8d09e6ac135e5aaaefd7cbb9b648cb6",
+      "finalEvidenceManifestSha256": "ee12f0307d5c55dc05027c50dcba4860923ff36544c432055417005cee3e19f8",
+      "archiveSha256": "4e7fb5b75b036e7edf78438117950f4be78c74ad26bc0d102e77dc6658da3c7a"
+    },
+    "historicalStage4": {
+      "revision": "R4",
+      "attemptId": "stage4-r4-20260804T133045451Z-13f6da53",
+      "acceptedEvidenceIndexSha256": "f54bb660578bcd2dadf8ad4412f1d58738441df4688816eabc64ea3f7cdeeac8",
+      "finalEvidenceManifestSha256": "0b740dfc12e2334a63807d3097e302f864b9adaa1caf58b2b8757b3c57752b46",
+      "archiveSha256": "7f01fe4fcf5bee2b32b220a26660ea163a92e98450c093d1e7dc4c6752c7598c",
+      "disposition": "accepted-immutable-history-only"
+    }
+  },
+  "stage2": {
+    "candidateCommit": "4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d",
+    "candidateTree": "1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a",
+    "msixSha256": "97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490",
+    "certificateThumbprint": "A01F08EB5A07308FEAB3812692516C667D50EA56"
+  },
+  "applicationActivation": {
+    "api": "IApplicationActivationManager.ActivateApplication",
+    "classId": "45BA127D-10A8-46EA-8AB7-56EA9078943C",
+    "interfaceId": "2E941141-7F97-4756-BA1D-9DECDE894A3D",
+    "classContext": "CLSCTX_LOCAL_SERVER",
+    "activateOptions": "AO_NOERRORUI",
+    "successHresult": "0x00000000",
+    "requiresNonzeroProcessId": true,
+    "explorerExitCodeIsQualificationEvidence": false,
+    "runtimeProof": ["Oracle.WindowDiscovery", "Oracle.WindowObserver"]
+  },
+  "package": {
+    "identity": "Oracle.Platform.LocalCertification",
+    "familyName": "Oracle.Platform.LocalCertification_2hnkknkjbzac2",
+    "fullName": "Oracle.Platform.LocalCertification_0.1.6.0_x64__2hnkknkjbzac2",
+    "appId": "Oracle.Platform.LocalCertification",
+    "version": "0.1.6.0",
+    "fileName": "Oracle_0.1.6.0_x64_STAGE2_REQUALIFICATION_R8_LOCAL_TEST_ONLY.msix",
+    "sha256": "97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490",
+    "publicCertificateFileName": "Oracle.Stage2R8PublicCertificate.cer",
+    "publicCertificateSha256": "78eb64dc769a87cbe82620a8d7bb6da655bdc2d38fe87f58b5c90f3c672492b2",
+    "certificateThumbprint": "A01F08EB5A07308FEAB3812692516C667D50EA56",
+    "publisher": "CN=Oracle Stage 2 Requalification R8 Local Test Signing - NOT PRODUCTION",
+    "trustStore": "Cert:\\LocalMachine\\TrustedPeople",
+    "providerOrigin": "http://127.0.0.1:54321"
+  },
+  "hostArchitecture": {
+    "engineeringProviderHost": {"identity": "DESKTOP-M3H22E4"},
+    "qualificationHost": {"identity": "Founder-QA-01", "model": "ERAZER P6605 MD61596"}
+  },
+  "hosts": {
+    "provider": {
+      "computerName": "DESKTOP-M3H22E4",
+      "adapterName": "Ethernet",
+      "adapterMac": "E8-9C-25-11-3B-E5",
+      "address": "192.168.70.1",
+      "prefixLength": 30,
+      "qualificationExecutionPermitted": false,
+      "packageInstallationPermitted": false
+    },
+    "qualification": {
+      "computerName": "Founder-QA-01",
+      "manufacturer": "MEDION",
+      "model": "ERAZER P6605 MD61596",
+      "address": "192.168.70.2",
+      "prefixLength": 30,
+      "repositoryPermitted": false,
+      "developmentToolsPermitted": false,
+      "prohibitedDependencies": ["git", "node", "npm", "supabase", "docker", "python", "dotnet", "msbuild"]
+    }
+  },
+  "network": {
+    "internetPermitted": false,
+    "defaultRoutesPermitted": false,
+    "providerPublications": [54321, 54324],
+    "qualificationRelays": [
+      {"listenAddress": "127.0.0.1", "listenPort": 54321, "connectAddress": "192.168.70.1", "connectPort": 54321},
+      {"listenAddress": "127.0.0.1", "listenPort": 54324, "connectAddress": "192.168.70.1", "connectPort": 54324}
+    ],
+    "postgresRemoteAccessPermitted": false,
+    "productionEndpointsPermitted": false
+  },
+  "provider": {
+    "classification": "disposable-local-non-production",
+    "implementation": "accepted-r4-supabase-stack-on-engineering-provider-host",
+    "projectIdPrefix": "oracle-stage4-r5-disposable",
+    "supabaseCliVersion": "2.109.1",
+    "services": {
+      "postgres": {"image": "public.ecr.aws/supabase/postgres:17.6.1.143", "digest": "sha256:80d7b27c3e8d77cfa7226eee9508671796da214781ff15a35b3670d7ad5ee453", "port": 54322},
+      "gotrue": {"image": "public.ecr.aws/supabase/gotrue:v2.192.0", "digest": "sha256:b252efb680be37d4a8bf77c210cf0439c19b63a4b51929233a65dd101d25bdab"},
+      "kong": {"image": "public.ecr.aws/supabase/kong:2.8.1", "digest": "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d", "port": 54321},
+      "mailpit": {"image": "public.ecr.aws/supabase/mailpit:v1.30.2", "digest": "sha256:37a38e48e9338cd7e89dfeb487f37b02ebfcd9cb23111bed2d345e79d37d6dd6", "port": 54324},
+      "postgrest": {"image": "public.ecr.aws/supabase/postgrest:v14.14", "digest": "sha256:d2009b5c9deffc210c8a5592698472fede14fd9f6ca89823c8474ca54d58c012"}
+    },
+    "requiredMigrations": [
+      "001_initial_schema.sql",
+      "007_operator_achievements.sql",
+      "008_operator_ownership.sql",
+      "009_operator_intelligence_persistence.sql",
+      "010_operator_trust_control_persistence.sql",
+      "011_operator_account_provisioning.sql",
+      "012_operator_identity_lifecycle.sql",
+      "013_authoritative_session_lifecycle.sql",
+      "014_operator_development_lifecycle.sql"
+    ]
+  },
+  "toolchain": {
+    "git": {"path": "C:\\Program Files\\Git\\cmd\\git.exe", "sha256": "22fead8244ef3a7225fb800099a4e43eca8bcec0466774917669599c2f19a05a", "version": "git version 2.55.0.windows.2"},
+    "node": {"path": "C:\\Program Files\\nodejs\\node.exe", "sha256": "9a4eb5f1c29c6a2e93852ead46b999e284a6a5ca8bab4d4e241d587d025a52de", "version": "24.18.0"},
+    "npmCli": {"path": "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js", "sha256": "3ce7cba6f5128dd5f54c98b6a5036b0f850496878cc2e21044b675fe3c594e3e", "version": "11.16.0"},
+    "supabaseCli": {"path": "C:\\Dev\\project-meta\\node_modules\\supabase\\dist\\supabase.js", "sha256": "253caa8c31ee5976322d04a8bd7752622c0915e7943de3f74e2b73395c54a240", "version": "2.109.1"},
+    "supabaseBinary": {"path": "C:\\Dev\\project-meta\\node_modules\\@supabase\\cli-windows-x64\\bin\\supabase.exe", "sha256": "22c0f28f013411c7a7b880116cd33636edb955a64278914692eea010bcc98dc7", "version": "2.109.1"},
+    "docker": {"path": "C:\\Users\\wilso.DESKTOP-M3H22E4\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe", "sha256": "8985cd8ac002c3240b5aa48fe401fcb55dca5d849b537e3c835564e8e8c49a70", "version": "29.6.2"},
+    "powershell": {"path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "sha256": "7600ffe12da441fe89d035b13801e8e91d064bc544a27b19a5cf49f6ab8b18f5", "version": "5.1.26100.8875"},
+    "taskkill": {"path": "C:\\Windows\\System32\\taskkill.exe", "sha256": "1249717315fc8f4d2df17d5db9da0444795fdb9fb83dfb1f763c3f39282244f7"},
+    "netsh": {"path": "C:\\Windows\\System32\\netsh.exe", "sha256": "b4fe2ea236ed6d360614a1502dc024adc9400d8ad2d1507e2b874e95629e73eb", "version": "10.0.26100.8457"}
+  },
+  "transferMedium": {
+    "method": "existing-usb-create-only-sibling",
+    "device": "Sony Storage Media",
+    "hardwareSerial": "5F10110403558",
+    "filesystem": "NTFS",
+    "label": "ORACLE-S3R1",
+    "volumeSerial": "783A-2CD4"
+  },
+  "paths": {
+    "engineeringFreezeRoot": ".artifacts/sprint-30-5/stage-2-r8-engineering-freeze/candidate-r8-20260806T120629088Z-f79fe50d",
+    "providerStateRoot": ".artifacts/sprint-30-5/stage-4-r5/provider",
+    "artifactRoot": ".artifacts/sprint-30-5/stage-4-r5",
+    "transferRecordRoot": ".artifacts/sprint-30-5/stage-4-r5/transfers",
+    "returnRecordRoot": ".artifacts/sprint-30-5/stage-4-r5/returns",
+    "repositoryEvidenceRoot": "docs/sprints/evidence/sprint-30-5/stage-4-r5",
+    "qualificationLocalTransferRoot": "C:\\OracleQualification\\Stage4R5\\Transfers",
+    "qualificationAttemptRoot": "C:\\OracleQualification\\Stage4R5\\Attempts",
+    "qualificationRehearsalRoot": "C:\\OracleQualification\\Stage4R5\\Rehearsals"
+  },
+  "requiredJourneys": [
+    "anonymous-protected-route-rejected",
+    "account-created-without-session",
+    "confirmation-mail-captured-locally",
+    "email-verified",
+    "verified-password-sign-in-passed",
+    "unverified-account-rejected",
+    "protected-route-rendered",
+    "protected-api-authorised",
+    "cross-account-isolation-passed",
+    "sign-out-invalidates-session"
+  ],
+  "requiredLifecycle": [
+    "authority-consumed", "baseline-verified", "zero-state-verified",
+    "provider-admitted", "trust-established", "package-installed",
+    "runtime-configuration-created", "package-activated",
+    "installed-server-admitted", "anonymous-boundaries-passed",
+    "account-created-unverified", "email-verified",
+    "authenticated-rendering-passed", "isolation-passed",
+    "session-invalidated", "package-removed", "trust-removed",
+    "provider-torn-down", "cleanup-passed", "evidence-frozen"
+  ]
+}

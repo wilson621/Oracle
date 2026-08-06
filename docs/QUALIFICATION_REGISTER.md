@@ -553,3 +553,7 @@ host and PostgreSQL publication prohibited. Static and hostile-fixture
 validation passed. No product, provider, relay, transfer, authority, attempt or
 qualification-evidence state was created. Stage 4 remains incomplete and Stage
 5 remains blocked. A separate execution-enabled R5 mission is required.
+
+## Stage 4 R5 execution-enabled mission - 6 August 2026
+
+Status: authorised pre-transfer. Accepted preparation commit 39c8b130ca4e1c4e037293d7ade646e3c2b25dce; accepted R8 package SHA-256 97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490; accepted R13 attempt stage3-r13-20260806T162253957Z-b0cb2a17. Maximum one transfer, one authority and one attempt. Authority remains barred until the independently reconciled two-host rehearsal and fresh post-rehearsal gates pass.

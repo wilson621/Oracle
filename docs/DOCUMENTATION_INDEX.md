@@ -649,3 +649,4 @@ to adopt a later formatting standard.
 | R5 validation | [Sprint 30.5 Stage 4 R5 Preparation Validation](sprints/SPRINT_30_5_STAGE_4_R5_PREPARATION_VALIDATION_REPORT.md) | Static, regression and hostile-fixture results with zero governed state |
 | R5 pre-execution gate | [Sprint 30.5 Stage 4 R5 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_4_R5_PRE_EXECUTION_GATE.md) | Fresh tool, host, private-link, zero-state and authority requirements |
 | R5 engineering closure | [Sprint 30.5 Stage 4 R5 Engineering Preparation Closure](sprints/SPRINT_30_5_STAGE_4_R5_ENGINEERING_PREPARATION_CLOSURE.md) | Completed bounded mission and recommended execution-enabled next mission |
+| R5 execution-enabled mission | [Sprint 30.5 Stage 4 R5 Execution-Enabled Mission](sprints/SPRINT_30_5_STAGE_4_R5_EXECUTION_ENABLED_MISSION.md) | Split-host rehearsal-before-authority lifecycle, single-attempt boundary and evidence closure |
