@@ -1,11 +1,11 @@
 # Sprint 30.5 Stage 5 R2 Clean-Host Validation Report
 
-**Status:** Lifecycle correction passed; immutable R6 contrast defect requires Founder decision
+**Status:** Historical R6 defect confirmed; corrected candidate and Stage 2 R7 preparation passed
 **Classification:** Non-qualification engineering validation
 **Authority created:** No
 **Attempt created:** No
 **Transfer created:** No
-**Last reviewed:** 4 August 2026
+**Last reviewed:** 6 August 2026
 
 ## Passed validation
 
@@ -55,10 +55,16 @@ coverage. The third is an exact R6 product defect against the frozen 4.5:1
 threshold. Candidate-tree inspection confirms the same `text-slate-500` source
 in immutable candidate `ee8fbeb7a8d18d393cc9a3e92d622250eb2165ff`.
 
-## Blocked next step
+## Historical blocked next step — superseded 6 August 2026
 
 No further installed rehearsal is justified because it would deterministically
 fail the frozen contrast gate. No product source or MSIX was changed. A Founder
 must authorise a product accessibility correction and accept the consequent new
 Stage 2-led requalification chain before engineering can continue. No transfer,
 authority, attempt or qualification state was created.
+
+## Correction validation disposition
+
+The corrected candidate is commit 4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d, tree 1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a. The fail-closed source inventory, all-eight-route Edge integration, lint, TypeScript, architecture audit, production build, Companion regressions, R7 adversarial harness suite, custody suite, and identity fixtures pass.
+
+Stage 2 R7 preparation is complete and qualification-barred. The accepted R6/R12/R4 chain is preserved unchanged as historical evidence. No transfer, authority, attempt, package, certificate, or qualification evidence was created.

@@ -1027,3 +1027,12 @@ R6 MSIX. The GPU, performance and accessibility acceptance contract is frozen;
 all development and installed rehearsals passed with zero residue. Execution is
 not authorised. A fresh execution-enabled baseline, transfer and pre-authority
 gates require a separate Founder mission.
+## Stage 5 accessibility correction and Stage 2 R7 preparation — 6 August 2026
+
+The Stage 5 R2 rendered-browser investigation established a genuine product defect in the immutable R6 package: enabled informational foregrounds measured approximately 4.22–4.25:1 against the frozen 4.5:1 threshold. The Founder authorised a bounded product correction.
+
+Corrected candidate commit 4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d, tree 1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a, replaces only the failing text and placeholder foregrounds. Static inventory, all-eight-route authenticated Edge integration, lint, TypeScript, architecture, production build, and relevant Companion regressions pass.
+
+Stage 2 Requalification R7 engineering preparation is complete for future package version 0.1.5.0. Its new namespace binds the exact corrected candidate, requires the accessibility gate in the governed source matrix, and hash-binds accepted R6/R12/R4 indexes and closures. Accepted R6/R12/R4 evidence remains unchanged and authoritative history for the exact R6 MSIX, but it does not qualify the corrected candidate.
+
+No transfer, authority, attempt, certificate, package, or qualification evidence was created. Stage 3, Stage 4, and Stage 5 are blocked for the current candidate pending a newly accepted Stage 2 baseline and separately authorised downstream missions. The next Founder-level decision is whether to accept the committed R7 preparation baseline and authorise exactly one governed Stage 2 R7 qualification attempt.

@@ -592,3 +592,12 @@ to adopt a later formatting standard.
 | Stage 5 R1 replacement transfer preparation | [Sprint 30.5 Stage 5 R1 Replacement Transfer Preparation](sprints/SPRINT_30_5_STAGE_5_R1_REPLACEMENT_TRANSFER_PREPARATION.md) | Failed-transfer rehash, fresh replacement boundary and zero authority/attempt state |
 
 | Stage 5 R1 clean-host bootstrap blocker | [Sprint 30.5 Stage 5 R1 Clean-Host Bootstrap Blocker](sprints/SPRINT_30_5_STAGE_5_R1_CLEAN_HOST_BOOTSTRAP_BLOCKER.md) | Returned immutable transfer, developer-tool dependency contradiction and required Founder architecture decision |
+
+## Stage 2 Requalification R7 accessibility-correction preparation
+
+| Document | Link | Purpose |
+| --- | --- | --- |
+| Stage 2 R7 plan | [Sprint 30.5 Stage 2 Requalification R7 Plan](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R7_PLAN.md) | Exact corrected candidate, chain impact, and authority boundary |
+| Stage 2 R7 implementation | [Sprint 30.5 Stage 2 Requalification R7 Implementation](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R7_IMPLEMENTATION.md) | Bounded contrast correction and R7 harness derivation |
+| Stage 2 R7 preparation validation | [Sprint 30.5 Stage 2 Requalification R7 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R7_PREPARATION_VALIDATION_REPORT.md) | Product, browser, regression, adversarial, custody, and identity results |
+| Stage 2 R7 pre-execution gate | [Sprint 30.5 Stage 2 Requalification R7 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R7_PRE_EXECUTION_GATE.md) | Separate Founder authority required; no current qualification state |

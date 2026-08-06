@@ -1,10 +1,10 @@
 # Sprint 30.5 Stage 5 R2 Clean-Host Protocol Correction
 
-**Status:** Engineering correction validated; Founder decision required for confirmed R6 product accessibility defect
+**Status:** Product defect corrected; Stage 2 R7 engineering preparation complete; qualification barred
 **Authority:** Founder-authorised evidence-led protocol correction
 **Qualification authority:** None
 **Transfers permitted:** Zero
-**Last reviewed:** 4 August 2026
+**Last reviewed:** 6 August 2026
 
 ## Decision
 
@@ -99,3 +99,9 @@ baseline. Weakening the frozen threshold is not recommended.
 Both R1 transfers remain immutable pre-authority engineering failures and are
 prohibited from admission or execution. No R2 transfer, authority or attempt
 exists.
+
+## Product correction disposition — 6 August 2026
+
+The Founder accepted the finding as a genuine product defect and authorised a bounded correction. Candidate commit 4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d, tree 1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a, corrects the failing enabled foregrounds while retaining the frozen 4.5:1 threshold. A fresh authenticated source-browser rehearsal passes all eight protected routes.
+
+Stage 2 R7 engineering preparation is complete for future package version 0.1.5.0. Accepted R6/R12/R4 remains immutable history for the exact R6 package but no longer qualifies the corrected current candidate. Stage 5 remains paused pending a fresh accepted chain beginning at Stage 2. No R7 transfer, authority, attempt, package, or qualification evidence exists.
