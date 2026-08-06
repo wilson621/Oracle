@@ -52,3 +52,8 @@ The sealed replacement transfer passed USB and local transfer admission but fail
 ## Hostname-corrected mission binding
 
 The fresh corrected mission is separately bound to baseline 6d86173a4090190e3e5b4c548d47c1e503b3651d and carries both failed predecessor identities through manifest, custody, independent verification and any future qualification records. Both historical transfer and failure-record hashes are mandatory pre-creation gates.
+
+
+## Hostname-corrected transfer seal
+
+The single authorised transfer was built from committed baseline f163a246fc40a202cc1e1a0adbc4be23ec9d2fbc, independently verified, admitted by its embedded PowerShell core and copied create-only to the fresh governed USB namespace. The USB copy passed full 18-file hash parity. Transfer creation is consumed and closed; qualification state remains absent pending physical clean-host handoff.

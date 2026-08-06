@@ -211,7 +211,7 @@
                       "engineeringPreparation":  "founder-authorised",
                       "candidateBuild":  "founder-authorised-engineering-freeze-only",
                       "candidateSigning":  "founder-authorised-local-test-engineering-freeze-only",
-                      "transferCreationPermitted":  true,
+                      "transferCreationPermitted":  false,
                       "authorityCreationPermitted":  true,
                       "attemptCreationPermitted":  true,
                       "qualificationExecutionPermitted":  true,
@@ -273,7 +273,7 @@
                                  "dotnet":  "C:/Program Files/dotnet/dotnet.exe",
                                  "bsdtar":  "C:/Windows/System32/tar.exe"
                              },
-    "status":  "founder-authorised-corrected-execution-enabled",
+    "status":  "corrected-transfer-sealed-awaiting-clean-host",
     "preparation":  {
                         "artifactBase":  ".artifacts/sprint-30-5/stage-2-r8-engineering-freeze",
                         "createOnly":  true,
@@ -303,7 +303,7 @@
                               "preAuthorityAdmissionRequired":  true
                           },
     "futureTransfer":  {
-                           "creationPermitted":  true,
+                           "creationPermitted":  false,
                            "createOnly":  true,
                            "independentVerificationRequired":  true,
                            "payloadRuntime":  "Windows PowerShell 5.1 only",
@@ -395,6 +395,21 @@
                                "retryAfterConsumedAuthority":  false,
                                "stage3Authorised":  false,
                                "authorisedAtUtc":  "2026-08-06T13:22:33.0242898Z",
-                               "state":  "founder-authorised-pre-transfer"
+                               "state":  "transfer-sealed-awaiting-physical-handoff",
+                               "transferCreationConsumed":  true,
+                               "sealedTransfer":  {
+                                                      "manifestSha256":  "2d72d30d005caf0a4b1fbb38cb1fd16a7d07442b53fa7a4ba6ee6f29f1bf75e2",
+                                                      "custodySha256":  "c9c52b5059f0ead02ab3d9b69ff5ef0bb51a0a4cbb6b86921148b6c02673de3c",
+                                                      "verificationSha256":  "053ceffe040e5fad8b937fd145254289466f72dc859e52e16cb2a3169c722c12",
+                                                      "executionContractSha256":  "04731755fb83ca5e62abafd0448e5655713d07e08008c5d2f31058132a356d55",
+                                                      "executionCommit":  "f163a246fc40a202cc1e1a0adbc4be23ec9d2fbc",
+                                                      "executionTree":  "55efd946b0abb0f39618e12f91bcf372d28c5d75",
+                                                      "payloadFiles":  15,
+                                                      "payloadBytes":  215865015,
+                                                      "usbFullTransferFiles":  18,
+                                                      "usbFullTransferBytes":  215870639,
+                                                      "usbContext":  "context-stage2-r8-corrected-d77af006",
+                                                      "usbReturnRoot":  "return-stage2-r8-corrected-d77af006"
+                                                  }
                            }
 }

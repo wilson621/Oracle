@@ -11,7 +11,7 @@ R8 restores the established split-host qualification architecture for corrected 
 
 The first two transfers are immutable pre-authority engineering failures and prohibited from admission or execution. Their source, USB and clean-host copies remain historical.
 
-A separately bound hostname-corrected mission authorises exactly one fresh transfer, `transfer-stage2-r8-corrected-20260806T132233022Z-d77af006`, under grant `founder-stage2-r8-corrected-grant-20260806T132233022Z-d77af006`. The transfer must bind both predecessor identities. Authority and attempt creation remain impossible until all transfer, clean-host, continuity and pre-authority gates pass. Retry and Stage 3 or later work remain unauthorised.
+The separately bound hostname-corrected mission created and sealed exactly one fresh transfer, `transfer-stage2-r8-corrected-20260806T132233022Z-d77af006`, under grant `founder-stage2-r8-corrected-grant-20260806T132233022Z-d77af006`. Transfer creation is consumed and closed. The transfer binds both predecessor identities. Authority and attempt creation remain impossible until all clean-host, continuity and pre-authority gates pass. Retry and Stage 3 or later work remain unauthorised.
 ## Engineering entry points
 
 - `node verify-preparation.mjs`

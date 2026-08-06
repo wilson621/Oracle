@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R8 Execution Mission
 
-Status: HOSTNAME-CORRECTED TRANSFER AUTHORISED - PRE-TRANSFER
+Status: HOSTNAME-CORRECTED TRANSFER SEALED - PHYSICAL CLEAN-HOST HANDOFF REQUIRED
 Date: 6 August 2026
 
 ## Exact authority
@@ -107,4 +107,19 @@ The Founder accepted the replacement failure and hostname correction baseline `6
 - retry after consumed authority or permanent failure: prohibited
 - Stage 3 and later work: not authorised
 
-Pre-transfer validation hash-bound and read-only admitted both failed predecessors, validated complete two-generation lineage, and passed the inventory and hostname adversarial suites. No corrected transfer, authority or attempt exists.
+Pre-transfer validation hash-bound and read-only admitted both failed predecessors, validated complete two-generation lineage, and passed the inventory and hostname adversarial suites. No corrected transfer, authority or attempt existed at that gate.
+
+## Sealed hostname-corrected transfer
+
+The single authorised hostname-corrected transfer was created from execution commit `f163a246fc40a202cc1e1a0adbc4be23ec9d2fbc` (tree `55efd946b0abb0f39618e12f91bcf372d28c5d75`) and independently verified:
+
+- manifest SHA-256: `2d72d30d005caf0a4b1fbb38cb1fd16a7d07442b53fa7a4ba6ee6f29f1bf75e2`
+- custody SHA-256: `c9c52b5059f0ead02ab3d9b69ff5ef0bb51a0a4cbb6b86921148b6c02673de3c`
+- verification SHA-256: `053ceffe040e5fad8b937fd145254289466f72dc859e52e16cb2a3169c722c12`
+- execution contract SHA-256: `04731755fb83ca5e62abafd0448e5655713d07e08008c5d2f31058132a356d55`
+- payload: 15 files, 215,865,015 bytes
+- full transfer: 18 files, 215,870,639 bytes
+
+The embedded PowerShell core admitted both the source transfer and the create-only USB copy. Full relative-path, byte-count and SHA-256 parity passed under USB context `context-stage2-r8-corrected-d77af006`; the governed return root is `return-stage2-r8-corrected-d77af006`.
+
+Transfer creation is consumed and closed. No continuity, authority, attempt or qualification evidence exists. The next action is the physical move of the USB to `Founder-QA-01` and execution of the exact clean-host handoff command.
