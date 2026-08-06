@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R8 Execution Mission
 
-Status: CORRECTED REPLACEMENT AUTHORISED - PRE-TRANSFER
+Status: REPLACEMENT TRANSFER SEALED - PHYSICAL CLEAN-HOST HANDOFF REQUIRED
 Date: 6 August 2026
 
 ## Exact authority
@@ -59,3 +59,17 @@ The Founder accepted the immutable pre-authority failure and corrected baseline 
 - Stage 3 and later work: not authorised
 
 The replacement namespace is separately bound; the original failed mission and transfer records remain unchanged. Pre-transfer validation passed with no replacement transfer, authority or attempt state.
+## Sealed replacement transfer
+
+The single corrected replacement transfer was created from execution commit `e9c0cb0e4da8955935cbb090b332617849e4d125` and independently verified:
+
+- manifest SHA-256: `62b26194f10ce0b560cb906575f94cd2e55d6c589e149304151c098a38f5f0f1`
+- custody SHA-256: `3853f9f4d6fe1032d9fe83fcc00cfe0bed8137a7d3035d0de1ac4b63bbf11484`
+- verification SHA-256: `b8b08448bd025e61fa5e7676ce33224d411c29f406ca7293e07397f3c1b9e8e7`
+- execution contract SHA-256: `a86f058e32a5ba68177dec3c728b17f4780a4ee20dee35807ed15707382df47f`
+- payload: 15 files, 215,860,190 bytes
+- full transfer: 18 files, 215,865,538 bytes
+
+The exact PowerShell core embedded in the transfer admitted the sealed source transfer successfully. The create-only USB copy under `context-stage2-r8-replacement-cc9e03ce` passed the same embedded admission and a full file-by-file source comparison. The governed return root is `return-stage2-r8-replacement-cc9e03ce`.
+
+Source transfer creation is closed. No continuity, authority, attempt or qualification evidence exists. The next action is the physical move of the USB to `Founder-QA-01` and execution of the exact clean-host handoff command.

@@ -11,7 +11,7 @@ R8 restores the established split-host qualification architecture for corrected 
 
 The original transfer `transfer-stage2-r8-20260806T123612020Z-338a5276` remains an immutable pre-authority engineering failure and is prohibited from admission or execution.
 
-A separately bound replacement mission authorises exactly one transfer, `transfer-stage2-r8-replacement-20260806T125821770Z-cc9e03ce`, under grant `founder-stage2-r8-replacement-grant-20260806T125821770Z-cc9e03ce`. Authority and attempt creation remain impossible until exact replacement-transfer admission, clean-host admission, continuity and every pre-authority gate pass. Retry and Stage 3 or later work remain unauthorised.
+The separately bound replacement transfer `transfer-stage2-r8-replacement-20260806T125821770Z-cc9e03ce` is now sealed and independently verified under grant `founder-stage2-r8-replacement-grant-20260806T125821770Z-cc9e03ce`. Further transfer creation is closed. Authority and attempt creation remain impossible until its exact USB and local admission, clean-host admission, continuity and every pre-authority gate pass. Retry and Stage 3 or later work remain unauthorised.
 ## Engineering entry points
 
 - `node verify-preparation.mjs`

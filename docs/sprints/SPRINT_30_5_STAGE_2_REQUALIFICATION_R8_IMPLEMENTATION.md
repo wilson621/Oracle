@@ -37,3 +37,8 @@ The first immutable execution transfer independently verified but failed clean-h
 ## Corrected replacement binding
 
 The accepted correction baseline is bound to one fresh replacement transfer and grant. The new manifest, custody and independent-verification records must carry the immutable predecessor transfer ID. Historical transfer admission remains schema-compatible, while every replacement record requires exact predecessor-lineage parity.
+
+
+## Replacement transfer seal
+
+The one corrected replacement transfer was built from committed baseline e9c0cb0e4da8955935cbb090b332617849e4d125, independently verified, admitted by its embedded PowerShell core and copied create-only to the governed USB namespace. The USB copy passed full 18-file hash parity. Source transfer creation is closed; qualification state remains absent pending physical clean-host handoff.

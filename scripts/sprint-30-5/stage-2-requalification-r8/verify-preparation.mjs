@@ -10,7 +10,7 @@ const repository=path.resolve(root,"../../..");
 const contractPath=path.join(root,"Oracle.Stage2RequalificationR8Contract.json");
 const contract=JSON.parse(fs.readFileSync(contractPath,"utf8"));
 assert.equal(contract.contract,"oracle.sprint-30-5.stage-2-requalification-r8");
-assert.equal(contract.status,"founder-authorised-replacement-execution-enabled");
+assert.equal(contract.status,"replacement-transfer-sealed-awaiting-clean-host");
 assert.equal(contract.candidate.commit,"4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d");
 assert.equal(contract.candidate.tree,"1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a");
 assert.equal(contract.package.version,"0.1.6.0");
@@ -18,7 +18,8 @@ assert.equal(contract.qualificationHost.identity,"Founder-QA-01");
 assert.equal(contract.qualificationHost.repositoryPermitted,false);
 assert.equal(contract.qualificationHost.developmentToolInstallationPermitted,false);
 assert.deepEqual(contract.qualificationHost.prohibitedDependencies,["git","node","npm","supabase","docker"]);
-assert.equal(contract.futureTransfer.creationPermitted,true);
+assert.equal(contract.futureTransfer.creationPermitted,false);
+assert.equal(contract.authority.transferCreationPermitted,false);
 assert.equal(contract.authority.authorityCreationPermitted,true);
 assert.equal(contract.authority.attemptCreationPermitted,true);
 assert.equal(contract.authority.qualificationExecutionPermitted,true);
@@ -43,7 +44,8 @@ assert.equal(contract.replacementMission.maximumAttempts,1);
 assert.equal(contract.replacementMission.createAuthorityOnlyAfterAllPreAuthorityGates,true);
 assert.equal(contract.replacementMission.retryAfterConsumedAuthority,false);
 assert.equal(contract.replacementMission.stage3Authorised,false);
-assert.equal(contract.replacementMission.state,"founder-authorised-pre-transfer");
+assert.equal(contract.replacementMission.state,"transfer-sealed-awaiting-physical-handoff");
+assert.equal(contract.replacementMission.transferCreationConsumed,true);
 const failedTransferRoot=path.resolve(repository,contract.futureTransfer.artifactBase,contract.executionMission.transferId);
 assert.equal(fs.existsSync(failedTransferRoot),true);
 assert.equal(sha256(path.join(failedTransferRoot,"Oracle.Stage2R8TransferManifest.json")),contract.executionMission.failureRecord.manifestSha256);
@@ -51,7 +53,10 @@ assert.equal(sha256(path.join(failedTransferRoot,"Oracle.Stage2R8TransferCustody
 assert.equal(sha256(path.join(failedTransferRoot,"Oracle.Stage2R8TransferVerification.json")),contract.executionMission.failureRecord.verificationSha256);
 assert.equal(sha256(path.resolve(repository,contract.executionMission.failureRecord.path)),contract.executionMission.failureRecord.sha256);
 const replacementTransferRoot=path.resolve(repository,contract.futureTransfer.artifactBase,contract.replacementMission.transferId);
-assert.equal(fs.existsSync(replacementTransferRoot),false);
+assert.equal(fs.existsSync(replacementTransferRoot),true);
+assert.equal(sha256(path.join(replacementTransferRoot,"Oracle.Stage2R8TransferManifest.json")),contract.replacementMission.sealedTransfer.manifestSha256);
+assert.equal(sha256(path.join(replacementTransferRoot,"Oracle.Stage2R8TransferCustody.json")),contract.replacementMission.sealedTransfer.custodySha256);
+assert.equal(sha256(path.join(replacementTransferRoot,"Oracle.Stage2R8TransferVerification.json")),contract.replacementMission.sealedTransfer.verificationSha256);
 assert.equal(fs.existsSync(path.resolve(repository,contract.output.artifactBase)),false);
 assert.equal(fs.existsSync(path.resolve(repository,contract.output.repositoryEvidenceBase)),false);
 
@@ -117,16 +122,18 @@ assert.match(handoff,/R8 source contract mission binding differs/u);
 
 const correctedAdmission=spawnSync(powershell,["-NoLogo","-NoProfile","-ExecutionPolicy","Bypass","-Command",`. '${path.join(root,"Oracle.Stage2R8CleanHostCore.ps1").replaceAll("'","''")}'; Assert-OracleStage2R8Transfer -TransferRoot '${failedTransferRoot.replaceAll("'","''")}' -ExpectedManifestSha256 '${contract.executionMission.failureRecord.manifestSha256}' -ExpectedCustodySha256 '${contract.executionMission.failureRecord.custodySha256}' -ExpectedVerificationSha256 '${contract.executionMission.failureRecord.verificationSha256}' | Out-Null`],{cwd:repository,encoding:"utf8",shell:false,windowsHide:true});
 assert.equal(correctedAdmission.status,0,correctedAdmission.stderr);
+const replacementAdmission=spawnSync(powershell,["-NoLogo","-NoProfile","-ExecutionPolicy","Bypass","-Command",`. '${path.join(root,"Oracle.Stage2R8CleanHostCore.ps1").replaceAll("'","''")}'; Assert-OracleStage2R8Transfer -TransferRoot '${replacementTransferRoot.replaceAll("'","''")}' -ExpectedManifestSha256 '${contract.replacementMission.sealedTransfer.manifestSha256}' -ExpectedCustodySha256 '${contract.replacementMission.sealedTransfer.custodySha256}' -ExpectedVerificationSha256 '${contract.replacementMission.sealedTransfer.verificationSha256}' | Out-Null`],{cwd:repository,encoding:"utf8",shell:false,windowsHide:true});
+assert.equal(replacementAdmission.status,0,replacementAdmission.stderr);
 const blockedTransfer=spawnSync(process.execPath,[path.join(root,"prepare-transfer.mjs")],{cwd:repository,encoding:"utf8",shell:false,windowsHide:true});
 assert.notEqual(blockedTransfer.status,0);
-assert.match(blockedTransfer.stderr,/Required argument is absent/iu);
-assert.equal(fs.existsSync(replacementTransferRoot),false);
+assert.match(blockedTransfer.stderr,/transfer creation is not authorised/iu);
+assert.equal(fs.existsSync(replacementTransferRoot),true);
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),"oracle-stage2-r8-preauthority-"));
 try{
   const local=path.join(temporary,"local"); const returned=path.join(temporary,"return"); fs.mkdirSync(local); fs.mkdirSync(returned);
   const blocked=spawnSync(powershell,["-NoLogo","-NoProfile","-ExecutionPolicy","Bypass","-File",path.join(root,"Invoke-OracleStage2R8Qualification.ps1"),"-TransferRoot",path.join(temporary,"absent-transfer"),"-ExpectedManifestSha256","0".repeat(64),"-ExpectedCustodySha256","0".repeat(64),"-ExpectedVerificationSha256","0".repeat(64),"-FounderGrantId",contract.replacementMission.founderGrantId,"-LocalExecutionParent",local,"-ReturnRoot",returned],{cwd:repository,encoding:"utf8",shell:false,windowsHide:true});
   assert.notEqual(blocked.status,0);
-  assert.match(blocked.stderr,/absent|cannot find|does not exist/iu);
+  assert.match(blocked.stderr,/not authorised/iu);
   assert.deepEqual(fs.readdirSync(local),[]);
   assert.deepEqual(fs.readdirSync(returned),[]);
 }finally{fs.rmSync(temporary,{recursive:true,force:true});}
@@ -134,6 +141,6 @@ const scannerFixture=spawnSync(powershell,["-NoLogo","-NoProfile","-ExecutionPol
 assert.equal(scannerFixture.status,0,scannerFixture.stderr);
 const scannerResult=JSON.parse(scannerFixture.stdout);
 assert.deepEqual({result:scannerResult.result,absentRejected:scannerResult.absentRejected,utf8ChunkBoundaryDetected:scannerResult.utf8ChunkBoundaryDetected,utf16LeDetected:scannerResult.utf16LeDetected},{result:"passed",absentRejected:true,utf8ChunkBoundaryDetected:true,utf16LeDetected:true});
-console.log(JSON.stringify({result:"passed",contract:contract.contract,status:contract.status,founderGrantId:contract.replacementMission.founderGrantId,transferId:contract.replacementMission.transferId,historicalBindings:contract.historicalEvidenceBindings.length,cleanHostRuntime:"powershell-only",historicalFailedTransferPreserved:true,replacementTransferCreated:false,correctedAdmission:"passed-read-only-against-failed-transfer",replacementTransferAuthorised:true,authorityCreated:false,attemptCreated:false,fixtures:{syntax:"passed",historicalIntegrity:"passed",freshReplacementIdentity:"passed",exactMissionBinding:"passed",ordinalInventoryCorrection:"passed",preAuthorityOrdering:"passed",cleanHostTooling:"passed",transferAdmission:"passed",signatureVerification:"passed",canaryRejection:"passed",failClosedBeforeAuthority:"passed"}},null,2));
+console.log(JSON.stringify({result:"passed",contract:contract.contract,status:contract.status,founderGrantId:contract.replacementMission.founderGrantId,transferId:contract.replacementMission.transferId,historicalBindings:contract.historicalEvidenceBindings.length,cleanHostRuntime:"powershell-only",historicalFailedTransferPreserved:true,replacementTransferCreated:true,replacementTransferSealed:true,sourceTransferCreationClosed:true,correctedAdmission:"passed",usbCopyVerified:true,authorityCreated:false,attemptCreated:false,fixtures:{syntax:"passed",historicalIntegrity:"passed",freshReplacementIdentity:"passed",exactMissionBinding:"passed",ordinalInventoryCorrection:"passed",preAuthorityOrdering:"passed",cleanHostTooling:"passed",transferAdmission:"passed",signatureVerification:"passed",canaryRejection:"passed",failClosedBeforeAuthority:"passed"}},null,2));
 function source(name){return fs.readFileSync(path.join(root,name),"utf8");}
 function sha256(file){return crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");}
