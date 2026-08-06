@@ -1117,3 +1117,8 @@ Proceed through one immutable transfer, isolated two-host rehearsal, bilateral z
 ## Stage 4 R5 replacement-transfer gate - 6 August 2026
 
 Preserve 	ransfer-stage4-r5-20260806T181151844Z-ac1fb503 unchanged as pre-authority failure. Prepare one fresh replacement only after optional-version regression passes. The replacement must name the failed transfer in manifest and custody. No authority or attempt exists or may be created before the complete governed gate chain passes.
+## Stage 4 R5 private-link pre-authority failure and correction - 6 August 2026
+
+Replacement transfer `transfer-stage4-r5-20260806T200338718Z-3af1860e` is accepted immutable pre-authority engineering failure history and is barred from admission or execution. Founder-QA-01 failed before rehearsal, authority or attempt creation because the initializer retained the target IP with a mismatched prefix and then attempted duplicate creation. Laptop recovery and governed provider teardown passed with zero residue.
+
+The corrected address reconciler removes every non-exact address, preserves one exact instance, rejects ambiguity, tolerates only a freshly verified concurrent exact creation, and propagates all unverified creation failures. A single fresh replacement transfer remains authorised after correction validation and commit; all rehearsal and pre-authority gates remain mandatory. Stage 5 remains barred.

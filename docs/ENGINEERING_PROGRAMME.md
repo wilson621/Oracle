@@ -2620,3 +2620,8 @@ The accepted R5 preparation is now implemented as a split-host execution overlay
 ## Stage 4 R5 optional tool-version correction - 6 August 2026
 
 The first R5 execution transfer failed pre-authority when strict property access treated the hash-only 	askkill binding as versioned. The transfer is immutable and prohibited. Tool path and SHA-256 remain mandatory; version is now optional only when absent from the governed binding. Replacement preparation is limited to one fresh identity and retains every rehearsal, clean-host and authority gate.
+## Stage 4 R5 private-link pre-authority failure and correction - 6 August 2026
+
+Replacement transfer `transfer-stage4-r5-20260806T200338718Z-3af1860e` is accepted immutable pre-authority engineering failure history and is barred from admission or execution. Founder-QA-01 failed before rehearsal, authority or attempt creation because the initializer retained the target IP with a mismatched prefix and then attempted duplicate creation. Laptop recovery and governed provider teardown passed with zero residue.
+
+The corrected address reconciler removes every non-exact address, preserves one exact instance, rejects ambiguity, tolerates only a freshly verified concurrent exact creation, and propagates all unverified creation failures. A single fresh replacement transfer remains authorised after correction validation and commit; all rehearsal and pre-authority gates remain mandatory. Stage 5 remains barred.

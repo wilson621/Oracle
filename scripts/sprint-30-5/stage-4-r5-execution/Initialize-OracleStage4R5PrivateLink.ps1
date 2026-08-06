@@ -18,9 +18,7 @@ $priorDhcp=[string](Get-NetIPInterface -InterfaceIndex ([int]$adapter.ifIndex) -
 $record=[ordered]@{schemaVersion='1.0.0';contract='oracle.sprint-30-5.stage-4-r5-private-link-state';role=$Role;computerName=[string]$env:COMPUTERNAME;interfaceIndex=[int]$adapter.ifIndex;interfaceAlias=[string]$adapter.Name;macAddress=[string]$adapter.MacAddress;priorDhcp=$priorDhcp;priorAddresses=$priorAddresses;targetAddress=[string]$expected.address;targetPrefixLength=[int]$expected.prefixLength;createdAtUtc=[DateTime]::UtcNow.ToString('o')}
 Write-OracleStage4R5CreateOnlyJson $stateFull $record
 Set-NetIPInterface -InterfaceIndex ([int]$adapter.ifIndex) -AddressFamily IPv4 -Dhcp Disabled -ErrorAction Stop
-Get-NetIPAddress -InterfaceIndex ([int]$adapter.ifIndex) -AddressFamily IPv4 -ErrorAction SilentlyContinue|Where-Object{$_.IPAddress-cne[string]$expected.address}|Remove-NetIPAddress -Confirm:$false -ErrorAction Stop
-$target=@(Get-NetIPAddress -InterfaceIndex ([int]$adapter.ifIndex) -AddressFamily IPv4 -IPAddress ([string]$expected.address) -ErrorAction SilentlyContinue|Where-Object{[int]$_.PrefixLength-eq[int]$expected.prefixLength})
-if($target.Count-eq0){New-NetIPAddress -InterfaceIndex ([int]$adapter.ifIndex) -IPAddress ([string]$expected.address) -PrefixLength ([int]$expected.prefixLength) -AddressFamily IPv4 -Type Unicast -ErrorAction Stop|Out-Null}
+[void](Invoke-OracleStage4R5PrivateLinkAddressReconciliation -InterfaceIndex ([int]$adapter.ifIndex) -TargetAddress ([string]$expected.address) -TargetPrefixLength ([int]$expected.prefixLength))
 $routes=@(Get-NetRoute -DestinationPrefix @('0.0.0.0/0','::/0') -ErrorAction SilentlyContinue|Where-Object{$_.State-ceq'Alive'})
 if($routes.Count-ne0){throw 'Private-link initialization completed, but an active default route remains. Disconnect all Internet-bearing links before continuing.'}
 [pscustomobject][ordered]@{result='passed';role=$Role;interfaceAlias=[string]$adapter.Name;address=[string]$expected.address;prefixLength=[int]$expected.prefixLength;activeDefaultRoutes=0;statePath=$stateFull}|ConvertTo-Json -Depth 6

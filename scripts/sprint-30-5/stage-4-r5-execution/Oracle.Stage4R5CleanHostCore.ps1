@@ -65,6 +65,38 @@ function Assert-OracleStage4R5Administrator {
   if(-not$principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)){throw 'Stage 4 R5 clean-host execution requires elevated Windows PowerShell.'}
 }
 
+function Invoke-OracleStage4R5PrivateLinkAddressReconciliation {
+  param(
+    [Parameter(Mandatory=$true)][int]$InterfaceIndex,
+    [Parameter(Mandatory=$true)][string]$TargetAddress,
+    [Parameter(Mandatory=$true)][int]$TargetPrefixLength
+  )
+  $current=@(Get-NetIPAddress -InterfaceIndex $InterfaceIndex -AddressFamily IPv4 -ErrorAction SilentlyContinue)
+  $exact=@($current|Where-Object{[string]$_.IPAddress-ceq$TargetAddress-and[int]$_.PrefixLength-eq$TargetPrefixLength})
+  if($exact.Count-gt1){throw 'Exact private-link address is ambiguous.'}
+
+  @(
+    $current|Where-Object{
+      [string]$_.IPAddress-cne$TargetAddress-or[int]$_.PrefixLength-ne$TargetPrefixLength
+    }
+  )|Remove-NetIPAddress -Confirm:$false -ErrorAction Stop
+
+  $exact=@(Get-NetIPAddress -InterfaceIndex $InterfaceIndex -AddressFamily IPv4 -IPAddress $TargetAddress -ErrorAction SilentlyContinue|Where-Object{[int]$_.PrefixLength-eq$TargetPrefixLength})
+  if($exact.Count-gt1){throw 'Exact private-link address is ambiguous.'}
+  if($exact.Count-eq0){
+    try{
+      New-NetIPAddress -InterfaceIndex $InterfaceIndex -IPAddress $TargetAddress -PrefixLength $TargetPrefixLength -AddressFamily IPv4 -Type Unicast -ErrorAction Stop|Out-Null
+    }catch{
+      $creationFailure=$_
+      $exact=@(Get-NetIPAddress -InterfaceIndex $InterfaceIndex -AddressFamily IPv4 -IPAddress $TargetAddress -ErrorAction SilentlyContinue|Where-Object{[int]$_.PrefixLength-eq$TargetPrefixLength})
+      if($exact.Count-ne1){throw $creationFailure}
+    }
+  }
+
+  $final=@(Get-NetIPAddress -InterfaceIndex $InterfaceIndex -AddressFamily IPv4 -IPAddress $TargetAddress -ErrorAction SilentlyContinue|Where-Object{[int]$_.PrefixLength-eq$TargetPrefixLength})
+  if($final.Count-ne1){throw 'Exact private-link address reconciliation failed.'}
+  [pscustomobject][ordered]@{result='passed';interfaceIndex=$InterfaceIndex;address=$TargetAddress;prefixLength=$TargetPrefixLength;exactAddressCount=1}
+}
 function Get-OracleStage4R5DefaultRoutes {
   @(
     Get-NetRoute -ErrorAction Stop|Where-Object{$_.DestinationPrefix-in@('0.0.0.0/0','::/0')-and[string]$_.State-cne'Unreachable'}|ForEach-Object{

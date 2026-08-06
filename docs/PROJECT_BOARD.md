@@ -1201,3 +1201,8 @@ The single governed R5 mission is in execution-enabled preparation. Exactly one 
 ## Stage 4 R5 pre-authority transfer failure and replacement - 6 August 2026
 
 Transfer 	ransfer-stage4-r5-20260806T181151844Z-ac1fb503 is immutable failed engineering history and barred from admission. Step 01 failed before readiness, rehearsal, provider, authority or attempt creation because the hash-only 	askkill binding had no optional version property. Network recovery passed. A corrected, exactly bound replacement transfer is authorised; authority remains barred.
+## Stage 4 R5 private-link pre-authority failure and correction - 6 August 2026
+
+Replacement transfer `transfer-stage4-r5-20260806T200338718Z-3af1860e` is accepted immutable pre-authority engineering failure history and is barred from admission or execution. Founder-QA-01 failed before rehearsal, authority or attempt creation because the initializer retained the target IP with a mismatched prefix and then attempted duplicate creation. Laptop recovery and governed provider teardown passed with zero residue.
+
+The corrected address reconciler removes every non-exact address, preserves one exact instance, rejects ambiguity, tolerates only a freshly verified concurrent exact creation, and propagates all unverified creation failures. A single fresh replacement transfer remains authorised after correction validation and commit; all rehearsal and pre-authority gates remain mandatory. Stage 5 remains barred.
