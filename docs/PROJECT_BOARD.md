@@ -1197,3 +1197,7 @@ remains barred.
 ## Stage 4 R5 execution-enabled mission authorised - 6 August 2026
 
 The single governed R5 mission is in execution-enabled preparation. Exactly one fresh immutable transfer is permitted. A mandatory two-host, non-authority rehearsal and complete teardown must pass before the fresh provider pre-authority record and any authority may exist. Stage 5 remains barred.
+
+## Stage 4 R5 pre-authority transfer failure and replacement - 6 August 2026
+
+Transfer 	ransfer-stage4-r5-20260806T181151844Z-ac1fb503 is immutable failed engineering history and barred from admission. Step 01 failed before readiness, rehearsal, provider, authority or attempt creation because the hash-only 	askkill binding had no optional version property. Network recovery passed. A corrected, exactly bound replacement transfer is authorised; authority remains barred.

@@ -2616,3 +2616,7 @@ rehearsal while authority remains barred.
 ## Stage 4 R5 execution-enabled mission - 6 August 2026
 
 The accepted R5 preparation is now implemented as a split-host execution overlay bound to R8/R13. The main PC provides the disposable backend; Founder-QA-01 remains the clean qualification host. One create-only transfer is permitted. One two-host rehearsal, zero-residue teardown and a fresh hash-bound post-rehearsal gate are mandatory before the single authority can be created and consumed.
+
+## Stage 4 R5 optional tool-version correction - 6 August 2026
+
+The first R5 execution transfer failed pre-authority when strict property access treated the hash-only 	askkill binding as versioned. The transfer is immutable and prohibited. Tool path and SHA-256 remain mandatory; version is now optional only when absent from the governed binding. Replacement preparation is limited to one fresh identity and retains every rehearsal, clean-host and authority gate.

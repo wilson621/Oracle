@@ -557,3 +557,7 @@ qualification-evidence state was created. Stage 4 remains incomplete and Stage
 ## Stage 4 R5 execution-enabled mission - 6 August 2026
 
 Status: authorised pre-transfer. Accepted preparation commit 39c8b130ca4e1c4e037293d7ade646e3c2b25dce; accepted R8 package SHA-256 97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490; accepted R13 attempt stage3-r13-20260806T162253957Z-b0cb2a17. Maximum one transfer, one authority and one attempt. Authority remains barred until the independently reconciled two-host rehearsal and fresh post-rehearsal gates pass.
+
+## Stage 4 R5 pre-authority engineering failure - 6 August 2026
+
+Transfer 	ransfer-stage4-r5-20260806T181151844Z-ac1fb503 failed before admission because the provider verifier required a version property from the intentionally hash-only 	askkill binding. No readiness, rehearsal, provider, authority, attempt or evidence state was created; private-link recovery passed. The transfer is immutable and barred. Exactly one corrected replacement transfer is authorised.

@@ -4,6 +4,7 @@
   "programme": "Sprint 30.5 Stage 4 live authentication and protected rendering",
   "revision": "R5",
   "status": "founder-authorised-execution-enabled",
+  "replacesTransferId": "transfer-stage4-r5-20260806T181151844Z-ac1fb503",
   "executionSurface": "accepted-r8-installed-msix",
   "requiredBranch": "sprint-9-overlay",
   "executionAuthority": {

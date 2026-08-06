@@ -1113,3 +1113,7 @@ considered.
 ## Stage 4 R5 execution-enabled gate - 6 August 2026
 
 Proceed through one immutable transfer, isolated two-host rehearsal, bilateral zero-residue verification, fresh post-rehearsal pre-authority admission and only then one governed R5 attempt. No retry is permitted after authority consumption or permanent failure. Stage 5 remains unauthorised.
+
+## Stage 4 R5 replacement-transfer gate - 6 August 2026
+
+Preserve 	ransfer-stage4-r5-20260806T181151844Z-ac1fb503 unchanged as pre-authority failure. Prepare one fresh replacement only after optional-version regression passes. The replacement must name the failed transfer in manifest and custody. No authority or attempt exists or may be created before the complete governed gate chain passes.

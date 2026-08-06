@@ -18,6 +18,7 @@ assert.equal(readFileSync(`${custodyPath}.sha256.txt`,"ascii"),`${args.get("expe
 const manifest=JSON.parse(readFileSync(manifestPath,"utf8"));
 const custody=JSON.parse(readFileSync(custodyPath,"utf8"));
 assert.equal(manifest.contract,"oracle.sprint-30-5.stage-4-r5-transfer-manifest");
+assert.equal(manifest.replacesTransferId,contract.replacesTransferId);
 assert.match(manifest.transferId,new RegExp(contract.identity.transferPattern,"u"));
 assert.match(manifest.founderGrantId,new RegExp(contract.identity.founderGrantPattern,"u"));
 assert.equal(manifest.preparation.executionCommit,args.get("expected-commit"));
@@ -32,6 +33,7 @@ assert.equal(manifest.privateKeysIncluded,false);
 assert.equal(manifest.productionCredentialsIncluded,false);
 assert.equal(manifest.productSourceIncluded,false);
 assert.equal(custody.transferId,manifest.transferId);
+assert.equal(custody.replacesTransferId,manifest.replacesTransferId);
 assert.equal(custody.founderGrantId,manifest.founderGrantId);
 assert.equal(custody.createOnly,true);
 assert.equal(custody.independentVerificationRequired,true);

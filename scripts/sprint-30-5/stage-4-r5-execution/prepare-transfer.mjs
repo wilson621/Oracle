@@ -7,11 +7,12 @@ import {
 } from "./stage4r5-core.mjs";
 
 const args = parseArguments(process.argv.slice(2));
-for (const name of ["founder-token", "founder-grant-id", "transfer-id", "timestamp-utc", "destination-root", "expected-commit"]) if (!args.has(name)) throw new Error(`Missing --${name}.`);
+for (const name of ["founder-token", "founder-grant-id", "transfer-id", "timestamp-utc", "destination-root", "expected-commit", "replaces-transfer-id"]) if (!args.has(name)) throw new Error(`Missing --${name}.`);
 assertContract();
 if (args.get("founder-token") !== contract.executionAuthority.requiredFounderToken) throw new Error("Exact Founder execution token is absent.");
 if (!new RegExp(contract.identity.transferPattern, "u").test(args.get("transfer-id"))) throw new Error("Transfer identity is malformed.");
 if (!new RegExp(contract.identity.founderGrantPattern, "u").test(args.get("founder-grant-id"))) throw new Error("Founder grant identity is malformed.");
+if (args.get("replaces-transfer-id") !== contract.replacesTransferId) throw new Error("Immutable failed-transfer replacement binding differs.");
 const timestamp = new Date(args.get("timestamp-utc"));
 if (!Number.isFinite(timestamp.valueOf()) || timestamp.toISOString() !== args.get("timestamp-utc")) throw new Error("Transfer timestamp is not canonical UTC.");
 const repository = validateRepository(args.get("expected-commit"), true);
@@ -76,6 +77,7 @@ writeJsonCreateOnly(manifestPath, {
   contract: "oracle.sprint-30-5.stage-4-r5-transfer-manifest",
   revision: "R5",
   transferId: args.get("transfer-id"),
+  replacesTransferId: args.get("replaces-transfer-id"),
   founderGrantId: args.get("founder-grant-id"),
   createdAtUtc: args.get("timestamp-utc"),
   founderAuthorisedQualificationExecution: true,
@@ -101,6 +103,7 @@ writeJsonCreateOnly(custodyPath, {
   schemaVersion: "1.0.0",
   contract: "oracle.sprint-30-5.stage-4-r5-transfer-custody",
   transferId: args.get("transfer-id"),
+  replacesTransferId: args.get("replaces-transfer-id"),
   founderGrantId: args.get("founder-grant-id"),
   recordedAtUtc: args.get("timestamp-utc"),
   createOnly: true,
