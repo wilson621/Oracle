@@ -1094,3 +1094,18 @@ CLI and Docker execution-host dependencies conflict with the accepted clean
 `Founder-QA-01` architecture. Stage 4 is incomplete and Stage 5 remains
 blocked. The next permissible mission is bounded, execution-barred Stage 4 R5
 engineering preparation for a clean-host provider and journey protocol.
+
+## Stage 4 R5 clean-host engineering preparation complete - 6 August 2026
+
+R5 now binds the exact accepted R8 package and R13 closure to a split-host Stage
+4 protocol. `DESKTOP-M3H22E4` owns the accepted R4 Supabase provider only;
+`Founder-QA-01` remains clean and owns the installed package and ten journeys.
+The isolated private link exposes only ports 54321 and 54324 through exact
+loopback relays, with no default route and no PostgreSQL publication.
+
+The retained twenty-phase lifecycle and hostile-fixture suite pass. No product,
+provider, relay or governed qualification state was created. Stage 4 remains
+unqualified and Stage 5 remains blocked. A separate Founder-authorised
+execution-enabled R5 mission must bind current provider-host tools, rehearse the
+exact two-host cell and prepare any future transfer before authority can be
+considered.

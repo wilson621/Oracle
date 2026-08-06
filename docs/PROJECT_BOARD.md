@@ -1180,3 +1180,16 @@ with clean `Founder-QA-01`. Stage 4 is incomplete and Stage 5 remains blocked.
 Next action: Founder-authorised bounded Stage 4 R5 engineering preparation for
 the clean-host provider and journey protocol. No engineering or qualification
 state exists under this assessment.
+
+## Stage 4 R5 clean-host preparation complete - 6 August 2026
+
+R5 preparation is complete for R8/R13. The real R4 provider remains on the main
+PC; clean `Founder-QA-01` owns the package and all ten journeys over an isolated
+private link and two exact loopback relays. R4's twenty phases and fail-closed
+claims remain intact. Static and hostile-fixture validation passed with zero
+provider, relay, transfer, authority, attempt or qualification state.
+
+Stage 4 remains incomplete and Stage 5 remains blocked. Next action requires a
+separate Founder-authorised execution-enabled R5 mission for fresh tool binding,
+two-host rehearsal and later transfer preparation; qualification authority
+remains barred.

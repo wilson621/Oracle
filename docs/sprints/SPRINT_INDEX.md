@@ -228,3 +228,12 @@ semantics remain reusable, while its repository and developer-tool-dependent
 execution design conflicts with clean `Founder-QA-01`. Stage 4 is incomplete,
 Stage 5 remains blocked, and the recommended next mission is bounded,
 execution-barred Stage 4 R5 engineering preparation.
+
+## Stage 4 R5 clean-host engineering preparation - 6 August 2026
+
+The bounded R5 preparation is complete for R8/R13. It retains R4's real
+provider, ten journeys and twenty phases while keeping `Founder-QA-01` free of
+repositories and developer tooling. The provider-only main-PC role, isolated
+private link and two exact loopback relays are contractually separated from
+package qualification. Validation passed without provider, relay or governed
+qualification state. A separate execution-enabled R5 mission is required.

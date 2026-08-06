@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-4-r5-engineering-preparation",
+  "programme": "Sprint 30.5 Stage 4 live authentication and protected rendering",
+  "revision": "R5",
+  "status": "engineering-preparation-qualification-barred",
+  "classification": [
+    "NON-QUALIFICATION",
+    "NON-AUTHORITY",
+    "NON-EVIDENCE",
+    "ENGINEERING PREPARATION"
+  ],
+  "acceptedChain": {
+    "stage2": {
+      "revision": "R8",
+      "attemptId": "stage2-r8-20260806T134157536Z-a0bf3986",
+      "candidateCommit": "4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d",
+      "candidateTree": "1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a",
+      "acceptedEvidenceIndexSha256": "16bf586a3c9f6ac6e164a05b70c14fa7381607dddb42d230819d599c3dc9dd8b"
+    },
+    "stage3": {
+      "revision": "R13",
+      "attemptId": "stage3-r13-20260806T162253957Z-b0cb2a17",
+      "authorityId": "authority-stage3-r13-20260806T162253957Z-b0cb2a17",
+      "acceptedEvidenceIndexSha256": "830a3dd59c493de17bfb7c51da49e882f8d09e6ac135e5aaaefd7cbb9b648cb6",
+      "finalEvidenceManifestSha256": "ee12f0307d5c55dc05027c50dcba4860923ff36544c432055417005cee3e19f8",
+      "archiveSha256": "4e7fb5b75b036e7edf78438117950f4be78c74ad26bc0d102e77dc6658da3c7a",
+      "providerConnectivityClaimed": false,
+      "authenticationClaimed": false
+    },
+    "historicalStage4": {
+      "revision": "R4",
+      "attemptId": "stage4-r4-20260804T133045451Z-13f6da53",
+      "authorityId": "authority-stage4-r4-20260804T133045451Z-13f6da53",
+      "acceptedEvidenceIndexSha256": "f54bb660578bcd2dadf8ad4412f1d58738441df4688816eabc64ea3f7cdeeac8",
+      "finalEvidenceManifestSha256": "0b740dfc12e2334a63807d3097e302f864b9adaa1caf58b2b8757b3c57752b46",
+      "archiveSha256": "7f01fe4fcf5bee2b32b220a26660ea163a92e98450c093d1e7dc4c6752c7598c",
+      "disposition": "accepted-immutable-history-for-r6-r12-only"
+    }
+  },
+  "package": {
+    "identity": "Oracle.Platform.LocalCertification",
+    "version": "0.1.6.0",
+    "architecture": "x64",
+    "fileName": "Oracle_0.1.6.0_x64_STAGE2_REQUALIFICATION_R8_LOCAL_TEST_ONLY.msix",
+    "sha256": "97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490",
+    "publicCertificateFileName": "Oracle.Stage2R8PublicCertificate.cer",
+    "publicCertificateSha256": "78eb64dc769a87cbe82620a8d7bb6da655bdc2d38fe87f58b5c90f3c672492b2",
+    "certificateThumbprint": "A01F08EB5A07308FEAB3812692516C667D50EA56",
+    "publisher": "CN=Oracle Stage 2 Requalification R8 Local Test Signing - NOT PRODUCTION",
+    "runtimeManifestVersion": "1.7.0",
+    "providerOrigin": "http://127.0.0.1:54321"
+  },
+  "authorityBoundary": {
+    "engineeringPreparationAuthorised": true,
+    "productModificationPermitted": false,
+    "providerStateCreationPermitted": false,
+    "transferCreationPermitted": false,
+    "authorityCreationPermitted": false,
+    "qualificationAttemptPermitted": false,
+    "qualificationExecutionPermitted": false,
+    "maximumTransfers": 0,
+    "maximumAuthorities": 0,
+    "maximumAttempts": 0,
+    "futureExecutionRequiresSeparateFounderAuthority": true
+  },
+  "hostArchitecture": {
+    "model": "split-host-isolated-qualification-cell",
+    "engineeringProviderHost": {
+      "identity": "DESKTOP-M3H22E4",
+      "responsibilities": [
+        "governed-disposable-supabase-provider",
+        "provider-image-and-migration-admission",
+        "provider-secret-custody",
+        "provider-teardown-and-zero-residue"
+      ],
+      "qualificationExecutionPermitted": false,
+      "installedOraclePackagePermitted": false,
+      "developmentToolsPermitted": ["git", "node", "npm", "supabase", "docker"]
+    },
+    "qualificationHost": {
+      "identity": "Founder-QA-01",
+      "model": "MEDION ERAZER P6605 MD61596",
+      "repositoryPermitted": false,
+      "developmentToolInstallationPermitted": false,
+      "requiredAbsentDevelopmentTools": [
+        "git",
+        "node",
+        "npm",
+        "supabase",
+        "docker",
+        "python",
+        "dotnet",
+        "msbuild"
+      ],
+      "permittedRuntime": [
+        "Windows PowerShell 5.1",
+        "Windows built-in APIs and services",
+        "manifest-bound PowerShell qualification harness"
+      ],
+      "responsibilities": [
+        "transfer-and-host-admission",
+        "loopback-provider-relay",
+        "R8-package-trust-installation-and-activation",
+        "ten-live-journey-execution",
+        "package-and-relay-teardown",
+        "create-only-evidence-generation"
+      ]
+    }
+  },
+  "network": {
+    "internetPermittedDuringQualification": false,
+    "activeIpv4DefaultRoutePermitted": false,
+    "activeIpv6DefaultRoutePermitted": false,
+    "link": "private-on-link-rfc1918-between-admitted-hosts",
+    "providerPublications": [54321, 54324],
+    "qualificationHostLoopbackRelays": [
+      {"listenAddress": "127.0.0.1", "listenPort": 54321, "connectPort": 54321},
+      {"listenAddress": "127.0.0.1", "listenPort": 54324, "connectPort": 54324}
+    ],
+    "postgresRemoteAccessPermitted": false,
+    "productionEndpointAccessPermitted": false,
+    "ambientNetworkFallbackPermitted": false,
+    "relayImplementation": "Windows netsh interface portproxy",
+    "relayMustBeAbsentBeforeAndAfter": true
+  },
+  "provider": {
+    "classification": "disposable-local-non-production",
+    "implementation": "accepted-r4-supabase-stack-on-engineering-provider-host",
+    "supabaseCliVersion": "2.109.1",
+    "externalEmail": false,
+    "productionEndpoint": false,
+    "services": {
+      "postgres": {"image": "public.ecr.aws/supabase/postgres:17.6.1.143", "digest": "sha256:80d7b27c3e8d77cfa7226eee9508671796da214781ff15a35b3670d7ad5ee453", "port": 54322},
+      "gotrue": {"image": "public.ecr.aws/supabase/gotrue:v2.192.0", "digest": "sha256:b252efb680be37d4a8bf77c210cf0439c19b63a4b51929233a65dd101d25bdab"},
+      "kong": {"image": "public.ecr.aws/supabase/kong:2.8.1", "digest": "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d", "port": 54321},
+      "mailpit": {"image": "public.ecr.aws/supabase/mailpit:v1.30.2", "digest": "sha256:37a38e48e9338cd7e89dfeb487f37b02ebfcd9cb23111bed2d345e79d37d6dd6", "port": 54324},
+      "postgrest": {"image": "public.ecr.aws/supabase/postgrest:v14.14", "digest": "sha256:d2009b5c9deffc210c8a5592698472fede14fd9f6ca89823c8474ca54d58c012"}
+    },
+    "requiredMigrations": [
+      "001_initial_schema.sql",
+      "007_operator_achievements.sql",
+      "008_operator_ownership.sql",
+      "009_operator_intelligence_persistence.sql",
+      "010_operator_trust_control_persistence.sql",
+      "011_operator_account_provisioning.sql",
+      "012_operator_identity_lifecycle.sql",
+      "013_authoritative_session_lifecycle.sql",
+      "014_operator_development_lifecycle.sql"
+    ],
+    "secretHandoff": "attempt-scoped-create-only-redacted-from-evidence",
+    "futureProviderState": "created-only-after-authority-consumption-and-destroyed-before-evidence-freeze"
+  },
+  "requiredJourneys": [
+    "anonymous-protected-route-rejected",
+    "account-created-without-session",
+    "confirmation-mail-captured-locally",
+    "email-verified",
+    "verified-password-sign-in-passed",
+    "unverified-account-rejected",
+    "protected-route-rendered",
+    "protected-api-authorised",
+    "cross-account-isolation-passed",
+    "sign-out-invalidates-session"
+  ],
+  "requiredLifecycle": [
+    "authority-consumed",
+    "baseline-verified",
+    "zero-state-verified",
+    "provider-admitted",
+    "trust-established",
+    "package-installed",
+    "runtime-configuration-created",
+    "package-activated",
+    "installed-server-admitted",
+    "anonymous-boundaries-passed",
+    "account-created-unverified",
+    "email-verified",
+    "authenticated-rendering-passed",
+    "isolation-passed",
+    "session-invalidated",
+    "package-removed",
+    "trust-removed",
+    "provider-torn-down",
+    "cleanup-passed",
+    "evidence-frozen"
+  ],
+  "claimPreservation": {
+    "realSupabaseProviderRequired": true,
+    "providerFixtureEquivalencePermitted": false,
+    "sourceBuildQualificationPermitted": false,
+    "mainPcQualificationExceptionPermitted": false,
+    "allTenJourneysRequired": true,
+    "twoDistinctPrincipalsRequired": true,
+    "rowLevelSecurityRequired": true,
+    "installedProtectedRenderingRequired": true,
+    "zeroResidueRequiredOnBothHosts": true
+  },
+  "preparationValidation": {
+    "providerStateCreated": false,
+    "networkRelayCreated": false,
+    "installedPackageMutated": false,
+    "staticAndFixtureValidationOnly": true,
+    "futureElevatedTwoHostRehearsalRequiresSeparateAuthority": true
+  }
+}

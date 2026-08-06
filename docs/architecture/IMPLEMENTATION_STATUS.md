@@ -1333,3 +1333,15 @@ repository, Git, Node/npm, Supabase CLI and Docker on the execution host. A
 bounded Stage 4 R5 engineering-preparation mission must establish and validate
 a clean-host provider and journey architecture before any transfer or
 qualification execution can be considered. Stage 5 remains blocked.
+
+## Stage 4 R5 clean-host protocol prepared - 6 August 2026
+
+The R5 engineering namespace implements exact R8/R13 bindings, split-host
+provider topology, the retained R4 lifecycle, clean-host network and provider
+admission policies, a PowerShell-only ten-journey driver, secret redaction and
+hostile fixtures. The application package and product source are unchanged.
+
+Provider and relay execution are deliberately barred. The next implementation
+step requires separate authority to bind the live provider-host toolchain and
+validate the actual isolated two-host link. Stage 4 and Stage 5 remain
+unqualified.

@@ -2595,3 +2595,20 @@ is incomplete and Stage 5 remains blocked. The recommended next mission is
 bounded Stage 4 R5 engineering preparation to design and validate the clean-host
 provider and journey protocol. This assessment created no engineering,
 transfer, authority, attempt or qualification state.
+
+## Stage 4 R5 clean-host engineering preparation complete - 6 August 2026
+
+The R5 preparation establishes a split-host, internet-isolated Stage 4 protocol
+for accepted R8/R13 without changing the product. The main PC owns only the
+accepted real disposable provider; clean `Founder-QA-01` owns R8 installation,
+activation and all ten journeys. Two loopback relays preserve the installed
+package's loopback-only provider contract without installing development tools
+on the laptop.
+
+The R4 journey and twenty-phase lifecycle semantics, real-provider identity,
+local confirmation mail, two-principal RLS isolation, secret separation and
+zero-residue requirements remain mandatory. Static and adversarial validation
+passed. No provider, relay, transfer, authority, attempt or qualification state
+was created. The next Founder decision is whether to authorise a separate
+execution-enabled R5 mission, beginning with fresh tool binding and two-host
+rehearsal while authority remains barred.

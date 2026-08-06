@@ -34,7 +34,7 @@ results.
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
 | 2 | Candidate Freeze and Package Reconciliation | **R8 Founder-accepted and formally closed - current baseline** | Attempt `stage2-r8-20260806T134157536Z-a0bf3986`; package `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`; clean-host verification and zero residue passed | None for Stage 2; separate Stage 3 assessment/authority required |
 | 3 | Clean Windows Qualification | **R13 Founder-accepted and formally closed - current baseline** | Attempt `stage3-r13-20260806T162253957Z-b0cb2a17`; R8 package, clean-host lifecycle, reset/repair and zero residue independently verified | None for Stage 3; separate Stage 4 assessment/authority required |
-| 4 | Live Authentication and Protected Rendering | **R4 accepted immutable history for R6; R8/R13 impact assessed** | R4 remains valid only for R6/R12; its developer-tool-dependent protocol is incompatible with the accepted R8 clean host | Bounded Stage 4 R5 engineering preparation; no execution authority |
+| 4 | Live Authentication and Protected Rendering | **R5 clean-host engineering preparation complete; qualification not started** | Exact R8/R13 split-host protocol prepared; R4 remains immutable R6/R12 history | Separate execution-enabled R5 mission; authority remains barred |
 | 5 | Installed Package GPU, Performance and Accessibility | **Accessibility correction included in accepted R8; Stage 5 not qualified** | Historical Stage 5 preparation and R6 evidence do not qualify the R8 package | Accepted R8-bound Stages 3-4, then separate Stage 5 authority |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
 | 7 | Final Integrated Qualification and Sprint 30 Closure Package | **Not started** | Requires complete immutable evidence from Stages 1–6 | Stage 6 acceptance, then separate Stage 7 authority |
@@ -538,3 +538,18 @@ execution host. That conflicts with the accepted clean-host architecture for
 Founder-level mission is bounded, execution-barred Stage 4 R5 engineering
 preparation to establish the clean-host provider and journey protocol. No Stage
 4 engineering or qualification state was created by this assessment.
+
+## Stage 4 R5 clean-host engineering preparation complete - 6 August 2026
+
+R5 engineering preparation is complete for the accepted R8/R13 baseline. It
+retains R4's real disposable Supabase provider, ten journeys and twenty-phase
+lifecycle while preserving `Founder-QA-01` as the repository-free and
+developer-tool-free qualification host. `DESKTOP-M3H22E4` is limited to
+provider custody and teardown; it cannot install or qualify the Oracle package.
+
+The private two-host cell admits only provider and Mailpit ports over an
+internet-isolated on-link route, with exact loopback relays on the qualification
+host and PostgreSQL publication prohibited. Static and hostile-fixture
+validation passed. No product, provider, relay, transfer, authority, attempt or
+qualification-evidence state was created. Stage 4 remains incomplete and Stage
+5 remains blocked. A separate execution-enabled R5 mission is required.

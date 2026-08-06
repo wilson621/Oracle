@@ -639,3 +639,13 @@ to adopt a later formatting standard.
 | Document | Link | Purpose |
 | --- | --- | --- |
 | Stage 4 R8/R13 qualification-impact assessment | [Sprint 30.5 Stage 4 R8/R13 Qualification-Impact Assessment](sprints/SPRINT_30_5_STAGE_4_R8_R13_QUALIFICATION_IMPACT_ASSESSMENT.md) | Exact-artifact impact, R4 reuse boundary, clean-host architecture dependency and recommended R5 preparation mission |
+
+## Stage 4 Requalification R5 clean-host preparation
+
+| Document | Link | Purpose |
+| --- | --- | --- |
+| R5 plan | [Sprint 30.5 Stage 4 R5 Plan](sprints/SPRINT_30_5_STAGE_4_R5_PLAN.md) | Split-host clean qualification architecture, retained R4 claims and authority boundary |
+| R5 implementation | [Sprint 30.5 Stage 4 R5 Implementation](sprints/SPRINT_30_5_STAGE_4_R5_IMPLEMENTATION.md) | Exact R8/R13 contract, PowerShell journey driver and provider/network policies |
+| R5 validation | [Sprint 30.5 Stage 4 R5 Preparation Validation](sprints/SPRINT_30_5_STAGE_4_R5_PREPARATION_VALIDATION_REPORT.md) | Static, regression and hostile-fixture results with zero governed state |
+| R5 pre-execution gate | [Sprint 30.5 Stage 4 R5 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_4_R5_PRE_EXECUTION_GATE.md) | Fresh tool, host, private-link, zero-state and authority requirements |
+| R5 engineering closure | [Sprint 30.5 Stage 4 R5 Engineering Preparation Closure](sprints/SPRINT_30_5_STAGE_4_R5_ENGINEERING_PREPARATION_CLOSURE.md) | Completed bounded mission and recommended execution-enabled next mission |

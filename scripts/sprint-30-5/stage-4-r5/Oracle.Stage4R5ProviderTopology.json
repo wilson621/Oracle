@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0.0",
+  "contract": "oracle.sprint-30-5.stage-4-r5-provider-topology",
+  "classification": ["DISPOSABLE", "PRIVATE-LINK", "NON-PRODUCTION", "STAGE-4-R5-ONLY"],
+  "providerHost": {
+    "identity": "DESKTOP-M3H22E4",
+    "provider": "accepted R4 Supabase stack",
+    "qualificationExecution": false,
+    "packageInstallation": false,
+    "publishedServices": [54321, 54324]
+  },
+  "qualificationHost": {
+    "identity": "Founder-QA-01",
+    "providerOriginObservedByPackage": "http://127.0.0.1:54321",
+    "mailCaptureOriginObservedByJourney": "http://127.0.0.1:54324",
+    "relay": "Windows built-in portproxy only",
+    "developmentTools": []
+  },
+  "isolation": {
+    "defaultRoutes": 0,
+    "privateOnLinkRouteOnly": true,
+    "internetAccess": false,
+    "productionEndpoints": false,
+    "postgresPublishedToQualificationHost": false,
+    "relayPresentBeforeAuthority": false,
+    "relayPresentAfterTeardown": false
+  },
+  "custody": {
+    "providerSecrets": "attempt-scoped and absent from evidence",
+    "handoff": "create-only exchange record after authority consumption",
+    "identities": "fresh provider, account, session and evidence namespaces",
+    "historicalReuse": false
+  }
+}
