@@ -33,7 +33,7 @@ results.
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
 | 2 | Candidate Freeze and Package Reconciliation | **R8 Founder-accepted and formally closed - current baseline** | Attempt `stage2-r8-20260806T134157536Z-a0bf3986`; package `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`; clean-host verification and zero residue passed | None for Stage 2; separate Stage 3 assessment/authority required |
-| 3 | Clean Windows Qualification | **R13 engineering preparation complete; R8 qualification not executed** | Exact R8 bindings, clean-host controls and the reused fourteen-phase lifecycle passed engineering validation; no transfer, authority or attempt exists | Founder acceptance, then separate authority for exactly one governed R13 mission |
+| 3 | Clean Windows Qualification | **Exactly-one R13 mission authorised; pre-transfer** | Execution-enabled R8-bound baseline; one fresh transfer permitted; authority and attempt remain gated and absent | Create and independently verify the single transfer, then clean-host admission and pre-authority gates |
 | 4 | Live Authentication and Protected Rendering | **R4 accepted immutable history for R6; not qualified for R8** | R4 remains valid only for the R6/R12 chain | Accepted R8-bound Stage 3, then separate Stage 4 authority |
 | 5 | Installed Package GPU, Performance and Accessibility | **Accessibility correction included in accepted R8; Stage 5 not qualified** | Historical Stage 5 preparation and R6 evidence do not qualify the R8 package | Accepted R8-bound Stages 3-4, then separate Stage 5 authority |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
@@ -509,3 +509,9 @@ The R13 preparation is complete against accepted Stage 2 R8 package SHA-256 97be
 Exact immutable bindings, 35 PowerShell parses, 15 policy and compatibility tests, all fourteen lifecycle phases, fourteen injected failures, optional-member audit and the elevated R8 post-reset integration passed. Managed LocalState was recreated through ApplicationDataManager without unconfigured activation; final package, trust and work residue was zero.
 
 No transfer, authority, attempt or qualification evidence was created. Stage 3 remains unqualified for R8, and Stage 4 and later work remain blocked. The next Founder-level decision is whether to accept R13 preparation and authorise exactly one governed R13 mission.
+
+## Stage 3 R13 exactly-one execution mission authorised - 6 August 2026
+
+Mission mission-stage3-r13-20260806T160537355Z-aed09e3b authorises exactly one fresh create-only R13 transfer, one authority and one attempt against accepted R8. Authority and attempt creation remain barred until independent transfer verification, clean-host admission, fresh continuity and every elevated pre-authority gate pass.
+
+No retry is authorised after a consumed authority or permanent failed attempt. Stage 4 and later work remain unauthorised.

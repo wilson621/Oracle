@@ -1307,3 +1307,9 @@ The R13 preparation is complete against accepted Stage 2 R8 package SHA-256 97be
 Exact immutable bindings, 35 PowerShell parses, 15 policy and compatibility tests, all fourteen lifecycle phases, fourteen injected failures, optional-member audit and the elevated R8 post-reset integration passed. Managed LocalState was recreated through ApplicationDataManager without unconfigured activation; final package, trust and work residue was zero.
 
 No transfer, authority, attempt or qualification evidence was created. Stage 3 remains unqualified for R8, and Stage 4 and later work remain blocked. The next Founder-level decision is whether to accept R13 preparation and authorise exactly one governed R13 mission.
+
+## Stage 3 R13 exactly-one execution mission authorised - 6 August 2026
+
+Mission mission-stage3-r13-20260806T160537355Z-aed09e3b authorises exactly one fresh create-only R13 transfer, one authority and one attempt against accepted R8. Authority and attempt creation remain barred until independent transfer verification, clean-host admission, fresh continuity and every elevated pre-authority gate pass.
+
+No retry is authorised after a consumed authority or permanent failed attempt. Stage 4 and later work remain unauthorised.

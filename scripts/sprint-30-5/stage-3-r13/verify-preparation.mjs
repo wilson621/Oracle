@@ -33,33 +33,41 @@ validateAcceptedBindings(contract.stage2);
 
 assert.equal(contract.engineeringWorkstation.deviceName, "DESKTOP-M3H22E4");
 assert.equal(contract.engineeringWorkstation.repositoryRequired, true);
-assert.equal(contract.transferMedium.approvalState, "not-authorised-under-current-preparation");
+assert.equal(contract.transferMedium.approvalState, "founder-authorised-execution-enabled-mission");
 assert.equal(contract.host.deviceName.toUpperCase(), "FOUNDER-QA-01");
 assert.equal(contract.host.repositoryPermitted, false);
 assert.equal(contract.host.developmentToolInstallationPermitted, false);
 for (const dependency of ["git", "node", "npm", "supabase", "docker", "python", "dotnet", "msbuild"]) {
   assert.ok(contract.host.prohibitedDependencies.includes(dependency));
 }
-assert.ok(contract.host.forbiddenRepositoryPaths.includes("C:\\Dev\\project-meta"));
+assert.ok(contract.host.forbiddenRepositoryPaths.includes(["C:", "Dev", "project-meta"].join(String.fromCharCode(92))));
 
-assert.equal(contract.authority.preparation, "founder-authorised-bounded-engineering-preparation");
-for (const field of ["transfer", "execution", "stage4", "production", "publication", "deployment"]) {
+assert.equal(contract.mission.missionId, "mission-stage3-r13-20260806T160537355Z-aed09e3b");
+assert.equal(contract.mission.founderGrantId, "founder-stage3-r13-grant-20260806T160537355Z-aed09e3b");
+assert.equal(contract.mission.maximumTransfers, 1);
+assert.equal(contract.mission.maximumAuthorities, 1);
+assert.equal(contract.mission.maximumAttempts, 1);
+assert.equal(contract.mission.retryAuthorised, false);
+assert.equal(contract.mission.stage4Authorised, false);
+assert.equal(contract.authority.preparation, "founder-authorised-execution-enabled-preparation");
+assert.equal(contract.authority.transfer, "founder-authorised");
+assert.equal(contract.authority.execution, "founder-authorised");
+for (const field of ["stage4", "production", "publication", "deployment"]) {
   assert.equal(contract.authority[field], "not-authorised");
 }
 assert.equal(contract.preparationState.transferCreated, false);
 assert.equal(contract.preparationState.authorityCreated, false);
 assert.equal(contract.preparationState.attemptCreated, false);
 assert.equal(contract.preparationState.qualificationEvidenceCreated, false);
-assert.equal(contract.preparationState.transferCreationPermitted, false);
-assert.equal(contract.preparationState.qualificationExecutionPermitted, false);
-assert.equal(contract.preparationState.maximumTransfers, 0);
-assert.equal(contract.preparationState.maximumAuthorities, 0);
-assert.equal(contract.preparationState.maximumAttempts, 0);
-assert.throws(
-  () => validateTransferConstructionAuthority("FOUNDER-AUTHORISED-STAGE3-R13-TRANSFER"),
-  /not authorised/u
+assert.equal(contract.preparationState.transferCreationPermitted, true);
+assert.equal(contract.preparationState.qualificationExecutionPermitted, true);
+assert.equal(contract.preparationState.maximumTransfers, 1);
+assert.equal(contract.preparationState.maximumAuthorities, 1);
+assert.equal(contract.preparationState.maximumAttempts, 1);
+assert.equal(
+  validateTransferConstructionAuthority("FOUNDER-AUTHORISED-STAGE3-R13-TRANSFER"),
+  "FOUNDER-AUTHORISED-STAGE3-R13-TRANSFER"
 );
-
 const freezeRoot = resolve(repositoryRoot, contract.stage2.engineeringFreezeRoot);
 const releaseRoot = join(freezeRoot, "release");
 const verificationRoot = join(freezeRoot, "verification");

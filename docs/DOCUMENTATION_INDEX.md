@@ -630,3 +630,4 @@ to adopt a later formatting standard.
 | R13 validation | [Sprint 30.5 Stage 3 R13 Preparation Validation](sprints/SPRINT_30_5_STAGE_3_R13_PREPARATION_VALIDATION_REPORT.md) | Static, regression, adversarial, simulated and elevated integration results |
 | R13 pre-execution gate | [Sprint 30.5 Stage 3 R13 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_3_R13_PRE_EXECUTION_GATE.md) | Zero current transfer, authority and attempt state |
 | R13 engineering closure | [Sprint 30.5 Stage 3 R13 Engineering Closure](sprints/SPRINT_30_5_STAGE_3_R13_ENGINEERING_CLOSURE.md) | Qualification-ready baseline and recommended next mission |
+| R13 execution mission | [Sprint 30.5 Stage 3 R13 Execution Mission](sprints/SPRINT_30_5_STAGE_3_R13_EXECUTION_MISSION.md) | Exact Founder grant, single transfer/authority/attempt limits and clean-host pre-authority boundary |

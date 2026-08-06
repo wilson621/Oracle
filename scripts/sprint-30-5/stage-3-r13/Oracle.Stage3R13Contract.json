@@ -293,7 +293,7 @@
                            "filesystem":  "NTFS",
                            "label":  "ORACLE-S3R1",
                            "volumeSerial":  "783A-2CD4",
-                           "approvalState":  "not-authorised-under-current-preparation"
+                           "approvalState":  "founder-authorised-execution-enabled-mission"
                        },
     "output":  {
                    "transferBase":  ".artifacts/sprint-30-5/stage-3-r13/transfers",
@@ -348,9 +348,9 @@
                                      "docs/sprints/evidence/sprint-30-5/stage-3-r12"
                                  ],
     "authority":  {
-                      "preparation":  "founder-authorised-bounded-engineering-preparation",
-                      "transfer":  "not-authorised",
-                      "execution":  "not-authorised",
+                      "preparation":  "founder-authorised-execution-enabled-preparation",
+                      "transfer":  "founder-authorised",
+                      "execution":  "founder-authorised",
                       "stage4":  "not-authorised",
                       "production":  "not-authorised",
                       "publication":  "not-authorised",
@@ -431,16 +431,16 @@
                                      "disposition":  "accepted-immutable-history-for-r6-only"
                                  },
     "preparationState":  {
-                             "status":  "engineering-preparation-complete-qualification-ready",
+                             "status":  "execution-enabled-baseline-authorised",
                              "transferCreated":  false,
                              "authorityCreated":  false,
                              "attemptCreated":  false,
                              "qualificationEvidenceCreated":  false,
-                             "transferCreationPermitted":  false,
-                             "qualificationExecutionPermitted":  false,
-                             "maximumTransfers":  0,
-                             "maximumAuthorities":  0,
-                             "maximumAttempts":  0,
+                             "transferCreationPermitted":  true,
+                             "qualificationExecutionPermitted":  true,
+                             "maximumTransfers":  1,
+                             "maximumAuthorities":  1,
+                             "maximumAttempts":  1,
                              "validation":  {
                                                 "result":  "passed",
                                                 "classification":  [
@@ -471,5 +471,16 @@
                                                             "independent-return-verification",
                                                             "programme-closure"
                                                         ]
-                               }
+                               },
+    "mission":  {
+                    "missionId":  "mission-stage3-r13-20260806T160537355Z-aed09e3b",
+                    "founderGrantId":  "founder-stage3-r13-grant-20260806T160537355Z-aed09e3b",
+                    "authorisedAtUtc":  "2026-08-06T16:05:37.355Z",
+                    "scope":  "exactly-one-governed-stage3-r13-qualification-mission",
+                    "maximumTransfers":  1,
+                    "maximumAuthorities":  1,
+                    "maximumAttempts":  1,
+                    "retryAuthorised":  false,
+                    "stage4Authorised":  false
+                }
 }
