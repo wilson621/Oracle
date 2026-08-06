@@ -48,6 +48,27 @@ function Get-OracleStage2R8PayloadInventory {
   )
 }
 
+function Assert-OracleStage2R8PayloadInventory {
+  param(
+    [Parameter(Mandatory = $true)][object[]]$Actual,
+    [Parameter(Mandatory = $true)][object[]]$Expected
+  )
+  if ($Actual.Count -ne $Expected.Count) { throw "Transfer payload count differs." }
+  $actualByPath = [Collections.Generic.Dictionary[string,object]]::new([StringComparer]::Ordinal)
+  foreach ($item in $Actual) {
+    $itemPath = [string]$item.path
+    if ($actualByPath.ContainsKey($itemPath)) { throw "Transfer payload contains a duplicate exact path." }
+    $actualByPath.Add($itemPath,$item)
+  }
+  $expectedPaths = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+  foreach ($item in $Expected) {
+    $itemPath = [string]$item.path
+    if (-not $expectedPaths.Add($itemPath)) { throw "Transfer manifest contains a duplicate exact path." }
+    if (-not $actualByPath.ContainsKey($itemPath)) { throw "Transfer payload path differs." }
+    $actualItem = $actualByPath[$itemPath]
+    if ([int64]$actualItem.bytes -ne [int64]$item.bytes -or [string]$actualItem.sha256 -cne [string]$item.sha256) { throw "Transfer payload inventory differs." }
+  }
+}
 function Assert-OracleStage2R8Transfer {
   param(
     [Parameter(Mandatory = $true)][string]$TransferRoot,
@@ -79,10 +100,9 @@ function Assert-OracleStage2R8Transfer {
   [void](Assert-OracleStage2R8NoReparseTraversal -Path $payloadRoot -Root $root)
   $actual = @(Get-OracleStage2R8PayloadInventory -PayloadRoot $payloadRoot)
   $expected = @($manifest.files)
-  if ($actual.Count -ne $expected.Count) { throw "Transfer payload count differs." }
-  for ($index = 0; $index -lt $actual.Count; $index++) {
-    if ([string]$actual[$index].path -cne [string]$expected[$index].path -or [int64]$actual[$index].bytes -ne [int64]$expected[$index].bytes -or [string]$actual[$index].sha256 -cne [string]$expected[$index].sha256) { throw "Transfer payload inventory differs." }
-  }
+
+  Assert-OracleStage2R8PayloadInventory -Actual $actual -Expected $expected
+
   $executionContractPath = Join-Path $payloadRoot 'harness\Oracle.Stage2RequalificationR8Contract.json'
   if ((Get-OracleStage2R8Sha256 $executionContractPath) -cne [string]$manifest.executionContractSha256 -or [string]$verification.executionContractSha256 -cne [string]$manifest.executionContractSha256) { throw "Execution contract binding differs." }
   [pscustomobject][ordered]@{ transferId=[string]$manifest.transferId; payloadRoot=$payloadRoot; manifest=$manifest; independentlyVerified=$true }

@@ -714,6 +714,7 @@ export function harnessFileInventory() {
     join(import.meta.dirname, "Invoke-OracleStage2R8FounderHandoff.ps1"),
     join(import.meta.dirname, "Invoke-OracleStage2R8EngineeringRehearsal.ps1"),
     join(import.meta.dirname, "Test-OracleStage2R8CanaryScanner.ps1"),
+    join(import.meta.dirname, "Test-OracleStage2R8PayloadInventory.ps1"),
     join(import.meta.dirname, "remove-exact-certificate.ps1"),
     join(import.meta.dirname, "runtime-configuration-custody.mjs"),
     join(import.meta.dirname, "sign-release-manifest-exact.ps1"),

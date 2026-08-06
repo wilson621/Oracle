@@ -211,10 +211,10 @@
                       "engineeringPreparation":  "founder-authorised",
                       "candidateBuild":  "founder-authorised-engineering-freeze-only",
                       "candidateSigning":  "founder-authorised-local-test-engineering-freeze-only",
-                      "transferCreationPermitted":  true,
-                      "authorityCreationPermitted":  true,
-                      "attemptCreationPermitted":  true,
-                      "qualificationExecutionPermitted":  true,
+                      "transferCreationPermitted":  false,
+                      "authorityCreationPermitted":  false,
+                      "attemptCreationPermitted":  false,
+                      "qualificationExecutionPermitted":  false,
                       "stage3":  "not-authorised",
                       "stage4":  "not-authorised",
                       "stage5":  "not-authorised",
@@ -273,7 +273,7 @@
                                  "dotnet":  "C:/Program Files/dotnet/dotnet.exe",
                                  "bsdtar":  "C:/Windows/System32/tar.exe"
                              },
-    "status":  "founder-authorised-execution-enabled",
+    "status":  "pre-authority-transfer-failed-replacement-not-authorised",
     "preparation":  {
                         "artifactBase":  ".artifacts/sprint-30-5/stage-2-r8-engineering-freeze",
                         "createOnly":  true,
@@ -303,7 +303,7 @@
                               "preAuthorityAdmissionRequired":  true
                           },
     "futureTransfer":  {
-                           "creationPermitted":  true,
+                           "creationPermitted":  false,
                            "createOnly":  true,
                            "independentVerificationRequired":  true,
                            "payloadRuntime":  "Windows PowerShell 5.1 only",
@@ -333,6 +333,16 @@
                              "createAuthorityOnlyAfterAllPreAuthorityGates":  true,
                              "retryAfterConsumedAuthority":  false,
                              "stage3Authorised":  false,
-                             "authorisedAtUtc":  "2026-08-06T12:36:12.0275124Z"
+                             "authorisedAtUtc":  "2026-08-06T12:36:12.0275124Z",
+                             "state":  "pre-authority-transfer-failed",
+                             "transferCreationConsumed":  true,
+                             "replacementTransferAuthorised":  false,
+                             "failureRecord":  {
+                                                   "path":  ".artifacts/sprint-30-5/stage-2-r8-pre-authority-failures/transfer-stage2-r8-20260806T123612020Z-338a5276-admission-failure.json",
+                                                   "sha256":  "6b6281b2bbcc43a3c3a0404d63832099391b015e7143ce845e5b200832845bac",
+                                                   "manifestSha256":  "579d514b8817b8a06d7e6328f8861e5852cdeba7082b456158230f1a9d3717ae",
+                                                   "custodySha256":  "31b61f8b6fb60a682ff7aeca6dc8573a753c1d2444bd03bbd1ba85de4f775c6c",
+                                                   "verificationSha256":  "61c92d9cea891627a707276a6fdb1727442c152e1e051ef179ff9e757fcac51d"
+                                               }
                          }
 }

@@ -27,3 +27,8 @@ The package canary scan uses a bounded 1 MiB streaming window with overlap equal
 ## Authority controls
 
 The accepted freeze did not itself create execution authority. The later execution overlay binds one exact Founder grant and transfer identity. `prepare-transfer.mjs` rejects every other identity, while the clean-host qualification script rejects mismatched grant, contract, transfer, custody or independent-verification records before authority creation.
+
+
+## Post-transfer admission correction
+
+The first immutable execution transfer independently verified but failed clean-host admission before handoff because Node and Windows PowerShell produced different case-orderings for the same exact inventory. The repository correction compares exact paths through ordinal dictionaries and sets rather than array indexes. Permuted order passes; case, hash and duplicate-path adversarial fixtures fail. The failed transfer remains unchanged, and replacement execution is not authorised.

@@ -9,10 +9,9 @@ R8 restores the established split-host qualification architecture for corrected 
 
 ## Current authority boundary
 
-The Founder-authorised execution overlay binds grant `founder-stage2-r8-grant-20260806T123612020Z-338a5276` to exactly one transfer identity, `transfer-stage2-r8-20260806T123612020Z-338a5276`. It permits one create-only transfer, one authority and one attempt. Authority and attempt creation remain impossible until exact transfer admission, clean-host admission, continuity and every pre-authority gate pass.
+The one authorised transfer `transfer-stage2-r8-20260806T123612020Z-338a5276` is an immutable pre-authority engineering failure. Its PowerShell admission exposed a cross-runtime inventory-order defect before USB handoff, continuity, authority or attempt. The repository comparator is corrected and adversarially validated, but the failed transfer remains unchanged and prohibited from admission or execution.
 
-The execution contract prohibits retry after a consumed authority and does not authorise Stage 3 or later work.
-
+The contract is fail-closed. No replacement transfer, authority, attempt, qualification execution, Stage 3 or later work is authorised.
 ## Engineering entry points
 
 - `node verify-preparation.mjs`
