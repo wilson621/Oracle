@@ -60,6 +60,25 @@ function Assert-OracleStage4R5Transfer {
   [pscustomobject][ordered]@{result='passed';transferId=[string]$manifest.transferId;founderGrantId=[string]$manifest.founderGrantId;manifest=$manifest;payloadRoot=$payloadRoot;transferRoot=$root;manifestSha256=Get-OracleStage4R5Sha256 $manifestPath;custodySha256=Get-OracleStage4R5Sha256 $custodyPath;verificationSha256=Get-OracleStage4R5Sha256 $verificationPath}
 }
 
+function Assert-OracleStage4R5EngineeringRehearsalBundle {
+  param([Parameter(Mandatory=$true)][string]$BundleRoot,[Parameter(Mandatory=$true)][string]$ExpectedManifestSha256)
+  $root=[IO.Path]::GetFullPath($BundleRoot);[void](Assert-OracleStage4R5NoReparseTraversal $root $root)
+  $manifestPath=Join-Path $root 'Oracle.Stage4R5EngineeringRehearsalBundle.json'
+  if(-not(Test-Path -LiteralPath $manifestPath -PathType Leaf)){throw 'Engineering rehearsal-bundle manifest is absent.'}
+  if((Get-OracleStage4R5Sha256 $manifestPath)-cne$ExpectedManifestSha256.ToLowerInvariant()){throw 'Engineering rehearsal-bundle manifest hash differs.'}
+  $manifest=Get-Content -Raw -LiteralPath $manifestPath|ConvertFrom-Json
+  if([string]$manifest.contract-cne'oracle.sprint-30-5.stage-4-r5-engineering-rehearsal-bundle'-or[string]$manifest.bundleId-cnotmatch'^engineering-rehearsal-stage4-r5-[0-9]{8}T[0-9]{9}Z-[a-f0-9]{8}$'){throw 'Engineering rehearsal-bundle identity differs.'}
+  if([bool]$manifest.transferCreated-or[bool]$manifest.qualificationExecutionPermitted-or[bool]$manifest.authorityCreated-or[bool]$manifest.attemptCreated-or[bool]$manifest.qualificationEvidence){throw 'Engineering rehearsal bundle contains governed execution state.'}
+  $payloadRoot=Join-Path $root 'payload';$actual=@(Get-OracleStage4R5Inventory $payloadRoot);$expected=@($manifest.payload)
+  if($actual.Count-ne$expected.Count){throw 'Engineering rehearsal-bundle payload count differs.'}
+  for($index=0;$index-lt$expected.Count;$index++){if([string]$actual[$index].path-cne[string]$expected[$index].path-or[long]$actual[$index].bytes-ne[long]$expected[$index].bytes-or[string]$actual[$index].sha256-cne[string]$expected[$index].sha256){throw "Engineering rehearsal-bundle payload differs at index $index."}}
+  [pscustomobject][ordered]@{
+    result='passed';transferId=('NON-TRANSFER-'+[string]$manifest.bundleId);founderGrantId='NO-FOUNDER-GRANT-ENGINEERING-REHEARSAL';manifest=$manifest
+    payloadRoot=$payloadRoot;transferRoot=$root;manifestSha256=Get-OracleStage4R5Sha256 $manifestPath
+    custodySha256='NO-CUSTODY-NON-TRANSFER';verificationSha256='NO-TRANSFER-VERIFICATION'
+  }
+}
+
 function Assert-OracleStage4R5Administrator {
   $principal=[Security.Principal.WindowsPrincipal]::new([Security.Principal.WindowsIdentity]::GetCurrent())
   if(-not$principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)){throw 'Stage 4 R5 clean-host execution requires elevated Windows PowerShell.'}

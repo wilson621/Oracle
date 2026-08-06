@@ -4,7 +4,9 @@ param(
   [Parameter(Mandatory=$true)][string]$ExpectedManifestSha256,
   [Parameter(Mandatory=$true)][string]$ExpectedCustodySha256,
   [Parameter(Mandatory=$true)][string]$ExpectedVerificationSha256,
-  [Parameter(Mandatory=$true)][string]$RehearsalRoot
+  [Parameter(Mandatory=$true)][string]$RehearsalRoot,
+  [switch]$EngineeringRehearsalBundle,
+  [string]$ExpectedEngineeringRehearsalBundleSha256
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
@@ -12,7 +14,7 @@ $ErrorActionPreference='Stop'
 . (Join-Path $PSScriptRoot 'Oracle.Stage4R5JourneyPolicy.ps1')
 . (Join-Path $PSScriptRoot 'Oracle.Stage4R5ProviderHostPolicy.ps1')
 $contract=Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'Oracle.Stage4R5ExecutionContract.json')|ConvertFrom-Json
-$transfer=Assert-OracleStage4R5Transfer $TransferRoot $ExpectedManifestSha256 $ExpectedCustodySha256 $ExpectedVerificationSha256
+$transfer=if($EngineeringRehearsalBundle){Assert-OracleStage4R5EngineeringRehearsalBundle $TransferRoot $ExpectedEngineeringRehearsalBundleSha256}else{Assert-OracleStage4R5Transfer $TransferRoot $ExpectedManifestSha256 $ExpectedCustodySha256 $ExpectedVerificationSha256}
 $root=[IO.Path]::GetFullPath($RehearsalRoot);$requestPath=Join-Path $root 'provider-start-request.json';$admissionPath=Join-Path $root 'provider-admission.json';$handoffPath=Join-Path $root 'provider-secret-handoff.json'
 if(-not(Test-Path -LiteralPath $requestPath -PathType Leaf)){throw "Two-host rehearsal request is absent: $requestPath"}
 $request=Get-Content -Raw -LiteralPath $requestPath|ConvertFrom-Json;if([string]$request.contract-cne'oracle.sprint-30-5.stage-4-r5-provider-rehearsal-request'-or[string]$request.transferId-cne[string]$transfer.transferId-or[bool]$request.authorityCreated-or[bool]$request.attemptCreated){throw 'Two-host rehearsal request differs.'}

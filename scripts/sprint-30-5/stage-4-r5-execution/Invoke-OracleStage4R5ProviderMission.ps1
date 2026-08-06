@@ -7,7 +7,9 @@ param(
   [Parameter(Mandatory=$true)][string]$ExpectedVerificationSha256,
   [Parameter(Mandatory=$true)][string]$ProviderPreflightPath,
   [Parameter(Mandatory=$true)][string]$ExpectedProviderPreflightSha256,
-  [Parameter(Mandatory=$true)][string]$ReturnRoot
+  [Parameter(Mandatory=$true)][string]$ReturnRoot,
+  [switch]$EngineeringRehearsalBundle,
+  [string]$ExpectedEngineeringRehearsalBundleSha256
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
@@ -15,7 +17,7 @@ $contract=Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'Oracle.Stage4R
 . (Join-Path $PSScriptRoot 'Oracle.Stage4R5CleanHostCore.ps1')
 Assert-OracleStage4R5Administrator
 if(-not[string]::Equals([string]$env:COMPUTERNAME,[string]$contract.hosts.provider.computerName,[StringComparison]::OrdinalIgnoreCase)){throw 'Provider host identity differs.'}
-$transfer=Assert-OracleStage4R5Transfer $TransferRoot $ExpectedManifestSha256 $ExpectedCustodySha256 $ExpectedVerificationSha256
+$transfer=if($EngineeringRehearsalBundle){Assert-OracleStage4R5EngineeringRehearsalBundle $TransferRoot $ExpectedEngineeringRehearsalBundleSha256}else{Assert-OracleStage4R5Transfer $TransferRoot $ExpectedManifestSha256 $ExpectedCustodySha256 $ExpectedVerificationSha256}
 $providerPreflight=[IO.Path]::GetFullPath($ProviderPreflightPath);if((-not (Test-Path -LiteralPath $providerPreflight -PathType Leaf)) -or ((Get-OracleStage4R5Sha256 $providerPreflight) -cne $ExpectedProviderPreflightSha256.ToLowerInvariant())){throw 'Bound provider pre-authority record differs.'}
 $preflight=Get-Content -Raw -LiteralPath $providerPreflight|ConvertFrom-Json;if([string]$preflight.result-cne'passed'-or[string]$preflight.transferId-cne[string]$transfer.transferId-or[bool]$preflight.providerStateCreated){throw 'Provider pre-authority admission differs.'}
 $routes=@(Get-OracleStage4R5DefaultRoutes);if($routes.Count-ne0){throw 'Provider host regained an active default route.'}

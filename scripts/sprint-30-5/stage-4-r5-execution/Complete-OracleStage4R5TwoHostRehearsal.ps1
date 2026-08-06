@@ -5,13 +5,15 @@ param(
   [Parameter(Mandatory=$true)][string]$ExpectedCustodySha256,
   [Parameter(Mandatory=$true)][string]$ExpectedVerificationSha256,
   [Parameter(Mandatory=$true)][string]$RehearsalRoot,
-  [Parameter(Mandatory=$true)][string]$OutputPath
+  [Parameter(Mandatory=$true)][string]$OutputPath,
+  [switch]$EngineeringRehearsalBundle,
+  [string]$ExpectedEngineeringRehearsalBundleSha256
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 . (Join-Path $PSScriptRoot 'Oracle.Stage4R5CleanHostCore.ps1')
 . (Join-Path $PSScriptRoot 'Oracle.Stage4R5JourneyPolicy.ps1')
-$transfer=Assert-OracleStage4R5Transfer $TransferRoot $ExpectedManifestSha256 $ExpectedCustodySha256 $ExpectedVerificationSha256
+$transfer=if($EngineeringRehearsalBundle){Assert-OracleStage4R5EngineeringRehearsalBundle $TransferRoot $ExpectedEngineeringRehearsalBundleSha256}else{Assert-OracleStage4R5Transfer $TransferRoot $ExpectedManifestSha256 $ExpectedCustodySha256 $ExpectedVerificationSha256}
 $root=[IO.Path]::GetFullPath($RehearsalRoot)
 $required=@('provider-start-request.json','provider-admission.json','qualification-terminal.json','qualification-host-rehearsal-manifest.json','provider-teardown.json')
 foreach($name in $required){if(-not(Test-Path -LiteralPath (Join-Path $root $name) -PathType Leaf)){throw "Two-host rehearsal record is absent: $name"}}

@@ -8,7 +8,9 @@ param(
   [string]$RehearsalCompletionPath,
   [string]$ExpectedRehearsalCompletionSha256,
   [switch]$RehearsalReadiness,
-  [Parameter(Mandatory=$true)][string]$OutputPath
+  [Parameter(Mandatory=$true)][string]$OutputPath,
+  [switch]$EngineeringRehearsalBundle,
+  [string]$ExpectedEngineeringRehearsalBundleSha256
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
@@ -21,7 +23,7 @@ Assert-OracleStage4R5Administrator
 if(-not[string]::Equals([string]$env:COMPUTERNAME,[string]$contract.hosts.provider.computerName,[StringComparison]::OrdinalIgnoreCase)){throw 'Provider host identity differs.'}
 $git=[string]$contract.toolchain.git.path;$head=(& $git -C $repositoryRoot rev-parse HEAD).Trim();if($LASTEXITCODE-ne0-or$head-cne$ExpectedExecutionCommit){throw 'Provider-host execution HEAD differs.'}
 $branch=(& $git -C $repositoryRoot branch --show-current).Trim();$status=(& $git -C $repositoryRoot status --porcelain=v1 --untracked-files=all|Out-String).Trim();if($LASTEXITCODE-ne0-or$branch-cne[string]$contract.requiredBranch-or-not[string]::IsNullOrEmpty($status)){throw 'Provider-host repository is not clean on the required branch.'}
-$transfer=Assert-OracleStage4R5Transfer $TransferRoot $ExpectedManifestSha256 $ExpectedCustodySha256 $ExpectedVerificationSha256
+$transfer=if($EngineeringRehearsalBundle){Assert-OracleStage4R5EngineeringRehearsalBundle $TransferRoot $ExpectedEngineeringRehearsalBundleSha256}else{Assert-OracleStage4R5Transfer $TransferRoot $ExpectedManifestSha256 $ExpectedCustodySha256 $ExpectedVerificationSha256}
 $rehearsalCompletionSha=$null
 if(-not$RehearsalReadiness){
   if([string]::IsNullOrWhiteSpace($RehearsalCompletionPath)-or[string]::IsNullOrWhiteSpace($ExpectedRehearsalCompletionSha256)){throw 'Final provider pre-authority requires the completed two-host rehearsal binding.'}
