@@ -833,7 +833,6 @@ function verifyRelease(release, candidate) {
         unpacked,
         "-PackageFileName",
         PACKAGE_FILE,
-    "Oracle.Stage2R8PublicCertificate.cer",
         "-ExpectedThumbprint",
         exactThumbprint,
         "-ExpectedSubject",
@@ -919,8 +918,14 @@ function performSafetyTeardown() {
     );
   }
   assertCleanMachineQualificationState();
-  const residue = findFiles(attemptRoot).filter((path) =>
-    /\.(cer|key|pem|pfx|p12)$/iu.test(path)
+  const admittedPublicCertificate = resolve(
+    directories.release,
+    contract.package.publicCertificateFileName
+  ).toLowerCase();
+  const residue = findFiles(attemptRoot).filter(
+    (path) =>
+      /\.(cer|key|pem|pfx|p12)$/iu.test(path) &&
+      resolve(path).toLowerCase() !== admittedPublicCertificate
   );
   if (residue.length !== 0) {
     throw new Error(`Signing material remains: ${residue.join(", ")}`);
