@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R8 Execution Mission
 
-Status: REPLACEMENT TRANSFER SEALED - PHYSICAL CLEAN-HOST HANDOFF REQUIRED
+Status: REPLACEMENT PRE-AUTHORITY HOST-IDENTITY FAILURE - FURTHER TRANSFER NOT AUTHORISED
 Date: 6 August 2026
 
 ## Exact authority
@@ -73,3 +73,27 @@ The single corrected replacement transfer was created from execution commit `e9c
 The exact PowerShell core embedded in the transfer admitted the sealed source transfer successfully. The create-only USB copy under `context-stage2-r8-replacement-cc9e03ce` passed the same embedded admission and a full file-by-file source comparison. The governed return root is `return-stage2-r8-replacement-cc9e03ce`.
 
 Source transfer creation is closed. No continuity, authority, attempt or qualification evidence exists. The next action is the physical move of the USB to `Founder-QA-01` and execution of the exact clean-host handoff command.
+## Replacement clean-host admission failure
+
+On `Founder-QA-01`, the USB transfer and fresh local create-only copy were admitted successfully. Host admission then failed closed with `Qualification host identity differs.` before continuity, authority or attempt creation.
+
+Read-only diagnostics proved:
+
+- environment computer name: `FOUNDER-QA-01`
+- CIM computer name: `FOUNDER-QA-01`
+- governed expected name: `Founder-QA-01`
+- local transfer exists: true
+- attempt entries: 0
+- return entries: 0
+
+The defect is a case-sensitive comparison of a Windows computer name. Windows computer names are case-insensitive. The replacement transfer, USB copy and local copy remain unchanged and are prohibited from admission or execution. The immutable failure record is `.artifacts/sprint-30-5/stage-2-r8-pre-authority-failures/transfer-stage2-r8-replacement-20260806T125821770Z-cc9e03ce-host-identity-failure.json`, SHA-256 `fd30328ceca30c175565c77a1acd8969f9c21da32858e00089eca594035da81a`.
+
+## Host-identity engineering correction
+
+The repository now compares actual and expected computer names with `StringComparison.OrdinalIgnoreCase`. Exact, uppercase-Windows and lowercase-Windows forms pass. Different suffix, appended and truncated identities fail. The correction does not weaken exact host identity beyond Windows-native case semantics.
+
+All transfer, authority, attempt and qualification permissions are fail-closed. No further transfer is authorised.
+
+## Required Founder decision
+
+Accept the replacement transfer as immutable pre-authority engineering failure evidence, accept the corrected hostname baseline, and authorise one new create-only corrected transfer with fresh identities.

@@ -10,7 +10,7 @@ const repository=path.resolve(root,"../../..");
 const contractPath=path.join(root,"Oracle.Stage2RequalificationR8Contract.json");
 const contract=JSON.parse(fs.readFileSync(contractPath,"utf8"));
 assert.equal(contract.contract,"oracle.sprint-30-5.stage-2-requalification-r8");
-assert.equal(contract.status,"replacement-transfer-sealed-awaiting-clean-host");
+assert.equal(contract.status,"replacement-pre-authority-host-identity-failed-further-transfer-not-authorised");
 assert.equal(contract.candidate.commit,"4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d");
 assert.equal(contract.candidate.tree,"1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a");
 assert.equal(contract.package.version,"0.1.6.0");
@@ -20,9 +20,9 @@ assert.equal(contract.qualificationHost.developmentToolInstallationPermitted,fal
 assert.deepEqual(contract.qualificationHost.prohibitedDependencies,["git","node","npm","supabase","docker"]);
 assert.equal(contract.futureTransfer.creationPermitted,false);
 assert.equal(contract.authority.transferCreationPermitted,false);
-assert.equal(contract.authority.authorityCreationPermitted,true);
-assert.equal(contract.authority.attemptCreationPermitted,true);
-assert.equal(contract.authority.qualificationExecutionPermitted,true);
+assert.equal(contract.authority.authorityCreationPermitted,false);
+assert.equal(contract.authority.attemptCreationPermitted,false);
+assert.equal(contract.authority.qualificationExecutionPermitted,false);
 assert.match(contract.executionMission.founderGrantId,/^founder-stage2-r8-grant-\d{8}T\d{9}Z-[0-9a-f]{8}$/u);
 assert.match(contract.executionMission.transferId,/^transfer-stage2-r8-\d{8}T\d{9}Z-[0-9a-f]{8}$/u);
 assert.equal(contract.executionMission.maximumTransfers,1);
@@ -44,7 +44,11 @@ assert.equal(contract.replacementMission.maximumAttempts,1);
 assert.equal(contract.replacementMission.createAuthorityOnlyAfterAllPreAuthorityGates,true);
 assert.equal(contract.replacementMission.retryAfterConsumedAuthority,false);
 assert.equal(contract.replacementMission.stage3Authorised,false);
-assert.equal(contract.replacementMission.state,"transfer-sealed-awaiting-physical-handoff");
+assert.equal(contract.replacementMission.state,"pre-authority-host-identity-failed");
+assert.equal(sha256(path.resolve(repository,contract.replacementMission.failureRecord.path)),contract.replacementMission.failureRecord.sha256);
+assert.equal(contract.replacementMission.failureRecord.hostContinuityCreated,false);
+assert.equal(contract.replacementMission.failureRecord.authorityCreated,false);
+assert.equal(contract.replacementMission.failureRecord.attemptCreated,false);
 assert.equal(contract.replacementMission.transferCreationConsumed,true);
 const failedTransferRoot=path.resolve(repository,contract.futureTransfer.artifactBase,contract.executionMission.transferId);
 assert.equal(fs.existsSync(failedTransferRoot),true);
@@ -101,6 +105,8 @@ assert.match(core,/HashSet\[string\].*StringComparer\]::Ordinal/u);
 assert.doesNotMatch(core,/\$actual\[\$index\].*\$expected\[\$index\]/u);
 assert.match(core,/Transfer predecessor lineage shape differs/u);
 assert.match(core,/Transfer predecessor lineage differs/u);
+assert.match(core,/StringComparison\]::OrdinalIgnoreCase/u);
+assert.doesNotMatch(core,/\$computer -cne/u);
 
 const transferBuilder=source("prepare-transfer.mjs");
 assert.match(transferBuilder,/Exactly four transfer arguments are required/u);
@@ -137,10 +143,14 @@ try{
   assert.deepEqual(fs.readdirSync(local),[]);
   assert.deepEqual(fs.readdirSync(returned),[]);
 }finally{fs.rmSync(temporary,{recursive:true,force:true});}
+const hostIdentityFixture=spawnSync(powershell,["-NoLogo","-NoProfile","-ExecutionPolicy","Bypass","-File",path.join(root,"Test-OracleStage2R8HostIdentity.ps1")],{cwd:repository,encoding:"utf8",shell:false,windowsHide:true});
+assert.equal(hostIdentityFixture.status,0,hostIdentityFixture.stderr);
+const hostIdentityResult=JSON.parse(hostIdentityFixture.stdout);
+assert.deepEqual({result:hostIdentityResult.result,comparison:hostIdentityResult.comparison,uppercaseWindows:hostIdentityResult.accepted.uppercaseWindows,differentSuffix:hostIdentityResult.rejected.differentSuffix},{result:"passed",comparison:"OrdinalIgnoreCase",uppercaseWindows:true,differentSuffix:true});
 const scannerFixture=spawnSync(powershell,["-NoLogo","-NoProfile","-ExecutionPolicy","Bypass","-File",path.join(root,"Test-OracleStage2R8CanaryScanner.ps1")],{cwd:repository,encoding:"utf8",shell:false,windowsHide:true});
 assert.equal(scannerFixture.status,0,scannerFixture.stderr);
 const scannerResult=JSON.parse(scannerFixture.stdout);
 assert.deepEqual({result:scannerResult.result,absentRejected:scannerResult.absentRejected,utf8ChunkBoundaryDetected:scannerResult.utf8ChunkBoundaryDetected,utf16LeDetected:scannerResult.utf16LeDetected},{result:"passed",absentRejected:true,utf8ChunkBoundaryDetected:true,utf16LeDetected:true});
-console.log(JSON.stringify({result:"passed",contract:contract.contract,status:contract.status,founderGrantId:contract.replacementMission.founderGrantId,transferId:contract.replacementMission.transferId,historicalBindings:contract.historicalEvidenceBindings.length,cleanHostRuntime:"powershell-only",historicalFailedTransferPreserved:true,replacementTransferCreated:true,replacementTransferSealed:true,sourceTransferCreationClosed:true,correctedAdmission:"passed",usbCopyVerified:true,authorityCreated:false,attemptCreated:false,fixtures:{syntax:"passed",historicalIntegrity:"passed",freshReplacementIdentity:"passed",exactMissionBinding:"passed",ordinalInventoryCorrection:"passed",preAuthorityOrdering:"passed",cleanHostTooling:"passed",transferAdmission:"passed",signatureVerification:"passed",canaryRejection:"passed",failClosedBeforeAuthority:"passed"}},null,2));
+console.log(JSON.stringify({result:"passed",contract:contract.contract,status:contract.status,founderGrantId:contract.replacementMission.founderGrantId,transferId:contract.replacementMission.transferId,historicalBindings:contract.historicalEvidenceBindings.length,cleanHostRuntime:"powershell-only",historicalFailedTransferPreserved:true,replacementTransferState:"immutable-pre-authority-host-identity-failure",sourceTransferCreationClosed:true,hostnameCorrection:"OrdinalIgnoreCase",furtherTransferAuthorised:false,authorityCreated:false,attemptCreated:false,fixtures:{syntax:"passed",historicalIntegrity:"passed",freshReplacementIdentity:"passed",exactMissionBinding:"passed",ordinalInventoryCorrection:"passed",hostIdentityCorrection:"passed",preAuthorityOrdering:"passed",cleanHostTooling:"passed",transferAdmission:"passed",signatureVerification:"passed",canaryRejection:"passed",failClosedBeforeAuthority:"passed"}},null,2));
 function source(name){return fs.readFileSync(path.join(root,name),"utf8");}
 function sha256(file){return crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");}

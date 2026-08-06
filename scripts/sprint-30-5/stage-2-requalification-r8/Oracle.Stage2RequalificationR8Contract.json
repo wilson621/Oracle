@@ -212,9 +212,9 @@
                       "candidateBuild":  "founder-authorised-engineering-freeze-only",
                       "candidateSigning":  "founder-authorised-local-test-engineering-freeze-only",
                       "transferCreationPermitted":  false,
-                      "authorityCreationPermitted":  true,
-                      "attemptCreationPermitted":  true,
-                      "qualificationExecutionPermitted":  true,
+                      "authorityCreationPermitted":  false,
+                      "attemptCreationPermitted":  false,
+                      "qualificationExecutionPermitted":  false,
                       "stage3":  "not-authorised",
                       "stage4":  "not-authorised",
                       "stage5":  "not-authorised",
@@ -273,7 +273,7 @@
                                  "dotnet":  "C:/Program Files/dotnet/dotnet.exe",
                                  "bsdtar":  "C:/Windows/System32/tar.exe"
                              },
-    "status":  "replacement-transfer-sealed-awaiting-clean-host",
+    "status":  "replacement-pre-authority-host-identity-failed-further-transfer-not-authorised",
     "preparation":  {
                         "artifactBase":  ".artifacts/sprint-30-5/stage-2-r8-engineering-freeze",
                         "createOnly":  true,
@@ -358,7 +358,7 @@
                                  "retryAfterConsumedAuthority":  false,
                                  "stage3Authorised":  false,
                                  "authorisedAtUtc":  "2026-08-06T12:58:21.7721687Z",
-                                 "state":  "transfer-sealed-awaiting-physical-handoff",
+                                 "state":  "pre-authority-host-identity-failed",
                                  "transferCreationConsumed":  true,
                                  "sealedTransfer":  {
                                                           "manifestSha256":  "62b26194f10ce0b560cb906575f94cd2e55d6c589e149304151c098a38f5f0f1",
@@ -371,6 +371,14 @@
                                                           "usbFullTransferBytes":  215865538,
                                                           "usbContext":  "context-stage2-r8-replacement-cc9e03ce",
                                                           "usbReturnRoot":  "return-stage2-r8-replacement-cc9e03ce"
-                                                      }
+                                                      },
+                                 "failureRecord":  {
+                                                       "path":  ".artifacts/sprint-30-5/stage-2-r8-pre-authority-failures/transfer-stage2-r8-replacement-20260806T125821770Z-cc9e03ce-host-identity-failure.json",
+                                                       "sha256":  "fd30328ceca30c175565c77a1acd8969f9c21da32858e00089eca594035da81a",
+                                                       "firstFailure":  "Qualification host identity differs.",
+                                                       "hostContinuityCreated":  false,
+                                                       "authorityCreated":  false,
+                                                       "attemptCreated":  false
+                                                   }
                              }
 }

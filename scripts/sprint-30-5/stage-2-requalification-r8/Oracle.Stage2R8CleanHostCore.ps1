@@ -113,10 +113,17 @@ function Assert-OracleStage2R8Transfer {
   [pscustomobject][ordered]@{ transferId=[string]$manifest.transferId; payloadRoot=$payloadRoot; manifest=$manifest; independentlyVerified=$true }
 }
 
+function Test-OracleStage2R8HostIdentity {
+  param(
+    [Parameter(Mandatory = $true)][string]$Actual,
+    [Parameter(Mandatory = $true)][string]$Expected
+  )
+  [String]::Equals($Actual,$Expected,[StringComparison]::OrdinalIgnoreCase)
+}
 function Get-OracleStage2R8HostAdmission {
   param([Parameter(Mandatory = $true)]$Contract)
   $computer = [string]$env:COMPUTERNAME
-  if ($computer -cne [string]$Contract.qualificationHost.identity) { throw "Qualification host identity differs." }
+  if (-not (Test-OracleStage2R8HostIdentity -Actual $computer -Expected ([string]$Contract.qualificationHost.identity))) { throw "Qualification host identity differs." }
   if (Test-Path -LiteralPath 'C:\Dev\project-meta') { throw "Development repository is prohibited on the qualification host." }
   $presentTools = @()
   foreach ($tool in @($Contract.qualificationHost.prohibitedDependencies)) {

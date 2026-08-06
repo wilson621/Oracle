@@ -42,3 +42,8 @@ The accepted correction baseline is bound to one fresh replacement transfer and 
 ## Replacement transfer seal
 
 The one corrected replacement transfer was built from committed baseline e9c0cb0e4da8955935cbb090b332617849e4d125, independently verified, admitted by its embedded PowerShell core and copied create-only to the governed USB namespace. The USB copy passed full 18-file hash parity. Source transfer creation is closed; qualification state remains absent pending physical clean-host handoff.
+
+
+## Host-identity correction
+
+The sealed replacement transfer passed USB and local transfer admission but failed before continuity because the harness compared the uppercase Windows computer name with the mixed-case governed spelling case-sensitively. The corrected helper uses ordinal case-insensitive equality, matching Windows computer-name semantics while rejecting every non-case identity difference. No further transfer or qualification activity is authorised.
