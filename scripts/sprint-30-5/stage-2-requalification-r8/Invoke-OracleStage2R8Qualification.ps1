@@ -15,24 +15,24 @@ $contract = Get-Content -Raw -LiteralPath $contractPath | ConvertFrom-Json
 . (Join-Path $PSScriptRoot 'Oracle.Stage2R8CleanHostCore.ps1')
 
 if (
-  [string]$contract.status -cne 'founder-authorised-execution-enabled' -or
+  [string]$contract.status -cne 'founder-authorised-replacement-execution-enabled' -or
   -not [bool]$contract.futureTransfer.creationPermitted -or
   -not [bool]$contract.authority.authorityCreationPermitted -or
   -not [bool]$contract.authority.attemptCreationPermitted -or
   -not [bool]$contract.authority.qualificationExecutionPermitted -or
-  [int]$contract.executionMission.maximumTransfers -ne 1 -or
-  [int]$contract.executionMission.maximumAuthorities -ne 1 -or
-  [int]$contract.executionMission.maximumAttempts -ne 1 -or
-  -not [bool]$contract.executionMission.createAuthorityOnlyAfterAllPreAuthorityGates -or
-  [bool]$contract.executionMission.retryAfterConsumedAuthority -or
-  [bool]$contract.executionMission.stage3Authorised -or
-  [string]$contract.executionMission.founderGrantId -cne $FounderGrantId
+  [int]$contract.replacementMission.maximumTransfers -ne 1 -or
+  [int]$contract.replacementMission.maximumAuthorities -ne 1 -or
+  [int]$contract.replacementMission.maximumAttempts -ne 1 -or
+  -not [bool]$contract.replacementMission.createAuthorityOnlyAfterAllPreAuthorityGates -or
+  [bool]$contract.replacementMission.retryAfterConsumedAuthority -or
+  [bool]$contract.replacementMission.stage3Authorised -or
+  [string]$contract.replacementMission.founderGrantId -cne $FounderGrantId
 ) {
   throw 'R8 qualification execution is not authorised by this exact mission contract.'
 }
 
 $transfer = Assert-OracleStage2R8Transfer -TransferRoot $TransferRoot -ExpectedManifestSha256 $ExpectedManifestSha256 -ExpectedCustodySha256 $ExpectedCustodySha256 -ExpectedVerificationSha256 $ExpectedVerificationSha256
-if ([string]$transfer.transferId -cne [string]$contract.executionMission.transferId -or [string]$transfer.manifest.founderGrantId -cne $FounderGrantId) { throw 'R8 admitted transfer mission binding differs.' }
+if ([string]$transfer.transferId -cne [string]$contract.replacementMission.transferId -or [string]$transfer.manifest.founderGrantId -cne $FounderGrantId -or [string]$transfer.manifest.replacesTransferId -cne [string]$contract.replacementMission.replacesTransferId) { throw 'R8 admitted transfer mission binding differs.' }
 $hostAdmission = Get-OracleStage2R8HostAdmission -Contract $contract
 $localParent = [IO.Path]::GetFullPath($LocalExecutionParent)
 $return = [IO.Path]::GetFullPath($ReturnRoot)
@@ -44,6 +44,7 @@ $continuity = [ordered]@{
   schemaVersion='1.0.0'
   contract='oracle.sprint-30-5.stage-2-r8-host-continuity'
   transferId=[string]$transfer.transferId
+  replacesTransferId=[string]$transfer.manifest.replacesTransferId
   founderGrantId=$FounderGrantId
   host=$hostAdmission
   localExecutionParentAdmitted=$true
@@ -70,6 +71,7 @@ $authority = [ordered]@{
   authorityId=[string]$futureIdentity.authorityId
   attemptId=[string]$futureIdentity.attemptId
   transferId=[string]$transfer.transferId
+  replacesTransferId=[string]$transfer.manifest.replacesTransferId
   state='consumed'
   attemptsAuthorised=1
   attemptsConsumed=1
@@ -78,7 +80,7 @@ $authority = [ordered]@{
 }
 Write-OracleStage2R8CreateOnlyJson -Path $authorityPath -Value $authority
 $attemptRecordPath = Join-Path $attemptRoot 'attempt.json'
-Write-OracleStage2R8CreateOnlyJson -Path $attemptRecordPath -Value ([ordered]@{schemaVersion='1.0.0';contract='oracle.sprint-30-5.stage-2-r8-attempt';authorityId=[string]$futureIdentity.authorityId;attemptId=[string]$futureIdentity.attemptId;transferId=[string]$transfer.transferId;state='running';startedAtUtc=[DateTime]::UtcNow.ToString('o')})
+Write-OracleStage2R8CreateOnlyJson -Path $attemptRecordPath -Value ([ordered]@{schemaVersion='1.0.0';contract='oracle.sprint-30-5.stage-2-r8-attempt';authorityId=[string]$futureIdentity.authorityId;attemptId=[string]$futureIdentity.attemptId;transferId=[string]$transfer.transferId;replacesTransferId=[string]$transfer.manifest.replacesTransferId;state='running';startedAtUtc=[DateTime]::UtcNow.ToString('o')})
 
 $work = Join-Path $attemptRoot 'work'
 $evidence = Join-Path $attemptRoot 'evidence'
@@ -105,6 +107,7 @@ $outcome = [ordered]@{
   authorityId=[string]$futureIdentity.authorityId
   attemptId=[string]$futureIdentity.attemptId
   transferId=[string]$transfer.transferId
+  replacesTransferId=[string]$transfer.manifest.replacesTransferId
   candidateVerification=$verification
   finalHostAdmission=$finalAdmission
   zeroResidue=$zeroResidue
@@ -117,7 +120,7 @@ Copy-Item -LiteralPath $authorityPath -Destination (Join-Path $evidence 'single-
 Copy-Item -LiteralPath $continuityPath -Destination (Join-Path $evidence 'host-continuity.json')
 Copy-Item -LiteralPath $contractPath -Destination (Join-Path $evidence 'execution-contract.json')
 $manifestFiles = @(Get-OracleStage2R8PayloadInventory -PayloadRoot $evidence)
-$manifest = [ordered]@{schemaVersion='1.0.0';contract='oracle.sprint-30-5.stage-2-r8-final-evidence-manifest';authorityId=[string]$futureIdentity.authorityId;attemptId=[string]$futureIdentity.attemptId;result=[string]$outcome.result;files=$manifestFiles}
+$manifest = [ordered]@{schemaVersion='1.0.0';contract='oracle.sprint-30-5.stage-2-r8-final-evidence-manifest';authorityId=[string]$futureIdentity.authorityId;attemptId=[string]$futureIdentity.attemptId;transferId=[string]$transfer.transferId;replacesTransferId=[string]$transfer.manifest.replacesTransferId;result=[string]$outcome.result;files=$manifestFiles}
 Write-OracleStage2R8CreateOnlyJson -Path (Join-Path $attemptRoot 'final-evidence-manifest.json') -Value $manifest
 Write-OracleStage2R8CreateOnlyJson -Path (Join-Path $attemptRoot 'attempt-completion.json') -Value ([ordered]@{schemaVersion='1.0.0';contract='oracle.sprint-30-5.stage-2-r8-attempt-completion';authorityId=[string]$futureIdentity.authorityId;attemptId=[string]$futureIdentity.attemptId;state=if($null -eq $primary -and $zeroResidue){'completed'}else{'failed-permanently'};result=[string]$outcome.result;retryAuthorised=$false;completedAtUtc=[DateTime]::UtcNow.ToString('o')})
 Copy-Item -LiteralPath $attemptRoot -Destination $returnAttemptRoot -Recurse

@@ -211,10 +211,10 @@
                       "engineeringPreparation":  "founder-authorised",
                       "candidateBuild":  "founder-authorised-engineering-freeze-only",
                       "candidateSigning":  "founder-authorised-local-test-engineering-freeze-only",
-                      "transferCreationPermitted":  false,
-                      "authorityCreationPermitted":  false,
-                      "attemptCreationPermitted":  false,
-                      "qualificationExecutionPermitted":  false,
+                      "transferCreationPermitted":  true,
+                      "authorityCreationPermitted":  true,
+                      "attemptCreationPermitted":  true,
+                      "qualificationExecutionPermitted":  true,
                       "stage3":  "not-authorised",
                       "stage4":  "not-authorised",
                       "stage5":  "not-authorised",
@@ -273,7 +273,7 @@
                                  "dotnet":  "C:/Program Files/dotnet/dotnet.exe",
                                  "bsdtar":  "C:/Windows/System32/tar.exe"
                              },
-    "status":  "pre-authority-transfer-failed-replacement-not-authorised",
+    "status":  "founder-authorised-replacement-execution-enabled",
     "preparation":  {
                         "artifactBase":  ".artifacts/sprint-30-5/stage-2-r8-engineering-freeze",
                         "createOnly":  true,
@@ -303,7 +303,7 @@
                               "preAuthorityAdmissionRequired":  true
                           },
     "futureTransfer":  {
-                           "creationPermitted":  false,
+                           "creationPermitted":  true,
                            "createOnly":  true,
                            "independentVerificationRequired":  true,
                            "payloadRuntime":  "Windows PowerShell 5.1 only",
@@ -344,5 +344,20 @@
                                                    "custodySha256":  "31b61f8b6fb60a682ff7aeca6dc8573a753c1d2444bd03bbd1ba85de4f775c6c",
                                                    "verificationSha256":  "61c92d9cea891627a707276a6fdb1727442c152e1e051ef179ff9e757fcac51d"
                                                }
-                         }
+                         },
+    "replacementMission":  {
+                                 "founderGrantId":  "founder-stage2-r8-replacement-grant-20260806T125821770Z-cc9e03ce",
+                                 "transferId":  "transfer-stage2-r8-replacement-20260806T125821770Z-cc9e03ce",
+                                 "replacesTransferId":  "transfer-stage2-r8-20260806T123612020Z-338a5276",
+                                 "acceptedCorrectionBaseline":  "e449803796256b54323c2a11c7bda90c3ef6ca08",
+                                 "authorisedMission":  "exactly-one-corrected-replacement-stage-2-r8-clean-host-qualification",
+                                 "maximumTransfers":  1,
+                                 "maximumAuthorities":  1,
+                                 "maximumAttempts":  1,
+                                 "createAuthorityOnlyAfterAllPreAuthorityGates":  true,
+                                 "retryAfterConsumedAuthority":  false,
+                                 "stage3Authorised":  false,
+                                 "authorisedAtUtc":  "2026-08-06T12:58:21.7721687Z",
+                                 "state":  "founder-authorised-pre-transfer"
+                             }
 }

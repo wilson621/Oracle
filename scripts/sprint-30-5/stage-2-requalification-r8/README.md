@@ -9,9 +9,9 @@ R8 restores the established split-host qualification architecture for corrected 
 
 ## Current authority boundary
 
-The one authorised transfer `transfer-stage2-r8-20260806T123612020Z-338a5276` is an immutable pre-authority engineering failure. Its PowerShell admission exposed a cross-runtime inventory-order defect before USB handoff, continuity, authority or attempt. The repository comparator is corrected and adversarially validated, but the failed transfer remains unchanged and prohibited from admission or execution.
+The original transfer `transfer-stage2-r8-20260806T123612020Z-338a5276` remains an immutable pre-authority engineering failure and is prohibited from admission or execution.
 
-The contract is fail-closed. No replacement transfer, authority, attempt, qualification execution, Stage 3 or later work is authorised.
+A separately bound replacement mission authorises exactly one transfer, `transfer-stage2-r8-replacement-20260806T125821770Z-cc9e03ce`, under grant `founder-stage2-r8-replacement-grant-20260806T125821770Z-cc9e03ce`. Authority and attempt creation remain impossible until exact replacement-transfer admission, clean-host admission, continuity and every pre-authority gate pass. Retry and Stage 3 or later work remain unauthorised.
 ## Engineering entry points
 
 - `node verify-preparation.mjs`

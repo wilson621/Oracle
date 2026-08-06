@@ -32,3 +32,8 @@ The accepted freeze did not itself create execution authority. The later executi
 ## Post-transfer admission correction
 
 The first immutable execution transfer independently verified but failed clean-host admission before handoff because Node and Windows PowerShell produced different case-orderings for the same exact inventory. The repository correction compares exact paths through ordinal dictionaries and sets rather than array indexes. Permuted order passes; case, hash and duplicate-path adversarial fixtures fail. The failed transfer remains unchanged, and replacement execution is not authorised.
+
+
+## Corrected replacement binding
+
+The accepted correction baseline is bound to one fresh replacement transfer and grant. The new manifest, custody and independent-verification records must carry the immutable predecessor transfer ID. Historical transfer admission remains schema-compatible, while every replacement record requires exact predecessor-lineage parity.

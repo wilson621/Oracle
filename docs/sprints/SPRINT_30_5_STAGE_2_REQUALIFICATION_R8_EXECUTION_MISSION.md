@@ -1,6 +1,6 @@
 # Sprint 30.5 Stage 2 Requalification R8 Execution Mission
 
-Status: IMMUTABLE PRE-AUTHORITY ENGINEERING FAILURE - REPLACEMENT NOT AUTHORISED
+Status: CORRECTED REPLACEMENT AUTHORISED - PRE-TRANSFER
 Date: 6 August 2026
 
 ## Exact authority
@@ -46,6 +46,16 @@ The repository comparator now uses case-sensitive ordinal path-keyed equality in
 
 The execution contract is fail-closed: replacement transfer, authority, attempt and qualification are not authorised.
 
-## Required Founder decision
+## Corrected replacement mission
 
-Accept this transfer as immutable pre-authority engineering failure evidence and authorise exactly one corrected replacement transfer with a new identity.
+The Founder accepted the immutable pre-authority failure and corrected baseline `e449803796256b54323c2a11c7bda90c3ef6ca08`, then authorised exactly one corrected replacement mission:
+
+- replacement grant: `founder-stage2-r8-replacement-grant-20260806T125821770Z-cc9e03ce`
+- replacement transfer: `transfer-stage2-r8-replacement-20260806T125821770Z-cc9e03ce`
+- predecessor transfer: `transfer-stage2-r8-20260806T123612020Z-338a5276`
+- maximum replacement transfers, authorities and attempts: one each
+- authority creation: only after transfer, continuity, clean-host and all pre-authority gates
+- retry after consumed authority or permanent failure: prohibited
+- Stage 3 and later work: not authorised
+
+The replacement namespace is separately bound; the original failed mission and transfer records remain unchanged. Pre-transfer validation passed with no replacement transfer, authority or attempt state.
