@@ -11,7 +11,7 @@ expiry or revocation
 **Supersedes:** Qualification status inferred across Sprint and programme
 documents
 **Superseded By:** None
-**Last Reviewed:** 4 August 2026
+**Last Reviewed:** 6 August 2026
 
 ---
 
@@ -32,10 +32,10 @@ results.
 | Stage | Scope | Current state | Evidence or blocker | Next authority |
 | --- | --- | --- | --- | --- |
 | 1 | Environment Admission | **Founder-accepted and closed** | Controlled non-pristine ASUS physical host; transfer, baseline, network, GPU and cleanup evidence complete; frozen package SHA-256 `841b5ea14bc06966ce969dda0a6794110633e9ad7f0c74d0d11ee1d54938a78d` | None for Stage 1; history is closed |
-| 2 | Candidate Freeze and Package Reconciliation | **R6 Founder-accepted and formally closed** | Passing attempt `r6-20260803T171057940Z-5e914d18`; final manifest `a637a7fdf49f6b2a957738c89cb02015b6384d227c2c72f77a2aabdd721bf288`; archive `7884c93b222cd5f16f51dd5ba1b56c51af5008e1f6c999dcff92a8c1a26ac690`; MSIX `492101857733a4cca913243ac660cfb9e181ea796180f1bc9f09c259fe172430`; zero residue | None for R6; downstream work requires separate authority |
-| 3 | Clean Windows Qualification | **R12 independently verified and formally closed** | Passing attempt `stage3-r12-20260803T204415402Z-b886be44`; evidence manifest `d0238d0859a871d2589f66cbddc5f337b33638b32a02375b71f39fc2dac461d0`; archive `1e583ef3a67755a40ec2d4ec50e0535e38ee3e2eab9b65767d48a3a17f8f5055`; zero residue | None for R12; consumed authority permits no retry |
-| 4 | Live Authentication and Protected Rendering | **R4 Founder-accepted and formally closed** | Passing attempt `stage4-r4-20260804T133045451Z-13f6da53`; final manifest `0b740dfc12e2334a63807d3097e302f864b9adaa1caf58b2b8757b3c57752b46`; archive `7f01fe4fcf5bee2b32b220a26660ea163a92e98450c093d1e7dc4c6752c7598c`; zero residue | None for R4; consumed authority permits no retry |
-| 5 | Installed Package GPU, Performance and Accessibility | **R1 engineering preparation complete; qualification not executed** | Exact unchanged R6 MSIX; acceptance contract frozen; deterministic, adversarial and elevated installed validation passed with zero residue | Founder decision on a separately authorised execution-enabled R1 qualification mission |
+| 2 | Candidate Freeze and Package Reconciliation | **R8 engineering freeze complete; qualification not executed** | Corrected candidate `4d22b3b`; package `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`; freeze `f8c7ec7d020ba717efb9f036350c189221debe53a58a45374aa5c252af695361`; clean-host protocol rehearsed; zero residue | Founder acceptance and separate one-transfer/one-attempt R8 mission |
+| 3 | Clean Windows Qualification | **R12 accepted immutable history for R6; blocked for R8** | R12 remains valid only for accepted R6 MSIX | Accepted Stage 2 R8, then separate Stage 3 requalification authority |
+| 4 | Live Authentication and Protected Rendering | **R4 accepted immutable history for R6; blocked for R8** | R4 remains valid only for accepted R6 MSIX | Accepted Stage 3 for R8, then separate Stage 4 authority |
+| 5 | Installed Package GPU, Performance and Accessibility | **R2 engineering investigation found product defect; blocked for R8** | Accessibility correction is in R8 candidate; historical Stage 5 preparation does not qualify it | Accepted Stages 2-4 for R8, then separate Stage 5 authority |
 | 6 | Reproducibility and Environment Teardown | **Not started** | Requires accepted Stages 2–5 | Stage 5 acceptance, then separate Stage 6 authority |
 | 7 | Final Integrated Qualification and Sprint 30 Closure Package | **Not started** | Requires complete immutable evidence from Stages 1–6 | Stage 6 acceptance, then separate Stage 7 authority |
 
@@ -472,3 +472,11 @@ Corrected candidate commit 4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d, tree 1bdc84
 Stage 2 Requalification R7 engineering preparation is complete for future package version 0.1.5.0. Its new namespace binds the exact corrected candidate, requires the accessibility gate in the governed source matrix, and hash-binds accepted R6/R12/R4 indexes and closures. Accepted R6/R12/R4 evidence remains unchanged and authoritative history for the exact R6 MSIX, but it does not qualify the corrected candidate.
 
 No transfer, authority, attempt, certificate, package, or qualification evidence was created. Stage 3, Stage 4, and Stage 5 are blocked for the current candidate pending a newly accepted Stage 2 baseline and separately authorised downstream missions. The next Founder-level decision is whether to accept the committed R7 preparation baseline and authorise exactly one governed Stage 2 R7 qualification attempt.
+
+## Stage 2 R8 clean-host preparation - 6 August 2026
+
+The Founder rejected the R7 main-PC qualification exception and authorised a fresh split-host R8 protocol. Engineering workstation `DESKTOP-M3H22E4` now owns source validation, build, local-test signing, exact teardown and immutable candidate freeze. `Founder-QA-01` remains a clean Windows qualification host and requires no repository, Git, Node, npm, Supabase CLI or Docker.
+
+The exact corrected product remains commit `4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d`, tree `1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a`. Passing engineering freeze `candidate-r8-20260806T120629088Z-f79fe50d` produced package SHA-256 `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`, public-certificate SHA-256 `78eb64dc769a87cbe82620a8d7bb6da655bdc2d38fe87f58b5c90f3c672492b2`, and freeze SHA-256 `f8c7ec7d020ba717efb9f036350c189221debe53a58a45374aa5c252af695361`. Private signing material and certificate-store residue are zero.
+
+The PowerShell-only clean-host path passed static/adversarial validation and a 28.4-second non-qualification rehearsal. All engineering failures and the timed-out first rehearsal remain immutable non-qualification records. No transfer, authority, attempt or qualification evidence exists. Stage 2 R8 qualification and Stages 3-5 remain unauthorised.

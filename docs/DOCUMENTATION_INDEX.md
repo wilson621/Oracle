@@ -8,7 +8,7 @@
 **Expected Stability:** Reviewed whenever governance or canonical documentation changes
 **Supersedes:** The incomplete documentation table in `README.md` as the canonical documentation index
 **Superseded By:** None
-**Last Reviewed:** 4 August 2026
+**Last Reviewed:** 6 August 2026
 
 ---
 
@@ -601,3 +601,13 @@ to adopt a later formatting standard.
 | Stage 2 R7 implementation | [Sprint 30.5 Stage 2 Requalification R7 Implementation](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R7_IMPLEMENTATION.md) | Bounded contrast correction and R7 harness derivation |
 | Stage 2 R7 preparation validation | [Sprint 30.5 Stage 2 Requalification R7 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R7_PREPARATION_VALIDATION_REPORT.md) | Product, browser, regression, adversarial, custody, and identity results |
 | Stage 2 R7 pre-execution gate | [Sprint 30.5 Stage 2 Requalification R7 Pre-Execution Gate](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R7_PRE_EXECUTION_GATE.md) | Separate Founder authority required; no current qualification state |
+
+## Stage 2 Requalification R8 clean-host preparation
+
+| Document | Path | Purpose |
+| --- | --- | --- |
+| Stage 2 R8 plan | [Sprint 30.5 Stage 2 Requalification R8 Plan](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R8_PLAN.md) | Split-host architecture, ordered lifecycle and authority boundary |
+| Stage 2 R8 implementation | [Sprint 30.5 Stage 2 Requalification R8 Implementation](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R8_IMPLEMENTATION.md) | Main-PC freeze and PowerShell-only clean-host runtime |
+| Stage 2 R8 preparation validation | [Sprint 30.5 Stage 2 Requalification R8 Preparation Validation Report](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R8_PREPARATION_VALIDATION_REPORT.md) | Engineering failures, exact freeze, adversarial gates and rehearsal results |
+| Stage 2 R8 pre-transfer gate | [Sprint 30.5 Stage 2 Requalification R8 Pre-Transfer Gate](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R8_PRE_TRANSFER_GATE.md) | Exact accepted freeze and remaining Founder authority |
+| Stage 2 R8 preparation closure | [Sprint 30.5 Stage 2 Requalification R8 Preparation Closure](sprints/SPRINT_30_5_STAGE_2_REQUALIFICATION_R8_PREPARATION_CLOSURE.md) | Engineering closure and recommended next mission |

@@ -8,9 +8,9 @@
 **Expected Stability:** Updated when verified implementation or accepted technical debt changes
 **Supersedes:** Earlier active implementation-status records
 **Superseded By:** None
-**Last Reviewed:** 4 August 2026
+**Last Reviewed:** 6 August 2026
 **Verified Branch:** `sprint-9-overlay`
-**Verified Repository Baseline:** `3994d483a4a7fc8dfe91a7d21c7c54d1d10a72c3`
+**Verified Repository Baseline:** `7f2d5feb7100624609b44d4b590d74d03fb576b4`
 **Sprint 14 Implementation Baseline:** `3868975`
 **Sprint 15 Phase 1:** Complete and committed
 **Sprint 15 Phase 2:** Complete and committed
@@ -1275,3 +1275,11 @@ Corrected candidate commit 4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d, tree 1bdc84
 Stage 2 Requalification R7 engineering preparation is complete for future package version 0.1.5.0. Its new namespace binds the exact corrected candidate, requires the accessibility gate in the governed source matrix, and hash-binds accepted R6/R12/R4 indexes and closures. Accepted R6/R12/R4 evidence remains unchanged and authoritative history for the exact R6 MSIX, but it does not qualify the corrected candidate.
 
 No transfer, authority, attempt, certificate, package, or qualification evidence was created. Stage 3, Stage 4, and Stage 5 are blocked for the current candidate pending a newly accepted Stage 2 baseline and separately authorised downstream missions. The next Founder-level decision is whether to accept the committed R7 preparation baseline and authorise exactly one governed Stage 2 R7 qualification attempt.
+
+## Stage 2 R8 clean-host preparation - 6 August 2026
+
+The Founder rejected the R7 main-PC qualification exception and authorised a fresh split-host R8 protocol. Engineering workstation `DESKTOP-M3H22E4` now owns source validation, build, local-test signing, exact teardown and immutable candidate freeze. `Founder-QA-01` remains a clean Windows qualification host and requires no repository, Git, Node, npm, Supabase CLI or Docker.
+
+The exact corrected product remains commit `4d22b3b0e09817bcc4d0eeb50a2f123be6626f5d`, tree `1bdc84bae6c4c7ebf9d0e50396ff2439d425e70a`. Passing engineering freeze `candidate-r8-20260806T120629088Z-f79fe50d` produced package SHA-256 `97bedef7bae989ac251e4866835591c63550311aef6b172cf5caf3b204a6e490`, public-certificate SHA-256 `78eb64dc769a87cbe82620a8d7bb6da655bdc2d38fe87f58b5c90f3c672492b2`, and freeze SHA-256 `f8c7ec7d020ba717efb9f036350c189221debe53a58a45374aa5c252af695361`. Private signing material and certificate-store residue are zero.
+
+The PowerShell-only clean-host path passed static/adversarial validation and a 28.4-second non-qualification rehearsal. All engineering failures and the timed-out first rehearsal remain immutable non-qualification records. No transfer, authority, attempt or qualification evidence exists. Stage 2 R8 qualification and Stages 3-5 remain unauthorised.
