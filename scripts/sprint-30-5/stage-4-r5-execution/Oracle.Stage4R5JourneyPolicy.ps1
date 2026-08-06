@@ -63,3 +63,43 @@ function Assert-OracleStage4R5SecretFreeText {
   if ($Text -match 'eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+') { throw "JWT-like value appears in evidence." }
   if ($Text -match '(?i)"?(service_role|refresh_token|access_token)"?\s*[=:]\s*"?[A-Za-z0-9_\-]+' ) { throw "Credential-like field appears in evidence." }
 }
+
+function Get-OracleStage4R5RehearsalRuntimeIdentity {
+  param([Parameter(Mandatory=$true)][string]$RehearsalId)
+  if($RehearsalId-cnotmatch '^rehearsal-(stage4-r5-[0-9]{8}T[0-9]{9}Z-[0-9a-f]{8})$'){
+    throw 'Stage 4 R5 rehearsal runtime identity is malformed.'
+  }
+  $executionId=[string]$Matches[1]
+  [pscustomobject][ordered]@{
+    configurationId="runtime-$executionId"
+    founderGrantId=($executionId-replace '^stage4-r5-','founder-stage4-r5-grant-')
+    authorityId="authority-$executionId"
+    attemptId=$executionId
+    authorityCreated=$false
+    attemptCreated=$false
+  }
+}
+
+function Assert-OracleStage4R5RehearsalTerminalRecords {
+  param(
+    [Parameter(Mandatory=$true)]$Request,
+    [Parameter(Mandatory=$true)]$Terminal,
+    [Parameter(Mandatory=$true)]$ReturnedManifest,
+    [Parameter(Mandatory=$true)][string]$ExpectedTransferId
+  )
+  $allowed=@('passed-awaiting-provider-teardown','failed-awaiting-provider-teardown')
+  if(
+    [string]$Terminal.contract-cne'oracle.sprint-30-5.stage-4-r5-rehearsal-terminal'-or
+    [string]$Terminal.result-cnotin$allowed-or
+    [string]$Terminal.transferId-cne$ExpectedTransferId-or
+    [string]$Terminal.rehearsalId-cne[string]$Request.rehearsalId-or
+    [string]$Terminal.providerIdentity-cne[string]$Request.providerIdentity-or
+    [bool]$Terminal.authorityCreated-or[bool]$Terminal.attemptCreated
+  ){throw 'Qualification-host rehearsal terminal record differs.'}
+  if(
+    [string]$ReturnedManifest.result-cne[string]$Terminal.result-or
+    [string]$ReturnedManifest.rehearsalId-cne[string]$Request.rehearsalId-or
+    [bool]$ReturnedManifest.authorityCreated-or[bool]$ReturnedManifest.attemptCreated
+  ){throw 'Qualification-host rehearsal manifest differs.'}
+  [string]$Terminal.result
+}

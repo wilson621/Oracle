@@ -237,3 +237,12 @@ repositories and developer tooling. The provider-only main-PC role, isolated
 private link and two exact loopback relays are contractually separated from
 package qualification. Validation passed without provider, relay or governed
 qualification state. A separate execution-enabled R5 mission is required.
+
+## Stage 4 R5 end-to-end rehearsal correction - 6 August 2026
+
+The preserved non-transfer split-host rehearsal identified an invalid
+development runtime identity and a secondary failed-terminal diagnostic defect.
+The batched correction now validates both success and failure completion paths,
+surfaces the first failure only after verified two-host teardown, and passes the
+complete local non-qualification execution baseline. No transfer, authority or
+attempt was created; a fresh physical non-transfer rehearsal remains required.

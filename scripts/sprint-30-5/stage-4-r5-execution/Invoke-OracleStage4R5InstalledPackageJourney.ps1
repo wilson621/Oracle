@@ -16,6 +16,7 @@ $developmentRehearsal = [Environment]::GetEnvironmentVariable("ORACLE_STAGE4_INS
 . (Join-Path $scriptRoot "Oracle.Stage3R13ActivationPolicy.ps1")
 . (Join-Path $scriptRoot "Oracle.Stage3R13InstalledRuntimeConfigurationPolicy.ps1")
 . (Join-Path $scriptRoot "Oracle.Stage4R4ProcessTeardownPolicy.ps1")
+. (Join-Path $scriptRoot "Oracle.Stage4R5JourneyPolicy.ps1")
 
 function Require-Environment([string]$Name) {
   $value = [Environment]::GetEnvironmentVariable($Name, "Process")
@@ -279,8 +280,10 @@ try {
       if ($attemptId -cnotmatch [string]$contract.identity.rehearsalPattern) {
         throw "Installed rehearsal identity is malformed."
       }
-      $authorityId = "NO-AUTHORITY-DEVELOPMENT-REHEARSAL"
-      $founderGrantId = "NO-FOUNDER-GRANT-DEVELOPMENT-REHEARSAL"
+      $runtimeIdentity = Get-OracleStage4R5RehearsalRuntimeIdentity $attemptId
+      $runtimeAttemptId = [string]$runtimeIdentity.attemptId
+      $runtimeAuthorityId = [string]$runtimeIdentity.authorityId
+      $runtimeFounderGrantId = [string]$runtimeIdentity.founderGrantId
     } else {
       if (
         [string]$contract.executionAuthority.founderAuthorisedQualificationExecution -ne "True" -or
@@ -297,6 +300,9 @@ try {
       $founderGrantId = [string]$authority.founderGrantId
       $authorityId = [string]$authority.authorityId
       $attemptId = [string]$authority.attemptId
+      $runtimeAttemptId = $attemptId
+      $runtimeAuthorityId = $authorityId
+      $runtimeFounderGrantId = $founderGrantId
       $expectedAttemptRoot = [IO.Path]::GetFullPath((Join-Path ([string]$contract.paths.qualificationAttemptRoot) $attemptId))
       if ($attemptRoot -cne $expectedAttemptRoot) {
         throw "Installed controller attempt root is mismatched."
@@ -352,14 +358,14 @@ try {
     $sessionSecret = Require-Environment "ORACLE_WEB_SESSION_SECRET"
     $serviceSecure = ConvertTo-SecureString $serviceKey -AsPlainText -Force
     $sessionSecure = ConvertTo-SecureString $sessionSecret -AsPlainText -Force
-    $configurationId = "runtime-$attemptId"
+    $configurationId = "runtime-$runtimeAttemptId"
     $configuration = New-OracleInstalledRuntimeConfiguration `
       -PackageFamilyName $packageFamilyName `
       -ExpectedPackageFamilyName $packageFamilyName `
       -ConfigurationId $configurationId `
-      -FounderGrantId $founderGrantId `
-      -AuthorityId $authorityId `
-      -AttemptId $attemptId `
+      -FounderGrantId $runtimeFounderGrantId `
+      -AuthorityId $runtimeAuthorityId `
+      -AttemptId $runtimeAttemptId `
       -CandidateCommit ([string]$contract.stage2.candidateCommit) `
       -CandidateTree ([string]$contract.stage2.candidateTree) `
       -MsixSha256 ([string]$contract.stage2.msixSha256) `

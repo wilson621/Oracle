@@ -23,13 +23,21 @@ $terminal=Get-Content -Raw -LiteralPath (Join-Path $root 'qualification-terminal
 $returnedManifest=Get-Content -Raw -LiteralPath (Join-Path $root 'qualification-host-rehearsal-manifest.json')|ConvertFrom-Json
 $teardown=Get-Content -Raw -LiteralPath (Join-Path $root 'provider-teardown.json')|ConvertFrom-Json
 if([string]$request.contract-cne'oracle.sprint-30-5.stage-4-r5-provider-rehearsal-request'-or[string]$request.transferId-cne[string]$transfer.transferId-or[bool]$request.authorityCreated-or[bool]$request.attemptCreated){throw 'Two-host rehearsal request is inadmissible.'}
-if([string]$terminal.contract-cne'oracle.sprint-30-5.stage-4-r5-rehearsal-terminal'-or[string]$terminal.result-cne'passed-awaiting-provider-teardown'-or[string]$terminal.transferId-cne[string]$transfer.transferId-or[string]$terminal.rehearsalId-cne[string]$request.rehearsalId-or[string]$terminal.providerIdentity-cne[string]$request.providerIdentity-or[bool]$terminal.authorityCreated-or[bool]$terminal.attemptCreated){throw 'Qualification-host rehearsal terminal record differs.'}
-if([string]$returnedManifest.result-cne'passed-awaiting-provider-teardown'-or[string]$returnedManifest.rehearsalId-cne[string]$request.rehearsalId-or[bool]$returnedManifest.authorityCreated-or[bool]$returnedManifest.attemptCreated){throw 'Qualification-host rehearsal manifest differs.'}
+$terminalResult=Assert-OracleStage4R5RehearsalTerminalRecords $request $terminal $returnedManifest ([string]$transfer.transferId)
 if([string]$teardown.result-cne'passed'-or-not[bool]$teardown.zeroResidue-or[string]$teardown.attemptId-cne[string]$request.rehearsalId-or[string]$teardown.providerIdentity-cne[string]$request.providerIdentity-or[int]$teardown.providerContainers-ne0-or[int]$teardown.providerVolumes-ne0-or[int]$teardown.providerNetworks-ne0-or[int]$teardown.providerRelays-ne0-or[int]$teardown.firewallRules-ne0-or[bool]$teardown.providerWorkRootPresent){throw 'Provider rehearsal teardown did not establish zero residue.'}
 $returned=Join-Path $root 'qualification-host-rehearsal';$actual=@(Get-OracleStage4R5Inventory $returned);$expected=@($returnedManifest.files)
 if($actual.Count-ne$expected.Count){throw 'Qualification-host rehearsal inventory count differs.'}
 for($i=0;$i-lt$expected.Count;$i++){if([string]$actual[$i].path-cne[string]$expected[$i].path-or[long]$actual[$i].bytes-ne[long]$expected[$i].bytes-or[string]$actual[$i].sha256-cne[string]$expected[$i].sha256){throw "Qualification-host rehearsal inventory differs at index $i."}}
 $completionPath=Join-Path $returned 'completion.json';$installedPath=Join-Path $returned 'logs\installed-package-result.json';$journeyPath=Join-Path $returned 'evidence\live-journey.json'
+if($terminalResult-ceq'failed-awaiting-provider-teardown'){
+  $failurePath=Join-Path $returned 'failure.json'
+  foreach($path in @($failurePath,$installedPath)){if(-not(Test-Path -LiteralPath $path -PathType Leaf)){throw "Required failed rehearsal record is absent: $path"}}
+  $failure=Get-Content -Raw -LiteralPath $failurePath|ConvertFrom-Json;$installed=Get-Content -Raw -LiteralPath $installedPath|ConvertFrom-Json
+  if([string]$failure.result-cne'failed'-or[bool]$failure.authorityCreated-or[bool]$failure.attemptCreated-or[string]::IsNullOrWhiteSpace([string]$failure.primaryFailure)){throw 'Returned rehearsal failure record differs.'}
+  if([string]$installed.result-cne'failed'-or-not[bool]$installed.zeroResidue-or(@($installed.classification)-cnotcontains'NON-QUALIFICATION')-or(@($installed.classification)-cnotcontains'NON-AUTHORITY')-or(@($installed.classification)-cnotcontains'NON-EVIDENCE')){throw 'Failed installed rehearsal result is inadmissible.'}
+  foreach($prohibited in @('qualificationEvidence','authorityId','attemptId')){if($installed.PSObject.Properties.Name-ccontains$prohibited){throw "Failed installed rehearsal result contains prohibited governed state: $prohibited"}}
+  throw "Two-host rehearsal failed after verified zero-residue teardown: $([string]$failure.primaryFailure)"
+}
 foreach($path in @($completionPath,$installedPath,$journeyPath)){if(-not(Test-Path -LiteralPath $path -PathType Leaf)){throw "Required returned rehearsal record is absent: $path"}}
 $completion=Get-Content -Raw -LiteralPath $completionPath|ConvertFrom-Json;$installed=Get-Content -Raw -LiteralPath $installedPath|ConvertFrom-Json;$journey=Get-Content -Raw -LiteralPath $journeyPath|ConvertFrom-Json
 if([string]$completion.result-cne'passed-awaiting-provider-teardown'-or[bool]$completion.authorityCreated-or[bool]$completion.attemptCreated-or[int]$completion.packageResidue-ne0-or[int]$completion.trustResidue-ne0){throw 'Returned rehearsal completion differs.'}
