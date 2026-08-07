@@ -246,3 +246,13 @@ The batched correction now validates both success and failure completion paths,
 surfaces the first failure only after verified two-host teardown, and passes the
 complete local non-qualification execution baseline. No transfer, authority or
 attempt was created; a fresh physical non-transfer rehearsal remains required.
+
+## Stage 4 R5 application-ID correction - 7 August 2026
+
+The preserved non-transfer split-host rehearsal reached runtime-configuration
+creation but direct AppX activation failed with `E_APPLICATION_NOT_REGISTERED`.
+The R5 overlay used the package identity as the application ID; the immutable
+R8 manifest and accepted R13 activation prove the exact application ID is
+`Oracle`. The overlay and shared contract admission are corrected, and a new
+regression binds all future R5 rehearsal and transfer paths directly to the
+hash-bound MSIX manifest and accepted R13 AUMID. No governed state was created.

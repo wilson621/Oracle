@@ -99,6 +99,7 @@ export function assertContract() {
   if (contract.status !== "founder-authorised-execution-enabled") throw new Error("R5 execution contract is not enabled.");
   if (contract.executionAuthority.maximumTransfers !== 1 || contract.executionAuthority.maximumAuthorities !== 1 || contract.executionAuthority.maximumAttempts !== 1 || contract.executionAuthority.retryAfterConsumedAuthorityPermitted !== false) throw new Error("R5 single-use limits differ.");
   if (contract.acceptedPreparation.preparationContractSha256 !== sha256(resolve(repositoryRoot, "scripts", "sprint-30-5", "stage-4-r5", "Oracle.Stage4R5Contract.json"))) throw new Error("Accepted R5 preparation contract differs.");
+  if (contract.package.appId !== "Oracle") throw new Error("R5 package application ID differs from the accepted R8 manifest.");
   if (contract.requiredJourneys.length !== 10 || contract.requiredLifecycle.length !== 20) throw new Error("R5 acceptance inventory differs.");
 }
 
