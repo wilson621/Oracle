@@ -1353,3 +1353,17 @@ The execution overlay preserves the clean-host split: provider-only main PC and 
 ## Stage 4 R5 optional tool-version correction - 6 August 2026
 
 Provider tool admission now treats path and SHA-256 as mandatory and version as optional when the governed binding omits it. Regression coverage binds the hash-only 	askkill case and the exact immutable failed transfer replaced. The product, R8/R13 chain, split-host topology, journeys and authority boundary are unchanged.
+## Stage 4 R5 HTTP body-semantics correction - 7 August 2026
+
+The latest immutable non-transfer rehearsal reached the installed server on
+Founder-QA-01 but the first bodyless GET was routed through request-body
+handling because Windows PowerShell coerced a typed null string to empty text.
+Qualification-host and provider cleanup both established zero residue and no
+authority or attempt existed.
+
+The shared preparation/execution journey helper now keys body handling on
+explicit parameter binding, rejects bodies for GET/HEAD/TRACE and preserves
+POST bodies. Focused adversarial coverage and the full R5 execution-baseline
+verification pass without governed state. A fresh Founder-authorised physical
+non-qualification rehearsal is required before any governed transfer or Stage
+4 R5 qualification mission can be considered.

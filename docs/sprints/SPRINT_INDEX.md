@@ -256,3 +256,17 @@ R8 manifest and accepted R13 activation prove the exact application ID is
 `Oracle`. The overlay and shared contract admission are corrected, and a new
 regression binds all future R5 rehearsal and transfer paths directly to the
 hash-bound MSIX manifest and accepted R13 AUMID. No governed state was created.
+## Stage 4 R5 HTTP body-semantics correction - 7 August 2026
+
+The preserved non-transfer split-host rehearsal passed private-link admission,
+package activation and installed-server ownership admission, then failed on the
+first anonymous GET because a typed null request-body parameter was coerced to
+an empty string and incorrectly entered `GetRequestStream()`. Both hosts were
+returned to verified zero residue; no authority or attempt was created.
+
+Preparation and execution helpers now distinguish omitted bodies through bound
+parameter presence, reject explicit bodies on GET/HEAD/TRACE, and retain POST
+body support. The focused regression and complete 31-script, seven-module R5
+execution baseline pass. No governed transfer was prepared. The next
+Founder-level mission is one fresh physical two-host non-qualification
+rehearsal of the corrected baseline; governed R5 execution remains premature.

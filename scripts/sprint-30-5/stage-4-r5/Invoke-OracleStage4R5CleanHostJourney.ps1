@@ -43,8 +43,13 @@ function Invoke-OracleStage4R5Http {
     [AllowNull()][string]$Body = $null,
     [AllowNull()][string]$Cookie = $null
   )
+  $methodName = $Method.ToUpperInvariant()
+  $bodySupplied = $PSBoundParameters.ContainsKey("Body")
+  if ($bodySupplied -and $methodName -in @("GET", "HEAD", "TRACE")) {
+    throw "HTTP method $methodName does not permit a request body."
+  }
   $request = [Net.HttpWebRequest]::CreateHttp($Uri)
-  $request.Method = $Method
+  $request.Method = $methodName
   $request.AllowAutoRedirect = $false
   $request.Timeout = 15000
   $request.ReadWriteTimeout = 15000
@@ -58,8 +63,8 @@ function Invoke-OracleStage4R5Http {
     $request.CookieContainer = [Net.CookieContainer]::new()
     $request.CookieContainer.SetCookies([Uri]$Uri, $Cookie)
   }
-  if ($null -ne $Body) {
-    $bytes = [Text.Encoding]::UTF8.GetBytes($Body)
+  if ($bodySupplied) {
+    $bytes = [Text.Encoding]::UTF8.GetBytes([string]$Body)
     $request.ContentLength = $bytes.Length
     $stream = $request.GetRequestStream()
     try { $stream.Write($bytes, 0, $bytes.Length) } finally { $stream.Dispose() }
@@ -151,7 +156,8 @@ try {
     $signup = Invoke-OracleStage4R5Http -Uri "$ProviderUrl/auth/v1/signup" -Method POST -Headers @{ apikey = $AnonymousKey; Authorization = "Bearer $AnonymousKey"; "Content-Type" = "application/json" } -Body $signupBody
     if ($signup.status -notin @(200, 201)) { throw "Account signup failed with status $($signup.status)." }
     $signupJson = ConvertFrom-OracleStage4R5JsonResponse $signup "Account signup"
-    $signupAccessToken = if ($null -eq $signupJson.PSObject.Properties["access_token"]) { $null } else { [string]$signupJson.access_token }`r`n    if ($null -eq $signupJson.user -or -not [string]::IsNullOrEmpty($signupAccessToken)) { throw "Account creation did not preserve the unverified no-session boundary." }
+    $signupAccessToken = if ($null -eq $signupJson.PSObject.Properties["access_token"]) { $null } else { [string]$signupJson.access_token }
+    if ($null -eq $signupJson.user -or -not [string]::IsNullOrEmpty($signupAccessToken)) { throw "Account creation did not preserve the unverified no-session boundary." }
     if ($index -eq 0) { $journeys.Add([ordered]@{ id = "account-created-without-session"; result = "passed" }) }
 
     $tokenBody = @{ email = $email; password = $password } | ConvertTo-Json -Compress
