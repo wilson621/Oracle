@@ -14,6 +14,8 @@ import {
   type OracleCompanionScreenObservationState,
   type OracleMatchRecordingResult,
   type OracleMatchRecordingState,
+  type OracleMatchVideoRecordingResult,
+  type OracleMatchVideoRecordingState,
   type OracleWatchIndicatorSettings,
 } from "./contracts.js";
 import {
@@ -31,6 +33,9 @@ import {
 import {
   isOracleMatchRecordingState,
 } from "./companion/match-recording-contract.js";
+import {
+  isOracleMatchVideoRecordingState,
+} from "./companion/match-video-recording-contract.js";
 import {
   ORACLE_DESKTOP_RELEASE_CHANNELS,
   isOracleDesktopReleaseState,
@@ -162,6 +167,60 @@ const oracleDesktopBridge: OracleDesktopBridge = {
       );
     };
   },
+
+  getMatchVideoRecordingState: async () => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.getMatchVideoRecordingState
+    );
+    return requireMatchVideoRecordingState(value);
+  },
+
+  startMatchVideoRecording: async () => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.startMatchVideoRecording
+    );
+    return requireMatchVideoRecordingState(value);
+  },
+
+  stopMatchVideoRecording: () =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.stopMatchVideoRecording
+    ) as Promise<OracleMatchVideoRecordingResult | null>,
+
+  onMatchVideoRecordingStateChanged: (listener) => {
+    let subscribed = true;
+    const handler = (
+      _event: IpcRendererEvent,
+      value: unknown
+    ) => {
+      if (subscribed && isOracleMatchVideoRecordingState(value)) {
+        listener(value);
+      }
+    };
+    ipcRenderer.on(
+      DESKTOP_CHANNELS.matchVideoRecordingStateChanged,
+      handler
+    );
+    return () => {
+      subscribed = false;
+      ipcRenderer.removeListener(
+        DESKTOP_CHANNELS.matchVideoRecordingStateChanged,
+        handler
+      );
+    };
+  },
+
+  readMatchVideoBytes: (videoPath) =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.readMatchVideoBytes,
+      videoPath
+    ) as Promise<Uint8Array>,
+
+  deleteMatchVideoFile: (videoPath) =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.deleteMatchVideoFile,
+      videoPath
+    ) as Promise<void>,
 
   getToggleWatchHotkey: async () => {
     const value: unknown = await ipcRenderer.invoke(
@@ -477,6 +536,17 @@ function requireMatchRecordingState(
   if (!isOracleMatchRecordingState(value)) {
     throw new Error(
       "Oracle desktop host returned invalid match recording state."
+    );
+  }
+  return value;
+}
+
+function requireMatchVideoRecordingState(
+  value: unknown
+): OracleMatchVideoRecordingState {
+  if (!isOracleMatchVideoRecordingState(value)) {
+    throw new Error(
+      "Oracle desktop host returned invalid match video recording state."
     );
   }
   return value;

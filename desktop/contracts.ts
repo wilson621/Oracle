@@ -41,6 +41,10 @@ import type {
   OracleMatchRecordingResult,
   OracleMatchRecordingState,
 } from "./companion/match-recording-contract.js";
+import type {
+  OracleMatchVideoRecordingResult,
+  OracleMatchVideoRecordingState,
+} from "./companion/match-video-recording-contract.js";
 
 export const DESKTOP_CHANNELS = {
   getHostState:
@@ -78,6 +82,24 @@ export const DESKTOP_CHANNELS = {
 
   matchRecordingHotkeyStopped:
     "oracle-desktop:match-recording-hotkey-stopped",
+
+  getMatchVideoRecordingState:
+    "oracle-desktop:get-match-video-recording-state",
+
+  startMatchVideoRecording:
+    "oracle-desktop:start-match-video-recording",
+
+  stopMatchVideoRecording:
+    "oracle-desktop:stop-match-video-recording",
+
+  matchVideoRecordingStateChanged:
+    "oracle-desktop:match-video-recording-state-changed",
+
+  readMatchVideoBytes:
+    "oracle-desktop:read-match-video-bytes",
+
+  deleteMatchVideoFile:
+    "oracle-desktop:delete-match-video-file",
 
   getToggleWatchHotkey:
     "oracle-desktop:get-toggle-watch-hotkey",
@@ -194,6 +216,8 @@ export type {
   OracleCompanionScreenObservationState,
   OracleMatchRecordingResult,
   OracleMatchRecordingState,
+  OracleMatchVideoRecordingResult,
+  OracleMatchVideoRecordingState,
   OracleDesktopAttachmentState,
   OracleDesktopAttachmentStatus,
   OracleDesktopAttachmentTarget,
@@ -261,6 +285,47 @@ export type OracleDesktopBridge = {
       result: OracleMatchRecordingResult
     ) => void
   ) => () => void;
+
+  /**
+   * The Full Match Analysis pipeline: a real screen+audio recording of the
+   * attached window (OracleMatchVideoRecordingCoordinator), additive to and
+   * entirely independent of the still-frame Watch & Coach flow above --
+   * separate state, separate hidden capture window, separate report path.
+   */
+  getMatchVideoRecordingState: () =>
+    Promise<OracleMatchVideoRecordingState>;
+
+  startMatchVideoRecording: () =>
+    Promise<OracleMatchVideoRecordingState>;
+
+  stopMatchVideoRecording: () =>
+    Promise<OracleMatchVideoRecordingResult | null>;
+
+  onMatchVideoRecordingStateChanged: (
+    listener: (
+      state: OracleMatchVideoRecordingState
+    ) => void
+  ) => () => void;
+
+  /**
+   * Reads back a video this same session's stopMatchVideoRecording() just
+   * produced (main rejects any other path -- see
+   * OracleMatchVideoRecordingCoordinator.readVideoFile), so the Companion
+   * renderer can attach it to a normal same-origin fetch() upload without
+   * ever needing filesystem access itself.
+   */
+  readMatchVideoBytes: (
+    videoPath: string
+  ) => Promise<Uint8Array>;
+
+  /**
+   * Deletes a video this same session's stopMatchVideoRecording() produced,
+   * once the Operator no longer needs the local copy (same path
+   * restriction as readMatchVideoBytes above).
+   */
+  deleteMatchVideoFile: (
+    videoPath: string
+  ) => Promise<void>;
 
   getToggleWatchHotkey: () =>
     Promise<OracleDesktopToggleWatchHotkeyState>;

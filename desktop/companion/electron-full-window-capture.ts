@@ -99,12 +99,19 @@ export class OracleElectronFullWindowCapture {
   }
 }
 
-function sourceHandle(sourceId: string): string | null {
+/**
+ * Exported for reuse by OracleVideoRecorderWindowController, which needs the
+ * same "does this desktopCapturer source id refer to this attached window
+ * handle" match to hand getDisplayMedia() the correct source -- keeping the
+ * matching logic in exactly one place so the still-frame and video capture
+ * paths can never disagree about which window they mean.
+ */
+export function sourceHandle(sourceId: string): string | null {
   const match = /^window:([^:]+):/u.exec(sourceId);
   return match ? normaliseHandle(match[1]) : null;
 }
 
-function normaliseHandle(value: string): string | null {
+export function normaliseHandle(value: string): string | null {
   try {
     return BigInt(value).toString(10);
   } catch {

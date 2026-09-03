@@ -585,6 +585,49 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
+    DESKTOP_CHANNELS.getMatchVideoRecordingState,
+    (event) =>
+      requireAuthorizedController(event)
+        .getMatchVideoRecordingState()
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.startMatchVideoRecording,
+    (event) =>
+      requireAuthorizedController(event)
+        .startMatchVideoRecording()
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.stopMatchVideoRecording,
+    (event) =>
+      requireAuthorizedController(event)
+        .stopMatchVideoRecording()
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.readMatchVideoBytes,
+    (event, videoPath: unknown) => {
+      if (typeof videoPath !== "string") {
+        throw new Error("readMatchVideoBytes requires a string path.");
+      }
+      return requireAuthorizedController(event)
+        .readMatchVideoBytes(videoPath);
+    }
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.deleteMatchVideoFile,
+    (event, videoPath: unknown) => {
+      if (typeof videoPath !== "string") {
+        throw new Error("deleteMatchVideoFile requires a string path.");
+      }
+      return requireAuthorizedController(event)
+        .deleteMatchVideoFile(videoPath);
+    }
+  );
+
+  ipcMain.handle(
     DESKTOP_CHANNELS.getToggleWatchHotkey,
     (event) => {
       requireAuthorizedController(event);
@@ -760,6 +803,26 @@ function removeIpcHandlers(): void {
 
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.stopMatchRecording
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.getMatchVideoRecordingState
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.startMatchVideoRecording
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.stopMatchVideoRecording
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.readMatchVideoBytes
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.deleteMatchVideoFile
   );
 
   ipcMain.removeHandler(

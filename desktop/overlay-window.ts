@@ -53,6 +53,13 @@ import type {
   OracleMatchRecordingResult,
   OracleMatchRecordingState,
 } from "./companion/match-recording-contract.js";
+import {
+  OracleMatchVideoRecordingCoordinator,
+} from "./companion/match-video-recording-coordinator.js";
+import type {
+  OracleMatchVideoRecordingResult,
+  OracleMatchVideoRecordingState,
+} from "./companion/match-video-recording-contract.js";
 import type {
   CompanionGuidanceApplicationState,
 } from "../lib/oracle/applications/companion/index.js";
@@ -161,6 +168,13 @@ export class CompanionHostWindowController {
       () => this.getAttachedCallOfDutyTarget()
     );
 
+  private readonly matchVideoRecording =
+    new OracleMatchVideoRecordingCoordinator(
+      undefined,
+      undefined,
+      () => this.getAttachedCallOfDutyTarget()
+    );
+
   private readonly gameIntegrations:
     OracleDesktopGameIntegrationCoordinator;
 
@@ -217,6 +231,9 @@ export class CompanionHostWindowController {
   );
   this.matchRecording.subscribe(
     () => this.publishMatchRecordingState()
+  );
+  this.matchVideoRecording.subscribe(
+    () => this.publishMatchVideoRecordingState()
   );
 
   this.recovery.subscribe(
@@ -577,6 +594,26 @@ export class CompanionHostWindowController {
     return this.matchRecording.stop();
   }
 
+  getMatchVideoRecordingState(): OracleMatchVideoRecordingState {
+    return this.matchVideoRecording.getState();
+  }
+
+  startMatchVideoRecording(): Promise<OracleMatchVideoRecordingState> {
+    return this.matchVideoRecording.start();
+  }
+
+  stopMatchVideoRecording(): Promise<OracleMatchVideoRecordingResult | null> {
+    return this.matchVideoRecording.stop();
+  }
+
+  readMatchVideoBytes(videoPath: string): Promise<Buffer> {
+    return this.matchVideoRecording.readVideoFile(videoPath);
+  }
+
+  deleteMatchVideoFile(videoPath: string): Promise<void> {
+    return this.matchVideoRecording.deleteVideoFile(videoPath);
+  }
+
   /**
    * Entry point for the global "toggle Watch & Coach" hotkey -- lets the
    * Operator start/stop a watch session without alt-tabbing out of the
@@ -772,6 +809,12 @@ export class CompanionHostWindowController {
     this.cancelWindowDiscovery();
 
     this.attachment.reset();
+    // Video recording owns real OS-level resources (a hidden capture
+    // window, an open display-media session, a file being written to
+    // disk) that must not outlive the Companion window -- unlike the
+    // lightweight still-frame matchRecording loop above, this can't just
+    // be left to GC.
+    this.matchVideoRecording.destroy();
 this.developmentBounds = null;
 
 this.unregisterScreenEvents();
@@ -1756,6 +1799,15 @@ this.hostState.reset();
     window.webContents.send(
       DESKTOP_CHANNELS.matchRecordingStateChanged,
       this.getMatchRecordingState()
+    );
+  }
+
+  private publishMatchVideoRecordingState(): void {
+    const window = this.getWindow();
+    if (!window || window.webContents.isDestroyed()) return;
+    window.webContents.send(
+      DESKTOP_CHANNELS.matchVideoRecordingStateChanged,
+      this.getMatchVideoRecordingState()
     );
   }
 
