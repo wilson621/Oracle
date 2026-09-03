@@ -1,16 +1,19 @@
 import "server-only";
-import { randomUUID } from "node:crypto";
 import type { SupabaseClient, User } from "@supabase/supabase-js";
 import { getTrustedSupabaseClient } from "@/lib/supabase-trusted-server";
 
 /**
  * Looks up the Operator bound to this Account, provisioning one on the fly
- * via the existing (already built, but never wired into sign-up)
- * provision_operator_for_account trusted RPC if none exists yet.
+ * if none exists yet.
  *
- * That RPC is security definer and only callable as service_role, so this
- * uses the trusted server client -- never exposed to the browser -- rather
- * than the caller's own request-scoped client.
+ * The codebase has a fancier provision_operator_for_account trusted RPC
+ * (database/011_operator_account_provisioning.sql) built for exactly this,
+ * but that migration -- and everything after it -- has not actually been
+ * deployed to this environment's real Supabase project (confirmed: calling
+ * it returns "Could not find the function ... in the schema cache"). Rather
+ * than depend on migrations that may or may not be applied, this does the
+ * same two inserts directly with the trusted (service_role) client, which
+ * only depends on migrations 001 and 008 -- both confirmed live.
  */
 export async function ensureOperatorBinding(
   supabase: SupabaseClient,
@@ -29,21 +32,13 @@ export async function ensureOperatorBinding(
   const trusted = getTrustedSupabaseClient();
   const callsign = deriveCallsign(user);
 
-  const { data, error } = await trusted.rpc("provision_operator_for_account", {
-    p_account_id: user.id,
-    p_command: {
-      contract: {
-        name: "oracle.operator-provisioning-command",
-        version: 1,
-      },
-      commandId: randomUUID(),
-      callsign,
-      policyId: "oracle.watch-and-coach.auto-provision",
-      policyVersion: "1",
-    },
-  });
+  const { data: operator, error: operatorError } = await trusted
+    .from("operators")
+    .insert({ callsign })
+    .select("id")
+    .single();
 
-  if (error) {
+  if (operatorError || !operator) {
     // Someone else may have provisioned it a moment ago -- check again
     // before giving up.
     const { data: retry } = await supabase
@@ -54,14 +49,22 @@ export async function ensureOperatorBinding(
     if (retry?.operator_id) {
       return retry.operator_id as string;
     }
-    throw new Error(`Could not create an Operator profile: ${error.message}`);
+    throw new Error(
+      `Could not create an Operator profile: ${operatorError?.message ?? "unknown error"}`
+    );
   }
 
-  const operatorId = (data as { operator?: { id?: string } })?.operator?.id;
-  if (!operatorId) {
-    throw new Error("Operator provisioning did not return an Operator id.");
+  const { error: bindingError } = await trusted
+    .from("operator_account_bindings")
+    .insert({ account_id: user.id, operator_id: operator.id });
+
+  if (bindingError) {
+    throw new Error(
+      `Could not bind the new Operator profile to this account: ${bindingError.message}`
+    );
   }
-  return operatorId;
+
+  return operator.id as string;
 }
 
 function deriveCallsign(user: User): string {
