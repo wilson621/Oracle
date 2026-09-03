@@ -7,8 +7,14 @@ import {
 import {
   DESKTOP_CHANNELS,
   ORACLE_DESKTOP_RECOVERY_SHORTCUT,
+  type OracleDesktopToggleWatchHotkeyState,
 } from "./contracts.js";
 import { CompanionHostWindowController } from "./overlay-window.js";
+import {
+  DEFAULT_TOGGLE_WATCH_ACCELERATOR,
+  loadHotkeySettings,
+  saveHotkeySettings,
+} from "./companion/hotkey-settings-store.js";
 import {
   getOracleDesktopGameIntegrationRegistry,
   getOracleDesktopGuidanceProviderService,
@@ -41,6 +47,11 @@ let companionUrl =
   DEFAULT_COMPANION_URL;
 let packagedProviderOrigin:
   string | undefined;
+// Populated inside app.whenReady() below -- app.getPath("userData"), which
+// loadHotkeySettings() needs, is only safe to call once Electron is ready.
+let toggleWatchAccelerator =
+  DEFAULT_TOGGLE_WATCH_ACCELERATOR;
+let toggleWatchRegistered = false;
 
 const packagedNextServer =
   new OraclePackagedNextServer();
@@ -93,6 +104,13 @@ if (!hasSingleInstanceLock) {
       registerIpcHandlers();
       registerReleaseIpcHandlers();
       registerRecoveryShortcut();
+
+      toggleWatchAccelerator =
+        loadHotkeySettings().toggleWatchAccelerator;
+      toggleWatchRegistered =
+        registerToggleWatchShortcut(
+          toggleWatchAccelerator
+        );
 
       hostWindowController =
         createHostWindowController();
@@ -148,6 +166,9 @@ app.on("will-quit", () => {
   globalShortcut.unregister(
     ORACLE_DESKTOP_RECOVERY_SHORTCUT
   );
+  globalShortcut.unregister(
+    toggleWatchAccelerator
+  );
 });
 
 function createHostWindowController(): CompanionHostWindowController {
@@ -200,6 +221,86 @@ function registerRecoveryShortcut(): void {
       `Oracle Companion could not register the recovery shortcut '${ORACLE_DESKTOP_RECOVERY_SHORTCUT}'.`
     );
   }
+}
+
+function registerToggleWatchShortcut(
+  accelerator: string
+): boolean {
+  const registered =
+    globalShortcut.register(
+      accelerator,
+      () => {
+        hostWindowController
+          ?.toggleMatchRecordingFromHotkey();
+      }
+    );
+
+  if (!registered) {
+    console.warn(
+      `Oracle Companion could not register the Watch & Coach hotkey '${accelerator}'.`
+    );
+  }
+
+  return registered;
+}
+
+function applyToggleWatchHotkey(
+  accelerator: unknown
+): OracleDesktopToggleWatchHotkeyState {
+  if (
+    typeof accelerator !== "string" ||
+    accelerator.trim().length === 0
+  ) {
+    return currentToggleWatchHotkeyState();
+  }
+
+  const trimmed = accelerator.trim();
+  if (trimmed === toggleWatchAccelerator) {
+    return currentToggleWatchHotkeyState();
+  }
+
+  const previousAccelerator =
+    toggleWatchAccelerator;
+  const previousRegistered =
+    toggleWatchRegistered;
+
+  if (toggleWatchRegistered) {
+    globalShortcut.unregister(
+      previousAccelerator
+    );
+  }
+
+  const registered =
+    registerToggleWatchShortcut(trimmed);
+
+  if (registered) {
+    toggleWatchAccelerator = trimmed;
+    toggleWatchRegistered = true;
+    saveHotkeySettings({
+      toggleWatchAccelerator: trimmed,
+    });
+  } else {
+    // Couldn't bind the requested combination (most likely already claimed
+    // by another running application) -- restore the previous one rather
+    // than leaving the Operator with no working hotkey at all.
+    toggleWatchAccelerator =
+      previousAccelerator;
+    toggleWatchRegistered =
+      previousRegistered
+        ? registerToggleWatchShortcut(
+            previousAccelerator
+          )
+        : false;
+  }
+
+  return currentToggleWatchHotkeyState();
+}
+
+function currentToggleWatchHotkeyState(): OracleDesktopToggleWatchHotkeyState {
+  return {
+    accelerator: toggleWatchAccelerator,
+    registered: toggleWatchRegistered,
+  };
 }
 
 function restoreInteraction(): void {
@@ -306,6 +407,24 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
+    DESKTOP_CHANNELS.getToggleWatchHotkey,
+    (event) => {
+      requireAuthorizedController(event);
+      return currentToggleWatchHotkeyState();
+    }
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.setToggleWatchHotkey,
+    (event, accelerator: unknown) => {
+      requireAuthorizedController(event);
+      return applyToggleWatchHotkey(
+        accelerator
+      );
+    }
+  );
+
+  ipcMain.handle(
     DESKTOP_CHANNELS.toggleOverlayPreview,
     (event) => {
       return requireAuthorizedController(
@@ -409,6 +528,14 @@ function removeIpcHandlers(): void {
   ipcMain.removeHandler(
     DESKTOP_CHANNELS
       .getCompanionPresentationState
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.getToggleWatchHotkey
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.setToggleWatchHotkey
   );
 
   ipcMain.removeHandler(

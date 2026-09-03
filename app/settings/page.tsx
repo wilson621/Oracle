@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import AppLayout from "@/components/layout/AppLayout";
 import PageHeader from "@/components/ui/PageHeader";
+import ToggleWatchHotkeySettings from "@/components/settings/ToggleWatchHotkeySettings";
 
 const settings = [
   {
@@ -48,6 +49,8 @@ export default function SettingsPage() {
         ))}
       </div>
 
+      <ToggleWatchHotkeySettings />
+
       <section className="mt-6 rounded-3xl border border-slate-800 bg-black/25 p-6 sm:p-8">
         <div className="flex items-start gap-4">
           <ShieldCheck
@@ -58,7 +61,13 @@ export default function SettingsPage() {
           <div>
             <h2 className="text-2xl font-black">Privacy and authority</h2>
             <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-300">
-              <li>Raw screen frames are transient, local and never uploaded.</li>
+              <li>
+                Companion screen observation frames are transient, local and
+                never uploaded. Watch &amp; Coach is separate and manual: it
+                only captures while you press Start Watching, and uploads a
+                bounded, curated set of frames from that session solely to
+                generate your coaching report.
+              </li>
               <li>Observation is off by default and requires visible consent.</li>
               <li>Models and renderers cannot mutate Oracle truth.</li>
               <li>Runtime persistence and persisted producers remain disabled.</li>

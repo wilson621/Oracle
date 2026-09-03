@@ -8,6 +8,7 @@ import {
   type OracleCompanionPresentationState,
   type OracleDesktopBridge,
   type OracleDesktopHostState,
+  type OracleDesktopToggleWatchHotkeyState,
   type OraclePlatformHealthSnapshot,
   type CompanionGuidanceApplicationState,
   type OracleCompanionScreenObservationState,
@@ -136,6 +137,44 @@ const oracleDesktopBridge: OracleDesktopBridge = {
         handler
       );
     };
+  },
+
+  onMatchRecordingHotkeyStopped: (listener) => {
+    let subscribed = true;
+    const handler = (
+      _event: IpcRendererEvent,
+      value: unknown
+    ) => {
+      if (subscribed && isOracleMatchRecordingResult(value)) {
+        listener(value);
+      }
+    };
+    ipcRenderer.on(
+      DESKTOP_CHANNELS.matchRecordingHotkeyStopped,
+      handler
+    );
+    return () => {
+      subscribed = false;
+      ipcRenderer.removeListener(
+        DESKTOP_CHANNELS.matchRecordingHotkeyStopped,
+        handler
+      );
+    };
+  },
+
+  getToggleWatchHotkey: async () => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.getToggleWatchHotkey
+    );
+    return requireToggleWatchHotkeyState(value);
+  },
+
+  setToggleWatchHotkey: async (accelerator) => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.setToggleWatchHotkey,
+      accelerator
+    );
+    return requireToggleWatchHotkeyState(value);
   },
 
   toggleOverlayPreview: () =>
@@ -371,6 +410,39 @@ function requireMatchRecordingState(
     );
   }
   return value;
+}
+
+function isOracleMatchRecordingResult(
+  value: unknown
+): value is OracleMatchRecordingResult {
+  if (typeof value !== "object" || value === null) return false;
+  const record = value as Record<string, unknown>;
+  return (
+    typeof record.sessionId === "string" &&
+    typeof record.startedAt === "string" &&
+    typeof record.stoppedAt === "string" &&
+    Array.isArray(record.frames)
+  );
+}
+
+function requireToggleWatchHotkeyState(
+  value: unknown
+): OracleDesktopToggleWatchHotkeyState {
+  if (typeof value !== "object" || value === null) {
+    throw new Error(
+      "Oracle desktop host returned an invalid toggle-watch hotkey state."
+    );
+  }
+  const record = value as Record<string, unknown>;
+  if (
+    typeof record.accelerator !== "string" ||
+    typeof record.registered !== "boolean"
+  ) {
+    throw new Error(
+      "Oracle desktop host returned an invalid toggle-watch hotkey state."
+    );
+  }
+  return value as OracleDesktopToggleWatchHotkeyState;
 }
 
 function requireCompanionScreenObservationState(

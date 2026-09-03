@@ -562,6 +562,33 @@ export class CompanionHostWindowController {
     return this.matchRecording.stop();
   }
 
+  /**
+   * Entry point for the global "toggle Watch & Coach" hotkey -- lets the
+   * Operator start/stop a watch session without alt-tabbing out of the
+   * game or clicking anything, even while the window is click-through.
+   *
+   * start()/stop() already publish state through the existing
+   * matchRecordingStateChanged broadcast (see the subscribe() call in the
+   * constructor), so the UI updates to "Watching..." the same way it does
+   * for a button-driven start. A hotkey-driven stop has no invoke() caller
+   * to hand its result back to, though, so its captured frames are pushed
+   * separately here for the renderer to submit for coaching.
+   */
+  toggleMatchRecordingFromHotkey(): void {
+    if (this.matchRecording.getState().status === "recording") {
+      const result = this.matchRecording.stop();
+      if (!result) return;
+      const window = this.getWindow();
+      if (!window || window.webContents.isDestroyed()) return;
+      window.webContents.send(
+        DESKTOP_CHANNELS.matchRecordingHotkeyStopped,
+        result
+      );
+      return;
+    }
+    this.matchRecording.start();
+  }
+
   private getAttachedCallOfDutyTarget() {
     const attachment = this.attachment.getState();
     if (attachment.status !== "attached") return null;

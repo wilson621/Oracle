@@ -151,6 +151,26 @@ export default function MatchRecordingControl() {
     }
   }
 
+  useEffect(() => {
+    const bridge = window.oracleDesktop;
+    if (!bridge) {
+      return;
+    }
+    // A start triggered by the global hotkey already reaches this
+    // component through onMatchRecordingStateChanged above (same as a
+    // button-driven start). A hotkey-triggered stop has no invoke() caller
+    // to hand its captured frames back to, so the frames are pushed here
+    // instead -- submit it for coaching exactly like a manual Stop press.
+    const unsubscribe = bridge.onMatchRecordingHotkeyStopped((result) => {
+      void submitForCoaching(result);
+    });
+    return unsubscribe;
+    // submitForCoaching is a stable-in-practice function declaration (not
+    // recreated meaningfully across renders); subscribing once on mount is
+    // the intent here, same as the state-subscription effect above it.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (!bridgeAvailable) {
     return (
       <section className={styles.card}>

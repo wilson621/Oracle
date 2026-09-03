@@ -76,6 +76,15 @@ export const DESKTOP_CHANNELS = {
   matchRecordingStateChanged:
     "oracle-desktop:match-recording-state-changed",
 
+  matchRecordingHotkeyStopped:
+    "oracle-desktop:match-recording-hotkey-stopped",
+
+  getToggleWatchHotkey:
+    "oracle-desktop:get-toggle-watch-hotkey",
+
+  setToggleWatchHotkey:
+    "oracle-desktop:set-toggle-watch-hotkey",
+
   toggleOverlayPreview:
     "oracle-desktop:toggle-overlay-preview",
 
@@ -112,6 +121,18 @@ export const DESKTOP_CHANNELS = {
 
 export const ORACLE_DESKTOP_RECOVERY_SHORTCUT =
   "CommandOrControl+Shift+O";
+
+/**
+ * State of the global "toggle Watch & Coach" hotkey: the accelerator string
+ * currently configured, and whether it's actually bound at the OS level
+ * right now (registration can fail if another running application already
+ * grabbed the same combination -- that's surfaced here rather than failing
+ * silently, so the Settings UI can tell the Operator to pick another one).
+ */
+export type OracleDesktopToggleWatchHotkeyState = Readonly<{
+  accelerator: string;
+  registered: boolean;
+}>;
 
 export type {
   OracleCompanionPresentationState,
@@ -176,6 +197,26 @@ export type OracleDesktopBridge = {
       state: OracleMatchRecordingState
     ) => void
   ) => () => void;
+
+  /**
+   * Fires once, carrying the captured frames, whenever the global toggle
+   * hotkey stops a watch session -- the button-driven stop already gets its
+   * result as the return value of stopMatchRecording(), but a hotkey press
+   * has no such caller to return to, so the result is pushed here instead
+   * so the report can still be submitted automatically.
+   */
+  onMatchRecordingHotkeyStopped: (
+    listener: (
+      result: OracleMatchRecordingResult
+    ) => void
+  ) => () => void;
+
+  getToggleWatchHotkey: () =>
+    Promise<OracleDesktopToggleWatchHotkeyState>;
+
+  setToggleWatchHotkey: (
+    accelerator: string
+  ) => Promise<OracleDesktopToggleWatchHotkeyState>;
 
   toggleOverlayPreview: () =>
     Promise<OracleDesktopHostState>;
