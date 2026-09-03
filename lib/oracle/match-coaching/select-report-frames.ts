@@ -8,6 +8,23 @@ export type SelectedReportFrame = SelectableFrame & {
   tag: "overview" | "moment";
 };
 
+// There is no reliable OS-level signal for "lobby ended, match started" --
+// it's the same game window throughout, and nobody can be tapping a
+// button mid-firefight to mark it. So this is a best-effort guess from
+// motion alone: lobby/loadout screens are mostly static (reading menus,
+// the occasional click), while actual gameplay has near-continuous
+// camera/environment motion. Find the first point where motion stays
+// elevated for a sustained stretch and treat that as "probably dropped
+// in," then concentrate frame selection after it instead of spreading
+// evenly across lobby time too. Deliberately conservative: if nothing
+// clearly sustained is found, or a session is too short to judge, it
+// falls back to not trimming anything rather than risking cutting real
+// match content on a bad guess.
+const MOTION_WINDOW_FRAMES = 5;
+const SUSTAINED_MOTION_THRESHOLD = 0.15;
+const MAX_LOBBY_FRACTION = 0.6;
+const MIN_FRAMES_TO_ATTEMPT_TRIM = 20;
+
 const OVERVIEW_FRAME_TARGET = 12;
 // Lower than before: a real gunfight's frame-to-frame pixel change is
 // often smaller than a full scene cut (menu open, killcam transition,
@@ -40,13 +57,19 @@ export function selectReportFrames(
 ): readonly SelectedReportFrame[] {
   if (frames.length === 0) return [];
 
-  const overviewIndices = evenlySpacedIndices(
-    frames.length,
-    Math.min(OVERVIEW_FRAME_TARGET, frames.length)
-  );
+  const matchStartIndex = detectLikelyMatchStart(frames);
+  const inMatchFrames = frames.slice(matchStartIndex);
 
-  const spikeIndices = frames
-    .map((frame, index) => ({ index, diffScore: frame.diffScore }))
+  const overviewIndices = evenlySpacedIndices(
+    inMatchFrames.length,
+    Math.min(OVERVIEW_FRAME_TARGET, inMatchFrames.length)
+  ).map((index) => index + matchStartIndex);
+
+  const spikeIndices = inMatchFrames
+    .map((frame, index) => ({
+      index: index + matchStartIndex,
+      diffScore: frame.diffScore,
+    }))
     .filter(({ diffScore }) => diffScore >= MOMENT_DIFF_THRESHOLD)
     .sort((a, b) => b.diffScore - a.diffScore)
     .slice(0, MOMENT_SPIKE_CAP)
@@ -66,7 +89,14 @@ export function selectReportFrames(
     }
   }
 
+  // A single frame from before the detected match start, kept only for
+  // loadout/context continuity -- not counted against the overview budget,
+  // which is now spent entirely on the part of the session that's
+  // actually the match.
+  const anchorIndices = matchStartIndex > 0 ? [0] : [];
+
   const selectedIndices = new Set<number>([
+    ...anchorIndices,
     ...overviewIndices,
     ...momentIndices,
   ]);
@@ -79,6 +109,38 @@ export function selectReportFrames(
         ? ("moment" as const)
         : ("overview" as const),
     }));
+}
+
+/**
+ * Scans forward for the first stretch of MOTION_WINDOW_FRAMES consecutive
+ * frames whose average diffScore stays at or above SUSTAINED_MOTION_
+ * THRESHOLD, and returns its starting index. Only looks within the first
+ * MAX_LOBBY_FRACTION of the session, and returns 0 (no trim) if nothing
+ * qualifies, the session is too short to judge, or a match happens to
+ * start in near-total darkness/stillness right away -- a missed guess
+ * just means lobby frames aren't trimmed, which is the pre-existing
+ * behaviour, not a regression.
+ */
+function detectLikelyMatchStart(frames: readonly SelectableFrame[]): number {
+  if (frames.length < MIN_FRAMES_TO_ATTEMPT_TRIM) return 0;
+
+  const searchLimit = Math.floor(frames.length * MAX_LOBBY_FRACTION);
+  for (
+    let start = 0;
+    start <= searchLimit - MOTION_WINDOW_FRAMES;
+    start += 1
+  ) {
+    let sum = 0;
+    for (let offset = 0; offset < MOTION_WINDOW_FRAMES; offset += 1) {
+      sum += frames[start + offset].diffScore;
+    }
+    const windowedAverage = sum / MOTION_WINDOW_FRAMES;
+    if (windowedAverage >= SUSTAINED_MOTION_THRESHOLD) {
+      return start;
+    }
+  }
+
+  return 0;
 }
 
 function evenlySpacedIndices(length: number, count: number): number[] {

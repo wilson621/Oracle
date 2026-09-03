@@ -118,10 +118,12 @@ export async function generateMatchCoachingReport(
               text:
                 `This watch session ran from ${input.startedAt} to ` +
                 `${input.endedAt} (${input.game}). ${selected.length} ` +
-                "frames are attached in chronological order; each was " +
-                "captured either as a spread across the whole session or " +
-                "in a burst around a large visual change. Produce the full " +
-                "coaching report.",
+                "frames are attached in chronological order. At most one " +
+                "early frame may show pre-match loadout/lobby for context " +
+                "-- the rest are concentrated on the part of the session " +
+                "after the Operator likely dropped into the match, either " +
+                "as a spread across it or in a burst around a large " +
+                "visual change. Produce the full coaching report.",
             },
             ...selected.map((frame) => ({
               type: "input_image" as const,
