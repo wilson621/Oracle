@@ -6,10 +6,7 @@ import {
   OPENAI_MATCH_COACHING_MODEL,
   type OracleMatchCoachingReport,
 } from "./oracle-match-coaching-report";
-import {
-  selectReportFrames,
-  type SelectableFrame,
-} from "./select-report-frames";
+import { type SelectableFrame } from "./select-report-frames";
 
 export type GenerateMatchCoachingReportInput = Readonly<{
   supabase: SupabaseClient;
@@ -67,7 +64,16 @@ export async function generateMatchCoachingReport(
     frameCount: input.frames.length,
   } as const;
 
-  const selected = selectReportFrames(input.frames);
+  // Frame selection already happened on-device (see
+  // desktop/companion/match-recording-coordinator.ts) before this ever left
+  // the Operator's PC, so `input.frames` is already the bounded, curated
+  // set in chronological order. Re-running selectReportFrames here used to
+  // apply the same "evenly spaced overview + biggest diff spikes" logic a
+  // *second* time on top of an already-reduced, non-uniformly-spaced set --
+  // which could silently drop frames the first pass deliberately kept
+  // (e.g. killcam context) in favor of re-picking its own "overview" from
+  // what was left. Trust the already-selected set instead.
+  const selected = input.frames;
   if (selected.length === 0) {
     return persist(input.supabase, {
       ...base,

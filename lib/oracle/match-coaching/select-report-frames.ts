@@ -8,10 +8,21 @@ export type SelectedReportFrame = SelectableFrame & {
   tag: "overview" | "moment";
 };
 
-const OVERVIEW_FRAME_TARGET = 8;
-const MOMENT_DIFF_THRESHOLD = 0.12;
-const MOMENT_SPIKE_CAP = 15;
-const MOMENT_CONTEXT_FRAMES = 1;
+const OVERVIEW_FRAME_TARGET = 12;
+// Lower than before: a real gunfight's frame-to-frame pixel change is
+// often smaller than a full scene cut (menu open, killcam transition,
+// loadout/gulag screens), which previously dominated the top spikes and
+// crowded actual combat out of the selected set entirely. Casting a wider
+// net here, and leaning on MOMENT_SPIKE_CAP/MOMENT_CONTEXT_FRAMES below to
+// keep both combat and UI-transition spikes without losing either.
+const MOMENT_DIFF_THRESHOLD = 0.08;
+const MOMENT_SPIKE_CAP = 20;
+// 2 neighbours on each side (5 frames per spike) instead of 1, so a burst
+// actually covers a few seconds either side of a cut -- important for
+// killcams specifically, since the informative part (the enemy's position
+// and sightline) is usually a second or two into the replay, not the very
+// first frame after the cut.
+const MOMENT_CONTEXT_FRAMES = 2;
 
 /**
  * Reduces a full match's captured frames down to a bounded set worth
