@@ -138,48 +138,77 @@ export default function CompanionGuidanceLive({
           Refresh guidance
         </button>
       </section>
-      <section className={styles.controls} aria-label="Local screen observation">
-        <div aria-live="polite">
-          <strong>
-            {observation?.indicator === "observation-on"
-              ? "Observation on"
-              : observation?.indicator === "observation-paused"
-                ? "Observation paused"
-                : "Observation off"}
-          </strong>
-          <p>
-            {observation?.message ??
-              "Local observation state is not available in this browser."}
-          </p>
-        </div>
-        <label>
-          Certified display mode
-          <select
-            value={observationDisplayMode}
-            onChange={(event) =>
-              setObservationDisplayMode(
-                event.target.value as
-                  OracleCompanionScreenObservationControl["displayMode"]
-              )
-            }
+      {
+        // Local screen observation (currently: live step-by-step guidance,
+        // e.g. Minecraft diamond-finding) only ever applies to game
+        // integrations that actually support it -- right now that's just
+        // Minecraft Java (see companion-screen-observation-coordinator.ts's
+        // eligibility check). The coordinator reports gameIntegrationId as
+        // null whenever the attached session isn't one of those, including
+        // the whole time an unsupported game (e.g. Call of Duty/Warzone) is
+        // attached, so hide the panel entirely in that case rather than
+        // showing a permanent "requires Minecraft" message on every other
+        // game's Companion view. This is a display gate only -- the feature
+        // itself stays intact for when more integrations support it (e.g.
+        // planned: other Minecraft-like/RPG item-location guidance, and
+        // live step-by-step Call of Duty Zombies easter-egg guidance).
+        observation?.gameIntegrationId && (
+          <section
+            className={styles.controls}
+            aria-label="Local screen observation"
           >
-            <option value="windowed">Windowed</option>
-            <option value="borderless-windowed">Borderless windowed</option>
-          </select>
-        </label>
-        <button type="button" onClick={() => void controlObservation("enable")}>
-          Enable and observe once
-        </button>
-        <button type="button" onClick={() => void controlObservation("observe")}>
-          Observe again
-        </button>
-        <button type="button" onClick={() => void controlObservation("pause")}>
-          Pause
-        </button>
-        <button type="button" onClick={() => void controlObservation("revoke")}>
-          Revoke consent
-        </button>
-      </section>
+            <div aria-live="polite">
+              <strong>
+                {observation?.indicator === "observation-on"
+                  ? "Observation on"
+                  : observation?.indicator === "observation-paused"
+                    ? "Observation paused"
+                    : "Observation off"}
+              </strong>
+              <p>
+                {observation?.message ??
+                  "Local observation state is not available in this browser."}
+              </p>
+            </div>
+            <label>
+              Certified display mode
+              <select
+                value={observationDisplayMode}
+                onChange={(event) =>
+                  setObservationDisplayMode(
+                    event.target.value as
+                      OracleCompanionScreenObservationControl["displayMode"]
+                  )
+                }
+              >
+                <option value="windowed">Windowed</option>
+                <option value="borderless-windowed">Borderless windowed</option>
+              </select>
+            </label>
+            <button
+              type="button"
+              onClick={() => void controlObservation("enable")}
+            >
+              Enable and observe once
+            </button>
+            <button
+              type="button"
+              onClick={() => void controlObservation("observe")}
+            >
+              Observe again
+            </button>
+            <button type="button" onClick={() => void controlObservation("pause")}>
+              Pause
+            </button>
+            <button
+              type="button"
+              onClick={() => void controlObservation("revoke")}
+            >
+              Revoke consent
+            </button>
+          </section>
+        )
+      }
       <CompanionGuidanceDashboard state={state} />
     </>
   );
