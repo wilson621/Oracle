@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase-server";
 import { generateMatchCoachingReport } from "@/lib/oracle/match-coaching/oracle-match-coaching-service";
 import type { SelectableFrame } from "@/lib/oracle/match-coaching/select-report-frames";
+import { ensureOperatorBinding } from "@/lib/oracle/operator/ensure-operator-binding";
 
 export const maxDuration = 300;
 
@@ -61,15 +62,18 @@ export async function POST(request: Request) {
     );
   }
 
-  const { data: binding, error: bindingError } = await supabase
-    .from("operator_account_bindings")
-    .select("operator_id")
-    .eq("account_id", user.id)
-    .single();
-  if (bindingError || !binding) {
+  let operatorId: string;
+  try {
+    operatorId = await ensureOperatorBinding(supabase, user);
+  } catch (error) {
     return NextResponse.json(
-      { error: "No Operator profile is bound to this account yet." },
-      { status: 409 }
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : "Could not set up an Operator profile for this account.",
+      },
+      { status: 500 }
     );
   }
 
@@ -82,7 +86,7 @@ export async function POST(request: Request) {
   try {
     const report = await generateMatchCoachingReport({
       supabase,
-      operatorId: binding.operator_id as string,
+      operatorId,
       clientSessionId: body.clientSessionId,
       game: body.game ?? "Call of Duty",
       startedAt: body.startedAt,
