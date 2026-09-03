@@ -33,8 +33,7 @@ const TARGET_FRAME_RATE = 5;
 const VIDEO_BITS_PER_SECOND = 900_000;
 
 // Reuses OracleElectronFullWindowCapture's existing diffScore still-frame
-// sampling -- unmodified, and via its own instance independent of the
-// frame-based Watch & Coach coordinator's -- purely to estimate when the
+// sampling, via its own private instance, purely to estimate when the
 // actual match likely began, so that estimate can be passed to Gemini as a
 // prompt hint. This never affects what gets uploaded or its cost; it is
 // solely a report-quality nicety with a safe "no hint given" fallback.
@@ -52,12 +51,9 @@ const ELAPSED_TICK_MS = 1_000;
 type MotionSample = Readonly<{ elapsedMs: number; diffScore: number }>;
 
 /**
- * Owns the local lifecycle for the new Gemini-video-based "Full Match
- * Analysis" feature: start/stop a real screen recording of the attached
- * Call of Duty window (via OracleVideoRecorderWindowController), independent
- * of and additive to OracleMatchRecordingCoordinator's existing still-frame
- * Watch & Coach flow -- both can exist side by side without interfering,
- * since they own separate capture windows and separate state.
+ * Owns the local lifecycle for the Gemini-video-based "Full Match Analysis"
+ * feature: start/stop a real screen recording of the attached Call of Duty
+ * window, via OracleVideoRecorderWindowController.
  *
  * The recorded file never leaves this process on its own; stop() only
  * returns its local path and metadata for the caller to upload and, per

@@ -42,10 +42,10 @@ export type GenerateMatchVideoCoachingReportInput = Readonly<{
 // low framerate for exactly this reason (see
 // match-video-recording-coordinator.ts) -- 1fps here is treated as roughly
 // "one sampled frame per second of match", which is what frame_count below
-// approximates for a video-based report (it isn't literally counting
-// frames the way the still-frame pipeline's frame_count does, since there
-// are no discrete captured frames here -- it's the closest honest analogue
-// so the column still means roughly the same thing either way).
+// approximates for a video-based report. There are no discrete captured
+// frames in this pipeline, so it's an honest analogue rather than a literal
+// count, kept so the column still means something comparable to what it
+// would for any other report in the same table.
 const APPROX_GEMINI_SAMPLES_PER_SECOND = 1;
 
 // How long to wait for Gemini's Files API to finish processing an uploaded
@@ -90,11 +90,8 @@ coaching than an honest "unclear from this footage."
 
 /**
  * Calls Gemini to turn a full local screen recording of a match (video +
- * system audio) into the same structured coaching report shape the
- * still-frame/OpenAI pipeline produces, then saves it (success or failure)
- * to the same oracle_match_coaching_reports table -- see
- * oracle-match-coaching-service.ts for that original pipeline, which this
- * is additive to, not a replacement for.
+ * system audio) into a structured coaching report, then saves it (success
+ * or failure) to the oracle_match_coaching_reports table.
  *
  * Always returns a report row rather than throwing, so a failed Gemini call
  * still leaves the Operator with a saved, visible "this didn't work" record

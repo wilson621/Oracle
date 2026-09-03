@@ -38,10 +38,6 @@ import type {
   OracleCompanionScreenObservationState,
 } from "./companion/companion-screen-observation-contract.js";
 import type {
-  OracleMatchRecordingResult,
-  OracleMatchRecordingState,
-} from "./companion/match-recording-contract.js";
-import type {
   OracleMatchVideoRecordingResult,
   OracleMatchVideoRecordingState,
 } from "./companion/match-video-recording-contract.js";
@@ -68,21 +64,6 @@ export const DESKTOP_CHANNELS = {
   controlCompanionScreenObservation:
     "oracle-desktop:control-companion-screen-observation",
 
-  getMatchRecordingState:
-    "oracle-desktop:get-match-recording-state",
-
-  startMatchRecording:
-    "oracle-desktop:start-match-recording",
-
-  stopMatchRecording:
-    "oracle-desktop:stop-match-recording",
-
-  matchRecordingStateChanged:
-    "oracle-desktop:match-recording-state-changed",
-
-  matchRecordingHotkeyStopped:
-    "oracle-desktop:match-recording-hotkey-stopped",
-
   getMatchVideoRecordingState:
     "oracle-desktop:get-match-video-recording-state",
 
@@ -95,17 +76,20 @@ export const DESKTOP_CHANNELS = {
   matchVideoRecordingStateChanged:
     "oracle-desktop:match-video-recording-state-changed",
 
+  matchVideoRecordingHotkeyStopped:
+    "oracle-desktop:match-video-recording-hotkey-stopped",
+
   readMatchVideoBytes:
     "oracle-desktop:read-match-video-bytes",
 
   deleteMatchVideoFile:
     "oracle-desktop:delete-match-video-file",
 
-  getToggleWatchHotkey:
-    "oracle-desktop:get-toggle-watch-hotkey",
+  getToggleVideoRecordingHotkey:
+    "oracle-desktop:get-toggle-video-recording-hotkey",
 
-  setToggleWatchHotkey:
-    "oracle-desktop:set-toggle-watch-hotkey",
+  setToggleVideoRecordingHotkey:
+    "oracle-desktop:set-toggle-video-recording-hotkey",
 
   toggleOverlayPreview:
     "oracle-desktop:toggle-overlay-preview",
@@ -169,25 +153,26 @@ export const ORACLE_DESKTOP_RECOVERY_SHORTCUT =
   "CommandOrControl+Shift+O";
 
 /**
- * State of a global hotkey (currently used for both "toggle Watch & Coach"
- * and "toggle indicator positioning mode"): the accelerator string
- * currently configured, and whether it's actually bound at the OS level
- * right now (registration can fail if another running application already
- * grabbed the same combination -- that's surfaced here rather than failing
- * silently, so the Settings UI can tell the Operator to pick another one).
+ * State of a global hotkey (used for both "toggle Full Match Analysis
+ * recording" and "toggle indicator positioning mode"): the accelerator
+ * string currently configured, and whether it's actually bound at the OS
+ * level right now (registration can fail if another running application
+ * already grabbed the same combination -- that's surfaced here rather than
+ * failing silently, so the Settings UI can tell the Operator to pick
+ * another one).
  */
-export type OracleDesktopToggleWatchHotkeyState = Readonly<{
+export type OracleDesktopHotkeyState = Readonly<{
   accelerator: string;
   registered: boolean;
 }>;
 
 /**
- * Lifecycle of the coaching report that follows a stopped Watch & Coach
- * session, as observed from the Companion renderer (fetch in flight /
- * succeeded / failed). Pushed to the main process so the small always-on-top
- * watch indicator can reflect it without needing its own knowledge of the
- * coach-report API -- the indicator only ever reacts to this plus match
- * recording status.
+ * Lifecycle of the coaching report that follows a stopped Full Match
+ * Analysis recording, as observed from the Companion renderer (fetch in
+ * flight / succeeded / failed). Pushed to the main process so the small
+ * always-on-top watch indicator can reflect it without needing its own
+ * knowledge of the coach-report API -- the indicator only ever reacts to
+ * this plus match recording status.
  */
 export type OracleReportGenerationStatus =
   | "idle"
@@ -196,8 +181,8 @@ export type OracleReportGenerationStatus =
   | "failed";
 
 /**
- * Operator-configurable presentation of the small always-on-top "Watch &
- * Coach" status indicator: whether it should ever draw at all (some
+ * Operator-configurable presentation of the small always-on-top match
+ * recording status indicator: whether it should ever draw at all (some
  * Operators want zero on-screen presence and to rely on the hotkey plus a
  * Windows notification instead) and, once repositioned via positioning
  * mode, the on-screen point it was dropped at.
@@ -214,8 +199,6 @@ export type {
   OracleCompanionGuidanceControl,
   OracleCompanionScreenObservationControl,
   OracleCompanionScreenObservationState,
-  OracleMatchRecordingResult,
-  OracleMatchRecordingState,
   OracleMatchVideoRecordingResult,
   OracleMatchVideoRecordingState,
   OracleDesktopAttachmentState,
@@ -258,39 +241,10 @@ export type OracleDesktopBridge = {
     control: OracleCompanionScreenObservationControl
   ) => Promise<OracleCompanionScreenObservationState>;
 
-  getMatchRecordingState: () =>
-    Promise<OracleMatchRecordingState>;
-
-  startMatchRecording: () =>
-    Promise<OracleMatchRecordingState>;
-
-  stopMatchRecording: () =>
-    Promise<OracleMatchRecordingResult | null>;
-
-  onMatchRecordingStateChanged: (
-    listener: (
-      state: OracleMatchRecordingState
-    ) => void
-  ) => () => void;
-
-  /**
-   * Fires once, carrying the captured frames, whenever the global toggle
-   * hotkey stops a watch session -- the button-driven stop already gets its
-   * result as the return value of stopMatchRecording(), but a hotkey press
-   * has no such caller to return to, so the result is pushed here instead
-   * so the report can still be submitted automatically.
-   */
-  onMatchRecordingHotkeyStopped: (
-    listener: (
-      result: OracleMatchRecordingResult
-    ) => void
-  ) => () => void;
-
   /**
    * The Full Match Analysis pipeline: a real screen+audio recording of the
-   * attached window (OracleMatchVideoRecordingCoordinator), additive to and
-   * entirely independent of the still-frame Watch & Coach flow above --
-   * separate state, separate hidden capture window, separate report path.
+   * attached window (OracleMatchVideoRecordingCoordinator), uploaded to
+   * Gemini for a deep, evidence-grounded report.
    */
   getMatchVideoRecordingState: () =>
     Promise<OracleMatchVideoRecordingState>;
@@ -304,6 +258,19 @@ export type OracleDesktopBridge = {
   onMatchVideoRecordingStateChanged: (
     listener: (
       state: OracleMatchVideoRecordingState
+    ) => void
+  ) => () => void;
+
+  /**
+   * Fires once, carrying the finished recording, whenever the global
+   * toggle hotkey stops a recording -- the button-driven stop already gets
+   * its result as the return value of stopMatchVideoRecording(), but a
+   * hotkey press has no such caller to return to, so the result is pushed
+   * here instead so the report can still be submitted automatically.
+   */
+  onMatchVideoRecordingHotkeyStopped: (
+    listener: (
+      result: OracleMatchVideoRecordingResult
     ) => void
   ) => () => void;
 
@@ -327,12 +294,12 @@ export type OracleDesktopBridge = {
     videoPath: string
   ) => Promise<void>;
 
-  getToggleWatchHotkey: () =>
-    Promise<OracleDesktopToggleWatchHotkeyState>;
+  getToggleVideoRecordingHotkey: () =>
+    Promise<OracleDesktopHotkeyState>;
 
-  setToggleWatchHotkey: (
+  setToggleVideoRecordingHotkey: (
     accelerator: string
-  ) => Promise<OracleDesktopToggleWatchHotkeyState>;
+  ) => Promise<OracleDesktopHotkeyState>;
 
   toggleOverlayPreview: () =>
     Promise<OracleDesktopHostState>;
@@ -382,10 +349,11 @@ export type OracleDesktopBridge = {
 
   /**
    * Tells the main process what the coach-report request for the last
-   * stopped Watch & Coach session is doing, so the small watch indicator
-   * (a separate always-on-top window the Companion renderer has no direct
-   * handle to) can reflect it -- an amber "generating" state, then a brief
-   * green "ready" flash or a red "failed" one before it fades.
+   * stopped Full Match Analysis recording is doing, so the small watch
+   * indicator (a separate always-on-top window the Companion renderer has
+   * no direct handle to) can reflect it -- an amber "generating" state,
+   * then a brief green "ready" flash or a red "failed" one before it
+   * fades.
    */
   notifyReportGenerationStatus: (
     status: OracleReportGenerationStatus
@@ -408,11 +376,11 @@ export type OracleDesktopBridge = {
   exitIndicatorPositioningMode: () => Promise<void>;
 
   getIndicatorPositioningHotkey: () =>
-    Promise<OracleDesktopToggleWatchHotkeyState>;
+    Promise<OracleDesktopHotkeyState>;
 
   setIndicatorPositioningHotkey: (
     accelerator: string
-  ) => Promise<OracleDesktopToggleWatchHotkeyState>;
+  ) => Promise<OracleDesktopHotkeyState>;
 
   /**
    * Fires whenever positioning mode is entered or exited by any trigger --

@@ -19,8 +19,7 @@
   },
   "include": [
     "desktop/**/*.ts",
-    "lib/oracle/game-integrations/**/*.ts",
-    "lib/oracle/match-coaching/select-report-frames.ts"
+    "lib/oracle/game-integrations/**/*.ts"
   ],
   "exclude": [
     "node_modules",

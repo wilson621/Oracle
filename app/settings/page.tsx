@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import AppLayout from "@/components/layout/AppLayout";
 import PageHeader from "@/components/ui/PageHeader";
-import ToggleWatchHotkeySettings from "@/components/settings/ToggleWatchHotkeySettings";
+import MatchVideoRecordingHotkeySettings from "@/components/settings/MatchVideoRecordingHotkeySettings";
 import WatchOverlaySettings from "@/components/settings/WatchOverlaySettings";
 
 const settings = [
@@ -50,7 +50,7 @@ export default function SettingsPage() {
         ))}
       </div>
 
-      <ToggleWatchHotkeySettings />
+      <MatchVideoRecordingHotkeySettings />
       <WatchOverlaySettings />
 
       <section className="mt-6 rounded-3xl border border-slate-800 bg-black/25 p-6 sm:p-8">
@@ -65,13 +65,13 @@ export default function SettingsPage() {
             <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-300">
               <li>
                 Companion screen observation frames are transient, local and
-                never uploaded. Watch &amp; Coach is separate and manual: it
-                only captures while you press Start Watching, and uploads a
-                bounded, curated set of frames from that session solely to
-                generate your coaching report.
+                never uploaded. Full Match Analysis is separate and manual:
+                it only records while you press Start, and the recording is
+                uploaded solely to generate your coaching report, then
+                deleted locally once the report is ready.
               </li>
               <li>
-                The Watch &amp; Coach hotkey and on-screen indicator only
+                The Full Match Analysis hotkey and on-screen indicator only
                 draw over Borderless or Windowed Fullscreen -- Windows&apos;
                 Exclusive Fullscreen mode blocks all overlays, Oracle&apos;s
                 included, the same limitation Discord and Nvidia&apos;s

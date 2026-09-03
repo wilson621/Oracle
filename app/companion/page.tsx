@@ -1,5 +1,4 @@
 import CompanionGuidanceLive from "@/components/companion/guidance/CompanionGuidanceLive";
-import MatchRecordingControl from "@/components/companion/matchrecording/MatchRecordingControl";
 import MatchVideoRecordingControl from "@/components/companion/matchrecording/MatchVideoRecordingControl";
 import AppLayout from "@/components/layout/AppLayout";
 import {
@@ -15,7 +14,6 @@ export default function CompanionPage() {
       <CompanionGuidanceLive
         initialState={COMPANION_PAGE_INITIAL_STATE}
       />
-      <MatchRecordingControl />
       <MatchVideoRecordingControl />
       <EvidenceBoundary
         evidence="Only validated, current Guidance Requests from approved Game Integrations."

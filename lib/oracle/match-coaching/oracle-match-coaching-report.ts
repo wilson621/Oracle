@@ -33,8 +33,6 @@ export type OracleMatchCoachingReport = Readonly<{
   rawError: string | null;
 }>;
 
-export const OPENAI_MATCH_COACHING_MODEL = "gpt-5.6-sol";
-
 // Full Match Analysis (video+audio, via Gemini's Files API) -- see
 // oracle-match-video-coaching-service.ts. Flash rather than a heavier tier:
 // for this task (grounded description + structured extraction from a video
@@ -43,102 +41,15 @@ export const OPENAI_MATCH_COACHING_MODEL = "gpt-5.6-sol";
 // using the larger model here.
 export const GEMINI_MATCH_COACHING_MODEL = "gemini-3.8-flash";
 
-export const MATCH_COACHING_JSON_SCHEMA = {
-  name: "oracle_match_coaching_report",
-  strict: true,
-  schema: {
-    type: "object",
-    additionalProperties: false,
-    properties: {
-      summary: {
-        type: "string",
-        description:
-          "A few paragraphs of plain-language, in-depth coaching covering how the whole match went.",
-      },
-      verdict: {
-        type: "string",
-        description:
-          "One or two sentence bottom-line verdict on the match.",
-      },
-      scores: {
-        type: "object",
-        additionalProperties: false,
-        properties: {
-          positioning: { type: "integer", minimum: 0, maximum: 100 },
-          aim: { type: "integer", minimum: 0, maximum: 100 },
-          movement: { type: "integer", minimum: 0, maximum: 100 },
-          decisionMaking: { type: "integer", minimum: 0, maximum: 100 },
-          gameSense: { type: "integer", minimum: 0, maximum: 100 },
-        },
-        required: [
-          "positioning",
-          "aim",
-          "movement",
-          "decisionMaking",
-          "gameSense",
-        ],
-      },
-      deaths: {
-        type: "array",
-        items: {
-          type: "object",
-          additionalProperties: false,
-          properties: {
-            whenInMatch: {
-              type: "string",
-              description:
-                "Roughly when this death happened, described from the visible frames (e.g. 'early match', 'around the 3rd captured moment').",
-            },
-            whatHappened: {
-              type: "string",
-              description:
-                "What is actually visible in the frames leading up to and including this death, including anything shown in the killcam if it appears.",
-            },
-            enemySightlineAssessment: {
-              type: "string",
-              description:
-                "Best-effort, evidence-graded reasoning about when the enemy likely first had the operator in view. Must be phrased as an inference from visible evidence ('likely', 'the killcam shows'), never asserted as certain fact unless the killcam frame itself makes it directly visible.",
-            },
-            couldHaveActedSooner: {
-              type: "boolean",
-              description:
-                "Whether the visible evidence suggests the operator could reasonably have reacted, repositioned, or engaged sooner to avoid or win this fight.",
-            },
-            whatToDoDifferently: {
-              type: "string",
-              description: "Concrete, specific coaching for next time.",
-            },
-            confidence: {
-              type: "string",
-              enum: ["low", "medium", "high"],
-              description:
-                "How confident this specific breakdown is, given what was actually visible in the captured frames.",
-            },
-          },
-          required: [
-            "whenInMatch",
-            "whatHappened",
-            "enemySightlineAssessment",
-            "couldHaveActedSooner",
-            "whatToDoDifferently",
-            "confidence",
-          ],
-        },
-      },
-    },
-    required: ["summary", "verdict", "scores", "deaths"],
-  },
-} as const;
-
 /**
- * Same report shape as MATCH_COACHING_JSON_SCHEMA above (identical property
- * names/types, so both pipelines write to the same table columns), but with
- * descriptions rewritten for a continuous video+audio recording instead of a
- * bounded set of screenshots -- most importantly, pointing the model at real
- * mm:ss timestamps and audio cues, which is the biggest single accuracy
- * advantage the video pipeline has over the frame-based one. Passed as
- * Gemini's `responseJsonSchema` (a plain JSON Schema, not OpenAI's
- * name+strict-wrapped format), so this is the bare schema object.
+ * The report shape Gemini is asked to produce, matching
+ * OracleMatchCoachingReport's fields exactly (so it maps straight onto the
+ * oracle_match_coaching_reports table via persist-match-coaching-report.ts)
+ * -- with descriptions written for a continuous video+audio recording, most
+ * importantly pointing the model at real mm:ss timestamps and audio cues,
+ * which is the biggest single accuracy advantage this format has. Passed as
+ * Gemini's `responseJsonSchema` (a plain JSON Schema), so this is the bare
+ * schema object.
  */
 export const GEMINI_MATCH_COACHING_RESPONSE_SCHEMA = {
   type: "object",

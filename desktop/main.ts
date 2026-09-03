@@ -7,14 +7,14 @@ import {
 import {
   DESKTOP_CHANNELS,
   ORACLE_DESKTOP_RECOVERY_SHORTCUT,
-  type OracleDesktopToggleWatchHotkeyState,
+  type OracleDesktopHotkeyState,
   type OracleReportGenerationStatus,
   type OracleWatchIndicatorSettings,
 } from "./contracts.js";
 import { CompanionHostWindowController } from "./overlay-window.js";
 import { WatchIndicatorWindowController } from "./watch-indicator-window.js";
 import {
-  DEFAULT_TOGGLE_WATCH_ACCELERATOR,
+  DEFAULT_TOGGLE_VIDEO_RECORDING_ACCELERATOR,
   DEFAULT_POSITIONING_MODE_ACCELERATOR,
   loadHotkeySettings,
   saveHotkeySettings,
@@ -59,9 +59,9 @@ let packagedProviderOrigin:
   string | undefined;
 // Populated inside app.whenReady() below -- app.getPath("userData"), which
 // loadHotkeySettings() needs, is only safe to call once Electron is ready.
-let toggleWatchAccelerator =
-  DEFAULT_TOGGLE_WATCH_ACCELERATOR;
-let toggleWatchRegistered = false;
+let toggleVideoRecordingAccelerator =
+  DEFAULT_TOGGLE_VIDEO_RECORDING_ACCELERATOR;
+let toggleVideoRecordingRegistered = false;
 let positioningModeAccelerator =
   DEFAULT_POSITIONING_MODE_ACCELERATOR;
 let positioningModeRegistered = false;
@@ -121,11 +121,11 @@ if (!hasSingleInstanceLock) {
 
       const storedHotkeySettings =
         loadHotkeySettings();
-      toggleWatchAccelerator =
-        storedHotkeySettings.toggleWatchAccelerator;
-      toggleWatchRegistered =
-        registerToggleWatchShortcut(
-          toggleWatchAccelerator
+      toggleVideoRecordingAccelerator =
+        storedHotkeySettings.toggleVideoRecordingAccelerator;
+      toggleVideoRecordingRegistered =
+        registerToggleVideoRecordingShortcut(
+          toggleVideoRecordingAccelerator
         );
       positioningModeAccelerator =
         storedHotkeySettings.positioningModeAccelerator;
@@ -201,7 +201,7 @@ app.on("will-quit", () => {
     ORACLE_DESKTOP_RECOVERY_SHORTCUT
   );
   globalShortcut.unregister(
-    toggleWatchAccelerator
+    toggleVideoRecordingAccelerator
   );
   globalShortcut.unregister(
     positioningModeAccelerator
@@ -211,9 +211,10 @@ app.on("will-quit", () => {
 /**
  * (Re)creates the small always-on-top watch indicator alongside a freshly
  * created (or reopened) Companion window and wires it to that window's
- * match-recording status stream. Idempotent-ish: safe to call again after
- * "activate" reopens the Companion window, since teardownWatchIndicator()
- * always runs first wherever the Companion window itself is torn down.
+ * match-video-recording status stream. Idempotent-ish: safe to call again
+ * after "activate" reopens the Companion window, since
+ * teardownWatchIndicator() always runs first wherever the Companion window
+ * itself is torn down.
  */
 function attachWatchIndicator(
   controller: CompanionHostWindowController
@@ -234,7 +235,7 @@ function attachWatchIndicator(
 
   unsubscribeIndicatorMatchStatus?.();
   unsubscribeIndicatorMatchStatus =
-    controller.subscribeMatchRecordingStatus((status) => {
+    controller.subscribeMatchVideoRecordingStatus((status) => {
       watchIndicator?.setMatchRecordingStatus(status);
     });
 }
@@ -317,81 +318,81 @@ function registerRecoveryShortcut(): void {
   }
 }
 
-function registerToggleWatchShortcut(
+function registerToggleVideoRecordingShortcut(
   accelerator: string
 ): boolean {
   const registered =
     globalShortcut.register(
       accelerator,
       () => {
-        hostWindowController
-          ?.toggleMatchRecordingFromHotkey();
+        void hostWindowController
+          ?.toggleMatchVideoRecordingFromHotkey();
       }
     );
 
   if (!registered) {
     console.warn(
-      `Oracle Companion could not register the Watch & Coach hotkey '${accelerator}'.`
+      `Oracle Companion could not register the Full Match Analysis hotkey '${accelerator}'.`
     );
   }
 
   return registered;
 }
 
-function applyToggleWatchHotkey(
+function applyToggleVideoRecordingHotkey(
   accelerator: unknown
-): OracleDesktopToggleWatchHotkeyState {
+): OracleDesktopHotkeyState {
   if (
     typeof accelerator !== "string" ||
     accelerator.trim().length === 0
   ) {
-    return currentToggleWatchHotkeyState();
+    return currentToggleVideoRecordingHotkeyState();
   }
 
   const trimmed = accelerator.trim();
-  if (trimmed === toggleWatchAccelerator) {
-    return currentToggleWatchHotkeyState();
+  if (trimmed === toggleVideoRecordingAccelerator) {
+    return currentToggleVideoRecordingHotkeyState();
   }
 
   const previousAccelerator =
-    toggleWatchAccelerator;
+    toggleVideoRecordingAccelerator;
   const previousRegistered =
-    toggleWatchRegistered;
+    toggleVideoRecordingRegistered;
 
-  if (toggleWatchRegistered) {
+  if (toggleVideoRecordingRegistered) {
     globalShortcut.unregister(
       previousAccelerator
     );
   }
 
   const registered =
-    registerToggleWatchShortcut(trimmed);
+    registerToggleVideoRecordingShortcut(trimmed);
 
   if (registered) {
-    toggleWatchAccelerator = trimmed;
-    toggleWatchRegistered = true;
+    toggleVideoRecordingAccelerator = trimmed;
+    toggleVideoRecordingRegistered = true;
     persistHotkeySettings();
   } else {
     // Couldn't bind the requested combination (most likely already claimed
     // by another running application) -- restore the previous one rather
     // than leaving the Operator with no working hotkey at all.
-    toggleWatchAccelerator =
+    toggleVideoRecordingAccelerator =
       previousAccelerator;
-    toggleWatchRegistered =
+    toggleVideoRecordingRegistered =
       previousRegistered
-        ? registerToggleWatchShortcut(
+        ? registerToggleVideoRecordingShortcut(
             previousAccelerator
           )
         : false;
   }
 
-  return currentToggleWatchHotkeyState();
+  return currentToggleVideoRecordingHotkeyState();
 }
 
-function currentToggleWatchHotkeyState(): OracleDesktopToggleWatchHotkeyState {
+function currentToggleVideoRecordingHotkeyState(): OracleDesktopHotkeyState {
   return {
-    accelerator: toggleWatchAccelerator,
-    registered: toggleWatchRegistered,
+    accelerator: toggleVideoRecordingAccelerator,
+    registered: toggleVideoRecordingRegistered,
   };
 }
 
@@ -417,7 +418,7 @@ function registerPositioningModeShortcut(
 
 function applyPositioningModeHotkey(
   accelerator: unknown
-): OracleDesktopToggleWatchHotkeyState {
+): OracleDesktopHotkeyState {
   if (
     typeof accelerator !== "string" ||
     accelerator.trim().length === 0
@@ -462,7 +463,7 @@ function applyPositioningModeHotkey(
   return currentPositioningModeHotkeyState();
 }
 
-function currentPositioningModeHotkeyState(): OracleDesktopToggleWatchHotkeyState {
+function currentPositioningModeHotkeyState(): OracleDesktopHotkeyState {
   return {
     accelerator: positioningModeAccelerator,
     registered: positioningModeRegistered,
@@ -476,7 +477,7 @@ function currentPositioningModeHotkeyState(): OracleDesktopToggleWatchHotkeyStat
  */
 function persistHotkeySettings(): void {
   saveHotkeySettings({
-    toggleWatchAccelerator,
+    toggleVideoRecordingAccelerator,
     positioningModeAccelerator,
   });
 }
@@ -564,27 +565,6 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
-    DESKTOP_CHANNELS.getMatchRecordingState,
-    (event) =>
-      requireAuthorizedController(event)
-        .getMatchRecordingState()
-  );
-
-  ipcMain.handle(
-    DESKTOP_CHANNELS.startMatchRecording,
-    (event) =>
-      requireAuthorizedController(event)
-        .startMatchRecording()
-  );
-
-  ipcMain.handle(
-    DESKTOP_CHANNELS.stopMatchRecording,
-    (event) =>
-      requireAuthorizedController(event)
-        .stopMatchRecording()
-  );
-
-  ipcMain.handle(
     DESKTOP_CHANNELS.getMatchVideoRecordingState,
     (event) =>
       requireAuthorizedController(event)
@@ -628,18 +608,18 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
-    DESKTOP_CHANNELS.getToggleWatchHotkey,
+    DESKTOP_CHANNELS.getToggleVideoRecordingHotkey,
     (event) => {
       requireAuthorizedController(event);
-      return currentToggleWatchHotkeyState();
+      return currentToggleVideoRecordingHotkeyState();
     }
   );
 
   ipcMain.handle(
-    DESKTOP_CHANNELS.setToggleWatchHotkey,
+    DESKTOP_CHANNELS.setToggleVideoRecordingHotkey,
     (event, accelerator: unknown) => {
       requireAuthorizedController(event);
-      return applyToggleWatchHotkey(
+      return applyToggleVideoRecordingHotkey(
         accelerator
       );
     }
@@ -794,18 +774,6 @@ function removeIpcHandlers(): void {
   );
 
   ipcMain.removeHandler(
-    DESKTOP_CHANNELS.getMatchRecordingState
-  );
-
-  ipcMain.removeHandler(
-    DESKTOP_CHANNELS.startMatchRecording
-  );
-
-  ipcMain.removeHandler(
-    DESKTOP_CHANNELS.stopMatchRecording
-  );
-
-  ipcMain.removeHandler(
     DESKTOP_CHANNELS.getMatchVideoRecordingState
   );
 
@@ -835,11 +803,11 @@ function removeIpcHandlers(): void {
   );
 
   ipcMain.removeHandler(
-    DESKTOP_CHANNELS.getToggleWatchHotkey
+    DESKTOP_CHANNELS.getToggleVideoRecordingHotkey
   );
 
   ipcMain.removeHandler(
-    DESKTOP_CHANNELS.setToggleWatchHotkey
+    DESKTOP_CHANNELS.setToggleVideoRecordingHotkey
   );
 
   ipcMain.removeHandler(

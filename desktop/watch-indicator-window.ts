@@ -3,7 +3,7 @@ import type {
   OracleReportGenerationStatus,
   OracleWatchIndicatorSettings,
 } from "./contracts.js";
-import type { OracleMatchRecordingState } from "./companion/match-recording-contract.js";
+import type { OracleMatchVideoRecordingState } from "./companion/match-video-recording-contract.js";
 import {
   loadIndicatorSettings,
   saveIndicatorSettings,
@@ -30,13 +30,14 @@ type IndicatorVisualState =
 
 /**
  * Owns a second, tiny always-on-top Electron window that does nothing but
- * show whether Oracle is currently watching a match / generating a report /
- * just finished one -- deliberately separate from the full Companion window
- * (CompanionHostWindowController) so it can stay a small corner indicator
- * instead of the full application surface. It is display-only: it never
- * calls back into the main process, so it needs no preload script or IPC of
- * its own -- the main process simply re-renders it (via a fresh data: URL)
- * whenever match-recording status or report-generation status changes.
+ * show whether Oracle is currently recording a match (Full Match Analysis)
+ * / generating a report / just finished one -- deliberately separate from
+ * the full Companion window (CompanionHostWindowController) so it can stay
+ * a small corner indicator instead of the full application surface. It is
+ * display-only: it never calls back into the main process, so it needs no
+ * preload script or IPC of its own -- the main process simply re-renders it
+ * (via a fresh data: URL) whenever match-video-recording status or
+ * report-generation status changes.
  *
  * Click-through and non-focusable by default so it can never intercept a
  * mouseclick or keypress during a match; positioning mode is the one
@@ -45,7 +46,7 @@ type IndicatorVisualState =
 export class WatchIndicatorWindowController {
   private window: BrowserWindow | null = null;
   private settings: OracleWatchIndicatorSettings = loadIndicatorSettings();
-  private recordingStatus: OracleMatchRecordingState["status"] = "idle";
+  private recordingStatus: OracleMatchVideoRecordingState["status"] = "idle";
   private reportStatus: OracleReportGenerationStatus = "idle";
   private positioning = false;
   private fadeTimer: NodeJS.Timeout | null = null;
@@ -128,20 +129,21 @@ export class WatchIndicatorWindowController {
   }
 
   /**
-   * Fed by CompanionHostWindowController.subscribeMatchRecordingStatus() --
-   * every match-recording status transition (idle/recording/stopped/etc.),
-   * not the per-frame frameCount ticks, so the indicator only redraws a
-   * handful of times per match instead of every ~2.5s while watching.
+   * Fed by CompanionHostWindowController.subscribeMatchVideoRecordingStatus()
+   * -- every match-video-recording status transition
+   * (idle/recording/stopped/etc.), not fine-grained progress ticks, so the
+   * indicator only redraws a handful of times per match instead of
+   * constantly while recording.
    */
   setMatchRecordingStatus(
-    status: OracleMatchRecordingState["status"]
+    status: OracleMatchVideoRecordingState["status"]
   ): void {
     if (status === this.recordingStatus) {
       return;
     }
     this.recordingStatus = status;
     if (status === "recording") {
-      // A fresh watch session should never be masked by a leftover
+      // A fresh recording should never be masked by a leftover
       // "ready"/"failed" flash from the previous one.
       this.clearFadeTimer();
       this.reportStatus = "idle";
@@ -183,8 +185,8 @@ export class WatchIndicatorWindowController {
   /**
    * Entry point for the global positioning-mode hotkey -- lets the Operator
    * pull up the indicator to drag it without alt-tabbing to Settings, even
-   * from inside a match. Same toggle shape as the watch hotkey: press once
-   * to enter, press again to drop it and save the new spot.
+   * from inside a match. Same toggle shape as the recording hotkey: press
+   * once to enter, press again to drop it and save the new spot.
    */
   togglePositioningMode(): void {
     if (this.positioning) {
@@ -370,7 +372,7 @@ function describeState(state: IndicatorVisualState): {
 } {
   switch (state) {
     case "watching":
-      return { dotClass: "watching", label: "Watching" };
+      return { dotClass: "watching", label: "Recording" };
     case "generating":
       return { dotClass: "generating", label: "Generating report…" };
     case "ready":

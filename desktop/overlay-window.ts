@@ -47,13 +47,6 @@ import type {
   OracleCompanionScreenObservationState,
 } from "./companion/companion-screen-observation-contract.js";
 import {
-  OracleMatchRecordingCoordinator,
-} from "./companion/match-recording-coordinator.js";
-import type {
-  OracleMatchRecordingResult,
-  OracleMatchRecordingState,
-} from "./companion/match-recording-contract.js";
-import {
   OracleMatchVideoRecordingCoordinator,
 } from "./companion/match-video-recording-coordinator.js";
 import type {
@@ -162,12 +155,6 @@ export class CompanionHostWindowController {
       new OracleElectronLocalWindowCapture()
     );
 
-  private readonly matchRecording =
-    new OracleMatchRecordingCoordinator(
-      undefined,
-      () => this.getAttachedCallOfDutyTarget()
-    );
-
   private readonly matchVideoRecording =
     new OracleMatchVideoRecordingCoordinator(
       undefined,
@@ -228,9 +215,6 @@ export class CompanionHostWindowController {
   );
   this.screenObservation.subscribe(
     () => this.publishCompanionScreenObservationState()
-  );
-  this.matchRecording.subscribe(
-    () => this.publishMatchRecordingState()
   );
   this.matchVideoRecording.subscribe(
     () => this.publishMatchVideoRecordingState()
@@ -567,35 +551,26 @@ export class CompanionHostWindowController {
     );
   }
 
-  getMatchRecordingState(): OracleMatchRecordingState {
-    return this.matchRecording.getState();
+  getMatchVideoRecordingState(): OracleMatchVideoRecordingState {
+    return this.matchVideoRecording.getState();
   }
 
   /**
    * Lets a second listener (the small always-on-top watch indicator window,
-   * owned separately in main.ts) observe match-recording status transitions
-   * without going through the renderer -- the coordinator's subscribe() is
-   * a Set, so this doesn't disturb the existing publishMatchRecordingState()
-   * subscription registered in the constructor above.
+   * owned separately in main.ts) observe match-video-recording status
+   * transitions without going through the renderer -- the coordinator's
+   * subscribe() is a Set, so this doesn't disturb the existing
+   * publishMatchVideoRecordingState() subscription registered in the
+   * constructor above.
    */
-  subscribeMatchRecordingStatus(
+  subscribeMatchVideoRecordingStatus(
     listener: (
-      status: OracleMatchRecordingState["status"]
+      status: OracleMatchVideoRecordingState["status"]
     ) => void
   ): () => void {
-    return this.matchRecording.subscribe((state) => listener(state.status));
-  }
-
-  startMatchRecording(): OracleMatchRecordingState {
-    return this.matchRecording.start();
-  }
-
-  stopMatchRecording(): OracleMatchRecordingResult | null {
-    return this.matchRecording.stop();
-  }
-
-  getMatchVideoRecordingState(): OracleMatchVideoRecordingState {
-    return this.matchVideoRecording.getState();
+    return this.matchVideoRecording.subscribe((state) =>
+      listener(state.status)
+    );
   }
 
   startMatchVideoRecording(): Promise<OracleMatchVideoRecordingState> {
@@ -615,30 +590,34 @@ export class CompanionHostWindowController {
   }
 
   /**
-   * Entry point for the global "toggle Watch & Coach" hotkey -- lets the
-   * Operator start/stop a watch session without alt-tabbing out of the
-   * game or clicking anything, even while the window is click-through.
+   * Entry point for the global "toggle Full Match Analysis recording"
+   * hotkey -- lets the Operator start/stop a recording without alt-tabbing
+   * out of the game or clicking anything, even while the window is
+   * click-through.
    *
    * start()/stop() already publish state through the existing
-   * matchRecordingStateChanged broadcast (see the subscribe() call in the
-   * constructor), so the UI updates to "Watching..." the same way it does
-   * for a button-driven start. A hotkey-driven stop has no invoke() caller
-   * to hand its result back to, though, so its captured frames are pushed
-   * separately here for the renderer to submit for coaching.
+   * matchVideoRecordingStateChanged broadcast (see the subscribe() call in
+   * the constructor), so the UI updates to "Recording..." the same way it
+   * does for a button-driven start. A hotkey-driven stop has no invoke()
+   * caller to hand its result back to, though -- and unlike the old
+   * still-frame pipeline's synchronous stop(), matchVideoRecording.stop()
+   * is async (it finalises the capture file) -- so the finished recording
+   * is pushed separately here, once ready, for the renderer to submit for
+   * analysis.
    */
-  toggleMatchRecordingFromHotkey(): void {
-    if (this.matchRecording.getState().status === "recording") {
-      const result = this.matchRecording.stop();
+  async toggleMatchVideoRecordingFromHotkey(): Promise<void> {
+    if (this.matchVideoRecording.getState().status === "recording") {
+      const result = await this.matchVideoRecording.stop();
       if (!result) return;
       const window = this.getWindow();
       if (!window || window.webContents.isDestroyed()) return;
       window.webContents.send(
-        DESKTOP_CHANNELS.matchRecordingHotkeyStopped,
+        DESKTOP_CHANNELS.matchVideoRecordingHotkeyStopped,
         result
       );
       return;
     }
-    this.matchRecording.start();
+    await this.matchVideoRecording.start();
   }
 
   private getAttachedCallOfDutyTarget() {
@@ -811,8 +790,7 @@ export class CompanionHostWindowController {
     this.attachment.reset();
     // Video recording owns real OS-level resources (a hidden capture
     // window, an open display-media session, a file being written to
-    // disk) that must not outlive the Companion window -- unlike the
-    // lightweight still-frame matchRecording loop above, this can't just
+    // disk) that must not outlive the Companion window, so it can't just
     // be left to GC.
     this.matchVideoRecording.destroy();
 this.developmentBounds = null;
@@ -1790,15 +1768,6 @@ this.hostState.reset();
     window.webContents.send(
       DESKTOP_CHANNELS.companionScreenObservationStateChanged,
       this.getCompanionScreenObservationState()
-    );
-  }
-
-  private publishMatchRecordingState(): void {
-    const window = this.getWindow();
-    if (!window || window.webContents.isDestroyed()) return;
-    window.webContents.send(
-      DESKTOP_CHANNELS.matchRecordingStateChanged,
-      this.getMatchRecordingState()
     );
   }
 

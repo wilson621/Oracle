@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type {
   OracleMatchVideoRecordingResult,
   OracleMatchVideoRecordingState,
@@ -24,10 +24,9 @@ const IDLE_STATE: OracleMatchVideoRecordingState = {
 
 /**
  * "Full Match Analysis": records the whole match as video + audio and sends
- * it to Gemini for a deeper report than the still-frame Watch & Coach flow
- * above can produce (real timestamps, audio cues like footsteps/gunfire).
- * Additive, not a replacement -- both can be used side by side, and both
- * write to the same reports history MatchRecordingControl shows.
+ * it to Gemini for a deep, evidence-grounded report -- real mm:ss
+ * timestamps and audio cues like footsteps/gunfire, not just a handful of
+ * screenshots.
  */
 export default function MatchVideoRecordingControl() {
   const [bridgeAvailable, setBridgeAvailable] = useState(false);
@@ -37,6 +36,20 @@ export default function MatchVideoRecordingControl() {
   const [activeReport, setActiveReport] =
     useState<CoachingReport | null>(null);
   const [activeError, setActiveError] = useState<string | null>(null);
+  const [history, setHistory] = useState<CoachingReport[]>([]);
+
+  const loadHistory = useCallback(() => {
+    void fetch("/api/oracle/coach-report")
+      .then((response) => response.json())
+      .then((body: { reports?: CoachingReport[] }) => {
+        setHistory(body.reports ?? []);
+      })
+      .catch(() => undefined);
+  }, []);
+
+  useEffect(() => {
+    loadHistory();
+  }, [loadHistory]);
 
   useEffect(() => {
     const bridge = window.oracleDesktop;
@@ -81,9 +94,9 @@ export default function MatchVideoRecordingControl() {
   ): Promise<void> {
     setUploading(true);
     setActiveError(null);
-    // Same indicator channel the still-frame flow uses -- from the
-    // Operator's point of view it's the same thing either way: "is a
-    // report cooking right now".
+    // Lets the small always-on-top watch indicator (a separate window the
+    // main process owns) reflect what's happening -- it has no way to know
+    // about this fetch on its own.
     void window.oracleDesktop?.notifyReportGenerationStatus("generating");
     try {
       if (result.sizeBytes === 0) {
@@ -151,6 +164,7 @@ export default function MatchVideoRecordingControl() {
 
       setActiveReport(report);
       void window.oracleDesktop?.notifyReportGenerationStatus("ready");
+      loadHistory();
       // The report now lives on Oracle -- the local recording has served
       // its purpose, so it's removed rather than left taking up disk space.
       void window.oracleDesktop
@@ -168,6 +182,26 @@ export default function MatchVideoRecordingControl() {
     }
   }
 
+  useEffect(() => {
+    const bridge = window.oracleDesktop;
+    if (!bridge) {
+      return;
+    }
+    // A start triggered by the global hotkey already reaches this
+    // component through onMatchVideoRecordingStateChanged above (same as a
+    // button-driven start). A hotkey-triggered stop has no invoke() caller
+    // to hand its finished recording back to, so it's pushed here instead
+    // -- submit it for analysis exactly like a manual Stop press.
+    const unsubscribe = bridge.onMatchVideoRecordingHotkeyStopped((result) => {
+      void submitForAnalysis(result);
+    });
+    return unsubscribe;
+    // submitForAnalysis is a stable-in-practice function declaration (not
+    // recreated meaningfully across renders); subscribing once on mount is
+    // the intent here, same as the state-subscription effect above it.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (!bridgeAvailable) {
     return null;
   }
@@ -177,11 +211,9 @@ export default function MatchVideoRecordingControl() {
       <h2 className={styles.heading}>Full Match Analysis</h2>
       <p className={styles.muted}>
         Records the whole match as video with audio and sends it to Gemini
-        for a deeper report -- real timestamps and audio cues like footsteps
-        and gunfire, not just a handful of screenshots. Takes longer to
-        upload and process than Watch &amp; Coach above, so use this when
-        you want the fullest breakdown of a match rather than for every
-        game.
+        for a deep report -- real timestamps and audio cues like footsteps
+        and gunfire, not just a handful of screenshots. Uploading and
+        processing takes a few minutes for a full match.
       </p>
 
       <p className={styles.message}>{state.message}</p>
@@ -214,8 +246,8 @@ export default function MatchVideoRecordingControl() {
 
       {uploading && (
         <p className={styles.muted}>
-          Uploading and analysing the full recording -- this takes longer
-          than Watch &amp; Coach, often several minutes for a full match.
+          Uploading and analysing the full recording -- often several
+          minutes for a full match.
         </p>
       )}
 
@@ -224,6 +256,31 @@ export default function MatchVideoRecordingControl() {
       )}
 
       {activeReport && <ReportView report={activeReport} />}
+
+      {history.length > 0 && (
+        <div className={styles.history}>
+          <h3 className={styles.subheading}>Past reports</h3>
+          <ul className={styles.historyList}>
+            {history.map((report) => (
+              <li key={report.id}>
+                <button
+                  type="button"
+                  className={styles.historyItem}
+                  onClick={() => {
+                    setActiveReport(report);
+                    setActiveError(null);
+                  }}
+                >
+                  {new Date(report.generated_at).toLocaleString()} --{" "}
+                  {report.status === "complete"
+                    ? report.verdict ?? "Complete"
+                    : "Failed"}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
 }

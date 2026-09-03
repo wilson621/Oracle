@@ -8,12 +8,10 @@ import {
   type OracleCompanionPresentationState,
   type OracleDesktopBridge,
   type OracleDesktopHostState,
-  type OracleDesktopToggleWatchHotkeyState,
+  type OracleDesktopHotkeyState,
   type OraclePlatformHealthSnapshot,
   type CompanionGuidanceApplicationState,
   type OracleCompanionScreenObservationState,
-  type OracleMatchRecordingResult,
-  type OracleMatchRecordingState,
   type OracleMatchVideoRecordingResult,
   type OracleMatchVideoRecordingState,
   type OracleWatchIndicatorSettings,
@@ -30,9 +28,6 @@ import {
 import {
   isOracleCompanionScreenObservationState,
 } from "./companion/companion-screen-observation-contract.js";
-import {
-  isOracleMatchRecordingState,
-} from "./companion/match-recording-contract.js";
 import {
   isOracleMatchVideoRecordingState,
 } from "./companion/match-video-recording-contract.js";
@@ -103,71 +98,6 @@ const oracleDesktopBridge: OracleDesktopBridge = {
     return requireCompanionScreenObservationState(value);
   },
 
-  getMatchRecordingState: async () => {
-    const value: unknown = await ipcRenderer.invoke(
-      DESKTOP_CHANNELS.getMatchRecordingState
-    );
-    return requireMatchRecordingState(value);
-  },
-
-  startMatchRecording: async () => {
-    const value: unknown = await ipcRenderer.invoke(
-      DESKTOP_CHANNELS.startMatchRecording
-    );
-    return requireMatchRecordingState(value);
-  },
-
-  stopMatchRecording: () =>
-    ipcRenderer.invoke(
-      DESKTOP_CHANNELS.stopMatchRecording
-    ) as Promise<OracleMatchRecordingResult | null>,
-
-  onMatchRecordingStateChanged: (listener) => {
-    let subscribed = true;
-    const handler = (
-      _event: IpcRendererEvent,
-      value: unknown
-    ) => {
-      if (subscribed && isOracleMatchRecordingState(value)) {
-        listener(value);
-      }
-    };
-    ipcRenderer.on(
-      DESKTOP_CHANNELS.matchRecordingStateChanged,
-      handler
-    );
-    return () => {
-      subscribed = false;
-      ipcRenderer.removeListener(
-        DESKTOP_CHANNELS.matchRecordingStateChanged,
-        handler
-      );
-    };
-  },
-
-  onMatchRecordingHotkeyStopped: (listener) => {
-    let subscribed = true;
-    const handler = (
-      _event: IpcRendererEvent,
-      value: unknown
-    ) => {
-      if (subscribed && isOracleMatchRecordingResult(value)) {
-        listener(value);
-      }
-    };
-    ipcRenderer.on(
-      DESKTOP_CHANNELS.matchRecordingHotkeyStopped,
-      handler
-    );
-    return () => {
-      subscribed = false;
-      ipcRenderer.removeListener(
-        DESKTOP_CHANNELS.matchRecordingHotkeyStopped,
-        handler
-      );
-    };
-  },
-
   getMatchVideoRecordingState: async () => {
     const value: unknown = await ipcRenderer.invoke(
       DESKTOP_CHANNELS.getMatchVideoRecordingState
@@ -210,6 +140,29 @@ const oracleDesktopBridge: OracleDesktopBridge = {
     };
   },
 
+  onMatchVideoRecordingHotkeyStopped: (listener) => {
+    let subscribed = true;
+    const handler = (
+      _event: IpcRendererEvent,
+      value: unknown
+    ) => {
+      if (subscribed && isOracleMatchVideoRecordingResult(value)) {
+        listener(value);
+      }
+    };
+    ipcRenderer.on(
+      DESKTOP_CHANNELS.matchVideoRecordingHotkeyStopped,
+      handler
+    );
+    return () => {
+      subscribed = false;
+      ipcRenderer.removeListener(
+        DESKTOP_CHANNELS.matchVideoRecordingHotkeyStopped,
+        handler
+      );
+    };
+  },
+
   readMatchVideoBytes: (videoPath) =>
     ipcRenderer.invoke(
       DESKTOP_CHANNELS.readMatchVideoBytes,
@@ -222,19 +175,19 @@ const oracleDesktopBridge: OracleDesktopBridge = {
       videoPath
     ) as Promise<void>,
 
-  getToggleWatchHotkey: async () => {
+  getToggleVideoRecordingHotkey: async () => {
     const value: unknown = await ipcRenderer.invoke(
-      DESKTOP_CHANNELS.getToggleWatchHotkey
+      DESKTOP_CHANNELS.getToggleVideoRecordingHotkey
     );
-    return requireToggleWatchHotkeyState(value);
+    return requireHotkeyState(value);
   },
 
-  setToggleWatchHotkey: async (accelerator) => {
+  setToggleVideoRecordingHotkey: async (accelerator) => {
     const value: unknown = await ipcRenderer.invoke(
-      DESKTOP_CHANNELS.setToggleWatchHotkey,
+      DESKTOP_CHANNELS.setToggleVideoRecordingHotkey,
       accelerator
     );
-    return requireToggleWatchHotkeyState(value);
+    return requireHotkeyState(value);
   },
 
   toggleOverlayPreview: () =>
@@ -421,7 +374,7 @@ const oracleDesktopBridge: OracleDesktopBridge = {
     const value: unknown = await ipcRenderer.invoke(
       DESKTOP_CHANNELS.getIndicatorPositioningHotkey
     );
-    return requireToggleWatchHotkeyState(value);
+    return requireHotkeyState(value);
   },
 
   setIndicatorPositioningHotkey: async (accelerator) => {
@@ -429,7 +382,7 @@ const oracleDesktopBridge: OracleDesktopBridge = {
       DESKTOP_CHANNELS.setIndicatorPositioningHotkey,
       accelerator
     );
-    return requireToggleWatchHotkeyState(value);
+    return requireHotkeyState(value);
   },
 
   onIndicatorPositioningModeChanged: (listener) => {
@@ -530,17 +483,6 @@ function requireCompanionGuidanceState(
   return value;
 }
 
-function requireMatchRecordingState(
-  value: unknown
-): OracleMatchRecordingState {
-  if (!isOracleMatchRecordingState(value)) {
-    throw new Error(
-      "Oracle desktop host returned invalid match recording state."
-    );
-  }
-  return value;
-}
-
 function requireMatchVideoRecordingState(
   value: unknown
 ): OracleMatchVideoRecordingState {
@@ -552,25 +494,28 @@ function requireMatchVideoRecordingState(
   return value;
 }
 
-function isOracleMatchRecordingResult(
+function isOracleMatchVideoRecordingResult(
   value: unknown
-): value is OracleMatchRecordingResult {
+): value is OracleMatchVideoRecordingResult {
   if (typeof value !== "object" || value === null) return false;
   const record = value as Record<string, unknown>;
   return (
     typeof record.sessionId === "string" &&
     typeof record.startedAt === "string" &&
     typeof record.stoppedAt === "string" &&
-    Array.isArray(record.frames)
+    typeof record.videoPath === "string" &&
+    typeof record.mimeType === "string" &&
+    typeof record.sizeBytes === "number" &&
+    typeof record.durationMs === "number"
   );
 }
 
-function requireToggleWatchHotkeyState(
+function requireHotkeyState(
   value: unknown
-): OracleDesktopToggleWatchHotkeyState {
+): OracleDesktopHotkeyState {
   if (typeof value !== "object" || value === null) {
     throw new Error(
-      "Oracle desktop host returned an invalid toggle-watch hotkey state."
+      "Oracle desktop host returned an invalid hotkey state."
     );
   }
   const record = value as Record<string, unknown>;
@@ -579,10 +524,10 @@ function requireToggleWatchHotkeyState(
     typeof record.registered !== "boolean"
   ) {
     throw new Error(
-      "Oracle desktop host returned an invalid toggle-watch hotkey state."
+      "Oracle desktop host returned an invalid hotkey state."
     );
   }
-  return value as OracleDesktopToggleWatchHotkeyState;
+  return value as OracleDesktopHotkeyState;
 }
 
 function requireWatchIndicatorSettings(

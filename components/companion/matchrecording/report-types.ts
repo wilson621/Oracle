@@ -1,8 +1,6 @@
-// Shared by MatchRecordingControl.tsx (still-frame/OpenAI Watch & Coach)
-// and MatchVideoRecordingControl.tsx (full-video/Gemini Full Match
-// Analysis) -- both pipelines write the same shape to
-// oracle_match_coaching_reports, so both render it the same way via
-// ReportView.tsx.
+// Used by MatchVideoRecordingControl.tsx (full-video/Gemini Full Match
+// Analysis) -- reports are written in this shape to
+// oracle_match_coaching_reports and rendered via ReportView.tsx.
 
 export type CoachingScores = {
   positioning: number;

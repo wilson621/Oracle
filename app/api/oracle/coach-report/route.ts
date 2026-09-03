@@ -1,121 +1,13 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase-server";
-import { generateMatchCoachingReport } from "@/lib/oracle/match-coaching/oracle-match-coaching-service";
-import type { SelectableFrame } from "@/lib/oracle/match-coaching/select-report-frames";
-import { ensureOperatorBinding } from "@/lib/oracle/operator/ensure-operator-binding";
 
-export const maxDuration = 300;
-
-type RequestFrame = {
-  capturedAt: string;
-  jpegBase64: string;
-  diffScore: number;
-};
-
-type RequestBody = {
-  clientSessionId: string;
-  game?: string;
-  startedAt: string;
-  endedAt: string;
-  frames: RequestFrame[];
-};
-
-const MAX_ACCEPTED_FRAMES = 400;
-
-export async function POST(request: Request) {
-  let body: RequestBody;
-  try {
-    body = (await request.json()) as RequestBody;
-  } catch (error) {
-    // If this fires for a real (non-tiny) submission, the most likely cause
-    // is the request body getting truncated before it reaches here -- see
-    // `experimental.proxyClientMaxBodySize` in next.config.ts.
-    console.error(
-      "[coach-report] failed to parse request JSON. content-length:",
-      request.headers.get("content-length"),
-      "error:",
-      error
-    );
-    return NextResponse.json(
-      { error: "Coaching report request must be valid JSON." },
-      { status: 400 }
-    );
-  }
-
-  if (!isValidBody(body)) {
-    return NextResponse.json(
-      {
-        error:
-          "Coaching report request requires clientSessionId, startedAt, endedAt and a non-empty frames array.",
-      },
-      { status: 400 }
-    );
-  }
-
-  if (body.frames.length > MAX_ACCEPTED_FRAMES) {
-    return NextResponse.json(
-      { error: `A single watch session cannot submit more than ${MAX_ACCEPTED_FRAMES} frames.` },
-      { status: 400 }
-    );
-  }
-
-  const supabase = await createClient();
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser();
-  if (userError || !user) {
-    return NextResponse.json(
-      { error: "You need to be signed in to generate a coaching report." },
-      { status: 401 }
-    );
-  }
-
-  let operatorId: string;
-  try {
-    operatorId = await ensureOperatorBinding(supabase, user);
-  } catch (error) {
-    return NextResponse.json(
-      {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Could not set up an Operator profile for this account.",
-      },
-      { status: 500 }
-    );
-  }
-
-  const frames: SelectableFrame[] = body.frames.map((frame) => ({
-    capturedAt: frame.capturedAt,
-    jpegBase64: frame.jpegBase64,
-    diffScore: frame.diffScore,
-  }));
-
-  try {
-    const report = await generateMatchCoachingReport({
-      supabase,
-      operatorId,
-      clientSessionId: body.clientSessionId,
-      game: body.game ?? "Call of Duty",
-      startedAt: body.startedAt,
-      endedAt: body.endedAt,
-      frames,
-    });
-    return NextResponse.json({ report });
-  } catch (error) {
-    return NextResponse.json(
-      {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Coaching report generation failed.",
-      },
-      { status: 502 }
-    );
-  }
-}
-
+// This endpoint used to also accept POST (submitting still-frame batches
+// for the old Watch & Coach pipeline). That pipeline has been removed --
+// Full Match Analysis (see coach-report-video/route.ts) is the only way to
+// generate a report now. GET stays here as the shared report-history
+// endpoint: it's pipeline-agnostic (oracle_match_coaching_reports holds
+// rows from either pipeline), so both MatchVideoRecordingControl and any
+// future Reports UI can keep reading from it.
 export async function GET() {
   const supabase = await createClient();
   const {
@@ -152,25 +44,4 @@ export async function GET() {
   }
 
   return NextResponse.json({ reports: data ?? [] });
-}
-
-function isValidBody(value: unknown): value is RequestBody {
-  if (typeof value !== "object" || value === null) return false;
-  const record = value as Record<string, unknown>;
-  return (
-    typeof record.clientSessionId === "string" &&
-    !!record.clientSessionId &&
-    typeof record.startedAt === "string" &&
-    typeof record.endedAt === "string" &&
-    Array.isArray(record.frames) &&
-    record.frames.length > 0 &&
-    record.frames.every(
-      (frame) =>
-        typeof frame === "object" &&
-        frame !== null &&
-        typeof (frame as RequestFrame).capturedAt === "string" &&
-        typeof (frame as RequestFrame).jpegBase64 === "string" &&
-        typeof (frame as RequestFrame).diffScore === "number"
-    )
-  );
 }

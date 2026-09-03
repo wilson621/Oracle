@@ -2,13 +2,10 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { OracleMatchCoachingReport } from "./oracle-match-coaching-report";
 
 /**
- * Shared by both coaching pipelines -- the original still-frame/OpenAI flow
- * (oracle-match-coaching-service.ts) and the newer full-video/Gemini flow
- * (oracle-match-video-coaching-service.ts). Both ultimately produce the same
- * OracleMatchCoachingReport shape and write to the same
- * oracle_match_coaching_reports table, so this is the one place that maps
- * that shape onto the table's columns -- keeping the two pipelines from
- * silently drifting in how they persist a report.
+ * Maps an OracleMatchCoachingReport onto the oracle_match_coaching_reports
+ * table's columns -- the one place that persists a Full Match Analysis
+ * report (see oracle-match-video-coaching-service.ts), so the mapping
+ * can't silently drift between call sites.
  */
 export async function persistMatchCoachingReport(
   supabase: SupabaseClient,

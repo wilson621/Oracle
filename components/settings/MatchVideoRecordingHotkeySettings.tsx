@@ -3,18 +3,25 @@
 import { useEffect, useState } from "react";
 import { Keyboard } from "lucide-react";
 
-type SaveStatus =
+type HotkeySaveStatus =
   | { kind: "idle" }
   | { kind: "saving" }
   | { kind: "saved" }
   | { kind: "conflict" }
   | { kind: "error"; message: string };
 
-export default function ToggleWatchHotkeySettings() {
+/**
+ * The global "toggle Full Match Analysis recording" hotkey -- lets the
+ * Operator start/stop a recording without alt-tabbing out of the game or
+ * clicking anything, even while Oracle's window is click-through. Replaces
+ * the old Watch & Coach toggle hotkey (removed along with that pipeline);
+ * this is the same convenience, repointed at video recording.
+ */
+export default function MatchVideoRecordingHotkeySettings() {
   const [bridgeAvailable, setBridgeAvailable] = useState(false);
   const [accelerator, setAccelerator] = useState("");
   const [draft, setDraft] = useState("");
-  const [status, setStatus] = useState<SaveStatus>({ kind: "idle" });
+  const [status, setStatus] = useState<HotkeySaveStatus>({ kind: "idle" });
 
   useEffect(() => {
     const bridge = window.oracleDesktop;
@@ -23,12 +30,12 @@ export default function ToggleWatchHotkeySettings() {
     }
     let active = true;
     void bridge
-      .getToggleWatchHotkey()
-      .then((value) => {
+      .getToggleVideoRecordingHotkey()
+      .then((hotkey) => {
         if (!active) return;
+        setAccelerator(hotkey.accelerator);
+        setDraft(hotkey.accelerator);
         setBridgeAvailable(true);
-        setAccelerator(value.accelerator);
-        setDraft(value.accelerator);
       })
       .catch(() => undefined);
     return () => {
@@ -44,18 +51,12 @@ export default function ToggleWatchHotkeySettings() {
 
     setStatus({ kind: "saving" });
     try {
-      const result = await bridge.setToggleWatchHotkey(trimmed);
-      if (result.registered) {
-        setAccelerator(result.accelerator);
-        setDraft(result.accelerator);
-        setStatus({ kind: "saved" });
-      } else {
-        // The Companion put the previous working combination back rather
-        // than leaving no hotkey bound at all -- reflect that here.
-        setAccelerator(result.accelerator);
-        setDraft(result.accelerator);
-        setStatus({ kind: "conflict" });
-      }
+      const result = await bridge.setToggleVideoRecordingHotkey(trimmed);
+      setAccelerator(result.accelerator);
+      setDraft(result.accelerator);
+      setStatus(
+        result.registered ? { kind: "saved" } : { kind: "conflict" }
+      );
     } catch (error) {
       setStatus({
         kind: "error",
@@ -76,17 +77,19 @@ export default function ToggleWatchHotkeySettings() {
   return (
     <section className="mt-6 rounded-3xl border border-slate-800 bg-black/25 p-6 sm:p-8">
       <div className="flex items-start gap-4">
-        <Keyboard aria-hidden="true" className="shrink-0 text-cyan-300" size={28} />
+        <Keyboard
+          aria-hidden="true"
+          className="shrink-0 text-cyan-300"
+          size={28}
+        />
         <div className="w-full">
-          <h2 className="text-2xl font-black">Watch &amp; Coach hotkey</h2>
+          <h2 className="text-2xl font-black">
+            Full Match Analysis hotkey
+          </h2>
           <p className="mt-3 leading-7 text-slate-400">
-            Start or stop watching a match from anywhere -- even while Call
-            of Duty has focus -- without alt-tabbing or clicking anything.
-            Uses Electron&apos;s accelerator format, e.g.{" "}
-            <code className="rounded bg-white/5 px-1.5 py-0.5 text-slate-300">
-              CommandOrControl+Shift+K
-            </code>
-            .
+            Starts and stops recording a match without alt-tabbing out of
+            the game -- press once to start, press again to stop and send
+            it off for analysis.
           </p>
 
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -110,11 +113,10 @@ export default function ToggleWatchHotkeySettings() {
               {status.kind === "saving" ? "Saving..." : "Save hotkey"}
             </button>
           </div>
-
-          <p className="mt-3 text-sm text-slate-500">
-            Currently bound to <span className="text-slate-300">{accelerator}</span>.
+          <p className="mt-2.5 text-sm text-slate-500">
+            Currently bound to{" "}
+            <span className="text-slate-300">{accelerator}</span>.
           </p>
-
           {status.kind === "saved" && (
             <p className="mt-2 text-sm text-emerald-400">Saved.</p>
           )}

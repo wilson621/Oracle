@@ -126,12 +126,13 @@ export default function WatchOverlaySettings() {
           size={28}
         />
         <div className="w-full">
-          <h2 className="text-2xl font-black">Watch &amp; Coach indicator</h2>
+          <h2 className="text-2xl font-black">Recording indicator</h2>
           <p className="mt-3 leading-7 text-slate-400">
-            A small always-on-top indicator confirms Oracle is watching,
-            generating or has finished a report -- click-through, so it never
-            intercepts a click or keypress, and it stays out of the way in
-            the corner of your screen rather than sitting over your HUD.
+            A small always-on-top indicator confirms Oracle is recording a
+            match, generating or has finished a report -- click-through, so
+            it never intercepts a click or keypress, and it stays out of the
+            way in the corner of your screen rather than sitting over your
+            HUD.
           </p>
 
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
