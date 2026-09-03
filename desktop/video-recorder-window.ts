@@ -2,6 +2,7 @@ import {
   BrowserWindow,
   desktopCapturer,
   ipcMain,
+  protocol,
   type IpcMainEvent,
 } from "electron";
 import { createWriteStream, mkdirSync, type WriteStream } from "node:fs";
@@ -11,7 +12,7 @@ import {
   normaliseHandle,
   sourceHandle,
 } from "./companion/electron-full-window-capture.js";
-import { buildVideoRecorderHarnessDataUrl } from "./video-recorder-harness.js";
+import { renderVideoRecorderHarnessHtml } from "./video-recorder-harness.js";
 import {
   VIDEO_RECORDER_CHANNELS,
   type VideoRecorderBeginConstraints,
@@ -19,6 +20,47 @@ import {
 } from "./video-recorder-channels.js";
 
 const RECORDER_PRELOAD_FILENAME = "video-recorder-preload.js";
+
+// Serves the hidden recorder harness page (see video-recorder-harness.ts)
+// over a privileged custom scheme instead of a data: URL. This has to be
+// registered here, at module scope, so it runs during main.ts's own module
+// load -- before app 'ready' fires -- which is Electron's hard requirement
+// for registerSchemesAsPrivileged. `secure: true` is what actually matters:
+// it makes pages loaded from this scheme a secure context, which
+// navigator.mediaDevices (and therefore getDisplayMedia) requires and a
+// data: URL's opaque origin never satisfies. `standard: true` gives the
+// scheme normal scheme://host origin semantics rather than opaque-path
+// semantics, which secure-context computation also depends on.
+const VIDEO_RECORDER_SCHEME = "oracle-video-recorder";
+const VIDEO_RECORDER_HARNESS_URL = `${VIDEO_RECORDER_SCHEME}://harness/`;
+
+protocol.registerSchemesAsPrivileged([
+  {
+    scheme: VIDEO_RECORDER_SCHEME,
+    privileges: {
+      standard: true,
+      secure: true,
+      supportFetchAPI: true,
+      corsEnabled: true,
+    },
+  },
+]);
+
+// protocol.handle() can only be called once the app is ready, but
+// beginCapture() (the only caller) is itself only ever reachable after
+// app.whenReady() has resolved (it requires an attached Companion window),
+// so a lazy, idempotent registration on first use is sufficient -- no need
+// to thread this through main.ts's own ready handler.
+let harnessProtocolRegistered = false;
+function ensureHarnessProtocolRegistered(): void {
+  if (harnessProtocolRegistered) return;
+  harnessProtocolRegistered = true;
+  protocol.handle(VIDEO_RECORDER_SCHEME, () => {
+    return new Response(renderVideoRecorderHarnessHtml(), {
+      headers: { "content-type": "text/html; charset=utf-8" },
+    });
+  });
+}
 
 // The hidden window captures a *different* window (the attached game) via
 // desktopCapturer/getDisplayMedia -- its own size never appears anywhere,
@@ -51,7 +93,9 @@ export type VideoRecorderEndResult = Readonly<{
  * getDisplayMedia()/MediaRecorder against the attached Call of Duty window
  * and stream the resulting WebM chunks back to disk here in the main
  * process -- see video-recorder-harness.ts for what actually runs inside
- * it, and video-recorder-preload.ts for the bridge it talks over.
+ * it (served over the privileged oracle-video-recorder:// scheme
+ * registered above, not a data: URL -- see that scheme registration for
+ * why), and video-recorder-preload.ts for the bridge it talks over.
  *
  * One controller instance is reused across recordings; each beginCapture()
  * tears down and recreates the hidden window fresh, which is also what
@@ -77,6 +121,7 @@ export class OracleVideoRecorderWindowController {
   ): Promise<VideoRecorderBeginResult> {
     this.destroyWindow();
     this.currentTarget = target;
+    ensureHarnessProtocolRegistered();
 
     mkdirSync(dirname(outputPath), { recursive: true });
     this.writeStream = createWriteStream(outputPath);
@@ -130,7 +175,7 @@ export class OracleVideoRecorderWindowController {
     const started = this.waitForStart(webContentsId);
 
     try {
-      await window.loadURL(buildVideoRecorderHarnessDataUrl());
+      await window.loadURL(VIDEO_RECORDER_HARNESS_URL);
     } catch (error) {
       this.teardownAfterFailure(webContentsId);
       throw error;

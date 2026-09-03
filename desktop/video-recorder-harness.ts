@@ -1,28 +1,30 @@
 /**
- * Builds the data: URL page loaded into the hidden recorder BrowserWindow.
+ * Renders the page loaded into the hidden recorder BrowserWindow, served
+ * over the privileged oracle-video-recorder:// scheme (see
+ * video-recorder-window.ts) rather than as a data: URL. A data: URL gets an
+ * opaque origin, which Chromium never treats as a secure context, and
+ * navigator.mediaDevices (getDisplayMedia included) is only exposed in a
+ * secure context at all -- attempting the data: URL approach first is what
+ * produced "This Electron build has no getDisplayMedia support" even
+ * though the build genuinely supports it. The privileged scheme is
+ * registered with `secure: true`, so pages loaded from it get a real
+ * secure-context origin while still never touching disk (no file on disk,
+ * same as the data: URL approach it replaces).
  *
- * This follows the same technique WatchIndicatorWindowController already
- * uses for its always-on-top dot (a self-contained data:text/html page, no
- * file on disk) -- except here the page's inline <script> does real work:
- * it calls navigator.mediaDevices.getDisplayMedia() (auto-granted with no
- * picker dialog, because OracleVideoRecorderWindowController installs a
+ * The page's inline <script> does the real work: it calls
+ * navigator.mediaDevices.getDisplayMedia() (auto-granted with no picker
+ * dialog, because OracleVideoRecorderWindowController installs a
  * setDisplayMediaRequestHandler on this window's session that hands back
  * the exact attached-game source), feeds the resulting stream into a
  * MediaRecorder, and streams each chunk back to main over the
  * VIDEO_RECORDER_CHANNELS bridge exposed by video-recorder-preload.ts.
  *
- * The window's preload still runs against a data: URL (Electron applies a
+ * The window's preload still runs against this scheme (Electron applies a
  * BrowserWindow's webPreferences.preload regardless of what the window
  * navigates to), so this page gets contextBridge access despite
  * contextIsolation + sandbox staying on -- nodeIntegration never turns on.
  */
-export function buildVideoRecorderHarnessDataUrl(): string {
-  return `data:text/html;charset=utf-8,${encodeURIComponent(
-    renderVideoRecorderHarnessHtml()
-  )}`;
-}
-
-function renderVideoRecorderHarnessHtml(): string {
+export function renderVideoRecorderHarnessHtml(): string {
   return `<!doctype html>
 <html>
 <head><meta charset="utf-8" /><title>Oracle video recorder (hidden)</title></head>
