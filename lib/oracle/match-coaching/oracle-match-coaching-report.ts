@@ -33,6 +33,37 @@ export type OracleMatchCoachingReport = Readonly<{
   rawError: string | null;
 }>;
 
+/**
+ * The shape a row actually has in oracle_match_coaching_reports (snake_case
+ * column names, scores flattened to top-level columns) -- what
+ * persistMatchCoachingReport hands back after inserting, and therefore what
+ * both API routes (coach-report's GET history and coach-report-video's
+ * POST) put on the wire. The desktop UI (report-types.ts's CoachingReport)
+ * is written against this same shape, not the camelCase
+ * OracleMatchCoachingReport above -- keep them in sync if either changes.
+ */
+export type OracleMatchCoachingReportRow = Readonly<{
+  id: string;
+  operator_id: string;
+  game: string;
+  client_session_id: string;
+  started_at: string;
+  ended_at: string;
+  generated_at: string;
+  status: "complete" | "degraded" | "failed";
+  model: string | null;
+  frame_count: number;
+  summary: string | null;
+  verdict: string | null;
+  positioning: number | null;
+  aim: number | null;
+  movement: number | null;
+  decision_making: number | null;
+  game_sense: number | null;
+  deaths: readonly OracleMatchCoachingDeathBreakdown[];
+  raw_error: string | null;
+}>;
+
 // Full Match Analysis (video+audio, via Gemini's Files API) -- see
 // oracle-match-video-coaching-service.ts. Flash rather than a heavier tier:
 // for this task (grounded description + structured extraction from a video

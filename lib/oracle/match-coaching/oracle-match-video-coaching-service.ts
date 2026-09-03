@@ -5,6 +5,7 @@ import {
   GEMINI_MATCH_COACHING_MODEL,
   GEMINI_MATCH_COACHING_RESPONSE_SCHEMA,
   type OracleMatchCoachingReport,
+  type OracleMatchCoachingReportRow,
 } from "./oracle-match-coaching-report";
 import { persistMatchCoachingReport } from "./persist-match-coaching-report";
 
@@ -99,7 +100,7 @@ coaching than an honest "unclear from this footage."
  */
 export async function generateMatchVideoCoachingReport(
   input: GenerateMatchVideoCoachingReportInput
-): Promise<OracleMatchCoachingReport> {
+): Promise<OracleMatchCoachingReportRow> {
   const id = randomUUID();
   const approxSampleCount = Math.max(
     1,

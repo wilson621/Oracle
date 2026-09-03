@@ -1,11 +1,23 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import type { OracleMatchCoachingReport } from "./oracle-match-coaching-report";
+import type {
+  OracleMatchCoachingReport,
+  OracleMatchCoachingReportRow,
+} from "./oracle-match-coaching-report";
 
 /**
  * Maps an OracleMatchCoachingReport onto the oracle_match_coaching_reports
  * table's columns -- the one place that persists a Full Match Analysis
  * report (see oracle-match-video-coaching-service.ts), so the mapping
  * can't silently drift between call sites.
+ *
+ * Returns the row as Postgres actually stored it (via .select().single()),
+ * not just an echo of the camelCase input -- the desktop UI is written
+ * against that snake_case row shape (see OracleMatchCoachingReportRow), the
+ * same shape coach-report's GET history endpoint returns. Returning the
+ * input object here previously meant the POST response for a freshly
+ * generated report silently didn't match what the UI expected (e.g.
+ * report.raw_error read undefined off a rawError field), so a real Gemini
+ * failure surfaced only as the generic "could not be generated" fallback.
  */
 export async function persistMatchCoachingReport(
   supabase: SupabaseClient,
@@ -13,8 +25,8 @@ export async function persistMatchCoachingReport(
     status: OracleMatchCoachingReport["status"];
     rawError: string | null;
   }
-): Promise<OracleMatchCoachingReport> {
-  const { error } = await supabase
+): Promise<OracleMatchCoachingReportRow> {
+  const { data, error } = await supabase
     .from("oracle_match_coaching_reports")
     .insert({
       id: report.id,
@@ -36,9 +48,13 @@ export async function persistMatchCoachingReport(
       game_sense: report.scores?.gameSense ?? null,
       deaths: report.deaths,
       raw_error: report.rawError,
-    });
-  if (error) {
-    throw new Error(`Failed to save the coaching report: ${error.message}`);
+    })
+    .select()
+    .single();
+  if (error || !data) {
+    throw new Error(
+      `Failed to save the coaching report: ${error?.message ?? "no row returned"}`
+    );
   }
-  return report;
+  return data as OracleMatchCoachingReportRow;
 }
