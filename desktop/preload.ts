@@ -14,6 +14,7 @@ import {
   type OracleCompanionScreenObservationState,
   type OracleMatchRecordingResult,
   type OracleMatchRecordingState,
+  type OracleWatchIndicatorSettings,
 } from "./contracts.js";
 import {
   isOracleCompanionPresentationState,
@@ -325,6 +326,37 @@ const oracleDesktopBridge: OracleDesktopBridge = {
         );
       };
   },
+
+  notifyReportGenerationStatus: (status) =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.notifyReportGenerationStatus,
+      status
+    ) as Promise<void>,
+
+  getWatchIndicatorSettings: async () => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.getWatchIndicatorSettings
+    );
+    return requireWatchIndicatorSettings(value);
+  },
+
+  setWatchIndicatorHidden: async (hidden) => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.setWatchIndicatorHidden,
+      hidden
+    );
+    return requireWatchIndicatorSettings(value);
+  },
+
+  enterIndicatorPositioningMode: () =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.enterIndicatorPositioningMode
+    ) as Promise<void>,
+
+  exitIndicatorPositioningMode: () =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.exitIndicatorPositioningMode
+    ) as Promise<void>,
 };
 
 const oracleDesktopReleaseBridge:
@@ -443,6 +475,30 @@ function requireToggleWatchHotkeyState(
     );
   }
   return value as OracleDesktopToggleWatchHotkeyState;
+}
+
+function requireWatchIndicatorSettings(
+  value: unknown
+): OracleWatchIndicatorSettings {
+  if (typeof value !== "object" || value === null) {
+    throw new Error(
+      "Oracle desktop host returned invalid watch indicator settings."
+    );
+  }
+  const record = value as Record<string, unknown>;
+  const position = record.position;
+  const positionValid =
+    position === null ||
+    (typeof position === "object" &&
+      position !== null &&
+      typeof (position as Record<string, unknown>).x === "number" &&
+      typeof (position as Record<string, unknown>).y === "number");
+  if (typeof record.hidden !== "boolean" || !positionValid) {
+    throw new Error(
+      "Oracle desktop host returned invalid watch indicator settings."
+    );
+  }
+  return value as OracleWatchIndicatorSettings;
 }
 
 function requireCompanionScreenObservationState(

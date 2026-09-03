@@ -8,6 +8,7 @@ import {
 import AppLayout from "@/components/layout/AppLayout";
 import PageHeader from "@/components/ui/PageHeader";
 import ToggleWatchHotkeySettings from "@/components/settings/ToggleWatchHotkeySettings";
+import WatchOverlaySettings from "@/components/settings/WatchOverlaySettings";
 
 const settings = [
   {
@@ -50,6 +51,7 @@ export default function SettingsPage() {
       </div>
 
       <ToggleWatchHotkeySettings />
+      <WatchOverlaySettings />
 
       <section className="mt-6 rounded-3xl border border-slate-800 bg-black/25 p-6 sm:p-8">
         <div className="flex items-start gap-4">
@@ -67,6 +69,13 @@ export default function SettingsPage() {
                 only captures while you press Start Watching, and uploads a
                 bounded, curated set of frames from that session solely to
                 generate your coaching report.
+              </li>
+              <li>
+                The Watch &amp; Coach hotkey and on-screen indicator only
+                draw over Borderless or Windowed Fullscreen -- Windows&apos;
+                Exclusive Fullscreen mode blocks all overlays, Oracle&apos;s
+                included, the same limitation Discord and Nvidia&apos;s
+                overlays share.
               </li>
               <li>Observation is off by default and requires visible consent.</li>
               <li>Models and renderers cannot mutate Oracle truth.</li>

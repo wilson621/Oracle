@@ -554,6 +554,21 @@ export class CompanionHostWindowController {
     return this.matchRecording.getState();
   }
 
+  /**
+   * Lets a second listener (the small always-on-top watch indicator window,
+   * owned separately in main.ts) observe match-recording status transitions
+   * without going through the renderer -- the coordinator's subscribe() is
+   * a Set, so this doesn't disturb the existing publishMatchRecordingState()
+   * subscription registered in the constructor above.
+   */
+  subscribeMatchRecordingStatus(
+    listener: (
+      status: OracleMatchRecordingState["status"]
+    ) => void
+  ): () => void {
+    return this.matchRecording.subscribe((state) => listener(state.status));
+  }
+
   startMatchRecording(): OracleMatchRecordingState {
     return this.matchRecording.start();
   }

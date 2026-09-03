@@ -114,6 +114,11 @@ export default function MatchRecordingControl() {
   async function submitForCoaching(result: OracleMatchRecordingResult) {
     setGenerating(true);
     setActiveError(null);
+    // Lets the small always-on-top watch indicator (a separate window the
+    // main process owns) reflect what's happening -- it has no way to know
+    // about this fetch on its own. Best-effort: the indicator is a nicety,
+    // not something worth failing report generation over.
+    void window.oracleDesktop?.notifyReportGenerationStatus("generating");
     try {
       const response = await fetch("/api/oracle/coach-report", {
         method: "POST",
@@ -129,6 +134,7 @@ export default function MatchRecordingControl() {
       const body = await response.json();
       if (!response.ok) {
         setActiveError(body.error ?? "The coaching report could not be generated.");
+        void window.oracleDesktop?.notifyReportGenerationStatus("failed");
         return;
       }
       const report = body.report as CoachingReport;
@@ -136,8 +142,10 @@ export default function MatchRecordingControl() {
         setActiveError(
           report.raw_error ?? "The coaching report could not be generated."
         );
+        void window.oracleDesktop?.notifyReportGenerationStatus("failed");
       } else {
         setActiveReport(report);
+        void window.oracleDesktop?.notifyReportGenerationStatus("ready");
       }
       loadHistory();
     } catch (error) {
@@ -146,6 +154,7 @@ export default function MatchRecordingControl() {
           ? error.message
           : "The coaching report could not be generated."
       );
+      void window.oracleDesktop?.notifyReportGenerationStatus("failed");
     } finally {
       setGenerating(false);
     }
@@ -187,6 +196,12 @@ export default function MatchRecordingControl() {
     <section className={styles.card}>
       <h2 className={styles.heading}>Watch &amp; Coach</h2>
       <p className={styles.message}>{state.message}</p>
+
+      <p className={styles.muted}>
+        Run Call of Duty in Borderless or Windowed Fullscreen (Options &gt;
+        Graphics &gt; Display Mode) -- not Exclusive Fullscreen -- so the
+        watch indicator and hotkey display correctly over the game.
+      </p>
 
       {state.status !== "recording" ? (
         <button

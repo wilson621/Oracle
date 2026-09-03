@@ -117,6 +117,21 @@ export const DESKTOP_CHANNELS = {
 
   companionScreenObservationStateChanged:
     "oracle-desktop:companion-screen-observation-state-changed",
+
+  notifyReportGenerationStatus:
+    "oracle-desktop:notify-report-generation-status",
+
+  getWatchIndicatorSettings:
+    "oracle-desktop:get-watch-indicator-settings",
+
+  setWatchIndicatorHidden:
+    "oracle-desktop:set-watch-indicator-hidden",
+
+  enterIndicatorPositioningMode:
+    "oracle-desktop:enter-indicator-positioning-mode",
+
+  exitIndicatorPositioningMode:
+    "oracle-desktop:exit-indicator-positioning-mode",
 } as const;
 
 export const ORACLE_DESKTOP_RECOVERY_SHORTCUT =
@@ -132,6 +147,32 @@ export const ORACLE_DESKTOP_RECOVERY_SHORTCUT =
 export type OracleDesktopToggleWatchHotkeyState = Readonly<{
   accelerator: string;
   registered: boolean;
+}>;
+
+/**
+ * Lifecycle of the coaching report that follows a stopped Watch & Coach
+ * session, as observed from the Companion renderer (fetch in flight /
+ * succeeded / failed). Pushed to the main process so the small always-on-top
+ * watch indicator can reflect it without needing its own knowledge of the
+ * coach-report API -- the indicator only ever reacts to this plus match
+ * recording status.
+ */
+export type OracleReportGenerationStatus =
+  | "idle"
+  | "generating"
+  | "ready"
+  | "failed";
+
+/**
+ * Operator-configurable presentation of the small always-on-top "Watch &
+ * Coach" status indicator: whether it should ever draw at all (some
+ * Operators want zero on-screen presence and to rely on the hotkey plus a
+ * Windows notification instead) and, once repositioned via positioning
+ * mode, the on-screen point it was dropped at.
+ */
+export type OracleWatchIndicatorSettings = Readonly<{
+  hidden: boolean;
+  position: Readonly<{ x: number; y: number }> | null;
 }>;
 
 export type {
@@ -263,4 +304,31 @@ export type OracleDesktopBridge = {
       state: OracleCompanionScreenObservationState
     ) => void
   ) => () => void;
+
+  /**
+   * Tells the main process what the coach-report request for the last
+   * stopped Watch & Coach session is doing, so the small watch indicator
+   * (a separate always-on-top window the Companion renderer has no direct
+   * handle to) can reflect it -- an amber "generating" state, then a brief
+   * green "ready" flash or a red "failed" one before it fades.
+   */
+  notifyReportGenerationStatus: (
+    status: OracleReportGenerationStatus
+  ) => Promise<void>;
+
+  getWatchIndicatorSettings: () =>
+    Promise<OracleWatchIndicatorSettings>;
+
+  setWatchIndicatorHidden: (
+    hidden: boolean
+  ) => Promise<OracleWatchIndicatorSettings>;
+
+  /**
+   * Temporarily makes the indicator draggable (and interactive) so the
+   * Operator can drop it wherever suits their HUD; exitIndicatorPositioningMode
+   * saves wherever it was left and returns it to click-through.
+   */
+  enterIndicatorPositioningMode: () => Promise<void>;
+
+  exitIndicatorPositioningMode: () => Promise<void>;
 };

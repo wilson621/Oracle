@@ -8,8 +8,11 @@ import {
   DESKTOP_CHANNELS,
   ORACLE_DESKTOP_RECOVERY_SHORTCUT,
   type OracleDesktopToggleWatchHotkeyState,
+  type OracleReportGenerationStatus,
+  type OracleWatchIndicatorSettings,
 } from "./contracts.js";
 import { CompanionHostWindowController } from "./overlay-window.js";
+import { WatchIndicatorWindowController } from "./watch-indicator-window.js";
 import {
   DEFAULT_TOGGLE_WATCH_ACCELERATOR,
   loadHotkeySettings,
@@ -43,6 +46,12 @@ app.enableSandbox();
 let hostWindowController:
   | CompanionHostWindowController
   | null = null;
+let watchIndicator:
+  | WatchIndicatorWindowController
+  | null = null;
+let unsubscribeIndicatorMatchStatus:
+  | (() => void)
+  | null = null;
 let companionUrl =
   DEFAULT_COMPANION_URL;
 let packagedProviderOrigin:
@@ -72,6 +81,7 @@ const desktopUpdateCoordinator =
       stopRuntime: () => {
         hostWindowController?.close();
         hostWindowController = null;
+        teardownWatchIndicator();
         packagedNextServer.stop();
         stopOracleDesktopPlatform();
       },
@@ -116,6 +126,10 @@ if (!hasSingleInstanceLock) {
         createHostWindowController();
 
       await hostWindowController.create();
+
+      attachWatchIndicator(
+        hostWindowController
+      );
     })
     .catch((error: unknown) => {
       console.error(
@@ -140,6 +154,13 @@ app.on("activate", () => {
 
   void hostWindowController
     .create()
+    .then(() => {
+      if (hostWindowController) {
+        attachWatchIndicator(
+          hostWindowController
+        );
+      }
+    })
     .catch((error: unknown) => {
       console.error(
         "Oracle Companion window failed to reopen.",
@@ -158,6 +179,7 @@ app.on("before-quit", () => {
 
   hostWindowController?.close();
   hostWindowController = null;
+  teardownWatchIndicator();
   packagedNextServer.stop();
   stopOracleDesktopPlatform();
 });
@@ -170,6 +192,54 @@ app.on("will-quit", () => {
     toggleWatchAccelerator
   );
 });
+
+/**
+ * (Re)creates the small always-on-top watch indicator alongside a freshly
+ * created (or reopened) Companion window and wires it to that window's
+ * match-recording status stream. Idempotent-ish: safe to call again after
+ * "activate" reopens the Companion window, since teardownWatchIndicator()
+ * always runs first wherever the Companion window itself is torn down.
+ */
+function attachWatchIndicator(
+  controller: CompanionHostWindowController
+): void {
+  if (!watchIndicator) {
+    watchIndicator = new WatchIndicatorWindowController();
+    watchIndicator.create();
+  }
+
+  unsubscribeIndicatorMatchStatus?.();
+  unsubscribeIndicatorMatchStatus =
+    controller.subscribeMatchRecordingStatus((status) => {
+      watchIndicator?.setMatchRecordingStatus(status);
+    });
+}
+
+function teardownWatchIndicator(): void {
+  unsubscribeIndicatorMatchStatus?.();
+  unsubscribeIndicatorMatchStatus = null;
+  watchIndicator?.destroy();
+  watchIndicator = null;
+}
+
+function normaliseReportGenerationStatus(
+  value: unknown
+): OracleReportGenerationStatus {
+  return value === "generating" ||
+    value === "ready" ||
+    value === "failed"
+    ? value
+    : "idle";
+}
+
+function currentWatchIndicatorSettings(): OracleWatchIndicatorSettings {
+  return (
+    watchIndicator?.getSettings() ?? {
+      hidden: false,
+      position: null,
+    }
+  );
+}
 
 function createHostWindowController(): CompanionHostWindowController {
   return new CompanionHostWindowController({
@@ -425,6 +495,51 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
+    DESKTOP_CHANNELS.notifyReportGenerationStatus,
+    (event, status: unknown) => {
+      requireAuthorizedController(event);
+      watchIndicator?.setReportGenerationStatus(
+        normaliseReportGenerationStatus(status)
+      );
+    }
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.getWatchIndicatorSettings,
+    (event) => {
+      requireAuthorizedController(event);
+      return currentWatchIndicatorSettings();
+    }
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.setWatchIndicatorHidden,
+    (event, hidden: unknown) => {
+      requireAuthorizedController(event);
+      return (
+        watchIndicator?.setHidden(hidden === true) ??
+        currentWatchIndicatorSettings()
+      );
+    }
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.enterIndicatorPositioningMode,
+    (event) => {
+      requireAuthorizedController(event);
+      watchIndicator?.enterPositioningMode();
+    }
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.exitIndicatorPositioningMode,
+    (event) => {
+      requireAuthorizedController(event);
+      watchIndicator?.exitPositioningMode();
+    }
+  );
+
+  ipcMain.handle(
     DESKTOP_CHANNELS.toggleOverlayPreview,
     (event) => {
       return requireAuthorizedController(
@@ -536,6 +651,26 @@ function removeIpcHandlers(): void {
 
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.setToggleWatchHotkey
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.notifyReportGenerationStatus
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.getWatchIndicatorSettings
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.setWatchIndicatorHidden
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.enterIndicatorPositioningMode
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.exitIndicatorPositioningMode
   );
 
   ipcMain.removeHandler(
