@@ -13,7 +13,14 @@ const nextConfig: NextConfig = {
     // truncated body then fails JSON parsing in the route handler with
     // "Coaching report request must be valid JSON." Raised here so a real
     // full-length match report can't get silently cut off.
-    proxyClientMaxBodySize: "80mb",
+    //
+    // Full Match Analysis (/api/oracle/coach-report-video) pushed this much
+    // higher still: a full 45-minute recording at the desktop app's capped
+    // bitrate can reach ~300MB (see MAX_VIDEO_BYTES in that route and the
+    // bitrate math in match-video-recording-coordinator.ts). This is a
+    // single global setting, so it has to cover both routes -- there's no
+    // per-route override.
+    proxyClientMaxBodySize: "350mb",
   },
 };
 

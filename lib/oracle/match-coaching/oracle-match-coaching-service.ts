@@ -7,6 +7,7 @@ import {
   type OracleMatchCoachingReport,
 } from "./oracle-match-coaching-report";
 import { type SelectableFrame } from "./select-report-frames";
+import { persistMatchCoachingReport } from "./persist-match-coaching-report";
 
 export type GenerateMatchCoachingReportInput = Readonly<{
   supabase: SupabaseClient;
@@ -75,7 +76,7 @@ export async function generateMatchCoachingReport(
   // what was left. Trust the already-selected set instead.
   const selected = input.frames;
   if (selected.length === 0) {
-    return persist(input.supabase, {
+    return persistMatchCoachingReport(input.supabase, {
       ...base,
       status: "failed",
       model: null,
@@ -89,7 +90,7 @@ export async function generateMatchCoachingReport(
 
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    return persist(input.supabase, {
+    return persistMatchCoachingReport(input.supabase, {
       ...base,
       status: "failed",
       model: null,
@@ -148,7 +149,7 @@ export async function generateMatchCoachingReport(
       deaths: OracleMatchCoachingReport["deaths"];
     };
 
-    return persist(input.supabase, {
+    return persistMatchCoachingReport(input.supabase, {
       ...base,
       status: "complete",
       model: OPENAI_MATCH_COACHING_MODEL,
@@ -159,7 +160,7 @@ export async function generateMatchCoachingReport(
       rawError: null,
     });
   } catch (error) {
-    return persist(input.supabase, {
+    return persistMatchCoachingReport(input.supabase, {
       ...base,
       status: "failed",
       model: OPENAI_MATCH_COACHING_MODEL,
@@ -170,40 +171,4 @@ export async function generateMatchCoachingReport(
       rawError: error instanceof Error ? error.message : String(error),
     });
   }
-}
-
-async function persist(
-  supabase: SupabaseClient,
-  report: Omit<OracleMatchCoachingReport, "status" | "rawError"> & {
-    status: OracleMatchCoachingReport["status"];
-    rawError: string | null;
-  }
-): Promise<OracleMatchCoachingReport> {
-  const { error } = await supabase
-    .from("oracle_match_coaching_reports")
-    .insert({
-      id: report.id,
-      operator_id: report.operatorId,
-      game: report.game,
-      client_session_id: report.clientSessionId,
-      started_at: report.startedAt,
-      ended_at: report.endedAt,
-      generated_at: report.generatedAt,
-      status: report.status,
-      model: report.model,
-      frame_count: report.frameCount,
-      summary: report.summary,
-      verdict: report.verdict,
-      positioning: report.scores?.positioning ?? null,
-      aim: report.scores?.aim ?? null,
-      movement: report.scores?.movement ?? null,
-      decision_making: report.scores?.decisionMaking ?? null,
-      game_sense: report.scores?.gameSense ?? null,
-      deaths: report.deaths,
-      raw_error: report.rawError,
-    });
-  if (error) {
-    throw new Error(`Failed to save the coaching report: ${error.message}`);
-  }
-  return report;
 }
