@@ -7,7 +7,14 @@ import {
 } from "./public-runtime-configuration";
 
 export function getBrowserPublicRuntimeConfiguration() {
-  if (typeof document === "undefined") {
+  // Checked via globalThis (not the bare `document` identifier) so this file
+  // type-checks under Node-only compile targets that don't include the DOM
+  // lib -- such as the desktop Electron main process build, which reaches
+  // this file transitively even though it never actually calls it.
+  const browser = globalThis as unknown as Readonly<{
+    document?: BrowserDocument;
+  }>;
+  if (typeof browser.document === "undefined") {
     // Client components render once on the server (no DOM exists yet) before
     // Next.js hands off to the browser. Nothing produced during that pass is
     // ever used to make a real call, so return a harmless placeholder instead

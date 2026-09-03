@@ -285,6 +285,27 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
+    DESKTOP_CHANNELS.getMatchRecordingState,
+    (event) =>
+      requireAuthorizedController(event)
+        .getMatchRecordingState()
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.startMatchRecording,
+    (event) =>
+      requireAuthorizedController(event)
+        .startMatchRecording()
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.stopMatchRecording,
+    (event) =>
+      requireAuthorizedController(event)
+        .stopMatchRecording()
+  );
+
+  ipcMain.handle(
     DESKTOP_CHANNELS.toggleOverlayPreview,
     (event) => {
       return requireAuthorizedController(
@@ -367,6 +388,18 @@ function removeIpcHandlers(): void {
 
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.controlCompanionScreenObservation
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.getMatchRecordingState
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.startMatchRecording
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.stopMatchRecording
   );
 
   ipcMain.removeHandler(

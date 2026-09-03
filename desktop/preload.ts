@@ -11,6 +11,8 @@ import {
   type OraclePlatformHealthSnapshot,
   type CompanionGuidanceApplicationState,
   type OracleCompanionScreenObservationState,
+  type OracleMatchRecordingResult,
+  type OracleMatchRecordingState,
 } from "./contracts.js";
 import {
   isOracleCompanionPresentationState,
@@ -24,6 +26,9 @@ import {
 import {
   isOracleCompanionScreenObservationState,
 } from "./companion/companion-screen-observation-contract.js";
+import {
+  isOracleMatchRecordingState,
+} from "./companion/match-recording-contract.js";
 import {
   ORACLE_DESKTOP_RELEASE_CHANNELS,
   isOracleDesktopReleaseState,
@@ -89,6 +94,48 @@ const oracleDesktopBridge: OracleDesktopBridge = {
       control
     );
     return requireCompanionScreenObservationState(value);
+  },
+
+  getMatchRecordingState: async () => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.getMatchRecordingState
+    );
+    return requireMatchRecordingState(value);
+  },
+
+  startMatchRecording: async () => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.startMatchRecording
+    );
+    return requireMatchRecordingState(value);
+  },
+
+  stopMatchRecording: () =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.stopMatchRecording
+    ) as Promise<OracleMatchRecordingResult | null>,
+
+  onMatchRecordingStateChanged: (listener) => {
+    let subscribed = true;
+    const handler = (
+      _event: IpcRendererEvent,
+      value: unknown
+    ) => {
+      if (subscribed && isOracleMatchRecordingState(value)) {
+        listener(value);
+      }
+    };
+    ipcRenderer.on(
+      DESKTOP_CHANNELS.matchRecordingStateChanged,
+      handler
+    );
+    return () => {
+      subscribed = false;
+      ipcRenderer.removeListener(
+        DESKTOP_CHANNELS.matchRecordingStateChanged,
+        handler
+      );
+    };
   },
 
   toggleOverlayPreview: () =>
@@ -310,6 +357,17 @@ function requireCompanionGuidanceState(
   if (!isCompanionGuidanceApplicationState(value)) {
     throw new Error(
       "Oracle desktop host returned invalid Companion Guidance state."
+    );
+  }
+  return value;
+}
+
+function requireMatchRecordingState(
+  value: unknown
+): OracleMatchRecordingState {
+  if (!isOracleMatchRecordingState(value)) {
+    throw new Error(
+      "Oracle desktop host returned invalid match recording state."
     );
   }
   return value;

@@ -46,6 +46,13 @@ import {
 import type {
   OracleCompanionScreenObservationState,
 } from "./companion/companion-screen-observation-contract.js";
+import {
+  OracleMatchRecordingCoordinator,
+} from "./companion/match-recording-coordinator.js";
+import type {
+  OracleMatchRecordingResult,
+  OracleMatchRecordingState,
+} from "./companion/match-recording-contract.js";
 import type {
   CompanionGuidanceApplicationState,
 } from "../lib/oracle/applications/companion/index.js";
@@ -148,6 +155,12 @@ export class CompanionHostWindowController {
       new OracleElectronLocalWindowCapture()
     );
 
+  private readonly matchRecording =
+    new OracleMatchRecordingCoordinator(
+      undefined,
+      () => this.getAttachedCallOfDutyTarget()
+    );
+
   private readonly gameIntegrations:
     OracleDesktopGameIntegrationCoordinator;
 
@@ -201,6 +214,9 @@ export class CompanionHostWindowController {
   );
   this.screenObservation.subscribe(
     () => this.publishCompanionScreenObservationState()
+  );
+  this.matchRecording.subscribe(
+    () => this.publishMatchRecordingState()
   );
 
   this.recovery.subscribe(
@@ -532,6 +548,30 @@ export class CompanionHostWindowController {
       session,
       attachment.status === "attached" ? attachment.target : null
     );
+  }
+
+  getMatchRecordingState(): OracleMatchRecordingState {
+    return this.matchRecording.getState();
+  }
+
+  startMatchRecording(): OracleMatchRecordingState {
+    return this.matchRecording.start();
+  }
+
+  stopMatchRecording(): OracleMatchRecordingResult | null {
+    return this.matchRecording.stop();
+  }
+
+  private getAttachedCallOfDutyTarget() {
+    const attachment = this.attachment.getState();
+    if (attachment.status !== "attached") return null;
+    const session = this.companionSession.getSnapshot();
+    if (
+      session?.currentContext?.game?.integrationId !== "call-of-duty"
+    ) {
+      return null;
+    }
+    return attachment.target;
   }
 
   invalidateObservationForReplacement():
@@ -1665,6 +1705,15 @@ this.hostState.reset();
     window.webContents.send(
       DESKTOP_CHANNELS.companionScreenObservationStateChanged,
       this.getCompanionScreenObservationState()
+    );
+  }
+
+  private publishMatchRecordingState(): void {
+    const window = this.getWindow();
+    if (!window || window.webContents.isDestroyed()) return;
+    window.webContents.send(
+      DESKTOP_CHANNELS.matchRecordingStateChanged,
+      this.getMatchRecordingState()
     );
   }
 

@@ -37,6 +37,10 @@ import type {
   OracleCompanionScreenObservationControl,
   OracleCompanionScreenObservationState,
 } from "./companion/companion-screen-observation-contract.js";
+import type {
+  OracleMatchRecordingResult,
+  OracleMatchRecordingState,
+} from "./companion/match-recording-contract.js";
 
 export const DESKTOP_CHANNELS = {
   getHostState:
@@ -59,6 +63,18 @@ export const DESKTOP_CHANNELS = {
 
   controlCompanionScreenObservation:
     "oracle-desktop:control-companion-screen-observation",
+
+  getMatchRecordingState:
+    "oracle-desktop:get-match-recording-state",
+
+  startMatchRecording:
+    "oracle-desktop:start-match-recording",
+
+  stopMatchRecording:
+    "oracle-desktop:stop-match-recording",
+
+  matchRecordingStateChanged:
+    "oracle-desktop:match-recording-state-changed",
 
   toggleOverlayPreview:
     "oracle-desktop:toggle-overlay-preview",
@@ -104,6 +120,8 @@ export type {
   OracleCompanionGuidanceControl,
   OracleCompanionScreenObservationControl,
   OracleCompanionScreenObservationState,
+  OracleMatchRecordingResult,
+  OracleMatchRecordingState,
   OracleDesktopAttachmentState,
   OracleDesktopAttachmentStatus,
   OracleDesktopAttachmentTarget,
@@ -143,6 +161,21 @@ export type OracleDesktopBridge = {
   controlCompanionScreenObservation: (
     control: OracleCompanionScreenObservationControl
   ) => Promise<OracleCompanionScreenObservationState>;
+
+  getMatchRecordingState: () =>
+    Promise<OracleMatchRecordingState>;
+
+  startMatchRecording: () =>
+    Promise<OracleMatchRecordingState>;
+
+  stopMatchRecording: () =>
+    Promise<OracleMatchRecordingResult | null>;
+
+  onMatchRecordingStateChanged: (
+    listener: (
+      state: OracleMatchRecordingState
+    ) => void
+  ) => () => void;
 
   toggleOverlayPreview: () =>
     Promise<OracleDesktopHostState>;

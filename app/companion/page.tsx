@@ -1,4 +1,5 @@
 import CompanionGuidanceLive from "@/components/companion/guidance/CompanionGuidanceLive";
+import MatchRecordingControl from "@/components/companion/matchrecording/MatchRecordingControl";
 import AppLayout from "@/components/layout/AppLayout";
 import {
   COMPANION_PAGE_INITIAL_STATE,
@@ -13,6 +14,7 @@ export default function CompanionPage() {
       <CompanionGuidanceLive
         initialState={COMPANION_PAGE_INITIAL_STATE}
       />
+      <MatchRecordingControl />
       <EvidenceBoundary
         evidence="Only validated, current Guidance Requests from approved Game Integrations."
         confidence="Each Guidance card carries its own governed confidence."
