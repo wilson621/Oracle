@@ -1,0 +1,236 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import type {
+  OracleMatchVideoRecordingResult,
+  OracleMatchVideoRecordingState,
+} from "@/desktop/contracts";
+import type { CoachingReport } from "./report-types";
+import ReportView from "./ReportView";
+import styles from "./match-recording.module.css";
+
+const IDLE_STATE: OracleMatchVideoRecordingState = {
+  contract: {
+    name: "oracle.companion-match-video-recording-state",
+    version: 1,
+  },
+  status: "idle",
+  sessionId: null,
+  startedAt: null,
+  elapsedMs: 0,
+  message: "Not recording.",
+  updatedAt: new Date(0).toISOString(),
+};
+
+/**
+ * "Full Match Analysis": records the whole match as video + audio and sends
+ * it to Gemini for a deeper report than the still-frame Watch & Coach flow
+ * above can produce (real timestamps, audio cues like footsteps/gunfire).
+ * Additive, not a replacement -- both can be used side by side, and both
+ * write to the same reports history MatchRecordingControl shows.
+ */
+export default function MatchVideoRecordingControl() {
+  const [bridgeAvailable, setBridgeAvailable] = useState(false);
+  const [state, setState] =
+    useState<OracleMatchVideoRecordingState>(IDLE_STATE);
+  const [uploading, setUploading] = useState(false);
+  const [activeReport, setActiveReport] =
+    useState<CoachingReport | null>(null);
+  const [activeError, setActiveError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const bridge = window.oracleDesktop;
+    if (!bridge) {
+      return;
+    }
+    let active = true;
+    void bridge
+      .getMatchVideoRecordingState()
+      .then((value) => {
+        if (!active) return;
+        setState(value);
+        setBridgeAvailable(true);
+      })
+      .catch(() => undefined);
+    const unsubscribe = bridge.onMatchVideoRecordingStateChanged((value) => {
+      if (active) setState(value);
+    });
+    return () => {
+      active = false;
+      unsubscribe();
+    };
+  }, []);
+
+  async function handleStart() {
+    setActiveReport(null);
+    setActiveError(null);
+    const next = await window.oracleDesktop?.startMatchVideoRecording();
+    if (next && next.status === "unavailable") {
+      setActiveError(next.message);
+    }
+  }
+
+  async function handleStop() {
+    const result = await window.oracleDesktop?.stopMatchVideoRecording();
+    if (!result) return;
+    void submitForAnalysis(result);
+  }
+
+  async function submitForAnalysis(
+    result: OracleMatchVideoRecordingResult
+  ): Promise<void> {
+    setUploading(true);
+    setActiveError(null);
+    // Same indicator channel the still-frame flow uses -- from the
+    // Operator's point of view it's the same thing either way: "is a
+    // report cooking right now".
+    void window.oracleDesktop?.notifyReportGenerationStatus("generating");
+    try {
+      if (result.sizeBytes === 0) {
+        throw new Error(
+          "Nothing was captured during this recording, so no report can be generated."
+        );
+      }
+
+      const bytes = await window.oracleDesktop?.readMatchVideoBytes(
+        result.videoPath
+      );
+      if (!bytes) {
+        throw new Error("Could not read the recorded video file.");
+      }
+
+      // Copy out exactly the bytes this view covers as a plain ArrayBuffer
+      // -- Blob's typings want that specifically, and a typed array arriving
+      // fresh over IPC can be typed as backed by the more general
+      // ArrayBufferLike (which also covers SharedArrayBuffer).
+      const videoData = bytes.buffer.slice(
+        bytes.byteOffset,
+        bytes.byteOffset + bytes.byteLength
+      ) as ArrayBuffer;
+
+      const form = new FormData();
+      form.append(
+        "video",
+        new Blob([videoData], { type: result.mimeType || "video/webm" }),
+        "match.webm"
+      );
+      form.append("clientSessionId", result.sessionId);
+      form.append("game", "Call of Duty");
+      form.append("startedAt", result.startedAt);
+      form.append("endedAt", result.stoppedAt);
+      form.append("durationMs", String(result.durationMs));
+      if (result.matchStartOffsetMs !== null) {
+        form.append(
+          "matchStartOffsetMs",
+          String(result.matchStartOffsetMs)
+        );
+      }
+
+      const response = await fetch("/api/oracle/coach-report-video", {
+        method: "POST",
+        body: form,
+      });
+      const body = await response.json();
+      if (!response.ok) {
+        setActiveError(
+          body.error ?? "The Full Match Analysis report could not be generated."
+        );
+        void window.oracleDesktop?.notifyReportGenerationStatus("failed");
+        return;
+      }
+
+      const report = body.report as CoachingReport;
+      if (report.status === "failed") {
+        setActiveError(
+          report.raw_error ??
+            "The Full Match Analysis report could not be generated."
+        );
+        void window.oracleDesktop?.notifyReportGenerationStatus("failed");
+        return;
+      }
+
+      setActiveReport(report);
+      void window.oracleDesktop?.notifyReportGenerationStatus("ready");
+      // The report now lives on Oracle -- the local recording has served
+      // its purpose, so it's removed rather than left taking up disk space.
+      void window.oracleDesktop
+        ?.deleteMatchVideoFile(result.videoPath)
+        .catch(() => undefined);
+    } catch (error) {
+      setActiveError(
+        error instanceof Error
+          ? error.message
+          : "The Full Match Analysis report could not be generated."
+      );
+      void window.oracleDesktop?.notifyReportGenerationStatus("failed");
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  if (!bridgeAvailable) {
+    return null;
+  }
+
+  return (
+    <section className={styles.card}>
+      <h2 className={styles.heading}>Full Match Analysis</h2>
+      <p className={styles.muted}>
+        Records the whole match as video with audio and sends it to Gemini
+        for a deeper report -- real timestamps and audio cues like footsteps
+        and gunfire, not just a handful of screenshots. Takes longer to
+        upload and process than Watch &amp; Coach above, so use this when
+        you want the fullest breakdown of a match rather than for every
+        game.
+      </p>
+
+      <p className={styles.message}>{state.message}</p>
+
+      {state.status !== "recording" ? (
+        <button
+          type="button"
+          className={styles.startButton}
+          onClick={handleStart}
+        >
+          Start Full Match Analysis
+        </button>
+      ) : (
+        <button
+          type="button"
+          className={styles.stopButton}
+          onClick={handleStop}
+        >
+          Stop Recording ({formatElapsed(state.elapsedMs)})
+        </button>
+      )}
+
+      {state.status === "recording" && (
+        <p className={styles.reminder}>
+          Important: let every killcam play out after a death instead of
+          skipping it -- Oracle needs to see and hear it to explain what
+          happened.
+        </p>
+      )}
+
+      {uploading && (
+        <p className={styles.muted}>
+          Uploading and analysing the full recording -- this takes longer
+          than Watch &amp; Coach, often several minutes for a full match.
+        </p>
+      )}
+
+      {activeError && (
+        <p className={styles.error}>Report failed: {activeError}</p>
+      )}
+
+      {activeReport && <ReportView report={activeReport} />}
+    </section>
+  );
+}
+
+function formatElapsed(elapsedMs: number): string {
+  const totalSeconds = Math.max(0, Math.floor(elapsedMs / 1_000));
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
+}

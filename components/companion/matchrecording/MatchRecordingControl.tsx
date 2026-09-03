@@ -5,40 +5,9 @@ import type {
   OracleMatchRecordingResult,
   OracleMatchRecordingState,
 } from "@/desktop/contracts";
+import type { CoachingReport } from "./report-types";
+import ReportView from "./ReportView";
 import styles from "./match-recording.module.css";
-
-type CoachingScores = {
-  positioning: number;
-  aim: number;
-  movement: number;
-  decision_making: number;
-  game_sense: number;
-};
-
-type DeathBreakdown = {
-  whenInMatch: string;
-  whatHappened: string;
-  enemySightlineAssessment: string;
-  couldHaveActedSooner: boolean;
-  whatToDoDifferently: string;
-  confidence: "low" | "medium" | "high";
-};
-
-type CoachingReport = {
-  id: string;
-  status: "complete" | "degraded" | "failed";
-  generated_at: string;
-  summary: string | null;
-  verdict: string | null;
-  positioning: number | null;
-  aim: number | null;
-  movement: number | null;
-  decision_making: number | null;
-  game_sense: number | null;
-  deaths: DeathBreakdown[] | null;
-  raw_error: string | null;
-  frame_count: number;
-};
 
 const IDLE_STATE: OracleMatchRecordingState = {
   contract: {
@@ -266,76 +235,5 @@ export default function MatchRecordingControl() {
         </div>
       )}
     </section>
-  );
-}
-
-function ReportView({ report }: Readonly<{ report: CoachingReport }>) {
-  const scores: CoachingScores | null =
-    report.positioning === null
-      ? null
-      : {
-          positioning: report.positioning ?? 0,
-          aim: report.aim ?? 0,
-          movement: report.movement ?? 0,
-          decision_making: report.decision_making ?? 0,
-          game_sense: report.game_sense ?? 0,
-        };
-
-  return (
-    <div className={styles.report}>
-      {report.verdict && <p className={styles.verdict}>{report.verdict}</p>}
-      {report.summary && <p className={styles.summary}>{report.summary}</p>}
-
-      {scores && (
-        <div className={styles.scores}>
-          <ScoreBar label="Positioning" value={scores.positioning} />
-          <ScoreBar label="Aim" value={scores.aim} />
-          <ScoreBar label="Movement" value={scores.movement} />
-          <ScoreBar label="Decision making" value={scores.decision_making} />
-          <ScoreBar label="Game sense" value={scores.game_sense} />
-        </div>
-      )}
-
-      {report.deaths && report.deaths.length > 0 && (
-        <div className={styles.deaths}>
-          <h3 className={styles.subheading}>Death by death</h3>
-          {report.deaths.map((death, index) => (
-            <div key={index} className={styles.deathCard}>
-              <p className={styles.deathWhen}>{death.whenInMatch}</p>
-              <p>{death.whatHappened}</p>
-              <p className={styles.deathSightline}>
-                {death.enemySightlineAssessment}
-              </p>
-              <p>
-                <strong>
-                  {death.couldHaveActedSooner
-                    ? "Could have acted sooner: "
-                    : "Reaction time looked reasonable: "}
-                </strong>
-                {death.whatToDoDifferently}
-              </p>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ScoreBar({
-  label,
-  value,
-}: Readonly<{ label: string; value: number }>) {
-  return (
-    <div className={styles.scoreRow}>
-      <span className={styles.scoreLabel}>{label}</span>
-      <div className={styles.scoreTrack}>
-        <div
-          className={styles.scoreFill}
-          style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
-        />
-      </div>
-      <span className={styles.scoreValue}>{value}</span>
-    </div>
   );
 }
