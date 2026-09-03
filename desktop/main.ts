@@ -15,6 +15,7 @@ import { CompanionHostWindowController } from "./overlay-window.js";
 import { WatchIndicatorWindowController } from "./watch-indicator-window.js";
 import {
   DEFAULT_TOGGLE_WATCH_ACCELERATOR,
+  DEFAULT_POSITIONING_MODE_ACCELERATOR,
   loadHotkeySettings,
   saveHotkeySettings,
 } from "./companion/hotkey-settings-store.js";
@@ -61,6 +62,9 @@ let packagedProviderOrigin:
 let toggleWatchAccelerator =
   DEFAULT_TOGGLE_WATCH_ACCELERATOR;
 let toggleWatchRegistered = false;
+let positioningModeAccelerator =
+  DEFAULT_POSITIONING_MODE_ACCELERATOR;
+let positioningModeRegistered = false;
 
 const packagedNextServer =
   new OraclePackagedNextServer();
@@ -115,11 +119,19 @@ if (!hasSingleInstanceLock) {
       registerReleaseIpcHandlers();
       registerRecoveryShortcut();
 
+      const storedHotkeySettings =
+        loadHotkeySettings();
       toggleWatchAccelerator =
-        loadHotkeySettings().toggleWatchAccelerator;
+        storedHotkeySettings.toggleWatchAccelerator;
       toggleWatchRegistered =
         registerToggleWatchShortcut(
           toggleWatchAccelerator
+        );
+      positioningModeAccelerator =
+        storedHotkeySettings.positioningModeAccelerator;
+      positioningModeRegistered =
+        registerPositioningModeShortcut(
+          positioningModeAccelerator
         );
 
       hostWindowController =
@@ -191,6 +203,9 @@ app.on("will-quit", () => {
   globalShortcut.unregister(
     toggleWatchAccelerator
   );
+  globalShortcut.unregister(
+    positioningModeAccelerator
+  );
 });
 
 /**
@@ -204,7 +219,16 @@ function attachWatchIndicator(
   controller: CompanionHostWindowController
 ): void {
   if (!watchIndicator) {
-    watchIndicator = new WatchIndicatorWindowController();
+    watchIndicator = new WatchIndicatorWindowController(
+      (positioning) => {
+        controller
+          .getWindow()
+          ?.webContents.send(
+            DESKTOP_CHANNELS.indicatorPositioningModeChanged,
+            positioning
+          );
+      }
+    );
     watchIndicator.create();
   }
 
@@ -346,9 +370,7 @@ function applyToggleWatchHotkey(
   if (registered) {
     toggleWatchAccelerator = trimmed;
     toggleWatchRegistered = true;
-    saveHotkeySettings({
-      toggleWatchAccelerator: trimmed,
-    });
+    persistHotkeySettings();
   } else {
     // Couldn't bind the requested combination (most likely already claimed
     // by another running application) -- restore the previous one rather
@@ -371,6 +393,92 @@ function currentToggleWatchHotkeyState(): OracleDesktopToggleWatchHotkeyState {
     accelerator: toggleWatchAccelerator,
     registered: toggleWatchRegistered,
   };
+}
+
+function registerPositioningModeShortcut(
+  accelerator: string
+): boolean {
+  const registered =
+    globalShortcut.register(
+      accelerator,
+      () => {
+        watchIndicator?.togglePositioningMode();
+      }
+    );
+
+  if (!registered) {
+    console.warn(
+      `Oracle Companion could not register the indicator positioning hotkey '${accelerator}'.`
+    );
+  }
+
+  return registered;
+}
+
+function applyPositioningModeHotkey(
+  accelerator: unknown
+): OracleDesktopToggleWatchHotkeyState {
+  if (
+    typeof accelerator !== "string" ||
+    accelerator.trim().length === 0
+  ) {
+    return currentPositioningModeHotkeyState();
+  }
+
+  const trimmed = accelerator.trim();
+  if (trimmed === positioningModeAccelerator) {
+    return currentPositioningModeHotkeyState();
+  }
+
+  const previousAccelerator =
+    positioningModeAccelerator;
+  const previousRegistered =
+    positioningModeRegistered;
+
+  if (positioningModeRegistered) {
+    globalShortcut.unregister(
+      previousAccelerator
+    );
+  }
+
+  const registered =
+    registerPositioningModeShortcut(trimmed);
+
+  if (registered) {
+    positioningModeAccelerator = trimmed;
+    positioningModeRegistered = true;
+    persistHotkeySettings();
+  } else {
+    positioningModeAccelerator =
+      previousAccelerator;
+    positioningModeRegistered =
+      previousRegistered
+        ? registerPositioningModeShortcut(
+            previousAccelerator
+          )
+        : false;
+  }
+
+  return currentPositioningModeHotkeyState();
+}
+
+function currentPositioningModeHotkeyState(): OracleDesktopToggleWatchHotkeyState {
+  return {
+    accelerator: positioningModeAccelerator,
+    registered: positioningModeRegistered,
+  };
+}
+
+/**
+ * Both configurable hotkeys live in the same on-disk settings file (see
+ * hotkey-settings-store.ts) -- always save both current values together so
+ * changing one never drops the other.
+ */
+function persistHotkeySettings(): void {
+  saveHotkeySettings({
+    toggleWatchAccelerator,
+    positioningModeAccelerator,
+  });
 }
 
 function restoreInteraction(): void {
@@ -540,6 +648,24 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
+    DESKTOP_CHANNELS.getIndicatorPositioningHotkey,
+    (event) => {
+      requireAuthorizedController(event);
+      return currentPositioningModeHotkeyState();
+    }
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.setIndicatorPositioningHotkey,
+    (event, accelerator: unknown) => {
+      requireAuthorizedController(event);
+      return applyPositioningModeHotkey(
+        accelerator
+      );
+    }
+  );
+
+  ipcMain.handle(
     DESKTOP_CHANNELS.toggleOverlayPreview,
     (event) => {
       return requireAuthorizedController(
@@ -671,6 +797,14 @@ function removeIpcHandlers(): void {
 
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.exitIndicatorPositioningMode
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.getIndicatorPositioningHotkey
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.setIndicatorPositioningHotkey
   );
 
   ipcMain.removeHandler(

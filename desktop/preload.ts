@@ -357,6 +357,44 @@ const oracleDesktopBridge: OracleDesktopBridge = {
     ipcRenderer.invoke(
       DESKTOP_CHANNELS.exitIndicatorPositioningMode
     ) as Promise<void>,
+
+  getIndicatorPositioningHotkey: async () => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.getIndicatorPositioningHotkey
+    );
+    return requireToggleWatchHotkeyState(value);
+  },
+
+  setIndicatorPositioningHotkey: async (accelerator) => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.setIndicatorPositioningHotkey,
+      accelerator
+    );
+    return requireToggleWatchHotkeyState(value);
+  },
+
+  onIndicatorPositioningModeChanged: (listener) => {
+    let subscribed = true;
+    const handler = (
+      _event: IpcRendererEvent,
+      value: unknown
+    ) => {
+      if (subscribed && typeof value === "boolean") {
+        listener(value);
+      }
+    };
+    ipcRenderer.on(
+      DESKTOP_CHANNELS.indicatorPositioningModeChanged,
+      handler
+    );
+    return () => {
+      subscribed = false;
+      ipcRenderer.removeListener(
+        DESKTOP_CHANNELS.indicatorPositioningModeChanged,
+        handler
+      );
+    };
+  },
 };
 
 const oracleDesktopReleaseBridge:

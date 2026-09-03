@@ -50,6 +50,12 @@ export class WatchIndicatorWindowController {
   private positioning = false;
   private fadeTimer: NodeJS.Timeout | null = null;
 
+  constructor(
+    private readonly onPositioningModeChanged?: (
+      positioning: boolean
+    ) => void
+  ) {}
+
   create(): void {
     if (this.window && !this.window.isDestroyed()) {
       return;
@@ -170,6 +176,24 @@ export class WatchIndicatorWindowController {
     return this.settings;
   }
 
+  isPositioning(): boolean {
+    return this.positioning;
+  }
+
+  /**
+   * Entry point for the global positioning-mode hotkey -- lets the Operator
+   * pull up the indicator to drag it without alt-tabbing to Settings, even
+   * from inside a match. Same toggle shape as the watch hotkey: press once
+   * to enter, press again to drop it and save the new spot.
+   */
+  togglePositioningMode(): void {
+    if (this.positioning) {
+      this.exitPositioningMode();
+    } else {
+      this.enterPositioningMode();
+    }
+  }
+
   enterPositioningMode(): void {
     const window = this.window;
     if (!window || window.isDestroyed()) {
@@ -180,12 +204,14 @@ export class WatchIndicatorWindowController {
     window.setIgnoreMouseEvents(false);
     this.render();
     window.showInactive();
+    this.onPositioningModeChanged?.(true);
   }
 
   exitPositioningMode(): void {
     const window = this.window;
     if (!window || window.isDestroyed()) {
       this.positioning = false;
+      this.onPositioningModeChanged?.(false);
       return;
     }
     this.positioning = false;
@@ -195,6 +221,7 @@ export class WatchIndicatorWindowController {
     window.setIgnoreMouseEvents(true, { forward: true });
     window.setFocusable(false);
     this.render();
+    this.onPositioningModeChanged?.(false);
   }
 
   private currentVisualState(): IndicatorVisualState {

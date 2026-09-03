@@ -132,13 +132,23 @@ export const DESKTOP_CHANNELS = {
 
   exitIndicatorPositioningMode:
     "oracle-desktop:exit-indicator-positioning-mode",
+
+  getIndicatorPositioningHotkey:
+    "oracle-desktop:get-indicator-positioning-hotkey",
+
+  setIndicatorPositioningHotkey:
+    "oracle-desktop:set-indicator-positioning-hotkey",
+
+  indicatorPositioningModeChanged:
+    "oracle-desktop:indicator-positioning-mode-changed",
 } as const;
 
 export const ORACLE_DESKTOP_RECOVERY_SHORTCUT =
   "CommandOrControl+Shift+O";
 
 /**
- * State of the global "toggle Watch & Coach" hotkey: the accelerator string
+ * State of a global hotkey (currently used for both "toggle Watch & Coach"
+ * and "toggle indicator positioning mode"): the accelerator string
  * currently configured, and whether it's actually bound at the OS level
  * right now (registration can fail if another running application already
  * grabbed the same combination -- that's surfaced here rather than failing
@@ -331,4 +341,20 @@ export type OracleDesktopBridge = {
   enterIndicatorPositioningMode: () => Promise<void>;
 
   exitIndicatorPositioningMode: () => Promise<void>;
+
+  getIndicatorPositioningHotkey: () =>
+    Promise<OracleDesktopToggleWatchHotkeyState>;
+
+  setIndicatorPositioningHotkey: (
+    accelerator: string
+  ) => Promise<OracleDesktopToggleWatchHotkeyState>;
+
+  /**
+   * Fires whenever positioning mode is entered or exited by any trigger --
+   * the Settings button or the global hotkey -- so a Settings page left
+   * open stays in sync even if positioning mode was toggled from in-game.
+   */
+  onIndicatorPositioningModeChanged: (
+    listener: (positioning: boolean) => void
+  ) => () => void;
 };
