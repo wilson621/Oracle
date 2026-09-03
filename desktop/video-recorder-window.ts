@@ -232,9 +232,17 @@ export class OracleVideoRecorderWindowController {
     const target = this.currentTarget;
     if (!target) return null;
 
+    // A non-zero thumbnailSize, matching what
+    // OracleElectronFullWindowCapture (the still-frame path, proven
+    // working for the exact same handle-matching logic against this same
+    // attached window) already uses -- a {0, 0} size is documented as
+    // "skip generating the thumbnail", but this is deliberately kept
+    // non-zero (and small, since the thumbnail itself is discarded) to
+    // rule out any platform-specific quirk in how a zero-sized thumbnail
+    // request enumerates window sources.
     const sources = await desktopCapturer.getSources({
       types: ["window"],
-      thumbnailSize: { width: 0, height: 0 },
+      thumbnailSize: { width: 32, height: 32 },
       fetchWindowIcons: false,
     });
 
@@ -242,6 +250,22 @@ export class OracleVideoRecorderWindowController {
     const matching = sources.find(
       (source) => sourceHandle(source.id) === wantedHandle
     );
+    if (!matching) {
+      // Logged rather than silently swallowed -- getDisplayMedia() will
+      // reject with a bare "Permission denied" in the renderer either way
+      // (Electron's documented behaviour for a request denied via an
+      // empty callback), which alone gives no way to tell "no window
+      // matched" apart from a real permission problem. This is the one
+      // piece of information that actually distinguishes them.
+      console.warn(
+        "Oracle video recorder: no desktopCapturer window source matched " +
+          `the attached window (wanted handle ${wantedHandle ?? "null"}). ` +
+          `${sources.length} window source(s) were available: ` +
+          sources
+            .map((source) => `${sourceHandle(source.id)} (${source.name})`)
+            .join(", ")
+      );
+    }
     return matching ? { id: matching.id, name: matching.name } : null;
   }
 
