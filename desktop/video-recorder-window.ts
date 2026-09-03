@@ -3,6 +3,7 @@ import {
   desktopCapturer,
   ipcMain,
   protocol,
+  session,
   type IpcMainEvent,
 } from "electron";
 import { createWriteStream, mkdirSync, type WriteStream } from "node:fs";
@@ -34,6 +35,23 @@ const RECORDER_PRELOAD_FILENAME = "video-recorder-preload.js";
 const VIDEO_RECORDER_SCHEME = "oracle-video-recorder";
 const VIDEO_RECORDER_HARNESS_URL = `${VIDEO_RECORDER_SCHEME}://harness/`;
 
+// The recorder window gets its own session, entirely separate from
+// session.defaultSession (which the Companion window uses). This isn't
+// isolation for its own sake: CompanionHostWindowController locks down
+// session.defaultSession with setPermissionCheckHandler(() => false) and
+// setPermissionRequestHandler(...deny everything...) in
+// registerNavigationSecurity (overlay-window.ts), because the Companion
+// window loads real web content and must never silently grant it a
+// permission. Neither window specified a `partition` before this, so the
+// recorder window shared that same locked-down session -- and
+// getDisplayMedia() was being denied by that blanket handler before our
+// own setDisplayMediaRequestHandler below ever ran, which is exactly what
+// a bare "Permission denied" with no source-matching diagnostic in the
+// log turned out to mean. Not prefixed with "persist:", so this session
+// is in-memory only and never touches disk, same as everything else in
+// this pipeline.
+const VIDEO_RECORDER_SESSION_PARTITION = "video-recorder";
+
 protocol.registerSchemesAsPrivileged([
   {
     scheme: VIDEO_RECORDER_SCHEME,
@@ -50,16 +68,21 @@ protocol.registerSchemesAsPrivileged([
 // beginCapture() (the only caller) is itself only ever reachable after
 // app.whenReady() has resolved (it requires an attached Companion window),
 // so a lazy, idempotent registration on first use is sufficient -- no need
-// to thread this through main.ts's own ready handler.
+// to thread this through main.ts's own ready handler. Registered on the
+// recorder's own session specifically (session.protocol, not the
+// top-level protocol.handle default-session shortcut), since it now runs
+// in its own partition rather than session.defaultSession.
 let harnessProtocolRegistered = false;
 function ensureHarnessProtocolRegistered(): void {
   if (harnessProtocolRegistered) return;
   harnessProtocolRegistered = true;
-  protocol.handle(VIDEO_RECORDER_SCHEME, () => {
-    return new Response(renderVideoRecorderHarnessHtml(), {
-      headers: { "content-type": "text/html; charset=utf-8" },
+  session
+    .fromPartition(VIDEO_RECORDER_SESSION_PARTITION)
+    .protocol.handle(VIDEO_RECORDER_SCHEME, () => {
+      return new Response(renderVideoRecorderHarnessHtml(), {
+        headers: { "content-type": "text/html; charset=utf-8" },
+      });
     });
-  });
 }
 
 // The hidden window captures a *different* window (the attached game) via
@@ -143,6 +166,9 @@ export class OracleVideoRecorderWindowController {
         contextIsolation: true,
         sandbox: true,
         webSecurity: true,
+        // See VIDEO_RECORDER_SESSION_PARTITION above -- this must not
+        // share the Companion window's session.
+        partition: VIDEO_RECORDER_SESSION_PARTITION,
       },
     });
     this.window = window;
