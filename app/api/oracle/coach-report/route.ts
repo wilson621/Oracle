@@ -26,7 +26,16 @@ export async function POST(request: Request) {
   let body: RequestBody;
   try {
     body = (await request.json()) as RequestBody;
-  } catch {
+  } catch (error) {
+    // If this fires for a real (non-tiny) submission, the most likely cause
+    // is the request body getting truncated before it reaches here -- see
+    // `experimental.proxyClientMaxBodySize` in next.config.ts.
+    console.error(
+      "[coach-report] failed to parse request JSON. content-length:",
+      request.headers.get("content-length"),
+      "error:",
+      error
+    );
     return NextResponse.json(
       { error: "Coaching report request must be valid JSON." },
       { status: 400 }

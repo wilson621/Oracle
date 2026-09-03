@@ -5,6 +5,7 @@ import type {
 import {
   OracleElectronFullWindowCapture,
 } from "./electron-full-window-capture.js";
+import { selectReportFrames } from "../../lib/oracle/match-coaching/select-report-frames.js";
 import {
   createInitialOracleMatchRecordingState,
   createOracleMatchRecordingState,
@@ -14,7 +15,13 @@ import {
 } from "./match-recording-contract.js";
 
 const CAPTURE_INTERVAL_MS = 2_500;
-const MAX_BUFFERED_FRAMES = 400; // roughly 16-17 minutes at the interval above
+// Raw in-process buffer only -- what actually gets uploaded is reduced to a
+// bounded ~50 frames by selectReportFrames() in stop() below, so this just
+// needs to comfortably cover a long real match without dropping early
+// frames. ~1500 frames covers well over an hour at the interval above, even
+// accounting for capture sometimes running slower than the nominal interval
+// under load (observed on a real match: ~77 frames in 5 minutes).
+const MAX_BUFFERED_FRAMES = 1_500;
 
 /**
  * Owns the local "Start Watching / Stop Watching" lifecycle for the new
@@ -110,14 +117,28 @@ export class OracleMatchRecordingCoordinator {
       this.timer = null;
     }
 
+    // Reduce the full raw capture down to a bounded set before it ever
+    // leaves this process -- an overview spread plus bursts around the
+    // biggest visual jumps (likely deaths/killcams). This keeps the upload
+    // small and predictable regardless of how long the match ran, instead
+    // of shipping every raw frame and hoping it fits under some size limit
+    // further down the pipeline.
+    const rawFrameCount = this.frames.length;
+    const reportFrames = selectReportFrames(this.frames).map(
+      (frame): OracleMatchRecordingFrameSummary => ({
+        capturedAt: frame.capturedAt,
+        jpegBase64: frame.jpegBase64,
+        diffScore: frame.diffScore,
+      })
+    );
+
     const result: OracleMatchRecordingResult = Object.freeze({
       sessionId: this.sessionId,
       startedAt: this.startedAt,
       stoppedAt: this.now(),
-      frames: Object.freeze([...this.frames]),
+      frames: Object.freeze(reportFrames),
     });
 
-    const frameCount = this.frames.length;
     this.frames = [];
     this.sessionId = null;
     this.startedAt = null;
@@ -128,8 +149,8 @@ export class OracleMatchRecordingCoordinator {
       startedAt: null,
       frameCount: 0,
       message:
-        frameCount > 0
-          ? `Watching stopped. ${frameCount} frames captured -- generating your coaching report now.`
+        rawFrameCount > 0
+          ? `Watching stopped. ${rawFrameCount} frames captured -- generating your coaching report now.`
           : "Watching stopped. Nothing was captured, so no report can be generated.",
       updatedAt: this.now(),
     });
