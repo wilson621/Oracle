@@ -50,6 +50,19 @@ export type OracleClipDetectionResult = Readonly<{
   clips: readonly OracleContentClipCandidate[];
 }>;
 
+// Gemini rates its own confidence per candidate ("low" | "medium" | "high"),
+// but that rating is worthless unless something actually acts on it. A
+// "low" confidence candidate means Gemini itself wasn't sure the moment was
+// genuinely shareworthy -- keeping it anyway just burns the Operator's
+// daily/monthly clip allowance (and real Gemini spend) on something they
+// were never going to post. Decided 2026-09-04 after live testing (casual,
+// not-trying-hard play still produced 4-5 candidates) surfaced that nothing
+// was filtering on this field at all. "Medium" is the floor -- see
+// meetsMinimumConfidence() in oracle-content-clips-service.ts for where
+// this is enforced.
+export const MIN_CLIP_CONFIDENCE: OracleContentClipCandidate["confidence"] =
+  "medium";
+
 // Same model as the other Gemini-backed Oracle features -- see the pricing
 // note in gemini-usage-log.ts. Structured extraction + grounded reasoning
 // from an already-reduced-fps video is exactly Flash's strength, same

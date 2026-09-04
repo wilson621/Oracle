@@ -11,6 +11,7 @@ import {
   MAX_CLIPS_PER_REQUEST,
   MAX_CLIP_DURATION_MS,
   MIN_CLIP_DURATION_MS,
+  MIN_CLIP_CONFIDENCE,
   type OracleClipDetectionResult,
   type OracleContentClipCandidate,
 } from "./oracle-clip-detection-report";
@@ -347,11 +348,31 @@ export async function generateContentClips(
   }
 }
 
+// Ranks confidence so "does this clear the bar" is a simple comparison
+// rather than a chain of === checks -- keep in sync with
+// OracleContentClipCandidate["confidence"] in oracle-clip-detection-report.ts.
+const CONFIDENCE_RANK: Record<OracleContentClipCandidate["confidence"], number> = {
+  low: 0,
+  medium: 1,
+  high: 2,
+};
+
+function meetsMinimumConfidence(
+  confidence: OracleContentClipCandidate["confidence"]
+): boolean {
+  return CONFIDENCE_RANK[confidence] >= CONFIDENCE_RANK[MIN_CLIP_CONFIDENCE];
+}
+
 function clampAndCap(
   candidates: readonly OracleContentClipCandidate[]
 ): OracleContentClipCandidate[] {
   const clamped: OracleContentClipCandidate[] = [];
   for (const candidate of candidates) {
+    // Drop anything Gemini itself wasn't confident about before it ever
+    // reaches the Operator's allowance -- see MIN_CLIP_CONFIDENCE's comment
+    // for why. Checked first so a low-confidence candidate never even
+    // counts toward MAX_CLIPS_PER_REQUEST below.
+    if (!meetsMinimumConfidence(candidate.confidence)) continue;
     if (
       !Number.isFinite(candidate.startOffsetMs) ||
       !Number.isFinite(candidate.endOffsetMs) ||
