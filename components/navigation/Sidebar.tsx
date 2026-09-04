@@ -10,6 +10,7 @@ import {
   Target,
   RadioTower,
   FileText,
+  Crosshair,
 } from "lucide-react";
 
 const navItems = [
@@ -20,6 +21,7 @@ const navItems = [
       { label: "Companion", href: "/companion", icon: RadioTower },
       { label: "Sessions", href: "/sessions", icon: ScrollText },
       { label: "Reports", href: "/reports", icon: FileText },
+      { label: "Loadouts", href: "/loadouts", icon: Crosshair },
       { label: "Intelligence", href: "/intelligence", icon: Brain },
       { label: "Coach & Plan", href: "/coach", icon: Target },
       { label: "Progress", href: "/progress", icon: TrendingUp },
