@@ -118,12 +118,26 @@ function trimArgs(
   ];
 }
 
+// The source recording comes from the browser's screen-capture MediaRecorder
+// (see match-video-recording-coordinator.ts's CLIPS_TARGET_FRAME_RATE), which
+// only *requests* 24fps -- actual frame delivery is irregular (variable frame
+// rate: frames land whenever the browser captures them, not on a strict
+// clock). Re-encoding through the filter graph above without pinning an
+// output frame rate carries that irregularity straight into the finished
+// .mp4, which plays back as stutter/lag in simple players (confirmed via
+// live testing -- see /areas/oracle-project.md). `-r` on the output forces
+// libx264 to duplicate/drop frames as needed to hit a real constant frame
+// rate, matching the capture target so motion still looks smooth.
+const OUTPUT_FRAME_RATE = 24;
+
 function outputArgs(outputPath: string): readonly string[] {
   return [
     "-map",
     "[outv]",
     "-map",
     "0:a?",
+    "-r",
+    String(OUTPUT_FRAME_RATE),
     "-c:v",
     "libx264",
     "-preset",
@@ -136,6 +150,8 @@ function outputArgs(outputPath: string): readonly string[] {
     "aac",
     "-b:a",
     "160k",
+    "-async",
+    "1",
     "-movflags",
     "+faststart",
     outputPath,

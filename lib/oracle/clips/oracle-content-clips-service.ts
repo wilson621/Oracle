@@ -88,6 +88,27 @@ zero) rather than padding this out. For each moment you do pick, give
 precise start/end offsets (a couple of seconds before the key action so it
 has room to build, a beat after it resolves so it isn't cut off), a short
 punchy on-screen hook line, and a separate ready-to-post caption.
+
+Write the hook and caption like an actual creator posting this clip, not
+like a video file name or a match-report headline. Bland, purely
+descriptive labels ("Clearing the tennis courts cleanly") are exactly what
+to avoid -- they don't earn a scroll-stopping thumbnail moment. Instead:
+- Pull a real, specific detail out of THIS moment (a kill count, a weapon,
+  a place name, how close it was, how fast it happened) rather than a
+  generic label -- specifics are what make a clip feel real instead of
+  templated.
+- Hook lines should read like something a creator would actually type in
+  6 words or fewer while hyped: e.g. "3 KILLS IN 8 SECONDS", "he never saw
+  it coming", "wrong place, wrong time". Punctuation, ALL CAPS, or a
+  number up front are all fair game if they fit the moment -- don't force
+  the same template onto every clip.
+- Captions should have a real hook of their own (the first few words are
+  what shows before "...more" on most platforms) -- lead with the payoff
+  or the stakes, not a flat description. 1-2 relevant hashtags at the end
+  (not more), matched to the actual game/moment rather than a stock set.
+- Never invent a stat or detail that isn't actually visible in the
+  footage -- specific and honest beats generic every time, but a made-up
+  number is worse than a plain one.
 `.trim();
 
 export async function generateContentClips(
