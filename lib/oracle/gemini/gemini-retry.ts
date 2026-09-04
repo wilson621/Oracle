@@ -90,6 +90,93 @@ function isRetryableGeminiError(error: unknown): boolean {
   );
 }
 
+// A small safety cap on the delay we'll actually honour -- Google's
+// suggested wait has been a handful of seconds in testing, but this stops
+// a pathological value from stalling a request far longer than an
+// Operator would reasonably expect.
+const MAX_SUGGESTED_RETRY_DELAY_MS = 60_000;
+
+/**
+ * Google's own suggested wait before retrying a 429, when it provides one
+ * -- present in the raw error body as a `RetryInfo` detail (a `retryDelay`
+ * field like "23.19s") and, in every case seen so far, also baked directly
+ * into the human-readable message text ("...Please retry in
+ * 23.190195011s."). Observed directly in live testing: Content Clips
+ * firing its own full Gemini video upload+analysis immediately after Full
+ * Match Analysis had already used up the free tier's short-window request
+ * quota (`generate_content_free_tier_requests`, limit 20) -- and the old
+ * fixed ~2-8s backoff never got close to the ~23s Google was actually
+ * asking for, burning through every one of the 5 retry attempts well
+ * before the quota window had a chance to reset. Reading this value
+ * directly, instead of guessing, means the retry loop waits as long as
+ * Google actually says is needed rather than either wasting attempts too
+ * eagerly or making the Operator wait longer than necessary.
+ */
+function retryDelayMsFromApiError(message: string): number | null {
+  let parsedBody: unknown;
+  try {
+    parsedBody = JSON.parse(message);
+  } catch {
+    parsedBody = undefined;
+  }
+  if (parsedBody && typeof parsedBody === "object") {
+    const details = (parsedBody as { error?: { details?: unknown } }).error
+      ?.details;
+    if (Array.isArray(details)) {
+      for (const detail of details) {
+        if (
+          detail &&
+          typeof detail === "object" &&
+          typeof (detail as { retryDelay?: unknown }).retryDelay === "string"
+        ) {
+          const seconds = parseSecondsDuration(
+            (detail as { retryDelay: string }).retryDelay
+          );
+          if (seconds !== null) return Math.ceil(seconds * 1_000);
+        }
+      }
+    }
+  }
+  // Fall back to Google's human-readable message text -- covers cases
+  // where the structured RetryInfo detail isn't present but the same hint
+  // is still there as plain prose.
+  const match = message.match(/retry in\s+([\d.]+)\s*s/i);
+  if (match) {
+    const seconds = Number(match[1]);
+    if (Number.isFinite(seconds)) return Math.ceil(seconds * 1_000);
+  }
+  return null;
+}
+
+function parseSecondsDuration(value: string): number | null {
+  const match = value.match(/^([\d.]+)s$/);
+  if (!match) return null;
+  const seconds = Number(match[1]);
+  return Number.isFinite(seconds) ? seconds : null;
+}
+
+/**
+ * How long to wait before the next attempt: Google's own suggested delay
+ * (see retryDelayMsFromApiError) when one is available and longer than our
+ * default short backoff, plus a small buffer -- retrying at the exact
+ * instant the window is said to reset risks landing just before it
+ * actually does, given ordinary clock/latency slop. Falls back to the
+ * plain exponential-ish backoff for every other retryable error (a
+ * transient 503 or a dropped connection), which was never the problem
+ * here.
+ */
+function nextRetryDelayMs(error: unknown, attempt: number): number {
+  const defaultDelay = GEMINI_RETRY_BASE_DELAY_MS * attempt;
+  if (!isApiErrorLike(error)) return defaultDelay;
+  const suggested = retryDelayMsFromApiError(error.message);
+  if (suggested === null) return defaultDelay;
+  const withBuffer = suggested + 1_500;
+  return Math.min(
+    Math.max(defaultDelay, withBuffer),
+    MAX_SUGGESTED_RETRY_DELAY_MS
+  );
+}
+
 /**
  * Runs one Gemini API call, retrying a couple of times with a short
  * backoff if it fails with a transient status (see
@@ -114,11 +201,13 @@ export async function withGeminiRetry<T>(
       const reason = isApiErrorLike(error)
         ? `status ${error.status}`
         : `network error${networkErrorCode(error) ? ` (${networkErrorCode(error)})` : ""}`;
+      const delayMs = nextRetryDelayMs(error, attempt);
       console.warn(
         `[gemini-retry] ${label} failed (attempt ` +
-          `${attempt}/${MAX_GEMINI_ATTEMPTS}, ${reason}) -- retrying shortly.`
+          `${attempt}/${MAX_GEMINI_ATTEMPTS}, ${reason}) -- retrying in ` +
+          `${Math.round(delayMs / 1_000)}s.`
       );
-      await sleep(GEMINI_RETRY_BASE_DELAY_MS * attempt);
+      await sleep(delayMs);
     }
   }
   // Unreachable: the loop above always either returns or throws on its
