@@ -6,6 +6,24 @@ import { dirname, join } from "node:path";
 import { tmpdir } from "node:os";
 import ffmpegPath from "ffmpeg-static";
 
+// The hook font, bundled with the repo (assets/fonts/anton/, SIL Open Font
+// License -- see OFL.txt there) rather than relying on whatever's installed
+// on the Operator's machine. Anton was picked over the previous plain Arial
+// specifically because it's the actual bold/condensed display font real
+// short-form creators use for hook text (research 2026-09-04 -- the same
+// look commonly associated with high-performing TikTok/Reels captions),
+// not a generic system font.
+//
+// Resolved via process.cwd() rather than __dirname: this file runs through
+// Next.js's Route Handler bundling, which rewrites __dirname to a location
+// that doesn't match the real filesystem (see the ffmpeg-static ENOENT bug
+// this exact issue caused before -- fixed via serverExternalPackages, but
+// that trick only applies to an installed npm package, not a repo-local
+// asset folder like this one). process.cwd() is the Next.js server's
+// project root regardless of bundling, so it stays correct.
+const HOOK_FONT_DIR = join(process.cwd(), "assets", "fonts", "anton");
+const HOOK_FONT_NAME = "Anton";
+
 /**
  * Cuts one short, vertical (9:16), social-ready clip out of a longer local
  * source recording using a bundled ffmpeg binary (`ffmpeg-static` -- no
@@ -173,7 +191,10 @@ function buildFilterGraph(
     return `${composed};[framed]copy[outv]`;
   }
 
-  return `${composed};[framed]subtitles=filename='${escapeFilterPath(options.assPath)}'[outv]`;
+  return (
+    `${composed};[framed]subtitles=filename='${escapeFilterPath(options.assPath)}'` +
+    `:fontsdir='${escapeFilterPath(HOOK_FONT_DIR)}'[outv]`
+  );
 }
 
 // ffmpeg's filter-graph syntax treats ':' as a key=value separator even
@@ -203,7 +224,11 @@ function buildHookSubtitleFile(hookText: string): string {
     "",
     "[V4+ Styles]",
     "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
-    "Style: Hook,Arial,72,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,4,0,8,60,60,140,1",
+    // Outline bumped from 4->6 to land in the "thick 5-8px outline" range
+    // real creator captions use for mobile readability -- Anton is bold
+    // enough on its own that Bold=1 isn't needed (it has no separate
+    // regular/bold pair; forcing synthetic bold just distorts it).
+    `Style: Hook,${HOOK_FONT_NAME},72,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,6,0,8,60,60,140,1`,
     "",
     "[Events]",
     "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text",

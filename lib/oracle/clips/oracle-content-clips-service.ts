@@ -84,7 +84,19 @@ shareable, not something specific to one genre.
 
 Be honest and selective. Most of a match is not clip-worthy, and a handful
 of strong moments beats a full list of mediocre ones -- return fewer (even
-zero) rather than padding this out. For each moment you do pick, give
+zero) rather than padding this out.
+
+Be especially skeptical of routine traversal or objective actions (vaulting
+somewhere, grabbing a bounty/loot, opening a door, moving to a location) --
+these can LOOK smooth or skillful without actually being a moment worth
+sharing. Only pick one if something genuinely earns it happened during or
+immediately around it (a fight, a close call, a good decision under
+pressure, a funny outcome). If a clip's honest one-sentence description
+would just be "player moved somewhere and got an item/objective," with no
+real tension or payoff, leave it out even if the movement itself looked
+clean -- smooth is not the same as shareworthy.
+
+For each moment you do pick, give
 precise start/end offsets (a couple of seconds before the key action so it
 has room to build, a beat after it resolves so it isn't cut off), a short
 punchy on-screen hook line, and a separate ready-to-post caption.
