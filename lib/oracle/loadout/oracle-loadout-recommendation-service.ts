@@ -43,12 +43,12 @@ weapon should cover a different part of the fight so the Operator isn't
 caught out at a range their primary is weak at. Both slots can be filled
 from any non-melee weapon category the current game has -- Assault Rifles,
 SMGs, LMGs, Shotguns, Marksman Rifles, Sniper Rifles, Battle Rifles,
-Pistols, Launchers, whatever exists in the current game per your search
-(in current titles this dual-primary flexibility is Overkill, and it's the
-default now, not a perk/wildcard tax the Operator has to pay for it -- so
-freely pair two full-size weapons, e.g. AR+SMG or AR+Sniper, whenever the
-goal calls for it, exactly as often as a Primary+Pistol pairing). The one
-category never valid in primaryWeapon or secondaryWeapon is Melee: Melee
+Pistols, Launchers, whatever exists in the current game per your search.
+Freely pair two full-size weapons (e.g. AR+SMG or AR+Sniper) exactly as
+readily as a Primary+Pistol pairing -- neither slot is restricted to a
+smaller "backup weapon" category, that's not how the current games work.
+The one category never valid in primaryWeapon or secondaryWeapon is Melee:
+Melee
 weapons occupy their own separate, dedicated equip slot alongside these two
 (pulled out with its own button/key), which this tool doesn't recommend
 for, so a Melee weapon -- however good a search result looks for it -- can
