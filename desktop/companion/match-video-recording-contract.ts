@@ -97,6 +97,32 @@ export function isOracleMatchVideoRecordingState(
   );
 }
 
+/**
+ * Validates a value read back from disk (see pending-clip-recording-store.ts)
+ * as a genuine OracleMatchVideoRecordingResult before trusting it -- a
+ * corrupt or hand-edited file should be treated as "nothing pending"
+ * rather than handed to the rest of the app unchecked.
+ */
+export function isOracleMatchVideoRecordingResult(
+  value: unknown
+): value is OracleMatchVideoRecordingResult {
+  if (typeof value !== "object" || value === null) return false;
+  const record = value as Record<string, unknown>;
+  return (
+    typeof record.sessionId === "string" &&
+    typeof record.startedAt === "string" &&
+    typeof record.stoppedAt === "string" &&
+    typeof record.videoPath === "string" &&
+    typeof record.mimeType === "string" &&
+    typeof record.hasAudio === "boolean" &&
+    typeof record.sizeBytes === "number" &&
+    typeof record.durationMs === "number" &&
+    (record.matchStartOffsetMs === null ||
+      typeof record.matchStartOffsetMs === "number") &&
+    typeof record.recordedForClips === "boolean"
+  );
+}
+
 function createState(
   input: Omit<OracleMatchVideoRecordingState, "contract">
 ): OracleMatchVideoRecordingState {

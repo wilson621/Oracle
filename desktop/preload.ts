@@ -175,6 +175,18 @@ const oracleDesktopBridge: OracleDesktopBridge = {
       videoPath
     ) as Promise<void>,
 
+  getPendingClipRecording: async () => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.getPendingClipRecording
+    );
+    return isOracleMatchVideoRecordingResult(value) ? value : null;
+  },
+
+  clearPendingClipRecording: () =>
+    ipcRenderer.invoke(
+      DESKTOP_CHANNELS.clearPendingClipRecording
+    ) as Promise<void>,
+
   getToggleVideoRecordingHotkey: async () => {
     const value: unknown = await ipcRenderer.invoke(
       DESKTOP_CHANNELS.getToggleVideoRecordingHotkey

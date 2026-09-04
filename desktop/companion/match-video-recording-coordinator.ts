@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto";
+import { existsSync } from "node:fs";
 import { readFile, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { app } from "electron";
@@ -6,6 +7,11 @@ import type { OracleDesktopAttachmentTarget } from "../overlay/attachment-state.
 import { OracleVideoRecorderWindowController } from "../video-recorder-window.js";
 import { OracleElectronFullWindowCapture } from "./electron-full-window-capture.js";
 import { loadClipRecordingSettings } from "./clip-recording-settings-store.js";
+import {
+  deletePersistedPendingClipRecording,
+  loadPersistedPendingClipRecording,
+  savePersistedPendingClipRecording,
+} from "./pending-clip-recording-store.js";
 import {
   createInitialOracleMatchVideoRecordingState,
   createOracleMatchVideoRecordingState,
@@ -269,6 +275,18 @@ export class OracleMatchVideoRecordingCoordinator {
       recordedForClips,
     });
 
+    if (recordedForClips) {
+      // Persisted immediately, before the caller has even uploaded this
+      // for a Full Match Analysis report -- Content Clips generation is a
+      // fully separate pipeline (its own upload, its own Gemini call), not
+      // dependent on that report succeeding, so there's no reason to wait.
+      // This is also what lets a pending recording survive an app restart
+      // (see pending-clip-recording-store.ts) -- without it, restarting
+      // Oracle between finishing a match and running Generate Clips would
+      // strand this video with no way for the app to find it again.
+      savePersistedPendingClipRecording(result);
+    }
+
     this.publish({
       status: "stopped",
       sessionId: null,
@@ -320,6 +338,39 @@ export class OracleMatchVideoRecordingCoordinator {
     }
     await rm(path, { force: true });
     this.knownVideoPaths.delete(path);
+  }
+
+  /**
+   * Returns the pending Content-Clips recording persisted by stop() (if
+   * any) that's still awaiting a Generate Clips/Discard decision --
+   * restores it after an app restart wiped this coordinator's own
+   * in-memory knownVideoPaths (and the Companion renderer's React state
+   * along with it). Re-authorizes the path for readVideoFile/deleteVideoFile
+   * as a side effect, exactly as if this session's own stop() had just
+   * produced it. Called once by the Companion renderer on mount.
+   */
+  getPendingClipRecording(): OracleMatchVideoRecordingResult | null {
+    const pending = loadPersistedPendingClipRecording();
+    if (!pending) return null;
+    if (!existsSync(pending.videoPath)) {
+      // The video is gone (deleted outside the app, or a stale leftover
+      // from before this existed) -- nothing to recover, and no point
+      // holding onto a reference to a file that isn't there.
+      deletePersistedPendingClipRecording();
+      return null;
+    }
+    this.knownVideoPaths.add(pending.videoPath);
+    return pending;
+  }
+
+  /**
+   * Clears the persisted pending Content-Clips recording once the Operator
+   * has decided its fate -- called by the Companion renderer alongside
+   * deleteVideoFile, both when clips are generated and when the recording
+   * is discarded.
+   */
+  clearPendingClipRecording(): void {
+    deletePersistedPendingClipRecording();
   }
 
   private async sampleMotionOnce(): Promise<void> {

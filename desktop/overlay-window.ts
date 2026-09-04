@@ -594,6 +594,14 @@ export class CompanionHostWindowController {
     return this.matchVideoRecording.deleteVideoFile(videoPath);
   }
 
+  getPendingClipRecording(): OracleMatchVideoRecordingResult | null {
+    return this.matchVideoRecording.getPendingClipRecording();
+  }
+
+  clearPendingClipRecording(): void {
+    this.matchVideoRecording.clearPendingClipRecording();
+  }
+
   getClipRecordingQualityEnabled(): boolean {
     return loadClipRecordingSettings().highQualityForClips;
   }

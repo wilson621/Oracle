@@ -85,6 +85,12 @@ export const DESKTOP_CHANNELS = {
   deleteMatchVideoFile:
     "oracle-desktop:delete-match-video-file",
 
+  getPendingClipRecording:
+    "oracle-desktop:get-pending-clip-recording",
+
+  clearPendingClipRecording:
+    "oracle-desktop:clear-pending-clip-recording",
+
   getToggleVideoRecordingHotkey:
     "oracle-desktop:get-toggle-video-recording-hotkey",
 
@@ -305,6 +311,24 @@ export type OracleDesktopBridge = {
   deleteMatchVideoFile: (
     videoPath: string
   ) => Promise<void>;
+
+  /**
+   * Restores a Content-Clips recording that was still awaiting a Generate
+   * Clips/Discard decision when the app last closed -- so a restart (an
+   * update, a crash, or simply closing Oracle) doesn't strand it: the
+   * video file itself was never deleted, only the app's in-memory ability
+   * to find it again (see pending-clip-recording-store.ts). Called once on
+   * mount; resolves null when nothing is pending.
+   */
+  getPendingClipRecording: () =>
+    Promise<OracleMatchVideoRecordingResult | null>;
+
+  /**
+   * Clears the persisted pending-clip-recording record once the Operator
+   * has decided its fate -- called alongside deleteMatchVideoFile, both
+   * when clips are generated and when the recording is discarded.
+   */
+  clearPendingClipRecording: () => Promise<void>;
 
   getToggleVideoRecordingHotkey: () =>
     Promise<OracleDesktopHotkeyState>;

@@ -89,6 +89,17 @@ export default function MatchVideoRecordingControl() {
         if (active) setClipQualityEnabled(value);
       })
       .catch(() => undefined);
+    // Restores a Content Clips recording that was still awaiting a
+    // Generate Clips/Discard decision when the app was last closed -- the
+    // video itself was never deleted, only this component's own React
+    // state (wiped by the restart) that pointed at it. See
+    // pending-clip-recording-store.ts.
+    void bridge
+      .getPendingClipRecording()
+      .then((value) => {
+        if (active && value) setPendingClipRecording(value);
+      })
+      .catch(() => undefined);
     const unsubscribe = bridge.onMatchVideoRecordingStateChanged((value) => {
       if (active) setState(value);
     });
@@ -109,6 +120,9 @@ export default function MatchVideoRecordingControl() {
     if (!pendingClipRecording) return;
     await window.oracleDesktop
       ?.deleteMatchVideoFile(pendingClipRecording.videoPath)
+      .catch(() => undefined);
+    await window.oracleDesktop
+      ?.clearPendingClipRecording()
       .catch(() => undefined);
     setPendingClipRecording(null);
     setClipResult(null);
@@ -196,6 +210,15 @@ export default function MatchVideoRecordingControl() {
           body.error ?? "The Full Match Analysis report could not be generated."
         );
         void window.oracleDesktop?.notifyReportGenerationStatus("failed");
+        // Content Clips is a fully separate pipeline from this report --
+        // the recording is still there and still usable (the main process
+        // already persisted it as pending, see stop() in
+        // match-video-recording-coordinator.ts) even though the report
+        // itself failed, so still offer Generate Clips/Discard rather than
+        // silently stranding the recording until the app is restarted.
+        if (result.recordedForClips) {
+          setPendingClipRecording(result);
+        }
         return;
       }
 
@@ -206,6 +229,9 @@ export default function MatchVideoRecordingControl() {
             "The Full Match Analysis report could not be generated."
         );
         void window.oracleDesktop?.notifyReportGenerationStatus("failed");
+        if (result.recordedForClips) {
+          setPendingClipRecording(result);
+        }
         return;
       }
 
@@ -233,6 +259,13 @@ export default function MatchVideoRecordingControl() {
           : "The Full Match Analysis report could not be generated."
       );
       void window.oracleDesktop?.notifyReportGenerationStatus("failed");
+      // Same reasoning as the two failure branches above -- a genuinely
+      // empty recording (sizeBytes === 0, the one case that throws before
+      // this point) has nothing worth clipping, so that's deliberately
+      // excluded here.
+      if (result.recordedForClips && result.sizeBytes > 0) {
+        setPendingClipRecording(result);
+      }
     } finally {
       setUploading(false);
     }
@@ -297,6 +330,9 @@ export default function MatchVideoRecordingControl() {
       // Analysis, so it's removed rather than left taking up disk space.
       await window.oracleDesktop
         ?.deleteMatchVideoFile(pendingClipRecording.videoPath)
+        .catch(() => undefined);
+      await window.oracleDesktop
+        ?.clearPendingClipRecording()
         .catch(() => undefined);
       setPendingClipRecording(null);
     } catch (error) {

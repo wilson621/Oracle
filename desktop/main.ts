@@ -608,6 +608,20 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
+    DESKTOP_CHANNELS.getPendingClipRecording,
+    (event) =>
+      requireAuthorizedController(event)
+        .getPendingClipRecording()
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.clearPendingClipRecording,
+    (event) =>
+      requireAuthorizedController(event)
+        .clearPendingClipRecording()
+  );
+
+  ipcMain.handle(
     DESKTOP_CHANNELS.getToggleVideoRecordingHotkey,
     (event) => {
       requireAuthorizedController(event);
@@ -823,6 +837,14 @@ function removeIpcHandlers(): void {
 
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.deleteMatchVideoFile
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.getPendingClipRecording
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.clearPendingClipRecording
   );
 
   ipcMain.removeHandler(
