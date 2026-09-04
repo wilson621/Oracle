@@ -41,7 +41,7 @@ export const ORACLE_AUTH_ROUTES = Object.freeze({
   verifyEmail: "/auth/verify-email",
   callback: "/auth/callback",
   onboarding: "/onboarding",
-  authenticatedHome: "/oracle",
+  authenticatedHome: "/companion",
 });
 
 export function safeRelativeReturnPath(

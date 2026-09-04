@@ -15,10 +15,10 @@ export default function NotFound() {
         No capability is implied by a missing or retired address.
       </p>
       <Link
-        href="/oracle"
+        href="/companion"
         className="mt-8 inline-flex rounded-xl bg-teal-300 px-5 py-3 font-bold text-slate-950 hover:bg-teal-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-200"
       >
-        Return to Oracle
+        Return to Companion
       </Link>
     </AppLayout>
   );

@@ -15,7 +15,7 @@ export default async function OnboardingPage() {
     redirect(ORACLE_AUTH_ROUTES.verifyEmail);
   }
   if (state.status === "commissioned") {
-    redirect("/oracle");
+    redirect("/companion");
   }
 
   return (

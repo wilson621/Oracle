@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Brain, Settings, RadioTower, Crosshair } from "lucide-react";
+import { Settings, RadioTower, Crosshair } from "lucide-react";
 
 // Sessions, Reports, Intelligence, Coach & Plan and Progress are deliberately
 // left out of navigation (not deleted -- 2026-09-04): their pages are
@@ -11,11 +11,18 @@ import { Brain, Settings, RadioTower, Crosshair } from "lucide-react";
 // inactive" placeholder text that reads like a broken feature rather than
 // an honest "coming soon". Add each one back in here once it's either
 // genuinely built or replaced with real placeholder copy.
+//
+// The "Oracle" tab itself was retired the same way (2026-09-04): it was the
+// app's landing page, but its generic chat was a non-functional duplicate of
+// "Ask Oracle about this report" (a real, working per-report chat -- see
+// components/companion/matchrecording/ReportChat.tsx), and 3 of its 4
+// "journey" links pointed at the hidden pages described above. Companion is
+// now the landing page instead (see app/page.tsx and
+// ORACLE_AUTH_ROUTES.authenticatedHome).
 const navItems = [
   {
     section: "YOUR ORACLE JOURNEY",
     items: [
-      { label: "Oracle", href: "/oracle", icon: Brain },
       { label: "Companion", href: "/companion", icon: RadioTower },
       { label: "Loadouts", href: "/loadouts", icon: Crosshair },
     ],
