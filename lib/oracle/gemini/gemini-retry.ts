@@ -95,6 +95,23 @@ export function describeGeminiFailure(error: unknown): string {
     } catch {
       // error.message wasn't JSON -- fall through and use it as-is below.
     }
+    // 429 is bucketed separately from the 500/502/503/504 "overloaded"
+    // group even though both are in RETRYABLE_GEMINI_STATUS_CODES: a 429 is
+    // Google saying "you've used up your quota", which retrying for a few
+    // seconds will never fix (quota windows are per-minute/day, not
+    // per-second) -- telling the customer "try again in a minute" here is
+    // actively misleading. 500/502/503/504 really are short-lived overload
+    // and that message is accurate for those.
+    if (error.status === 429) {
+      return (
+        "Gemini's usage limit has been reached for now" +
+        (detail ? ` (Google said: "${detail}")` : "") +
+        ". If this account is on the Gemini API free tier, that tier's " +
+        "limits are quite low and this can take a while to reset -- " +
+        "check current usage and limits at https://ai.dev/rate-limit, " +
+        "or add billing to raise them."
+      );
+    }
     if (RETRYABLE_GEMINI_STATUS_CODES.has(error.status)) {
       return (
         "Gemini was temporarily too busy to process this, even after " +
