@@ -18,7 +18,7 @@ export default function OracleSignalFeed({
   return (
     <section className="rounded-3xl border border-white/10 bg-slate-950/70 p-6">
       <div className="flex items-center gap-3">
-        <Activity className="text-cyan-300" size={22} />
+        <Activity className="text-teal-300" size={22} />
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-400">
           Signal Feed
         </p>
@@ -37,7 +37,7 @@ export default function OracleSignalFeed({
             <div className="flex items-center justify-between gap-4">
               <p className="font-semibold text-white">{signal.title}</p>
 
-              <span className="rounded-full border border-cyan-400/20 px-3 py-1 text-xs uppercase tracking-[0.2em] text-cyan-300">
+              <span className="rounded-full border border-teal-400/20 px-3 py-1 text-xs uppercase tracking-[0.2em] text-teal-300">
                 {signal.severity}
               </span>
             </div>

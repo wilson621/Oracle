@@ -41,9 +41,9 @@ export default function SettingsPage() {
           <Link
             key={href}
             href={href}
-            className="rounded-3xl border border-slate-800 bg-black/25 p-6 transition hover:border-cyan-300/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+            className="rounded-3xl border border-slate-800 bg-black/25 p-6 transition hover:border-teal-300/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300"
           >
-            <Icon aria-hidden="true" className="text-cyan-300" size={28} />
+            <Icon aria-hidden="true" className="text-teal-300" size={28} />
             <h2 className="mt-5 text-2xl font-black">{title}</h2>
             <p className="mt-3 leading-7 text-slate-400">{description}</p>
           </Link>
@@ -57,7 +57,7 @@ export default function SettingsPage() {
         <div className="flex items-start gap-4">
           <ShieldCheck
             aria-hidden="true"
-            className="shrink-0 text-cyan-300"
+            className="shrink-0 text-teal-300"
             size={28}
           />
           <div>

@@ -29,10 +29,10 @@ export default function ConfidencePanel({
   const status = getConfidenceStatus(percentage);
 
   return (
-    <section className="rounded-3xl border border-cyan-500/20 bg-black/40 p-6 shadow-lg shadow-cyan-500/10">
+    <section className="rounded-3xl border border-teal-500/20 bg-black/40 p-6 shadow-lg shadow-teal-500/10">
       <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-2xl">
-          <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+          <p className="text-xs font-bold uppercase tracking-[0.35em] text-teal-300">
             Oracle Intelligence
           </p>
 
@@ -40,7 +40,7 @@ export default function ConfidencePanel({
             Confidence Assessment
           </h3>
 
-          <div className="mt-5 inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm font-bold text-cyan-300">
+          <div className="mt-5 inline-flex rounded-full border border-teal-400/20 bg-teal-400/10 px-4 py-2 text-sm font-bold text-teal-300">
             {status}
           </div>
 
@@ -64,7 +64,7 @@ export default function ConfidencePanel({
                 Intelligence State
               </p>
 
-              <p className="mt-2 text-sm font-semibold text-cyan-300">
+              <p className="mt-2 text-sm font-semibold text-teal-300">
                 Active Analysis
               </p>
             </div>

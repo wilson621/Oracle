@@ -26,8 +26,8 @@ export default function MissionBrief({
   ],
 }: MissionBriefProps) {
   return (
-    <section className="rounded-3xl border border-cyan-500/20 bg-black/40 p-6 shadow-lg shadow-cyan-500/10">
-      <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+    <section className="rounded-3xl border border-teal-500/20 bg-black/40 p-6 shadow-lg shadow-teal-500/10">
+      <p className="text-xs font-bold uppercase tracking-[0.35em] text-teal-300">
         Oracle Coach
       </p>
 
@@ -52,7 +52,7 @@ export default function MissionBrief({
               Estimated Combat Gain
             </p>
 
-            <p className="mt-2 text-3xl font-black text-cyan-300">
+            <p className="mt-2 text-3xl font-black text-teal-300">
               +{estimatedCombatGain}
             </p>
           </div>
@@ -82,7 +82,7 @@ export default function MissionBrief({
       </div>
 
       <div className="mt-7 rounded-2xl border border-slate-800 bg-slate-950/70 p-5">
-        <p className="text-xs font-bold uppercase tracking-[0.3em] text-cyan-300">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-teal-300">
           Mission Objectives
         </p>
 
@@ -92,7 +92,7 @@ export default function MissionBrief({
               key={objective.label}
               className="flex items-center gap-3 rounded-xl border border-white/10 bg-black/30 px-4 py-3"
             >
-              <span className="h-3 w-3 rounded-sm border border-cyan-400/60 bg-cyan-400/5" />
+              <span className="h-3 w-3 rounded-sm border border-teal-400/60 bg-teal-400/5" />
 
               <p className="text-sm font-medium text-slate-300">
                 {objective.label}

@@ -17,7 +17,7 @@ export default function PredictionCard({
 }: PredictionCardProps) {
   return (
     <Card>
-      <TrendingUp className="text-cyan-300" size={32} />
+      <TrendingUp className="text-teal-300" size={32} />
 
       <h2 className="mt-5 text-3xl font-black">
         Predicted Improvement
@@ -26,7 +26,7 @@ export default function PredictionCard({
       <p className="mt-3 text-slate-400">
         Oracle predicts your {skill.toLowerCase()} can improve from{" "}
         <span className="font-bold text-white">{current}</span> to{" "}
-        <span className="font-bold text-cyan-300">{projected}</span> within
+        <span className="font-bold text-teal-300">{projected}</span> within
         approximately {sessions} focused sessions.
       </p>
 
@@ -34,9 +34,9 @@ export default function PredictionCard({
   <ProgressBar value={projected} label={`${skill} Projection`} />
 </div>
 
-<div className="mt-6 rounded-2xl border border-cyan-400/20 bg-cyan-400/5 p-4">
+<div className="mt-6 rounded-2xl border border-teal-400/20 bg-teal-400/5 p-4">
 
-  <p className="text-xs font-bold tracking-[0.3em] text-cyan-300">
+  <p className="text-xs font-bold tracking-[0.3em] text-teal-300">
     PREDICTION CONFIDENCE
   </p>
 

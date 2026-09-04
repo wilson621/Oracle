@@ -33,7 +33,7 @@ export default function ConfidenceRing({
       className="relative flex items-center justify-center"
       style={{ width: size, height: size }}
     >
-      <div className="absolute inset-0 rounded-full bg-cyan-400/5 blur-2xl" />
+      <div className="absolute inset-0 rounded-full bg-teal-400/5 blur-2xl" />
 
       <svg width={size} height={size} className="relative -rotate-90">
         <circle
@@ -77,11 +77,11 @@ export default function ConfidenceRing({
           <AnimatedNumber value={value} suffix="%" />
         </div>
 
-        <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.32em] text-cyan-300">
+        <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.32em] text-teal-300">
           Confidence
         </div>
 
-        <div className="mx-auto mt-3 h-px w-16 bg-cyan-400/30" />
+        <div className="mx-auto mt-3 h-px w-16 bg-teal-400/30" />
       </div>
     </div>
   );

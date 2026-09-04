@@ -89,7 +89,7 @@ export default function OraclePage() {
             </p>
           )}
           {conversation && (
-            <article className="mx-auto mt-6 max-w-3xl rounded-3xl border border-cyan-900 bg-slate-950 p-6 text-slate-100">
+            <article className="mx-auto mt-6 max-w-3xl rounded-3xl border border-teal-900 bg-slate-950 p-6 text-slate-100">
               <h2 className="text-xl font-bold">Oracle</h2>
               <p className="mt-3 leading-7">{conversation.answer}</p>
               <dl className="mt-6 grid gap-3 text-sm text-slate-300 sm:grid-cols-2">
@@ -127,7 +127,7 @@ export default function OraclePage() {
             </article>
           )}
           <section className="mt-10" aria-labelledby="oracle-journey-heading">
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-cyan-300">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-teal-300">
               Your Oracle journey
             </p>
             <h2

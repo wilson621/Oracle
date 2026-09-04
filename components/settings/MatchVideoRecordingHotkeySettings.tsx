@@ -79,7 +79,7 @@ export default function MatchVideoRecordingHotkeySettings() {
       <div className="flex items-start gap-4">
         <Keyboard
           aria-hidden="true"
-          className="shrink-0 text-cyan-300"
+          className="shrink-0 text-teal-300"
           size={28}
         />
         <div className="w-full">
@@ -102,13 +102,13 @@ export default function MatchVideoRecordingHotkeySettings() {
               }}
               placeholder="CommandOrControl+Shift+K"
               spellCheck={false}
-              className="w-full max-w-sm rounded-xl border border-slate-700 bg-black/30 px-4 py-2.5 text-sm text-slate-100 outline-none focus-visible:border-cyan-300/60"
+              className="w-full max-w-sm rounded-xl border border-slate-700 bg-black/30 px-4 py-2.5 text-sm text-slate-100 outline-none focus-visible:border-teal-300/60"
             />
             <button
               type="button"
               onClick={handleSave}
               disabled={!dirty || status.kind === "saving"}
-              className="rounded-xl bg-cyan-300 px-5 py-2.5 text-sm font-bold text-black transition disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
+              className="rounded-xl bg-teal-300 px-5 py-2.5 text-sm font-bold text-black transition disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
             >
               {status.kind === "saving" ? "Saving..." : "Save hotkey"}
             </button>

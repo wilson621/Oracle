@@ -68,7 +68,7 @@ export default function CapabilityNotice({
           {href && linkLabel ? (
             <Link
               href={href}
-              className="mt-6 inline-flex rounded-xl bg-cyan-300 px-5 py-3 font-bold text-slate-950 transition hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200"
+              className="mt-6 inline-flex rounded-xl bg-teal-300 px-5 py-3 font-bold text-slate-950 transition hover:bg-teal-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-200"
             >
               {linkLabel}
             </Link>

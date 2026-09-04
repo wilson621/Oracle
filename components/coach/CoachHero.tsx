@@ -12,8 +12,8 @@ export default function CoachHero({
   sessionsAnalysed,
 }: CoachHeroProps) {
   return (
-    <Card className="border-cyan-400/20 bg-cyan-400/5">
-      <Brain className="text-cyan-300" size={42} />
+    <Card className="border-teal-400/20 bg-teal-400/5">
+      <Brain className="text-teal-300" size={42} />
 
       <h2 className="mt-6 text-4xl font-black text-white">
   {OracleBrain.greeting()}
@@ -23,7 +23,7 @@ export default function CoachHero({
         {summary}
       </p>
 
-      <p className="mt-6 text-xs font-bold tracking-[0.3em] text-cyan-300">
+      <p className="mt-6 text-xs font-bold tracking-[0.3em] text-teal-300">
   ORACLE AI COACH
 </p>
 

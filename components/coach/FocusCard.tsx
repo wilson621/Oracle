@@ -35,7 +35,7 @@ export default function FocusCard({
       </Card>
 
       <Card>
-        <Shield className="text-cyan-300" />
+        <Shield className="text-teal-300" />
 
         <p className="mt-5 text-sm text-slate-400">
           Current Strength

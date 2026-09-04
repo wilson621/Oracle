@@ -7,7 +7,7 @@ export default function CareerHeader({
 }: CareerHeaderProps) {
   return (
     <>
-      <p className="text-sm font-bold tracking-[0.35em] text-cyan-300">
+      <p className="text-sm font-bold tracking-[0.35em] text-teal-300">
         OPERATOR CAREER
       </p>
 

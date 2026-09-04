@@ -15,6 +15,27 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/*
+ * Oracle Teal -- primary intelligence colour (formerly "Oracle Cyan").
+ * Overrides Tailwind's default teal-* scale with a desaturated,
+ * teal-blue accent: same role across the app (signals, confidence,
+ * operational status, primary interaction), calmer presentation.
+ * See docs/Brand-Bible.md > Colour Philosophy > Oracle Teal.
+ */
+@theme {
+  --color-teal-50: #f5f9fa;
+  --color-teal-100: #e7f1f3;
+  --color-teal-200: #cce2e6;
+  --color-teal-300: #a6ccd3;
+  --color-teal-400: #7db5bf;
+  --color-teal-500: #549eab;
+  --color-teal-600: #437e89;
+  --color-teal-700: #36656d;
+  --color-teal-800: #2c5259;
+  --color-teal-900: #223f44;
+  --color-teal-950: #142629;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -28,12 +49,12 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid #67e8f9;
+  outline: 2px solid #a6ccd3;
   outline-offset: 3px;
 }
 
 ::selection {
-  background: rgba(34, 211, 238, 0.3);
+  background: rgba(84, 158, 171, 0.35);
   color: #ffffff;
 }
 

@@ -19,7 +19,7 @@ function riskColour(risk: PredictionRisk) {
     case "very_low":
       return "text-emerald-300";
     case "low":
-      return "text-cyan-300";
+      return "text-teal-300";
     case "moderate":
       return "text-amber-300";
     case "high":
@@ -56,7 +56,7 @@ export default function PredictionPanel({
     <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
       <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+          <p className="text-xs font-bold uppercase tracking-[0.35em] text-teal-300">
             Prediction Engine
           </p>
 
@@ -69,16 +69,16 @@ export default function PredictionPanel({
           </p>
         </div>
 
-        <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/5 px-5 py-4 text-right">
+        <div className="rounded-2xl border border-teal-400/20 bg-teal-400/5 px-5 py-4 text-right">
           <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-400">
             Prediction Confidence
           </p>
 
-          <div className="mt-2 text-3xl font-black text-cyan-300">
+          <div className="mt-2 text-3xl font-black text-teal-300">
             {confidence}%
           </div>
 
-          <p className="mt-1 text-xs font-semibold text-cyan-200">
+          <p className="mt-1 text-xs font-semibold text-teal-200">
             {getProjectionStatus(prediction.confidence)}
           </p>
         </div>
@@ -90,7 +90,7 @@ export default function PredictionPanel({
             Projected Combat Rating
           </p>
 
-          <p className="mt-3 text-4xl font-black text-cyan-300">
+          <p className="mt-3 text-4xl font-black text-teal-300">
             {prediction.projectedCombatRating}
           </p>
         </div>
@@ -100,7 +100,7 @@ export default function PredictionPanel({
             Projected Success Rate
           </p>
 
-          <p className="mt-3 text-4xl font-black text-cyan-300">
+          <p className="mt-3 text-4xl font-black text-teal-300">
             {prediction.projectedWinChance}%
           </p>
         </div>
@@ -110,7 +110,7 @@ export default function PredictionPanel({
             Sessions To Next Tier
           </p>
 
-          <p className="mt-3 text-4xl font-black text-cyan-300">
+          <p className="mt-3 text-4xl font-black text-teal-300">
             {prediction.projectedSessionsToNextTier ?? "--"}
           </p>
         </div>
@@ -204,8 +204,8 @@ export default function PredictionPanel({
         </div>
       </div>
 
-      <div className="mt-5 rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-5">
-        <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-300">
+      <div className="mt-5 rounded-2xl border border-teal-500/20 bg-teal-500/5 p-5">
+        <p className="text-xs font-bold uppercase tracking-[0.28em] text-teal-300">
           Operator Priority
         </p>
 

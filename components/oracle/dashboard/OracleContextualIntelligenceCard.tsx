@@ -23,8 +23,8 @@ export default function OracleContextualIntelligenceCard({
 }: OracleContextualIntelligenceCardProps) {
   if (isLoading) {
     return (
-      <section className="rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-300">
+      <section className="rounded-3xl border border-teal-400/20 bg-teal-400/5 p-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-teal-300">
           Contextual Intelligence
         </p>
         <h2 className="mt-3 text-2xl font-black text-white">
@@ -67,10 +67,10 @@ export default function OracleContextualIntelligenceCard({
   const priorityCount = state.context.contextual.priorities.length;
 
   return (
-    <section className="rounded-3xl border border-cyan-400/20 bg-slate-950/70 p-6">
+    <section className="rounded-3xl border border-teal-400/20 bg-slate-950/70 p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-300">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-teal-300">
             Contextual Intelligence
           </p>
 
@@ -84,15 +84,15 @@ export default function OracleContextualIntelligenceCard({
           </p>
         </div>
 
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/10">
-          <Compass className="text-cyan-300" size={24} />
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-teal-400/30 bg-teal-400/10">
+          <Compass className="text-teal-300" size={24} />
         </div>
       </div>
 
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
           <div className="flex items-center gap-3">
-            <Radar className="text-cyan-300" size={18} />
+            <Radar className="text-teal-300" size={18} />
             <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Confidence
             </p>
@@ -106,7 +106,7 @@ export default function OracleContextualIntelligenceCard({
 
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
           <div className="flex items-center gap-3">
-            <Lightbulb className="text-cyan-300" size={18} />
+            <Lightbulb className="text-teal-300" size={18} />
             <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Opportunities
             </p>
@@ -118,7 +118,7 @@ export default function OracleContextualIntelligenceCard({
 
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
           <div className="flex items-center gap-3">
-            <Layers3 className="text-cyan-300" size={18} />
+            <Layers3 className="text-teal-300" size={18} />
             <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Priorities
             </p>

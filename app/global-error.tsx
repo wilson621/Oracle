@@ -24,7 +24,7 @@ export default function GlobalError({
             <button
               type="button"
               onClick={reset}
-              className="mt-8 rounded-xl bg-cyan-300 px-5 py-3 font-bold text-slate-950 hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200"
+              className="mt-8 rounded-xl bg-teal-300 px-5 py-3 font-bold text-slate-950 hover:bg-teal-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-200"
             >
               Try again
             </button>

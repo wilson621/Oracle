@@ -14,12 +14,12 @@ export default function MissionCard({
   rewardXp,
 }: MissionCardProps) {
   return (
-    <Card className="border-cyan-400/30">
+    <Card className="border-teal-400/30">
       <div className="flex items-start justify-between gap-6">
         <div>
-          <Target className="text-cyan-300" size={32} />
+          <Target className="text-teal-300" size={32} />
 
-          <p className="mt-5 text-sm font-bold tracking-[0.3em] text-cyan-300">
+          <p className="mt-5 text-sm font-bold tracking-[0.3em] text-teal-300">
             TODAY&apos;S MISSION
           </p>
 

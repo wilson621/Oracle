@@ -20,7 +20,7 @@ export default function OracleHero({ isAnalysing }: OracleHeroProps) {
         }`}
       />
 
-      <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+      <p className="text-xs font-bold uppercase tracking-[0.35em] text-teal-300">
         YOUR EVIDENCE-LED GUIDE
       </p>
       <h1 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">

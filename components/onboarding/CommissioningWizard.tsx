@@ -19,8 +19,8 @@ export default function CommissioningWizard({
   );
 
   return (
-    <section className="w-full max-w-3xl rounded-3xl border border-cyan-500/20 bg-slate-950/90 p-8 shadow-2xl sm:p-10">
-      <p className="text-sm font-semibold uppercase tracking-[0.45em] text-cyan-300">
+    <section className="w-full max-w-3xl rounded-3xl border border-teal-500/20 bg-slate-950/90 p-8 shadow-2xl sm:p-10">
+      <p className="text-sm font-semibold uppercase tracking-[0.45em] text-teal-300">
         Oracle Initialisation
       </p>
 
@@ -38,7 +38,7 @@ export default function CommissioningWizard({
         <div>
           <label
             htmlFor="callsign"
-            className="block text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300"
+            className="block text-sm font-semibold uppercase tracking-[0.3em] text-teal-300"
           >
             Callsign
           </label>
@@ -51,7 +51,7 @@ export default function CommissioningWizard({
             pattern="[A-Za-z0-9](?:[A-Za-z0-9 _-]*[A-Za-z0-9])?"
             autoComplete="nickname"
             autoFocus
-            className="mt-4 w-full rounded-2xl border border-cyan-500/20 bg-black/40 px-6 py-5 text-2xl font-bold text-white outline-none transition focus:border-cyan-400"
+            className="mt-4 w-full rounded-2xl border border-teal-500/20 bg-black/40 px-6 py-5 text-2xl font-bold text-white outline-none transition focus:border-teal-400"
             placeholder="Ghost Hunter"
           />
           <p className="mt-4 text-sm leading-6 text-slate-400">
@@ -82,7 +82,7 @@ export default function CommissioningWizard({
             name="intent"
             value="choose"
             disabled={pending}
-            className="rounded-2xl bg-cyan-400 px-8 py-4 text-lg font-bold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-2xl bg-teal-400 px-8 py-4 text-lg font-bold text-slate-950 transition hover:bg-teal-300 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {pending ? "Commissioning..." : "Use This Callsign"}
           </button>
@@ -91,7 +91,7 @@ export default function CommissioningWizard({
             value="generate"
             formNoValidate
             disabled={pending}
-            className="rounded-2xl border border-cyan-300/25 px-8 py-4 text-lg font-bold text-cyan-200 transition hover:bg-cyan-300/10 disabled:opacity-50"
+            className="rounded-2xl border border-teal-300/25 px-8 py-4 text-lg font-bold text-teal-200 transition hover:bg-teal-300/10 disabled:opacity-50"
           >
             Ask Oracle to Generate One
           </button>

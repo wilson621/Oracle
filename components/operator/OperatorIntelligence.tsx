@@ -29,13 +29,13 @@ export default function OperatorIntelligence({ profile }: Props) {
   const recommendation = generateOperatorRecommendation(profile);
 
   return (
-    <section className="rounded-3xl border border-cyan-500/20 bg-black/40 p-8 shadow-lg shadow-cyan-500/10">
+    <section className="rounded-3xl border border-teal-500/20 bg-black/40 p-8 shadow-lg shadow-teal-500/10">
       <div className="flex flex-col gap-8 lg:flex-row lg:justify-between">
         <div className="max-w-3xl">
           <div className="flex items-center gap-3">
-            <Brain className="text-cyan-300" size={30} />
+            <Brain className="text-teal-300" size={30} />
 
-            <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+            <p className="text-xs font-bold uppercase tracking-[0.35em] text-teal-300">
               Operator Intelligence
             </p>
           </div>
@@ -49,12 +49,12 @@ export default function OperatorIntelligence({ profile }: Props) {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 px-6 py-5">
+        <div className="rounded-2xl border border-teal-500/20 bg-teal-500/5 px-6 py-5">
           <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-slate-400">
             Confidence Level
           </p>
 
-          <p className="mt-3 text-4xl font-black text-cyan-300">
+          <p className="mt-3 text-4xl font-black text-teal-300">
             {formatConfidence(profile.confidenceLevel)}
           </p>
         </div>
@@ -62,7 +62,7 @@ export default function OperatorIntelligence({ profile }: Props) {
 
       <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-          <Brain className="text-cyan-300" size={20} />
+          <Brain className="text-teal-300" size={20} />
 
           <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Learning Style
@@ -74,7 +74,7 @@ export default function OperatorIntelligence({ profile }: Props) {
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-          <Shield className="text-cyan-300" size={20} />
+          <Shield className="text-teal-300" size={20} />
 
           <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Primary Strength
@@ -86,7 +86,7 @@ export default function OperatorIntelligence({ profile }: Props) {
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-          <Target className="text-cyan-300" size={20} />
+          <Target className="text-teal-300" size={20} />
 
           <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Highest Priority
@@ -98,7 +98,7 @@ export default function OperatorIntelligence({ profile }: Props) {
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-          <TrendingUp className="text-cyan-300" size={20} />
+          <TrendingUp className="text-teal-300" size={20} />
 
           <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-slate-400">
             Behaviour Status
@@ -111,11 +111,11 @@ export default function OperatorIntelligence({ profile }: Props) {
       </div>
 
       <div className="mt-8 grid gap-4 lg:grid-cols-2">
-        <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-5">
+        <div className="rounded-2xl border border-teal-500/20 bg-teal-500/5 p-5">
           <div className="flex items-center gap-3">
-            <Sparkles size={18} className="text-cyan-300" />
+            <Sparkles size={18} className="text-teal-300" />
 
-            <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-300">
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-teal-300">
               Oracle Insight
             </p>
           </div>

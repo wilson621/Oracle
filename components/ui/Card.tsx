@@ -18,11 +18,11 @@ export default function Card({
         bg-white/[0.03]
         p-6
         shadow-lg
-        shadow-cyan-500/5
+        shadow-teal-500/5
         transition-all
         duration-300
-        hover:border-cyan-500/25
-        hover:shadow-cyan-500/15
+        hover:border-teal-500/25
+        hover:shadow-teal-500/15
         ${className}
       `}
     >

@@ -37,9 +37,9 @@ const styles: Record<
     text: "text-yellow-300",
   },
   Platinum: {
-    bg: "bg-cyan-900/30",
-    border: "border-cyan-400",
-    text: "text-cyan-300",
+    bg: "bg-teal-900/30",
+    border: "border-teal-400",
+    text: "text-teal-300",
   },
   Diamond: {
     bg: "bg-blue-900/30",
@@ -52,9 +52,9 @@ const styles: Record<
     text: "text-purple-300",
   },
   Oracle: {
-    bg: "bg-cyan-400/10",
-    border: "border-cyan-300",
-    text: "text-cyan-300",
+    bg: "bg-teal-400/10",
+    border: "border-teal-300",
+    text: "text-teal-300",
   },
 };
 

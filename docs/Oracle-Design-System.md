@@ -261,7 +261,7 @@ Deep blue-black.
 
 Primary Accent
 
-Oracle Cyan
+Oracle Teal (formerly Oracle Cyan -- see docs/Brand-Bible.md > Colour Philosophy)
 
 Used sparingly.
 

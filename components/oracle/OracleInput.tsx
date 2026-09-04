@@ -34,7 +34,7 @@ export default function OracleInput({
           type="button"
           disabled={isAnalysing || !prompt.trim()}
           onClick={() => onAskOracle(prompt)}
-          className="w-full rounded-2xl bg-cyan-400 px-5 py-4 font-bold text-slate-950 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full rounded-2xl bg-teal-400 px-5 py-4 font-bold text-slate-950 hover:bg-teal-300 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isAnalysing ? "Grounding..." : "Ask Oracle"}
         </button>

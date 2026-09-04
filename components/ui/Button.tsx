@@ -18,8 +18,8 @@ export default function Button({
 }: ButtonProps) {
   const styles =
     variant === "primary"
-      ? "bg-cyan-400 text-slate-950 hover:bg-cyan-300"
-      : "border border-slate-700 text-slate-300 hover:border-cyan-400 hover:text-cyan-300";
+      ? "bg-teal-400 text-slate-950 hover:bg-teal-300"
+      : "border border-slate-700 text-slate-300 hover:border-teal-400 hover:text-teal-300";
 
   const base =
     "inline-flex items-center justify-center rounded-2xl px-6 py-4 font-bold transition";

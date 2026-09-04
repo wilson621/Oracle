@@ -8,11 +8,11 @@ export default function ClipUpload({
   onFileSelect,
 }: ClipUploadProps) {
   return (
-    <div className="mx-auto mt-6 max-w-3xl rounded-3xl border border-dashed border-cyan-400/30 bg-cyan-400/10 p-6">
-      <label className="flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-slate-800 bg-slate-950 p-8 text-center hover:border-cyan-400">
+    <div className="mx-auto mt-6 max-w-3xl rounded-3xl border border-dashed border-teal-400/30 bg-teal-400/10 p-6">
+      <label className="flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-slate-800 bg-slate-950 p-8 text-center hover:border-teal-400">
         <span className="text-4xl">🎥</span>
 
-        <p className="mt-4 text-xl font-bold text-cyan-300">
+        <p className="mt-4 text-xl font-bold text-teal-300">
           Upload a gameplay clip
         </p>
 

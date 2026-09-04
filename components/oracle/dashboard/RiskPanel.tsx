@@ -126,16 +126,16 @@ export default function RiskPanel({ report }: RiskPanelProps) {
   risk={report.prediction.burnoutRisk}
 />
 
-        <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4">
+        <div className="rounded-2xl border border-teal-500/20 bg-teal-500/5 p-4">
           <p className="text-xs uppercase tracking-wide text-slate-400">
             Assessment Confidence
           </p>
 
-          <p className="mt-3 text-2xl font-black text-cyan-300">
+          <p className="mt-3 text-2xl font-black text-teal-300">
             {confidence}%
           </p>
 
-          <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-cyan-200/80">
+          <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-teal-200/80">
             {confidenceLabel(report.confidence)}
           </p>
         </div>
@@ -168,7 +168,7 @@ export default function RiskPanel({ report }: RiskPanelProps) {
 
         <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
           <div className="flex items-center gap-3">
-            <Activity className="text-cyan-300" size={20} />
+            <Activity className="text-teal-300" size={20} />
 
             <p className="text-xs uppercase tracking-wide text-slate-400">
               Recommended Response

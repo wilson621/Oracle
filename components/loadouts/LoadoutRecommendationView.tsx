@@ -27,7 +27,7 @@ export default function LoadoutRecommendationView({
         <span
           className={`rounded-full border px-3 py-1 text-xs font-bold tracking-wide ${
             recommendation.personalization_level === "personalized"
-              ? "border-cyan-400/30 bg-cyan-400/10 text-cyan-300"
+              ? "border-teal-400/30 bg-teal-400/10 text-teal-300"
               : "border-slate-500/30 bg-slate-500/10 text-slate-300"
           }`}
         >
@@ -44,7 +44,7 @@ export default function LoadoutRecommendationView({
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <h4 className="text-sm font-bold tracking-wide text-cyan-300">
+          <h4 className="text-sm font-bold tracking-wide text-teal-300">
             Primary
           </h4>
           <p className="mt-1 font-semibold text-white">
@@ -59,7 +59,7 @@ export default function LoadoutRecommendationView({
 
         {loadout.secondaryWeapon && (
           <div>
-            <h4 className="text-sm font-bold tracking-wide text-cyan-300">
+            <h4 className="text-sm font-bold tracking-wide text-teal-300">
               Secondary
             </h4>
             <p className="mt-1 font-semibold text-white">
@@ -75,7 +75,7 @@ export default function LoadoutRecommendationView({
 
         {loadout.perks.length > 0 && (
           <div>
-            <h4 className="text-sm font-bold tracking-wide text-cyan-300">
+            <h4 className="text-sm font-bold tracking-wide text-teal-300">
               Perks
             </h4>
             <p className="mt-1 text-sm text-slate-300">
@@ -86,7 +86,7 @@ export default function LoadoutRecommendationView({
 
         {(loadout.lethalEquipment || loadout.tacticalEquipment) && (
           <div>
-            <h4 className="text-sm font-bold tracking-wide text-cyan-300">
+            <h4 className="text-sm font-bold tracking-wide text-teal-300">
               Equipment
             </h4>
             <p className="mt-1 text-sm text-slate-300">
@@ -112,7 +112,7 @@ export default function LoadoutRecommendationView({
               href={source.url}
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-white/10 px-3 py-1 text-xs text-slate-400 hover:border-cyan-400/40 hover:text-cyan-300"
+              className="rounded-full border border-white/10 px-3 py-1 text-xs text-slate-400 hover:border-teal-400/40 hover:text-teal-300"
             >
               {source.title}
             </a>

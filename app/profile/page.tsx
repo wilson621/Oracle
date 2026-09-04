@@ -21,7 +21,7 @@ export default async function ProfilePage() {
 
   return (
     <AppLayout>
-      <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+      <p className="text-xs font-bold uppercase tracking-[0.35em] text-teal-300">
         Permanent Operator
       </p>
       <h1 className="mt-4 text-4xl font-black">Identity settings</h1>

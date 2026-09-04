@@ -131,9 +131,9 @@ function AuthForm() {
 
   return (
     <main className="grid min-h-screen place-items-center bg-[#070A10] px-6 py-12 text-white">
-      <section className="grid w-full max-w-5xl overflow-hidden rounded-[2rem] border border-cyan-400/15 bg-slate-950 shadow-2xl lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="border-b border-cyan-400/10 bg-gradient-to-br from-cyan-400/15 via-slate-950 to-blue-500/10 p-10 lg:border-b-0 lg:border-r">
-          <p className="text-xs font-bold uppercase tracking-[0.45em] text-cyan-300">
+      <section className="grid w-full max-w-5xl overflow-hidden rounded-[2rem] border border-teal-400/15 bg-slate-950 shadow-2xl lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="border-b border-teal-400/10 bg-gradient-to-br from-teal-400/15 via-slate-950 to-blue-500/10 p-10 lg:border-b-0 lg:border-r">
+          <p className="text-xs font-bold uppercase tracking-[0.45em] text-teal-300">
             Oracle
           </p>
           <h1 className="mt-8 text-5xl font-black leading-tight">
@@ -160,7 +160,7 @@ function AuthForm() {
                 }}
                 className={`flex-1 rounded-lg px-4 py-3 text-sm font-semibold transition ${
                   mode === value
-                    ? "bg-cyan-300 text-slate-950"
+                    ? "bg-teal-300 text-slate-950"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -203,14 +203,14 @@ function AuthForm() {
             )}
 
             {message && (
-              <p role="status" className="rounded-xl border border-cyan-300/15 bg-cyan-300/5 p-3 text-sm text-cyan-100">
+              <p role="status" className="rounded-xl border border-teal-300/15 bg-teal-300/5 p-3 text-sm text-teal-100">
                 {message}
               </p>
             )}
 
             <button
               disabled={busy || !email || !password}
-              className="w-full rounded-xl bg-cyan-300 px-5 py-4 font-bold text-slate-950 transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-50"
+              className="w-full rounded-xl bg-teal-300 px-5 py-4 font-bold text-slate-950 transition hover:bg-teal-200 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {busy
                 ? "Authenticating..."
@@ -226,7 +226,7 @@ function AuthForm() {
                 type="button"
                 disabled={busy}
                 onClick={sendMagicLink}
-                className="rounded-xl border border-slate-700 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-cyan-300/40"
+                className="rounded-xl border border-slate-700 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-teal-300/40"
               >
                 Email a Magic Link
               </button>
@@ -234,7 +234,7 @@ function AuthForm() {
                 type="button"
                 disabled={busy}
                 onClick={signInWithPasskey}
-                className="rounded-xl border border-slate-700 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-cyan-300/40"
+                className="rounded-xl border border-slate-700 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-teal-300/40"
               >
                 Use a Passkey
               </button>
@@ -254,7 +254,7 @@ function AuthForm() {
 function AuthLoading() {
   return (
     <main className="grid min-h-screen place-items-center bg-[#070A10] px-6 text-white">
-      <p className="text-sm uppercase tracking-[0.35em] text-cyan-300">
+      <p className="text-sm uppercase tracking-[0.35em] text-teal-300">
         Initialising identity…
       </p>
     </main>
@@ -288,7 +288,7 @@ function AuthField({
         onChange={(event) => onChange(event.target.value)}
         autoComplete={autoComplete}
         minLength={minimumLength}
-        className="mt-2 w-full rounded-xl border border-slate-700 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-cyan-300"
+        className="mt-2 w-full rounded-xl border border-slate-700 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-teal-300"
       />
       {helper && <span className="mt-2 block text-xs text-slate-400">{helper}</span>}
     </label>

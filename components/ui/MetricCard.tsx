@@ -21,7 +21,7 @@ export default function MetricCard({
 }: MetricCardProps) {
   return (
     <Card>
-      <div className="text-cyan-300">{icon}</div>
+      <div className="text-teal-300">{icon}</div>
 
       <p className="mt-5 text-sm text-slate-400">{label}</p>
 

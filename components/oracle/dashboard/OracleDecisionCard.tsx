@@ -40,8 +40,8 @@ export default function OracleDecisionCard({
 }: OracleDecisionCardProps) {
   if (isLoading) {
     return (
-      <section className="mt-10 rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-cyan-300">
+      <section className="mt-10 rounded-3xl border border-teal-400/20 bg-teal-400/5 p-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-teal-300">
           Oracle Decision
         </p>
         <h2 className="mt-4 text-3xl font-black text-white">
@@ -74,10 +74,10 @@ export default function OracleDecisionCard({
   const primaryEvidence = decision.evidence[0];
 
   return (
-    <section className="mt-10 rounded-3xl border border-cyan-400/30 bg-cyan-400/10 p-8 shadow-[0_0_45px_rgba(34,211,238,0.08)]">
+    <section className="mt-10 rounded-3xl border border-teal-400/30 bg-teal-400/10 p-8 shadow-[0_0_45px_rgba(34,211,238,0.08)]">
       <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-cyan-300">
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-teal-300">
             Oracle Decision
           </p>
 
@@ -94,11 +94,11 @@ export default function OracleDecisionCard({
           </p>
         </div>
 
-        <div className="rounded-2xl border border-cyan-400/20 bg-slate-950/70 px-5 py-4">
+        <div className="rounded-2xl border border-teal-400/20 bg-slate-950/70 px-5 py-4">
           <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
             Priority
           </p>
-          <p className="mt-2 text-2xl font-black text-cyan-300">
+          <p className="mt-2 text-2xl font-black text-teal-300">
             {formatPriority(decision.priority)}
           </p>
         </div>
@@ -107,7 +107,7 @@ export default function OracleDecisionCard({
       <div className="mt-8 grid gap-4 md:grid-cols-3">
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
           <div className="flex items-center gap-3">
-            <BrainCircuit className="text-cyan-300" size={20} />
+            <BrainCircuit className="text-teal-300" size={20} />
             <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Confidence
             </p>
@@ -119,7 +119,7 @@ export default function OracleDecisionCard({
 
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
           <div className="flex items-center gap-3">
-            <Target className="text-cyan-300" size={20} />
+            <Target className="text-teal-300" size={20} />
             <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Expected Outcome
             </p>
@@ -131,7 +131,7 @@ export default function OracleDecisionCard({
 
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
           <div className="flex items-center gap-3">
-            <TimerReset className="text-cyan-300" size={20} />
+            <TimerReset className="text-teal-300" size={20} />
             <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Reassessment
             </p>
@@ -145,7 +145,7 @@ export default function OracleDecisionCard({
       <div className="mt-6 grid gap-4 xl:grid-cols-2">
         <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5">
           <div className="flex items-center gap-3">
-            <CheckCircle2 className="text-cyan-300" size={20} />
+            <CheckCircle2 className="text-teal-300" size={20} />
             <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Why Oracle chose this
             </p>
@@ -162,7 +162,7 @@ export default function OracleDecisionCard({
 
         <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5">
           <div className="flex items-center gap-3">
-            <ListChecks className="text-cyan-300" size={20} />
+            <ListChecks className="text-teal-300" size={20} />
             <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
               Evidence Considered
             </p>

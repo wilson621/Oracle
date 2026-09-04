@@ -12,22 +12,22 @@ function getStatus(value: number) {
 }
 
 function getBarColour(value: number) {
-  if (value >= 75) return "from-cyan-400 to-cyan-300";
-  if (value >= 50) return "from-sky-400 to-cyan-400";
+  if (value >= 75) return "from-teal-400 to-teal-300";
+  if (value >= 50) return "from-sky-400 to-teal-400";
   if (value >= 40) return "from-amber-300 to-orange-400";
   return "from-amber-400 to-orange-500";
 }
 
 export default function SkillBar({ label, value }: Props) {
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4 transition-all duration-300 hover:border-cyan-400/20 hover:bg-slate-950">
+    <div className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4 transition-all duration-300 hover:border-teal-400/20 hover:bg-slate-950">
       <div className="flex items-center justify-between gap-6">
         <div>
           <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-slate-400">
             {label}
           </p>
 
-          <p className="mt-1 text-sm font-semibold text-cyan-300">
+          <p className="mt-1 text-sm font-semibold text-teal-300">
             {getStatus(value)}
           </p>
         </div>

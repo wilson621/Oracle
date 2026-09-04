@@ -122,7 +122,7 @@ export default function WatchOverlaySettings() {
       <div className="flex items-start gap-4">
         <MonitorSmartphone
           aria-hidden="true"
-          className="shrink-0 text-cyan-300"
+          className="shrink-0 text-teal-300"
           size={28}
         />
         <div className="w-full">
@@ -140,7 +140,7 @@ export default function WatchOverlaySettings() {
               type="button"
               onClick={handleToggleHidden}
               disabled={savingHidden}
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-black/30 px-5 py-2.5 text-sm font-bold text-slate-100 transition hover:border-cyan-300/40 disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-black/30 px-5 py-2.5 text-sm font-bold text-slate-100 transition hover:border-teal-300/40 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {hidden ? (
                 <>
@@ -160,7 +160,7 @@ export default function WatchOverlaySettings() {
                 <button
                   type="button"
                   onClick={handleFinishPositioning}
-                  className="rounded-xl bg-cyan-300 px-5 py-2.5 text-sm font-bold text-black transition"
+                  className="rounded-xl bg-teal-300 px-5 py-2.5 text-sm font-bold text-black transition"
                 >
                   Done positioning
                 </button>
@@ -168,7 +168,7 @@ export default function WatchOverlaySettings() {
                 <button
                   type="button"
                   onClick={handleStartPositioning}
-                  className="rounded-xl border border-slate-700 bg-black/30 px-5 py-2.5 text-sm font-bold text-slate-100 transition hover:border-cyan-300/40"
+                  className="rounded-xl border border-slate-700 bg-black/30 px-5 py-2.5 text-sm font-bold text-slate-100 transition hover:border-teal-300/40"
                 >
                   Reposition
                 </button>
@@ -176,7 +176,7 @@ export default function WatchOverlaySettings() {
           </div>
 
           {positioning && (
-            <p className="mt-3 text-sm text-cyan-200">
+            <p className="mt-3 text-sm text-teal-200">
               Drag the indicator wherever suits your HUD, then come back here
               (or press the positioning hotkey again) to drop it and save the
               spot.
@@ -209,13 +209,13 @@ export default function WatchOverlaySettings() {
                 }}
                 placeholder="CommandOrControl+Shift+P"
                 spellCheck={false}
-                className="w-full max-w-sm rounded-xl border border-slate-700 bg-black/30 px-4 py-2.5 text-sm text-slate-100 outline-none focus-visible:border-cyan-300/60"
+                className="w-full max-w-sm rounded-xl border border-slate-700 bg-black/30 px-4 py-2.5 text-sm text-slate-100 outline-none focus-visible:border-teal-300/60"
               />
               <button
                 type="button"
                 onClick={handleSaveHotkey}
                 disabled={!hotkeyDirty || hotkeyStatus.kind === "saving"}
-                className="rounded-xl bg-cyan-300 px-5 py-2.5 text-sm font-bold text-black transition disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
+                className="rounded-xl bg-teal-300 px-5 py-2.5 text-sm font-bold text-black transition disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
               >
                 {hotkeyStatus.kind === "saving" ? "Saving..." : "Save hotkey"}
               </button>

@@ -68,7 +68,7 @@ export default function LoadoutIntelligenceControl() {
   }
 
   return (
-    <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-lg shadow-cyan-500/5 sm:p-8">
+    <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-lg shadow-teal-500/5 sm:p-8">
       <h2 className="text-2xl font-black text-white">Loadout Intelligence</h2>
       <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">
         Tell Oracle what you want -- &ldquo;no recoil build&rdquo;,
@@ -89,13 +89,13 @@ export default function LoadoutIntelligenceControl() {
             if (event.key === "Enter") void handleGenerate();
           }}
           placeholder="e.g. no recoil build, movement build, long-range..."
-          className="flex-1 rounded-2xl border border-white/10 bg-black/30 px-4 py-4 text-white placeholder:text-slate-500 focus:border-cyan-400/50 focus:outline-none"
+          className="flex-1 rounded-2xl border border-white/10 bg-black/30 px-4 py-4 text-white placeholder:text-slate-500 focus:border-teal-400/50 focus:outline-none"
         />
         <button
           type="button"
           onClick={handleGenerate}
           disabled={generating || goal.trim().length === 0}
-          className="inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-6 py-4 font-bold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
+          className="inline-flex items-center justify-center rounded-2xl bg-teal-400 px-6 py-4 font-bold text-slate-950 transition hover:bg-teal-300 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
         >
           {generating ? "Generating..." : "Generate Loadout"}
         </button>
@@ -129,7 +129,7 @@ export default function LoadoutIntelligenceControl() {
                     setActive(recommendation);
                     setRequestError(null);
                   }}
-                  className="w-full rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3 text-left text-sm text-slate-300 transition hover:border-cyan-400/30 hover:text-cyan-200"
+                  className="w-full rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3 text-left text-sm text-slate-300 transition hover:border-teal-400/30 hover:text-teal-200"
                 >
                   &ldquo;{recommendation.requested_goal}&rdquo; --{" "}
                   {new Date(recommendation.generated_at).toLocaleString()}

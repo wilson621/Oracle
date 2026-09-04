@@ -17,15 +17,15 @@ export default function OracleAssessmentPanel({
   assessment,
 }: OracleAssessmentPanelProps) {
   return (
-    <section className="rounded-3xl border border-cyan-500/20 bg-black/50 p-6 shadow-xl shadow-cyan-500/10">
+    <section className="rounded-3xl border border-teal-500/20 bg-black/50 p-6 shadow-xl shadow-teal-500/10">
       <div className="border-b border-white/10 pb-6">
         <div className="flex items-start gap-4">
-          <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-3 shadow-lg shadow-cyan-500/10">
-            <FileText className="text-cyan-300" size={24} />
+          <div className="rounded-2xl border border-teal-500/20 bg-teal-500/10 p-3 shadow-lg shadow-teal-500/10">
+            <FileText className="text-teal-300" size={24} />
           </div>
 
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+            <p className="text-xs font-bold uppercase tracking-[0.35em] text-teal-300">
               Oracle Assessment
             </p>
 
@@ -52,12 +52,12 @@ export default function OracleAssessmentPanel({
           </p>
         </div>
 
-        <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4">
+        <div className="rounded-2xl border border-teal-500/20 bg-teal-500/5 p-4">
           <p className="text-xs uppercase tracking-wide text-slate-400">
             Operational Outlook
           </p>
 
-          <p className="mt-3 text-2xl font-black text-cyan-300">
+          <p className="mt-3 text-2xl font-black text-teal-300">
             {formatOutlook(assessment.outlook)}
           </p>
         </div>

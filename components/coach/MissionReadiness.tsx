@@ -36,7 +36,7 @@ export default function MissionReadiness({
     <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+          <p className="text-xs font-bold uppercase tracking-[0.35em] text-teal-300">
             Mission Control
           </p>
 
@@ -50,7 +50,7 @@ export default function MissionReadiness({
         </div>
 
         <div
-          className={`rounded-2xl border bg-cyan-400/5 px-5 py-4 text-right ${getMissionStatusBorder(
+          className={`rounded-2xl border bg-teal-400/5 px-5 py-4 text-right ${getMissionStatusBorder(
             status
           )}`}
         >
@@ -85,8 +85,8 @@ export default function MissionReadiness({
       </div>
 
       <div className="mt-5 grid gap-4 md:grid-cols-2">
-        <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-300">
+        <div className="rounded-2xl border border-teal-500/20 bg-teal-500/5 p-5">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-teal-300">
             Mission Source
           </p>
 
@@ -138,7 +138,7 @@ export default function MissionReadiness({
             Combat Rating
           </p>
 
-          <p className="mt-3 text-3xl font-black text-cyan-300">
+          <p className="mt-3 text-3xl font-black text-teal-300">
             {readiness.currentCombatRating} → {readiness.projectedCombatRating}
           </p>
 
@@ -152,7 +152,7 @@ export default function MissionReadiness({
             Prediction Confidence
           </p>
 
-          <p className="mt-3 text-3xl font-black text-cyan-300">
+          <p className="mt-3 text-3xl font-black text-teal-300">
             {readiness.confidence}%
           </p>
         </div>
@@ -162,7 +162,7 @@ export default function MissionReadiness({
             Estimated Sessions
           </p>
 
-          <p className="mt-3 text-3xl font-black text-cyan-300">
+          <p className="mt-3 text-3xl font-black text-teal-300">
             {readiness.estimatedSessions}
           </p>
         </div>
@@ -171,7 +171,7 @@ export default function MissionReadiness({
       <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-950/70 p-5">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-300">
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-teal-300">
               Mission Completion
             </p>
 
@@ -180,12 +180,12 @@ export default function MissionReadiness({
             </p>
           </div>
 
-          <p className="text-3xl font-black text-cyan-300">{progress}%</p>
+          <p className="text-3xl font-black text-teal-300">{progress}%</p>
         </div>
 
         <div className="mt-4 h-3 overflow-hidden rounded-full bg-slate-800">
           <div
-            className="h-full rounded-full bg-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.45)] transition-all duration-700"
+            className="h-full rounded-full bg-teal-400 shadow-[0_0_12px_rgba(34,211,238,0.45)] transition-all duration-700"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -196,7 +196,7 @@ export default function MissionReadiness({
               key={objective.label}
               className="flex items-center gap-3 rounded-xl border border-white/10 bg-black/30 px-4 py-3"
             >
-              <span className="h-3 w-3 rounded-sm border border-cyan-400/50 bg-cyan-400/5" />
+              <span className="h-3 w-3 rounded-sm border border-teal-400/50 bg-teal-400/5" />
 
               <p className="text-sm font-medium text-slate-300">
                 {objective.label}
@@ -212,13 +212,13 @@ export default function MissionReadiness({
             Mission Reward
           </p>
 
-          <p className="mt-3 text-3xl font-black text-cyan-300">
+          <p className="mt-3 text-3xl font-black text-teal-300">
             +{mission.rewardXp} XP
           </p>
         </div>
 
-        <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-300">
+        <div className="rounded-2xl border border-teal-500/20 bg-teal-500/5 p-5">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-teal-300">
             Oracle Assessment
           </p>
 

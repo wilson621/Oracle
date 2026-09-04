@@ -18,7 +18,7 @@ export default function Panel({
         bg-white/[0.03]
         p-6
         shadow-lg
-        shadow-cyan-500/10
+        shadow-teal-500/10
         ${className}
       `}
     >

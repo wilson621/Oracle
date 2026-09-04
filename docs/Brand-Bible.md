@@ -290,9 +290,12 @@ Never decoration.
 
 ---
 
-## Oracle Cyan
+## Oracle Teal
 
-Primary intelligence colour.
+Primary intelligence colour. (Formerly "Oracle Cyan" -- retired in favour of
+a calmer, more desaturated teal-blue with the same meaning and the same
+role in the interface. Full-saturation cyan read as generic "gamer RGB";
+Oracle Teal keeps the glow but reads as restrained and premium.)
 
 Represents:
 
@@ -308,17 +311,29 @@ Primary interaction
 
 Suggested Tailwind
 
-cyan-300
+teal-300
 
-cyan-400
+teal-400
 
-cyan-500
+teal-500
 
-cyan-500/10
+teal-500/10
 
-cyan-500/20
+teal-500/20
 
-cyan-600
+teal-600
+
+Note: these are not Tailwind's stock teal swatches. `app/globals.css`
+overrides the `teal-*` scale via `@theme` with Oracle's own values, so any
+`teal-*` utility class in the app already renders the muted brand colour:
+
+teal-300 #A6CCD3
+
+teal-400 #7DB5BF
+
+teal-500 #549EAB
+
+teal-600 #437E89
 
 ---
 

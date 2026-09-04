@@ -45,7 +45,7 @@ export default function Sidebar({
           : "p-6"
       }`}
     >
-      <p className="text-xs font-bold tracking-[0.35em] text-cyan-300">
+      <p className="text-xs font-bold tracking-[0.35em] text-teal-300">
         ORACLE
       </p>
       <p className="mt-2 text-xs leading-5 text-slate-400">
@@ -100,7 +100,7 @@ export default function Sidebar({
                     href={item.href}
                     className={`flex items-center gap-3 whitespace-nowrap rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-300 ${
                       active
-                        ? "bg-cyan-400 text-slate-950 shadow-[0_0_24px_rgba(34,211,238,0.35)]"
+                        ? "bg-teal-400 text-slate-950 shadow-[0_0_24px_rgba(34,211,238,0.35)]"
                         : "text-slate-400 hover:bg-slate-900 hover:text-white"
                     }`}
                     aria-current={active ? "page" : undefined}

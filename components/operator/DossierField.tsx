@@ -22,7 +22,7 @@ function toneClasses(tone: DossierFieldTone) {
     case "danger":
       return "border-rose-500/20 bg-rose-500/5 text-rose-300";
     default:
-      return "border-cyan-500/20 bg-cyan-500/5 text-cyan-300";
+      return "border-teal-500/20 bg-teal-500/5 text-teal-300";
   }
 }
 

@@ -45,9 +45,9 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
   ];
 
   return (
-    <section className="rounded-3xl border border-cyan-500/20 bg-black/50 p-6 shadow-lg shadow-cyan-500/10">
+    <section className="rounded-3xl border border-teal-500/20 bg-black/50 p-6 shadow-lg shadow-teal-500/10">
       <div className="mb-6">
-        <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+        <p className="text-xs uppercase tracking-[0.3em] text-teal-300">
           OracleBrain
         </p>
 
@@ -61,11 +61,11 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-3">
-        <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-5">
+        <div className="rounded-2xl border border-teal-500/20 bg-teal-500/10 p-5">
           <p className="text-xs uppercase tracking-wide text-slate-400">
             Intelligence Confidence
           </p>
-          <p className="mt-2 text-4xl font-black text-cyan-300">
+          <p className="mt-2 text-4xl font-black text-teal-300">
             {confidencePercent(report.confidence)}
           </p>
         </div>
@@ -97,7 +97,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
 
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-cyan-300">
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-teal-300">
             Behaviour Traits
           </h3>
 
@@ -111,7 +111,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
 
                 <div className="mt-2 h-2 rounded-full bg-slate-800">
                   <div
-                    className="h-2 rounded-full bg-cyan-300"
+                    className="h-2 rounded-full bg-teal-300"
                     style={{ width: `${trait.score}%` }}
                   />
                 </div>
@@ -121,7 +121,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-cyan-300">
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-teal-300">
             Trend Intelligence
           </h3>
 
@@ -200,7 +200,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
       </div>
 
       <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-        <h3 className="text-sm font-semibold uppercase tracking-wide text-cyan-300">
+        <h3 className="text-sm font-semibold uppercase tracking-wide text-teal-300">
           Skill Trends
         </h3>
 
@@ -230,7 +230,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
       </div>
 
       <div className="mt-6 space-y-3">
-        <h3 className="text-sm font-semibold uppercase tracking-wide text-cyan-300">
+        <h3 className="text-sm font-semibold uppercase tracking-wide text-teal-300">
           Recommendations
         </h3>
 
@@ -242,7 +242,7 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
             <div className="flex items-center justify-between gap-4">
               <p className="font-semibold text-white">{recommendation.title}</p>
 
-              <span className="rounded-full bg-cyan-500/10 px-3 py-1 text-xs uppercase tracking-wide text-cyan-300">
+              <span className="rounded-full bg-teal-500/10 px-3 py-1 text-xs uppercase tracking-wide text-teal-300">
                 {recommendation.priority}
               </span>
             </div>
@@ -254,11 +254,11 @@ export function OracleBrainCard({ report }: OracleBrainCardProps) {
         ))}
       </div>
 
-      <div className="mt-6 rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-5">
+      <div className="mt-6 rounded-2xl border border-teal-500/20 bg-teal-500/5 p-5">
         <p className="text-xs uppercase tracking-wide text-slate-400">
           Next Focus
         </p>
-        <p className="mt-2 text-base font-semibold text-cyan-100">
+        <p className="mt-2 text-base font-semibold text-teal-100">
           {report.nextFocus}
         </p>
       </div>

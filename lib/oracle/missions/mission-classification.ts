@@ -27,7 +27,7 @@ export function getMissionClassificationColour(
 ) {
   switch (classification) {
     case "routine":
-      return "text-cyan-300";
+      return "text-teal-300";
     case "priority":
       return "text-sky-300";
     case "critical":

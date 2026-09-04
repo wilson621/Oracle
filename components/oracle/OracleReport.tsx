@@ -22,7 +22,7 @@ export default function OracleReport({ report }: OracleReportProps) {
       />
 
       <OracleCard title="Overall Grade">
-        <p className="text-6xl font-black text-cyan-300">
+        <p className="text-6xl font-black text-teal-300">
           {report.grade}
         </p>
       </OracleCard>

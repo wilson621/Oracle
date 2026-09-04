@@ -27,7 +27,7 @@ export default function ProgressBar({
           </span>
 
           {showPercentage && (
-            <span className="text-sm font-bold text-cyan-300">
+            <span className="text-sm font-bold text-teal-300">
               {percentage}%
             </span>
           )}
@@ -38,7 +38,7 @@ export default function ProgressBar({
       <div className="h-4 overflow-hidden rounded-full bg-slate-800">
 
         <div
-          className="h-full rounded-full bg-cyan-400 shadow-[0_0_20px_rgba(34,211,238,.7)] transition-all duration-1000"
+          className="h-full rounded-full bg-teal-400 shadow-[0_0_20px_rgba(34,211,238,.7)] transition-all duration-1000"
           style={{
             width: `${percentage}%`,
           }}

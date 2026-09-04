@@ -22,9 +22,9 @@ function riskStyles(risk: PredictionRisk) {
       };
     case "low":
       return {
-        dot: "bg-cyan-300",
-        text: "text-cyan-300",
-        border: "border-cyan-500/25 bg-cyan-500/5",
+        dot: "bg-teal-300",
+        text: "text-teal-300",
+        border: "border-teal-500/25 bg-teal-500/5",
       };
     case "moderate":
       return {

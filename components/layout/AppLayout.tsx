@@ -14,7 +14,7 @@ export default function AppLayout({
     <main className="min-h-screen bg-[#070A10] text-white">
       <a
         href="#oracle-main-content"
-        className="fixed left-4 top-4 z-[11000] -translate-y-24 rounded-xl bg-cyan-300 px-4 py-3 font-bold text-slate-950 transition focus:translate-y-0"
+        className="fixed left-4 top-4 z-[11000] -translate-y-24 rounded-xl bg-teal-300 px-4 py-3 font-bold text-slate-950 transition focus:translate-y-0"
       >
         Skip to main content
       </a>

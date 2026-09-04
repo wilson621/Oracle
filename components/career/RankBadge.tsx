@@ -7,10 +7,10 @@ const colours: Record<string, string> = {
   Bronze: "from-orange-700 to-amber-500 border-amber-400",
   Silver: "from-slate-400 to-slate-200 border-white",
   Gold: "from-yellow-700 to-yellow-400 border-yellow-300",
-  Platinum: "from-cyan-700 to-cyan-400 border-cyan-300",
+  Platinum: "from-teal-700 to-teal-400 border-teal-300",
   Diamond: "from-indigo-700 to-violet-500 border-violet-300",
   Elite: "from-red-700 to-red-500 border-red-400",
-  Oracle: "from-cyan-400 via-sky-300 to-white border-cyan-200",
+  Oracle: "from-teal-400 via-sky-300 to-white border-teal-200",
 };
 
 export default function RankBadge({ rank }: RankBadgeProps) {

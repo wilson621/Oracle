@@ -32,7 +32,7 @@ export default function BehaviourPanel({ behaviour }: BehaviourPanelProps) {
     <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
       <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+          <p className="text-xs font-bold uppercase tracking-[0.35em] text-teal-300">
             Behaviour Assessment
           </p>
 
@@ -46,16 +46,16 @@ export default function BehaviourPanel({ behaviour }: BehaviourPanelProps) {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/5 px-5 py-4 text-right">
+        <div className="rounded-2xl border border-teal-400/20 bg-teal-400/5 px-5 py-4 text-right">
           <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-400">
             Behaviour Confidence
           </p>
 
-          <div className="mt-2 text-3xl font-black text-cyan-300">
+          <div className="mt-2 text-3xl font-black text-teal-300">
             {confidence}%
           </div>
 
-          <p className="mt-1 text-xs font-semibold text-cyan-200">
+          <p className="mt-1 text-xs font-semibold text-teal-200">
             {getBehaviourStatus(behaviour.overallBehaviourConfidence)}
           </p>
         </div>
@@ -79,7 +79,7 @@ export default function BehaviourPanel({ behaviour }: BehaviourPanelProps) {
 
             <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-800">
               <div
-                className="h-full rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.45)] transition-all duration-700"
+                className="h-full rounded-full bg-teal-400 shadow-[0_0_10px_rgba(34,211,238,0.45)] transition-all duration-700"
                 style={{ width: `${trait.score}%` }}
               />
             </div>

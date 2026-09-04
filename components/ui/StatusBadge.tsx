@@ -12,7 +12,7 @@ type StatusBadgeProps = {
 
 const styles: Record<BadgeVariant, string> = {
   cyan:
-    "border-cyan-500/30 bg-cyan-500/10 text-cyan-300",
+    "border-teal-500/30 bg-teal-500/10 text-teal-300",
 
   green:
     "border-emerald-500/30 bg-emerald-500/10 text-emerald-300",

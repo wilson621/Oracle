@@ -31,8 +31,8 @@ function getToneClasses(tone: StatusPillTone) {
 
     default:
       return {
-        dot: "bg-cyan-400",
-        pill: "border-cyan-500/20 bg-cyan-500/10 text-cyan-300",
+        dot: "bg-teal-400",
+        pill: "border-teal-500/20 bg-teal-500/10 text-teal-300",
       };
   }
 }

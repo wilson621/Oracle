@@ -9,7 +9,7 @@ export default function BriefingSection({
 }: BriefingSectionProps) {
   return (
     <div className="border-t border-white/10 pt-5">
-      <p className="text-xs font-bold uppercase tracking-[0.3em] text-cyan-300">
+      <p className="text-xs font-bold uppercase tracking-[0.3em] text-teal-300">
         {title}
       </p>
 

@@ -41,7 +41,7 @@ export default function AccountSecurityPage() {
 
   return (
     <AppLayout>
-      <p className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300">
+      <p className="text-xs font-bold uppercase tracking-[0.35em] text-teal-300">
         Account security
       </p>
       <h1 className="mt-4 text-4xl font-black">Authentication methods</h1>
@@ -70,7 +70,7 @@ export default function AccountSecurityPage() {
               type="button"
               disabled={busy}
               onClick={registerPasskey}
-              className="mt-5 rounded-lg bg-cyan-300 px-4 py-2 text-sm font-bold text-slate-950 disabled:opacity-50"
+              className="mt-5 rounded-lg bg-teal-300 px-4 py-2 text-sm font-bold text-slate-950 disabled:opacity-50"
             >
               Register Passkey
             </button>
@@ -79,7 +79,7 @@ export default function AccountSecurityPage() {
       </div>
 
       {message && (
-        <p role="status" className="mt-6 rounded-xl border border-cyan-300/15 bg-cyan-300/5 p-4 text-sm text-cyan-100">
+        <p role="status" className="mt-6 rounded-xl border border-teal-300/15 bg-teal-300/5 p-4 text-sm text-teal-100">
           {message}
         </p>
       )}
@@ -111,7 +111,7 @@ function SecurityMethod({
 }) {
   return (
     <section className="rounded-2xl border border-slate-800 bg-black/20 p-5">
-      <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cyan-300">
+      <p className="text-xs font-semibold uppercase tracking-[0.25em] text-teal-300">
         {status}
       </p>
       <h2 className="mt-3 text-xl font-bold">{title}</h2>

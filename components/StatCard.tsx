@@ -10,7 +10,7 @@ export default function StatCard({ label, value }: StatCardProps) {
         {label}
       </p>
 
-      <p className="mt-2 text-4xl font-bold text-cyan-300">{value}</p>
+      <p className="mt-2 text-4xl font-bold text-teal-300">{value}</p>
     </div>
   );
 }

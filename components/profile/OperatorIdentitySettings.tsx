@@ -29,7 +29,7 @@ export default function OperatorIdentitySettings({
   return (
     <div className="mt-8 grid gap-6 lg:grid-cols-2">
       <form action={displayAction} className="rounded-2xl border border-slate-800 bg-black/20 p-6">
-        <p className="text-xs font-bold uppercase tracking-[0.25em] text-cyan-300">
+        <p className="text-xs font-bold uppercase tracking-[0.25em] text-teal-300">
           Profile identity
         </p>
         <h2 className="mt-3 text-2xl font-bold">Display Name</h2>
@@ -41,12 +41,12 @@ export default function OperatorIdentitySettings({
           defaultValue={displayName ?? ""}
           maxLength={80}
           autoComplete="name"
-          className="mt-5 w-full rounded-xl border border-slate-700 bg-black/30 px-4 py-3 outline-none focus:border-cyan-300"
+          className="mt-5 w-full rounded-xl border border-slate-700 bg-black/30 px-4 py-3 outline-none focus:border-teal-300"
         />
         <ActionMessage state={displayState} />
         <button
           disabled={displayPending}
-          className="mt-5 rounded-xl bg-cyan-300 px-5 py-3 font-bold text-slate-950 disabled:opacity-50"
+          className="mt-5 rounded-xl bg-teal-300 px-5 py-3 font-bold text-slate-950 disabled:opacity-50"
         >
           Save Display Name
         </button>
@@ -55,12 +55,12 @@ export default function OperatorIdentitySettings({
       <form action={callsignAction} className="rounded-2xl border border-slate-800 bg-black/20 p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-cyan-300">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-teal-300">
               Global identity
             </p>
             <h2 className="mt-3 text-2xl font-bold">Callsign</h2>
           </div>
-          <span className="rounded-full border border-cyan-300/20 px-3 py-1 text-xs text-cyan-200">
+          <span className="rounded-full border border-teal-300/20 px-3 py-1 text-xs text-teal-200">
             {tokens} / 3 tokens
           </span>
         </div>
@@ -74,7 +74,7 @@ export default function OperatorIdentitySettings({
           minLength={3}
           maxLength={32}
           pattern="[A-Za-z0-9](?:[A-Za-z0-9 _-]*[A-Za-z0-9])?"
-          className="mt-5 w-full rounded-xl border border-slate-700 bg-black/30 px-4 py-3 outline-none focus:border-cyan-300"
+          className="mt-5 w-full rounded-xl border border-slate-700 bg-black/30 px-4 py-3 outline-none focus:border-teal-300"
         />
         <ActionMessage state={callsignState} />
         <div className="mt-5 flex flex-wrap gap-3">
@@ -82,7 +82,7 @@ export default function OperatorIdentitySettings({
             name="intent"
             value="choose"
             disabled={callsignPending || tokens < 1}
-            className="rounded-xl bg-cyan-300 px-5 py-3 font-bold text-slate-950 disabled:opacity-50"
+            className="rounded-xl bg-teal-300 px-5 py-3 font-bold text-slate-950 disabled:opacity-50"
           >
             Change Callsign
           </button>
@@ -91,7 +91,7 @@ export default function OperatorIdentitySettings({
             value="generate"
             formNoValidate
             disabled={callsignPending || tokens < 1}
-            className="rounded-xl border border-cyan-300/25 px-5 py-3 font-semibold text-cyan-200 disabled:opacity-50"
+            className="rounded-xl border border-teal-300/25 px-5 py-3 font-semibold text-teal-200 disabled:opacity-50"
           >
             Generate and Apply
           </button>
@@ -111,7 +111,7 @@ function ActionMessage({
   return (
     <p
       role="status"
-      className={`mt-4 text-sm ${state.error ? "text-red-200" : "text-cyan-200"}`}
+      className={`mt-4 text-sm ${state.error ? "text-red-200" : "text-teal-200"}`}
     >
       {text}
     </p>

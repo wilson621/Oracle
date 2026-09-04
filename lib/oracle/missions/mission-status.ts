@@ -24,7 +24,7 @@ export function getMissionStatusColour(status: MissionStatus) {
   switch (status) {
     case "assigned":
     case "active":
-      return "text-cyan-300";
+      return "text-teal-300";
     case "review":
       return "text-amber-300";
     case "completed":
@@ -38,7 +38,7 @@ export function getMissionStatusBorder(status: MissionStatus) {
   switch (status) {
     case "assigned":
     case "active":
-      return "border-cyan-500/20";
+      return "border-teal-500/20";
     case "review":
       return "border-amber-500/20";
     case "completed":
