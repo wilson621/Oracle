@@ -9,7 +9,8 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 export type OracleAiFeature =
   | "full-match-analysis"
   | "loadout-intelligence"
-  | "oracle-chat";
+  | "oracle-chat"
+  | "content-clips";
 
 // $ per 1M tokens, current as of the pricing researched 2026-09-03 (Gemini
 // 3.8 Flash, standard tier, through 2026-12-31 -- these rates double on
