@@ -6,6 +6,12 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase-server";
 import { generateContentClips } from "@/lib/oracle/clips/oracle-content-clips-service";
 import { ensureOperatorBinding } from "@/lib/oracle/operator/ensure-operator-binding";
+import {
+  CONTENT_CLIPS_DAILY_CAP,
+  dailyCapReachedMessage,
+  getRemainingDailyAllowance,
+  recordDailyUsage,
+} from "@/lib/oracle/usage-caps/daily-usage-cap";
 
 // Same reasoning as coach-report-video/route.ts: streaming the uploaded
 // video to a temp file (for Gemini's upload) and then invoking ffmpeg on
@@ -51,6 +57,25 @@ export async function POST(request: Request) {
             : "Could not set up an Operator profile for this account.",
       },
       { status: 500 }
+    );
+  }
+
+  // Checked before reading the upload off the wire, same reasoning as
+  // coach-report-video/route.ts. Content Clips can cut up to
+  // MAX_CLIPS_PER_REQUEST clips from a single good match, so this is a cap
+  // on clips actually cut per day, not on generation attempts -- see
+  // remainingToday's use as generateContentClips's maxClips below, which
+  // clamps a strong match's output down to whatever's left rather than
+  // letting one great game blow past the daily allowance in one go.
+  const remainingToday = await getRemainingDailyAllowance(
+    operatorId,
+    "content-clips",
+    CONTENT_CLIPS_DAILY_CAP
+  );
+  if (remainingToday <= 0) {
+    return NextResponse.json(
+      { error: dailyCapReachedMessage("content-clips", CONTENT_CLIPS_DAILY_CAP) },
+      { status: 429 }
     );
   }
 
@@ -115,10 +140,17 @@ export async function POST(request: Request) {
       mimeType: video.type || "video/webm",
       matchStartOffsetMs: resolvedOffsetMs,
       outputRoot: typeof outputRoot === "string" ? outputRoot : null,
+      maxClips: remainingToday,
     });
 
     if (result.status === "failed") {
       return NextResponse.json({ error: result.error }, { status: 502 });
+    }
+    // Only count clips that were actually cut -- a match with nothing
+    // shareworthy in it (clips.length === 0) shouldn't touch the
+    // allowance at all.
+    if (result.clips.length > 0) {
+      await recordDailyUsage(operatorId, "content-clips", result.clips.length);
     }
     return NextResponse.json(result);
   } catch (error) {

@@ -8,6 +8,10 @@ import type {
 import type { CoachingReport } from "./report-types";
 import type { ContentClipsResult } from "./content-clip-types";
 import { MOMENT_TYPE_LABELS } from "./content-clip-types";
+import {
+  CONTENT_CLIPS_DAILY_CAP,
+  FULL_MATCH_ANALYSIS_DAILY_CAP,
+} from "@/lib/oracle/usage-caps/daily-usage-cap-constants";
 import ReportView from "./ReportView";
 import styles from "./match-recording.module.css";
 
@@ -38,6 +42,10 @@ export default function MatchVideoRecordingControl() {
   const [activeReport, setActiveReport] =
     useState<CoachingReport | null>(null);
   const [activeError, setActiveError] = useState<string | null>(null);
+  // True only when activeError is specifically "you've hit today's cap"
+  // (HTTP 429) rather than a genuine failure -- lets the UI say so plainly
+  // instead of implying something broke.
+  const [activeCapReached, setActiveCapReached] = useState(false);
   const [history, setHistory] = useState<CoachingReport[]>([]);
 
   const [clipQualityEnabled, setClipQualityEnabled] = useState(false);
@@ -54,6 +62,8 @@ export default function MatchVideoRecordingControl() {
     null
   );
   const [clipError, setClipError] = useState<string | null>(null);
+  // Same distinction as activeCapReached above, for the Content Clips cap.
+  const [clipCapReached, setClipCapReached] = useState(false);
   const clipsOutputRootRef = useRef<string | null>(null);
 
   const loadHistory = useCallback(() => {
@@ -155,6 +165,7 @@ export default function MatchVideoRecordingControl() {
   ): Promise<void> {
     setUploading(true);
     setActiveError(null);
+    setActiveCapReached(false);
     // Lets the small always-on-top watch indicator (a separate window the
     // main process owns) reflect what's happening -- it has no way to know
     // about this fetch on its own.
@@ -209,6 +220,7 @@ export default function MatchVideoRecordingControl() {
         setActiveError(
           body.error ?? "The Full Match Analysis report could not be generated."
         );
+        setActiveCapReached(response.status === 429);
         void window.oracleDesktop?.notifyReportGenerationStatus("failed");
         // Content Clips is a fully separate pipeline from this report --
         // the recording is still there and still usable (the main process
@@ -275,6 +287,7 @@ export default function MatchVideoRecordingControl() {
     if (!pendingClipRecording || clipGenerating) return;
     setClipGenerating(true);
     setClipError(null);
+    setClipCapReached(false);
     setClipResult(null);
     try {
       const bytes = await window.oracleDesktop?.readMatchVideoBytes(
@@ -320,6 +333,16 @@ export default function MatchVideoRecordingControl() {
       });
       const body = await response.json();
       if (!response.ok) {
+        if (response.status === 429) {
+          // Not a real failure -- the recording is still there and still
+          // usable tomorrow, so leave it as a pending clip recording
+          // rather than treating this like a generation error.
+          setClipCapReached(true);
+          setClipError(
+            body.error ?? "You've reached today's Content Clips limit."
+          );
+          return;
+        }
         throw new Error(body.error ?? "Content Clips generation failed.");
       }
 
@@ -377,7 +400,8 @@ export default function MatchVideoRecordingControl() {
         Records the whole match as video with audio and sends it to Gemini
         for a deep report -- real timestamps and audio cues like footsteps
         and gunfire, not just a handful of screenshots. Uploading and
-        processing takes a few minutes for a full match.
+        processing takes a few minutes for a full match. Up to{" "}
+        {FULL_MATCH_ANALYSIS_DAILY_CAP} reports per day.
       </p>
 
       <label className={styles.toggleRow}>
@@ -442,7 +466,9 @@ export default function MatchVideoRecordingControl() {
       )}
 
       {activeError && (
-        <p className={styles.error}>Report failed: {activeError}</p>
+        <p className={styles.error}>
+          {activeCapReached ? activeError : `Report failed: ${activeError}`}
+        </p>
       )}
 
       {activeReport && <ReportView report={activeReport} />}
@@ -453,7 +479,8 @@ export default function MatchVideoRecordingControl() {
           <p className={styles.muted}>
             This match was recorded in high quality for Content Clips.
             Generate a set of shareable clips from it, or discard the
-            recording if you don&apos;t need them.
+            recording if you don&apos;t need them. Up to{" "}
+            {CONTENT_CLIPS_DAILY_CAP} clips per day.
           </p>
           <div className={styles.clipActions}>
             <button
@@ -483,7 +510,9 @@ export default function MatchVideoRecordingControl() {
       )}
 
       {clipError && (
-        <p className={styles.error}>Content Clips failed: {clipError}</p>
+        <p className={styles.error}>
+          {clipCapReached ? clipError : `Content Clips failed: ${clipError}`}
+        </p>
       )}
 
       {clipResult && (
@@ -496,6 +525,16 @@ export default function MatchVideoRecordingControl() {
           {clipResult.clips.length === 0 && (
             <p className={styles.muted}>
               Nothing in this match cleared the bar for a shareable clip.
+            </p>
+          )}
+          {clipResult.heldBackByDailyCap > 0 && (
+            <p className={styles.muted}>
+              This match actually had {clipResult.heldBackByDailyCap} more
+              shareworthy moment
+              {clipResult.heldBackByDailyCap === 1 ? "" : "s"} -- today&apos;s
+              Content Clips limit is reached, so only the best{" "}
+              {clipResult.clips.length === 1 ? "one was" : `${clipResult.clips.length} were`}{" "}
+              cut. The limit resets at midnight UTC.
             </p>
           )}
           {clipResult.clips.map((clip, index) => (

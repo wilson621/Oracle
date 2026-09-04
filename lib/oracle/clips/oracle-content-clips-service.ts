@@ -36,6 +36,18 @@ export type GenerateContentClipsInput = Readonly<{
    * rather than failing outright.
    */
   outputRoot?: string | null;
+  /**
+   * Upper bound on how many clips this call is allowed to cut -- the
+   * caller's remaining daily allowance (see
+   * lib/oracle/usage-caps/daily-usage-cap.ts), already resolved before
+   * this is invoked. Gemini can still surface up to MAX_CLIPS_PER_REQUEST
+   * candidates from one strong match; this clamps what actually gets cut
+   * to what the Operator has left today, taking the best-ranked ones
+   * (Gemini returns candidates ordered best first) rather than either
+   * blocking the whole match or handing over more than the day's cap.
+   * Defaults to MAX_CLIPS_PER_REQUEST (no additional clamping) if omitted.
+   */
+  maxClips?: number;
 }>;
 
 export type GeneratedContentClip = Readonly<{
@@ -52,7 +64,21 @@ export type GeneratedContentClip = Readonly<{
 }>;
 
 export type GenerateContentClipsResult =
-  | Readonly<{ status: "complete"; clips: readonly GeneratedContentClip[]; outputFolder: string }>
+  | Readonly<{
+      status: "complete";
+      clips: readonly GeneratedContentClip[];
+      outputFolder: string;
+      /**
+       * How many genuinely shareworthy moments Gemini found in this
+       * footage but weren't cut, specifically because maxClips (the
+       * caller's remaining daily allowance) was smaller than what Gemini
+       * found -- NOT counting a moment that was picked but then failed to
+       * cut for an unrelated reason (a local ffmpeg error). Lets the UI
+       * tell "the match only had this many good moments" apart from "the
+       * match had more, but today's cap held some back" honestly.
+       */
+      heldBackByDailyCap: number;
+    }>
   | Readonly<{ status: "failed"; error: string }>;
 
 // Same polling approach as Full Match Analysis's video coaching service --
@@ -248,9 +274,24 @@ export async function generateContentClips(
       await ai.files.delete({ name: uploaded.name }).catch(() => undefined);
     }
 
-    const candidates = clampAndCap(detection.clips ?? []);
+    const allCandidates = clampAndCap(detection.clips ?? []);
+    const maxClips = Math.max(
+      0,
+      Math.min(input.maxClips ?? MAX_CLIPS_PER_REQUEST, MAX_CLIPS_PER_REQUEST)
+    );
+    // Candidates are already ordered best-first (see the response schema's
+    // description in oracle-clip-detection-report.ts) -- clamping here
+    // keeps the strongest moments when the daily allowance is smaller than
+    // what Gemini actually found, rather than an arbitrary subset.
+    const candidates = allCandidates.slice(0, maxClips);
+    const heldBackByDailyCap = Math.max(0, allCandidates.length - maxClips);
     if (candidates.length === 0) {
-      return { status: "complete", clips: [], outputFolder: "" };
+      return {
+        status: "complete",
+        clips: [],
+        outputFolder: "",
+        heldBackByDailyCap,
+      };
     }
 
     const outputRoot =
@@ -295,7 +336,12 @@ export async function generateContentClips(
       ).catch(() => undefined);
     }
 
-    return { status: "complete", clips, outputFolder };
+    return {
+      status: "complete",
+      clips,
+      outputFolder,
+      heldBackByDailyCap,
+    };
   } catch (error) {
     return { status: "failed", error: describeGeminiFailure(error) };
   }

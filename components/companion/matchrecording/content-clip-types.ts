@@ -28,6 +28,14 @@ export type ContentClipsResult = Readonly<{
   status: "complete";
   clips: readonly GeneratedContentClip[];
   outputFolder: string;
+  /**
+   * How many genuinely shareworthy moments Oracle found in this match but
+   * didn't cut, specifically because today's Content Clips allowance ran
+   * out -- not counting a moment that was picked but failed to cut for an
+   * unrelated (e.g. local processing) reason. Greater than 0 means this
+   * match had more worth sharing than today's cap allowed.
+   */
+  heldBackByDailyCap: number;
 }>;
 
 export const MOMENT_TYPE_LABELS: Record<ContentClipMomentType, string> = {
