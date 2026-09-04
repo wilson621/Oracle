@@ -104,12 +104,18 @@ moment mattered to them. Weight it heavily: a moment they reacted to is
 one they'd actually want posted, even if it's a little more understated
 on screen than your other picks. The reaction always comes AFTER the real
 action (people react to what just happened, not while it's happening), so
-use it to locate the moment, then set the actual clip boundaries around
-what happened in the few seconds before the reaction, not around the
-reaction itself. Still sanity-check it against the footage -- if someone
-says "clip that" sarcastically about something mundane, or as a joke with
-nothing notable actually visible, don't force it in just because the
-phrase was said.
+use it to find the moment -- the actual key action still happened a
+couple of seconds BEFORE the reaction, and startOffsetMs should give that
+room to build like any other clip. For endOffsetMs specifically: when
+there's an audible reaction like this, extend the clip to include the
+player's own reaction/callout being heard, rather than cutting right as
+the action resolves -- that reaction is part of what makes the clip feel
+real and earns it being genuinely testable as a feature (this is a
+deliberate choice, being tried out for now, not a general rule for every
+clip). Still sanity-check it against the footage -- if someone says "clip
+that" sarcastically about something mundane, or as a joke with nothing
+notable actually visible, don't force it in just because the phrase was
+said.
 
 For each moment you do pick, give
 precise start/end offsets (a couple of seconds before the key action so it
