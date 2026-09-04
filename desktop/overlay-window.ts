@@ -2,10 +2,11 @@ import {
   BrowserWindow,
   app,
   screen,
+  shell,
   type Display,
   type Rectangle,
 } from "electron";
-import { join } from "node:path";
+import { isAbsolute, join, relative } from "node:path";
 import {
   createPackagedRequestOrigins,
   isAllowedPackagedRequestUrl,
@@ -49,6 +50,10 @@ import type {
 import {
   OracleMatchVideoRecordingCoordinator,
 } from "./companion/match-video-recording-coordinator.js";
+import {
+  loadClipRecordingSettings,
+  saveClipRecordingSettings,
+} from "./companion/clip-recording-settings-store.js";
 import type {
   OracleMatchVideoRecordingResult,
   OracleMatchVideoRecordingState,
@@ -587,6 +592,48 @@ export class CompanionHostWindowController {
 
   deleteMatchVideoFile(videoPath: string): Promise<void> {
     return this.matchVideoRecording.deleteVideoFile(videoPath);
+  }
+
+  getClipRecordingQualityEnabled(): boolean {
+    return loadClipRecordingSettings().highQualityForClips;
+  }
+
+  setClipRecordingQualityEnabled(enabled: boolean): boolean {
+    saveClipRecordingSettings({ highQualityForClips: enabled });
+    return enabled;
+  }
+
+  /**
+   * Where Content Clips writes finished clips: Electron's own "documents"
+   * path rather than a raw home-directory join, so this stays correct
+   * even when the Operator's actual Documents folder has been redirected
+   * (e.g. OneDrive Known Folder Move, common on Windows) -- computed here
+   * and handed to the renderer to pass along with its generate-clips
+   * request, since the local Next.js server has no Electron API of its
+   * own to resolve this correctly.
+   */
+  getClipsOutputRoot(): string {
+    return join(app.getPath("documents"), "Oracle Clips");
+  }
+
+  /**
+   * Opens a folder in the OS file explorer -- restricted to the Content
+   * Clips output root (or a subfolder of it) so this can't become a
+   * general "open any folder on disk" primitive reachable from the
+   * Companion renderer, same spirit as knownVideoPaths in
+   * match-video-recording-coordinator.ts.
+   */
+  async openClipsFolder(folderPath?: string): Promise<void> {
+    const root = this.getClipsOutputRoot();
+    const target = folderPath && folderPath.trim() ? folderPath : root;
+    const relativePath = relative(root, target);
+    if (relativePath.startsWith("..") || isAbsolute(relativePath)) {
+      throw new Error("That folder is outside the Content Clips output root.");
+    }
+    const error = await shell.openPath(target);
+    if (error) {
+      throw new Error(error);
+    }
   }
 
   /**

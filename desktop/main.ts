@@ -626,6 +626,38 @@ function registerIpcHandlers(): void {
   );
 
   ipcMain.handle(
+    DESKTOP_CHANNELS.getClipRecordingQualityEnabled,
+    (event) =>
+      requireAuthorizedController(event)
+        .getClipRecordingQualityEnabled()
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.setClipRecordingQualityEnabled,
+    (event, enabled: unknown) =>
+      requireAuthorizedController(event)
+        .setClipRecordingQualityEnabled(enabled === true)
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.getClipsOutputRoot,
+    (event) =>
+      requireAuthorizedController(event)
+        .getClipsOutputRoot()
+  );
+
+  ipcMain.handle(
+    DESKTOP_CHANNELS.openClipsFolder,
+    (event, folderPath: unknown) => {
+      if (folderPath !== undefined && typeof folderPath !== "string") {
+        throw new Error("openClipsFolder requires a string path or none.");
+      }
+      return requireAuthorizedController(event)
+        .openClipsFolder(folderPath);
+    }
+  );
+
+  ipcMain.handle(
     DESKTOP_CHANNELS.notifyReportGenerationStatus,
     (event, status: unknown) => {
       requireAuthorizedController(event);
@@ -804,6 +836,22 @@ function removeIpcHandlers(): void {
 
   ipcMain.removeHandler(
     DESKTOP_CHANNELS.getToggleVideoRecordingHotkey
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.getClipRecordingQualityEnabled
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.setClipRecordingQualityEnabled
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.getClipsOutputRoot
+  );
+
+  ipcMain.removeHandler(
+    DESKTOP_CHANNELS.openClipsFolder
   );
 
   ipcMain.removeHandler(

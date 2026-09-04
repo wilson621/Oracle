@@ -182,6 +182,35 @@ const oracleDesktopBridge: OracleDesktopBridge = {
     return requireHotkeyState(value);
   },
 
+  getClipRecordingQualityEnabled: async () => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.getClipRecordingQualityEnabled
+    );
+    return value === true;
+  },
+
+  setClipRecordingQualityEnabled: async (enabled) => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.setClipRecordingQualityEnabled,
+      enabled
+    );
+    return value === true;
+  },
+
+  getClipsOutputRoot: async () => {
+    const value: unknown = await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.getClipsOutputRoot
+    );
+    return typeof value === "string" ? value : "";
+  },
+
+  openClipsFolder: async (folderPath) => {
+    await ipcRenderer.invoke(
+      DESKTOP_CHANNELS.openClipsFolder,
+      folderPath
+    );
+  },
+
   setToggleVideoRecordingHotkey: async (accelerator) => {
     const value: unknown = await ipcRenderer.invoke(
       DESKTOP_CHANNELS.setToggleVideoRecordingHotkey,

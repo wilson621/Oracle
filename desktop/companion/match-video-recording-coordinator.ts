@@ -5,6 +5,7 @@ import { app } from "electron";
 import type { OracleDesktopAttachmentTarget } from "../overlay/attachment-state.js";
 import { OracleVideoRecorderWindowController } from "../video-recorder-window.js";
 import { OracleElectronFullWindowCapture } from "./electron-full-window-capture.js";
+import { loadClipRecordingSettings } from "./clip-recording-settings-store.js";
 import {
   createInitialOracleMatchVideoRecordingState,
   createOracleMatchVideoRecordingState,
@@ -25,12 +26,30 @@ const MAX_RECORDING_DURATION_MS = 45 * 60 * 1_000;
 // analysis quality. A few fps of headroom above that internal sampling
 // rate is kept so fast camera swings/killcam cuts aren't missed between
 // Gemini's own sample points.
-const TARGET_FRAME_RATE = 5;
+const STANDARD_TARGET_FRAME_RATE = 5;
 
 // ~900kbps keeps a full 45-minute recording bounded to roughly
 // (900_000 / 8) * 2_700 ~= 304MB in the worst case, while remaining ample
 // for this low-framerate, largely-static-camera source material.
-const VIDEO_BITS_PER_SECOND = 900_000;
+const STANDARD_VIDEO_BITS_PER_SECOND = 900_000;
+
+// Used instead of the standard settings above when the Operator has opted
+// into "record in high quality for Content Clips" (see
+// clip-recording-settings-store.ts). Actual gameplay footage meant to be
+// cut into a shareable clip needs to look smooth, not like the 5fps
+// analysis-only capture -- 24fps is a real, visible jump in motion
+// smoothness for gunfights/flicks over 5fps, without the file size (and
+// downstream upload/processing) blowing up the way true 60fps would.
+// Deliberately kept modest rather than maxed out: this same recording is
+// still what Full Match Analysis uploads (via the existing multipart
+// upload path, see coach-report-video/route.ts's MAX_VIDEO_BYTES), so the
+// worst case here -- (3_000_000 / 8) * 2_700 ~= 1.01GB for a full 45-minute
+// recording -- has to stay inside what that upload path can safely hold in
+// memory. This is a real jump in local CPU/disk load during the match
+// (~3.3x the file size of the standard capture for the same duration) --
+// deliberately opt-in, never the default, for exactly that reason.
+const CLIPS_TARGET_FRAME_RATE = 24;
+const CLIPS_VIDEO_BITS_PER_SECOND = 3_000_000;
 
 // Reuses OracleElectronFullWindowCapture's existing diffScore still-frame
 // sampling, via its own private instance, purely to estimate when the
@@ -71,6 +90,7 @@ export class OracleMatchVideoRecordingCoordinator {
   private outputPath: string | null = null;
   private mimeType = "video/webm";
   private hasAudio = false;
+  private recordedForClips = false;
   private motionSamples: MotionSample[] = [];
 
   // Paths this coordinator has itself produced via stop() -- the only
@@ -138,13 +158,21 @@ export class OracleMatchVideoRecordingCoordinator {
     this.motionCapture.reset();
     this.motionSamples = [];
 
+    const highQualityForClips =
+      loadClipRecordingSettings().highQualityForClips;
+
     try {
       const began = await this.recorder.beginCapture(target, outputPath, {
-        targetFrameRate: TARGET_FRAME_RATE,
-        videoBitsPerSecond: VIDEO_BITS_PER_SECOND,
+        targetFrameRate: highQualityForClips
+          ? CLIPS_TARGET_FRAME_RATE
+          : STANDARD_TARGET_FRAME_RATE,
+        videoBitsPerSecond: highQualityForClips
+          ? CLIPS_VIDEO_BITS_PER_SECOND
+          : STANDARD_VIDEO_BITS_PER_SECOND,
       });
       this.mimeType = began.mimeType;
       this.hasAudio = began.hasAudio;
+      this.recordedForClips = highQualityForClips;
     } catch (error) {
       return this.publish({
         status: "unavailable",
@@ -213,6 +241,7 @@ export class OracleMatchVideoRecordingCoordinator {
     const outputPath = this.outputPath;
     const mimeType = this.mimeType;
     const hasAudio = this.hasAudio;
+    const recordedForClips = this.recordedForClips;
 
     this.clearTimers();
 
@@ -237,6 +266,7 @@ export class OracleMatchVideoRecordingCoordinator {
       sizeBytes: ended?.sizeBytes ?? 0,
       durationMs,
       matchStartOffsetMs,
+      recordedForClips,
     });
 
     this.publish({

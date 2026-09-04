@@ -91,6 +91,18 @@ export const DESKTOP_CHANNELS = {
   setToggleVideoRecordingHotkey:
     "oracle-desktop:set-toggle-video-recording-hotkey",
 
+  getClipRecordingQualityEnabled:
+    "oracle-desktop:get-clip-recording-quality-enabled",
+
+  setClipRecordingQualityEnabled:
+    "oracle-desktop:set-clip-recording-quality-enabled",
+
+  getClipsOutputRoot:
+    "oracle-desktop:get-clips-output-root",
+
+  openClipsFolder:
+    "oracle-desktop:open-clips-folder",
+
   toggleOverlayPreview:
     "oracle-desktop:toggle-overlay-preview",
 
@@ -300,6 +312,36 @@ export type OracleDesktopBridge = {
   setToggleVideoRecordingHotkey: (
     accelerator: string
   ) => Promise<OracleDesktopHotkeyState>;
+
+  /**
+   * The sticky "record in high quality for Content Clips" preference --
+   * see clip-recording-settings-store.ts. Read to show the toggle's
+   * current state before a match starts; the recording coordinator itself
+   * re-reads the persisted setting directly rather than being passed it,
+   * so this pair only exists for the UI to display/change it.
+   */
+  getClipRecordingQualityEnabled: () => Promise<boolean>;
+
+  setClipRecordingQualityEnabled: (
+    enabled: boolean
+  ) => Promise<boolean>;
+
+  /**
+   * The local folder Content Clips writes finished clips into -- resolved
+   * via Electron's own "documents" path so it stays correct even when the
+   * Operator's Documents folder is redirected (e.g. OneDrive). Sent along
+   * with a generate-clips request so the server writes clips to the same
+   * place this can open.
+   */
+  getClipsOutputRoot: () => Promise<string>;
+
+  /**
+   * Opens the local "Documents/Oracle Clips" folder (or a specific match's
+   * subfolder within it, if a path is given) in the OS file explorer, so
+   * an Operator can find clips Content Clips just generated without
+   * having to know where they live on disk.
+   */
+  openClipsFolder: (folderPath?: string) => Promise<void>;
 
   toggleOverlayPreview: () =>
     Promise<OracleDesktopHostState>;

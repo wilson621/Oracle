@@ -45,6 +45,15 @@ export type OracleMatchVideoRecordingResult = Readonly<{
   sizeBytes: number;
   durationMs: number;
   matchStartOffsetMs: number | null;
+  /**
+   * True when this recording used the higher-quality capture settings
+   * (see clip-recording-settings-store.ts) rather than the standard
+   * Full-Match-Analysis-only settings. Content Clips can only be generated
+   * from a recording where this is true -- the standard 5fps capture is
+   * too choppy to cut a shareable clip from. Full Match Analysis works
+   * identically either way, since Gemini samples video at ~1fps regardless.
+   */
+  recordedForClips: boolean;
 }>;
 
 export function createInitialOracleMatchVideoRecordingState(
