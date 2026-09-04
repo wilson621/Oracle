@@ -35,9 +35,52 @@ function isApiErrorLike(
   );
 }
 
+// Node's fetch (used internally by @google/genai to actually reach
+// Google's servers) wraps any connection-level failure -- a dropped
+// connection, a DNS blip, a reset mid-transfer -- as a generic
+// `TypeError: fetch failed`, with the real cause nested in `.cause` (e.g.
+// an Error with `.code` "ECONNRESET"/"ETIMEDOUT"/etc). This has no
+// `.status`, so it never matched isApiErrorLike above and was never
+// retried -- meaning a single momentary network drop during a long video
+// upload (more likely the longer that upload takes, which is exactly what
+// the higher-quality Content Clips capture setting makes more likely)
+// failed the whole report outright instead of being retried like any other
+// transient problem.
+const RETRYABLE_NETWORK_ERROR_CODES = new Set([
+  "ECONNRESET",
+  "ETIMEDOUT",
+  "ECONNREFUSED",
+  "ENOTFOUND",
+  "EAI_AGAIN",
+  "EPIPE",
+  "UND_ERR_SOCKET",
+  "UND_ERR_CONNECT_TIMEOUT",
+]);
+
+function networkErrorCode(error: unknown): string | undefined {
+  if (!(error instanceof Error)) return undefined;
+  const cause = (error as { cause?: unknown }).cause;
+  const code =
+    cause && typeof cause === "object"
+      ? (cause as { code?: unknown }).code
+      : undefined;
+  return typeof code === "string" ? code : undefined;
+}
+
+function isNetworkError(error: unknown): boolean {
+  if (!(error instanceof Error)) return false;
+  const code = networkErrorCode(error);
+  if (code && RETRYABLE_NETWORK_ERROR_CODES.has(code)) return true;
+  // Fall back to matching Node's own generic wrapper message directly --
+  // covers cases where `.cause` doesn't carry a recognised `.code`.
+  return error.message === "fetch failed";
+}
+
 function isRetryableGeminiError(error: unknown): boolean {
   return (
-    isApiErrorLike(error) && RETRYABLE_GEMINI_STATUS_CODES.has(error.status)
+    (isApiErrorLike(error) &&
+      RETRYABLE_GEMINI_STATUS_CODES.has(error.status)) ||
+    isNetworkError(error)
   );
 }
 
@@ -62,10 +105,12 @@ export async function withGeminiRetry<T>(
       if (!isRetryableGeminiError(error) || isLastAttempt) {
         throw error;
       }
+      const reason = isApiErrorLike(error)
+        ? `status ${error.status}`
+        : `network error${networkErrorCode(error) ? ` (${networkErrorCode(error)})` : ""}`;
       console.warn(
         `[gemini-retry] ${label} failed (attempt ` +
-          `${attempt}/${MAX_GEMINI_ATTEMPTS}, status ` +
-          `${(error as { status: number }).status}) -- retrying shortly.`
+          `${attempt}/${MAX_GEMINI_ATTEMPTS}, ${reason}) -- retrying shortly.`
       );
       await sleep(GEMINI_RETRY_BASE_DELAY_MS * attempt);
     }
@@ -123,6 +168,17 @@ export function describeGeminiFailure(error: unknown): string {
     return `Gemini returned an error (status ${error.status}): ${
       detail ?? error.message
     }`;
+  }
+  if (isNetworkError(error)) {
+    const code = networkErrorCode(error);
+    return (
+      "Couldn't reach Gemini's servers, even after retrying a few times " +
+      "-- this usually means the internet connection dropped out briefly " +
+      "partway through uploading the video (more likely the longer an " +
+      "upload takes)." +
+      (code ? ` (${code})` : "") +
+      " Check your connection and try again."
+    );
   }
   return error instanceof Error ? error.message : String(error);
 }
