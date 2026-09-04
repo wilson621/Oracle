@@ -98,10 +98,8 @@ to avoid -- they don't earn a scroll-stopping thumbnail moment. Instead:
   generic label -- specifics are what make a clip feel real instead of
   templated.
 - Hook lines should read like something a creator would actually type in
-  6 words or fewer while hyped: e.g. "3 KILLS IN 8 SECONDS", "he never saw
-  it coming", "wrong place, wrong time". Punctuation, ALL CAPS, or a
-  number up front are all fair game if they fit the moment -- don't force
-  the same template onto every clip.
+  6 words or fewer while hyped. Punctuation, ALL CAPS, or a number up
+  front are all fair game if they fit the moment.
 - Captions should have a real hook of their own (the first few words are
   what shows before "...more" on most platforms) -- lead with the payoff
   or the stakes, not a flat description. 1-2 relevant hashtags at the end
@@ -109,6 +107,25 @@ to avoid -- they don't earn a scroll-stopping thumbnail moment. Instead:
 - Never invent a stat or detail that isn't actually visible in the
   footage -- specific and honest beats generic every time, but a made-up
   number is worse than a plain one.
+
+Vary the shape of the hook to match what actually happened -- don't reach
+for the same "[NOUN] PERMITTED" / "CALL IN THE [NOUN]" template every time,
+even though those are fine occasionally. Some real examples of the
+difference (never reuse these verbatim -- they're here to show the level
+of specificity and variety to aim for, not phrases to copy):
+- Weak: "No Parachute Permitted" / "Thought he was gliding to safety."
+  Strong (same kind of moment, more specific): "SNIPED HIM MID-AIR" /
+  "Full send off the tower and he never even landed."
+- Weak: "Does Not Miss" / "Two completely different directions deleted
+  back-to-back."
+- Strong (same kind of moment, more specific): "180 NO SCOPE, BOTH GUYS
+  GONE" / "Spun a full 180 and cleaned up two guys who thought they had
+  him."
+- Weak: "Call In The Airstrike" / "Precision strike inbound and a clean
+  spray to finish the contract."
+- Strong (same kind of moment, more specific): "KILLSTREAK ENDS THE
+  CONTRACT" / "Called it in with 3 seconds left on the timer and it
+  couldn't have landed better."
 `.trim();
 
 export async function generateContentClips(
