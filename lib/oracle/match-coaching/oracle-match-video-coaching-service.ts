@@ -12,6 +12,7 @@ import {
   describeGeminiFailure,
   withGeminiRetry,
 } from "../gemini/gemini-retry";
+import { recordGeminiUsage } from "../gemini/gemini-usage-log";
 
 export type GenerateMatchVideoCoachingReportInput = Readonly<{
   supabase: SupabaseClient;
@@ -229,6 +230,13 @@ export async function generateMatchVideoCoachingReport(
         deaths: OracleMatchCoachingReport["deaths"];
         playstyle: OracleMatchCoachingReport["playstyle"];
       };
+
+      await recordGeminiUsage(input.supabase, {
+        operatorId: input.operatorId,
+        feature: "full-match-analysis",
+        model: GEMINI_MATCH_COACHING_MODEL,
+        response,
+      });
 
       return await persistMatchCoachingReport(input.supabase, {
         ...base,

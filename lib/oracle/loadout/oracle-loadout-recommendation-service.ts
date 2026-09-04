@@ -13,6 +13,7 @@ import {
   describeGeminiFailure,
   withGeminiRetry,
 } from "../gemini/gemini-retry";
+import { recordGeminiUsage } from "../gemini/gemini-usage-log";
 
 export type GenerateLoadoutRecommendationInput = Readonly<{
   supabase: SupabaseClient;
@@ -139,6 +140,13 @@ export async function generateLoadoutRecommendation(
     };
 
     const sources = extractGroundingSources(response);
+
+    await recordGeminiUsage(input.supabase, {
+      operatorId: input.operatorId,
+      feature: "loadout-intelligence",
+      model: GEMINI_LOADOUT_MODEL,
+      response,
+    });
 
     return await persistLoadoutRecommendation(input.supabase, {
       ...base,
