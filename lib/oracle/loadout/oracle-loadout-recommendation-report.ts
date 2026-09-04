@@ -113,7 +113,7 @@ export const GEMINI_LOADOUT_RESPONSE_SCHEMA = {
           },
           required: ["name", "attachments"],
           description:
-            "A secondary weapon and its attachments, only when one meaningfully complements the primary for this specific goal/playstyle. null if a secondary isn't relevant.",
+            "A secondary weapon and its attachments, deliberately chosen to cover a different engagement range/role than the primary (e.g. a mid-range primary paired with a close-range secondary for an aggressive Operator) rather than picked as an afterthought. null only when the goal is genuinely single-weapon-focused or a second weapon wouldn't meaningfully help.",
         },
         perks: {
           type: "array",
