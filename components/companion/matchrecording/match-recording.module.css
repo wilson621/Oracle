@@ -241,3 +241,62 @@
   margin: 0 0 0.35rem;
   white-space: pre-wrap;
 }
+
+.chatPanel {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chatThread {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 22rem;
+  overflow-y: auto;
+  margin-bottom: 0.75rem;
+}
+
+.chatBubbleOperator,
+.chatBubbleOracle {
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  max-width: 90%;
+}
+
+.chatBubbleOperator {
+  align-self: flex-end;
+  background: rgba(76, 139, 245, 0.16);
+  border: 1px solid rgba(76, 139, 245, 0.3);
+}
+
+.chatBubbleOracle {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chatBubbleLabel {
+  margin: 0 0 0.15rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.chatInputRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chatInput {
+  flex: 1;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  color: inherit;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.9rem;
+}

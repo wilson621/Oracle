@@ -1,4 +1,5 @@
 import type { CoachingReport, CoachingScores } from "./report-types";
+import ReportChat from "./ReportChat";
 import styles from "./match-recording.module.css";
 
 export default function ReportView({
@@ -51,6 +52,10 @@ export default function ReportView({
             </div>
           ))}
         </div>
+      )}
+
+      {report.status !== "failed" && (
+        <ReportChat key={report.id} reportId={report.id} />
       )}
     </div>
   );
