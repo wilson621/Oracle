@@ -8,7 +8,7 @@ export default function GlobalError({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-[#070A10] text-white">
+      <body className="min-h-screen bg-[#0A0A0B] text-white">
         <main className="grid min-h-screen place-items-center px-6 py-12">
           <section className="w-full max-w-2xl rounded-3xl border border-red-400/20 bg-slate-950 p-8 sm:p-10">
             <p className="text-xs font-bold uppercase tracking-[0.35em] text-red-300">

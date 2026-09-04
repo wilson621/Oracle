@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function VerifyEmailPage() {
   return (
-    <main className="grid min-h-screen place-items-center bg-[#070A10] px-6 text-white">
+    <main className="grid min-h-screen place-items-center bg-[#0A0A0B] px-6 text-white">
       <section className="w-full max-w-xl rounded-3xl border border-teal-400/20 bg-slate-950/90 p-10 shadow-2xl">
         <p className="text-xs font-semibold uppercase tracking-[0.38em] text-teal-300">
           Identity verification

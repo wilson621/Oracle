@@ -19,7 +19,7 @@ export default async function OnboardingPage() {
   }
 
   return (
-    <main className="grid min-h-screen place-items-center bg-[#070A10] px-6 py-12 text-white">
+    <main className="grid min-h-screen place-items-center bg-[#0A0A0B] px-6 py-12 text-white">
       <CommissioningWizard commandId={randomUUID()} />
     </main>
   );

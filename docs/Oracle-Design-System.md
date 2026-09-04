@@ -257,7 +257,9 @@ Primary Background
 
 Near-black.
 
-Deep blue-black.
+Neutral charcoal (formerly deep blue-black -- retired for the same reason
+as Oracle Cyan: it read as a colour choice rather than a neutral. See
+docs/Brand-Bible.md > Colour Philosophy > Oracle Teal).
 
 Primary Accent
 

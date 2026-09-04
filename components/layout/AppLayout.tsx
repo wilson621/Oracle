@@ -11,7 +11,7 @@ export default function AppLayout({
   compactNavigationOnSmallScreens = false,
 }: AppLayoutProps) {
   return (
-    <main className="min-h-screen bg-[#070A10] text-white">
+    <main className="min-h-screen bg-[#0A0A0B] text-white">
       <a
         href="#oracle-main-content"
         className="fixed left-4 top-4 z-[11000] -translate-y-24 rounded-xl bg-teal-300 px-4 py-3 font-bold text-slate-950 transition focus:translate-y-0"

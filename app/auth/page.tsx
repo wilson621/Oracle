@@ -130,7 +130,7 @@ function AuthForm() {
   }
 
   return (
-    <main className="grid min-h-screen place-items-center bg-[#070A10] px-6 py-12 text-white">
+    <main className="grid min-h-screen place-items-center bg-[#0A0A0B] px-6 py-12 text-white">
       <section className="grid w-full max-w-5xl overflow-hidden rounded-[2rem] border border-teal-400/15 bg-slate-950 shadow-2xl lg:grid-cols-[0.9fr_1.1fr]">
         <div className="border-b border-teal-400/10 bg-gradient-to-br from-teal-400/15 via-slate-950 to-blue-500/10 p-10 lg:border-b-0 lg:border-r">
           <p className="text-xs font-bold uppercase tracking-[0.45em] text-teal-300">
@@ -253,7 +253,7 @@ function AuthForm() {
 
 function AuthLoading() {
   return (
-    <main className="grid min-h-screen place-items-center bg-[#070A10] px-6 text-white">
+    <main className="grid min-h-screen place-items-center bg-[#0A0A0B] px-6 text-white">
       <p className="text-sm uppercase tracking-[0.35em] text-teal-300">
         Initialising identity…
       </p>
