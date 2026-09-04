@@ -99,7 +99,7 @@ export const GEMINI_LOADOUT_RESPONSE_SCHEMA = {
               type: "array",
               items: { type: "string" },
               description:
-                "The specific attachment names for this weapon, using its real current attachment options found via search.",
+                "This weapon's real current attachment options (found via search) chosen to serve whatever this weapon is specifically meant to optimise for in this build (e.g. recoil control, mobility, range) -- not just a generic 'good' set.",
             },
           },
           required: ["name", "attachments"],
@@ -109,7 +109,12 @@ export const GEMINI_LOADOUT_RESPONSE_SCHEMA = {
           additionalProperties: false,
           properties: {
             name: { type: "string" },
-            attachments: { type: "array", items: { type: "string" } },
+            attachments: {
+              type: "array",
+              items: { type: "string" },
+              description:
+                "This weapon's real current attachment options (found via search) chosen to serve whatever this weapon is specifically meant to optimise for in this build -- when the Operator's goal names a different priority per weapon, this should reflect its own priority, not the primary weapon's.",
+            },
           },
           required: ["name", "attachments"],
           description:
