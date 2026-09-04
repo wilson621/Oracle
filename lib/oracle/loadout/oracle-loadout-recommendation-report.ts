@@ -118,7 +118,7 @@ export const GEMINI_LOADOUT_RESPONSE_SCHEMA = {
           },
           required: ["name", "attachments"],
           description:
-            "A secondary (backup) weapon and its attachments, deliberately chosen to cover a different engagement range/role than the primary (e.g. a mid-range primary paired with a close-range secondary for an aggressive Operator) rather than picked as an afterthought. Restricted to the current game's actual Secondary Weapon category -- Pistols and Launchers -- never a full-size Primary-category weapon and never a Melee weapon (Melee is its own equip slot, not Secondary). null only when the goal is genuinely single-weapon-focused or a second weapon wouldn't meaningfully help.",
+            "A second weapon and its attachments, deliberately chosen to cover a different engagement range/role than the primary (e.g. a mid-range primary paired with a close-range secondary for an aggressive Operator) rather than picked as an afterthought. Any non-melee weapon category is fair game here -- including a full-size weapon (AR, SMG, Sniper, etc.), not just a Pistol/Launcher -- but never a Melee weapon (Melee is its own equip slot, not Primary or Secondary). null only when the goal is genuinely single-weapon-focused or a second weapon wouldn't meaningfully help.",
         },
         perks: {
           type: "array",
