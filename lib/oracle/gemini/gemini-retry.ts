@@ -11,7 +11,13 @@
 // Anything else (a bad API key, a malformed request, a genuinely rejected
 // input) is not worth retrying -- it will just fail the same way again.
 const RETRYABLE_GEMINI_STATUS_CODES = new Set([429, 500, 502, 503, 504]);
-const MAX_GEMINI_ATTEMPTS = 3;
+// Raised from 3 to 5 after real-world testing on a flaky connection hit a
+// dropped connection (see isNetworkError below) twice in a row followed by
+// a genuine Gemini 503 on the very next attempt -- three attempts wasn't
+// enough headroom to absorb two independent kinds of transient failure
+// back to back, even though each individually is exactly the kind of
+// short-lived problem retrying is meant to ride out.
+const MAX_GEMINI_ATTEMPTS = 5;
 const GEMINI_RETRY_BASE_DELAY_MS = 2_000;
 
 function sleep(ms: number): Promise<void> {
