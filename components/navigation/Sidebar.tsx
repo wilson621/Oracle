@@ -2,29 +2,22 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Brain,
-  ScrollText,
-  TrendingUp,
-  Settings,
-  Target,
-  RadioTower,
-  FileText,
-  Crosshair,
-} from "lucide-react";
+import { Brain, Settings, RadioTower, Crosshair } from "lucide-react";
 
+// Sessions, Reports, Intelligence, Coach & Plan and Progress are deliberately
+// left out of navigation (not deleted -- 2026-09-04): their pages are
+// leftover scaffolding from an earlier, much larger design that was never
+// actually built, and currently show dense "implemented and certified but
+// inactive" placeholder text that reads like a broken feature rather than
+// an honest "coming soon". Add each one back in here once it's either
+// genuinely built or replaced with real placeholder copy.
 const navItems = [
   {
     section: "YOUR ORACLE JOURNEY",
     items: [
       { label: "Oracle", href: "/oracle", icon: Brain },
       { label: "Companion", href: "/companion", icon: RadioTower },
-      { label: "Sessions", href: "/sessions", icon: ScrollText },
-      { label: "Reports", href: "/reports", icon: FileText },
       { label: "Loadouts", href: "/loadouts", icon: Crosshair },
-      { label: "Intelligence", href: "/intelligence", icon: Brain },
-      { label: "Coach & Plan", href: "/coach", icon: Target },
-      { label: "Progress", href: "/progress", icon: TrendingUp },
     ],
   },
   {
