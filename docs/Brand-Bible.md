@@ -324,16 +324,17 @@ teal-500/20
 teal-600
 
 Note: these are not Tailwind's stock teal swatches. `app/globals.css`
-overrides the `teal-*` scale via `@theme` with Oracle's own values, so any
-`teal-*` utility class in the app already renders the muted brand colour:
+overrides the `teal-*` scale via `@theme` with Oracle's own values
+(anchored on the approved reference palette, ~#40AEAE), so any `teal-*`
+utility class in the app already renders the brand colour:
 
-teal-300 #A6CCD3
+teal-300 #97D8D8
 
-teal-400 #7DB5BF
+teal-400 #6AC8C8
 
-teal-500 #549EAB
+teal-500 #40AEAE
 
-teal-600 #437E89
+teal-600 #348D8D
 
 ---
 

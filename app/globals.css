@@ -17,23 +17,24 @@
 
 /*
  * Oracle Teal -- primary intelligence colour (formerly "Oracle Cyan").
- * Overrides Tailwind's default teal-* scale with a desaturated,
- * teal-blue accent: same role across the app (signals, confidence,
- * operational status, primary interaction), calmer presentation.
+ * Overrides Tailwind's default teal-* scale with Oracle's own teal-blue
+ * accent, sampled from the reference dashboard palette (~#40AEAE): same
+ * role across the app (signals, confidence, operational status, primary
+ * interaction), calmer presentation than the previous neon cyan.
  * See docs/Brand-Bible.md > Colour Philosophy > Oracle Teal.
  */
 @theme {
-  --color-teal-50: #f5f9fa;
-  --color-teal-100: #e7f1f3;
-  --color-teal-200: #cce2e6;
-  --color-teal-300: #a6ccd3;
-  --color-teal-400: #7db5bf;
-  --color-teal-500: #549eab;
-  --color-teal-600: #437e89;
-  --color-teal-700: #36656d;
-  --color-teal-800: #2c5259;
-  --color-teal-900: #223f44;
-  --color-teal-950: #142629;
+  --color-teal-50: #f4fbfb;
+  --color-teal-100: #e1f4f4;
+  --color-teal-200: #c0e8e8;
+  --color-teal-300: #97d8d8;
+  --color-teal-400: #6ac8c8;
+  --color-teal-500: #40aeae;
+  --color-teal-600: #348d8d;
+  --color-teal-700: #297070;
+  --color-teal-800: #215959;
+  --color-teal-900: #194343;
+  --color-teal-950: #0f2929;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -49,12 +50,12 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid #a6ccd3;
+  outline: 2px solid #97d8d8;
   outline-offset: 3px;
 }
 
 ::selection {
-  background: rgba(84, 158, 171, 0.35);
+  background: rgba(64, 174, 174, 0.35);
   color: #ffffff;
 }
 
