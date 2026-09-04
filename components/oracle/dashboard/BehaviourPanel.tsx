@@ -79,7 +79,7 @@ export default function BehaviourPanel({ behaviour }: BehaviourPanelProps) {
 
             <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-800">
               <div
-                className="h-full rounded-full bg-teal-400 shadow-[0_0_10px_rgba(34,211,238,0.45)] transition-all duration-700"
+                className="h-full rounded-full bg-teal-400 shadow-[0_0_8px_rgba(64,174,174,0.25)] transition-all duration-700"
                 style={{ width: `${trait.score}%` }}
               />
             </div>

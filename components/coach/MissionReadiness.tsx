@@ -185,7 +185,7 @@ export default function MissionReadiness({
 
         <div className="mt-4 h-3 overflow-hidden rounded-full bg-slate-800">
           <div
-            className="h-full rounded-full bg-teal-400 shadow-[0_0_12px_rgba(34,211,238,0.45)] transition-all duration-700"
+            className="h-full rounded-full bg-teal-400 shadow-[0_0_8px_rgba(64,174,174,0.25)] transition-all duration-700"
             style={{ width: `${progress}%` }}
           />
         </div>

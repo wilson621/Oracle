@@ -47,7 +47,7 @@ export default function SkillBar({ label, value }: Props) {
         <div
           className={`h-full rounded-full bg-gradient-to-r ${getBarColour(
             value
-          )} shadow-[0_0_12px_rgba(34,211,238,0.35)] transition-all duration-700`}
+          )} shadow-[0_0_8px_rgba(64,174,174,0.2)] transition-all duration-700`}
           style={{ width: `${value}%` }}
         />
       </div>

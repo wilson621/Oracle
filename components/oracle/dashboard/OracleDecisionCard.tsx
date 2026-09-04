@@ -74,7 +74,7 @@ export default function OracleDecisionCard({
   const primaryEvidence = decision.evidence[0];
 
   return (
-    <section className="mt-10 rounded-3xl border border-teal-400/30 bg-teal-400/10 p-8 shadow-[0_0_45px_rgba(34,211,238,0.08)]">
+    <section className="mt-10 rounded-3xl border border-teal-400/30 bg-teal-400/10 p-8 shadow-[0_0_36px_rgba(64,174,174,0.07)]">
       <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-teal-300">

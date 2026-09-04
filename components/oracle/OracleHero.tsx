@@ -15,8 +15,8 @@ export default function OracleHero({ isAnalysing }: OracleHeroProps) {
         priority
         className={`mb-8 h-auto transition-all duration-700 ${
           isAnalysing
-            ? "scale-105 drop-shadow-[0_0_35px_rgba(34,211,238,0.9)]"
-            : "drop-shadow-[0_0_20px_rgba(34,211,238,0.45)]"
+            ? "scale-105 drop-shadow-[0_0_28px_rgba(64,174,174,0.45)]"
+            : "drop-shadow-[0_0_16px_rgba(64,174,174,0.22)]"
         }`}
       />
 

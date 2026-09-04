@@ -49,7 +49,7 @@ export default function ConfidenceRing({
           cx={size / 2}
           cy={size / 2}
           r={radius - 18}
-          stroke="rgba(34,211,238,0.12)"
+          stroke="rgba(64, 174, 174,0.12)"
           strokeWidth="1"
           fill="transparent"
           strokeDasharray="4 8"
@@ -59,7 +59,7 @@ export default function ConfidenceRing({
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#22d3ee"
+          stroke="#40aeae"
           strokeWidth={strokeWidth}
           fill="transparent"
           strokeLinecap="round"
@@ -67,7 +67,7 @@ export default function ConfidenceRing({
           strokeDashoffset={offset}
           style={{
             transition: "stroke-dashoffset 1.1s cubic-bezier(0.22, 1, 0.36, 1)",
-            filter: "drop-shadow(0 0 10px rgba(34,211,238,.65))",
+            filter: "drop-shadow(0 0 8px rgba(64,174,174,.35))",
           }}
         />
       </svg>

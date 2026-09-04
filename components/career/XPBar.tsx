@@ -19,7 +19,7 @@ export default function XPBar({ current, required, progress }: XPBarProps) {
 
       <div className="h-4 overflow-hidden rounded-full bg-slate-800">
         <div
-          className="h-full rounded-full bg-teal-400 shadow-[0_0_22px_rgba(34,211,238,0.7)] transition-all duration-1000"
+          className="h-full rounded-full bg-teal-400 shadow-[0_0_14px_rgba(64,174,174,0.35)] transition-all duration-1000"
           style={{ width: `${progress}%` }}
         />
       </div>

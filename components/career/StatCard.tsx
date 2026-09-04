@@ -14,7 +14,7 @@ export default function StatCard({
   subtitle,
 }: StatCardProps) {
   return (
-    <div className="rounded-3xl border border-slate-800 bg-slate-950 p-6 transition-all duration-300 hover:border-teal-400/40 hover:shadow-[0_0_25px_rgba(34,211,238,0.15)]">
+    <div className="rounded-3xl border border-slate-800 bg-slate-950 p-6 transition-all duration-300 hover:border-teal-400/40 hover:shadow-[0_0_18px_rgba(64,174,174,0.12)]">
 
       <div className="text-teal-300">
         {icon}
