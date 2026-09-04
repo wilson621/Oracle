@@ -47,6 +47,11 @@ export async function persistMatchCoachingReport(
       decision_making: report.scores?.decisionMaking ?? null,
       game_sense: report.scores?.gameSense ?? null,
       deaths: report.deaths,
+      engagement_range: report.playstyle?.engagementRange ?? null,
+      aggression_style: report.playstyle?.aggressionStyle ?? null,
+      movement_style: report.playstyle?.movementStyle ?? null,
+      weapons_observed: report.playstyle?.weaponsObserved ?? [],
+      notable_tendencies: report.playstyle?.notableTendencies ?? [],
       raw_error: report.rawError,
     })
     .select()

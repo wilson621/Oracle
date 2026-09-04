@@ -8,6 +8,10 @@ import {
   type OracleMatchCoachingReportRow,
 } from "./oracle-match-coaching-report";
 import { persistMatchCoachingReport } from "./persist-match-coaching-report";
+import {
+  describeGeminiFailure,
+  withGeminiRetry,
+} from "../gemini/gemini-retry";
 
 export type GenerateMatchVideoCoachingReportInput = Readonly<{
   supabase: SupabaseClient;
@@ -57,16 +61,6 @@ const APPROX_GEMINI_SAMPLES_PER_SECOND = 1;
 const FILE_ACTIVE_POLL_INTERVAL_MS = 3_000;
 const FILE_ACTIVE_TIMEOUT_MS = 10 * 60 * 1_000;
 
-// HTTP statuses the Gemini API returns for transient, short-lived problems
-// (most commonly 503 "This model is currently experiencing high demand" --
-// Google documents this as a normal, expected occurrence during load
-// spikes, not a sign of anything actually broken) plus 429 rate-limiting.
-// Anything else (a bad API key, a malformed request, a genuinely rejected
-// video) is not worth retrying -- it will just fail the same way again.
-const RETRYABLE_GEMINI_STATUS_CODES = new Set([429, 500, 502, 503, 504]);
-const MAX_GEMINI_ATTEMPTS = 3;
-const GEMINI_RETRY_BASE_DELAY_MS = 2_000;
-
 const VIDEO_SYSTEM_PROMPT = `
 You are Oracle, an elite Call of Duty coaching analyst reviewing a full,
 continuous recording of one Operator's own match -- video and audio both --
@@ -97,6 +91,15 @@ Prefer "likely", "the killcam shows", "the audio suggests" over flat
 assertions, and say plainly when a moment is inconclusive rather than
 inventing certainty you don't have. A wrong confident guess is worse
 coaching than an honest "unclear from this footage."
+
+Alongside the coaching report itself, also record structured playstyle
+observations (the playstyle field) purely from what this match's footage
+shows: preferred engagement range, aggression level, movement habits, the
+actual weapons visible in the HUD/killfeed/loadout, and any other specific
+tendencies worth noting. This feeds a separate personalised loadout feature,
+so it matters that these stay grounded in this footage rather than becoming
+a generic character sketch -- use null/empty values rather than guessing
+when the footage genuinely doesn't show enough to judge something.
 `.trim();
 
 /**
@@ -139,6 +142,7 @@ export async function generateMatchVideoCoachingReport(
       verdict: null,
       scores: null,
       deaths: [],
+      playstyle: null,
       rawError: "GEMINI_API_KEY is not configured on this server.",
     });
   }
@@ -223,6 +227,7 @@ export async function generateMatchVideoCoachingReport(
         verdict: string;
         scores: NonNullable<OracleMatchCoachingReport["scores"]>;
         deaths: OracleMatchCoachingReport["deaths"];
+        playstyle: OracleMatchCoachingReport["playstyle"];
       };
 
       return await persistMatchCoachingReport(input.supabase, {
@@ -233,6 +238,7 @@ export async function generateMatchVideoCoachingReport(
         verdict: parsed.verdict,
         scores: parsed.scores,
         deaths: parsed.deaths,
+        playstyle: parsed.playstyle,
         rawError: null,
       });
     } finally {
@@ -250,6 +256,7 @@ export async function generateMatchVideoCoachingReport(
       verdict: null,
       scores: null,
       deaths: [],
+      playstyle: null,
       rawError: describeGeminiFailure(error),
     });
   }
@@ -280,96 +287,4 @@ async function waitForFileActive(
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-/**
- * The @google/genai SDK's ApiError shape (status: number, message: string)
- * -- checked structurally rather than with `instanceof ApiError` so this
- * still works if the SDK's error class identity ever gets duplicated across
- * module instances, which `instanceof` is notoriously fragile against.
- */
-function isApiErrorLike(
-  error: unknown
-): error is { status: number; message: string } {
-  return (
-    typeof error === "object" &&
-    error !== null &&
-    typeof (error as { status?: unknown }).status === "number" &&
-    typeof (error as { message?: unknown }).message === "string"
-  );
-}
-
-function isRetryableGeminiError(error: unknown): boolean {
-  return (
-    isApiErrorLike(error) && RETRYABLE_GEMINI_STATUS_CODES.has(error.status)
-  );
-}
-
-/**
- * Runs one Gemini API call, retrying a couple of times with a short
- * backoff if it fails with a transient status (see
- * RETRYABLE_GEMINI_STATUS_CODES) -- most commonly a 503 "high demand"
- * overload, which is short-lived and usually gone within seconds. A
- * non-retryable failure (bad key, malformed request, genuine rejection)
- * throws immediately rather than wasting the customer's time retrying
- * something that will never succeed.
- */
-async function withGeminiRetry<T>(
-  label: string,
-  call: () => Promise<T>
-): Promise<T> {
-  for (let attempt = 1; attempt <= MAX_GEMINI_ATTEMPTS; attempt++) {
-    try {
-      return await call();
-    } catch (error) {
-      const isLastAttempt = attempt === MAX_GEMINI_ATTEMPTS;
-      if (!isRetryableGeminiError(error) || isLastAttempt) {
-        throw error;
-      }
-      console.warn(
-        `[oracle-match-video-coaching] ${label} failed (attempt ` +
-          `${attempt}/${MAX_GEMINI_ATTEMPTS}, status ` +
-          `${(error as { status: number }).status}) -- retrying shortly.`
-      );
-      await sleep(GEMINI_RETRY_BASE_DELAY_MS * attempt);
-    }
-  }
-  // Unreachable: the loop above always either returns or throws on its
-  // last iteration. Satisfies the compiler's control-flow analysis.
-  throw new Error(`${label}: exhausted retries without a result.`);
-}
-
-/**
- * Turns whatever a failed Gemini call (or our own code) threw into a
- * message worth showing a customer. The SDK's ApiError carries the raw API
- * error body JSON.stringify-ed into .message (see throwErrorIfNotOK in
- * @google/genai) -- e.g. `{"error":{"code":503,"message":"...","status":
- * "UNAVAILABLE"}}` verbatim, which is what previously ended up on screen
- * unparsed. This extracts Google's actual human-readable message and
- * writes a clear sentence around it instead.
- */
-function describeGeminiFailure(error: unknown): string {
-  if (isApiErrorLike(error)) {
-    let detail: string | undefined;
-    try {
-      const parsed = JSON.parse(error.message) as {
-        error?: { message?: string };
-      };
-      detail = parsed.error?.message;
-    } catch {
-      // error.message wasn't JSON -- fall through and use it as-is below.
-    }
-    if (RETRYABLE_GEMINI_STATUS_CODES.has(error.status)) {
-      return (
-        "Gemini was temporarily too busy to process this video, even " +
-        "after retrying a few times. This is usually short-lived -- " +
-        "please try uploading again in a minute or two." +
-        (detail ? ` (Google said: "${detail}")` : "")
-      );
-    }
-    return `Gemini returned an error (status ${error.status}): ${
-      detail ?? error.message
-    }`;
-  }
-  return error instanceof Error ? error.message : String(error);
 }

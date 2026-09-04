@@ -15,6 +15,27 @@ export type OracleMatchCoachingScores = Readonly<{
   gameSense: number;
 }>;
 
+/**
+ * Structured playstyle signals pulled from the same video/audio Full Match
+ * Analysis already reviews for the coaching report -- no extra recording or
+ * API call, just more of what's already being asked for. This is the raw
+ * material Oracle Loadout Intelligence aggregates across an Operator's
+ * matches to personalise a loadout recommendation to how they actually
+ * play, rather than a generic build (see
+ * lib/oracle/loadout/oracle-loadout-recommendation-service.ts). Nullable at
+ * the report level because a report from before this field existed, or one
+ * where the footage genuinely doesn't show enough to judge, has none.
+ */
+export type OracleMatchCoachingPlaystyle = Readonly<{
+  engagementRange: "close" | "mid" | "long" | "mixed" | null;
+  aggressionStyle: "aggressive" | "balanced" | "passive" | null;
+  movementStyle: "highly-mobile" | "moderate" | "static" | null;
+  /** Weapon names as they actually appeared in the footage/HUD/killfeed. */
+  weaponsObserved: readonly string[];
+  /** Short, specific observations, e.g. "third-parties active fights". */
+  notableTendencies: readonly string[];
+}>;
+
 export type OracleMatchCoachingReport = Readonly<{
   id: string;
   operatorId: string;
@@ -30,6 +51,7 @@ export type OracleMatchCoachingReport = Readonly<{
   verdict: string | null;
   scores: OracleMatchCoachingScores | null;
   deaths: readonly OracleMatchCoachingDeathBreakdown[];
+  playstyle: OracleMatchCoachingPlaystyle | null;
   rawError: string | null;
 }>;
 
@@ -61,6 +83,11 @@ export type OracleMatchCoachingReportRow = Readonly<{
   decision_making: number | null;
   game_sense: number | null;
   deaths: readonly OracleMatchCoachingDeathBreakdown[];
+  engagement_range: OracleMatchCoachingPlaystyle["engagementRange"];
+  aggression_style: OracleMatchCoachingPlaystyle["aggressionStyle"];
+  movement_style: OracleMatchCoachingPlaystyle["movementStyle"];
+  weapons_observed: readonly string[];
+  notable_tendencies: readonly string[];
   raw_error: string | null;
 }>;
 
@@ -160,6 +187,51 @@ export const GEMINI_MATCH_COACHING_RESPONSE_SCHEMA = {
         ],
       },
     },
+    playstyle: {
+      type: "object",
+      additionalProperties: false,
+      description:
+        "Structured observations about how this Operator actually plays, drawn only from what this footage shows -- feeds Oracle's personalised loadout recommendations, so keep every field grounded in this match specifically rather than a generic impression.",
+      properties: {
+        engagementRange: {
+          type: ["string", "null"],
+          enum: ["close", "mid", "long", "mixed", null],
+          description:
+            "The distance this Operator most often actually engaged at in this match. 'mixed' if there's no clear dominant range. null only if the footage genuinely doesn't show enough engagements to judge.",
+        },
+        aggressionStyle: {
+          type: ["string", "null"],
+          enum: ["aggressive", "balanced", "passive", null],
+          description:
+            "Whether this Operator tends to push/hunt fights, play a balanced/reactive game, or hold back and let fights come to them, based on what this match actually shows.",
+        },
+        movementStyle: {
+          type: ["string", "null"],
+          enum: ["highly-mobile", "moderate", "static", null],
+          description:
+            "How much this Operator moves during engagements and rotations -- e.g. frequent slide-cancelling/repositioning versus mostly holding one position.",
+        },
+        weaponsObserved: {
+          type: "array",
+          items: { type: "string" },
+          description:
+            "Weapon names as they actually appear on screen (HUD, killfeed, loadout menu) in this footage. Empty array if none are legible.",
+        },
+        notableTendencies: {
+          type: "array",
+          items: { type: "string" },
+          description:
+            "Short, specific, evidence-grounded observations about this Operator's habits this match (e.g. 'frequently third-parties active fights', 'rotates late off contested zones'). Empty array if nothing stands out.",
+        },
+      },
+      required: [
+        "engagementRange",
+        "aggressionStyle",
+        "movementStyle",
+        "weaponsObserved",
+        "notableTendencies",
+      ],
+    },
   },
-  required: ["summary", "verdict", "scores", "deaths"],
+  required: ["summary", "verdict", "scores", "deaths", "playstyle"],
 } as const;
