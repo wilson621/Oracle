@@ -391,9 +391,10 @@ export default function MatchVideoRecordingControl() {
         />
         <span>
           Record in high quality for Content Clips -- smoother footage
-          Oracle can cut into shareable social clips after the match. Uses
-          noticeably more disk space per match; leave this off if you only
-          want Full Match Analysis.
+          Oracle can cut into shareable social clips after the match. Say
+          &quot;clip that&quot; out loud during a moment worth sharing and
+          Oracle will prioritise it. Uses noticeably more disk space per
+          match; leave this off if you only want Full Match Analysis.
         </span>
       </label>
 
@@ -422,6 +423,14 @@ export default function MatchVideoRecordingControl() {
           Important: let every killcam play out after a death instead of
           skipping it -- Oracle needs to see and hear it to explain what
           happened.
+        </p>
+      )}
+
+      {state.status === "recording" && clipQualityEnabled && (
+        <p className={styles.reminder}>
+          Tip: got a moment worth sharing? Just say &quot;clip that&quot; (or
+          react out loud) -- Oracle listens for it and prioritises what you
+          actually called out when picking clips afterward.
         </p>
       )}
 

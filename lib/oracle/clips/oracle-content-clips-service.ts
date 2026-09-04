@@ -96,6 +96,21 @@ would just be "player moved somewhere and got an item/objective," with no
 real tension or payoff, leave it out even if the movement itself looked
 clean -- smooth is not the same as shareworthy.
 
+Listen to the audio, not just the video. If the player reacts out loud
+right after something happens -- says something like "clip that" or
+"clip it", shouts, laughs hard, or has any other clearly excited/surprised
+reaction on mic -- treat that as the player themselves telling you this
+moment mattered to them. Weight it heavily: a moment they reacted to is
+one they'd actually want posted, even if it's a little more understated
+on screen than your other picks. The reaction always comes AFTER the real
+action (people react to what just happened, not while it's happening), so
+use it to locate the moment, then set the actual clip boundaries around
+what happened in the few seconds before the reaction, not around the
+reaction itself. Still sanity-check it against the footage -- if someone
+says "clip that" sarcastically about something mundane, or as a joke with
+nothing notable actually visible, don't force it in just because the
+phrase was said.
+
 For each moment you do pick, give
 precise start/end offsets (a couple of seconds before the key action so it
 has room to build, a beat after it resolves so it isn't cut off), a short
