@@ -39,13 +39,13 @@ export type GenerateContentClipsInput = Readonly<{
   outputRoot?: string | null;
   /**
    * Upper bound on how many clips this call is allowed to cut -- the
-   * caller's remaining daily allowance (see
-   * lib/oracle/usage-caps/daily-usage-cap.ts), already resolved before
-   * this is invoked. Gemini can still surface up to MAX_CLIPS_PER_REQUEST
+   * caller's remaining allowance for their current billing cycle (see
+   * lib/oracle/usage-caps/usage-cap.ts), already resolved before this is
+   * invoked. Gemini can still surface up to MAX_CLIPS_PER_REQUEST
    * candidates from one strong match; this clamps what actually gets cut
-   * to what the Operator has left today, taking the best-ranked ones
+   * to what the Operator has left this cycle, taking the best-ranked ones
    * (Gemini returns candidates ordered best first) rather than either
-   * blocking the whole match or handing over more than the day's cap.
+   * blocking the whole match or handing over more than the cycle's cap.
    * Defaults to MAX_CLIPS_PER_REQUEST (no additional clamping) if omitted.
    */
   maxClips?: number;

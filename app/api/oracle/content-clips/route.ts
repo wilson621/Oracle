@@ -7,11 +7,11 @@ import { createClient } from "@/lib/supabase-server";
 import { generateContentClips } from "@/lib/oracle/clips/oracle-content-clips-service";
 import { ensureOperatorBinding } from "@/lib/oracle/operator/ensure-operator-binding";
 import {
-  CONTENT_CLIPS_DAILY_CAP,
-  dailyCapReachedMessage,
-  getRemainingDailyAllowance,
-  recordDailyUsage,
-} from "@/lib/oracle/usage-caps/daily-usage-cap";
+  CONTENT_CLIPS_MONTHLY_CAP,
+  monthlyCapReachedMessage,
+  getRemainingMonthlyAllowance,
+  recordMonthlyUsage,
+} from "@/lib/oracle/usage-caps/usage-cap";
 
 // Same reasoning as coach-report-video/route.ts: streaming the uploaded
 // video to a temp file (for Gemini's upload) and then invoking ffmpeg on
@@ -63,18 +63,20 @@ export async function POST(request: Request) {
   // Checked before reading the upload off the wire, same reasoning as
   // coach-report-video/route.ts. Content Clips can cut up to
   // MAX_CLIPS_PER_REQUEST clips from a single good match, so this is a cap
-  // on clips actually cut per day, not on generation attempts -- see
-  // remainingToday's use as generateContentClips's maxClips below, which
-  // clamps a strong match's output down to whatever's left rather than
-  // letting one great game blow past the daily allowance in one go.
-  const remainingToday = await getRemainingDailyAllowance(
+  // on clips actually cut per billing cycle, not on generation attempts --
+  // see remainingThisCycle's use as generateContentClips's maxClips below,
+  // which clamps a strong match's output down to whatever's left rather
+  // than letting one great game blow past the cycle's allowance in one go.
+  const remainingThisCycle = await getRemainingMonthlyAllowance(
     operatorId,
     "content-clips",
-    CONTENT_CLIPS_DAILY_CAP
+    CONTENT_CLIPS_MONTHLY_CAP
   );
-  if (remainingToday <= 0) {
+  if (remainingThisCycle <= 0) {
     return NextResponse.json(
-      { error: dailyCapReachedMessage("content-clips", CONTENT_CLIPS_DAILY_CAP) },
+      {
+        error: monthlyCapReachedMessage("content-clips", CONTENT_CLIPS_MONTHLY_CAP),
+      },
       { status: 429 }
     );
   }
@@ -140,7 +142,7 @@ export async function POST(request: Request) {
       mimeType: video.type || "video/webm",
       matchStartOffsetMs: resolvedOffsetMs,
       outputRoot: typeof outputRoot === "string" ? outputRoot : null,
-      maxClips: remainingToday,
+      maxClips: remainingThisCycle,
     });
 
     if (result.status === "failed") {
@@ -150,7 +152,7 @@ export async function POST(request: Request) {
     // shareworthy in it (clips.length === 0) shouldn't touch the
     // allowance at all.
     if (result.clips.length > 0) {
-      await recordDailyUsage(operatorId, "content-clips", result.clips.length);
+      await recordMonthlyUsage(operatorId, "content-clips", result.clips.length);
     }
     return NextResponse.json(result);
   } catch (error) {

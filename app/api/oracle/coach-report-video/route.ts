@@ -7,11 +7,11 @@ import { createClient } from "@/lib/supabase-server";
 import { generateMatchVideoCoachingReport } from "@/lib/oracle/match-coaching/oracle-match-video-coaching-service";
 import { ensureOperatorBinding } from "@/lib/oracle/operator/ensure-operator-binding";
 import {
-  FULL_MATCH_ANALYSIS_DAILY_CAP,
-  dailyCapReachedMessage,
-  getRemainingDailyAllowance,
-  recordDailyUsage,
-} from "@/lib/oracle/usage-caps/daily-usage-cap";
+  FULL_MATCH_ANALYSIS_MONTHLY_CAP,
+  monthlyCapReachedMessage,
+  getRemainingMonthlyAllowance,
+  recordMonthlyUsage,
+} from "@/lib/oracle/usage-caps/usage-cap";
 
 // Node's fs is required to stream the uploaded video to a temp file before
 // handing it to Gemini's Files API -- this route cannot run on the edge
@@ -66,20 +66,21 @@ export async function POST(request: Request) {
 
   // Checked before even reading the (potentially huge) upload off the
   // wire -- no point spending the bandwidth/time on a request that's
-  // going to be rejected anyway. This is a daily count of reports
-  // actually generated, not upload attempts -- a failed generation below
-  // never counts against it (see the recordDailyUsage call further down).
-  const remainingToday = await getRemainingDailyAllowance(
+  // going to be rejected anyway. This is a count of reports actually
+  // generated in the Operator's current billing cycle, not upload
+  // attempts -- a failed generation below never counts against it (see
+  // the recordMonthlyUsage call further down).
+  const remainingThisCycle = await getRemainingMonthlyAllowance(
     operatorId,
     "full-match-analysis",
-    FULL_MATCH_ANALYSIS_DAILY_CAP
+    FULL_MATCH_ANALYSIS_MONTHLY_CAP
   );
-  if (remainingToday <= 0) {
+  if (remainingThisCycle <= 0) {
     return NextResponse.json(
       {
-        error: dailyCapReachedMessage(
+        error: monthlyCapReachedMessage(
           "full-match-analysis",
-          FULL_MATCH_ANALYSIS_DAILY_CAP
+          FULL_MATCH_ANALYSIS_MONTHLY_CAP
         ),
       },
       { status: 429 }
@@ -173,9 +174,9 @@ export async function POST(request: Request) {
     });
     // Only counts against today's allowance if a report actually came out
     // of it -- a failed generation (bad upload, Gemini error) shouldn't
-    // cost the Operator one of their two reports for the day.
+    // cost the Operator one of their reports for this billing cycle.
     if (report.status !== "failed") {
-      await recordDailyUsage(operatorId, "full-match-analysis", 1);
+      await recordMonthlyUsage(operatorId, "full-match-analysis", 1);
     }
     return NextResponse.json({ report });
   } catch (error) {

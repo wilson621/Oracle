@@ -9,9 +9,9 @@ import type { CoachingReport } from "./report-types";
 import type { ContentClipsResult } from "./content-clip-types";
 import { MOMENT_TYPE_LABELS } from "./content-clip-types";
 import {
-  CONTENT_CLIPS_DAILY_CAP,
-  FULL_MATCH_ANALYSIS_DAILY_CAP,
-} from "@/lib/oracle/usage-caps/daily-usage-cap-constants";
+  CONTENT_CLIPS_MONTHLY_CAP,
+  FULL_MATCH_ANALYSIS_MONTHLY_CAP,
+} from "@/lib/oracle/usage-caps/usage-cap-constants";
 import ReportView from "./ReportView";
 import styles from "./match-recording.module.css";
 
@@ -401,7 +401,7 @@ export default function MatchVideoRecordingControl() {
         for a deep report -- real timestamps and audio cues like footsteps
         and gunfire, not just a handful of screenshots. Uploading and
         processing takes a few minutes for a full match. Up to{" "}
-        {FULL_MATCH_ANALYSIS_DAILY_CAP} reports per day.
+        {FULL_MATCH_ANALYSIS_MONTHLY_CAP} reports per month.
       </p>
 
       <label className={styles.toggleRow}>
@@ -480,7 +480,7 @@ export default function MatchVideoRecordingControl() {
             This match was recorded in high quality for Content Clips.
             Generate a set of shareable clips from it, or discard the
             recording if you don&apos;t need them. Up to{" "}
-            {CONTENT_CLIPS_DAILY_CAP} clips per day.
+            {CONTENT_CLIPS_MONTHLY_CAP} clips per month.
           </p>
           <div className={styles.clipActions}>
             <button
